@@ -2,7 +2,7 @@
 
 module.exports = function(environment) {
   var ENV = {
-    modulePrefix: 'tim',
+    modulePrefix: 'repositive.io',
     environment: environment,
     baseURL: '/',
     locationType: 'auto',
