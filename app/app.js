@@ -11,6 +11,10 @@ var App = Ember.Application.extend({
   Resolver: Resolver
 });
 
+Router.map(function() {
+  this.resource('kitchensink', { path: '/kitchensink' });
+});
+
 loadInitializers(App, config.modulePrefix);
 
 export default App;
