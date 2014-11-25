@@ -19,7 +19,7 @@ var app = new EmberApp({
     inputFile: 'main.less',
     outputFile: 'main.css',
     paths: [
-      'bower_components/semantic-ui/src/definitions',
+      'bower_components/semantic-ui/src/',
     ]
   }
 });
@@ -36,5 +36,7 @@ var app = new EmberApp({
 // modules that you would like to import into your application
 // please specify an object with the list of modules as keys
 // along with the exports of each module as its value.
+var instrument = require('broccoli-debug').instrument;
+tree = instrument.print(app.toTree());
 
-module.exports = app.toTree();
+module.exports = tree

@@ -6,6 +6,7 @@ var Router = Ember.Router.extend({
 });
 
 Router.map(function() {
+  this.resource('kitchensink', { path: '/kitchensink' });
 });
 
 export default Router;
