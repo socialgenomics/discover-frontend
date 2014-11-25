@@ -19,7 +19,7 @@ var app = new EmberApp({
     inputFile: 'main.less',
     outputFile: 'main.css',
     paths: [
-      'bower_components/semantic-ui/src',
+      'bower_components/semantic-ui/src/definitions',
     ]
   }
 });
