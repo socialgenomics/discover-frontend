@@ -18,7 +18,13 @@
           </ul>
         </li>
       </ul>
-      <p class="navbar-text navbar-right">{{#link-to 'login'}}Login{{/link-to}}</p>
+      <p class="navbar-text navbar-right">
+      {{#if session.isAuthenticated}}
+        <a {{ action 'invalidateSession' }}>Logout</a>
+      {{else}}
+        <a {{ action 'authenticateSession' }}>Login</a>
+      {{/if}}
+      </p>
     </div>
   </div>
 </div>
