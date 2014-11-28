@@ -6,4 +6,7 @@
   <label for="password">Password</label>
   {{input id='password' placeholder='Enter Password' type='password' value=password}}
   <button type="submit">Login</button>
+  <div class="alert alert-info">
+    Login with <a {{ action 'authenticateWithFacebook' }} class="alert-link" style="cursor: pointer;"><i class="fa fa-facebook-square"></i> Facebook</a> or <a {{ action 'authenticateWithGooglePlus' }} class="alert-link" style="cursor: pointer;"><i class="fa fa-google-plus-square"></i> Google+</a>.
+  </div>
 </form>
