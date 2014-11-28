@@ -16,7 +16,7 @@ module.exports = function(environment) {
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
-    }
+    },
   };
 
   if (environment === 'development') {
@@ -25,6 +25,9 @@ module.exports = function(environment) {
     // ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     ENV.APP.LOG_VIEW_LOOKUPS = true;
+    ENV['simple-auth-oauth2'] = {
+      serverTokenEndpoint: 'http://localhost:3000/token'
+    }
   }
 
   if (environment === 'test') {
@@ -42,6 +45,10 @@ module.exports = function(environment) {
   if (environment === 'production') {
 
   }
+
+//  ENV['simple-auth'] = {
+//    authorizer: 'simple-auth-authorizer:oauth2-bearer'
+//  }
 
   return ENV;
 };
