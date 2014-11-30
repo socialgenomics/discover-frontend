@@ -1,6 +1,6 @@
 import Base from 'simple-auth/authenticators/base';
 
-var GooglePlusAuthenticator = Base.extend({
+App.GooglePlusAuthenticator = Base.extend({
   restore: function(properties) {
     return new Ember.RSVP.Promise(function(resolve, reject) {
       if (!Ember.isEmpty(properties.access_token)) {
@@ -30,5 +30,3 @@ var GooglePlusAuthenticator = Base.extend({
     return Ember.RSVP.resolve();
   }
 });
-
-export default GooglePlusAuthenticator;

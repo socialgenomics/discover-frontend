@@ -17,6 +17,18 @@ module.exports = function(environment) {
       // Here you can pass flags/options to your application instance
       // when it is created
     },
+    torii: {
+      providers: {
+        'facebook-oauth2': {
+          apiKey:      '631252926924840',
+          redirectUri: '/login'
+        },
+        'google-oauth2': {
+          apiKey:      '677526813069-6tmd1flqovp5miud67phqlks49bqdo8i.apps.googleusercontent.com',
+          redirectUri: 'http://localhost:4200'
+        }
+      }
+    }
   };
 
   if (environment === 'development') {
@@ -49,6 +61,7 @@ module.exports = function(environment) {
 //  ENV['simple-auth'] = {
 //    authorizer: 'simple-auth-authorizer:oauth2-bearer'
 //  }
+
 
   return ENV;
 };
