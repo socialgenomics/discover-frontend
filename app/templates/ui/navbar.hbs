@@ -18,6 +18,9 @@
           </ul>
         </li>
       </ul>
+      <p class="navbar-text">
+        <a href='/profile'>profile</a>
+      </p>
       <p class="navbar-text navbar-right">
       {{#if session.isAuthenticated}}
         <a {{ action 'invalidateSession' }}>Logout</a>

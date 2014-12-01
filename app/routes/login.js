@@ -9,6 +9,10 @@ var LoginRouter = Ember.Route.extend({
     // action to trigger authentication with Google+
     authenticateWithGooglePlus: function() {
       this.get('session').authenticate('simple-auth-authenticator:torii', 'google-oauth2');
+    },
+    // action to trigger authentication with Linked-in
+    authenticateWithLinkedIn: function() {
+      this.get('session').authenticate('simple-auth-authenticator:torii', 'linked-in-oauth2');
     }
   }
 });

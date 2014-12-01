@@ -20,11 +20,15 @@ module.exports = function(environment) {
     torii: {
       providers: {
         'facebook-oauth2': {
-          apiKey:      '631252926924840',
-          redirectUri: '/login'
+          apiKey:      '',
+          redirectUri: ''
         },
         'google-oauth2': {
           apiKey:      '677526813069-6tmd1flqovp5miud67phqlks49bqdo8i.apps.googleusercontent.com',
+          redirectUri: 'http://localhost:4200'
+        },
+        'linked-in-oauth2': {
+          apiKey:      '75fsbvpfgi1667',
           redirectUri: 'http://localhost:4200'
         }
       }
