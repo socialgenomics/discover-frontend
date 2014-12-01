@@ -62,9 +62,9 @@ module.exports = function(environment) {
 
   }
 
-//  ENV['simple-auth'] = {
-//    authorizer: 'simple-auth-authorizer:oauth2-bearer'
-//  }
+  ENV['simple-auth'] = {
+    routeAfterAuthentication: 'profile',
+  }
 
 
   return ENV;
