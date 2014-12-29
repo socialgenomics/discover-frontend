@@ -63,7 +63,8 @@ module.exports = function(environment) {
   }
 
   ENV['simple-auth'] = {
-    routeAfterAuthentication: 'profile',
+    routeAfterAuthentication: 'users.profile',
+    authenticationRoute: 'users.login'
   }
 
 
