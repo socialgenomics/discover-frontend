@@ -15,4 +15,6 @@ Tag.reopenClass({
   ]
 });
 
+Tag.adapter = DS.FixtureAdapter.create();
+
 export default Tag;
