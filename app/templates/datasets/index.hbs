@@ -1,5 +1,11 @@
-<h2>Datasets</h2>
-{{#each datasets}}
-  {{name}}
-  {{description}}
+<h4>index</h4>
+{{#each}}
+<div class="panel panel-default" id="headings">
+  <div class="panel-heading">{{#link-to datasets.detail name}}name{{/link-to}}</div>
+  <div class="panel-body">
+    <p class="lead">{{description}}</p>
+    <p><small>created: {{createdAt}}</small></p>
+    <p><small>updated: {{updatedAt}}</small></p>
+  </div>
+</div>
 {{/each}}
