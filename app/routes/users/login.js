@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import ajax from 'ic-ajax';
+import request from 'ic-ajax';
 
 var LoginRouter = Ember.Route.extend({
   actions: {
@@ -13,12 +13,16 @@ var LoginRouter = Ember.Route.extend({
     },
     // action to trigger authentication with Google+
     authenticateWithGooglePlus: function() {
-      var router = this;
-      this.get('session').authenticate('simple-auth-authenticator:torii', 'google-oauth2').then(function(thing){
-        console.log('success');
-        debugger;
-        //ajax.post({'some':'stuff'})
+      var route = this;
+      this.get('session').authenticate('simple-auth-authenticator:torii', 'google-oauth2').then(function(){
         //router.flashMessage('success', 'Congratulations! Your changes have been saved', 1000);
+        console.log(route.get('session.token'))
+        console.log(route.get('session'))
+        request({url:'/users',type:'POST'}).then(function(resp){
+          console.log(resp);
+        },function(err){
+          console.log(err)
+        })
       }, function(err){
         //router.flashMessage('error','problem with login');
       });
