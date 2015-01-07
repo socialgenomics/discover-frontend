@@ -1,9 +1,15 @@
 <h4>index</h4>
+<!--
+{{#collection Ember.ListView contentBinding="controller" height=500 rowHeight=50 width=500}}
+{{title}}
+{{/collection}}
+--!>
 {{#each}}
 <div class="panel panel-default" id="headings">
-  <div class="panel-heading">{{#link-to datasets.detail name}}name{{/link-to}}</div>
+  <div class="panel-heading">{{#link-to datasets.detail id}}{{title}}{{/link-to}}</div>
   <div class="panel-body">
     <p class="lead">{{description}}</p>
+    <p>{{metadata}}</p>
     <p><small>created: {{createdAt}}</small></p>
     <p><small>updated: {{updatedAt}}</small></p>
   </div>
