@@ -4,7 +4,7 @@
     <div class="panel-heading"><h4>{{#link-to datasets.detail id}}{{title}}{{/link-to}}</h4></div>
   <div class="panel-body">
     <p class="lead">{{description}}</p>
-    <pre>{{json-html metadata}}</pre>
+    <pre>{{!json-html metadata}}{{ metadata }}</pre>
     <p><small>created: {{createdAt}}</small></p>
     <p><small>updated: {{updatedAt}}</small></p>
   </div>
