@@ -12,7 +12,8 @@ var App = Ember.Application.extend({
   Resolver: Resolver,
   LOG_TRANSITIONS: true,
   LOG_TRANSITIONS_INTERNAL: true,
-  LOG_VIEW_LOOKUPS: true  
+  LOG_VIEW_LOOKUPS: true,
+  LOG_ACTIVE_GENERATION: true,
 });
 
 loadInitializers(App, config.modulePrefix);
