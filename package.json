@@ -8,7 +8,7 @@
     "test": "tests"
   },
   "scripts": {
-    "start": "ember server",
+    "start": "ember server --proxy localhost:3000",
     "build": "ember build",
     "test": "ember test"
   },
@@ -38,6 +38,7 @@
     "ember-cli-simple-auth-torii": "~0.7.2",
     "ember-browserify": "~0.4.0",
     "json-to-html": "~0.1.2",
-    "torii": "~0.2.2"
+    "torii": "~0.2.2",
+    "ember-cli-list-view": "0.0.8"
   }
 }
