@@ -39,6 +39,7 @@
     "ember-browserify": "~0.4.0",
     "json-to-html": "~0.1.2",
     "torii": "~0.2.2",
-    "ember-cli-list-view": "0.0.8"
+    "ember-cli-list-view": "0.0.8",
+    "ember-cli-6to5": "~0.2.1"
   }
 }
