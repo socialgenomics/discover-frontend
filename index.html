@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Repositive</title>
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+<body>
+  <!-- this is the parent template in which all elements will be rendered -->
+  <script type="text/x-handlebars" data-template-name="application">
+
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+          <span class="sr-only">Toggle navigation</span>
+          <i class="fa fa-bars "></i>
+        </button>
+        <ul class="list-inline">
+        {{#link-to 'index' tagName='li' class='navbar-brand'}}Repositive{{/link-to}}
+        </ul>
+      </div>
+      {{render "navbar"}}
+    </div>
+  </nav>
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="container-fluid">
+      {{outlet}}
+    </div>
+
+  </script>
+  <!-- NAVBAR -->
+  <script type="text/x-handlebars" data-template-name="navbar">
+    
+     {{#if isAuthenticated}}
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+
+            <!--SEARCHBAR-->
+            <form class="navbar-form navbar-left" role="search">
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="Search">
+              </div>
+              <!-- <button type="submit" class="btn btn-default">Submit</button> -->
+            </form>
+
+            <!--BROWSE DROPDOWN  -->
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Browse <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="#">Peers</a></li>
+                <li><a href="#">Datasets</a></li>
+                <li><a href="#">Institutions</a></li>
+                <li class="divider"></li>
+                <li><a href="#">More</a></li>
+              </ul>
+            </li>
+          </ul>
+          
+          <ul class="nav navbar-nav navbar-right">
+            <!-- replace this with actual user info -->
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> <i class="fa fa-user"></i>  Sebastian Place<span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="#">Profile</a></li>
+                <li><a href="#">Notifications</a></li>
+                <li><a href="#">Settings</a></li>
+                <li class="divider"></li>
+                <li><a {{action 'logout'}} href="#">Logout</a></li>
+              </ul>
+            </li>
+            <li><button type="button" class="btn btn-default navbar-btn">Register Dataset</button></li>
+          </ul>
+      </div><!-- /.navbar-collapse -->
+    {{else}}
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">     
+          <ul class="nav navbar-nav navbar-right">
+
+            <li><a {{action 'login'}} href="#">Login</a></li>
+            <li><a {{action 'login'}} href="#">Signup</a></li>
+            <li><button type="button" class="btn btn-default navbar-btn">Register Dataset</button></li>
+          </ul>
+      </div><!-- .navbar-collapse --> 
+
+     {{/if}}
+  </script>
+
+  <!-- INDEX PAGE - search page-->
+  <script type="text/x-handlebars" data-template-name="index">
+    <div class="container text-center">
+      <h1>repositive</h1>
+      <p>connecting the world of genomic data</p>
+    </div>
+    <div class="container" id="search-container">
+      <p class="text-left">Find relevant datasets</p>
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="Search for...">
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="button">Search</button>
+        </span>
+      </div><!-- /input-group -->
+    </div>
+
+  </script>
+
+  <!-- DATASET PAGE - result page-->
+  <script type="text/x-handlebars" data-template-name='datasets'>
+    {{#each dataset in model}}
+    <div class="container container-card">
+      <h2>{{dataset.title}}</h2>
+      <p>{{dataset.description}}</p>
+      <p>{{dataset.quantity}} Available</p>
+    </div>
+    {{/each}}
+  </script>
+
+  <script src="js/libs/jquery-1.10.2.js"></script>
+  <script src="js/libs/handlebars-v1.3.0.js"></script>
+  <script src="js/libs/ember-1.8.1.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/libs/ember-data.js"></script>
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
+  <!-- to activate the test runner, add the "?test" query string parameter -->
+  <script src="tests/runner.js"></script>
+  <!-- Put all in-app dependencies below -->
+  <script src="js/controllers/index_controller.js"></script>
+  <script src="js/controllers/navbar_controller.js"></script>
+  <script src="js/router.js"></script>
+</body>
+</html>

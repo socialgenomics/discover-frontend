@@ -1,52 +1,36 @@
-# Repositive.io
+starter-kit
+===========
 
-This README outlines the details of collaborating on this Ember application.
-A short introduction of this app could easily go here.
+A starter kit for Ember
 
-## Prerequisites
+Your Ember.js project is almost ready! Here's how to get started:
 
-You will need the following things properly installed on your computer.
+- Start writing your app in `js/app.js`.
 
-* [Git](http://git-scm.com/)
-* [Node.js](http://nodejs.org/) (with NPM)
-* [Bower](http://bower.io/)
-* [Ember CLI](http://www.ember-cli.com/)
-* [PhantomJS](http://phantomjs.org/)
+- Describe your application HTML in `index.html`.
 
-## Installation
+- During development, you can link to `js/libs/ember-*.js` to get the
+  unminified version of Ember.js.
 
-* `git clone <repository-url>` this repository
-* change into the new directory
-* `npm install`
-* `bower install`
+- Add CSS to `css/style.css`.
 
-## Running / Development
+- Open `index.html` in your browser.
 
-* `ember server`
-* Visit your app at [http://localhost:4200](http://localhost:4200).
+Tests
+=====
 
-### Code Generators
+This starter kit comes with an integration test sample, written for QUnit runner. 
 
-Make use of the many generators for code, try `ember help generate` for more details
+You can run the tests by opening the `index.html?test` page in your browser.
 
-### Running Tests
+The test is located in the `tests/tests.js` file. You can see how such an 
+integration test should be written, using QUnit assertions and ember-testing helpers.
 
-* `ember test`
-* `ember test --server`
+For more information about ember-testing package see [ember-testing](http://emberjs.com/guides/testing/integration/).
 
-### Building
+For more information about the QUnit testing framework, see [QUnit](http://qunitjs.com/).
 
-* `ember build` (development)
-* `ember build --environment production` (production)
+Contact
+====
 
-### Deploying
-
-Specify what it takes to deploy your app.
-
-## Further Reading / Useful Links
-
-* [ember.js](http://emberjs.com/)
-* [ember-cli](http://www.ember-cli.com/)
-* Development Browser Extensions
-  * [ember inspector for chrome](https://chrome.google.com/webstore/detail/ember-inspector/bmdblncegkenkacieihfhpjfppoconhi)
-  * [ember inspector for firefox](https://addons.mozilla.org/en-US/firefox/addon/ember-inspector/)
+[www.emberjs.com](http://www.emberjs.com)
