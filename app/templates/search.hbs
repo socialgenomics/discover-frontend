@@ -1,13 +1,14 @@
-    <div class="container text-center">
-      <h1>repositive</h1>
-      <p>connecting the world of genomic data</p>
-    </div>
-    <div class="container" id="search-container">
-      <p class="text-left">Find relevant datasets</p>
-      <div class="input-group">
-        {{input type="text" class="form-control" placeholder="Search for..." valueBinding=keyword}}
-        <span class="input-group-btn">
-            <button class="btn btn-default" type="button" {{action 'search' keyword}}>Search</button>
-        </span>
-      </div><!-- /input-group -->
-    </div>
+<div class="container text-center">
+  <h1>repositive</h1>
+  <p>connecting the world of genomic data</p>
+</div>
+<div class="container" id="search-container">
+  <p class="text-left">Find relevant datasets</p>
+  <div class="input-group">
+    {{input type="text" class="form-control" placeholder="Search for..." valueBinding=keyword}}
+    <span class="input-group-btn">
+      <button class="btn btn-default" type="button" {{action 'search' keyword}}>Search</button>
+    </span>
+  </div><!-- /input-group -->
+{{outlet}}
+</div>

@@ -9,7 +9,9 @@ var Router = Ember.Router.extend({
 Router.map(function() {
   this.route('home', {path:'/'})
 
-  this.route('search');
+  this.resource('search', function(){
+    this.route('results', {'path':':query'})
+  });
 
   this.resource('users', function(){
     this.route('login');

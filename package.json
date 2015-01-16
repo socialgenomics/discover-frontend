@@ -40,5 +40,8 @@
     "torii": "~0.2.2",
     "ember-cli-list-view": "0.0.8",
     "ember-cli-6to5": "~0.2.1"
+  },
+  "dependencies": {
+    "underscore": "~1.7.0"
   }
 }
