@@ -10,7 +10,7 @@ App.DATASETS = [{
 	repo:'Array Express',
 	date:'23/09/2014',
 	uploader:'John Smith',
-	acccessType:'Public',
+	accessType:'Public',
 	downloads:307,
 	rating:89,
 	comments:5
@@ -22,7 +22,7 @@ App.DATASETS = [{
 	repo:'DBgap',
 	date:'28/04/2014',
 	uploader:'Anna Jones',
-	acccessType:'Public',
+	accessType:'Public',
 	downloads:455,
 	rating:77,
 	comments:12
