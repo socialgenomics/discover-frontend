@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,300,600,700' rel='stylesheet' type='text/css'>
 </head>
 <body>
   <!-- this is the parent template in which all elements will be rendered -->
@@ -111,20 +112,23 @@
       <div class="input-group">
         <input type="text" class="form-control" placeholder="Search for...">
         <span class="input-group-btn">
-          <button class="btn btn-default" type="button">Search</button>
+          {{#link-to 'datasets' tagName='button' classNames="btn btn-default"}}Search{{/link-to}}
         </span>
       </div><!-- /input-group -->
     </div>
+
 
   </script>
 
   <!-- DATASET PAGE - result page-->
   <script type="text/x-handlebars" data-template-name='datasets'>
     {{#each dataset in model}}
-    <div class="container container-card">
-      <h2>{{dataset.title}}</h2>
+    <div class="container container-result">
+      <div class="result-head">
+        <h3>{{dataset.title}}</h3>
+      </div>
       <p>{{dataset.description}}</p>
-      <p>{{dataset.quantity}} Available</p>
+
     </div>
     {{/each}}
   </script>

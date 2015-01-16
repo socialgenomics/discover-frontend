@@ -1,4 +1,6 @@
-
+h1, h2, h3, h4, p, li, a{
+	font-family: 'Open Sans', sans-serif;
+}
 /*NAVIGATION*/
 .navbar li{
 	cursor: pointer; 
@@ -17,9 +19,15 @@
 }
 
 /*RESULT VIEW*/
-.container-card{
-	border: 1px solid grey;
+.container-result{
 	margin: 1em 0 1em 0;
 	padding: 0;
+	border-radius: 4px 4px 4px 4px;
+	-moz-border-radius: 4px 4px 4px 4px;
+	-webkit-border-radius: 4px 4px 4px 4px;
+	border: 1px solid #b0b0b0;
+}
+.result-head{
+	background-color: grey;
 }
 
