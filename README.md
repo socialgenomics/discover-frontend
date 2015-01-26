@@ -1,20 +1,53 @@
-git push origin --all
+# Cli-try
 
-Tests
-=====
+This README outlines the details of collaborating on this Ember application.
+A short introduction of this app could easily go here.
 
-This starter kit comes with an integration test sample, written for QUnit runner. 
+## Prerequisites
 
-You can run the tests by opening the `index.html?test` page in your browser.
+You will need the following things properly installed on your computer.
 
-The test is located in the `tests/tests.js` file. You can see how such an 
-integration test should be written, using QUnit assertions and ember-testing helpers.
+* [Git](http://git-scm.com/)
+* [Node.js](http://nodejs.org/) (with NPM)
+* [Bower](http://bower.io/)
+* [Ember CLI](http://www.ember-cli.com/)
+* [PhantomJS](http://phantomjs.org/)
 
-For more information about ember-testing package see [ember-testing](http://emberjs.com/guides/testing/integration/).
+## Installation
 
-For more information about the QUnit testing framework, see [QUnit](http://qunitjs.com/).
+* `git clone <repository-url>` this repository
+* change into the new directory
+* `npm install`
+* `bower install`
 
-Contact
-====
+## Running / Development
 
-[www.emberjs.com](http://www.emberjs.com)
+* `ember server`
+* Visit your app at [http://localhost:4200](http://localhost:4200).
+
+### Code Generators
+
+Make use of the many generators for code, try `ember help generate` for more details
+
+### Running Tests
+
+* `ember test`
+* `ember test --server`
+
+### Building
+
+* `ember build` (development)
+* `ember build --environment production` (production)
+
+### Deploying
+
+Specify what it takes to deploy your app.
+
+## Further Reading / Useful Links
+
+* [ember.js](http://emberjs.com/)
+* [ember-cli](http://www.ember-cli.com/)
+* Development Browser Extensions
+  * [ember inspector for chrome](https://chrome.google.com/webstore/detail/ember-inspector/bmdblncegkenkacieihfhpjfppoconhi)
+  * [ember inspector for firefox](https://addons.mozilla.org/en-US/firefox/addon/ember-inspector/)
+
