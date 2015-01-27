@@ -7,7 +7,7 @@ var Router = Ember.Router.extend({
 
 Router.map(function() {
 	this.resource('datasets',function(){
-		this.route('dataset',{path:'/:dataset_id'});
+		this.resource('dataset',{path:'/:id'});
 	});
 	
 });

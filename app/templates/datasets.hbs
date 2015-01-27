@@ -1,20 +1,22 @@
+<div class="container">{{outlet}}</div>
 <div  id="results-wrap">
-{{model}}
-{{#each dataset in model}}
-  <p>hello</p>
+
+{{#each}}
   <div class="result-container">
     <div class="result-head">
-      <h3>{{dataset.title}}</h3>
+    {{#link-to 'dataset' this}}
+      <h3>{{title}}</h3>
+    {{/link-to}}
     </div>
     <div class="result-body">
-      <p>{{dataset.description}}</p>
+      <p>{{description}}</p>
     </div>
     <div class="result-footer">
       <ul class="list-inline">
-        <li>Rating: {{dataset.rating}}</li>
-        <li>Comments: {{dataset.comments}}</li>
-        <li>Downloads: {{dataset.downloads}}</li>
-        <li>Access Type: {{dataset.accessType}}</li>
+        <li>Rating: {{rating}}</li>
+        <li>Comments: {{comments}}</li>
+        <li>Downloads: {{downloads}}</li>
+        <li>Access Type: {{accessType}}</li>
       </ul>
     </div>
   </div>
