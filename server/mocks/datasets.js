@@ -6,7 +6,7 @@ module.exports = function(app) {
   var DATASETS = [
     {
       id:1,
-      title:'Towards a genetic understanding of multiple myeloma',
+      title:'Towards a **genetic** understanding of multiple myeloma',
       description:'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium qui eligendi nesciunt perferendis nobis veritatis, mollitia at dicta rerum, laborum magnam molestiae ipsam recusandae? Tempora molestiae libero, vel natus necessitatibus.',
       repo:'Array Express',
       date:'23/09/2014',
@@ -19,7 +19,7 @@ module.exports = function(app) {
     {
         id:2,
         title:'Ipsum dolor sit amet, consectetur adipisicing elit.',
-        description:'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium qui eligendi nesciunt perferendis nobis veritatis, mollitia at dicta rerum, laborum magnam molestiae ipsam recusandae? Tempora molestiae libero, vel natus necessitatibus.',
+        description:'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium qui eligendi nesciunt perferendis nobis veritatis, mollitia at dicta rerum, laborum magnam molestiae ipsam recusandae? Tempora molestiae libero, vel natus necessitatibus: \n \n - blah \n - lah lala ',
         repo:'DBgap',
         date:'28/04/2014',
         uploader:'Anna Jones',
