@@ -1,6 +1,16 @@
-h1, h2, h3, h4, p, li, a{
-	font-family: 'Open Sans', sans-serif;
+$font-stack: Open Sans, sans-serif;
+
+body{
+	font:$font-stack;
 }
+
+@mixin border-radius($radius) {
+	-webkit-border-radius: $radius;
+	-moz-border-radius: $radius;
+	-ms-border-radius: $radius;
+	border-radius: $radius;
+}
+
 /*NAVIGATION*/
 .navbar li{
 	cursor: pointer; 
@@ -12,11 +22,14 @@ h1, h2, h3, h4, p, li, a{
 	padding:0 1em 0 1em;
 	border-radius: 0 !important;
 }
+
+
 /*SEARCH PAGE*/
 #search-container{
 	max-width: 40%;
 	margin-top: 10%;
 }
+
 
 /*RESULT VIEW*/
 #results-wrap{
@@ -25,9 +38,7 @@ h1, h2, h3, h4, p, li, a{
 .result-container{
 	margin: 1em 0 2em 0;
 	padding: 0 !important;
-	border-radius: 3px 3px 3px 3px;
-	-moz-border-radius: 3px 3px 3px 3px;
-	-webkit-border-radius: 3px 3px 3px 3px;
+	@include border-radius(3px);
 	border: 1px solid #b0b0b0;
 }
 .result-head{
