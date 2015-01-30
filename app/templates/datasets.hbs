@@ -1,7 +1,7 @@
 <div class="container">{{outlet}}</div>
-<div  id="results-wrap">
+<div id="results-wrap">
 
-{{#each}}
+{{!-- {{#each}}
   <div class="result-container">
     <div class="result-head">
     {{#link-to 'dataset' this}}
@@ -20,5 +20,39 @@
       </ul>
     </div>
   </div>
+{{/each}} --}}
+
+{{#each}}
+  {{#if first}}
+    <div class="row-fluid">
+  {{/if}}
+    <div class="col-md-4">
+      <div class=card>
+        <div class="card-head">
+          {{#link-to 'dataset' this}}
+            <h3>{{showdown-addon title}}</h3>
+          {{/link-to}}
+        </div>
+        <div class="card-body">
+          <p>{{description}}</p>
+        </div>
+        <div class="card-footer">
+          <ul class="list-inline">
+            <li>Rating: {{rating}}</li>
+            <li>Comments: {{comments}}</li>
+            <li>Downloads: {{downloads}}</li>
+            <li>Access Type: {{accessType}}</li>
+          </ul>
+        </div>       
+      </div>
+    </div>
+  {{#if lastOfRow}}
+    </div>
+    <div class="row-fluid">
+  {{/if}}
+  {{#if last}}
+    </div>
+  {{/if}}
 {{/each}}
+
 </div>
