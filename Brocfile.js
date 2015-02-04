@@ -2,7 +2,11 @@
 
 var EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
-var app = new EmberApp();
+var app = new EmberApp({
+  sassOptions: {
+      inputFile:'prototype.scss',
+  }
+});
 
 
 
@@ -31,4 +35,5 @@ app.import('bower_components/fontawesome/css/font-awesome.min.css');
 app.import('bower_components/fontawesome/fonts/fontawesome-webfont.woff', {
     destDir: 'fonts'
 });
+
 module.exports = app.toTree();
