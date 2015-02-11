@@ -19,7 +19,7 @@ Router.map(function() {
   });
 
   this.resource('datasets', function(){
-    this.route('detail', {path:':id'});  
+    this.route('detail', {path:'/:id'});  
     this.route('tags', {path:'/tag/:tag'});
   });
 
