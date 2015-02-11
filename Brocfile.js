@@ -4,6 +4,7 @@ var EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
 var app = new EmberApp({
   // Uncomment this & restart server to use the prototype.scss file.
+  // TODO: import environment and change this with if statement
   // sassOptions: {
   //     inputFile:'prototype.scss',
   // }

@@ -43,5 +43,10 @@ module.exports = function(environment) {
 
   }
 
+  // TODO: set some variable that change the stylesheet
+  if (environment === 'prototypes') {
+
+  }
+
   return ENV;
 };
