@@ -58,30 +58,7 @@ module.exports = function(app) {
     res.send({'datasets': DATASETS});
   });
 
-//   datasetsRouter.post('/', function(req, res) {
-//     res.status(201).end();
-//   });
 
-// // detail view - return one datadet (by id)
-//   datasetsRouter.get('/:id', function(req, res) {
-//     res.send({
-//       'datasets': {
-//         id: req.params.id
-//       }
-//     });
-//   });
-
-//   datasetsRouter.put('/:id', function(req, res) {
-//     res.send({
-//       'datasets': {
-//         id: req.params.id
-//       }
-//     });
-//   });
-
-  // datasetsRouter.delete('/:id', function(req, res) {
-  //   res.status(204).end();
-  // });
 
   app.use('/datasets', datasetsRouter);
 };
