@@ -2,36 +2,36 @@
 {{!-- {{outlet}} --}}
 {{outlet 'modal'}}
 
-<div id="results-wrap">
+<div id="row">
 
 {{#each}}
-    <div class="col-md-4">
-      <div class=card {{action 'showModal' 'datasets-modal' model}}>
-        <div class="card-head">
-        {{!-- put modal toggle here --}}
-          {{!-- {{#link-to 'dataset' this}}
-            <h3>{{showdown-addon title}}</h3>
-          {{/link-to}} --}}
-
-
+  <div class="col-md-4">
+    <div class="card" {{action 'showModal' 'datasets-modal' model}}>
+      <div class="card-head">
+      {{!-- put modal toggle here --}}
+        {{!-- {{#link-to 'dataset' this}}
           <h3>{{showdown-addon title}}</h3>
+        {{/link-to}} --}}
+
+
+        <h3>{{showdown-addon title}}</h3>
 
 
 
-        </div>
-        <div class="card-body">
-          <p>{{description}}</p>
-        </div>
-        <div class="card-footer">
-          <ul class="list-inline">
-            <li>Rating: {{rating}}</li>
-            <li>Comments: {{comments}}</li>
-            <li>Downloads: {{downloads}}</li>
-            <li>Access Type: {{accessType}}</li>
-          </ul>
-        </div>      
       </div>
+      <div class="card-body">
+        <p>{{description}}</p>
+      </div>
+      <div class="card-footer">
+        <ul class="list-inline">
+          <li>Rating: {{rating}}</li>
+          <li>Comments: {{comments}}</li>
+          <li>Downloads: {{downloads}}</li>
+          <li>Access Type: {{accessType}}</li>
+        </ul>
+      </div>      
     </div>
+  </div>
 {{/each}}
 
 </div>

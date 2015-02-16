@@ -8,7 +8,7 @@
     "test": "tests"
   },
   "scripts": {
-    "start": "ember server",
+    "start": "ember server --environment=prototype",
     "build": "ember build",
     "test": "ember test"
   },
@@ -35,6 +35,6 @@
     "ember-export-application-global": "^1.0.0",
     "express": "^4.8.5",
     "glob": "^4.0.5",
-    "morgan": "^1.5.1"
+    "morgan": "^1.5.1",
   }
 }
