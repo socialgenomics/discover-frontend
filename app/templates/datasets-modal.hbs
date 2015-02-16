@@ -2,7 +2,9 @@
   <form {{action 'ok' on='submit' target=view}}>
     <div class="form-group">
       <label>{{title}}</label>
+      <p>{{model.title}}</p>
       {{input class="form-control" value=name}}
+
     </div>
   </form>
 {{/my-modal}}
