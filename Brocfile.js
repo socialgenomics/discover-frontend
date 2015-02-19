@@ -2,6 +2,14 @@
 
 var EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
+var environment = EmberApp.env();
+
+if (environment === 'prototypes'){
+  var infile = 'prototype.scss';
+} else {
+  var infile = 'main.scss';
+}
+
 var app = new EmberApp({
   outputPaths: {
     app: {
@@ -15,11 +23,11 @@ var app = new EmberApp({
       js: '/assets/vendor.js'
     }
   },
-  lessOptions:{
-    inputFile: 'main.less',
-    outputFile: 'main.css',
-    paths: [
-      './bower_components/bootstrap/less/',
+  sassOptions: {
+    inputFile:infile,
+    outputFile:'main.css',
+    includePaths: [
+      'bower_components/bootstrap-sass/assets/stylesheets'
     ]
   }
 });
@@ -36,6 +44,9 @@ var app = new EmberApp({
 // modules that you would like to import into your application
 // please specify an object with the list of modules as keys
 // along with the exports of each module as its value.
+
+// TODO: do we need this??
+// app.import('bower_components/bootstrap/dist/js/bootstrap.js');
 
 app.import('bower_components/ic-ajax/dist/named-amd/main.js', {
   exports: {

@@ -62,11 +62,14 @@ module.exports = function(environment) {
 
   }
 
+  if (environment === 'prototypes') {
+
+  }
+
   ENV['simple-auth'] = {
     routeAfterAuthentication: 'users.profile',
     authenticationRoute: 'users.login'
   }
-
 
   return ENV;
 };
