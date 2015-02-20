@@ -9,6 +9,7 @@ Router.map(function() {
 	this.resource('datasets',function(){
 		this.resource('dataset',{path:'/:id'});
 	});
+	this.route('signup');
 	
 });
 
