@@ -1,7 +1,7 @@
 /* global require, module */
 
 var EmberApp = require('ember-cli/lib/broccoli/ember-app');
-var environment = require('config/environment');
+var environment = EmberApp.env();
 
 
 if (environment == 'prototypes'){
@@ -11,6 +11,18 @@ if (environment == 'prototypes'){
 }
 
 var app = new EmberApp({
+  outputPaths: {
+    app: {
+      css: {
+        'main': '/assets/main.css'
+      },
+      js: '/assets/main.js'
+    },
+    vendor: {
+      css: '/assets/vendor.css',
+      js: '/assets/vendor.js'
+    }
+  },
   sassOptions: {
     inputFile:infile,
     outputFile:'main.css',
