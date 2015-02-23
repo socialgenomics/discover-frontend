@@ -10,8 +10,6 @@ if (environment == 'prototypes'){
   var infile = 'main.scss';
 }
 
-console.log(infile)
-
 var app = new EmberApp({
   outputPaths: {
     app: {
