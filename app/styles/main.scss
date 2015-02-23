@@ -49,7 +49,7 @@
 @import "bootstrap/utilities";
 @import "bootstrap/responsive-utilities";
 
-// kitchen sink
+// custom repositive style
 @import "repositive";
 
 
@@ -57,12 +57,17 @@
 .navbar li{
 	cursor: pointer; 
 }
+.nav {
+	color: $white;
+}
 .navbar-right .active{
 	font-weight: bold;
 }
 .navbar {
 	padding:0 1em 0 1em;
+	background: $green;
 	border-radius: 0 !important;
+
 }
 
 
@@ -83,8 +88,6 @@
 	margin:1.6em 1em 1.6em 1em;
 	min-height:35vh;
 	cursor: pointer;
-
-
 	.card-head{
 		border-bottom: $border-grey;
 		padding: 0.8em 1em 0 1em;
@@ -108,12 +111,22 @@
 /*SIGNUP PAGE*/
 #signup-form {
 	.third-party  {
-		display: block;
-		text-align: center;
+		display: flex;
+		height: 4em;
+		justify-content: space-between;
+		margin: 1em 0 1em 0;
 		img {
 			width: 20%;	
 		}
-	border: $border-grey;
 	}
+	p.support-copy {
+			font-size: $support-msg;
+			text-align: center;
+		}
+	.btn-submit {
+		@include button-submit($green,$white,3px);
+		width: 100%;
+	}
+
 }
 
