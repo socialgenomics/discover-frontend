@@ -49,31 +49,25 @@
 @import "bootstrap/utilities";
 @import "bootstrap/responsive-utilities";
 
+// custom repositive style
+@import "repositive";
 
-$font-stack: Open Sans, sans-serif;
-$border-grey: 1px solid #b0b0b0;
-
-body{
-	font:$font-stack;
-}
-
-@mixin border-radius($radius) {
-	-webkit-border-radius: $radius;
-	-moz-border-radius: $radius;
-	-ms-border-radius: $radius;
-	border-radius: $radius;
-}
 
 /*NAVIGATION*/
 .navbar li{
 	cursor: pointer; 
+}
+.nav {
+	color: $white;
 }
 .navbar-right .active{
 	font-weight: bold;
 }
 .navbar {
 	padding:0 1em 0 1em;
+	background: $green;
 	border-radius: 0 !important;
+
 }
 
 
@@ -94,8 +88,6 @@ body{
 	margin:1.6em 1em 1.6em 1em;
 	min-height:35vh;
 	cursor: pointer;
-
-
 	.card-head{
 		border-bottom: $border-grey;
 		padding: 0.8em 1em 0 1em;
@@ -114,5 +106,27 @@ body{
 		border-top: $border-grey;
 		font-size:0.8em;
 	}
+}
+
+/*SIGNUP PAGE*/
+#signup-form {
+	.third-party  {
+		display: flex;
+		height: 4em;
+		justify-content: space-between;
+		margin: 1em 0 1em 0;
+		img {
+			width: 20%;	
+		}
+	}
+	p.support-copy {
+			font-size: $support-msg;
+			text-align: center;
+		}
+	.btn-submit {
+		@include button-submit($green,$white,3px);
+		width: 100%;
+	}
+
 }
 

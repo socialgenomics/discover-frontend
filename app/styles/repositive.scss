@@ -1,0 +1,36 @@
+
+/* font family */
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,400,600,700,800,300);
+$font-family: Open Sans;
+
+/* font sizes */
+$paragraph: 0.8em;
+$support-msg: 0.7em;
+
+/* color schemes */
+$green: #44c392;
+$light-grey: #bebebe;
+$dark-grey: #707070;
+$white: #fff;
+
+
+$border-grey: 1px solid #b0b0b0;
+
+body{
+	font-family:$font-family;
+}
+p {
+	font-size: $paragraph;
+}
+@mixin border-radius($radius) {
+	-webkit-border-radius: $radius;
+	-moz-border-radius: $radius;
+	-ms-border-radius: $radius;
+	border-radius: $radius;
+}
+@mixin button-submit($bgcolor,$fontColor,$radius) {
+	background: $bgcolor;
+	border-radius: $radius;
+	color:$fontColor;
+}
+
