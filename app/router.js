@@ -10,7 +10,6 @@ Router.map(function() {
 		this.resource('dataset',{path:'/:id'});
 	});
 	this.route('signup');
-	
 });
 
 export default Router;
