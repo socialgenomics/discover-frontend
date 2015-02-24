@@ -52,7 +52,7 @@ Dataset.reopenClass({
 	    {
 	      id:4,
 	      title:'Ipsum dolor sit amet, consectetur adipisicing elit.',
-	      description:'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium qui eligendi nesciunt perferendis nobis veritatis, mollitia at dicta rerum, laborum magnam molestiae ipsam recusandae? Tempora molestiae libero, vel natus necessitatibus: \n \n - blah \n - lah lala ',
+	      description:'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium qui eligendi nesciunt perferendis nobis veritatis, mollitia at dicta rerum, laborum magnam molestiae ipsam recusandae? Tempora molestiae libero, vel natus necessitatibus: \n \n - blah \n - lah lala lalalalala blah la fhshsds blahalssdh dssds d sd gndf orem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium qui eligendi nesciunt perferendis nobis veritatis, mollitia at dicta rerum, laborum ma',
 	      repo:'DBgap',
 	      date:'28/04/2014',
 	      uploader:'Anna Jones',
