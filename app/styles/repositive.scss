@@ -13,6 +13,7 @@ $green: #44c392;
 $light-grey: #bebebe;
 $dark-grey: #707070;
 $white: #fff;
+<<<<<<< HEAD
 
 /*Button Colours*/
 $success: #6FE9AC; //Green
@@ -27,6 +28,14 @@ $snp-array: #a68bc0; // Purple
 
 
 $border-grey: 1px solid #d7d7d7;
+
+/* form styles,input fields */
+input {
+	width: 100%;
+	margin: 0 0 0.5em 0;
+	font-size: 0.8em;
+	line-height: 3em;
+}
 
 body{
 	font-family:$font-family;
@@ -55,5 +64,6 @@ p {
 	background: $bgcolor;
 	border-radius: $radius;
 	color:$fontColor;
+	margin: 0.5em 0 0.5em 0;
 }
 

@@ -13,7 +13,7 @@
 @import "bootstrap/code";
 @import "bootstrap/grid";
 @import "bootstrap/tables";
-@import "bootstrap/forms";
+// @import "bootstrap/forms";
 @import "bootstrap/buttons";
 
 // Components
@@ -159,23 +159,72 @@
 
 /*SIGNUP PAGE*/
 #signup-form {
+	@extend .col-md-4;
+	@extend .col-md-offset-4;
+	@extend .col-sm-4;
+	@extend .col-sm-offset-4;
+	@extend .col-xs-12;
+	@extend .col-xs-offset-0;
 	.third-party  {
 		display: flex;
 		height: 4em;
 		justify-content: space-between;
 		margin: 1em 0 1em 0;
+		a {
+			padding: 0.3em
+		}
 		img {
-			width: 20%;	
+			width: 100%;
 		}
 	}
-	p.support-copy {
+	p.info-msg {
 			font-size: $support-msg;
 			text-align: center;
+			margin-top: 10px;
 		}
 	.btn-submit {
 		@include button-submit($green,$white,3px);
 		width: 100%;
 	}
+}
+form {
+	margin-top: 1em;
+}
+.input-field {
+	position: relative;
+	color: $light-grey;
+	i {
+		position: absolute;
+		font-size: 1.5em;
+		right: 0;
+		padding: 0.4em;
+	}
+}
+p.support-copy {
+	width: 13em;
+	position: absolute;
+	font-size: $support-msg;
+	color: $dark-grey;
+	top: 0;
+	right: -15em;
 
+}
+.line { 
+	color: $light-grey;
+	position: relative;
+	span{
+		border-top: 1px solid $light-grey;
+		width: 100%;
+		display: inline-block;
+		vertical-align: middle;
+		}
+	  p {
+		position: absolute;
+		left: 45%;
+		font-size: 1em;
+		padding: 6px;
+		background: $white;
+		top: -0.5em;
+	}
 }
 
