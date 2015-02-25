@@ -14,13 +14,13 @@ var app = new EmberApp({
   outputPaths: {
     app: {
       css: {
-        'main': '/assets/main.css'
+        'main': '/css/main.css'
       },
-      js: '/assets/main.js'
+      js: '/js/main.js'
     },
     vendor: {
-      css: '/assets/vendor.css',
-      js: '/assets/vendor.js'
+      css: '/css/vendor.css',
+      js: '/js/vendor.js'
     }
   },
   sassOptions: {

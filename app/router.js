@@ -9,21 +9,21 @@ var Router = Ember.Router.extend({
 Router.map(function() {
   this.route('home', {path:'/'})
 
-  this.resource('search', function(){
-    this.route('results', {'path':':query'})
-  });
-
   this.resource('users', function(){
+    this.route('signup');
     this.route('login');
     this.route('profile');
   });
 
   this.resource('datasets', function(){
-    this.route('detail', {path:'/:id'});  
+    this.route('detail', {path:':id'});  
     this.route('tags', {path:'/tag/:tag'});
+
+	this.resource('search', function(){
+	  this.route('results', {'path':':query'})
+	});
   });
 
-  this.route('kitchensink');
   this.route('404', { path: '/*path' });
 });
 

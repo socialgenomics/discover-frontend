@@ -1,14 +1,14 @@
-import DS from 'ember-data';
-
+import DS from "ember-data";
 var Dataset = DS.Model.extend({
-  title: DS.attr('string'),
-  description: DS.attr('string'),
-  metadata: DS.attr('string'),
-  //createdAt: DS.attr('date'),
-  //updatedAt: DS.attr('date'),
-  //tags: DS.hasMany('tag'),
-  //user: DS.belongsTo('user'),
-  //TODO: add properties field with custom datatype - json
+	title: DS.attr('string'),
+	description: DS.attr('string'),
+	repo: DS.attr('string'),
+	date: DS.attr('string'),
+	uploader: DS.attr('string'),
+	accessType:DS.attr('string'),
+	downloads:DS.attr('number'),
+	rating:DS.attr('number'),
+	comments:DS.attr('number')
 });
 
 export default Dataset;
