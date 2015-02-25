@@ -4,6 +4,7 @@
 $font-family: Open Sans;
 
 /* font sizes */
+// too small maybe?
 $paragraph: 0.8em;
 $support-msg: 0.7em;
 
@@ -13,14 +14,34 @@ $light-grey: #bebebe;
 $dark-grey: #707070;
 $white: #fff;
 
+/*Button Colours*/
+$success: #6FE9AC; //Green
+$danger:#F06060; // Red
 
-$border-grey: 1px solid #b0b0b0;
+/* Assay Colours */
+$dna-array: #45AFB6; // Blue
+$dna-seq: #6FE9AC; //Green
+$rna-seq: #F06060; // Red
+$rna-array: #FFC861; // Yellow
+$snp-array: #a68bc0; // Purple
+
+
+$border-grey: 1px solid #d7d7d7;
 
 body{
 	font-family:$font-family;
+	background-color:#ecf0f1;
+}
+h3{
+	font-size:1.2em;
+	font-weight:600;
 }
 p {
 	font-size: $paragraph;
+}
+.subtitle{
+	font-style:italic;
+	font-weight:200;
 }
 @mixin border-radius($radius) {
 	-webkit-border-radius: $radius;
@@ -28,6 +49,8 @@ p {
 	-ms-border-radius: $radius;
 	border-radius: $radius;
 }
+
+//This seems silly. Why would you want to change any of the params?
 @mixin button-submit($bgcolor,$fontColor,$radius) {
 	background: $bgcolor;
 	border-radius: $radius;

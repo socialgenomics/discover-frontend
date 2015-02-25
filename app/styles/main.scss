@@ -67,9 +67,7 @@
 	padding:0 1em 0 1em;
 	background: $green;
 	border-radius: 0 !important;
-
 }
-
 
 /*SEARCH PAGE*/
 #search-container{
@@ -83,30 +81,81 @@
 	margin:2% 12% 2% 12%;
 }
 .card{
-	@include border-radius(3px);
+	@include border-radius(2px);
 	border: $border-grey;
 	margin:1.6em 1em 1.6em 1em;
-	min-height:35vh;
+	min-width:310px;
 	cursor: pointer;
+	background-color:$white;
+	position:relative;
+	padding-bottom:2.2em;
+	height:200px;
+	overflow:hidden;
 	.card-head{
-		border-bottom: $border-grey;
-		padding: 0.8em 1em 0 1em;
+		overflow:hidden;
+		padding: 0 1em 0 1em;
 		h3{
-			margin:0.5em 0 0.5em 0;
-			font-size:1.2em;
+			margin:0 0 0.5em 0;
+		}
+		ul{
+			margin-bottom:0;
+			li{
+				padding:0 1px 0 0;
+			}
 		}
 	}
 	.card-body{
-		padding: 0.8em 1em 0 1em;
-	    max-height:35vh;
+		padding: 0 1em 0 1em;
         overflow:hidden;
 	}
 	.card-footer{
 		padding: 0.8em 1em 0 1em;
-		border-top: $border-grey;
 		font-size:0.8em;
+		position:absolute;
+		bottom:0;
+		background-color:$white;
+		width:100%;
+		ul{
+			display: -webkit-flex; /* Safari */
+		    -webkit-justify-content: space-around; /* Safari 6.1+ */
+		    display: flex;
+		    justify-content: space-around;
+		}
 	}
 }
+
+
+/*Assays*/
+.assay{
+	padding:0 1.4em 0 1.4em;
+	height:6px;
+	margin:0;
+	display:block;
+	position:relative;
+	top:-10px;
+}
+.dna-array{
+	@extend .assay;
+	background-color:$dna-array;
+}
+.dna-seq{
+	@extend .assay;
+	background-color:$dna-seq;
+}
+.rna-seq{
+	@extend .assay;
+	background-color:$rna-seq;
+}
+.rna-array{
+	@extend .assay;
+	background-color:$rna-array;
+}
+.snp-array{
+	@extend .assay;
+	background-color:$snp-array;
+}
+
+
 
 /*SIGNUP PAGE*/
 #signup-form {

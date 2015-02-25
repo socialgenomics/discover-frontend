@@ -13,8 +13,17 @@
           <h3>{{showdown-addon title}}</h3>
         {{/link-to}} --}}
 
+        <ul class="list-inline">
+          {{!-- loop over assay array --}}
+          <li> <i class="dna-array"></i></li>
+          <li> <i class="dna-seq"></i></li>
+          <li> <i class="rna-seq"></i></li>
+          <li> <i class="rna-array"></i></li>
+        </ul>
 
-        <h3>{{showdown-addon title}}</h3>
+        <h3>{{title}}</h3>
+        {{!-- Name should link to profile. --}}
+        <p class="subtitle">uploaded by: <strong>Thomas Pearson</strong></p>
 
 
 
@@ -22,12 +31,15 @@
       <div class="card-body">
         <p>{{description}}</p>
       </div>
-      <div class="card-footer">
+      <div class="card-footer text-muted">
         <ul class="list-inline">
-          <li>Rating: {{rating}}</li>
-          <li>Comments: {{comments}}</li>
-          <li>Downloads: {{downloads}}</li>
-          <li>Access Type: {{accessType}}</li>
+          <li><i class="fa fa-calendar"></i> 23-04-14</li>
+          <li><i class="fa fa-comments"></i> {{comments}}</li>
+          <li><i class="fa fa-star"></i> {{rating}}</li>
+          <li><i class="fa  fa-arrow-circle-o-down"></i> {{downloads}}</li>
+          <li><i class="fa  fa-globe"></i> {{accessType}}</li>
+
+
         </ul>
       </div>      
     </div>

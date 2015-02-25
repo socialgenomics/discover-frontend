@@ -15,14 +15,14 @@ Dataset.reopenClass({
 	FIXTURES: [
 		{
 		  id:1,
-	      title:'Towards a **genetic** understanding of multiple myeloma',
+	      title:'Towards a genetic understanding of multiple myeloma',
 	      description:'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium qui eligendi nesciunt perferendis nobis veritatis, mollitia at dicta rerum, laborum magnam molestiae ipsam recusandae? Tempora molestiae libero, vel natus necessitatibus.',
 	      repo:'Array Express',
 	      date:'23/09/2014',
 	      uploader:'John Smith',
 	      accessType:'Public',
 	      downloads:307,
-	      rating:89,
+	      rating:3.5,
 	      comments:5
 		},
 		{
@@ -34,7 +34,7 @@ Dataset.reopenClass({
 	      uploader:'Anna Jones',
 	      accessType:'Public',
 	      downloads:455,
-	      rating:77,
+	      rating:4,
 	      comments:12
    	 	},
    	 	{
@@ -46,7 +46,7 @@ Dataset.reopenClass({
 	      uploader:'Anna Jones',
 	      accessType:'Public',
 	      downloads:455,
-	      rating:77,
+	      rating:4.5,
 	      comments:12
 	    },
 	    {
@@ -58,7 +58,7 @@ Dataset.reopenClass({
 	      uploader:'Anna Jones',
 	      accessType:'Public',
 	      downloads:455,
-	      rating:77,
+	      rating:5,
 	      comments:12
 	    }
 	]
