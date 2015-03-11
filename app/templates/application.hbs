@@ -1,6 +1,6 @@
-{{ render 'ui/navbar' }}
+{{ render 'navbar' }}
 <div class="container">
   {{message-queue}}
   {{outlet}}
-  {{outlet modal}}
+  {{outlet 'modal'}}
 </div>
