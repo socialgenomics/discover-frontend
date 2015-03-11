@@ -14,7 +14,7 @@ Router.map(function() {
     this.route('profile');
   });
 
-  this.resource('datasets', function(){
+  this.resource('metadata', function(){
     this.route('detail', {path:':id'});  
     this.route('tags', {path:'/tag/:tag'});
 

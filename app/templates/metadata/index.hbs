@@ -1,7 +1,7 @@
 <h4>index</h4>
 {{#each}}
 <div class="panel panel-default" id="headings">
-    <div class="panel-heading"><h4>{{#link-to 'datasets.detail' this}}{{title}}{{/link-to}}</h4></div>
+    <div class="panel-heading"><h4>{{#link-to 'metadata.detail' this}}{{title}}{{/link-to}}</h4></div>
   <div class="panel-body">
     <p class="lead">{{description}}</p>
     <pre>{{!json-html metadata}}{{ metadata }}</pre>

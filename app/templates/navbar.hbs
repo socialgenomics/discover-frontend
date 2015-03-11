@@ -1,12 +1,23 @@
 <nav class="teal" role="navigation">
-  <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Repositive.io</a>
+<div class="nav-wrapper container">
+    {{link-to 'Repositive.io' 'home' class="navbar-brand"}}
     <ul class="right">
-      <li><a href="#">Navbar Link</a></li>
+      {{#if session.isAuthenticated}}
+        <li><a {{ action 'invalidateSession' }}>Logout</a></li>
+      {{else}}
+        <li><a {{ action 'authenticateSession' }}>Login</a></li>
+        <li>{{#link-to 'users.signup'}}Sign Up{{/link-to}}</li>
+      {{/if}}
     </ul>
 
     <ul id="nav-mobile" class="side-nav">
-      <li><a href="#">Navbar Link</a></li>
-   </ul>
+      {{#if session.isAuthenticated}}
+        <li><a {{ action 'invalidateSession' }}>Logout</a></li>
+      {{else}}
+        <li><a {{ action 'authenticateSession' }}>Login</a></li>
+        <li>{{#link-to 'users.signup'}}Sign Up{{/link-to}}</li>
+      {{/if}}
+    </ul>
     <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
   </div>
 </nav>

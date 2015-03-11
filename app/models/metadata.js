@@ -1,5 +1,6 @@
 import DS from "ember-data";
-var Dataset = DS.Model.extend({
+
+var Meta = DS.Model.extend({
 	title: DS.attr('string'),
 	description: DS.attr('string'),
 	repo: DS.attr('string'),
@@ -11,4 +12,4 @@ var Dataset = DS.Model.extend({
 	comments:DS.attr('number')
 });
 
-export default Dataset;
+export default Meta;

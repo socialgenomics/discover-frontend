@@ -13,7 +13,7 @@ export default Ember.Route.extend({
       }).then(function(resp){
       // TODO: hack to remove nulll values
       var cleanIds = _.compact(resp.ids)
-      return route.store.findByIds('Dataset', cleanIds)
+      return route.store.findByIds('Meta', cleanIds)
     },function(err){
       return console.log(err)
     })
