@@ -75,6 +75,9 @@ module.exports = function(environment) {
     routeAfterAuthentication: 'users.profile',
     authenticationRoute: 'users.login'
   }
+  ENV['simple-auth-cookie-store'] = {
+    cookieName: 'repositvie.io'
+  }
 
 
   return ENV;
