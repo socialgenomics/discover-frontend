@@ -1,6 +1,5 @@
 import Ember from "ember";
 import { raw } from 'ic-ajax';
-import User from 'repositive.io/models/user';
 
 var showMessages = function(resp, emberThing){
    // emberThing is any ember object that flashMessages is
@@ -41,8 +40,6 @@ export default Ember.Route.extend({
         // transition to homepage
         showMessages(body, route);
         route.transitionTo('home');
-        var cookie = resp.jqXHR.getResponseHeader('set-cookie');
-        alert(cookie)
       }, function(err){
         showMessages(err, route);
       });
