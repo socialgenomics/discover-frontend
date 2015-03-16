@@ -1,28 +1,29 @@
 import Base from 'simple-auth/authenticators/base';
-import ajax from 'ic-ajax';
 import Ember from 'ember';
+
 
 export default Base.extend({
   restore: function(data) {
     return data;
   },
-  authenticate: function(email, password) {
+  authenticate: function(data) {
     var that = this;
     return new Ember.RSVP.Promise(function(resolve, reject){
-      ajax({
+      Ember.$.ajax({
         url: 'api/users/login',
         type: 'POST',
-        data: {
-          email:email,
-          password:password,
-        }
+        data: data
       }).then(function(resp){
-        var body = resp.response;
-        body.isCurrentUser = true;
-        that.store.push('user',body);
-        resolve(resp);
-      }, function(err){
-        reject(err);
+        resp.isCurrentUser = true;
+        Ember.run(function(){
+          // all the properties of the object you resolve with
+          // will be added to the session
+          resolve({userData: resp});
+        });
+      }, function(xhr, status, error){
+        Ember.run(function(){
+            reject(xhr);
+        });
       });
     });
   },
@@ -30,15 +31,14 @@ export default Base.extend({
     return new Ember.RSVP.Promise(function(resolve, reject){
       // strange but true -- post data should be *username* and password 
       // - due to the way passpost works on the backend. TODO: change this! 
-      ajax({
+      Ember.$.ajax({
         url: 'api/users/logout',
         type: 'POST',
         data: {
           authToken: user.authToken,
         }
       }).then(function(resp){
-        console.log(resp);
-        resolve(true);
+        resolve(resp);
       }, function(err){
         reject(err);
       });

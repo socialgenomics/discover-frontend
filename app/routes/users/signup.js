@@ -1,5 +1,5 @@
 import Ember from "ember";
-import { raw } from 'ic-ajax';
+import ajax from 'ic-ajax';
 
 var showMessages = function(resp, emberThing){
    // emberThing is any ember object that flashMessages is
@@ -23,23 +23,16 @@ export default Ember.Route.extend({
       var route = this;
       // strange but true -- post data should be *username* and password 
       // - due to the way passpost works on the backend. TODO: change this! 
-      var formData = {
-        username: this.currentModel.email,
-        password: this.currentModel.password,
-      };
-      // use the raw method to anable access to the http headers
-      raw({
+      ajax({
         url:'api/users',
         type:'POST',
-        data:formData
+        data:{
+          username: this.currentModel.email,
+          password: this.currentModel.password,
+        }
       }).then(function(resp){
-        // signup sucessful, add the current user to the store.
-        var body = resp.response;
-        body.isCurrentUser = true;
-        route.store.push('user',body);
-        // transition to homepage
-        showMessages(body, route);
-        route.transitionTo('home');
+        showMessages(resp, route);
+        route.transitionTo('users.profile');
       }, function(err){
         showMessages(err, route);
       });
