@@ -4,10 +4,11 @@ import Ember from 'ember';
 
 export default Base.extend({
   restore: function(data) {
-    return data;
+    return new Ember.RSVP.Promise(function(resolve, reject){
+      resolve(data);
+    });
   },
   authenticate: function(data) {
-    var that = this;
     return new Ember.RSVP.Promise(function(resolve, reject){
       Ember.$.ajax({
         url: 'api/users/login',

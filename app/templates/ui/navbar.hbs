@@ -18,6 +18,8 @@
       </p>
       <p class="navbar-text navbar-right">
       {{#if session.isAuthenticated}}
+        {{#link-to 'users.profile'}}profile{{/link-to}}
+        {{#link-to 'users.settings'}}settings{{/link-to}}
         <a {{ action 'invalidateSession' }}>Logout</a>
       {{else}}
         <a {{ action 'authenticateSession' }}>Login</a>

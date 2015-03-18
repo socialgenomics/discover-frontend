@@ -12,6 +12,7 @@ Router.map(function() {
     this.route('signup');
     this.route('login');
     this.route('profile');
+    this.route('settings');
   });
 
   this.resource('metadata', function(){

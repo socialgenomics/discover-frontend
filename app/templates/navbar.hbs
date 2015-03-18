@@ -4,6 +4,8 @@
     <ul class="right">
       {{#if session.isAuthenticated}}
         <li><a {{ action 'invalidateSession' }}>Logout</a></li>
+        <li>{{#link-to 'users.profile'}}profile{{/link-to}}</li>
+        <li>{{#link-to 'users.settings'}}settings{{/link-to}}</li>
       {{else}}
         <li><a {{ action 'authenticateSession' }}>Login</a></li>
         <li>{{#link-to 'users.signup'}}Sign Up{{/link-to}}</li>
@@ -12,6 +14,8 @@
 
     <ul id="nav-mobile" class="side-nav">
       {{#if session.isAuthenticated}}
+        <li>{{#link-to 'users.profile'}}profile{{/link-to}}</li>
+        <li>{{#link-to 'users.settings'}}settings{{/link-to}}</li>
         <li><a {{ action 'invalidateSession' }}>Logout</a></li>
       {{else}}
         <li><a {{ action 'authenticateSession' }}>Login</a></li>
