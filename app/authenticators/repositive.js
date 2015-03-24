@@ -1,14 +1,19 @@
-import Base from 'simple-auth/authenticators/base';
 import Ember from 'ember';
+
+import Base from 'simple-auth/authenticators/base';
+import Queue from 'ember-flash-messages/queue';
+import _ from 'npm:underscore';
 
 
 export default Base.extend({
   restore: function(data) {
     return new Ember.RSVP.Promise(function(resolve, reject){
+      // TODO: display any notifications - i.e if you have new messages etc
       resolve(data);
     });
   },
   authenticate: function(data) {
+    var _this = this;
     return new Ember.RSVP.Promise(function(resolve, reject){
       Ember.$.ajax({
         url: 'api/users/login',
@@ -23,15 +28,15 @@ export default Base.extend({
         });
       }, function(xhr, status, error){
         Ember.run(function(){
-            reject(xhr);
+          _this.showMessages(xhr.responseJSON.messages);
+          reject(xhr);
         });
       });
     });
   },
   invalidate: function(user) {
+    var _this = this;
     return new Ember.RSVP.Promise(function(resolve, reject){
-      // strange but true -- post data should be *username* and password 
-      // - due to the way passpost works on the backend. TODO: change this! 
       Ember.$.ajax({
         url: 'api/users/logout',
         type: 'POST',
@@ -39,10 +44,19 @@ export default Base.extend({
           authToken: user.authToken,
         }
       }).then(function(resp){
+        _this.showMessages(resp.messages);
         resolve(resp);
-      }, function(err){
+      }, function(xhr, status, error){
+        _this.showMessages(xhr.responseJSON.messages);
         reject(err);
       });
     });
+  },
+  showMessages : function(messages){
+    if (messages) {
+      messages.forEach(function(message){
+        Queue.pushMessage(message);
+      });
+    }
   }
 });

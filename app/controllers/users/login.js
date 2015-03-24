@@ -1,13 +1,12 @@
 import Ember from "ember";
-import ajax from 'ic-ajax';
 import Queue from 'ember-flash-messages/queue';
 import EmberValidations from 'ember-validations';
 
 
 export default Ember.ObjectController.extend(EmberValidations.Mixin, {
-  email:null,
-  password:null,
-  showErrors:false,
+  email: '',
+  password: '',
+  showErrors: true,
 
   validations: {
     email: {
@@ -25,26 +24,19 @@ export default Ember.ObjectController.extend(EmberValidations.Mixin, {
   actions: {
     submitForm: function() {
       var _this = this;
-      if (this.get('isValid')){
-        ajax({
-          url:'api/users',
-          type:'POST',
-          data:{
+      this.get('session')
+        .authenticate('authenticator:repositive', 
+          {
             email: this.email,
-            password: this.password,
+            password: this.password
           }
-        }).then(function(resp){
-          _this.showMessages(resp.messages);
-          _this.get('session').authenticate('authenticator:repositive', {
-            email: _this.email,
-            password: _this.password,
-          });
-        }, function(err){
-          _this.showMessages(xhr.responseJSON.messages);
-        });
-      } else {
-        this.set('showErrors', true);
-      }
+      ).then(function(resp){
+        _this.transitionToRoute('home');
+      }, function(err){
+        // messages are already being shown by the authenticator
+        // do something else instead?
+        console.log(err)
+      });
     }
   },
   showMessages : function(messages){

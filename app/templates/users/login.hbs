@@ -8,22 +8,33 @@
       <a href="#"><img class="col s3" src="/assets/images/twitter.png"></a>
     </div>
 	<div class="divider"></div>
-     <p class="center-align">OR</p>
+    <p class="center-align">OR</p>
     <div class="row">
       <div class="input-field col s12">
         <!-- TODO: validations -->
-        {{input valueBinding="model.email" id="email" type="email" class="validate"}}
+        {{input valueBinding="email" id="email" type="email" class="validate"}}
         <label for="email">Email</label>
+        {{#if showErrors}}
+            {{#each error in errors.email}}
+                <div class="error">{{ error }}</div>
+            {{/each}}
+        {{/if}}
       </div>
     </div>
     <div class="row">
       <div class="input-field col s12">
-        {{input valueBinding="model.password" id="password" type="password" class="validate"}}
+        {{input valueBinding="password" id="password" type="password" class="validate"}}
         <label for="password">Password</label>
+        {{#if showErrors}}
+            {{#each error in errors.password}}
+                <div class="error">{{ error }}</div>
+            {{/each}}
+        {{/if}}
       </div>
     </div>
     <div class="center-btn">
       <a class="waves-effect waves-light btn" {{action 'submitForm'}}>Log In</a>
     </div>
+    {{message-queue}}
   </form>
 </div>
