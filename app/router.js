@@ -6,7 +6,7 @@ var Router = Ember.Router.extend({
 });
 
 Router.map(function() {
-  this.route('home', {path:'/'});
+  this.route('root', {path:'/'});
 
   this.resource('users', function(){
     this.route('signup');
@@ -19,9 +19,10 @@ Router.map(function() {
     this.route('detail', {path:':id'});  
     this.route('tags', {path:'/tag/:tag'});
 
-	this.resource('search', function(){
-	  this.route('results', {'path':':query'});
-	});
+  });
+
+  this.resource('search', function(){
+    this.route('results', {'path':':query'});
   });
 
   this.route('404', { path: '/*path' });

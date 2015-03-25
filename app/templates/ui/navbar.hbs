@@ -1,31 +1,27 @@
-<nav class="navbar navbar-default navbar-static-top">
-  <div class="container">
-    <div class="navbar-header">
-      {{link-to 'Repositive.io' 'home' class="navbar-brand"}}
-    </div>
-    <div class="collapse navbar-collapse header-collapse">
-      <ul class="nav navbar-nav">
-        <!--SEARCHBAR-->
-        <form class="navbar-form navbar-left" role="search">
-          <div class="form-group">
-            <input type="text" class="form-control" placeholder="Search">
-          </div>
-          <!-- <button type="submit" class="btn btn-default">Submit</button> -->
-        </form>
-      </ul>
-      <p class="navbar-text">
-      {{#link-to 'datasets'}}datasets{{/link-to}}
-      </p>
-      <p class="navbar-text navbar-right">
+<nav class="teal" role="navigation">
+  <div class="nav-wrapper container">
+    {{link-to 'Repositive.io' 'root' class="navbar-brand"}}
+    <ul class="right">
       {{#if session.isAuthenticated}}
-        {{#link-to 'users.profile'}}profile{{/link-to}}
-        {{#link-to 'users.settings'}}settings{{/link-to}}
-        <a {{ action 'invalidateSession' }}>Logout</a>
+        <li><a {{ action 'invalidateSession' }}>Logout</a></li>
+        <li>{{#link-to 'users.profile'}}profile{{/link-to}}</li>
+        <li>{{#link-to 'users.settings'}}settings{{/link-to}}</li>
       {{else}}
-        <a {{ action 'authenticateSession' }}>Login</a>
+        <li><a {{ action 'authenticateSession' }}>Login</a></li>
+        <li>{{#link-to 'users.signup'}}Sign Up{{/link-to}}</li>
       {{/if}}
-      {{#link-to 'users.signup'}}Sign Up{{/link-to}}
-      </p>
-    </div>
+    </ul>
+
+    <ul id="nav-mobile" class="side-nav">
+      {{#if session.isAuthenticated}}
+        <li>{{#link-to 'users.profile'}}profile{{/link-to}}</li>
+        <li>{{#link-to 'users.settings'}}settings{{/link-to}}</li>
+        <li><a {{ action 'invalidateSession' }}>Logout</a></li>
+      {{else}}
+        <li><a {{ action 'authenticateSession' }}>Login</a></li>
+        <li>{{#link-to 'users.signup'}}Sign Up{{/link-to}}</li>
+      {{/if}}
+    </ul>
+    <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
   </div>
 </nav>
