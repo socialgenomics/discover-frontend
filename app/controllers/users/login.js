@@ -10,17 +10,17 @@ export default Ember.ObjectController.extend(EmberValidations.Mixin, {
 
   validations: {
     email: {
-      server: true,
       presence: true,
       format: {
         with: /^[\w+\-.]+@[a-z\d\-.]+\.[a-z]+$/i,
         message: 'must be a valid e-mail address'
       },
+      server: true,
     },
     password: {
-      server: true,
       presence: true,
-        length: { minimum: 8 }
+      length: { minimum: 8 },
+      server: true,
     },
   },
   actions: {
@@ -33,7 +33,7 @@ export default Ember.ObjectController.extend(EmberValidations.Mixin, {
             password: this.password
           }
       ).then(function(resp){
-        _this.transitionToRoute('home');
+        _this.transitionToRoute('root');
       }, function(err){
         // messages are already being shown by the authenticator
         // do something else instead?

@@ -58,5 +58,5 @@ export default Base.extend({
         Queue.pushMessage(message);
       });
     }
-  }
+  },
 });
