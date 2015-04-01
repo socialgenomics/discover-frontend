@@ -6,7 +6,7 @@ module.exports = {
       port: 6379
     },
     assets: {
-      accessKeyId: 'AKIAJGXHOF2VTOVKSRHQ',
+      accessKeyId: 'AKIAJVMZYC2JCT2XY53Q',
       secretAccessKey: process.env['AWS_ACCESS_KEY'],
       bucket: 'testing.repositive.io'
     }
@@ -18,7 +18,7 @@ module.exports = {
       password: '<your-redis-secret>'
     },
     assets: {
-      accessKeyId: 'AKIAJGXHOF2VTOVKSRHQ',
+      accessKeyId: 'AKIAJVMZYC2JCT2XY53Q',
       secretAccessKey: process.env['AWS_ACCESS_KEY'],
       bucket: 'repositive.io'
     }
