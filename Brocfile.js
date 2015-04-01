@@ -10,6 +10,8 @@ if (environment === 'prototypes'){
   var infile = 'main.scss';
 }
 
+var isProductionLikeBuild = ['production', 'staging'].indexOf(environment) > -1;
+
 var app = new EmberApp({
   outputPaths: {
     app: {
@@ -29,7 +31,17 @@ var app = new EmberApp({
     includePaths: [
       'bower_components/bootstrap-sass/assets/stylesheets'
     ]
-  }
+  },
+  fingerprint: {
+    enabled: isProductionLikeBuild,
+    exclude: [],
+    prepend: 'http://d3duxukexohr0v.cloudfront.net/',
+  },
+  sourcemaps: {
+    enabled: !isProductionLikeBuild,
+  },
+  minifyCSS: { enabled: isProductionLikeBuild },
+  minifyJS: { enabled: isProductionLikeBuild },
 });
 
 // Use `app.import` to add additional libraries to the generated
@@ -44,20 +56,5 @@ var app = new EmberApp({
 // modules that you would like to import into your application
 // please specify an object with the list of modules as keys
 // along with the exports of each module as its value.
-
-// TODO: do we need this??
-// app.import('bower_components/bootstrap/dist/js/bootstrap.js');
-
-app.import('bower_components/ic-ajax/dist/named-amd/main.js', {
-  exports: {
-    'ic-ajax': [
-      'default',
-      'defineFixture',
-      'lookupFixture',
-      'raw',
-      'request',
-    ]
-  }
-});
 
 module.exports = app.toTree();

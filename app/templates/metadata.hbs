@@ -1,49 +1,26 @@
-{{!-- <div class="container">{{outlet}}</div> --}}
-{{!-- {{outlet}} --}}
-{{outlet 'modal'}}
-
-<div id="row">
-
-{{#each}}
-  <div class="col-md-4">
-    <div class="card" {{action 'showModal' 'datasets-modal' model}}>
-      <div class="card-head">
-      {{!-- put modal toggle here --}}
-        {{!-- {{#link-to 'dataset' this}}
-          <h3>{{showdown-addon title}}</h3>
-        {{/link-to}} --}}
-
-        <ul class="list-inline">
-          {{!-- loop over assay array --}}
-          <li> <i class="dna-array"></i></li>
-          <li> <i class="dna-seq"></i></li>
-          <li> <i class="rna-seq"></i></li>
-          <li> <i class="rna-array"></i></li>
-        </ul>
-
-        <h3>{{title}}</h3>
-        {{!-- Name should link to profile. --}}
-        <p class="subtitle">uploaded by: <strong>Thomas Pearson</strong></p>
-
-
-
+<div class="row">
+{{# each meta in model }}
+  <div class="col m4">
+    <div class="card small">
+      <a href="/datasets/:id">
+        <h2>{{ meta.title }}</h2>
+      </a>
+      {{#if mets.user }}
+      <span class="helper-text">
+        uploaded by 
+        <a href="/profile" class="teal-text"></a>
+      </span>
+      {{/if }}
+      <p>{{ meta.description }}</p>
+      <div class="row">
+        <div class="col m4">
+          <span>12/05/1994</span>
+        </div>
+        <div class="col m4 offset-m4">
+          <span>35 views</span>
+        </div>
       </div>
-      <div class="card-body">
-        <p>{{description}}</p>
-      </div>
-      <div class="card-footer text-muted">
-        <ul class="list-inline">
-          <li><i class="fa fa-calendar"></i> 23-04-14</li>
-          <li><i class="fa fa-comments"></i> {{comments}}</li>
-          <li><i class="fa fa-star"></i> {{rating}}</li>
-          <li><i class="fa  fa-arrow-circle-o-down"></i> {{downloads}}</li>
-          <li><i class="fa  fa-globe"></i> {{accessType}}</li>
-
-
-        </ul>
-      </div>      
     </div>
   </div>
-{{/each}}
-
+{{/ each }}
 </div>
