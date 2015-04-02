@@ -10,7 +10,7 @@ if (environment === 'prototypes'){
   var infile = 'main.scss';
 }
 
-var isProductionLikeBuild = ['production', 'staging'].indexOf(environment) > -1;
+var isProductionLikeBuild = ['production', 'testing'].indexOf(environment) > -1;
 
 var app = new EmberApp({
   outputPaths: {
