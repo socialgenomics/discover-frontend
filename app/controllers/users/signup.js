@@ -49,7 +49,14 @@ export default Ember.ObjectController.extend(EmberValidations.Mixin, {
       } else {
         this.set('showErrors', true);
       }
-    }
+    },
+    authenticateWithFacebook: function() {
+      this.get('session').authenticate('simple-auth-authenticator:torii', 'facebook-oauth2').then(function(value){
+        console.log('complete');
+      }, function(err){
+         console.log('facebok login failed')
+      });
+    },
   },
   showMessages : function(messages){
     if (messages) {
