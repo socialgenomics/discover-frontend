@@ -50,11 +50,18 @@ export default Ember.ObjectController.extend(EmberValidations.Mixin, {
         this.set('showErrors', true);
       }
     },
-    authenticateWithFacebook: function() {
-      this.get('session').authenticate('simple-auth-authenticator:torii', 'facebook-oauth2').then(function(value){
+    authenticateWithGooglePlus: function() {
+      this.get('session').authenticate('simple-auth-authenticator:torii', 'google-oauth2').then(function(value){
         console.log('complete');
       }, function(err){
-         console.log('facebok login failed')
+         console.log('google login failed')
+      });
+    },
+    authenticateWithLinkedIn: function() {
+      this.get('session').authenticate('simple-auth-authenticator:torii', 'linked-in-oauth2').then(function(value){
+        console.log('complete');
+      }, function(err){
+         console.log('linkedIn login failed')
       });
     },
   },
