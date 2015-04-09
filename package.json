@@ -10,7 +10,8 @@
   "scripts": {
     "start": "ember server --proxy http://localhost:3000",
     "build": "ember build",
-    "test": "ember test"
+    "test": "ember test",
+    "containerized": "ember server --proxy http://$(boot2docker ip)"
   },
   "repository": "https://bitbucket.org/repositive/repositive.io",
   "engines": {
@@ -35,6 +36,7 @@
     "ember-cli-simple-auth": "0.7.3",
     "ember-cli-simple-auth-cookie-store": "0.7.3",
     "ember-cli-simple-auth-oauth2": "0.7.3",
+    "ember-cli-simple-auth-torii": "0.6.7",
     "ember-cli-uglify": "1.0.1",
     "ember-data": "1.0.0-beta.15",
     "ember-deploy-redis": "0.0.2",
@@ -42,6 +44,7 @@
     "ember-export-application-global": "^1.0.2",
     "ember-flash-messages": "0.5.2",
     "ember-validations": "2.0.0-alpha.3",
-    "underscore": "^1.8.2"
+    "underscore": "^1.8.2",
+    "torii": "0.2.1"
   }
 }

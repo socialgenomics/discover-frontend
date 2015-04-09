@@ -1,9 +1,13 @@
 import Ember from "ember";
 import Queue from 'ember-flash-messages/queue';
 import EmberValidations from 'ember-validations';
+import ThirdParty from 'repositive.io/mixins/third-party'
 
 
-export default Ember.ObjectController.extend(EmberValidations.Mixin, {
+export default Ember.ObjectController.extend(
+    EmberValidations.Mixin,
+    ThirdParty,
+{
   email: '',
   password: '',
   showErrors: true,
@@ -33,7 +37,7 @@ export default Ember.ObjectController.extend(EmberValidations.Mixin, {
             password: this.password
           }
       ).then(function(resp){
-        _this.transitionToRoute('root');
+        //_this.transitionToRoute('root');
       }, function(err){
         // messages are already being shown by the authenticator
         // do something else instead?

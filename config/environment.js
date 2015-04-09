@@ -17,17 +17,28 @@ module.exports = function(environment) {
       // Here you can pass flags/options to your application instance
       // when it is created
     },
+
+    // mapping of backend routes
+    APIRoutes: {
+      "users.login" : "/api/users/login",           
+      "users.sigup" : "/api/users",           
+    },
+
     sassOptions: {
       inputFile:'main.scss',
       outputFile:'main.css',
       includePaths: ['bower_components/materialize/sass']
     },
+    'simple-auth' : {
+      authorizer: 'authorizer:repositive',
+      routeAfterAuthentication: 'users.profile',
+      authenticationRoute: 'users.login'
+    },
+    'simple-auth-cookie-store' : {
+      cookieName: 'repositvie.io'
+    },
     torii: {
       providers: {
-        'facebook-oauth2': {
-          apiKey:      '',
-          redirectUri: ''
-        },
         'google-oauth2': {
           apiKey:      '677526813069-6tmd1flqovp5miud67phqlks49bqdo8i.apps.googleusercontent.com',
           redirectUri: 'http://localhost:4200'
@@ -41,14 +52,11 @@ module.exports = function(environment) {
   };
 
   if (environment === 'development') {
-    ENV.APP.LOG_RESOLVER = true;
-    ENV.APP.LOG_ACTIVE_GENERATION = true;
-    ENV.APP.LOG_TRANSITIONS = true;
-    ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
-    ENV.APP.LOG_VIEW_LOOKUPS = true;
-    ENV['simple-auth-oauth2'] = {
-      serverTokenEndpoint: 'http://localhost:3000/token'
-    }
+   // ENV.APP.LOG_RESOLVER = true;
+   // ENV.APP.LOG_ACTIVE_GENERATION = true;
+   // ENV.APP.LOG_TRANSITIONS = true;
+   // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
+   // ENV.APP.LOG_VIEW_LOOKUPS = true;
   }
 
   if (environment === 'test') {
@@ -64,21 +72,7 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-
   }
-
-  if (environment === 'prototypes') {
-
-  }
-
-  ENV['simple-auth'] = {
-    routeAfterAuthentication: 'users.profile',
-    authenticationRoute: 'users.login'
-  }
-  ENV['simple-auth-cookie-store'] = {
-    cookieName: 'repositvie.io'
-  }
-
 
   return ENV;
 };

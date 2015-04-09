@@ -7,7 +7,7 @@ export default {
   initialize: function(container) {
     Session.reopen({
       setCurrentUser: function() {
-        var userData = this.get("userData");
+        var userData = this.get("user");
         var that = this;
 
         if (!Ember.isEmpty(userData)) {
@@ -15,7 +15,7 @@ export default {
           that.set("currentUser", user);
           return user;
         }
-      }.observes("userData")
+      }.observes("user")
     });
   }
 };

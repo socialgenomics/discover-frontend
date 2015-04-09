@@ -2,9 +2,13 @@ import Ember from "ember";
 import Queue from 'ember-flash-messages/queue';
 import EmberValidations from 'ember-validations';
 import ServerValidation from 'repositive.io/validators/remote/server';
+import ThirdParty from 'repositive.io/mixins/third-party'
 
 
-export default Ember.ObjectController.extend(EmberValidations.Mixin, {
+export default Ember.ObjectController.extend(
+    EmberValidations.Mixin,
+    ThirdParty,
+{
   email:null,
   password:null,
   showErrors:true,
@@ -29,19 +33,14 @@ export default Ember.ObjectController.extend(EmberValidations.Mixin, {
     submitForm: function() {
       var _this = this;
       if (this.get('isValid')){
+        var credentials = this.getProperties('email', 'password');
         Ember.$.ajax({
-          url:'api/users',
-          type:'POST',
-          data:{
-            email: this.email,
-            password: this.password,
-          }
-        }).then(function(resp){
+          url: 'api/users',
+          type: 'POST',
+          data: credentials
+        }).then(function(resp){ // signup has suceeded, now login
           _this.showMessages(resp.messages);
-          _this.get('session').authenticate('authenticator:repositive', {
-            email: _this.email,
-            password: _this.password,
-          });
+          _this.get('session').authenticate('authenticator:repositive', credentials);
         }, function(xhr, status, error){
           //_this.showMessages(xhr.responseJSON.messages);
           _this.addValidationErrors(xhr.responseJSON.errors);
@@ -49,20 +48,6 @@ export default Ember.ObjectController.extend(EmberValidations.Mixin, {
       } else {
         this.set('showErrors', true);
       }
-    },
-    authenticateWithGooglePlus: function() {
-      this.get('session').authenticate('simple-auth-authenticator:torii', 'google-oauth2').then(function(value){
-        console.log('complete');
-      }, function(err){
-         console.log('google login failed')
-      });
-    },
-    authenticateWithLinkedIn: function() {
-      this.get('session').authenticate('simple-auth-authenticator:torii', 'linked-in-oauth2').then(function(value){
-        console.log('complete');
-      }, function(err){
-         console.log('linkedIn login failed')
-      });
     },
   },
   showMessages : function(messages){

@@ -20,11 +20,11 @@ export default Base.extend({
         type: 'POST',
         data: data
       }).then(function(resp){
-        resp.isCurrentUser = true;
+        resp.user.isCurrentUser = true;
         Ember.run(function(){
           // all the properties of the object you resolve with
           // will be added to the session
-          resolve({userData: resp});
+          resolve(resp);
         });
       }, function(xhr, status, error){
         Ember.run(function(){
