@@ -1,8 +1,8 @@
 import Ember from 'ember';
-
 import Base from 'simple-auth/authenticators/base';
 import Queue from 'ember-flash-messages/queue';
 import _ from 'npm:underscore';
+import ENV from 'repositive.io/config/environment';
 
 
 export default Base.extend({
@@ -16,7 +16,7 @@ export default Base.extend({
     var _this = this;
     return new Ember.RSVP.Promise(function(resolve, reject){
       Ember.$.ajax({
-        url: 'api/users/login',
+        url: ENV.APIRoutes[ENV['simple-auth'].authenticationRoute],
         type: 'POST',
         data: data
       }).then(function(resp){
@@ -38,7 +38,7 @@ export default Base.extend({
     var _this = this;
     return new Ember.RSVP.Promise(function(resolve, reject){
       Ember.$.ajax({
-        url: 'api/users/logout',
+        url: ENV.APIRoutes[ENV['simple-auth'].logoutRoute],
         type: 'POST',
         data: {
           authToken: user.authToken,

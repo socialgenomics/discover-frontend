@@ -3,6 +3,7 @@ import Queue from 'ember-flash-messages/queue';
 import EmberValidations from 'ember-validations';
 import ServerValidationMixin from 'repositive.io/validators/remote/server/mixin';
 import ThirdParty from 'repositive.io/mixins/third-party'
+import ENV from 'repositive.io/config/environment';
 
 
 export default Ember.ObjectController.extend(
@@ -36,7 +37,7 @@ export default Ember.ObjectController.extend(
       if (this.get('isValid')){
         var credentials = this.getProperties('email', 'password');
         Ember.$.ajax({
-          url: 'api/users',
+          url: ENV.APIRoutes[ENV['simple-auth'].signupRoute],
           type: 'POST',
           data: credentials
         }).then(function(resp){ // signup has suceeded, now login

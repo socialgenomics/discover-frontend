@@ -9,11 +9,12 @@ module.exports = function(environment) {
     APIBaseURL = 'http://api.repositive.io'
   }
   else {
-    APIBaseURL = '/api'
+    APIBaseURL = ''
   }
   APIRoutes = _.each({
-    "users.login" : "/users/login",           
-    "users.signup" : "/users",           
+    "users.login" : "/api/users/login",           
+    "users.logout" : "/api/users/logout",           
+    "users.signup" : "/api/users",           
   }, function(path, key, obj){
     obj[key] =  APIBaseURL + path;
   });
@@ -52,6 +53,7 @@ module.exports = function(environment) {
       routeAfterAuthentication: 'users.profile',
       authenticationRoute: 'users.login',
       signupRoute: 'users.signup',
+      logoutRoute: 'users.logout',
     },
     'simple-auth-cookie-store' : {
       cookieName: 'repositvie.io'

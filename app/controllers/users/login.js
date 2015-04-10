@@ -1,14 +1,14 @@
 import Ember from "ember";
 import Queue from 'ember-flash-messages/queue';
 import EmberValidations from 'ember-validations';
-import ThirdParty from 'repositive.io/mixins/third-party'
+import ThirdPartyMixin from 'repositive.io/mixins/third-party'
 import ServerValidationMixin from 'repositive.io/validators/remote/server/mixin';
 
 
 export default Ember.ObjectController.extend(
-    EmberValidations.Mixin,
-    ServerValidationMixin,
-    ThirdParty,
+  EmberValidations.Mixin,
+  ServerValidationMixin,
+  ThirdPartyMixin,
 {
   email: '',
   password: '',
@@ -21,23 +21,23 @@ export default Ember.ObjectController.extend(
         with: /^[\w+\-.]+@[a-z\d\-.]+\.[a-z]+$/i,
         message: 'must be a valid e-mail address'
       },
-      server: true,
+      server: true, // must be last - unknown bug
     },
     password: {
       presence: true,
       length: { minimum: 8 },
-      server: true,
+      server: true, // must be last - unknown bug
     },
   },
   actions: {
     submitForm: function() {
       var _this = this;
       this.get('session')
-        .authenticate('authenticator:repositive', 
-          {
-            email: this.email,
-            password: this.password
-          }
+      .authenticate('authenticator:repositive', 
+        {
+          email: this.email,
+          password: this.password
+        }
       ).then(function(resp){
         //_this.transitionToRoute('root');
       }, function(err){
