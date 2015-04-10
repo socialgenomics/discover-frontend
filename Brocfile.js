@@ -10,7 +10,7 @@ if (environment === 'prototypes'){
   var infile = 'main.scss';
 }
 
-var isProductionLikeBuild = ['production', 'staging'].indexOf(environment) > -1;
+var isProductionLikeBuild = ['production', 'testing'].indexOf(environment) > -1;
 
 var app = new EmberApp({
   outputPaths: {
@@ -56,5 +56,7 @@ var app = new EmberApp({
 // modules that you would like to import into your application
 // please specify an object with the list of modules as keys
 // along with the exports of each module as its value.
+
+app.import('bower_components/materialize/sass/materialize.scss');
 
 module.exports = app.toTree();
