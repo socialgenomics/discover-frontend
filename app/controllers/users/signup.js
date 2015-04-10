@@ -1,12 +1,13 @@
 import Ember from "ember";
 import Queue from 'ember-flash-messages/queue';
 import EmberValidations from 'ember-validations';
-import ServerValidation from 'repositive.io/validators/remote/server';
+import ServerValidationMixin from 'repositive.io/validators/remote/server/mixin';
 import ThirdParty from 'repositive.io/mixins/third-party'
 
 
 export default Ember.ObjectController.extend(
     EmberValidations.Mixin,
+    ServerValidationMixin,
     ThirdParty,
 {
   email:null,
@@ -57,20 +58,4 @@ export default Ember.ObjectController.extend(
       });
     }
   },
-  addValidationErrors: function(errors){
-    var serverValidators = {};
-    this.validators.forEach(function(validator){
-      // es6 module transpiler screws this up
-      //if(validator instanceof ServerValidation.constructor){
-      // bloddy hack
-        if (validator.toString().search(/repositive.io@validator:remote\/server::/)){
-        serverValidators[validator.property] = validator;
-      }
-    })
-    for (var key in errors){
-      if (key in serverValidators){
-        serverValidators[key].set('message', errors[key]);
-      }
-    }
-  }
 });

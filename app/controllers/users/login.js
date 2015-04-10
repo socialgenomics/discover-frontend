@@ -2,10 +2,12 @@ import Ember from "ember";
 import Queue from 'ember-flash-messages/queue';
 import EmberValidations from 'ember-validations';
 import ThirdParty from 'repositive.io/mixins/third-party'
+import ServerValidationMixin from 'repositive.io/validators/remote/server/mixin';
 
 
 export default Ember.ObjectController.extend(
     EmberValidations.Mixin,
+    ServerValidationMixin,
     ThirdParty,
 {
   email: '',
@@ -45,11 +47,4 @@ export default Ember.ObjectController.extend(
       });
     }
   },
-  showMessages : function(messages){
-    if (messages) {
-      messages.forEach(function(message){
-        Queue.pushMessage(message);
-      });
-    }
-  }
 });

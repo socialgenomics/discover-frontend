@@ -34,7 +34,12 @@ export default Ember.Mixin.create({
       _this.set('session.token', resp.token)
       _this.set('session.user', resp.user)
     }, function(xhr, status, error){
-      console.log(xhr.responseJSON)
+      if (currentPath === ENV['simple-auth'].authenticationRoute){
+        _this.get("session").invalidate().then(function(){
+          _this.transitionToRoute(ENV['simple-auth'].authenticationRoute);
+          _this.showMessages(xhr.responseJSON.errors)
+        });
+      }
     });
   }
 });

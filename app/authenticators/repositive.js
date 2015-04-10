@@ -28,7 +28,7 @@ export default Base.extend({
         });
       }, function(xhr, status, error){
         Ember.run(function(){
-          _this.showMessages(xhr.responseJSON.messages);
+          _this.controller.addValidationErrors(xhr.responseJSON.errors);
           reject(xhr);
         });
       });

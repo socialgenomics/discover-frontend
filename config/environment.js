@@ -21,7 +21,7 @@ module.exports = function(environment) {
     // mapping of backend routes
     APIRoutes: {
       "users.login" : "/api/users/login",           
-      "users.sigup" : "/api/users",           
+      "users.signup" : "/api/users",           
     },
 
     sassOptions: {
@@ -32,7 +32,8 @@ module.exports = function(environment) {
     'simple-auth' : {
       authorizer: 'authorizer:repositive',
       routeAfterAuthentication: 'users.profile',
-      authenticationRoute: 'users.login'
+      authenticationRoute: 'users.login',
+      signupRoute: 'users.signup',
     },
     'simple-auth-cookie-store' : {
       cookieName: 'repositvie.io'
