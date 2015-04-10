@@ -11,6 +11,13 @@ if (environment === 'prototypes'){
 }
 
 var isProductionLikeBuild = ['production', 'testing'].indexOf(environment) > -1;
+var prepend;
+if (isProductionLikeBuild){
+  prepend = 'http://d3duxukexohr0v.cloudfront.net/';
+}
+else {
+  prepend = '';
+}
 
 var app = new EmberApp({
   outputPaths: {
@@ -35,7 +42,7 @@ var app = new EmberApp({
   fingerprint: {
     enabled: isProductionLikeBuild,
     exclude: [],
-    prepend: 'http://d3duxukexohr0v.cloudfront.net/',
+    prepend: prepend,
   },
   sourcemaps: {
     enabled: !isProductionLikeBuild,
