@@ -1,7 +1,17 @@
 import DS from 'ember-data';
+import ENV from 'repositive.io/config/environment';
 
-var ApplicationAdapter = DS.RESTAdapter.extend({
-  namespace: 'api'
-});
+
+if (ENV.environment === 'development'){
+  var ApplicationAdapter = DS.RESTAdapter.extend({
+    namespace: 'api'
+  });
+}
+else if (ENV.environment === 'production'){
+  var ApplicationAdapter = DS.RESTAdapter.extend({
+    namespace: 'api',
+    host: 'api.repositive.io'
+  });
+}
 
 export default ApplicationAdapter;
