@@ -10,7 +10,7 @@ if (ENV.environment === 'development'){
 else if (ENV.environment === 'production'){
   var ApplicationAdapter = DS.RESTAdapter.extend({
     namespace: 'api',
-    host: 'http://api.repositive.io'
+    host: ENV.APIBaseURL
   });
 }
 

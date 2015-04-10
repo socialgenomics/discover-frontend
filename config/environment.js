@@ -1,6 +1,21 @@
 /* jshint node: true */
+var _ = require('underscore');
+
 
 module.exports = function(environment) {
+  var APIBaseURL, APIRoutes;
+  if (environment === 'production'){
+    APIBaseURL = 'http://api.repositive.io'
+  }
+  else {
+    APIBaseURL = '/api'
+  }
+  APIRoutes = _.each({
+    "users.login" : "/users/login",           
+    "users.signup" : "/users",           
+  }, function(path, key, obj){
+    obj[key] =  APIBaseURL + path;
+  });
   var ENV = {
     modulePrefix: 'repositive.io',
     environment: environment,
@@ -18,11 +33,9 @@ module.exports = function(environment) {
       // when it is created
     },
 
+    APIBaseURL: APIBaseURL,
     // mapping of backend routes
-    APIRoutes: {
-      "users.login" : "/api/users/login",           
-      "users.signup" : "/api/users",           
-    },
+    APIRoutes: APIRoutes,  
 
     sassOptions: {
       inputFile:'main.scss',
