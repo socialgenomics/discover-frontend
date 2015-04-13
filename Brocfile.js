@@ -10,7 +10,7 @@ if (environment === 'prototypes'){
   var infile = 'main.scss';
 }
 
-var isProductionLikeBuild = ['production', 'testing'].indexOf(environment) > -1;
+var isProductionLikeBuild = ['live', 'testing'].indexOf(environment) > -1;
 var prepend;
 if (isProductionLikeBuild){
   prepend = 'http://d3duxukexohr0v.cloudfront.net/';

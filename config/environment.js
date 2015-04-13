@@ -1,27 +1,15 @@
 /* jshint node: true */
 var _ = require('underscore');
+var deploySettings = require('./deploy');
 
 
 module.exports = function(environment) {
-  var env = environment;
-  var APIBaseURL, APIRoutes;
-  if (env === 'production'){
-    APIBaseURL = 'http://api.repositive.io'
-  }
-  else {
-    APIBaseURL = ''
-  }
-  APIRoutes = _.each({
-    "users.login" : "/api/users/login",           
-    "users.logout" : "/api/users/logout",           
-    "users.signup" : "/api/users",           
-  }, function(path, key, obj){
-    obj[key] =  APIBaseURL + path;
-  });
+
   var redirectUri = (function(){ 
-    if (env === 'development') { return 'http://localhost:4200'; }
+    if (environment === 'development') { return 'http://localhost:4200'; }
     else { return 'http://platform.repositive.io'; }
   }());
+
   var ENV = {
     modulePrefix: 'repositive.io',
     environment: environment,
@@ -39,9 +27,21 @@ module.exports = function(environment) {
       // when it is created
     },
 
-    APIBaseURL: APIBaseURL,
+    APIBaseURL: deploySettings[environment].apiBaseURL,
+
     // mapping of backend routes
-    APIRoutes: APIRoutes,  
+    APIRoutes : (function(){
+      _.each(
+        {
+          "users.login" : "/api/users/login",           
+          "users.logout" : "/api/users/logout",           
+          "users.signup" : "/api/users",           
+        }, 
+        function(path, key, obj){
+          obj[key] =  deploySettings[environment].apiBaseURL + path;
+        }
+      );
+    }()),
 
     sassOptions: {
       inputFile:'main.scss',
@@ -92,7 +92,7 @@ module.exports = function(environment) {
     ENV.APP.rootElement = '#ember-testing';
   }
 
-  if (environment === 'production') {
+  if (environment === 'live') {
   }
 
   return ENV;
