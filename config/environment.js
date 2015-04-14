@@ -2,21 +2,7 @@
 var _ = require('underscore');
 var deploySettings = require('./deploy');
 
-var trySetting = function(func){
-  try {
-    return func()
-  }
-  catch (err){
-    return ''
-  }
-}
-
 module.exports = function(environment) {
-
-  var redirectUri = (function(){ 
-    if (environment === 'development') { return 'http://localhost:4200'; }
-    else { return 'http://platform.repositive.io'; }
-  }());
 
   var ENV = {
     modulePrefix: 'repositive.io',
@@ -35,33 +21,32 @@ module.exports = function(environment) {
       // when it is created
     },
 
-    APIBaseURL: (function(){ 
-      try {
-        return deploySettings[environment].apiBaseURL; 
+    APIBaseURL: (function(){
+      if (environment in deploySettings){ 
+        return deploySettings[environment].apiBaseURL;        
       }
-      catch(err){
+      else {
         return '';
       }
     }()),
 
     // mapping of backend routes
-    APIRoutes : (trySetting(function(){
-      _.each(
-        {
+    APIRoutes : (function(){
+      var mapping = 
+      {
           "users.login" : "/api/users/login",           
           "users.logout" : "/api/users/logout",           
           "users.signup" : "/api/users",           
-        }, 
+      }; 
+      _.each(mapping,
         function(path, key, obj){
-          try{
+          if (environment in deploySettings){
             obj[key] =  deploySettings[environment].apiBaseURL + path;
-          }
-          catch(err){
-            obj[key] =  'path' + path;
           }
         }
       );
-    }())),
+      return mapping;
+    }()),
 
     sassOptions: {
       inputFile:'main.scss',
@@ -82,11 +67,11 @@ module.exports = function(environment) {
       providers: {
         'google-oauth2': {
           apiKey:      '677526813069-6tmd1flqovp5miud67phqlks49bqdo8i.apps.googleusercontent.com',
-          redirectUri: redirectUri
+          redirectUri: 'http://localhost:4200'
         },
         'linked-in-oauth2': {
           apiKey:      '75fsbvpfgi1667',
-          redirectUri: redirectUri
+          redirectUri: 'http://localhost:4200'
         }
       }
     }
@@ -112,7 +97,14 @@ module.exports = function(environment) {
     ENV.APP.rootElement = '#ember-testing';
   }
 
-  if (environment === 'live') {
+  if (environment === 'testing') {
+    ENV.torii.providers['google-oauth2'].redirectUri = 'http://platform.repositive.io'
+    ENV.torii.providers['linked-in-oauth2'].redirectUri = 'http://platform.repositive.io'
+  }
+
+  if (environment === 'production') {
+    ENV.torii.providers['google-oauth2'].redirectUri = 'http://platform.repositive.io'
+    ENV.torii.providers['linked-in-oauth2'].redirectUri = 'http://platform.repositive.io'
   }
 
   return ENV;

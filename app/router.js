@@ -6,6 +6,7 @@ var Router = Ember.Router.extend({
 });
 
 Router.map(function() {
+
   this.route('root', {path:'/'});
 
   this.resource('users', function(){
@@ -18,7 +19,6 @@ Router.map(function() {
   this.resource('metadata', function(){
     this.route('detail', {path:':id'});  
     this.route('tags', {path:'/tag/:tag'});
-
   });
 
   this.resource('search', function(){
@@ -26,6 +26,7 @@ Router.map(function() {
   });
 
   this.route('404', { path: '/*path' });
+
 });
 
 export default Router;
