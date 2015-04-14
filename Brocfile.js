@@ -10,7 +10,9 @@ if (environment === 'prototypes'){
   var infile = 'main.scss';
 }
 
+console.log('brocfile', environment)
 var isProductionLikeBuild = ['live', 'testing'].indexOf(environment) > -1;
+
 var prepend;
 if (isProductionLikeBuild){
   prepend = 'http://d3duxukexohr0v.cloudfront.net/';

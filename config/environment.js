@@ -2,6 +2,14 @@
 var _ = require('underscore');
 var deploySettings = require('./deploy');
 
+var trySetting = function(func){
+  try {
+    return func()
+  }
+  catch (err){
+    return ''
+  }
+}
 
 module.exports = function(environment) {
 
@@ -27,10 +35,17 @@ module.exports = function(environment) {
       // when it is created
     },
 
-    APIBaseURL: deploySettings[environment].apiBaseURL,
+    APIBaseURL: (function(){ 
+      try {
+        return deploySettings[environment].apiBaseURL; 
+      }
+      catch(err){
+        return '';
+      }
+    }()),
 
     // mapping of backend routes
-    APIRoutes : (function(){
+    APIRoutes : (trySetting(function(){
       _.each(
         {
           "users.login" : "/api/users/login",           
@@ -38,10 +53,15 @@ module.exports = function(environment) {
           "users.signup" : "/api/users",           
         }, 
         function(path, key, obj){
-          obj[key] =  deploySettings[environment].apiBaseURL + path;
+          try{
+            obj[key] =  deploySettings[environment].apiBaseURL + path;
+          }
+          catch(err){
+            obj[key] =  'path' + path;
+          }
         }
       );
-    }()),
+    }())),
 
     sassOptions: {
       inputFile:'main.scss',
