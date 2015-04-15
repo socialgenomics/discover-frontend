@@ -11,7 +11,7 @@ if (environment === 'prototypes'){
 }
 
 console.log('brocfile', environment)
-var isProductionLikeBuild = ['live', 'testing'].indexOf(environment) > -1;
+var isProductionLikeBuild = ['production', 'testing'].indexOf(environment) > -1;
 
 var prepend;
 if (isProductionLikeBuild){

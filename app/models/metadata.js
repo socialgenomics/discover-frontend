@@ -1,15 +1,12 @@
 import DS from "ember-data";
 
 var Meta = DS.Model.extend({
-	title: DS.attr('string'),
-	description: DS.attr('string'),
-	repo: DS.attr('string'),
-	date: DS.attr('string'),
-	uploader: DS.attr('string'),
-	accessType:DS.attr('string'),
-	downloads:DS.attr('number'),
-	rating:DS.attr('number'),
-	comments:DS.attr('number')
+  title: DS.attr('string'),
+  description: DS.attr('string'),
+});
+
+var Metadata = DS.Model.extend({
+  meta: DS.hasOne(Meta, { embedded: true })
 });
 
 export default Meta;
