@@ -1,12 +1,13 @@
 import DS from "ember-data";
 
-var Meta = DS.Model.extend({
+var KnownProperties = DS.Model.extend({
   title: DS.attr('string'),
   description: DS.attr('string'),
 });
 
 var Metadata = DS.Model.extend({
-  meta: DS.hasOne(Meta, { embedded: true })
+ // meta: DS.hasOne(KnownProperties, { embedded: true })
+  meta: DS.attr('string')
 });
 
-export default Meta;
+export default Metadata;
