@@ -2,7 +2,7 @@ import Ember from 'ember';
 import ENV from 'repositive.io/config/environment';
 
 export default Ember.Mixin.create({
-  needs: ['application'],
+  needs: [''],
   query: '',
   actions: {
     search: function() {
