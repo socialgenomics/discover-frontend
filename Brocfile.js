@@ -38,7 +38,7 @@ var app = new EmberApp({
     inputFile:infile,
     outputFile:'main.css',
     includePaths: [
-      'bower_components/bootstrap-sass/assets/stylesheets'
+      //'bower_components/bootstrap-sass/assets/stylesheets'
     ]
   },
   fingerprint: {

@@ -1,3 +1,306 @@
-@import 'materialize';
+@charset "UTF-8";
 
-.center-btn { text-align:center; }
+// Mixins
+@import "../../bower_components/materialize/sass/components/prefixer";
+@import "../../bower_components/materialize/sass/components/mixins";
+@import "../../bower_components/materialize/sass/components/color";
+
+// Variables;
+@import "../../bower_components/materialize/sass/components/variables";
+
+// Reset
+@import "../../bower_components/materialize/sass/components/normalize";
+
+// components
+@import "../../bower_components/materialize/sass/components/global";
+@import "../../bower_components/materialize/sass/components/icons-material-design";
+@import "../../bower_components/materialize/sass/components/grid";
+@import "../../bower_components/materialize/sass/components/navbar";
+@import "../../bower_components/materialize/sass/components/roboto";
+@import "../../bower_components/materialize/sass/components/typography";
+@import "../../bower_components/materialize/sass/components/cards";
+@import "../../bower_components/materialize/sass/components/toast";
+@import "../../bower_components/materialize/sass/components/tabs";
+@import "../../bower_components/materialize/sass/components/tooltip";
+@import "../../bower_components/materialize/sass/components/buttons";
+@import "../../bower_components/materialize/sass/components/dropdown";
+@import "../../bower_components/materialize/sass/components/waves";
+@import "../../bower_components/materialize/sass/components/modal";
+@import "../../bower_components/materialize/sass/components/collapsible";
+@import "../../bower_components/materialize/sass/components/materialbox";
+@import "../../bower_components/materialize/sass/components/form";
+@import "../../bower_components/materialize/sass/components/table_of_contents";
+@import "../../bower_components/materialize/sass/components/sideNav";
+@import "../../bower_components/materialize/sass/components/preloader";
+@import "../../bower_components/materialize/sass/components/slider";
+@import "../../bower_components/materialize/sass/components/date_picker/default.scss";
+@import "../../bower_components/materialize/sass/components/date_picker/default.date.scss";
+@import "../../bower_components/materialize/sass/components/date_picker/default.time.scss";
+
+/* custom styles */
+@import "components/_mixins.scss";
+@import "components/_fonts.scss";
+@import "components/_colours.scss";
+@import "components/_type.scss";
+@import "components/_headroom.scss";
+@import "components/_navbar.scss";
+@import "components/_jumbotron.scss";
+@import "components/_input.scss";
+@import "components/_images.scss";
+@import "components/_cards.scss";
+html{
+  box-sizing:border-box;
+}
+*, *:before, *:after{
+  box-sizing:inherit;
+}
+html, body{
+    height: 100%;
+    margin: 0;
+}
+body{
+    padding-top:64px;
+}
+.outer-wrap{
+    min-height: 100%;
+    position:relative;
+    padding-bottom:60px;
+    padding-top:1em;
+}
+//use for name then position e.g. Fiona CEO
+.no-margin-bottom{
+    margin-bottom:0;
+    line-height:1;
+}
+.no-margin-top {
+    margin-top: 0;
+}
+.z-depth-0{
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    box-shadow: none !important;
+}
+.job-notice {
+    border: 1px solid #FFC861;
+    padding: 0.5em;
+    border-radius: 2px;
+}
+.job ul li{
+    list-style-type: circle;
+    list-style-position: inside;
+}
+.fixed-height-tile{
+    height: 9em;
+}
+.unhilight-link{
+    color: $primary-text; //Dark grey for normal text
+}
+.list-inline{
+    list-style-type: none;
+    margin-bottom:0.3em;
+    li {
+        display: inline !important;
+        padding-left: 0.4em;
+        padding-right: 0.4em;
+    }
+}
+hr{
+    background-color:$sub-text;
+    @include border-radius(200px);
+    border: 0px solid #000000;
+    height:0.3em;
+    width:10em;
+    margin-top:0;
+}
+footer{
+    padding-bottom:1em;
+    margin-top:3em;
+}
+footer.platform{
+    position:absolute;
+    bottom:0;
+    width:100%;
+    height:60px;   /* Height of the footer */
+    ul{
+        margin-bottom:0;
+        padding-bottom:0.4em;
+        padding-top:0.4em;
+        li{
+            padding-left:1em;
+            padding-right:1em;
+            font-family:$head-font-stack;
+            a:hover{
+              color:white !important;
+            }
+        }
+    }
+}
+.full-width{
+  width:100%;
+}
+
+//to keep content below navbar
+@media only screen and (max-width : 600px) {
+    body{
+        padding-top:56px;
+    }
+}
+//PLATFORM
+.btn-upvote{
+  color:$sub-text !important;
+  background-color:white;
+  font-size:0.8em;
+  text-align:left;
+  padding:0.4em 0.7em 0.4em 0.7em;
+  margin:0;
+  @include border-radius(2px);
+  border:1px solid $border-grey;
+  span{
+    border-left:1px solid $border-grey;
+    margin-left:0.7em;
+    padding-left:0.7em;
+  }
+}
+.or-div{
+    height: 1px;
+    background-color: $border-grey;
+    text-align: center;
+    margin-bottom:3em;
+    span{
+        background-color: white;
+        position: relative;
+        top: -0.7em;
+        padding-left:5px;
+        padding-right:5px;
+        color:$border-grey;
+    }
+}
+.in-page-search {
+    margin: auto;
+    width: 75%;
+}
+.platform-info {
+    position: absolute;
+    width: 100%;
+    text-align: left;
+    left: 10px;
+    bottom: 5px;
+    font-size: 0.7em;
+    font-weight: 300;
+    font-style: italic;
+}
+#activity .collection .collection-item.avatar {
+    padding-left: 85px;
+}
+h1.avatar {
+    font-size: 6em;
+}
+.card a:hover {
+    color: $primary-text;
+}
+.card {
+    padding: 1em;
+}
+/* .card a {
+    color: #fff;
+} */
+
+// PLATFORM - PROFILE PAGE
+#profile {
+
+    p {
+        margin: 0;
+    }
+    .card .divider {
+        margin-bottom: 1.5em;
+    }
+    .stretch {
+    width: 100%;
+    display: inline-block;
+    font-size: 0;
+    line-height: 0
+    }
+    .activity-stats, .activity-contacts {
+        text-align: justify;
+        div {
+            display: inline-block;
+            vertical-align: top;
+        }
+    .numb {
+        display: inline-block;
+        font-size: 1.5em;
+        font-weight: bold;
+        color: $primary-text;
+    }
+    h5 {
+        display: inline-block;
+        font-weight: 300;
+        font-size: 1.5em;
+        }
+    }
+    .contact-item {
+        border: 1px solid $border-grey;
+        padding: 0;
+        margin: 10px;
+        img.col.m6{
+            border-right: 1px solid $border-grey;
+        }
+    }
+    .contact-info {
+        width:50%;
+        float: right;
+
+        .name,.occupation {
+            display: block;
+            width: 100%;
+        }
+        .name {
+            color: $primary-teal;
+            border-bottom: 1px solid $border-grey;
+        }
+        .occupation {
+            font-style: italic;
+            font-size: 0.8em;
+        }
+        i.circle {
+            padding: 5px;
+            color: $yellow;
+        }
+    }
+    h5.dataset-title {
+        font-size: 0.9em;
+        font-weight: 400;
+        line-height: 1.2;
+    }
+    li.collection-dataset {
+        padding: 10px 0 10px 0;
+        padding-bottom: 10px;
+        border-bottom: 1px solid $border-grey;
+    }
+}
+.tag {
+    border: 1px solid $border-grey;
+    font-size: 0.8em;
+    color: $unfocus-grey;
+    padding: 0.5em;
+    @include border-radius(3px);
+    margin: 4px;
+    display: inline-block;
+    cursor:pointer;
+    &:hover{
+      text-decoration:underline;
+    }
+}
+.add-tag{
+  color:$unfocus-grey !important;
+  font-weight:500;
+  &:hover{
+    font-weight:bold;
+    span{
+      text-decoration:none;
+    }
+    i{
+      font-weight:bold;
+    }
+  }
+}

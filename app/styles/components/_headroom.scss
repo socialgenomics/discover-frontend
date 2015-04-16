@@ -1,0 +1,10 @@
+//css for headroom
+.headroom {
+    transition: transform 100ms linear;
+}
+.headroom--pinned {
+    transform: translateY(0%);
+}
+.headroom--unpinned {
+    transform: translateY(-100%);
+}

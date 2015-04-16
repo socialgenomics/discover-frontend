@@ -1,0 +1,42 @@
+.icon{
+    width: 100px;
+    height: 100px;
+}
+.team-img{
+    max-width:10em;
+}
+.press-img{
+    max-width:80%;
+}
+.social-media-icon{
+	width:2.8em;
+}
+footer .social-media-icon {
+    width: 1.5em;
+}
+.supporters{
+    img {
+        width: 100%;
+    }
+}
+.profile-img {
+	width: 8em;
+	height: 8em;
+	overflow: hidden;
+	img {
+		max-width: 100%;
+		background-size: 100%;
+		background-color:#8dbdff;
+	}
+}
+.dp-wrapper{
+  height:40px;
+  width:40px;
+  display:inline-block;
+  overflow:hidden;
+  @include border-radius(200px);
+  background-color:#8dbdff;
+  .display-pic{
+    width:100%;
+  }
+}

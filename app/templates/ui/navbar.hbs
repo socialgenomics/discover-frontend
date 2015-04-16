@@ -1,4 +1,4 @@
-<nav class="teal" role="navigation">
+<!-- <nav class="teal" role="navigation">
   <div class="nav-wrapper container">
     {{link-to 'Repositive.io' 'root' class="navbar-brand"}}
     <ul class="right">
@@ -25,4 +25,44 @@
     </ul>
     <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
   </div>
-</nav>
+</nav> -->
+
+
+<div class="navbar-fixed">
+  <nav class="navbar-grey">
+    <div class="nav-wrapper">
+      {{#link-to 'root'}}
+        <a><img class="nav-logo" src="/assets/images/logo.png" alt="Repositive DNA logo"></a>
+        <a class="hide-on-small-only" id="brand-name">REPOSITIVE</a>
+      {{/link-to}}
+      {{#if session.isAuthenticated}}
+        <ul class="left nav-input">
+          <form>
+            <div class="input-field grey-text">
+              <input id="search" type="text" class="grey-text" placeholder="Search">
+              <i class="small mdi-action-search"></i>
+            </div>
+          </form>
+        </ul>
+        <ul class="right">
+        <!-- <li class="hide-on-small-only nav-button"><a class="waves-effect waves-light red btn white-text z-depth-0 modal-trigger" href="#modal1" >Register Data</a></li> -->
+        <li><a class='dropdown-button' data-beloworigin="true" href='#' data-activates='profile-drop'><!-- <i class="mdi-social-person user-icon"></i> --><div class="dp-wrapper"><img src="/assets/images/elena-watson.png" alt="your profile picture" class="display-pic"></div><i class="mdi-hardware-keyboard-arrow-down hide-on-small-only"></i></a></li>
+        <ul id='profile-drop' class='dropdown-content'>
+          <li><a href="/profile">Profile</a></li>
+          <li><a href="/settings">Settings</a></li>
+          <li class="divider"></li>
+          <li><a href="/">About</a></li>
+          <li><a href="/faq">Help</a></li>
+          <li class="divider"></li>
+          <li><a href="/login">Logout</a></li>
+        </ul>
+      </ul>
+      {{else}}
+        <ul class="right">
+          {{#link-to 'users.signup'}}<li><a>SIGN UP</a></li>{{/link-to}}
+          {{#link-to 'users.login'}}<li><a>LOGIN</a></li>{{/link-to}}
+        </ul>
+      {{/if}}
+    </div>
+  </nav>
+</div>
