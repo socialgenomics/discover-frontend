@@ -34,6 +34,7 @@ export default Ember.Mixin.create({
       _this.set('session.token', resp.token)
       _this.set('session.user', resp.user)
     }, function(xhr, status, error){
+      // server denied authorisation - invalidate the session
       if (currentPath === ENV['simple-auth'].authenticationRoute){
         _this.get("session").invalidate().then(function(){
           _this.transitionToRoute(ENV['simple-auth'].authenticationRoute);
