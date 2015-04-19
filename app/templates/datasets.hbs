@@ -1,17 +1,17 @@
 <div class="row">
-{{# each meta in model }}
+{{# each dataset in model }}
   <div class="col m4">
     <div class="card small">
       <a href="/datasets/:id">
-        <h2>{{ meta.title }}</h2>
+        <h2>{{ dataset.title }}</h2>
       </a>
-      {{#if mets.user }}
+      {{#if dataset.user }}
       <span class="helper-text">
         uploaded by 
         <a href="/profile" class="teal-text"></a>
       </span>
       {{/if }}
-      <p>{{ meta.description }}</p>
+      <p>{{ dataset.description }}</p>
       <div class="row">
         <div class="col m4">
           <span>12/05/1994</span>
