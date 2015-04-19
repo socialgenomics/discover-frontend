@@ -3,6 +3,6 @@ import ApplicationRouteMixin from 'simple-auth/mixins/application-route-mixin';
 
 export default Ember.Route.extend(ApplicationRouteMixin, {
  // model: function(){
- //   this.store.find('metadata');
+ //   this.store.find('dataset');
  // }
 });

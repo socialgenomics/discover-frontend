@@ -54,6 +54,7 @@ module.exports = function(environment) {
       includePaths: ['bower_components/materialize/sass']
     },
     'simple-auth' : {
+      crossOriginWhitelist: ['http://*.repositive.io'],
       authorizer: 'authorizer:repositive',
       routeAfterAuthentication: 'users.profile',
       authenticationRoute: 'users.login',

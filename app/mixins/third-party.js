@@ -2,7 +2,7 @@ import Ember from 'ember';
 import ENV from 'repositive.io/config/environment';
 
 export default Ember.Mixin.create({
-  needs: ['application'],
+//  needs: ['application'], I believe the lookup in the third-pary initalizer is causig this to fail
   actions: {
     authenticateWithGooglePlus: function() {
       var _this = this;
@@ -24,7 +24,11 @@ export default Ember.Mixin.create({
   authorizeWithAPI: function(data){
     if (data === undefined){ data = this.get("session").get("store").restore(); }
     var _this = this;
-    var currentPath = this.get("controllers.application").currentPath;
+   // var currentPath = this.get('controllers.application.currentPath'); - cannot get controller:application without the above needs
+    var currentPath = (function(){
+      var p = window.location.href;
+      return p.split('/').slice(3, p.split('/').length).join('.')
+    }())
     var url = ENV.APIRoutes[currentPath];
     Ember.$.ajax({
       url: url,
