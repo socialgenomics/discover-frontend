@@ -1,13 +1,8 @@
 import DS from "ember-data";
 
-var KnownProperties = DS.Model.extend({
-  title: DS.attr('string'),
-  description: DS.attr('string'),
-});
 
-var Dataset = DS.Model.extend({
- // meta: DS.hasOne(KnownProperties, { embedded: true })
-  body : DS.attr('string')
+export default DS.Model.extend({
+  properties : DS.belongsTo('property'),
+  tags: DS.hasMany('tag'),
+  comments: DS.hasMany('comments'),
 });
-
-export default Dataset;
