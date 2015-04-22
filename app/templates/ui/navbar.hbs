@@ -46,21 +46,33 @@
         </ul>
         <ul class="right">
         <!-- <li class="hide-on-small-only nav-button"><a class="waves-effect waves-light red btn white-text z-depth-0 modal-trigger" href="#modal1" >Register Data</a></li> -->
-        <li><a class='dropdown-button' data-beloworigin="true" href='#' data-activates='profile-drop'><!-- <i class="mdi-social-person user-icon"></i> --><div class="dp-wrapper"><img src="/assets/images/elena-watson.png" alt="your profile picture" class="display-pic"></div><i class="mdi-hardware-keyboard-arrow-down hide-on-small-only"></i></a></li>
+        <li><a class='dropdown-button' data-beloworigin="true" href='#' data-activates='profile-drop'><div class="dp-wrapper"><img src="/assets/images/elena-watson.png" alt="your profile picture" class="display-pic"></div><i class="mdi-hardware-keyboard-arrow-down hide-on-small-only"></i></a></li>
         <ul id='profile-drop' class='dropdown-content'>
-          <li><a href="/profile">Profile</a></li>
-          <li><a href="/settings">Settings</a></li>
+          {{#link-to 'users.profile'}}<li><a href="/profile">Profile</a></li>{{/link-to}}
+          {{#link-to 'users.settings'}}<li><a href="/settings">Settings</a></li>{{/link-to}}
           <li class="divider"></li>
           <li><a href="/">About</a></li>
           <li><a href="/faq">Help</a></li>
           <li class="divider"></li>
-          <li><a href="/login">Logout</a></li>
+          <li><a {{ action 'invalidateSession' }}>Logout</a></li>
         </ul>
       </ul>
       {{else}}
-        <ul class="right">
+        <!-- <ul class="right">
           {{#link-to 'users.signup'}}<li><a>SIGN UP</a></li>{{/link-to}}
           {{#link-to 'users.login'}}<li><a>LOGIN</a></li>{{/link-to}}
+        </ul> -->
+        <ul class="right">
+          <li><a class='dropdown-button' data-beloworigin="true" data-activates='profile-drop'><div class="dp-wrapper"><img src="/assets/images/elena-watson.png" alt="your profile picture" class="display-pic"></div><i class="mdi-hardware-keyboard-arrow-down hide-on-small-only"></i></a></li>
+          <ul id='profile-drop' class='dropdown-content'>
+            <!-- {{#link-to 'users.profile'}}<li><a href="/profile">Profile</a></li>{{/link-to}} -->
+            <!-- {{#link-to 'users.settings'}}<li><a href="/settings">Settings</a></li>{{/link-to}} -->
+            <li class="divider"></li>
+            <li><a href="/">About</a></li>
+            <li><a href="/faq">Help</a></li>
+            <li class="divider"></li>
+            <!-- <li><a {{ action 'invalidateSession' }}>Logout</a></li> -->
+          </ul>
         </ul>
       {{/if}}
     </div>
