@@ -5,9 +5,9 @@ var KnownProperties = DS.Model.extend({
   description: DS.attr('string'),
 });
 
-var Metadata = DS.Model.extend({
+var Dataset = DS.Model.extend({
  // meta: DS.hasOne(KnownProperties, { embedded: true })
-  meta: DS.attr('string')
+  body : DS.attr('string')
 });
 
-export default Metadata;
+export default Dataset;
