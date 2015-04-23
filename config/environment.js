@@ -104,8 +104,8 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-    ENV.torii.providers['google-oauth2'].redirectUri = 'http://api.repositive.io'
-    ENV.torii.providers['linked-in-oauth2'].redirectUri = 'http://api.repositive.io'
+    ENV.torii.providers['google-oauth2'].redirectUri = 'http://platform.repositive.io'
+    ENV.torii.providers['linked-in-oauth2'].redirectUri = 'http://platform.repositive.io'
   }
 
   return ENV;
