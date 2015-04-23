@@ -9,6 +9,12 @@ Router.map(function() {
 
   this.route('root', {path:'/'});
 
+  this.route('help');
+  this.route('about');
+  this.route('team');
+  this.route('faq');
+  this.route('press');
+
   this.resource('users', function(){
     this.route('signup');
     this.route('login');

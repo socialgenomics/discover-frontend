@@ -1,49 +1,44 @@
 <div class="navbar-fixed">
   <nav class="navbar-grey">
     <div class="nav-wrapper">
-      {{#link-to 'root'}}
-        <a><img class="nav-logo" src="/assets/images/logo.png" alt="Repositive DNA logo"></a>
-        <a class="hide-on-small-only" id="brand-name">REPOSITIVE</a>
-      {{/link-to}}
+      {{#link-to 'root'}}<img class="nav-logo" src="/assets/images/logo.png" alt="Repositive DNA logo">{{/link-to}}
+      {{#link-to 'root' class='hide-on-small-only' brand='id'}}REPOSITIVE{{/link-to}}
       {{#if session.isAuthenticated}}
-        <ul class="left nav-input">
-          <form>
-            <div class="input-field grey-text">
-              <input id="search" type="text" class="grey-text" placeholder="Search">
-              <i class="small mdi-action-search"></i>
-            </div>
-          </form>
-        </ul>
-        <ul class="right">
-        <!-- <li class="hide-on-small-only nav-button"><a class="waves-effect waves-light red btn white-text z-depth-0 modal-trigger" href="#modal1" >Register Data</a></li> -->
-        <li><a class='dropdown-button' data-beloworigin="true" href='#' data-activates='profile-drop'><div class="dp-wrapper"><img src="/assets/images/elena-watson.png" alt="your profile picture" class="display-pic"></div><i class="mdi-hardware-keyboard-arrow-down hide-on-small-only"></i></a></li>
+      <ul class="left nav-input">
+        <form>
+          <div class="input-field grey-text">
+            <input autofocus="autofocus" id="search" type="text" class="grey-text" placeholder="Search">
+            <i class="small mdi-action-search"></i>
+          </div>
+        </form>
+      </ul>
+      <ul class="right">
+        <li>
+            <a class='dropdown-button' data-beloworigin="true" href='#' data-activates='profile-drop'><div class="dp-wrapper"><img src="/assets/images/icons/person-icon.png" alt="your profile picture" class="display-pic"></div><i class="mdi-hardware-keyboard-arrow-down hide-on-small-only"></i></a>
+        </li>
         <ul id='profile-drop' class='dropdown-content'>
-          {{#link-to 'users.profile'}}<li><a href="/profile">Profile</a></li>{{/link-to}}
-          {{#link-to 'users.settings'}}<li><a href="/settings">Settings</a></li>{{/link-to}}
+          <li>{{#link-to 'users.profile'}}Profile{{/link-to}}</li>
+          <li>{{#link-to 'users.settings'}}Settings{{/link-to}}</li>
           <li class="divider"></li>
-          <li><a href="/">About</a></li>
-          <li><a href="/faq">Help</a></li>
+          <li>{{#link-to 'about'}}About{{/link-to}}</li>
+          <li>{{#link-to 'help'}}Help{{/link-to}}</li>
           <li class="divider"></li>
           <li><a {{ action 'invalidateSession' }}>Logout</a></li>
         </ul>
       </ul>
+      <div class="re-navbar-btn register grey-text valign-wrapper">
+        <i class="mdi-action-note-add"></i>
+        <a href="#modalRegister" class="modal-trigger valign">REGISTER DATA</a>
+      </div>
+      <div class="re-navbar-btn request grey-text valign-wrapper">
+        <i class="mdi-content-content-paste"></i>
+        <a href="#modalRequest" class="modal-trigger valign">REQUEST DATA</a>
+      </div>
       {{else}}
-        <!-- <ul class="right">
-          {{#link-to 'users.signup'}}<li><a>SIGN UP</a></li>{{/link-to}}
-          {{#link-to 'users.login'}}<li><a>LOGIN</a></li>{{/link-to}}
-        </ul> -->
-        <ul class="right">
-          <li><a class='dropdown-button' data-beloworigin="true" data-activates='profile-drop'><div class="dp-wrapper"><img src="/assets/images/elena-watson.png" alt="your profile picture" class="display-pic"></div><i class="mdi-hardware-keyboard-arrow-down hide-on-small-only"></i></a></li>
-          <ul id='profile-drop' class='dropdown-content'>
-            <!-- {{#link-to 'users.profile'}}<li><a href="/profile">Profile</a></li>{{/link-to}} -->
-            <!-- {{#link-to 'users.settings'}}<li><a href="/settings">Settings</a></li>{{/link-to}} -->
-            <li class="divider"></li>
-            <li><a href="/">About</a></li>
-            <li><a href="/faq">Help</a></li>
-            <li class="divider"></li>
-            <!-- <li><a {{ action 'invalidateSession' }}>Logout</a></li> -->
-          </ul>
-        </ul>
+      <ul class="right">
+        <li>{{#link-to 'users.signup'}}SIGN UP{{/link-to}}</li>
+        <li>{{#link-to 'users.login'}}LOGIN{{/link-to}}</li>
+      </ul>
       {{/if}}
     </div>
   </nav>
