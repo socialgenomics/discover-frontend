@@ -22,8 +22,8 @@ module.exports = function(environment) {
     },
 
     APIBaseURL: (function(){
-      if (environment in deploySettings){ 
-        return deploySettings[environment].apiBaseURL;        
+      if (environment in deploySettings){
+        return deploySettings[environment].apiBaseURL;
       }
       else {
         return '';
@@ -32,12 +32,12 @@ module.exports = function(environment) {
 
     // mapping of backend routes
     APIRoutes : (function(){
-      var mapping = 
+      var mapping =
       {
-          "users.login" : "/api/users/login",           
-          "users.logout" : "/api/users/logout",           
-          "users.signup" : "/api/users",           
-      }; 
+          "users.login" : "/api/users/login",
+          "users.logout" : "/api/users/logout",
+          "users.signup" : "/api/users",
+      };
       _.each(mapping,
         function(path, key, obj){
           if (environment in deploySettings){
@@ -81,7 +81,7 @@ module.exports = function(environment) {
   if (environment === 'development') {
    // ENV.APP.LOG_RESOLVER = true;
    // ENV.APP.LOG_ACTIVE_GENERATION = true;
-   // ENV.APP.LOG_TRANSITIONS = true;
+   ENV.APP.LOG_TRANSITIONS = true;
    // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
    // ENV.APP.LOG_VIEW_LOOKUPS = true;
   }
