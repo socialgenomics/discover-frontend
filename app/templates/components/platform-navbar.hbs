@@ -5,9 +5,9 @@
       {{#link-to 'root' class='hide-on-small-only brand-name'}}REPOSITIVE{{/link-to}}
       {{#if session.isAuthenticated}}
       <ul class="left nav-input">
-        <form>
+        <form {{action 'search' on='submit'}}>
           <div class="input-field grey-text">
-            <input autofocus="autofocus" id="search" type="text" class="grey-text" placeholder="Search">
+            {{input type="text" class="grey-text" placeholder="Search" value=query}}
             <i class="small mdi-action-search"></i>
           </div>
         </form>
