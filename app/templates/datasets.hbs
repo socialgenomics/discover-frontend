@@ -1,40 +1,42 @@
-<div class="row">
+<div class="container">
+  <div class="row">
 
-{{# each dataset in model }}
-  <div class="col s12 m6 l4">
-    <div class="card small">
-      <div class="card-header">
-        <div class="assay-container">
-  				<span class="assay-small as-red"></span>
-  				<span class="assay-small as-yellow"></span>
-  			</div>
-        <div class="actions-container">
-  				<a href="#"><i class="mdi-social-share"></i></a>
-  				<a href="#"><i class="mdi-action-bookmark-outline"></i></a>
-  			</div>
-      </div>
-      <div class="card-body">
-        {{#link-to 'datasets.detail' dataset.id}}
-          <h2>{{ dataset.properties.title }}</h2>
-        {{/link-to}}
-        <span>by </span> <span><a href="/profile">Tom Smith</a></span><span> 3 days ago</span> <i class="mdi-social-public tooltipped" data-position="bottom" data-tooltip="Public Access"></i>
-			  <p class="card-line-limit">{{dataset.properties.description}}</p>
-      </div>
+  {{# each dataset in model }}
+    <div class="col s12 m6 l4">
+      <div class="card small">
+        <div class="card-header">
+          <div class="assay-container">
+    				<span class="assay-small as-red"></span>
+    				<span class="assay-small as-yellow"></span>
+    			</div>
+          <div class="actions-container">
+    				<a href="#"><i class="mdi-social-share"></i></a>
+    				<a href="#"><i class="mdi-action-bookmark-outline"></i></a>
+    			</div>
+        </div>
+        <div class="card-body">
+          {{#link-to 'datasets.detail' dataset.id}}
+            <h2>{{ dataset.properties.title }}</h2>
+          {{/link-to}}
+          <span>by </span> <span><a href="/profile">Tom Smith</a></span><span> 3 days ago</span> <i class="mdi-social-public tooltipped" data-position="bottom" data-tooltip="Public Access"></i>
+  			  <p class="card-line-limit">{{dataset.properties.description}}</p>
+        </div>
 
-      <!-- <p>
-        {{#each tag in dataset.tags}}
-          {{tag.word}}
-        {{/each}}
-      </p> -->
-      <div class="card-footer">
-  			<ul class="list-inline">
-  				<li class="tooltipped" data-position="bottom" data-tooltip="Views"><i class="mdi-action-visibility"></i><span>135</span></li>
-  				<li class="tooltipped" data-position="bottom" data-tooltip="Ratings"><i class="mdi-action-grade"></i><span>17</span></li>
-  				<li class="tooltipped" data-position="bottom" data-tooltip="Comments"><i class="mdi-action-question-answer"></i><span>3</span></li>
-  			</ul>
-  		</div>
+        <!-- <p>
+          {{#each tag in dataset.tags}}
+            {{tag.word}}
+          {{/each}}
+        </p> -->
+        <div class="card-footer">
+    			<ul class="list-inline">
+    				<li class="tooltipped" data-position="bottom" data-tooltip="Views"><i class="mdi-action-visibility"></i><span>135</span></li>
+    				<li class="tooltipped" data-position="bottom" data-tooltip="Ratings"><i class="mdi-action-grade"></i><span>17</span></li>
+    				<li class="tooltipped" data-position="bottom" data-tooltip="Comments"><i class="mdi-action-question-answer"></i><span>3</span></li>
+    			</ul>
+    		</div>
+      </div>
     </div>
-  </div>
-{{/ each }}
+  {{/ each }}
 
+  </div>
 </div>
