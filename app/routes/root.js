@@ -16,9 +16,7 @@ export default Ember.Route.extend({
     }
   },
 
-  actions: {
-    search: function(){
-      this.transitionTo('search.results', this.get('query'));
-    }
+  actions:{
+
   }
 });
