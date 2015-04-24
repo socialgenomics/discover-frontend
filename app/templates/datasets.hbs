@@ -2,16 +2,24 @@
 {{# each dataset in model }}
   <div class="col m4">
     <div class="card small">
-      <a href="/datasets/:id">
-        <h2>{{ dataset.title }}</h2>
-      </a>
+      {{#link-to 'datasets.detail' dataset.id}}
+        <h2>{{ dataset.properties.title }}</h2>
+      {{/link-to}}
+      <!-- <a href="/datasets/:id">
+        <h2>{{ dataset.properties.title }}</h2>
+      </a> -->
       {{#if dataset.user }}
       <span class="helper-text">
         uploaded by
         <a href="/profile" class="teal-text"></a>
       </span>
       {{/if }}
-      <p>{{ dataset.description }}</p>
+      <p>
+        {{#each tag in dataset.tags}}
+          {{tag.word}}
+        {{/each}}
+      </p>
+      <p>{{ dataset.properties.description }}</p>
       <div class="row">
         <div class="col m4">
           <span>12/05/1994</span>

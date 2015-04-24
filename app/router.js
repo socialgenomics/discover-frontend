@@ -28,7 +28,7 @@ Router.map(function() {
   });
 
   this.resource('search', function(){
-    this.route('results', {'path':':query'});
+    this.route('results', {path:':query'});
   });
 
   this.route('404', { path: '/*path' });

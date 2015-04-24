@@ -3,9 +3,9 @@
     <h1 class="center-align">repositive</h1>
     <nav>
       <div class="nav-wrapper">
-        <form>
+        <form {{action 'search' on='submit'}}>
           <div class="input-field">
-            <input id="search" type="search" required>
+            {{input id='search' type='search' value=query }}
             <label for="search"><i class="mdi-action-search"></i></label>
             <i class="mdi-navigation-close"></i>
           </div>
