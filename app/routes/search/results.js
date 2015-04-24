@@ -7,7 +7,7 @@ export default Ember.Route.extend({
     var route = this;
     return request(
       {
-        url:'api/search',
+        url:'api/datasets/search',
         type:'POST',
         data:params
       }).then(function(resp){

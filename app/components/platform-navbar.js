@@ -1,6 +1,8 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
+  query:'',
+
   didInsertElement: function(){
     //dropdown initialization
     this.$('.dropdown-button').dropdown({
@@ -13,9 +15,20 @@ export default Ember.Component.extend({
       belowOrigin: true // Displays dropdown below the button
     });
   },
+
+  autocomplete: function(){
+    console.log(this.get('query'))
+  }.observes('query'),
+
   actions:{
+
     logout: function(){
       this.get("session").invalidate();        
-    }        
+    },
+
+    search: function(){
+      this.sendAction(this.get("query"));
+    },
+
   }
 });

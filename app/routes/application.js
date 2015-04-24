@@ -5,4 +5,10 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
  // model: function(){
  //   this.store.find('dataset');
  // }
+  actions:{
+
+    search: function(query){
+      this.transitionToRoute('search.results', query);
+    }
+  }
 });
