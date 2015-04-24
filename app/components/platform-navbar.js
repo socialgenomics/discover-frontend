@@ -12,5 +12,10 @@ export default Ember.Component.extend({
       gutter: 0, // Spacing from edge
       belowOrigin: true // Displays dropdown below the button
     });
+  },
+  actions:{
+    logout: function(){
+      this.get("session").invalidate();        
+    }        
   }
 });
