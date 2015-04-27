@@ -27,7 +27,7 @@ export default Ember.Component.extend({
     },
 
     search: function(){
-      this.sendAction(this.get("query"));
+      this.sendAction('action', this.get("query"));
     },
 
   }

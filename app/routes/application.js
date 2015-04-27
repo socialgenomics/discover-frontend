@@ -8,7 +8,7 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
   actions:{
 
     search: function(query){
-      this.transitionToRoute('search.results', query);
+      this.transitionTo('datasets.search', query);
     }
   }
 });

@@ -23,12 +23,9 @@ Router.map(function() {
   });
 
   this.resource('datasets', function(){
-    this.route('detail', {path:':id'});  
+    this.route('detail', {path:':uuid'});
     this.route('tags', {path:'/tag/:tag'});
-  });
-
-  this.resource('search', function(){
-    this.route('results', {path:':query'});
+    this.route('search', {path:'/search/:query'});
   });
 
   this.route('404', { path: '/*path' });
