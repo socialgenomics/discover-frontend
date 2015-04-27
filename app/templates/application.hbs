@@ -1,6 +1,8 @@
-{{platform-navbar action="search"}}
 <div class="outer-wrap">
-  {{!message-queue}}
-  {{outlet}}
-  {{outlet 'modal'}}
+  {{platform-navbar action="search"}}
+  <div class="container">
+    {{!message-queue}}
+    {{!outlet 'modal'}}
+    {{outlet}}
+  </div>
 </div>
