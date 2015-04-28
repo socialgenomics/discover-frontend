@@ -1,6 +1,8 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
+  queryparams: ['tab'],
+  tab: 'comments',
   actions: {
     submit: function(){
       var controller = this;
@@ -14,3 +16,5 @@ export default Ember.Controller.extend({
     }
   }
 });
+  
+  
