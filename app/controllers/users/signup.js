@@ -15,22 +15,23 @@ export default Ember.ObjectController.extend(
   password:null,
   showErrors:true,
 
-  validations: {
-    email: {
-      presence: true,
-      format: {
-        with: /^[\w+\-.]+@[a-z\d\-.]+\.[a-z]+$/i,
-        message: 'must be a valid e-mail address'
-      },
-      // must go last - somthing todo with observables being syncronous
-      server: true,
-    },
-    password: {
-      presence: true,
-      length: { minimum: 8 },
-      server: true,
-    },
-  },
+  // Moved to components
+  // validations: {
+  //   email: {
+  //     presence: true,
+  //     format: {
+  //       with: /^[\w+\-.]+@[a-z\d\-.]+\.[a-z]+$/i,
+  //       message: 'must be a valid e-mail address'
+  //     },
+  //     // must go last - somthing todo with observables being syncronous
+  //     server: true,
+  //   },
+  //   password: {
+  //     presence: true,
+  //     length: { minimum: 8 },
+  //     server: true,
+  //   },
+  // },
   actions: {
     submitForm: function() {
       var _this = this;
