@@ -7,12 +7,6 @@ export default Ember.Component.extend(
   EmberValidations.Mixin,
   ServerValidationMixin,
   ThirdParty,{
-    didInsertElement: function(){
-
-    },
-
-    actions: {
-    },
 
     password:null,
     showErrors:true,
@@ -24,4 +18,26 @@ export default Ember.Component.extend(
         server: true,
       },
     },
+
+    didInsertElement: function(){
+      $('#input-password').focus(function(){
+        $(this).parents('.input-container').addClass("active");
+        $(this).attr("placeholder", "")
+      });
+      $('#input-password').focusout(function(){
+        if(!$(this).val()){
+          $(this).parents('.input-container').removeClass("active");
+          $(this).attr("placeholder", this.name);
+        }
+      });
+    },
+
+    isValidHasChanged: function(){
+      this.sendAction('action', this.get("isValid"));
+    }.property('isValid'),
+    
+    actions: {
+    },
+
+
 });

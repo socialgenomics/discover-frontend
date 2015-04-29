@@ -15,26 +15,18 @@ export default Ember.ObjectController.extend(
   password:null,
   showErrors:true,
 
-  // Moved to components
-  // validations: {
-  //   email: {
-  //     presence: true,
-  //     format: {
-  //       with: /^[\w+\-.]+@[a-z\d\-.]+\.[a-z]+$/i,
-  //       message: 'must be a valid e-mail address'
-  //     },
-  //     // must go last - somthing todo with observables being syncronous
-  //     server: true,
-  //   },
-  //   password: {
-  //     presence: true,
-  //     length: { minimum: 8 },
-  //     server: true,
-  //   },
-  // },
+  emailValid: false,
+  passwordValid: false,
+
+  isValid: function(){
+    return this.get("emailValid") && this.get("passwordValid");
+  }.property('emailValid', 'passwordValid'),
+
   actions: {
     submitForm: function() {
       var _this = this;
+      console.log(this.getProperties('email'));
+      console.log(this.getProperties('password'));
       if (this.get('isValid')){
         var credentials = this.getProperties('email', 'password');
         Ember.$.ajax({
@@ -52,7 +44,15 @@ export default Ember.ObjectController.extend(
         this.set('showErrors', true);
       }
     },
+    emailValidHasChanged:function(value){
+      console.log(value);
+      this.set('emailValid', value);
+    },
+    passwordValidHasChanged:function(value){
+      this.set('passwordValid', value);
+    }
   },
+
   showMessages : function(messages){
     if (messages) {
       messages.forEach(function(message){

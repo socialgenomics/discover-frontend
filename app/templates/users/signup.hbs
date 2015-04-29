@@ -60,11 +60,11 @@
         </span>
       </div>
 
-      {{input-email}}
-      <!-- {{input-password}} -->
+      {{input-email email=email action="emailValidHasChanged"}}
+      {{input-password password=password action="passwordValidHasChanged"}}
 
       <div class="input-container">
-        <a href="/homePage?loggedIn=true" id="continue-btn" class="btn full-width disabled">SIGN UP</a>
+        <a {{action 'submitForm'}} id="continue-btn" class="btn full-width">SIGN UP</a>
         <span class="sub-input">By signing up you agree to our <a href="#">Terms</a> and <a href="#">Privacy Policy</a>.</span>
       </div>
     </form>
