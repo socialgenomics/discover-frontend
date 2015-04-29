@@ -5,8 +5,7 @@ import ThirdParty from 'repositive.io/mixins/third-party'
 
 export default Ember.Component.extend(
   EmberValidations.Mixin,
-  ServerValidationMixin,
-  ThirdParty,{
+  {
 
     password:null,
     showErrors:true,
@@ -15,7 +14,6 @@ export default Ember.Component.extend(
         presence: true,
         presence: {message:"You missed this one."},
         length: { minimum: 8, messages:{tooShort:"Must be at least 8 characters."}},
-        server: true,
       },
     },
 
@@ -32,9 +30,9 @@ export default Ember.Component.extend(
       });
     },
 
-    isValidHasChanged: function(){
+    passwordHasChanged: function(){
       this.sendAction('action', this.get("isValid"));
-    }.property('isValid'),
+    }.observes('password'),
     
     actions: {
     },
