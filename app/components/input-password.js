@@ -32,6 +32,7 @@ export default Ember.Component.extend(
 
     passwordHasChanged: function(){
       this.sendAction('action', this.get("isValid"));
+      this.sendAction('passwordChanged', this.get("password"))
     }.observes('password'),
     
     actions: {

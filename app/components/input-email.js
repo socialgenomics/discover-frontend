@@ -36,10 +36,10 @@ export default Ember.Component.extend(
     //show errors on focus out
     emailHasChanged: function(){
       this.sendAction('action', this.get("isValid"));
+      this.sendAction('emailChanged', this.get("email"))
     }.observes('email'),
 
     actions: {
-
     },
 
 });

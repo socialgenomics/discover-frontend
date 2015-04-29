@@ -46,14 +46,21 @@ export default Ember.ObjectController.extend(
         this.set('showErrors', true);
       }
     },
+
     emailValidHasChanged:function(value){
-      console.log(value)
       this.set('emailValid', value);
-      console.log(this.get('emailValid'))
+    },
+
+    setEmail:function(value){
+      this.set('email', value)
     },
 
     passwordValidHasChanged:function(value){
       this.set('passwordValid', value);
+    },
+
+    setPassword:function(value){
+      this.set('password', value)
     },
   },
 
