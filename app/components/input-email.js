@@ -38,6 +38,8 @@ export default Ember.Component.extend(
     },
     //show errors on focus out
     isValidHasChanged: function(){
+      var isValid = this.get('isValid');
+
       this.sendAction('action', this.get("emailValid"));
     }.property('emailValid'),
 
