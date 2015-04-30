@@ -6,7 +6,6 @@ import ThirdParty from 'repositive.io/mixins/third-party';
 export default Ember.Component.extend(
   EmberValidations.Mixin,
   {
-
     password:null,
     showErrors:true,
     validations: {
@@ -17,6 +16,7 @@ export default Ember.Component.extend(
       },
     },
 
+    //need to rethink this - "The ember way"
     didInsertElement: function(){
       $('#input-password').focus(function(){
         $(this).parents('.input-container').addClass("active");
@@ -36,6 +36,10 @@ export default Ember.Component.extend(
     }.observes('password'),
 
     actions: {
+      //hmmmmm
+      showErr:function(){
+        this.set("showErrors, true")
+      },
     },
 
 
