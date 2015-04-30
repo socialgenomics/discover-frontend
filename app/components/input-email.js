@@ -24,7 +24,7 @@ export default Ember.Component.extend(
     didInsertElement: function(){
       $('#input-email').focus(function(){
         $(this).parents('.input-container').addClass("active");
-        $(this).attr("placeholder", "")
+        $(this).attr("placeholder", "");
       });
       $('#input-email').focusout(function(){
         if(!$(this).val()){
@@ -36,7 +36,7 @@ export default Ember.Component.extend(
     //show errors on focus out
     emailHasChanged: function(){
       this.sendAction('action', this.get("isValid"));
-      this.sendAction('emailChanged', this.get("email"))
+      this.sendAction('emailChanged', this.get("email"));
     }.observes('email'),
 
     actions: {

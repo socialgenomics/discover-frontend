@@ -11,7 +11,7 @@ export default Ember.Mixin.create({
         if (validator.toString().search(/repositive.io@validator:remote\/server::/)){
         serverValidators[validator.property] = validator;
       }
-    })
+    });
     for (var key in errors){
       if (key in serverValidators){
         serverValidators[key].set('message', errors[key]);

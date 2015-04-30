@@ -20,7 +20,7 @@ export default Ember.Component.extend(
     didInsertElement: function(){
       $('#input-password').focus(function(){
         $(this).parents('.input-container').addClass("active");
-        $(this).attr("placeholder", "")
+        $(this).attr("placeholder", "");
       });
       $('#input-password').focusout(function(){
         if(!$(this).val()){
@@ -32,9 +32,9 @@ export default Ember.Component.extend(
 
     passwordHasChanged: function(){
       this.sendAction('action', this.get("isValid"));
-      this.sendAction('passwordChanged', this.get("password"))
+      this.sendAction('passwordChanged', this.get("password"));
     }.observes('password'),
-    
+
     actions: {
     },
 
