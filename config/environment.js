@@ -75,7 +75,11 @@ module.exports = function(environment) {
           redirectUri: 'http://localhost:4200'
         }
       }
-    }
+    },
+    contentSecurityPolicy: {
+      'font-src': "'self' data: fonts.gstatic.com",
+      'style-src': "'self' 'unsafe-inline' fonts.googleapis.com"
+    },
   };
 
   if (environment === 'development') {
