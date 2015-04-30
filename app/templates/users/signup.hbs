@@ -60,8 +60,8 @@
         </span>
       </div>
 
-      {{input-email action="emailValidHasChanged"}}
-      {{input-password action="passwordValidHasChanged"}}
+      {{input-email action="emailValidHasChanged" emailChanged="setEmail"}}
+      {{input-password action="passwordValidHasChanged" passwordChanged="setPassword"}}
 
       <div class="input-container">
         <a {{action 'submitForm'}} id="continue-btn" class="btn full-width">SIGN UP</a>
