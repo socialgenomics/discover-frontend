@@ -5,8 +5,7 @@ import ThirdParty from 'repositive.io/mixins/third-party'
 
 export default Ember.Component.extend(
   EmberValidations.Mixin,
-  ServerValidationMixin,
-  ThirdParty,{
+  {
 
     email:null,
     showErrors:true,
@@ -19,8 +18,6 @@ export default Ember.Component.extend(
           with: /^[\w+\-.]+@[a-z\d\-.]+\.[a-z]+$/i,
           message: 'Must be a valid e-mail address'
         },
-        // must go last - somthing todo with observables being syncronous
-        //server: true,
       },
     },
 
@@ -37,11 +34,9 @@ export default Ember.Component.extend(
       });
     },
     //show errors on focus out
-    isValidHasChanged: function(){
-      var isValid = this.get('isValid');
-
-      this.sendAction('action', this.get("emailValid"));
-    }.property('emailValid'),
+    emailHasChanged: function(){
+      this.sendAction('action', this.get("isValid"));
+    }.observes('email'),
 
     actions: {
 
