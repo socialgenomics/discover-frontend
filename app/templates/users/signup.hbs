@@ -49,8 +49,10 @@
         <h2 class="center-align">Sign Up</h2>
         <div class="col m12 center-align">
           <ul class="list-inline">
-            <li><img class="social-media-icon" src="assets/images/icons/social/googleplus.png" alt="google plus logo"></li>
-            <li><img class="social-media-icon" src="assets/images/icons/social/linkedin.png" alt="linkedin logo"></li>
+            <!-- <li><img class="social-media-icon" src="assets/images/icons/social/googleplus.png" alt="google plus logo"></li>
+            <li><img class="social-media-icon" src="assets/images/icons/social/linkedin.png" alt="linkedin logo"></li>-->
+            <li><a {{ action 'authenticateWithGooglePlus' }}><img class="col s3" src="/assets/images/icons/social/googleplus.png"></a></li>
+            <li><a {{ action 'authenticateWithLinkedIn' }}><img class="col s3" src="/assets/images/icons/social/linkedin.png"></a></li>
           </ul>
         </div>
       </div>

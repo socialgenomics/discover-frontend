@@ -17,13 +17,13 @@ export default Ember.Component.extend({
   },
 
   autocomplete: function(){
-    console.log(this.get('query'))
+    console.log(this.get('query'));
   }.observes('query'),
 
   actions:{
 
     logout: function(){
-      this.get("session").invalidate();        
+      this.get("session").invalidate();
     },
 
     search: function(){

@@ -4,7 +4,6 @@ import EmberValidations from 'ember-validations';
 export default Ember.Component.extend(
   EmberValidations.Mixin,
   {
-
     password:null,
     showErrors:true,
     validations: {
@@ -15,10 +14,11 @@ export default Ember.Component.extend(
       },
     },
 
+    //need to rethink this - "The ember way"
     didInsertElement: function(){
       $('#input-password').focus(function(){
         $(this).parents('.input-container').addClass("active");
-        $(this).attr("placeholder", "")
+        $(this).attr("placeholder", "");
       });
       $('#input-password').focusout(function(){
         if(!$(this).val()){
@@ -30,10 +30,14 @@ export default Ember.Component.extend(
 
     passwordHasChanged: function(){
       this.sendAction('action', this.get("isValid"));
-      this.sendAction('passwordChanged', this.get("password"))
+      this.sendAction('passwordChanged', this.get("password"));
     }.observes('password'),
     
     actions: {
+      //hmmmmm
+      showErr:function(){
+        this.set("showErrors, true")
+      },
     },
 
 
