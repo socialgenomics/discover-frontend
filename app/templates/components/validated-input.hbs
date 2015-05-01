@@ -1,0 +1,24 @@
+{{yield}}
+<div class="input-container">
+  <div class="input-field">
+    {{input value=value focus-in="showHelpers" focus-out="doBoth" type=type placeholder=placeholder }}
+  </div>
+
+  {{#if email}}
+    <div class="lbl">Email</div>
+    <i class="mdi-communication-email"></i>
+    <div class="input-helper">You'll need to verify this later.</div>
+  {{/if}}
+
+  {{#if password}}
+    <div class="lbl">Create Password</div>
+    <i class="mdi-action-lock-outline"></i>
+    <div class="input-helper">Must contain at least one upper case and one number character.</div>
+  {{/if}}
+
+  {{#if showError}}
+    {{#each error in errors}}
+      <div class="text-invalid error-text">{{ error }}</div>
+    {{/each}}
+  {{/if}}
+</div>

@@ -62,8 +62,10 @@
         </span>
       </div>
 
-      {{input-email action="emailValidHasChanged" emailChanged="setEmail"}}
-      {{input-password action="passwordValidHasChanged" passwordChanged="setPassword"}}
+      {{validated-input type="email" value=email errors=errors.email placeholder="Email" email=true}}
+      {{validated-input type="password" value=password errors=errors.password placeholder="Password" password=true}}
+      <!-- {{input-email action="emailValidHasChanged" emailChanged="setEmail"}} -->
+      <!-- {{input-password action="passwordValidHasChanged" passwordChanged="setPassword"}} -->
 
       <div class="input-container">
         <a {{action 'submitForm'}} id="continue-btn" class="btn full-width">SIGN UP</a>
