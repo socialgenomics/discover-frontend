@@ -2,14 +2,14 @@ import Ember from "ember";
 import Queue from 'ember-flash-messages/queue';
 import EmberValidations from 'ember-validations';
 import ServerValidationMixin from 'repositive.io/validators/remote/server/mixin';
-import ThirdParty from 'repositive.io/mixins/third-party'
+import ThirdParty from 'repositive.io/mixins/third-party';
 import ENV from 'repositive.io/config/environment';
 
 
 export default Ember.ObjectController.extend(
 //    EmberValidations.Mixin,
 //    ServerValidationMixin,
-//    ThirdParty,
+    ThirdParty,
 {
   email:null,
   password:null,
@@ -39,7 +39,6 @@ export default Ember.ObjectController.extend(
           _this.addValidationErrors(xhr.responseJSON.errors);
         });
       } else {
-        console.log('invalid')
         this.set('showErrors', true);
       }
     },
@@ -49,7 +48,7 @@ export default Ember.ObjectController.extend(
     },
 
     setEmail:function(value){
-      this.set('email', value)
+      this.set('email', value);
     },
 
     passwordValidHasChanged:function(value){
@@ -57,10 +56,9 @@ export default Ember.ObjectController.extend(
     },
 
     setPassword:function(value){
-      this.set('password', value)
+      this.set('password', value);
     },
   },
-
 
   showMessages : function(messages){
     if (messages) {

@@ -1,5 +1,4 @@
 import Ember from "ember";
-import Queue from 'ember-flash-messages/queue';
 import EmberValidations from 'ember-validations';
 import ThirdPartyMixin from 'repositive.io/mixins/third-party'
 import ServerValidationMixin from 'repositive.io/validators/remote/server/mixin';
@@ -43,7 +42,7 @@ export default Ember.ObjectController.extend(
       }, function(err){
         // messages are already being shown by the authenticator
         // do something else instead?
-        console.log(err)
+        console.log(err);
       });
     }
   },
