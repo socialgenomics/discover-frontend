@@ -25,9 +25,6 @@ export default Ember.ObjectController.extend(
   actions: {
     submitForm: function() {
       var _this = this;
-      console.log(this.get('isValid'))
-      console.log(this.getProperties('email'));
-      console.log(this.getProperties('password'));
       if (this.get('isValid')){
         var credentials = this.getProperties('email', 'password');
         Ember.$.ajax({

@@ -1,7 +1,5 @@
 import Ember from 'ember';
 import EmberValidations from 'ember-validations';
-import ServerValidationMixin from 'repositive.io/validators/remote/server/mixin';
-import ThirdParty from 'repositive.io/mixins/third-party'
 
 export default Ember.Component.extend(
   EmberValidations.Mixin,
