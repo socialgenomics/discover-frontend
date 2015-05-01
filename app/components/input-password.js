@@ -36,10 +36,7 @@ export default Ember.Component.extend(
     }.observes('password'),
 
     actions: {
-      //hmmmmm
-      showErr:function(){
-        this.set("showErrors, true")
-      },
+      //need to link up focusOutInput from controller
     },
 
 

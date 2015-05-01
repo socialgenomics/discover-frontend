@@ -62,6 +62,10 @@ export default Ember.ObjectController.extend(
     setPassword:function(value){
       this.set('password', value);
     },
+
+    focusOutInput:function(){
+      console.log("this has been out FOCUSSSEDDSSD");
+    }
   },
 
 
