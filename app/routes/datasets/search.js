@@ -7,6 +7,7 @@ export default Ember.Route.extend({
       refreshModel: true
     }
   },
+  meta:{},
   model: function(params){
     var _this = this;
     return new Ember.RSVP.Promise(function(resolve, reject){
@@ -17,12 +18,13 @@ export default Ember.Route.extend({
           data:params
         })
         .then(function(resp){
+        _this.meta = resp.meta;
         if (resp.meta.total > 0){
           //_this.store.pushPayload('Dataset', resp);
           var ids = resp.meta.ids;
           _this.store.find('dataset', {ids: ids}).then(function(datasets){
             resolve(datasets);
-          })
+          });
         }
         else {
           return {}
@@ -31,6 +33,10 @@ export default Ember.Route.extend({
       },function(err){
         return console.log(err);
       });
-    })
+    });
+  },
+  setupController: function(controller, model){
+    this._super(controller, model);
+    controller.set('meta', this.meta)
   }
 });
