@@ -1,47 +1,3 @@
-<!-- old stuff -->
-<!--<div class="section row">
-  <form class="col s4 offset-s4">
-    <h1 class="center-align">Sign Up</h1>
-    <div class="row">
-      <a {{ action 'authenticateWithGooglePlus' }}><img class="col s3" src="/assets/images/icons/social/googleplus.png"></a>
-      <a {{ action 'authenticateWithLinkedIn' }}><img class="col s3" src="/assets/images/icons/social/linkedin.png"></a> -->
-      <!-- <a {{ action 'authenticateWithOrcid' }}><img class="col s3" src="/assets/images/icons/social/orcid.png"></a> -->
-      <!-- <a {{ action 'authenticateWithTwitter' }}><img class="col s3" src="/assets/images/icons/social/twitter.png"></a> -->
-<!--    </div>
-	<p class="center-align">We won't use any of your personal data only your email.</p>
-	<div class="divider"></div>
-     <p class="center-align">OR</p>
-    <div class="row">
-      <div class="input-field col s12">
-        {{input valueBinding="controller.email" id="email" type="email" class="validate"}}
-        <label for="email">Email</label>
-        {{#if showErrors}}
-            {{#each error in errors.email}}
-                <div class="error">{{ error }}</div>
-            {{/each}}
-        {{/if}}
-      </div>
-    </div>
-    <div class="row">
-      <div class="input-field col s12">
-        {{input valueBinding="controller.password" id="password" type="password" class="validate"}}
-        <label for="password">Password</label>
-        {{#if showErrors}}
-            {{#each error in errors.password}}
-                <div class="error">{{ error }}</div>
-            {{/each}}
-        {{/if}}
-      </div>
-    </div>
-    <div class="center-btn">
-      <a class="waves-effect waves-light btn" {{action 'submitForm'}}>Join Us</a>
-    </div>
-	<p class="info-msg">By signing up, you agree to <a href="#">Terms of Service and Privacy Policy.</a></p>
-  </form>
-</div>-->
-
-
-<!--  new stuff-->
 <div class="section row">
   <div class="col m4 offset-m4 s12">
     <form>
@@ -64,8 +20,6 @@
 
       {{validated-input type="email" value=email errors=errors.email placeholder="Email" email=true}}
       {{validated-input type="password" value=password errors=errors.password placeholder="Password" password=true}}
-      <!-- {{input-email action="emailValidHasChanged" emailChanged="setEmail"}} -->
-      <!-- {{input-password action="passwordValidHasChanged" passwordChanged="setPassword"}} -->
 
       <div class="input-container">
         <a {{action 'submitForm'}} id="continue-btn" class="btn full-width">SIGN UP</a>

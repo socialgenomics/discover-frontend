@@ -1,23 +1,36 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
+  isActive:false,
+  isValid:false,
+  isInvalid:false,
+  value:'',
+  //sets the class names of this component
+  classNames:"input-container",
+  classNameBindings:['isActive:active', 'isValid:valid', 'isInvalid:invalid'],
+  //watch input for type
+  watchInput: function(){
+    if(this.errors.length > 0){
+      this.set("isValid",false);
+      this.set("isInvalid",true);
+    }else{
+      this.set("isValid", true);
+      this.set("isInvalid", false);
+    }
+  }.observes('value'),
+
   actions: {
     showErrors: function() {
       this.set("showError", true);
-      console.log("showError is now "+this.showError+". MSG-FROM: validated-input");
+    },
+    focusedIn:function(){
+      this.set("placeholder", "");
+      this.set ("isActive", true);
     },
     focusedOut:function(){
-      //put focussed out logic here
-      console.log("you can have 2");
-    },
-    showHelpers:function(){
-      //show helper text and label
-      console.log("you can see helpers");
-      
-    },
-    doBoth:function(){
+      this.set("placeholder", this.type);
       this.send('showErrors');
-      this.send('focusedOut');
+      this.set ("isActive", false);
     },
   }
 });

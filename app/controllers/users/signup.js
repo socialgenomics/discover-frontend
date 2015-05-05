@@ -8,7 +8,7 @@ import ENV from 'repositive.io/config/environment';
 
 export default Ember.ObjectController.extend(
    EmberValidations.Mixin,
-//    ServerValidationMixin,
+ServerValidationMixin,
 //    ThirdParty,
 {
   validations:{
@@ -40,9 +40,9 @@ export default Ember.ObjectController.extend(
   actions: {
     submitForm: function() {
       var _this = this;
-      // console.log(this.get('isValid'));
-      // console.log(this.getProperties('email'));
-      // console.log(this.getProperties('password'));
+      console.log(this.get('isValid'));
+      console.log(this.getProperties('email'));
+      console.log(this.getProperties('password'));
       if (this.get('isValid')){
         var credentials = this.getProperties('email', 'password');
         Ember.$.ajax({
@@ -77,13 +77,7 @@ export default Ember.ObjectController.extend(
     // setPassword:function(value){
     //   this.set('password', value);
     // },
-    //
-    // focusOutInput:function(){
-    //   console.log("this has been out FOCUSSSEDDSSD");
-    // }
   },
-
-
   showMessages : function(messages){
     if (messages) {
       messages.forEach(function(message){
