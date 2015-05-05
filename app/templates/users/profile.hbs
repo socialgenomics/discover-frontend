@@ -1,6 +1,97 @@
-<div class="container">
-  <div class="section">
-    <h1 class="center-align">Profile</h1>
-    <p class="center-align">{{ model.email }}</p>
+<div class="row">
+  {{sub-navigation active="profile"}}
+
+  <div class="col s12 m9 center-align">
+    <div class="card white darken-1">
+      <div class="card-content">
+        <span class="card-title">
+          <h5>Edit Profile</h5>
+        </span>
+        <hr class="yellow">
+        <p class="helper-text">Build your profile here.</p>
+      </div>a
+      <div class="row">
+        <h5>Personal</h5>
+        <div class="row">
+          <div class="profile-img col m12">
+            <img class="scale-img" src="/assets/images/icons/person-icon.png"> 
+            <label class="custom-file-upload">
+              Upload your image
+              <input id="files" type="file">   
+            </label>
+          </div>
+        </div>
+        <form>                      
+          <div class="input-container col m6 offset-m3">
+            <div class="input-field no-margin-top">
+              <input id="first-name" type="text" placeholder="First Name">
+            </div>
+            <div class="lbl">First Name</div>
+          </div>
+          <div class="input-container col m6 offset-m3">
+            <div class="input-field">
+              <input id="last-name" type="text" placeholder="Last name">
+            </div>
+            <div class="lbl">Last name</div>
+          </div>
+          <div class="input-container col m6 offset-m3">
+            <div class="input-field">
+              <input id="email" type="text" placeholder="Email">
+            </div>
+            <div class="lbl">Email</div>
+          </div>                        
+        </form>
+      </div>
+
+      <div class="row">
+        <h5>Education</h5>
+        <form>                      
+          <div class="input-container col m6 offset-m3">
+            <div class="input-field">
+              <input id="degree" type="text" placeholder="Degree">
+            </div>
+            <div class="lbl">Degree</div>
+          </div>
+          <div class="input-container col m6 offset-m3">
+            <div class="input-field">
+              <input id="university" type="text" placeholder="University">
+            </div>
+            <div class="lbl">University</div>
+          </div>
+        </form>
+      </div>
+
+
+      <div class="row">
+        <h5>Work</h5>
+        <form>                      
+          <div class="input-container col m6 offset-m3">
+            <div class="input-field">
+              <input id="role" type="text" placeholder="Job role">
+            </div>
+            <div class="lbl">Job role</div>
+          </div>
+          <div class="input-container col m6 offset-m3">
+            <div class="input-field">
+              <input id="company" type="text" placeholder="Organisation">
+            </div>
+            <div class="lbl">Organisation</div>
+          </div>
+        </form>
+      </div>
+      <div class="row">
+        <h5>Interests</h5>
+        <form>                      
+          <div class="input-container col m6 offset-m3">
+            <div class="input-field">
+              <textarea id="role" type="text" placeholder="Interests" style="height: 150px;"></textarea>
+            </div>
+            <div class="lbl">Interests</div>
+          </div>
+        </form>
+      </div>
+      <button class="btn waves-effect waves-light" type="submit" name="action">save
+      </button>
+    </div>
   </div>
 </div>

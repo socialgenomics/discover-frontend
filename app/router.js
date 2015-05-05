@@ -20,6 +20,8 @@ Router.map(function() {
     this.route('login');
     this.route('profile');
     this.route('settings');
+    this.route('trust');
+    this.route('references');
   });
 
   this.resource('datasets', function(){
