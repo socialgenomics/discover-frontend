@@ -1,7 +1,7 @@
 <div class="row card full-view">
-  <!-- MAIN CONTENT DIV -->
-  <div class="col l7 m6 s12 card-main-wrapper">
+  <div class="col l7 m6 s12 card-main-wrapper"><!-- MAIN CONTENT DIV -->
     <div class="card-main-content">
+
       <h2>{{dataset.properties.title}}</h2>
 
       <h3>Assays: </h3>
@@ -13,6 +13,7 @@
       <div class="card-section">
         <p>{{dataset.properties.description}}</p>
       </div>
+
       <h3>Tags: </h3>
       <div class="card-section">
         {{#each tag in dataset.tags}}
@@ -38,115 +39,51 @@
               {{/if}}
             </ul>
           </div>
-          <!-- <div class="col s12 m6">
-            <ul class="card-info-list">
-              <li class="card-info-attr">Submitted by: <a href="#"><span>Paul Smith</span></a></li>
-              <li class="card-info-attr">Sourced from: <a href="#"><span>dbgap</span></a></li>
-              <li class="card-info-attr">Submitted on: <span>19-11-2014</span></li>
-            </ul>
-          </div> -->
-          <!-- <div class="col s12 m6">
-            <ul class="card-info-list">
-              <li class="card-info-attr">Access: <span>Restricted</span></li>
-              <li class="card-info-attr">Contributors: <a href="#"><span>Elena Watson</span></a> & <a href="#"><span>Nikola Tesla</span></a></li>
-            </ul>
-          </div> -->
         </div>
-      </div>
+      </div><!-- end .card-section -->
+
       <div class="row">
         <div class="card-action center-align col m12">
           <a href="#sorrymsg" class="btn waves-effect white modal-trigger grey-text">Bookmark</a>
           <a href="#" class="btn waves-effect teal white-text">Download</a>
           <a href="#sorrymsg" class="modal-trigger btn waves-effect white grey-text">Share</a>
-          
         </div>
       </div>
-    </div>
-  </div>
 
-  <!-- SIDE CONTENT DIV -->
-  <div class="col l5 m6 s12 card-side-wrapper">
+    </div><!-- end .card-main-comtent -->
+  </div><!-- MAIN CONTENT DIV -->
+
+  <div class="col l5 m6 s12 card-side-wrapper"><!-- SIDE CONTENT DIV -->
     <ul class="tabs">
-      <li class="tab col s3"><a class="active" href="#test1">Comments</a></li>
-      <li class="tab col s3"><a href="#test2">Rating</a></li>
-      <li class="tab col s3"><a href="#test3">Related</a></li>
+      <li class="tab col s3">
+        {{#if (eq tab "comments")}}
+        {{#link-to 'datasets.detail' dataset (query-params tab="comments") class="active"}}Comments{{/link-to}}
+        {{else}}
+        {{#link-to 'datasets.detail' dataset (query-params tab="comments")}}Comments{{/link-to}}
+        {{/if}}
+      </li>
+      <li class="tab col s3">
+        {{#if (eq tab "rating")}}
+        {{#link-to 'datasets.detail' dataset (query-params tab="rating") class="active"}}Rating{{/link-to}}
+        {{else}}
+        {{#link-to 'datasets.detail' dataset (query-params tab="rating") }}Rating{{/link-to}}
+        {{/if}}
+      </li>
+      <li class="tab col s3">
+        {{#if (eq tab "related")}}
+        {{#link-to 'datasets.detail' dataset (query-params tab="related") class="active"}}Related{{/link-to}}
+        {{else}}
+        {{#link-to 'datasets.detail' dataset (query-params tab="related") }}Related{{/link-to}}
+        {{/if}}
+      </li>
     </ul>
-    <div class="card-side-content">
-      <div id="test1" class="col s12">
-        <div class="write-comment">
-          <div class="dp-wrapper">
-            <img src="/assets/images/elena-watson.png" alt="your display picture" class="display-pic">
-          </div>
-          <div class="input-field">
-            <input type="text" placeholder="write a comment">
-          </div>
-        </div>
+    {{#if (eq tab "rating")}}
+    {{render "datasets/tab-ratings"}}
+    {{else if (eq tab "related")}}
+    {{render "datasets/tab-related"}}
+    {{else}}
+    {{render "datasets/tab-comments"}}
+    {{/if}}
+  </div><!-- SIDE CONTENT DIV -->
 
-        <div class="comment">
-          <div class="comment-header">
-            <div class="dp-wrapper">
-              <img src="/assets/images/elena-watson.png" alt="your display picture" class="display-pic">
-            </div>
-            <h4>Elena Watson</h4>
-            <span>3 months ago</span>
-          </div>
-          <div class="comment-body">
-            <p>I published a meta-analysis of prostate cancer biomarkers based on this data, among others.See my paper here paper.com/dan-fair-13dh8.</p>
-          </div>
-          <div class="comment-footer">
-            <ul class="list-inline">
-              <li><a href="#" class="btn-upvote">Upvote<span>41</span></a></li>
-              <li><a href="#">Downvote</a></li>
-              <li><a href="#">Reply</a></li>
-              <li><a href="#">Flag</a></li>
-            </ul>
-          </div>
-          <!--FIRST REPLY-->
-          <div class="comment reply">
-            <div class="comment-header">
-              <div class="dp-wrapper">
-                <img src="/assets/images/Dan.png" alt="your display picture" class="display-pic">
-              </div>
-              <h4>Dan Smith</h4>
-              <span>3 months ago</span>
-            </div>
-            <div class="comment-body">
-              <p>The dataset is missing detailed description about the assay used in the research. I would find this information very useful.</p>
-            </div>
-            <div class="comment-footer">
-              <ul class="list-inline">
-                <li><a href="#" class="btn-upvote">Upvote <span>13</span></a></li>
-                <li><a href="#">Downvote</a></li>
-                <li><a href="#">Reply</a></li>
-                <li><a href="#">Flag</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <div class="comment reply">
-          <div class="comment-header">
-            <div class="dp-wrapper">
-              <img src="/assets/images/Christina.png" alt="your display picture" class="display-pic">
-            </div>
-            <h4>Christina Nicolson</h4>
-            <span>3 months ago</span>
-          </div>
-          <div class="comment-body">
-            <p>Hi Elena, I updated the description with categories included in the dataset i.e. DNA seq and DNA array.</p>
-          </div>
-          <div class="comment-footer">
-            <ul class="list-inline">
-              <li><a href="#" class="btn-upvote">Upvote <span>22</span></a></li>
-              <li><a href="#">Downvote</a></li>
-              <li><a href="#">Reply</a></li>
-              <li><a href="#">Flag</a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div id="test2" class="col s12">Rating</div>
-      <div id="test3" class="col s12">Related</div>
-    </div>
-  </div>
 </div>

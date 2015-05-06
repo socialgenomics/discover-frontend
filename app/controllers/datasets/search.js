@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-  queryParams: ['q', 'repo'],
+  queryParams: ['q','ordering'],
   q: null,
-  repo: null,
+  ordering: null,
 });

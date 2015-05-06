@@ -9,7 +9,7 @@ import ENV from 'repositive.io/config/environment';
 export default Ember.ObjectController.extend(
 //    EmberValidations.Mixin,
 //    ServerValidationMixin,
-//    ThirdParty,
+    ThirdParty,
 {
   email:null,
   password:null,
@@ -25,9 +25,6 @@ export default Ember.ObjectController.extend(
   actions: {
     submitForm: function() {
       var _this = this;
-      console.log(this.get('isValid'));
-      console.log(this.getProperties('email'));
-      console.log(this.getProperties('password'));
       if (this.get('isValid')){
         var credentials = this.getProperties('email', 'password');
         Ember.$.ajax({
@@ -42,7 +39,6 @@ export default Ember.ObjectController.extend(
           _this.addValidationErrors(xhr.responseJSON.errors);
         });
       } else {
-        console.log('invalid');
         this.set('showErrors', true);
       }
     },
@@ -63,7 +59,6 @@ export default Ember.ObjectController.extend(
       this.set('password', value);
     },
   },
-
 
   showMessages : function(messages){
     if (messages) {
