@@ -8,8 +8,8 @@ import ENV from 'repositive.io/config/environment';
 
 export default Ember.ObjectController.extend(
    EmberValidations.Mixin,
-ServerValidationMixin,
-//    ThirdParty,
+   ServerValidationMixin,
+   ThirdParty,
 {
   validations:{
     email:{
@@ -28,21 +28,10 @@ ServerValidationMixin,
   },
   email:null,
   password:null,
-  // showErrors:true,
-  //
-  // emailValid: false,
-  // passwordValid: false,
-  //
-  // isValid: function(){
-  //   return this.get("emailValid") && this.get("passwordValid");
-  // }.property('emailValid', 'passwordValid'),
 
   actions: {
     submitForm: function() {
       var _this = this;
-      console.log(this.get('isValid'));
-      console.log(this.getProperties('email'));
-      console.log(this.getProperties('password'));
       if (this.get('isValid')){
         var credentials = this.getProperties('email', 'password');
         Ember.$.ajax({
@@ -58,27 +47,9 @@ ServerValidationMixin,
         });
       } else {
         console.log('invalid');
-        // this.set('showErrors', true);
       }
     },
-
-    // emailValidHasChanged:function(value){
-    //   this.set('emailValid', value);
-    // },
-    //
-    // setEmail:function(value){
-    //   this.set('email', value);
-    // },
-    //
-    // passwordValidHasChanged:function(value){
-    //   this.set('passwordValid', value);
-    // },
-    //
-    // setPassword:function(value){
-    //   this.set('password', value);
-    // },
   },
-
 
   showMessages : function(messages){
     if (messages) {
