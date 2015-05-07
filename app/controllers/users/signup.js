@@ -11,6 +11,8 @@ export default Ember.ObjectController.extend(
 ServerValidationMixin,
 //    ThirdParty,
 {
+  email:null,
+  password:null,
   validations:{
     email:{
       presence:true,
@@ -19,30 +21,19 @@ ServerValidationMixin,
         with: /^[\w+\-.]+@[a-z\d\-.]+\.[a-z]+$/i,
         message: 'Must be a valid e-mail address'
       },
+       server: true,
     },
     password: {
       presence: true,
       presence: {message:"You missed this one."},
       length: { minimum: 8, messages:{tooShort:"Must be at least 8 characters."}},
+      server: true,
     },
   },
-  email:null,
-  password:null,
-  // showErrors:true,
-  //
-  // emailValid: false,
-  // passwordValid: false,
-  //
-  // isValid: function(){
-  //   return this.get("emailValid") && this.get("passwordValid");
-  // }.property('emailValid', 'passwordValid'),
 
   actions: {
     submitForm: function() {
       var _this = this;
-      console.log(this.get('isValid'));
-      console.log(this.getProperties('email'));
-      console.log(this.getProperties('password'));
       if (this.get('isValid')){
         var credentials = this.getProperties('email', 'password');
         Ember.$.ajax({

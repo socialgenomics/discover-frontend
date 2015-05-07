@@ -2,6 +2,9 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   query:'',
+  currentUser: Ember.computed(function(){
+    return this.get('session.user');
+  }),
 
   didInsertElement: function(){
     //dropdown initialization
