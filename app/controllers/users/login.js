@@ -9,30 +9,30 @@ export default Ember.ObjectController.extend(
   ServerValidationMixin,
   ThirdPartyMixin,
 {
-  email: '',
-  password: '',
-  showErrors: true,
-
-  validations: {
-    email: {
-      presence: true,
+  validations:{
+    email:{
+      presence:true,
+      presence:{message:"You missed this one."},
       format: {
         with: /^[\w+\-.]+@[a-z\d\-.]+\.[a-z]+$/i,
-        message: 'must be a valid e-mail address'
+        message: 'Must be a valid e-mail address'
       },
       server: true, // must be last - unknown bug
     },
     password: {
       presence: true,
-      length: { minimum: 8 },
+      presence: {message:"You missed this one."},
+      length: { minimum: 8, messages:{tooShort:"Must be at least 8 characters."}},
       server: true, // must be last - unknown bug
     },
   },
+  email:null,
+  password:null,
   actions: {
     submitForm: function() {
       var _this = this;
       this.get('session')
-      .authenticate('authenticator:repositive', 
+      .authenticate('authenticator:repositive',
         {
           email: this.email,
           password: this.password

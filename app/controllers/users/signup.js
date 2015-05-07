@@ -8,11 +8,9 @@ import ENV from 'repositive.io/config/environment';
 
 export default Ember.ObjectController.extend(
    EmberValidations.Mixin,
-ServerValidationMixin,
-//    ThirdParty,
+   ServerValidationMixin,
+   ThirdParty,
 {
-  email:null,
-  password:null,
   validations:{
     email:{
       presence:true,
@@ -21,15 +19,15 @@ ServerValidationMixin,
         with: /^[\w+\-.]+@[a-z\d\-.]+\.[a-z]+$/i,
         message: 'Must be a valid e-mail address'
       },
-       server: true,
     },
     password: {
       presence: true,
       presence: {message:"You missed this one."},
       length: { minimum: 8, messages:{tooShort:"Must be at least 8 characters."}},
-      server: true,
     },
   },
+  email:null,
+  password:null,
 
   actions: {
     submitForm: function() {
@@ -49,27 +47,9 @@ ServerValidationMixin,
         });
       } else {
         console.log('invalid');
-        // this.set('showErrors', true);
       }
     },
-
-    // emailValidHasChanged:function(value){
-    //   this.set('emailValid', value);
-    // },
-    //
-    // setEmail:function(value){
-    //   this.set('email', value);
-    // },
-    //
-    // passwordValidHasChanged:function(value){
-    //   this.set('passwordValid', value);
-    // },
-    //
-    // setPassword:function(value){
-    //   this.set('password', value);
-    // },
   },
-
 
   showMessages : function(messages){
     if (messages) {
