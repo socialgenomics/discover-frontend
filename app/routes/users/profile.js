@@ -3,7 +3,17 @@ import AuthenticatedRouteMixin from 'simple-auth/mixins/authenticated-route-mixi
 
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
   model: function(){
-    var user = this.get('session.user');
-    return this.store.find('user.profile', {UserId: user.id});
+    var _this = this;
+    var currentUser = this.get('session.user');
+
+    return new Ember.RSVP.all([
+      _this.store.find('user', currentUser.id),
+      _this.store.find('user.profile', {UserId: currentUser.id}),
+    ]).then(function(values){
+      return {
+        user: values[0],
+        profile: values[1].get('firstObject'),
+      }
+    });
   }
 });
