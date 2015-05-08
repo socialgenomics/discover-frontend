@@ -20,8 +20,11 @@ Router.map(function() {
     this.route('login');
     this.route('profile');
     this.route('settings');
-    this.route('trust');
     this.route('references');
+    this.route('trust');
+  });
+
+  this.resource('user', {path: '/user/:username'}, function(){
   });
 
   this.resource('datasets', function(){
