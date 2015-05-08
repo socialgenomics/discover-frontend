@@ -5,5 +5,6 @@ export default DS.Model.extend({
 	username: DS.attr('string'),
 	firstname: DS.attr('string'),
 	lastname: DS.attr('string'),
-  isCurrentUser: DS.attr('boolean', {defaultValue: false})
+  isCurrentUser: DS.attr('boolean', {defaultValue: false}),
+	comments: DS.hasMany('comments'),
 });

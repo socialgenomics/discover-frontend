@@ -1,7 +1,10 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  didInsertElement: function(){
-  },
-  actions: {}
+
+  actions: {
+    addComment: function(text){
+      this.sendAction('addComment',text);
+    },
+  }
 });

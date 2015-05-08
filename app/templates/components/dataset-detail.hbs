@@ -78,11 +78,11 @@
       </li>
     </ul>
     {{#if (eq tab "rating")}}
-    {{render "datasets/tab-ratings"}}
+    {{partial "datasets/tab-ratings"}}
     {{else if (eq tab "related")}}
-    {{render "datasets/tab-related"}}
+    {{partial "datasets/tab-related"}}
     {{else}}
-    {{render "datasets/tab-comments"}}
+    {{partial "datasets/tab-comments"}}
     {{/if}}
   </div><!-- SIDE CONTENT DIV -->
 
