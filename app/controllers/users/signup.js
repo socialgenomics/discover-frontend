@@ -19,11 +19,13 @@ export default Ember.ObjectController.extend(
         with: /^[\w+\-.]+@[a-z\d\-.]+\.[a-z]+$/i,
         message: 'Must be a valid e-mail address'
       },
+      server: true,
     },
     password: {
       presence: true,
       presence: {message:"You missed this one."},
       length: { minimum: 8, messages:{tooShort:"Must be at least 8 characters."}},
+      server: true,
     },
   },
   email:null,
