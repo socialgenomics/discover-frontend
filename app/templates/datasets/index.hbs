@@ -1,5 +1,14 @@
 <div class="row">
-{{# each dataset in model }}
+<div class="row no-margin">
+  <span class="align-left col m3">Results: {{ meta.hits }}</span>
+  <div class="assay-key right">
+    <span>Assay Key:</span> 
+    {{#each assay in assays }}
+    <span class="assay snp-array" style="color:black;">{{ assay }}</span>  
+    {{/each }}
+  </div>
+</div>
+{{#each dataset in model }}
   {{dataset-card dataset=dataset}}
-{{/ each }}
+{{/each }}
 </div>
