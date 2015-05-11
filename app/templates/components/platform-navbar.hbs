@@ -12,14 +12,22 @@
           </div>
         </form>
       </ul>
-      <ul class="right">
+      
 <!-- {{yield}} -->
-        <li>
-            <a class='dropdown-button' href="!#" data-beloworigin="true" data-activates='profile-drop'>
-              <div class="dp-wrapper"><img src="/assets/icons/person-icon.png" alt="your profile picture" class="display-pic"></div>
-              <i class="mdi-hardware-keyboard-arrow-down hide-on-small-only"></i>
-            </a>
+      <div class="notification-account right">
+        <div class="notification-icon grey-text tiny">  
+          <a href="#sorrymsg" class="modal-trigger valign">
+          <i class="mdi-social-notifications"></i>
+          </a>
+        </div>
+        <li class="user-avatar right">
+        <a class='dropdown-button valign-wrapper' data-beloworigin="true" href='/profile' data-activates='profile-drop'>
+        <div class="dp-wrapper">
+          <img src="/assets/icons/person-icon.png" alt="your profile picture" class="display-pic">
+        </div>
+        <i class="mdi-navigation-arrow-drop-down hide-on-small-only"></i></a>
         </li>
+
         <ul id='profile-drop' class='dropdown-content'>
           <li>{{#link-to 'user' currentUser.username}}Profile{{/link-to}}</li>
           <li>{{#link-to 'users.settings'}}Settings{{/link-to}}</li>
@@ -29,7 +37,8 @@
           <li class="divider"></li>
           <li><a {{ action 'logout' }}>Logout</a></li>
         </ul>
-      </ul>
+
+      </div>
       <div class="re-navbar-btn register grey-text valign-wrapper">
         <i class="mdi-action-note-add"></i>
         <a href="#modalRegister" class="modal-trigger valign">REGISTER DATA</a>
