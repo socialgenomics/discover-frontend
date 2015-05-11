@@ -56,7 +56,7 @@ module.exports = function(environment) {
     'simple-auth' : {
       crossOriginWhitelist: ['http://*.repositive.io'],
       authorizer: 'authorizer:repositive',
-      routeAfterAuthentication: 'users.profile',
+      routeAfterAuthentication: 'root',
       authenticationRoute: 'users.login',
       signupRoute: 'users.signup',
       logoutRoute: 'users.logout',

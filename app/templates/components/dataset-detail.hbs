@@ -17,7 +17,9 @@
       <h3>Tags: </h3>
       <div class="card-section">
         {{#each tag in dataset.tags}}
+        {{#link-to 'datasets.tags' tag.word}}
         <span class="tag">{{tag.word}}</span>
+        {{/link-to}}
         {{/each}}
         <a class="add-tag" href="#"><span class="tag">add tag <i class="mdi-content-add grey-text"></i></span></a>
       </div>
@@ -78,11 +80,11 @@
       </li>
     </ul>
     {{#if (eq tab "rating")}}
-    {{render "datasets/tab-ratings"}}
+    {{partial "datasets/tab-ratings"}}
     {{else if (eq tab "related")}}
-    {{render "datasets/tab-related"}}
+    {{partial "datasets/tab-related"}}
     {{else}}
-    {{render "datasets/tab-comments"}}
+    {{partial "datasets/tab-comments"}}
     {{/if}}
   </div><!-- SIDE CONTENT DIV -->
 
