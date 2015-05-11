@@ -3,7 +3,6 @@ import Ember from 'ember';
 export default Ember.Controller.extend({
   queryParams: ['tab'],
   tab: "comments",
-
   actions: {
     addComment:function(text){
       var cmnt = this.store.createRecord('comment', {
@@ -11,6 +10,5 @@ export default Ember.Controller.extend({
       });
       cmnt.save();
     }
-
   },
 });
