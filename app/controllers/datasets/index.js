@@ -1,9 +1,10 @@
 import Ember from 'ember';
+import _ from 'npm:underscore';
 
 export default Ember.Controller.extend({
   assays: function(){
     let properties = this.store.all('property');
-    let assays = properties.getEach('sample technology');
+    let assays = properties.getEach('sampleTechnology');
     return assays.uniq();
   }.property()
 });
