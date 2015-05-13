@@ -1,67 +1,28 @@
 <div class="container" id="homepage">
-    <!--EXPLORE-->
-
-    <!-- <h4 class="welcome-msg center-align grey-text lime lighten-4 valign">Welcome to Repositive.</h4> -->
-
-    <div id="explore" class="section">
-        <div class="center-align">
-            <h2>EXPLORE</h2>
-            <hr class="teal">
-            <p class="sub-head">Find the most relevant and hight quality datasets.</p>
-            <div class="row">
-                <div class="stats left-align col m4"><span class="numb">25</span><span class="stats-text">Repositories</span></div>
-                <div class="stats center-align col m4"><span class="numb">25 524</span><span class="stats-text">Datasets</span></div>
-                <div class="stats right-align col m4"><span class="numb">54</span><span class="stats-text">Active Users</span></div>
-            </div>
-        </div>
-    </div>
-    <!--tranding events-->
-    <div class="row">
-        <div class="center-align">
-            <h2>The Latest Datasets Registration</h2>
-            <hr class="red">
-        </div>
-    </div>
-
-    {{!each results}}
-    {{! datasetMinimalView data=this}}
-    {{!each}}
-    <div class="divider"></div>
-    <!--ACTIVITY-->
-    <div id="activity" class="section">
-        <h2 class="center-align">Activity on the platform</h2>
-        <hr class="yellow">
-        <p class="sub-head center-align">What's going on?</p>
-        <div class="row">
-            <div class="col m12">
-                <ul class="collection">
-                    <li class="collection-item avatar">
-                    <i class="mdi-action-find-replace blue circle"></i>
-                    <p class="platform-info">Requests</p>
-                    <h4 class="title no-margin-bottom">
-                        Whole Genome Bisulfite Sequencing of Circulating Cell-Free (CCF) DNA and its Cellular Contributors</h4>
-                    <p class="helper-text">by Christina Luckasson</p>
-                    </li>
-                    <li class="collection-item avatar">
-                    <i class="mdi-action-description red circle"></i>
-                    <p class="platform-info">Uploads</p>
-                    <h4 class="title no-margin-bottom">Autism Post-Mortem Brain RNA-Sequencing: SRRM4 Splicing Study</h4>
-                    <p class="helper-text">by Elena Watson</p>
-                    </li>
-                    <li class="collection-item avatar">
-                    <i class="mdi-action-question-answer green circle"></i>
-                    <p class="platform-info">Comments</p>
-                    <h4 class="title no-margin-bottom">Exome Sequencing of a family with thrombocytopenia... </h4>
-                    <p class="helper-text">by Dan Fair</p>
-                    </li>
-                    <li class="collection-item avatar">
-                    <i class="mdi-action-perm-identity yellow circle"></i>
-                    <p class="platform-info">Community</p>
-                    <h4 class="title no-margin-bottom">New user joined the platform</h4>
-                    <p class="helper-text"></p>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
+  <div id="explore" class="section">
+      <div class="center-align">
+          <h2>EXPLORE</h2>
+          <hr class="teal">
+          <p class="sub-head">Find the most relevant and hight quality datasets.</p>
+          <div class="row">
+              <div class="stats left-align col m4"><span class="numb">25</span><span class="stats-text">Repositories</span></div>
+              <div class="stats center-align col m4"><span class="numb">25 524</span><span class="stats-text">Datasets</span></div>
+              <div class="stats right-align col m4"><span class="numb">54</span><span class="stats-text">Active Users</span></div>
+          </div>
+      </div>
+  </div>
+  <div class="row">
+      <div class="center-align">
+          <h2>The Latest Datasets Registration</h2>
+          <hr class="red">
+      </div>
+  </div>
+  {{#each card in cards}}
+    <p>
+      {{card.properties.title}}
+      {{card.properties.description}}
+      {{mini-dataset  title = card.properties description=card.properties.description}}
+    </p>
+  {{/each}}
+  <a {{action 'logThis'}}>log</a>
 </div>
