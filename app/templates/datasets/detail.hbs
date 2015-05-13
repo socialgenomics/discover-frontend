@@ -1,29 +1,31 @@
 <!-- {{dataset-detail dataset=model tab=tab addComment="addComment"}} -->
 
-<div class="row card full-view">
+<div class="row card dataset full-view no-margin">
   <div class="col l7 m6 s12 card-main-wrapper"><!-- MAIN CONTENT DIV -->
+    <div class="top-action card-header">
+      <div class="assays">
+        <h6 class="assay-large no-margin">{{model.properties.sampleTechnology}}</h6>
+        <span class="add-btn">+</span>
+      </div>
+      <div class="share-favourite">
+        <a href="#sorrymsg" class="modal-trigger valign-wrapper grey-text"><i class="mdi-action-grade"></i></a><span>number of favs</span>
+        <a href="#sorrymsg" class="modal-trigger grey-text"><i class="mdi-social-share"></i></a>
+      </div>
+    </div>
     <div class="card-main-content">
 
       <h2>{{model.properties.title}}</h2>
-
-      <h3>Assays: </h3>
-      <div class="card-section">
-        <span class="assay as-red">{{model.properties.sampleTechnology}}</span>
-      </div>
-
-      <h3>Description: </h3>
-      <div class="card-section">
-        <p>{{model.properties.description}}</p>
-      </div>
-
-      <h3>Tags: </h3>
-      <div class="card-section">
+      <p>{{model.properties.description}}</p>
+      <p>
+        {{model.properties.sampleTechnology}}
+      </p>
+      <div class="tags">
         {{#each tag in model.tags}}
         {{#link-to 'datasets.tags' tag.word}}
         <span class="tag">{{tag.word}}</span>
         {{/link-to}}
         {{/each}}
-        <a class="add-tag" href="#"><span class="tag">add tag <i class="mdi-content-add grey-text"></i></span></a>
+        <a class="add-tag" href="#"><span class="add-btn">+</span></a>
       </div>
       <h3>Information:</h3>
       <div class="card-section">
@@ -44,16 +46,12 @@
           </div>
         </div>
       </div><!-- end .card-section -->
-
-      <div class="row">
-        <div class="card-action center-align col m12">
-          <a href="#sorrymsg" class="btn waves-effect white modal-trigger grey-text">Bookmark</a>
-          <a href="#" class="btn waves-effect teal white-text">Download</a>
-          <a href="#sorrymsg" class="modal-trigger btn waves-effect white grey-text">Share</a>
-        </div>
-      </div>
-
     </div><!-- end .card-main-comtent -->
+    <div class="row bottom-static">
+      <div class="center-align card-action">
+        <a class="btn waves-effect teal white-text">Download</a>
+      </div>
+    </div>
   </div><!-- MAIN CONTENT DIV -->
 
   <div class="col l5 m6 s12 card-side-wrapper"><!-- SIDE CONTENT DIV -->
