@@ -4,13 +4,13 @@
     <span>Assay Key:</span> 
     {{#each assay in assays }}
       {{#link-to 'datasets.assay' assay}}
-      <span class=''>{{assay-colour assay}}{{ assay }}</span>  
+        {{assay-colour assay model}}<span>{{ assay }}</span>  
       {{/link-to}}
     {{/each }}
   </div>
 </div>
 <div class="row">
 {{#each dataset in model }}
-  {{render 'datasets/card' dataset=dataset}}
+  {{partial 'datasets/card' dataset=dataset}}
 {{/each }}
 </div>

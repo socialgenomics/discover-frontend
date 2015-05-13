@@ -1,0 +1,32 @@
+<div class="col s12 m6 l4">
+  <div class="card dataset">
+    <div class="card-header">
+      <div class="assay-container">
+        {{assay-colour dataset.properties.sampleTechnology model}}
+        <span class="assay-small as-yellow"></span>
+      </div>
+      <div class="actions-container valign-wrapper">
+
+        <a href="#sorrymsg" class="modal-trigger valign-wrapper"><i class="mdi-action-grade tooltipped" data-tooltip="bookmark" data-position="bottom"></i></a><span class="grey-text">{{data.favourite}}</span>
+        <a href="#sorrymsg" class="modal-trigger valign-wrapper"><i class="mdi-social-share tooltipped" data-position="bottom" data-tooltip="share"></i></a>
+      </div>
+    </div>
+
+    <div class="card-body">
+      {{!link-to 'datasets.detail' dataset.id classNames="data-title"}}
+      <h2 class="card-title-limit">{{ dataset.properties.title }}</h2>
+      {{!link-to}}
+      <span>by </span> <span><a href="/profile">{{data.submittedBy}}</a></span>
+      <i class="mdi-action-today"></i><span>{{data.date}}</span>
+      <p class="card-line-limit">{{dataset.properties.description}}</p>
+    </div>
+
+    <div class="card-footer">
+      <ul class="list-inline">
+        <li class="tooltipped" data-position="bottom" data-tooltip="Views"><i class="mdi-action-visibility"></i><span>135</span></li>
+        <li class="tooltipped" data-position="bottom" data-tooltip="Public Access"><i class="mdi-social-public" ></i><span>{{data.access}}</span></li>
+        <li class="tooltipped" data-position="bottom" data-tooltip="Comments"><i class="mdi-action-question-answer"></i><span>3</span></li>
+      </ul>
+    </div>
+  </div>
+</div>
