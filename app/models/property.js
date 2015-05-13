@@ -3,6 +3,6 @@ import DS from "ember-data";
 export default DS.Model.extend({
   title: DS.attr('string'),
   description: DS.attr('string'),
-  'sample technology': DS.attr('String'),
+  sampleTechnology: DS.attr('String'),
   dataset: DS.belongsTo('dataset')
 });

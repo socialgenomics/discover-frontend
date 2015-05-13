@@ -1,6 +1,6 @@
 <div class="row">
   <div class="metadata">Results: {{meta.total}}</div>
 {{# each dataset in model }}
-  {{dataset-card dataset=dataset}}
+  {{partial 'datasets/card' dataset=dataset}}
 {{/ each }}
 </div>
