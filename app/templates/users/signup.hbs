@@ -1,6 +1,6 @@
 <div class="section row ">
   <div class="col m4 offset-m4 s12">
-  
+
     <form>
       <div class="row">
         <div class="col m12 center">
@@ -19,15 +19,15 @@
         </span>
       </div>
 
-      {{validated-input type="Email" value=email errors=errors.email placeholder="Email" email=true}}
+      {{validated-input type="Email" signup=true value=email errors=errors.email placeholder="Email" email=true}}
       {{validated-input type="Password" value=password errors=errors.password placeholder="Password" password=true}}
 
       <div class="input-container">
         <a {{action 'submitForm'}} id="continue-btn" class="btn full-width">SIGN UP</a>
         <span class="sub-input center-align">By signing up you agree to our <a href="#">Terms</a> and <a href="#">Privacy Policy</a>.</span>
       </div>
-      
-      
+
+
     </form>
   </div>
 </div>
@@ -39,15 +39,13 @@
          <ul class="col m11">
             <li>We respect the individuals right to privacy and advocate full adherence to patient consent.</li>
             <li>We don't sell and share any private data with 3rd party.</li>
-          </ul>      
+          </ul>
         </div>
       <div class="col m6">
         <ul class="right col m11">
           <li>We encourage responsible custodianship of genomic data.</li>
-          <li>We will NEVER sell any data with 3rd party.</li>  
+          <li>We will NEVER sell any data with 3rd party.</li>
         </ul>
-      </div>  
+      </div>
     </div>
   </div>
-
-
