@@ -9,7 +9,7 @@
         </span>
         <hr class="yellow">
         <p class="helper-text">Build your profile here.</p>
-      </div>a
+      </div>
       <div class="row">
         <h5>Personal</h5>
         <div class="row">
@@ -17,7 +17,8 @@
             <img class="scale-img" src="/assets/images/icons/person-icon.png">
             <label class="custom-file-upload">
               Upload your image
-              <input id="files" type="file">
+              {{input type="file"}}
+              <!-- {{validated-input type="Password" value=password errors=errors.password placeholder="Password" password=true}} -->
             </label>
           </div>
         </div>

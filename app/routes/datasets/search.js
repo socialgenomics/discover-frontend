@@ -27,7 +27,7 @@ export default Ember.Route.extend({
           });
         }
         else {
-          return {}
+          resolve([])
         }
      //   _this.store.find(_.map(resp, function(r){ r.id })).then(resolve);
       },function(err){
