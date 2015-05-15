@@ -9,6 +9,13 @@ export default Ember.ObjectController.extend(
   ServerValidationMixin,
   ThirdPartyMixin,
 {
+  email:null,
+  password:null,
+  loading: false,
+  buttonDisabled: function(){
+    return !this.get('isValid') || this.get('loading');
+  }.property('isValid', 'loading'),
+
   validations:{
     email:{
       presence:true,
@@ -26,23 +33,22 @@ export default Ember.ObjectController.extend(
       server: true, // must be last - unknown bug
     },
   },
-  email:null,
-  password:null,
   actions: {
     submitForm: function() {
       var _this = this;
+
+      this.set('loading', true)
+
       this.get('session')
-      .authenticate('authenticator:repositive',
-        {
-          email: this.email,
-          password: this.password
-        }
-      ).then(function(resp){
-        //_this.transitionToRoute('root');
-      }, function(err){
-        // messages are already being shown by the authenticator
-        // do something else instead?
-        console.log(err);
+      .authenticate('authenticator:repositive', {
+        email: this.email,
+        password: this.password
+      })
+      .then(function(resp){
+        _this.set('loading', false)
+      }, 
+      function(error){
+        _this.set('loading', false)
       });
     }
   },
