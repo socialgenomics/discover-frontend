@@ -22,7 +22,7 @@
       {{validated-input type="password" value=password errors=errors.password placeholder="Password" password=true}}
 
       <div class="input-container">
-        <a {{action 'submitForm'}} id="continue-btn" class="btn full-width">LOG IN</a>
+        {{#full-width-button disabled=buttonDisabled action="submitForm"}}LOGIN{{/full-width-button}}
       </div>
       {{message-queue}}
     </form>
