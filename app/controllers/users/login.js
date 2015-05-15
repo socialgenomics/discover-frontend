@@ -29,7 +29,7 @@ export default Ember.ObjectController.extend(
     password: {
       presence: true,
       presence: {message:"You missed this one."},
-      length: { minimum: 8, messages:{tooShort:"Must be at least 8 characters."}},
+      length: { minimum: 8, messages:{ tooShort: "Must be at least 8 characters."}},
       server: true, // must be last - unknown bug
     },
   },

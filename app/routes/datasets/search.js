@@ -19,9 +19,11 @@ export default Ember.Route.extend({
         })
         .then(function(resp){
         _this.meta = resp.meta;
-        if (resp.meta.total > 0){
-          //_this.store.pushPayload('Dataset', resp);
-          var ids = resp.meta.ids;
+        delete resp.meta;
+        if (_this.meta.total > 0){
+          _this.store.pushPayload('Dataset', resp);
+          var ids = _.map(resp.datasets, function(dataset){ return dataset.id; });
+         // var ids = resp.meta.ids;
           _this.store.find('dataset', {ids: ids}).then(function(datasets){
             resolve(datasets);
           });
