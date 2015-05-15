@@ -10,6 +10,7 @@
         <hr class="yellow">
         <p class="helper-text">Build your profile here.</p>
       </div>
+      <a {{action "getInfo"}} class="btn red white-text">Get info</a>
       <div class="row">
         <h5>Personal</h5>
         <div class="row">
@@ -22,16 +23,20 @@
             </label>
           </div>
         </div>
+        <p>
+          {{model.user.username}}
+        </p>
         <form>
           <div class="input-container col m6 offset-m3">
             <div class="input-field no-margin-top">
-              <input id="first-name" type="text" placeholder="First Name">
+              {{input type="text" placeholder="First Name"}}
             </div>
             <div class="lbl">First Name</div>
+
           </div>
           <div class="input-container col m6 offset-m3">
             <div class="input-field">
-              <input id="last-name" type="text" placeholder="Last name">
+              {{input type="text" placeholder="Last Name"}}
             </div>
             <div class="lbl">Last name</div>
           </div>
@@ -91,7 +96,7 @@
           </div>
         </form>
       </div>
-      <button class="btn waves-effect waves-light" type="submit" name="action">save
+      <button  {{action "submitForm"}}class="btn waves-effect waves-light" type="submit">save
       </button>
     </div>
   </div>

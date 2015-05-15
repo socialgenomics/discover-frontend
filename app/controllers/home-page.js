@@ -7,7 +7,4 @@ export default Ember.Controller.extend({
     let cards = this.store.find('dataset',{ids:ids});
     return cards;
   }.property(),
-  actions:{
-
-  }
 });
