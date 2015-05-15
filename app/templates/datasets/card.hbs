@@ -2,7 +2,7 @@
   <div class="card dataset">
     <div class="card-header">
       <div class="assay-container">
-        {{assay-colour dataset.properties.sampleTechnology model}}
+        {{assay-colour dataset.properties.assayType model}}
         <span class="assay-small as-yellow"></span>
       </div>
       <div class="actions-container valign-wrapper">
@@ -13,9 +13,9 @@
     </div>
 
     <div class="card-body">
-      {{!link-to 'datasets.detail' dataset.id classNames="data-title"}}
+      {{#link-to 'datasets.detail' dataset.id classNames="data-title"}}
       <h2 class="card-title-limit">{{ dataset.properties.title }}</h2>
-      {{!link-to}}
+      {{/link-to}}
       <span>by </span> <span><a href="/profile">{{data.submittedBy}}</a></span>
       <i class="mdi-action-today"></i><span>{{data.date}}</span>
       <p class="card-line-limit">{{dataset.properties.description}}</p>

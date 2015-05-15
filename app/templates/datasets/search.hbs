@@ -1,6 +1,4 @@
-<div class="row">
-  <div class="metadata">Results: {{meta.total}}</div>
-{{# each dataset in model }}
-  {{partial 'datasets/card' dataset=dataset}}
-{{/ each }}
+<div class="row no-margin">
+  <span class="align-left col m3">Results: {{ meta.hits }}</span>
+  {{assay-key model}}
 </div>

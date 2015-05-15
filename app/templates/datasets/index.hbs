@@ -1,16 +1,8 @@
 <div class="row no-margin">
-  <span class="align-left col m3">Results: {{ meta.hits }}</span>
-  <div class="assay-key right">
-    <span>Assay Key:</span> 
-    {{#each assay in assays }}
-      {{#link-to 'datasets.assay' assay}}
-        {{assay-colour assay model}}<span>{{ assay }}</span>  
-      {{/link-to}}
-    {{/each }}
-  </div>
+  {{assay-key model}}
 </div>
 <div class="row">
-{{#each dataset in model }}
-  {{partial 'datasets/card' dataset=dataset}}
-{{/each }}
+  {{# each dataset in model }}
+    {{partial 'datasets/card' dataset=dataset}}
+  {{/ each }}
 </div>
