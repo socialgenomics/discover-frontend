@@ -15,5 +15,10 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         profile: values[1].get('firstObject'),
       }
     });
+  },
+  actions: {
+    saveChanges: function() {
+      console.log(this.get('model'));
+    }
   }
 });
