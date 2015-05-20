@@ -12,7 +12,7 @@ export default Ember.ObjectController.extend(
   validations:{
     email:{
       presence:true,
-      presence:{message:"You missed this one."},
+      presence:{message:" "},
       format: {
         with: /^[\w+\-.]+@[a-z\d\-.]+\.[a-z]+$/i,
         message: 'Must be a valid e-mail address'
@@ -21,7 +21,7 @@ export default Ember.ObjectController.extend(
     },
     password: {
       presence: true,
-      presence: {message:"You missed this one."},
+      presence: {message:" "},
       length: { minimum: 8, messages:{tooShort:"Must be at least 8 characters."}},
       server: true, // must be last - unknown bug
     },

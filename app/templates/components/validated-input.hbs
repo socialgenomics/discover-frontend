@@ -4,16 +4,21 @@
   {{input value=value focus-in="focusedIn" focus-out="focusedOut" type=type placeholder=placeholder }}
 </div>
 
-{{#if email}}
-  <div class="lbl">Email</div>
-  <i class="mdi-communication-email"></i>
-  <div class="input-helper">You'll need to verify this later.</div>
+
+  {{#if email}}
+    <div class="lbl">Email</div>
+    <i class="mdi-communication-email"></i>
+    {{#if signup}}
+    <div class="input-helper">You'll need to verify this later.</div>
+    {{/if}}
 {{/if}}
 
 {{#if password}}
   <div class="lbl">Create Password</div>
   <i class="mdi-action-lock-outline"></i>
+     {{#if signup}}
   <div class="input-helper">Must contain at least one upper case and one number character.</div>
+    {{/if}}
 {{/if}}
 
 {{#if showError}}
