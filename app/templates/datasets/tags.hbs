@@ -1,6 +1,9 @@
+<div class="row no-margin">
+  <span class="align-left col m3">Tag: {{tag}}</span>
+  {{assay-key model}}
+</div>
 <div class="row">
-<div class="metadata">Tag: {{tag}}</div>
-{{# each dataset in model }}
-  {{dataset-card dataset=dataset}}
-{{/ each }}
+  {{# each dataset in model }}
+    {{partial 'datasets/card' dataset=dataset}}
+  {{/ each }}
 </div>
