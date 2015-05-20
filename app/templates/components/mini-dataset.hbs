@@ -3,20 +3,17 @@
 	<div class="card dataset mini">
 		<div class="card-header">
 			<div class="assay-container">
-				{{#each  data.assay}}
-				<span class="assay-small {{this}}"></span>
-				{{/each}}
+				<span class="assay-small">{{assay}}</span>
 			</div>
 			<div class="actions-container">
+				<a href="#sorrymsg" class="modal-trigger"><i class="mdi-action-grade"></i></a>
 				<a href="#sorrymsg" class="modal-trigger"><i class="mdi-social-share"></i></a>
-				<a href="#sorrymsg" class="modal-trigger"><i class="mdi-action-bookmark-outline"></i></a>
 			</div>
 		</div>
 
 		<div class="card-body mini">
 			<a href="#"><h2 class="truncate">{{title}}</h2></a>
 			<span>by </span> <span><a href="/profile">{{submittedBy}}</a></span><span> 3 hours ago</span> <i class="mdi-social-public tooltipped" data-position="bottom" data-tooltip="Public Access"></i>
-
 		</div>
 
 		<div class="card-footer">
@@ -26,5 +23,5 @@
 				<li class="tooltipped" data-position="bottom" data-tooltip="Comments"><i class="mdi-action-question-answer"></i><span>{{comments}}</span></li>
 			</ul>
 		</div>
-  	</div>
+  </div>
 </div>

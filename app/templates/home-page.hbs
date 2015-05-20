@@ -19,10 +19,8 @@
   </div>
   {{#each card in cards}}
     <p>
-      {{card.properties.title}}
-      {{card.properties.description}}
-      {{mini-dataset  title = card.properties description=card.properties.description}}
+      {{!card.properties.title}}
+      {{mini-dataset  title = card.properties.title assay=card.properties.assayType}}
     </p>
   {{/each}}
-  <a {{action 'logThis'}}>log</a>
 </div>

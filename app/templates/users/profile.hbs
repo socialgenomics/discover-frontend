@@ -5,51 +5,53 @@
     <div class="card white darken-1">
       <div class="card-content">
         <span class="card-title">
-          <h5>Edit Profile</h5>
+          <h2>Edit Profile</h2>
         </span>
-        <hr class="yellow">
-        <p class="helper-text">Build your profile here.</p>
       </div>
+      <!-- <a {{action "getInfo"}} class="btn red white-text">Get info</a> -->
       <div class="row">
         <h5>Personal</h5>
-        <div class="row">
+        <!-- <div class="row">
           <div class="profile-img col m12">
             <img class="scale-img" src="/assets/images/icons/person-icon.png">
             <label class="custom-file-upload">
               Upload your image
-              {{input type="file"}}
-              <!-- {{validated-input type="Password" value=password errors=errors.password placeholder="Password" password=true}} -->
+              {{!input type="file"}}
             </label>
           </div>
-        </div>
-        <form>
+        </div> -->
+        <form {{action "saveChanges" on="submit"}}>
           <div class="input-container col m6 offset-m3">
             <div class="input-field no-margin-top">
-              <input id="first-name" type="text" placeholder="First Name">
+              {{input type="text" placeholder="First Name" value=model.user.firstname}}
             </div>
             <div class="lbl">First Name</div>
+
           </div>
           <div class="input-container col m6 offset-m3">
             <div class="input-field">
-              <input id="last-name" type="text" placeholder="Last name">
+              {{input type="text" placeholder="Last Name" value=model.user.lastname}}
             </div>
             <div class="lbl">Last name</div>
           </div>
           <div class="input-container col m6 offset-m3">
             <div class="input-field">
-              <input id="email" type="text" placeholder="Email">
+              {{input type="email" placeholder="Email" value=model.user.email}}
             </div>
             <div class="lbl">Email</div>
+          </div>
+          <div class="input-container col m6 offset-m3">
+            <button type="submit" class="btn teal white-text">Save</button>
           </div>
         </form>
       </div>
 
-      <div class="row">
+      <!-- <div class="row">
         <h5>Education</h5>
         <form>
           <div class="input-container col m6 offset-m3">
             <div class="input-field">
-              <input id="degree" type="text" placeholder="Degree">
+              {{input type="text" placeholder="Degree" value=model.profile.educationDegree}}
             </div>
             <div class="lbl">Degree</div>
           </div>
@@ -91,8 +93,8 @@
           </div>
         </form>
       </div>
-      <button class="btn waves-effect waves-light" type="submit" name="action">save
-      </button>
+      <button  {{action "submitForm"}}class="btn waves-effect waves-light" type="submit">save
+      </button> -->
     </div>
   </div>
 </div>

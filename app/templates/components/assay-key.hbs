@@ -1,0 +1,6 @@
+{{yield}}
+<span>Assay Key:</span>
+{{#each assay in assays}}
+<div {{bind-attr class=":label assay.colour"}}></div>
+{{#link-to 'datasets.search' (query-params assayType=assay.name)}}<span class="assay">{{assay.name}}</span>{{/link-to}}
+{{/each}}
