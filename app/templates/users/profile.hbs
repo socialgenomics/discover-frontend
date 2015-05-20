@@ -10,7 +10,7 @@
       </div>
       <!-- <a {{action "getInfo"}} class="btn red white-text">Get info</a> -->
       <div class="row">
-        <h5>Personal</h5>
+
         <!-- <div class="row">
           <div class="profile-img col m12">
             <img class="scale-img" src="/assets/images/icons/person-icon.png">
@@ -20,13 +20,13 @@
             </label>
           </div>
         </div> -->
-        <form {{action "saveChanges" on="submit"}}>
+        <form {{action "save" on="submit"}}>
+          <h5>Personal</h5>
           <div class="input-container col m6 offset-m3">
             <div class="input-field no-margin-top">
               {{input type="text" placeholder="First Name" value=model.user.firstname}}
             </div>
             <div class="lbl">First Name</div>
-
           </div>
           <div class="input-container col m6 offset-m3">
             <div class="input-field">
@@ -40,9 +40,14 @@
             </div>
             <div class="lbl">Email</div>
           </div>
+
           <div class="input-container col m6 offset-m3">
             <button type="submit" class="btn teal white-text">Save</button>
+            {{#if saved}}
+              <p class="text-valid">Save Successful.</p>
+            {{/if}}
           </div>
+
         </form>
       </div>
 
