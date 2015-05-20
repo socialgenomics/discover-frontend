@@ -1,4 +1,21 @@
-<div class="row no-margin">
-  <span class="align-left col m3">Results: {{ meta.hits }}</span>
-  {{assay-key model}}
+{{#if meta.total}}
+  <div class="row no-margin">
+    <span class="align-left col m3">Results: {{ meta.total }}</span>
+    {{assay-key model=model}}
+  </div>
+{{/if}}
+<div class="row">
+  {{#unless meta.total}}
+    <div class="row no-margin center card">
+      <div class="no-results">
+        <h3><br>Sorry, there are no datasets matching<br> You can make request to ask our community for help. </h3>   
+      </div>
+      <div class="row">
+      <a href="#modalRequest" id="request-btn" class="btn modal-trigger white-text"><i class="mdi-content-content-paste"></i><span>Request Dataset</span></a>
+      </div>
+    </div>
+  {{/unless}}
+  {{# each dataset in model }}
+    {{partial 'datasets/card' dataset=dataset}}
+  {{/ each }}
 </div>
