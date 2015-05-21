@@ -9,10 +9,12 @@ export default Ember.Controller.extend({
   actions: {
     //need to validate on save!!!
     save:function(){
-      var userChanges = this.get('model.user');
-      // var profileChanges = this.get('model.user.profile');
-      userChanges.save();
+      // var userChanges = this.get('model.user');
+      //var profileChanges = this.get('model.profile');
+      // userChanges.save();
       // profileChanges.save();
+      this.get('model.user').save();
+      this.get('model.profile').save();
       this.set('saved',true);
     },
   },

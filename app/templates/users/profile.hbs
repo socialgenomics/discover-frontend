@@ -8,38 +8,53 @@
           <h2>Edit Profile</h2>
         </span>
       </div>
-      <!-- <a {{action "getInfo"}} class="btn red white-text">Get info</a> -->
-      <div class="row">
 
-        <!-- <div class="row">
-          <div class="profile-img col m12">
-            <img class="scale-img" src="/assets/images/icons/person-icon.png">
-            <label class="custom-file-upload">
-              Upload your image
-              {{!input type="file"}}
-            </label>
-          </div>
-        </div> -->
+      <div class="row">
         <form {{action "save" on="submit"}}>
-          <h5>Personal</h5>
-          <div class="input-container col m6 offset-m3">
-            <div class="input-field no-margin-top">
-              {{input type="text" placeholder="First Name" value=model.user.firstname}}
+          <div class="row">
+            <!-- <h5>Personal</h5> -->
+            <div class="input-container col m6 offset-m3">
+              <div class="input-field no-margin-top">
+                {{input type="text" placeholder="First Name" value=model.user.firstname}}
+              </div>
+              <div class="lbl">First Name</div>
             </div>
-            <div class="lbl">First Name</div>
-          </div>
-          <div class="input-container col m6 offset-m3">
-            <div class="input-field">
-              {{input type="text" placeholder="Last Name" value=model.user.lastname}}
+            <div class="input-container col m6 offset-m3">
+              <div class="input-field">
+                {{input type="text" placeholder="Last Name" value=model.user.lastname}}
+              </div>
+              <div class="lbl">Last name</div>
             </div>
-            <div class="lbl">Last name</div>
-          </div>
-          <div class="input-container col m6 offset-m3">
-            <div class="input-field">
-              {{input type="email" placeholder="Email" value=model.user.email}}
+            <!-- <div class="input-container col m6 offset-m3">
+              <div class="input-field">
+                {{input type="email" placeholder="Email" value=model.user.email}}
+              </div>
+              <div class="lbl">Email</div>
+            </div> -->
+            <div class="input-container col m6 offset-m3">
+              <div class="input-field">
+                {{input type="text" placeholder="Affiliation" value=model.profile.workOrganisation}}
+              </div>
+              <div class="lbl">Last name</div>
             </div>
-            <div class="lbl">Email</div>
           </div>
+
+          <!-- <div class="row">
+            <h5>Education</h5>
+            <div class="input-container col m6 offset-m3">
+              <div class="input-field no-margin-top">
+                {{input type="text" placeholder="Degree" value=model.profile.educationDegree}}
+              </div>
+              <div class="lbl">Degree</div>
+            </div>
+            <div class="input-container col m6 offset-m3">
+              <div class="input-field">
+                {{input type="text" placeholder="University" value=model.profile.educationUniversity}}
+              </div>
+              <div class="lbl">University</div>
+            </div>
+          </div> -->
+
 
           <div class="input-container col m6 offset-m3">
             <button type="submit" class="btn teal white-text">Save</button>
@@ -47,59 +62,9 @@
               <p class="text-valid">Save Successful.</p>
             {{/if}}
           </div>
-
         </form>
       </div>
 
-      <!-- <div class="row">
-        <h5>Education</h5>
-        <form>
-          <div class="input-container col m6 offset-m3">
-            <div class="input-field">
-              {{input type="text" placeholder="Degree" value=model.profile.educationDegree}}
-            </div>
-            <div class="lbl">Degree</div>
-          </div>
-          <div class="input-container col m6 offset-m3">
-            <div class="input-field">
-              <input id="university" type="text" placeholder="University">
-            </div>
-            <div class="lbl">University</div>
-          </div>
-        </form>
-      </div>
-
-
-      <div class="row">
-        <h5>Work</h5>
-        <form>
-          <div class="input-container col m6 offset-m3">
-            <div class="input-field">
-              <input id="role" type="text" placeholder="Job role">
-            </div>
-            <div class="lbl">Job role</div>
-          </div>
-          <div class="input-container col m6 offset-m3">
-            <div class="input-field">
-              <input id="company" type="text" placeholder="Organisation">
-            </div>
-            <div class="lbl">Organisation</div>
-          </div>
-        </form>
-      </div>
-      <div class="row">
-        <h5>Interests</h5>
-        <form>
-          <div class="input-container col m6 offset-m3">
-            <div class="input-field">
-              <textarea id="role" type="text" placeholder="Interests" style="height: 150px;"></textarea>
-            </div>
-            <div class="lbl">Interests</div>
-          </div>
-        </form>
-      </div>
-      <button  {{action "submitForm"}}class="btn waves-effect waves-light" type="submit">save
-      </button> -->
     </div>
   </div>
 </div>
