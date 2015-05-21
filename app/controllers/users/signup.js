@@ -30,7 +30,6 @@ export default Ember.ObjectController.extend(
   },
   email:null,
   password:null,
-
   actions: {
     submitForm: function() {
       var _this = this;
