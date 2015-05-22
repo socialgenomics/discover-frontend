@@ -15,18 +15,22 @@
 
     <div class="card-body">
       {{#link-to 'datasets.detail' dataset.id classNames="data-title"}}
-      <h2 class="card-title-limit">{{ dataset.properties.title }}</h2>
+      <h2 class="card-title-limit data-title">{{dataset.properties.title}}</h2>
       {{/link-to}}
-      <span>by </span> <span><a href="/profile">{{dataset.repository.name}}</a></span>
-      <i class="mdi-action-today"></i><span>{{data.date}}</span>
+      <span>from </span> <span><a href="/profile">{{dataset.repository.name}}</a></span>
+      <!-- data when data was registered on repository 
+      <i class="mdi-action-today"></i><span>{{data.date}}</span> -->
       <p class="card-line-limit">{{dataset.properties.description}}</p>
     </div>
 
     <div class="card-footer">
-      <ul class="list-inline">
-        <li class="tooltipped" data-position="bottom" data-tooltip="Views"><i class="mdi-action-visibility"></i><span>135</span></li>
-        <li class="tooltipped" data-position="bottom" data-tooltip="Public Access"><i class="mdi-social-public" ></i><span>{{data.access}}</span></li>
-        <li class="tooltipped" data-position="bottom" data-tooltip="Comments"><i class="mdi-action-question-answer"></i><span>3</span></li>
+      <ul>
+        <li><i class="mdi-social-public tooltipped" data-position="bottom" data-tooltip="Public Access"></i><span>{{dataset.repository.accessType}}</span>
+        </li>
+        <li class="tooltipped" data-position="bottom" data-tooltip="Views">
+        <i class="mdi-action-visibility"></i><span>{{data.views}}</span>
+        </li>
+        <li class="tooltipped" data-position="bottom" data-tooltip="Comments"><i class="mdi-action-question-answer"></i><span>{{data.comments}}</span></li>
       </ul>
     </div>
   </div>
