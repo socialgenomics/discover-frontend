@@ -1,32 +1,34 @@
-<div class="section row">
-  <div class="col m4 offset-m4 s12">
-    <form>
-    <h2 class="center-align">Login</h2>
-      <div class="row">
-        
-        <div class="col m12 center-align">
-        
-          <ul class="list-inline">
-            <!-- <li><img class="social-media-icon" src="assets/images/icons/social/googleplus.png" alt="google plus logo"></li>
-            <li><img class="social-media-icon" src="assets/images/icons/social/linkedin.png" alt="linkedin logo"></li>-->
-            <li><a {{ action 'authenticateWithGooglePlus' }}><img class="social-media-icon" src="/assets/images/icons/social/googleplus.png"></a></li>
-            <li><a {{ action 'authenticateWithLinkedIn' }}><img class="social-media-icon" src="/assets/images/icons/social/linkedin.png"></a></li>
-          </ul>
+<div class="container">
+  <div class="section row">
+    <div class="col m4 offset-m4 s12">
+      <form>
+      <h2 class="center-align">Login</h2>
+        <div class="row">
+          
+          <div class="col m12 center-align">
+          
+            <ul class="list-inline">
+              <!-- <li><img class="social-media-icon" src="assets/images/icons/social/googleplus.png" alt="google plus logo"></li>
+              <li><img class="social-media-icon" src="assets/images/icons/social/linkedin.png" alt="linkedin logo"></li>-->
+              <li><a {{ action 'authenticateWithGooglePlus' }}><img class="social-media-icon" src="/assets/images/icons/social/googleplus.png"></a></li>
+              <li><a {{ action 'authenticateWithLinkedIn' }}><img class="social-media-icon" src="/assets/images/icons/social/linkedin.png"></a></li>
+            </ul>
+          </div>
         </div>
-      </div>
-      <div class="or-div">
-        <span>
-          OR
-        </span>
-      </div>
+        <div class="or-div">
+          <span>
+            OR
+          </span>
+        </div>
 
-      {{validated-input type="email" value=email errors=errors.email placeholder="Email" email=true}}
-      {{validated-input type="password" value=password errors=errors.password placeholder="Password" password=true}}
+        {{validated-input type="email" value=email errors=errors.email placeholder="Email" email=true}}
+        {{validated-input type="password" value=password errors=errors.password placeholder="Password" password=true}}
 
-      <div class="input-container">
-        {{#full-width-button disabled=buttonDisabled action="submitForm"}}LOGIN{{/full-width-button}}
-      </div>
-      {{message-queue}}
-    </form>
+        <div class="input-container">
+          {{#full-width-button disabled=buttonDisabled action="submitForm"}}LOGIN{{/full-width-button}}
+        </div>
+        {{message-queue}}
+      </form>
+    </div>
   </div>
 </div>
