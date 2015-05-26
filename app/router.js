@@ -32,6 +32,7 @@ Router.map(function() {
     this.route('tags', {path:'/tag/:tag'});
     this.route('assay', {path:'/assay/:assay'});
     this.route('search');
+    this.route('register');
   });
 
   this.route('404', { path: '/*path' });

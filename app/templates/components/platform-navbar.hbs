@@ -15,7 +15,7 @@
 
 <!-- {{yield}} -->
       <div class="notification-account right">
-        <!-- <div class="notification-icon grey-text tiny">  
+        <!-- <div class="notification-icon grey-text tiny">
           <a href="#sorrymsg" class="modal-trigger valign">
           <i class="mdi-social-notifications"></i>
           </a>
@@ -39,7 +39,8 @@
       </div>
       <div class="re-navbar-btn register grey-text valign-wrapper">
         <i class="mdi-action-note-add"></i>
-        <a href="#modalRegister" class="modal-trigger valign">REGISTER DATA</a>
+        {{#link-to "datasets.register" class="valign"}}REGISTER DATA{{/link-to}}
+        <!-- <a href="#modalRegister" class="modal-trigger valign">REGISTER DATA</a> -->
       </div>
       <div class="re-navbar-btn request grey-text valign-wrapper">
         <i class="mdi-content-content-paste"></i>
