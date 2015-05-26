@@ -8,7 +8,7 @@
         <span class="add-btn">+</span>
       </div>
       <div class="share-favourite">
-        <a href="#sorrymsg" class="modal-trigger valign-wrapper grey-text"><i class="mdi-action-grade"></i></a><span>number of favs</span>
+        <a href="#sorrymsg" class="modal-trigger valign-wrapper grey-text"><i class="mdi-action-grade"></i></a><span></span>
         <a href="#sorrymsg" class="modal-trigger grey-text"><i class="mdi-social-share"></i></a>
       </div>
     </div>
@@ -37,7 +37,9 @@
               {{else}}
               <li class="card-info-attr">Sourced from: <a href="#"><span>{{model.repository.name}}</span></a></li>
               {{/if}}
+              {{#if model.createdAt}}
               <li class="card-info-attr">Submitted on: <span>{{model.createdAt}}</span></li>
+              {{/if}}
               <li class="card-info-attr">Access: <span>{{model.repository.accessType}}</span></li>
               {{#if model.contributors}}
               <li class="card-info-attr">Contributors: <a href="#"><span>Elena Watson</span></a> & <a href="#"><span>Nikola Tesla</span></a></li>
@@ -49,7 +51,7 @@
     </div><!-- end .card-main-comtent -->
     <div class="row bottom-static">
       <div class="center-align card-action">
-        <a class="btn waves-effect teal white-text">Download</a>
+        <a class="btn waves-effect teal white-text">{{#if isPublic}}Download{{else}}Apply for Access{{/if}}</a>
       </div>
     </div>
   </div><!-- MAIN CONTENT DIV -->
