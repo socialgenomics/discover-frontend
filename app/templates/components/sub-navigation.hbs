@@ -10,9 +10,9 @@
       </li>
       <li>
       {{#if (eq active "profile")}}
-        {{#link-to "users.profile" class="active"}}EDIT PROFILE<i class="mdi-action-account-circle right"></i>{{/link-to}}
+        {{#link-to "user" session.user.id class="active"}}EDIT PROFILE<i class="mdi-action-account-circle right"></i>{{/link-to}}
       {{else}}
-        {{#link-to "users.profile"}}EDIT PROFILE<i class="mdi-action-account-circle right"></i>{{/link-to}}
+        {{#link-to "user" session.user.id}}EDIT PROFILE<i class="mdi-action-account-circle right"></i>{{/link-to}}
       {{/if}}
       </li>
       <li>
