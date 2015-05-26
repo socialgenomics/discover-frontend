@@ -3,7 +3,7 @@ import Ember from 'ember';
 export default Ember.Controller.extend({
   cards: null,
   cards: function(){
-    var ids= ["d5bfae2f-a08a-4b8b-9647-76c9f9247a36","a76266b2-5a7b-46f1-906f-d32da5076125","9c31881d-4c1d-44f2-a8e0-afc2ee800c91"]
+    var ids= ["6aba488e-d972-44f0-a994-3fab9a15cf9e","93def000-9c72-4d17-8a3f-702f41f0ef0f","e837fd0b-3072-4bb9-b9f5-f267cae469b4"];
     let cards = this.store.find('dataset',{ids:ids});
     return cards;
   }.property(),
