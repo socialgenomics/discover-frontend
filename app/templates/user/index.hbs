@@ -1,5 +1,72 @@
+<div class="container" id="profile">
+<div class="row no-margin">
+  <div class="card white darken-1">
+    <div class="card-content center-align col m12 grey-text">
+    <div class="row">
+      <div class="col m6">
+        <div class="profile-img circle right">
+          <img src="/assets/icons/person-icon.png">
+        </div>
+      </div>
+      <div class="col m4">
+        <h3>{{user.firstname}} {{user.lastname}}</h3>
+        <p class="helper-text">{{profile.workOrganisation}}</p>
+        <p class="helper-text">{{user.email}}</p>
+          <button class="btn teal white-text"><a href="/editProfile">Fill your profile</a></button>
+      </div>     
+    </div>
+    <div class="divider"></div>
+    <div class="row no-margin-bottom">
+    <div class="activity-stats col m12">
+      <div class="activity-saved-data">
+        <span class="numb">0</span>
+        <h5>Saved data</h5>
+      </div>
+      <div class="activity-uploads">
+        <span class="numb">0</span>
+        <h5>Registrations</h5>
+      </div>
+      <div class="activity-request">
+        <span class="numb">0</span>
+        <h5>Requests</h5>
+      </div>
+      <div class="activity-comments">
+        <span class="numb">0</span>
+        <h5>Comments</h5>
+      </div>
+      
+      <span class="stretch"></span>
+    </div>
+    </div>
+    <div class="divider"></div>
+    </div>  
+  </div>   
+</div><!--end of top profile card-->
+<!--saved datasets card-->
+<div class="row no-margin">
+    <div class="card profile-datasets white darken-1">
+      <div class="center-align">
+        <span class="card-title">         
+          <h5>Bookmarks</h5>
+        </span>
+      </div>
+      <p class="helper-text">You haven’t bookmarked any dataset yet. To do so click on <i class="mdi-action-bookmark-outline tiny"></i> symbol on the dataset card.</p>         
+    </div> <!--end of saved datasets card-->
+    <!--registered dataset card-->
+    <div class="card profile-datasets right white darken-1">
+      <div class="center-align">
+        <span class="card-title">
+          <h5>Registered datasets</h5>
+        </span>
+        <p class="helper-text">You haven’t registered any dataset yet. You can start simple registration now <i class="mdi-action-note-add"></i><a href="#modalRegister" class="modal-trigger valign">REGISTER DATA</a>.</p> 
+      </div> 
+    </div>
+</div>
+</div> 
 
-<h2>Username: {{ user.username }}</h2>
+
+
+<h2>Username: {{user.username }}</h2>
 <h2>First Name:  {{user.firstname}}</h2>
 <h2>Last Name: {{user.lastname}} </h2>
 <h2>Last Name: {{user.email}} </h2>

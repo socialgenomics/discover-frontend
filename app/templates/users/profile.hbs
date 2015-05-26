@@ -1,70 +1,72 @@
-<div class="row">
-  {{sub-navigation active="profile"}}
+<div class="container">
+  <div class="row">
+    {{sub-navigation active="profile"}}
 
-  <div class="col s12 m9 center-align">
-    <div class="card white darken-1">
-      <div class="card-content">
-        <span class="card-title">
-          <h2>Edit Profile</h2>
-        </span>
+    <div class="col s12 m9 center-align">
+      <div class="card white darken-1">
+        <div class="card-content">
+          <span class="card-title">
+            <h2>Edit Profile</h2>
+          </span>
+        </div>
+
+        <div class="row">
+          <form {{action "save" on="submit"}}>
+            <div class="row">
+              <!-- <h5>Personal</h5> -->
+              <div class="input-container col m6 offset-m3">
+                <div class="input-field no-margin-top">
+                  {{input type="text" placeholder="First Name" value=model.user.firstname}}
+                </div>
+                <div class="lbl">First Name</div>
+              </div>
+              <div class="input-container col m6 offset-m3">
+                <div class="input-field">
+                  {{input type="text" placeholder="Last Name" value=model.user.lastname}}
+                </div>
+                <div class="lbl">Last name</div>
+              </div>
+              <div class="input-container col m6 offset-m3">
+                <div class="input-field">
+                  {{input type="email" placeholder="Email" value=model.user.email}}
+                </div>
+                <div class="lbl">Email</div>
+              </div>
+              <div class="input-container col m6 offset-m3">
+                <div class="input-field">
+                  {{input type="text" placeholder="Affiliation" value=model.profile.workOrganisation}}
+                </div>
+                <div class="lbl">Last name</div>
+              </div>
+            </div>
+
+            <!-- <div class="row">
+              <h5>Education</h5>
+              <div class="input-container col m6 offset-m3">
+                <div class="input-field no-margin-top">
+                  {{input type="text" placeholder="Degree" value=model.profile.educationDegree}}
+                </div>
+                <div class="lbl">Degree</div>
+              </div>
+              <div class="input-container col m6 offset-m3">
+                <div class="input-field">
+                  {{input type="text" placeholder="University" value=model.profile.educationUniversity}}
+                </div>
+                <div class="lbl">University</div>
+              </div>
+            </div> -->
+
+
+            <div class="input-container col m6 offset-m3">
+              <button type="submit" class="btn teal white-text">Save</button>
+              {{#if saved}}
+                <p class="text-valid">Save Successful.</p>
+              {{/if}}
+            </div>
+          </form>
+        </div>
+
       </div>
-
-      <div class="row">
-        <form {{action "save" on="submit"}}>
-          <div class="row">
-            <!-- <h5>Personal</h5> -->
-            <div class="input-container col m6 offset-m3">
-              <div class="input-field no-margin-top">
-                {{input type="text" placeholder="First Name" value=model.user.firstname}}
-              </div>
-              <div class="lbl">First Name</div>
-            </div>
-            <div class="input-container col m6 offset-m3">
-              <div class="input-field">
-                {{input type="text" placeholder="Last Name" value=model.user.lastname}}
-              </div>
-              <div class="lbl">Last name</div>
-            </div>
-            <div class="input-container col m6 offset-m3">
-              <div class="input-field">
-                {{input type="email" placeholder="Email" value=model.user.email}}
-              </div>
-              <div class="lbl">Email</div>
-            </div>
-            <div class="input-container col m6 offset-m3">
-              <div class="input-field">
-                {{input type="text" placeholder="Affiliation" value=model.profile.workOrganisation}}
-              </div>
-              <div class="lbl">Last name</div>
-            </div>
-          </div>
-
-          <!-- <div class="row">
-            <h5>Education</h5>
-            <div class="input-container col m6 offset-m3">
-              <div class="input-field no-margin-top">
-                {{input type="text" placeholder="Degree" value=model.profile.educationDegree}}
-              </div>
-              <div class="lbl">Degree</div>
-            </div>
-            <div class="input-container col m6 offset-m3">
-              <div class="input-field">
-                {{input type="text" placeholder="University" value=model.profile.educationUniversity}}
-              </div>
-              <div class="lbl">University</div>
-            </div>
-          </div> -->
-
-
-          <div class="input-container col m6 offset-m3">
-            <button type="submit" class="btn teal white-text">Save</button>
-            {{#if saved}}
-              <p class="text-valid">Save Successful.</p>
-            {{/if}}
-          </div>
-        </form>
-      </div>
-
     </div>
   </div>
 </div>

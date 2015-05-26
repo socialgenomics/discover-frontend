@@ -16,12 +16,15 @@
 			<span>by </span> <span><a href="/profile">{{submittedBy}}</a></span><span> 3 hours ago</span> <i class="mdi-social-public tooltipped" data-position="bottom" data-tooltip="Public Access"></i>
 		</div>
 
-		<div class="card-footer">
-			<ul class="list-inline">
-				<li class="tooltipped" data-position="bottom" data-tooltip="Views"><i class="mdi-action-visibility"></i><span>{{views}}</span></li>
-				<li class="tooltipped" data-position="bottom" data-tooltip="Ratings"><i class="mdi-action-grade"></i><span>{{favourite}}</span></li>
-				<li class="tooltipped" data-position="bottom" data-tooltip="Comments"><i class="mdi-action-question-answer"></i><span>{{comments}}</span></li>
-			</ul>
-		</div>
+    <div class="card-footer">
+      <ul>
+        <li><i class="mdi-notification-vpn-lock tooltipped" data-position="bottom" data-tooltip="Public Access"></i><span>{{dataset.repository.accessType}}</span>
+        </li>
+        <li class="tooltipped" data-position="bottom" data-tooltip="Views">
+        <i class="mdi-action-visibility"></i><span>{{data.views}}</span>
+        </li>
+        <li class="tooltipped" data-position="bottom" data-tooltip="Comments"><i class="mdi-action-question-answer"></i><span>{{data.comments}}</span></li>
+      </ul>
+    </div>
   </div>
 </div>
