@@ -1,55 +1,23 @@
 import Ember from 'ember';
+import ajax from 'ic-ajax';
 
 export default Ember.Route.extend({
 
   model: function(){
-    if (this.get('session').isAuthenticated){
-      let stats = new Ember.RSVP.Promise(function(resolve, reject){
-        Ember.$.ajax(
-        {
-          url:'/api/datasets/search',
-          type:'GET',
-        }
-        )
-        .then(
-          function(resp){
-            resolve(resp)
-          },
-          function(err){
-            return console.log(err);
-          }
-        );
-      });
-
+    if (this.get('session.isAuthenticated')){
       return Ember.RSVP.all([
-        stats,
+        ajax({ url:'/api/datasets/search', type:'GET' }),
         this.store.find('dataset'),
       ])
-      .then(
-        function(data){
-          return {
-            stats: data[0],
-            datasets: data[1],
-          }
+      .then(function(data){
+        return {
+          stats: data[0],
+          datasets: data[1].slice(0,3)
         }
-      );
+      })
     }
     else {
       return null;
-    }
-    
-  },
-
-  renderTemplate: function() {
-    if (this.get('session').isAuthenticated){
-      this.render('homePage', {
-        controller: 'homePage',
-      });
-    }
-    else {
-      this.render('landingPage', {
-        controller: 'landingPage',
-      });
     }
   },
 

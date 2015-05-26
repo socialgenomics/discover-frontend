@@ -5,8 +5,8 @@
                 <!-- <p class="sub-head">Find the most relevant and hight quality datasets.</p> -->
                 <div class="row">
                   <div class="col m12 center-align">
-                      <div class="stats"><span class="numb">4</span><span class="stats-text">Repositories</span></div>
-                      <div class="stats"><span class="numb">5 524</span><span class="stats-text">Datasets</span></div>
+                    <div class="stats"><span class="numb">{{ model.stats.repos }}</span><span class="stats-text">Repositories</span></div>
+                    <div class="stats"><span class="numb">{{ model.stats.datasets }}</span><span class="stats-text">Datasets</span></div>
                   </div>
                 </div>
                 <div class="row">
@@ -26,7 +26,7 @@
           <hr class="yellow">
       </div>
   </div>
-  {{#each card in cards}}
+  {{#each card in model.datasets }}
     <p>
       {{!card.properties.title}}
       {{mini-dataset  title = card.properties.title assay=card.properties.assayType}}
