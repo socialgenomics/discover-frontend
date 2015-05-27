@@ -8,8 +8,8 @@
       </div>
       <div class="actions-container valign-wrapper">
 
-        <a href="#sorrymsg" class="modal-trigger valign-wrapper"><i class="mdi-action-grade tooltipped" data-tooltip="bookmark" data-position="bottom"></i></a><span class="grey-text">{{data.favourite}}</span>
-        <a href="#sorrymsg" class="modal-trigger valign-wrapper"><i class="mdi-social-share tooltipped" data-position="bottom" data-tooltip="share"></i></a>
+        <a class="modal-trigger valign-wrapper"><i class="mdi-action-grade tooltipped" data-tooltip="bookmark" data-position="bottom"></i></a><span class="grey-text">{{data.favourite}}</span>
+        <a class="modal-trigger valign-wrapper"><i class="mdi-social-share tooltipped" data-position="bottom" data-tooltip="share"></i></a>
       </div>
     </div>
 
@@ -17,7 +17,7 @@
       {{#link-to 'datasets.detail' dataset.id classNames="data-title"}}
       <h2 class="card-title-limit data-title">{{dataset.properties.title}}</h2>
       {{/link-to}}
-      <span>from </span> <span><a href="/profile">{{dataset.repository.name}}</a></span>
+      <span>from </span> <span><a>{{dataset.repository.name}}</a></span>
       <!-- data when data was registered on repository 
       <i class="mdi-action-today"></i><span>{{data.date}}</span> -->
       <p class="card-line-limit">{{dataset.properties.description}}</p>
