@@ -8,7 +8,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
     return new Ember.RSVP.all([
       _this.store.find('user', currentUser.id),
-      _this.store.find('user-profile', {UserId: currentUser.id}),
+      _this.store.find('profile', {UserId: currentUser.id}),
     ]).then(function(values){
       return {
         user: values[0],

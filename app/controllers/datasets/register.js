@@ -5,28 +5,20 @@ export default Ember.Controller.extend({
   description:null,
   actions:{
     addDataset:function(){
-      // var dataset= this.store.createRecord('dataset',{});
-      // dataset.get('properties').addObject(this.store.createRecord('property',{
-      //   title:this.title,
-      //   description:this.description
-      // }));
-      // dataset.save();
+      var _this =this;
       var dataset = this.store.createRecord('dataset',{});
-      var props = dataset.createdAt;
-      console.log(props);
-      var props = dataset.get('properties').createRecord('property',{});
+      //var props = dataset.get('properties').createRecord('property',{});
+      var props = this.store.createRecord('property',{});
+
       props.title = this.title;
       props.description = this.description;
-      dataset.save();
-
-      // console.log(this.title);
-      // var dataset = this.store.createRecord('dataset', {
-      //   properties:{
-      //     title:this.title,
-      //     description:this.description,
-      //   },
-      // });
-      // dataset.save();
+      dataset.properties = props;
+      dataset.save().then(function(created){
+        _this.transitionToRoute('datasets.detail',created.id);
+      })
+      // var datasetID = this.store.g
+      //this.transitionToRoute('datasets.detail',dataset.id);
     },
+
   }
 });

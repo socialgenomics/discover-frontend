@@ -6,4 +6,12 @@ export default Ember.Controller.extend({
   ordering: null,
   assayType: null,
   tags: null,
+  filters: function(){
+    return [
+      {
+        name: 'Assay Type',
+        value: this.assayType,
+      },
+    ]
+  }.property('assayType'),
 });

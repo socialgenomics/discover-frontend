@@ -18,8 +18,8 @@ Router.map(function() {
   this.resource('users', function(){
     this.route('signup');
     this.route('login');
-    this.route('profile');
     this.route('settings');
+    this.route('profile')
     this.route('references');
     this.route('trust');
   });
