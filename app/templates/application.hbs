@@ -1,7 +1,11 @@
 <div class="outer-wrap">
-  {{platform-navbar action="search"}}
+  {{#if session.isAuthenticated}}
+    {{platform-navbar-logged-in action="search"}}
+  {{else}}
+    {{platform-navbar-logged-out action="search"}}
+  {{/if}}
   <div>
-    {{!message-queue}}
+    {{message-queue}}
     {{!outlet 'modal'}}
     {{outlet}}
   </div>
