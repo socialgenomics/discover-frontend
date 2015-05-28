@@ -6,4 +6,5 @@ export default DS.Model.extend({
   assayType: DS.attr('string'),
   dataset: DS.belongsTo('dataset'),
   downloadURL: DS.attr('string'),
+  isRequest: DS.attr('boolean'),
 });

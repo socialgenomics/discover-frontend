@@ -50,7 +50,11 @@
     </div><!-- end .card-main-comtent -->
     <div class="row bottom-static">
       <div class="center-align card-action">
-        <a class="btn waves-effect teal white-text">{{#if isPublic}}Download{{else}}Apply for Access{{/if}}</a>
+        {{#if model.properties.downloadURL}}
+        <a class="btn waves-effect teal white-text">{{#if isPublic}}Access Data{{else}}Apply for Access{{/if}}</a>
+        {{else}}
+        <a class="btn disabled white-text">{{#if isPublic}}Access Data{{else}}Apply for Access{{/if}}</a>
+        {{/if}}
       </div>
     </div>
   </div><!-- MAIN CONTENT DIV -->
