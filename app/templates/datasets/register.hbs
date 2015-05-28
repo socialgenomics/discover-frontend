@@ -1,7 +1,7 @@
 <div class="row center">
   <h2>Register a dataset</h2>
   <hr class="teal">
-  <span class="helper-text">Register your dataset by entering the informations bellow.</span>
+  <span class="helper-text">Complete all fields below, you can edit these later.</span>
   <form class="col s8 offset-s2" {{action "addDataset" on="submit"}}>
     <div class="input-container">
       <div class="input-field">
@@ -19,7 +19,7 @@
     </div>
     <div class="input-container">
       <div class="input-field">
-        {{input type="text" placeholder="URL of the dataset" value=datasetURL}}
+        {{input type="text" placeholder="URL of the dataset" value=downloadURL}}
       </div>
       <div class="lbl">Description</div>
       <div class="input-helper">Say something about the dataset.</div>
@@ -28,5 +28,6 @@
     <div class="input-container col m12">
       <button type="submit" class="btn teal white-text">Add Dataset</button>
     </div>
+
   </form>
 </div>
