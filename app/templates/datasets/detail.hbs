@@ -50,7 +50,11 @@
     </div><!-- end .card-main-comtent -->
     <div class="row bottom-static">
       <div class="center-align card-action">
-        <a class="btn waves-effect teal white-text">{{#if isPublic}}Download{{else}}Apply for Access{{/if}}</a>
+        <a class="btn waves-effect teal white-text">
+        {{#if isPublic}}ACCESS THE DATA<i class="mdi-action-open-in-new"></i>{{/if}}
+        {{#if isRestricted}}APPLY FOR ACCESS<i {{bind-attr class="accessIcon"}}></i>{{/if}}
+        {{#if isPrivate}}CONTACT THE SUBMITTER <i class="mdi-action-open-in-new"></i>{{/if}}
+        </a>
       </div>
     </div>
   </div><!-- MAIN CONTENT DIV -->
