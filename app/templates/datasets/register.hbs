@@ -2,7 +2,7 @@
   <h2>Register a dataset</h2>
   <hr class="teal">
   <span class="helper-text">Register your dataset by entering the informations bellow.</span>
-  <form class="col s8 offset-s2" {{action "addDataset" on="submit"}}>       
+  <form class="col s8 offset-s2" {{action "addDataset" on="submit"}}>
     <div class="input-container">
       <div class="input-field">
         {{input type="text" placeholder="Title of the dataset" value=title}}
@@ -12,37 +12,19 @@
     </div>
     <div class="input-container">
       <div class="input-field">
-        {{input type="text" placeholder="Description of the dataset" value=description}}
+        {{textarea type="text" placeholder="Description of the dataset" value=description}}
+      </div>
+      <div class="lbl">Description</div>
+      <div class="input-helper">Say something about the dataset.</div>
+    </div>
+    <div class="input-container">
+      <div class="input-field">
+        {{input type="text" placeholder="URL of the dataset" value=datasetURL}}
       </div>
       <div class="lbl">Description</div>
       <div class="input-helper">Say something about the dataset.</div>
     </div>
 
-    <span class="col m12 helper-text">Where the data is stored?</span>
-
-    <div class="row">
-      <div class="col m12">
-        <p>
-        <input class="with-gap" name="register-data" type="radio" id="data-url"/>
-        <label for="data-url">Online</label>
-        </p>
-        <div class="input-container">
-          <div class="input-field">
-            <input class="validate" id="register-url" type="text" placeholder="URL of the dataset">
-          </div>
-          <div class="lbl">URL</div>
-          <div class="input-helper"></div>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <p class="col m4">
-      <input class="with-gap" name="register-data" type="radio" id="data-local"/>
-      <label for="data-local">Locally</label>
-      </p>
-      <p class="helper-text col m8 right">The dataset is stored on my computer. Anyone interested in access should contact me directly.</p>
-    </div>
-    <div class="divider"></div>
     <div class="input-container col m12">
       <button type="submit" class="btn teal white-text">Add Dataset</button>
     </div>
