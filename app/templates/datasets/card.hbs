@@ -28,7 +28,7 @@
         <li><i {{bind-attr class="dataset.repository.accessType tooltiped"}} data-position="bottom" data-tooltip="Public Access"></i><span>{{dataset.repository.accessType}}</span>
         </li>
         <li class="tooltipped" data-position="bottom" data-tooltip="Views">
-        <i class="mdi-action-visibility"></i><span>{{data.views}}</span>
+        <i class="mdi-action-visibility"></i><span>{{data.views}}{{poisson-dist 0.5}}</span>
         </li>
         <li class="tooltipped" data-position="bottom" data-tooltip="Comments"><i class="mdi-action-question-answer"></i><span>{{data.comments}}</span></li>
       </ul>
