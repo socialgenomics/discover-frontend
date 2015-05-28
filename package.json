@@ -51,8 +51,5 @@
     "moment": "^2.10.2",
     "torii": "0.2.1",
     "underscore": "^1.8.2"
-  },
-  "dependencies": {
-    "ember-radio-buttons": "^4.0.1"
   }
 }

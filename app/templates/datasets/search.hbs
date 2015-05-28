@@ -11,7 +11,9 @@
         <h3><br>Sorry, there are no datasets matching<br> You can make request to ask our community for help. </h3>   
       </div>
       <div class="row">
-      <a id="request-btn" class="btn modal-trigger white-text"><i class="mdi-content-content-paste"></i><span>Request Dataset</span></a>
+        {{#link-to 'datasets.request' class='btn white-text'}}
+          <i class="mdi-content-content-paste"></i><span>Request Dataset</span>
+        {{/link-to}}
       </div>
     </div>
   {{/unless}}
