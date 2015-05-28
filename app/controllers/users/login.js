@@ -51,5 +51,5 @@ export default Ember.ObjectController.extend(
         _this.set('loading', false)
       });
     }
-  },
+  }
 });
