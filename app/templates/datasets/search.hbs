@@ -11,11 +11,11 @@
         <h3><br>Sorry, there are no datasets matching<br> You can make request to ask our community for help. </h3>   
       </div>
       <div class="row">
-      <a href="#modalRequest" id="request-btn" class="btn modal-trigger white-text"><i class="mdi-content-content-paste"></i><span>Request Dataset</span></a>
+      <a id="request-btn" class="btn modal-trigger white-text"><i class="mdi-content-content-paste"></i><span>Request Dataset</span></a>
       </div>
     </div>
   {{/unless}}
   {{# each dataset in model }}
     {{partial 'datasets/card' dataset=dataset}}
   {{/ each }}
-</div>
+</div

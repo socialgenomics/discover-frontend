@@ -23,10 +23,10 @@
           <hr class="yellow">
       </div>
   </div>
-  {{#each card in model.datasets }}
+  {{#each dataset in model.datasets }}
     <p>
       {{!card.properties.title}}
-      {{mini-dataset  title = card.properties.title assay=card.properties.assayType}}
+      {{mini-dataset  dataset=dataset}}
     </p>
   {{/each}}
 </div>

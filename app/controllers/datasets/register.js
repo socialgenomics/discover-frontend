@@ -3,21 +3,23 @@ import Ember from 'ember';
 export default Ember.Controller.extend({
   title:null,
   description:null,
+  downloadURL:null,
   actions:{
     addDataset:function(){
       var _this =this;
       var dataset = this.store.createRecord('dataset',{});
-      //var props = dataset.get('properties').createRecord('property',{});
-      var props = this.store.createRecord('property',{});
-
-      props.title = this.title;
-      props.description = this.description;
+      var props = this.store.createRecord('property',{title:this.title,description:this.description,downloadURL:this.downloadURL});
       dataset.properties = props;
+
       dataset.save().then(function(created){
+        _this.flashMessage({
+          content: 'Dataset successfully registered.', // String
+          duration: 2000, // Number in milliseconds
+          type: 'success', // String
+        });
+
         _this.transitionToRoute('datasets.detail',created.id);
-      })
-      // var datasetID = this.store.g
-      //this.transitionToRoute('datasets.detail',dataset.id);
+      });
     },
 
   }

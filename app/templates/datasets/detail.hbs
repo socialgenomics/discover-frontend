@@ -1,5 +1,5 @@
 <!-- {{dataset-detail dataset=model tab=tab addComment="addComment"}} -->
-
+{{message-queue}}
 <div class="row card dataset full-view no-margin">
   <div class="col l7 m6 s12 card-main-wrapper"><!-- MAIN CONTENT DIV -->
     <div class="top-action card-header">
@@ -7,8 +7,8 @@
 
       </div>
       <div class="share-favourite">
-        <a href="#sorrymsg" class="modal-trigger valign-wrapper grey-text"><i class="mdi-action-grade"></i></a><span></span>
-        <a href="#sorrymsg" class="modal-trigger grey-text"><i class="mdi-social-share"></i></a>
+        <a class="modal-trigger valign-wrapper grey-text"><i class="mdi-action-grade"></i></a><span></span>
+        <a class="modal-trigger grey-text"><i class="mdi-social-share"></i></a>
       </div>
     </div>
     <div class="card-main-content">
@@ -24,7 +24,7 @@
         <span class="tag">{{tag.word}}</span>
         {{/link-to}}
         {{/each}}
-        <a class="add-tag" href="#"><span class="add-btn">+</span></a>
+        <a class="add-tag"><span class="add-btn">+</span></a>
       </div>
       <h3>Information:</h3>
       <div class="card-section">
@@ -32,16 +32,16 @@
           <div class="col m12">
             <ul class="card-info-list">
               {{#if dataset.owner}}
-              <li class="card-info-attr">Submitted by: <a href="#"><span>{{model.owner.fullname}}</span></a></li>
+              <li class="card-info-attr">Submitted by: <a><span>{{model.owner.fullname}}</span></a></li>
               {{else}}
-              <li class="card-info-attr">Sourced from: <a href="#"><span>{{model.repository.name}}</span></a></li>
+              <li class="card-info-attr">Sourced from: <a><span>{{model.repository.name}}</span></a></li>
               {{/if}}
               {{#if model.createdAt}}
               <li class="card-info-attr">Submitted on: <span>{{model.createdAt}}</span></li>
               {{/if}}
               <li class="card-info-attr">Access: <span>{{model.repository.accessType}}</span></li>
               {{#if model.contributors}}
-              <li class="card-info-attr">Contributors: <a href="#"><span>Elena Watson</span></a> & <a href="#"><span>Nikola Tesla</span></a></li>
+              <li class="card-info-attr">Contributors: <a><span>Elena Watson</span></a> & <a><span>Nikola Tesla</span></a></li>
               {{/if}}
             </ul>
           </div>
@@ -50,11 +50,11 @@
     </div><!-- end .card-main-comtent -->
     <div class="row bottom-static">
       <div class="center-align card-action">
-        <a class="btn waves-effect teal white-text">
-        {{#if isPublic}}ACCESS THE DATA<i class="mdi-action-open-in-new"></i>{{/if}}
-        {{#if isRestricted}}APPLY FOR ACCESS<i {{bind-attr class="accessIcon"}}></i>{{/if}}
-        {{#if isPrivate}}CONTACT THE SUBMITTER <i class="mdi-action-open-in-new"></i>{{/if}}
-        </a>
+        {{#if model.properties.downloadURL}}
+        <a class="btn waves-effect teal white-text">{{#if isPublic}}Access Data{{else}}Apply for Access{{/if}}</a>
+        {{else}}
+        <a class="btn disabled white-text">{{#if isPublic}}Access Data{{else}}Apply for Access{{/if}}</a>
+        {{/if}}
       </div>
     </div>
   </div><!-- MAIN CONTENT DIV -->

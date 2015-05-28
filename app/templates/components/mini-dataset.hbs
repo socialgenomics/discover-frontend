@@ -8,14 +8,15 @@
 			<div class="assay-container">
       </div>
 			<div class="actions-container">
-				<a href="#sorrymsg" class="modal-trigger"><i class="mdi-action-grade"></i></a>
-				<a href="#sorrymsg" class="modal-trigger"><i class="mdi-social-share"></i></a>
+				<a class="modal-trigger"><i class="mdi-action-grade"></i></a>
+				<a class="modal-trigger"><i class="mdi-social-share"></i></a>
 			</div>
 		</div>
 
 		<div class="card-body mini">
-			<a href="#"><h2 class="truncate">{{title}}</h2></a>
-			<span>by </span> <span><a href="/profile">{{submittedBy}}</a></span><span> 3 hours ago</span> <i class="mdi-social-public tooltipped" data-position="bottom" data-tooltip="Public Access"></i>
+      {{#link-to 'datasets.detail' dataset.id}}<h2 class="truncate">{{dataset.properties.title}}</h2>{{/link-to}}
+      <span>by </span> <span><a>{{submittedBy}}</a></span><span> 3 hours ago</span>
+      <i class="mdi-social-public tooltipped" data-position="bottom" data-tooltip="Public Access"></i>
 		</div>
 
     <div class="card-footer">
