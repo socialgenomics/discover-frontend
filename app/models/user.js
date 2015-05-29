@@ -7,4 +7,12 @@ export default DS.Model.extend({
 	lastname: DS.attr('string'),
   isCurrentUser: DS.attr('boolean', {defaultValue: false}),
 	comments: DS.hasMany('comments'),
+  displayName: function(){
+    if (Ember.isPresent(this.get('firstname')) || Ember.isPresent(this.get('lastname'))){
+      return this.get('firstname') + ' ' + this.get('lastname')
+    }
+    else {
+      return 'User' + this.get('username')
+    }
+  }.property('username', 'firstname', 'lastname')
 });
