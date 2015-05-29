@@ -9,6 +9,14 @@ export default Ember.Component.extend({
   classNames:"input-container",
   classNameBindings:['isActive:active', 'isValid:valid', 'isInvalid:invalid'],
 
+  watchInput: function(){
+    if(this.errors.length == 0){
+      this.set("isValid", true);
+      this.set("isInvalid", false);
+    }
+  }.observes('value'),
+
+
   actions: {
     showErrors: function() {
       this.set("showError", true);
@@ -29,10 +37,5 @@ export default Ember.Component.extend({
         this.set("isInvalid", false);
       }
     },
-    submitForm:function(){
-      console.log("LAALLAALA");
-
-      this.sendAction('submitForm');
-    }
   }
 });

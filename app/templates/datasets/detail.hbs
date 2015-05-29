@@ -13,6 +13,7 @@
     <div class="card-main-content">
       <h2>{{model.properties.title}}</h2>
       <p>{{model.properties.description}}</p>
+      {{isRequest}}
       <div class="tags">
         {{#each tag in model.tags}}
         {{#link-to 'datasets.tags' tag.word}}
