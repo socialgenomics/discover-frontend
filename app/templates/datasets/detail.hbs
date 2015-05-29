@@ -1,5 +1,4 @@
 <!-- {{dataset-detail dataset=model tab=tab addComment="addComment"}} -->
-{{message-queue}}
 <div class="row card dataset full-view no-margin">
   <div class="col l7 m6 s12 card-main-wrapper"><!-- MAIN CONTENT DIV -->
     <div class="top-action card-header">
@@ -12,12 +11,8 @@
       </div>
     </div>
     <div class="card-main-content">
-
       <h2>{{model.properties.title}}</h2>
       <p>{{model.properties.description}}</p>
-      <p>
-        {{model.properties.sampleTechnology}}
-      </p>
       <div class="tags">
         {{#each tag in model.tags}}
         {{#link-to 'datasets.tags' tag.word}}
@@ -43,6 +38,8 @@
               {{#if model.contributors}}
               <li class="card-info-attr">Contributors: <a><span>Elena Watson</span></a> & <a><span>Nikola Tesla</span></a></li>
               {{/if}}
+
+              {{model.properties.downloadURL}}
             </ul>
           </div>
         </div>
@@ -51,7 +48,7 @@
     <div class="row bottom-static">
       <div class="center-align card-action">
         {{#if model.properties.downloadURL}}
-        <a class="btn waves-effect teal white-text">{{#if isPublic}}Access Data{{else}}Apply for Access{{/if}}</a>
+        <a target="_blank" {{bind-attr href="model.properties.downloadURL"}} class="btn waves-effect teal white-text">{{#if isPublic}}Access Data{{else}}Apply for Access{{/if}}</a>
         {{else}}
         <a class="btn disabled white-text">{{#if isPublic}}Access Data{{else}}Apply for Access{{/if}}</a>
         {{/if}}

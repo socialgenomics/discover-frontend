@@ -14,8 +14,8 @@ export default Ember.Controller.extend({
       dataset.save().then(function(created){
         _this.flashMessage({
           content: 'Dataset successfully registered.', // String
-          duration: 2000, // Number in milliseconds
-          type: 'success', // String
+          duration:3000, // Number in milliseconds
+          type: 'Success', // String
         });
 
         _this.transitionToRoute('datasets.detail',created.id);
