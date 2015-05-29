@@ -17,8 +17,8 @@
       {{#link-to 'datasets.detail' dataset.id classNames="data-title"}}
       <h2 class="card-title-limit data-title">{{dataset.properties.title}}</h2>
       {{/link-to}}
-      <span>from </span> <span><a>{{dataset.repository.name}}</a></span>
-      <!-- data when data was registered on repository 
+      <span>from </span> {{#if dataset.repository.name}}<span><a>{{dataset.repository.name}}</a></span>{{else}}{{#link-to 'user' dataset.owner.username}}<span>{{dataset.owner.username}}</span>{{/link-to}}{{/if}}
+      <!-- data when data was registered on repository
       <i class="mdi-action-today"></i><span>{{data.date}}</span> -->
       <p class="card-line-limit">{{dataset.properties.description}}</p>
     </div>
