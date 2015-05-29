@@ -13,7 +13,6 @@
     <div class="card-main-content">
       <h2>{{model.properties.title}}</h2>
       <p>{{model.properties.description}}</p>
-      {{isRequest}}
       <div class="tags">
         {{#each tag in model.tags}}
         {{#link-to 'datasets.tags' tag.word}}
@@ -28,7 +27,7 @@
           <div class="col m12">
             <ul class="card-info-list">
               {{#if model.owner}}
-              <li class="card-info-attr">Submitted by: <a><span>{{model.owner.displayName}}</span></a></li>
+              <li class="card-info-attr">Submitted by: {{#link-to 'user' model.owner.username }}<span>{{model.owner.displayName}}</span>{{/link-to}}</li>
               {{else}}
               <li class="card-info-attr">Sourced from: <a><span>{{model.repository.name}}</span></a></li>
               {{/if}}
