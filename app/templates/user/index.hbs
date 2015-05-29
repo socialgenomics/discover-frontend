@@ -3,11 +3,11 @@
   <div class="card white darken-1 center">
     <h3 class="center">Your Profile</h3>
     <hr class="yellow">
-     
+
     <div class="card-content center-align col m12 grey-text">
       <div class="row">
         <div class="col m12 center">
-            <img class="profile-img circle" src="/assets/icons/person-icon.png">    
+            <img class="profile-img circle" src="/assets/icons/person-icon.png">
         </div>
         <div class="col m12">
           <h3>{{user.firstname}} {{user.lastname}}</h3>
@@ -15,9 +15,9 @@
           <p class="helper-text">{{user.email}}</p>
         </div>
         <div class="bottom-fixed">
-        {{#link-to "users.profile"}}<button class="btn yellow white-text"><i class="mdi-editor-border-color"></i>EDIT PROFILE</button>{{/link-to}} 
+        {{#link-to "users.profile"}}<button class="btn yellow white-text"><i class="mdi-editor-border-color"></i>EDIT PROFILE</button>{{/link-to}}
         </div>
-      </div>       
+      </div>
       <div class="divider"></div>
       <div class="row no-margin-bottom">
         <div class="activity-stats col m12">
@@ -36,49 +36,51 @@
           <div class="activity-comments">
             <span class="numb">0</span>
             <h5>Comments</h5>
-          </div>      
+          </div>
           <span class="stretch"></span>
         </div>
       </div>
-    </div> 
-  </div>   
+    </div>
+  </div>
 </div><!--end of top profile card-->
 <!--saved datasets card-->
 <div class="row no-margin">
     <!--<div class="card profile-datasets white darken-1">
       <div class="center-align">
-        <span class="card-title">         
+        <span class="card-title">
           <h5>Bookmarks</h5>
         </span>
       </div>
-      <p class="helper-text">You haven’t bookmarked any dataset yet. To do so click on <i class="mdi-action-bookmark-outline tiny"></i> symbol on the dataset card.</p>         
+      <p class="helper-text">You haven’t bookmarked any dataset yet. To do so click on <i class="mdi-action-bookmark-outline tiny"></i> symbol on the dataset card.</p>
     </div> end of saved datasets card-->
     <!--registered dataset card-->
-    <div class="card profile-datasets left white darken-1 center-align">
-          <h3>Registered datasets</h3>
+    <div class="card profile-datasets left white darken-1">
+      <div class=" center-align">
+          <h3>Registered Datasets</h3>
           <hr class="teal">
-        <p class="helper-text">Do you have data to share?</p>
-        <p class="action-text">Do not be tight-arse and share with the rest.</p>
+        <p class="helper-text">Have data to share?</p>
+        <p>Don't be a tight-arse, share with the rest.</p>
         <div class="bottom-fixed">
         {{#link-to 'datasets.register'}}<button class="btn teal white-text"><i class="mdi-action-note-add"></i>REGISTER</button>{{/link-to}}
         </div>
+      </div>
     </div>
     <div class="card profile-datasets right white darken-1">
       <div class="center-align">
-          <h3>Requested datasets</h3>
+          <h3>Requested Datasets</h3>
           <hr class="red">
-        <p class="helper-text">You have not found what you are looking for?</p>
-        <p class="actin-text">There is a community of generous scientists happy to help.</p>
+        <p class="helper-text">Haven't found what you're looking for?</p>
+        <p>There is a community of generous scientists happy to help.</p>
         <div class="bottom-fixed">
         {{#link-to 'datasets.request'}}<button class="btn red white-text"><i class="mdi-content-content-paste"></i>REQUEST</button>{{/link-to}}
         </div>
-      </div> 
+      </div>
     </div>
 </div>
-</div> 
+</div>
 
 
-<!--available data for user profile 
+<!--available data for user profile
 <h2>Username: {{user.username }}</h2>
 <h2>First Name:  {{user.firstname}}</h2>
 <h2>Last Name: {{user.lastname}} </h2>
