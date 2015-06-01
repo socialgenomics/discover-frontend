@@ -9,12 +9,16 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         var user = results.get('firstObject');
         _this.store.find('profile', {userId: user.get('id')}).then(function(results){
           var profile = results.get('firstObject');
-          resolve({
-            profile: profile,
-            user: user,
+          _this.store.find('dataset',{userId: user.get('id')}).then(function(results){
+            var datasets = results;
+            resolve({
+              datasets:datasets,
+              profile: profile,
+              user: user,
+            });
           });
         });
       });
     });
-  }
+  },
 });

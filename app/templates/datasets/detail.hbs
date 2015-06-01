@@ -12,12 +12,9 @@
       </div>
     </div>
     <div class="card-main-content">
-    <div class="dataset-main-info">
+	<div class="dataset-main-info">
       <h2>{{model.properties.title}}</h2>
       <p>{{model.properties.description}}</p>
-      <p>
-        
-      </p>
       <div class="tags">
         {{#each tag in model.tags}}
         {{#link-to 'datasets.tags' tag.word}}
@@ -35,8 +32,8 @@
         <div class="row">
           <div class="col m12">
             <ul class="card-info-list">
-              {{#if dataset.owner}}
-              <li class="card-info-attr">Submitted by: <a><span>{{model.owner.fullname}}</span></a></li>
+              {{#if model.owner}}
+              <li class="card-info-attr">Submitted by: {{#link-to 'user' model.owner.username }}<span>{{model.owner.displayName}}</span>{{/link-to}}</li>
               {{else}}
               <li class="card-info-attr">Sourced from: <a><span>{{model.repository.name}}</span></a></li>
               {{/if}}
@@ -48,6 +45,8 @@
               <li class="card-info-attr">Access: <span>{{model.repository.accessType}}</span></li>
               <!-- <li class="card-info-attr">Contributors: <a><span>Elena Watson</span></a> & <a><span>Nikola Tesla</span></a></li> -->
               {{/if}}
+
+              {{model.properties.downloadURL}}
             </ul>
           </div>
         </div>
@@ -56,7 +55,7 @@
     <div class="row bottom-static">
       <div class="center-align card-action">
         {{#if model.properties.downloadURL}}
-        <a class="btn waves-effect teal white-text">{{#if isPublic}}Access Data{{else}}Apply for Access{{/if}}</a>
+        <a target="_blank" {{bind-attr href="model.properties.downloadURL"}} class="btn waves-effect teal white-text">{{#if isPublic}}Access Data{{else}}Apply for Access{{/if}}</a>
         {{else}}
         <a class="btn disabled white-text">{{#if isPublic}}Access Data{{else}}Apply for Access{{/if}}</a>
         {{/if}}

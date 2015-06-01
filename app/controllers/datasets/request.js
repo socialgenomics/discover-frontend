@@ -4,16 +4,17 @@ export default Ember.Controller.extend({
   title:null,
   description:null,
   downloadURL:null,
+
   actions:{
-    addDataset:function(){
+    addRequest:function(){
       var _this =this;
       var dataset = this.store.createRecord('dataset',{});
-      var props = this.store.createRecord('property',{title:this.title,description:this.description,downloadURL:this.downloadURL});
+      var props = this.store.createRecord('property',{title:this.title,description:this.description,downloadURL:this.downloadURL,isRequest:true});
       dataset.properties = props;
 
       dataset.save().then(function(created){
         _this.flashMessage({
-          content: 'Dataset successfully registered.', // String
+          content: 'Request posted successfully.', // String
           duration:3000, // Number in milliseconds
           type: 'Success', // String
         });
