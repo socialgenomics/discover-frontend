@@ -3,7 +3,7 @@
   <div class="card white darken-1 center">
     <h3 class="center">Your Profile</h3>
     <hr class="yellow">
-
+    <a {{action "getRegistered"}} class="orange">Get reg</a>
     <div class="card-content center-align col m12 grey-text">
       <div class="row">
         <div class="col m12 center">
@@ -56,13 +56,19 @@
     <!--registered dataset card-->
     <div class="card profile-datasets left white darken-1">
       <div class=" center-align">
-          <h3>Registered Datasets</h3>
-          <hr class="teal">
-        <p class="helper-text">Have data to share?</p>
-        <p>Don't be a tight-arse, share with the rest.</p>
-        <div class="bottom-fixed">
-        {{#link-to 'datasets.register'}}<button class="btn teal white-text"><i class="mdi-action-note-add"></i>REGISTER</button>{{/link-to}}
-        </div>
+        <h3>Registered Datasets</h3>
+        <hr class="teal">
+        {{#if datasets}}
+          {{#each dataset in datasets}}
+            {{mini-dataset dataset=dataset}}
+          {{/each}}
+        {{else}}
+          <p class="helper-text">Have data to share?</p>
+          <p>Don't be a tight-arse, share with the rest.</p>
+          <div class="bottom-fixed">
+          {{#link-to 'datasets.register'}}<button class="btn teal white-text"><i class="mdi-action-note-add"></i>REGISTER</button>{{/link-to}}
+          </div>
+        {{/if}}
       </div>
     </div>
     <div class="card profile-datasets right white darken-1">
