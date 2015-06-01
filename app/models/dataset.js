@@ -11,6 +11,7 @@ export default DS.Model.extend({
   createdAt: DS.attr('isodate'),
   updatedAt: DS.attr('isodate'),
   count: DS.attr('number'),
+  isRequest: DS.attr('boolean'),
   views: function(){
     return this.get('count') + poisson(0.5);
   }.property('count')
