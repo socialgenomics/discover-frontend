@@ -4,7 +4,7 @@
   <div class="col l7 m6 s12 card-main-wrapper"><!-- MAIN CONTENT DIV -->
     <div class="top-action card-header">
       <div class="assays">
-
+      <h6 class="assay-large no-margin" data-position="bottom">{{model.properties.sampleTechnology}}</h6>
       </div>
       <div class="share-favourite">
         <a class="modal-trigger valign-wrapper grey-text"><i class="mdi-action-grade"></i></a><span></span>
@@ -12,11 +12,11 @@
       </div>
     </div>
     <div class="card-main-content">
-
+    <div class="dataset-main-info">
       <h2>{{model.properties.title}}</h2>
       <p>{{model.properties.description}}</p>
       <p>
-        {{model.properties.sampleTechnology}}
+        
       </p>
       <div class="tags">
         {{#each tag in model.tags}}
@@ -24,10 +24,14 @@
         <span class="tag">{{tag.word}}</span>
         {{/link-to}}
         {{/each}}
-        <a class="add-tag"><span class="add-btn">+</span></a>
+        <a class="add-tag"><span class="add-btn" title="Add Tag">+</span></a>
       </div>
-      <h3>Information:</h3>
-      <div class="card-section">
+      </div>
+      <div class="dataset-more-info-section">
+        <div class="divider"></div>
+        <h3 class="center">Information</h3>
+        <hr class="red">
+        <p class="helper-text center">More details about the dataset.</p>
         <div class="row">
           <div class="col m12">
             <ul class="card-info-list">
@@ -37,16 +41,17 @@
               <li class="card-info-attr">Sourced from: <a><span>{{model.repository.name}}</span></a></li>
               {{/if}}
               {{#if model.createdAt}}
-              <li class="card-info-attr">Submitted on: <span>{{model.createdAt}}</span></li>
+            <!--   <li class="card-info-attr">Submitted on: <span>{{model.createdAt}}</span></li> -->
               {{/if}}
               <li class="card-info-attr">Access: <span>{{model.repository.accessType}}</span></li>
               {{#if model.contributors}}
-              <li class="card-info-attr">Contributors: <a><span>Elena Watson</span></a> & <a><span>Nikola Tesla</span></a></li>
+              <li class="card-info-attr">Access: <span>{{model.repository.accessType}}</span></li>
+              <!-- <li class="card-info-attr">Contributors: <a><span>Elena Watson</span></a> & <a><span>Nikola Tesla</span></a></li> -->
               {{/if}}
             </ul>
           </div>
         </div>
-      </div><!-- end .card-section -->
+      </div>
     </div><!-- end .card-main-comtent -->
     <div class="row bottom-static">
       <div class="center-align card-action">
