@@ -1,7 +1,7 @@
 <div class="container">
 <div class="section row ">
   <div class="col m4 offset-m4 s12">
-    <form>
+    <form {{action "submitForm" on="submit"}}>
       <div class="row">
         <div class="col m12 center">
           <ul class="list-inline">
@@ -20,16 +20,17 @@
       {{login-signup-input type="Email" signup=true value=email errors=errors.email placeholder="Email" email=true}}
       {{login-signup-input type="Password" value=password errors=errors.password placeholder="Password" password=true}}
 
-      <div class="input-container">
-        <a {{action 'submitForm'}} id="continue-btn" class="btn full-width">SIGN UP</a>
-        <span class="sub-input center-align">By signing up you agree to our <a>Terms</a> and <a>Privacy Policy</a>.</span>
+      <div class="input-container center">
+        <!-- <a {{action 'submitForm'}} id="continue-btn" class="btn full-width">SIGN UP</a> -->
+        {{#full-width-button disabled=buttonDisabled type="submit"}}SIGN UP{{/full-width-button}}
+        <span class="sub-input">By signing up you agree to our <a>Terms</a> and <a>Privacy Policy</a>.</span>
       </div>
 
 
     </form>
   </div>
 </div>
- <div class="section row stick-to-bottom privacy-msg">
+ <div class="row stick-to-bottom privacy-msg">
     <div class="col m12 center">
       <div class="divider"></div>
         <h3>WE TAKE YOUR PRIVACY SERIOUSLY</h3>

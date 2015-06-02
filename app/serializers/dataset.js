@@ -16,6 +16,7 @@ export default DS.RESTSerializer.extend(DS.EmbeddedRecordsMixin, {
     return {
       sourceJSON: JSON.stringify(sourceJSON),
       repository: 'REPOSITIVE',
+      isRequest: snapshot.get('isRequest')
     }
   },
   keyForRelationship: function(key, relationship, method) {
