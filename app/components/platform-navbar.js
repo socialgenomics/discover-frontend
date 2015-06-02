@@ -6,7 +6,6 @@ export default Ember.Component.extend({
     return this.get('session.user');
   }),
 
-
   autocomplete: function(){
     console.log(this.get('query'));
   }.observes('query'),
