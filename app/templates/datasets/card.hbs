@@ -3,34 +3,78 @@
     <div class="card-header">
       <div class="assay-container">
         {{#link-to 'datasets.search' (query-params assayType=dataset.properties.assayType) }}
-          {{assay-label assay=dataset.properties.assayType model=model}}
+        {{assay-label assay=dataset.properties.assayType model=model}}
         {{/link-to}}
       </div>
       <div class="actions-container valign-wrapper">
-        <a class="modal-trigger valign-wrapper"><i class="mdi-action-grade tooltipped" data-tooltip="bookmark" data-position="bottom"></i></a><span class="grey-text">{{data.favourite}}</span>
-        <a class="modal-trigger valign-wrapper"><i class="mdi-social-share tooltipped" data-position="bottom" data-tooltip="share"></i></a>
+        <a class="modal-trigger valign-wrapper">
+          <i 
+            class="mdi-action-grade tooltipped" 
+            data-tooltip="bookmark" 
+            data-position="bottom"></i>
+        </a>
+        <span class="grey-text">{{data.favourite}}</span>
+        <a class="modal-trigger valign-wrapper">
+          <i 
+            class="mdi-social-share tooltipped"
+            data-position="bottom"
+            data-tooltip="share"></i>
+        </a>
       </div>
     </div>
     <div class="card-body">
       {{#link-to 'datasets.detail' dataset.id classNames="data-title"}}
       <h2 class="card-title-limit data-title">{{dataset.properties.title}}</h2>
       {{/link-to}}
-      <span>from </span> {{#if dataset.repository.name}}<span><a>{{dataset.repository.name}}</a></span>{{else}}{{#link-to 'user' dataset.owner.username}}<span>{{dataset.owner.username}}</span>{{/link-to}}{{/if}}
+
+      {{#if dataset.repository.name}}
+      <span>from </span>
+        <span>
+          {{#link-to 'datasets.search' (query-params repository=dataset.repository.name) }}
+            {{dataset.repository.name}}
+          {{/link-to}}
+        </span>
+
+      {{else}}
+        {{#link-to 'user' dataset.owner.username}}
+          <span>{{dataset.owner.username}}</span>
+        {{/link-to}}
+      {{/if}}
+
       <!-- data when data was registered on repository
       <i class="mdi-action-today"></i><span>{{data.date}}</span> -->
       <p class="card-line-limit">{{dataset.properties.description}}</p>
     </div>
     <div class="card-footer">
       <ul>
-        <li class="access-icons">
+
         {{#if isPublic}}
-        <i class="mdi-social-public teal-text tooltiped" data-position="bottom" data-tooltip="Public Access" Title="Pu"></i><span class="red-text">{{dataset.repository.accessType}}</span>
-        {{else}}
-        <i class="mdi-action-lock red-text tooltiped" data-position="bottom" data-tooltip="Restricted Access" title="Access application needed"></i><span class="red-text">{{dataset.repository.accessType}}</span>
-        {{/if}}        
+        <li class="access-icons">
+          <i 
+            class="mdi-social-public teal-text tooltiped" 
+            data-position="bottom" 
+            data-tooltip="Public Access"
+            title="Public"></i>
+          <span class="red-text">
+            {{dataset.repository.accessType}}
+          </span>
         </li>
+
+        {{else}}
+        <li class="access-icons">
+          <i 
+            class="mdi-action-lock red-text tooltiped"
+            data-position="bottom"
+            data-tooltip="Restricted Access" 
+            title="Access application needed"></i>
+          <span class="red-text">
+            {{dataset.repository.accessType}}
+          </span>
+        </li>
+
+        {{/if}}        
         <li class="tooltipped" data-position="bottom" data-tooltip="Views">
-        <i class="mdi-action-visibility"></i><span>{{dataset.views}}</span>
+          <i class="mdi-action-visibility"></i><span>{{dataset.views}}</span>
         </li>
         <li class="tooltipped" data-position="bottom" data-tooltip="Comments"><i class="mdi-action-question-answer"></i><span>{{data.comments}}</span></li>
       </ul>
