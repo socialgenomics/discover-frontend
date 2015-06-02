@@ -3,16 +3,15 @@
   <div class="card white darken-1 center">
     <h3 class="center">Your Profile</h3>
     <hr class="yellow">
-    <a {{action "getRegistered"}} class="orange">Get reg</a>
     <div class="card-content center-align col m12 grey-text">
       <div class="row">
         <div class="col m12 center">
             <img class="profile-img circle" src="/assets/icons/person-icon.png">
         </div>
         <div class="col m12">
-          <h3>{{user.firstname}} {{user.lastname}}</h3>
-          <p class="helper-text">{{profile.workOrganisation}}</p>
-          <p class="helper-text">{{user.email}}</p>
+          <h3>{{model.user.firstname}} {{model.user.lastname}}</h3>
+          <p class="helper-text">{{model.profile.workOrganisation}}</p>
+          <p class="helper-text">{{model.user.email}}</p>
         </div>
         <div class="bottom-fixed">
         {{#link-to "users.profile"}}<button class="btn yellow white-text"><i class="mdi-editor-border-color"></i>EDIT PROFILE</button>{{/link-to}}
@@ -58,8 +57,8 @@
       <div class=" center-align">
         <h3>Registered Datasets</h3>
         <hr class="teal">
-        {{#if datasets}}
-          {{#each dataset in datasets}}
+        {{#if model.datasets}}
+          {{#each dataset in model.datasets}}
             {{mini-dataset dataset=dataset}}
           {{/each}}
         {{else}}
@@ -73,23 +72,30 @@
     </div>
     <div class="card profile-datasets right white darken-1">
       <div class="center-align">
-          <h3>Requested Datasets</h3>
-          <hr class="red">
-        <p class="helper-text">Haven't found what you're looking for?</p>
-        <p>There is a community of generous scientists happy to help.</p>
-        <div class="bottom-fixed">
-        {{#link-to 'datasets.request'}}<button class="btn red white-text"><i class="mdi-content-content-paste"></i>REQUEST</button>{{/link-to}}
-        </div>
+        <h3>Requested Datasets</h3>
+        <hr class="red">
+
+        {{#if requests}}
+          {{#each request in requests}}
+            {{mini-dataset dataset=request}}
+          {{/each}}
+        {{else}}
+          <p class="helper-text">Haven't found what you're looking for?</p>
+          <p>There is a community of generous scientists happy to help.</p>
+          <div class="bottom-fixed">
+          {{#link-to 'datasets.request'}}<button class="btn red white-text"><i class="mdi-content-content-paste"></i>REQUEST</button>{{/link-to}}
+          </div>
+        {{/if}}
       </div>
     </div>
 </div>
 </div>
 
 
-<!--available data for user profile
-<h2>Username: {{user.username }}</h2>
-<h2>First Name:  {{user.firstname}}</h2>
-<h2>Last Name: {{user.lastname}} </h2>
-<h2>Last Name: {{user.email}} </h2>
-<h2>Profile ID: {{ profile.id }} </h2>
-<h2>Affiliation: {{profile.workOrganisation}}</h2> -->
+available data for user profile
+<h2>Username: {{model.user.username }}</h2>
+<h2>First Name:  {{model.user.firstname}}</h2>
+<h2>Last Name: {{model.user.lastname}} </h2>
+<h2>Email: {{model.user.email}} </h2>
+<h2>Profile ID: {{model.profile.id }} </h2>
+<h2>Affiliation: {{model.profile.workOrganisation}}</h2>
