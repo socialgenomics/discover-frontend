@@ -1,0 +1,23 @@
+<div class="notification-account right">
+  <!-- 
+  <div class="notification-icon grey-text tiny">
+    <i class="mdi-social-notifications"></i>
+  </div> 
+  -->
+  <li class="user-avatar right">
+  <a class='dropdown-button valign-wrapper' data-beloworigin="true" data-activates='profile-drop'>
+    <div class="dp-wrapper">
+      <img src="/assets/icons/person-icon.png" alt="your profile picture" class="display-pic">
+    </div>
+    <i class="mdi-navigation-arrow-drop-down hide-on-small-only"></i></a>
+  </li>
+  <ul id='profile-drop' class='dropdown-content'>
+    <li>{{#link-to 'user' currentUser.username}}Profile{{/link-to}}</li>
+    <li>{{#link-to 'users.settings'}}Settings{{/link-to}}</li>
+    <li class="divider"></li>
+    <li>{{#link-to 'about'}}About{{/link-to}}</li>
+    <li>{{#link-to 'help'}}Help{{/link-to}}</li>
+    <li class="divider"></li>
+    <li><a {{ action 'logout' }}>Logout</a></li>
+  </ul>
+</div>
