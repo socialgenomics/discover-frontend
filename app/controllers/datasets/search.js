@@ -6,6 +6,7 @@ export default Ember.Controller.extend({
   ordering: null,
   assayType: null,
   tags: null,
+
   filters: function(){
     return [
       {

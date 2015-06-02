@@ -20,7 +20,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         }
       });
     }).catch(function(err){
-      return {};
+      return Ember.RSVP.reject("Sorry, we cannot find a user with this username.");
     });
   },
 });
