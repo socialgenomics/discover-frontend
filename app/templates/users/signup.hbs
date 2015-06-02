@@ -1,7 +1,7 @@
 <div class="container">
 <div class="section row ">
   <div class="col m4 offset-m4 s12">
-    <form>
+    <form {{action "submitForm" on="submit"}}>
       <div class="row">
         <div class="col m12 center">
           <ul class="list-inline">
@@ -21,7 +21,8 @@
       {{validated-input type="Password" value=password errors=errors.password placeholder="Password" password=true}}
 
       <div class="input-container">
-        <a {{action 'submitForm'}} id="continue-btn" class="btn full-width">SIGN UP</a>
+        <!-- <a {{action 'submitForm'}} id="continue-btn" class="btn full-width">SIGN UP</a> -->
+        {{#full-width-button disabled=buttonDisabled type="submit"}}SIGN UP{{/full-width-button}}
         <span class="sub-input center-align">By signing up you agree to our <a>Terms</a> and <a>Privacy Policy</a>.</span>
       </div>
 

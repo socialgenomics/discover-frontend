@@ -1,23 +1,23 @@
-<div class="row center">
+<div class="row center card">
   <h2>Make a request on dataset</h2>
   <hr class='red'/>
-  <span class="helper-text">Be as specific as possible.</span>
+  <span class="col m8 offset-m2 helper-text">Repositive has a community of users who are willing to help you to find a dataset you are looking for. Make a request and ask for the users.</span>
   <div class="row">
-    <form class="col s6 offset-s3" {{action "adddDataset" on="submit"}}>
+    <form class="col s6 offset-s3" {{action "addRequest" on="submit"}}>
       <div class="row">
         <div class="input-container">
             <div class="input-field">
-              <input class="validate" id="register-title" type="text" placeholder="Title of the dataset">
+              {{input type="text" placeholder="Name your request" value=title}}
             </div>
             <div class="lbl">Title</div>
             <div class="input-helper">What are you looking for?</div>
         </div>
         <div class="input-container">
             <div class="input-field">
-              <textarea class="validate" id="register-description" type="text" placeholder="Description of the dataset" style="height: 200px"></textarea>
+              {{textarea type="text" placeholder="Describe the dataset you're looking for" value=description}}
             </div>
             <div class="lbl">Description</div>
-            <div class="input-helper">Say something about the dataset.</div>
+            <div class="input-helper">Say something about the dataset you're after.</div>
         </div>
       </div>
            <div class="input-container col m12">

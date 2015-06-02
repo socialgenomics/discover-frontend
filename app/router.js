@@ -19,7 +19,7 @@ Router.map(function() {
     this.route('signup');
     this.route('login');
     this.route('settings');
-    this.route('profile')
+    this.route('profile');
     this.route('references');
     this.route('trust');
   });
