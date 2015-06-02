@@ -8,8 +8,8 @@ export default Ember.Controller.extend({
   actions:{
     addRequest:function(){
       var _this =this;
-      var dataset = this.store.createRecord('dataset',{});
-      var props = this.store.createRecord('property',{title:this.title,description:this.description,downloadURL:this.downloadURL,isRequest:true});
+      var dataset = this.store.createRecord('dataset',{isRequest:true});
+      var props = this.store.createRecord('property',{title:this.title,description:this.description,downloadURL:this.downloadURL});
       dataset.properties = props;
 
       dataset.save().then(function(created){

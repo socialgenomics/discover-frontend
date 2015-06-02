@@ -3,16 +3,16 @@
   <div class="card white darken-1 center">
     <h3 class="center">Your Profile</h3>
     <hr class="yellow">
-    <a {{action "getRegistered"}} class="orange">Get reg</a>
+    <a {{action "getRegistered"}} class="grey btn">Get reg</a>
     <div class="card-content center-align col m12 grey-text">
       <div class="row">
         <div class="col m12 center">
             <img class="profile-img circle" src="/assets/icons/person-icon.png">
         </div>
         <div class="col m12">
-          <h3>{{user.firstname}} {{user.lastname}}</h3>
-          <p class="helper-text">{{profile.workOrganisation}}</p>
-          <p class="helper-text">{{user.email}}</p>
+          <h3>{{model.user.firstname}} {{model.user.lastname}}</h3>
+          <p class="helper-text">{{model.profile.workOrganisation}}</p>
+          <p class="helper-text">{{model.user.email}}</p>
         </div>
         <div class="bottom-fixed">
         {{#link-to "users.profile"}}<button class="btn yellow white-text"><i class="mdi-editor-border-color"></i>EDIT PROFILE</button>{{/link-to}}
@@ -86,10 +86,10 @@
 </div>
 
 
-<!--available data for user profile
-<h2>Username: {{user.username }}</h2>
-<h2>First Name:  {{user.firstname}}</h2>
-<h2>Last Name: {{user.lastname}} </h2>
-<h2>Last Name: {{user.email}} </h2>
-<h2>Profile ID: {{ profile.id }} </h2>
-<h2>Affiliation: {{profile.workOrganisation}}</h2> -->
+available data for user profile
+<h2>Username: {{model.user.username }}</h2>
+<h2>First Name:  {{model.user.firstname}}</h2>
+<h2>Last Name: {{model.user.lastname}} </h2>
+<h2>Email: {{model.user.email}} </h2>
+<h2>Profile ID: {{model.profile.id }} </h2>
+<h2>Affiliation: {{model.profile.workOrganisation}}</h2>

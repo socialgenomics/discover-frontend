@@ -13,5 +13,6 @@ export default DS.Model.extend({
   count: DS.attr('number'),
   views: function(){
     return this.get('count') + poisson(0.5);
-  }.property('count')
+  }.property('count'),
+  isRequest:DS.attr('boolean')
 });
