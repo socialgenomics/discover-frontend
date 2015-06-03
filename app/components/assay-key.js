@@ -13,7 +13,7 @@ export default Ember.Component.extend({
     assays =  _.map(_.zip(assays, colours), function(tuple){
       return {name: tuple[0], colour:tuple[1]};
     });
-    return assays
+    return assays.splice(0, 12)
   }.property('model'),
 
 
