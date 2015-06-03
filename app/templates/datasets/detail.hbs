@@ -2,9 +2,7 @@
 <div class="row card dataset full-view no-margin">
   <div class="col l7 m6 s12 card-main-wrapper"><!-- MAIN CONTENT DIV -->
     <div class="top-action card-header">
-      <div class="assays">
-      <h6 class="assay-large no-margin" data-position="bottom">{{model.properties.sampleTechnology}}</h6>
-      </div>
+      {{assay-label assay=model.properties.assayType}}
       <div class="share-favourite">
         <a class="modal-trigger valign-wrapper grey-text"><i class="mdi-action-grade"></i></a><span></span>
         <a class="modal-trigger grey-text"><i class="mdi-social-share"></i></a>
