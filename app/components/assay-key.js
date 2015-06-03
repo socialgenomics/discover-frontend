@@ -4,7 +4,7 @@ import _ from 'npm:underscore';
 
 export default Ember.Component.extend({
   tag: 'div',
-  classNames: ['assay-key', 'right'],
+  classNames: ['assay-key', 'right-of-container'],
 
   assays: function(){
     let assays = this.model.getEach('properties.assayType');

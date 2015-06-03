@@ -1,12 +1,11 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  query:'',
   currentUser: Ember.computed(function(){
     return this.get('session.user');
   }),
 
-  didInsertElement: function(){
+  afterRenderEvent: function(){
     //dropdown initialization
     this.$('.dropdown-button').dropdown({
       inDuration: 500,
@@ -19,19 +18,10 @@ export default Ember.Component.extend({
     });
   },
 
-  autocomplete: function(){
-    console.log(this.get('query'));
-  }.observes('query'),
-
-  actions:{
+  actions: {
 
     logout: function(){
       this.get("session").invalidate();
     },
-
-    search: function(){
-      this.sendAction('action', this.get("query"));
-    },
-
   }
 });

@@ -1,13 +1,9 @@
 <div class="outer-wrap">
-  {{#if session.isAuthenticated}}
-    {{platform-navbar-logged-in action="search"}}
-  {{else}}
-    {{platform-navbar-logged-out action="search"}}
-  {{/if}}
+  {{platform-navbar action="search"}}
   <div>
     {{message-queue}}
     {{!outlet 'modal'}}
     {{outlet}}
-  </div>  
+  </div>
   {{> platform-footer}}
 </div>

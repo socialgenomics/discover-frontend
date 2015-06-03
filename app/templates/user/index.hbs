@@ -25,11 +25,11 @@
             <h5>Saved data</h5>
           </div>
           <div class="activity-uploads">
-            <span class="numb">0</span>
+            <span class="numb">{{registered.length}}</span>
             <h5>Registrations</h5>
           </div>
           <div class="activity-request">
-            <span class="numb">0</span>
+            <span class="numb">{{requested.length}}</span>
             <h5>Requests</h5>
           </div>
           <div class="activity-comments">
@@ -57,8 +57,8 @@
       <div class=" center-align">
         <h3>Registered Datasets</h3>
         <hr class="teal">
-        {{#if model.datasets}}
-          {{#each dataset in model.datasets}}
+        {{#if registered}}
+          {{#each dataset in registered}}
             {{mini-dataset dataset=dataset}}
           {{/each}}
         {{else}}
@@ -75,8 +75,8 @@
         <h3>Requested Datasets</h3>
         <hr class="red">
 
-        {{#if requests}}
-          {{#each request in requests}}
+        {{#if requested}}
+          {{#each request in requested}}
             {{mini-dataset dataset=request}}
           {{/each}}
         {{else}}

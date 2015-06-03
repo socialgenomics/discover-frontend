@@ -5,21 +5,21 @@
   <form class="col s8 offset-s2" {{action "addDataset" on="submit"}}>
     <div class="input-container">
       <div class="input-field">
-        {{input type="text" placeholder="Title of the dataset" value=title}}
+        {{validated-input type="text" value=title errors=errors.title placeholder="Add a title for your dataset."}}
       </div>
       <div class="lbl">Title</div>
       <div class="input-helper"></div>
     </div>
     <div class="input-container">
       <div class="input-field">
-        {{textarea type="text" placeholder="Description of the dataset" value=description}}
+        {{validated-input type="text" value=description errors=errors.description placeholder="A short description of the dataset"}}
       </div>
       <div class="lbl">Description</div>
       <div class="input-helper">Say something about the dataset.</div>
     </div>
     <div class="input-container">
       <div class="input-field">
-        {{input type="text" placeholder="URL of the dataset" value=downloadURL}}
+        {{validated-input type="text" value=downloadURL errors=errors.downloadURL placeholder="If the dataset is online please add the URL here."}}
       </div>
       <div class="lbl">Description</div>
       <div class="input-helper">Say something about the dataset.</div>

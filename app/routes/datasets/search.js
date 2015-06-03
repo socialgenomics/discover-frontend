@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import _ from 'npm:underscore';
+import ajax from 'ic-ajax';
 
 
 var keyMappings = {
@@ -43,42 +44,44 @@ export default Ember.Route.extend({
     },
     assayType: {
       refreshModel: true
+    },
+    repository: {
+      refreshModel: true
     }
   },
   meta:{},
-  model: function(params){
 
+  model: function(params){
     var _this = this;
     var query = dtoQueryObject(params)
 
-    return new Ember.RSVP.Promise(function(resolve, reject){
-      Ember.$.ajax(
-        {
-          url:'/api/datasets/search',
-          type:'POST',
-          data:query
-        })
-        .then(function(resp){
-        _this.meta = resp.meta;
-        delete resp.meta;
-        if (_this.meta.total > 0){
-          _this.store.pushPayload('Dataset', resp);
-          var ids = _.map(resp.datasets, function(dataset){ return dataset.id; });
-          // Using `store.find('dataset', {ids: ids})` hits the backend.
-          // use this instead..
-          var datasets = _.map(ids, function(id){
-            return _this.store.find('Dataset', id);
-          });
-          resolve(datasets)
-        }
-        else {
-          resolve([])
-        }
-      },function(err){
-        return console.log(err);
-      });
+    return ajax({
+        url:'/api/datasets/search',
+        type:'POST',
+        data:query
+    })
+    .then(function(resp){
+      _this.meta = resp.meta;
+      delete resp.meta;
+      if (_this.meta.total > 0){
+        _this.store.pushPayload('Dataset', resp);
+        var ids = _.map(resp.datasets, function(dataset){ return dataset.id; });
+        // Using `store.find('dataset', {ids: ids})` hits the backend.
+        // use this instead..
+        var datasets = _.map(ids, function(id){
+          return _this.store.find('Dataset', id);
+        });
+        return datasets
+      }
+      else {
+        return Ember.RSVP.reject("No results")
+      }
+    }).catch(function(err){
+      console.assert(false, err)
+      return Ember.RSVP.reject(err)
     });
   },
+
   setupController: function(controller, model){
     this._super(controller, model);
     controller.set('meta', this.meta)

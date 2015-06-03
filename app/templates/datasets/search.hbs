@@ -1,23 +1,23 @@
-{{#if meta.total}}
-  <div class="row no-margin">
-    <span class="align-left col m3">Results: {{ meta.total }}</span>
-    {{assay-key model=model}}
-  </div>
-{{/if}}
-<div class="row">
-  {{#unless meta.total}}
-    <div class="row no-margin center card">
-      <div class="no-results">
-        <h3><br>Sorry, there are no datasets matching<br> You can make request to ask our community for help. </h3>   
-      </div>
-      <div class="row">
-        {{#link-to 'datasets.request' class='btn white-text'}}
-          <i class="mdi-content-content-paste"></i><span>Request Dataset</span>
-        {{/link-to}}
-      </div>
-    </div>
-  {{/unless}}
-  {{# each dataset in model }}
+<div class="row relative">
+  <p class="left-align col s6">You searched for <i>"{{q}}"</i></p>
+  <p class="right-align col s6">Results: {{ meta.total }}</p>
+
+  {{#if isFiltered}}
+  <p class="filters right-of-container">
+    <span class="left">Active Filters:</span><br>
+    {{#each filter in filters}}
+      {{#if filter.value }}
+        <b>{{filter.name}}</b>: {{filter.value}}<br>
+      {{/if}}
+    {{/each}}
+  </p>
+  {{/if}}
+
+</div>
+
+<div class="row relative">
+  {{assay-key model=model}}
+  {{#each dataset in model}}
     {{partial 'datasets/card' dataset=dataset}}
-  {{/ each }}
+  {{/each}}
 </div

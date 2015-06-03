@@ -17,8 +17,8 @@
         </span>
       </div>
 
-      {{validated-input type="Email" signup=true value=email errors=errors.email placeholder="Email" email=true}}
-      {{validated-input type="Password" value=password errors=errors.password placeholder="Password" password=true}}
+      {{login-signup-input type="Email" signup=true value=email errors=errors.email placeholder="Email" email=true}}
+      {{login-signup-input type="Password" value=password errors=errors.password placeholder="Password" password=true}}
 
       <div class="input-container center">
         <!-- <a {{action 'submitForm'}} id="continue-btn" class="btn full-width">SIGN UP</a> -->
