@@ -7,6 +7,13 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
 
     search: function(query){
       this.transitionTo('datasets.search', {queryParams: {q: query}});
+    },
+    showModal:function(message){
+      this.flashMessage({
+        content: message, // String
+        duration:6000, // Number in milliseconds
+        type: 'Fail', // String
+      });
     }
   }
 });
