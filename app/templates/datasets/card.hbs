@@ -59,8 +59,9 @@
             {{dataset.repository.accessType}}
           </span>
         </li>
+        {{/if}}
 
-        {{else}}
+        {{#if isRestricted}}
         <li class="access-icons">
           <i 
             class="mdi-action-lock red-text tooltiped"
@@ -71,7 +72,6 @@
             {{dataset.repository.accessType}}
           </span>
         </li>
-
         {{/if}}        
         <li class="tooltipped" data-position="bottom" data-tooltip="Views">
           <i class="mdi-action-visibility"></i><span>{{dataset.views}}</span>

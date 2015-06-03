@@ -1,4 +1,4 @@
-<p>Assay Key:</p>
+<h6 class="helper-text">Assay Key:</h6>
 {{#each assay in assays}}
 {{#link-to 'datasets.search' (query-params assayType=assay.name)}}<div {{bind-attr class=":label assay.colour"}}></div><p class="assay">{{assay.name}}</p>{{/link-to}}<br>
 {{/each}}
