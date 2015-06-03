@@ -15,7 +15,7 @@
 
 		<div class="card-body mini">
       {{#link-to 'datasets.detail' dataset.id}}<h2 class="truncate">{{dataset.properties.title}}</h2>{{/link-to}}
-      <span>by </span> <span><a>{{submittedBy}}</a></span><span> 3 hours ago</span>
+      <span>by </span> <span><a>{{dataset.owner.displayName}}</a></span><span> 3 hours ago</span>
       <i class="mdi-social-public tooltipped" data-position="bottom" data-tooltip="Public Access"></i>
 		</div>
 
