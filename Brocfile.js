@@ -15,7 +15,7 @@ var isProductionLikeBuild = ['production', 'testing'].indexOf(environment) > -1;
 
 var prepend;
 if (isProductionLikeBuild){
-  prepend = 'http://d3duxukexohr0v.cloudfront.net/';
+  prepend = 'http://dg2kcfbxc77v1.cloudfront.net';
 }
 else {
   prepend = '';
