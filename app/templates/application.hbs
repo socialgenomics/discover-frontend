@@ -2,8 +2,27 @@
   {{platform-navbar action="search"}}
   <div>
     {{message-queue}}
-    {{!outlet 'modal'}}
+    {{md-modal-container}}
     {{outlet}}
+
   </div>
   {{> platform-footer}}
 </div>
+{{#if isModalShown}}
+  {{#md-modal action="closeModal"}}
+    <div class="modal-content">
+      <h4>Hello Modal</h4>
+      <p>Oh hai there!</p>
+    </div>
+    <div class="modal-footer">
+      <a class="modal-action modal-close waves-effect waves-green btn-flat"
+          {{action 'agree'}}>
+        Agree
+      </a>
+      <a class="modal-action modal-close waves-effect waves-green btn-flat"
+          {{action 'toggleModal'}}>
+        Cancel
+      </a>
+    </div>
+  {{/md-modal}}
+{{/if}}
