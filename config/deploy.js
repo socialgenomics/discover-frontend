@@ -17,7 +17,7 @@ module.exports = {
     buildEnv: 'testing', // Override the environment passed to the ember asset build. Defaults to 'production'
     apiBaseURL: 'http://api.testing.repositive.io',
     store: {
-      host: 'app.repositive.io',
+      host: 'discover.repositive.io',
       port: 6379,
     },
     assets: {
@@ -31,7 +31,7 @@ module.exports = {
     buildEnv: 'production', // Override the environment passed to the ember asset build. Defaults to 'production'
     apiBaseURL: 'http://api.repositive.io',
     store: {
-      host: 'app.repositive.io',
+      host: 'discover.repositive.io',
       port: 6379,
       //password: '<your-redis-secret>' // do not use passwd tunnel over ssh instead
     },
