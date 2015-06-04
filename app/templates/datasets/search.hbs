@@ -3,14 +3,15 @@
   <h6 class="left-align col m12">Results: {{ meta.total }}</h6>
 
   {{#if isFiltered}}
-  <p class="filters right-of-container">
-    <span class="left">Active Filters:</span><br>
+  <h6 class="filters left-align col m12">
+    <span class="left">Active Filters:&nbsp;</span>
     {{#each filter in filters}}
       {{#if filter.value }}
-        <b>{{filter.name}}</b>: {{filter.value}}<br>
+        <!-- <b>{{filter.name}}</b>: -->
+         <span> {{filter.value}}</span><br>
       {{/if}}
     {{/each}}
-  </p>
+  </h6>
   {{/if}}
 
 </div>
