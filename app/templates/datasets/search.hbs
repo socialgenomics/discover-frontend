@@ -28,4 +28,18 @@
   {{#each dataset in model}}
     {{partial 'datasets/card' dataset=dataset}}
   {{/each}}
-</div
+</div>
+
+{{#if isModalShown}}
+  {{#md-modal action="closeModal"}}
+  <div class="modal-content center-align">
+    <img src="/assets/images/icons/work-in-progress.png" alt="Logo" class="social-media-icon"/>
+  <!-- <img class="social-media-icon" src="/assets/images/icons/work-in-progress.png"/> -->
+    <h2>We are still working hard.</h2>
+    <h5>This feature will be available very soon. Please, do not leave us.</h5>
+  </div>
+  <div class="modal-footer center-align">
+    <a {{action "toggleModal"}} class="modal-action modal-close waves-effect">OK</a>
+  </div>
+  {{/md-modal}}
+{{/if}}
