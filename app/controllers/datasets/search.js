@@ -3,11 +3,12 @@ import _ from 'npm:underscore';
 import { titleCase } from 'repositive.io/utils/case';
 
 export default Ember.Controller.extend({
-  queryParams: ['q','ordering','assayType','tags','repository'],
+  queryParams: ['q','ordering','assayType','tags','repository','accessType'],
   q: null,
   ordering: null,
   assayType: null,
   tags: null,
+  accessType: null,
 
   filters: function(){
     let _this = this;
