@@ -1,6 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
+  isModalShown:false,
 
   requested: function(){
     var datasets = this.get('model.datasets');
@@ -12,4 +13,9 @@ export default Ember.Controller.extend({
     return datasets.filterBy('isRequest', false);
   }.property(),
 
+  actions:{
+    toggleModal(){
+      this.toggleProperty('isModalShown');
+    },
+  },
 });
