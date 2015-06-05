@@ -4,6 +4,7 @@ export default DS.RESTSerializer.extend(DS.EmbeddedRecordsMixin, {
   attrs: {
     properties: {embedded: 'always'},
     repository: {embedded: 'always'},
+    highlights: {embedded: 'always'},
     tags: {embedded: 'always'},
     owner: { serialize: 'ids' },
   },

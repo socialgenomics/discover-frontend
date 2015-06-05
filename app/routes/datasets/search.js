@@ -45,6 +45,9 @@ export default Ember.Route.extend({
     assayType: {
       refreshModel: true
     },
+    accessType:{
+      refreshModel: true
+    },
     repository: {
       refreshModel: true
     }

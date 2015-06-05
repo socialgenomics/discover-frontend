@@ -1,14 +1,15 @@
 <div class="row relative">
-  <p class="left-align col s6">You searched for <i>"{{q}}"</i></p>
+  <p class="left-align col s6">You searched for <em class="highlight">"{{q}}"</em></p>
   <p class="right-align col s6">
   Results: {{ meta.total }}<br>
-  <b>access types:</b><br>
+  </p>
+  <!--
   {{#each type in meta.accessTypes}}
     {{#link-to 'datasets.search' (query-params accessType=type.key)}}
     {{type.key}}: {{type.doc_count}}
     {{/link-to}}
   {{/each}}
-  </p>
+  -->
 
   {{#if isFiltered}}
   <p class="filters right-of-container">
