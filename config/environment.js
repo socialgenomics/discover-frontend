@@ -7,7 +7,7 @@ module.exports = function(environment) {
   var ENV = {
     modulePrefix: 'repositive.io',
     environment: environment,
-    baseURL: '/',
+    baseURL: '',
     locationType: 'auto',
     EmberENV: {
       FEATURES: {
