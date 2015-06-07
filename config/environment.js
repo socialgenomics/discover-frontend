@@ -7,7 +7,7 @@ module.exports = function(environment) {
   var ENV = {
     modulePrefix: 'repositive.io',
     environment: environment,
-    baseURL: '',
+    baseURL: '/',
     locationType: 'auto',
     EmberENV: {
       FEATURES: {
@@ -37,6 +37,7 @@ module.exports = function(environment) {
           "users.login" : "/api/users/login",
           "users.logout" : "/api/users/logout",
           "users.signup" : "/api/users",
+          "datasets.search" : "/api/datasets/search",
       };
       _.each(mapping,
         function(path, key, obj){
