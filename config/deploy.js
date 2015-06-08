@@ -17,27 +17,29 @@ module.exports = {
     buildEnv: 'testing', // Override the environment passed to the ember asset build. Defaults to 'production'
     apiBaseURL: 'http://api.testing.repositive.io',
     store: {
-      host: 'platform.repositive.io',
+      host: 'discover.repositive.io',
       port: 6379,
     },
     assets: {
-      accessKeyId: 'AKIAJVMZYC2JCT2XY53Q',
+      accessKeyId: process.env['AWS_KEY_ID'],
       secretAccessKey: process.env['AWS_ACCESS_KEY'],
-      bucket: 'testing.repositive.io'
+      bucket: 'testing.repositive.io',
+     // region: 'eu-central-1'
     }
   },
   production: {
     buildEnv: 'production', // Override the environment passed to the ember asset build. Defaults to 'production'
     apiBaseURL: 'http://api.repositive.io',
     store: {
-      host: 'platform.repositive.io',
+      host: 'discover.repositive.io',
       port: 6379,
       //password: '<your-redis-secret>' // do not use passwd tunnel over ssh instead
     },
     assets: {
-      accessKeyId: 'AKIAJVMZYC2JCT2XY53Q',
+      accessKeyId: process.env['AWS_KEY_ID'],
       secretAccessKey: process.env['AWS_ACCESS_KEY'],
-      bucket: 'repositive.io'
+      bucket: 'discover.repositive.io',
+     // region: 'eu-central-1',
     }
   }
 };

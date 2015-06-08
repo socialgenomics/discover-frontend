@@ -7,19 +7,9 @@
         {{/link-to}}
       </div>
       <div class="actions-container valign-wrapper">
-        <a class="modal-trigger valign-wrapper">
-          <i 
-            class="mdi-action-grade tooltipped" 
-            data-tooltip="bookmark" 
-            data-position="bottom"></i>
-        </a>
+        {{action-favourite}}
         <span class="grey-text">{{data.favourite}}</span>
-        <a class="modal-trigger valign-wrapper">
-          <i 
-            class="mdi-social-share tooltipped"
-            data-position="bottom"
-            data-tooltip="share"></i>
-        </a>
+        {{action-share action="showModal"}}
       </div>
     </div>
     <div class="card-body">
@@ -43,16 +33,16 @@
 
       <!-- data when data was registered on repository
       <i class="mdi-action-today"></i><span>{{data.date}}</span> -->
-      <p class="card-line-limit">{{dataset.properties.description}}</p>
+      <p class="card-line-limit">{{dataset.properties.shortDescription}}</p>
     </div>
     <div class="card-footer">
       <ul>
 
         {{#if isPublic}}
         <li class="access-icons">
-          <i 
-            class="mdi-social-public teal-text tooltiped" 
-            data-position="bottom" 
+          <i
+            class="mdi-social-public teal-text tooltiped"
+            data-position="bottom"
             data-tooltip="Public Access"
             title="Public"></i>
           <span class="red-text">
@@ -63,10 +53,10 @@
 
         {{#if isRestricted}}
         <li class="access-icons">
-          <i 
+          <i
             class="mdi-action-lock red-text tooltiped"
             data-position="bottom"
-            data-tooltip="Restricted Access" 
+            data-tooltip="Restricted Access"
             title="Access application needed"></i>
           <span class="red-text">
             {{dataset.repository.accessType}}

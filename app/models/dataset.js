@@ -6,8 +6,9 @@ export default DS.Model.extend({
   owner: DS.belongsTo('user'),
   properties : DS.belongsTo('property'),
   repository: DS.belongsTo('repository'),
-  tags: DS.hasMany('tag'),
+  favorites: DS.hasMany('favourite'),
   comments: DS.hasMany('comments'),
+  tags: DS.hasMany('tag'),
   createdAt: DS.attr('isodate'),
   updatedAt: DS.attr('isodate'),
   count: DS.attr('number'),
@@ -15,5 +16,4 @@ export default DS.Model.extend({
   views: function(){
     return this.get('count') + poisson(0.5);
   }.property('count'),
-  isRequest:DS.attr('boolean')
 });

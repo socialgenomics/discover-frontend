@@ -7,10 +7,8 @@ export default Ember.Component.extend({
   }.observes('query'),
 
   actions:{
-
     search: function(){
       this.sendAction('action', this.get("query"));
     },
-
   }
 });

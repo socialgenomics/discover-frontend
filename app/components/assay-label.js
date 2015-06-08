@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import { getColours } from 'repositive.io/utils/colours';
+import { getColours, getColour } from 'repositive.io/utils/colours';
 import _ from 'npm:underscore';
 
 export default Ember.Component.extend({
@@ -7,11 +7,17 @@ export default Ember.Component.extend({
   classNames: 'assay-small',
   classNameBindings: 'colour',
   attributeBindings: 'title',
+
   colour: function(){
-    let assays = this.model.getEach('properties.assayType');
-    assays = assays.uniq();
-    let colours = getColours(assays.length);
-    return colours[assays.indexOf(this.assay)]
+    if (this.model){
+      let assays = this.model.getEach('properties.assayType');
+      assays = assays.uniq();
+      let colours = getColours(assays.length);
+      return colours[assays.indexOf(this.assay)]
+    }
+    else{
+      return getColour(this.assay)
+    }
   }.property('assay', 'model'),
   title: function(){
     return this.assay;       
