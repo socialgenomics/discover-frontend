@@ -9,6 +9,7 @@ export default DS.Model.extend({
   favorites: DS.hasMany('favourite'),
   comments: DS.hasMany('comments'),
   tags: DS.hasMany('tag'),
+  highlights: DS.belongsTo('highlight'),
   createdAt: DS.attr('isodate'),
   updatedAt: DS.attr('isodate'),
   count: DS.attr('number'),

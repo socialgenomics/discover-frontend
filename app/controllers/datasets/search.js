@@ -3,11 +3,13 @@ import _ from 'npm:underscore';
 import { titleCase } from 'repositive.io/utils/case';
 
 export default Ember.Controller.extend({
-  queryParams: ['q','ordering','assayType','tags','repository'],
+  queryParams: ['q','ordering','assayType','tags','repository','accessType'],
   q: null,
   ordering: null,
   assayType: null,
   tags: null,
+  accessType: null,
+  isModalShown:false,
 
   filters: function(){
     let _this = this;
@@ -24,7 +26,20 @@ export default Ember.Controller.extend({
 
   isFiltered: function(){
     let filters = this.get('filters');
-    return filters.filterBy('value')   
+    return filters.filterBy('value')
   }.property("filters.@each.value"),
 
+
+  actions:{
+    toggleModal(message){
+      console.log("Toggle moooodalll!!1111!");
+      // this.flashMessage({
+      //   content: message, // String
+      //   duration:6000, // Number in milliseconds
+      //   type: 'Fail', // String
+      // });
+      this.toggleProperty('isModalShown');
+      console.log(message);
+    },
+  }
 });

@@ -1,12 +1,13 @@
 import Ember from 'ember';
 import ajax from 'ic-ajax';
+import ENV from 'repositive.io/config/environment';
 
 export default Ember.Route.extend({
 
   model: function(){
     if (this.get('session.isAuthenticated')){
       return Ember.RSVP.all([
-        ajax({ url:'/api/datasets/search', type:'GET' }),
+        ajax({url: ENV.APIRoutes['datasets.search'] , type:'GET' }),
         this.store.find('dataset'),
       ])
       .then(function(data){

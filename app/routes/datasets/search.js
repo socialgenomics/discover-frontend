@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import _ from 'npm:underscore';
 import ajax from 'ic-ajax';
+import ENV from 'repositive.io/config/environment';
 
 
 var keyMappings = {
@@ -45,6 +46,9 @@ export default Ember.Route.extend({
     assayType: {
       refreshModel: true
     },
+    accessType:{
+      refreshModel: true
+    },
     repository: {
       refreshModel: true
     }
@@ -56,7 +60,7 @@ export default Ember.Route.extend({
     var query = dtoQueryObject(params)
 
     return ajax({
-        url:'/api/datasets/search',
+        url: ENV.APIRoutes['datasets.search'],
         type:'POST',
         data:query
     })

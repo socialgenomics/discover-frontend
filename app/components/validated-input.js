@@ -9,14 +9,6 @@ export default Ember.Component.extend({
   classNames:"input-container",
   classNameBindings:['isActive:active', 'isValid:valid', 'isInvalid:invalid'],
 
-  watchInput: function(){
-    if(this.errors.length == 0){
-      this.set("isValid", true);
-      this.set("isInvalid", false);
-    }
-  }.observes('value'),
-
-
   actions: {
     showErrors: function() {
       this.set("showError", true);
@@ -26,7 +18,8 @@ export default Ember.Component.extend({
       this.set ("isActive", true);
     },
     focusedOut:function(){
-      this.set("placeholder", this.type);
+      let placeholder = this.placeholder || ""
+      this.set("placeholder", placeholder);
       this.send('showErrors');
       this.set ("isActive", false);
       if (this.errors.length > 0){

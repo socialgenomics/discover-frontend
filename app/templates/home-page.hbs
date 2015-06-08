@@ -7,12 +7,50 @@
           <div class="stats"><span class="numb">{{ model.stats.datasets }}</span><span class="stats-text">Datasets</span></div>
         </div>
       </div>
+      <div class="row">
+        <div class="col m12 align-left">
+        <h5>Start exploring</h5>
+          {{#each dataset in model.datasets}}
+            {{render 'datasets/card' model.datasets dataset=dataset}}
+          {{/each}}
+        </div>
+      </div>
   </div>
-  <h6>Start exploring</h6>
-  <div class="row relative">
-  <!-- {{assay-key model=model}}
-  {{#each dataset in model}}
-    {{partial 'datasets/card' dataset=dataset}}
+  
+<!--   {{#each dataset in model.datasets }}
+    <p>
+      {{!card.properties.title}}
+      {{mini-dataset  dataset=dataset action="toggleModal"}}
+    </p>
   {{/each}} -->
+    <div class="row">
+      <!-- data registrations -->
+      <div class="col m6 left registred-data">
+      <h5>Register Data</h5>
+      <div class="card">
+        <div class="top-panel">
+          <p class="helper-text">
+            Do you have data to share? Do not be a tight-arse and share with the rest.
+          </p>
+        </div>
+        <div class="content-panel">
+          <h6>The latest registrations</h6>
+        </div>
+      </div>
+    </div>
+    <!--data requests-->
+    <div class="col m6 left registred-data">
+      <h5>Register Data</h5>
+      <div class="card">
+        <div class="top-panel">
+          <p class="helper-text">
+            Haven't found what you are looking for? There is a community of generous scientists happy to share.
+          </p>
+        </div>
+        <div class="content-panel">
+          <h6>The latest requests</h6>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

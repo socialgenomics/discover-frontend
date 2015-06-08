@@ -3,6 +3,7 @@ import Ember from 'ember';
 export default Ember.Controller.extend({
   queryParams: ['tab'],
   tab: "comments",
+  isModalShown:false,
 
   isPublic:function(){
     var accessType = this.get('model.repository.accessType');
@@ -17,6 +18,9 @@ export default Ember.Controller.extend({
         text:text,
       });
       cmnt.save();
+    },
+    toggleModal(){
+      this.toggleProperty('isModalShown');
     },
   },
 });

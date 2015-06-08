@@ -37,6 +37,7 @@ module.exports = function(environment) {
           "users.login" : "/api/users/login",
           "users.logout" : "/api/users/logout",
           "users.signup" : "/api/users",
+          "datasets.search" : "/api/datasets/search",
       };
       _.each(mapping,
         function(path, key, obj){

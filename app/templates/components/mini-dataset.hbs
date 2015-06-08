@@ -8,8 +8,9 @@
 			<div class="assay-container">
       </div>
 			<div class="actions-container">
-				<a class="modal-trigger"><i class="mdi-action-grade"></i></a>
-				<a class="modal-trigger"><i class="mdi-social-share"></i></a>
+				{{action-favourite}}
+        <span class="grey-text">{{data.favourite}}</span>
+        {{action-share targetObject=view action="toggleModal"}}
 			</div>
 		</div>
 

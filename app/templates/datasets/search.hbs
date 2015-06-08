@@ -1,6 +1,15 @@
 <div class="row relative">
-  <h6 class="left-align col m12 text-helper">You searched for <i>"{{q}}"</i></h6>
-  <h6 class="left-align col m12">Results: {{ meta.total }}</h6>
+  <p class="left-align col s6">You searched for <em class="highlight">"{{q}}"</em></p>
+  <p class="right-align col s6">
+  Results: {{ meta.total }}<br>
+  </p>
+  <!--
+  {{#each type in meta.accessTypes}}
+    {{#link-to 'datasets.search' (query-params accessType=type.key)}}
+    {{type.key}}: {{type.doc_count}}
+    {{/link-to}}
+  {{/each}}
+  -->
 
   {{#if isFiltered}}
   <h6 class="filters left-align col m12">
@@ -22,3 +31,17 @@
     {{partial 'datasets/card' dataset=dataset}}
   {{/each}}
 </div>
+
+{{#if isModalShown}}
+  {{#md-modal action="closeModal"}}
+  <div class="modal-content center-align">
+    <img src="/assets/images/icons/work-in-progress.png" alt="Logo" class="social-media-icon"/>
+  <!-- <img class="social-media-icon" src="/assets/images/icons/work-in-progress.png"/> -->
+    <h2>We are still working hard.</h2>
+    <h5>This feature will be available very soon. Please, do not leave us.</h5>
+  </div>
+  <div class="modal-footer center-align">
+    <a {{action "toggleModal"}} class="modal-action modal-close waves-effect">OK</a>
+  </div>
+  {{/md-modal}}
+{{/if}}
