@@ -9,11 +9,15 @@ export default Ember.Route.extend({
       return Ember.RSVP.all([
         ajax({url: ENV.APIRoutes['datasets.search'] , type:'GET' }),
         this.store.find('dataset'),
+        this.store.find('dataset', {isRequest: 1}),
+        this.store.find('dataset', {repository:"REPOSITIVE"})
       ])
       .then(function(data){
         return {
           stats: data[0],
-          datasets: data[1].slice(0,3)
+          datasets: data[1].slice(0,3),
+          requests: data[2],
+          registered: data[3]
         }
       })
     }
@@ -21,7 +25,6 @@ export default Ember.Route.extend({
       return null;
     }
   },
-
   actions:{
   }
 });

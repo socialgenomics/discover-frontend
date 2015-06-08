@@ -1,5 +1,5 @@
 <div id="homepage">
-  <div class="center-align">
+
       <!-- <p class="sub-head">Find the most relevant and hight quality datasets.</p> -->
       <div class="row">
         <div class="col m12 center-align">
@@ -8,14 +8,14 @@
         </div>
       </div>
       <div class="row">
-        <div class="col m12 align-left">
+        <div class="col m12 left-align">
         <h5>Start exploring</h5>
           {{#each dataset in model.datasets}}
             {{render 'datasets/card' model.datasets dataset=dataset}}
           {{/each}}
         </div>
       </div>
-  </div>
+
   
 <!--   {{#each dataset in model.datasets }}
     <p>
@@ -35,12 +35,15 @@
         </div>
         <div class="content-panel">
           <h6>The latest registrations</h6>
+            {{#each register in model.registered}}
+              {{mini-dataset dataset=register}}
+            {{/each}}
         </div>
       </div>
     </div>
     <!--data requests-->
     <div class="col m6 left registred-data">
-      <h5>Register Data</h5>
+      <h5 class='center'>Register Data</h5>
       <div class="card">
         <div class="top-panel">
           <p class="helper-text">
@@ -48,7 +51,10 @@
           </p>
         </div>
         <div class="content-panel">
-          <h6>The latest requests</h6>
+          <h6 class='center'>The latest requests</h6>
+          {{#each request in model.requests}}
+            {{mini-dataset dataset=request}}
+          {{/each}}
         </div>
       </div>
     </div>
