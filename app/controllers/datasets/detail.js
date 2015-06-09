@@ -13,11 +13,13 @@ export default Ember.Controller.extend({
   }.property('accessType'),
 
   actions: {
+    //link user to comment
     addComment:function(text){
       var cmnt = this.store.createRecord('comment', {
         text:text,
       });
       cmnt.save();
+      console.log(text);
     },
     toggleModal(){
       this.toggleProperty('isModalShown');
