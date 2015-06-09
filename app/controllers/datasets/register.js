@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import EmberValidations from 'ember-validations';
 
-export default Ember.Controller.extend(EmberValidations, {
+export default Ember.Controller.extend(EmberValidations.Mixin, {
   title:null,
   description:null,
   downloadURL:null,
@@ -13,12 +13,12 @@ export default Ember.Controller.extend(EmberValidations, {
     description:{
       presence: true,
     },
-    downloadURL:{
-      format: {
-        with: /[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/,
-        message: 'must be a valid url',
-      },
-    },
+//    downloadURL:{
+//      format: {
+//        with: /[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/,
+//        message: 'must be a valid url',
+//      },
+//    },
   },
   actions:{
     addDataset:function(){

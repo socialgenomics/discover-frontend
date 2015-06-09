@@ -5,6 +5,7 @@ export default Ember.Component.extend({
   isValid:false,
   isInvalid:false,
   value:'',
+  errors: [],
   //sets the class names of this component
   classNames:"input-container",
   classNameBindings:['isActive:active', 'isValid:valid', 'isInvalid:invalid'],
@@ -13,22 +14,27 @@ export default Ember.Component.extend({
     showErrors: function() {
       this.set("showError", true);
     },
-    focusedIn:function(){
+    focusedIn: function(){
       this.set("placeholder", "");
       this.set ("isActive", true);
     },
-    focusedOut:function(){
+    focusedOut: function(){
       let placeholder = this.placeholder || ""
       this.set("placeholder", placeholder);
       this.send('showErrors');
       this.set ("isActive", false);
-      if (this.errors.length > 0){
+
+      if (!Ember.isEmpty(this.errors)){
         this.set("isValid",false);
         this.set("isInvalid",true);
-      }else{
+      }
+      else{
         this.set("isValid", true);
         this.set("isInvalid", false);
       }
     },
+    submitForm: function(){
+      this.sendAction();            
+    }
   }
 });

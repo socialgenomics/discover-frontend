@@ -10,6 +10,7 @@
           value=title 
           errors=errors.title 
           placeholder="Add a title for your dataset."
+          action=addDataset
         }}
       </div>
       <div class="lbl">Title</div>
@@ -17,18 +18,23 @@
     </div>
     <div class="input-container">
       <div class="input-field">
-      {{textarea type="text" value=description errors=errors.description placeholder="A short description of the dataset" style="height:150px"}}
+        {{textarea type="text" 
+          value=description 
+          errors=errors.description 
+          placeholder="A short description of the dataset" 
+          style="height:150px"
+          action=addDataset
+        }}
       </div>
-      <div class="lbl">Description</div>
-      <div class="input-helper">Say something about the dataset.</div>
     </div>
     <div class="input-container">
       <div class="input-field">
-        {{validated-input 
-          type="text" 
+        {{validated-input
+          type="text"
           value=downloadURL 
-          errors=errors.downloadURL 
-          placeholder="If the dataset is online please add the URL here."
+          errors=errors.downloadURL
+          placeholder="A link to the dataset if available"
+          action=addDataset
         }}
       </div>
     </div>
