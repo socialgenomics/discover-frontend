@@ -6,6 +6,7 @@ export default DS.RESTSerializer.extend(DS.EmbeddedRecordsMixin, {
     repository: {embedded: 'always'},
     highlights: {embedded: 'always'},
     tags: {embedded: 'always'},
+    comments: {embedded: 'always'},
     owner: { serialize: 'ids' },
   },
   serialize: function(snapshot, options){

@@ -1,3 +1,2 @@
-{{yield}}
-{{textarea class="comment-textarea" value=comment placeholder=placeholder focus-in="focusedIn" focus-out="focusedOut"}}
-{{#if isActive}}<a {{action 'addComment'}} class="right btn teal white-text" >Post</a>{{/if}}
+{{textarea class="comment-textarea" value=comment placeholder="write a comment" focus-in="focusedIn" focus-out="focusedOut"}}
+{{!#if isActive}}<a {{action 'addComment'}} class="right btn teal white-text" >Post</a>{{!/if}}

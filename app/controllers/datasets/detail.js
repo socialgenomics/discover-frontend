@@ -13,13 +13,13 @@ export default Ember.Controller.extend({
   }.property('accessType'),
 
   actions: {
-    //link user to comment
     addComment:function(text){
       var cmnt = this.store.createRecord('comment', {
         text:text,
       });
+      cmnt.dataset = this.model.id; //THIS DOESN'T WORK!
+      cmnt.user = this.get('session.user.id');
       cmnt.save();
-      console.log(text);
     },
     toggleModal(){
       this.toggleProperty('isModalShown');
