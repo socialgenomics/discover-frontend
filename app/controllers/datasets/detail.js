@@ -4,7 +4,7 @@ export default Ember.Controller.extend({
   queryParams: ['tab'],
   tab: "comments",
   isModalShown:false,
-  
+
   isPublic:function(){
     var accessType = this.get('model.repository.accessType');
     if(accessType == "public" || accessType =="open"){
@@ -21,6 +21,12 @@ export default Ember.Controller.extend({
 
       cmnt.user = this.get('session.user.id');
       cmnt.save();
+    },
+    addTag:function(text){
+      var tag = this.store.createRecord('tag',{
+        word:text,
+      })
+      tag.save();
     },
     toggleModal(){
       this.toggleProperty('isModalShown');
