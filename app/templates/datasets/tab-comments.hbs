@@ -11,26 +11,5 @@
     {{#each comment in model.comments}}
       {{user-comment user=comment.user.displayName text=comment.text date=comment.createdAt}}
     {{/each}}
-
-    <div class="comment">
-      <div class="comment-header">
-        <div class="dp-wrapper">
-          <img src="/assets/images/elena-watson.png" alt="your display picture" class="display-pic">
-        </div>
-        <h4>tom smith</h4>
-        <span>392213/313.31/312</span>
-      </div>
-      <div class="comment-body">
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-      </div>
-      <!-- <div class="comment-footer">
-        <ul class="list-inline">
-          <li><a class="btn-upvote">Upvote<span>41</span></a></li>
-          <li><a>Downvote</a></li>
-          <li><a>Reply</a></li>
-          <li><a>Flag</a></li>
-        </ul>
-      </div> -->
-    </div>
   </div>
 </div>
