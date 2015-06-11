@@ -5,17 +5,19 @@
         <img src="/assets/icons/person-icon.png" alt="your display picture" class="display-pic">
       </div>
       <div class="input-field">
-        {{add-comment placeholder="write a comment" addComment="addComment"}}
+        {{add-comment addComment="addComment"}}
       </div>
     </div>
-    {{#each comment in dataset.comments}}
-      <p>
+    {{#each comment in model.comments}}
+      <!-- <p>
         {{comment.text}}
-      </p>
+      </p> -->
+      <h2>New Comment</h2>
       <!-- {{user-comment user='user.name' text='comment.text' date='comment.date'}} -->
     {{/each}}
-    {{#unless model.isRequest}}
-      <div class="comment">
+
+	 {{#unless model.isRequest}}
+      <!-- <div class="comment">
         <div class="comment-header">
           <div class="dp-wrapper">
             <img src="/assets/images/elena-watson.png" alt="your display picture" class="display-pic">
@@ -34,7 +36,7 @@
             <li><a href="#">Flag</a></li>
           </ul>
         </div>
-        <!--FIRST REPLY-->
+
         <div class="comment reply">
           <div class="comment-header">
             <div class="dp-wrapper">
@@ -55,9 +57,9 @@
             </ul>
           </div>
         </div>
-      </div>
+      </div> -->
 
-      <div class="comment reply">
+      <!-- <div class="comment reply">
         <div class="comment-header">
           <div class="dp-wrapper">
             <img src="/assets/images/Christina.png" alt="your display picture" class="display-pic">
@@ -76,7 +78,7 @@
             <li><a href="#">Flag</a></li>
           </ul>
         </div>
-      </div>
-      {{/unless}}
+      </div> -->
+	{{/unless}}
   </div>
 </div>

@@ -17,6 +17,8 @@ export default Ember.Controller.extend({
       var cmnt = this.store.createRecord('comment', {
         text:text,
       });
+      cmnt.dataset = this.model.id; //THIS DOESN'T WORK!
+      cmnt.user = this.get('session.user.id');
       cmnt.save();
     },
     toggleModal(){

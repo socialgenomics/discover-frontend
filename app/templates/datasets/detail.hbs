@@ -11,6 +11,7 @@
     </div>
     <div class="card-main-content">
 	<div class="dataset-main-info">
+      <h2>{{user.displayName}}</h2>
       <h2>{{model.properties.title}}</h2>
       <p>{{model.properties.description}}</p>
       <div class="tags">
@@ -19,10 +20,10 @@
         <span class="tag">{{tag.word}}</span>
         {{/link-to}}
         {{/each}}
-        
+
         <!-- enable this feature when it's ready
          <a class="add-tag"><span class="add-btn" title="Add Tag">+</span></a> -->
-      
+
       </div>
       </div>
       <div class="dataset-more-info-section">
