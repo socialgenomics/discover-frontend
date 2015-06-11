@@ -2,6 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   isActive:false,
+  isValid:false,
   classNames:"write-comment",
   classNameBindings:['isActive:active'],
   comment:null,
@@ -14,7 +15,10 @@ export default Ember.Component.extend({
       this.set('comment', null);
     },
     addComment:function(){
-      this.sendAction('addComment',this.comment);
+      //temporary validation
+      if(this.comment != ""){
+        this.sendAction('addComment',this.comment);
+      }
       this.send('cancel');
     },
   },
