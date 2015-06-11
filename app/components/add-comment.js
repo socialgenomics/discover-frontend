@@ -9,9 +9,9 @@ export default Ember.Component.extend({
     focusedIn:function(){
       this.set ("isActive", true);
     },
-    focusedOut:function(){
-      this.set ("isActive", false);
-    },
+    // focusedOut:function(){
+    //   this.set ("isActive", false);
+    // },
     addComment:function(){
       this.sendAction('addComment',this.comment);
     },

@@ -4,7 +4,7 @@ export default Ember.Controller.extend({
   queryParams: ['tab'],
   tab: "comments",
   isModalShown:false,
-
+  
   isPublic:function(){
     var accessType = this.get('model.repository.accessType');
     if(accessType == "public" || accessType =="open"){
@@ -16,8 +16,9 @@ export default Ember.Controller.extend({
     addComment:function(text){
       var cmnt = this.store.createRecord('comment', {
         text:text,
+        dataset: this.model, //THIS DOESN'T WORK!
       });
-      cmnt.dataset = this.model.id; //THIS DOESN'T WORK!
+
       cmnt.user = this.get('session.user.id');
       cmnt.save();
     },

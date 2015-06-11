@@ -1,83 +1,36 @@
 <div class="card-side-content">
-  <div id="test1" class="col s12">
+  <div class="col s12">
     <div class="write-comment">
       <div class="dp-wrapper">
-        <img src="/assets/icons/person-icon.png" alt="your display picture" class="display-pic">
+        <img src="/assets/icons/person-icon.png" alt="Your display picture" class="display-pic">
       </div>
       <div class="input-field">
         {{add-comment addComment="addComment"}}
       </div>
     </div>
     {{#each comment in model.comments}}
-      <!-- <p>
-        {{comment.text}}
-      </p> -->
-      <h2>New Comment</h2>
-      <!-- {{user-comment user='user.name' text='comment.text' date='comment.date'}} -->
+      {{user-comment user=comment.user.displayName text=comment.text date=comment.createdAt}}
     {{/each}}
 
-
-      <!-- <div class="comment">
-        <div class="comment-header">
-          <div class="dp-wrapper">
-            <img src="/assets/images/elena-watson.png" alt="your display picture" class="display-pic">
-          </div>
-          <h4>Elena Watson</h4>
-          <span>3 months ago</span>
+    <div class="comment">
+      <div class="comment-header">
+        <div class="dp-wrapper">
+          <img src="/assets/images/elena-watson.png" alt="your display picture" class="display-pic">
         </div>
-        <div class="comment-body">
-          <p>I published a meta-analysis of prostate cancer biomarkers based on this data, among others.See my paper here paper.com/dan-fair-13dh8.</p>
-        </div>
-        <div class="comment-footer">
-          <ul class="list-inline">
-            <li><a href="#" class="btn-upvote">Upvote<span>41</span></a></li>
-            <li><a href="#">Downvote</a></li>
-            <li><a href="#">Reply</a></li>
-            <li><a href="#">Flag</a></li>
-          </ul>
-        </div>
-
-        <div class="comment reply">
-          <div class="comment-header">
-            <div class="dp-wrapper">
-              <img src="/assets/images/Dan.png" alt="your display picture" class="display-pic">
-            </div>
-            <h4>Dan Smith</h4>
-            <span>3 months ago</span>
-          </div>
-          <div class="comment-body">
-            <p>The dataset is missing detailed description about the assay used in the research. I would find this information very useful.</p>
-          </div>
-          <div class="comment-footer">
-            <ul class="list-inline">
-              <li><a href="#" class="btn-upvote">Upvote <span>13</span></a></li>
-              <li><a href="#">Downvote</a></li>
-              <li><a href="#">Reply</a></li>
-              <li><a href="#">Flag</a></li>
-            </ul>
-          </div>
-        </div>
+        <h4>tom smith</h4>
+        <span>392213/313.31/312</span>
+      </div>
+      <div class="comment-body">
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      </div>
+      <!-- <div class="comment-footer">
+        <ul class="list-inline">
+          <li><a class="btn-upvote">Upvote<span>41</span></a></li>
+          <li><a>Downvote</a></li>
+          <li><a>Reply</a></li>
+          <li><a>Flag</a></li>
+        </ul>
       </div> -->
-
-      <!-- <div class="comment reply">
-        <div class="comment-header">
-          <div class="dp-wrapper">
-            <img src="/assets/images/Christina.png" alt="your display picture" class="display-pic">
-          </div>
-          <h4>Christina Nicolson</h4>
-          <span>3 months ago</span>
-        </div>
-        <div class="comment-body">
-          <p>Hi Elena, I updated the description with categories included in the dataset i.e. DNA seq and DNA array.</p>
-        </div>
-        <div class="comment-footer">
-          <ul class="list-inline">
-            <li><a href="#" class="btn-upvote">Upvote <span>22</span></a></li>
-            <li><a href="#">Downvote</a></li>
-            <li><a href="#">Reply</a></li>
-            <li><a href="#">Flag</a></li>
-          </ul>
-        </div>
-      </div> -->
+    </div>
   </div>
 </div>
