@@ -1,15 +1,8 @@
 <div class="card-side-content">
   <div class="col s12">
-    <div class="write-comment">
-      <div class="dp-wrapper">
-        <img src="/assets/icons/person-icon.png" alt="Your display picture" class="display-pic">
-      </div>
-      <div class="input-field">
-        {{add-comment addComment="addComment"}}
-      </div>
-    </div>
+    {{add-comment addComment="addComment"}}
     {{#each comment in model.comments}}
-      {{user-comment user=comment.user.displayName text=comment.text date=comment.createdAt}}
+      {{user-comment user=comment.user text=comment.text date=comment.createdAt}}
     {{/each}}
   </div>
 </div>
