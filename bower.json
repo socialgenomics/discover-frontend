@@ -14,6 +14,7 @@
     "qunit": "~1.17.1",
     "ember-simple-auth": "0.7.3",
     "ic-ajax": "~2.0.2",
-    "materialize": "~0.96.1"
+    "materialize": "~0.96.1",
+    "ember-cli-moment-shim": "~0.1.0"
   }
 }

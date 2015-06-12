@@ -67,5 +67,6 @@ var app = new EmberApp({
 // along with the exports of each module as its value.
 
 app.import('bower_components/materialize/sass/materialize.scss');
+
 //app.import('bower_components/materialize/dist/js/materialize.js');
 module.exports = app.toTree();
