@@ -6,6 +6,7 @@ export default Ember.Component.extend({
   classNames:"write-comment",
   classNameBindings:['isActive:active'],
   comment:null,
+
   actions: {
     focusedIn:function(){
       this.set ("isActive", true);

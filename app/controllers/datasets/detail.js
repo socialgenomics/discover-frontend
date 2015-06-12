@@ -16,16 +16,15 @@ export default Ember.Controller.extend({
     addComment:function(text){
       var cmnt = this.store.createRecord('comment', {
         text:text,
-        dataset: this.model, //THIS DOESN'T WORK!
+        dataset: this.model,
       });
-
       cmnt.user = this.get('session.user.id');
       cmnt.save();
     },
     addTag:function(text){
       var tag = this.store.createRecord('tag',{
         word:text,
-      })
+      });
       tag.save();
     },
     toggleModal(){

@@ -9,7 +9,6 @@
         <div class="row">
           <form {{action "save" on="submit"}}>
             <div class="row">
-              <!-- <h5>Personal</h5> -->
               <div class="input-container col m6 offset-m3">
                 <div class="input-field no-margin-top">
                   {{input type="text" placeholder="First Name" value=model.user.firstname}}
@@ -55,7 +54,7 @@
               {{#if saved}}
                 <p class="text-valid center-align">Save Successful.</p>
               {{/if}}
-              <button type="submit" class="btn teal white-text">Save</button>              
+              <button type="submit" class="btn teal white-text">Save</button>
             </div>
           </form>
         </div>
