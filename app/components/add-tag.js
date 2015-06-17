@@ -5,7 +5,7 @@ export default Ember.Component.extend({
   isOpen:false,
   actions:{
     addTag:function(){
-      if(this.tag != ""){
+      if(this.tag !== ""){
         this.sendAction('addTag',this.tag);
       }
       this.set('tag',null);

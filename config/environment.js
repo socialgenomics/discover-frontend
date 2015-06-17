@@ -78,8 +78,13 @@ module.exports = function(environment) {
       }
     },
     contentSecurityPolicy: {
+      'default-src': "'none'",
       'font-src': "'self' data: fonts.gstatic.com",
-      'style-src': "'self' 'unsafe-inline' fonts.googleapis.com"
+      'style-src': "'self' 'unsafe-inline' fonts.googleapis.com",
+      'script-src': "'self' 'unsafe-inline' http://api.calq.io", // Allow scripts from api.calq.io
+      'connect-src': "'self' 'unsafe-inline' http://api.calq.io", // Allow data (ajax/websocket) from api.calq.io
+      'img-src': "'self'",
+      'media-src': "'self'",
     },
   };
 

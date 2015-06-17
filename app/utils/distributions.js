@@ -7,7 +7,7 @@ export function poisson(expectvalue){
 
   while(x > limit){
     n++;
-    x *= Math.random();;
+    x *= Math.random();
   }
   return n;
 }

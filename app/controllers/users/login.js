@@ -37,6 +37,10 @@ export default Ember.ObjectController.extend(
   },
   actions: {
     submitForm: function() {
+      calq.action.track(
+        "Login Button Click",
+        { "User": "Lalala"}
+      );
       var _this = this;
       this.set('loading', true)
       this.get('session')
@@ -46,7 +50,7 @@ export default Ember.ObjectController.extend(
       })
       .then(function(resp){
         _this.set('loading', false)
-      }, 
+      },
       function(error){
         _this.set('loading', false)
       });
