@@ -22,12 +22,13 @@ export default Base.extend({
       }).then(function(resp){
         resp.user.isCurrentUser = true;
 
-        //README!!! This is calq analytics code to register a new user on calq - not sure where the best place to put this was - SP
+        //ANALYTICS CODE FOR CALQ PROFILE SETUP
         calq.user.identify(resp.user.username);
-        console.log(resp.user.email);
         calq.user.profile(
             {"$email": resp.user.email }
         );
+        // END OF ANALYTICS CODE
+
         Ember.run(function(){
           // all the properties of the object you resolve with
           // will be added to the session
