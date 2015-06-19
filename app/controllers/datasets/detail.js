@@ -13,6 +13,19 @@ export default Ember.Controller.extend({
   }.property('accessType'),
 
   actions: {
+    //Register when someone click the "Access Data" button
+    trackExit:function(){
+      calq.action.track(
+        "Dataset.ToData",
+        {
+          "Title":this.get('model.properties.title'),
+          "URL":this.get('model.properties.downloadURL'),
+        }
+      );
+      //Hack to open link in new tab - NEED TO TEST THIS IN OTHER BROWSERS!
+      var tab  = window.open(this.get('model.properties.downloadURL'),'_blank');
+      tab.focus();
+    },
     addComment:function(text){
       var cmnt = this.store.createRecord('comment', {
         text:text,

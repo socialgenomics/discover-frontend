@@ -37,9 +37,6 @@ export default Ember.ObjectController.extend(
   },
   actions: {
     submitForm: function() {
-      calq.action.track(
-        "Login Button Click"
-      );
       var _this = this;
       this.set('loading', true);
       this.get('session')

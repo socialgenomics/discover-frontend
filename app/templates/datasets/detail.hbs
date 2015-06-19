@@ -54,7 +54,7 @@
     <div class="row bottom-static">
       <div class="center-align card-action">
         {{#if model.properties.downloadURL}}
-        <a target="_blank" {{bind-attr href="model.properties.downloadURL"}} class="btn waves-effect teal white-text">{{#if isPublic}}Access Data{{else}}Apply for Access{{/if}}</a>
+        <a target="_blank" {{action "trackExit"}} class="btn waves-effect teal white-text">{{#if isPublic}}Access Data{{else}}Apply for Access{{/if}}</a>
         {{else}}
         <a class="btn disabled white-text">{{#if isPublic}}Access Data{{else}}Apply for Access{{/if}}</a>
         {{/if}}

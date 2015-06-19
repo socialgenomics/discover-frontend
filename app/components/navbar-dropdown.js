@@ -21,6 +21,9 @@ export default Ember.Component.extend({
   actions: {
 
     logout: function(){
+      calq.action.track(
+        "User.Logout"
+      );
       this.get("session").invalidate();
     },
   }
