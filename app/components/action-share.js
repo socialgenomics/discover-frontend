@@ -3,7 +3,10 @@ import Ember from 'ember';
 export default Ember.Component.extend({
   tagName: 'a',
   click: function(){
-    //sends to application.js route's showModal method
+    calq.action.track(
+      "Dataset.Share"
+    );
+    //sends to showModal in parent controller
     this.sendAction();
   },
 });

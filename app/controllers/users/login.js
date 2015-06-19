@@ -38,21 +38,20 @@ export default Ember.ObjectController.extend(
   actions: {
     submitForm: function() {
       calq.action.track(
-        "Login Button Click",
-        { "User": "Lalala"}
+        "Login Button Click"
       );
       var _this = this;
-      this.set('loading', true)
+      this.set('loading', true);
       this.get('session')
       .authenticate('authenticator:repositive', {
         email: this.email,
         password: this.password
       })
       .then(function(resp){
-        _this.set('loading', false)
+        _this.set('loading', false);
       },
       function(error){
-        _this.set('loading', false)
+        _this.set('loading', false);
       });
     }
   }

@@ -6,6 +6,10 @@ export default Ember.Component.extend({
   actions:{
     addTag:function(){
       if(this.tag !== ""){
+        calq.action.track(
+          "Dataset.AddTag",
+          {"TagName":this.tag}
+        );
         this.sendAction('addTag',this.tag);
       }
       this.set('tag',null);

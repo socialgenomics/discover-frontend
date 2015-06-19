@@ -43,10 +43,10 @@ Router.map(function() {
 
 
 //calq page view tracking
-Router.reopen({
-  notifyCalq: function(){
-    calq.action.trackPageView( this.get('url'));
-  }.on('didTransition')
-});
+// Router.reopen({
+//   notifyCalq: function(){
+//     calq.action.trackPageView( this.get('url'));
+//   }.on('didTransition')
+// });
 
 export default Router;

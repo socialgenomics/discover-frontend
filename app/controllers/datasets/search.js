@@ -31,15 +31,8 @@ export default Ember.Controller.extend({
 
 
   actions:{
-    toggleModal(message){
-      console.log("Toggle moooodalll!!1111!");
-      // this.flashMessage({
-      //   content: message, // String
-      //   duration:6000, // Number in milliseconds
-      //   type: 'Fail', // String
-      // });
+    toggleModal(){
       this.toggleProperty('isModalShown');
-      console.log(message);
     },
   }
 });
