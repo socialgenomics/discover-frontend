@@ -35,7 +35,14 @@ export default Ember.Controller.extend(EmberValidations.Mixin, {
           downloadURL:this.downloadURL
         });
         dataset.properties = props;
-
+        calq.action.track(
+          "Dataset.Register",
+          {
+            "title":this.title,
+            "description":this.description,
+            "url":this.downloadURL
+          }
+        );
         dataset.save()
         .then(function(created){
           _this.flashMessage({
@@ -44,14 +51,7 @@ export default Ember.Controller.extend(EmberValidations.Mixin, {
             type: 'Success', // String
           });
 
-          calq.action.track(
-            "Dataset.Register",
-            {
-              "title":this.title,
-              "description":this.description,
-              "url":this.downloadURL
-            }
-          );
+
           _this.transitionToRoute('datasets.detail',created.id);
         })
         .catch(function(err){
