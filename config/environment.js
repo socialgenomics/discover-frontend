@@ -81,9 +81,9 @@ module.exports = function(environment) {
       'default-src': "'none'",
       'font-src': "'self' data: fonts.gstatic.com",
       'style-src': "'self' 'unsafe-inline' fonts.googleapis.com",
-      'script-src': "'self' 'unsafe-inline' http://api.calq.io", // Allow scripts from api.calq.io
+      'script-src': "'self' 'unsafe-inline' http://api.calq.io http://www.google-analytics.com/analytics.js", // Allow scripts from api.calq.io
       'connect-src': "'self' 'unsafe-inline' http://api.calq.io", // Allow data (ajax/websocket) from api.calq.io
-      'img-src': "'self'",
+      'img-src': "'self' http://www.google-analytics.com",
       'media-src': "'self'",
     },
   };

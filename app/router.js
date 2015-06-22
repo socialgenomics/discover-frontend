@@ -43,9 +43,19 @@ Router.map(function() {
 
 
 //calq page view tracking
+// Router.reopen({
+//   notifyCalq: function(){
+//     calq.action.trackPageView( this.get('url'));
+//   }.on('didTransition')
+// });
+
+//google analytics
 Router.reopen({
-  notifyCalq: function(){
-    calq.action.trackPageView( this.get('url'));
+  notifyGoogleAnalytics: function() {
+    return ga('send', 'pageview', {
+        'page': this.get('url'),
+        'title': this.get('url')
+      });
   }.on('didTransition')
 });
 
