@@ -16,7 +16,7 @@
         </div>
       </div>
 
-  
+
 <!--   {{#each dataset in model.datasets }}
     <p>
       {{!card.properties.title}}
@@ -36,7 +36,7 @@
         <div class="card-content">
           <h6 class="center">The latest registrations</h6>
             {{#each register in model.registered}}
-              {{mini-dataset dataset=register}}
+              {{mini-dataset dataset=register action="toggleModal"}}
             {{/each}}
         </div>
       </div>
