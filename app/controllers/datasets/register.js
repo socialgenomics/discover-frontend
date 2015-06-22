@@ -43,6 +43,15 @@ export default Ember.Controller.extend(EmberValidations.Mixin, {
             duration:3000, // Number in milliseconds
             type: 'Success', // String
           });
+
+          calq.action.track(
+            "Dataset.Register",
+            {
+              "title":this.title,
+              "description":this.description,
+              "url":this.downloadURL
+            }
+          );
           _this.transitionToRoute('datasets.detail',created.id);
         })
         .catch(function(err){
