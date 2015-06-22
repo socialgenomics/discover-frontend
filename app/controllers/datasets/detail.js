@@ -5,6 +5,14 @@ export default Ember.Controller.extend({
   tab: "comments",
   isModalShown:false,
 
+  comments: function(){
+    return Ember.ArrayProxy.createWithMixins(Ember.SortableMixin, {
+      sortProperties: ['createdAt'],
+      sortAscending: false,
+      content: this.get('model.comments')
+    });
+  }.property('model.comments'),
+
   isPublic:function(){
     var accessType = this.get('model.repository.accessType');
     if(accessType == "public" || accessType =="open"){
@@ -30,8 +38,8 @@ export default Ember.Controller.extend({
       var cmnt = this.store.createRecord('comment', {
         text:text,
         dataset: this.model,
+        owner: this.get('session.user'),
       });
-      cmnt.user = this.get('session.user.id');
       cmnt.save();
     },
     addTag:function(text){
