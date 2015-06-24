@@ -1,9 +1,16 @@
 {{#if isOpen}}
-<form {{action "addTag" on="submit"}}>
+<!-- <form {{action "addTag" on="submit"}}>
   {{input value=tag type="text" placeholder="Enter tag name"}}
   <button class="btn white grey-text" type="submit">Add Tag</button>
   <a {{action "toggleInput"}} class="grey-text cancel-btn">Cancel</a>
-</form>
+</form> -->
+  <form {{action "addTag" on="submit"}}>
+    <div class="input-field">
+      {{input value=tag type="text" placeholder="Enter tag name" class="col m7"}}
+      <button class="btn white grey-text" type="submit">Add Tag</button>
+      <a {{action "toggleInput"}} class="grey-text cancel-btn">Close</a>
+    </div>
+  </form>
 {{else}}
 <button  {{action "toggleInput"}} class="btn white grey-text">Add Tag</button>
 {{/if}}

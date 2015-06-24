@@ -14,20 +14,26 @@
       <h2>{{user.displayName}}</h2>
       <h2>{{model.properties.title}}</h2>
       <p>{{model.properties.description}}</p>
-      <div class="tags">
-        {{#each tag in model.tags}}
-        {{#link-to 'datasets.tags' tag.word}}
-        <span class="tag">{{tag.word}}</span>
-        {{/link-to}}
-        {{/each}}
-        {{add-tag addTag="addTag"}}
-      </div>
+      <h5>Tags:</h5>
+      {{#if model.tags}}
+        <div class="tags">
+          {{#each tag in model.tags}}
+          {{#link-to 'datasets.tags' tag.word}}
+          <span class="tag">{{tag.word}}</span>
+          {{/link-to}}
+          {{/each}}
+        </div>
+      {{else}}
+        <p class="grey-text">This dataset has not yet been tagged.</p>
+      {{/if}}
+
+      {{add-tag addTag="addTag"}}
       </div>
       <div class="dataset-more-info-section">
-        <div class="divider"></div>
-        <h3 class="center">Information</h3>
+        <!-- <div class="divider"></div> -->
+        <!-- <h3 class="center">Information</h3>
         <hr class="red">
-        <p class="helper-text center">More details about the dataset.</p>
+        <p class="helper-text center">More details about the dataset.</p> -->
         <div class="row">
           <div class="col m12">
             <ul class="card-info-list">

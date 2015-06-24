@@ -5,10 +5,10 @@
   <form class="col s8 offset-s2" {{action "addDataset" on="submit"}}>
     <div class="input-container">
       <div class="input-field">
-        {{validated-input 
-          type="text" 
-          value=title 
-          errors=errors.title 
+        {{validated-input
+          type="text"
+          value=title
+          errors=errors.title
           placeholder="Add a title for your dataset."
           action=addDataset
         }}
@@ -18,10 +18,10 @@
     </div>
     <div class="input-container">
       <div class="input-field">
-        {{textarea type="text" 
-          value=description 
-          errors=errors.description 
-          placeholder="A short description of the dataset" 
+        {{textarea type="text"
+          value=description
+          errors=errors.description
+          placeholder="A short description of the dataset"
           style="height:150px"
           action=addDataset
         }}
@@ -31,7 +31,7 @@
       <div class="input-field">
         {{validated-input
           type="text"
-          value=downloadURL 
+          value=downloadURL
           errors=errors.downloadURL
           placeholder="A link to the dataset if available"
           action=addDataset
@@ -40,7 +40,7 @@
     </div>
 
     <div class="input-container col m12">
-      <button type="submit" class="btn teal white-text">Add Dataset</button>
+      <button type="submit" class="btn teal white-text">Register Dataset</button>
     </div>
 
   </form>

@@ -46,6 +46,7 @@ export default Ember.Controller.extend({
       var tag = this.store.createRecord('tag',{
         word:text,
       });
+      this.get('model.tags').pushObject(tag);
       tag.save();
     },
     toggleModal(){
