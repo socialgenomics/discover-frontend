@@ -86,6 +86,10 @@ module.exports = function(environment) {
       'img-src': "'self' http://www.google-analytics.com",
       'media-src': "'self'",
     },
+    TRACKING: {
+      LOG_EVENT_TRACKING: true,
+      ENABLED: false,
+    },
   };
 
   if (environment === 'development') {
@@ -114,6 +118,7 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
+    ENV.TRACKING.ENABLED = true;
     ENV.torii.providers['google-oauth2'].redirectUri = 'http://discover.repositive.io'
     ENV.torii.providers['linked-in-oauth2'].redirectUri = 'http://dicsover.repositive.io'
   }

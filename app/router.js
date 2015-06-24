@@ -1,7 +1,8 @@
 import Ember from 'ember';
 import config from './config/environment';
+import TrackingMixin from 'repositive.io/mixins/tracking-mixin'
 
-var Router = Ember.Router.extend({
+var Router = Ember.Router.extend(TrackingMixin, {
   location: config.locationType
 });
 
@@ -39,24 +40,6 @@ Router.map(function() {
 
   this.route('404', { path: '/*path' });
 
-});
-
-
-//calq page view tracking
-// Router.reopen({
-//   notifyCalq: function(){
-//     calq.action.trackPageView( this.get('url'));
-//   }.on('didTransition')
-// });
-
-//google analytics
-Router.reopen({
-  notifyGoogleAnalytics: function() {
-    return ga('send', 'pageview', {
-        'page': this.get('url'),
-        'title': this.get('url')
-      });
-  }.on('didTransition')
 });
 
 export default Router;

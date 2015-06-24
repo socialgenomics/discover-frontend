@@ -31,23 +31,27 @@ export default Ember.Controller.extend({
         }
       );
       //Hack to open link in new tab - NEED TO TEST THIS IN OTHER BROWSERS!
-      var tab  = window.open(this.get('model.properties.downloadURL'),'_blank');
+      var tab = window.open(this.get('model.properties.downloadURL'),'_blank');
       tab.focus();
     },
-    addComment:function(text){
+
+    addComment(text){
       var cmnt = this.store.createRecord('comment', {
-        text:text,
+        text: text,
         dataset: this.model,
         owner: this.get('session.user'),
       });
       cmnt.save();
     },
-    addTag:function(text){
+
+    addTag(text){
       var tag = this.store.createRecord('tag',{
-        word:text,
+        word: text,
+        dataset: this.model,
       });
       tag.save();
     },
+
     toggleModal(){
       this.toggleProperty('isModalShown');
     },
