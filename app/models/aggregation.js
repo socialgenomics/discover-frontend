@@ -7,6 +7,8 @@ var keyMappings = {
 export default DS.Model.extend({
   field: DS.attr('string'),
   term: DS.attr('string'),
+  selected: DS.attr('boolean'),
+
   serialize(){
     var field = keyMappings[field];
     return {

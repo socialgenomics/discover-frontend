@@ -32,27 +32,28 @@ export default DS.Model.extend({
     this.set('query', this.get('query') || query);
     
     return ajax({
-        url: ENV.APIRoutes['datasets.search'],
-        type:'POST',
-        data:query
+      url: ENV.APIRoutes['datasets.search'],
+      type:'POST',
+      data:query
     })
     .then(function(resp){
-      _this.meta = resp.meta;
-      delete resp.meta;
-      if (_this.meta.total > 0){
-        _this.store.pushPayload('Dataset', resp);
-        var ids = _.map(resp.datasets, function(dataset){ return dataset.id; });
-        // Using `store.find('dataset', {ids: ids})` hits the backend.
-        // use this instead..
-        _this.datasets = _.map(ids, function(id){
-          return _this.store.find('Dataset', id);
-        });
-        return _this; 
-      }
-      else {
-        return Ember.RSVP.reject("No results")
-      }
-    }).catch(function(err){
+      if (_this.meta.total < 0){ return Ember.RSVP.reject("No results") }
+
+      // load the results
+      _this.store.pushPayload('Dataset', resp);
+      var ids = _.map(resp.datasets, function(dataset){ return dataset.id; });
+      // Using `store.find('dataset', {ids: ids})` hits the backend.
+      // use this instead..
+      _this.datasets = _.map(ids, function(id){
+        return _this.store.find('Dataset', id);
+      });
+
+      // load the aggregations
+      for 
+
+      return _this;
+    })
+    .catch(function(err){
       console.assert(false, err)
       return Ember.RSVP.reject(err)
     });
