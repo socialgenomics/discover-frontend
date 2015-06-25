@@ -2,6 +2,7 @@ import Ember from 'ember';
 import _ from 'npm:underscore';
 import ajax from 'ic-ajax';
 import ENV from 'repositive.io/config/environment';
+import SearchModel from 'repositive.io/models/search';
 
 
 var keyMappings = {
@@ -58,6 +59,14 @@ export default Ember.Route.extend({
   model: function(params){
     var _this = this;
     var query = dtoQueryObject(params)
+    
+    var search = SearchModel.createFromQueryParams(params);
+
+    var search.user = this.get('currentUser');
+
+    search.run().then(function(results){
+      // TODO: search result
+    })
 
     return ajax({
         url: ENV.APIRoutes['datasets.search'],

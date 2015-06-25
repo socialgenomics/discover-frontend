@@ -9,11 +9,16 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     return new Ember.RSVP.all([
       _this.store.find('user', currentUser.id),
       _this.store.find('profile', {UserId: currentUser.id}),
-    ]).then(function(values){
+    ])
+    .then(function(values){
       return {
         user: values[0],
         profile: values[1].get('firstObject'),
       }
+    })
+    .catch(function(err){
+      console.assert(false, err);
+      return Ember.RSVP.reject(err);
     });
   },
   // model: function(){
