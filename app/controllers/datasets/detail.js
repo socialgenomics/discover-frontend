@@ -47,8 +47,8 @@ export default Ember.Controller.extend({
     addTag(text){
       var tag = this.store.createRecord('tag',{
         word: text,
-        dataset: this.model,
       });
+      tag.dataset = this.model;
       this.get('model.tags').pushObject(tag);
       tag.save();
     },
