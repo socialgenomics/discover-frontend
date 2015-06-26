@@ -48,8 +48,10 @@ export default DS.Model.extend({
         return _this.store.find('Dataset', id);
       });
 
-      // load the aggregations
-      for 
+      // load the aggregations from the resp
+      for(var key in resp.aggregations){f
+        _this.aggregations.pushObject(Aggregation.create({key: resp.aggregations[key]}))
+      } 
 
       return _this;
     })

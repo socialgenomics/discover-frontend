@@ -5,14 +5,18 @@ var keyMappings = {
 }
 
 export default DS.Model.extend({
-  field: DS.attr('string'),
-  term: DS.attr('string'),
+  name: DS.attr('string'),
   selected: DS.attr('boolean'),
 
+  create(object){
+    this.super(object)
+    this.buckets = object.buckets;
+    return this
+  },
   serialize(){
     var field = keyMappings[field];
     return {
       field: term,
     }
-  }
+  },
 });
