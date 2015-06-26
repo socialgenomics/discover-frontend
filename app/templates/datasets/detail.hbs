@@ -18,16 +18,14 @@
       {{#if model.tags}}
         <div class="tags">
           {{#each tag in model.tags}}
-          {{#link-to 'datasets.tags' tag.word}}
-          <span class="tag">{{tag.word}}</span>
-          {{/link-to}}
+          <span class="tag">{{#link-to 'datasets.tags' tag.word}} {{tag.word}} {{/link-to}}{{#if 'isEditingTags'}} <a {{action "removeTag" this}} class="remove-tag">X</a>{{/if}}</span>
           {{/each}}
         </div>
       {{else}}
         <p class="grey-text">This dataset has not yet been tagged.</p>
       {{/if}}
 
-      {{add-tag addTag="addTag"}}
+      {{add-tag addTag="addTag" toggleEditTags="toggleEditTags"}}
       </div>
       <div class="dataset-more-info-section">
         <!-- <div class="divider"></div> -->
