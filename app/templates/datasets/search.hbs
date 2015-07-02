@@ -1,7 +1,7 @@
 <div class="row relative">
-  <p class="left-align col s6">You searched for <em class="highlight">"{{q}}"</em></p>
+  <p class="left-align col s6">You searched for <em class="highlight">"{{model.query}}"</em></p>
   <p class="right-align col s6">
-  Results: {{ meta.total }}<br>
+  Results: {{ model.meta.total }}<br>
   </p>
   <!--
   {{#each type in meta.accessTypes}}
@@ -10,26 +10,23 @@
     {{/link-to}}
   {{/each}}
   -->
-
-  {{#if isFiltered}}
-  <h6 class="filters left-align col m12">
-    <span class="left">Active Filters:&nbsp;</span>
-    {{#each filter in filters}}
-      {{#if filter.value }}
-        <!-- <b>{{filter.name}}</b>: -->
-         <span> {{filter.value}}</span><br>
-      {{/if}}
-    {{/each}}
-  </h6>
-  {{/if}}
-
 </div>
 
 <div class="row relative">
-  {{assay-key model=model}}
-  {{#each dataset in model}}
-    {{partial 'datasets/card' dataset=dataset}}
+
+  {{#each agg in model.aggregations}}
+  <div class="section">
+    <h5>{{ agg.name }}</h5>
+    {{#each bucket in agg.buckets}}
+      <p>{{bucket.key}}</p>
+    {{/each}}
+  </div>
   {{/each}}
+
+  {{#each dataset in model.datasets}}
+    {{partial 'datasets/card' model=dataset}}
+  {{/each}}
+
 </div>
 
 {{#if isModalShown}}
