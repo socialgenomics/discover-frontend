@@ -16,8 +16,10 @@ Router.map(function() {
   this.route('press');
   this.route('jobs');
   this.route('help');
+  this.route('verify');
 
   this.resource('users', function(){
+
     this.route('signup');
     this.route('login');
     this.route('settings');

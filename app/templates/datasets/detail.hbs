@@ -17,7 +17,9 @@
       {{#if model.tags}}
         <div class="tags">
           {{#each tag in model.tags}}
-          <span class="tag">{{#link-to 'datasets.tags' tag.word}} {{tag.word}} {{/link-to}}{{#if 'isEditingTags'}} <a {{action "removeTag" this}} class="remove-tag">X</a>{{/if}}</span>
+          {{#link-to 'datasets.tags' tag.word}}
+          <span class="tag"> {{tag.word}}</span>
+          {{/link-to}}
           {{/each}}
           {{add-tag addTag="addTag" class="add-btn"}}
         </div>
