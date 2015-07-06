@@ -14,56 +14,49 @@
       <h2>{{user.displayName}}</h2>
       <h2>{{model.properties.title}}</h2>
       <p>{{model.properties.description}}</p>
-      <h5>Tags:</h5>
       {{#if model.tags}}
         <div class="tags">
           {{#each tag in model.tags}}
           <span class="tag">{{#link-to 'datasets.tags' tag.word}} {{tag.word}} {{/link-to}}{{#if 'isEditingTags'}} <a {{action "removeTag" this}} class="remove-tag">X</a>{{/if}}</span>
           {{/each}}
+          {{add-tag addTag="addTag" class="add-btn"}}
         </div>
       {{else}}
-        <p class="grey-text">This dataset has not yet been tagged.</p>
+      {{!add-tag addTag="addTag" toggleEditTags="toggleEditTags"}}
+        <span class="sub-grey tag">Add a new tag, please.</span>
+        {{add-tag addTag="addTag" class="add-btn"}}
       {{/if}}
-
-      {{add-tag addTag="addTag" toggleEditTags="toggleEditTags"}}
       </div>
-      <div class="dataset-more-info-section">
-        <!-- <div class="divider"></div> -->
-        <!-- <h3 class="center">Information</h3>
-        <hr class="red">
-        <p class="helper-text center">More details about the dataset.</p> -->
-        <div class="row">
+
+    </div><!-- end .card-main-comtent -->
+    <div class="row bottom-static">
+        <div class="dataset-more-info-section center-align">
           <div class="col m12">
-            <ul class="card-info-list">
+            <h2>More Informations</h2>
+            <ul class="card-info-list left-align">
               {{#if model.owner}}
               <li class="card-info-attr">Submitted by: {{#link-to 'user' model.owner.username }}<span>{{model.owner.displayName}}</span>{{/link-to}}</li>
               {{else}}
               <li class="card-info-attr">Sourced from: <a><span>{{model.repository.name}}</span></a></li>
               {{/if}}
               {{#if model.createdAt}}
-            <!--   <li class="card-info-attr">Submitted on: <span>{{model.createdAt}}</span></li> -->
               {{/if}}
               <li class="card-info-attr">Access: <span>{{model.repository.accessType}}</span></li>
               {{#if model.contributors}}
               <li class="card-info-attr">Access: <span>{{model.repository.accessType}}</span></li>
-              <!-- <li class="card-info-attr">Contributors: <a><span>Elena Watson</span></a> & <a><span>Nikola Tesla</span></a></li> -->
               {{/if}}
-
-              {{model.properties.downloadURL}}
+              <!-- {{model.properties.downloadURL}} -->
             </ul>
           </div>
         </div>
+        <div class="col m12 center">
+          {{#if model.properties.downloadURL}}
+          <a target="_blank" {{action "trackExit"}} class="btn waves-effect teal white-text">{{#if isPublic}}Access Data{{else}}Go To Dataset{{/if}}</a>
+          {{else}}
+          <a class="btn disabled white-text">{{#if isPublic}}Access Data{{else}}Apply for Access{{/if}}</a>
+          {{/if}}
+        </div>
       </div>
-    </div><!-- end .card-main-comtent -->
-    <div class="row bottom-static">
-      <div class="center-align card-action">
-        {{#if model.properties.downloadURL}}
-        <a target="_blank" {{action "trackExit"}} class="btn waves-effect teal white-text">{{#if isPublic}}Access Data{{else}}Apply for Access{{/if}}</a>
-        {{else}}
-        <a class="btn disabled white-text">{{#if isPublic}}Access Data{{else}}Apply for Access{{/if}}</a>
-        {{/if}}
-      </div>
-    </div>
   </div><!-- MAIN CONTENT DIV -->
 
   <div class="col l5 m6 s12 card-side-wrapper"><!-- SIDE CONTENT DIV -->
