@@ -7,7 +7,6 @@ var Router = Ember.Router.extend(TrackingMixin, {
 });
 
 Router.map(function() {
-
   this.route('root', {path:'/'});
 
   this.route('about');
@@ -19,7 +18,6 @@ Router.map(function() {
   this.route('verify');
 
   this.resource('users', function(){
-
     this.route('signup');
     this.route('login');
     this.route('settings');
