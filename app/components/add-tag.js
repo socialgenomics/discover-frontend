@@ -11,6 +11,7 @@ export default Ember.Component.extend({
           {"TagName":this.tag}
         );
         this.sendAction('addTag',this.tag);
+
       }
       this.set('tag',null);
     },
