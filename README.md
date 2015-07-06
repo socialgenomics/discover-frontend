@@ -24,6 +24,8 @@ You will need the following things properly installed on your computer.
 
 * `ember server`
 * Visit your app at [http://localhost:4200](http://localhost:4200).
+or
+* ember server --proxy http://testing.api.repositive.io
 
 ### Code Generators
 
