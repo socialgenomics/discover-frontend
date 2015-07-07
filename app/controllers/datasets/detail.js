@@ -4,6 +4,7 @@ export default Ember.Controller.extend({
   queryParams: ['tab'],
   tab: "comments",
   isModalShown:false,
+  isEditingTags:false,
 
   comments: function(){
     return Ember.ArrayProxy.createWithMixins(Ember.SortableMixin, {
@@ -51,6 +52,16 @@ export default Ember.Controller.extend({
       tag.dataset = this.model;
       this.get('model.tags').pushObject(tag);
       tag.save();
+    },
+
+    removeTag(tag){
+      var abc = this.get('model.tags').removeObject(tag);
+      abc.save();
+      console.log("removed tag");
+    },
+
+    toggleEditTags(){
+      this.toggleProperty('isEditingTags');
     },
 
     toggleModal(){

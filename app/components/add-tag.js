@@ -17,6 +17,7 @@ export default Ember.Component.extend({
     },
     toggleInput:function(){
       this.toggleProperty('isOpen');
+      this.sendAction('toggleEditTags');
     },
   },
 });

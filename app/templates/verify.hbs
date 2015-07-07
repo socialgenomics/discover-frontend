@@ -1,0 +1,9 @@
+{{outlet}}
+<div class="row">
+  <form {{action "submitForm" on="submit"}} class="col m8 offset-m2">
+    <h2>Private beta access</h2>
+    <p>To use join the private beta, you must have an access code. These codes have only been emailed to several users.</p>
+    {{validated-input placeholder="please enter your code" value=code}}
+    <button type="submit" class="btn teal">Continue</button>
+  </form>
+</div>
