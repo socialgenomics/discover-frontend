@@ -5,12 +5,24 @@ export default Ember.Controller.extend({
   needs: 'application',
   actions:{
     submitForm:function(){
+      var _this = this;
       if(this.code){
         //check code against api
-        this.set('controllers.application.isVerified', true);
-        this.transitionTo('/users/signup');
-
-        console.log(this.code);
+        Ember.$.ajax({
+          url: '/api/invites',
+          type:'POST',
+          data: {
+            'invite':_this.code,
+          }
+        }).then(function(resp){
+          if(resp.permitted){
+            _this.set('controllers.application.isVerified', true);
+            _this.transitionToRoute('/users/signup');
+          }
+          console.log(resp.permitted);
+        }, function(err){
+          console.log(err);
+        });
       }
     }
   }
