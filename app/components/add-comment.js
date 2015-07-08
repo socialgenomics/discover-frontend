@@ -17,7 +17,7 @@ export default Ember.Component.extend({
     },
     addComment:function(){
       //temporary validation
-      if(this.comment !== ""){
+      if(this.comment){
         calq.action.track(
           "Dataset.AddComment",
           {"CommentName":this.comment}

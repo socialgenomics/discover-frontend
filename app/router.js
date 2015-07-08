@@ -7,7 +7,6 @@ var Router = Ember.Router.extend(TrackingMixin, {
 });
 
 Router.map(function() {
-
   this.route('root', {path:'/'});
 
   this.route('about');
@@ -16,6 +15,7 @@ Router.map(function() {
   this.route('press');
   this.route('jobs');
   this.route('help');
+  this.route('verify');
 
   this.resource('users', function(){
     this.route('signup');

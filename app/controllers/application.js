@@ -9,6 +9,7 @@ export default Ember.Controller.extend({
       return 'bg-grey'
     }
   }.property('currentPath'),
+  isVerified:false,
   actions:{
   },
 });
