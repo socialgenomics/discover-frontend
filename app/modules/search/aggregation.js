@@ -1,32 +1,34 @@
 import Ember from 'ember';
 import Bucket from './bucket';
+import { getColours } from 'repositive.io/utils/colours';
+import keyMappings from './mappings';
 
-var keyMappings = {
-  'assayType': 'dataset.properties.assayType',
-  'accessType': 'dataset.repository.access',
-  'repository': 'dataset.repository.name',
-  'tags': 'dataset.tags'
-}
 
-var Agg = Ember.Object.extend({
-  name: "",
-  value: "",
-  buckets: [], 
+export default Ember.Object.extend({
+  name: null,
+  value: null,
+  DSL: null,
+  buckets: null, 
 
-  setBuckets: function(buckets){
-    if (typeof object.buckets === 'array'){
-      var colours = getColours(object.buckets.length);
+  init: function(){
+    if (!Ember.$.isEmptyObject(this.get('aggDSL'))){
+      var DSL = this.get('aggDSL')
+      var name = Object.keys(DSL)[0];
+      this.set('name', name);
+      var buckets = DSL[name].buckets;
+      var colours = getColours(buckets.length);
       var i = 0;
-      object.buckets.forEach(function(bucket){
+      this.set('buckets', []);
+      buckets.forEach(function(bucket){
         bucket.colour = colours[i];
-        this.buckets.push(Bucket.create(bucket));
+        var b = Bucket.create(bucket);
+        this.buckets.pushObject(b);
         i++;
-      });
+      }.bind(this));
     }
   },
 
-  serialise(){
-    // TODO: create query for selected buckets
+  DSL: function(){
     var fieldName = keyMappings[this.name];
     var q = {};
     q[this.get('name')] = { 
@@ -34,29 +36,7 @@ var Agg = Ember.Object.extend({
         field: fieldName 
       }
     };
-    return q
-  },
+    this.set('DSL', q);
+  }.observes('name', 'value').on('init'),
 
 });
-
-Agg.reopenClass({
-
-  create: function(object, fromES){
-    if (fromES){
-      var instance = this._super({});
-      var name = Object.keys(object)[0];
-      instance.set('name', name);
-      object[name].buckets.forEach(function(bucket){
-        instance.buckets.push(Bucket.create(bucket));
-      });
-      return instance;
-    }
-    else {
-      return this._super(object);
-    }
-  },
-
-});
-
-export default Agg;
-

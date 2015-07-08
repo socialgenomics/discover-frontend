@@ -13,18 +13,25 @@
 </div>
 
 <div class="row relative">
-
-  {{#each agg in model.aggregations}}
+  <div class="section">
+    <h5>Applied Filters</h5>
+  {{#each filter in model.filters}}
+    {{#if filter.value}}
+    <span {{action "removeFilter" filter.name filter.value}}>{{ filter.name }}:{{filter.value}}</span>
+    {{/if}}
+  {{/each}}
+  </div>
+  {{#each agg in model.aggs}}
   <div class="section">
     <h5>{{ agg.name }}</h5>
     {{#each bucket in agg.buckets}}
-      <p>{{bucket.key}}</p>
+    <div {{action "addFilter" agg.name bucket.key}} style="cursor:pointer;">{{bucket.doc_count}}  {{bucket.key}}</div>
     {{/each}}
   </div>
   {{/each}}
 
   {{#each dataset in model.datasets}}
-    {{partial 'datasets/card' model=dataset}}
+    {{partial 'datasets/card' dataset=dataset}}
   {{/each}}
 
 </div>
