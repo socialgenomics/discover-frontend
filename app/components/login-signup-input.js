@@ -17,7 +17,6 @@ export default Ember.Component.extend({
   classNameBindings:['isActive:active', 'showValid:valid', 'showInvalid:invalid'],
 
   actions: {
-
     focusedIn:function(){
       this.set("defaultPlaceholder", this.get('placeholder'))
       this.set("placeholder", "");
