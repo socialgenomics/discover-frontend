@@ -36,6 +36,7 @@ export default DS.Model.extend({
         var agg = Agg.create({
           name: key,
           value: params[key],
+          show: false,
         });
         this.aggs.pushObject(agg);
 
@@ -53,9 +54,12 @@ export default DS.Model.extend({
   queryParamsDidChange: function(){
     if (!Ember.isNone(this.get('filters'))){
       var qps = this.get('queryParams');
-      delete qps.q
-      delete qps.ordering
-      delete qps.offset
+      this.set('query', qps.q);
+      delete qps.q;
+      this.set('ordering', qps.ordering);
+      delete qps.ordering;
+      this.set('offset', qps.offset);
+      delete qps.offset;
 
       for (var key in qps){
         console.log(key)
@@ -64,6 +68,11 @@ export default DS.Model.extend({
       }
     }
   }.observes('queryParams'),
+
+  queryDidChange: function(){
+    this.get('aggs').setEach('show', false)   
+    this.get('datasets').clear()
+  }.observes('query'),
 
   updateModelFromAPI: function(){
     
@@ -83,7 +92,8 @@ export default DS.Model.extend({
         var DSL = {}; 
         DSL[key] = resp.aggs[key];
         var agg = Agg.create({
-          aggDSL: DSL
+          aggDSL: DSL, //TODO:: this is dodgy
+          show: true,
         });
         this.aggs.pushObject(agg);
       }

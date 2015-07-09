@@ -9,6 +9,7 @@ export default Ember.Object.extend({
   value: null,
   DSL: null,
   buckets: null, 
+  show: false,
 
   init: function(){
     if (!Ember.$.isEmptyObject(this.get('aggDSL'))){
