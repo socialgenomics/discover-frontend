@@ -1,8 +1,21 @@
 import Ember from 'ember';
+import EmberValidations from 'ember-validations';
+import ServerValidationMixin from 'repositive.io/validators/remote/server/mixin';
 
-export default Ember.Controller.extend({
+export default Ember.Controller.extend(
+  EmberValidations.Mixin,
+  ServerValidationMixin,
+{
   code:null,
   needs: 'application',
+
+  validations:{
+    code:{
+      presence:true,
+      server: true, // must be last - unknown bug
+    },
+  },
+
   actions:{
     submitForm:function(){
       var _this = this;
@@ -19,8 +32,11 @@ export default Ember.Controller.extend({
             _this.set('controllers.application.isVerified', true);
             _this.transitionToRoute('/users/signup');
           }
-          console.log(resp.permitted);
-        }, function(err){
+          else{
+            _this.addValidationErrors({'code':'This code is incorrect.'});
+          }
+        }, function(xhr, status, error){
+          _this.addValidationErrors(xhr.responseJSON.errors);
           console.log(err);
         });
       }

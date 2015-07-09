@@ -24,8 +24,8 @@
         </span>
       </div>
 
-      {{validated-input type="Email" lbl="Email" signup=true value=email errors=errors.email placeholder="Email" helpText="You'll need to verify this later." email=true}}
-      {{validated-input type="Password" lbl="Password" value=password errors=errors.password placeholder="Password" helpText="Must contain at least one upper case and one number character." password=true}}
+      {{validated-input type="Email" lbl="Email" value=email errors=errors.email placeholder="Email" helpText="You'll need to verify this later." icon="email"}}
+      {{validated-input type="Password" lbl="Password" value=password errors=errors.password placeholder="Password" helpText="Must contain at least one upper case and one number character." icon="password"}}
 
       <div class="input-container center">
         {{#full-width-button disabled=buttonDisabled type="submit"}}SIGN UP{{/full-width-button}}
