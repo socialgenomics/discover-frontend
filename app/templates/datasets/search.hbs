@@ -12,28 +12,34 @@
   -->
 </div>
 
-<div class="row relative">
-  <div class="section">
-    <h5>Applied Filters</h5>
+<div id="filters">
+  <h5>Applied Filters</h5>
   {{#each filter in model.filters}}
     {{#if filter.value}}
     <span {{action "removeFilter" filter.name filter.value}}>{{ filter.name }}:{{filter.value}}</span>
     {{/if}}
   {{/each}}
-  </div>
-  {{#each agg in model.aggs}}
-  <div class="section">
-    <h5>{{ agg.name }}</h5>
-    {{#each bucket in agg.buckets}}
-    <div {{action "addFilter" agg.name bucket.key}} style="cursor:pointer;">{{bucket.doc_count}}  {{bucket.key}}</div>
+</div>
+
+<div id="aggregation" class="row relative">
+  <div class="left-of-container">
+    {{#each agg in model.aggs}}
+      {{#if agg.show}}
+      <div class="section">
+        <h5>{{ agg.name }}</h5>
+        {{#each bucket in agg.buckets}}
+        <div {{action "addFilter" agg.name bucket.key}} style="cursor:pointer;">{{bucket.doc_count}}  {{bucket.key}}</div>
+        {{/each}}
+      </div>
+      {{/if}}
     {{/each}}
   </div>
-  {{/each}}
+</div>
 
+<div class="row">
   {{#each dataset in model.datasets}}
     {{partial 'datasets/card' dataset=dataset}}
   {{/each}}
-
 </div>
 
 {{#if isModalShown}}
