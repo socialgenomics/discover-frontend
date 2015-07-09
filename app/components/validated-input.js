@@ -2,39 +2,35 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   isActive:false,
-  isValid:false,
-  isInvalid:false,
+  hasBeenFocused: false,
   value:'',
-  errors: [],
+
+  showValid: function(){
+    return this.get('hasBeenFocused') && Ember.isEmpty(this.get('errors'))
+  }.property('hasBeenFocused', 'errors'),
+
+  showInvalid: function(){
+    return this.get('hasBeenFocused') && !Ember.isEmpty(this.get('errors'))
+  }.property('hasBeenFocused', 'errors'),
+
+
   //sets the class names of this component
   classNames:"input-container",
-  classNameBindings:['isActive:active', 'isValid:valid', 'isInvalid:invalid'],
+  classNameBindings:['isActive:active', 'showValid:valid', 'showInvalid:invalid'],
 
   actions: {
-    showErrors: function() {
-      this.set("showError", true);
-    },
-    focusedIn: function(){
+    focusedIn:function(){
+      this.set("defaultPlaceholder", this.get('placeholder'))
       this.set("placeholder", "");
       this.set ("isActive", true);
     },
-    focusedOut: function(){
-      let placeholder = this.placeholder || ""
-      this.set("placeholder", placeholder);
-      this.send('showErrors');
+    focusedOut:function(){
+      this.set("hasBeenFocused", true);
+      this.set("placeholder", this.get('defaultPlaceholder'));
       this.set ("isActive", false);
-
-      if (!Ember.isEmpty(this.errors)){
-        this.set("isValid",false);
-        this.set("isInvalid",true);
-      }
-      else{
-        this.set("isValid", true);
-        this.set("isInvalid", false);
-      }
     },
-    submitForm: function(){
-      this.sendAction();            
+    submitForm:function(){
+      this.sendAction('submitForm');
     }
   }
 });

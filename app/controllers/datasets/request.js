@@ -1,9 +1,17 @@
 import Ember from 'ember';
+import EmberValidations from 'ember-validations';
 
-export default Ember.Controller.extend({
+export default Ember.Controller.extend(EmberValidations.Mixin, {
   title:null,
   description:null,
-
+  validations:{
+    title:{
+      presence: true,
+    },
+    description:{
+      presence: true,
+    },
+  },
   actions:{
     addRequest:function(){
       var _this =this;
