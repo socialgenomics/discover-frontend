@@ -1,15 +1,26 @@
 {{yield}}
 
 <div class="input-field">
-  {{input
-    value=value
-    focus-in="focusedIn"
-    focus-out="focusedOut"
-    type=type
-    placeholder=placeholder
-    insert-newline='submitForm'}}
+  {{#if textarea}}
+    {{textarea
+      value=value
+      focus-in="focusedIn"
+      focus-out="focusedOut"
+      type=type
+      placeholder=placeholder}}
+  {{else}}
+    {{input
+      value=value
+      focus-in="focusedIn"
+      focus-out="focusedOut"
+      type=type
+      placeholder=placeholder
+      insert-newline='submitForm'}}
+  {{/if}}
 </div>
-<div class="lbl">{{label}}</div>
+<div class="lbl">{{lbl}}</div>
+{{#if password}} <i class="mdi-action-lock-outline"></i> {{/if}}
+{{#if email}} <i class="mdi-communication-email"></i> {{/if}}
 <div class="input-helper">
   {{#if showError}}
     {{#each error in errors}}

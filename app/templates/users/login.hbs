@@ -17,10 +17,8 @@
           OR
         </span>
       </div>
-
-      {{login-signup-input type="email" value=email errors=errors.email placeholder="Email" email=true}}
-      {{login-signup-input type="password" value=password errors=errors.password placeholder="Password" password=true}}
-
+      {{validated-input type="email" lbl="Email" value=email errors=errors.email placeholder="Email" email=true}}
+      {{validated-input type="password" lbl="Password" value=password errors=errors.password placeholder="Password" password=true}}
       <div class="input-container">
         {{#full-width-button disabled=buttonDisabled type="submit"}}LOGIN{{/full-width-button}}
       </div>
@@ -28,4 +26,3 @@
     </form>
   </div>
 </div>
-

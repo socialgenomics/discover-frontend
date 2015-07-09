@@ -1,28 +1,31 @@
 <div class="row center card">
   <h2>Make a request on dataset</h2>
-  <hr class='red'/>
+  <hr class="red">
   <span class="col m8 offset-m2 helper-text">Repositive has a community of users who are willing to help you to find a dataset you are looking for. Make a request and ask for the users.</span>
-  <div class="row">
-    <form class="col s6 offset-s3" {{action "addRequest" on="submit"}}>
-      <div class="row">
-        <div class="input-container">
-            <div class="input-field">
-              {{input type="text" placeholder="Name your request" value=title}}
-            </div>
-            <div class="lbl">Title</div>
-            <div class="input-helper">What are you looking for?</div>
-        </div>
-        <div class="input-container">
-            <div class="input-field">
-              {{textarea type="text" placeholder="Describe the dataset you're looking for" value=description style="height: 300px"}}
-            </div>
-            <div class="lbl">Description</div>
-            <div class="input-helper">Say something about the dataset you're after.</div>
-        </div>
-      </div>
-           <div class="input-container col m12">
-        <button type="submit" class="btn red white-text">Submit Request</button>
-      </div>
-    </form>
-  </div>
+  <form class="col s8 offset-s2" {{action "addRequest" on="submit"}}>
+    {{validated-input
+      type="text"
+      value=title
+      errors=errors.title
+      placeholder="Name your request"
+      action=addDataset
+      lbl="Title"
+    }}
+
+    {{validated-input
+      type="text"
+      value=description
+      errors=errors.description
+      placeholder="Describe the dataset you're looking for"
+      style="height:150px"
+      action=addDataset
+      textarea="true"
+      lbl="Description"
+    }}
+
+    <div class="input-container col m12">
+      <button type="submit" class="btn red white-text">Submit Request</button>
+    </div>
+
+  </form>
 </div>
