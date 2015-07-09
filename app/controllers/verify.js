@@ -22,7 +22,7 @@ export default Ember.Controller.extend(
       if(this.code){
         //check code against api
         Ember.$.ajax({
-          url: '/api/invites',
+          url: ENV.APIRoutes['invite'],
           type:'POST',
           data: {
             'invite':_this.code,
