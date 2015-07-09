@@ -3,7 +3,6 @@
     <div class="card-header">
       <div class="assay-container">
         {{#link-to 'datasets.search' (query-params assayType=dataset.properties.assayType) }}
-        {{assay-label assay=dataset.properties.assayType model=model}}
         {{/link-to}}
         {{#if isRequest}}<div class="request">Request</div>{{/if}}
       </div>
