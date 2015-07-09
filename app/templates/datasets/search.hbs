@@ -16,7 +16,7 @@
   <h5>Applied Filters</h5>
   {{#each filter in model.filters}}
     {{#if filter.value}}
-    <span {{action "removeFilter" filter.name filter.value}}>{{ filter.name }}:{{filter.value}}</span>
+      <span {{action "removeFilter" filter.name filter.value}}>{{ filter.name }}:{{filter.value}}</span>
     {{/if}}
   {{/each}}
 </div>
@@ -28,7 +28,14 @@
       <div class="section">
         <h5>{{ agg.name }}</h5>
         {{#each bucket in agg.buckets}}
-        <div {{action "addFilter" agg.name bucket.key}} style="cursor:pointer;">{{bucket.doc_count}}  {{bucket.key}}</div>
+          <div>
+          {{#if (eq agg.name "assayType")}}
+          <div {{bind-attr class=":label bucket.colour"}}>{{bucket.doc_count}}</div>
+          {{else}}
+          <div {{bind-attr class=":label"}}>{{bucket.doc_count}}</div>
+          {{/if}}
+          <span {{action "addFilter" agg.name bucket.key}} style="cursor:pointer;">{{bucket.key}}</span>
+        </div>
         {{/each}}
       </div>
       {{/if}}

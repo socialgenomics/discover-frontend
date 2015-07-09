@@ -103,7 +103,9 @@ export default DS.Model.extend({
       this.store.pushPayload('Dataset', resp);
       this.get('datasets').clear();
       resp.datasets.forEach(function(ds){
-        this.get('datasets').pushObject(this.store.getById('Dataset', ds.id));
+        var ds = this.store.getById('Dataset', ds.id);
+        ds.colour = this.getAssayColourForDataset(ds);
+        this.get('datasets').pushObject(ds);
       }.bind(this));
     }.bind(this))
     .catch(function(err){
@@ -172,5 +174,10 @@ export default DS.Model.extend({
     return JSON.stringify(query); 
   }.property('query', 'offset', 'filters.@each.value'),
 
+  getAssayColourForDataset: function(dataset){
+    var buckets = this.get('aggs').findBy('name', 'assayType').get('buckets');
+    var colour = buckets.findBy('key', dataset.get('properties.assayType')).get('colour');
+    return colour;
+  }
 
 });
