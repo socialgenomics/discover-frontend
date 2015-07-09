@@ -48,6 +48,7 @@ export default Ember.ObjectController.extend(
         _this.set('loading', false);
       },
       function(error){
+        //_this.addValidationErrors(xhr.responseJSON.errors);
         _this.set('loading', false);
       });
     }
