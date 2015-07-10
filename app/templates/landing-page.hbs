@@ -1,6 +1,28 @@
-<div class="container">
-  <div class="section">
-    <h1 class="center-align">repositive</h1>
-    <h4 class="center-align">this is the landing page</h4>
+<div class="container landing-wrapper">
+  <div class="row center-align">
+    <div class="col m6 offset-m3">
+      <img src="/assets/images/logo-full-larger.png" class="logo-large" alt="">
+    </div>
+  </div>
+
+  <div class="row center-align">
+    <div class="col m6 offset-m3">
+      <p class="grey-text" style="margin-top:0;">Our app is currently in private beta, so you'll need an invitation to get started.</p>
+    </div>
+  </div>
+
+  <div class="row center-align">
+    <div class="col m6 offset-m3">
+      {{#link-to "" class="btn-large full-width teal white-text"}}Request Invitation{{/link-to}}
+    </div>
+  </div>
+
+  <div class="row center-align">
+    <div class="col m3 offset-m3">
+      {{#link-to "users.signup" class="btn btn-secondary full-width"}}Signup{{/link-to}}
+    </div>
+    <div class="col m3">
+      {{#link-to "users.login" class="btn btn-secondary full-width"}}Login{{/link-to}}
+    </div>
   </div>
 </div>
