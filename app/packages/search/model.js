@@ -176,7 +176,14 @@ export default DS.Model.extend({
 
   getAssayColourForDataset: function(dataset){
     var buckets = this.get('aggs').findBy('name', 'assayType').get('buckets');
-    var colour = buckets.findBy('key', dataset.get('properties.assayType')).get('colour');
+    var bucket = buckets.findBy('key', dataset.get('properties.assayType'));
+    if (Ember.isEmpty(bucket)){
+      bucket = buckets.findBy("key", "Other");
+    }
+    if (Ember.isEmpty(bucket)){
+      bucket = buckets.findBy("key", "other");
+    }
+    var colour = bucket.get('colour');
     return colour;
   }
 

@@ -19,27 +19,27 @@ export default Ember.Controller.extend(
 
   actions:{
     submitForm:function(){
-      var _this = this;
       if(this.code){
         //check code against api
         Ember.$.ajax({
-          url: ENV.APIRoutes['invite'],
+          url: ENV.APIRoutes['invites'],
           type:'POST',
           data: {
-            'invite':_this.code,
+            'invite':this.code,
           }
         }).then(function(resp){
           if(resp.permitted){
-            _this.set('controllers.application.isVerified', true);
-            _this.transitionToRoute('/users/signup');
+            this.set('controllers.application.isVerified', true);
+            this.transitionToRoute('/users/signup');
           }
           else{
-            _this.addValidationErrors({'code':'This code is incorrect.'});
+            this.addValidationErrors(resp.errors);
           }
-        }, function(xhr, status, error){
-          _this.addValidationErrors(xhr.responseJSON.errors);
+        }.bind(this), 
+        function(xhr, status, error){
+          this.addValidationErrors(xhr.responseJSON.errors);
           console.log(err);
-        });
+        }.bind(this));
       }
     }
   }
