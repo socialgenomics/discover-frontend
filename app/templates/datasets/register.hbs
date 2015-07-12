@@ -3,41 +3,34 @@
   <hr class="teal">
   <span class="helper-text">Complete all fields below, you can edit these later.</span>
   <form class="col s8 offset-s2" {{action "addDataset" on="submit"}}>
-    <div class="input-container">
-      <div class="input-field">
-        {{validated-input
-          type="text"
-          value=title
-          errors=errors.title
-          placeholder="Add a title for your dataset."
-          action=addDataset
-        }}
-      </div>
-      <div class="lbl">Title</div>
-      <div class="input-helper"></div>
-    </div>
-    <div class="input-container">
-      <div class="input-field">
-        {{textarea type="text"
-          value=description
-          errors=errors.description
-          placeholder="A short description of the dataset"
-          style="height:150px"
-          action=addDataset
-        }}
-      </div>
-    </div>
-    <div class="input-container">
-      <div class="input-field">
-        {{validated-input
-          type="text"
-          value=downloadURL
-          errors=errors.downloadURL
-          placeholder="A link to the dataset if available"
-          action=addDataset
-        }}
-      </div>
-    </div>
+    {{validated-input
+      type="text"
+      value=title
+      errors=errors.title
+      placeholder="Add a title for your dataset."
+      action=addDataset
+      lbl="Title"
+    }}
+
+    {{validated-input
+      type="text"
+      value=description
+      errors=errors.description
+      placeholder="A short description of the dataset"
+      style="height:150px"
+      action=addDataset
+      textarea="true"
+      lbl="Description"
+    }}
+
+    {{validated-input
+      type="url"
+      value=downloadURL
+      errors=errors.downloadURL
+      placeholder="A link to the dataset if available"
+      action=addDataset
+      lbl="URL"
+    }}
 
     <div class="input-container col m12">
       <button type="submit" class="btn teal white-text">Register Dataset</button>

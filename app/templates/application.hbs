@@ -1,9 +1,9 @@
 <div {{bind-attr class=":outer-wrap bgColour"}}>
-  {{platform-navbar action="search"}}
+  {{#unless isLandingPage}}{{platform-navbar action="search"}}{{/unless}}
   <div class="container">
     {{message-queue}}
     {{md-modal-container}}
     {{outlet}}
   </div>
-  {{platform-footer}}
+  {{#unless isLandingPage}}{{platform-footer}}{{/unless}}
 </div>

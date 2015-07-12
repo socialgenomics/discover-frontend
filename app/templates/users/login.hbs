@@ -5,8 +5,6 @@
       <div class="row">
         <div class="col m12 center-align">
           <ul class="list-inline">
-            <!-- <li><img class="social-media-icon" src="assets/images/icons/social/googleplus.png" alt="google plus logo"></li>
-            <li><img class="social-media-icon" src="assets/images/icons/social/linkedin.png" alt="linkedin logo"></li>-->
             <li><a {{ action 'authenticateWithGooglePlus' }}><img class="social-media-icon" src="/assets/images/icons/social/googleplus.png"></a></li>
             <li><a {{ action 'authenticateWithLinkedIn' }}><img class="social-media-icon" src="/assets/images/icons/social/linkedin.png"></a></li>
           </ul>
@@ -17,10 +15,8 @@
           OR
         </span>
       </div>
-
-      {{login-signup-input type="email" value=email errors=errors.email placeholder="Email" email=true}}
-      {{login-signup-input type="password" value=password errors=errors.password placeholder="Password" password=true}}
-
+      {{validated-input type="email" lbl="Email" value=email errors=errors.email placeholder="Email" email=true}}
+      {{validated-input type="password" lbl="Password" value=password errors=errors.password placeholder="Password" password=true}}
       <div class="input-container">
         {{#full-width-button disabled=buttonDisabled type="submit"}}LOGIN{{/full-width-button}}
       </div>
@@ -28,4 +24,3 @@
     </form>
   </div>
 </div>
-

@@ -1,7 +1,7 @@
 <div class="row relative">
-  <p class="left-align col s6">You searched for <em class="highlight">"{{q}}"</em></p>
+  <p class="left-align col s6">You searched for <em class="highlight">"{{model.query}}"</em></p>
   <p class="right-align col s6">
-  Results: {{ meta.total }}<br>
+  Results: {{ model.meta.total }}<br>
   </p>
   <!--
   {{#each type in meta.accessTypes}}
@@ -10,24 +10,41 @@
     {{/link-to}}
   {{/each}}
   -->
-
-  {{#if isFiltered}}
-  <h6 class="filters left-align col m12">
-    <span class="left">Active Filters:&nbsp;</span>
-    {{#each filter in filters}}
-      {{#if filter.value }}
-        <!-- <b>{{filter.name}}</b>: -->
-         <span> {{filter.value}}</span><br>
-      {{/if}}
-    {{/each}}
-  </h6>
-  {{/if}}
-
 </div>
 
-<div class="row relative">
-  {{assay-key model=model}}
-  {{#each dataset in model}}
+<div id="filters">
+  <h5>Applied Filters</h5>
+  {{#each filter in model.filters}}
+    {{#if filter.value}}
+      <span {{action "removeFilter" filter.name filter.value}}>{{ filter.name }}:{{filter.value}}</span>
+    {{/if}}
+  {{/each}}
+</div>
+
+<div id="aggregation" class="row relative">
+  <div class="left-of-container">
+    {{#each agg in model.aggs}}
+      {{#if agg.show}}
+      <div class="section">
+        <h5>{{ agg.name }}</h5>
+        {{#each bucket in agg.buckets}}
+          <div>
+          {{#if (eq agg.name "assayType")}}
+          <div {{bind-attr class=":label bucket.colour"}}>{{bucket.doc_count}}</div>
+          {{else}}
+          <div {{bind-attr class=":label"}}>{{bucket.doc_count}}</div>
+          {{/if}}
+          <span {{action "addFilter" agg.name bucket.key}} style="cursor:pointer;">{{bucket.key}}</span>
+        </div>
+        {{/each}}
+      </div>
+      {{/if}}
+    {{/each}}
+  </div>
+</div>
+
+<div class="row">
+  {{#each dataset in model.datasets}}
     {{partial 'datasets/card' dataset=dataset}}
   {{/each}}
 </div>
