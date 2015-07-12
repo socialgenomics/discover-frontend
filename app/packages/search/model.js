@@ -104,7 +104,7 @@ export default DS.Model.extend({
       this.get('datasets').clear();
       resp.datasets.forEach(function(ds){
         var ds = this.store.getById('Dataset', ds.id);
-        ds.colour = this.getAssayColourForDataset(ds);
+        ds.set('colour', this.getAssayColourForDataset(ds));
         this.get('datasets').pushObject(ds);
       }.bind(this));
     }.bind(this))
@@ -183,8 +183,12 @@ export default DS.Model.extend({
     if (Ember.isEmpty(bucket)){
       bucket = buckets.findBy("key", "other");
     }
-    var colour = bucket.get('colour');
-    return colour;
+    if (!Ember.isEmpty(bucket)){
+      return bucket.get('colour');
+    }
+    else{
+      return ''
+    }
   }
 
 });
