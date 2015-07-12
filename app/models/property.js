@@ -5,7 +5,7 @@ export default DS.Model.extend({
   title: DS.attr('string'),
   description: DS.attr('string'),
   assayType: DS.attr('string'),
-  downloadURL: DS.attr('string'),
+  webURL: DS.attr('string'),
   shortDescription: function(){
     let length = 100;
     let description = this.get('description');

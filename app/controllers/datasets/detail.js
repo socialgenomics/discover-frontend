@@ -28,11 +28,11 @@ export default Ember.Controller.extend({
         "Dataset.ToData",
         {
           "Title":this.get('model.properties.title'),
-          "URL":this.get('model.properties.downloadURL'),
+          "URL":this.get('model.properties.webURL'),
         }
       );
       //Hack to open link in new tab - NEED TO TEST THIS IN OTHER BROWSERS!
-      var tab = window.open(this.get('model.properties.downloadURL'),'_blank');
+      var tab = window.open(this.get('model.properties.webURL'),'_blank');
       tab.focus();
     },
 

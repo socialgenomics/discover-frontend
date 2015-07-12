@@ -47,12 +47,11 @@
               {{#if model.contributors}}
               <li class="card-info-attr">Access: <span>{{model.repository.accessType}}</span></li>
               {{/if}}
-              <!-- {{model.properties.downloadURL}} -->
             </ul>
           </div>
         </div>
         <div class="col m12 center">
-          {{#if model.properties.downloadURL}}
+          {{#if model.properties.webURL}}
           <a target="_blank" {{action "trackExit"}} class="btn waves-effect teal white-text">{{#if isPublic}}Access Data{{else}}Go To Dataset{{/if}}</a>
           {{else}}
           <a class="btn disabled white-text">{{#if isPublic}}Access Data{{else}}Apply for Access{{/if}}</a>
