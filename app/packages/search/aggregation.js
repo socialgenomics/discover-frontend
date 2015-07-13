@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import Bucket from './bucket';
 import { getColours } from 'repositive.io/utils/colours';
+import { titleCase } from 'repositive.io/utils/case';
 import keyMappings from './mappings';
 
 
@@ -10,6 +11,10 @@ export default Ember.Object.extend({
   DSL: null,
   buckets: null, 
   show: false,
+
+  displayName: function(){
+    return titleCase(this.get('name'));
+  }.property('name'),
 
   init: function(){
     if (!Ember.$.isEmptyObject(this.get('aggDSL'))){
