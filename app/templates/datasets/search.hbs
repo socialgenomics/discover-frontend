@@ -1,32 +1,30 @@
-<div class="row relative">
-  <p class="left-align col s6">You searched for <em class="highlight">"{{model.query}}"</em></p>
-  {{#if model.isLoading}}
-    
-  {{else}}
-    <p class="right-align col s6">
-    Results: {{ model.meta.total }}<br>
-    </p>
-  {{/if}}
-  <!--
-  {{#each type in meta.accessTypes}}
-    {{#link-to 'datasets.search' (query-params accessType=type.key)}}
-    {{type.key}}: {{type.doc_count}}
-    {{/link-to}}
-  {{/each}}
-  -->
-</div>
+<div class="s12">
+  <div class="section" style="padding-top:0;">
+    <h6>Your query:</h6>
+      <div id="filters">
+        <span class="filter first">
+          <em class="highlight">"{{model.query}}"</em>
+        </span>
+        {{#each filter in model.filters}}
+          {{#if filter.value}}
+          <span class="filter" {{action "removeFilter" filter.name filter.value}}>{{ filter.displayName }} : {{filter.value}}<span class="remove">x</span></span>
+          {{/if}}
+        {{/each}}
+      </div>
 
-<div id="filters">
-  <h5>Applied Filters</h5>
-  {{#each filter in model.filters}}
-    {{#if filter.value}}
-      <span {{action "removeFilter" filter.name filter.value}}>{{ filter.name }}:{{filter.value}}</span>
+  </div>
+  <div class="section" style="padding-bottom:0;">
+    {{#if model.isLoading}}
+      
+    {{else}}
+      <h6>Search Results ({{ model.meta.total }}):</h6>
     {{/if}}
-  {{/each}}
+  </div>
 </div>
 
-<div id="aggregation" class="row relative">
-  <div class="left-of-container">
+
+<div class="row relative">
+  <div id="aggregation" class="left-of-container">
   {{#each agg in model.aggs}}
     {{#if agg.show}}
     <div class="section">
@@ -41,14 +39,11 @@
         <span {{action "addFilter" agg.name bucket.key}} style="cursor:pointer;">{{bucket.key}} ({{bucket.doc_count}})</span>
       </div>
       {{/each}}
-      <div class="divider"></div>
     </div>
+    <div class="divider"></div>
     {{/if}}
   {{/each}}
   </div>
-</div>
-
-<div class="row">
   {{#if model.isLoading}}
     <div class="center-align">
       <h1 class="sub-grey">loading...</h1>
