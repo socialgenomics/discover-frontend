@@ -1,8 +1,12 @@
 <div class="row relative">
   <p class="left-align col s6">You searched for <em class="highlight">"{{model.query}}"</em></p>
-  <p class="right-align col s6">
-  Results: {{ model.meta.total }}<br>
-  </p>
+  {{#if model.isLoading}}
+    
+  {{else}}
+    <p class="right-align col s6">
+    Results: {{ model.meta.total }}<br>
+    </p>
+  {{/if}}
   <!--
   {{#each type in meta.accessTypes}}
     {{#link-to 'datasets.search' (query-params accessType=type.key)}}
@@ -23,30 +27,37 @@
 
 <div id="aggregation" class="row relative">
   <div class="left-of-container">
-    {{#each agg in model.aggs}}
-      {{#if agg.show}}
-      <div class="section">
-        <h5>{{ agg.name }}</h5>
-        {{#each bucket in agg.buckets}}
-          <div>
-          {{#if (eq agg.name "assayType")}}
-          <div {{bind-attr class=":label bucket.colour"}}>{{bucket.doc_count}}</div>
-          {{else}}
-          <div {{bind-attr class=":label"}}>{{bucket.doc_count}}</div>
-          {{/if}}
-          <span {{action "addFilter" agg.name bucket.key}} style="cursor:pointer;">{{bucket.key}}</span>
-        </div>
-        {{/each}}
+  {{#each agg in model.aggs}}
+    {{#if agg.show}}
+    <div class="section">
+      <h5>{{ agg.displayName }}</h5>
+      {{#each bucket in agg.buckets}}
+        <div>
+        {{#if (eq agg.name "assayType")}}
+          <div {{bind-attr class=":label bucket.colour"}}></div>
+        {{else}}
+          <div {{bind-attr class=":label"}}></div>
+        {{/if}}
+        <span {{action "addFilter" agg.name bucket.key}} style="cursor:pointer;">{{bucket.key}} ({{bucket.doc_count}})</span>
       </div>
-      {{/if}}
-    {{/each}}
+      {{/each}}
+      <div class="divider"></div>
+    </div>
+    {{/if}}
+  {{/each}}
   </div>
 </div>
 
 <div class="row">
-  {{#each dataset in model.datasets}}
-    {{partial 'datasets/card' dataset=dataset}}
-  {{/each}}
+  {{#if model.isLoading}}
+    <div class="center-align">
+      <h1 class="sub-grey">loading...</h1>
+    </div>
+  {{else}}
+    {{#each dataset in model.datasets}}
+      {{partial 'datasets/card' dataset=dataset}}
+    {{/each}}
+  {{/if}}
 </div>
 
 {{#if isModalShown}}

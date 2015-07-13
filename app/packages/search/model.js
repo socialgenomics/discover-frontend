@@ -4,6 +4,7 @@ import ENV from 'repositive.io/config/environment';
 import Agg from './aggregation';
 import Filter from './filter';
 import _ from 'npm:underscore';
+import { titleCase } from 'repositive.io/utils/case';
 
 
 export default DS.Model.extend({
@@ -16,6 +17,7 @@ export default DS.Model.extend({
   offset: DS.attr('number'),
   aggs: null,
   filters: null,
+  isLoading: true,
 
   initialise: function(){
     
@@ -70,6 +72,7 @@ export default DS.Model.extend({
   }.observes('queryParams'),
 
   queryDidChange: function(){
+    this.set('isLoading', true)
     this.get('aggs').setEach('show', false)   
     this.get('datasets').clear()
   }.observes('query'),
@@ -86,6 +89,7 @@ export default DS.Model.extend({
       if (this.get('meta.total') < 0){ return Ember.RSVP.reject("No results") }
       delete resp.meta;
 
+      this.set('isLoading', false);
       // load the aggs from the resp
       this.set('aggs', []);
       for(var key in resp.aggs){
