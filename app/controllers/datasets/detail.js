@@ -15,11 +15,11 @@ export default Ember.Controller.extend({
   }.property('model.comments'),
 
   isPublic:function(){
-    var accessType = this.get('model.repository.accessType');
-    if(accessType == "public" || accessType =="open"){
+    var access = this.get('model.repository.access');
+    if(access == "public" || access =="open"){
       return true;
     }
-  }.property('accessType'),
+  }.property('access'),
 
   actions: {
     //Register when someone click the "Access Data" button

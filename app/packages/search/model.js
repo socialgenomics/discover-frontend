@@ -64,7 +64,6 @@ export default DS.Model.extend({
       delete qps.offset;
 
       for (var key in qps){
-        console.log(key)
         var filter = this.filters.findBy('name', key);
         filter.set('value', this.get('queryParams.'+key))
       }

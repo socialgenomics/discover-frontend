@@ -5,9 +5,11 @@ import { titleCase } from 'repositive.io/utils/case';
 export default Ember.Object.extend({
   name: null,
   value: null, 
+  
   displayName: function(){
     return titleCase(this.get('name'));
   }.property('name'),
+
   DSL: function(){
     if (Ember.isNone(this.get('value'))){ return null }
     var d = { term: {} };

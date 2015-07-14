@@ -18,7 +18,7 @@ export default Ember.Object.extend({
 
   init: function(){
     if (!Ember.$.isEmptyObject(this.get('aggDSL'))){
-      var DSL = this.get('aggDSL')
+      var DSL = this.get('aggDSL') // TODO: rmove this dependancy on aggDSL as it is confusing
       var name = Object.keys(DSL)[0];
       this.set('name', name);
       var buckets = DSL[name].buckets;
