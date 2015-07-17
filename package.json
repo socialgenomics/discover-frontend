@@ -11,8 +11,7 @@
     "start": "ember server --proxy http://localhost:3000",
     "build": "ember build",
     "test": "ember test",
-    "deployLive": "ssh -f -L 6379:discover.repositive.io:6379 discover.repositive.io -N;  echo 'Please enter your AWS Access Key ID: '; read AWS_KEY_ID; export AWS_KEY_ID; echo 'Please enter your AWS Secret Access Key: '; read AWS_ACCESS_KEY; export AWS_ACCESS_KEY; ember deploy --environment=production",
-    "deployTesting": "ssh -f -L 6379:testing.discover.repositive.io:6379 testing.discover.repositive.io -N; echo 'Please enter your AWS Access Key ID: '; read AWS_KEY_ID; export AWS_KEY_ID; echo 'Please enter your AWS Secret Access Key: '; read AWS_ACCESS_KEY; export AWS_ACCESS_KEY;   ember deploy --environment=testing",
+    "deploy": "ssh -f -L 6379:discover.repositive.io:6379 discover.repositive.io -N;  echo 'Please enter your AWS Access Key ID: '; read AWS_KEY_ID; export AWS_KEY_ID; echo 'Please enter your AWS Secret Access Key: '; read AWS_ACCESS_KEY; export AWS_ACCESS_KEY; ember deploy --environment=production",
     "containerized": "ember server --proxy http://$(boot2docker ip)"
   },
   "repository": "https://bitbucket.org/repositive/repositive.io",
