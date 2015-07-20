@@ -126,7 +126,5 @@ module.exports = function(environment) {
     ENV.torii.providers['google-oauth2'].redirectUri = 'http://discover.repositive.io'
     ENV.torii.providers['linked-in-oauth2'].redirectUri = 'http://dicsover.repositive.io'
   }
-
-  console.log(ENV)
   return ENV;
 };

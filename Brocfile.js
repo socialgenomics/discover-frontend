@@ -10,7 +10,6 @@ if (environment === 'prototypes'){
   var infile = 'main.scss';
 }
 
-console.log('brocfile', environment)
 var isProductionLikeBuild = ['production', 'testing'].indexOf(environment) > -1;
 
 var prepend;
@@ -20,6 +19,8 @@ if (isProductionLikeBuild){
 else {
   prepend = '';
 }
+
+console.log(isProductionLikeBuild)
 
 var app = new EmberApp({
   outputPaths: {

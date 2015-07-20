@@ -23,8 +23,8 @@ module.exports = {
     assets: {
       accessKeyId: process.env['AWS_KEY_ID'],
       secretAccessKey: process.env['AWS_ACCESS_KEY'],
-      bucket: 'testing.discover.repositive.io',
-     // region: 'eu-central-1'
+      bucket: 'test.discover.repositive.io',
+      //region: 'eu-central-1'
     }
   },
   production: {
