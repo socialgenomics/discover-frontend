@@ -14,7 +14,7 @@ module.exports = {
     }
   },
   testing: {
-    buildEnv: 'testing', // Override the environment passed to the ember asset build. Defaults to 'production'
+    buildEnv: 'production', // Override the environment passed to the ember asset build. Defaults to 'production'
     apiBaseURL: 'http://testing.api.repositive.io',
     store: {
       host: 'testing.discover.repositive.io',
