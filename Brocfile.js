@@ -4,13 +4,7 @@ var EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
 var environment = EmberApp.env();
 
-if (environment === 'prototypes'){
-  var infile = 'prototype.scss';
-} else {
-  var infile = 'main.scss';
-}
-
-var isProductionLikeBuild = ['production', 'testing'].indexOf(environment) > -1;
+var isProductionLikeBuild = ['production', 'staging'].indexOf(environment) > -1;
 
 var prepend;
 if (isProductionLikeBuild){
@@ -20,7 +14,6 @@ else {
   prepend = '';
 }
 
-console.log(isProductionLikeBuild)
 
 var app = new EmberApp({
   outputPaths: {
@@ -36,7 +29,7 @@ var app = new EmberApp({
     }
   },
   sassOptions: {
-    inputFile:infile,
+    inputFile:'main.scss',
     outputFile:'main.css',
     includePaths: [
       //'bower_components/bootstrap-sass/assets/stylesheets'

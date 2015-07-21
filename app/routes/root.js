@@ -1,8 +1,9 @@
 import Ember from 'ember';
 import ajax from 'ic-ajax';
 import ENV from 'repositive.io/config/environment';
+import AuthenticatedRouteMixin from 'simple-auth/mixins/authenticated-route-mixin';
 
-export default Ember.Route.extend({
+export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
   model: function(){
     if (this.get('session.isAuthenticated')){
