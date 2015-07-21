@@ -12,7 +12,7 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
           assayType: null,
           tags: null,
           repository: null,
-          accessType: null,
+          access: null,
         }
       });
     },

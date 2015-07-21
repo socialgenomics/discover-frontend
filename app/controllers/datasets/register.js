@@ -4,7 +4,7 @@ import EmberValidations from 'ember-validations';
 export default Ember.Controller.extend(EmberValidations.Mixin, {
   title:null,
   description:null,
-  downloadURL:null,
+  webURL:null,
   loading: false,
   validations:{
     title:{
@@ -13,7 +13,7 @@ export default Ember.Controller.extend(EmberValidations.Mixin, {
     description:{
       presence: true,
     },
-//    downloadURL:{
+//    webURL:{
 //      format: {
 //        with: /[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/,
 //        message: 'must be a valid url',
@@ -32,7 +32,7 @@ export default Ember.Controller.extend(EmberValidations.Mixin, {
         var props = this.store.createRecord('property',{
           title: this.title,
           description: this.description,
-          downloadURL:this.downloadURL
+          webURL:this.webURL
         });
         dataset.properties = props;
         calq.action.track(
@@ -40,7 +40,7 @@ export default Ember.Controller.extend(EmberValidations.Mixin, {
           {
             "title":this.title,
             "description":this.description,
-            "url":this.downloadURL
+            "url":this.webURL
           }
         );
         dataset.save()

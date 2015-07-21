@@ -114,8 +114,11 @@ module.exports = function(environment) {
   }
 
   if (environment === 'testing') {
-    ENV.torii.providers['google-oauth2'].redirectUri = 'http://discover.repositive.io'
-    ENV.torii.providers['linked-in-oauth2'].redirectUri = 'http://discover.repositive.io'
+    ENV.torii.providers['google-oauth2'].redirectUri = 'http://testing.discover.repositive.io'
+    ENV.torii.providers['linked-in-oauth2'].redirectUri = 'http://testing.discover.repositive.io',
+    ENV.sourcemaps = {
+      enabled: false,
+    }
   }
 
   if (environment === 'production') {
@@ -123,6 +126,5 @@ module.exports = function(environment) {
     ENV.torii.providers['google-oauth2'].redirectUri = 'http://discover.repositive.io'
     ENV.torii.providers['linked-in-oauth2'].redirectUri = 'http://dicsover.repositive.io'
   }
-
   return ENV;
 };

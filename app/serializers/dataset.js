@@ -11,7 +11,7 @@ export default DS.RESTSerializer.extend(DS.EmbeddedRecordsMixin, {
   },
   serialize: function(snapshot, options){
     let sourceJSON = {
-      downloadURL: snapshot.record.properties.get('downloadURL'),
+      webURL: snapshot.record.properties.get('webURL'),
       title: snapshot.record.properties.get('title'),
       description: snapshot.record.properties.get('description'),
     }
