@@ -9,6 +9,7 @@ export default Ember.Mixin.create({
       this.get('session').authenticate('simple-auth-authenticator:torii', 'google-oauth2').then(function(data){
         _this.authorizeWithAPI(data);
       }, function(err){
+         console.log(err);
          console.log('login failed');
       });
     },
