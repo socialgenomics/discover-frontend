@@ -34,9 +34,10 @@ export default Ember.Object.extend({
     }
   },
 
-  DSL: function(){
+  initDSL: function(){
     var fieldName = keyMappings[this.name];
     var q = {};
+          var q = {};
     q[this.get('name')] = { 
       terms: {
         field: fieldName 
