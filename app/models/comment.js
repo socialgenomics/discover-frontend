@@ -1,7 +1,7 @@
 import DS from "ember-data";
 
 var Comment = DS.Model.extend({
-  user: DS.belongsTo('user'),
+  user: DS.belongsTo('user', {async: true}),
   dataset: DS.belongsTo('dataset'),
   // parentComment: DS.belongsTo('comment', {inverse: 'childComments'}),
   // childComments: DS.hasMany('comment', {inverse: 'parentComment'}),
