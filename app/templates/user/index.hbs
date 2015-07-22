@@ -11,10 +11,11 @@
         <div class="col m12 personal-info">
           <h3>{{model.user.firstname}} {{model.user.lastname}}</h3>
           <p class="helper-text">{{model.profile.workOrganisation}}</p>
-          <p class="helper-text">{{model.user.email}}</p>
         </div>
         <div class="bottom-fixed">
-        {{#link-to "users.profile"}}<button class="btn yellow white-text"><i class="mdi-editor-border-color"></i>EDIT PROFILE</button>{{/link-to}}
+        {{#if isOwnProfile}}
+          {{#link-to "users.profile"}}<button class="btn yellow white-text"><i class="mdi-editor-border-color"></i>EDIT PROFILE</button>{{/link-to}}
+        {{/if}}
         </div>
       </div>
       <div class="divider"></div>
