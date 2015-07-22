@@ -52,10 +52,10 @@ export default Base.extend({
           authToken: user.authToken,
         }
       }).then(function(resp){
-        _this.showMessages(resp.messages);
+        //_this.showMessages(resp.messages);
         resolve(resp);
       }, function(xhr, status, error){
-        _this.showMessages(xhr.responseJSON.messages);
+        //_this.showMessages(xhr.responseJSON.messages);
         reject(err);
       });
     });
