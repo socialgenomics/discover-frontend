@@ -45,9 +45,7 @@
   {{/each}}
   </div>
   {{#if model.isLoading}}
-    <div class="center-align">
-      <h1 class="sub-grey">loading...</h1>
-    </div>
+    {{partial 'datasets/loading'}}
   {{else}}
     {{#each dataset in model.datasets}}
       {{partial 'datasets/card' dataset=dataset}}

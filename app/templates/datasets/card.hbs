@@ -46,14 +46,18 @@
 
       <!-- data when data was registered on repository
       <i class="mdi-action-today"></i><span>{{data.date}}</span> -->
-      <p class="card-line-limit">
-        {{#if dataset.highlights.description}}
-          {{{dataset.highlights.description}}}
-        {{else}}
-          {{dataset.properties.description}}
-        {{/if}}
+      <div class="line-limit-desc">
+        <div class="ellipsis">
+        <p>
+          {{#if dataset.highlights.description}}
+            {{{dataset.highlights.description}}}
+          {{else}}
+            {{dataset.properties.description}}
+          {{/if}}
         </p>
-    </div>
+        </div>
+       </div> 
+      </div>
     <div class="card-footer">
       <ul>
 
