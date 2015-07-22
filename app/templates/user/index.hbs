@@ -1,7 +1,11 @@
 <div id="profile">
 <div class="row no-margin">
   <div class="card white darken-1 center">
-    <h3 class="center">Your Profile</h3>
+    {{#if isOwnProfile}}
+      <h3 class="center">your profile</h3>
+    {{else}}
+      <h3 class="center">{{ model.user.displayName }}</h3>
+    {{/if}}
     <hr class="yellow">
     <div class="card-content center-align col m12 grey-text">
       <div class="row">
