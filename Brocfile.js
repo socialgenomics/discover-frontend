@@ -4,7 +4,7 @@ var EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
 var environment = EmberApp.env();
 
-var isProductionLikeBuild = ['production', 'staging'].indexOf(environment) > -1;
+var isProductionLikeBuild = ['production', 'testing'].indexOf(environment) > -1;
 
 var prepend;
 if (isProductionLikeBuild){
