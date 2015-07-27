@@ -113,7 +113,7 @@ module.exports = function(environment) {
     ENV.APP.rootElement = '#ember-testing';
   }
 
-  if (environment === 'staging') {
+  if (environment === 'testing') {
     ENV.torii.providers['google-oauth2'].redirectUri = 'http://testing.discover.repositive.io'
     ENV.torii.providers['linked-in-oauth2'].redirectUri = 'http://testing.discover.repositive.io'
   }
