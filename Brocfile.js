@@ -13,6 +13,13 @@ if (environment === 'production'){
 else if (environment === 'testing'){
   prepend = 'http://testing.discover.repositive.io.s3-website-us-east-1.amazonaws.com/';
 }
+else {
+  prepend = '';
+}
+console.log("\n\n\n");
+console.log(environment);
+console.log(prepend)
+console.log("\n\n\n");
 
 
 var app = new EmberApp({
