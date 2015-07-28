@@ -2,9 +2,10 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   tag:null,
-  isOpen:false,
+  isOpen:null,
   actions:{
     addTag:function(){
+
       if(this.tag){
         calq.action.track(
           "Dataset.AddTag",
@@ -14,6 +15,7 @@ export default Ember.Component.extend({
 
       }
       this.set('tag',null);
+      this.set('isOpen',true);
     },
     toggleInput:function(){
       this.toggleProperty('isOpen');

@@ -52,6 +52,7 @@ export default Ember.Controller.extend({
       tag.dataset = this.model;
       this.get('model.tags').pushObject(tag);
       tag.save();
+      this.set('isEditingTags', true);
     },
 
     removeTag(tag){

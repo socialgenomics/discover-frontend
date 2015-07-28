@@ -8,10 +8,10 @@
     <!-- <button {{action "toggleInput"}}class="btn add-tag grey white-text" type="submit">+</button> -->
     <div class="input-field">
       {{input value=tag type="text" placeholder="Enter tag name" class="col m7 input-tag"}}
-      <button class="btn-flat add-tag teal white-text" type="submit"><i class="mdi-action-done"></i></button>
+      <button class="btn add-tag teal white-text" type="submit"><i class="mdi-action-done"></i></button>
       <a {{action "toggleInput"}} class="grey-text cancel-btn">cancel</a>
     </div>
   </form>
 {{else}}
-<button  {{action "toggleInput"}} class="btn add-tag grey white-text">+</button>
+  <button {{action "toggleInput"}} class="btn add-tag teal white-text">Add Tag</button>
 {{/if}}
