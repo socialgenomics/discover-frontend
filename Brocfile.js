@@ -4,7 +4,7 @@ var EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
 var environment = EmberApp.env();
 
-var isProductionLikeBuild = ['production'].indexOf(environment) > -1;
+var isProductionLikeBuild = ['production', 'testing'].indexOf(environment) > -1;
 
 var prepend;
 if (environment === 'production'){
@@ -48,7 +48,7 @@ var app = new EmberApp({
     prepend: prepend,
   },
   sourcemaps: {
-    enabled: isProductionLikeBuild,
+    enabled: !isProductionLikeBuild,
   },
   minifyCSS: { enabled: isProductionLikeBuild },
   minifyJS: { enabled: isProductionLikeBuild },
