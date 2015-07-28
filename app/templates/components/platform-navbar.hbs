@@ -3,7 +3,9 @@
   <div class="nav-wrapper">
      {{#link-to 'root'}}
      <div class="nav-logo">
-     <img class="responsive-img" src="/assets/images/logo-full.png" alt="Repositive DNA logo"></div>
+       <img class="hide-on-med-and-up nav-logo-square" src="/assets/logo.png" alt="Repositive DNA logo">
+       <img class="responsive-img hide-on-small-only" src="/assets/images/logo-full.png" alt="Repositive DNA logo">
+     </div>
      {{/link-to}}
     <!-- {{#link-to 'root' class='hide-on-small-only brand-name'}}REPOSITIVE{{/link-to}} -->
     {{#if session.isAuthenticated}}
@@ -11,7 +13,7 @@
       <form {{action 'search' on='submit'}}>
         <div class="input-field grey-text">
           <i class="small mdi-action-search"></i>
-          {{input type="text" class="grey-text" placeholder="human genomic datasets, e.g. cancer, prostate,..." value=query}}
+          {{input type="text" class="grey-text" placeholder="search cancer, prostate..." value=query}}
        <!--    {{#search-button action='search' on="submit"}}
           {{/search-button}} -->
         </div>
