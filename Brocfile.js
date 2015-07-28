@@ -43,7 +43,7 @@ var app = new EmberApp({
     ]
   },
   fingerprint: {
-    enabled: true,
+    enabled: isProductionLikeBuild,
     exclude: [],
     prepend: prepend,
   },
