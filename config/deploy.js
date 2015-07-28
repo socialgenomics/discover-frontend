@@ -13,17 +13,17 @@ module.exports = {
       bucket: 'repositive.io'
     }
   },
-  staging: {
-    buildEnv: 'staging', // Override the environment passed to the ember asset build. Defaults to 'production'
-    apiBaseURL: 'http://staging.api.repositive.io',
+  testing: {
+    buildEnv: 'testing', // Override the environment passed to the ember asset build. Defaults to 'production'
+    apiBaseURL: 'http://testing.api.repositive.io',
     store: {
-      host: 'staging.discover.repositive.io',
+      host: 'testing.discover.repositive.io',
       port: 6379,
     },
     assets: {
       accessKeyId: process.env['AWS_KEY_ID'],
       secretAccessKey: process.env['AWS_ACCESS_KEY'],
-      bucket: 'staging.discover.repositive.io',
+      bucket: 'testing.discover.repositive.io',
       //region: 'eu-central-1'
     }
   },

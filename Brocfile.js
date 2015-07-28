@@ -4,15 +4,22 @@ var EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
 var environment = EmberApp.env();
 
-var isProductionLikeBuild = ['production', 'staging'].indexOf(environment) > -1;
+var isProductionLikeBuild = ['production', 'testing'].indexOf(environment) > -1;
 
 var prepend;
-if (isProductionLikeBuild){
+if (environment === 'production'){
   prepend = 'http://dg2kcfbxc77v1.cloudfront.net/';
+}
+if (environment === 'testing'){
+  prepend = 'http://testing.discover.repositive.io.s3-website-us-east-1.amazonaws.com/';
 }
 else {
   prepend = '';
 }
+console.log("\n\n\n");
+console.log(environment);
+console.log(prepend)
+console.log("\n\n\n");
 
 
 var app = new EmberApp({
