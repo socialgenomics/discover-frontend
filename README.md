@@ -21,7 +21,7 @@ You will need the following things properly installed on your computer.
 ## Running / Development
 
 * `npm start`
-* Visit your app at [http://localhost:4200](http://localhost:4200).
+* Visit your app at [http://localhost:4200](http://localhost:4200). (it is important you use this address and not 127.0.0.1:4200 for the 3rd party authentication to work correctly)
 
 ### Code Generators
 
