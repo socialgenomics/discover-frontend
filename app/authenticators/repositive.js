@@ -2,6 +2,7 @@ import Ember from 'ember';
 import Base from 'simple-auth/authenticators/base';
 import Queue from 'ember-flash-messages/queue';
 import _ from 'npm:underscore';
+import ajax from 'ic-ajax';
 import ENV from 'repositive.io/config/environment';
 
 
@@ -14,33 +15,33 @@ export default Base.extend({
   },
   authenticate: function(data) {
     var _this = this;
-    return new Ember.RSVP.Promise(function(resolve, reject){
-      Ember.$.ajax({
+    if ('provider' in data){
+      // this is a third party login
+      return ajax({
+        url: ENV.APIRoutes['users.signup'],
+        type: 'POST',
+        data: data
+      })
+      .then(function(resp){
+        return _this._resolveWithResp(resp);
+      });
+    }
+    else {
+      return ajax({
         url: ENV.APIRoutes[ENV['simple-auth'].authenticationRoute],
         type: 'POST',
         data: data
-      }).then(function(resp){
-        resp.user.isCurrentUser = true;
-
-        //ANALYTICS CODE FOR CALQ PROFILE SETUP
-        calq.user.identify(resp.user.username);
-        calq.user.profile(
-            {"$email": resp.user.email }
-        );
-        // END OF ANALYTICS CODE
-
-        Ember.run(function(){
-          // all the properties of the object you resolve with
-          // will be added to the session
-          resolve(resp);
-        });
-      }, function(xhr, status, error){
+      })
+      .then(function(resp){
+        return _this._resolveWithResp(resp);
+      })
+      .catch(function(err){
         Ember.run(function(){
           _this.get("loginController").addValidationErrors(xhr.responseJSON.errors);
-          reject(xhr);
+          Ember.RSVP.reject(xhr);
         });
       });
-    });
+    }
   },
   invalidate: function(user) {
     var _this = this;
@@ -59,6 +60,24 @@ export default Base.extend({
         reject(err);
       });
     });
+  },
+  _resolveWithResp: function(resp){
+    return new Ember.RSVP.Promise(function(resolve, reject){
+      resp.user.isCurrentUser = true;
+
+      //ANALYTICS CODE FOR CALQ PROFILE SETUP
+      calq.user.identify(resp.user.username);
+      calq.user.profile(
+          {"$email": resp.user.email }
+      );
+      // END OF ANALYTICS CODE
+
+      Ember.run(function(){
+        // all the properties of the object you resolve with
+        // will be added to the session
+        resolve(resp);
+      });
+    })
   },
   showMessages : function(messages){
     if (messages) {

@@ -2,13 +2,11 @@ import Ember from "ember";
 import Queue from 'ember-flash-messages/queue';
 import EmberValidations from 'ember-validations';
 import ServerValidationMixin from 'repositive.io/validators/remote/server/mixin';
-import ThirdParty from 'repositive.io/mixins/third-party';
 import ENV from 'repositive.io/config/environment';
 
 export default Ember.ObjectController.extend(
    EmberValidations.Mixin,
    ServerValidationMixin,
-   ThirdParty,
 {
   validations:{
     email:{

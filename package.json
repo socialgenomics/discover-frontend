@@ -8,7 +8,7 @@
     "test": "tests"
   },
   "scripts": {
-    "start": "ember server --proxy http://testing.api.repositive.io",
+    "start": "ember server --proxy http://devel.api.repositive.io",
     "build": "ember build",
     "test": "ember test",
     "deployLive": "ssh -f -L 6379:discover.repositive.io:6379 discover.repositive.io -N;  echo 'Please enter your AWS Access Key ID: '; read AWS_KEY_ID; export AWS_KEY_ID; echo 'Please enter your AWS Secret Access Key: '; read AWS_ACCESS_KEY; export AWS_ACCESS_KEY; ember deploy --environment=production",
@@ -23,9 +23,6 @@
   "license": "MIT",
   "devDependencies": {
     "broccoli-asset-rev": "^2.0.0",
-    "broccoli-filter": "^0.2.0",
-    "broccoli-read-compat": "^0.1.3",
-    "core-object": "^1.1.0",
     "ember-browserify": "ef4/ember-browserify",
     "ember-cli": "^0.2.1",
     "ember-cli-app-version": "0.3.2",
@@ -42,7 +39,6 @@
     "ember-cli-simple-auth": "0.7.3",
     "ember-cli-simple-auth-cookie-store": "0.7.3",
     "ember-cli-simple-auth-oauth2": "0.7.3",
-    "ember-cli-simple-auth-torii": "0.6.7",
     "ember-cli-uglify": "1.0.1",
     "ember-data": "1.0.0-beta.15",
     "ember-deploy-redis": "0.0.2",
@@ -56,12 +52,8 @@
     "ember-radio-button": "^1.0.4",
     "ember-truth-helpers": "0.0.5",
     "ember-validations": "2.0.0-alpha.3",
-    "minimatch": "^2.0.10",
-    "mkdirp": "^0.5.1",
     "moment": "^2.10.2",
-    "symlink-or-copy": "^1.0.1",
     "torii": "^0.5.1",
-    "underscore": "^1.8.2",
-    "walk-sync": "^0.1.3"
+    "underscore": "^1.8.2"
   }
 }

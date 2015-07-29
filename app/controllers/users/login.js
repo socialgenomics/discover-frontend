@@ -1,13 +1,11 @@
 import Ember from "ember";
 import EmberValidations from 'ember-validations';
-import ThirdPartyMixin from 'repositive.io/mixins/third-party'
 import ServerValidationMixin from 'repositive.io/validators/remote/server/mixin';
 
 
 export default Ember.ObjectController.extend(
   EmberValidations.Mixin,
   ServerValidationMixin,
-  ThirdPartyMixin,
 {
   email:null,
   password:null,
