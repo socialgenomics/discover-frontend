@@ -14,8 +14,9 @@
       <h2>{{model.properties.title}}</h2>
       <span>{{user.displayName}}</span>
       <p>{{model.properties.description}}</p>
-      {{#if model.tags}}
+
         <div class="tags">
+          <h3>Tags</h3>
           {{#each tag in model.tags}}
           {{#link-to 'datasets.tags' tag.word}}
           <span class="tag"> {{tag.word}}</span>
@@ -23,11 +24,8 @@
           {{/each}}
           {{add-tag addTag="addTag" class="add-btn"}}
         </div>
-      {{else}}
-      {{!add-tag addTag="addTag" toggleEditTags="toggleEditTags"}}
-        <span class="sub-grey tag">Add a new tag, please.</span>
-        {{add-tag addTag="addTag" class="add-btn"}}
-      {{/if}}
+
+
       </div>
 
     </div><!-- end .card-main-comtent -->
@@ -107,4 +105,3 @@
   </div>
   {{/md-modal}}
 {{/if}}
-
