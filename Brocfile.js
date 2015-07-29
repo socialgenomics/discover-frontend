@@ -10,7 +10,7 @@ var prepend;
 if (environment === 'production'){
   prepend = 'http://dg2kcfbxc77v1.cloudfront.net/';
 }
-if (environment === 'testing'){
+else if (environment === 'testing'){
   prepend = 'http://testing.discover.repositive.io.s3-website-us-east-1.amazonaws.com/';
 }
 else {
