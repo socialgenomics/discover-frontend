@@ -30,22 +30,19 @@
         {{/link-to}}
       {{/if}}
 
-      {{#if dataset.repository.name}}
       <span>from </span>
+      {{#if dataset.owner.displayName}}
+        {{#link-to 'user' dataset.owner.username}}
+          <span>{{dataset.owner.displayName}}</span>
+        {{/link-to}}
+      {{else}}
         <span>
           {{#link-to 'datasets.search' (query-params repository=dataset.repository.name) }}
             {{dataset.repository.name}}
           {{/link-to}}
         </span>
-
-      {{else}}
-        {{#link-to 'user' dataset.owner.username}}
-          <span>{{dataset.owner.username}}</span>
-        {{/link-to}}
       {{/if}}
 
-      <!-- data when data was registered on repository
-      <i class="mdi-action-today"></i><span>{{data.date}}</span> -->
       <div class="line-limit-desc">
         <div class="ellipsis">
         <p>
@@ -56,7 +53,7 @@
           {{/if}}
         </p>
         </div>
-       </div> 
+       </div>
       </div>
     <div class="card-footer">
       <ul>
