@@ -58,20 +58,20 @@
     <div class="card-footer">
       <ul>
 
-        {{#if isPublic}}
+        {{#if (eq dataset.repository.access "Open")}}
         <li class="access-icons">
           <i
-            class="mdi-social-public teal-text tooltiped"
+            class="mdi-social-public green-text tooltiped"
             data-position="bottom"
             data-tooltip="Public Access"
             title="Public"></i>
-          <span class="red-text">
+          <span class="green-text">
             {{dataset.repository.access}}
           </span>
         </li>
         {{/if}}
 
-        {{#if isRestricted}}
+        {{#if (eq dataset.repository.access "Restricted")}}
         <li class="access-icons">
           <i
             class="mdi-action-lock red-text tooltiped"

@@ -16,7 +16,6 @@
       <p>{{model.properties.description}}</p>
 
         <div class="tags">
-          <h3>Tags</h3>
           {{#each tag in model.tags}}
           {{#link-to 'datasets.tags' tag.word}}
           <span class="tag"> {{tag.word}}</span>
@@ -24,10 +23,7 @@
           {{/each}}
           {{add-tag addTag="addTag" class="add-btn"}}
         </div>
-
-
       </div>
-
     </div><!-- end .card-main-comtent -->
     <div class="row bottom-static">
         <div class="dataset-more-info-section">
