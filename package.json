@@ -8,7 +8,7 @@
     "test": "tests"
   },
   "scripts": {
-    "start": "ember server --proxy http://devel.api.repositive.io",
+    "start": "ember server --proxy http://testing.api.repositive.io",
     "build": "ember build",
     "test": "ember test",
     "deployLive": "ssh -f -L 6379:discover.repositive.io:6379 discover.repositive.io -N;  echo 'Please enter your AWS Access Key ID: '; read AWS_KEY_ID; export AWS_KEY_ID; echo 'Please enter your AWS Secret Access Key: '; read AWS_ACCESS_KEY; export AWS_ACCESS_KEY; ember deploy --environment=production",
@@ -24,7 +24,7 @@
   "devDependencies": {
     "broccoli-asset-rev": "^2.0.0",
     "ember-browserify": "ef4/ember-browserify",
-    "ember-cli": "^0.2.1",
+    "ember-cli": "^1.13.7",
     "ember-cli-app-version": "0.3.2",
     "ember-cli-babel": "^4.0.0",
     "ember-cli-content-security-policy": "0.3.0",

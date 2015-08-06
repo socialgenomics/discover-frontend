@@ -9,7 +9,9 @@ export default DS.Model.extend({
 	comments: DS.hasMany('comments'),
   displayName: function(){
     if (Ember.isPresent(this.get('firstname')) || Ember.isPresent(this.get('lastname'))){
-      return this.get('firstname') + ' ' + this.get('lastname')
+      var fn = this.get('firstname') || '';
+      var ln = this.get('lastname') || '';
+      return  fn + ' ' + ln;
     }
     else {
       return 'User' + this.get('username')

@@ -35,13 +35,6 @@ var app = new EmberApp({
       js: '/assets/vendor.js'
     }
   },
-  sassOptions: {
-    inputFile:'main.scss',
-    outputFile:'main.css',
-    includePaths: [
-      //'bower_components/bootstrap-sass/assets/stylesheets'
-    ]
-  },
   fingerprint: {
     enabled: isProductionLikeBuild,
     exclude: [],

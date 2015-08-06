@@ -23,7 +23,7 @@ test('it rejects empty input', function(assert){
   assert.expect(1);
   //var controller = this.subject();
   //equal(controller.get('code'), null);
-  click('button[type="submit"]');
+  click('button:contains("Go")');
   andThen(function(){
     equal(currentRouteName(),'verify', "Stayed on page");
   })

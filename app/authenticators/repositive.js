@@ -35,9 +35,9 @@ export default Base.extend({
       .then(function(resp){
         return _this._resolveWithResp(resp);
       })
-      .catch(function(err){
+      .fail(function(err){
         Ember.run(function(){
-          _this.get("loginController").addValidationErrors(xhr.responseJSON.errors);
+          _this.get("loginController").addValidationErrors(err.jqXHR.responseJSON.errors);
           Ember.RSVP.reject(xhr);
         });
       });
