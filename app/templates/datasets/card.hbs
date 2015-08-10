@@ -30,22 +30,19 @@
         {{/link-to}}
       {{/if}}
 
-      {{#if dataset.repository.name}}
       <span>from </span>
+      {{#if dataset.owner.displayName}}
+        {{#link-to 'user' dataset.owner.username}}
+          <span>{{dataset.owner.displayName}}</span>
+        {{/link-to}}
+      {{else}}
         <span>
           {{#link-to 'datasets.search' (query-params repository=dataset.repository.name) }}
             {{dataset.repository.name}}
           {{/link-to}}
         </span>
-
-      {{else}}
-        {{#link-to 'user' dataset.owner.username}}
-          <span>{{dataset.owner.username}}</span>
-        {{/link-to}}
       {{/if}}
 
-      <!-- data when data was registered on repository
-      <i class="mdi-action-today"></i><span>{{data.date}}</span> -->
       <div class="line-limit-desc">
         <div class="ellipsis">
         <p>
@@ -56,25 +53,25 @@
           {{/if}}
         </p>
         </div>
-       </div> 
+       </div>
       </div>
     <div class="card-footer">
       <ul>
 
-        {{#if isPublic}}
+        {{#if (eq dataset.repository.access "Open")}}
         <li class="access-icons">
           <i
-            class="mdi-social-public teal-text tooltiped"
+            class="mdi-social-public green-text tooltiped"
             data-position="bottom"
             data-tooltip="Public Access"
             title="Public"></i>
-          <span class="red-text">
+          <span class="green-text">
             {{dataset.repository.access}}
           </span>
         </li>
         {{/if}}
 
-        {{#if isRestricted}}
+        {{#if (eq dataset.repository.access "Restricted")}}
         <li class="access-icons">
           <i
             class="mdi-action-lock red-text tooltiped"
