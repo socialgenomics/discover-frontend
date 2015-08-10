@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import ENV from 'repositive.io/config/environment';
+import ENV from 'repositive/config/environment';
 
 export default Ember.Mixin.create({
   _pageHasGa: function() {

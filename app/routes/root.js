@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import ajax from 'ic-ajax';
-import ENV from 'repositive.io/config/environment';
+import ENV from 'repositive/config/environment';
 
 export default Ember.Route.extend({
 

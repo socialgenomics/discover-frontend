@@ -5,7 +5,7 @@
         <span class="filter first">
           <em class="highlight">"{{model.query}}"</em>
         </span>
-        {{#each filter in model.filters}}
+        {{#each model.filters as |filter|}}
           {{#if filter.value}}
           <span class="filter" {{action "removeFilter" filter.name filter.value}}>{{ filter.displayName }} : {{filter.value}}<span class="remove">x</span></span>
           {{/if}}
@@ -25,16 +25,16 @@
 
 <div class="row relative">
   <div id="aggregation" class="left-of-container">
-  {{#each agg in model.aggs}}
+  {{#each model.aggs as |agg|}}
     {{#if agg.show}}
     <div class="section">
       <h5>{{ agg.displayName }}</h5>
-      {{#each bucket in agg.buckets}}
+      {{#each agg.buckets as |bucket|}}
         <div>
         {{#if (eq agg.name "assayType")}}
-          <div {{bind-attr class=":label bucket.colour"}}></div>
+          <div class="label {{bucket.colour}}"></div>
         {{else}}
-          <div {{bind-attr class=":label"}}></div>
+          <div class="label"></div>
         {{/if}}
         <span {{action "addFilter" agg.name bucket.key}} style="cursor:pointer;">{{bucket.key}} ({{bucket.doc_count}})</span>
       </div>
@@ -47,7 +47,7 @@
   {{#if model.isLoading}}
     {{partial 'datasets/loading'}}
   {{else}}
-    {{#each dataset in model.datasets}}
+    {{#each model.datasets as |dataset|}}
       {{partial 'datasets/card' dataset=dataset}}
     {{/each}}
   {{/if}}

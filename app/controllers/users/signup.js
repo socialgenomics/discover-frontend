@@ -1,11 +1,10 @@
 import Ember from "ember";
-import Queue from 'ember-flash-messages/queue';
 import EmberValidations from 'ember-validations';
-import ServerValidationMixin from 'repositive.io/validators/remote/server/mixin';
-import ENV from 'repositive.io/config/environment';
+import ServerValidationMixin from 'repositive/validators/remote/server/mixin';
+import ENV from 'repositive/config/environment';
 
 export default Ember.ObjectController.extend(
-   EmberValidations.Mixin,
+   EmberValidations,
    ServerValidationMixin,
 {
   validations:{
@@ -54,8 +53,8 @@ export default Ember.ObjectController.extend(
   showMessages : function(messages){
     if (messages) {
       messages.forEach(function(message){
-        Queue.pushMessage(message);
-      });
+        this.flashMessages.success(message);
+      }.bind(this));
     }
   },
 });

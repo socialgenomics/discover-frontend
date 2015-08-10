@@ -1,11 +1,10 @@
 import Ember from 'ember';
-import AuthenticatedRouteMixin from 'simple-auth/mixins/authenticated-route-mixin';
 
-export default Ember.Route.extend(AuthenticatedRouteMixin, {
+export default Ember.Route.extend({
   beforeModel:function(){
     //if verified transition to signup route
     if(this.controllerFor("Application").get("isVerified")){
-      this.transitionTo('/users/signup');
+      this.transitionTo('users.signup');
     }
   }
 });

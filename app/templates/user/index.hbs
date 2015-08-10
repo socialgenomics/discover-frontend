@@ -63,7 +63,7 @@
         <h3>Registered Datasets</h3>
         <hr class="teal">
         {{#if registered}}
-          {{#each dataset in registered}}
+          {{#each registered as |dataset|}}
             {{mini-dataset dataset=dataset action="toggleModal"}}
           {{/each}}
         {{else}}
@@ -81,7 +81,7 @@
         <hr class="red">
 
         {{#if requested}}
-          {{#each request in requested}}
+          {{#each requested as |request|}}
             {{mini-dataset dataset=request action="toggleModal"}}
           {{/each}}
         {{else}}

@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import searchMixin from 'repositive.io/packages/search/controllerMixin';
+import searchMixin from 'repositive/packages/search/controllerMixin';
 
 
 export default Ember.Controller.extend(searchMixin, {

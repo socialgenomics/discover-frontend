@@ -1,9 +1,8 @@
 import Ember from 'ember';
 import Base from 'simple-auth/authenticators/base';
-import Queue from 'ember-flash-messages/queue';
 import _ from 'npm:underscore';
 import ajax from 'ic-ajax';
-import ENV from 'repositive.io/config/environment';
+import ENV from 'repositive/config/environment';
 
 
 export default Base.extend({
@@ -35,9 +34,9 @@ export default Base.extend({
       .then(function(resp){
         return _this._resolveWithResp(resp);
       })
-      .catch(function(err){
+      .fail(function(err){
         Ember.run(function(){
-          _this.get("loginController").addValidationErrors(xhr.responseJSON.errors);
+          _this.get("loginController").addValidationErrors(err.jqXHR.responseJSON.errors);
           Ember.RSVP.reject(xhr);
         });
       });
@@ -82,7 +81,7 @@ export default Base.extend({
   showMessages : function(messages){
     if (messages) {
       messages.forEach(function(message){
-        Queue.pushMessage(message);
+        console.log(messages);
       });
     }
   },

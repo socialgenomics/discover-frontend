@@ -1,5 +1,5 @@
 import DS from 'ember-data';
-import ENV from 'repositive.io/config/environment';
+import ENV from 'repositive/config/environment';
 
 
 if (ENV.environment === 'development'){

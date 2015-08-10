@@ -1,6 +1,6 @@
 import DS from 'ember-data';
-import ENV from 'repositive.io/config/environment';
-import ApplicationAdapter from 'repositive.io/adapters/application';
+import ENV from 'repositive/config/environment';
+import ApplicationAdapter from 'repositive/adapters/application';
 
 
 export default ApplicationAdapter.extend({

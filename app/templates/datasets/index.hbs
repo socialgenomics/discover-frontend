@@ -1,6 +1,5 @@
 <div class="row no-margin">
-  {{assay-key model=model}}
-  {{#each filter in filters}}
+  {{#each filters as |filter|}}
     {{# if filter.value }}
       {{ filter.name }}
       {{ filter.value }}
@@ -8,7 +7,7 @@
   {{/each}}
 </div>
 <div class="row">
-  {{# each dataset in model }}
+  {{# each model as |dataset|}}
     {{partial 'datasets/card' dataset=dataset}}
   {{/ each }}
 </div>

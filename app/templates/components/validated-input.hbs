@@ -23,7 +23,7 @@
 {{#if (eq icon "email")}} <i class="mdi-communication-email"></i> {{/if}}
 
   {{#if showInvalid}}
-    {{#each error in errors}}
+    {{#each errors as |error|}}
       <div class="text-invalid error-text">{{ error }}</div>
     {{/each}}
   {{else}}

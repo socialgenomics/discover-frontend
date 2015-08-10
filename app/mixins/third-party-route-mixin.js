@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import ENV from 'repositive.io/config/environment';
+import ENV from 'repositive/config/environment';
 
 export default Ember.Mixin.create({
 //  needs: ['application'], I believe the lookup in the third-pary initalizer is causig this to fail

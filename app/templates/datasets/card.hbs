@@ -4,7 +4,7 @@
       <div class="assay-container">
         {{#link-to 'datasets.search' (query-params assayType=dataset.properties.assayType) }}
           <div class="assay-container">
-            <span {{bind-attr class=":assay-small dataset.colour"}}></span>
+            <span class="assay-small {{dataset.colour}}"></span>
           </div>
         {{/link-to}}
         {{#if isRequest}}<div class="request">Request</div>{{/if}}

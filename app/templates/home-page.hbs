@@ -1,31 +1,21 @@
 <div id="homepage">
-
-      <!-- <p class="sub-head">Find the most relevant and hight quality datasets.</p> -->
-      <div class="row">
-        <div class="col m12 center-align">
-          <div class="stats"><span class="numb">{{ model.stats.repos }}</span><span class="stats-text">Repositories</span></div>
-          <div class="stats"><span class="numb">{{ model.stats.datasets }}</span><span class="stats-text">Datasets</span></div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col m12 left-align">
-        <h5 class="padding-left-right unfocus-grey-text">Start exploring</h5>
-          {{#each dataset in model.datasets}}
-            {{render 'datasets/card' model.datasets dataset=dataset}}
-          {{/each}}
-        </div>
-      </div>
-
-
-<!--   {{#each dataset in model.datasets }}
-    <p>
-      {{!card.properties.title}}
-      {{mini-dataset  dataset=dataset action="toggleModal"}}
-    </p>
-  {{/each}} -->
-    <div class="row padding-left-right">
-      <!-- data registrations -->
-      <div class="col m6 left registered-data">
+  <div class="row">
+    <div class="col m12 center-align">
+      <div class="stats"><span class="numb">{{ model.stats.repos }}</span><span class="stats-text">Repositories</span></div>
+      <div class="stats"><span class="numb">{{ model.stats.datasets }}</span><span class="stats-text">Datasets</span></div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col m12 left-align">
+    <h5 class="padding-left-right unfocus-grey-text">Start exploring</h5>
+      {{#each model.datasets as |dataset|}}
+        {{render 'datasets/card' model.datasets dataset=dataset}}
+      {{/each}}
+    </div>
+  </div>
+  <div class="row padding-left-right">
+    <!-- data registrations -->
+    <div class="col m6 left registered-data">
       <h5 class="left-align unfocus-grey-text">Recently added data</h5>
       <div class="card dataset">
         <div class="card-header register-top light-blue lighten-4">
@@ -35,8 +25,8 @@
         </div>
         <div class="card-content">
           <h6 class="center">The latest registrations</h6>
-            {{#each register in model.registered}}
-              {{mini-dataset dataset=register action="toggleModal"}}
+            {{#each model.registered as |registration|}}
+              {{mini-dataset dataset=registration action="toggleModal"}}
             {{/each}}
         </div>
       </div>
@@ -52,7 +42,7 @@
         </div>
         <div class="card-content">
           <h6 class='center'>The latest requests</h6>
-          {{#each request in model.requests}}
+          {{#each model.requests as |request|}}
             {{mini-dataset dataset=request}}
           {{/each}}
         </div>

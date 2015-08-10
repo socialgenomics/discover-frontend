@@ -1,7 +1,8 @@
 import Ember from 'ember';
 import EmberValidations from 'ember-validations';
-
-export default Ember.Controller.extend(EmberValidations.Mixin, {
+export default Ember.Controller.extend(
+  EmberValidations, 
+{
   title:null,
   description:null,
   webURL:null,
@@ -45,13 +46,7 @@ export default Ember.Controller.extend(EmberValidations.Mixin, {
         );
         dataset.save()
         .then(function(created){
-          _this.flashMessage({
-            content: 'Dataset successfully registered.', // String
-            duration:3000, // Number in milliseconds
-            type: 'Success', // String
-          });
-
-
+          _this.flashMessages.success('Dataset successfully registered.');
           _this.transitionToRoute('datasets.detail',created.id);
         })
         .catch(function(err){

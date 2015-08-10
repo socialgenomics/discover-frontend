@@ -1,7 +1,9 @@
 import Ember from 'ember';
 import EmberValidations from 'ember-validations';
 
-export default Ember.Controller.extend(EmberValidations.Mixin, {
+export default Ember.Controller.extend(
+  EmberValidations, 
+{
   title:null,
   description:null,
   validations:{
@@ -26,12 +28,7 @@ export default Ember.Controller.extend(EmberValidations.Mixin, {
         }
       );
       dataset.save().then(function(created){
-        _this.flashMessage({
-          content: 'Request posted successfully.', // String
-          duration:3000, // Number in milliseconds
-          type: 'Success', // String
-        });
-
+        _this.flashMessages('Request posted successfully.');
         _this.transitionToRoute('datasets.detail',created.id);
       });
     },

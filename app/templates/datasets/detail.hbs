@@ -2,7 +2,7 @@
 <div class="row card dataset full-view no-margin">
   <div class="col l7 m6 s12 card-main-wrapper"><!-- MAIN CONTENT DIV -->
     <div class="top-action card-header">
-      <span {{bind-attr class=":assay-small model.colour"}}></span>
+      <span class="assay-small {{model.colour}}"></span>
       <div class="share-favourite">
         {{action-favourite}}
         <span class="grey-text">{{data.favourite}}</span>
@@ -17,7 +17,7 @@
 
         <div class="tags">
           <h3>Tags</h3>
-          {{#each tag in model.tags}}
+          {{#each model.tags as |tag|}}
           {{#link-to 'datasets.tags' tag.word}}
           <span class="tag"> {{tag.word}}</span>
           {{/link-to}}
