@@ -1,5 +1,5 @@
 import Ember from 'ember';
-//import ThirdParty from 'repositive/mixins/third-party-route-mixin';
+import ThirdParty from 'repositive.io/mixins/third-party-route-mixin';
 
 export default Ember.Route.extend(
 //  ThirdParty,

@@ -1,22 +1,25 @@
 {
   "name": "repositive",
   "version": "0.0.0",
-  "description": "Small description for repositive goes here",
+  "description": "Frontend app for repositive.io",
   "private": true,
   "directories": {
     "doc": "doc",
     "test": "tests"
   },
   "scripts": {
-    "start": "ember server",
+    "start": "ember server --proxy http://testing.api.repositive.io",
     "build": "ember build",
-    "test": "ember test"
+    "test": "ember test",
+    "deployLive": "ssh -f -L 6379:discover.repositive.io:6379 discover.repositive.io -N;  echo 'Please enter your AWS Access Key ID: '; read AWS_KEY_ID; export AWS_KEY_ID; echo 'Please enter your AWS Secret Access Key: '; read AWS_ACCESS_KEY; export AWS_ACCESS_KEY; ember deploy --environment=production",
+    "deployTesting": "ssh -f -L 6379:testing.discover.repositive.io:6379 testing.discover.repositive.io -N;  echo 'Please enter your AWS Access Key ID: '; read AWS_KEY_ID; export AWS_KEY_ID; echo 'Please enter your AWS Secret Access Key: '; read AWS_ACCESS_KEY; export AWS_ACCESS_KEY; ember deploy --environment=testing",
+    "containerized": "ember server --proxy http://$(boot2docker ip)"
   },
-  "repository": "",
+  "repository": "https://bitbucket.org/repositive/repositive.io",
   "engines": {
     "node": ">= 0.10.0"
   },
-  "author": "",
+  "author": "repositive.io",
   "license": "MIT",
   "devDependencies": {
     "broccoli-asset-rev": "^2.0.2",
