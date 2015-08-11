@@ -21,7 +21,7 @@ export default Ember.Route.extend({
         }
       })
       .catch(function(err){
-        console.log(err);
+        Ember.Logger.error(err.trace)
       });
     }
     else {

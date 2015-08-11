@@ -17,7 +17,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
       }
     })
     .catch(function(err){
-      console.assert(false, err);
+      Ember.Logger.error(err.trace)
       return Ember.RSVP.reject(err);
     });
   },

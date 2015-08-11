@@ -1,3 +1,3 @@
-import Search from 'repositive.io/packages/search/model';
+import Search from 'repositive/packages/search/model';
 
 export default Search;

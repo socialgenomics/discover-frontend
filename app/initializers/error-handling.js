@@ -1,13 +1,16 @@
 import Ember from 'ember';
+import ENV from 'repositive/config/environment';
 
 export function initialize(/* container, application */) {
-  Ember.onerror = function(error) {
-    Ember.$.ajax('/api/logging', {
-      type: 'POST',
-      data: {
-        stack: error.stack,
-      }
-    });
+  if (ENV.environment === 'production'){
+    Ember.onerror = function(error) {
+      Ember.$.ajax('/api/logging', {
+        type: 'POST',
+        data: {
+          stack: error.stack,
+        }
+      });
+    }
   }
 }
 

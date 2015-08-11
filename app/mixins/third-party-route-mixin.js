@@ -11,7 +11,7 @@ export default Ember.Mixin.create({
         _this.get('session').authenticate('authenticator:repositive', data);
       })
       .catch(function(err){
-        console.log(err)
+        Ember.Logger.error(err.trace);
       })
     },
     authenticateWithLinkedIn: function() {

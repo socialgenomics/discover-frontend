@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import Bucket from './bucket';
-import { getColours } from 'repositive.io/utils/colours';
-import { titleCase } from 'repositive.io/utils/case';
+import { getColours } from 'repositive/utils/colours';
+import { titleCase } from 'repositive/utils/case';
 import keyMappings from './mappings';
 
 

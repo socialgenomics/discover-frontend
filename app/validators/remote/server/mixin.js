@@ -8,7 +8,7 @@ export default Ember.Mixin.create({
       // es6 module transpiler screws this up
       //if(validator instanceof ServerValidation.constructor){
       // bloddy hack
-        if (validator.toString().search(/repositive.io@validator:remote\/server::/)){
+        if (validator.toString().search(/repositive@validator:remote\/server::/)){
         serverValidators[validator.property] = validator;
       }
     });

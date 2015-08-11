@@ -1,7 +1,9 @@
 <div class="outer-wrap {{bgColour}}">
   {{#unless isLandingPage}}{{platform-navbar action="search"}}{{/unless}}
   <div class="container">
-    {{message-queue}}
+    {{#each flashMessages.queue as |flash|}}
+      {{ui-message flash=flash}}
+    {{/each}}
     {{md-modal-container}}
     {{outlet}}
   </div>

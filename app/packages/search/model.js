@@ -1,10 +1,10 @@
 import DS from 'ember-data';
 import ajax from 'ic-ajax';
-import ENV from 'repositive.io/config/environment';
+import ENV from 'repositive/config/environment';
 import Agg from './aggregation';
 import Filter from './filter';
 import _ from 'npm:underscore';
-import { titleCase } from 'repositive.io/utils/case';
+import { titleCase } from 'repositive/utils/case';
 
 
 export default DS.Model.extend({

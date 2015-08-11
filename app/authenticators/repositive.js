@@ -1,6 +1,5 @@
 import Ember from 'ember';
 import Base from 'simple-auth/authenticators/base';
-import _ from 'npm:underscore';
 import ajax from 'ic-ajax';
 import ENV from 'repositive/config/environment';
 
@@ -22,8 +21,8 @@ export default Base.extend({
         data: data
       })
       .then(function(resp){
-        return _this._resolveWithResp(resp);
-      });
+        return this._resolveWithResp(resp);
+      }.bind(this));
     }
     else {
       return ajax({
@@ -37,13 +36,12 @@ export default Base.extend({
       .fail(function(err){
         Ember.run(function(){
           _this.get("loginController").addValidationErrors(err.jqXHR.responseJSON.errors);
-          Ember.RSVP.reject(xhr);
+          Ember.RSVP.reject(err);
         });
       });
     }
   },
   invalidate: function(user) {
-    var _this = this;
     return new Ember.RSVP.Promise(function(resolve, reject){
       Ember.$.ajax({
         url: ENV.APIRoutes[ENV['simple-auth'].logoutRoute],
@@ -54,10 +52,10 @@ export default Base.extend({
       }).then(function(resp){
         //_this.showMessages(resp.messages);
         resolve(resp);
-      }, function(xhr, status, error){
+      }.bind(this), function(xhr, status, err){
         //_this.showMessages(xhr.responseJSON.messages);
         reject(err);
-      });
+      }.bind(this));
     });
   },
   _resolveWithResp: function(resp){
@@ -76,12 +74,12 @@ export default Base.extend({
         // will be added to the session
         resolve(resp);
       });
-    })
+    });
   },
   showMessages : function(messages){
     if (messages) {
       messages.forEach(function(message){
-        console.log(messages);
+        console.log(message);
       });
     }
   },

@@ -27,7 +27,8 @@ export default Ember.Controller.extend(
           data: {
             'invite':this.code,
           }
-        }).then(function(resp){
+        })
+        .then(function(resp){
           if(resp.permitted){
             this.set('controllers.application.isVerified', true);
             this.transitionToRoute('/users/signup');
@@ -37,8 +38,8 @@ export default Ember.Controller.extend(
           }
         }.bind(this), 
         function(xhr, status, error){
+          Ember.Logger.error(error)
           this.addValidationErrors(xhr.responseJSON.errors);
-          console.log(err);
         }.bind(this));
       }
     }
