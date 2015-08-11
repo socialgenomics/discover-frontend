@@ -8,9 +8,9 @@ export default Ember.Route.extend({
     if (this.get('session.isAuthenticated')){
       return Ember.RSVP.all([
         ajax({url: ENV.APIRoutes['datasets.search'] , type:'GET' }),
-        this.store.find('dataset'),
-        this.store.find('dataset', {isRequest: 1}),
-        this.store.find('dataset', {repository:"REPOSITIVE", isRequest:0})
+        this.store.findAll('dataset'),
+        this.store.query('dataset', {isRequest: 1}),
+        this.store.query('dataset', {repository:"REPOSITIVE", isRequest:0})
       ])
       .then(function(data){
         return {
@@ -21,7 +21,7 @@ export default Ember.Route.extend({
         }
       })
       .catch(function(err){
-        Ember.Logger.error(err.trace)
+        Ember.Logger.error(err)
       });
     }
     else {

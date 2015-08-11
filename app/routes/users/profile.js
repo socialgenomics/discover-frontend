@@ -7,8 +7,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     var currentUser = this.get('session.user');
 
     return new Ember.RSVP.all([
-      _this.store.find('user', currentUser.id),
-      _this.store.find('profile', {UserId: currentUser.id}),
+      this.store.find('user', currentUser.id),
+      this.store.query('profile', {UserId: currentUser.id}),
     ])
     .then(function(values){
       return {
@@ -17,7 +17,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
       }
     })
     .catch(function(err){
-      Ember.Logger.error(err.trace)
+      Ember.Logger.error(err)
       return Ember.RSVP.reject(err);
     });
   },

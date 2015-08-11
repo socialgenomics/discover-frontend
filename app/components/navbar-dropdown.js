@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   currentUser: Ember.computed(function(){
-    return this.get('session.user');
+    return this.get('session.secure.user');
   }),
 
   afterRenderEvent: function(){

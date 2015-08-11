@@ -106,7 +106,7 @@ export default DS.Model.extend({
       this.store.pushPayload('Dataset', resp);
       this.get('datasets').clear();
       resp.datasets.forEach(function(ds){
-        var ds = this.store.getById('Dataset', ds.id);
+        var ds = this.store.peekRecord('Dataset', ds.id);
         ds.set('colour', this.getAssayColourForDataset(ds));
         this.get('datasets').pushObject(ds);
       }.bind(this));

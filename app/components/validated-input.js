@@ -3,15 +3,16 @@ import Ember from 'ember';
 export default Ember.Component.extend({
   isActive:false,
   hasBeenFocused: false,
+  formSubmitted: false,
   value:'',
 
   showValid: function(){
-    return this.get('hasBeenFocused') && Ember.isEmpty(this.get('errors'))
-  }.property('hasBeenFocused', 'errors'),
+    return (this.get('hasBeenFocused') || this.get('formSubmitted')) && Ember.isEmpty(this.get('errors'))
+  }.property('hasBeenFocused', 'errors', 'formSubmitted'),
 
   showInvalid: function(){
-    return this.get('hasBeenFocused') && !Ember.isEmpty(this.get('errors'))
-  }.property('hasBeenFocused', 'errors'),
+    return (this.get('hasBeenFocused') || this.get('formSubmitted')) && !Ember.isEmpty(this.get('errors'))
+  }.property('hasBeenFocused', 'errors', 'formSubmitted'),
 
 
   //sets the class names of this component

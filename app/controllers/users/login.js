@@ -10,6 +10,7 @@ export default Ember.ObjectController.extend(
   email:null,
   password:null,
   loading: false,
+  formSubmitted: false,
   buttonDisabled: function(){
     return !this.get('isValid') || this.get('loading');
   }.property('isValid', 'loading'),
@@ -37,6 +38,7 @@ export default Ember.ObjectController.extend(
     submitForm: function() {
       var _this = this;
       this.set('loading', true);
+      this.set('formSubmitted', true)
       this.get('session')
       .authenticate('authenticator:repositive', {
         email: this.email,

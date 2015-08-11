@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import ServerValidator from '../server';
 
 
 export default Ember.Mixin.create({
@@ -6,9 +7,9 @@ export default Ember.Mixin.create({
     var serverValidators = {};
     this.validators.forEach(function(validator){
       // es6 module transpiler screws this up
-      //if(validator instanceof ServerValidation.constructor){
+      if(validator instanceof ServerValidator){
       // bloddy hack
-        if (validator.toString().search(/repositive@validator:remote\/server::/)){
+      //  if (validator.toString().search(/repositive@validator:remote\/server::/)){
         serverValidators[validator.property] = validator;
       }
     });

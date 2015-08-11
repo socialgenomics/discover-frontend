@@ -12,7 +12,6 @@ export default Base.extend({
     });
   },
   authenticate: function(data) {
-    var _this = this;
     if ('provider' in data){
       // this is a third party login
       return ajax({
@@ -31,14 +30,12 @@ export default Base.extend({
         data: data
       })
       .then(function(resp){
-        return _this._resolveWithResp(resp);
-      })
+        return this._resolveWithResp(resp);
+      }.bind(this))
       .fail(function(err){
-        Ember.run(function(){
-          _this.get("loginController").addValidationErrors(err.jqXHR.responseJSON.errors);
-          Ember.RSVP.reject(err);
-        });
-      });
+        this.get("loginController").addValidationErrors(err.jqXHR.responseJSON.errors);
+        return Ember.RSVP.reject(err);
+      }.bind(this));
     }
   },
   invalidate: function(user) {

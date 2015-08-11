@@ -4,7 +4,7 @@ export default Ember.Controller.extend({
   isModalShown:false,
 
   isOwnProfile: function(){
-    return this.get('session.currentUser.id') == this.get('model.user.id');
+    return this.get('session.secure.user.id') == this.get('model.user.id');
   }.property('model'),
 
   requested: function(){
