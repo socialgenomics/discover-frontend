@@ -4,7 +4,7 @@ import ServerValidationMixin from 'repositive/validators/remote/server/mixin';
 import ENV from 'repositive/config/environment';
 
 export default Ember.Controller.extend(
-  EmberValidations.Mixin,
+  EmberValidations,
   ServerValidationMixin,
 {
   code:null,

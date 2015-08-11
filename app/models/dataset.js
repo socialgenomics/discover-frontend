@@ -1,5 +1,5 @@
 import DS from "ember-data";
-import { poisson } from "repositive.io/utils/distributions";
+import { poisson } from "repositive/utils/distributions";
 
 
 export default DS.Model.extend({

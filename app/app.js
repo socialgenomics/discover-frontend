@@ -8,14 +8,7 @@ Ember.MODEL_FACTORY_INJECTIONS = true;
 var App = Ember.Application.extend({
   modulePrefix: config.modulePrefix,
   podModulePrefix: config.podModulePrefix,
-  Resolver: Resolver,
-  sassOptions: {
-    inputFile:'main.scss',
-    outputFile:'main.css',
-    includePaths: [
-      //'bower_components/bootstrap-sass/assets/stylesheets'
-    ]
-  },
+  Resolver: Resolver
 });
 
 loadInitializers(App, config.modulePrefix);

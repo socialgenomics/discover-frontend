@@ -20,6 +20,9 @@ export default Ember.Route.extend({
           registered: data[3]
         }
       })
+      .catch(function(err){
+        console.log(err);
+      });
     }
     else {
       return null;
