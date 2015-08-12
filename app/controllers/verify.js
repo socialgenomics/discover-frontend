@@ -7,7 +7,8 @@ export default Ember.Controller.extend(
   EmberValidations,
   ServerValidationMixin,
 {
-  code:null,
+  queryParams: ['code'],
+  code: null,
   needs: 'application',
 
   validations:{

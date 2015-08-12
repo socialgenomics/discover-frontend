@@ -5,16 +5,22 @@ export default Ember.Mixin.create({
 //  needs: ['application'], I believe the lookup in the third-pary initalizer is causig this to fail
   actions: {
     authenticateWithGooglePlus: function() {
-      var _this = this;
       this.get('torii').open('google-oauth2')
-      .then(function(data){
-        _this.get('session').authenticate('authenticator:repositive', data);
+      .then((data)=>{
+        this.get('session').authenticate('authenticator:repositive', data);
       })
-      .catch(function(err){
+      .catch((err)=>{
         Ember.Logger.error(err.trace);
       })
     },
     authenticateWithLinkedIn: function() {
+      this.get('torii').open('linked-in-oauth2')
+      .then((data)=>{
+        this.get('session').authenticate('authenticator:repositive', data);
+      })
+      .catch((err)=>{
+        Ember.Logger.error(err.trace);
+      })
     },
   },
 });
