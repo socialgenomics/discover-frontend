@@ -2,43 +2,43 @@
   <div class="card dataset">
     <div class="card-header">
       <div class="assay-container">
-        {{#link-to 'datasets.search' (query-params assayType=dataset.properties.assayType) }}
+        {{#link-to 'datasets.search' (query-params assayType=model.properties.assayType) }}
           <div class="assay-container">
-            <span class="assay-small {{dataset.colour}}"></span>
+            <span class="assay-small {{model.colour}}"></span>
           </div>
         {{/link-to}}
         {{#if isRequest}}<div class="request">Request</div>{{/if}}
       </div>
       <div class="actions-container valign-wrapper">
         {{action-favourite}}
-        <span class="grey-text">{{data.favourite}}</span>
+        <span class="grey-text">{{model.favourite}}</span>
         {{action-share action="toggleModal"}}
       </div>
     </div>
     <div class="card-body">
-      {{#if dataset.highlights.title}}
-        {{#link-to 'datasets.detail' dataset.id classNames="data-title"}}
+      {{#if model.highlights.title}}
+        {{#link-to 'datasets.detail' model.id classNames="data-title"}}
         <h2 class="card-title-limit data-title">
-            {{{dataset.highlights.title}}}
+            {{{model.highlights.title}}}
         </h2>
         {{/link-to}}
       {{else}}
-        {{#link-to 'datasets.detail' dataset.id classNames="data-title"}}
+        {{#link-to 'datasets.detail' model.id classNames="data-title"}}
         <h2 class="card-title-limit data-title">
-          {{dataset.properties.title}}
+          {{model.properties.title}}
         </h2>
         {{/link-to}}
       {{/if}}
 
       <span>from </span>
-      {{#if dataset.owner.displayName}}
-        {{#link-to 'user' dataset.owner.username}}
-          <span>{{dataset.owner.displayName}}</span>
+      {{#if model.owner.displayName}}
+        {{#link-to 'user' model.owner.username}}
+          <span>{{model.owner.displayName}}</span>
         {{/link-to}}
       {{else}}
         <span>
-          {{#link-to 'datasets.search' (query-params repository=dataset.repository.name) }}
-            {{dataset.repository.name}}
+          {{#link-to 'datasets.search' (query-params repository=model.repository.name) }}
+            {{model.repository.name}}
           {{/link-to}}
         </span>
       {{/if}}
@@ -46,10 +46,10 @@
       <div class="line-limit-desc">
         <div class="ellipsis">
         <p>
-          {{#if dataset.highlights.description}}
-            {{{dataset.highlights.description}}}
+          {{#if model.highlights.description}}
+            {{{model.highlights.description}}}
           {{else}}
-            {{dataset.properties.description}}
+            {{model.properties.description}}
           {{/if}}
         </p>
         </div>
@@ -58,7 +58,7 @@
     <div class="card-footer">
       <ul>
 
-        {{#if (eq dataset.repository.access "Open")}}
+        {{#if (eq model.repository.access "Open")}}
         <li class="access-icons">
           <i
             class="mdi-social-public green-text tooltiped"
@@ -66,12 +66,12 @@
             data-tooltip="Public Access"
             title="Public"></i>
           <span class="green-text">
-            {{dataset.repository.access}}
+            {{model.repository.access}}
           </span>
         </li>
         {{/if}}
 
-        {{#if (eq dataset.repository.access "Restricted")}}
+        {{#if (eq model.repository.access "Restricted")}}
         <li class="access-icons">
           <i
             class="mdi-action-lock red-text tooltiped"
@@ -79,14 +79,14 @@
             data-tooltip="Restricted Access"
             title="Access application needed"></i>
           <span class="red-text">
-            {{dataset.repository.access}}
+            {{model.repository.access}}
           </span>
         </li>
         {{/if}}
         <li class="tooltipped" data-position="bottom" data-tooltip="Views">
-          <i class="mdi-action-visibility"></i><span>{{dataset.views}}</span>
+          <i class="mdi-action-visibility"></i><span>{{model.views}}</span>
         </li>
-        <li class="tooltipped" data-position="bottom" data-tooltip="Comments"><i class="mdi-action-question-answer"></i><span>{{dataset.comments.length}}</span></li>
+        <li class="tooltipped" data-position="bottom" data-tooltip="Comments"><i class="mdi-action-question-answer"></i><span>{{model.comments.length}}</span></li>
       </ul>
     </div>
   </div>
