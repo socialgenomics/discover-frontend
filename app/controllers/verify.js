@@ -45,7 +45,7 @@ export default Ember.Controller.extend(
           }
         }.bind(this),
         function(xhr, status, error){
-          Ember.Logger.error(error)
+          Ember.Logger.error(error);
           this.addValidationErrors(xhr.responseJSON.errors);
         }.bind(this));
       }
