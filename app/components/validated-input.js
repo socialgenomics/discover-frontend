@@ -7,11 +7,11 @@ export default Ember.Component.extend({
   value:'',
 
   showValid: function(){
-    return (this.get('hasBeenFocused') || this.get('formSubmitted')) && Ember.isEmpty(this.get('errors'))
+    return (!Ember.isEmpty(this.get('value')) || this.get('hasBeenFocused') || this.get('formSubmitted')) && Ember.isEmpty(this.get('errors'))
   }.property('hasBeenFocused', 'errors', 'formSubmitted'),
 
   showInvalid: function(){
-    return (this.get('hasBeenFocused') || this.get('formSubmitted')) && !Ember.isEmpty(this.get('errors'))
+    return (!Ember.isEmpty(this.get('hasBeenFocused')) || this.get('formSubmitted')) && !Ember.isEmpty(this.get('errors'))
   }.property('hasBeenFocused', 'errors', 'formSubmitted'),
 
 
