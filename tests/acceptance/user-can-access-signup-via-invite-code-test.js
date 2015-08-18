@@ -13,9 +13,11 @@ module('Acceptance | user can access signup via invite code', {
 });
 
 test('visiting /user-can-access-signup-via-invite-code', function(assert) {
-  visit('/user-can-access-signup-via-invite-code');
-
-  andThen(function() {
-    assert.equal(currentURL(), '/user-can-access-signup-via-invite-code');
+  visit('/verify').then(()=>{
+    fillIn('input[placeholder="please enter your code"]', 'QT7VwsqYbAI=').then(()=>{
+      click('button:contains("Continue")').then(()=>{
+        assert.equal(currentURL(), '/users/signup');
+      });
+    });
   });
 });
