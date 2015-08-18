@@ -12,7 +12,7 @@ module('Acceptance | user can access signup via invite code', {
   }
 });
 
-test('visiting /user-can-access-signup-via-invite-code', function(assert) {
+test('correct code takes user to signup page', function(assert) {
   visit('/verify').then(()=>{
     fillIn('input[placeholder="please enter your code"]', 'QT7VwsqYbAI=').then(()=>{
       click('button:contains("Continue")').then(()=>{

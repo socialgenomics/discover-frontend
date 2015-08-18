@@ -16,15 +16,7 @@ moduleFor('controller:verify', 'Verify Controller', {
   }
 });
 
-// Replace this with your real tests.
-
-test('it rejects empty input', function(assert){
-  //expect this number of assertions
-  assert.expect(2);
+test('it exists', function(assert) {
   var controller = this.subject();
-  equal(controller.get('code'), null);
-  //click('button.btn');
-  //andThen(function(){
-  equal(currentRouteName(),'verify', "Stayed on page");
-  //})
+  assert.ok(controller);
 });
