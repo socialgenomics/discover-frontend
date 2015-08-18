@@ -8,6 +8,7 @@ export default Ember.ObjectController.extend(
    ServerValidationMixin,
 {
   validations:{
+
     email:{
       presence: {
         message: ""

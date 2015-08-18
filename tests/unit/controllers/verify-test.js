@@ -20,11 +20,11 @@ moduleFor('controller:verify', 'Verify Controller', {
 
 test('it rejects empty input', function(assert){
   //expect this number of assertions
-  assert.expect(1);
-  //var controller = this.subject();
-  //equal(controller.get('code'), null);
-  click('button:contains("Go")');
-  andThen(function(){
-    equal(currentRouteName(),'verify', "Stayed on page");
-  })
+  assert.expect(2);
+  var controller = this.subject();
+  equal(controller.get('code'), null);
+  //click('button.btn');
+  //andThen(function(){
+  equal(currentRouteName(),'verify', "Stayed on page");
+  //})
 });
