@@ -9,6 +9,12 @@ export default Ember.ObjectController.extend(
 {
   validations:{
 
+    fullname:{
+      presence: {
+        message: "Can't be blank."
+      },
+      server: true,
+    },
     email:{
       presence: {
         message: ""
@@ -27,6 +33,7 @@ export default Ember.ObjectController.extend(
       server: true,
     },
   },
+  fullname:null,
   email:null,
   password:null,
   formSubmitted: false,
@@ -35,7 +42,7 @@ export default Ember.ObjectController.extend(
       var _this = this;
       this.set('formSubmitted', true);
       if (this.get('isValid')){
-        var credentials = this.getProperties('email', 'password');
+        var credentials = this.getProperties('fullname', 'email', 'password');
         Ember.$.ajax({
           url: ENV.APIRoutes[ENV['simple-auth'].signupRoute],
           type: 'POST',
