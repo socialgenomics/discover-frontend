@@ -11,7 +11,7 @@ export default Ember.Component.extend({
   }.property('hasBeenFocused', 'errors', 'formSubmitted'),
 
   showInvalid: function(){
-    return (Ember.isPresent(this.get('value')) || this.get('hasBeenFocused')) || this.get('formSubmitted')) && !Ember.isEmpty(this.get('errors'))
+    return (Ember.isPresent(this.get('value')) || this.get('hasBeenFocused') || this.get('formSubmitted')) && !Ember.isEmpty(this.get('errors'))
   }.property('hasBeenFocused', 'errors', 'formSubmitted'),
 
 
