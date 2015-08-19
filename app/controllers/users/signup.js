@@ -34,15 +34,32 @@ export default Ember.ObjectController.extend(
     },
   },
   fullname:null,
+  firstname:null,
+  lastname:null,
   email:null,
   password:null,
   formSubmitted: false,
+
+  // firstname:function(){
+  //
+  // }.property('fullname'),
+  // lastname:function(){
+  //
+  // }.property('fullname'),
+
+  setFirstAndLastNamesFromFullName:function(){
+    var firstname = this.get('fullname').split(' ')[0];
+    var lastname = this.get('fullname').split(' ')[1]
+    this.set('firstname', firstname);
+    this.set('lastname', lastname);
+  }.observes('fullname'),
+
   actions: {
     submitForm: function() {
       var _this = this;
       this.set('formSubmitted', true);
       if (this.get('isValid')){
-        var credentials = this.getProperties('fullname', 'email', 'password');
+        var credentials = this.getProperties('firstname', 'lastname', 'email', 'password');
         Ember.$.ajax({
           url: ENV.APIRoutes[ENV['simple-auth'].signupRoute],
           type: 'POST',
@@ -59,6 +76,12 @@ export default Ember.ObjectController.extend(
       }
     },
   },
+
+  passwordStrength: function() {
+    console.log("password strength: ",
+  this.get('password.length'));
+    return this.get('password.length');
+  }.observes('password'),
 
   showMessages : function(messages){
     if (messages) {
