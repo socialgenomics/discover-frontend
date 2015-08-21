@@ -32,12 +32,7 @@ export default Ember.Controller.extend(
         .then(function(resp){
           if(resp.permitted){
             this.set('controllers.application.isVerified', true);
-            //calq code to track use of invite codes
-            // console.log(this.get('code'));
-            // calq.user.profile(
-            //
-            //   {"InviteCode": this.get('code')}
-            // )
+            this.set('controllers.application.code', this.get('code'));
             this.transitionToRoute('/users/signup');
           }
           else{

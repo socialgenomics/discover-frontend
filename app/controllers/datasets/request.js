@@ -2,7 +2,7 @@ import Ember from 'ember';
 import EmberValidations from 'ember-validations';
 
 export default Ember.Controller.extend(
-  EmberValidations, 
+  EmberValidations,
 {
   title:null,
   description:null,
@@ -17,7 +17,7 @@ export default Ember.Controller.extend(
   actions:{
     addRequest:function(){
       var _this =this;
-      var dataset = this.store.createRecord('dataset',{isRequest:true});
+      var dataset = this.store.createRecord('dataset',{isRequest:1});
       var props = this.store.createRecord('property', {
         title:this.title,
         description:this.description

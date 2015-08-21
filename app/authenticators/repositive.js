@@ -56,14 +56,15 @@ export default Base.extend({
     });
   },
   _resolveWithResp: function(resp){
-    return new Ember.RSVP.Promise(function(resolve, reject){
+    return new Ember.RSVP.Promise((resolve, reject)=>{
       resp.user.isCurrentUser = true;
 
       //ANALYTICS CODE FOR CALQ PROFILE SETUP
       calq.user.identify(resp.user.username);
-      calq.user.profile(
-          {"$email": resp.user.email }
-      );
+      calq.user.profile({
+        "$email": resp.user.email,
+        "InviteCode": this.get('loginController.controllers.application.code')
+      });
       // END OF ANALYTICS CODE
 
       Ember.run(function(){
