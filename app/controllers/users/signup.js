@@ -38,18 +38,13 @@ export default Ember.ObjectController.extend(
   lastname:null,
   email:null,
   password:null,
+  strength:null,
+  showPassword:false,
   formSubmitted: false,
-
-  // firstname:function(){
-  //
-  // }.property('fullname'),
-  // lastname:function(){
-  //
-  // }.property('fullname'),
 
   setFirstAndLastNamesFromFullName:function(){
     var firstname = this.get('fullname').split(' ')[0];
-    var lastname = this.get('fullname').split(' ')[1]
+    var lastname = this.get('fullname').split(' ')[1];
     this.set('firstname', firstname);
     this.set('lastname', lastname);
   }.observes('fullname'),
@@ -75,12 +70,36 @@ export default Ember.ObjectController.extend(
         console.log('invalid');
       }
     },
+    toggleCheckbox: function() {
+      this.set('showPassword', !this.get('showPassword'));
+    }
   },
 
+  togglePassword: function() {
+    var text = this.get('password');
+    var pw = this.get('password');
+
+    if (this.get('showPassword') === true) {
+      text.toString();
+      this.set('password', text);
+    }
+    else {
+      this.set('password', pw);
+    }
+  }.observes('showPassword', 'password'),
+
   passwordStrength: function() {
-    console.log("password strength: ",
-  this.get('password.length'));
-    return this.get('password.length');
+    var pass = this.get('password.length');
+
+    if (pass < 6) {
+      this.set('strength', "weak");
+    }
+    else if (pass < 12) {
+      this.set('strength', "medium");
+    }
+    else {
+      this.set('strength', "strong");
+    }
   }.observes('password'),
 
   showMessages : function(messages){

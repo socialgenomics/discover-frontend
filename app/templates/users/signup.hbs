@@ -52,9 +52,16 @@
         placeholder="Password"
         helpText="Must contain at least one upper case and one number character."
         icon="password"
+        showPassword=showPassword
         formSubmitted=formSubmitted
       }}
-      
+
+      <div class="password-div">
+        <input type="checkbox" id="showPassword" name="showPassword" {{action 'toggleCheckbox'}} >
+        <label for="showPassword">Show Password</label>
+        Password strength: {{strength}}
+      </div>
+
       <div class="input-container center">
         {{#full-width-button disabled=buttonDisabled type="submit"}}SIGN UP{{/full-width-button}}
         <p class="center-align">By signing up you agree to our <a>Terms</a> and <a>Privacy Policy</a>.</p>
