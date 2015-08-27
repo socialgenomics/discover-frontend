@@ -40,9 +40,9 @@ export default Ember.Controller.extend(
           this.addValidationErrors(resp.errors);
         }
       })
-      .error((xhr, status, error)=>{
-        Ember.Logger.error(error);
-        this.addValidationErrors(xhr.responseJSON.errors);
+      .catch((resp)=>{
+        Ember.Logger.error(resp.jqXHR.responseJSON);
+        this.addValidationErrors(resp.jqXHR.responseJSON.errors);
       });
     }
   }

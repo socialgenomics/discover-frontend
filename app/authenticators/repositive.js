@@ -32,7 +32,7 @@ export default Base.extend({
       .then((resp)=>{
         return this._resolveWithResp(resp);
       })
-      .error((err)=>{
+      .catch((err)=>{
         this.get("loginController").addValidationErrors(err.jqXHR.responseJSON.errors);
         return Ember.RSVP.reject(err);
       });
@@ -50,9 +50,9 @@ export default Base.extend({
       //_this.showMessages(resp.messages);
       return Ember.RSVP.resolve(resp);
     })
-    .error((xhr, status, err)=>{
+    .catch((err)=>{
         //_this.showMessages(xhr.responseJSON.messages);
-        return Ember.RSVP.reject(err);
+        return Ember.RSVP.reject(err.jqXHR.responseJSON);
     });
   },
   _resolveWithResp: function(resp){

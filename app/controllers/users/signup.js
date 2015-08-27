@@ -53,9 +53,9 @@ export default Ember.ObjectController.extend(
             this.showMessages(resp.messages);
             this.get('session').authenticate('authenticator:repositive', credentials);
         })
-        .error((xhr, status, error)=>{
+        .catch((err)=>{
             //_this.showMessages(xhr.responseJSON.messages);
-            this.addValidationErrors(xhr.responseJSON.errors);
+            this.addValidationErrors(err.jqXHR.responseJSON.errors);
         });
       } else {
         console.log('invalid');
