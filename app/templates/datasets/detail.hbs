@@ -16,7 +16,6 @@
       <p>{{model.properties.description}}</p>
 
         <div class="tags">
-          <h3>Tags</h3>
           {{#each model.tags as |tag|}}
           {{#link-to 'datasets.tags' tag.word}}
           <span class="tag"> {{tag.word}}</span>
@@ -29,7 +28,6 @@
     <div class="row bottom-static">
         <div class="dataset-more-info-section">
           <div class="col m12">
-            <h2>More Information</h2>
             <ul class="card-info-list left-align">
               {{#if model.owner}}
               <li class="card-info-attr">Submitted by: {{#link-to 'user' model.owner.username }}<span>{{model.owner.displayName}}</span>{{/link-to}}</li>

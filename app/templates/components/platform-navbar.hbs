@@ -28,8 +28,12 @@
     </div>
     {{else}}
     <ul class="right">
-      <li>{{#link-to 'users.signup'}}SIGN UP{{/link-to}}</li>
-      <li>{{#link-to 'users.login'}}LOGIN{{/link-to}}</li>
+    {{#active-link}}
+        {{link-to 'SIGNUP' 'users.signup'}}
+     {{/active-link}}
+        {{#active-link}}
+             {{link-to 'LOGIN' 'users.login'}}
+        {{/active-link}}
     </ul>
     {{/if}}
   </div>
