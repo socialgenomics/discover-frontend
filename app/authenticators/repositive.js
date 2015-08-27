@@ -6,9 +6,9 @@ import ENV from 'repositive/config/environment';
 
 export default Base.extend({
   restore: function(data) {
-    return new Ember.RSVP.Promise(function(){
+    return new Ember.RSVP.Promise(function(resolve, reject){
       // TODO: display any notifications - i.e if you have new messages etc
-      Ember.RSVP.resolve(data);
+      resolve(data);
     });
   },
   authenticate: function(data) {
@@ -32,7 +32,7 @@ export default Base.extend({
       .then((resp)=>{
         return this._resolveWithResp(resp);
       })
-      .fail((err)=>{
+      .error((err)=>{
         this.get("loginController").addValidationErrors(err.jqXHR.responseJSON.errors);
         return Ember.RSVP.reject(err);
       });
