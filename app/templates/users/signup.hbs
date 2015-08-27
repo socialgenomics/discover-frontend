@@ -24,23 +24,33 @@
         </span>
       </div>
 
-      {{validated-input 
-        type="Email" 
-        lbl="Email" 
-        value=email 
-        errors=errors.email 
-        placeholder="Email" 
-        helpText="You'll need to verify this later." 
+      {{validated-input
+        type="Text"
+        lbl="Full Name"
+        value=fullname
+        errors=errors.fullname
+        placeholder="Full Name"
+        helpText="You can change your name later in the settings."
+        icon="fullname"
+        formSubmitted=formSubmitted
+      }}
+      {{validated-input
+        type="Email"
+        lbl="Email"
+        value=email
+        errors=errors.email
+        placeholder="Email"
+        helpText="You'll need to verify this later."
         icon="email"
         formSubmitted=formSubmitted
       }}
-      {{validated-input 
-        type="Password" 
-        lbl="Password" 
-        value=password 
-        errors=errors.password 
-        placeholder="Password" 
-        helpText="Must contain at least one upper case and one number character." 
+      {{validated-input
+        type="Password"
+        lbl="Password"
+        value=password
+        errors=errors.password
+        placeholder="Password"
+        helpText="Must contain at least one upper case and one number character."
         icon="password"
         formSubmitted=formSubmitted
       }}

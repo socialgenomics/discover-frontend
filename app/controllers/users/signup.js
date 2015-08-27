@@ -2,6 +2,7 @@ import Ember from "ember";
 import EmberValidations from 'ember-validations';
 import ServerValidationMixin from 'repositive/validators/remote/server/mixin';
 import ENV from 'repositive/config/environment';
+import ajax from 'ic-ajax';
 
 export default Ember.ObjectController.extend(
    EmberValidations,
@@ -9,6 +10,12 @@ export default Ember.ObjectController.extend(
 {
   validations:{
 
+    fullname:{
+      presence: {
+        message: "Can't be blank."
+      },
+      server: true,
+    },
     email:{
       presence: {
         message: ""
@@ -27,6 +34,7 @@ export default Ember.ObjectController.extend(
       server: true,
     },
   },
+  fullname:null,
   email:null,
   password:null,
   formSubmitted: false,
@@ -35,17 +43,19 @@ export default Ember.ObjectController.extend(
       var _this = this;
       this.set('formSubmitted', true);
       if (this.get('isValid')){
-        var credentials = this.getProperties('email', 'password');
-        Ember.$.ajax({
+        var credentials = this.getProperties('fullname', 'email', 'password');
+        ajax({
           url: ENV.APIRoutes[ENV['simple-auth'].signupRoute],
           type: 'POST',
           data: credentials
-        }).then(function(resp){ // signup has suceeded, now login
-          _this.showMessages(resp.messages);
-          _this.get('session').authenticate('authenticator:repositive', credentials);
-        }, function(xhr, status, error){
-          //_this.showMessages(xhr.responseJSON.messages);
-          _this.addValidationErrors(xhr.responseJSON.errors);
+        })
+        .then((resp)=>{ // signup has suceeded, now login
+            this.showMessages(resp.messages);
+            this.get('session').authenticate('authenticator:repositive', credentials);
+        })
+        .error((xhr, status, error)=>{
+            //_this.showMessages(xhr.responseJSON.messages);
+            this.addValidationErrors(xhr.responseJSON.errors);
         });
       } else {
         console.log('invalid');

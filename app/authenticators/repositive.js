@@ -6,9 +6,9 @@ import ENV from 'repositive/config/environment';
 
 export default Base.extend({
   restore: function(data) {
-    return new Ember.RSVP.Promise(function(resolve, reject){
+    return new Ember.RSVP.Promise(function(){
       // TODO: display any notifications - i.e if you have new messages etc
-      resolve(data);
+      Ember.RSVP.resolve(data);
     });
   },
   authenticate: function(data) {
@@ -19,9 +19,9 @@ export default Base.extend({
         type: 'POST',
         data: data
       })
-      .then(function(resp){
+      .then((resp)=>{
         return this._resolveWithResp(resp);
-      }.bind(this));
+      });
     }
     else {
       return ajax({
@@ -29,41 +29,46 @@ export default Base.extend({
         type: 'POST',
         data: data
       })
-      .then(function(resp){
+      .then((resp)=>{
         return this._resolveWithResp(resp);
-      }.bind(this))
-      .fail(function(err){
+      })
+      .fail((err)=>{
         this.get("loginController").addValidationErrors(err.jqXHR.responseJSON.errors);
         return Ember.RSVP.reject(err);
-      }.bind(this));
+      });
     }
   },
   invalidate: function(user) {
-    return new Ember.RSVP.Promise(function(resolve, reject){
-      Ember.$.ajax({
-        url: ENV.APIRoutes[ENV['simple-auth'].logoutRoute],
-        type: 'POST',
-        data: {
-          authToken: user.authToken,
-        }
-      }).then(function(resp){
-        //_this.showMessages(resp.messages);
-        resolve(resp);
-      }.bind(this), function(xhr, status, err){
+    return ajax({
+      url: ENV.APIRoutes[ENV['simple-auth'].logoutRoute],
+      type: 'POST',
+      data: {
+        authToken: user.authToken,
+      }
+    })
+    .then((resp)=>{
+      //_this.showMessages(resp.messages);
+      return Ember.RSVP.resolve(resp);
+    })
+    .error((xhr, status, err)=>{
         //_this.showMessages(xhr.responseJSON.messages);
-        reject(err);
-      }.bind(this));
+        return Ember.RSVP.reject(err);
     });
   },
   _resolveWithResp: function(resp){
-    return new Ember.RSVP.Promise(function(resolve, reject){
+<<<<<<< HEAD
+    return new Ember.RSVP.Promise((resolve)=>{
+=======
+    return new Ember.RSVP.Promise((resolve, reject)=>{
+>>>>>>> master
       resp.user.isCurrentUser = true;
 
       //ANALYTICS CODE FOR CALQ PROFILE SETUP
       calq.user.identify(resp.user.username);
-      calq.user.profile(
-          {"$email": resp.user.email }
-      );
+      calq.user.profile({
+        "$email": resp.user.email,
+        "InviteCode": this.get('loginController.controllers.application.code')
+      });
       // END OF ANALYTICS CODE
 
       Ember.run(function(){
