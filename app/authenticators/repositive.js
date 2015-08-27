@@ -56,11 +56,8 @@ export default Base.extend({
     });
   },
   _resolveWithResp: function(resp){
-<<<<<<< HEAD
     return new Ember.RSVP.Promise((resolve)=>{
-=======
-    return new Ember.RSVP.Promise((resolve, reject)=>{
->>>>>>> master
+
       resp.user.isCurrentUser = true;
 
       //ANALYTICS CODE FOR CALQ PROFILE SETUP
