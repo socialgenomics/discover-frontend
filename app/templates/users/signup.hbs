@@ -1,6 +1,6 @@
 <div class="section row ">
   <div class="col m4 offset-m4 s12">
-    <form {{action "submitForm" on="submit"}}>
+    <form {{action "submitForm" on="submit"}} >
       <div class="row">
         <div class="col m12 center">
           <ul class="list-inline">
@@ -45,7 +45,7 @@
         formSubmitted=formSubmitted
       }}
       {{validated-input
-        type="Password"
+        type=type
         lbl="Password"
         value=password
         errors=errors.password
@@ -57,9 +57,15 @@
       }}
 
       <div class="password-div">
-        <input type="checkbox" id="showPassword" name="showPassword" {{action 'toggleCheckbox'}} >
-        <label for="showPassword">Show Password</label>
-        Password strength: {{strength}}
+        <ul class="list-inline">
+          <li>
+            <input type="checkbox" id="showPassword" onClick={{action 'toggleCheckbox'}} >
+            <label for="showPassword">Show Password</label>
+          </li>
+          <li>
+            Password strength: {{strength}}
+          </li>
+        </ul>
       </div>
 
       <div class="input-container center">
