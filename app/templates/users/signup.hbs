@@ -1,5 +1,5 @@
 <div class="section row ">
-  <div class="col m4 offset-m4 s12">
+  <div class="col s12 m6 offset-m3 l4 offset-l4">
     <form {{action "submitForm" on="submit"}} >
       <div class="row">
         <div class="col m12 center">
@@ -63,7 +63,7 @@
             <label for="showPassword">Show Password</label>
           </li>
           <li>
-            Password strength: {{strength}}
+            Password strength: <span class="{{strength}}">{{strength}}</span>
           </li>
         </ul>
       </div>

@@ -30,6 +30,11 @@ export default Ember.ObjectController.extend(
         message: ""
       },
       length: { minimum: 8, messages:{tooShort:"Must be at least 8 characters."}},
+      format: {
+        with: /(?=.*\d)(?=.*[A-Z])/,
+        //allowBlank: true,
+        message: "Must include an uppercase letter and a number."
+      },
       server: true,
     },
   },
@@ -54,16 +59,16 @@ export default Ember.ObjectController.extend(
   }.observes('fullname'),
 
   passwordStrength: function() {
-    var pass = this.get('password.length');
+    var accept = this.get('errors.password.length');
 
-    if (pass < 6) {
-      this.set('strength', "weak");
+    if (accept < 1) {
+      this.set('strength', "strong");
     }
-    else if (pass < 12) {
+    else if (accept === 1) {
       this.set('strength', "medium");
     }
     else {
-      this.set('strength', "strong");
+      this.set('strength', "weak");
     }
   }.observes('password'),
 
