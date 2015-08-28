@@ -30,6 +30,11 @@ export default Ember.ObjectController.extend(
         message: ""
       },
       length: { minimum: 8, messages:{tooShort:"Must be at least 8 characters."}},
+      format: {
+        with: /(?=.*\d)(?=.*[A-Z])/,
+        //allowBlank: true,
+        message: "Must include an uppercase letter and a number."
+      },
       server: true,
     },
   },
@@ -42,12 +47,38 @@ export default Ember.ObjectController.extend(
   showPassword:false,
   formSubmitted: false,
 
+  type: function() {
+    return this.get('showPassword') ? 'text' : 'password';
+  }.property('showPassword'),
+
   setFirstAndLastNamesFromFullName:function(){
     var firstname = this.get('fullname').split(' ')[0];
     var lastname = this.get('fullname').split(' ')[1];
     this.set('firstname', firstname);
     this.set('lastname', lastname);
   }.observes('fullname'),
+
+  passwordStrength: function() {
+    var accept = this.get('errors.password.length');
+
+    if (accept < 1) {
+      this.set('strength', "strong");
+    }
+    else if (accept === 1) {
+      this.set('strength', "medium");
+    }
+    else {
+      this.set('strength', "weak");
+    }
+  }.observes('password'),
+
+  showMessages : function(messages){
+    if (messages) {
+      messages.forEach(function(message){
+        this.flashMessages.success(message);
+      }.bind(this));
+    }
+  },
 
   actions: {
     submitForm: function() {
@@ -72,41 +103,6 @@ export default Ember.ObjectController.extend(
     },
     toggleCheckbox: function() {
       this.set('showPassword', !this.get('showPassword'));
-    }
-  },
-
-  togglePassword: function() {
-    var text = this.get('password');
-    var pw = this.get('password');
-
-    if (this.get('showPassword') === true) {
-      text.toString();
-      this.set('password', text);
-    }
-    else {
-      this.set('password', pw);
-    }
-  }.observes('showPassword', 'password'),
-
-  passwordStrength: function() {
-    var pass = this.get('password.length');
-
-    if (pass < 6) {
-      this.set('strength', "weak");
-    }
-    else if (pass < 12) {
-      this.set('strength', "medium");
-    }
-    else {
-      this.set('strength', "strong");
-    }
-  }.observes('password'),
-
-  showMessages : function(messages){
-    if (messages) {
-      messages.forEach(function(message){
-        this.flashMessages.success(message);
-      }.bind(this));
     }
   },
 });

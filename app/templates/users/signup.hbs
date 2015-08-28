@@ -46,7 +46,7 @@
         formSubmitted=formSubmitted
       }}
       {{validated-input
-        type="Password"
+        type=type
         lbl="Password"
         value=password
         errors=errors.password
@@ -58,9 +58,15 @@
       }}
 
       <div class="password-div">
-        <input type="checkbox" id="showPassword" name="showPassword" {{action 'toggleCheckbox'}} >
-        <label for="showPassword">Show Password</label>
-        Password strength: {{strength}}
+        <ul class="list-inline">
+          <li>
+            <input type="checkbox" id="showPassword" onClick={{action 'toggleCheckbox'}} >
+            <label for="showPassword">Show Password</label>
+          </li>
+          <li>
+            Password strength: <span class="{{strength}}">{{strength}}</span>
+          </li>
+        </ul>
       </div>
 
       <div class="input-container center">
