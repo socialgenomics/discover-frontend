@@ -7,7 +7,7 @@ if (ENV.environment === 'development'){
     namespace: 'api'
   });
 }
-else if (ENV.environment === 'production'){
+else if (ENV.environment === 'production' || ENV.environment === 'testing'){
   var ApplicationAdapter = DS.RESTAdapter.extend({
     namespace: 'api',
     host: ENV.APIBaseURL
