@@ -29,11 +29,11 @@ export default Ember.ObjectController.extend(
       presence: {
         message: ""
       },
-      length: { minimum: 8, messages:{tooShort:"Must be at least 8 characters."}},
+      length: { minimum: 8, messages:{tooShort:" "}},
       format: {
         with: /(?=.*\d)(?=.*[A-Z])/,
         //allowBlank: true,
-        message: "Must include an uppercase letter and a number."
+        message: "Must be at least 8 characters and include an uppercase letter and a number."
       },
       server: true,
     },
