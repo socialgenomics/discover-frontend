@@ -7,13 +7,13 @@
   </div>
   <div class="row">
     <div class="col m12 left-align">
-    <h5 class="padding-left-right unfocus-grey-text">Start exploring</h5>
-      {{#each model.datasets as |dataset|}}
-        {{render 'datasets.card' dataset dataset=dataset}}
-      {{/each}}
+      <h5 class="padding-left-right unfocus-grey-text">Start exploring</h5>
     </div>
+    {{#each model.datasets as |dataset|}}
+      {{render 'datasets.card' dataset dataset=dataset}}
+    {{/each}}
   </div>
-  <div class="row padding-left-right">
+  <div class="row">
     <!-- data registrations -->
     <div class="col s12 m6 left registered-data">
       <h5 class="left-align unfocus-grey-text">Recently added data</h5>
