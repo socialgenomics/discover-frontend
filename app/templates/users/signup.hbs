@@ -1,17 +1,18 @@
 <div class="section row ">
-  <div class="col s12 m6 offset-m3 l4 offset-l4">
-    <form {{action "submitForm" on="submit"}} >
+  <div class="container-signup">
+    <form {{action "submitForm" on="submit"}}>
+     <h2 class="center-align">Signup</h2>
       <div class="row">
         <div class="col m12 center">
           <ul class="list-inline">
             <li>
               <a {{ action 'authenticateWithGooglePlus' }}>
-                <img class="social-media-icon" src="/assets/images/icons/social/googleplus.png">
+                <img class="social-media-icon btn-floating" src="/assets/images/icons/social/googleplus.png">
               </a>
             </li>
             <li>
               <a {{ action 'authenticateWithLinkedIn' }}>
-                <img class="social-media-icon" src="/assets/images/icons/social/linkedin.png">
+                <img class="social-media-icon btn-floating" src="/assets/images/icons/social/linkedin.png">
               </a>
             </li>
           </ul>
@@ -52,7 +53,7 @@
         value=password
         errors=errors.password
         placeholder="Password"
-        helpText="Must contain at least one upper case and one number character."
+        helpText="Must be at least 8 characters and include an uppercase letter and a number."
         icon="password"
         showPassword=showPassword
         formSubmitted=formSubmitted
@@ -60,20 +61,18 @@
       }}
 
       <div class="password-div">
-        <ul class="list-inline">
-          <li>
-            <input type="checkbox" id="showPassword" onClick={{action 'toggleCheckbox'}} >
-            <label for="showPassword">Show Password</label>
-          </li>
-          <li>
-            Password strength: <span class="{{strength}}">{{strength}}</span>
-          </li>
-        </ul>
+        <div class="pw-check left">
+          <input type="checkbox" id="showPassword" onClick={{action 'toggleCheckbox'}} >
+          <label for="showPassword">Show Password</label>
+        </div>
+        <div class="pw-strength right">
+          <span class="pw-tag">Password strength: <span class="{{strength}}">{{strength}}</span></span>
+        </div>
       </div>
 
       <div class="input-container center">
         {{#full-width-button disabled=buttonDisabled type="submit"}}SIGN UP{{/full-width-button}}
-        <p class="center-align">By signing up you agree to our <a>Terms</a> and <a>Privacy Policy</a>.</p>
+        <p class="center-align">By signing up you agree to our {{#link-to 'policies'}}<a>Terms &amp; Privacy Policy.</a> {{/link-to}} </p>
       </div>
     </form>
   </div>

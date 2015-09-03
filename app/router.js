@@ -16,6 +16,7 @@ Router.map(function() {
   this.route('jobs');
   this.route('help');
   this.route('verify');
+  this.route('policies');
 
   this.resource('users', function(){
     this.route('signup');

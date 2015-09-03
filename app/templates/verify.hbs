@@ -1,14 +1,12 @@
 {{outlet}}
+<h2>Welcome to Repositive Beta</h2>
+<p class="col m12">To use join the private beta, you must have an access code.</p>
 <div class="row valign-wrapper">
-  <div class="col m3 valign">
     <img src="/assets/images/lizzard.png" alt="Repositive Lizzard">
-  </div>
-  <div class="col m7 offset-m1 valign">
-    <form {{action "submitForm" on="submit"}} class="col m9">
-      <h2>Private beta access</h2>
-      <p>To use join the private beta, you must have an access code. These codes have only been emailed to several users.</p>
+
+    <form {{action "submitForm" on="submit"}}>
+
       {{validated-input placeholder="please enter your code" errors=errors.code value=code}}
-      <button type="submit" class="btn teal">Continue</button>
+      <button type="submit" class="btn full-width teal">Continue</button>
     </form>
-  </div>
 </div>

@@ -45,7 +45,7 @@
 
       <div class="line-limit-desc">
         <div class="ellipsis">
-        <p>
+        <p class="sub-grey">
           {{#if model.highlights.description}}
             {{{model.highlights.description}}}
           {{else}}
@@ -56,8 +56,7 @@
        </div>
       </div>
     <div class="card-footer">
-      <ul>
-
+      <ul class="grey-text">
         {{#if (eq model.repository.access "Open")}}
         <li class="access-icons">
           <i
