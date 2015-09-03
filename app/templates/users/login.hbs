@@ -18,7 +18,7 @@
       {{validated-input class="login-email" type="email" lbl="Email" value=email errors=errors.email placeholder="Email" email=true formSubmitted=formSubmitted icon="email"}}
       {{validated-input class="login-password" type="password" lbl="Password" value=password errors=errors.password placeholder="Password" password=true formSubmitted=formSubmitted icon="password"}}
       <div class="input-container">
-        {{#full-width-button disabled=buttonDisabled type="submit"}}LOGIN{{/full-width-button}}
+        {{#full-width-button class="teal" disabled=buttonDisabled type="submit"}}LOGIN{{/full-width-button}}
       </div>
       {{message-queue}}
     </form>
