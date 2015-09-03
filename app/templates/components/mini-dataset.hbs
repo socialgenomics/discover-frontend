@@ -15,7 +15,7 @@
 		</div>
 
 		<div class="card-body mini">
-      {{#link-to 'datasets.detail' dataset.id}}<h2 class="truncate">{{dataset.properties.title}}</h2>{{/link-to}}
+      {{#link-to 'datasets.detail' dataset.id}}<h4 class="truncate">{{dataset.properties.title}}</h4>{{/link-to}}
       <span>by </span>{{#link-to 'user' dataset.owner.username}}<span>{{dataset.owner.displayName}}</span>{{/link-to}}
 		</div>
 
