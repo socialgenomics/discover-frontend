@@ -19,9 +19,9 @@ export default Base.extend({
         type: 'POST',
         data: data
       })
-      .then(function(resp){
+      .then((resp)=>{
         return this._resolveWithResp(resp);
-      }.bind(this));
+      });
     }
     else {
       return ajax({
@@ -29,34 +29,35 @@ export default Base.extend({
         type: 'POST',
         data: data
       })
-      .then(function(resp){
+      .then((resp)=>{
         return this._resolveWithResp(resp);
-      }.bind(this))
-      .fail(function(err){
+      })
+      .catch((err)=>{
         this.get("loginController").addValidationErrors(err.jqXHR.responseJSON.errors);
         return Ember.RSVP.reject(err);
-      }.bind(this));
+      });
     }
   },
   invalidate: function(user) {
-    return new Ember.RSVP.Promise(function(resolve, reject){
-      Ember.$.ajax({
-        url: ENV.APIRoutes[ENV['simple-auth'].logoutRoute],
-        type: 'POST',
-        data: {
-          authToken: user.authToken,
-        }
-      }).then(function(resp){
-        //_this.showMessages(resp.messages);
-        resolve(resp);
-      }.bind(this), function(xhr, status, err){
+    return ajax({
+      url: ENV.APIRoutes[ENV['simple-auth'].logoutRoute],
+      type: 'POST',
+      data: {
+        authToken: user.authToken,
+      }
+    })
+    .then((resp)=>{
+      //_this.showMessages(resp.messages);
+      return Ember.RSVP.resolve(resp);
+    })
+    .catch((err)=>{
         //_this.showMessages(xhr.responseJSON.messages);
-        reject(err);
-      }.bind(this));
+        return Ember.RSVP.reject(err.jqXHR.responseJSON);
     });
   },
   _resolveWithResp: function(resp){
-    return new Ember.RSVP.Promise((resolve, reject)=>{
+    return new Ember.RSVP.Promise((resolve)=>{
+
       resp.user.isCurrentUser = true;
 
       //ANALYTICS CODE FOR CALQ PROFILE SETUP
