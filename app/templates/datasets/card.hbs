@@ -18,30 +18,29 @@
     <div class="card-body">
       {{#if model.highlights.title}}
         {{#link-to 'datasets.detail' model.id classNames="data-title"}}
-        <h2 class="card-title-limit data-title">
+        <h4 class="card-title-limit data-title">
             {{{model.highlights.title}}}
-        </h2>
+        </h4>
         {{/link-to}}
       {{else}}
         {{#link-to 'datasets.detail' model.id classNames="data-title"}}
-        <h2 class="card-title-limit data-title">
+        <h4 class="card-title-limit data-title">
           {{model.properties.title}}
-        </h2>
+        </h4>
         {{/link-to}}
       {{/if}}
 
-      <span>from </span>
-      {{#if model.owner.displayName}}
-        {{#link-to 'user' model.owner.username}}
-          <span>{{model.owner.displayName}}</span>
-        {{/link-to}}
-      {{else}}
-        <span>
+      <h5>from
+        {{#if model.owner.displayName}}
+          {{#link-to 'user' model.owner.username}}
+            {{model.owner.displayName}}
+          {{/link-to}}
+        {{else}}
           {{#link-to 'datasets.search' (query-params repository=model.repository.name) }}
             {{model.repository.name}}
           {{/link-to}}
-        </span>
-      {{/if}}
+        {{/if}}
+      </h5>
 
       <div class="line-limit-desc">
         <div class="ellipsis">

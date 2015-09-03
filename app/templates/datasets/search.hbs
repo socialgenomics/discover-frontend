@@ -1,6 +1,6 @@
 <div class="s12">
   <div class="section" style="padding-top:0;">
-    <h6>Your query:</h6>
+    <h3>Your query:</h3>
       <div id="filters">
         <span class="filter first">
           <em class="highlight">"{{model.query}}"</em>
@@ -17,7 +17,7 @@
     {{#if model.isLoading}}
       
     {{else}}
-      <h6>Search Results ({{ model.meta.total }}):</h6>
+      <h3>Search Results ({{ model.meta.total }}):</h3>
     {{/if}}
   </div>
 </div>
@@ -28,7 +28,7 @@
   {{#each model.aggs as |agg|}}
     {{#if agg.show}}
     <div class="section">
-      <h5>{{ agg.displayName }}</h5>
+      <h4>{{ agg.displayName }}</h4>
       {{#each agg.buckets as |bucket|}}
         <div>
         {{#if (eq agg.name "assayType")}}
