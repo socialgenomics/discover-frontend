@@ -31,19 +31,62 @@ export default Ember.ObjectController.extend(
         message: ""
       },
       length: { minimum: 8, messages:{tooShort:"Must be at least 8 characters."}},
+      format: {
+        with: /(?=.*\d)(?=.*[A-Z])/,
+        //allowBlank: true,
+        message: "Must include an uppercase letter and a number."
+      },
       server: true,
     },
   },
   fullname:null,
+  firstname:null,
+  lastname:null,
   email:null,
   password:null,
+  strength:null,
+  showPassword:false,
   formSubmitted: false,
+
+  type: function() {
+    return this.get('showPassword') ? 'text' : 'password';
+  }.property('showPassword'),
+
+  setFirstAndLastNamesFromFullName:function(){
+    var firstname = this.get('fullname').split(' ')[0];
+    var lastname = this.get('fullname').split(' ')[1];
+    this.set('firstname', firstname);
+    this.set('lastname', lastname);
+  }.observes('fullname'),
+
+  passwordStrength: function() {
+    var accept = this.get('errors.password.length');
+
+    if (accept < 1) {
+      this.set('strength', "strong");
+    }
+    else if (accept === 1) {
+      this.set('strength', "medium");
+    }
+    else {
+      this.set('strength', "weak");
+    }
+  }.observes('password'),
+
+  showMessages : function(messages){
+    if (messages) {
+      messages.forEach(function(message){
+        this.flashMessages.success(message);
+      }.bind(this));
+    }
+  },
+
   actions: {
     submitForm: function() {
       var _this = this;
       this.set('formSubmitted', true);
       if (this.get('isValid')){
-        var credentials = this.getProperties('fullname', 'email', 'password');
+        var credentials = this.getProperties('firstname', 'lastname', 'email', 'password');
         ajax({
           url: ENV.APIRoutes[ENV['simple-auth'].signupRoute],
           type: 'POST',
@@ -61,13 +104,8 @@ export default Ember.ObjectController.extend(
         console.log('invalid');
       }
     },
-  },
-
-  showMessages : function(messages){
-    if (messages) {
-      messages.forEach(function(message){
-        this.flashMessages.success(message);
-      }.bind(this));
+    toggleCheckbox: function() {
+      this.set('showPassword', !this.get('showPassword'));
     }
   },
 });

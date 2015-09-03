@@ -1,6 +1,6 @@
 <div class="section row ">
-  <div class="col m4 offset-m4 s12">
-    <form {{action "submitForm" on="submit"}}>
+  <div class="col s12 m6 offset-m3 l4 offset-l4">
+    <form {{action "submitForm" on="submit"}} >
       <div class="row">
         <div class="col m12 center">
           <ul class="list-inline">
@@ -47,16 +47,29 @@
         class="signup-email"
       }}
       {{validated-input
-        type="Password"
+        type=type
         lbl="Password"
         value=password
         errors=errors.password
         placeholder="Password"
         helpText="Must contain at least one upper case and one number character."
         icon="password"
+        showPassword=showPassword
         formSubmitted=formSubmitted
         class="signup-password"
       }}
+
+      <div class="password-div">
+        <ul class="list-inline">
+          <li>
+            <input type="checkbox" id="showPassword" onClick={{action 'toggleCheckbox'}} >
+            <label for="showPassword">Show Password</label>
+          </li>
+          <li>
+            Password strength: <span class="{{strength}}">{{strength}}</span>
+          </li>
+        </ul>
+      </div>
 
       <div class="input-container center">
         {{#full-width-button disabled=buttonDisabled type="submit"}}SIGN UP{{/full-width-button}}
