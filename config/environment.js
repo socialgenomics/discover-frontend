@@ -91,6 +91,20 @@ module.exports = function(environment) {
       LOG_EVENT_TRACKING: true,
       ENABLED: false,
     },
+    metricsAdapters: [
+      {
+        name: 'GoogleAnalytics',
+        config: {
+          id: 'UA-54495053-2'
+        }
+      },
+      {
+        name: 'Calq',
+        config: {
+          id: 'ca78eed5d34a041ab5cf164295cf2c25'
+        }
+      },
+    ]
   };
 
   if (environment === 'development') {

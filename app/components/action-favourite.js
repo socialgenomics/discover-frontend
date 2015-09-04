@@ -8,11 +8,11 @@ export default Ember.Component.extend({
     this.toggleProperty("isStarred");
     if(this.isStarred){
       calq.action.track(
-        "Dataset.Favoutite"
+        "Dataset.Favourite"
       );
     }else{
       calq.action.track(
-        "Dataset.Unfavoutite"
+        "Dataset.Unfavourite"
       );
     }
   }
