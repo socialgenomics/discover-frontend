@@ -1,4 +1,3 @@
-<div class="section row ">
   <div class="container-signup">
     <form {{action "submitForm" on="submit"}}>
       <div class="row">
@@ -15,7 +14,7 @@
               </a>
             </li>
           </ul>
-          <p class="center-align">We won't use any of your personal data, only your email.</p>
+          <h6 class="center-align">We won't use any of your personal data, only your email.</h6>
         </div>
       </div>
       <div class="or-div">
@@ -70,11 +69,10 @@
       </div>
       <div class="input-container center">
         {{#full-width-button class="teal" disabled=buttonDisabled type="submit"}}SIGN UP{{/full-width-button}}
-        <p class="center-align">By signing up you agree to our {{#link-to 'policies'}}<a>Terms &amp; Privacy Policy.</a> {{/link-to}} </p>
+        <h6 class="center-align">By signing up you agree to our {{#link-to 'policies' class="link"}}Terms &amp; Privacy Policy.{{/link-to}} </h6>
       </div>
     </form>
   </div>
-</div>
  <div class="row stick-to-bottom privacy-msg">
     <div class="col m12 center">
       <div class="divider"></div>
