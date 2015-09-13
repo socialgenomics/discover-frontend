@@ -20,7 +20,7 @@ export default DS.Model.extend({
   isLoading: true,
 
   initialise: function(){
-    
+
     if(Ember.isEmpty(this.get('queryParams'))){
       throw "please initialise with query params object";
     }
@@ -54,6 +54,7 @@ export default DS.Model.extend({
   }.on('ready'),
 
   queryParamsDidChange: function(){
+    this.set('isLoading', true)
     if (!Ember.isNone(this.get('filters'))){
       var qps = this.get('queryParams');
       this.set('query', qps.q);
@@ -72,27 +73,26 @@ export default DS.Model.extend({
 
   queryDidChange: function(){
     this.set('isLoading', true)
-    this.get('aggs').setEach('show', false)   
+    this.get('aggs').setEach('show', false)
     this.get('datasets').clear()
   }.observes('query'),
 
   updateModelFromAPI: function(){
-    
+
     return ajax({
       url: ENV.APIRoutes['datasets.search'],
       type:'POST',
       data: "query="+this.get('DSL')
     })
-    .then(function(resp){
+    .then((resp)=>{
       this.set('meta', resp.meta);
       if (this.get('meta.total') < 0){ return Ember.RSVP.reject("No results") }
       delete resp.meta;
 
-      this.set('isLoading', false);
       // load the aggs from the resp
       this.set('aggs', []);
       for(var key in resp.aggs){
-        var DSL = {}; 
+        var DSL = {};
         DSL[key] = resp.aggs[key];
         var agg = Agg.create({
           aggDSL: DSL, //TODO:: this is dodgy
@@ -105,12 +105,13 @@ export default DS.Model.extend({
       // load the results
       this.store.pushPayload('Dataset', resp);
       this.get('datasets').clear();
-      resp.datasets.forEach(function(ds){
+      resp.datasets.forEach((ds)=>{
         var ds = this.store.peekRecord('Dataset', ds.id);
         ds.set('colour', this.getAssayColourForDataset(ds));
         this.get('datasets').pushObject(ds);
-      }.bind(this));
-    }.bind(this))
+      });
+      this.set('isLoading', false);
+    })
     .catch(function(err){
       return Ember.RSVP.reject(err)
     });
@@ -140,7 +141,7 @@ export default DS.Model.extend({
       var a = agg.get('DSL');
       query.body.aggs[agg.name] = a[agg.name];
     });
-    
+
     if (Ember.isEmpty(this.get('filters'))){
       query.body.query = {
         "query_string": {
@@ -174,7 +175,7 @@ export default DS.Model.extend({
       query.body.query.filtered.filter.bool.must = filtersBool;
     }
     console.log(query)
-    return JSON.stringify(query); 
+    return JSON.stringify(query);
   }.property('query', 'offset', 'filters.@each.value'),
 
   getAssayColourForDataset: function(dataset){

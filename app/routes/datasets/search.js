@@ -1,9 +1,5 @@
 import Ember from 'ember';
-import _ from 'npm:underscore';
-import ajax from 'ic-ajax';
-import ENV from 'repositive/config/environment';
 import AuthenticatedRouteMixin from 'simple-auth/mixins/authenticated-route-mixin';
-import Search from 'repositive/models/search';
 
 
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
