@@ -24,6 +24,9 @@ export default Ember.Controller.extend(
   },
   modelLoadingDidChange: function(){
     if (!this.get('model.isLoading')){
+      // The view subscribes to this function
+      // so that it can call some jquery after the
+      // model has finised rendering
       Ember.run.schedule('afterRender', this, ()=>{
         this.trigger('modelLoaded');
       });
