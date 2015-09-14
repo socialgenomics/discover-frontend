@@ -1,46 +1,56 @@
-<div class="navbar-fixed">
-  <nav class="navbar-grey">
-    <div class="nav-wrapper">
-      {{#link-to 'root'}}
-      <div class="nav-logo valign-wrapper">
-        <img id="mobile-logo" class="hide-on-med-and-up nav-logo-square" src="/assets/images/repositive-logo.png" alt="Repositive DNA logo">
-        <img id="full-logo" class="responsive-img hide-on-small-only" src="/assets/images/logo-full.png" alt="Repositive DNA logo">
-      </div>
-      {{/link-to}}
-      <!-- {{#link-to 'root' class='hide-on-small-only brand-name'}}REPOSITIVE{{/link-to}} -->
-      {{#if session.isAuthenticated}}
 
-      <div class="container">
-        <div class="left nav-input">
-          <form {{action 'search' on='submit'}}>
-            <div class="input-field grey-text">
-              <i class="small mdi-action-search"></i>
-              {{input type="text" class="grey-text" placeholder="search cancer, prostate..." value=query}}
-              <!--    {{#search-button action='search' on="submit"}}
-              {{/search-button}} -->
-            </div>
-          </form>
-        </div>
-        <div class="re-navbar-btn register grey-text right">
-          {{#link-to "datasets.register" class="valign-wrapper"}}<i class="mdi-action-note-add"></i><h6 class="uppercase">Register Data</h6>{{/link-to}}
-        </div>
-        <div class="re-navbar-btn request grey-text right">
-          {{#link-to "datasets.request" class="valign-wrapper"}}<i class="mdi-content-content-paste"></i><h6 class="uppercase">Request Data</h6>{{/link-to}}
-        </div>
-      </div>
-      {{navbar-dropdown}}
+<nav id="navbar">
+  <div class="navbar-wrapper">
 
-      {{else}}
-      <ul class="right no-margin valign-wrapper">
-        {{#active-link class="navbar-btn grey-text"}}
-        {{link-to 'SIGNUP' 'users.signup'}}
-        {{/active-link}}
-        {{#active-link class="navbar-btn grey-text"}}
-        {{link-to 'LOGIN' 'users.login' }}
-        {{/active-link}}
-      </ul>
-      {{/if}}
-
+    {{#link-to 'root'}}
+    <div class="navbar-logo valign-wrapper">
+      <img id="mobile-logo" class="hide-on-med-and-up nav-logo-square" src="/assets/images/repositive-logo.png" alt="Repositive DNA logo">
+      <img id="full-logo" class="responsive-img hide-on-small-only" src="/assets/images/logo-full.png" alt="Repositive DNA logo">
     </div>
-  </nav>
-</div>
+    {{/link-to}}
+
+    {{#if session.isAuthenticated}}
+
+    <div class="navbar-container">
+      <div class="navbar-search">
+        <form {{action 'search' on='submit'}}>
+            <i class="small mdi-action-search"></i>
+            {{input
+              type="text"
+              class="grey-text"
+              placeholder="search cancer, prostate..."
+              value=query
+            }}
+        </form>
+      </div>
+      <div class="navbar-buttons">
+        <div class="navbar-button">
+          {{#link-to "datasets.register" class="valign-wrapper"}}
+          <i class="mdi-action-note-add"></i><h6 class="uppercase">Register Data</h6>
+          {{/link-to}}
+        </div>
+        <div class="navbar-button">
+          {{#link-to "datasets.request" class="valign-wrapper"}}
+          <i class="mdi-content-content-paste"></i><h6 class="uppercase">Request Data</h6>
+          {{/link-to}}
+        </div>
+      </div>
+    </div>
+
+
+    {{navbar-dropdown}}
+
+    {{else}}
+
+    <ul class="right">
+      {{#active-link}}
+      {{link-to 'SIGNUP' 'users.signup'}}
+      {{/active-link}}
+      {{#active-link}}
+      {{link-to 'LOGIN' 'users.login'}}
+      {{/active-link}}
+    </ul>
+
+    {{/if}}
+  </div>
+</nav>
