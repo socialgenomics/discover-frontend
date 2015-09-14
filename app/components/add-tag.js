@@ -7,10 +7,12 @@ export default Ember.Component.extend({
     addTag:function(){
 
       if(this.tag){
-        calq.action.track(
-          "Dataset.AddTag",
-          {"TagName":this.tag}
-        );
+        this.get('metrics').trackEvent({
+          category: 'dataset',
+          action: 'tag',
+          label: this.get('dataset.id'),
+          value: comment.tag
+        });
         this.sendAction('addTag',this.tag);
 
       }

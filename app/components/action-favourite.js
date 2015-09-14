@@ -6,14 +6,20 @@ export default Ember.Component.extend({
   classNameBindings: ['isStarred:starred'],
   click: function(){
     this.toggleProperty("isStarred");
-    if(this.isStarred){
-      calq.action.track(
-        "Dataset.Favourite"
-      );
+    if(this.get('isStarred')){
+      this.get('metrics').trackEvent({
+        category: 'dataset',
+        action: 'favourite',
+        label: this.get('dataset.id'),
+        value: true
+      });
     }else{
-      calq.action.track(
-        "Dataset.Unfavourite"
-      );
+      this.get('metrics').trackEvent({
+        category: 'dataset',
+        action: 'favourite',
+        label: this.get('dataset.id'),
+        value: false
+      });
     }
   }
 });

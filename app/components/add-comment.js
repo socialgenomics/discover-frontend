@@ -18,10 +18,12 @@ export default Ember.Component.extend({
     addComment:function(){
       //temporary validation
       if(this.comment){
-        calq.action.track(
-          "Dataset.AddComment",
-          {"CommentName":this.comment}
-        );
+        this.get('metrics').trackEvent({
+          category: 'dataset',
+          action: 'comment',
+          label: this.get('dataset.id'),
+          value: this.comment
+        });
         this.sendAction('addComment',this.comment);
       }
       this.send('cancel');

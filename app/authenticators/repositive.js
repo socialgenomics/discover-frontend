@@ -57,17 +57,12 @@ export default Base.extend({
   },
   _resolveWithResp: function(resp){
     return new Ember.RSVP.Promise((resolve)=>{
+      this.get('metrics').identify({
+        email: resp.user.email,
+        inviteCode: this.get('loginController.controllers.application.code')
+      });
 
       resp.user.isCurrentUser = true;
-
-      //ANALYTICS CODE FOR CALQ PROFILE SETUP
-      calq.user.identify(resp.user.username);
-      calq.user.profile({
-        "$email": resp.user.email,
-        "InviteCode": this.get('loginController.controllers.application.code')
-      });
-      // END OF ANALYTICS CODE
-
       Ember.run(function(){
         // all the properties of the object you resolve with
         // will be added to the session

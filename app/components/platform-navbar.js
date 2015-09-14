@@ -10,10 +10,11 @@ export default Ember.Component.extend({
   actions:{
 
     search: function(){
-      calq.action.track(
-        "Search.Query",
-        { "Query": this.get("query")}
-      );
+      this.get('metrics').trackEvent({
+        category: 'dataset',
+        action: 'search',
+        value: this.get("query")
+      });
       this.sendAction('action', this.get("query"));
     },
 
