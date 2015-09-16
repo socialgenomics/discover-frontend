@@ -87,22 +87,20 @@ module.exports = function(environment) {
       'img-src': "'self' data: http://www.google-analytics.com",
       'media-src': "'self'",
     },
-    TRACKING: {
-      LOG_EVENT_TRACKING: true,
-      ENABLED: false,
-    },
     metricsAdapters: [
       {
         name: 'GoogleAnalytics',
         config: {
           id: 'UA-54495053-2'
-        }
+        },
+        environments: ['production']
       },
       {
         name: 'Calq',
         config: {
           id: 'ca78eed5d34a041ab5cf164295cf2c25'
-        }
+        },
+        environments: ['production']
       },
     ]
   };
@@ -134,7 +132,6 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-    ENV.TRACKING.ENABLED = true;
     ENV.torii.providers['google-oauth2'].redirectUri = 'http://discover.repositive.io'
     ENV.torii.providers['linked-in-oauth2'].redirectUri = 'http://dicsover.repositive.io'
   }

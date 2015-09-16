@@ -7,7 +7,12 @@ export default Ember.Mixin.create({
 
   didTransition() {
     this._super(...arguments);
-    this._trackPage();
+    if (ENV.environment == 'production'){
+      this._trackPage();
+    }
+    else{
+      this._logTracking();
+    }
   },
 
   _trackPage() {
@@ -17,5 +22,11 @@ export default Ember.Mixin.create({
 
       Ember.get(this, 'metrics').trackPage({ page, title });
     });
+  },
+
+  _logTracking() {
+    const page = document.location.href;
+    const title = Ember.getWithDefault(this, 'routeName', 'unknown');
+    Ember.Logger.info("Tracking:", { page, title })
   }
 });
