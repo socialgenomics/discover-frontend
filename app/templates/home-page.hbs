@@ -1,30 +1,29 @@
 <div id="homepage">
   <div class="row">
+    <h5 class="subtitles unfocus-grey-text">Search</h5>
     <div class="col m12 center-align">
       <div class="stats"><span class="numb">{{ model.stats.repos }}</span><span class="stats-text">Repositories</span></div>
       <div class="stats"><span class="numb">{{ model.stats.datasets }}</span><span class="stats-text">Datasets</span></div>
     </div>
   </div>
   <div class="row">
-    <div class="col m12 left-align">
-      <h5 class="padding-left-right unfocus-grey-text">Start exploring</h5>
-    </div>
+    <h5 class="subtitles unfocus-grey-text">Start Exploring</h5>
     {{#each model.datasets as |dataset|}}
       {{render 'datasets.card' dataset dataset=dataset}}
     {{/each}}
   </div>
   <div class="row">
+    <h5 class="subtitles unfocus-grey-text">User Activity</h5>
     <!-- data registrations -->
-    <div class="col s12 m6 left registered-data">
-      <h5 class="left-align unfocus-grey-text">Recently added data</h5>
-      <div class="card dataset">
-        <div class="card-header register-top light-blue lighten-4">
-          <p>
-            Do you have data to share? Do not be a tight-arse and share with the rest.
-          </p>
+    <div class="col s12 m6 ">
+      <div class="card  activity-card registered-data">
+        <div class="card-header card-title center">
+          <i class="mdi-action-note-add"></i><h6 class="uppercase">Register Data</h6>
         </div>
-        <div class="card-content">
-          <h6 class="center">The latest registrations</h6>
+        <p class="info-text">
+          These are datasets contributed by our community. You can easily register your dataset and make it visible for others.
+        </p>
+        <div class="card-body">
             {{#each model.registered as |registration|}}
               {{mini-dataset dataset=registration action="toggleModal"}}
             {{/each}}
@@ -32,16 +31,16 @@
       </div>
     </div>
     <!--data requests-->
-    <div class="col s12 m6 left registered-data">
-      <h5 class='left-align unfocus-grey-text'>Requested datasets</h5>
-      <div class="card dataset">
-        <div class="card-header register-top amber lighten-3">
-          <p>
-            Haven't found what you are looking for? There is a community of generous scientists happy to share.
-          </p>
+    <div class="col s12 m6">
+      <div class="card activity-card requested-data">
+        <div class="card-header center card-title">
+            <i class="mdi-content-content-paste"></i><h6 class="uppercase">Request Data</h6>
         </div>
-        <div class="card-content">
-          <h6 class='center'>The latest requests</h6>
+        <p class="info-text">
+          Help our community by connecting them to datasets they are looking for.
+If you’re seeking datasets for your research you can make a request too.
+        </p>
+        <div class="card-body">
           {{#each model.requests as |request|}}
             {{mini-dataset dataset=request}}
           {{/each}}
