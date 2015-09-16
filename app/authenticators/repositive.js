@@ -5,6 +5,7 @@ import ENV from 'repositive/config/environment';
 
 
 export default Base.extend({
+  metrics: Ember.inject.service(),
   restore: function(data) {
     return new Ember.RSVP.Promise(function(resolve, reject){
       // TODO: display any notifications - i.e if you have new messages etc
