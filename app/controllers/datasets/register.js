@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import EmberValidations from 'ember-validations';
 export default Ember.Controller.extend(
-  EmberValidations, 
+  EmberValidations,
 {
   title:null,
   description:null,
@@ -23,10 +23,7 @@ export default Ember.Controller.extend(
   },
   actions:{
     addDataset:function(){
-      var _this = this;
-
       if (this.get('isValid')){
-
         this.set('loading', true)
 
         var dataset = this.store.createRecord('dataset',{});
@@ -36,22 +33,21 @@ export default Ember.Controller.extend(
           webURL:this.webURL
         });
         dataset.properties = props;
-        calq.action.track(
-          "Dataset.Register",
-          {
-            "title":this.title,
-            "description":this.description,
-            "url":this.webURL
-          }
-        );
-        dataset.save()
-        .then(function(created){
-          _this.flashMessages.success('Dataset successfully registered.');
-          _this.transitionToRoute('datasets.detail',created.id);
+
+        dataset
+        .save()
+        .then((created)=>{
+          this.flashMessages.success('Dataset successfully registered.');
+          this.transitionToRoute('datasets.detail',created.id);
+          this.get('metrics').trackEvent({
+            category: 'dataset',
+            action: 'register',
+            value: created.id
+          });
         })
         .catch(function(err){
           console.log(err);
-          _this.set('loading', false)
+          this.set('loading', false)
         });
       }
 

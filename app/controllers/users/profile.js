@@ -7,9 +7,11 @@ export default Ember.Controller.extend({
       this.get('model.user').save();
       this.get('model.profile').save();
       this.set('saved',true);
-      calq.user.profile(
-          {"$full_name": this.get('model.user.displayName')}
-      );
+      this.get('metrics').trackEvent({
+        category: 'profile',
+        action: 'request',
+        value: this.get('currentUser')
+      });
     },
   },
 });
