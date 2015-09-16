@@ -1,22 +1,25 @@
 {{yield}}
-	<div class="card dataset mini left-align">
-		<div class="card-header">
-			<div class="assay-container">
+	<div class="card dataset mini">
+		<div class="submitted">
+			<h6>
+				{{#if (dataset=register)}}
+				<span>Registered by</span>
+				{{else}}
+				<span>Request by</span>
+				{{#link-to 'user' dataset.owner.username}}{{dataset.owner.displayName}}{{/link-to}}
+			</h6>
+			<!--not applicable yet-->
+			{{!-- <div class="assay-container">
 				<span class="assay-small">{{assay}}</span>
 			</div>
-			<div class="assay-container">
-      </div>
 			<div class="actions-container">
 				{{action-favourite}}
         <span class="grey-text">{{data.favourite}}</span>
         {{action-share action="toggleModal"}}
-			</div>
+			</div>--}}
 		</div>
-
-		<div class="card-body mini">
-      {{#link-to 'datasets.detail' dataset.id}}<h4 class="truncate">{{dataset.properties.title}}</h4>{{/link-to}}
-      <span>by </span>{{#link-to 'user' dataset.owner.username}}<span>{{dataset.owner.displayName}}</span>{{/link-to}}
-		</div>
+		<div class="title-details">
+      {{#link-to 'datasets.detail' dataset.id}}<h6 class="truncate">{{dataset.properties.title}}</h6>{{/link-to}}
 
     <div class="card-footer">
       <ul class="grey-text">
@@ -51,4 +54,5 @@
         <li class="tooltipped" data-position="bottom" data-tooltip="Comments"><i class="mdi-action-question-answer"></i><span>{{dataset.comments.length}}</span></li>
       </ul>
     </div>
+	</div>
   </div>
