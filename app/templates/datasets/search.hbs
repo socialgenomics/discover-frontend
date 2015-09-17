@@ -1,4 +1,5 @@
-<div class="s12">
+
+{{!-- <div class="s12">
   <div class="section" style="padding-top:0;">
     <h3>Your query:</h3>
       <div id="filters">
@@ -15,16 +16,15 @@
   </div>
   <div class="section" style="padding-bottom:0;">
     {{#if model.isLoading}}
-      
+
     {{else}}
       <h3>Search Results ({{ model.meta.total }}):</h3>
     {{/if}}
   </div>
-</div>
+</div> --}}
 
 
-<div class="row relative">
-  <div id="aggregation" class="left-of-container">
+<nav class="sideNav">
   {{#each model.aggs as |agg|}}
     {{#if agg.show}}
     <div class="section">
@@ -43,17 +43,20 @@
     <div class="divider"></div>
     {{/if}}
   {{/each}}
-  </div>
-  {{#if model.isLoading}}
-    {{partial 'datasets/loading'}}
-  {{else}}
-    {{#each model.datasets as |dataset|}}
-      {{render 'datasets/card' dataset}}
-    {{/each}}
-  {{/if}}
+</nav>
+
+
+<div class="content">
+{{#if model.isLoading}}
+  {{partial 'datasets/loading'}}
+{{else}}
+  {{#each model.datasets as |dataset|}}
+    {{render 'datasets/card' dataset}}
+  {{/each}}
+{{/if}}
 </div>
 
-{{#if isModalShown}}
+{{!-- {{#if isModalShown}}
   {{#md-modal action="closeModal"}}
   <div class="modal-content center-align">
     <img src="/assets/images/icons/work-in-progress.png" alt="Logo" class="social-media-icon"/>
@@ -65,4 +68,4 @@
     <a {{action "toggleModal"}} class="modal-action modal-close waves-effect">OK</a>
   </div>
   {{/md-modal}}
-{{/if}}
+{{/if}} --}}
