@@ -2,11 +2,11 @@
 	<div class="card dataset mini">
 		<div class="submitted">
 			<h6>
-				{{#if (eq dataset.repository.name "REPOSITIVE")}}
-				<span>Registered by</span>
-				{{else}}
-				<span>Request by</span>
+				{{#if dataset.isRequest}}
+				<span>Request from</span>
 				{{#link-to 'user' dataset.owner.username}}{{dataset.owner.displayName}}{{/link-to}}
+				{{else}}
+				<span>Registered by</span>
 				{{/if}}
 			</h6>
 			<!--not applicable yet-->
