@@ -2,11 +2,12 @@
 	<div class="card dataset mini">
 		<div class="submitted">
 			<h6>
-				{{#if (dataset=register)}}
+				{{#if data=register}}
 				<span>Registered by</span>
 				{{else}}
-				<span>Request by</span>
+				<span>Request from</span>
 				{{#link-to 'user' dataset.owner.username}}{{dataset.owner.displayName}}{{/link-to}}
+				{{/if}}
 			</h6>
 			<!--not applicable yet-->
 			{{!-- <div class="assay-container">
