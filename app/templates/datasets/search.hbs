@@ -1,30 +1,8 @@
 
-{{!-- <div class="s12">
-  <div class="section" style="padding-top:0;">
-    <h3>Your query:</h3>
-      <div id="filters">
-        <span class="filter first">
-          <em class="highlight">"{{model.query}}"</em>
-        </span>
-        {{#each model.filters as |filter|}}
-          {{#if filter.value}}
-          <span class="filter" {{action "removeFilter" filter.name filter.value}}>{{ filter.displayName }} : {{filter.value}}<span class="remove">x</span></span>
-          {{/if}}
-        {{/each}}
-      </div>
-
-  </div>
-  <div class="section" style="padding-bottom:0;">
-    {{#if model.isLoading}}
-
-    {{else}}
-      <h3>Search Results ({{ model.meta.total }}):</h3>
-    {{/if}}
-  </div>
-</div> --}}
 
 
-<nav class="sideNav">
+
+<nav class="sideNav" id="aggregation">
   {{#each model.aggs as |agg|}}
     {{#if agg.show}}
     <div class="section">
@@ -47,6 +25,29 @@
 
 
 <div class="content">
+<div class="s12">
+  <div class="section" style="padding-top:0;">
+    <h3>Your query:</h3>
+      <div id="filters">
+        <span class="filter first">
+          <em class="highlight">"{{model.query}}"</em>
+        </span>
+        {{#each model.filters as |filter|}}
+          {{#if filter.value}}
+          <span class="filter" {{action "removeFilter" filter.name filter.value}}>{{ filter.displayName }} : {{filter.value}}<span class="remove">x</span></span>
+          {{/if}}
+        {{/each}}
+      </div>
+
+  </div>
+  <div class="section" style="padding-bottom:0;">
+    {{#if model.isLoading}}
+
+    {{else}}
+      <h3>Search Results ({{ model.meta.total }}):</h3>
+    {{/if}}
+  </div>
+</div>
 {{#if model.isLoading}}
   {{partial 'datasets/loading'}}
 {{else}}
