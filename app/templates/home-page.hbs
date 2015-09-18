@@ -1,9 +1,13 @@
 <div id="homepage">
   <div class="row">
-    <h5 class="subtitles unfocus-grey-text">Search</h5>
-    <div class="col m12 center-align card">
-      <div class="stats"><span class="numb">{{ model.stats.repos }}</span><span class="stats-text">Repositories</span></div>
-      <div class="stats"><span class="numb">{{ model.stats.datasets }}</span><span class="stats-text">Datasets</span></div>
+    <h5 class="subtitles unfocus-grey-text">Search Through</h5>
+    <div class="col m12 center-align">
+      <div class="card">
+        <div class="stats"><h2 class="numb">{{ model.stats.datasets }}<span class="stats-text"> Human Genomic Datasets</span></h2>
+        <span> from </span>
+        <h2 class="numb">{{ model.stats.repos }}<span class="stats-text"> Repositories</span></h2></div>
+
+      </div>
     </div>
   </div>
   <div class="row">
@@ -18,7 +22,7 @@
     <div class="col s12 m6 ">
       <div class="card  activity-card registered-data">
         <div class="card-header card-title center">
-          <i class="mdi-action-note-add"></i><h6 class="uppercase">Register Data</h6>
+          <i class="mdi-action-note-add"></i><h4 class="uppercase">Register Data</h4>
         </div>
         <p class="info-text">
           These are datasets contributed by our community. You can easily register your dataset and make it visible for others.
@@ -34,7 +38,7 @@
     <div class="col s12 m6">
       <div class="card activity-card requested-data">
         <div class="card-header center card-title">
-            <i class="mdi-content-content-paste"></i><h6 class="uppercase">Request Data</h6>
+            <i class="mdi-content-content-paste"></i><h4 class="uppercase">Request Data</h4>
         </div>
         <p class="info-text">
           Help our community by connecting them to datasets they are looking for.

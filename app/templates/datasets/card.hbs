@@ -18,13 +18,13 @@
     <div class="card-body">
       {{#if model.highlights.title}}
         {{#link-to 'datasets.detail' model.id classNames="data-title"}}
-        <h4 class="card-title-limit data-title">
+        <h4 class="data-title">
             {{{model.highlights.title}}}
         </h4>
         {{/link-to}}
       {{else}}
         {{#link-to 'datasets.detail' model.id classNames="data-title"}}
-        <h4 class="card-title-limit data-title">
+        <h4 class="data-title">
           {{model.properties.title}}
         </h4>
         {{/link-to}}
