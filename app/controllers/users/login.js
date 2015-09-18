@@ -39,7 +39,7 @@ export default Ember.ObjectController.extend(
     submitForm: function() {
       var _this = this;
       this.set('loading', true);
-      this.set('formSubmitted', true)
+      this.set('formSubmitted', true);
       this.get('session')
       .authenticate('authenticator:repositive', {
         email: this.email,

@@ -10,12 +10,12 @@ export default Ember.Controller.extend(searchMixin, {
   tags: null,
   repository: null,
   access: null,
-  isModalShown:false,
+  isShowingModal:false,
 
   actions:{
 
     toggleModal(){
-      this.toggleProperty('isModalShown');
+      this.toggleProperty('isShowingModal');
     },
 
   }
