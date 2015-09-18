@@ -50,9 +50,11 @@
 {{#if model.isLoading}}
   {{partial 'datasets/loading'}}
 {{else}}
+  <div class="row">
   {{#each model.datasets as |dataset|}}
     {{render 'datasets/card' dataset}}
   {{/each}}
+  </div>
 {{/if}}
 </div>
 

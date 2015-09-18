@@ -10,7 +10,7 @@ export default Ember.Route.extend({
         ajax({url: ENV.APIRoutes['datasets.search'] , type:'GET' }),
         this.store.findAll('dataset'),
         this.store.query('dataset', {isRequest: 1}),
-        this.store.query('dataset', {repository:"REPOSITIVE", isRequest:0})
+        this.store.query('dataset', {repository:"REPOSITIVE", isRequest: 0})
       ])
       .then(function(data){
         return {
