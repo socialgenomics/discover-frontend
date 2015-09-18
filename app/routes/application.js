@@ -3,7 +3,6 @@ import ApplicationRouteMixin from 'simple-auth/mixins/application-route-mixin';
 
 export default Ember.Route.extend(ApplicationRouteMixin, {
   actions:{
-
     search: function(query){
       this.transitionTo('datasets.search', {
         queryParams: {
@@ -15,6 +14,9 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
           access: null,
         }
       });
+    },
+    toggleModal(){
+      this.controllerFor("application").toggleProperty('isShowingModal');
     },
   }
 });

@@ -1,8 +1,6 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-  isShowingModal:false,
-
   isOwnProfile: function(){
     return this.get('session.secure.user.id') == this.get('model.user.id');
   }.property('model'),
@@ -18,8 +16,6 @@ export default Ember.Controller.extend({
   }.property(),
 
   actions:{
-    toggleModal(){
-      this.toggleProperty('isShowingModal');
-    },
+
   },
 });
