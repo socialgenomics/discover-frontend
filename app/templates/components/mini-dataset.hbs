@@ -1,7 +1,6 @@
 {{yield}}
 	<div class="card dataset mini">
 		<div class="submitted">
-<<<<<<< HEAD
 			<h6>
 				{{#if (dataset.register)}}
 				<span>Registered by</span>
@@ -10,14 +9,12 @@
 				{{#link-to 'user' dataset.owner.username}}{{dataset.owner.displayName}}{{/link-to}}
 				{{/if}}
 			</h6>
-=======
 				{{#if dataset.isRequest}}
 				<h6>Request from</h6>
 				{{else}}
 				<h6>Registered by</h6>
 				{{/if}}
 				{{#link-to 'user' dataset.owner.username}}<h6 class="user-name">{{dataset.owner.displayName}}</h6>{{/link-to}}
->>>>>>> aaead2a5225ca1c569a41b6b97fbe7d4f65c6d41
 			<!--not applicable yet-->
 			{{!-- <div class="assay-container">
 				<span class="assay-small">{{assay}}</span>

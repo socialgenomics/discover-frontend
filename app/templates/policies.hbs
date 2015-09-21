@@ -1,5 +1,4 @@
-<div class="policy">
-<<<<<<< HEAD
+  <div class="policy">
   <h1 class='policy-header'>Repositive Policy</h1>
 
   <div class="row card">
@@ -34,44 +33,7 @@
             {{/if}}
           </li>
         </ul>
-=======
-  <h1>Repositive Policy</h1>
-
-  <div class="row card">
-      <div class="col s12 card-main-wrapper">
-        <div class="card-header">
-          <ul class="tabs">
-            <li class="tab col s3">
-              {{#if (eq tab "web")}}
-              {{#link-to 'policies' (query-params tab="web") class="active"}}Website Acceptable Use Policy{{/link-to}}
-              {{else}}
-              {{#link-to 'policies' (query-params tab="web")}}Website Acceptable Use Policy{{/link-to}}
-              {{/if}}
-            </li>
-            <li class="tab col s3">
-              {{#if (eq tab "privacy")}}
-              {{#link-to 'policies' (query-params tab="privacy") class="active"}}privacy Policy{{/link-to}}
-              {{else}}
-              {{#link-to 'policies' (query-params tab="privacy")}}Privacy policy{{/link-to}}
-              {{/if}}
-            </li>
-            <li class="tab col s3">
-              {{#if (eq tab "terms")}}
-              {{#link-to 'policies' (query-params tab="terms") class="active"}}Terms of Website Use (UK){{/link-to}}
-              {{else}}
-              {{#link-to 'policies' (query-params tab="terms")}}Terms of Website Use (UK){{/link-to}}
-              {{/if}}
-            </li>
-            <li class="tab col s3">
-              {{#if (eq tab "cookie")}}
-              {{#link-to 'policies' (query-params tab="cookie") class="active"}}Cookie Policy{{/link-to}}
-              {{else}}
-              {{#link-to 'policies' (query-params tab="cookie")}}Cookie Policy{{/link-to}}
-              {{/if}}
-            </li>
-          </ul>
         </div>
->>>>>>> aaead2a5225ca1c569a41b6b97fbe7d4f65c6d41
         <div class="card-main-content">
           {{#if (eq tab "web")}}
           {{partial "policies/tab-web"}}
@@ -85,4 +47,3 @@
         </div>
       </div>
   </div>
-</div>
