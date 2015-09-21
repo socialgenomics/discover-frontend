@@ -20,36 +20,32 @@
 </nav>
 
 <div class="content">
-  <div class="s12">
-    <div class="section" style="padding-top:0;">
-      <h3>Your query:</h3>
-        <div id="filters">
-          <span class="filter first">
-            <em class="highlight">"{{model.query}}"</em>
-          </span>
-          {{#each model.filters as |filter|}}
-            {{#if filter.value}}
-            <span class="filter" {{action "removeFilter" filter.name filter.value}}>{{ filter.displayName }} : {{filter.value}}<span class="remove">x</span></span>
-            {{/if}}
-          {{/each}}
-        </div>
-    </div>
-    <div class="section" style="padding-bottom:0;">
-      {{#if model.isLoading}}
-      {{else}}
-        <h3>Search Results ({{ model.meta.total }}):</h3>
-      {{/if}}
-    </div>
+  <div class="section">
+    <h3>Your query:</h3>
+      <p id="filters">
+        <span class="filter first">
+          <em class="highlight">"{{model.query}}"</em>
+        </span>
+        {{#each model.filters as |filter|}}
+          {{#if filter.value}}
+          <span class="filter" {{action "removeFilter" filter.name filter.value}}>{{ filter.displayName }} : {{filter.value}}<span class="remove">x</span></span>
+          {{/if}}
+        {{/each}}
+      </p>
+  </div>
+  <div class="section">
+    {{#if model.isLoading}}
+    {{else}}
+      <h3>Search Results ({{ model.meta.total }}):</h3>
+    {{/if}}
   </div>
   {{#if model.isLoading}}
     {{partial 'datasets/loading'}}
   {{else}}
-    {{#each model.datasetsAllInARow as |row|}}
     <div class="row">
-      {{#each row as |dataset|}}
+      {{#each model.datasets as |dataset|}}
         {{render 'datasets/card' dataset}}
       {{/each}}
     </div>
-    {{/each}}
   {{/if}}
 </div>
