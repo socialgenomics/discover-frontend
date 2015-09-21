@@ -13,15 +13,7 @@ export default Ember.Controller.extend(
   tags: null,
   repository: null,
   access: null,
-  isModalShown:false,
 
-  actions:{
-
-    toggleModal(){
-      this.toggleProperty('isModalShown');
-    },
-
-  },
   modelLoadingDidChange: function(){
     if (!this.get('model.isLoading')){
       // The view subscribes to this function
@@ -31,5 +23,8 @@ export default Ember.Controller.extend(
         this.trigger('modelLoaded');
       });
     }
-  }.observes('model.isLoading')
+  }.observes('model.isLoading'),
+
+  actions:{
+  },
 });
