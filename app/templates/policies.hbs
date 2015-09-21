@@ -1,10 +1,6 @@
-<div class="policy">
-  <h1>Repositive Policy</h1>
-
-  <div class="row card">
-      <div class="col s12 card-main-wrapper">
-        <div class="card-header">
-          <ul class="tabs">
+<h5 class="subtitles unfocus-grey-text">Repositive Policy</h5>
+  <div class="card">
+      <ul class="tabs">
             <li class="tab col s3">
               {{#if (eq tab "web")}}
               {{#link-to 'policies' (query-params tab="web") class="active"}}Website Acceptable Use Policy{{/link-to}}
@@ -34,8 +30,7 @@
               {{/if}}
             </li>
           </ul>
-        </div>
-        <div class="card-main-content">
+        <div class="card-body">
           {{#if (eq tab "web")}}
           {{partial "policies/tab-web"}}
           {{else if (eq tab "privacy")}}
@@ -46,6 +41,4 @@
           {{partial "policies/tab-cookie"}}
           {{/if}}
         </div>
-      </div>
-  </div>
-</div>
+    </div>
