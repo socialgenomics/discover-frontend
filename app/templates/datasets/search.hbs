@@ -1,7 +1,3 @@
-
-
-
-
 <nav class="sideNav" id="aggregation">
   {{#each model.aggs as |agg|}}
     {{#if agg.show}}
@@ -23,52 +19,37 @@
   {{/each}}
 </nav>
 
-
 <div class="content">
-<div class="s12">
-  <div class="section" style="padding-top:0;">
-    <h3>Your query:</h3>
-      <div id="filters">
-        <span class="filter first">
-          <em class="highlight">"{{model.query}}"</em>
-        </span>
-        {{#each model.filters as |filter|}}
-          {{#if filter.value}}
-          <span class="filter" {{action "removeFilter" filter.name filter.value}}>{{ filter.displayName }} : {{filter.value}}<span class="remove">x</span></span>
-          {{/if}}
-        {{/each}}
-      </div>
-
+  <div class="s12">
+    <div class="section" style="padding-top:0;">
+      <h3>Your query:</h3>
+        <div id="filters">
+          <span class="filter first">
+            <em class="highlight">"{{model.query}}"</em>
+          </span>
+          {{#each model.filters as |filter|}}
+            {{#if filter.value}}
+            <span class="filter" {{action "removeFilter" filter.name filter.value}}>{{ filter.displayName }} : {{filter.value}}<span class="remove">x</span></span>
+            {{/if}}
+          {{/each}}
+        </div>
+    </div>
+    <div class="section" style="padding-bottom:0;">
+      {{#if model.isLoading}}
+      {{else}}
+        <h3>Search Results ({{ model.meta.total }}):</h3>
+      {{/if}}
+    </div>
   </div>
-  <div class="section" style="padding-bottom:0;">
-    {{#if model.isLoading}}
-
-    {{else}}
-      <h3>Search Results ({{ model.meta.total }}):</h3>
-    {{/if}}
-  </div>
+  {{#if model.isLoading}}
+    {{partial 'datasets/loading'}}
+  {{else}}
+    {{#each model.datasetsAllInARow as |row|}}
+    <div class="row">
+      {{#each row as |dataset|}}
+        {{render 'datasets/card' dataset}}
+      {{/each}}
+    </div>
+    {{/each}}
+  {{/if}}
 </div>
-{{#if model.isLoading}}
-  {{partial 'datasets/loading'}}
-{{else}}
-  <div class="row">
-  {{#each model.datasets as |dataset|}}
-    {{render 'datasets/card' dataset}}
-  {{/each}}
-  </div>
-{{/if}}
-</div>
-
-{{!-- {{#if isModalShown}}
-  {{#md-modal action="closeModal"}}
-  <div class="modal-content center-align">
-    <img src="/assets/images/icons/work-in-progress.png" alt="Logo" class="social-media-icon"/>
-  <!-- <img class="social-media-icon" src="/assets/images/icons/work-in-progress.png"/> -->
-    <h2>We are still working hard.</h2>
-    <h5>This feature will be available very soon. Please, do not leave us.</h5>
-  </div>
-  <div class="modal-footer center-align">
-    <a {{action "toggleModal"}} class="modal-action modal-close waves-effect">OK</a>
-  </div>
-  {{/md-modal}}
-{{/if}} --}}
