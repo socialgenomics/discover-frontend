@@ -61,7 +61,7 @@ Ember.Route.reopen({
     // to be added to the body
     if (cssClass != 'application') {
       Ember.$('body').addClass(cssClass);
-      if (cssClass == 'datasets-search') {
+      if (['datasets-search','users-settings'].indexOf(cssClass) !== -1){
         // Add the class here for all the pages with side navigation
         Ember.$('body').addClass('has-sidenav');
       }
@@ -69,7 +69,7 @@ Ember.Route.reopen({
   },
   deactivate: function() {
     Ember.$('body').removeClass(this.toCssClass());
-
+    Ember.$('body').removeClass('has-sidenav');
   },
   toCssClass: function() {
     return this.routeName.replace(/\./g, '-').dasherize();

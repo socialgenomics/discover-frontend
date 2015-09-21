@@ -193,6 +193,16 @@ export default DS.Model.extend({
     else{
       return ''
     }
-  }
+  },
+
+  datasetsAllInARow: function(){
+    let perRow = 3;
+    let datasets = this.get('datasets');
+    let out = [];
+    for (var i = 0; i < datasets.length; i += perRow){
+      out.push(datasets.slice(i, i+perRow))
+    }
+    return out;
+  }.property('datasets')
 
 });
