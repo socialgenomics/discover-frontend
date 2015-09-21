@@ -1,57 +1,53 @@
-  <div class="row">
-    {{sub-navigation active="settings"}}
-    <div class="content-view right col m9">
-       <div class="card white darken-1 center-align">
-        <div class="card-content">
-          <span class="card-title">
-            <h1>Privacy settings</h1>
-          </span>
-          <hr class="yellow">
-          <p class="helper-text">Choose what information can others see in your profile</p>
-        </div>
-        <div class="card-action">
-          <form action="#">
-            <div class="col m6">
-              <input class="with-gap" name="privacy" type="radio" id="test1">
-              <label for="test1" class="helper-text">Minimal</label>
-            </div>
-            <div class="col m6">
-              <input class="with-gap" name="privacy" type="radio" id="test2" checked="">
-              <label for="test2" class="helper-text">Public</label>
-            </div>
-          </form>
-        </div>
-      </div>
-      <div class="center-align">
-        <div class="card white darken-1">
+{{sub-navigation active="settings"}}
+  <div class="content">
+    <div class="row">
+      <div class="col m12 content-view">
+        <div class="card white darken-1 center-align">
           <div class="card-content">
-            <span class="card-title">
-              <h1>Notifications</h1>
-            </span>
-            <hr class="yellow">
-            <p class="helper-text">Select when would you like to be notified by email</p>
+            <h1>Privacy settings</h1>
+            {{!-- <hr class="yellow"> --}}
+            <p class="helper-text">Choose which information others can view on your profile.</p>
           </div>
           <div class="card-action">
-            <div class="col m12">
-              <form action="#">
-                <p>
-                <input type="checkbox" id="test5" checked="checked">
-                <label for="test5" class="helper-text">I receive a message in my inbox</label>
-                </p>
-                <p>
-                <input type="checkbox" id="test6">
-                <label for="test6" class="helper-text">Someone comments on a dataset I posted</label>
-                </p>
-                <p>
-                <input type="checkbox" id="test7">
-                <label for="test7" class="helper-text">Tips and important updates about REPOSITIVE features are available</label>
-                </p>
-                <p>
-                <input type="checkbox" id="test8">
-                <label for="test8" class="helper-text">There are new suggestions for datasets based on my request (weekly)</label>
-                </p>
-              </form>
+            <form action="" class="row">
+              <div class="col m6">
+                <input id="privacyMinimal" name="privacy" type="radio">
+                <label for="privacyMiniaml" class="helper-text">Minimal</label>
+              </div>
+              <div class="col m6">
+                <input id="privacyPublic" name="privacy" type="radio" checked="checked">
+                <label for="privacyPublic" class="helper-text">Public</label>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="col m12">
+        <div class="card white darken-1">
+          <div class="card-content center-align">
+            <div class="card-title">
+              <h1>Notifications</h1>
             </div>
+            {{!-- <hr class="yellow"> --}}
+            <p class="helper-text">Select when you would like to recieve email notifications.</p>
+          </div>
+          <div class="card-action row">
+              <form action="#" class="col m6 offset-m3">
+
+                <input id="notificationsMessage" type="checkbox" checked="checked">
+                <label for="notificationsMessage" class="helper-text">Another user sends me a message.</label>
+                <br>
+                <input id="notificationsComments" type="checkbox">
+                <label for="notificationsComments" class="helper-text">Someone comments on a dataset I posted.</label>
+                <br>
+                <input id="notificationsUpdates" type="checkbox">
+                <label for="notificationsUpdates" class="helper-text">Tips and important updates about Repositive.</label>
+                <br>
+                <input id="notificationsSuggestions" type="checkbox" >
+                <label for="notificationsSuggestions" class="helper-text">Suggestions for datasets based on my search history.</label>
+                <br>
+
+              </form>
           </div>
         </div>
       </div>
