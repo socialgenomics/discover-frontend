@@ -1,54 +1,56 @@
 <div id="homepage" class="content">
   <div class="row">
-    <h5 class="subtitles unfocus-grey-text">Search Through</h5>
-    <div class="col m12 center-align">
-      <div class="card">
-        <div class="stats">
-          <h2 class="numb">{{ model.stats.datasets }}<span class="stats-text light"> Human Genomic Datasets </span><span class="thin">from</span>
-            {{ model.stats.repos }}<span class="stats-text light"> Repositories</span>
-          </h2>
+    <div class="contain">
+      <h5 class="subtitles unfocus-grey-text">Search Through</h5>
+      <div class="col m12 center-align">
+        <div class="card">
+          <div class="stats">
+            <h2 class="numb">{{ model.stats.datasets }}<span class="stats-text light"> Human Genomic Datasets </span><span class="thin">from</span>
+              {{ model.stats.repos }}<span class="stats-text light"> Repositories</span>
+            </h2>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="row">
-    <h5 class="subtitles unfocus-grey-text">Start Exploring</h5>
-    {{#each model.datasets as |dataset|}}
-      {{render 'datasets.card' dataset dataset=dataset}}
-    {{/each}}
-  </div>
-  <div class="row">
-    <h5 class="subtitles unfocus-grey-text">User Activity</h5>
-    <!-- data registrations -->
-    <div class="col s12 m6 ">
-      <div class="card  activity-card registered-data">
-        <div class="card-header card-title center">
-          <i class="mdi-action-note-add"></i><h4 class="uppercase">Register Data</h4>
+    <div class="contain">
+      <h5 class="subtitles unfocus-grey-text">Start Exploring</h5>
+      {{#each model.datasets as |dataset|}}
+        {{render 'datasets.card' dataset dataset=dataset}}
+      {{/each}}
+    </div>
+    <div class="contain">
+      <h5 class="subtitles unfocus-grey-text">User Activity</h5>
+      <!-- data registrations -->
+      <div class="col s12 m6 ">
+        <div class="card  activity-card registered-data">
+          <div class="card-header card-title center">
+            <i class="mdi-action-note-add"></i><h4 class="uppercase">Register Data</h4>
+          </div>
+          <p class="info-text">
+            These are datasets contributed by our community. You can easily register your dataset and make it visible for others.
+          </p>
+          <div class="card-body">
+              {{#each model.registered as |registration|}}
+                {{mini-dataset dataset=registration action="toggleModal"}}
+              {{/each}}
+          </div>
         </div>
-        <p class="info-text">
-          These are datasets contributed by our community. You can easily register your dataset and make it visible for others.
-        </p>
-        <div class="card-body">
-            {{#each model.registered as |registration|}}
-              {{mini-dataset dataset=registration action="toggleModal"}}
+      </div>
+      <!--data requests-->
+      <div class="col s12 m6">
+        <div class="card activity-card requested-data">
+          <div class="card-header center card-title">
+              <i class="mdi-content-content-paste"></i><h4 class="uppercase">Request Data</h4>
+          </div>
+          <p class="info-text">
+            Help our community by connecting them with the datasets they're looking for.
+  If you’re seeking datasets you can make a request too.
+          </p>
+          <div class="card-body">
+            {{#each model.requests as |request|}}
+              {{mini-dataset dataset=request}}
             {{/each}}
-        </div>
-      </div>
-    </div>
-    <!--data requests-->
-    <div class="col s12 m6">
-      <div class="card activity-card requested-data">
-        <div class="card-header center card-title">
-            <i class="mdi-content-content-paste"></i><h4 class="uppercase">Request Data</h4>
-        </div>
-        <p class="info-text">
-          Help our community by connecting them with the datasets they're looking for.
-If you’re seeking datasets you can make a request too.
-        </p>
-        <div class="card-body">
-          {{#each model.requests as |request|}}
-            {{mini-dataset dataset=request}}
-          {{/each}}
+          </div>
         </div>
       </div>
     </div>
