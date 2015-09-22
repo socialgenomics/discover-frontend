@@ -64,7 +64,7 @@ module.exports = function(environment) {
       logoutRoute: 'users.logout',
     },
     'simple-auth-cookie-store' : {
-      cookieName: 'repositvie.io'
+      cookieName: 'repositive.io'
     },
     torii: {
       providers: {
@@ -133,7 +133,7 @@ module.exports = function(environment) {
 
   if (environment === 'production') {
     ENV.torii.providers['google-oauth2'].redirectUri = 'http://discover.repositive.io'
-    ENV.torii.providers['linked-in-oauth2'].redirectUri = 'http://dicsover.repositive.io'
+    ENV.torii.providers['linked-in-oauth2'].redirectUri = 'http://discover.repositive.io'
   }
 
   return ENV;
