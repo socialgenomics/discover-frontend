@@ -1,12 +1,22 @@
+import Ember from 'ember';
+let { Component, inject } = Ember;
+
+/**
+ * inject metrics into all components, routes and controllers.
+ */
+Component.reopen({
+  metrics: inject.service()
+});
+
 export function initialize(container, application) {
-  // application.inject('route', 'foo', 'service:foo');
-  var router = container.lookup('router:main');
-  router.on('didTransition', function() {
-    this.trackPageView(router.rootURL.slice(0, -1) + this.get('url'));
-  });
+  Ember.Component = Component;
+
+  application.inject('route', 'metrics', 'service:metrics');
+  application.inject('controller', 'metrics', 'service:metrics');
 }
 
 export default {
   name: 'tracking',
-  initialize: initialize
+  after: "metrics",
+  initialize: initialize,
 };

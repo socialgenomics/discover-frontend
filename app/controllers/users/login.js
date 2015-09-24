@@ -7,6 +7,7 @@ export default Ember.ObjectController.extend(
   EmberValidations,
   ServerValidationMixin,
 {
+  needs: 'application', // HACKISH - the repositive authenticator has access to login controller and needs application
   email:null,
   password:null,
   loading: false,

@@ -21,9 +21,11 @@ export default Ember.Component.extend({
   actions: {
 
     logout: function(){
-      calq.action.track(
-        "User.Logout"
-      );
+      this.get('metrics').trackEvent({
+        category: 'auth',
+        action: 'logout',
+        label: this.get('currentUser'),
+      });
       this.get("session").invalidate();
     },
   }
