@@ -7,13 +7,15 @@
 
   <a class='dropdown-button valign-wrapper' data-beloworigin="true" data-activates='profile-drop'>
     <div class="dp-wrapper">
-      <img class="display-pic" src="{{model.profile.avatar}}">
+      <img class="display-pic" src="/assets/images/icons/person-icon.png">
+      {{!-- <img class="display-pic" src="{{model.profile.avatar}}"> --}}
     </div>
     <i class="mdi-navigation-arrow-drop-down hide-on-small-only"></i>
   </a>
 
   <ul id='profile-drop' class='dropdown-content'>
     <li>{{#link-to 'user' currentUser.username}}PROFILE{{/link-to}}</li>
+    <li class="divider"></li>
     <li>{{#link-to 'users.settings'}}SETTINGS{{/link-to}}</li>
     <li class="divider"></li>
     <li><a href="http://repositive.io/about" target="_blank">ABOUT</a></li>

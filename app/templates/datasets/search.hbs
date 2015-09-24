@@ -21,7 +21,7 @@
 
 <div class="content">
   <div class="section">
-    <h3>Your query:</h3>
+      <h5 class="subtitles unfocus-grey-text">Your Query</h5>
       <p id="filters">
         <span class="filter first">
           <em class="highlight">"{{model.query}}"</em>
@@ -36,7 +36,8 @@
   <div class="section">
     {{#if model.isLoading}}
     {{else}}
-      <h3>Search Results ({{ model.meta.total }}):</h3>
+      <h5 class="subtitles unfocus-grey-text">Search Results ({{ model.meta.total }})</h5>
+
     {{/if}}
   </div>
   {{#if model.isLoading}}
