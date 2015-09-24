@@ -26,6 +26,7 @@
       {{#link-to 'datasets.detail' dataset.id}}<h5 class="data-title" alt="dataset title">{{dataset.properties.title}}</h5>{{/link-to}}
     <div class="card-footer">
       <ul class="grey-text">
+
         {{#if (eq dataset.repository.access "Open")}}
         <li class="access-icons">
           <i
@@ -51,6 +52,7 @@
           </span>
         </li>
         {{/if}}
+
         <li class="tooltipped" data-position="bottom" data-tooltip="Views">
         <i class="mdi-action-visibility"></i><span>{{dataset.views}}</span>
         </li>

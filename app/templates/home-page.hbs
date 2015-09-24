@@ -24,7 +24,8 @@
       <div class="col s12 m6 ">
         <div class="card  activity-card registered-data">
           <div class="card-header card-title center">
-            <i class="mdi-action-note-add"></i><h4 class="uppercase">Register Data</h4>
+            {{#link-to 'datasets.register'}}<i class="mdi-action-note-add"></i>{{/link-to}}
+            <h4 class="uppercase">Register Data</h4>
           </div>
           <p class="info-text">
             These are datasets contributed by our community. You can easily register your dataset and make it visible for others.
@@ -40,7 +41,8 @@
       <div class="col s12 m6">
         <div class="card activity-card requested-data">
           <div class="card-header center card-title">
-              <i class="mdi-content-content-paste"></i><h4 class="uppercase">Request Data</h4>
+              {{#link-to 'datasets.request'}}<i class="mdi-content-content-paste"></i>{{/link-to}}
+              <h4 class="uppercase">Request Data</h4>
           </div>
           <p class="info-text">
             Help our community by connecting them with the datasets they're looking for.
