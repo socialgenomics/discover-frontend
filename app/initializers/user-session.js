@@ -1,17 +1,5 @@
 import Ember from "ember";
 import Session from "simple-auth/session";
-let { Component, inject } = Ember;
-
-Component.reopen({
-  profile: inject.service()
-});
-
-export function initialize(container, application) {
-  Ember.Component = Component;
-
-  application.inject('route', 'profile', 'service:profile');
-  application.inject('controller', 'profile', 'service:profile');
-}
 
 export default {
   name: "user-session",

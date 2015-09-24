@@ -1,11 +1,18 @@
 import Ember from 'ember';
+import ENV from 'repositive/config/environment';
 
 export default Ember.Component.extend({
-  store: Ember.inject.service(),
-  currentUser: Ember.computed(function(){
+  avatar: null,
+  currentUser: Ember.computed(function() {
     return this.get('session.secure.user');
   }),
-  afterRenderEvent: function(){
+
+  init: function() {
+    this._super();
+    this.sendAction();
+  },
+
+  afterRenderEvent: function() {
     //dropdown initialization
     this.$('.dropdown-button').dropdown({
       inDuration: 500,
@@ -17,30 +24,15 @@ export default Ember.Component.extend({
       belowOrigin: true // Displays dropdown below the button
     });
   },
-  getAvatar: function() {
-  	var store = this.get('data');
-
-  	store.map(item => {
-  		console.log(item.get('user.profile.avatar'));
-    });
-  },
 
   actions: {
-    // getAvatar: function() {
-      // console.log(this.get('profile.avatar.store'));
-      // this.set('avatar', this.get('profile.avatar.store'));
-      // return this.get('store').get('profile.avatar');
-      // var store = this.get('profile');
-      //
-      // store.map(item => {
-      //   console.log(item.get('avatar'));
-      // });
-    // },
-    logout: function(){
+    logout: function() {
       calq.action.track(
         "User.Logout"
       );
       this.get("session").invalidate();
     },
+
   }
+
 });

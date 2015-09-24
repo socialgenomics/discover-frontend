@@ -38,6 +38,7 @@ module.exports = function(environment) {
           "users.signup" : "/api/users",
           "datasets.search" : "/api/datasets/search",
           "invites": "/api/invites",
+          "users.profiles": "/api/users/profiles",
       };
       _.each(mapping,
         function(path, key, obj){
