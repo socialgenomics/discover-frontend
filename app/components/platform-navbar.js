@@ -18,8 +18,7 @@ export default Ember.Component.extend({
       this.sendAction('action', this.get("query"));
     },
     initAvatar: function(){
-      this.sendAction("initAvatar")
-    }
-
+      this.sendAction("initAvatar");
+    },
   }
 });

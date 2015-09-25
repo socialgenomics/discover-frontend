@@ -2,7 +2,9 @@
 <div class="comment">
   <div class="comment-header">
     <div class="dp-wrapper">
-      <img src="{{model.profile.avatar}}" alt="your display picture" class="display-pic">
+      {{#link-to 'user' user.username}}
+        <img src="{{avatar}}" alt="your display picture" class="display-pic">
+      {{/link-to}}
     </div>
     {{#link-to 'user' user.username}}<h4>{{user.displayName}}</h4>{{/link-to}}
     <span>{{moment-from-now date}}</span>
