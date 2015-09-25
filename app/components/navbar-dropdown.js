@@ -1,11 +1,18 @@
 import Ember from 'ember';
+import ENV from 'repositive/config/environment';
 
 export default Ember.Component.extend({
-  currentUser: Ember.computed(function(){
+  avatar: null,
+  currentUser: Ember.computed(function() {
     return this.get('session.secure.user');
   }),
 
-  afterRenderEvent: function(){
+  init: function() {
+    this._super();
+    this.sendAction();
+  },
+
+  afterRenderEvent: function() {
     //dropdown initialization
     this.$('.dropdown-button').dropdown({
       inDuration: 500,
@@ -28,5 +35,7 @@ export default Ember.Component.extend({
       });
       this.get("session").invalidate();
     },
+
   }
+
 });
