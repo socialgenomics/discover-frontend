@@ -5,7 +5,7 @@
       <img src="{{avatar}}" alt="your display picture" class="display-pic">
     </div>
     {{#link-to 'user' user.username}}<h4>{{user.displayName}}</h4>{{/link-to}}
-    <span>{{ago date}}</span>
+    <span>{{moment-from-now date}}</span>
   </div>
   <div class="comment-body">
     <p>{{text}}</p>
