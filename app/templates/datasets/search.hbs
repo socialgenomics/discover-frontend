@@ -1,4 +1,5 @@
 <nav class="sideNav" id="aggregation">
+  <h4 class="unfocus-grey-text">Filters</h4>
   {{#each model.aggs as |agg|}}
     {{#if agg.show}}
     <div class="section">
@@ -22,7 +23,7 @@
 <div class="content">
   <div class="">
       <h4 class="subtitles-right unfocus-grey-text">Your Query</h4>
-      <p id="filters">
+      <p id="filters" class="card">
         <span class="filter first">
           <em class="highlight">"{{model.query}}"</em>
         </span>
