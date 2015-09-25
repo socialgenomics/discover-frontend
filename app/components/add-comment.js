@@ -6,22 +6,14 @@ export default Ember.Component.extend({
   classNames:"write-comment",
   classNameBindings:['isActive:active'],
   comment:null,
-  avatar: null,
-  currentUser: Ember.computed(function() {
-    return this.get('session.secure.user');
-  }),
 
-  init: function() {
+  init:function(){
     this._super();
-    this.sendAction();
+    this.sendAction('initAvatar');
   },
-
   actions: {
-    initAvatar: function(){
-      this.sendAction("initAvatar")
-    },
     focusedIn:function(){
-      this.set ("isActive", true);
+      this.set("isActive", true);
     },
     cancel:function(){
       this.set('isActive',false);

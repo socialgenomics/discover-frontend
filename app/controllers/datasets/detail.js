@@ -6,6 +6,10 @@ export default Ember.Controller.extend({
   isModalShown:false,
   isEditingTags:false,
 
+  setAvatar: function(){
+    this.set('avatar', this.controllerFor('application').get('avatar'));
+  }.on('init'),
+
   comments: function(){
     return Ember.ArrayProxy.createWithMixins(Ember.SortableMixin, {
       sortProperties: ['createdAt'],

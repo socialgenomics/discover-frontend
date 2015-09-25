@@ -2,9 +2,8 @@ import Ember from 'ember';
 import ApplicationRouteMixin from 'simple-auth/mixins/application-route-mixin';
 
 export default Ember.Route.extend(ApplicationRouteMixin, {
-  avatar: null, // used by the navbar component
+  avatar: null, // used by the navbar and comment components
   actions:{
-
     search: function(query){
       this.transitionTo('datasets.search', {
         queryParams: {
