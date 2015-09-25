@@ -1,48 +1,13 @@
-
 <div class="row">
   <h5 class="subtitles unfocus-grey-text">Repositive Policy</h5>
     <div class="col m12">
       <div class="card">
-
       <ul class="tabs">
-            <li class="tab col s3">
-              {{#if (eq tab "web")}}
-              {{#link-to 'policies' (query-params tab="web") class="active"}}Website Acceptable Use Policy{{/link-to}}
-              {{else}}
-              {{#link-to 'policies' (query-params tab="web")}}Website Acceptable Use Policy{{/link-to}}
-              {{/if}}
-            </li>
-            <li class="tab col s3">
-              {{#if (eq tab "privacy")}}
-              {{#link-to 'policies' (query-params tab="privacy") class="active"}}privacy Policy{{/link-to}}
-              {{else}}
-              {{#link-to 'policies' (query-params tab="privacy")}}Privacy policy{{/link-to}}
-              {{/if}}
-            </li>
-            <li class="tab col s3">
-              {{#if (eq tab "terms")}}
-              {{#link-to 'policies' (query-params tab="terms") class="active"}}Terms of Website Use (UK){{/link-to}}
-              {{else}}
-              {{#link-to 'policies' (query-params tab="terms")}}Terms of Website Use (UK){{/link-to}}
-              {{/if}}
-            </li>
-            <li class="tab col s3">
-              {{#if (eq tab "cookie")}}
-              {{#link-to 'policies' (query-params tab="cookie") class="active"}}Cookie Policy{{/link-to}}
-              {{else}}
-              {{#link-to 'policies' (query-params tab="cookie")}}Cookie Policy{{/link-to}}
-              {{/if}}
-            </li>
-          </ul>
-        <div class="card-body">
+        <li class="tab col s3">
           {{#if (eq tab "web")}}
-          {{partial "policies/tab-web"}}
-          {{else if (eq tab "privacy")}}
-          {{partial "policies/tab-privacy"}}
-          {{else if (eq tab "terms")}}
-          {{partial "policies/tab-terms"}}
+          {{#link-to 'policies' (query-params tab="web") class="active"}}Website Acceptable Use Policy{{/link-to}}
           {{else}}
-          {{partial "policies/tab-cookie"}}
+          {{#link-to 'policies' (query-params tab="web")}}Website Acceptable Use Policy{{/link-to}}
           {{/if}}
         </li>
         <li class="tab col s3">
