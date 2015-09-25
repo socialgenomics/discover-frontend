@@ -8,6 +8,9 @@ export default Ember.Component.extend({
   comment:null,
 
   actions: {
+    initAvatar: function(){
+      this.sendAction("initAvatar")
+    },
     focusedIn:function(){
       this.set ("isActive", true);
     },

@@ -1,7 +1,7 @@
-import Ember from "ember";  
+import Ember from "ember";
 import Session from "simple-auth/session";
 
-export default {  
+export default {
   name: "user-session",
   before: "simple-auth",
   initialize: function(container) {
