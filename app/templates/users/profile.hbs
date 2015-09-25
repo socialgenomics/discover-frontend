@@ -1,55 +1,36 @@
+{{sub-navigation active="profile"}}
+<div class="content">
   <div class="row">
-    {{sub-navigation active="profile"}}
     <div class="col m12 center-align">
       <div class="card white darken-1">
         <div class="card-content">
-            <h1 class="no-margin">Edit Profile</h1>
-            <hr class="yellow">
-        </div>
-        <div class="row">
-          <form {{action "save" on="submit"}}>
-            <div class="row">
-              <div class="input-container col m6 offset-m3">
-                <div class="input-field no-margin-top">
-                  {{input type="text" placeholder="First Name" value=model.user.firstname}}
-                </div>
-                <div class="lbl">First Name</div>
+          <h1 class="no-margin">Edit Profile</h1>
+          <hr class="yellow">
+          <form {{action "save" on="submit"}} class="row section">
+            <div class="input-container col m6 offset-m3">
+              <div class="input-field no-margin-top">
+                {{input type="text" placeholder="First Name" value=model.user.firstname}}
               </div>
-              <div class="input-container col m6 offset-m3">
-                <div class="input-field">
-                  {{input type="text" placeholder="Last Name" value=model.user.lastname}}
-                </div>
-                <div class="lbl">Last name</div>
-              </div>
-              <div class="input-container col m6 offset-m3">
-                <div class="input-field">
-                  {{input type="email" placeholder="Email" value=model.user.email}}
-                </div>
-                <div class="lbl">Email</div>
-              </div>
-              <div class="input-container col m6 offset-m3">
-                <div class="input-field">
-                  {{input type="text" placeholder="Affiliation" value=model.profile.workOrganisation}}
-                </div>
-                <div class="lbl">Last name</div>
-              </div>
+              <div class="lbl">First Name</div>
             </div>
-            <!-- <div class="row">
-              <h5>Education</h5>
-              <div class="input-container col m6 offset-m3">
-                <div class="input-field no-margin-top">
-                  {{input type="text" placeholder="Degree" value=model.profile.educationDegree}}
-                </div>
-                <div class="lbl">Degree</div>
+            <div class="input-container col m6 offset-m3">
+              <div class="input-field">
+                {{input type="text" placeholder="Last Name" value=model.user.lastname}}
               </div>
-              <div class="input-container col m6 offset-m3">
-                <div class="input-field">
-                  {{input type="text" placeholder="University" value=model.profile.educationUniversity}}
-                </div>
-                <div class="lbl">University</div>
+              <div class="lbl">Last name</div>
+            </div>
+            <div class="input-container col m6 offset-m3">
+              <div class="input-field">
+                {{input type="email" placeholder="Email" value=model.user.email}}
               </div>
-            </div> -->
-
+              <div class="lbl">Email</div>
+            </div>
+            <div class="input-container col m6 offset-m3">
+              <div class="input-field">
+                {{input type="text" placeholder="Affiliation" value=model.profile.workOrganisation}}
+              </div>
+              <div class="lbl">Last name</div>
+            </div>
             <div class="input-container col m6 offset-m3">
               {{#if saved}}
                 <p class="text-valid center-align">Save Successful.</p>
@@ -61,3 +42,4 @@
       </div>
     </div>
   </div>
+</div>

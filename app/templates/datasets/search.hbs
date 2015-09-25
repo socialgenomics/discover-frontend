@@ -1,4 +1,5 @@
 <nav class="sideNav" id="aggregation">
+  <h4 class="unfocus-grey-text">Filters</h4>
   {{#each model.aggs as |agg|}}
     {{#if agg.show}}
     <div class="section">
@@ -21,23 +22,22 @@
 
 <div class="content">
   <div class="">
-      <h4 class="subtitles-right unfocus-grey-text">Your Query</h4>
-      <p id="filters">
-        <span class="filter first">
-          <em class="highlight">"{{model.query}}"</em>
-        </span>
-        {{#each model.filters as |filter|}}
-          {{#if filter.value}}
-          <span class="filter" {{action "removeFilter" filter.name filter.value}}>{{ filter.displayName }} : {{filter.value}}<span class="remove">x</span></span>
-          {{/if}}
-        {{/each}}
-      </p>
+    <h5 class="subtitles-right unfocus-grey-text">Your Query</h5>
+    <p id="filters" class="card">
+      <span class="filter first">
+        <em class="highlight">"{{model.query}}"</em>
+      </span>
+      {{#each model.filters as |filter|}}
+        {{#if filter.value}}
+        <span class="filter" {{action "removeFilter" filter.name filter.value}}>{{ filter.displayName }} : {{filter.value}}<span class="remove">x</span></span>
+        {{/if}}
+      {{/each}}
+    </p>
   </div>
   <div class="">
     {{#if model.isLoading}}
     {{else}}
-      <h4 class="subtitles-right unfocus-grey-text">Search Results ({{ model.meta.total }})</h4>
-
+      <h5 class="subtitles-right unfocus-grey-text">Search Results ({{ model.meta.total }})</h5>
     {{/if}}
   </div>
   {{#if model.isLoading}}

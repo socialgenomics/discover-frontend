@@ -1,5 +1,87 @@
-<div id="profile">
-<div class="row no-margin">
+<div id="profile" class="content">
+  <div class="row">
+    <div class="contain">
+      {{#if isOwnProfile}}
+      <h5 class="subtitles-left unfocus-grey-text">Your Profile</h5>
+      {{/if}}
+      <div class="col m12 center-align">
+        <div class="card ">
+          <div class="card-content">
+            <h3>{{ model.user.displayName }}</h3>
+            <div class="card-body">
+              <div class="col m12 center">
+                <img class="profile-img circle" src="{{model.profile.avatar}}">
+                {{!-- <h3>{{model.user.firstname}} {{model.user.lastname}}</h3> --}}
+              </div>
+              {{#if isOwnProfile}}
+                {{#link-to "users.profile" class="btn yellow white-text"}}EDIT PROFILE{{/link-to}}
+              {{/if}}
+              <div class="card-action">
+                <div class="activity-stats col m12">
+                  <div class="activity-saved-data">
+                    <span class="numb">0</span>
+                    <h5>Saved data</h5>
+                  </div>
+                  <div class="activity-uploads">
+                    <span class="numb">{{registered.length}}</span>
+                    <h5>Registrations</h5>
+                  </div>
+                  <div class="activity-request">
+                    <span class="numb">{{requested.length}}</span>
+                    <h5>Requests</h5>
+                  </div>
+                  <div class="activity-comments">
+                    <span class="numb">0</span>
+                    <h5>Comments</h5>
+                  </div>
+                  <span class="stretch"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="contain">
+      {{#if isOwnProfile}}
+      <h5 class="subtitles-left unfocus-grey-text">Your Activity</h5>
+      {{/if}}
+      <!-- data registrations -->
+      <div class="col m6">
+        <div class="card registered-data">
+          <div class="card-header card-title center">
+            {{#link-to 'datasets.register'}}<i class="mdi-action-note-add"></i>{{/link-to}}
+            <h4 class="uppercase">Registered Data</h4>
+          </div>
+          <div class="card-body">
+            {{#each registered as |dataset|}}
+              {{mini-dataset dataset=dataset action="toggleModal"}}
+            {{/each}}
+          </div>
+        </div>
+      </div>
+      <!--data requests-->
+      <div class="col m6">
+        <div class="card requested-data">
+          <div class="card-header center card-title">
+              {{#link-to 'datasets.request'}}<i class="mdi-content-content-paste"></i>{{/link-to}}
+              <h4 class="uppercase">Requested Data</h4>
+          </div>
+          <div class="card-body">
+            {{#each requested as |dataset|}}
+              {{mini-dataset dataset=dataset}}
+            {{/each}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{{!-- <div class="row no-margin">
   <div class="card white darken-1 center">
     {{#if isOwnProfile}}
       <h3 class="center">your profile</h3>
@@ -108,4 +190,4 @@
     <a {{action "toggleModal"}} class="modal-action modal-close waves-effect">OK</a>
   </div>
   {{/md-modal}}
-{{/if}}
+{{/if}} --}}
