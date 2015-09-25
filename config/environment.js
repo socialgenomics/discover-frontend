@@ -65,7 +65,7 @@ module.exports = function(environment) {
       logoutRoute: 'users.logout',
     },
     'simple-auth-cookie-store' : {
-      cookieName: 'repositvie.io'
+      cookieName: 'repositive.io'
     },
     torii: {
       providers: {
@@ -85,21 +85,33 @@ module.exports = function(environment) {
       'style-src': "'self' 'unsafe-inline' fonts.googleapis.com",
       'script-src': "'self' 'unsafe-inline' http://api.calq.io http://www.google-analytics.com/analytics.js", // Allow scripts from api.calq.io
       'connect-src': "'self' 'unsafe-inline' http://api.calq.io", // Allow data (ajax/websocket) from api.calq.io
-      'img-src': "'self' http://www.google-analytics.com",
+      'img-src': "'self' data: http://www.google-analytics.com",
       'media-src': "'self'",
     },
-    TRACKING: {
-      LOG_EVENT_TRACKING: true,
-      ENABLED: false,
-    },
+    metricsAdapters: [
+      {
+        name: 'GoogleAnalytics',
+        config: {
+          id: 'UA-54495053-2'
+        },
+        environments: ['production']
+      },
+      {
+        name: 'Calq',
+        config: {
+          id: 'ca78eed5d34a041ab5cf164295cf2c25'
+        },
+        environments: ['production']
+      },
+    ]
   };
 
   if (environment === 'development') {
-    // ENV.APP.LOG_RESOLVER = true;
-    // ENV.APP.LOG_ACTIVE_GENERATION = true;
-    // ENV.APP.LOG_TRANSITIONS = true;
-    // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
-    // ENV.APP.LOG_VIEW_LOOKUPS = true;
+    ENV.APP.LOG_RESOLVER = true;
+    ENV.APP.LOG_ACTIVE_GENERATION = true;
+    ENV.APP.LOG_TRANSITIONS = true;
+    ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
+    ENV.APP.LOG_VIEW_LOOKUPS = true;
   }
 
   if (environment === 'test') {
@@ -121,9 +133,8 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-    ENV.TRACKING.ENABLED = true;
     ENV.torii.providers['google-oauth2'].redirectUri = 'http://discover.repositive.io'
-    ENV.torii.providers['linked-in-oauth2'].redirectUri = 'http://dicsover.repositive.io'
+    ENV.torii.providers['linked-in-oauth2'].redirectUri = 'http://discover.repositive.io'
   }
 
   return ENV;

@@ -20,8 +20,8 @@
 </nav>
 
 <div class="content">
-  <div class="section">
-      <h5 class="subtitles unfocus-grey-text">Your Query</h5>
+  <div class="">
+      <h4 class="subtitles-right unfocus-grey-text">Your Query</h4>
       <p id="filters">
         <span class="filter first">
           <em class="highlight">"{{model.query}}"</em>
@@ -33,10 +33,10 @@
         {{/each}}
       </p>
   </div>
-  <div class="section">
+  <div class="">
     {{#if model.isLoading}}
     {{else}}
-      <h5 class="subtitles unfocus-grey-text">Search Results ({{ model.meta.total }})</h5>
+      <h4 class="subtitles-right unfocus-grey-text">Search Results ({{ model.meta.total }})</h4>
 
     {{/if}}
   </div>

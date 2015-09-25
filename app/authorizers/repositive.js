@@ -1,8 +1,8 @@
-// app/authorizers/custom.js
+import Ember from 'ember';
 import Base from 'simple-auth/authorizers/base';
 
 export default Base.extend({
-  authorize: function(jqXHR, requestOptions) {
+  authorize: function(jqXHR) {
     var token = this.get('session.secure.token');
     if (this.get('session.isAuthenticated') && !Ember.isEmpty(token)) {
       //jqXHR.setRequestHeader('X-CSRF-Token', token);
