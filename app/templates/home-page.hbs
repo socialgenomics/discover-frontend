@@ -1,7 +1,7 @@
 <div id="homepage" class="content">
   <div class="row">
     <div class="contain">
-      <h5 class="subtitles unfocus-grey-text">Search Through</h5>
+      <h5 class="subtitles-left unfocus-grey-text">Search Through</h5>
       <div class="col m12 center-align">
         <div class="card">
           <div class="stats">
@@ -13,13 +13,13 @@
       </div>
     </div>
     <div class="contain">
-      <h5 class="subtitles unfocus-grey-text">Start Exploring</h5>
+      <h5 class="subtitles-left unfocus-grey-text">Start Exploring</h5>
       {{#each model.datasets as |dataset|}}
         {{render 'datasets.card' dataset dataset=dataset}}
       {{/each}}
     </div>
     <div class="contain">
-      <h5 class="subtitles unfocus-grey-text">User Activity</h5>
+      <h5 class="subtitles-left unfocus-grey-text">User Activity</h5>
       <!-- data registrations -->
       <div class="col s12 m6 ">
         <div class="card  activity-card registered-data">
