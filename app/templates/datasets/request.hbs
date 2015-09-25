@@ -1,31 +1,48 @@
-<div class="row center card request-form">
-  <h1>Make a request on dataset</h1>
-  <hr class="red">
-  <span class="col m8 offset-m2 helper-text">Repositive has a community of users who are willing to help you to find a dataset you are looking for. Make a request and ask for the users.</span>
-  <form class="col s8 offset-s2" {{action "addRequest" on="submit"}}>
-    {{validated-input
-      type="text"
-      value=title
-      errors=errors.title
-      placeholder="Name your request"
-      action=addDataset
-      lbl="Title"
-    }}
+<div id="register-form">
+  <div class="row">
+    <div class="contain">
+      <h5 class="subtitles unfocus-grey-text">Request Data</h5>
+      <div class="col m12">
+        <div class="card activity-card">
 
-    {{validated-input
-      type="text"
-      value=description
-      errors=errors.description
-      placeholder="Describe the dataset you're looking for"
-      style="height:150px"
-      action=addDataset
-      textarea="true"
-      lbl="Description"
-    }}
+          <div class="card-header bg-request">
+            <p class="white-text">
+              If you can not find the data on REPOSITIVE you can ask our community by making a request. Your request will appear on the search and in activity feed. Could find collaborators and datasets you are looking for.
+            </p>
+          </div>
+          <div class="card-body center">
+            <h3>Register a New Dataset</h3>
+            <div class="col m6 offset-m3">
+              <form {{action "addRequest" on="submit"}}>
+                {{validated-input
+                  type="text"
+                  value=title
+                  errors=errors.title
+                  placeholder="Name your request"
+                  action=addDataset
+                  lbl="Title"
+                }}
 
-    <div class="input-container col m12">
-      <button type="submit" class="btn red white-text">Submit Request</button>
+                {{validated-input
+                  type="text"
+                  value=description
+                  errors=errors.description
+                  placeholder="Describe the dataset you're looking for"
+                  style="height:150px"
+                  action=addDataset
+                  textarea="true"
+                  lbl="Description"
+                }}
+
+                <div class="input-container col m12">
+                  <button type="submit" class="btn bg-request white-text">Submit Request</button>
+                </div>
+
+              </form>
+          </div>
+        </div>
+        </div>
+      </div>
     </div>
-
-  </form>
+  </div>
 </div>
