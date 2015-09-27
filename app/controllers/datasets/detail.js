@@ -10,6 +10,12 @@ export default Ember.Controller.extend({
     this.set('avatar', this.controllerFor('application').get('avatar'));
   }.on('init'),
 
+  setAvatarsOnComments: function(){
+    this.get('model.comments.@each.UserId').forEach((id)=>{
+      this.store.query('profile', {UserId: id});
+    });
+  }.observes('model.comments'),
+
   comments: function(){
     return Ember.ArrayProxy.createWithMixins(Ember.SortableMixin, {
       sortProperties: ['createdAt'],

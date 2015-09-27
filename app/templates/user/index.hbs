@@ -23,11 +23,11 @@
                     <h5>Saved data</h5>
                   </div>
                   <div class="activity-uploads">
-                    <span class="numb">{{registered.length}}</span>
+                    <span class="numb">{{model.registrations.length}}</span>
                     <h5>Registrations</h5>
                   </div>
                   <div class="activity-request">
-                    <span class="numb">{{requested.length}}</span>
+                    <span class="numb">{{model.requests.length}}</span>
                     <h5>Requests</h5>
                   </div>
                   <div class="activity-comments">
@@ -56,7 +56,7 @@
             <h4 class="uppercase">Registered Data</h4>
           </div>
           <div class="card-body">
-            {{#each registered as |dataset|}}
+            {{#each model.registrations as |dataset|}}
               {{mini-dataset dataset=dataset action="toggleModal"}}
             {{/each}}
           </div>
@@ -70,7 +70,7 @@
               <h4 class="uppercase">Requested Data</h4>
           </div>
           <div class="card-body">
-            {{#each requested as |dataset|}}
+            {{#each model.requests as |dataset|}}
               {{mini-dataset dataset=dataset}}
             {{/each}}
           </div>
