@@ -9,8 +9,8 @@ export default Ember.Route.extend({
       return Ember.RSVP.all([
         ajax({url: ENV.APIRoutes['datasets.search'] , type:'GET' }),
         this.store.findAll('dataset'),
-        this.store.query('dataset', {isRequest: 1}),
-        this.store.query('dataset', {repository:"REPOSITIVE", isRequest: 0})
+        this.store.query('dataset', {isRequest: true}),
+        this.store.query('dataset', {repository:"REPOSITIVE", isRequest: false})
       ])
       .then(function(data){
         return {
