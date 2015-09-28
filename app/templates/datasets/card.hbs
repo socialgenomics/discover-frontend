@@ -32,13 +32,13 @@
 
       <h6>
       <span>from</span>
+        {{#link-to 'datasets.search' (query-params repository=model.repository.name) }}
+          {{model.repository.name}}
+        {{/link-to}}
         {{#if model.owner.displayName}}
+          <span>by</span>
           {{#link-to 'user' model.owner.username}}
             {{model.owner.displayName}}
-          {{/link-to}}
-        {{else}}
-          {{#link-to 'datasets.search' (query-params repository=model.repository.name) }}
-            {{model.repository.name}}
           {{/link-to}}
         {{/if}}
       </h6>
