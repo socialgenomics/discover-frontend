@@ -25,14 +25,18 @@
       </div>
       <div class="navbar-buttons">
         <div class="navbar-button">
+          {{#active-link}}
           {{#link-to "datasets.request" class="valign-wrapper"}}
             <i class="mdi-content-content-paste"></i><h6 class="uppercase">Request Data</h6>
           {{/link-to}}
+          {{/active-link}}
         </div>
         <div class="navbar-button">
+          {{#active-link}}
           {{#link-to "datasets.register" class="valign-wrapper"}}
           <i class="mdi-action-note-add"></i><h6 class="uppercase">Register Data</h6>
           {{/link-to}}
+          {{/active-link}}
         </div>
       </div>
     </div>
@@ -42,7 +46,7 @@
 
     {{else}}
 
-    <ul class="right">
+    <ul class="buttons-logged-out">
       {{#active-link}}
       {{link-to 'SIGNUP' 'users.signup'}}
       {{/active-link}}
