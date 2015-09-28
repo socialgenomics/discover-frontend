@@ -15,11 +15,6 @@ export default Ember.Component.extend({
     this._super();
     this.sendAction();
   },
-
-  init:function(){
-    this._super();
-    this.sendAction('initAvatar');
-  },
   actions: {
     focusedIn:function(){
       this.set("isActive", true);
