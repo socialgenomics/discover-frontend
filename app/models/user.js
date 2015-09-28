@@ -7,6 +7,7 @@ export default DS.Model.extend({
 	lastname: DS.attr('string'),
   isCurrentUser: DS.attr('boolean', {defaultValue: false}),
 	comments: DS.hasMany('comments'),
+	profile: DS.belongsTo('profile', {async: true}),
   displayName: function(){
     if (Ember.isPresent(this.get('firstname')) || Ember.isPresent(this.get('lastname'))){
       var fn = this.get('firstname') || '';

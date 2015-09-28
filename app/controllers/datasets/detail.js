@@ -6,6 +6,10 @@ export default Ember.Controller.extend({
   isModalShown:false,
   isEditingTags:false,
 
+  setAvatar: function(){
+    this.set('avatar', this.controllerFor('application').get('avatar'));
+  }.on('init'),
+
   comments: function(){
     return Ember.ArrayProxy.createWithMixins(Ember.SortableMixin, {
       sortProperties: ['createdAt'],
@@ -16,7 +20,7 @@ export default Ember.Controller.extend({
 
   isPublic:function(){
     var access = this.get('model.repository.access');
-    if(access == "public" || access =="open"){
+    if(access === "public" || access === "open"){
       return true;
     }
   }.property('access'),

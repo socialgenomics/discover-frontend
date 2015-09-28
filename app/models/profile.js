@@ -7,4 +7,5 @@ export default DS.Model.extend({
   workRole: DS.attr('string'),
   workOrganisation: DS.attr('string'),
   interests: DS.attr('string'),
+  user: DS.belongsTo('user', {async: true})
 });

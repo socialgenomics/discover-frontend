@@ -54,9 +54,9 @@
             <h4 class="uppercase">Registered Data</h4>
           </div>
           <div class="card-body">
-              {{#each model.registered as |registration|}}
-                {{mini-dataset dataset=registration action="toggleModal"}}
-              {{/each}}
+            {{#each registered as |dataset|}}
+              {{mini-dataset dataset=dataset action="toggleModal"}}
+            {{/each}}
           </div>
         </div>
       </div>
@@ -68,8 +68,8 @@
               <h4 class="uppercase">Requested Data</h4>
           </div>
           <div class="card-body">
-            {{#each model.requests as |request|}}
-              {{mini-dataset dataset=request}}
+            {{#each requested as |dataset|}}
+              {{mini-dataset dataset=dataset}}
             {{/each}}
           </div>
         </div>
