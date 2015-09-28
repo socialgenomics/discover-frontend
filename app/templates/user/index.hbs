@@ -4,11 +4,11 @@
       {{#if isOwnProfile}}
       <h5 class="subtitles-left unfocus-grey-text">Your Profile</h5>
       {{/if}}
-      <div class="col m12 center-align">
-        <div class="card ">
-          <div class="card-content">
+      <div class="col m12 center">
+        <div class="card activity-card">
+          <div class="card-body">
             <h3>{{ model.user.displayName }}</h3>
-            <div class="card-body">
+
               <div class="col m12 center">
                 <img class="profile-img circle" src="{{model.profile.avatar}}">
                 {{!-- <h3>{{model.user.firstname}} {{model.user.lastname}}</h3> --}}
@@ -16,7 +16,7 @@
               {{#if isOwnProfile}}
                 {{#link-to "users.profile" class="btn yellow white-text"}}EDIT PROFILE{{/link-to}}
               {{/if}}
-              <div class="card-action">
+              <div class="divider"></div>
                 <div class="activity-stats col m12">
                   <div class="activity-saved-data">
                     <span class="numb">0</span>
@@ -36,8 +36,6 @@
                   </div>
                   <span class="stretch"></span>
                 </div>
-              </div>
-            </div>
           </div>
         </div>
       </div>
