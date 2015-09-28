@@ -7,8 +7,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
       var user = user.get('firstObject');
       return new Ember.RSVP.all([
         this.store.query('profile', {UserId: user.get('id')}),
-        this.store.query('dataset',{UserId: user.get('id'), isRequest:0}),
         this.store.query('dataset',{UserId: user.get('id'), isRequest:1}),
+        this.store.query('dataset',{UserId: user.get('id'), isRequest:0}),
       ])
       .then(function(values){
         return {
