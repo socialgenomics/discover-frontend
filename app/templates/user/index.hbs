@@ -4,11 +4,11 @@
       {{#if isOwnProfile}}
       <h5 class="subtitles-left unfocus-grey-text">Your Profile</h5>
       {{/if}}
-      <div class="col m12 center">
-        <div class="card activity-card">
-          <div class="card-body">
+      <div class="col m12 center-align">
+        <div class="card ">
+          <div class="card-content">
             <h3>{{ model.user.displayName }}</h3>
-
+            <div class="card-body">
               <div class="col m12 center">
                 <img class="profile-img circle" src="{{model.profile.avatar}}">
                 {{!-- <h3>{{model.user.firstname}} {{model.user.lastname}}</h3> --}}
@@ -16,7 +16,7 @@
               {{#if isOwnProfile}}
                 {{#link-to "users.profile" class="btn yellow white-text"}}EDIT PROFILE{{/link-to}}
               {{/if}}
-              <div class="divider"></div>
+              <div class="card-action">
                 <div class="activity-stats col m12">
                   <div class="activity-saved-data">
                     <span class="numb">0</span>
@@ -36,6 +36,8 @@
                   </div>
                   <span class="stretch"></span>
                 </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -47,7 +49,7 @@
       <h5 class="subtitles-left unfocus-grey-text">Your Activity</h5>
       {{/if}}
       <!-- data registrations -->
-      <div class="col m6">
+      <div class="col m6 activity-card">
         <div class="card registered-data">
           <div class="card-header card-title center">
             {{#link-to 'datasets.register'}}<i class="mdi-action-note-add"></i>{{/link-to}}
@@ -55,13 +57,15 @@
           </div>
           <div class="card-body">
             {{#each model.registrations as |dataset|}}
-              {{mini-dataset dataset=dataset action="toggleModal"}}
+
+              {{mini-dataset hideSubmitter=isOwnProfile dataset=dataset action="toggleModal"}}
+
             {{/each}}
           </div>
         </div>
       </div>
       <!--data requests-->
-      <div class="col m6">
+      <div class="col m6 activity-card">
         <div class="card requested-data">
           <div class="card-header center card-title">
               {{#link-to 'datasets.request'}}<i class="mdi-content-content-paste"></i>{{/link-to}}
@@ -69,7 +73,7 @@
           </div>
           <div class="card-body">
             {{#each model.requests as |dataset|}}
-              {{mini-dataset dataset=dataset}}
+              {{mini-dataset dataset=dataset hideSubmitter=isOwnProfile}}
             {{/each}}
           </div>
         </div>
