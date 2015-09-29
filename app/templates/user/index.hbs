@@ -49,7 +49,7 @@
       <h5 class="subtitles-left unfocus-grey-text">Your Activity</h5>
       {{/if}}
       <!-- data registrations -->
-      <div class="col m6">
+      <div class="col m6 activity-card">
         <div class="card registered-data">
           <div class="card-header card-title center">
             {{#link-to 'datasets.register'}}<i class="mdi-action-note-add"></i>{{/link-to}}
@@ -57,13 +57,15 @@
           </div>
           <div class="card-body">
             {{#each model.registrations as |dataset|}}
-              {{mini-dataset dataset=dataset action="toggleModal"}}
+
+              {{mini-dataset hideSubmitter=isOwnProfile dataset=dataset action="toggleModal"}}
+
             {{/each}}
           </div>
         </div>
       </div>
       <!--data requests-->
-      <div class="col m6">
+      <div class="col m6 activity-card">
         <div class="card requested-data">
           <div class="card-header center card-title">
               {{#link-to 'datasets.request'}}<i class="mdi-content-content-paste"></i>{{/link-to}}
@@ -71,7 +73,7 @@
           </div>
           <div class="card-body">
             {{#each model.requests as |dataset|}}
-              {{mini-dataset dataset=dataset}}
+              {{mini-dataset dataset=dataset hideSubmitter=isOwnProfile}}
             {{/each}}
           </div>
         </div>

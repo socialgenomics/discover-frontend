@@ -11,7 +11,6 @@ export default Ember.Component.extend({
           category: 'dataset',
           action: 'tag',
           label: this.get('dataset.id'),
-          value: comment.tag
         });
         this.sendAction('addTag',this.tag);
 
