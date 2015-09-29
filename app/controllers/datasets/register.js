@@ -42,7 +42,7 @@ export default Ember.Controller.extend(
           this.get('metrics').trackEvent({
             category: 'dataset',
             action: 'register',
-            value: created.id
+            label: created.get('id')
           });
         })
         .catch(function(err){

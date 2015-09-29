@@ -11,9 +11,9 @@ export default Ember.Component.extend({
 
     search: function(){
       this.get('metrics').trackEvent({
-        category: 'dataset',
-        action: 'search',
-        value: this.get("query")
+        category: 'search',
+        action: 'query',
+        label: this.get("query")
       });
       this.sendAction('action', this.get("query"));
     },

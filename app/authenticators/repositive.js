@@ -60,7 +60,10 @@ export default Base.extend({
     return new Ember.RSVP.Promise((resolve)=>{
       this.get('metrics').identify({
         email: resp.user.email,
-        inviteCode: this.get('loginController.controllers.application.code')
+        inviteCode: this.get('loginController.controllers.application.code'),
+        firstname: resp.user.firstname,
+        lastname: resp.user.lastname,
+        username: resp.user.username,
       });
 
       resp.user.isCurrentUser = true;

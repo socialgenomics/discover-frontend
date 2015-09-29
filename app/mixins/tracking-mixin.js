@@ -7,7 +7,7 @@ export default Ember.Mixin.create({
 
   didTransition() {
     this._super(...arguments);
-    if (ENV.environment == 'production'){
+    if (ENV.environment == 'development'){
       this._trackPage();
     }
     else{
