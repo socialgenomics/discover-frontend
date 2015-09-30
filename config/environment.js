@@ -53,7 +53,10 @@ module.exports = function(environment) {
     sassOptions: {
       inputFile:'main.scss',
       outputFile:'main.css',
-      includePaths: ['bower_components/materialize/sass']
+      includePaths: [
+        'bower_components/materialize/sass',
+        'bower_components'
+      ]
     },
     'simple-auth' : {
       store: 'simple-auth-session-store:local-storage',

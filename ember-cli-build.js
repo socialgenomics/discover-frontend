@@ -38,7 +38,10 @@ module.exports = function(defaults) {
     sassOptions: {
       inputFile:'main.scss',
       outputFile:'main.css',
-      includePaths: ['bower_components/materialize/sass']
+      includePaths: [
+        'bower_components/materialize/sass',
+        'bower_components'
+      ]
     },
     fingerprint: {
       enabled: isProductionLikeBuild,

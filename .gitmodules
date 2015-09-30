@@ -1,3 +1,0 @@
-[submodule "app/styles"]
-	path = app/styles
-	url = git@github.com:repositive/repositive-styles.git
