@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import config from './config/environment';
-import TrackingMixin from 'repositive/mixins/tracking-mixin'
+import TrackingMixin from 'repositive/mixins/tracking-mixin';
 
 var Router = Ember.Router.extend(TrackingMixin, {
   location: config.locationType
@@ -27,6 +27,7 @@ Router.map(function() {
     this.route('profile');
     this.route('references');
     this.route('trust');
+    this.route('verify');
   });
 
   this.resource('user', {
@@ -59,7 +60,7 @@ Ember.Route.reopen({
     var cssClass = this.toCssClass();
     // you probably don't need the application class
     // to be added to the body
-    if (cssClass != 'application') {
+    if (cssClass !== 'application') {
       Ember.$('body').addClass(cssClass);
       if (['datasets-search','users-settings'].indexOf(cssClass) !== -1){
         // Add the class here for all the pages with side navigation
