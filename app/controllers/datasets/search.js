@@ -26,5 +26,5 @@ export default Ember.Controller.extend(
   }.observes('model.isLoading'),
 
   actions:{
-  },
+  }
 });

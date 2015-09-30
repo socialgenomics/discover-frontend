@@ -3,7 +3,6 @@ import Ember from 'ember';
 export default Ember.Controller.extend({
   queryParams: ['tab'],
   tab: "comments",
-  isModalShown:false,
   isEditingTags:false,
 
   setAvatar: function(){
@@ -72,10 +71,6 @@ export default Ember.Controller.extend({
 
     toggleEditTags(){
       this.toggleProperty('isEditingTags');
-    },
-
-    toggleModal(){
-      this.toggleProperty('isModalShown');
     },
   },
 });

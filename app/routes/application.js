@@ -16,6 +16,9 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
         }
       });
     },
+    toggleModal(){
+      this.controllerFor("application").toggleProperty('isShowingModal');
+    },
     initAvatar:function(){
       this.store.query('profile', {UserId: this.get('session.secure.user.id')})
       .then((profiles) => {
