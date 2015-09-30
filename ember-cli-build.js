@@ -35,11 +35,6 @@ module.exports = function(defaults) {
         js: '/assets/vendor.js'
       }
     },
-    sassOptions: {
-      inputFile:'main.scss',
-      outputFile:'main.css',
-      includePaths: ['bower_components/materialize/sass']
-    },
     fingerprint: {
       enabled: isProductionLikeBuild,
       exclude: [],
