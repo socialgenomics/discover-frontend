@@ -16,6 +16,6 @@
     "showdown": "~1.2.3",
     "moment": ">= 2.8.0",
     "moment-timezone": ">= 0.1.0",
-    "repositive-styles": "git@github.com:repositive/repositive-styles.git#bower-support"
+    "repositive-styles": "git@github.com:repositive/repositive-styles.git#master"
   }
 }
