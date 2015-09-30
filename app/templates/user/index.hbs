@@ -11,7 +11,6 @@
             <div class="card-body">
               <div class="col m12 center">
                 <img class="profile-img circle" src="{{model.profile.avatar}}">
-                {{!-- <h3>{{model.user.firstname}} {{model.user.lastname}}</h3> --}}
               </div>
               {{#if isOwnProfile}}
                 {{#link-to "users.profile" class="btn yellow white-text"}}EDIT PROFILE{{/link-to}}
@@ -78,102 +77,4 @@
       </div>
     </div>
   </div>
-</div>
-
-
-{{!-- <div class="row no-margin">
-  <div class="card white darken-1 center">
-    {{#if isOwnProfile}}
-      <h3 class="center">your profile</h3>
-    {{else}}
-      <h3 class="center">{{ model.user.displayName }}</h3>
-    {{/if}}
-    <hr class="yellow">
-    <div class="card-content center-align col m12 grey-text">
-      <div class="row">
-        <div class="col m12 center">
-            <img class="profile-img circle" src="{{model.profile.avatar}}">
-        </div>
-        <div class="col m12 personal-info">
-          <h3>{{model.user.firstname}} {{model.user.lastname}}</h3>
-          <p class="helper-text">{{model.profile.workOrganisation}}</p>
-        </div>
-        <div class="bottom-fixed">
-        {{#if isOwnProfile}}
-          {{#link-to "users.profile"}}<button class="btn yellow white-text"><i class="mdi-editor-border-color"></i>EDIT PROFILE</button>{{/link-to}}
-        {{/if}}
-        </div>
-      </div>
-      <div class="divider"></div>
-      <div class="row no-margin-bottom">
-        <div class="activity-stats col m12">
-          <div class="activity-saved-data">
-            <span class="numb">0</span>
-            <h5>Saved data</h5>
-          </div>
-          <div class="activity-uploads">
-            <span class="numb">{{registered.length}}</span>
-            <h5>Registrations</h5>
-          </div>
-          <div class="activity-request">
-            <span class="numb">{{requested.length}}</span>
-            <h5>Requests</h5>
-          </div>
-          <div class="activity-comments">
-            <span class="numb">0</span>
-            <h5>Comments</h5>
-          </div>
-          <span class="stretch"></span>
-        </div>
-      </div>
-    </div>
-  </div>
-</div><!--end of top profile card-->
-<!--saved datasets card-->
-<div class="row no-margin">
-    <!--<div class="card profile-datasets white darken-1">
-      <div class="center-align">
-        <span class="card-title">
-          <h5>Bookmarks</h5>
-        </span>
-      </div>
-      <p class="helper-text">You haven’t bookmarked any dataset yet. To do so click on <i class="mdi-action-bookmark-outline tiny"></i> symbol on the dataset card.</p>
-    </div> end of saved datasets card-->
-    <!--registered dataset card-->
-    <div class="card profile-datasets left white darken-1">
-      <div class=" center-align">
-        <h3>Registered Datasets</h3>
-        <hr class="teal">
-        {{#if registered}}
-          {{#each registered as |dataset|}}
-            {{mini-dataset dataset=dataset action="toggleModal"}}
-          {{/each}}
-        {{else}}
-          <p class="helper-text">Have data to share?</p>
-          <p>Don't be a tight-arse, share with the rest.</p>
-          <div class="bottom-fixed">
-          {{#link-to 'datasets.register'}}<button class="btn teal white-text"><i class="mdi-action-note-add"></i>REGISTER</button>{{/link-to}}
-          </div>
-        {{/if}}
-      </div>
-    </div>
-    <div class="card profile-datasets right white darken-1">
-      <div class="center-align">
-        <h3>Requested Datasets</h3>
-        <hr class="red">
-
-        {{#if requested}}
-          {{#each requested as |request|}}
-            {{mini-dataset dataset=request action="toggleModal"}}
-          {{/each}}
-        {{else}}
-          <p class="helper-text">Haven't found what you're looking for?</p>
-          <p>There is a community of generous scientists happy to help.</p>
-          <div class="bottom-fixed">
-          {{#link-to 'datasets.request'}}<button class="btn red white-text"><i class="mdi-content-content-paste"></i>REQUEST</button>{{/link-to}}
-          </div>
-        {{/if}}
-      </div>
-    </div>
-</div>
 </div>
