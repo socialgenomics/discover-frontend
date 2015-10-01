@@ -1,5 +1,6 @@
 {{yield}}
 	<div class="card dataset mini">
+		{{#unless hideSubmitter}}
 		<div class="submitted">
 				{{#if dataset.isRequest}}
 				<h6>Request from</h6>
@@ -17,6 +18,7 @@
         {{action-share action="toggleModal"}}
 			</div>--}}
 		</div>
+		{{/unless}}
 		<div class="title-details">
       {{#link-to 'datasets.detail' dataset.id}}<h5 class="data-title" alt="dataset title">{{dataset.properties.title}}</h5>{{/link-to}}
     <div class="card-footer">

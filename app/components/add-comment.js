@@ -1,5 +1,7 @@
 import Ember from 'ember';
 
+let { isEmpty } = Ember;
+
 export default Ember.Component.extend({
   isActive:false,
   isValid:false,
@@ -15,11 +17,6 @@ export default Ember.Component.extend({
     this._super();
     this.sendAction();
   },
-
-  init:function(){
-    this._super();
-    this.sendAction('initAvatar');
-  },
   actions: {
     focusedIn:function(){
       this.set("isActive", true);
@@ -30,12 +27,11 @@ export default Ember.Component.extend({
     },
     addComment:function(){
       //temporary validation
-      if(this.comment){
+      if(!isEmpty(this.get('comment'))){
         this.get('metrics').trackEvent({
           category: 'dataset',
           action: 'comment',
           label: this.get('dataset.id'),
-          value: this.comment
         });
         this.sendAction('addComment',this.comment);
       }

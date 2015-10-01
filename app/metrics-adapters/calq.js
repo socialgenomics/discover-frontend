@@ -41,7 +41,7 @@ export default BaseAdapter.extend({
             t.writeKey = e;
             t._initOptions = o;
             t._execQueue = [];
-            var m = "action.track action.trackSale action.trackHTMLLink action.trackPageView action.setGlobalProperty user.profile user.identify user.clear".split(" "); 
+            var m = "action.track action.trackSale action.trackHTMLLink action.trackPageView action.setGlobalProperty user.profile user.identify user.clear".split(" ");
             for (var n = 0; n < m.length; n++) {
               var f = function () {
                 var r = m[n];
@@ -67,14 +67,17 @@ export default BaseAdapter.extend({
 
   identify(options = {}) {
     const compactedOptions = compact(options);
-    const { email, inviteCode } = compactedOptions;
+    const { email, inviteCode, firstname, lastname, username } = compactedOptions;
     window.calq.user.identify(email);
-    window.calq.user.profile({inviteCode});
+    window.calq.user.profile({inviteCode, email, firstname, lastname, username});
   },
 
   trackEvent(options = {}) {
     const compactedOptions = compact(options);
-    window.calq.action.track(options);
+    var actionName = options.category + '.' + options.action;
+    delete options.category;
+    delete options.action;
+    window.calq.action.track(actionName, options);
 
     return options;
   },

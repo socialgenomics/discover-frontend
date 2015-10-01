@@ -14,6 +14,10 @@ export default DS.Model.extend({
   updatedAt: DS.attr('isodate'),
   count: DS.attr('number'),
   isRequest: DS.attr('boolean'),
+  externalID: DS.attr('string'),
+  accession: function(){
+    return this.get('externalID')
+  }.property('externalID'),
   colour: null,
   views: function(){
     return this.get('count') + poisson(0.5);

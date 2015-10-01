@@ -55,6 +55,14 @@ Router.map(function() {
 
 });
 
+var pagesWithSideNavigation = [
+  'datasets-search',
+  'users-settings',
+  'users-profile',
+  'users-trust',
+  'users-references'
+];
+
 Ember.Route.reopen({
   activate: function() {
     var cssClass = this.toCssClass();
@@ -62,7 +70,7 @@ Ember.Route.reopen({
     // to be added to the body
     if (cssClass !== 'application') {
       Ember.$('body').addClass(cssClass);
-      if (['datasets-search','users-settings'].indexOf(cssClass) !== -1){
+      if (pagesWithSideNavigation.indexOf(cssClass) !== -1){
         // Add the class here for all the pages with side navigation
         Ember.$('body').addClass('has-sidenav');
       }

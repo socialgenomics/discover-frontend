@@ -31,7 +31,7 @@ export default Ember.Component.extend({
       this.get('metrics').trackEvent({
         category: 'auth',
         action: 'logout',
-        label: this.get('currentUser'),
+        label: this.get('currentUser.email'),
       });
       this.get("session").invalidate();
     },

@@ -31,7 +31,7 @@ export default Ember.Controller.extend(
         this.get('metrics').trackEvent({
           category: 'dataset',
           action: 'request',
-          value: created.id
+          label: created.get('id')
         });
       });
     },

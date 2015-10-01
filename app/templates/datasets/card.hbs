@@ -10,9 +10,9 @@
         {{#if isRequest}}<div class="request">Request</div>{{/if}}
       </div>
       <div class="actions-container valign-wrapper">
-        {{action-favourite}}
+        {{action-favourite dataset=model}}
         <span class="grey-text">{{model.favourite}}</span>
-        {{action-share action="toggleModal"}}
+        {{action-share action="toggleModal" dataset=model}}
       </div>
     </div>
     <div class="card-body">
@@ -32,13 +32,13 @@
 
       <h6>
       <span>from</span>
+        {{#link-to 'datasets.search' (query-params repository=model.repository.name) }}
+          {{model.repository.name}}
+        {{/link-to}}
         {{#if model.owner.displayName}}
+          <span>by</span>
           {{#link-to 'user' model.owner.username}}
             {{model.owner.displayName}}
-          {{/link-to}}
-        {{else}}
-          {{#link-to 'datasets.search' (query-params repository=model.repository.name) }}
-            {{model.repository.name}}
           {{/link-to}}
         {{/if}}
       </h6>
