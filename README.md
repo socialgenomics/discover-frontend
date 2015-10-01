@@ -83,6 +83,31 @@ After the "repositive-styles" feature branch is finished and the changes are mer
 update the "discover.repositive.io" `bower.json` file to point to `master` again, before finishing and 
 merging the "discover.repositive.io" feature branch.
 
+The full common workflow step-by-step is:
+
+1. Create feature branch on "repositive-styles". ex.: "feature/nice-buttons-scss"
+2. Create feature branch on "discover.repositive.io", ex.: "feature/nice-buttons"
+3. Edit "discover.repositive.io" `bower.json` to point to the styles feature branch
+
+    ```
+    "repositive-styles": "git@github.com:repositive/repositive-styles.git#feature/nice-buttons-scss"
+    ```
+
+Work as usual on both projects. For finish work on both branches:
+
+1. Finish the styles feature branch and push to Github
+2. Edit "discover.repositive.io" `bower.json` to point Bower back to `master branch`, commit and push to Github
+
+    ```
+    "repositive-styles": "git@github.com:repositive/repositive-styles.git#master"
+    ```
+3. Finish the "discover.repositive.io" feature branch and push to Github
+ 
+
+
+
+
+
 
 ### Code Generators
 
