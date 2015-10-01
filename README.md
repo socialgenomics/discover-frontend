@@ -64,7 +64,8 @@ In production (and development), "discover.repositive.io" has the `master` branc
   ```
   "repositive-styles": "git@github.com:repositive/repositive-styles.git#master"
   ```
- 
+This means that when the deployment process runs `bower install`, Bower does a git checkout of that Git branch of the styles. 
+
   For working on Git feature branches in both "discover.repositive.io" and "repositive-styles", the Bower dependency 
 needs to point to the "repositive-styles" feature branch instead of `master`,
 so that "discover.repositive.io" deployment to servers installs that "repositive-styles" feature branch.
@@ -76,11 +77,11 @@ just change the branch name in the `bower.json` file (after the `#`):
   "repositive-styles": "git@github.com:repositive/repositive-styles.git#feature-my-feature-branch-name"
   ```
 
-and be sure to commit the `bower.json`, for example along with other changes to the frontend app omn the 1st commit.
+and be sure to commit the `bower.json`, for example along with other changes to the frontend app on the 1st commit.
 
-After the "repositive-styles" feature branch is finished and the changes merged into main development ("development" branch),
+After the "repositive-styles" feature branch is finished and the changes are merged into main development ("development" branch),
 update the "discover.repositive.io" `bower.json` file to point to `master` again, before finishing and 
-merging the "discover.repositive.io" feature branch. 
+merging the "discover.repositive.io" feature branch.
 
 
 ### Code Generators
