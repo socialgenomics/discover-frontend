@@ -57,6 +57,32 @@ To link a separate checkout of repositive-styles into the project and do live ed
   This is required because fb-watchman does not currently support watching for filesystem changes over symlinks 
   (https://github.com/facebook/watchman/issues/105).
 
+## Working on feature branches in both "discover.repositive.io" and "repositive-styles" projects
+
+In production (and development), "discover.repositive.io" has the `master` branch of "repositive-styles" as a Bower dependency:
+
+  ```
+  "repositive-styles": "git@github.com:repositive/repositive-styles.git#master"
+  ```
+ 
+  For working on Git feature branches in both "discover.repositive.io" and "repositive-styles", the Bower dependency 
+needs to point to the "repositive-styles" feature branch instead of `master`,
+so that "discover.repositive.io" deployment to servers installs that "repositive-styles" feature branch.
+
+For pointing the frontend dependency to another branch, on the "repositive-styles" feature branch,
+just change the branch name in the `bower.json` file (after the `#`):
+
+  ```
+  "repositive-styles": "git@github.com:repositive/repositive-styles.git#feature-my-feature-branch-name"
+  ```
+
+and be sure to commit the `bower.json`, for example along with other changes to the frontend app omn the 1st commit.
+
+After the "repositive-styles" feature branch is finished and the changes merged into main development ("development" branch),
+update the "discover.repositive.io" `bower.json` file to point to `master` again, before finishing and 
+merging the "discover.repositive.io" feature branch. 
+
+
 ### Code Generators
 
 Make use of the many generators for code, try `ember help generate` for more details
