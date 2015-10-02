@@ -86,7 +86,19 @@ merging the "discover.repositive.io" feature branch.
 The full common workflow step-by-step is:
 
 1. Create feature branch on "repositive-styles". ex.: "feature/nice-buttons-scss"
+
+    ```
+    $ cd /path/to/repositive-styles/
+    $ git flow feature start nice-buttons-scss
+    ```
+
 2. Create feature branch on "discover.repositive.io", ex.: "feature/nice-buttons"
+
+    ```
+    $ cd /path/to/discover.repositive.io/
+    $ git flow feature start nice-buttons
+    ```
+
 3. Edit "discover.repositive.io" `bower.json` to point to the styles feature branch
 
     ```
@@ -96,13 +108,26 @@ The full common workflow step-by-step is:
 Work as usual on both projects. For finish work on both branches:
 
 1. Finish the styles feature branch and push to Github
+
+    ```
+    $ cd /path/to/discover.repositive.io/
+    $ git flow feature finish nice-buttons-scss
+    $ git push
+    ```
+
 2. Edit "discover.repositive.io" `bower.json` to point Bower back to `master branch`, commit and push to Github
 
     ```
     "repositive-styles": "git@github.com:repositive/repositive-styles.git#master"
     ```
+
 3. Finish the "discover.repositive.io" feature branch and push to Github
  
+    ```
+    $ cd /path/to/discover.repositive.io/
+    $ git flow feature finish nice-buttons
+    $ git push
+    ```
 
 
 
