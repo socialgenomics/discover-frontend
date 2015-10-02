@@ -57,6 +57,83 @@ To link a separate checkout of repositive-styles into the project and do live ed
   This is required because fb-watchman does not currently support watching for filesystem changes over symlinks 
   (https://github.com/facebook/watchman/issues/105).
 
+## Working on feature branches in both "discover.repositive.io" and "repositive-styles" projects
+
+In production (and development), "discover.repositive.io" has the `master` branch of "repositive-styles" as a Bower dependency:
+
+  ```
+  "repositive-styles": "git@github.com:repositive/repositive-styles.git#master"
+  ```
+This means that when the deployment process runs `bower install`, Bower does a git checkout of that Git branch of the styles. 
+
+  For working on Git feature branches in both "discover.repositive.io" and "repositive-styles", the Bower dependency 
+needs to point to the "repositive-styles" feature branch instead of `master`,
+so that "discover.repositive.io" deployment to servers installs that "repositive-styles" feature branch.
+
+For pointing the frontend dependency to another branch, on the "repositive-styles" feature branch,
+just change the branch name in the `bower.json` file (after the `#`):
+
+  ```
+  "repositive-styles": "git@github.com:repositive/repositive-styles.git#feature-my-feature-branch-name"
+  ```
+
+and be sure to commit the `bower.json`, for example along with other changes to the frontend app on the 1st commit.
+
+After the "repositive-styles" feature branch is finished and the changes are merged into main development ("development" branch),
+update the "discover.repositive.io" `bower.json` file to point to `master` again, before finishing and 
+merging the "discover.repositive.io" feature branch.
+
+The full common workflow step-by-step is:
+
+1. Create feature branch on "repositive-styles". ex.: "feature/nice-buttons-scss"
+
+    ```
+    $ cd /path/to/repositive-styles/
+    $ git flow feature start nice-buttons-scss
+    ```
+
+2. Create feature branch on "discover.repositive.io", ex.: "feature/nice-buttons"
+
+    ```
+    $ cd /path/to/discover.repositive.io/
+    $ git flow feature start nice-buttons
+    ```
+
+3. Edit "discover.repositive.io" `bower.json` to point to the styles feature branch
+
+    ```
+    "repositive-styles": "git@github.com:repositive/repositive-styles.git#feature/nice-buttons-scss"
+    ```
+
+Work as usual on both projects. When finishing work on both branches:
+
+1. Finish the styles feature branch and push to Github
+
+    ```
+    $ cd /path/to/discover.repositive.io/
+    $ git flow feature finish nice-buttons-scss
+    $ git push
+    ```
+
+2. Edit "discover.repositive.io" `bower.json` to point Bower back to `master branch`, commit and push to Github
+
+    ```
+    "repositive-styles": "git@github.com:repositive/repositive-styles.git#master"
+    ```
+
+3. Finish the "discover.repositive.io" feature branch and push to Github
+ 
+    ```
+    $ cd /path/to/discover.repositive.io/
+    $ git flow feature finish nice-buttons
+    $ git push
+    ```
+
+
+
+
+
+
 ### Code Generators
 
 Make use of the many generators for code, try `ember help generate` for more details
