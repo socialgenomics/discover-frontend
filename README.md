@@ -105,7 +105,7 @@ The full common workflow step-by-step is:
     "repositive-styles": "git@github.com:repositive/repositive-styles.git#feature/nice-buttons-scss"
     ```
 
-Work as usual on both projects. For finish work on both branches:
+Work as usual on both projects. When finishing work on both branches:
 
 1. Finish the styles feature branch and push to Github
 
