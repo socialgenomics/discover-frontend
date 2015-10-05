@@ -27,7 +27,9 @@ Router.map(function() {
     this.route('profile');
     this.route('references');
     this.route('trust');
-    this.route('verify');
+    this.route('verify', {
+      path: ':id'
+    });
   });
 
   this.resource('user', {
