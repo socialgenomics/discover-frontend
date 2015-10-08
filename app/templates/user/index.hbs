@@ -12,6 +12,10 @@
               <div class="col m12 center">
                 <img class="profile-img circle" src="{{model.profile.avatar}}">
               </div>
+              <div class="input-container col m12">
+                <label for="upload-avatar">Upload Avatar</label>
+                {{s3-upload id="upload-avatar" field="image"}}
+              </div>
               {{#if isOwnProfile}}
                 {{#link-to "users.profile" class="btn yellow white-text"}}EDIT PROFILE{{/link-to}}
               {{/if}}
