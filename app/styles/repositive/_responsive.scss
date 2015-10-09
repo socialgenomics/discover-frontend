@@ -1,0 +1,62 @@
+// navbar buttons move into navbar container on breakpoint
+@media (max-width: $navbar-breakpoint) {
+  .navbar-wrapper{
+    margin-left: auto;
+    margin-right: auto;
+    width: $container-width;
+    // width: $navbar-breakpoint;
+  }
+  .navbar-container{
+    width: $container-width - $navbar-logo-width - $navbar-dropdown-width;
+    margin: 0;
+    margin-left: $navbar-logo-width;
+  }
+  .navbar-logo{
+    padding-left: 0;
+  }
+}
+@media (max-width: $navbar-breakpoint) {
+  //titles for sections next to the card
+  .subtitles-left,
+  .subtitles-right{
+    position: initial;
+    text-align: left;
+    width:auto;
+
+  }
+}
+
+// side navigation to lock to left of screen on breakpoint
+@media (max-width: $sidenav-breakpoint) {
+  .has-sidenav .container{
+    margin:0;
+    width:$container-width + $sidenav-width;
+  }
+  .has-sidenav .navbar-wrapper{
+    height: $navbar-height;
+    margin-left: 0;
+    margin-right: 0;
+    position:relative;
+    width: $container-width + $sidenav-width;
+  }
+  .sideNav{
+    float:left;
+    position:initial;
+    margin-top: 1.5rem;
+  }
+  .content{
+    float:right;
+    width:$container-width;
+  }
+  .has-sidenav .navbar-logo{
+    position: fixed;
+    left:$navbar-horiz-padding;
+    padding-left: 0;
+  }
+  .has-sidenav .navbar-container{
+    margin:0;
+    position:absolute;
+    left:$sidenav-width;
+    width:$container-width - $navbar-dropdown-width;
+  }
+}

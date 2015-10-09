@@ -1,0 +1,47 @@
+.tag {
+    font-size: 0.8em;
+    padding: 0.4em;
+    @include border-radius(3px);
+    border: 1px solid $border-grey;
+    margin: 0 0.5em 1em 0;
+    color: $sub-text;
+    display: inline-block;
+    // a:first-of-type{
+    //   color: $primary-text;
+    // }
+
+    a:hover{
+      font-weight:bold;
+      color: red;
+    }
+    .remove-tag{
+      color:$primary-red;
+      padding-left:0.3em;
+      &:hover{
+        text-decoration: none;
+        color:$primary-red;
+      }
+    }
+}
+.tags {
+    margin: 1em 0 1em 0;
+    .input-field {
+      margin: 0 !important;
+    }
+}
+.post-btn, .add-tag {
+  display: inline-block;
+  margin-right: 1em;
+  padding: 0 0.5em 0 0.5em;
+  line-height: 30px;
+  height: 30px;
+  cursor:pointer;
+}
+.cancel-btn {
+  cursor: pointer;
+  margin-left: 0.4em;
+}
+.input-field input.input-tag {
+  margin-right: 0.5em;
+  height: 30px;
+}

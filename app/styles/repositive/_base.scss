@@ -1,0 +1,66 @@
+p{
+  font-size:14px;
+}
+* {
+	margin: 0;
+}
+html {
+  position: relative;
+  min-height: 100%;
+  box-sizing: border-box;
+}
+body{
+  margin-bottom: $footer-height;
+  padding-top: $navbar-height;
+  background: $background-grey;
+}
+footer{
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: $footer-height;
+  width: 100%;
+}
+.container{
+  width: $container-width;
+  height: 100%;
+  margin: 0 auto;
+  position: relative;
+}
+.container.landing-wrapper {
+    width: 280px;
+    padding-top: 4em;
+}
+body.users-login, body.users-signup, body.verify {
+    background: #fff;
+}
+body.verify {
+    .container {
+        width: 500px;
+      img {
+        margin-left: -75px;
+        width: 250px;
+      }
+      form {
+        width: 280px;
+      }
+    }
+}
+.container-login,.container-signup {
+  width: 20rem;
+  margin: auto;
+  padding: 2rem 0 2rem 0;
+}
+.content{
+  width:100%;
+  height:100%;
+  margin-bottom: $footer-height;
+  margin-top: 1.5rem;
+}
+.sideNav{
+  position: absolute;
+  //margin-top: 1.5rem;
+  width: $sidenav-width;
+  left: -$sidenav-width;
+  @include horiz-padding($sidenav-horiz-padding);
+}

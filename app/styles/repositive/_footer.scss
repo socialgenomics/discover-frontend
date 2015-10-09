@@ -1,0 +1,28 @@
+footer{
+    padding-bottom:1em;
+    margin-top:3em;
+    background-color: $primary-text;
+}
+footer.platform {
+    position:absolute;
+    bottom:0;
+    width:100%;
+    height:43px;
+    font-size: 0.8em;
+    ul{
+        margin-bottom:0;
+        margin-top: 1.3em;
+        a:hover{
+              color: $background-grey;
+            }
+        a{
+          cursor:pointer;
+          color: inherit;
+          li{
+            padding-left:1em;
+            padding-right:1em;
+            font-family:$head-font-stack;
+            }
+        }
+    }
+}

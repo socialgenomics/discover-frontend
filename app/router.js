@@ -28,6 +28,12 @@ Router.map(function() {
     this.route('references');
     this.route('trust');
     this.route('verify');
+    this.route('resend-password', {
+      path:'/reset-password'
+    });
+    this.route('reset-password', {
+      path:'/reset-password/:resetKey'
+    });
   });
 
   this.resource('user', {
