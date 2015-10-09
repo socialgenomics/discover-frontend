@@ -27,17 +27,27 @@ export default Ember.ObjectController.extend(
   validations:{
     password1: {
       presence: {
-        message: " "
+        message: ""
       },
-      length: { minimum: 8, messages:{ tooShort: "Must be at least 8 characters."}},
-      server: true, // must be last - unknown bug
+      length: { minimum: 8, messages:{tooShort:" "}},
+      format: {
+        with: /(?=.*\d)(?=.*[A-Z])/,
+        //allowBlank: true,
+        message: "Must be at least 8 characters and include an uppercase letter and a number."
+      },
+      server: true,
     },
     password2: {
       presence: {
-        message: " "
+        message: ""
       },
-      length: { minimum: 8, messages:{ tooShort: "Must be at least 8 characters."}},
-      server: true, // must be last - unknown bug
+      length: { minimum: 8, messages:{tooShort:" "}},
+      format: {
+        with: /(?=.*\d)(?=.*[A-Z])/,
+        //allowBlank: true,
+        message: "Must be at least 8 characters and include an uppercase letter and a number."
+      },
+      server: true,
     },
   },
   actions: {

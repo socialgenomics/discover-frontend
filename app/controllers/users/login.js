@@ -1,7 +1,8 @@
 import Ember from "ember";
 import EmberValidations from 'ember-validations';
 import ServerValidationMixin from 'repositive/validators/remote/server/mixin';
-
+import ajax from 'ic-ajax';
+import ENV from 'repositive/config/environment';
 
 export default Ember.ObjectController.extend(
   EmberValidations,
@@ -12,6 +13,8 @@ export default Ember.ObjectController.extend(
   password:null,
   loading: false,
   formSubmitted: false,
+  messages:[],
+
   buttonDisabled: function(){
     return !this.get('isValid') || this.get('loading');
   }.property('isValid', 'loading'),
@@ -37,7 +40,6 @@ export default Ember.ObjectController.extend(
   },
   actions: {
     submitForm: function() {
-      var _this = this;
       this.set('loading', true);
       this.set('formSubmitted', true);
       this.get('session')
@@ -45,13 +47,32 @@ export default Ember.ObjectController.extend(
         email: this.email,
         password: this.password
       })
-      .then(function(resp){
-        _this.set('loading', false);
+      .then(
+      resp=>{
+        this.set('loading', false);
       },
-      function(error){
+      error=>{
         //_this.addValidationErrors(xhr.responseJSON.errors);
-        _this.set('loading', false);
+        this.set('loading', false);
       });
+    },
+
+    resetPassword: function(){
+      if (!Ember.isBlank(this.get('email'))){
+        ajax({
+          url: ENV.APIRoutes['reset-password'] + '/' + this.get("email"),
+          type:'GET',
+        })
+        .then(resp=>{
+          this.get("messages").addObjects(resp.messages)
+        })
+        .catch(err=>{
+          this.get("messages").addObjects(err.jqXHR.responseJSON.messages)
+        })
+      }
+      else{
+        this.transitionToRoute('users.resend-password')
+      }
     }
   }
 });
