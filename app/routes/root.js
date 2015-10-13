@@ -17,7 +17,7 @@ export default Ember.Route.extend({
           stats: data[0],
           datasets: data[1].slice(0,3),
           requests: data[2],
-          registered: data[3]
+          registered: data[3],
         }
       })
       .catch(function(err){
