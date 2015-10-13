@@ -12,6 +12,9 @@
               <div class="col m12 center">
                 <img class="profile-img circle" src="{{model.profile.avatar}}">
               </div>
+              {{#if verifiedAccount}}
+                <h3><i class="mdi-action-verified-user"></i> Verified Account</h3>
+              {{/if}}
               {{#if isOwnProfile}}
                 {{#link-to "users.profile" class="btn yellow white-text"}}EDIT PROFILE{{/link-to}}
               {{/if}}
