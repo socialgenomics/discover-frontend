@@ -8,6 +8,8 @@ export default Ember.ObjectController.extend(
    EmberValidations,
    ServerValidationMixin,
 {
+  needs: ['root'],
+
   validations:{
 
     fullname:{
@@ -93,7 +95,11 @@ export default Ember.ObjectController.extend(
           data: credentials
         })
         .then((resp)=>{ // signup has suceeded, now login
+            // render any messages provided by the backend
             this.showMessages(resp.messages);
+            // We would like to show a welcome screen if this is the first visit.
+            this.get('controllers.root').set('firstVisit', true);
+            // login!
             this.get('session').authenticate('authenticator:repositive', credentials);
         })
         .catch((err)=>{

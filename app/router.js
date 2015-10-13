@@ -28,7 +28,7 @@ Router.map(function() {
     this.route('references');
     this.route('trust');
     this.route('verify', {
-      path: ':id'
+      path: '/:verificationId'
     });
   });
 

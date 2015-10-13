@@ -17,5 +17,5 @@ export default DS.Model.extend({
     else {
       return 'User' + this.get('username')
     }
-  }.property('username', 'firstname', 'lastname')
+  }.property('username', 'firstname', 'lastname'),
 });
