@@ -22,8 +22,9 @@ RUN usermod -d /home/www-data www-data
 # setup SSH deploy key
 RUN mkdir -p /home/www-data/.ssh/
 RUN usermod -d /home/www-data www-data
+ADD .bowerrc /home/www-data/.bowerrc
 ADD docker/id_rsa /home/www-data/.ssh/id_rsa
-ADD docker/known_hosts /home/www-data/.ssh/
+ADD docker/known_hosts /home/www-data/.ssh/known_hosts
 RUN chown -R www-data:www-data /home/www-data/
 RUN chmod 700 /home/www-data/.ssh/
 RUN chmod 600 /home/www-data/.ssh/id_rsa
