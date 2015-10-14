@@ -6,6 +6,7 @@ export default DS.Model.extend({
 	firstname: DS.attr('string'),
 	lastname: DS.attr('string'),
   isCurrentUser: DS.attr('boolean', {defaultValue: false}),
+	isEmailValidated: DS.attr('boolean', {defaultValue: false}),
 	comments: DS.hasMany('comments'),
 	profile: DS.belongsTo('profile', {async: true}),
   displayName: function(){
@@ -15,7 +16,7 @@ export default DS.Model.extend({
       return  fn + ' ' + ln;
     }
     else {
-      return 'User' + this.get('username')
+      return 'User' + this.get('username');
     }
   }.property('username', 'firstname', 'lastname'),
 });

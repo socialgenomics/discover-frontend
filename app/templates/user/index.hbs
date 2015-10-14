@@ -1,3 +1,13 @@
+<!-- {{#if validAccount}}
+  {{#unless bannerSeen}}
+    <div id="verified-banner" {{action 'seenBanner'}}>
+      <div class="row">
+        <h1>Your account is now verified!</h1>
+      </div>
+    </div>
+  {{/unless}}
+{{/if}} -->
+
 <div id="profile" class="content">
   <div class="row">
     <div class="contain">
@@ -12,9 +22,9 @@
               <div class="col m12 center">
                 <img class="profile-img circle" src="{{model.profile.avatar}}">
               </div>
-              <!-- {{#if isEmailValidated}}
+              {{#if validAccount}}
                 <h3><i class="mdi-action-verified-user"></i> Verified Account</h3>
-              {{/if}} -->
+              {{/if}}
               {{#if isOwnProfile}}
                 {{#link-to "users.profile" class="btn yellow white-text"}}EDIT PROFILE{{/link-to}}
               {{/if}}
