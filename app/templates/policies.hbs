@@ -5,12 +5,12 @@
       <ul class="tabs">
         <li class="tab col s3">
           {{#if (eq tab "web")}}
-          {{#link-to 'policies' (query-params tab="web") class="active"}}Website Acceptable Use Policy{{/link-to}}
+          {{#link-to 'policies' (query-params tab="web") class="active"}}Website Acceptable Use{{/link-to}}
           {{else}}
-          {{#link-to 'policies' (query-params tab="web")}}Website Acceptable Use Policy{{/link-to}}
+          {{#link-to 'policies' (query-params tab="web")}}Website Acceptable Use{{/link-to}}
           {{/if}}
         </li>
-        <li class="tab col s3">
+        <li class="tab col s2">
           {{#if (eq tab "privacy")}}
           {{#link-to 'policies' (query-params tab="privacy") class="active"}}privacy Policy{{/link-to}}
           {{else}}
@@ -19,16 +19,23 @@
         </li>
         <li class="tab col s3">
           {{#if (eq tab "terms")}}
-          {{#link-to 'policies' (query-params tab="terms") class="active"}}Terms of Website Use (UK){{/link-to}}
+          {{#link-to 'policies' (query-params tab="terms") class="active"}}Terms of Website Use{{/link-to}}
           {{else}}
-          {{#link-to 'policies' (query-params tab="terms")}}Terms of Website Use (UK){{/link-to}}
+          {{#link-to 'policies' (query-params tab="terms")}}Terms of Website Use{{/link-to}}
           {{/if}}
         </li>
-        <li class="tab col s3">
+        <li class="tab col s2">
           {{#if (eq tab "cookie")}}
           {{#link-to 'policies' (query-params tab="cookie") class="active"}}Cookie Policy{{/link-to}}
           {{else}}
           {{#link-to 'policies' (query-params tab="cookie")}}Cookie Policy{{/link-to}}
+          {{/if}}
+        </li>
+        <li class="tab col s2">
+          {{#if (eq tab "disclaimer")}}
+          {{#link-to 'policies' (query-params tab="disclaimer") class="active"}}Disclaimer{{/link-to}}
+          {{else}}
+          {{#link-to 'policies' (query-params tab="disclaimer")}}Disclaimer{{/link-to}}
           {{/if}}
         </li>
       </ul>
@@ -39,8 +46,10 @@
         {{partial "policies/tab-privacy"}}
         {{else if (eq tab "terms")}}
         {{partial "policies/tab-terms"}}
-        {{else}}
+        {{else if (eq tab "cookie")}}
         {{partial "policies/tab-cookie"}}
+        {{else}}
+        {{partial "policies/tab-disclaimer"}}
         {{/if}}
       </div>
   </div>
