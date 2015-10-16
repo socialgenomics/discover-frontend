@@ -6,4 +6,6 @@ export default Ember.Controller.extend({
     return this.get('session.secure.user');
   }),
 
+  
+
 });

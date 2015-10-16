@@ -8,6 +8,8 @@ export default DS.Model.extend({
   isCurrentUser: DS.attr('boolean', {defaultValue: false}),
 	isEmailValidated: DS.attr('boolean', {defaultValue: false}),
 	comments: DS.hasMany('comments'),
+	createdAt: DS.attr('isodate'),
+	updatedAt: DS.attr('isodate'),
 	profile: DS.belongsTo('profile', {async: true}),
   displayName: function(){
     if (Ember.isPresent(this.get('firstname')) || Ember.isPresent(this.get('lastname'))){
