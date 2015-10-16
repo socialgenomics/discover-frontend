@@ -30,7 +30,7 @@ export default Ember.ObjectController.extend(
         with: /^[\w+\-.]+@[a-z\d\-.]+\.[a-z]+$/i,
         message: 'Must be a valid e-mail address'
       },
-      server: true, // must be last - unknown bug
+      server: true, // must be last - known bug
     },
   },
   actions: {
@@ -41,11 +41,15 @@ export default Ember.ObjectController.extend(
         type:'GET',
       })
       .then(resp=>{
-        this.get("messages").addObjects(resp.messages)
+        this.reloadMessages(resp.messages);
       })
       .catch(err=>{
-        this.get("messages").addObjects(err.jqXHR.responseJSON.messages)
-      })
+        this.reloadMessages(err.jqXHR.responseJSON.messages);
+      });
     }
+  },
+  reloadMessages: function(messages){
+    this.set("messages", []);
+    this.get("messages").addObjects(messages);
   }
 });

@@ -69,7 +69,7 @@ export default Ember.ObjectController.extend(
           }
         })
         .then(resp=>{
-          this.get("messages").addObjects(resp.messages)
+          this.reloadMessages(resp.messages);
         })
         .catch(err=>{
           // TODO: remove this
@@ -79,5 +79,9 @@ export default Ember.ObjectController.extend(
         })
       }
     }
+  },
+  reloadMessages: function(messages){
+    this.set("messages", []);
+    this.get("messages").addObjects(messages);
   }
 });

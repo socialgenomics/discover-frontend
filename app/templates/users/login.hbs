@@ -37,7 +37,7 @@
       icon="password"}}
     <a {{action 'resetPassword'}}>Click here to reset your password</a>
     <div class="input-container">
-      {{#full-width-button class="teal" disabled=buttonDisabled type="submit"}}LOGIN{{/full-width-button}}
+      {{#full-width-button class="teal {{#if buttonDisabled 'disabled'}}" disabled=buttonDisabled type="submit"}}LOGIN{{/full-width-button}}
     </div>
     {{message-queue}}
   </form>

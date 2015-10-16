@@ -64,15 +64,19 @@ export default Ember.ObjectController.extend(
           type:'GET',
         })
         .then(resp=>{
-          this.get("messages").addObjects(resp.messages)
+          this.reloadMessages(resp.messages);
         })
         .catch(err=>{
-          this.get("messages").addObjects(err.jqXHR.responseJSON.messages)
-        })
+          this.reloadMessages(err.jqXHR.responseJSON.messages);
+        });
       }
       else{
-        this.transitionToRoute('users.resend-password')
+        this.transitionToRoute('users.resend-password');
       }
     }
+  },
+  reloadMessages: function(messages){
+    this.set("messages", []);
+    this.get("messages").addObjects(messages);
   }
 });
