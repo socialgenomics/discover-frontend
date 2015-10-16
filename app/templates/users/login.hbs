@@ -14,6 +14,9 @@
         OR
       </span>
     </div>
+    {{#each flashMessages.queue as |flash|}}
+      {{flash-message flash=flash}}
+    {{/each}}
     {{validated-input type="email" lbl="Email" value=email errors=errors.email placeholder="Email" email=true formSubmitted=formSubmitted icon="email"}}
     {{validated-input type="password" lbl="Password" value=password errors=errors.password placeholder="Password" password=true formSubmitted=formSubmitted icon="password"}}
     <div class="input-container">
@@ -22,4 +25,3 @@
     {{message-queue}}
   </form>
 </div>
-

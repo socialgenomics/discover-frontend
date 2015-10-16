@@ -20,15 +20,29 @@ export default Ember.Route.extend({
       type:'GET',
     })
     .then(resp=>{
+      this.showMessages(resp.messages);
+
       /**
       * Backend validated the email address - transitionTo the profile without
       * rendering the current page (i.e do not resolve the promise before transitioning).
       */
       this.store.findRecord('user', this.get('session.secure.user.id'))
       .then(user=>{
+
         user.set("isEmailValidated", true);
       });
-      this.transitionTo('user', this.get('session.secure.user.username'));
+      /*
+        We cannot know the username of the current user unless it is stored in the
+        session. This means we cannot redirect to current user's profile if they're
+        not logged in.
+      */
+      if (this.get("session.isAuthenticated")){
+        this.transitionTo('user', this.get('session.secure.user.username'));
+      }
+      else{
+        this.transitionTo('users.login');
+      }
+
     })
     .catch((err)=>{
       Ember.Logger.error(err);
@@ -43,5 +57,10 @@ export default Ember.Route.extend({
         type:'GET',
       })
     }
+  },
+  showMessages: function(messages){
+    messages.forEach(message=>{
+      Ember.get(this, 'flashMessages')[message.type](message.text);
+    })
   }
 });
