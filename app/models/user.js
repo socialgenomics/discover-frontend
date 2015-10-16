@@ -6,7 +6,10 @@ export default DS.Model.extend({
 	firstname: DS.attr('string'),
 	lastname: DS.attr('string'),
   isCurrentUser: DS.attr('boolean', {defaultValue: false}),
+	isEmailValidated: DS.attr('boolean', {defaultValue: false}),
 	comments: DS.hasMany('comments'),
+	createdAt: DS.attr('isodate'),
+	updatedAt: DS.attr('isodate'),
 	profile: DS.belongsTo('profile', {async: true}),
   displayName: function(){
     if (Ember.isPresent(this.get('firstname')) || Ember.isPresent(this.get('lastname'))){
@@ -15,7 +18,7 @@ export default DS.Model.extend({
       return  fn + ' ' + ln;
     }
     else {
-      return 'User' + this.get('username')
+      return 'User' + this.get('username');
     }
-  }.property('username', 'firstname', 'lastname')
+  }.property('username', 'firstname', 'lastname'),
 });
