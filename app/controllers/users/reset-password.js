@@ -54,10 +54,10 @@ export default Ember.ObjectController.extend(
     submitForm: function() {
       this.set('loading', true);
       if (this.get("password1") !== this.get("password2")){
-        this.get("messages").addObject({
+        this.reloadMessages([{
           type:"warning",
           text:"Passwords do not match"
-        })
+        }])
       }
       else{
         ajax({
