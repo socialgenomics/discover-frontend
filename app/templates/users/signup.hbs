@@ -32,7 +32,7 @@
         helpText="You can change your name later in the settings."
         icon="fullname"
         formSubmitted=formSubmitted
-		class="signup-fullname"
+		    class="signup-fullname"
       }}
       {{validated-input
         type="Email"
@@ -68,7 +68,7 @@
         </div>
       </div>
       <div class="input-container center">
-        {{#full-width-button class="teal" disabled=buttonDisabled type="submit"}}SIGN UP{{/full-width-button}}
+        {{#full-width-button class="teal {{#if buttonDisabled 'disabled'}}" disabled=buttonDisabled type="submit"}}SIGN UP{{/full-width-button}}
         <h6 class="center-align">By signing up you agree to our {{#link-to 'policies' class="link"}}Terms &amp; Privacy Policy.{{/link-to}} </h6>
       </div>
     </form>
