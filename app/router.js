@@ -27,7 +27,15 @@ Router.map(function() {
     this.route('profile');
     this.route('references');
     this.route('trust');
-    this.route('verify');
+    this.route('verify', {
+      path: '/verify/:verificationId'
+    });
+    this.route('resend-password', {
+      path:'/reset-password'
+    });
+    this.route('reset-password', {
+      path:'/reset-password/:resetKey'
+    });
   });
 
   this.resource('user', {
