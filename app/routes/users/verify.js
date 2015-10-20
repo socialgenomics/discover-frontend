@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import AuthenticatedRouteMixin from 'simple-auth/mixins/authenticated-route-mixin';
 import ajax from 'ic-ajax';
+import ENV from 'repositive/config/environment';
 
 export default Ember.Route.extend({
   verificationId:null,
@@ -16,7 +17,7 @@ export default Ember.Route.extend({
     // loding page is shown whilst the promise in unresolved
     // error page is shown if the promise is rejected
     return ajax({
-      url: '/api/users/verify/' + params.verificationId,
+      url: ENV.APIRoutes['verify-email'] + '/' + params.verificationId,
       type:'GET',
     })
     .then(resp=>{
@@ -53,7 +54,7 @@ export default Ember.Route.extend({
   actions: {
     resendVerifyEmail: function() {
       ajax({
-        url: '/api/users/verify/resend/' + this.get('session.secure.user.email'),
+        url: ENV.APIRoutes["resend-verify-email"] + '/' + this.get('session.secure.user.email'),
         type:'GET',
       })
     }
