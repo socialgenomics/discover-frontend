@@ -34,7 +34,7 @@ export default Ember.ObjectController.extend(
       format: {
         with: /(?=.*\d)(?=.*[A-Z])/,
         //allowBlank: true,
-        message: "Must be at least 8 characters and include an uppercase letter and a number."
+        message: "Strong password has minimum 8 characters, an uppercase and a number."
       },
       server: true,
     },
@@ -63,13 +63,13 @@ export default Ember.ObjectController.extend(
     var accept = this.get('errors.password.length');
 
     if (accept < 1) {
-      this.set('strength', "strong");
+      this.set('strength', " strong");
     }
     else if (accept === 1) {
-      this.set('strength', "medium");
+      this.set('strength', " medium");
     }
     else {
-      this.set('strength', "weak");
+      this.set('strength', " weak");
     }
   }.observes('password'),
 

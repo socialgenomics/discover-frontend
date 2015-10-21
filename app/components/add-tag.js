@@ -5,7 +5,6 @@ export default Ember.Component.extend({
   isOpen:null,
   actions:{
     addTag:function(){
-
       if(this.tag){
         this.get('metrics').trackEvent({
           category: 'dataset',
@@ -13,7 +12,6 @@ export default Ember.Component.extend({
           label: this.get('dataset.id'),
         });
         this.sendAction('addTag',this.tag);
-
       }
       this.set('tag',null);
       this.set('isOpen',true);
