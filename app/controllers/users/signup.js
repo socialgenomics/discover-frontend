@@ -3,22 +3,25 @@ import EmberValidations from 'ember-validations';
 import ServerValidationMixin from 'repositive/validators/remote/server/mixin';
 import ENV from 'repositive/config/environment';
 import ajax from 'ic-ajax';
+import { validator } from 'ember-validations';
 
 export default Ember.ObjectController.extend(
    EmberValidations,
    ServerValidationMixin,
 {
+  needs: ['root'],
+
   validations:{
 
     fullname:{
       presence: {
         message: "Can't be blank."
       },
-      server: true,
     },
+
     email:{
       presence: {
-        message: ""
+        message: "Can't be blank."
       },
       format: {
         with: /^[\w+\-.]+@[a-z\d\-.]+\.[a-z]+$/i,
@@ -26,7 +29,9 @@ export default Ember.ObjectController.extend(
       },
       server: true,
     },
+
     password: {
+<<<<<<< HEAD
       presence: {
         message: ""
       },
@@ -35,8 +40,22 @@ export default Ember.ObjectController.extend(
         with: /(?=.*\d)(?=.*[A-Z])/,
         //allowBlank: true,
         message: "Strong password has minimum 8 characters, an uppercase and a number."
+=======
+      length: {
+        minimum: 8,
+        messages: {
+          tooShort:"Must be at least 8 characters long."
+        }
+>>>>>>> 5c30b27e26a95183718d0920bd75744950563faa
       },
-      server: true,
+      inline: validator(function() {
+        let pw = this.get('password');
+        if (!/\d/.test(pw) &&
+            !/[A-Z]/.test(pw) &&
+            !/[!,@,#,$,%,^,&,*,?,_,~,-,(,)]/.test(pw)) {
+          return "Please enter a number or capital letter."
+        }
+      }),
     },
   },
   fullname:null,
@@ -53,15 +72,26 @@ export default Ember.ObjectController.extend(
   }.property('showPassword'),
 
   setFirstAndLastNamesFromFullName:function(){
-    var firstname = this.get('fullname').split(' ')[0];
-    var lastname = this.get('fullname').split(' ')[1];
+    let fullname = this.get('fullname');
+    let firstname = fullname.substr(0,fullname.indexOf(' '));
+    let lastname = fullname.substr(fullname.indexOf(' ')+1);
     this.set('firstname', firstname);
     this.set('lastname', lastname);
   }.observes('fullname'),
 
   passwordStrength: function() {
-    var accept = this.get('errors.password.length');
+    let numErrors = this.get('errors.password.length');
 
+    let pw = this.get('password');
+    let specials = [
+      /\d/.test(pw),
+      /[A-Z]/.test(pw),
+      /[!,@,#,$,%,^,&,*,?,_,~,-,(,)]/.test(pw),
+    ].reduce((prev, curr)=>{
+      return Number(curr) + Number(prev);
+    });
+
+<<<<<<< HEAD
     if (accept < 1) {
       this.set('strength', " strong");
     }
@@ -70,6 +100,16 @@ export default Ember.ObjectController.extend(
     }
     else {
       this.set('strength', " weak");
+=======
+    if (numErrors === 0 && (specials > 1)){
+      this.set('strength', "strong");
+    }
+    else if (numErrors <= 1){
+      this.set('strength', "medium");
+    }
+    else{
+      this.set('strength', "weak")
+>>>>>>> 5c30b27e26a95183718d0920bd75744950563faa
     }
   }.observes('password'),
 
@@ -93,7 +133,11 @@ export default Ember.ObjectController.extend(
           data: credentials
         })
         .then((resp)=>{ // signup has suceeded, now login
+            // render any messages provided by the backend
             this.showMessages(resp.messages);
+            // We would like to show a welcome screen if this is the first visit.
+            this.get('controllers.root').set('firstVisit', true);
+            // login!
             this.get('session').authenticate('authenticator:repositive', credentials);
         })
         .catch((err)=>{

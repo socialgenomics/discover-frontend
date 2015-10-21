@@ -14,7 +14,7 @@
               </a>
             </li>
           </ul>
-          <span class="support-text">We won't use any of your personal data, only your email.</span>
+          <h6 class="center-align">We won't use any of your personal data, only your email.</h6>
         </div>
       </div>
       <div class="or-div">
@@ -32,7 +32,7 @@
         helpText="You can change your name later in the settings."
         icon="fullname"
         formSubmitted=formSubmitted
-		class="signup-fullname"
+        class="signup-fullname"
       }}
       {{validated-input
         type="Email"
@@ -51,7 +51,7 @@
         value=password
         errors=errors.password
         placeholder="Password"
-        helpText="Strong password has minimum 8 characters, an uppercase and a number."
+        helpText="Must be at least 8 characters and include an uppercase letter or number."
         icon="password"
         showPassword=showPassword
         formSubmitted=formSubmitted
@@ -67,8 +67,8 @@
         </div>
       </div>
       <div class="input-container center">
-        {{#full-width-button class="teal" disabled=buttonDisabled type="submit"}}SIGN UP{{/full-width-button}}
-        <span class="support-text">By signing up you agree to our {{#link-to 'policies' class="link"}}Terms &amp; Privacy Policy.{{/link-to}} </span>
+        {{#full-width-button class="teal {{#if buttonDisabled 'disabled'}}" disabled=buttonDisabled type="submit"}}SIGN UP{{/full-width-button}}
+        <h6 class="center-align">By signing up you agree to our {{#link-to 'policies' class="link"}}Terms &amp; Privacy Policy.{{/link-to}} </h6>
       </div>
     </form>
   </div>

@@ -31,7 +31,7 @@
             These are datasets contributed by our community. You can easily register your dataset and make it visible for others.
           </p>
           <div class="card-body">
-              {{#each model.registered as |registration|}}
+              {{#each registrationsSorted as |registration|}}
                 {{mini-dataset dataset=registration action="toggleModal"}}
               {{/each}}
           </div>
@@ -49,7 +49,7 @@
   If you’re seeking datasets you can make a request too.
           </p>
           <div class="card-body">
-            {{#each model.requests as |request|}}
+            {{#each requestsSorted as |request|}}
               {{mini-dataset dataset=request}}
             {{/each}}
           </div>

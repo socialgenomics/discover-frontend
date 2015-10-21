@@ -44,9 +44,13 @@
     {{partial 'datasets/loading'}}
   {{else}}
     <div class="row">
-      {{#each model.datasets as |dataset|}}
-        {{render 'datasets/card' dataset}}
-      {{/each}}
+      {{#if (eq model.meta.total 0)}}
+        {{render 'datasets/noResults'}}
+      {{else}}
+        {{#each model.datasets as |dataset|}}
+          {{render 'datasets/card' dataset}}
+        {{/each}}
+      {{/if}}
     </div>
   {{/if}}
 </div>
