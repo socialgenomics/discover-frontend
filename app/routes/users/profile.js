@@ -6,7 +6,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     var currentUser = this.get('session.secure.user');
 
     return new Ember.RSVP.all([
-      this.store.findRecord('user', currentUser.id),
+      this.store.find('user', currentUser.id),
       this.store.query('profile', {UserId: currentUser.id}),
     ])
     .then((values)=>{
@@ -23,12 +23,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
   actions: {
 
   }
-
-  // var _this = this;
-  //     var initiative = this.get('controller.model');
-  //     initiative.save().then(function(model) {
-  //       _this.transitionTo('initiatives.show', model.get('id'));
-  //     });
 
   // model: function(){
   //   var currentUser = this.get('session.user');

@@ -16,11 +16,11 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
           profile: values[0].get('firstObject'),
           requests: values[1],
           registrations: values[2],
-        }
+        };
       });
     }.bind(this))
     .catch(function(err){
-      Ember.Logger.error(err)
+      Ember.Logger.error(err);
       return Ember.RSVP.reject("Sorry, we cannot find a user with this username.");
     });
   },
