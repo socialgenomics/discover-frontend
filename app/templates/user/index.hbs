@@ -10,12 +10,16 @@
             <h3>{{ model.user.displayName }}</h3>
             <div class="card-body">
               <div class="col m12 center">
-                <img class="profile-img circle" src="{{model.profile.avatar}}">
+                {{#if model.profile.gravatar}}
+                  {{ gravatar-image email=model.user.email class='profile-img circle' }}
+                {{else}}
+                  <img class="profile-img circle" src="{{model.profile.avatar}}">
+                {{/if}}
               </div>
-              <div class="input-container col m12">
+              <!-- <div class="input-container col m12">
                 <label for="upload-avatar">Upload Avatar</label>
                 {{s3-upload id="upload-avatar" field="image"}}
-              </div>
+              </div> -->
               {{#if isOwnProfile}}
                 {{#link-to "users.profile" class="btn yellow white-text"}}EDIT PROFILE{{/link-to}}
               {{/if}}

@@ -6,8 +6,17 @@
         <div class="card-content">
           <h1 class="no-margin">Edit Profile</h1>
           <hr class="yellow">
-          <form {{action "save" on="submit"}} class="row section">
+          <form class="row section">
             <div class="input-container col m6 offset-m3">
+              <div class="col m12 center">
+                {{#if model.profile.gravatar}}
+                  {{ gravatar-image email=model.user.email class='profile-img circle' }}
+                {{else}}
+                  <img class="profile-img circle" src="{{model.profile.avatar}}">
+                {{/if}}
+              </div>
+              <button class="btn yellow white-text" title="Use the Gravatar registered to your email account" {{action "useGravatar"}}>USE GRAVATAR</button>
+              <button class="btn yellow white-text" title="Or use our default avatar characters" {{action "useAvatar"}}>USE AVATAR</button>
               <div class="input-field no-margin-top">
                 {{input type="text" placeholder="First Name" value=model.user.firstname}}
               </div>
@@ -35,7 +44,7 @@
               {{#if saved}}
                 <p class="text-valid center-align">Save Successful.</p>
               {{/if}}
-              <button type="submit" class="btn teal white-text">Save</button>
+              <button type="submit" class="btn teal white-text"  {{action "save" model}}>Save</button>
             </div>
           </form>
         </div>

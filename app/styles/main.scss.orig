@@ -1,0 +1,7 @@
+@import "repositive-styles/main";
+<<<<<<< HEAD
+=======
+
+@import "ember-modal-dialog/ember-modal-structure";
+@import "ember-modal-dialog/ember-modal-appearance";
+>>>>>>> 7bf8eb5e81c0388eca12fa828f577b9f28a49034

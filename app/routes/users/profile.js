@@ -20,6 +20,16 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
       return Ember.RSVP.reject(err);
     });
   },
+  actions: {
+
+  }
+
+  // var _this = this;
+  //     var initiative = this.get('controller.model');
+  //     initiative.save().then(function(model) {
+  //       _this.transitionTo('initiatives.show', model.get('id'));
+  //     });
+
   // model: function(){
   //   var currentUser = this.get('session.user');
   //   // return this.store.find('user',currentUser.id);
