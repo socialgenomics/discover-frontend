@@ -1,0 +1,50 @@
+# Setup development instance of repositive api
+---
+
+- name: Link packages.json
+  file: src=/home/vagrant/app/package.json dest=/home/vagrant/package.json state=link
+
+# Install kb5 just to avoid sequelise compile errors
+#- name: Install OS packages
+# apt: name="libkrb5-dev"
+
+- name: Install gulp (locally)
+  shell: npm install gulp@3.9.0 --no-bin-links
+    chdir="/home/vagrant"
+  sudo: no
+
+- name: Install gulp / nan (globally)
+  shell: npm install -g gulp@3.9.0 nan@2.1.0
+  sudo: yes
+
+- name: Install NPM dependencies
+  shell: npm install
+    chdir="/home/vagrant"
+  sudo: no
+
+
+- name: Install Bower
+  shell: npm install -g bower
+    chdir="/home/vagrant"
+  sudo: yes
+
+- name: Install Bower dependencies
+  shell: bower install
+    chdir="/home/vagrant/app"
+  sudo: no
+
+- name: Install Upstart job conf
+  template: src="upstart/repositive-frontend.conf.j2"
+   dest="/etc/init/repositive-frontend.conf" owner=root group=root
+  notify: Restart repositive-frontend
+
+- name: Start Upstart job and ensure it runs at boot time
+  service: name="repositive-frontend" enabled="yes" state=started
+
+# Workaround vagrant bug
+- name: Install vagrant workaround Upstart job conf
+  template: src="upstart/workaround-vagrant-bug-6074.conf"
+   dest="/etc/init/workaround-vagrant-bug-6074.conf" owner=root group=root
+
+- name: Enable vagrant workaround Upstart job
+  service: name="workaround-vagrant-bug-6074" enabled="yes"

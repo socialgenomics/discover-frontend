@@ -1,0 +1,11 @@
+# Installs base packages
+---
+
+- name: Install OS packages
+  apt: name="{{ item }}"
+  with_items:
+    - curl
+    - git
+    - build-essential
+    - ca-certificates
+    - language-pack-en

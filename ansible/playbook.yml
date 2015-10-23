@@ -1,0 +1,11 @@
+# Ansible playbook for provisioning the development API
+---
+- hosts: all
+  sudo: yes
+  roles:
+    - base
+    - ANXS.hostname
+    - geerlingguy.redis
+    - nodejs4
+    - { role: repositive-frontend }
+
