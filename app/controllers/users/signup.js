@@ -31,22 +31,11 @@ export default Ember.ObjectController.extend(
     },
 
     password: {
-<<<<<<< HEAD
-      presence: {
-        message: ""
-      },
-      length: { minimum: 8, messages:{tooShort:" "}},
-      format: {
-        with: /(?=.*\d)(?=.*[A-Z])/,
-        //allowBlank: true,
-        message: "Strong password has minimum 8 characters, an uppercase and a number."
-=======
       length: {
         minimum: 8,
         messages: {
           tooShort:"Must be at least 8 characters long."
         }
->>>>>>> 5c30b27e26a95183718d0920bd75744950563faa
       },
       inline: validator(function() {
         let pw = this.get('password');
@@ -91,16 +80,6 @@ export default Ember.ObjectController.extend(
       return Number(curr) + Number(prev);
     });
 
-<<<<<<< HEAD
-    if (accept < 1) {
-      this.set('strength', " strong");
-    }
-    else if (accept === 1) {
-      this.set('strength', " medium");
-    }
-    else {
-      this.set('strength', " weak");
-=======
     if (numErrors === 0 && (specials > 1)){
       this.set('strength', "strong");
     }
@@ -109,7 +88,6 @@ export default Ember.ObjectController.extend(
     }
     else{
       this.set('strength', "weak")
->>>>>>> 5c30b27e26a95183718d0920bd75744950563faa
     }
   }.observes('password'),
 
