@@ -1,8 +1,9 @@
 import Ember from 'ember';
 import ajax from 'ic-ajax';
 import ENV from 'repositive/config/environment';
+import { shuffle } from 'repositive/utils/arrays';
 
-let trending = [
+let trending = shuffle([
   '197190e2-4f48-4c28-ba7d-021ee4b99592',
   '5a59338e-7ad8-4875-98a7-63bca3cd1678',
   '9f897c89-1981-4931-86aa-8bdf2a7ae3d7',
@@ -18,12 +19,12 @@ let trending = [
   '1392da4b-205a-43b7-addd-c0f672b7c8c1',
   '6110a494-06f9-45f0-8fe2-51419d74b406',
   '8b1a0e2d-4f19-4214-b331-f2758e3b9503',
-]
+]).slice(0, 3);
 
 export default Ember.Route.extend({
 
-  model: function(){
-    if (this.get('session.isAuthenticated')){
+  model: function() {
+    if (this.get('session.isAuthenticated')) {
       return Ember.RSVP.all([
         ajax({url: ENV.APIRoutes['datasets.search'] , type:'GET' }),
         this.store.findByIds('dataset', trending),
