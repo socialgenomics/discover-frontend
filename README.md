@@ -22,6 +22,7 @@ You will need the following things properly installed on your computer.
 
 ## Running / Development
 
+* We recommend you use [atom editor](https://atom.io/) when working on this project. That way you can get the benefits of [code style linter](https://atom.io/packages/linter-jscs) and [jshint linter](https://atom.io/packages/linter-jshint).
 * `npm start`
 * Visit your app at [http://localhost:4200](http://localhost:4200). (it is important you use this address and not 127.0.0.1:4200 for the 3rd party authentication to work correctly)
 
