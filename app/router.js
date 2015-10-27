@@ -31,10 +31,10 @@ Router.map(function() {
       path: '/verify/:verificationId'
     });
     this.route('resend-password', {
-      path:'/reset-password'
+      path: '/reset-password'
     });
     this.route('reset-password', {
-      path:'/reset-password/:resetKey'
+      path: '/reset-password/:resetKey'
     });
   });
 
@@ -60,7 +60,6 @@ Router.map(function() {
   this.route('404', {
     path: '/*path'
   });
-
 });
 
 var pagesWithSideNavigation = [
@@ -78,7 +77,7 @@ Ember.Route.reopen({
     // to be added to the body
     if (cssClass !== 'application') {
       Ember.$('body').addClass(cssClass);
-      if (pagesWithSideNavigation.indexOf(cssClass) !== -1){
+      if (pagesWithSideNavigation.indexOf(cssClass) !== -1) {
         // Add the class here for all the pages with side navigation
         Ember.$('body').addClass('has-sidenav');
       }

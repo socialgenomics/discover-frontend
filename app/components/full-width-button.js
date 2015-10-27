@@ -4,7 +4,7 @@ export default Ember.Component.extend({
   tagName: 'button',
   classNames: ['btn', 'full-width'],
   classNameBindings: ['disabled:disabled:'],
-  click: function(){
+  click: function() {
     this.sendAction();
   }
 });

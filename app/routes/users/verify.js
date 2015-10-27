@@ -1,9 +1,8 @@
 import Ember from 'ember';
-import AuthenticatedRouteMixin from 'simple-auth/mixins/authenticated-route-mixin';
 import ajax from 'ic-ajax';
 
 export default Ember.Route.extend({
-  verificationId:null,
+  verificationId: null,
   isAuthenticated: Ember.computed(function() {
     return this.get('session.isAuthenticated');
   }),
@@ -11,15 +10,15 @@ export default Ember.Route.extend({
     return this.get('session.secure.user');
   }),
 
-  model: function(params){
+  model: function(params) {
     // return a promise.. this pauses the page rendering until the promise is resolved or rejected
     // loding page is shown whilst the promise in unresolved
     // error page is shown if the promise is rejected
     return ajax({
       url: '/api/users/verify/' + params.verificationId,
-      type:'GET',
+      type: 'GET'
     })
-    .then(resp=>{
+    .then(resp=> {
       this.showMessages(resp.messages);
 
       /**
@@ -27,26 +26,23 @@ export default Ember.Route.extend({
       * rendering the current page (i.e do not resolve the promise before transitioning).
       */
       this.store.findRecord('user', this.get('session.secure.user.id'))
-      .then(user=>{
-
-        user.set("isEmailValidated", true);
+      .then(user=> {
+        user.set('isEmailValidated', true);
       });
       /*
         We cannot know the username of the current user unless it is stored in the
         session. This means we cannot redirect to current user's profile if they're
         not logged in.
       */
-      if (this.get("session.isAuthenticated")){
+      if (this.get('session.isAuthenticated')) {
         this.transitionTo('user', this.get('session.secure.user.username'));
-      }
-      else{
+      } else {
         this.transitionTo('users.login');
       }
-
     })
-    .catch((err)=>{
+    .catch((err)=> {
       Ember.Logger.error(err);
-      Ember.RSVP.resolve() // fulfills the promise - this causes ember to render the template
+      Ember.RSVP.resolve(); // fulfills the promise - this causes ember to render the template
     });
   },
 
@@ -54,13 +50,13 @@ export default Ember.Route.extend({
     resendVerifyEmail: function() {
       ajax({
         url: '/api/users/verify/resend/' + this.get('session.secure.user.email'),
-        type:'GET',
-      })
+        type: 'GET'
+      });
     }
   },
-  showMessages: function(messages){
-    messages.forEach(message=>{
+  showMessages: function(messages) {
+    messages.forEach(message=> {
       Ember.get(this, 'flashMessages')[message.type](message.text);
-    })
+    });
   }
 });

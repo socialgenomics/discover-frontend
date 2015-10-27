@@ -6,7 +6,7 @@ export default Ember.Controller.extend({
     return this.get('session.secure.user');
   }),
 
-  isOwnProfile: function(){
+  isOwnProfile: function() {
     return this.get('session.secure.user.id') == this.get('model.user.id');
   }.property('model'),
 
@@ -14,7 +14,7 @@ export default Ember.Controller.extend({
     return this.get('model.user.isEmailValidated');
   }.property('model'),
 
-  actions:{
+  actions: {
 
-  },
+  }
 });

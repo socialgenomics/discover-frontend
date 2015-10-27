@@ -18,7 +18,7 @@ let trending = shuffle([
   '1b95f0f8-d0f7-4f3b-af39-185b309c726e',
   '1392da4b-205a-43b7-addd-c0f672b7c8c1',
   '6110a494-06f9-45f0-8fe2-51419d74b406',
-  '8b1a0e2d-4f19-4214-b331-f2758e3b9503',
+  '8b1a0e2d-4f19-4214-b331-f2758e3b9503'
 ]).slice(0, 3);
 
 export default Ember.Route.extend({
@@ -26,27 +26,26 @@ export default Ember.Route.extend({
   model: function() {
     if (this.get('session.isAuthenticated')) {
       return Ember.RSVP.all([
-        ajax({url: ENV.APIRoutes['datasets.search'] , type:'GET' }),
+        ajax({ url: ENV.APIRoutes['datasets.search'] , type: 'GET' }),
         this.store.findByIds('dataset', trending),
-        this.store.query('dataset', {isRequest: true}),
-        this.store.query('dataset', {repository:"REPOSITIVE", isRequest: false})
+        this.store.query('dataset', { isRequest: true }),
+        this.store.query('dataset', { repository: 'REPOSITIVE', isRequest: false })
       ])
-      .then(function(data){
+      .then(function(data) {
         return {
           stats: data[0],
-          datasets: data[1].slice(0,3),
+          datasets: data[1].slice(0, 3),
           requests: data[2],
-          registered: data[3],
-        }
+          registered: data[3]
+        };
       })
-      .catch(function(err){
-        Ember.Logger.error(err)
+      .catch(function(err) {
+        Ember.Logger.error(err);
       });
-    }
-    else {
+    } else {
       return null;
     }
   },
-  actions:{
+  actions: {
   }
 });

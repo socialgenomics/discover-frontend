@@ -1,5 +1,5 @@
-import DS from "ember-data";
-import { poisson } from "repositive/utils/distributions";
+import DS from 'ember-data';
+import { poisson } from 'repositive/utils/distributions';
 
 
 export default DS.Model.extend({
@@ -15,11 +15,11 @@ export default DS.Model.extend({
   count: DS.attr('number'),
   isRequest: DS.attr('boolean'),
   externalID: DS.attr('string'),
-  accession: function(){
-    return this.get('externalID')
+  accession: function() {
+    return this.get('externalID');
   }.property('externalID'),
   colour: null,
-  views: function(){
+  views: function() {
     return this.get('count') + poisson(0.5);
-  }.property('count'),
+  }.property('count')
 });

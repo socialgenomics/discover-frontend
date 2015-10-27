@@ -1,4 +1,4 @@
-import Ember from "ember";
+import Ember from 'ember';
 import EmberValidations from 'ember-validations';
 import ServerValidationMixin from 'repositive/validators/remote/server/mixin';
 import ENV from 'repositive/config/environment';
@@ -9,79 +9,78 @@ export default Ember.ObjectController.extend(
   EmberValidations,
   ServerValidationMixin,
 {
-  resetKey:null,
-  password1:null,
-  password2:null,
-  loading:false,
-  messages:[],
-  resendEmailMessage:false,
+  resetKey: null,
+  password1: null,
+  password2: null,
+  loading: false,
+  messages: [],
+  resendEmailMessage: false,
 
-  buttonDisabled: function(){
+  buttonDisabled: function() {
     return !this.get('isValid') || this.get('loading');
   }.property('isValid', 'loading'),
 
-  clearMessages: function(){
-    this.set("messages", [])
+  clearMessages: function() {
+    this.set('messages', []);
   }.observes('password1', 'password2'),
 
-  validations:{
+  validations: {
     password1: {
       presence: {
-        message: ""
+        message: ''
       },
-      length: { minimum: 8, messages:{tooShort:" "}},
+      length: { minimum: 8, messages: { tooShort: ' ' } },
       format: {
         with: /(?=.*\d)(?=.*[A-Z])/,
         //allowBlank: true,
-        message: "Must be at least 8 characters and include an uppercase letter and a number."
+        message: 'Must be at least 8 characters and include an uppercase letter and a number.'
       },
-      server: true,
+      server: true
     },
     password2: {
       presence: {
-        message: ""
+        message: ''
       },
-      length: { minimum: 8, messages:{tooShort:" "}},
+      length: { minimum: 8, messages: { tooShort: ' ' } },
       format: {
         with: /(?=.*\d)(?=.*[A-Z])/,
         //allowBlank: true,
-        message: "Must be at least 8 characters and include an uppercase letter and a number."
+        message: 'Must be at least 8 characters and include an uppercase letter and a number.'
       },
-      server: true,
-    },
+      server: true
+    }
   },
   actions: {
     submitForm: function() {
       this.set('loading', true);
-      if (this.get("password1") !== this.get("password2")){
+      if (this.get('password1') !== this.get('password2')) {
         this.reloadMessages([{
-          type:"warning",
-          text:"Passwords do not match"
-        }])
-      }
-      else{
+          type: 'warning',
+          text: 'Passwords do not match'
+        }]);
+      } else {
         ajax({
           url: ENV.APIRoutes['reset-password'],
-          type:'POST',
+          type: 'POST',
           data: {
-            token: this.get("resetKey"),
-            password: this.get("password1"),
+            token: this.get('resetKey'),
+            password: this.get('password1')
           }
         })
-        .then(resp=>{
+        .then(resp=> {
           this.reloadMessages(resp.messages);
         })
-        .catch(err=>{
+        .catch(err=> {
           // TODO: remove this
-          this.set("resendEmailMessage", true);
+          this.set('resendEmailMessage', true);
           //TODO write a helper to render messages
           //this.get("messages").addObjects(err.jqXHR.responseJSON.messages)
-        })
+        });
       }
     }
   },
-  reloadMessages: function(messages){
-    this.set("messages", []);
-    this.get("messages").addObjects(messages);
+  reloadMessages: function(messages) {
+    this.set('messages', []);
+    this.get('messages').addObjects(messages);
   }
 });

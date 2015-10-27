@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import ENV from 'repositive/config/environment';
 
 export default Ember.Component.extend({
   avatar: null,
@@ -27,14 +26,14 @@ export default Ember.Component.extend({
 
   actions: {
 
-    logout: function(){
+    logout: function() {
       this.get('metrics').trackEvent({
         category: 'auth',
         action: 'logout',
-        label: this.get('currentUser.email'),
+        label: this.get('currentUser.email')
       });
-      this.get("session").invalidate();
-    },
+      this.get('session').invalidate();
+    }
 
   }
 
