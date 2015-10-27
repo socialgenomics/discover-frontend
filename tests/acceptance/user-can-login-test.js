@@ -14,8 +14,8 @@ module('Acceptance | user can login', {
 
 test('user can login and go to homepage', function(assert) {
   visit('/users/login');
-  fillIn('input.login-email', "testaccount@repositive.io");
-  fillIn('input.login-password', "abcdefghi");
+  fillIn('input.login-email', 'testaccount@repositive.io');
+  fillIn('input.login-password', 'abcdefghi');
   click('button.full-width');
   andThen(function() {
     assert.equal(currentURL(), '/');

@@ -13,7 +13,7 @@ export default Ember.Controller.extend(
     },
     description: {
       presence: true
-    },
+    }
     //    webURL:{
     //      format: {
     //        with: /[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/,
@@ -24,7 +24,7 @@ export default Ember.Controller.extend(
   actions: {
     addDataset: function() {
       if (this.get('isValid')) {
-        this.set('loading', true)
+        this.set('loading', true);
 
         var dataset = this.store.createRecord('dataset', {});
         var props = this.store.createRecord('property', {
@@ -47,7 +47,7 @@ export default Ember.Controller.extend(
         })
         .catch(function(err) {
           console.log(err);
-          this.set('loading', false)
+          this.set('loading', false);
         });
       }
     }

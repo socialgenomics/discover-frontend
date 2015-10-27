@@ -1,7 +1,7 @@
 {
   "esnext": true,
   "excludeFiles": ["ember-runtime/ext/rsvp.js"],
-  "additionalRules": [ ".jscs-rules/*.js" ],
+  "additionalRules": [ "./.jscs-rules/*.js" ],
   "disallowSpacesInsideArrayBrackets": "all",
   "disallowMultipleVarDeclWithAssignment": true,
   "disallowPaddingNewlinesInBlocks": true,
