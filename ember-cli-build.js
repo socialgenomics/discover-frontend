@@ -47,7 +47,7 @@ module.exports = function(defaults) {
       configPath: '.jscsrc',
       enabled: true,
       esnext: true,
-      disableTestGenerator: false
+      disableTestGenerator: true
     }
   });
 
