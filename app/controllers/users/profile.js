@@ -6,12 +6,11 @@ export default Ember.Controller.extend({
   actions: {
 
     useGravatar: function() {
-      this.set('model.profile.gravatar', true);
+      return this.set('model.profile.gravatar', true);
     },
     useAvatar: function() {
-      this.set('model.profile.gravatar', false);
+      return this.set('model.profile.gravatar', false);
     },
-
     save:function(){
       this.get('model.user').save(),
       this.get('model.profile').save().then((model)=>{

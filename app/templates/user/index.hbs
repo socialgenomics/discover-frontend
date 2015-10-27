@@ -10,8 +10,9 @@
             <h3>{{ model.user.displayName }}</h3>
             <div class="card-body">
               <div class="col m12 center">
+                {{ gravatar-image }}
                 {{#if model.profile.gravatar}}
-                  {{ gravatar-image email=model.user.email class='profile-img circle' }}
+                  {{ gravatar-image }}
                 {{else}}
                   <img class="profile-img circle" src="{{model.profile.avatar}}">
                 {{/if}}

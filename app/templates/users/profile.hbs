@@ -10,7 +10,7 @@
             <div class="input-container col m6 offset-m3">
               <div class="col m12 center">
                 {{#if model.profile.gravatar}}
-                  {{ gravatar-image email=model.user.email class='profile-img circle' }}
+                  {{ gravatar-image }}
                 {{else}}
                   <img class="profile-img circle" src="{{model.profile.avatar}}">
                 {{/if}}
