@@ -1,3 +1,4 @@
 # Install re-usable roles with Ansible Galaxy
 - src: ANXS.hostname
 - src: geerlingguy.redis
+- src: nextpertise.supervisord

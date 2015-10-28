@@ -7,5 +7,9 @@
     - ANXS.hostname
     - geerlingguy.redis
     - nodejs4
+    - nextpertise.supervisord
     - { role: repositive-frontend }
-
+  vars:
+    # Supervisord config
+    - supervisord_inethttp: True
+    - supervisord_interface_ip: "0.0.0.0"

@@ -1,4 +1,4 @@
 ---
 
 - name: Restart repositive-frontend
-  service: name="repositive-frontend" state="restarted"
+  supervisorctl: name="repositive-frontend" state="restarted"

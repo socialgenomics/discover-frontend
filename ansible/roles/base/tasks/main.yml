@@ -9,3 +9,9 @@
     - build-essential
     - ca-certificates
     - language-pack-en
+    - insserv  # required by nextpertise.supervisord
+
+# required by nextpertise.supervisord
+- name: Symlink insserv to PATH
+  file: src=/usr/lib/insserv/insserv dest=/usr/sbin/insserv
+    owner=root group=root state=link
