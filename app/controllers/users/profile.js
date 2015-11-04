@@ -12,11 +12,9 @@ export default Ember.Controller.extend({
       return this.set('model.profile.gravatar', false);
     },
     save:function(){
-      this.get('model.user').save(),
-      this.get('model.profile').save().then((model)=>{
-        this.set('saved', true);
-        console.log(model + " SAVED");
-      });
+      this.get('model.user').save();
+      this.get('model.profile').save();
+      this.set('saved', true);
     },
   },
 });
