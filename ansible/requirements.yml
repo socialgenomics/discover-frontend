@@ -1,0 +1,6 @@
+# Install re-usable roles with Ansible Galaxy
+- src: ANXS.hostname
+- src: geerlingguy.redis
+- src: nextpertise.supervisord
+#- src: Celc.watchman
+- src: https://github.com/repositive/ansible.watchman
