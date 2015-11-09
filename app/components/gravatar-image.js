@@ -8,7 +8,7 @@ export default Ember.Component.extend({
   }),
 
   gravatarUrl: Ember.computed('email', 'size', function() {
-    var email = this.get('model.user.email'),
+    var email = this.get('currentUser.email'),
     size = this.get('size');
 
     return 'http://www.gravatar.com/avatar/' + md5(email) + '?s=' + size;
