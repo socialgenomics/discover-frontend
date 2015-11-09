@@ -4,3 +4,4 @@
 - src: nextpertise.supervisord
 #- src: Celc.watchman
 - src: https://github.com/repositive/ansible.watchman
+- src: https://github.com/repositive/ansible-nodejs
