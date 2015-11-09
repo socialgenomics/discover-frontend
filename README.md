@@ -1,17 +1,39 @@
 # Ember Frontend for repositive.io
 
 
-## Prerequisites
+## Utilising Vagrant
+
+See <https://github.com/repositive/api.repositive.io/wiki/Vagrant>.
+
+### Setting up SSH agent
+
+See <https://github.com/repositive/api.repositive.io/wiki/SSH>.
+
+### About the Vagrant setup
+
+The VM has a static IP address, `192.168.33.12`. You can optionally add an entry to `/etc/hosts` to access the VM by a `repositive-frontend` domain name instead of IP, for example utilising [Gas Mask](http://clockwise.ee).
+
+    # /etc/hosts
+    192.168.33.12 repositive-frontend
+
+The following services are running in the VM:
+
+* Ember app: <http://repositive-frontend:4200/>
+* Supervisor Web UI: <http://repositive-frontend:9001>. This allows start/stop/restart and monitor the logs of the Ember app.
+
+## Application Architecture
+
+### Prerequisites
 
 You will need the following things properly installed on your computer.
 
 * [Git](http://git-scm.com/)
-* [Node.js](http://nodejs.org/) (with NPM) 
+* [Node.js](http://nodejs.org/) (with NPM)
 * [Bower](http://bower.io/)
 * [Ember CLI](http://www.ember-cli.com/)
 * [PhantomJS](http://phantomjs.org/)
 
-## Installation
+### Installation
 
 * `git clone <repository-url>` this repository
 * change into the new directory
@@ -20,7 +42,7 @@ You will need the following things properly installed on your computer.
 * `bower install`
 * `npm install -g onchange`
 
-## Running / Development
+### Running / Development
 
 * We recommend you use jscs and hshint plugins in your editor.
  * [atom editor](https://atom.io/) - That way you can get the benefits of [code style linter](https://atom.io/packages/linter-jscs) and [jshint linter](https://atom.io/packages/linter-jshint). See [this article](http://blog.yld.io/2015/04/15/using-jscs-and-jscs-fixer-for-atom/).
@@ -57,7 +79,7 @@ To link a separate checkout of repositive-styles into the project and do live ed
     ```
 
   This will start 2 background processes, one for ember server and another to watch SCSS changes and trigger a reload.
-  This is required because fb-watchman does not currently support watching for filesystem changes over symlinks 
+  This is required because fb-watchman does not currently support watching for filesystem changes over symlinks
   (https://github.com/facebook/watchman/issues/105).
 
 ## Working on feature branches in both "discover.repositive.io" and "repositive-styles" projects
@@ -67,9 +89,9 @@ In production (and development), "discover.repositive.io" has the `master` branc
   ```
   "repositive-styles": "git@github.com:repositive/repositive-styles.git#master"
   ```
-This means that when the deployment process runs `bower install`, Bower does a git checkout of that Git branch of the styles. 
+This means that when the deployment process runs `bower install`, Bower does a git checkout of that Git branch of the styles.
 
-  For working on Git feature branches in both "discover.repositive.io" and "repositive-styles", the Bower dependency 
+  For working on Git feature branches in both "discover.repositive.io" and "repositive-styles", the Bower dependency
 needs to point to the "repositive-styles" feature branch instead of `master`,
 so that "discover.repositive.io" deployment to servers installs that "repositive-styles" feature branch.
 
@@ -83,7 +105,7 @@ just change the branch name in the `bower.json` file (after the `#`):
 and be sure to commit the `bower.json`, for example along with other changes to the frontend app on the 1st commit.
 
 After the "repositive-styles" feature branch is finished and the changes are merged into main development ("development" branch),
-update the "discover.repositive.io" `bower.json` file to point to `master` again, before finishing and 
+update the "discover.repositive.io" `bower.json` file to point to `master` again, before finishing and
 merging the "discover.repositive.io" feature branch.
 
 The full common workflow step-by-step is:
@@ -125,7 +147,7 @@ Work as usual on both projects. When finishing work on both branches:
     ```
 
 3. Finish the "discover.repositive.io" feature branch and push to Github
- 
+
     ```
     $ cd /path/to/discover.repositive.io/
     $ git flow feature finish nice-buttons
