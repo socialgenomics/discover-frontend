@@ -9,23 +9,23 @@ export default Ember.Object.extend({
   name: null,
   value: null,
   DSL: null,
-  buckets: null, 
+  buckets: null,
   show: false,
 
-  displayName: function(){
+  displayName: function() {
     return titleCase(this.get('name'));
   }.property('name'),
 
-  init: function(){
-    if (!Ember.$.isEmptyObject(this.get('aggDSL'))){
-      var DSL = this.get('aggDSL') // TODO: rmove this dependancy on aggDSL as it is confusing
+  init: function() {
+    if (!Ember.$.isEmptyObject(this.get('aggDSL'))) {
+      var DSL = this.get('aggDSL'); // TODO: rmove this dependancy on aggDSL as it is confusing
       var name = Object.keys(DSL)[0];
       this.set('name', name);
       var buckets = DSL[name].buckets;
       var colours = getColours(buckets.length);
       var i = 0;
       this.set('buckets', []);
-      buckets.forEach(function(bucket){
+      buckets.forEach(function(bucket) {
         bucket.colour = colours[i];
         var b = Bucket.create(bucket);
         this.buckets.pushObject(b);
@@ -34,16 +34,15 @@ export default Ember.Object.extend({
     }
   },
 
-  initDSL: function(){
+  initDSL: function() {
     var fieldName = keyMappings[this.name];
     var q = {};
-          var q = {};
-    q[this.get('name')] = { 
+    q[this.get('name')] = {
       terms: {
-        field: fieldName 
+        field: fieldName
       }
     };
     this.set('DSL', q);
-  }.observes('name', 'value').on('init'),
+  }.observes('name', 'value').on('init')
 
 });

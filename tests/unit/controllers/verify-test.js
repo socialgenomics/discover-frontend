@@ -1,5 +1,6 @@
 import { moduleFor, test } from 'ember-qunit';
 import startApp from '../../helpers/start-app';
+import Ember from 'ember';
 
 var App;
 

@@ -9,7 +9,7 @@ export default Ember.Controller.extend({
       content: this.get('model.requests')
     });
   }.property('model.requests'),
-  
+
   registrationsSorted:  function() {
     return Ember.ArrayProxy.extend(Ember.SortableMixin).create({
       sortProperties: ['updatedAt'],

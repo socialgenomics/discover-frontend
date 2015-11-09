@@ -2,24 +2,24 @@ import Ember from 'ember';
 import AuthenticatedRouteMixin from 'simple-auth/mixins/authenticated-route-mixin';
 
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
-  model: function(){
+  model: function() {
     var currentUser = this.get('session.secure.user');
 
     return new Ember.RSVP.all([
       this.store.findRecord('user', currentUser.id),
-      this.store.query('profile', {UserId: currentUser.id}),
+      this.store.query('profile', { UserId: currentUser.id })
     ])
-    .then((values)=>{
+    .then((values)=> {
       return {
         user: values[0],
-        profile: values[1].get('firstObject'),
+        profile: values[1].get('firstObject')
       };
     })
-    .catch((err)=>{
+    .catch((err)=> {
       Ember.Logger.error(err);
       return Ember.RSVP.reject(err);
     });
-  },
+  }
   // model: function(){
   //   var currentUser = this.get('session.user');
   //   // return this.store.find('user',currentUser.id);

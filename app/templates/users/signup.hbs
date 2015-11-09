@@ -57,14 +57,13 @@
         formSubmitted=formSubmitted
         class="signup-password"
       }}
-
       <div class="password-div">
         <div class="pw-check left">
           <input type="checkbox" id="showPassword" onClick={{action 'toggleCheckbox'}} >
-          <label for="showPassword">Show Password</label>
+          <label for="showPassword">Show password</label>
         </div>
         <div class="pw-strength right">
-          <span class="pw-tag">Password strength: <span class="{{strength}}">{{strength}}</span></span>
+          <span class="pw-tag">Password strength<span class="{{strength}}"> {{strength}}</span></span>
         </div>
       </div>
       <div class="input-container center">
