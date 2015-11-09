@@ -6,7 +6,7 @@
     - base
     - ANXS.hostname
     - geerlingguy.redis
-    - nodejs4
+    - ansible-nodejs
     - nextpertise.supervisord
     #- Celc.watchman
     - ansible.watchman
