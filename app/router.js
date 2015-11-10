@@ -19,7 +19,7 @@ Router.map(function() {
   this.route('help');
   this.route('verify');
   this.route('policies');
-
+  
   this.resource('users', function() {
     this.route('signup');
     this.route('login');
