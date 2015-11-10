@@ -1,5 +1,9 @@
 <div class="dp-wrapper">
-  <img class="display-pic" src="{{avatar}}" alt="Your display picture">
+  {{#if model.profile.gravatar}}
+    {{ gravatar-image}}
+  {{else}}
+    <img src="{{avatar}}">
+  {{/if}}
 </div>
 <div class="input-field">
   {{textarea value=comment placeholder="Write a comment..." focus-in="focusedIn"}}

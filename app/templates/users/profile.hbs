@@ -9,11 +9,13 @@
           <form class="row section">
             <div class="input-container col m6 offset-m3">
               <div class="col m12 center">
-                {{#if model.profile.gravatar}}
-                  {{ gravatar-image }}
-                {{else}}
-                  <img class="profile-img circle" src="{{model.profile.avatar}}">
-                {{/if}}
+                <div class="profile-img circle">
+                  {{#if model.profile.gravatar}}
+                    {{ gravatar-image}}
+                  {{else}}
+                    <img src="{{model.profile.avatar}}">
+                  {{/if}}
+                </div>
               </div>
               <button class="btn yellow white-text" title="Use the Gravatar registered to your email account" {{action "useGravatar"}}>USE GRAVATAR</button>
               <button class="btn yellow white-text" title="Or use our default avatar characters" {{action "useAvatar"}}>USE AVATAR</button>
