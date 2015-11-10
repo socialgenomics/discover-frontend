@@ -1,8 +1,8 @@
-import DS from "ember-data";
-import moment from "npm:moment";
+import DS from 'ember-data';
+import moment from 'npm:moment';
 
 
-export default DS.Transform.extend({  
+export default DS.Transform.extend({
   deserialize: function (serialized) {
     if (serialized) {
       return moment(serialized).toDate();

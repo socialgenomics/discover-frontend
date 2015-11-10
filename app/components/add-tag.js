@@ -1,26 +1,24 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  tag:null,
-  isOpen:null,
-  actions:{
-    addTag:function(){
-
-      if(this.tag){
+  tag: null,
+  isOpen: null,
+  actions: {
+    addTag: function() {
+      if (this.tag) {
         this.get('metrics').trackEvent({
           category: 'dataset',
           action: 'tag',
-          label: this.get('dataset.id'),
+          label: this.get('dataset.id')
         });
-        this.sendAction('addTag',this.tag);
-
+        this.sendAction('addTag', this.tag);
       }
-      this.set('tag',null);
-      this.set('isOpen',true);
+      this.set('tag', null);
+      this.set('isOpen', true);
     },
-    toggleInput:function(){
+    toggleInput: function() {
       this.toggleProperty('isOpen');
       this.sendAction('toggleEditTags');
-    },
-  },
+    }
+  }
 });

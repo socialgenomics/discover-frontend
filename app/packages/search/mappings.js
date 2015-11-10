@@ -3,4 +3,4 @@ export default {
   'access': 'dataset.repository.access',
   'repository': 'dataset.repository.name',
   'tags': 'dataset.tags'
-}
+};

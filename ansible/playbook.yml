@@ -1,0 +1,19 @@
+# Ansible playbook for provisioning the development API
+---
+- hosts: all
+  sudo: yes
+  roles:
+    - base
+    - ANXS.hostname
+    - geerlingguy.redis
+    - ansible-nodejs
+    - nextpertise.supervisord
+    #- Celc.watchman
+    - ansible.watchman
+    - repositive-frontend
+  vars:
+    # Supervisord config
+    - supervisord_inethttp: True
+    - supervisord_interface_ip: "0.0.0.0"
+
+    - watchman_version: "3.9.0"

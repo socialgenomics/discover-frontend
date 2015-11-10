@@ -20,3 +20,4 @@ testem.log
 *.sw*
 git_stats/
 .idea/
+.vagrant

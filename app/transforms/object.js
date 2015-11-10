@@ -1,12 +1,12 @@
-import DS from "ember-data";
-import moment from "npm:moment";
+import DS from 'ember-data';
+import Ember from 'ember';
 
 
-export default DS.Transform.extend({  
+export default DS.Transform.extend({
   from: function(serialized) {
-    return Em.none(serialized) ? {} : serialized;
+    return Ember.none(serialized) ? {} : serialized;
   },
   to: function(deserialized) {
-    return Em.none(deserialized) ? {} : deserialized;
+    return Ember.none(deserialized) ? {} : deserialized;
   }
 });

@@ -17,6 +17,6 @@ export function initialize(container, application) {
 
 export default {
   name: 'tracking',
-  after: "metrics",
-  initialize: initialize,
+  after: 'metrics',
+  initialize: initialize
 };
