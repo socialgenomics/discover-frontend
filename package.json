@@ -55,6 +55,7 @@
     "ember-moment": "4.0.1",
     "ember-truth-helpers": "1.1.0",
     "ember-validations": "^2.0.0-alpha.4",
+    "ember-watson": "^0.7.0",
     "foreman": "^1.4.1",
     "moment": "^2.10.6",
     "onchange": "^2.0.0",
