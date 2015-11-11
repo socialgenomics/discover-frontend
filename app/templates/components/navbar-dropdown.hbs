@@ -7,12 +7,11 @@
 
   <a class='dropdown-button valign-wrapper' data-beloworigin="true" data-activates='profile-drop'>
     <div class="dp-wrapper">
-      {{ profile }}
-      {{#if profile }}
-        {{ gravatar-image }}
-      {{else}}
-        <img src="{{avatar}}">
-      {{/if}}
+      {{
+        gravatar-image
+        class="gravatar"
+        defaultImage=avatar
+      }}
     </div>
     <i class="mdi-navigation-arrow-drop-down hide-on-small-only"></i>
   </a>

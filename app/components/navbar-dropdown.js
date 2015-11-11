@@ -10,11 +10,9 @@ export default Ember.Component.extend({
     return this.get('profile.gravatar');
   }),
 
-
   init: function() {
     this._super();
     this.sendAction();
-    this.store.find("profile", {UserId: this.get('currentUser.id')});
   },
 
   afterRenderEvent: function() {

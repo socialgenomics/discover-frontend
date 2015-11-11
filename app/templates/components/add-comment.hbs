@@ -1,9 +1,9 @@
 <div class="dp-wrapper">
-  {{#if model.profile.gravatar}}
-    {{ gravatar-image}}
-  {{else}}
-    <img src="{{avatar}}">
-  {{/if}}
+  {{
+    gravatar-image
+    class="gravatar"
+    defaultImage=avatar
+  }}
 </div>
 <div class="input-field">
   {{textarea value=comment placeholder="Write a comment..." focus-in="focusedIn"}}

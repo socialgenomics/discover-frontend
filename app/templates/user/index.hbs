@@ -10,12 +10,12 @@
             <h3>{{ model.user.displayName }}</h3>
             <div class="card-body">
               <div class="col m12 center">
-                <div class="profile-img circle">
-                  {{#if model.profile.gravatar}}
-                    {{ gravatar-image}}
-                  {{else}}
-                    <img src="{{model.profile.avatar}}">
-                  {{/if}}
+                <div class="profile-img">
+                  {{
+                    gravatar-image
+                    class="gravatar"
+                    defaultImage=model.profile.avatar
+                  }}
                 </div>
               </div>
               <!-- <div class="input-container col m12">
