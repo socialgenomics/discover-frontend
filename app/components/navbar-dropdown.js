@@ -6,9 +6,6 @@ export default Ember.Component.extend({
   currentUser: Ember.computed(function() {
     return this.get('session.secure.user');
   }),
-  gravatar: Ember.computed(function() {
-    return this.get('profile.gravatar');
-  }),
 
   init: function() {
     this._super();
