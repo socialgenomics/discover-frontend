@@ -4,14 +4,11 @@ import objectTransforms from 'ember-metrics/utils/object-transforms';
 import BaseAdapter from 'ember-metrics/metrics-adapters/base';
 
 const {
-  isPresent,
   copy,
   assert,
-  merge,
-  get,
-  $,
-  String: { capitalize },
+  get
 } = Ember;
+
 const { compact } = objectTransforms;
 
 export default BaseAdapter.extend({
@@ -23,7 +20,7 @@ export default BaseAdapter.extend({
     const config = copy(get(this, 'config'));
     const { id } = config;
 
-    assert(`[ember-metrics] You must pass a valid \`id\` to the ${this.toString()} adapter`, id);
+    assert(`[ember-metrics] You must pass a valid *id* to the ${this.toString()} adapter`, id);
 
 
     if (canUseDOM) {
@@ -31,37 +28,39 @@ export default BaseAdapter.extend({
       (function (e, t) {
         if (!t.__SV) {
           window.calq = t;
-          var n = e.createElement("script");
-          n.type = "text/javascript";
-          n.src = "http" + ("https:" === e.location.protocol ? "s" : "") + '://api.calq.io/lib/js/core-1.0.js';
-          n.async = !0; var r = e.getElementsByTagName("script")[0];
+          var n = e.createElement('script');
+          n.type = 'text/javascript';
+          n.src = 'http' + ('https:' === e.location.protocol ? 's' : '') + '://api.calq.io/lib/js/core-1.0.js';
+          n.async = !0; var r = e.getElementsByTagName('script')[0];
           r.parentNode.insertBefore(n, r);
           t.init = function (e, o) {
-            if (t.writeKey) return;
+            if (t.writeKey) {
+              return;
+            }
             t.writeKey = e;
             t._initOptions = o;
             t._execQueue = [];
-            var m = "action.track action.trackSale action.trackHTMLLink action.trackPageView action.setGlobalProperty user.profile user.identify user.clear".split(" ");
+            var m = 'action.track action.trackSale action.trackHTMLLink action.trackPageView action.setGlobalProperty user.profile user.identify user.clear'.split(' ');
             for (var n = 0; n < m.length; n++) {
               var f = function () {
                 var r = m[n];
                 var s = function () {
                   t._execQueue.push({ m: r, args: arguments }) };
-                  var i = r.split(".");
-                  if (i.length == 2) {
-                    if (!t[i[0]]) { t[i[0]] = [] }
-                    t[i[0]][i[1]] = s
-                  } else {
-                    t[r] = s
-                  }
-                }();
-              }
-            };
-            t.__SV = 1
-          }
-        })(document, window.calq || []);
-      /* jshint ignore:end */
+                var i = r.split('.');
+                if (i.length == 2) {
+                  if (!t[i[0]]) { t[i[0]] = [] }
+                  t[i[0]][i[1]] = s
+                } else {
+                  t[r] = s
+                }
+              }();
+            }
+          };
+          t.__SV = 1
+        }
+      })(document, window.calq || []);
       calq.init(id);
+      /* jshint ignore:end */
     }
   },
 
@@ -69,11 +68,11 @@ export default BaseAdapter.extend({
     const compactedOptions = compact(options);
     const { email, inviteCode, firstname, lastname, username } = compactedOptions;
     window.calq.user.identify(email);
-    window.calq.user.profile({inviteCode, email, firstname, lastname, username});
+    window.calq.user.profile({ inviteCode, email, firstname, lastname, username });
   },
 
   trackEvent(options = {}) {
-    const compactedOptions = compact(options);
+    //const compactedOptions = compact(options);
     var actionName = options.category + '.' + options.action;
     delete options.category;
     delete options.action;
@@ -83,12 +82,11 @@ export default BaseAdapter.extend({
   },
 
   trackPage(options = {}) {
-    const compactedOptions = compact(options);
+    //const compactedOptions = compact(options);
     //calq.action.trackPageView();
     return options;
   },
 
   alias() {
-
   }
 });

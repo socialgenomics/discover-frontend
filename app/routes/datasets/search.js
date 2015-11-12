@@ -3,10 +3,10 @@ import AuthenticatedRouteMixin from 'simple-auth/mixins/authenticated-route-mixi
 
 
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
-  model: function(params){
+  model: function(params) {
     return this.store.createRecord('Search', {
       queryParams: params,
-      user: this.get('currentUser'),
+      user: this.get('currentUser')
     });
-  },
+  }
 });

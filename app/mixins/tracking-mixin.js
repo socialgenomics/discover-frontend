@@ -7,10 +7,9 @@ export default Ember.Mixin.create({
 
   didTransition() {
     this._super(...arguments);
-    if (ENV.environment == 'development'){
+    if (ENV.environment === 'development') {
       this._trackPage();
-    }
-    else{
+    } else {
       this._logTracking();
     }
   },
@@ -27,6 +26,6 @@ export default Ember.Mixin.create({
   _logTracking() {
     const page = document.location.href;
     const title = Ember.getWithDefault(this, 'routeName', 'unknown');
-    Ember.Logger.info("Tracking:", { page, title })
+    Ember.Logger.info('Tracking:', { page, title });
   }
 });

@@ -1,1 +1,15 @@
-<h1>Verify Page</h1>
+<div class="card">
+  <div class="container-login">
+    <div class="row center-align">
+      <div class="col m12">
+        {{#if isEmailValidated}}
+          <h1>Your account is now verified</h1>
+          {{#link-to 'user' currentUser.username}}<button class="btn teal white-text">Visit your Profile</button>{{/link-to}}
+        {{else}}
+          <h1>Your code was invalid</h1>
+          <button class="btn yellow white-text" {{action "resendVerifyEmail"}}>Resend Verification Email</button>
+        {{/if}}
+      </div>
+    </div>
+  </div>
+</div>

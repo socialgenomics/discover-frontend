@@ -1,1 +1,8 @@
 @import "repositive-styles/app/styles/main";
+
+@import "ember-modal-dialog/ember-modal-structure";
+@import "ember-modal-dialog/ember-modal-appearance";
+
+#profile-drop{
+  right:1rem !important;
+}

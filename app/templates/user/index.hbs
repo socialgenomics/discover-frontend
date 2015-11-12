@@ -23,7 +23,23 @@
                 {{s3-upload id="upload-avatar" field="image"}}
               </div> -->
               {{#if isOwnProfile}}
+                {{#if isEmailValidated}}
+                  <div class="verified">
+                    <h3><i class="mdi-action-verified-user"></i> Verified Account</h3>
+                  </div>
+                {{else}}
+                  <div class="not-verified">
+                    <h3><i class="mdi-communication-email"></i> Please verify your email</h3>
+                  </div>
+                {{/if}}
                 {{#link-to "users.profile" class="btn yellow white-text"}}EDIT PROFILE{{/link-to}}
+
+              {{else}}
+                {{#if isEmailValidated}}
+                  <div class="verified">
+                    <h3><i class="mdi-action-verified-user"></i> Verified Account</h3>
+                  </div>
+                {{/if}}
               {{/if}}
               <div class="card-action">
                 <div class="activity-stats col m12">

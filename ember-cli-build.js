@@ -6,20 +6,18 @@ var environment = EmberApp.env();
 var isProductionLikeBuild = ['production', 'testing'].indexOf(environment) > -1;
 
 var prepend;
-if (environment === 'production'){
+if (environment === 'production') {
   prepend = 'http://dg2kcfbxc77v1.cloudfront.net/';
-}
-else if (environment === 'testing'){
+} else if (environment === 'testing') {
   prepend = 'http://testing.discover.repositive.io.s3-website-us-east-1.amazonaws.com/';
-}
-else {
+} else {
   prepend = '';
 }
 
-console.log("\n");
+console.log('\n');
 console.log(environment);
-console.log(prepend)
-console.log("\n");
+console.log(prepend);
+console.log('\n');
 
 module.exports = function(defaults) {
   var app = new EmberApp(defaults, {
@@ -38,13 +36,19 @@ module.exports = function(defaults) {
     fingerprint: {
       enabled: isProductionLikeBuild,
       exclude: [],
-      prepend: prepend,
+      prepend: prepend
     },
     sourcemaps: {
-      enabled: !isProductionLikeBuild,
+      enabled: !isProductionLikeBuild
     },
     minifyCSS: { enabled: isProductionLikeBuild },
     minifyJS: { enabled: isProductionLikeBuild },
+    jscsOptions: {
+      configPath: '.jscsrc',
+      enabled: true,
+      esnext: true,
+      disableTestGenerator: false
+    }
   });
 
   // Use `app.import` to add additional libraries to the generated

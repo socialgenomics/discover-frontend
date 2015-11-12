@@ -13,34 +13,33 @@ export default Ember.Controller.extend(
   code: null,
   needs: 'application',
 
-  validations:{
-    code:{
-      presence:true,
-      server: true, // must be last - unknown bug
-    },
+  validations: {
+    code: {
+      presence: true,
+      server: true // must be last - unknown bug
+    }
   },
 
-  actions:{
-    submitForm:function(){
+  actions: {
+    submitForm: function() {
       //check code against api
       ajax({
         url: ENV.APIRoutes['invites'],
-        type:'POST',
+        type: 'POST',
         data: {
-          'invite':this.code,
+          'invite': this.code
         }
       })
-      .then((resp)=>{
-        if(resp.permitted){
+      .then((resp)=> {
+        if (resp.permitted) {
           this.set('controllers.application.isVerified', true);
           this.set('controllers.application.code', this.get('code'));
           this.transitionToRoute('/users/signup');
-        }
-        else{
+        } else {
           this.addValidationErrors(resp.errors);
         }
       })
-      .catch((resp)=>{
+      .catch((resp)=> {
         Ember.Logger.error(resp.jqXHR.responseJSON);
         this.addValidationErrors(resp.jqXHR.responseJSON.errors);
       });

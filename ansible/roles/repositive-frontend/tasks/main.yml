@@ -1,0 +1,46 @@
+# Setup development instance of repositive api
+---
+
+- name: Link packages.json
+  file: src=/home/vagrant/app/package.json dest=/home/vagrant/package.json state=link
+
+# Example from Ansible Playbooks
+- name:
+  copy: src=known_hosts dest=/home/vagrant/.ssh/known_hosts owner=vagrant group=vagrant mode=0644
+
+- name: Install gulp (locally)
+  shell: npm install gulp@3.9.0 --no-bin-links
+    chdir="/home/vagrant"
+  sudo: no
+
+- name: Install gulp / nan (globally)
+  shell: npm install -g gulp@3.9.0 nan@2.1.0
+  sudo: yes
+
+- name: Install NPM dependencies
+  shell: npm install
+    chdir="/home/vagrant"
+  sudo: no
+
+- name: Install Bower
+  shell: npm install -g bower
+    chdir="/home/vagrant"
+  sudo: yes
+
+- name: Install Bower dependencies
+  shell: bower install
+    chdir="/home/vagrant/app"
+  sudo: no
+
+# Supervisor
+
+- name: Install Supervisord job conf
+  template: src="supervisord/repositive-frontend.conf.j2"
+   dest="/etc/supervisor/conf.d/repositive-frontend.conf" owner=root group=root
+  notify: Restart repositive-frontend
+
+- name: Ensure Supervisord is running
+  service: name="supervisor" state=started
+
+- name: Start Upstart job and ensure it runs at boot time
+  supervisorctl: name="repositive-frontend" state=present

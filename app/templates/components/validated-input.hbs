@@ -26,9 +26,11 @@
 {{#if (eq icon "email")}} <i class="mdi-communication-email"></i> {{/if}}
 
   {{#if showInvalid}}
+    <div class="errors">
     {{#each errors as |error|}}
       <div class="text-invalid error-text">{{ error }}</div>
     {{/each}}
+    </div>
   {{else}}
     <div class="input-helper">{{helpText}}</div>
   {{/if}}

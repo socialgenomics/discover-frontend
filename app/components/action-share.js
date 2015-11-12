@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   tagName: 'a',
-  click: function(){
+  click: function() {
     this.get('metrics').trackEvent({
       category: 'dataset',
       action: 'share',
@@ -11,5 +11,5 @@ export default Ember.Component.extend({
     });
     //sends to showModal in parent controller
     this.sendAction();
-  },
+  }
 });

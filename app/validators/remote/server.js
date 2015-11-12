@@ -12,9 +12,9 @@ export default Base.extend({
     }
   },
   call: function() {
-    if (this.get('message')){
+    if (this.get('message')) {
       this.errors.pushObject(this.get('message'));
     }
     this.set('message', null);
-  }.observes('message'),
+  }.observes('message')
 });

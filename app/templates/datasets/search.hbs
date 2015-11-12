@@ -22,7 +22,7 @@
 
 <div class="content">
   <div class="">
-    <h5 class="subtitles-right unfocus-grey-text">Your Query</h5>
+    <h5 class="unfocus-grey-text">Your Query</h5>
     <p id="filters" class="card">
       <span class="filter first">
         <em class="highlight">"{{model.query}}"</em>
@@ -37,16 +37,20 @@
   <div class="">
     {{#if model.isLoading}}
     {{else}}
-      <h5 class="subtitles-right unfocus-grey-text">Search Results ({{ model.meta.total }})</h5>
+      <h5 class="unfocus-grey-text">Search Results ({{ model.meta.total }})</h5>
     {{/if}}
   </div>
   {{#if model.isLoading}}
     {{partial 'datasets/loading'}}
   {{else}}
     <div class="row">
-      {{#each model.datasets as |dataset|}}
-        {{render 'datasets/card' dataset}}
-      {{/each}}
+      {{#if (eq model.meta.total 0)}}
+        {{render 'datasets/noResults'}}
+      {{else}}
+        {{#each model.datasets as |dataset|}}
+          {{render 'datasets/card' dataset}}
+        {{/each}}
+      {{/if}}
     </div>
   {{/if}}
 </div>

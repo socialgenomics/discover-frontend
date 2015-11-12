@@ -1,4 +1,4 @@
-import DS from "ember-data";
+import DS from 'ember-data';
 
 export default DS.Model.extend({
   dataset: DS.belongsTo('dataset'),
@@ -6,12 +6,12 @@ export default DS.Model.extend({
   description: DS.attr('string'),
   assayType: DS.attr('string'),
   webURL: DS.attr('string'),
-  shortDescription: function(){
+  shortDescription: function() {
     let length = 100;
     let description = this.get('description');
-    if (description.length > length){ 
-      description = description.substr(0, length) + ' ..'; 
+    if (description.length > length) {
+      description = description.substr(0, length) + ' ..';
     }
     return description;
-  }.property('description'),
+  }.property('description')
 });

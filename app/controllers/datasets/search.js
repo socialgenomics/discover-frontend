@@ -6,25 +6,25 @@ export default Ember.Controller.extend(
   searchMixin,
   Ember.Evented,
 {
-  queryParams: ['q','ordering','assayType','tags','repository','access'],
+  queryParams: ['q', 'ordering', 'assayType', 'repository', 'access'],
   q: null,
   ordering: null,
   assayType: null,
-  tags: null,
+  //tags: null,
   repository: null,
   access: null,
 
-  modelLoadingDidChange: function(){
-    if (!this.get('model.isLoading')){
+  modelLoadingDidChange: function() {
+    if (!this.get('model.isLoading')) {
       // The view subscribes to this function
       // so that it can call some jquery after the
       // model has finised rendering
-      Ember.run.schedule('afterRender', this, ()=>{
+      Ember.run.schedule('afterRender', this, ()=> {
         this.trigger('modelLoaded');
       });
     }
   }.observes('model.isLoading'),
 
-  actions:{
+  actions: {
   }
 });

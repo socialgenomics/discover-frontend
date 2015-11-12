@@ -14,12 +14,31 @@
         OR
       </span>
     </div>
-    {{validated-input type="email" lbl="Email" value=email errors=errors.email placeholder="Email" email=true formSubmitted=formSubmitted icon="email"}}
-    {{validated-input type="password" lbl="Password" value=password errors=errors.password placeholder="Password" password=true formSubmitted=formSubmitted icon="password"}}
+    {{#each messages as |message|}}
+      <div class="message {{message.type}}">{{message.text}}</div>
+    {{/each}}
+    {{validated-input
+      type="email"
+      lbl="Email"
+      value=email
+      errors=errors.email
+      placeholder="Email"
+      email=true
+      formSubmitted=formSubmitted
+      icon="email"}}
+    {{validated-input
+      type="password"
+      lbl="Password"
+      value=password
+      errors=errors.password
+      placeholder="Password"
+      password=true
+      formSubmitted=formSubmitted
+      icon="password"}}
+    <h6><a {{action 'resetPassword'}} class="link" style="cursor:pointer">Click here</a> to reset your password</h6>
     <div class="input-container">
-      {{#full-width-button class="teal" disabled=buttonDisabled type="submit"}}LOGIN{{/full-width-button}}
+      {{#full-width-button class="teal {{#if buttonDisabled 'disabled'}}" disabled=buttonDisabled type="submit"}}LOGIN{{/full-width-button}}
     </div>
     {{message-queue}}
   </form>
 </div>
-
