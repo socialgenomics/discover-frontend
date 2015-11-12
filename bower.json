@@ -10,7 +10,6 @@
     "ember-qunit-notifications": "0.0.7",
     "ember-resolver": "~0.1.18",
     "ember-simple-auth": "0.8.0",
-    "ember-uploader": "0.3.9",
     "loader.js": "ember-cli/loader.js#3.2.0",
     "materialize": "~0.97.0",
     "moment": ">= 2.8.0",
