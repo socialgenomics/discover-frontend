@@ -17,7 +17,7 @@ export default Ember.Route.extend({
     // error page is shown if the promise is rejected
     return ajax({
       url: ENV.APIRoutes['verify-email'] + '/' + params.verificationId,
-      type:'GET',
+      type: 'GET'
     })
     .then(resp=> {
       this.showMessages(resp.messages);
