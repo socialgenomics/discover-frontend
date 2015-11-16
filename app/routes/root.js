@@ -18,7 +18,8 @@ let trending = shuffle([
   '1b95f0f8-d0f7-4f3b-af39-185b309c726e',
   '1392da4b-205a-43b7-addd-c0f672b7c8c1',
   '6110a494-06f9-45f0-8fe2-51419d74b406',
-  '8b1a0e2d-4f19-4214-b331-f2758e3b9503'
+  '8b1a0e2d-4f19-4214-b331-f2758e3b9503',
+  '08dfb517-77ec-4683-9bcc-2840ba31a5cd'
 ]).slice(0, 3);
 
 export default Ember.Route.extend({
