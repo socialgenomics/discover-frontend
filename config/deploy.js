@@ -17,8 +17,14 @@ module.exports = {
     buildEnv: 'testing', // Override the environment passed to the ember asset build. Defaults to 'production'
     apiBaseURL: 'http://testing.api.repositive.io',
     store: {
-      host: 'testing.discover.repositive.io',
-      port: 6379
+      type: 'redis',
+      ssh: {
+        host: 'testing.discover.repositive.io',
+        username: 'repositive',
+        privateKey: process.env.DEPLOY_KEY_PATH,
+        dstPort: 6379,
+        dstHost: 'localhost'
+      }
     },
     assets: {
       accessKeyId: process.env.AWS_KEY_ID,
@@ -33,9 +39,9 @@ module.exports = {
     store: {
       type: 'redis',
       ssh: {
-        host: '159.122.234.124',
+        host: 'discover.repositive.io',
         username: 'repositive',
-        privateKey: '~/.ssh/tim.repositive.io',
+        privateKey: process.env.DEPLOY_KEY_PATH,
         dstPort: 6379,
         dstHost: 'localhost'
       }
