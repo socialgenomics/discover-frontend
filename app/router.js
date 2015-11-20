@@ -7,10 +7,7 @@ var Router = Ember.Router.extend(TrackingMixin, {
 });
 
 Router.map(function() {
-  this.route('root', {
-    path: '/'
-  });
-
+  this.route('root', { path: '/' });
   this.route('about');
   this.route('team');
   this.route('faq');
@@ -19,50 +16,32 @@ Router.map(function() {
   this.route('help');
   this.route('verify');
   this.route('policies');
-
-  this.resource('users', function() {
+  this.route('user', { path: '/user/:username' }, function() {
+    this.route('favourites');
+  });
+  this.route('users', function() {
     this.route('signup');
     this.route('login');
     this.route('settings');
     this.route('profile');
     this.route('references');
     this.route('trust');
-    this.route('verify', {
-      path: '/verify/:verificationId'
-    });
-    this.route('resend-password', {
-      path: '/reset-password'
-    });
-    this.route('reset-password', {
-      path: '/reset-password/:resetKey'
-    });
+    this.route('verify', { path: '/verify/:verificationId' });
+    this.route('resend-password', { path: '/reset-password' });
+    this.route('reset-password', { path: '/reset-password/:resetKey' });
   });
-
-  this.resource('user', {
-    path: '/user/:username'
-  }, function() {});
-
-  this.resource('datasets', function() {
-    this.route('detail', {
-      path: ':id'
-    });
-    this.route('tags', {
-      path: '/tag/:tag'
-    });
-    this.route('assay', {
-      path: '/assay/:assay'
-    });
+  this.route('datasets', function() {
+    this.route('detail', { path: ':id' });
+    this.route('tags', { path: '/tag/:tag' });
+    this.route('assay', { path: '/assay/:assay' });
     this.route('search');
     this.route('register');
     this.route('request');
   });
-
-  this.route('404', {
-    path: '/*path'
-  });
+  this.route('404', { path: '/*path' });
 });
 
-var pagesWithSideNavigation = [
+const pagesWithSideNavigation = [
   'datasets-search',
   'users-settings',
   'users-profile',
@@ -70,6 +49,9 @@ var pagesWithSideNavigation = [
   'users-references'
 ];
 
+/*
+  add css classes to the body of the ember app
+ */
 Ember.Route.reopen({
   activate: function() {
     var cssClass = this.toCssClass();
