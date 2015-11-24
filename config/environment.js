@@ -106,7 +106,7 @@ module.exports = function(environment) {
           id: 'ca78eed5d34a041ab5cf164295cf2c25'
         },
         environments: ['production']
-      },
+      }
     ]
   };
 
