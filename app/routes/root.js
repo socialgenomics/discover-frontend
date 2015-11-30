@@ -3,14 +3,16 @@ import ajax from 'ic-ajax';
 import ENV from 'repositive/config/environment';
 import { shuffle } from 'repositive/utils/arrays';
 
-if (settings.env === 'development'){
-  let trending = [
-    '9eef17f2-2200-43d8-ad07-845ee0927cb7',
-    'cfaf4976-8801-4d75-b837-d6e41820c7fa',
-    '08eb51bb-76e5-43ba-a0bb-2ce4c85671cc',
+let trending = {};
+
+if (ENV.environment === "development"){
+  trending = [
+    'd096c88e-6a33-482f-a126-d2002c03fca6',
+    'd096c88e-6a33-482f-a126-d2002c03fca6',
+    'd096c88e-6a33-482f-a126-d2002c03fca6',
   ]
 } else {
-  let trending = shuffle([
+  trending = shuffle([
     '197190e2-4f48-4c28-ba7d-021ee4b99592',
     '5a59338e-7ad8-4875-98a7-63bca3cd1678',
     '9f897c89-1981-4931-86aa-8bdf2a7ae3d7',
