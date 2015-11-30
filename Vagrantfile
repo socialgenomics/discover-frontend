@@ -37,7 +37,7 @@ Vagrant.configure(2) do |config|
   # the path on the guest to mount the folder. And the optional third
   # argument is a set of non-required options.
   config.vm.synced_folder ".", "/home/vagrant/app"
-  config.vm.synced_folder "../repositive-styles", "/home/vagrant/app/bower_components/repositive-styles", disabled: true
+  config.vm.synced_folder "../repositive-styles", "/home/vagrant/app/bower_components/repositive-styles", disabled: false
 
   # Config frontend machine
   config.vm.define "frontend" do |frontend|
