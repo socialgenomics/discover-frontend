@@ -9,11 +9,7 @@ export default Ember.Component.extend({
   defaultImage: null,
   secure: true,
 
-  currentUser: Ember.computed(function() {
-    return this.get('session.secure.user');
-  }),
-
-  src: Ember.computed('currentUser', 'imageSize', 'defaultImage', function() {
+  src: Ember.computed('imageSize', 'defaultImage', function() {
     var email = this.get('email');
     var size = this.get('size');
     var def = this.get('defaultImage');
@@ -21,6 +17,6 @@ export default Ember.Component.extend({
     var protocol = secure ? 'https' : 'http';
 
     return protocol + '://www.gravatar.com/avatar/' + md5(email) + '?s=' + size + '&d=' + def;
-  }),
+  })
 
 });
