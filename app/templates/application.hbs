@@ -1,4 +1,8 @@
-{{#unless isLandingPage}}{{platform-navbar action="search" initAvatar="initAvatar" avatar=avatar}}{{/unless}}
+<!-- {{#unless isLandingPage}} -->
+<!-- {{/unless}} -->
+{{platform-navbar action="search" initAvatar="initAvatar" avatar=avatar}}
+
+
 <div class="container">
   {{#each flashMessages.queue as |flash|}}
     {{ui-message flash=flash}}
