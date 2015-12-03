@@ -17,8 +17,8 @@ Vagrant.configure(2) do |config|
   # Provider-specific configuration
   config.vm.provider "virtualbox" do |v|
     v.name = "repositive-frontend"
-    v.memory = 1536
-    v.cpus = 2
+    v.memory = 2048
+    v.cpus = 4
     v.customize ["modifyvm", :id, "--usb", "off"]
     v.customize ["modifyvm", :id, "--usbehci", "off"]
   end
@@ -37,7 +37,7 @@ Vagrant.configure(2) do |config|
   # the path on the guest to mount the folder. And the optional third
   # argument is a set of non-required options.
   config.vm.synced_folder ".", "/home/vagrant/app"
-  config.vm.synced_folder "../repositive-styles", "/home/vagrant/app/bower_components/repositive-styles", disabled: false
+  #config.vm.synced_folder "../repositive-styles", "/home/vagrant/app/bower_components/repositive-styles", disabled: false
 
   # Config frontend machine
   config.vm.define "frontend" do |frontend|
