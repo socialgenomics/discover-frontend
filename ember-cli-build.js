@@ -24,7 +24,7 @@ module.exports = function(defaults) {
     outputPaths: {
       app: {
         css: {
-          'main': '/assets/main.css'
+          'app': '/assets/app.css'
         },
         js: '/assets/main.js'
       },
@@ -32,6 +32,14 @@ module.exports = function(defaults) {
         css: '/assets/vendor.css',
         js: '/assets/vendor.js'
       }
+    },
+    sassOptions: {
+      inputFile:'app.scss',
+      outputFile:'app.css',
+      includePaths: [
+        'bower_components/materialize/sass',
+        'bower_components'
+      ]
     },
     fingerprint: {
       enabled: isProductionLikeBuild,
