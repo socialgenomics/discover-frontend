@@ -3,13 +3,17 @@ var EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
 var environment = EmberApp.env();
 
-var isProductionLikeBuild = ['production', 'testing'].indexOf(environment) > -1;
+var isProductionLikeBuild = ['production', 'testing', 'aws_dev', 'aws_staging'].indexOf(environment) > -1;
 
 var prepend;
 if (environment === 'production') {
   prepend = 'http://dg2kcfbxc77v1.cloudfront.net/';
 } else if (environment === 'testing') {
   prepend = 'http://testing.discover.repositive.io.s3-website-us-east-1.amazonaws.com/';
+} else if (environment === 'aws_dev') {
+  prepend = 'http://s3.amazonaws.com/frontend-dev-amzn-us-east-1.repositive.io/';
+} else if (environment === 'aws_staging') {
+  prepend = 'http://s3.amazonaws.com/frontend-staging-amzn-us-east-1.repositive.io/';
 } else {
   prepend = '';
 }
@@ -24,7 +28,7 @@ module.exports = function(defaults) {
     outputPaths: {
       app: {
         css: {
-          'main': '/assets/main.css'
+          'app': '/assets/app.css'
         },
         js: '/assets/main.js'
       },
@@ -32,6 +36,14 @@ module.exports = function(defaults) {
         css: '/assets/vendor.css',
         js: '/assets/vendor.js'
       }
+    },
+    sassOptions: {
+      inputFile:'app.scss',
+      outputFile:'app.css',
+      includePaths: [
+        'bower_components/materialize/sass',
+        'bower_components'
+      ]
     },
     fingerprint: {
       enabled: isProductionLikeBuild,

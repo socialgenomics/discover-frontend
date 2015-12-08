@@ -1,3 +1,5 @@
+/*jslint node: true */
+
 module.exports = {
   development: {
     buildEnv: 'development', // Override the environment passed to the ember asset build. Defaults to 'production'
@@ -52,5 +54,46 @@ module.exports = {
       bucket: 'discover.repositive.io'
       // region: 'eu-central-1',
     }
+  },
+  // AWS development
+  aws_dev: {
+    buildEnv: 'aws_dev', // Override the environment passed to the ember asset build. Defaults to 'production'
+    apiBaseURL: 'http://backend-dev-amzn-us-east-1.repositive.io',
+    store: {
+      type: 'redis',
+      ssh: {
+        host: 'frontend-dev-amzn-us-east-1.repositive.io',
+        username: 'repositive',
+        dstPort: 6379,
+        dstHost: 'localhost'
+      }
+    },
+    assets: {
+      accessKeyId: process.env.AWS_KEY_ID,
+      secretAccessKey: process.env.AWS_ACCESS_KEY,
+      bucket: 'frontend-dev-amzn-us-east-1.repositive.io'
+      // region: 'eu-central-1',
+    }
+  },
+  // AWS staging
+  aws_staging: {
+    buildEnv: 'aws_staging', // Override the environment passed to the ember asset build. Defaults to 'production'
+    apiBaseURL: 'http://backend-staging-amzn-us-east-1.repositive.io',
+    store: {
+      type: 'redis',
+      ssh: {
+        host: 'frontend-staging-amzn-us-east-1.repositive.io',
+        username: 'repositive',
+        dstPort: 6379,
+        dstHost: 'localhost'
+      }
+    },
+    assets: {
+      accessKeyId: process.env.AWS_KEY_ID,
+      secretAccessKey: process.env.AWS_ACCESS_KEY,
+      bucket: 'frontend-staging-amzn-us-east-1.repositive.io'
+      // region: 'eu-central-1',
+    }
   }
+
 };
