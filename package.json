@@ -8,7 +8,7 @@
     "test": "tests"
   },
   "scripts": {
-    "start": "ember server --watcher=polling --proxy=http://192.168.33.11:3000",
+    "start": "ember server --watcher=polling --proxy=http://backend-dev-amzn-us-east-1.repositive.io",
     "build": "ember build",
     "test": "ember test",
     "deployLive": "ssh -f -L 6379:159.122.234.124:6379 159.122.234.124 -N;  echo 'Please enter your AWS Access Key ID: '; read AWS_KEY_ID; export AWS_KEY_ID; echo 'Please enter your AWS Secret Access Key: '; read AWS_ACCESS_KEY; export AWS_ACCESS_KEY; ember deploy --environment=production",

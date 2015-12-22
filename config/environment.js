@@ -20,26 +20,24 @@ module.exports = function(environment) {
       // when it is created
     },
 
-    APIBaseURL: (function(){
-      if (environment in deploySettings){
+    APIBaseURL: (function() {
+      if (environment in deploySettings) {
         return deploySettings[environment].apiBaseURL;
-      }
-      else {
+      } else {
         return '';
       }
     }()),
 
     // mapping of backend routes
-    APIRoutes : (function(){
-      var mapping =
-      {
-          "users.login" : "/api/users/login",
-          "users.logout" : "/api/users/logout",
-          "users.signup" : "/api/users",
-          "datasets.search" : "/api/datasets/search",
-          "invites": "/api/invites",
-          "users.profiles": "/api/users/profiles",
-          "reset-password": "/api/users/password-reset",
+    APIRoutes : (function() {
+      var mapping = {
+        "users.login" : "/api/users/login",
+        "users.logout" : "/api/users/logout",
+        "users.signup" : "/api/users",
+        "datasets.search" : "/api/datasets/search",
+        "invites": "/api/invites",
+        "users.profiles": "/api/users/profiles",
+        "reset-password": "/api/users/password-reset",
       };
       _.each(mapping,
         function(path, key, obj){
@@ -58,7 +56,7 @@ module.exports = function(environment) {
       routeAfterAuthentication: 'root',
       authenticationRoute: 'users.login',
       signupRoute: 'users.signup',
-      logoutRoute: 'users.logout',
+      logoutRoute: 'users.logout'
     },
     'simple-auth-cookie-store' : {
       cookieName: 'repositive.io'
@@ -82,7 +80,7 @@ module.exports = function(environment) {
       'script-src': "'self' 'unsafe-inline' http://api.calq.io http://www.google-analytics.com/analytics.js", // Allow scripts from api.calq.io
       'connect-src': "'self' 'unsafe-inline' http://api.calq.io", // Allow data (ajax/websocket) from api.calq.io
       'img-src': "'self' data: http://www.google-analytics.com",
-      'media-src': "'self'",
+      'media-src': "'self'"
     },
     metricsAdapters: [
       {
@@ -92,12 +90,23 @@ module.exports = function(environment) {
         },
         environments: ['production']
       },
+      //
+      //production calq
+      // {
+      //   name: 'Calq',
+      //   config: {
+      //     id: 'ca78eed5d34a041ab5cf164295cf2c25'
+      //   },
+      //   environments: ['production']
+      // },
+      //
+      //this is to test Calq actions are sent to track properly from dev environment
       {
         name: 'Calq',
         config: {
-          id: 'ca78eed5d34a041ab5cf164295cf2c25'
+          id: 'd0e47c1ccd9e6bb517cff046e2dbc00a'
         },
-        environments: ['production']
+        environments: ['development']
       }
     ]
   };
@@ -124,13 +133,13 @@ module.exports = function(environment) {
 
   if (environment === 'testing') {
     ENV.locationType = 'none';
-    ENV.torii.providers['google-oauth2'].redirectUri = 'http://testing.discover.repositive.io'
-    ENV.torii.providers['linked-in-oauth2'].redirectUri = 'http://testing.discover.repositive.io'
+    ENV.torii.providers['google-oauth2'].redirectUri = 'http://testing.discover.repositive.io';
+    ENV.torii.providers['linked-in-oauth2'].redirectUri = 'http://testing.discover.repositive.io';
   }
 
   if (environment === 'production') {
-    ENV.torii.providers['google-oauth2'].redirectUri = 'http://discover.repositive.io'
-    ENV.torii.providers['linked-in-oauth2'].redirectUri = 'http://discover.repositive.io'
+    ENV.torii.providers['google-oauth2'].redirectUri = 'http://discover.repositive.io';
+    ENV.torii.providers['linked-in-oauth2'].redirectUri = 'http://discover.repositive.io';
   }
 
   return ENV;
