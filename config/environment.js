@@ -29,7 +29,7 @@ module.exports = function(environment) {
       The base URL path of the API.
      */
     APIBaseURL: (function() {
-      if (environment === deployConf.buildEnv) {
+      if (environment === deployConf.build.environment) {
         return deployConf.apiBaseURL;
       } else {
         return '';
@@ -52,7 +52,7 @@ module.exports = function(environment) {
       };
       _.each(mapping,
         function(path, key, obj) {
-          if (environment === deployConf.buildEnv) {
+          if (environment === deployConf.build.environment) {
             obj[key] =  deployConf.apiBaseURL + path;
           }
         }

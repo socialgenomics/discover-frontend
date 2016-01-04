@@ -1,21 +1,18 @@
 {
-  "buildEnv": "development",
   "apiBaseURL": "http://backend-dev-amzn-us-east-1.repositive.io",
-  "ssh-tunnel":{
-    "host": "frontend-dev-amzn-us-east-1.repositive.io",
-    "username": "repositive",
-    "dstPort": 6379,
-    "dstHost": "localhost"
+  "build": {
+    "environment": "development"
+  },
+  "s3": {
+    "bucket": "frontend-dev-amzn-us-east-1.repositive.io",
+    "region": "us-east-1"
   },
   "redis":{
     "host": "frontend-dev-amzn-us-east-1.repositive.io",
-    "port": 6379,
-    "password": ""
+    "port": 6379
   },
-  "s3": {
-    "accessKeyId": "",
-    "secretAccessKey": "",
-    "bucket": "frontend-dev-amzn-us-east-1.repositive.io",
-    "region": "us-east-1"
+  "ssh-tunnel":{
+    "host": "frontend-dev-amzn-us-east-1.repositive.io",
+    "username": "repositive"
   }
 }

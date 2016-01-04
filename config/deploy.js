@@ -4,7 +4,6 @@
 
 module.exports = function(env) {
   var deployConfig
-  console.log(env)
   /*
     Use ths env var `EMBER_CLI_DEPLOY_CONFIG_PATH` to direct ember-cli-deploy
     to a deploy configuration file to use.
@@ -15,15 +14,16 @@ module.exports = function(env) {
     try {
       deployConfig = require('./servers/' + env + '.json');
     } catch (e) {
-      console.log(e);
+      console.warn('Error, could not load conf file for `' + env +
+                   '` using default development.json file.');
       deployConfig = require('./servers/development.json');
     }
   }
   /**
    * Add secrets from env variables.
    */
-  deployConfig.s3.accessKeyId = deployConfig.s3.accessKeyId || process.env.AWS_KEY_ID;
-  deployConfig.s3.secretAccessKey = deployConfig.s3.accessKeyId || process.env.AWS_ACCESS_KEY;
+  deployConfig.s3.accessKeyId = process.env.AWS_KEY;
+  deployConfig.s3.secretAccessKey = process.env.AWS_SECRET;
 
   return deployConfig;
 };
