@@ -1,9 +1,12 @@
-/* global require, module */
 var EmberApp = require('ember-cli/lib/broccoli/ember-app');
+
+/*
+  brocolli related build conf.
+ */
 
 var environment = EmberApp.env();
 
-var isProductionLikeBuild = ['production', 'testing', 'aws_dev', 'aws_staging'].indexOf(environment) > -1;
+var isProductionLikeBuild = ['production', 'staging'].indexOf(environment) > -1;
 
 var prepend;
 if (environment === 'production') {
@@ -17,11 +20,6 @@ if (environment === 'production') {
 } else {
   prepend = '';
 }
-
-console.log('\n');
-console.log(environment);
-console.log(prepend);
-console.log('\n');
 
 module.exports = function(defaults) {
   var app = new EmberApp(defaults, {
@@ -38,8 +36,8 @@ module.exports = function(defaults) {
       }
     },
     sassOptions: {
-      inputFile:'app.scss',
-      outputFile:'app.css',
+      inputFile: 'app.scss',
+      outputFile: 'app.css',
       includePaths: [
         'bower_components/materialize/sass',
         'bower_components'

@@ -1,13 +1,23 @@
+/*
+  deploy related conf.
+ */
+
 module.exports = function(env) {
-  let deployConfig
+  var deployConfig
+  console.log(env)
   /*
     Use ths env var `EMBER_CLI_DEPLOY_CONFIG_PATH` to direct ember-cli-deploy
     to a deploy configuration file to use.
    */
-  if (process.env.EMBER_CLI_DEPLOY_CONFIG_PATH) {
-    deployConfig = require(process.env.EMBER_CLI_DEPLOY_CONFIG_PATH)
+  if (process.env.FRONTEND_DEPLOY_CONFIG_PATH) {
+    deployConfig = require(process.env.FRONTEND_DEPLOY_CONFIG_PATH)
   } else {
-    deployConfig = require('./' + env + '.json');
+    try {
+      deployConfig = require('./' + env + '.json');
+    } catch (e) {
+      console.log(e);
+      deployConfig = require('./aws_dev.json');
+    }
   }
   /**
    * Add secrets from env variables
