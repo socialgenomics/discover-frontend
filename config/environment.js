@@ -1,11 +1,13 @@
 var _ = require('underscore');
 var getDeployConf = require('./deploy');
+
 /*
   app related conf.
  */
 
 module.exports = function(environment) {
   var deployConf = getDeployConf(environment);
+
   var ENV = {
     modulePrefix: 'repositive',
     environment: environment,
