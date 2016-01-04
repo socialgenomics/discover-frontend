@@ -13,14 +13,14 @@ module.exports = function(env) {
     deployConfig = require(process.env.FRONTEND_DEPLOY_CONFIG_PATH)
   } else {
     try {
-      deployConfig = require('./' + env + '.json');
+      deployConfig = require('./servers/' + env + '.json');
     } catch (e) {
       console.log(e);
-      deployConfig = require('./aws_dev.json');
+      deployConfig = require('./servers/development.json');
     }
   }
   /**
-   * Add secrets from env variables
+   * Add secrets from env variables.
    */
   deployConfig.s3.accessKeyId = deployConfig.s3.accessKeyId || process.env.AWS_KEY_ID;
   deployConfig.s3.secretAccessKey = deployConfig.s3.accessKeyId || process.env.AWS_ACCESS_KEY;

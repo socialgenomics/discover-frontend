@@ -1,5 +1,5 @@
 {
-  "buildEnv": "aws_dev",
+  "buildEnv": "development",
   "apiBaseURL": "http://backend-dev-amzn-us-east-1.repositive.io",
   "ssh-tunnel":{
     "host": "frontend-dev-amzn-us-east-1.repositive.io",
@@ -16,6 +16,6 @@
     "accessKeyId": "",
     "secretAccessKey": "",
     "bucket": "frontend-dev-amzn-us-east-1.repositive.io",
-    "region": "eu-central-1"
+    "region": "us-east-1"
   }
 }
