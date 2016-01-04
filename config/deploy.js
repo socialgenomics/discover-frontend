@@ -1,5 +1,3 @@
-/*jslint node: true */
-
 module.exports = {
   development: {
     buildEnv: 'development', // Override the environment passed to the ember asset build. Defaults to 'production'
@@ -10,9 +8,11 @@ module.exports = {
       port: 6379
     },
     assets: {
-      accessKeyId: 'AKIAJVMZYC2JCT2XY53Q',
+      type: 's3',
+      accessKeyId: process.env.AWS_KEY_ID,
       secretAccessKey: process.env.AWS_ACCESS_KEY,
-      bucket: 'repositive.io'
+      bucket: 'repositive.io',
+      region: 'eu-central-1'
     }
   },
   testing: {
@@ -29,10 +29,11 @@ module.exports = {
       }
     },
     assets: {
+      type: 's3',
       accessKeyId: process.env.AWS_KEY_ID,
       secretAccessKey: process.env.AWS_ACCESS_KEY,
-      bucket: 'testing.discover.repositive.io'
-      //region: 'eu-central-1'
+      bucket: 'testing.discover.repositive.io',
+      region: 'eu-central-1'
     }
   },
   production: {
@@ -49,10 +50,11 @@ module.exports = {
       }
     },
     assets: {
+      type: 's3',
       accessKeyId: process.env.AWS_KEY_ID,
       secretAccessKey: process.env.AWS_ACCESS_KEY,
-      bucket: 'discover.repositive.io'
-      // region: 'eu-central-1',
+      bucket: 'discover.repositive.io',
+      region: 'eu-central-1'
     }
   },
   // AWS development
@@ -69,10 +71,11 @@ module.exports = {
       }
     },
     assets: {
+      type: 's3',
       accessKeyId: process.env.AWS_KEY_ID,
       secretAccessKey: process.env.AWS_ACCESS_KEY,
-      bucket: 'frontend-dev-amzn-us-east-1.repositive.io'
-      // region: 'eu-central-1',
+      bucket: 'frontend-dev-amzn-us-east-1.repositive.io',
+      region: 'eu-central-1'
     }
   },
   // AWS staging
@@ -89,11 +92,11 @@ module.exports = {
       }
     },
     assets: {
+      type: 's3',
       accessKeyId: process.env.AWS_KEY_ID,
       secretAccessKey: process.env.AWS_ACCESS_KEY,
-      bucket: 'frontend-staging-amzn-us-east-1.repositive.io'
-      // region: 'eu-central-1',
+      bucket: 'frontend-staging-amzn-us-east-1.repositive.io',
+      region: 'eu-central-1'
     }
   }
-
 };

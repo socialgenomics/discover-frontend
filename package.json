@@ -10,10 +10,7 @@
   "scripts": {
     "start": "ember server --proxy http://192.168.33.11:3000",
     "build": "ember build",
-    "test": "ember test",
-    "deployLive": "ssh -f -L 6379:159.122.234.124:6379 159.122.234.124 -N;  echo 'Please enter your AWS Access Key ID: '; read AWS_KEY_ID; export AWS_KEY_ID; echo 'Please enter your AWS Secret Access Key: '; read AWS_ACCESS_KEY; export AWS_ACCESS_KEY; ember deploy --environment=production",
-    "deployTesting": "ssh -f -L 6379:testing.discover.repositive.io:6379 testing.discover.repositive.io -N;  echo 'Please enter your AWS Access Key ID: '; read AWS_KEY_ID; export AWS_KEY_ID; echo 'Please enter your AWS Secret Access Key: '; read AWS_ACCESS_KEY; export AWS_ACCESS_KEY; ember deploy --environment=testing",
-    "containerized": "ember server --proxy http://$(boot2docker ip)"
+    "test": "ember test"
   },
   "repository": "https://bitbucket.org/repositive/repositive.io",
   "engines": {
@@ -31,9 +28,11 @@
     "ember-cli-babel": "^5.1.3",
     "ember-cli-content-security-policy": "0.4.0",
     "ember-cli-dependency-checker": "^1.0.1",
-    "ember-cli-deploy": "^0.4.3",
+    "ember-cli-deploy": "0.5.1",
+    "ember-cli-deploy-build": "0.1.0",
+    "ember-cli-deploy-redis": "0.1.1",
     "ember-cli-deploy-s3": "0.2.0",
-    "ember-cli-deploy-ssh-tunnel": "0.2.0",
+    "ember-cli-deploy-ssh-tunnel": "0.2.1",
     "ember-cli-flash": "1.3.3",
     "ember-cli-htmlbars": "0.7.9",
     "ember-cli-htmlbars-inline-precompile": "^0.2.0",
@@ -49,8 +48,6 @@
     "ember-cli-sri": "^1.0.3",
     "ember-cli-uglify": "^1.2.0",
     "ember-data": "1.13.8",
-    "ember-deploy-redis": "0.0.7",
-    "ember-deploy-s3": "0.0.5",
     "ember-disable-proxy-controllers": "^1.0.0",
     "ember-export-application-global": "^1.0.3",
     "ember-metrics": "git+https://github.com/repositive/ember-metrics.git#4510677b81e0d2308658055fa761a903b4c763c3",

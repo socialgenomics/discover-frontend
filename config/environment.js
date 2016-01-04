@@ -33,13 +33,13 @@ module.exports = function(environment) {
     APIRoutes : (function(){
       var mapping =
       {
-          "users.login" : "/api/users/login",
-          "users.logout" : "/api/users/logout",
-          "users.signup" : "/api/users",
-          "datasets.search" : "/api/datasets/search",
-          "invites": "/api/invites",
-          "users.profiles": "/api/users/profiles",
-          "reset-password": "/api/users/password-reset",
+        "users.login" : "/api/users/login",
+        "users.logout" : "/api/users/logout",
+        "users.signup" : "/api/users",
+        "datasets.search" : "/api/datasets/search",
+        "invites": "/api/invites",
+        "users.profiles": "/api/users/profiles",
+        "reset-password": "/api/users/password-reset",
       };
       _.each(mapping,
         function(path, key, obj){
