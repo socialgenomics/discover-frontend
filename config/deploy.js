@@ -5,7 +5,7 @@
 module.exports = function(env) {
   var deployConfig
   /*
-    Use ths env var `EMBER_CLI_DEPLOY_CONFIG_PATH` to direct ember-cli-deploy
+    Use ths env var `FRONTEND_DEPLOY_CONFIG_PATH` to direct ember-cli-deploy
     to a deploy configuration file to use.
    */
   if (process.env.FRONTEND_DEPLOY_CONFIG_PATH) {

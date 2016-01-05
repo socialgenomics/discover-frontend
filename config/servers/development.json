@@ -7,12 +7,15 @@
     "bucket": "frontend-dev-amzn-us-east-1.repositive.io",
     "region": "us-east-1"
   },
+  "ssh-tunnel":{
+    "host": "frontend-dev-amzn-us-east-1.repositive.io",
+    "username": "repositive"
+  },
   "redis":{
     "host": "frontend-dev-amzn-us-east-1.repositive.io",
     "port": 6379
   },
-  "ssh-tunnel":{
-    "host": "frontend-dev-amzn-us-east-1.repositive.io",
-    "username": "repositive"
+  "pipeline":{
+    "activateOnDeploy": true
   }
 }
