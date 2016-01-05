@@ -9,11 +9,12 @@
   },
   "ssh-tunnel":{
     "host": "frontend-dev-amzn-us-east-1.repositive.io",
-    "username": "repositive"
+    "username": "repositive",
+    "privateKeyPath": "~/.ssh/tim.repositive.io"
   },
   "redis":{
-    "host": "frontend-dev-amzn-us-east-1.repositive.io",
-    "port": 6379
+    "host": "localhost",
+    "allowOverwrite": true
   },
   "pipeline":{
     "activateOnDeploy": true
