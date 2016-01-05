@@ -2,11 +2,11 @@ import DS from 'ember-data';
 import ENV from 'repositive/config/environment';
 
 
-if (ENV.environment === 'development') {
+if (ENV.environment === 'localDevelopment') {
   var ApplicationAdapter = DS.RESTAdapter.extend({
     namespace: 'api'
   });
-} else if (ENV.environment === 'production' || ENV.environment === 'testing') {
+} else {
   var ApplicationAdapter = DS.RESTAdapter.extend({
     namespace: 'api',
     host: ENV.APIBaseURL
