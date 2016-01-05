@@ -1,0 +1,22 @@
+{
+  "apiBaseURL": "http://backend-dev-amzn-us-east-1.repositive.io",
+  "build": {
+    "environment": "development"
+  },
+  "s3": {
+    "bucket": "frontend-dev-amzn-us-east-1.repositive.io",
+    "region": "us-east-1"
+  },
+  "ssh-tunnel":{
+    "host": "frontend-dev-amzn-us-east-1.repositive.io",
+    "username": "repositive",
+    "privateKeyPath": "~/.ssh/tim.repositive.io"
+  },
+  "redis":{
+    "host": "localhost",
+    "allowOverwrite": true
+  },
+  "pipeline":{
+    "activateOnDeploy": true
+  }
+}
