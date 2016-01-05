@@ -7,3 +7,4 @@ sudo pip install -q ansible==1.9.4
 cd /home/vagrant/app
 mkdir -p tmp/roles
 ansible-galaxy -p tmp/roles install -r ansible/requirements.yml --force
+echo fs.inotify.max_user_watches=16384 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p

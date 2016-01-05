@@ -8,7 +8,7 @@
     "test": "tests"
   },
   "scripts": {
-    "start": "ember server --watcher=polling --proxy=http://192.168.33.11:3000",
+    "start": "ember server --proxy=http://backend-dev-amzn-us-east-1.repositive.io",
     "build": "ember build",
     "test": "ember test"
   },
