@@ -9,17 +9,24 @@ var environment = EmberApp.env();
 var isProductionLikeBuild = ['production', 'staging'].indexOf(environment) > -1;
 
 var prepend;
-if (environment === 'production') {
-  prepend = 'http://dg2kcfbxc77v1.cloudfront.net/';
-} else if (environment === 'testing') {
-  prepend = 'http://testing.discover.repositive.io.s3-website-us-east-1.amazonaws.com/';
-} else if (environment === 'aws_dev') {
-  prepend = 'http://s3.amazonaws.com/frontend-dev-amzn-us-east-1.repositive.io/';
-} else if (environment === 'aws_staging') {
-  prepend = 'http://s3.amazonaws.com/frontend-staging-amzn-us-east-1.repositive.io/';
-} else {
-  prepend = '';
+switch (environment) {
+  case 'production':
+    prepend = 'http://dg2kcfbxc77v1.cloudfront.net/';
+    break;
+  case 'staging':
+    prepend = '';
+    break;
+  case 'development':
+    prepend = 'http://s3.amazonaws.com/frontend-dev-amzn-us-east-1.repositive.io/';
+    break;
+  case 'qa':
+    prepend = '';
+    break;
+  default:
+    prepend = '';
 }
+
+console.log(prepend);
 
 module.exports = function(defaults) {
   var app = new EmberApp(defaults, {
@@ -44,7 +51,7 @@ module.exports = function(defaults) {
       ]
     },
     fingerprint: {
-      enabled: isProductionLikeBuild,
+      enabled: true,
       exclude: [],
       prepend: prepend
     },
