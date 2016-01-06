@@ -176,13 +176,11 @@ In summary this means that when you run `ember deploy` 2 things happen:
  - assets are uploaded to an s3 bucket
  - the index.html file is uploaded to a small server with a redis instance.
 
-In order to deploy you need to add you AWS Iams credentials to a .env file. This file
-should correspond to the environment you are deploying against. For example if you
-are deploying to an server called `development` then you need a file called `.env.deploy.development`
-in the root of this project. Further information can be found here http://ember-cli.com/ember-cli-deploy/docs/v0.5.x/dotenv-support/.
+In order to deploy you need to add your AWS Iams credentials to a .env file in the
+root of the project.
 
 ```
-# /.env.deploy.development
+# /.env
 
 AWS_KEY=123456
 AWS_SECRET=abcdef
