@@ -22,8 +22,12 @@ module.exports = function(env) {
   /**
    * Add secrets from env variables.
    */
-  deployConfig.s3.accessKeyId = process.env.AWS_KEY;
-  deployConfig.s3.secretAccessKey = process.env.AWS_SECRET;
+  try {
+    deployConfig.s3.accessKeyId = process.env.AWS_KEY;
+    deployConfig.s3.secretAccessKey = process.env.AWS_SECRET;
+  } catch (e) {
+    console.info('no AWS creds specified in .env file, this is only needed if you are deploying.')
+  }
 
   return deployConfig;
 };

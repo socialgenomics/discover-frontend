@@ -14,7 +14,7 @@ switch (environment) {
     prepend = 'http://dg2kcfbxc77v1.cloudfront.net/';
     break;
   case 'staging':
-    prepend = '';
+    prepend = 'http://s3.amazonaws.com/frontend-staging-amzn-us-east-1.repositive.io/';
     break;
   case 'development':
     prepend = 'http://s3.amazonaws.com/frontend-dev-amzn-us-east-1.repositive.io/';
@@ -22,11 +22,15 @@ switch (environment) {
   case 'qa':
     prepend = '';
     break;
+  case 'local-development':
+    prepend = '';
+    break;
   default:
     prepend = '';
 }
 
 console.log(prepend);
+console.log(environment);
 
 module.exports = function(defaults) {
   var app = new EmberApp(defaults, {
