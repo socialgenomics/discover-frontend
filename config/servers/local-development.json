@@ -1,6 +1,6 @@
 {
   "apiBaseURL": "",
   "build": {
-    "environment": "development"
+    "environment": "local-development"
   }
 }
