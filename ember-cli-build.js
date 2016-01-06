@@ -20,7 +20,7 @@ switch (environment) {
     prepend = 'http://s3.amazonaws.com/frontend-dev-amzn-us-east-1.repositive.io/';
     break;
   case 'qa':
-    prepend = '';
+    prepend = 'http://s3.amazonaws.com/frontend-qa-amzn-us-east-1.repositive.io/';
     break;
   case 'local-development':
     prepend = '';

@@ -22,4 +22,4 @@ git_stats/
 .idea/
 .vagrant
 
-.env.deploy
+.env
