@@ -1,14 +1,14 @@
 {
-  "apiBaseURL": "http://backend-dev-amzn-us-east-1.repositive.io",
+  "apiBaseURL": "http://backend-qa-amzn-us-east-1.repositive.io",
   "build": {
-    "environment": "development"
+    "environment": "qa"
   },
   "s3": {
-    "bucket": "frontend-dev-amzn-us-east-1.repositive.io",
+    "bucket": "frontend-qa-amzn-us-east-1.repositive.io",
     "region": "us-east-1"
   },
   "ssh-tunnel":{
-    "host": "frontend-dev-amzn-us-east-1.repositive.io",
+    "host": "frontend-qa-amzn-us-east-1.repositive.io",
     "username": "repositive",
     "privateKeyPath": "~/.ssh/tim.repositive.io"
   },

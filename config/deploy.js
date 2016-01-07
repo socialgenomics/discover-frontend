@@ -33,6 +33,5 @@ module.exports = function(env) {
     console.warn('no AWS creds found in .env file. These are only needed for deployment.')
   }
 
-  console.log(deployConfig)
   return deployConfig;
 };

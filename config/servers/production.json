@@ -1,7 +1,7 @@
 {
   "apiBaseURL": "http://api.repositive.io",
   "build": {
-    "environment": "development"
+    "environment": "production"
   },
   "s3": {
     "bucket": "frontend-production-amzn-us-east-1.repositive.io",
