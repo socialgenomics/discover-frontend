@@ -11,6 +11,7 @@ Router.map(function() {
     path: '/'
   });
 
+  this.route('landing-page');
   this.route('about');
   this.route('team');
   this.route('faq');
@@ -60,6 +61,7 @@ Router.map(function() {
   this.route('404', {
     path: '/*path'
   });
+  this.route('typeform');
 });
 
 var pagesWithSideNavigation = [
