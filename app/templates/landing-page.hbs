@@ -4,22 +4,22 @@
       <div class="col m12">
         <div class="card">
           <div class="card-content">
-            <h1 class="sub-grey"><strong>DATA DISCOVERY PLATFORM</strong></h1>
-            <h3><em>Designed for users who produce, look for and use human genomic data.</em></h3>
-
             <div class="card-body">
+
+              <h1 class="sub-grey"><strong>DATA DISCOVERY PLATFORM</strong></h1>
+              <h3><em>Designed for users who produce, look for and use human genomic data.</em></h3>
 
               <div class="row">
 
                 <div class="col m5 offset-m1">
-                  <img src="/assets/images/landing-page.png" class="lizard-image" style="width:100%;" alt="landing page lizard">
+                  <img src="/assets/images/landing-page.png" class="lizard-image" alt="landing page lizard">
                 </div>
 
                 <div class="col m4 offset-m1">
                   <form class="landing-form" {{action "submitForm" on="submit"}}>
                     <div class="row">
                       <div class="col m12">
-                        {{#full-width-button class="teal" type="submit"}}SIGN UP FOR BETA{{/full-width-button}}
+                        {{#link-to 'typeform' tagName='button' class='btn teal'}}SIGN UP FOR BETA{{/link-to}}
                       </div>
                     </div>
                     <div class="row">
@@ -35,18 +35,7 @@
                     <div class="row">
                       <div class="col m12">
                         <label class="left">Insert your activation code to sign up</label>
-                        {{validated-input
-                          type="text"
-                          errors=errors.code
-                          value=code
-                          placeholder="jfG42dh/="
-                          formSubmitted=formSubmitted
-                        }}
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col m12">
-                        <button type="submit" class="btn full-width teal">Continue</button>
+                        {{partial "verify"}}
                       </div>
                     </div>
                   </form>
