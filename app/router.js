@@ -20,6 +20,7 @@ Router.map(function() {
   this.route('help');
   this.route('verify');
   this.route('policies');
+  this.route('typeform');
 
   this.resource('users', function() {
     this.route('signup');
@@ -61,7 +62,6 @@ Router.map(function() {
   this.route('404', {
     path: '/*path'
   });
-  this.route('typeform');
 });
 
 var pagesWithSideNavigation = [
