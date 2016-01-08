@@ -109,6 +109,9 @@ module.exports = function(environment) {
         environments: ['production']
       }
     ]
+    // sassOptions: {
+    //   includePaths: ['bower_components/materialize/sass']
+    // }
   };
 
   if (environment === 'development') {
