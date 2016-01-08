@@ -8,7 +8,6 @@
 
               <h1 class="sub-grey"><strong>DATA DISCOVERY PLATFORM</strong></h1>
               <h3><em>Designed for users who produce, look for and use human genomic data.</em></h3>
-
               <div class="row">
 
                 <div class="col m5 offset-m1">
@@ -39,6 +38,42 @@
                         {{partial "verify"}}
                       </div>
                     </div>
+=======
+                  <img src="/assets/images/landing-page.png" class="lizard-image" alt="landing page lizard">
+                </div>
+
+                <div class="col m4 offset-m1">
+                  <form class="landing-form">
+
+                    <div class="row">
+                      {{#full-width-button class="teal" type="submit"}}SIGN UP FOR BETA{{/full-width-button}}
+                    </div>
+
+                    <div class="row">
+                      <span>The platform is in development and we invite only users who are willing to give us feedback.</span>
+                    </div>
+
+                    <div class="row">
+                      <div class="or-div">
+                        <span>DO YOU HAVE THE ACTIVATION CODE?</span>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      {{validated-input
+                        type="text"
+                        lbl="Insert you activation code to sign up"
+                        value=code
+                        placeholder="jfG42dh/="
+                        formSubmitted=formSubmitted
+                      }}
+                    </div>
+
+                    <div class="row">
+                      {{#full-width-button class="teal" type="submit"}}CONTINUE{{/full-width-button}}
+                    </div>
+
+>>>>>>> 21651a06c91c372cc59e6be8915de890ef4d355d
                   </form>
                 </div>
 
