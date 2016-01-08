@@ -3,25 +3,23 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Repositive.io</title>
+    <title>Repositive</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    {{content-for 'head'}}
-    
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="assets/vendor.css">
-    <link rel="stylesheet" href="assets/app.css">
-    <link rel="icon" href="/assets/images/favicon.ico">
+    {{content-for "head"}}
 
-    {{content-for 'head-footer'}}
+    <link rel="stylesheet" href="assets/vendor.css">
+    <link rel="stylesheet" href="assets/repositive.css">
+
+    {{content-for "head-footer"}}
   </head>
-  <body class="platform">
-    {{content-for 'body'}}
+  <body>
+    {{content-for "body"}}
 
     <script src="assets/vendor.js"></script>
-    <script src="assets/main.js"></script>
+    <script src="assets/repositive.js"></script>
 
-    {{content-for 'body-footer'}}
+    {{content-for "body-footer"}}
   </body>
 </html>

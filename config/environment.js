@@ -64,9 +64,6 @@ module.exports = function(environment) {
       conf for the auth system
      */
     'simple-auth' : {
-      store: 'simple-auth-session-store:local-storage',
-      crossOriginWhitelist: ['http://*.repositive.io'],
-      authorizer: 'authorizer:repositive',
       routeAfterAuthentication: 'root',
       authenticationRoute: 'users.login',
       signupRoute: 'users.signup',
