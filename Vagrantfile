@@ -9,7 +9,8 @@ Vagrant.configure(2) do |config|
   # For a complete reference, please see the online documentation at
   # https://docs.vagrantup.com.
 
-  config.vm.box = "ubuntu/trusty64"
+  #config.vm.box = "ubuntu/trusty64"
+  config.vm.box = "repositive/trusty64-base"
 
   # Enable SSH Forwarding
   config.ssh.forward_agent = true
@@ -18,7 +19,7 @@ Vagrant.configure(2) do |config|
   config.vm.provider "virtualbox" do |v|
     v.name = "repositive-frontend"
     v.memory = 2048
-    v.cpus = 4
+    v.cpus = 1
     v.customize ["modifyvm", :id, "--usb", "off"]
     v.customize ["modifyvm", :id, "--usbehci", "off"]
   end
@@ -42,9 +43,8 @@ Vagrant.configure(2) do |config|
   # Config frontend machine
   config.vm.define "frontend" do |frontend|
 
-    # Run pre-setup script
     frontend.vm.provision "shell" do |s|
-        s.path = "ansible/setup.sh"
+        s.inline = "ansible-galaxy -p /home/vagrant/app/tmp/roles install -r /home/vagrant/app/ansible/requirements.yml --force"
     end
 
     # Provision VM with Ansible
@@ -57,7 +57,6 @@ Vagrant.configure(2) do |config|
         }
         #ansible.verbose =  'vvvv'
         ansible.raw_ssh_args = ['-o UserKnownHostsFile=/dev/null']
-        #ansible.raw_arguments = ['--check', '-M /my/modules']
     end
 
   end
