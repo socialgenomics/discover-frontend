@@ -4,7 +4,7 @@ import ServerValidationMixin from 'repositive/validators/remote/server/mixin';
 import ajax from 'ic-ajax';
 import ENV from 'repositive/config/environment';
 
-export default Ember.ObjectController.extend(
+export default Ember.Controller.extend(
   EmberValidations,
   ServerValidationMixin,
 {

@@ -24,7 +24,7 @@
     "dotenv": "^1.2.0",
     "ember-browserify": "^1.0.2",
     "ember-cli": "^2.2.0-beta.4",
-    "ember-cli-active-link-wrapper": "0.0.2",
+    "ember-cli-active-link-wrapper": "0.0.4",
     "ember-cli-app-version": "^1.0.0",
     "ember-cli-babel": "^5.1.5",
     "ember-cli-content-security-policy": "0.4.0",
@@ -70,5 +70,8 @@
     "onchange": "^2.0.0",
     "torii": "^0.5.1",
     "underscore": "^1.8.3"
+  },
+  "dependencies": {
+    "rimraf": "^2.5.0"
   }
 }
