@@ -1,4 +1,5 @@
 var EmberApp = require('ember-cli/lib/broccoli/ember-app');
+var settings = require('./config/settings');
 
 /*
   brocolli related build conf.
