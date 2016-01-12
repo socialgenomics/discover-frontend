@@ -62,6 +62,7 @@ Router.map(function() {
   this.route('404', {
     path: '/*path'
   });
+  this.route('video');
 });
 
 var pagesWithSideNavigation = [
