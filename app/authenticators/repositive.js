@@ -6,15 +6,16 @@ import ENV from 'repositive/config/environment';
 
 export default Base.extend({
   metrics: Ember.inject.service(),
+  session: Ember.inject.service(),
+  loginController: Ember.inject.controller('users.login'),
+
   restore: function(data) {
     return new Ember.RSVP.Promise(function(resolve, reject) {
       // TODO: display any notifications - i.e if you have new messages etc
-      /*
-        get the user profile.
-       */
       resolve(data);
     });
   },
+
   authenticate: function(data) {
     if ('provider' in data) {
       // this is a third party login
@@ -41,6 +42,7 @@ export default Base.extend({
       });
     }
   },
+
   invalidate: function(user) {
     return ajax({
       url: ENV.APIRoutes[ENV['simple-auth'].logoutRoute],
@@ -62,7 +64,7 @@ export default Base.extend({
     return new Ember.RSVP.Promise((resolve)=> {
       this.get('metrics').identify({
         email: resp.user.email,
-        inviteCode: this.get('loginController.controllers.application.code'),
+        inviteCode: this.get('session').set('data.inviteCode'),
         firstname: resp.user.firstname,
         lastname: resp.user.lastname,
         username: resp.user.username

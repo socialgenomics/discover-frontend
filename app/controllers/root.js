@@ -1,6 +1,8 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
+  session: Ember.inject.service(),
+  firstVisit: Ember.computed.alias('session.data.firstVisit'),
 
   requestsSorted:  function() {
     return Ember.ArrayProxy.extend(Ember.SortableMixin).create({
@@ -21,7 +23,7 @@ export default Ember.Controller.extend({
   actions : {
     // user clicks button on welcome page to enter site
     enterSite: function() {
-      this.set('firstVisit', false);
+      this.get('session').set('data.firstVisit', false);
     }
   }
 });

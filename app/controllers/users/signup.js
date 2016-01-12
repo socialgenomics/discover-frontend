@@ -9,7 +9,7 @@ export default Ember.Controller.extend(
    EmberValidations,
    ServerValidationMixin,
 {
-  needs: ['root'],
+  session: Ember.inject.service(),
 
   validations: {
 
@@ -111,7 +111,7 @@ export default Ember.Controller.extend(
           // render any messages provided by the backend
           this.showMessages(resp.messages);
           // We would like to show a welcome screen if this is the first visit.
-          this.get('controllers.root').set('firstVisit', true);
+          this.get('session').set('data.firstVisit', true);
           // login!
           this.get('session').authenticate('authenticator:repositive', credentials);
         })

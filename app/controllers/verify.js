@@ -11,7 +11,7 @@ export default Ember.Controller.extend(
 {
   queryParams: ['code'],
   code: null,
-  needs: 'application',
+  session: Ember.inject.service(),
 
   validations: {
     code: {
@@ -27,14 +27,14 @@ export default Ember.Controller.extend(
         url: ENV.APIRoutes['invites'],
         type: 'POST',
         data: {
-          'invite': this.code
+          'invite': this.get('code')
         }
       })
       .then((resp)=> {
         if (resp.permitted) {
-          this.set('controllers.application.isVerified', true);
-          this.set('controllers.application.code', this.get('code'));
-          this.transitionToRoute('/users/signup');
+          this.get('session').set('data.isVerified', true);
+          this.get('session').set('data.inviteCode', this.get('code'));
+          this.transitionToRoute('users.signup');
         } else {
           this.addValidationErrors(resp.errors);
         }
