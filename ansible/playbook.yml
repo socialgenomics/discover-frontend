@@ -8,7 +8,6 @@
     - geerlingguy.redis
     - ansible-nodejs
     - nextpertise.supervisord
-    #- Celc.watchman
     - ansible.watchman
     - repositive-frontend
   vars:

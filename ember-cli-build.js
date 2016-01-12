@@ -11,7 +11,8 @@ var isProductionLikeBuild = ['production', 'staging'].indexOf(environment) > -1;
 var prepend;
 switch (environment) {
   case 'production':
-    prepend = 'http://dg2kcfbxc77v1.cloudfront.net/';
+    //prepend = 'http://dg2kcfbxc77v1.cloudfront.net/';
+    prepend = 'http://s3.amazonaws.com/frontend-prod-amzn-us-east-1.repositive.io/';
     break;
   case 'staging':
     prepend = 'http://s3.amazonaws.com/frontend-staging-amzn-us-east-1.repositive.io/';
