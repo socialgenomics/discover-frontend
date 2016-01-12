@@ -103,7 +103,7 @@ export default Ember.Controller.extend(
       if (this.get('isValid')) {
         var credentials = this.getProperties('firstname', 'lastname', 'email', 'password');
         ajax({
-          url: ENV.APIRoutes[ENV['simple-auth'].signupRoute],
+          url: ENV.APIRoutes[ENV['ember-simple-auth'].signupRoute],
           type: 'POST',
           data: credentials
         })
@@ -113,7 +113,10 @@ export default Ember.Controller.extend(
           // We would like to show a welcome screen if this is the first visit.
           this.get('session').set('data.firstVisit', true);
           // login!
-          this.get('session').authenticate('authenticator:repositive', credentials);
+          this.get('session').authenticate('authenticator:repositive', credentials)
+            .catch(err=> {
+              console.log(err);
+            });
         })
         .catch((err)=> {
           //_this.showMessages(xhr.responseJSON.messages);

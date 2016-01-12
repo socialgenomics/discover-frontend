@@ -63,8 +63,9 @@ module.exports = function(environment) {
     /*
       conf for the auth system
      */
-    'simple-auth' : {
+    'ember-simple-auth' : {
       routeAfterAuthentication: 'root',
+      routeIfAlreadyAuthenticated: 'root',
       authenticationRoute: 'users.login',
       signupRoute: 'users.signup',
       logoutRoute: 'users.logout'

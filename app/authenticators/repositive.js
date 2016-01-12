@@ -7,7 +7,8 @@ import ENV from 'repositive/config/environment';
 export default Base.extend({
   metrics: Ember.inject.service(),
   session: Ember.inject.service(),
-  loginController: Ember.inject.controller('users.login'),
+  //loginController: Ember.inject.service('controllers:users/login'),
+  //loginController: Ember.inject.controller('users.login'),
 
   restore: function(data) {
     return new Ember.RSVP.Promise(function(resolve, reject) {
@@ -29,7 +30,7 @@ export default Base.extend({
       });
     } else {
       return ajax({
-        url: ENV.APIRoutes[ENV['simple-auth'].authenticationRoute],
+        url: ENV.APIRoutes[ENV['ember-simple-auth'].authenticationRoute],
         type: 'POST',
         data: data
       })
@@ -37,7 +38,7 @@ export default Base.extend({
         return this._resolveWithResp(resp);
       })
       .catch((err)=> {
-        this.get('loginController').addValidationErrors(err.jqXHR.responseJSON.errors);
+        //this.get('loginController').addValidationErrors(err.jqXHR.responseJSON.errors);
         return Ember.RSVP.reject(err);
       });
     }
@@ -45,7 +46,7 @@ export default Base.extend({
 
   invalidate: function(user) {
     return ajax({
-      url: ENV.APIRoutes[ENV['simple-auth'].logoutRoute],
+      url: ENV.APIRoutes[ENV['ember-simple-auth'].logoutRoute],
       type: 'POST',
       data: {
         authToken: user.authToken

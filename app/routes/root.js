@@ -32,6 +32,7 @@ if (ENV.environment === 'local-development') {
   ]).slice(0, 3);
 }
 export default Ember.Route.extend({
+  session: Ember.inject.service(),
 
   model: function() {
     if (this.get('session.isAuthenticated')) {
