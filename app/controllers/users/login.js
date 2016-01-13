@@ -43,17 +43,12 @@ export default Ember.Controller.extend(
       this.set('loading', true);
       this.set('formSubmitted', true);
       this.get('session')
-        .authenticate('authenticator:repositive', {
-          email: this.email,
-          password: this.password
-        })
-        .then(resp=> {
-          this.set('loading', false);
-        })
-        .catch(err=> {
-          this.displayMessages(err.messages)
-          this.set('loading', false);
-        });
+      .authenticate('authenticator:repositive', {
+        email: this.get('email'),
+        password: this.get('password')
+      })
+      .then(this.displayMessages)
+      .catch(this.displayMessages);
     },
 
     resetPassword: function() {
@@ -62,21 +57,19 @@ export default Ember.Controller.extend(
           url: ENV.APIRoutes['reset-password'] + '/' + this.get('email'),
           type: 'GET'
         })
-        .then(resp=> {
-          this.displayMessages(resp.messages);
-        })
-        .catch(err=> {
-          this.displayMessages(err.jqXHR.responseJSON.messages);
-        });
+        .then(this.displayMessages)
+        .catch(this.displayMessages);
       } else {
         this.transitionToRoute('users.resend-password');
       }
     }
   },
 
-  displayMessages: function(messages) {
+  displayMessages: function(resp) {
+    let messages = resp.messages;
     this.addValidationErrors(messages);
     this.set('messages', []);
     this.get('messages').addObjects(messages);
+    this.set('loading', false);
   }
 });

@@ -21,7 +21,7 @@ export default Ember.Controller.extend(
 
     email: {
       presence: {
-        message: 'Can\'t be blank.'
+        message: ''
       },
       format: {
         with: /^[\w+\-.]+@[a-z\d\-.]+\.[a-z]+$/i,
@@ -54,7 +54,7 @@ export default Ember.Controller.extend(
   password: null,
   strength: null,
   showPassword: false,
-  formSubmitted: false,
+  loading: false,
 
   type: function() {
     return this.get('showPassword') ? 'text' : 'password';
@@ -67,6 +67,10 @@ export default Ember.Controller.extend(
     this.set('firstname', firstname);
     this.set('lastname', lastname);
   }.observes('fullname'),
+
+  buttonDisabled: function() {
+    return !this.get('isValid') || this.get('loading');
+  }.property('isValid', 'loading'),
 
   passwordStrength: function() {
     let numErrors = this.get('errors.password.length');
@@ -89,19 +93,25 @@ export default Ember.Controller.extend(
     }
   }.observes('password'),
 
-  showMessages : function(messages) {
+  displayMessages : function(resp) {
+    let messages = resp.messages;
+    this.addValidationErrors(messages);
+    messages = messages.reject(item => {
+      return item.type === 'validation';
+    });
     if (messages) {
-      messages.forEach(function(message) {
+      messages.forEach(message => {
         this.flashMessages.success(message);
-      }.bind(this));
+      });
     }
+    this.set('loading', false);
   },
 
   actions: {
     submitForm: function() {
-      this.set('formSubmitted', true);
       if (this.get('isValid')) {
-        var credentials = this.getProperties('firstname', 'lastname', 'email', 'password');
+        let credentials = this.getProperties('firstname', 'lastname', 'email', 'password');
+        this.set('loading', true);
         ajax({
           url: ENV.APIRoutes[ENV['ember-simple-auth'].signupRoute],
           type: 'POST',
@@ -109,21 +119,13 @@ export default Ember.Controller.extend(
         })
         .then((resp)=> { // signup has suceeded, now login
           // render any messages provided by the backend
-          this.showMessages(resp.messages);
+          this.displayMessages(resp);
           // We would like to show a welcome screen if this is the first visit.
           this.get('session').set('data.firstVisit', true);
           // login!
-          this.get('session').authenticate('authenticator:repositive', credentials)
-            .catch(err=> {
-              console.log(err);
-            });
+          this.get('session').authenticate('authenticator:repositive', credentials);
         })
-        .catch((err)=> {
-          //_this.showMessages(xhr.responseJSON.messages);
-          this.addValidationErrors(err.jqXHR.responseJSON.errors);
-        });
-      } else {
-        console.log('invalid');
+        .catch(this.displayMessages);
       }
     },
     toggleCheckbox: function() {
