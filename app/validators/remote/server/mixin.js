@@ -3,20 +3,19 @@ import ServerValidator from '../server';
 
 
 export default Ember.Mixin.create({
-  addValidationErrors: function(errors) {
+  addValidationErrors: function(messages) {
     var serverValidators = {};
     this.validators.forEach(function(validator) {
-      // es6 module transpiler screws this up
       if (validator instanceof ServerValidator) {
-        // bloddy hack
-        //  if (validator.toString().search(/repositive@validator:remote\/server::/)){
         serverValidators[validator.property] = validator;
       }
     });
-    for (var key in errors) {
-      if (key in serverValidators) {
-        serverValidators[key].set('message', errors[key]);
+    messages.forEach(message=> {
+      if (message.type === 'validation') {
+        if (message.field in serverValidators) {
+          serverValidators[message.field].set('message', message.message);
+        }
       }
-    }
+    });
   }
 });

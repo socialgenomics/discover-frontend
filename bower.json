@@ -12,7 +12,8 @@
     "qunit": "~1.20.0",
     "moment": ">= 2.8.0",
     "repositive-styles": "git@github.com:repositive/repositive-styles.git#development",
-    "showdown": "~1.2.3"
+    "showdown": "~1.2.3",
+    "materialize": "~0.97.0"
   },
   "resolutions": {
     "ember": "2.2.0",

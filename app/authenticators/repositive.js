@@ -7,8 +7,6 @@ import ENV from 'repositive/config/environment';
 export default Base.extend({
   metrics: Ember.inject.service(),
   session: Ember.inject.service(),
-  //loginController: Ember.inject.service('controllers:users/login'),
-  //loginController: Ember.inject.controller('users.login'),
 
   restore: function(data) {
     return new Ember.RSVP.Promise(function(resolve, reject) {
@@ -27,20 +25,18 @@ export default Base.extend({
       })
       .then((resp)=> {
         return this._resolveWithResp(resp);
-      });
+      })
+      .catch(this._handleError);
     } else {
       return ajax({
         url: ENV.APIRoutes[ENV['ember-simple-auth'].authenticationRoute],
         type: 'POST',
         data: data
       })
-      .then((resp)=> {
+      .then(resp=> {
         return this._resolveWithResp(resp);
       })
-      .catch((err)=> {
-        //this.get('loginController').addValidationErrors(err.jqXHR.responseJSON.errors);
-        return Ember.RSVP.reject(err);
-      });
+      .catch(this._handleError);
     }
   },
 
@@ -53,14 +49,11 @@ export default Base.extend({
       }
     })
     .then((resp)=> {
-      //_this.showMessages(resp.messages);
       return Ember.RSVP.resolve(resp);
     })
-    .catch((err)=> {
-      //_this.showMessages(xhr.responseJSON.messages);
-      return Ember.RSVP.reject(err.jqXHR.responseJSON);
-    });
+    .catch(this._handleError);
   },
+
   _resolveWithResp: function(resp) {
     return new Ember.RSVP.Promise((resolve)=> {
       this.get('metrics').identify({
@@ -70,6 +63,9 @@ export default Base.extend({
         lastname: resp.user.lastname,
         username: resp.user.username
       });
+      /*
+        Use ember run to avoid pain.
+       */
       Ember.run(function() {
         // all the properties of the object you resolve with
         // will be added to the session
@@ -77,11 +73,15 @@ export default Base.extend({
       });
     });
   },
-  showMessages : function(messages) {
-    if (messages) {
-      messages.forEach(function(message) {
-        console.log(message);
-      });
+
+  _handleError: function(err) {
+    if (err.jqXHR !== undefined) {
+      /*
+        if the error is 4XX or 5XX server resp return it.
+       */
+      return Ember.RSVP.reject(err.jqXHR.responseJSON);
+    } else {
+      throw err;
     }
   }
 });

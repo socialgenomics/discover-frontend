@@ -8,7 +8,7 @@ export default Ember.Controller.extend(
   EmberValidations,
   ServerValidationMixin,
 {
-  needs: 'application', // HACKISH - the repositive authenticator has access to login controller and needs application
+  session: Ember.inject.service(),
   email: null,
   password: null,
   loading: false,
@@ -43,18 +43,17 @@ export default Ember.Controller.extend(
       this.set('loading', true);
       this.set('formSubmitted', true);
       this.get('session')
-      .authenticate('authenticator:repositive', {
-        email: this.email,
-        password: this.password
-      })
-      .then(
-      resp=> {
-        this.set('loading', false);
-      },
-      error=> {
-        //_this.addValidationErrors(xhr.responseJSON.errors);
-        this.set('loading', false);
-      });
+        .authenticate('authenticator:repositive', {
+          email: this.email,
+          password: this.password
+        })
+        .then(resp=> {
+          this.set('loading', false);
+        })
+        .catch(err=> {
+          this.displayMessages(err.messages)
+          this.set('loading', false);
+        });
     },
 
     resetPassword: function() {
@@ -64,17 +63,19 @@ export default Ember.Controller.extend(
           type: 'GET'
         })
         .then(resp=> {
-          this.reloadMessages(resp.messages);
+          this.displayMessages(resp.messages);
         })
         .catch(err=> {
-          this.reloadMessages(err.jqXHR.responseJSON.messages);
+          this.displayMessages(err.jqXHR.responseJSON.messages);
         });
       } else {
         this.transitionToRoute('users.resend-password');
       }
     }
   },
-  reloadMessages: function(messages) {
+
+  displayMessages: function(messages) {
+    this.addValidationErrors(messages);
     this.set('messages', []);
     this.get('messages').addObjects(messages);
   }

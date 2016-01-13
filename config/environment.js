@@ -48,7 +48,8 @@ module.exports = function(environment) {
         'datasets.search' : '/api/datasets/search',
         'invites': '/api/invites',
         'users.profiles': '/api/users/profiles',
-        'reset-password': '/api/users/password-reset'
+        'reset-password': '/api/users/password-reset',
+        'verify-email': '/api/users/verify'
       };
       _.each(mapping,
         function(path, key, obj) {
@@ -133,12 +134,6 @@ module.exports = function(environment) {
     ENV.APP.LOG_VIEW_LOOKUPS = false;
 
     ENV.APP.rootElement = '#ember-testing';
-  }
-
-  if (environment === 'testing') {
-    ENV.locationType = 'none';
-    ENV.torii.providers['google-oauth2'].redirectUri = 'http://testing.discover.repositive.io';
-    ENV.torii.providers['linked-in-oauth2'].redirectUri = 'http://testing.discover.repositive.io';
   }
 
   if (environment === 'production') {
