@@ -1,19 +1,20 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
+  session: Ember.inject.service(),
   queryParams: ['tab'],
   tab: 'comments',
   isEditingTags: false,
 
   setAvatar: function() {
-    this.set('avatar', this.controllerFor('application').get('avatar'));
+    this.set('avatar', this.get('application').get('avatar'));
   }.on('init'),
 
-  setAvatarsOnComments: function() {
-    this.get('model.comments.@each.UserId').forEach((id)=> {
-      this.store.query('profile', { UserId: id });
-    });
-  }.observes('model.comments'),
+  // setAvatarsOnComments: function() {
+  //   this.get('model.comments.@each.UserId').forEach((id)=> {
+  //     this.store.query('profile', { UserId: id });
+  //   });
+  // }.observes('model.comments'),
 
   comments: function() {
     return Ember.ArrayProxy.createWithMixins(Ember.SortableMixin, {

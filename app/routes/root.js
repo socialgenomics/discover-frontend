@@ -52,6 +52,7 @@ export default Ember.Route.extend({
       })
       .catch(function(err) {
         Ember.Logger.error(err);
+        throw err;
       });
     } else {
       return null;

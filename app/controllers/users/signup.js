@@ -112,6 +112,9 @@ export default Ember.Controller.extend(
       if (this.get('isValid')) {
         let credentials = this.getProperties('firstname', 'lastname', 'email', 'password');
         this.set('loading', true);
+        /*
+          Signup with repositive.
+         */
         ajax({
           url: ENV.APIRoutes[ENV['ember-simple-auth'].signupRoute],
           type: 'POST',
@@ -123,9 +126,20 @@ export default Ember.Controller.extend(
           // We would like to show a welcome screen if this is the first visit.
           this.get('session').set('data.firstVisit', true);
           // login!
-          this.get('session').authenticate('authenticator:repositive', credentials);
+          this.get('session')
+          .authenticate('authenticator:repositive', credentials)
+          .catch(this.displayMessages);
         })
-        .catch(this.displayMessages);
+        .catch(err => { // error with signup
+          if (err.jqXHR !== undefined) {
+            /*
+              if the error is 4XX or 5XX server resp display the error messages.
+             */
+            this.displayMessages(err.jqXHR.responseJSON);
+          } else {
+            throw err;
+          }
+        });
       }
     },
     toggleCheckbox: function() {
