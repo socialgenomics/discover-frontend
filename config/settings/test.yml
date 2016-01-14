@@ -1,8 +1,8 @@
-# Default/local development settings
+# test settings
 ---
 apiBaseURL:
 build:
-  environment: development
+  environment: test
 
 deploy:
   s3:
@@ -11,20 +11,19 @@ deploy:
     accessKeyId:
     secretAccessKey:
   ssh-tunnel:
-    host: frontend-01
-    username: vagrant
+    host:
+    username:
   redis:
-    host: localhost
-    allowOverwrite: true
-
+    host:
+    allowOverwrite:
 fingerprint:
-  enabled: false
+  enabled: true
   # URL to prepend to assets
   prepend:
 sourcemaps:
   enabled: true
-minifyCSS: false
-minifyJS: false
+minifyCSS: true
+minifyJS: true
 pipeline:
   activateOnDeploy: true
 # Ember environment
@@ -37,4 +36,3 @@ environment:
       - linked-in-oauth2:
         apiKey: 75fsbvpfgi1667
         redirectUri: http://localhost:4200
-

@@ -1,0 +1,38 @@
+# Default/local development settings
+---
+apiBaseURL:
+build:
+  environment: development
+
+deploy:
+  s3:
+    bucket:
+    region:
+    accessKeyId:
+    secretAccessKey:
+  ssh-tunnel:
+    host: frontend-01
+    username: vagrant
+  redis:
+    host: localhost
+    allowOverwrite: true
+fingerprint:
+  enabled: false
+  # URL to prepend to assets
+  prepend:
+sourcemaps:
+  enabled: true
+minifyCSS: false
+minifyJS: false
+pipeline:
+  activateOnDeploy: true
+# Ember environment
+environment:
+  torii:
+    providers:
+      - google-oauth2:
+        apiKey: 677526813069-6tmd1flqovp5miud67phqlks49bqdo8i.apps.googleusercontent.com
+        redirectUri: http://localhost:4200
+      - linked-in-oauth2:
+        apiKey: 75fsbvpfgi1667
+        redirectUri: http://localhost:4200

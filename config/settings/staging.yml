@@ -1,15 +1,15 @@
-# Development settings
+# Staging settings
 ---
-apiBaseURL: http://backend-dev-amzn-us-east-1.repositive.io
+apiBaseURL: http://backend-staging-amzn-us-east-1.repositive.io
 build:
-  environment: development
+  environment: staging
 
 deploy:
   s3:
     bucket:
     region:
   ssh-tunnel:
-    host: frontend-dev-amzn-us-east-1.repositive.io
+    host: frontend-staging-amzn-us-east-1.repositive.io
     username: repositive
   redis:
     host: localhost
@@ -18,7 +18,7 @@ deploy:
 fingerprint:
   enabled: true
   # URL to prepend to assets
-  prepend: http://s3.amazonaws.com/frontend-dev-amzn-us-east-1.repositive.io/
+  prepend: http://s3.amazonaws.com/frontend-staging-amzn-us-east-1.repositive.io/
 sourcemaps:
   enabled: true
 minifyCSS: true
@@ -31,8 +31,8 @@ environment:
     providers:
       google-oauth2:
         apiKey: 677526813069-6tmd1flqovp5miud67phqlks49bqdo8i.apps.googleusercontent.com
-        redirectUri: http://frontend-dev-amzn-us-east-1.repositive.io
+        redirectUri: http://frontend-staging-amzn-us-east-1.repositive.io
       linked-in-oauth2:
         apiKey: 75fsbvpfgi1667
-        redirectUri: http://frontend-dev-amzn-us-east-1.repositive.io
+        redirectUri: http://frontend-staging-amzn-us-east-1.repositive.io
 

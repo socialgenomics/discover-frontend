@@ -1,43 +1,48 @@
+/*jshint node: true */
+
 var EmberApp = require('ember-cli/lib/broccoli/ember-app');
 var settings = require('./config/settings');
 
 /*
-  brocolli related build conf.
+ brocolli related build conf.
  */
 
-module.exports = function(defaults) {
-  var app = new EmberApp(defaults, {
-    outputPaths: {
-      app: {
-        css: {
-          'app': '/assets/app.css'
+module.exports = function (defaults) {
+
+  var environment = EmberApp.env(),
+    config = settings.getConfig(environment),
+    app = new EmberApp(defaults, {
+      outputPaths: {
+        app: {
+          css: {
+            'app': '/assets/app.css'
+          },
+          js: '/assets/main.js'
         },
-        js: '/assets/main.js'
+        vendor: {
+          css: '/assets/vendor.css',
+          js: '/assets/vendor.js'
+        }
       },
-      vendor: {
-        css: '/assets/vendor.css',
-        js: '/assets/vendor.js'
+      sassOptions: {
+        inputFile: 'app.scss',
+        outputFile: 'app.css',
+        includePaths: [
+          'bower_components/materialize/sass',
+          'bower_components'
+        ]
+      },
+      fingerprint: config.fingerprint,
+      sourcemaps: config.sourcemaps,
+      minifyCSS: config.minifyCSS,
+      minifyJS: config.minifyJS,
+      jscsOptions: {
+        configPath: '.jscsrc',
+        enabled: true,
+        esnext: true,
+        disableTestGenerator: false
       }
-    },
-    sassOptions: {
-      inputFile: 'app.scss',
-      outputFile: 'app.css',
-      includePaths: [
-        'bower_components/materialize/sass',
-        'bower_components'
-      ]
-    },
-    fingerprint: settings.fingerprint,
-    sourcemaps: settings.sourcemaps,
-    minifyCSS: settings.minifyCSS,
-    minifyJS: settings.minifyJS,
-    jscsOptions: {
-      configPath: '.jscsrc',
-      enabled: true,
-      esnext: true,
-      disableTestGenerator: false
-    }
-  });
+    });
 
   // Use `app.import` to add additional libraries to the generated
   // output files.

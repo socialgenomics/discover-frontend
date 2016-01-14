@@ -1,12 +1,26 @@
+/*jshint node: true */
+/* globals __dirname: false */
+
 var YAML = require('yamljs');
-/*
- Use ths env var `FRONTEND_DEPLOY_CONFIG_PATH` to direct ember-cli-deploy
- to a deploy configuration file to use.
 
- */
+const CONFIG_PATH = __dirname + '/settings';
 
-settings = YAML.load('/home/vagrant/app/config/settings/default.yml');
-console.log("settings", settings);
-//process.exit(1)
-module.exports = settings;
+module.exports = {
+  /**
+   * Read configuration depending on environment.
+   */
+  getConfig: function (environment) {
+    var config, configFile;
+    try {
+      configFile = CONFIG_PATH + '/' + environment + '.yml';
+      console.log("Reading config:", configFile);
+      config = YAML.load(configFile);
 
+    } catch (e) {
+      console.log("Could not read ", environment, "YAML config");
+      process.exit(1);
+    }
+    return config;
+  }
+
+};
