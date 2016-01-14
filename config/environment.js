@@ -1,16 +1,15 @@
 var _ = require('underscore');
-var getDeployConf = require('./deploy');
+var settings = require('./settings');
 
 /*
   app related conf.
  */
 
 module.exports = function(environment) {
-  var deployConf = getDeployConf(environment);
 
   var ENV = {
     modulePrefix: 'repositive',
-    environment: environment,
+    environment: settings.build.environment,
     baseURL: '/',
     locationType: 'auto',
     EmberENV: {
@@ -28,13 +27,7 @@ module.exports = function(environment) {
     /*
       The base URL path of the API.
      */
-    APIBaseURL: (function() {
-      if (environment === deployConf.build.environment) {
-        return deployConf.apiBaseURL;
-      } else {
-        return '';
-      }
-    }()),
+    APIBaseURL: settings.apiBaseURL,
 
     /*
       Mapping of route names to API paths, needed for non ember-data calls to
@@ -52,8 +45,8 @@ module.exports = function(environment) {
       };
       _.each(mapping,
         function(path, key, obj) {
-          if (environment === deployConf.build.environment) {
-            obj[key] =  deployConf.apiBaseURL + path;
+          if (environment === settings.build.environment) {
+            obj[key] =  settings.apiBaseURL + path;
           }
         }
       );
@@ -75,18 +68,7 @@ module.exports = function(environment) {
     'simple-auth-cookie-store' : {
       cookieName: 'repositive.io'
     },
-    torii: {
-      providers: {
-        'google-oauth2': {
-          apiKey:      '677526813069-6tmd1flqovp5miud67phqlks49bqdo8i.apps.googleusercontent.com',
-          redirectUri: 'http://localhost:4200'
-        },
-        'linked-in-oauth2': {
-          apiKey:      '75fsbvpfgi1667',
-          redirectUri: 'http://localhost:4200'
-        }
-      }
-    },
+    torii: settings.environment.torii,
     contentSecurityPolicy: {
       'default-src': "'none'",
       'font-src': "'self' data: fonts.gstatic.com",

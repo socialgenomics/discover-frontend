@@ -21,7 +21,6 @@
   "devDependencies": {
     "broccoli-asset-rev": "^2.1.2",
     "broccoli-jscs": "^1.1.0",
-    "dotenv": "^1.2.0",
     "ember-browserify": "^1.0.2",
     "ember-cli": "1.13.13",
     "ember-cli-active-link-wrapper": "0.0.2",
@@ -65,6 +64,7 @@
     "moment": "^2.10.6",
     "onchange": "^2.0.0",
     "torii": "^0.5.1",
-    "underscore": "^1.8.3"
+    "underscore": "^1.8.3",
+    "yamljs": "^0.2.4"
   }
 }
