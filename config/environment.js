@@ -118,16 +118,5 @@ module.exports = function (environment) {
     ENV.APP.rootElement = '#ember-testing';
   }
 
-  // if (environment === 'testing') {
-  //   ENV.locationType = 'none';
-  //   ENV.torii.providers['google-oauth2'].redirectUri = 'http://testing.discover.repositive.io';
-  //   ENV.torii.providers['linked-in-oauth2'].redirectUri = 'http://testing.discover.repositive.io';
-  // }
-  //
-  // if (environment === 'production') {
-  //   ENV.torii.providers['google-oauth2'].redirectUri = 'http://discover.repositive.io';
-  //   ENV.torii.providers['linked-in-oauth2'].redirectUri = 'http://discover.repositive.io';
-  // }
-
   return ENV;
 };
