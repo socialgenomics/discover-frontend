@@ -70,6 +70,14 @@ module.exports = function(defaults) {
       enabled: true,
       esnext: true,
       disableTestGenerator: false
+    },
+    sassOptions: {
+      inputFile: 'app.scss',
+      outputFile: 'main.css',
+      includePaths: [
+        'bower_components/materialize/sass',
+        'bower_components'
+      ]
     }
   });
 

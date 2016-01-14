@@ -19,6 +19,8 @@ Router.map(function() {
   this.route('help');
   this.route('verify');
   this.route('policies');
+  this.route('typeform');
+  this.route('video');
 
   this.resource('users', function() {
     this.route('signup');

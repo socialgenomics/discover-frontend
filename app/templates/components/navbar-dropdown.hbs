@@ -5,19 +5,20 @@
     <i class="mdi-social-notifications"></i>
   </div>
   -->
-
-  <a class='dropdown-button valign-wrapper' data-beloworigin="true" data-activates='profile-drop'>
-
-    <div class="dp-wrapper">
-      {{
-        gravatar-image
-        class="gravatar"
-        email=currentUser.email
-        defaultImage=avatar
-      }}
-    </div>
-    <i class="mdi-navigation-arrow-drop-down hide-on-small-only"></i>
-  </a>
+  <div class="navbar-button">
+    <a class='dropdown-button valign-wrapper' data-beloworigin="true" data-activates='profile-drop'>
+      <div class="dp-wrapper">
+        {{
+          gravatar-image
+          class="gravatar"
+          email=currentUser.email
+          defaultImage=avatar
+        }}
+        <h5>{{currentUser.firstname}}</h5>
+      </div>
+      <i class="mdi-navigation-arrow-drop-down hide-on-small-only"></i>
+    </a>
+  </div>
 
   <ul id='profile-drop' class='dropdown-content'>
     <li>{{#link-to 'user' currentUser.username}}PROFILE{{/link-to}}</li>
