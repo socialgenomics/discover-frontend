@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 
 export default Ember.Mixin.create({
-  //  needs: ['application'], I believe the lookup in the third-pary initalizer is causig this to fail
+  session: Ember.inject.service(),
   actions: {
     authenticateWithGooglePlus: function() {
       this.get('torii').open('google-oauth2')

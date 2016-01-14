@@ -1,8 +1,9 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
+  session: Ember.inject.service(),
   model: function() {
-    var currentUser = this.get('session.secure.user');
+    var currentUser = this.get('session.data.authenticated.user');
 
     return new Ember.RSVP.all([
       this.store.findRecord('user', currentUser.id),

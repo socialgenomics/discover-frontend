@@ -1,9 +1,10 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
+  session: Ember.inject.service(),
   avatar: null,
   currentUser: Ember.computed(function() {
-    return this.get('session.secure.user');
+    return this.get('session.data.authenticated.user');
   }),
 
   init: function() {

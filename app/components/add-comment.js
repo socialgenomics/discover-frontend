@@ -3,6 +3,7 @@ import Ember from 'ember';
 let { isEmpty } = Ember;
 
 export default Ember.Component.extend({
+  session: Ember.inject.service(),
   isActive: false,
   isValid: false,
   classNames: 'write-comment',
@@ -10,7 +11,7 @@ export default Ember.Component.extend({
   comment: null,
   avatar: null,
   currentUser: Ember.computed(function() {
-    return this.get('session.secure.user');
+    return this.get('session.data.authenticated.user');
   }),
 
   init: function() {

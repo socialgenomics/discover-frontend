@@ -5,24 +5,17 @@ export default Ember.Controller.extend({
   queryParams: ['tab'],
   tab: 'comments',
   isEditingTags: false,
+  comments: Ember.computed.sort('model.commnets', 'createdAt:desc'),
 
-  setAvatar: function() {
-    this.set('avatar', this.get('application').get('avatar'));
-  }.on('init'),
+  // setAvatar: function() {
+  //   this.set('avatar', this.get('application').get('avatar'));
+  // }.on('init'),
 
   // setAvatarsOnComments: function() {
   //   this.get('model.comments.@each.UserId').forEach((id)=> {
   //     this.store.query('profile', { UserId: id });
   //   });
   // }.observes('model.comments'),
-
-  comments: function() {
-    return Ember.ArrayProxy.createWithMixins(Ember.SortableMixin, {
-      sortProperties: ['createdAt'],
-      sortAscending: false,
-      content: this.get('model.comments')
-    });
-  }.property('model.comments'),
 
   isPublic: function() {
     var access = this.get('model.repository.access');
@@ -48,7 +41,7 @@ export default Ember.Controller.extend({
       var cmnt = this.store.createRecord('comment', {
         text: text,
         dataset: this.model,
-        owner: this.get('session.secure.user')
+        owner: this.get('session.data.authenticated.user.id')
       });
       cmnt.save();
     },
