@@ -1,0 +1,26 @@
+---
+apiBaseURL: http://backend-dev-amzn-us-east-1.repositive.io
+build:
+  environment: development
+
+deploy:
+  s3:
+    bucket:
+    region:
+  ssh-tunnel:
+    host: frontend-dev-amzn-us-east-1.repositive.io
+    username: repositive
+  redis:
+    host: localhost
+    allowOverwrite: true
+
+fingerprint:
+  enabled: true
+  # URL to prepend to assets
+  prepend: http://s3.amazonaws.com/frontend-dev-amzn-us-east-1.repositive.io/
+sourcemaps:
+  enabled: true
+minifyCSS: true
+minifyJS: true
+pipeline:
+  activateOnDeploy: true

@@ -5,35 +5,6 @@ var settings = require('./config/settings');
   brocolli related build conf.
  */
 
-var environment = EmberApp.env();
-
-var isProductionLikeBuild = ['production', 'staging'].indexOf(environment) > -1;
-
-var prepend;
-switch (environment) {
-  case 'production':
-    //prepend = 'http://dg2kcfbxc77v1.cloudfront.net/';
-    prepend = 'http://s3.amazonaws.com/frontend-prod-amzn-us-east-1.repositive.io/';
-    break;
-  case 'staging':
-    prepend = 'http://s3.amazonaws.com/frontend-staging-amzn-us-east-1.repositive.io/';
-    break;
-  case 'development':
-    prepend = 'http://s3.amazonaws.com/frontend-dev-amzn-us-east-1.repositive.io/';
-    break;
-  case 'qa':
-    prepend = 'http://s3.amazonaws.com/frontend-qa-amzn-us-east-1.repositive.io/';
-    break;
-  case 'local-development':
-    prepend = '';
-    break;
-  default:
-    prepend = '';
-}
-
-console.log(prepend);
-console.log(environment);
-
 module.exports = function(defaults) {
   var app = new EmberApp(defaults, {
     outputPaths: {
@@ -56,16 +27,10 @@ module.exports = function(defaults) {
         'bower_components'
       ]
     },
-    fingerprint: {
-      enabled: true,
-      exclude: [],
-      prepend: prepend
-    },
-    sourcemaps: {
-      enabled: !isProductionLikeBuild
-    },
-    minifyCSS: { enabled: isProductionLikeBuild },
-    minifyJS: { enabled: isProductionLikeBuild },
+    fingerprint: settings.fingerprint,
+    sourcemaps: settings.sourcemaps,
+    minifyCSS: settings.minifyCSS,
+    minifyJS: settings.minifyJS,
     jscsOptions: {
       configPath: '.jscsrc',
       enabled: true,
