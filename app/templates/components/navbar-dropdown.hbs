@@ -1,10 +1,5 @@
 {{yield}}
 <div class="navbar-dropdown">
-  <!--
-  <div class="notification-icon grey-text tiny">
-    <i class="mdi-social-notifications"></i>
-  </div>
-  -->
   <div class="navbar-button">
     <a class='dropdown-button valign-wrapper' data-beloworigin="true" data-activates='profile-drop'>
       <div class="dp-wrapper">
@@ -14,19 +9,18 @@
           email=currentUser.email
           defaultImage=avatar
         }}
-        <h5>{{currentUser.firstname}}</h5>
       </div>
-      <i class="mdi-navigation-arrow-drop-down hide-on-small-only"></i>
+      <h5>{{currentUser.firstname}}</h5>
     </a>
   </div>
 
   <ul id='profile-drop' class='dropdown-content'>
     <li>{{#link-to 'user' currentUser.username}}PROFILE{{/link-to}}</li>
-    <li class="divider"></li>
+    <div class="divider"></div>
     <li>{{#link-to 'users.settings'}}SETTINGS{{/link-to}}</li>
-    <li class="divider"></li>
+    <div class="divider"></div>
     <li><a href="http://repositive.io/about" target="_blank">ABOUT</a></li>
-    <li class="divider"></li>
+    <div class="divider"></div>
     <li><a {{ action 'logout' }}>LOGOUT</a></li>
   </ul>
 </div>
