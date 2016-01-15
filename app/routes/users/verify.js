@@ -8,9 +8,6 @@ export default Ember.Route.extend({
   isAuthenticated: Ember.computed(function() {
     return this.get('session.isAuthenticated');
   }),
-  currentUser: Ember.computed(function() {
-    return this.get('session.data.authenticated.user');
-  }),
 
   model: function(params) {
     // return a promise.. this pauses the page rendering until the promise is resolved or rejected

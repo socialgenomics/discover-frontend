@@ -10,9 +10,6 @@ export default Ember.Component.extend({
   classNameBindings: ['isActive:active'],
   comment: null,
   avatar: null,
-  currentUser: Ember.computed(function() {
-    return this.get('session.data.authenticated.user');
-  }),
 
   init: function() {
     this._super();

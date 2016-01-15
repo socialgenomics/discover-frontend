@@ -2,10 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   session: Ember.inject.service(),
-  avatar: null,
-  currentUser: Ember.computed(function() {
-    return this.get('session.data.authenticated.user');
-  }),
+  avatar: Ember.computed.alias('session.data.authenticated.user.profile.avatar'),
 
   init: function() {
     this._super();
@@ -31,7 +28,7 @@ export default Ember.Component.extend({
       this.get('metrics').trackEvent({
         category: 'auth',
         action: 'logout',
-        label: this.get('currentUser.email')
+        label: this.get('session.data.authenticated.user.email')
       });
       this.get('session').invalidate();
     }

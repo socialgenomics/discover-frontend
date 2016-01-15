@@ -38,6 +38,13 @@ export default Ember.Controller.extend(
       server: true // must be last - unknown bug
     }
   },
+  displayMessages: function(resp) {
+    let messages = resp.messages;
+    this.addValidationErrors(messages);
+    this.set('messages', []);
+    this.get('messages').addObjects(messages);
+    this.set('loading', false);
+  },
   actions: {
     submitForm: function() {
       this.set('loading', true);
@@ -63,13 +70,5 @@ export default Ember.Controller.extend(
         this.transitionToRoute('users.resend-password');
       }
     }
-  },
-
-  displayMessages: function(resp) {
-    let messages = resp.messages;
-    this.addValidationErrors(messages);
-    this.set('messages', []);
-    this.get('messages').addObjects(messages);
-    this.set('loading', false);
   }
 });

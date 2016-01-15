@@ -130,7 +130,7 @@ export default Ember.Controller.extend(
           // login!
           this.get('session')
           .authenticate('authenticator:repositive', credentials)
-          .catch(this.displayMessages);
+          .catch(this.displayMessages.bind(this));
         })
         .catch(err => { // error with signup
           if (err.jqXHR !== undefined) {
