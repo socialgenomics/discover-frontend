@@ -4,12 +4,12 @@ let { isEmpty } = Ember;
 
 export default Ember.Component.extend({
   session: Ember.inject.service(),
+  avatar: Ember.computed.alias('session.data.authenticated.user.profile.avatar'),
   isActive: false,
   isValid: false,
   classNames: 'write-comment',
   classNameBindings: ['isActive:active'],
   comment: null,
-  avatar: null,
 
   init: function() {
     this._super();

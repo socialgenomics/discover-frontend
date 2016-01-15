@@ -1,8 +1,8 @@
 <div class="card-side-content">
   <div class="col s12">
-    {{add-comment addComment="addComment" avatar=avatar action="initAvatar"}}
+    {{add-comment addComment="addComment"}}
     {{#each comments as |comment|}}
-      {{user-comment user=comment.user text=comment.text date=comment.createdAt avatar=user.profile.avatar action="initAvatar"}}
+      {{user-comment user=comment.user text=comment.text date=comment.createdAt avatar=user.profile.avatar}}
     {{/each}}
   </div>
 </div>

@@ -2,6 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   session: Ember.inject.service(),
+  isAuthenticated: Ember.computed.alias('session.isAuthenticated'),
   query: '',
 
   autocomplete: function() {
@@ -17,9 +18,6 @@ export default Ember.Component.extend({
         label: this.get('query')
       });
       this.sendAction('action', this.get('query'));
-    },
-    initAvatar: function() {
-      this.sendAction('initAvatar');
     }
   }
 });
