@@ -1,27 +1,37 @@
-/* global require, module */
 var EmberApp = require('ember-cli/lib/broccoli/ember-app');
+
+/*
+  brocolli related build conf.
+ */
 
 var environment = EmberApp.env();
 
-var isProductionLikeBuild = ['production', 'testing', 'aws_dev', 'aws_staging'].indexOf(environment) > -1;
+var isProductionLikeBuild = ['production', 'staging'].indexOf(environment) > -1;
 
 var prepend;
-if (environment === 'production') {
-  prepend = 'http://dg2kcfbxc77v1.cloudfront.net/';
-} else if (environment === 'testing') {
-  prepend = 'http://testing.discover.repositive.io.s3-website-us-east-1.amazonaws.com/';
-} else if (environment === 'aws_dev') {
-  prepend = 'http://s3.amazonaws.com/frontend-dev-amzn-us-east-1.repositive.io/';
-} else if (environment === 'aws_staging') {
-  prepend = 'http://s3.amazonaws.com/frontend-staging-amzn-us-east-1.repositive.io/';
-} else {
-  prepend = '';
+switch (environment) {
+  case 'production':
+    //prepend = 'http://dg2kcfbxc77v1.cloudfront.net/';
+    prepend = 'http://s3.amazonaws.com/frontend-prod-amzn-us-east-1.repositive.io/';
+    break;
+  case 'staging':
+    prepend = 'http://s3.amazonaws.com/frontend-staging-amzn-us-east-1.repositive.io/';
+    break;
+  case 'development':
+    prepend = 'http://s3.amazonaws.com/frontend-dev-amzn-us-east-1.repositive.io/';
+    break;
+  case 'qa':
+    prepend = 'http://s3.amazonaws.com/frontend-qa-amzn-us-east-1.repositive.io/';
+    break;
+  case 'local-development':
+    prepend = '';
+    break;
+  default:
+    prepend = '';
 }
 
-console.log('\n');
-console.log(environment);
 console.log(prepend);
-console.log('\n');
+console.log(environment);
 
 module.exports = function(defaults) {
   var app = new EmberApp(defaults, {
@@ -38,15 +48,15 @@ module.exports = function(defaults) {
       }
     },
     sassOptions: {
-      inputFile:'app.scss',
-      outputFile:'app.css',
+      inputFile: 'app.scss',
+      outputFile: 'app.css',
       includePaths: [
         'bower_components/materialize/sass',
         'bower_components'
       ]
     },
     fingerprint: {
-      enabled: isProductionLikeBuild,
+      enabled: true,
       exclude: [],
       prepend: prepend
     },
@@ -60,6 +70,14 @@ module.exports = function(defaults) {
       enabled: true,
       esnext: true,
       disableTestGenerator: false
+    },
+    sassOptions: {
+      inputFile: 'app.scss',
+      outputFile: 'main.css',
+      includePaths: [
+        'bower_components/materialize/sass',
+        'bower_components'
+      ]
     }
   });
 

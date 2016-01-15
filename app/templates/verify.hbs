@@ -1,12 +1,5 @@
-{{outlet}}
-<h2>Welcome to Repositive Beta</h2>
-<p class="col m12">To use join the private beta, you must have an access code.</p>
-<div class="row valign-wrapper">
-    <img src="/assets/images/lizzard.png" alt="Repositive Lizzard">
-
-    <form {{action "submitForm" on="submit"}}>
-
-      {{validated-input placeholder="please enter your code" errors=errors.code value=code}}
-      <button type="submit" class="btn full-width teal">Continue</button>
-    </form>
-</div>
+<!-- {{outlet}} -->
+<form {{action "submitForm" on="submit"}}>
+  {{validated-input placeholder="please enter your code" errors=errors.code value=code}}
+  <button type="submit" class="btn teal full-width">Continue</button>
+</form>

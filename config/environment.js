@@ -1,8 +1,13 @@
-/* jshint node: true */
 var _ = require('underscore');
-var deploySettings = require('./deploy');
+var getDeployConf = require('./deploy');
+
+/*
+  app related conf.
+ */
 
 module.exports = function(environment) {
+  var deployConf = getDeployConf(environment);
+
   var ENV = {
     modulePrefix: 'repositive',
     environment: environment,
@@ -20,35 +25,44 @@ module.exports = function(environment) {
       // when it is created
     },
 
+    /*
+      The base URL path of the API.
+     */
     APIBaseURL: (function() {
-      if (environment in deploySettings) {
-        return deploySettings[environment].apiBaseURL;
+      if (environment === deployConf.build.environment) {
+        return deployConf.apiBaseURL;
       } else {
         return '';
       }
     }()),
 
-    // mapping of backend routes
+    /*
+      Mapping of route names to API paths, needed for non ember-data calls to
+      the API.
+     */
     APIRoutes : (function() {
       var mapping = {
-        "users.login" : "/api/users/login",
-        "users.logout" : "/api/users/logout",
-        "users.signup" : "/api/users",
-        "datasets.search" : "/api/datasets/search",
-        "invites": "/api/invites",
-        "users.profiles": "/api/users/profiles",
-        "reset-password": "/api/users/password-reset",
+        'users.login' : '/api/users/login',
+        'users.logout' : '/api/users/logout',
+        'users.signup' : '/api/users',
+        'datasets.search' : '/api/datasets/search',
+        'invites': '/api/invites',
+        'users.profiles': '/api/users/profiles',
+        'reset-password': '/api/users/password-reset'
       };
       _.each(mapping,
-        function(path, key, obj){
-          if (environment in deploySettings){
-            obj[key] =  deploySettings[environment].apiBaseURL + path;
+        function(path, key, obj) {
+          if (environment === deployConf.build.environment) {
+            obj[key] =  deployConf.apiBaseURL + path;
           }
         }
       );
       return mapping;
     }()),
 
+    /*
+      conf for the auth system
+     */
     'simple-auth' : {
       store: 'simple-auth-session-store:local-storage',
       crossOriginWhitelist: ['http://*.repositive.io'],
@@ -90,33 +104,31 @@ module.exports = function(environment) {
         },
         environments: ['production']
       },
-      //
-      //production calq
-      // {
-      //   name: 'Calq',
-      //   config: {
-      //     id: 'ca78eed5d34a041ab5cf164295cf2c25'
-      //   },
-      //   environments: ['production']
-      // },
-      //
-      //this is to test Calq actions are sent to track properly from dev environment
+      //Production calq
       {
         name: 'Calq',
         config: {
-          id: 'd0e47c1ccd9e6bb517cff046e2dbc00a'
+          id: 'ca78eed5d34a041ab5cf164295cf2c25'
         },
-        environments: ['development']
+        environments: ['production']
       }
+      //DEV Calq - this is to test Calq actions are sent to track properly from dev environment
+      // {
+      //   name: 'Calq',
+      //   config: {
+      //     id: 'd0e47c1ccd9e6bb517cff046e2dbc00a'
+      //   },
+      //   environments: ['development']
+      // }
     ]
   };
 
   if (environment === 'development') {
-  // ENV.APP.LOG_RESOLVER = true;
-  // ENV.APP.LOG_ACTIVE_GENERATION = true;
-  // ENV.APP.LOG_TRANSITIONS = true;
-  // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
-  // ENV.APP.LOG_VIEW_LOOKUPS = true;
+    // ENV.APP.LOG_RESOLVER = true;
+    // ENV.APP.LOG_ACTIVE_GENERATION = true;
+    // ENV.APP.LOG_TRANSITIONS = true;
+    // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
+    // ENV.APP.LOG_VIEW_LOOKUPS = true;
   }
 
   if (environment === 'test') {

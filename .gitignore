@@ -21,3 +21,5 @@ testem.log
 git_stats/
 .idea/
 .vagrant
+
+.env
