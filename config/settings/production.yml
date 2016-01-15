@@ -6,8 +6,8 @@ build:
 
 deploy:
   s3:
-    bucket:
-    region:
+    bucket: frontend-prod-amzn-us-east-1.repositive.io
+    region: us-east-1
   ssh-tunnel:
     host: frontend-prod-amzn-us-east-1.repositive.io
     username: repositive
