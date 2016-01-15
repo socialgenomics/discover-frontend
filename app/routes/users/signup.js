@@ -6,7 +6,7 @@ export default Ember.Route.extend(ThirdParty, {
   beforeModel: function() {
     //if not verified transition to verify route
     if (!this.get('session').get('data.isVerified')) {
-      this.transitionTo('verify');
+      this.transitionTo('landing-page');
     }
   }
 });

@@ -93,7 +93,7 @@ module.exports = function(environment) {
       'script-src': "'self' 'unsafe-inline' http://api.calq.io http://www.google-analytics.com/analytics.js", // Allow scripts from api.calq.io
       'connect-src': "'self' 'unsafe-inline' http://api.calq.io", // Allow data (ajax/websocket) from api.calq.io
       'img-src': "'self' data: http://www.google-analytics.com",
-      'media-src': "'self'",
+      'media-src': "'self'"
     },
     metricsAdapters: [
       {
@@ -103,6 +103,7 @@ module.exports = function(environment) {
         },
         environments: ['production']
       },
+      //Production calq
       {
         name: 'Calq',
         config: {
@@ -110,6 +111,14 @@ module.exports = function(environment) {
         },
         environments: ['production']
       }
+      //DEV Calq - this is to test Calq actions are sent to track properly from dev environment
+      // {
+      //   name: 'Calq',
+      //   config: {
+      //     id: 'd0e47c1ccd9e6bb517cff046e2dbc00a'
+      //   },
+      //   environments: ['development']
+      // }
     ]
     // sassOptions: {
     //   includePaths: ['bower_components/materialize/sass']
