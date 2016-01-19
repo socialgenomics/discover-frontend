@@ -11,10 +11,6 @@ export default Ember.Component.extend({
   classNameBindings: ['isActive:active'],
   comment: null,
 
-  init: function() {
-    this._super();
-    this.sendAction();
-  },
   actions: {
     focusedIn: function() {
       this.set('isActive', true);

@@ -5,17 +5,14 @@ export default Ember.Controller.extend({
   queryParams: ['tab'],
   tab: 'comments',
   isEditingTags: false,
-  comments: Ember.computed.sort('model.commnets', 'createdAt:desc'),
-
-  // setAvatar: function() {
-  //   this.set('avatar', this.get('application').get('avatar'));
-  // }.on('init'),
-
-  // setAvatarsOnComments: function() {
-  //   this.get('model.comments.@each.UserId').forEach((id)=> {
-  //     this.store.query('profile', { UserId: id });
-  //   });
-  // }.observes('model.comments'),
+  commentsSorted: Ember.computed.sort('model.comments', (a, b)=> {
+    if (a.createdAt < b.createdAt) {
+      return 1;
+    } else if (a.createdAt > b.createdAt) {
+      return -1;
+    }
+    return 0;
+  }),
 
   isPublic: function() {
     var access = this.get('model.repository.access');
@@ -32,7 +29,7 @@ export default Ember.Controller.extend({
         action: 'download',
         label: this.get('model.id')
       });
-      //Hack to open link in new tab - NEED TO TEST THIS IN OTHER BROWSERS!
+      //HACK to open link in new tab - NEED TO TEST THIS IN OTHER BROWSERS!
       var tab = window.open(this.get('model.properties.webURL'), '_blank');
       tab.focus();
     },
