@@ -3,13 +3,13 @@
   <div class="row center-align">
     <div class="col m12">
       <div class="card">
-        <div class="card-content">
+        <!-- <div class="card-content"> -->
           <div class="card-body">
             <div class="row">
               <div class="col m12">
                 <div class="landing-title">
                   <h1><strong>DATA DISCOVERY PLATFORM</strong></h1>
-                  <h3 class="color-silver-chalice-text"><em>Designed for users who produce, look for and use human genomic data.</em></h3>
+                  <h3 class="color-silver-chalice-text thin"><em>Designed for users who produce, look for and use human genomic data.</em></h3>
                 </div>
               </div>
               <div class="col m6">
@@ -27,14 +27,13 @@
                       <form {{action "submitForm" on="submit"}}>
                         {{validated-input placeholder="Your activation code" value=code errors=errors.code}}
                         {{#full-width-button class="btn teal {{#if buttonDisabled 'disabled'}}" disabled=buttonDisabled type="submit"}}Continue{{/full-width-button}}
-                        <!-- <button type="submit" class="btn teal full-width">Continue</button> -->
                       </form>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
+          <!-- </div> -->
         </div>
       </div>
     </div>
