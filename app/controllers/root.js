@@ -17,6 +17,10 @@ export default Ember.Controller.extend({
     }
   },
 
+  buttonDisabled: function() {
+    return Ember.isEmpty(this.get('code'));
+  }.property('code'),
+
   requestsSorted:  function() {
     return Ember.ArrayProxy.extend(Ember.SortableMixin).create({
       sortProperties: ['updatedAt'],
