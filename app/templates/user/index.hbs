@@ -2,40 +2,36 @@
   <div class="row">
     <div class="contain">
       {{#if isOwnProfile}}
-      <h5 class="subtitles-left unfocus-grey-text">Your Profile</h5>
+        <h5 class="subtitles-left unfocus-grey-text">Your Profile</h5>
       {{/if}}
-      <div class="col m12 center-align">
-        <div class="card ">
+      <div class="col m12 center">
+        <div class="card">
           <div class="card-content">
-            <h3>{{ model.user.displayName }}</h3>
-            <div class="card-body">
-              <div class="col m12 center">
-                <div class="profile-img">
-                  <img src={{avatar}}>
-                </div>
-              </div>
-              <!-- <div class="input-container col m12">
-                <label for="upload-avatar">Upload Avatar</label>
-                {{s3-upload id="upload-avatar" field="image"}}
-              </div> -->
+            <h1>{{model.user.displayName}}</h1>
+            <div class="profile-img">
+              <img src={{avatar}}>
+            </div>
               {{#if isOwnProfile}}
+
                 {{#if isEmailValidated}}
                   <div class="verified">
-                    <h3><i class="mdi-action-verified-user"></i> Verified Account</h3>
+                    <h4><i class="mdi-action-verified-user"></i> Verified Account</h4>
                   </div>
                 {{else}}
                   <div class="not-verified">
-                    <h3><i class="mdi-communication-email"></i> Please verify your email</h3>
+                    <h4><i class="mdi-communication-email"></i> Please verify your email</h4>
                   </div>
                 {{/if}}
-                {{#link-to "users.profile" class="btn yellow white-text"}}EDIT PROFILE{{/link-to}}
+                {{#link-to "users.profile" class="btn yellow white-text"}}{{fa-icon "pencil-square-o"}} EDIT{{/link-to}}
 
               {{else}}
+
                 {{#if isEmailValidated}}
                   <div class="verified">
                     <h3><i class="mdi-action-verified-user"></i> Verified Account</h3>
                   </div>
                 {{/if}}
+
               {{/if}}
               <div class="card-action">
                 <div class="activity-stats col m12">
@@ -58,12 +54,13 @@
                   <span class="stretch"></span>
                 </div>
               </div>
-            </div>
+            <!-- </div> -->
           </div>
         </div>
       </div>
     </div>
   </div>
+
   <div class="row">
     <div class="contain">
       {{#if isOwnProfile}}

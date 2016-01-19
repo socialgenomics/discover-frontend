@@ -4,6 +4,9 @@ export default Ember.Controller.extend({
   session: Ember.inject.service(),
   avatar: Ember.computed.alias('session.data.authenticated.user.profile.avatar'),
 
+  /*
+  * session.secure returns number and model.user returns string, hence double =
+  */
   isOwnProfile: function() {
     return this.get('session.data.authenticated.user.id') == this.get('model.user.id');
   }.property('model'),
