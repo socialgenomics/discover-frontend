@@ -4,7 +4,10 @@ import ServerValidationMixin from 'repositive/validators/remote/server/mixin';
 import ENV from 'repositive/config/environment';
 import ajax from 'ic-ajax';
 
-export default Ember.Controller.extend({
+export default Ember.Controller.extend(
+  EmberValidations,
+  ServerValidationMixin,
+{
   session: Ember.inject.service(),
   firstVisit: Ember.computed.alias('session.data.firstVisit'),
   requestsSorted: Ember.computed.sort('model.requests', 'updatedAt'),
