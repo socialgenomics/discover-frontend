@@ -9,7 +9,7 @@ export default Ember.Controller.extend(
   ServerValidationMixin,
 {
   session: Ember.inject.service(),
-  firstVisit: Ember.computed.alias('session.data.firstVisit'),
+  showWelcome: Ember.computed.alias('session.data.firstVisit'),
   requestsSorted: Ember.computed.sort('model.requests', 'updatedAt'),
   registrationsSorted:  Ember.computed.sort('model.requests', 'updatedAt'),
 
@@ -26,7 +26,7 @@ export default Ember.Controller.extend(
   actions : {
     // user clicks button on welcome page to enter site
     enterSite: function() {
-      this.set('firstVisit', false);
+      this.get('session').set('data.firstVisit', false);
     },
     submitForm: function() {
       //check code against api
@@ -39,7 +39,7 @@ export default Ember.Controller.extend(
       })
       .then((resp)=> {
         if (resp.permitted) {
-          this.get('session').set('data.isVerified', true);
+          this.get('session').set('data.hasInvite', true);
           this.get('session').set('data.inviteCode', this.get('code'));
           this.transitionToRoute('users.signup');
         } else {

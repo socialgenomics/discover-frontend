@@ -129,11 +129,11 @@ export default Ember.Controller.extend(
           if (resp.messages !== undefined) {
             this.displayMessages(resp.messages);
           }
-          // We would like to show a welcome screen if this is the first visit.
-          this.get('session').set('data.firstVisit', true);
           // login!
           this.get('session')
           .authenticate('authenticator:repositive', credentials)
+          // We would like to show a welcome screen if this is the first visit.
+          .then(() => this.get('session').set('data.firstVisit', true))
           .catch(this.displayMessages.bind(this));
         })
         .catch(err => { // error with signup
