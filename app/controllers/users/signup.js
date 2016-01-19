@@ -11,6 +11,16 @@ export default Ember.Controller.extend(
 {
   session: Ember.inject.service(),
 
+  fullname: null,
+  firstname: null,
+  lastname: null,
+  email: null,
+  password: null,
+  strength: null,
+  showPassword: false,
+  loading: false,
+  formSubmitted: false,
+
   validations: {
 
     fullname: {
@@ -47,14 +57,7 @@ export default Ember.Controller.extend(
       })
     }
   },
-  fullname: null,
-  firstname: null,
-  lastname: null,
-  email: null,
-  password: null,
-  strength: null,
-  showPassword: false,
-  loading: false,
+
 
   type: function() {
     return this.get('showPassword') ? 'text' : 'password';
@@ -110,6 +113,7 @@ export default Ember.Controller.extend(
   actions: {
     submitForm: function() {
       if (this.get('isValid')) {
+        this.set('formSubmitted', true);
         let credentials = this.getProperties('firstname', 'lastname', 'email', 'password');
         this.set('loading', true);
         /*
