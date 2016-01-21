@@ -78,7 +78,7 @@
             {{#link-to 'datasets.register'}}<i class="mdi-action-note-add"></i>{{/link-to}}
             <h4 class="uppercase">Registered Data</h4>
           </div>
-          <div class="card-body">
+          <div class="card-content">
             {{#each model.registrations as |dataset|}}
 
               {{mini-dataset hideSubmitter=isOwnProfile dataset=dataset action="toggleModal"}}
@@ -94,7 +94,7 @@
               {{#link-to 'datasets.request'}}<i class="mdi-content-content-paste"></i>{{/link-to}}
               <h4 class="uppercase">Requested Data</h4>
           </div>
-          <div class="card-body">
+          <div class="card-content">
             {{#each model.requests as |dataset|}}
               {{mini-dataset dataset=dataset hideSubmitter=isOwnProfile}}
             {{/each}}
