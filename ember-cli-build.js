@@ -15,13 +15,13 @@ switch (environment) {
     prepend = 'http://s3.amazonaws.com/frontend-prod-amzn-us-east-1.repositive.io/';
     break;
   case 'staging':
-    prepend = 'http://s3.amazonaws.com/frontend-staging-amzn-us-east-1.repositive.io/';
+    prepend = 'http://s3.amazonaws.com/frontend-staging-sol-lon02.repositive.io/';
     break;
   case 'development':
-    prepend = 'http://s3.amazonaws.com/frontend-dev-amzn-us-east-1.repositive.io/';
+    prepend = 'http://s3.amazonaws.com/frontend-dev-sol-lon02.repositive.io/';
     break;
   case 'qa':
-    prepend = 'http://s3.amazonaws.com/frontend-qa-amzn-us-east-1.repositive.io/';
+    prepend = 'http://s3.amazonaws.com/frontend-qa-sol-lon02.repositive.io/';
     break;
   case 'local-development':
     prepend = '';
