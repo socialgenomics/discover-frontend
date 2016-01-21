@@ -30,7 +30,7 @@
           <p class="info-text">
             These are datasets contributed by our community. You can easily register your dataset and make it visible for others.
           </p>
-          <div class="card-body">
+          <div class="card-content">
               {{#each registrationsSorted as |registration|}}
                 {{mini-dataset dataset=registration action="toggleModal"}}
               {{/each}}
@@ -48,7 +48,7 @@
             Help our community by connecting them with the datasets they're looking for.
   If you’re seeking datasets you can make a request too.
           </p>
-          <div class="card-body">
+          <div class="card-content">
             {{#each requestsSorted as |request|}}
               {{mini-dataset dataset=request}}
             {{/each}}
