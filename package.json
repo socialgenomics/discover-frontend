@@ -8,7 +8,7 @@
     "test": "tests"
   },
   "scripts": {
-    "start": "ember server --watcher polling --proxy=http://backend-dev-amzn-us-east-1.repositive.io",
+    "start": "ember server --proxy=http://backend-dev-amzn-us-east-1.repositive.io",
     "build": "ember build",
     "test": "ember test"
   },
@@ -43,7 +43,6 @@
     "ember-cli-htmlbars-inline-precompile": "^0.3.1",
     "ember-cli-ic-ajax": "0.2.1",
     "ember-cli-inject-live-reload": "^1.3.1",
-    "ember-cli-materialize": "0.18.6",
     "ember-cli-moment-shim": "0.6.2",
     "ember-cli-qunit": "^1.1.0",
     "ember-cli-release": "0.2.8",

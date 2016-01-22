@@ -5,7 +5,7 @@
       <div class="col m12 center-align">
         <div class="card">
           <div class="stats">
-            <h2 class="numb">{{ model.stats.datasets }}<span class="stats-text light"> Human Genomic Datasets </span><span class="thin">from</span>
+            <h2 class="numb">{{ model.stats.datasets }}<span class="stats-text light"> Human Genomic Datasets </span><span class="stats-text thin">from</span>
               {{ model.stats.repos }}<span class="stats-text light"> Repositories</span>
             </h2>
           </div>
@@ -30,7 +30,7 @@
           <p class="info-text">
             These are datasets contributed by our community. You can easily register your dataset and make it visible for others.
           </p>
-          <div class="card-body">
+          <div class="card-content">
               {{#each registrationsSorted as |registration|}}
                 {{mini-dataset dataset=registration action="toggleModal"}}
               {{/each}}
@@ -48,7 +48,7 @@
             Help our community by connecting them with the datasets they're looking for.
   If you’re seeking datasets you can make a request too.
           </p>
-          <div class="card-body">
+          <div class="card-content">
             {{#each requestsSorted as |request|}}
               {{mini-dataset dataset=request}}
             {{/each}}

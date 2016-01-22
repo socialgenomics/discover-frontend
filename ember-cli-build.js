@@ -15,13 +15,13 @@ switch (environment) {
     prepend = 'http://s3.amazonaws.com/frontend-prod-amzn-us-east-1.repositive.io/';
     break;
   case 'staging':
-    prepend = 'http://s3.amazonaws.com/frontend-staging-amzn-us-east-1.repositive.io/';
+    prepend = 'http://s3.amazonaws.com/frontend-staging-sol-lon02.repositive.io/';
     break;
   case 'development':
-    prepend = 'http://s3.amazonaws.com/frontend-dev-amzn-us-east-1.repositive.io/';
+    prepend = 'http://s3.amazonaws.com/frontend-dev-sol-lon02.repositive.io/';
     break;
   case 'qa':
-    prepend = 'http://s3.amazonaws.com/frontend-qa-amzn-us-east-1.repositive.io/';
+    prepend = 'http://s3.amazonaws.com/frontend-qa-sol-lon02.repositive.io/';
     break;
   case 'local-development':
     prepend = '';
@@ -51,7 +51,6 @@ module.exports = function(defaults) {
       inputFile: 'app.scss',
       outputFile: 'app.css',
       includePaths: [
-        'bower_components/materialize/sass',
         'bower_components'
       ]
     },
@@ -75,7 +74,6 @@ module.exports = function(defaults) {
       inputFile: 'app.scss',
       outputFile: 'main.css',
       includePaths: [
-        'bower_components/materialize/sass',
         'bower_components'
       ]
     }
@@ -93,6 +91,9 @@ module.exports = function(defaults) {
   // modules that you would like to import into your application
   // please specify an object with the list of modules as keys
   // along with the exports of each module as its value.
+
+  app.import('bower_components/JavaScript-MD5/js/md5.js');
+  app.import('bower_components/materialize/dist/js/materialize.js');
 
   return app.toTree();
 };
