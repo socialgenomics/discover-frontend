@@ -51,7 +51,6 @@ module.exports = function(defaults) {
       inputFile: 'app.scss',
       outputFile: 'app.css',
       includePaths: [
-        'bower_components/materialize/sass',
         'bower_components'
       ]
     },
@@ -75,7 +74,6 @@ module.exports = function(defaults) {
       inputFile: 'app.scss',
       outputFile: 'main.css',
       includePaths: [
-        'bower_components/materialize/sass',
         'bower_components'
       ]
     }
@@ -95,6 +93,7 @@ module.exports = function(defaults) {
   // along with the exports of each module as its value.
 
   app.import('bower_components/JavaScript-MD5/js/md5.js');
+  app.import('bower_components/materialize/dist/js/materialize.js');
 
   return app.toTree();
 };
