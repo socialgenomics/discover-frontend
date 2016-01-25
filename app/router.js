@@ -66,10 +66,10 @@ Router.map(function() {
 
 var pagesWithSideNavigation = [
   'datasets-search',
-  'users-settings',
-  'users-profile',
-  'users-trust',
-  'users-references'
+  // 'users-settings',
+  // 'users-profile',
+  // 'users-trust',
+  // 'users-references'
 ];
 
 Ember.Route.reopen({
