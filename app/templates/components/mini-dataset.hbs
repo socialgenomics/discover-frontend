@@ -22,16 +22,16 @@
 		<div class="title-details">
       {{#link-to 'datasets.detail' dataset.id}}<h5 class="data-title" alt="dataset title">{{dataset.properties.title}}</h5>{{/link-to}}
     <div class="card-footer">
-      <ul class="grey-text">
+      <ul class="color-silver-chalice-text">
 
         {{#if (eq dataset.repository.access "Open")}}
         <li class="access-icons">
           <i
-            class="mdi-social-public green-text tooltiped"
+            class="mdi-social-public color-fruit-salad-text tooltiped"
             data-position="bottom"
             data-tooltip="Public Access"
             title="Public"></i>
-          <span class="green-text">
+          <span class="color-fruit-salad-text">
             {{dataset.repository.access}}
           </span>
         </li>
@@ -40,11 +40,11 @@
         {{#if (eq dataset.repository.access "Restricted")}}
         <li class="access-icons">
           <i
-            class="mdi-action-lock red-text tooltiped"
+            class="mdi-action-lock color-red-error-text tooltiped"
             data-position="bottom"
             data-tooltip="Restricted Access"
             title="Access application needed"></i>
-          <span class="red-text">
+          <span class="color-red-error-text">
             {{dataset.repository.access}}
           </span>
         </li>
