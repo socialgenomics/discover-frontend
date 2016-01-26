@@ -55,7 +55,7 @@ module.exports = function(defaults) {
       ]
     },
     fingerprint: {
-      enabled: true,
+      enabled: isProductionLikeBuild,
       exclude: [],
       prepend: prepend
     },
@@ -69,13 +69,6 @@ module.exports = function(defaults) {
       enabled: true,
       esnext: true,
       disableTestGenerator: false
-    },
-    sassOptions: {
-      inputFile: 'app.scss',
-      outputFile: 'main.css',
-      includePaths: [
-        'bower_components'
-      ]
     }
   });
 
