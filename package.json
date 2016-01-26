@@ -8,7 +8,7 @@
     "test": "tests"
   },
   "scripts": {
-    "start": "ember server --proxy=http://backend-dev-amzn-us-east-1.repositive.io",
+    "start": "ember server --proxy=http://192.168.33.11",
     "build": "ember build",
     "test": "ember test"
   },
@@ -23,7 +23,8 @@
     "broccoli-jscs": "^1.1.0",
     "dotenv": "^1.2.0",
     "ember-browserify": "^1.0.2",
-    "ember-cli": "^2.2.0-beta.4",
+    "ember-ajax": "0.7.1",
+    "ember-cli": "2.3.0-beta.1",
     "ember-cli-active-link-wrapper": "0.0.4",
     "ember-cli-app-version": "^1.0.0",
     "ember-cli-babel": "^5.1.5",
@@ -44,35 +45,31 @@
     "ember-cli-ic-ajax": "0.2.1",
     "ember-cli-inject-live-reload": "^1.3.1",
     "ember-cli-moment-shim": "0.6.2",
-    "ember-cli-qunit": "^1.1.0",
+    "ember-cli-qunit": "^1.2.1",
     "ember-cli-release": "0.2.8",
     "ember-cli-sass": "^5.2.1",
     "ember-cli-showdown": "2.4.0",
     "ember-cli-sri": "^2.0.0",
     "ember-cli-uglify": "^1.2.0",
-    "ember-composability": "0.1.3",
-    "ember-data": "^2.2.1",
+    "ember-data": "^2.3.0",
     "ember-disable-proxy-controllers": "^1.0.1",
     "ember-export-application-global": "^1.0.4",
-    "ember-key-responder": "0.4.2",
-    "ember-legacy-views": "0.2.0",
     "ember-metrics": "0.5.3",
     "ember-modal-dialog": "0.8.0",
     "ember-moment": "4.1.0",
-    "ember-new-computed": "1.0.3",
     "ember-radio-button": "1.0.7",
-    "ember-resolver": "^2.0.3",
     "ember-simple-auth": "1.0.1",
     "ember-truth-helpers": "1.1.0",
     "ember-validations": "^2.0.0-alpha.4",
     "ember-watson": "^0.7.0",
-    "foreman": "^1.4.1",
     "moment": "^2.10.6",
     "onchange": "^2.0.0",
     "torii": "^0.5.1",
     "underscore": "^1.8.3"
   },
   "dependencies": {
+    "ember-resolver": "^2.0.3",
+    "foreman": "^1.4.1",
     "rimraf": "^2.5.0"
   }
 }
