@@ -9,11 +9,12 @@
   when: node_modules.stat.isdir is defined and node_modules.stat.isdir == true
 
 # Delete bower_components for avoilding cross compilation issues between vagrant VM and host
-- stat: path=/home/vagrant/app/bower_components
-  register: bower_components
-- name: Delete project folder bower_components
-  file: path=/home/vagrant/app/bower_components state=absent
-  when: bower_components.stat.isdir is defined and bower_components.stat.isdir == true
+# TODO: Should not delete when "bower_components/repositive_styles" is a mount
+#- stat: path=/home/vagrant/app/bower_components
+#  register: bower_components
+#- name: Delete project folder bower_components
+#  file: path=/home/vagrant/app/bower_components state=absent
+#  when: bower_components.stat.isdir is defined and bower_components.stat.isdir == true
 
 # Delete tmp folder
 - stat: path=/home/vagrant/app/tmp
