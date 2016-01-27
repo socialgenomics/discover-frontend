@@ -1,26 +1,39 @@
 <div id="register-form" class="content">
-  <div class="row">
-    <div class="contain">
-      <h5 class="subtitles-left unfocus-grey-text">Register Data</h5>
-      <div class="col m12">
-        <div class="card activity-card">
+    <h5 class="subtitles-left unfocus-grey-text">Register Data</h5>
+      <div class="card">
+      <div class="card-body">
+        <div class="row">
 
-          <div class="card-header bg-register grey-text">
-            <p class="main-dark">
-              This will register a new dataset which will be visible and searchable on REPOSITIVE. By registering a dataset you let other users know about the dataset you have, help with better research or initiate collaboration.
-            </p>
+        <h2 class="col m12 center">Do you have a data to share?</h2>
+          <h4 class="color-silver-chalice-text center thin">
+            <em>Make it visible for other researchers.</em>
+          </h4>
+        </div>
+
+        <div class="row">
+        <div class="divider"></div>
+          <h4 class="col m6 offset-m6 center color-salmon-text">Register a New Dataset</h4>
+
+          <div class="col m5">
+            <p>
+            1. Fill the simple registration form. Add the title, description and url link to the dataset.</p>
+            <p>
+            2. We will list your dataset on the platform and it will become searchable for other users. </p>
+            <p>
+            3. By listing your dataset you can help with better research or initiate collaboration.
+          </p>  
           </div>
-          <div class="card-content center">
-            <h3>Register a New Dataset</h3>
-            <div class="col m6 offset-m3">
+                 
+        <div class="col m6 offset-m1">
+          
           <form {{action "addDataset" on="submit"}}>
             {{validated-input
               type="text"
               value=title
-              errors=errors.title
+              
               placeholder="Add a title for your dataset."
               action=addDataset
-              lbl="Title"
+              
             }}
 
             {{validated-input
@@ -31,7 +44,7 @@
               style="height:150px"
               action=addDataset
               textarea="true"
-              lbl="Description"
+              
             }}
 
             {{validated-input
@@ -40,17 +53,15 @@
               errors=errors.webURL
               placeholder="A link to the dataset if available"
               action=addDataset
-              lbl="URL"
+              
             }}
-            <div class="input-container">
-              <button type="submit" class="btn bg-register main-dark">Register Dataset</button>
+            <div class="center input-container">
+              <button type="submit" class="btn bg-register white-text">Register Dataset</button>
             </div>
-
           </form>
-          </div>
-        </div>
-        </div>
+
+         </div>
+        </div> 
       </div>
-    </div>
+    </div>  
   </div>
-</div>

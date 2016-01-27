@@ -6,7 +6,7 @@ var EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
 var environment = EmberApp.env();
 
-var isProductionLikeBuild = ['production', 'staging'].indexOf(environment) > -1;
+var isProductionLikeBuild = ['development', 'production', 'staging'].indexOf(environment) > -1;
 
 var prepend;
 switch (environment) {
@@ -55,7 +55,7 @@ module.exports = function(defaults) {
       ]
     },
     fingerprint: {
-      enabled: true,
+      enabled: isProductionLikeBuild,
       exclude: [],
       prepend: prepend
     },
@@ -69,13 +69,6 @@ module.exports = function(defaults) {
       enabled: true,
       esnext: true,
       disableTestGenerator: false
-    },
-    sassOptions: {
-      inputFile: 'app.scss',
-      outputFile: 'main.css',
-      includePaths: [
-        'bower_components'
-      ]
     }
   });
 
