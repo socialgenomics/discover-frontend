@@ -6,7 +6,7 @@ var EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
 var environment = EmberApp.env();
 
-var isProductionLikeBuild = ['development', 'production', 'staging'].indexOf(environment) > -1;
+var isProductionLikeBuild = ['production', 'staging'].indexOf(environment) > -1;
 
 var prepend;
 switch (environment) {
@@ -49,7 +49,7 @@ module.exports = function(defaults) {
     },
     sassOptions: {
       inputFile: 'app.scss',
-      outputFile: 'app.css',
+      outputFile: 'main.css',
       includePaths: [
         'bower_components'
       ]

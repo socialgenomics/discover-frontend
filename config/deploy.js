@@ -4,13 +4,13 @@ dotenv = require('dotenv').load();
  */
 
 module.exports = function(env) {
-  var deployConfig
+  var deployConfig;
   /*
     Use ths env var `FRONTEND_DEPLOY_CONFIG_PATH` to direct ember-cli-deploy
     to a deploy configuration file to use.
    */
   if (process.env.FRONTEND_DEPLOY_CONFIG_PATH) {
-    deployConfig = require(process.env.FRONTEND_DEPLOY_CONFIG_PATH)
+    deployConfig = require(process.env.FRONTEND_DEPLOY_CONFIG_PATH);
   } else {
     try {
       deployConfig = require('./environments/' + env + '.json');
