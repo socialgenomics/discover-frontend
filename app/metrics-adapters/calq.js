@@ -68,7 +68,9 @@ export default BaseAdapter.extend({
   identify(options = {}) {
     const compactedOptions = compact(options);
     const { email, inviteCode, firstname, lastname, username } = compactedOptions;
+    const fullname = firstname + " " + lastname;
     window.calq.user.identify(email);
+    window.calq.user.profile({"$full_name":fullname});
     window.calq.user.profile({ inviteCode, email, firstname, lastname, username });
   },
 
