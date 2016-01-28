@@ -27,9 +27,11 @@
 
   {{#if showInvalid}}
     <div class="errors">
-    {{#each errors as |error|}}
-      <div class="text-invalid error-text">{{ error }}</div>
-    {{/each}}
+      <ul class="text-invalid error-text">
+        {{#each errors as |error|}}
+          <li>{{error}}</li>
+        {{/each}}
+      </ul>
     </div>
   {{else}}
     <div class="input-helper">{{helpText}}</div>

@@ -65,7 +65,7 @@ Router.map(function() {
 });
 
 var pagesWithSideNavigation = [
-  'datasets-search',
+  'datasets-search'
   // 'users-settings',
   // 'users-profile',
   // 'users-trust',

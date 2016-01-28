@@ -26,7 +26,13 @@ export default Ember.Controller.extend(
     fullname: {
       presence: {
         message: 'Can\'t be blank.'
-      }
+      },
+      inline: validator(function() {
+        let fn = this.get('fullname');
+        if (/@/.test(fn)) {
+          return 'Please enter your full name.';
+        }
+      })
     },
 
     email: {

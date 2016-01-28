@@ -56,13 +56,17 @@ export default Base.extend({
 
   _resolveWithResp: function(resp) {
     return new Ember.RSVP.Promise((resolve)=> {
-      this.get('metrics').identify({
-        email: resp.user.email,
-        inviteCode: this.get('session').set('data.inviteCode'),
-        firstname: resp.user.firstname,
-        lastname: resp.user.lastname,
-        username: resp.user.username
-      });
+      try {
+        this.get('metrics').identify({
+          email: resp.user.email,
+          inviteCode: this.get('session').set('data.inviteCode'),
+          firstname: resp.user.firstname,
+          lastname: resp.user.lastname,
+          username: resp.user.username
+        });
+      } catch (err) {
+        console.error('Error on metrics.identify', err);
+      }
       /*
         Use ember run to avoid pain.
        */
@@ -73,15 +77,11 @@ export default Base.extend({
       });
     });
   },
-
-  _handleError: function(err) {
-    if (err.jqXHR !== undefined) {
-      /*
-        if the error is 4XX or 5XX server resp return it.
-       */
-      return Ember.RSVP.reject(err.jqXHR.responseJSON);
-    } else {
-      throw err;
+  showMessages: function (messages) {
+    if (messages) {
+      messages.forEach(function (message) {
+        console.log(message);
+      });
     }
   }
 });
