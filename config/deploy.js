@@ -13,11 +13,11 @@ module.exports = function(env) {
     deployConfig = require(process.env.FRONTEND_DEPLOY_CONFIG_PATH);
   } else {
     try {
-      deployConfig = require('./environments/' + env + '.json');
+      deployConfig = require('./servers/' + env + '.json');
     } catch (e) {
       console.warn('Error, could not load conf file for `' + env +
                    '` using default local-development.json file.');
-      deployConfig = require('./environments/local-development.json');
+      deployConfig = require('./servers/local-development.json');
     }
   }
   /**

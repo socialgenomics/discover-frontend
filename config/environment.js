@@ -1,12 +1,21 @@
 var _ = require('underscore');
-var getDeployConf = require('./deploy');
+var appConfCache = {};
 
+function getAppConf(env) {
+  if (env in appConfCache) {
+    return appConfCache[env];
+  } else {
+    var conf = require('./app/' + env + '.json');
+    appConfCache[env] = conf;
+    return conf;
+  }
+}
 /*
   app related conf.
  */
 
 module.exports = function(environment) {
-  var deployConf = getDeployConf(environment);
+  var appConf = getAppConf(environment);
 
   var ENV = {
     modulePrefix: 'repositive',
@@ -28,13 +37,7 @@ module.exports = function(environment) {
     /*
       The base URL path of the API.
      */
-    APIBaseURL: (function() {
-      if (environment === deployConf.build.environment) {
-        return deployConf.apiBaseURL;
-      } else {
-        return '';
-      }
-    }()),
+    APIBaseURL: appConf.apiBaseURL,
 
     /*
       Mapping of route names to API paths, needed for non ember-data calls to
@@ -53,9 +56,7 @@ module.exports = function(environment) {
       };
       _.each(mapping,
         function(path, key, obj) {
-          if (environment === deployConf.build.environment) {
-            obj[key] =  deployConf.apiBaseURL + path;
-          }
+          obj[key] =  appConf.apiBaseURL + path;
         }
       );
       return mapping;
@@ -111,18 +112,7 @@ module.exports = function(environment) {
         },
         environments: ['production']
       }
-      //DEV Calq - this is to test Calq actions are sent to track properly from dev environment
-      // {
-      //   name: 'Calq',
-      //   config: {
-      //     id: 'd0e47c1ccd9e6bb517cff046e2dbc00a'
-      //   },
-      //   environments: ['development']
-      // }
     ]
-    // sassOptions: {
-    //   includePaths: ['bower_components/materialize/sass']
-    // }
   };
 
   if (environment === 'local-development') {

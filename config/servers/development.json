@@ -1,5 +1,4 @@
 {
-  "apiBaseURL": "http://backend-dev-sol-lon02.repositive.io",
   "build": {
     "environment": "development"
   },

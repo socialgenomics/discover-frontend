@@ -35,18 +35,6 @@ console.log(environment);
 
 module.exports = function(defaults) {
   var app = new EmberApp(defaults, {
-    outputPaths: {
-      app: {
-        css: {
-          'app': '/assets/app.css'
-        },
-        js: '/assets/main.js'
-      },
-      vendor: {
-        css: '/assets/vendor.css',
-        js: '/assets/vendor.js'
-      }
-    },
     sassOptions: {
       inputFile: 'app.scss',
       outputFile: 'main.css',
@@ -59,9 +47,7 @@ module.exports = function(defaults) {
       exclude: [],
       prepend: prepend
     },
-    sourcemaps: {
-      enabled: !isProductionLikeBuild
-    },
+    sourcemaps: { enabled: !isProductionLikeBuild },
     minifyCSS: { enabled: isProductionLikeBuild },
     minifyJS: { enabled: isProductionLikeBuild },
     jscsOptions: {
@@ -85,7 +71,6 @@ module.exports = function(defaults) {
   // please specify an object with the list of modules as keys
   // along with the exports of each module as its value.
 
-  app.import('bower_components/JavaScript-MD5/js/md5.js');
   app.import('bower_components/materialize/dist/js/materialize.js');
 
   return app.toTree();
