@@ -2,6 +2,7 @@ import Ember from 'ember';
 import canUseDOM from 'ember-metrics/utils/can-use-dom';
 import objectTransforms from 'ember-metrics/utils/object-transforms';
 import BaseAdapter from 'ember-metrics/metrics-adapters/base';
+import ENV from 'repositive/config/environment';
 
 const {
   copy,
@@ -73,11 +74,12 @@ export default BaseAdapter.extend({
 
   trackEvent(options = {}) {
     //const compactedOptions = compact(options);
-    var actionName = options.category + '.' + options.action;
-    delete options.category;
-    delete options.action;
-    window.calq.action.track(actionName, options);
-
+    if (ENV.environment === 'production') {
+      var actionName = options.category + '.' + options.action;
+      delete options.category;
+      delete options.action;
+      window.calq.action.track(actionName, options);
+    }
     return options;
   },
 
