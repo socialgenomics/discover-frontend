@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
   session: Ember.inject.service(),
-  avatar: Ember.computed.alias('session.data.authenticated.user.profile.avatar'),
+  avatar: Ember.computed.alias('session.data.authenticatedUser.profile.avatar'),
   saved: false,
   actions: {
     save: function() {

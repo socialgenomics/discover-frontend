@@ -38,7 +38,7 @@ export default Ember.Controller.extend({
       var cmnt = this.store.createRecord('comment', {
         text: text,
         dataset: this.model,
-        owner: this.get('session.data.authenticated.user.id')
+        owner: this.get('session.data.authenticatedUser.id')
       });
       cmnt.save();
     },

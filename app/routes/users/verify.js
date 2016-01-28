@@ -24,17 +24,14 @@ export default Ember.Route.extend({
       * Backend validated the email address - transitionTo the profile without
       * rendering the current page (i.e do not resolve the promise before transitioning).
       */
-      this.store.findRecord('user', this.get('session.data.authenticated.user.id'))
-      .then(user=> {
-        user.set('isEmailValidated', true);
-      });
+      this.get('session.data.authenticatedUser').set('isEmailValidated', true);
       /*
         We cannot know the username of the current user unless it is stored in the
         session. This means we cannot redirect to current user's profile if they're
         not logged in.
       */
       if (this.get('session.isAuthenticated')) {
-        this.transitionTo('user', this.get('session.data.authenticated.user.username'));
+        this.transitionTo('user', this.get('session.data.authenticatedUser.username'));
       } else {
         this.transitionTo('users.login');
       }
@@ -48,7 +45,7 @@ export default Ember.Route.extend({
   actions: {
     resendVerifyEmail: function() {
       ajax({
-        url: '/api/users/verify/resend/' + this.get('session.data.authenticated.user.email'),
+        url: '/api/users/verify/resend/' + this.get('session.data.authenticatedUser.email'),
         type: 'GET'
       });
     }
