@@ -1,3 +1,4 @@
 {
-  "apiBaseURL": ""
+  "apiBaseURL": "",
+  "assetsPrependPath": ""
 }

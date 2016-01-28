@@ -1,3 +1,4 @@
 {
-  "apiBaseURL": "http://api.repositive.io"
+  "apiBaseURL": "http://api.repositive.io",
+  "assetsPrependPath": "http://s3.amazonaws.com/frontend-prod-amzn-us-east-1.repositive.io/"
 }

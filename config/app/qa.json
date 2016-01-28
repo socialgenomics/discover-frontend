@@ -1,3 +1,4 @@
 {
-  "apiBaseURL": "http://backend-qa-amzn-us-east-1.repositive.io"
+  "apiBaseURL": "http://backend-qa-amzn-us-east-1.repositive.io",
+  "assetsPrependPath": "http://s3.amazonaws.com/frontend-qa-sol-lon02.repositive.io/"
 }

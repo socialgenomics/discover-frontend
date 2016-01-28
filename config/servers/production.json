@@ -1,5 +1,4 @@
 {
-  "apiBaseURL": "http://api.repositive.io",
   "build": {
     "environment": "production"
   },

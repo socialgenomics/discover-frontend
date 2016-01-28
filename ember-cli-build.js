@@ -5,30 +5,9 @@ var EmberApp = require('ember-cli/lib/broccoli/ember-app');
  */
 
 var environment = EmberApp.env();
+var appConf = require('./config/app/' + environment + '.json');
 
 var isProductionLikeBuild = ['production', 'staging'].indexOf(environment) > -1;
-
-var prepend;
-switch (environment) {
-  case 'production':
-    //prepend = 'http://dg2kcfbxc77v1.cloudfront.net/';
-    prepend = 'http://s3.amazonaws.com/frontend-prod-amzn-us-east-1.repositive.io/';
-    break;
-  case 'staging':
-    prepend = 'http://s3.amazonaws.com/frontend-staging-sol-lon02.repositive.io/';
-    break;
-  case 'development':
-    prepend = 'http://s3.amazonaws.com/frontend-dev-sol-lon02.repositive.io/';
-    break;
-  case 'qa':
-    prepend = 'http://s3.amazonaws.com/frontend-qa-sol-lon02.repositive.io/';
-    break;
-  case 'local-development':
-    prepend = '';
-    break;
-  default:
-    prepend = '';
-}
 
 console.log(prepend);
 console.log(environment);
@@ -45,7 +24,7 @@ module.exports = function(defaults) {
     fingerprint: {
       enabled: isProductionLikeBuild,
       exclude: [],
-      prepend: prepend
+      prepend: appConf.assetsPrependPath
     },
     sourcemaps: { enabled: !isProductionLikeBuild },
     minifyCSS: { enabled: isProductionLikeBuild },
