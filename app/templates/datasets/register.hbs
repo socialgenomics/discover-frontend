@@ -21,19 +21,19 @@
             2. We will list your dataset on the platform and it will become searchable for other users. </p>
             <p>
             3. By listing your dataset you can help with better research or initiate collaboration.
-          </p>  
+          </p>
           </div>
-                 
+
         <div class="col m6 offset-m1">
-          
+
           <form {{action "addDataset" on="submit"}}>
             {{validated-input
               type="text"
               value=title
-              
+              errors=errors.title
               placeholder="Add a title for your dataset."
               action=addDataset
-              
+
             }}
 
             {{validated-input
@@ -44,7 +44,7 @@
               style="height:150px"
               action=addDataset
               textarea="true"
-              
+
             }}
 
             {{validated-input
@@ -53,7 +53,7 @@
               errors=errors.webURL
               placeholder="A link to the dataset if available"
               action=addDataset
-              
+
             }}
             <div class="center input-container">
               <button type="submit" class="btn bg-register white-text">Register Dataset</button>
@@ -61,7 +61,7 @@
           </form>
 
          </div>
-        </div> 
+        </div>
       </div>
-    </div>  
+    </div>
   </div>
