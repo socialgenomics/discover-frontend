@@ -111,7 +111,7 @@ export default Ember.Controller.extend(
   },
 
   actions: {
-    submitForm: function() {
+    signupAndAuthenticate: function() {
       if (this.get('isValid')) {
         this.set('formSubmitted', true);
         let credentials = this.getProperties('firstname', 'lastname', 'email', 'password');
@@ -126,8 +126,8 @@ export default Ember.Controller.extend(
         })
         .then((resp)=> { // signup has suceeded, now login
           // render any messages provided by the backend
-          if (resp.messages !== undefined) {
-            this.displayMessages(resp.messages);
+          if ('messages' in resp) {
+            this.displayMessages(resp);
           }
           // login!
           this.get('session')

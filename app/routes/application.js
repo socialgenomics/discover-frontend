@@ -1,9 +1,9 @@
 import Ember from 'ember';
-import ApplicationRouteMixin from 'ember-simple-auth/mixins/application-route-mixin';
+import ApplicationRouteMixin from 'repositive/mixins/application-route-mixin';
 
 export default Ember.Route.extend(ApplicationRouteMixin, {
   session: Ember.inject.service(),
-  avatar: Ember.computed.alias('session.data.authenticated.user.profile.avatar'), // used by the navbar and comment components
+  avatar: Ember.computed.alias('session.data.authenticatedUser.profile.avatar'), // used by the navbar and comment components
   actions: {
     search: function(query) {
       this.transitionTo('datasets.search', {
