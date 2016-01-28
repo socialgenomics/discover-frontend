@@ -9,7 +9,6 @@ var appConf = require('./config/app/' + environment + '.json');
 
 var isProductionLikeBuild = ['production', 'staging'].indexOf(environment) > -1;
 
-console.log(prepend);
 console.log(environment);
 
 module.exports = function(defaults) {

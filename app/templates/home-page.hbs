@@ -15,7 +15,7 @@
     <div class="contain">
       <h5 class="subtitles-left unfocus-grey-text">Start Exploring</h5>
       {{#each model.datasets as |dataset|}}
-        {{render 'datasets.card' dataset dataset=dataset}}
+        {{dataset-card dataset=dataset}}
       {{/each}}
     </div>
     <div class="contain">

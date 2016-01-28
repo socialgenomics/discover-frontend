@@ -48,7 +48,7 @@
         {{render 'datasets/noResults'}}
       {{else}}
         {{#each model.datasets as |dataset|}}
-          {{render 'datasets/card' dataset}}
+          {{dataset-card dataset=dataset}}
         {{/each}}
       {{/if}}
     </div>

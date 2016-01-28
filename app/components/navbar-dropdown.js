@@ -3,13 +3,11 @@ import Ember from 'ember';
 export default Ember.Component.extend({
   session: Ember.inject.service(),
   avatar: Ember.computed.alias('session.data.authenticated.user.profile.avatar'),
+  firstname: Ember.computed.alias('session.data.authenticated.user.firstname'),
+  username: Ember.computed.alias('session.data.authenticated.user.username'),
 
-  init: function() {
-    this._super();
-    this.sendAction();
-  },
-
-  afterRenderEvent: function() {
+  didRender() {
+    this._super(...arguments);
     //dropdown initialization
     this.$('.dropdown-button').dropdown({
       inDuration: 500,
@@ -23,7 +21,6 @@ export default Ember.Component.extend({
   },
 
   actions: {
-
     logout: function() {
       this.get('metrics').trackEvent({
         category: 'auth',
@@ -32,7 +29,6 @@ export default Ember.Component.extend({
       });
       this.get('session').invalidate();
     }
-
   }
 
 });

@@ -11,7 +11,7 @@ export default Ember.Controller.extend(
   session: Ember.inject.service(),
   showWelcome: Ember.computed.alias('session.data.firstVisit'),
   requestsSorted: Ember.computed.sort('model.requests', 'updatedAt'),
-  registrationsSorted:  Ember.computed.sort('model.requests', 'updatedAt'),
+  registrationsSorted:  Ember.computed.sort('model.registered', 'updatedAt'),
 
   queryParams: ['code'],
   code: null,

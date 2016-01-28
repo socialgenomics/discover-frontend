@@ -2,7 +2,7 @@
   <div class="col s12">
     {{add-comment addComment="addComment"}}
     {{#each commentsSorted as |comment|}}
-      {{user-comment user=comment.user text=comment.text date=comment.createdAt}}
+      {{user-comment user=comment.user text=comment.text date=comment.createdAt avatar=comment.user.profile.avatar}}
     {{/each}}
   </div>
 </div>

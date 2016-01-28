@@ -11,7 +11,7 @@ export default DS.Model.extend({
   comments: DS.hasMany('comments'),
   createdAt: DS.attr('isodate'),
   updatedAt: DS.attr('isodate'),
-  profile: DS.belongsTo('profile', { async: true }),
+  profile: DS.belongsTo('profile'),
   displayName: function() {
     if (Ember.isPresent(this.get('firstname')) || Ember.isPresent(this.get('lastname'))) {
       var fn = this.get('firstname') || '';

@@ -3,6 +3,6 @@ import Ember from 'ember';
 export default Ember.Route.extend({
   meta: null,
   model: function() {
-    return this.store.find('dataset');
+    return this.store.findAll('dataset');
   }
 });
