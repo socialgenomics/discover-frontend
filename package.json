@@ -9,6 +9,7 @@
   },
   "scripts": {
     "start": "ember server --watcher=polling --proxy=http://backend-dev-sol-lon02.repositive.io",
+    "startLocal": "ember server --watcher=polling --proxy=http://192.168.33.11:3000",
     "build": "ember build",
     "test": "ember test"
   },
@@ -51,6 +52,7 @@
     "ember-cli-simple-auth": "0.8.0",
     "ember-cli-sri": "^1.0.3",
     "ember-cli-uglify": "^1.2.0",
+    "ember-cli-rollbar": "^0.2.6",
     "ember-data": "1.13.8",
     "ember-disable-proxy-controllers": "^1.0.0",
     "ember-export-application-global": "^1.0.3",
