@@ -21,5 +21,6 @@ export default Ember.Component.extend({
         value: false
       });
     }
+    this.sendAction();
   }
 });

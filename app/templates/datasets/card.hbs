@@ -10,7 +10,7 @@
         {{#if isRequest}}<div class="request">Request</div>{{/if}}
       </div>
       <div class="actions-container valign-wrapper">
-        {{action-favourite dataset=model}}
+        {{action-favourite action="toggleModal" dataset=model}}
         <span class="grey-text">{{model.favourite}}</span>
         {{action-share action="toggleModal" dataset=model}}
       </div>
