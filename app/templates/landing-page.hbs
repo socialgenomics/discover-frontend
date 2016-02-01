@@ -3,7 +3,7 @@
   <div class="row center-align">
     <div class="col m12">
       <div class="card">
-        <div class="card-content">          
+        <div class="card-content">
             <div class="row no-margin">
               <div class="col m12">
                 <div class="landing-title">
@@ -16,9 +16,9 @@
               </div>
               <div class="col m5 offset-m1">
                 <div class="landing-form">
-                    <span class="helper-text">The platform is in beta testing. We will invite you for beta testing as soon as we are ready to accommodate you.</span>                
-                  {{#link-to 'typeform' tagName='button' class='btn teal full-width'}}SIGN UP FOR BETA{{/link-to}}
-                
+                  <span class="helper-text">The platform is in beta testing. We will invite you for beta testing as soon as we are ready to accommodate you.</span>
+                  {{#link-to 'typeform'}}{{#full-width-button class="btn {{#if codeEntered 'btn-light'}}" btn-light=codeEntered}}SIGN UP FOR BETA{{/full-width-button}}{{/link-to}}
+
                   <div class="or-div">
                     <span>DO YOU HAVE THE ACTIVATION CODE?</span>
                   </div>

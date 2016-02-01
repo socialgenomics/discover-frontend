@@ -1,53 +1,43 @@
 <div id="request-form" class="content">
-    <h5 class="subtitles-left unfocus-grey-text">Request Data</h5>
-     <div class="card">
-      <div class="card-body">
-        <div class="row">
-
+  <h5 class="subtitles-left unfocus-grey-text">Request Data</h5>
+  <div class="card">
+    <div class="card-body">
+      <div class="row">
         <h2 class="col m12 center">Can't find the data on REPOSITIVE?</h2>
-        <h4 class="color-silver-chalice-text center thin "><em>           
-              Ask our community for help.</em> 
-          </h4>
-        </div>
+        <h4 class="color-silver-chalice-text center thin"><em>Ask our community for help.</em></h4>
+      </div>
 
-        <div class="row">
-        <div class="divider"></div>      
-                <h4 class="col m6 offset-m6 center color-havelock-blue-text">Request a New Dataset</h4>
-        <div class="col m5">  
+      <div class="row">
+        <div class="divider"></div>
+        <h4 class="col m6 offset-m6 center color-havelock-blue-text">Request a New Dataset</h4>
+        <div class="col m5">
           <p><span class="numb">1.</span> Fill the request form with information of data you are looking for.</p>
           <p><span class="numb">2.</span> Your request will appear on the search and in activity feed. Could find collaborators and datasets you are looking for.</p>
         </div>
-          
+
         <div class="col m6 offset-m1">
-        
-        
-          <form {{action "addRequest" on="submit"}}>
+          <form {{action "addRequest" on="submit"}} class="side-form">
             {{validated-input
               type="text"
               value=title
               errors=errors.title
               placeholder="Name your request"
               action=addDataset
-              lbl="Title"
             }}
-
             {{validated-input
               type="text"
               value=description
               errors=errors.description
               placeholder="Describe the dataset you're looking for"
-              style="height:150px"
               action=addDataset
               textarea="true"
-              lbl="Description"
             }}
-
             <div class="input-container center">
               <button type="submit" class="btn bg-request white-text">Submit Request</button>
             </div>
           </form>
-        
         </div>
+
       </div>
     </div>
   </div>

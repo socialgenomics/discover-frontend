@@ -33,10 +33,23 @@ export default Base.extend({
         type: 'POST',
         data: data
       })
-      .then(resp=> {
-        return this._resolveWithResp(resp);
-      })
-      .catch(this._handleError);
+      .then((resp)=> {
+          this.get('metrics').trackEvent({
+            category: 'auth',
+            action: 'login',
+            label: 'Success'
+          });
+          return this._resolveWithResp(resp);
+        })
+        .catch((err)=> {
+          this.get('metrics').trackEvent({
+            category: 'auth',
+            action: 'login',
+            label: 'Failed'
+          });
+          this.get('loginController').addValidationErrors(err.jqXHR.responseJSON.errors);
+          return Ember.RSVP.reject(err);
+        });
     }
   },
 
@@ -59,7 +72,7 @@ export default Base.extend({
       try {
         this.get('metrics').identify({
           email: resp.user.email,
-          inviteCode: this.get('session').set('data.inviteCode'),
+          inviteCode: this.get('session.data.inviteCode'),
           firstname: resp.user.firstname,
           lastname: resp.user.lastname,
           username: resp.user.username
