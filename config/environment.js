@@ -123,7 +123,12 @@ module.exports = function(environment) {
       //   },
       //   environments: ['local-development']
       // }
-    ]
+    ],
+    rollbar: {
+      // enabled only on online servers
+      enabled: ['local-development', 'test'].indexOf(environment) === -1,
+      accessToken: '96bd2d6a6d5d400aa904f399e88768ce'
+    }
   };
 
   if (environment === 'development') {
