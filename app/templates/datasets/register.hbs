@@ -1,67 +1,52 @@
 <div id="register-form" class="content">
-    <h5 class="subtitles-left unfocus-grey-text">Register Data</h5>
-      <div class="card">
-      <div class="card-body">
-        <div class="row">
-
+  <h5 class="subtitles-left unfocus-grey-text">Register Data</h5>
+  <div class="card">
+    <div class="card-body">
+      <div class="row">
         <h2 class="col m12 center">Do you have a data to share?</h2>
-          <h4 class="color-silver-chalice-text center thin">
-            <em>Make it visible for other researchers.</em>
-          </h4>
+        <h4 class="color-silver-chalice-text center thin"><em>Make it visible for other researchers.</em></h4>
+      </div>
+
+      <div class="row">
+        <div class="divider"></div>
+        <h4 class="col m6 offset-m6 center color-salmon-text">Register a New Dataset</h4>
+        <div class="col m5">
+          <p>1. Fill the simple registration form. Add the title, description and url link to the dataset.</p>
+          <p>2. We will list your dataset on the platform and it will become searchable for other users.</p>
+          <p>3. By listing your dataset you can help with better research or initiate collaboration.</p>
         </div>
 
-        <div class="row">
-        <div class="divider"></div>
-          <h4 class="col m6 offset-m6 center color-salmon-text">Register a New Dataset</h4>
-
-          <div class="col m5">
-            <p>
-            1. Fill the simple registration form. Add the title, description and url link to the dataset.</p>
-            <p>
-            2. We will list your dataset on the platform and it will become searchable for other users. </p>
-            <p>
-            3. By listing your dataset you can help with better research or initiate collaboration.
-          </p>
-          </div>
-
         <div class="col m6 offset-m1">
-
-          <form {{action "addDataset" on="submit"}}>
+          <form {{action "addDataset" on="submit"}} class="side-form">
             {{validated-input
               type="text"
               value=title
               errors=errors.title
               placeholder="Add a title for your dataset."
               action=addDataset
-
             }}
-
             {{validated-input
-              type="text"
+              type="textarea"
               value=description
               errors=errors.description
               placeholder="A short description of the dataset"
-              style="height:150px"
               action=addDataset
               textarea="true"
-
             }}
-
             {{validated-input
               type="url"
               value=webURL
               errors=errors.webURL
               placeholder="A link to the dataset if available"
               action=addDataset
-
             }}
             <div class="center input-container">
               <button type="submit" class="btn bg-register white-text">Register Dataset</button>
             </div>
           </form>
-
-         </div>
         </div>
+
       </div>
     </div>
   </div>
+</div>
