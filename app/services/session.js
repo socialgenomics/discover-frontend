@@ -8,9 +8,9 @@ export default SessionService.extend({
       let userData = this.get('data.authenticated.user');
 
       let userId = userData.id;
-      let profileId = userData.profileId;
+      let profileId = userData.ProfileId;
       delete userData.id;
-      delete userData.profileId;
+      delete userData.ProfileId;
 
       let jsonAPIUser = {
         data: {
