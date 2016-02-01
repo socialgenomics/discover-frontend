@@ -6,9 +6,9 @@ export default Ember.Controller.extend({
   tab: 'comments',
   isEditingTags: false,
   commentsSorted: Ember.computed.sort('model.comments', (a, b)=> {
-    if (a.createdAt < b.createdAt) {
+    if (a.get('createdAt') < b.get('createdAt')) {
       return 1;
-    } else if (a.createdAt > b.createdAt) {
+    } else if (a.get('createdAt') > b.get('createdAt')) {
       return -1;
     }
     return 0;

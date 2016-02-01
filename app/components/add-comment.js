@@ -3,8 +3,6 @@ import Ember from 'ember';
 let { isEmpty } = Ember;
 
 export default Ember.Component.extend({
-  session: Ember.inject.service(),
-  avatar: Ember.computed.alias('session.data.authenticatedUser.profile.avatar'),
   isActive: false,
   isValid: false,
   classNames: 'write-comment',

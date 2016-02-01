@@ -1,4 +1,8 @@
-{{platform-navbar action="search"}}
+{{platform-navbar
+  action="search"
+  avatar=session.authenticatedUser.profile.avatar
+  firstname=session.authenticatedUser.firstname
+}}
 <div class="container">
   {{#each flashMessages.queue as |flash|}}
     {{ui-message flash=flash}}

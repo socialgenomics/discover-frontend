@@ -2,9 +2,12 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   session: Ember.inject.service(),
-  avatar: Ember.computed.alias('session.data.authenticatedUser.profile.avatar'),
+  //currentUser: Ember.computed.alias('session.data.authenticatedUser.profile.avatar'),
   firstname: Ember.computed.alias('session.data.authenticatedUser.firstname'),
   username: Ember.computed.alias('session.data.authenticatedUser.username'),
+  avatar: Ember.computed('session.data.authenticatedUser', function() {
+    return this.store.findRecord('profile', this.get('session.data.authenticatedUser.ProfileId')).get('avatar');
+  }),
 
   didRender() {
     this._super(...arguments);
