@@ -23,30 +23,6 @@ export default Ember.Controller.extend(
     }
   },
 
-  buttonDisabled: function() {
-    return Ember.isEmpty(this.get('code'));
-  }.property('code'),
-
-  codeEntered: function() {
-    return !Ember.isEmpty(this.get('code'));
-  }.property('code'),
-
-  requestsSorted:  function() {
-    return Ember.ArrayProxy.extend(Ember.SortableMixin).create({
-      sortProperties: ['updatedAt'],
-      sortAscending: false,
-      content: this.get('model.requests')
-    });
-  }.property('model.requests'),
-
-  registrationsSorted:  function() {
-    return Ember.ArrayProxy.extend(Ember.SortableMixin).create({
-      sortProperties: ['updatedAt'],
-      sortAscending: false,
-      content: this.get('model.registered')
-    });
-  }.property('model.registered'),
-
   actions : {
     // user clicks button on welcome page to enter site
     enterSite: function() {
