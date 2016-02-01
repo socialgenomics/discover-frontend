@@ -9,10 +9,12 @@ export default Ember.Controller.extend(
   loading: false,
   validations: {
     title: {
-      presence: true
+      presence: true,
+      presence: { message: 'This field can\'t be blank.' }
     },
     description: {
-      presence: true
+      presence: true,
+      presence: { message: 'This field can\'t be blank.' }
     }
     //    webURL:{
     //      format: {

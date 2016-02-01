@@ -31,9 +31,19 @@ export default Base.extend({
         type: 'POST',
         data: data
       }).then((resp)=> {
+          this.get('metrics').trackEvent({
+            category: 'auth',
+            action: 'login',
+            label: 'Success'
+          });
           return this._resolveWithResp(resp);
         })
         .catch((err)=> {
+          this.get('metrics').trackEvent({
+            category: 'auth',
+            action: 'login',
+            label: 'Failed'
+          });
           this.get('loginController').addValidationErrors(err.jqXHR.responseJSON.errors);
           return Ember.RSVP.reject(err);
         });

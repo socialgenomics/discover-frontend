@@ -112,15 +112,23 @@ module.exports = function(environment) {
         },
         environments: ['production']
       }
-      //DEV Calq - this is to test Calq actions are sent to track properly from dev environment
+
+      //DEV Calq - Test calq without polluting production analytics
+      //Also change the line - if (ENV.environment === 'production')
+      //from "production" to "local-development" in app/metrics-dapters/calq.js
       // {
       //   name: 'Calq',
       //   config: {
       //     id: 'd0e47c1ccd9e6bb517cff046e2dbc00a'
       //   },
-      //   environments: ['development']
+      //   environments: ['local-development']
       // }
-    ]
+    ],
+    rollbar: {
+      // enabled only on online servers
+      enabled: ['local-development', 'test'].indexOf(environment) === -1,
+      accessToken: '96bd2d6a6d5d400aa904f399e88768ce'
+    }
   };
 
   if (environment === 'development') {
