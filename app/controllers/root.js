@@ -21,6 +21,10 @@ export default Ember.Controller.extend({
     return Ember.isEmpty(this.get('code'));
   }.property('code'),
 
+  codeEntered: function() {
+    return !Ember.isEmpty(this.get('code'));
+  }.property('code'),
+
   requestsSorted:  function() {
     return Ember.ArrayProxy.extend(Ember.SortableMixin).create({
       sortProperties: ['updatedAt'],
