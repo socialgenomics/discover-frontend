@@ -2,17 +2,21 @@
   <div class="row center-align">
     <div class="col m12">
       {{#if isEmailValidated}}
-        <h1>Your account is now verified</h1>
-        {{#link-to 'user' currentUser.username}}<button class="btn teal white-text">Visit your Profile</button>{{/link-to}}
+        <div class="card">
+          <div class="card-content">
+            <h1>Your account is now verified</h1>
+            <img src="/assets/images/happy.png" class="lizard-image" alt="happy lizard">
+            <div></div>
+            {{#link-to 'user' currentUser.username}}<button class="btn teal white-text">Visit your Profile</button>{{/link-to}}
+          </div>
+        </div>
       {{else}}
         <div class="card">
           <div class="card-content">
             <h1 class="sub-grey">The verification link has expired.</h1>
-            <div class="card-body">
-              <img src="/assets/images/liz-time-out.png" class="lizard-image" alt="Time Out lizard">
-              <div></div>
-              <button class="btn teal white-text" {{action "resendVerifyEmail"}}>Resend Verification Email</button>
-            </div>
+            <img src="/assets/images/liz-time-out.png" class="lizard-image" alt="Time Out lizard">
+            <div></div>
+            <button class="btn teal white-text" {{action "resendVerifyEmail"}}>Resend Verification Email</button>
           </div>
         </div>
       {{/if}}
