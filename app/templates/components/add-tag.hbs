@@ -9,10 +9,10 @@
     <div class="input-field">
       {{input value=tag type="text" placeholder="Enter tag name" class="col m5 input-tag"}}
       <button class="btn post-btn teal white-text" type="submit"><i class="mdi-action-done"></i></button>
-      <a {{action "toggleInput"}} class="grey-text cancel-btn">cancel</a>
+      <a {{action "toggleInput"}} class="color-silver-chalice-text cancel-btn">cancel</a>
     </div>
   </form>
 {{else}}
-  <span class="sub-grey tag white-text">Add a new tag</span>
+  <span class="sub-grey tag">Add a new tag</span>
   <button {{action "toggleInput"}} class="btn add-tag grey white-text">+</button>
 {{/if}}
