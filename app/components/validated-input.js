@@ -1,9 +1,10 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
+  errors: null,
   isActive: false,
   hasBeenFocused: false,
-  formSubmitted: false,
+  //formSubmitted: false,
   value: '',
 
   showValid: function() {

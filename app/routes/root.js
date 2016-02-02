@@ -5,12 +5,12 @@ import { shuffle } from 'repositive/utils/arrays';
 
 let trending = {};
 
-if (ENV.environment === "development"){
+if (ENV.environment === 'local-development') {
   trending = [
     'd096c88e-6a33-482f-a126-d2002c03fca6',
     'd096c88e-6a33-482f-a126-d2002c03fca6',
-    'd096c88e-6a33-482f-a126-d2002c03fca6',
-  ]
+    'd096c88e-6a33-482f-a126-d2002c03fca6'
+  ];
 } else {
   trending = shuffle([
     '197190e2-4f48-4c28-ba7d-021ee4b99592',
@@ -32,6 +32,7 @@ if (ENV.environment === "development"){
   ]).slice(0, 3);
 }
 export default Ember.Route.extend({
+  session: Ember.inject.service(),
 
   model: function() {
     if (this.get('session.isAuthenticated')) {
@@ -51,6 +52,7 @@ export default Ember.Route.extend({
       })
       .catch(function(err) {
         Ember.Logger.error(err);
+        throw err;
       });
     } else {
       return null;

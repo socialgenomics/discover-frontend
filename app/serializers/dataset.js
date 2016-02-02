@@ -18,10 +18,12 @@ export default DS.RESTSerializer.extend(DS.EmbeddedRecordsMixin, {
     return {
       sourceJSON: JSON.stringify(sourceJSON),
       repository: 'REPOSITIVE',
-      isRequest: snapshot.get('isRequest')
+      isRequest: snapshot.attr('isRequest')
     };
   },
-  keyForRelationship: function(key, relationship, method) {
-    return 'userId';
-  }
+  // keyForRelationship: function(key, relationship, method) {
+  //   if (key === 'owner') {
+  //     return 'userId';
+  //   }
+  // }
 });

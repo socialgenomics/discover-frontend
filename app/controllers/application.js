@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-  isVerified: false,
+  session: Ember.inject.service(),
   isShowingModal: false,
 
   actions: {

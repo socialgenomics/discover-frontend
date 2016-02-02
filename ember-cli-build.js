@@ -5,51 +5,17 @@ var EmberApp = require('ember-cli/lib/broccoli/ember-app');
  */
 
 var environment = EmberApp.env();
+var appConf = require('./config/app/' + environment + '.json');
 
-var isProductionLikeBuild = ['development', 'production', 'staging'].indexOf(environment) > -1;
+var isProductionLikeBuild = ['production', 'staging'].indexOf(environment) > -1;
 
-var prepend;
-switch (environment) {
-  case 'production':
-    //prepend = 'http://dg2kcfbxc77v1.cloudfront.net/';
-    prepend = 'http://s3.amazonaws.com/frontend-prod-amzn-us-east-1.repositive.io/';
-    break;
-  case 'staging':
-    prepend = 'http://s3.amazonaws.com/frontend-staging-sol-lon02.repositive.io/';
-    break;
-  case 'development':
-    prepend = 'http://s3.amazonaws.com/frontend-dev-sol-lon02.repositive.io/';
-    break;
-  case 'qa':
-    prepend = 'http://s3.amazonaws.com/frontend-qa-sol-lon02.repositive.io/';
-    break;
-  case 'local-development':
-    prepend = '';
-    break;
-  default:
-    prepend = '';
-}
-
-console.log(prepend);
 console.log(environment);
 
 module.exports = function(defaults) {
   var app = new EmberApp(defaults, {
-    outputPaths: {
-      app: {
-        css: {
-          'app': '/assets/app.css'
-        },
-        js: '/assets/main.js'
-      },
-      vendor: {
-        css: '/assets/vendor.css',
-        js: '/assets/vendor.js'
-      }
-    },
     sassOptions: {
       inputFile: 'app.scss',
-      outputFile: 'app.css',
+      outputFile: 'main.css',
       includePaths: [
         'bower_components'
       ]
@@ -57,11 +23,9 @@ module.exports = function(defaults) {
     fingerprint: {
       enabled: isProductionLikeBuild,
       exclude: [],
-      prepend: prepend
+      prepend: appConf.assetsPrependPath
     },
-    sourcemaps: {
-      enabled: !isProductionLikeBuild
-    },
+    sourcemaps: { enabled: !isProductionLikeBuild },
     minifyCSS: { enabled: isProductionLikeBuild },
     minifyJS: { enabled: isProductionLikeBuild },
     jscsOptions: {
@@ -85,8 +49,8 @@ module.exports = function(defaults) {
   // please specify an object with the list of modules as keys
   // along with the exports of each module as its value.
 
-  app.import('bower_components/JavaScript-MD5/js/md5.js');
   app.import('bower_components/materialize/dist/js/materialize.js');
+  app.import('vendor/typeform.js');
 
   return app.toTree();
 };

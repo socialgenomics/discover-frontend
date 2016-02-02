@@ -8,7 +8,7 @@
     </div>
     {{/link-to}}
 
-    {{#if session.isAuthenticated}}
+    {{#if isAuthenticated}}
 
     <div class="navbar-container">
       <div class="navbar-search">
@@ -40,7 +40,8 @@
       </div>
     </div>
 
-    {{navbar-dropdown action="initAvatar" avatar=avatar}}
+
+    {{navbar-dropdown avatar=avatar firstname=firstname username=username}}
 
     {{else}}
     <div class="navbar-buttons">

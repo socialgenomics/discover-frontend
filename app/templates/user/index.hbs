@@ -9,12 +9,7 @@
           <div class="card-content">
             <h1>{{model.user.displayName}}</h1>
             <div class="profile-img">
-              {{
-                gravatar-image
-                class="gravatar"
-                email=model.user.email
-                defaultImage=model.profile.avatar
-              }}
+              <img src={{model.profile.avatar}}>
             </div>
               {{#if isOwnProfile}}
 
