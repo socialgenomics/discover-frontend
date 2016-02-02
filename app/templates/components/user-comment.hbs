@@ -3,12 +3,7 @@
   <div class="comment-header">
     <div class="dp-wrapper">
       {{#link-to 'user' user.username}}
-        {{
-          gravatar-image
-          class="gravatar"
-          email=user.email
-          defaultImage=user.profile.avatar
-        }}
+        <img src={{avatar}}>
       {{/link-to}}
     </div>
     {{#link-to 'user' user.username}}<h4>{{user.displayName}}</h4>{{/link-to}}

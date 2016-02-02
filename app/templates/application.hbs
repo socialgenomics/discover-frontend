@@ -1,5 +1,9 @@
-{{platform-navbar action="search" initAvatar="initAvatar" avatar=avatar}}
-
+{{platform-navbar
+  action="search"
+  avatar=session.authenticatedUser.profile.avatar
+  firstname=session.authenticatedUser.firstname
+  username=session.authenticatedUser.username
+}}
 <div class="container">
   {{#each flashMessages.queue as |flash|}}
     {{ui-message flash=flash}}
@@ -22,3 +26,6 @@
   </div>
   {{/modal-dialog}}
 {{/if}}
+
+{{!-- ember-cli-materialize modal container --}}
+{{!-- md-modal-container --}}

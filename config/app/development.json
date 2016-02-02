@@ -1,0 +1,4 @@
+{
+  "apiBaseURL": "http://backend-dev-sol-lon02.repositive.io",
+  "assetsPrependPath": "http://s3.amazonaws.com/frontend-dev-sol-lon02.repositive.io/"
+}

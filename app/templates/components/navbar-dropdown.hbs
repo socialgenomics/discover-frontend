@@ -3,19 +3,14 @@
   <div class="navbar-button">
     <a class='dropdown-button valign-wrapper' data-beloworigin="true" data-activates='profile-drop'>
       <div class="dp-wrapper">
-        {{
-          gravatar-image
-          class="gravatar"
-          email=currentUser.email
-          defaultImage=avatar
-        }}
+        <img src={{avatar}}>
       </div>
-      <h5>{{currentUser.firstname}}</h5>
+      <h5>{{firstname}}</h5>
     </a>
   </div>
 
   <ul id='profile-drop' class='dropdown-content'>
-    <li>{{#link-to 'user' currentUser.username}}PROFILE{{/link-to}}</li>
+    <li>{{#link-to 'user' username}}PROFILE{{/link-to}}</li>
     <div class="divider"></div>
     <li>{{#link-to 'users.settings'}}SETTINGS{{/link-to}}</li>
     <div class="divider"></div>

@@ -1,5 +1,4 @@
 {
-  "apiBaseURL": "http://backend-qa-amzn-us-east-1.repositive.io",
   "build": {
     "environment": "qa"
   },

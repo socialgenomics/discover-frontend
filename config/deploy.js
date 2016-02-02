@@ -4,20 +4,20 @@ dotenv = require('dotenv').load();
  */
 
 module.exports = function(env) {
-  var deployConfig
+  var deployConfig;
   /*
     Use ths env var `FRONTEND_DEPLOY_CONFIG_PATH` to direct ember-cli-deploy
     to a deploy configuration file to use.
    */
   if (process.env.FRONTEND_DEPLOY_CONFIG_PATH) {
-    deployConfig = require(process.env.FRONTEND_DEPLOY_CONFIG_PATH)
+    deployConfig = require(process.env.FRONTEND_DEPLOY_CONFIG_PATH);
   } else {
     try {
       deployConfig = require('./servers/' + env + '.json');
     } catch (e) {
       console.warn('Error, could not load conf file for `' + env +
-                   '` using default development.json file.');
-      deployConfig = require('./servers/development.json');
+                   '` using default local-development.json file.');
+      deployConfig = require('./servers/local-development.json');
     }
   }
   /**
