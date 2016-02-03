@@ -13,12 +13,22 @@ export default Ember.Controller.extend(
   requestsSorted: Ember.computed.sort('model.requests', 'updatedAt'),
   registrationsSorted:  Ember.computed.sort('model.registered', 'updatedAt'),
 
+  buttonDisabled: function() {
+    return Ember.isEmpty(this.get('code'));
+  }.property('code'),
+
+  codeEntered: function() {
+    return !Ember.isEmpty(this.get('code'));
+  }.property('code'),
+
   queryParams: ['code'],
   code: null,
 
   validations: {
     code: {
-      presence: true,
+      presence: {
+        message: 'This field can\'t be blank.'
+      },
       server: true // must be last - unknown bug
     }
   },
