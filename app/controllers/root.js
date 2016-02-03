@@ -16,6 +16,7 @@ export default Ember.Controller.extend(
   buttonDisabled: function() {
     return Ember.isEmpty(this.get('code'));
   }.property('code'),
+
   codeEntered: function() {
     return !Ember.isEmpty(this.get('code'));
   }.property('code'),
@@ -25,7 +26,9 @@ export default Ember.Controller.extend(
 
   validations: {
     code: {
-      presence: true,
+      presence: {
+        message: 'This field can\'t be blank.'
+      },
       server: true // must be last - unknown bug
     }
   },
