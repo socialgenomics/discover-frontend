@@ -18,15 +18,20 @@
                 <div class="landing-form">
                   <span class="helper-text center-align">The platform is in beta testing. We will invite you for beta testing as soon as we are ready to accommodate you.</span>
                   {{#unless codeEntered}}
-                    {{#link-to 'signup-form'}}{{#full-width-button class="btn"}}SIGN UP FOR BETA{{/full-width-button}}{{/link-to}}
+                    {{#link-to 'signup-form'}}{{#full-width-button class="btn teal"}}SIGN UP FOR BETA{{/full-width-button}}{{/link-to}}
                   {{else}}
-                    {{#full-width-button class="btn teal {{#if codeEntered 'disabled'}}" disabled=codeEntered}}SIGN UP FOR BETA{{/full-width-button}}
+                    {{#full-width-button class="btn {{#if codeEntered 'disabled'}}" disabled=codeEntered}}SIGN UP FOR BETA{{/full-width-button}}
                   {{/unless}}
+                  {{#if codeEntered}}<span class="helper-text center-align hidden-span">Enable the button by removing the text from the input field.</span>{{/if}}
                   <div class="or-div">
                     <span>DO YOU HAVE THE ACTIVATION CODE?</span>
                   </div>
                   <form {{action "submitForm" on="submit"}} class="side-form">
-                    {{validated-input placeholder="Your activation code" value=code errors=errors.code}}
+                    {{validated-input
+                      placeholder="Your activation code"
+                      value=code
+                      errors=errors.code
+                    }}
                     {{#full-width-button class="btn teal {{#if buttonDisabled 'disabled'}}" disabled=buttonDisabled type="submit"}}Continue{{/full-width-button}}
                   </form>
                 </div>
