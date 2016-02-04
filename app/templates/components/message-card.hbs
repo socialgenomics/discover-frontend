@@ -1,0 +1,30 @@
+<div class="content">
+  <div class="row center-align">
+    <div class="col m12">
+      <div class="card">
+        <div class="card-content">
+          <h1>{{heading}}</h1>
+          <h3 class="color-silver-chalice-text thin"><em>{{subheading}}</em></h3>
+
+          {{#if image}}
+            <img src="{{imgsrc}}" class="lizard-image">
+          {{/if}}
+
+          <div></div>
+
+          {{#if button}}
+            {{#link-to buttonRoute}}
+              {{#if buttonAction}}
+                <button class="btn teal white-text" {{action buttonAction}}>{{button}}</button>
+              {{else}}
+                <button class="btn teal white-text">{{button}}</button>
+              {{/if}}
+            {{/link-to}}
+          {{/if}}
+
+          {{#if link}}<a href="{{link}}" class="btn teal white-text">{{linkText}}</a>{{/if}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
