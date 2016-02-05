@@ -8,6 +8,7 @@
         <div class="card">
           <div class="card-content">
             <h1>{{model.user.displayName}}</h1>
+            {{#if isOwnProfile}}{{#link-to "users.profile" class="edit-btn fa-2x sub-dark"}}{{fa-icon "pencil-square-o"}}{{/link-to}}{{/if}}
             <div class="profile-img">
               <img src={{model.profile.avatar}}>
             </div>
@@ -21,7 +22,6 @@
                     <h4>{{fa-icon "envelope"}} Please verify your email</h4>
                   </div>
                 {{/if}}
-                {{#link-to "users.profile" class="btn yellow white-text"}}{{fa-icon "pencil-square-o"}} EDIT{{/link-to}}
               {{else}}
                  {{#if isEmailValidated}}
                    <div class="verified">
@@ -55,9 +55,7 @@
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="row">
     <div class="contain">
       {{#if isOwnProfile}}
       <h5 class="subtitles-left unfocus-grey-text">Your Activity</h5>
@@ -71,9 +69,7 @@
           </div>
           <div class="card-content">
             {{#each model.registrations as |dataset|}}
-
               {{mini-dataset hideSubmitter=isOwnProfile dataset=dataset action="toggleModal"}}
-
             {{/each}}
           </div>
         </div>
