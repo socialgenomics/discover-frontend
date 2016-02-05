@@ -50,6 +50,7 @@ module.exports = function(environment) {
           'users.logout' : '/api/users/logout',
           'users.signup' : '/api/users',
           'datasets.search' : '/api/datasets/search',
+          'datasets.trending' : '/api/datasets/search/trending',
           'invites': '/api/invites',
           'users.profiles': '/api/users/profiles',
           'reset-password': '/api/users/password-reset',
