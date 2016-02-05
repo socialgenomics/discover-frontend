@@ -1,9 +1,6 @@
 import Ember from 'ember';
 import ajax from 'ic-ajax';
 import ENV from 'repositive/config/environment';
-import { shuffle } from 'repositive/utils/arrays';
-
-let trending = {};
 
 export default Ember.Route.extend({
   session: Ember.inject.service(),
