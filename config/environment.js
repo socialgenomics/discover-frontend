@@ -94,8 +94,9 @@ module.exports = function(environment) {
         'style-src': "'self' 'unsafe-inline' fonts.googleapis.com",
         'script-src': "'self' 'unsafe-inline' http://api.calq.io http://www.google-analytics.com/analytics.js https://d37gvrvc0wt4s1.cloudfront.net/js/v1.8/rollbar.min.js https://s3-eu-west-1.amazonaws.com/share.typeform.com/widget.js", // Allow scripts from api.calq.io
         'connect-src': "'self' 'unsafe-inline' http://api.calq.io", // Allow data (ajax/websocket) from api.calq.io
-        'img-src': "'self' data: http://www.google-analytics.com https://www.gravatar.com http://i2.wp.com/dg2kcfbxc77v1.cloudfront.net",
-        'media-src': "'self'"
+        'img-src': "'self' data: http://www.google-analytics.com https://www.gravatar.com http://i2.wp.com/dg2kcfbxc77v1.cloudfront.net http://i0.wp.com/dg2kcfbxc77v1.cloudfront.net/assets",
+        'media-src': "'self'",
+        'frame-src':"'self' 'unsafe-inline' https://repositive.typeform.com/to/pktwPz"
       },
       metricsAdapters: [
         {
@@ -111,7 +112,7 @@ module.exports = function(environment) {
             id: 'ca78eed5d34a041ab5cf164295cf2c25'
           },
           environments: ['production']
-        }
+        },
       ],
       rollbar: {
         // enabled only on online servers
