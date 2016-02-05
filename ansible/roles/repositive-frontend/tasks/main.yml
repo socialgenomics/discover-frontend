@@ -60,8 +60,8 @@
    dest="/etc/supervisor/conf.d/repositive-frontend.conf" owner=root group=root
   notify: Restart repositive-frontend
 
-- name: Ensure Supervisord is running
-  service: name="supervisor" state=started
-
-- name: Start Upstart job and ensure it runs at boot time
-  supervisorctl: name="repositive-frontend" state=present
+# - name: Ensure Supervisord is running
+#   service: name="supervisor" state=started
+#
+# - name: Start Upstart job and ensure it runs at boot time
+#   supervisorctl: name="repositive-frontend" state=present
