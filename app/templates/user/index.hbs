@@ -14,18 +14,18 @@
             </div>
               {{#if isOwnProfile}}
                 {{#if isEmailValidated}}
-                  <div class="verified">
-                    <h4>{{fa-icon "check-circle"}} Verified Account</h4>
+                  <div>
+                    <h4 class="verified">{{fa-icon "check-circle"}} Verified Account</h4>
                   </div>
                 {{else}}
-                  <div class="not-verified">
-                    <h4>{{fa-icon "envelope"}} Please verify your email</h4>
+                  <div>
+                    <h4 class="not-verified">{{fa-icon "envelope"}} Please verify your email</h4>
                   </div>
                 {{/if}}
               {{else}}
                  {{#if isEmailValidated}}
-                   <div class="verified">
-                     <h3>{{fa-icon "check-circle"}} Verified Account</h3>
+                   <div>
+                     <h3 class="verified">{{fa-icon "check-circle"}} Verified Account</h3>
                    </div>
                  {{/if}}
                {{/if}}
@@ -61,30 +61,50 @@
       <h5 class="subtitles-left unfocus-grey-text">Your Activity</h5>
       {{/if}}
       <!-- data registrations -->
-      <div class="col m6 activity-card">
+      <div class="col s12 m6 activity-card">
         <div class="card registered-data">
           <div class="card-header card-title center">
-            {{#link-to 'datasets.register'}}{{fa-icon "book"}}{{/link-to}}
-            <h4 class="uppercase">Registered Data</h4>
+            {{#link-to 'datasets.register'}}
+              {{fa-icon "book"}}
+              <h4 class="uppercase">Registered Data</h4>
+            {{/link-to}}
           </div>
           <div class="card-content">
-            {{#each model.registrations as |dataset|}}
-              {{mini-dataset hideSubmitter=isOwnProfile dataset=dataset action="toggleModal"}}
-            {{/each}}
+            {{#if model.registrations}}
+              {{#each model.registrations as |dataset|}}
+                {{mini-dataset hideSubmitter=isOwnProfile dataset=dataset action="toggleModal"}}
+              {{/each}}
+            {{else}}
+              {{#if isOwnProfile}}
+                <p class="info-text center-align">You have not registered any data to Repositive.</p>
+              {{else}}
+                <p class="info-text center-align">This user has not registered any data to Repositive.</p>
+              {{/if}}
+            {{/if}}
           </div>
         </div>
       </div>
       <!--data requests-->
-      <div class="col m6 activity-card">
+      <div class="col s12 m6 activity-card">
         <div class="card requested-data">
           <div class="card-header center card-title">
-              {{#link-to 'datasets.request'}}{{fa-icon "clipboard"}}{{/link-to}}
-              <h4 class="uppercase">Requested Data</h4>
+              {{#link-to 'datasets.request'}}
+                {{fa-icon "clipboard"}}
+                <h4 class="uppercase">Requested Data</h4>
+              {{/link-to}}
           </div>
           <div class="card-content">
-            {{#each model.requests as |dataset|}}
-              {{mini-dataset dataset=dataset hideSubmitter=isOwnProfile}}
-            {{/each}}
+            {{#if model.requests}}
+              {{#each model.requests as |dataset|}}
+                {{mini-dataset dataset=dataset hideSubmitter=isOwnProfile action="toggleModal"}}
+              {{/each}}
+            {{else}}
+              {{#if isOwnProfile}}
+                <p class="info-text center-align">You have not requested any data from our community on Repositive.</p>
+              {{else}}
+                <p class="info-text center-align">This user has not made any requests for data from our community on Repositive.</p>
+              {{/if}}
+            {{/if}}
           </div>
         </div>
       </div>
