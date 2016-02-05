@@ -92,9 +92,9 @@ module.exports = function(environment) {
         'default-src': "'none'",
         'font-src': "'self' data: fonts.gstatic.com",
         'style-src': "'self' 'unsafe-inline' fonts.googleapis.com",
-        'script-src': "'self' 'unsafe-inline' http://api.calq.io http://www.google-analytics.com/analytics.js", // Allow scripts from api.calq.io
+        'script-src': "'self' 'unsafe-inline' http://api.calq.io http://www.google-analytics.com/analytics.js https://d37gvrvc0wt4s1.cloudfront.net/js/v1.8/rollbar.min.js https://s3-eu-west-1.amazonaws.com/share.typeform.com/widget.js", // Allow scripts from api.calq.io
         'connect-src': "'self' 'unsafe-inline' http://api.calq.io", // Allow data (ajax/websocket) from api.calq.io
-        'img-src': "'self' data: http://www.google-analytics.com",
+        'img-src': "'self' data: http://www.google-analytics.com https://www.gravatar.com http://i2.wp.com/dg2kcfbxc77v1.cloudfront.net",
         'media-src': "'self'"
       },
       metricsAdapters: [
