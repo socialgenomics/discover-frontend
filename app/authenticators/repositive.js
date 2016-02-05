@@ -23,33 +23,16 @@ export default Base.extend({
         type: 'POST',
         data: data
       })
-      .then((resp)=> {
-        return this._resolveWithResp(resp);
-      })
-      .catch(this._handleError);
+      .then(resp => this._resolveWithResp(resp))
+      .catch(this._handleError.bind(this));
     } else {
       return ajax({
         url: ENV.APIRoutes[ENV['ember-simple-auth'].authenticationRoute],
         type: 'POST',
         data: data
       })
-      .then(resp => {
-        this.get('metrics').trackEvent({
-          category: 'auth',
-          action: 'login',
-          label: 'Success'
-        });
-        return this._resolveWithResp(resp);
-      })
-      .catch(err => {
-        this.get('metrics').trackEvent({
-          category: 'auth',
-          action: 'login',
-          label: 'Failed'
-        });
-        this.get('loginController').addValidationErrors(err.jqXHR.responseJSON.errors);
-        return Ember.RSVP.reject(err);
-      });
+      .then(resp => this._resolveWithResp(resp))
+      .catch(this._handleError.bind(this));
     }
   },
 
@@ -70,6 +53,11 @@ export default Base.extend({
   _resolveWithResp: function(resp) {
     return new Ember.RSVP.Promise((resolve)=> {
       try {
+        this.get('metrics').trackEvent({
+          category: 'auth',
+          action: 'login',
+          label: 'Success'
+        });
         this.get('metrics').identify({
           email: resp.user.email,
           inviteCode: this.get('session.data.inviteCode'),
@@ -90,11 +78,20 @@ export default Base.extend({
       });
     });
   },
-  showMessages: function (messages) {
-    if (messages) {
-      messages.forEach(function (message) {
-        console.log(message);
+
+  _handleError: function(err) {
+    if (err.jqXHR !== undefined) {
+      /*
+        if the error is 4XX or 5XX server resp return it.
+      */
+      this.get('metrics').trackEvent({
+        category: 'auth',
+        action: 'login',
+        label: 'Failed'
       });
+      return Ember.RSVP.reject(err.jqXHR.responseJSON);
+    } else {
+      throw err;
     }
   }
 });

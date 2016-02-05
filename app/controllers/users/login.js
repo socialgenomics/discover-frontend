@@ -54,8 +54,8 @@ export default Ember.Controller.extend(
         email: this.get('email'),
         password: this.get('password')
       })
-      .then(this.displayMessages)
-      .catch(this.displayMessages);
+      .then(this.displayMessages.bind(this))
+      .catch(this.displayMessages.bind(this));
     },
 
     resetPassword: function() {
@@ -64,8 +64,8 @@ export default Ember.Controller.extend(
           url: ENV.APIRoutes['reset-password'] + '/' + this.get('email'),
           type: 'GET'
         })
-        .then(this.displayMessages)
-        .catch(this.displayMessages);
+        .then(this.displayMessages.bind(this))
+        .catch(this.displayMessages.bind(this));
       } else {
         this.transitionToRoute('users.resend-password');
       }
