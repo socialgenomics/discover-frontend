@@ -14,5 +14,4 @@
     # Supervisord config
     - supervisord_inethttp: True
     - supervisord_interface_ip: "0.0.0.0"
-
     - watchman_version: "3.9.0"
