@@ -39,7 +39,11 @@ export default Ember.Controller.extend(
         dataset
         .save()
         .then((created)=> {
-          this.flashMessages.success('Dataset successfully registered.');
+          this.flashMessages.add({
+            message: 'Dataset successfully registered',
+            type: 'success',
+            timeout: 5000
+          });
           this.transitionToRoute('datasets.detail', created.id);
           this.get('metrics').trackEvent({
             category: 'dataset',
