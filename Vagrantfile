@@ -46,14 +46,14 @@ Vagrant.configure(2) do |config|
        mount_options: ['fsc']
   end
 
-  config.vm.network "forwarded_port", guest: 4200, host: 4200
-  config.vm.network "forwarded_port", guest: 35729, host: 35729
+  #config.vm.network "forwarded_port", guest: 4200, host: 4200
+  #config.vm.network "forwarded_port", guest: 35729, host: 35729
 
   # Config frontend machine
   config.vm.define "frontend" do |frontend|
 
     frontend.vm.provision "shell" do |s|
-        s.inline = "ansible-galaxy -p /home/vagrant/app/tmp/roles install -r /home/vagrant/app/ansible/requirements.yml --force"
+        s.inline = "ansible-galaxy -p /home/vagrant/app/ansible/tmp/roles install -r /home/vagrant/app/ansible/requirements.yml --force"
     end
 
     # Provision VM with Ansible
