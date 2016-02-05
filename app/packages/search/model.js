@@ -213,7 +213,7 @@ export default DS.Model.extend({
     * See: http://lucene.apache.org/core/3_4_0/queryparsersyntax.html#Escaping%20Special%20Characters
     */
   escapeQuery: function(query) {
-    var escaped = query.replace(/([\!\*\+\&\|\(\)\[\]\{\}\^\~\?\:\"\/])/g, "\\$1");
+    var escaped = query.replace(/([\!\*\+\&\|\(\)\[\]\{\}\^\~\?\:\/])/g, "\\$1");
     console.debug("Escaped query", query, "as", escaped);
     return escaped;
   }
