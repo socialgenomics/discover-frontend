@@ -1,17 +1,20 @@
 import Ember from 'ember';
-import Base from 'simple-auth/authenticators/base';
+import Base from 'ember-simple-auth/authenticators/base';
 import ajax from 'ic-ajax';
 import ENV from 'repositive/config/environment';
 
 
 export default Base.extend({
   metrics: Ember.inject.service(),
+  session: Ember.inject.service(),
+
   restore: function(data) {
     return new Ember.RSVP.Promise(function(resolve, reject) {
       // TODO: display any notifications - i.e if you have new messages etc
       resolve(data);
     });
   },
+
   authenticate: function(data) {
     if ('provider' in data) {
       // this is a third party login
@@ -20,52 +23,54 @@ export default Base.extend({
         type: 'POST',
         data: data
       })
-      .then((resp)=> {
-        return this._resolveWithResp(resp);
-      });
+      .then(resp => this._resolveWithResp(resp))
+      .catch(this._handleError.bind(this));
     } else {
       return ajax({
-        url: ENV.APIRoutes[ENV['simple-auth'].authenticationRoute],
+        url: ENV.APIRoutes[ENV['ember-simple-auth'].authenticationRoute],
         type: 'POST',
         data: data
       })
-      .then((resp)=> {
-        return this._resolveWithResp(resp);
-      })
-      .catch((err)=> {
-        this.get('loginController').addValidationErrors(err.jqXHR.responseJSON.errors);
-        return Ember.RSVP.reject(err);
-      });
+      .then(resp => this._resolveWithResp(resp))
+      .catch(this._handleError.bind(this));
     }
   },
+
   invalidate: function(user) {
     return ajax({
-      url: ENV.APIRoutes[ENV['simple-auth'].logoutRoute],
+      url: ENV.APIRoutes[ENV['ember-simple-auth'].logoutRoute],
       type: 'POST',
       data: {
         authToken: user.authToken
       }
     })
     .then((resp)=> {
-      //_this.showMessages(resp.messages);
       return Ember.RSVP.resolve(resp);
     })
-    .catch((err)=> {
-      //_this.showMessages(xhr.responseJSON.messages);
-      return Ember.RSVP.reject(err.jqXHR.responseJSON);
-    });
+    .catch(this._handleError);
   },
+
   _resolveWithResp: function(resp) {
     return new Ember.RSVP.Promise((resolve)=> {
-      this.get('metrics').identify({
-        email: resp.user.email,
-        inviteCode: this.get('loginController.controllers.application.code'),
-        firstname: resp.user.firstname,
-        lastname: resp.user.lastname,
-        username: resp.user.username
-      });
-
-      resp.user.isCurrentUser = true;
+      try {
+        this.get('metrics').trackEvent({
+          category: 'auth',
+          action: 'login',
+          label: 'Success'
+        });
+        this.get('metrics').identify({
+          email: resp.user.email,
+          inviteCode: this.get('session.data.inviteCode'),
+          firstname: resp.user.firstname,
+          lastname: resp.user.lastname,
+          username: resp.user.username
+        });
+      } catch (err) {
+        console.error('Error on metrics.identify', err);
+      }
+      /*
+        Use ember run to avoid pain.
+       */
       Ember.run(function() {
         // all the properties of the object you resolve with
         // will be added to the session
@@ -73,11 +78,20 @@ export default Base.extend({
       });
     });
   },
-  showMessages : function(messages) {
-    if (messages) {
-      messages.forEach(function(message) {
-        console.log(message);
+
+  _handleError: function(err) {
+    if (err.jqXHR !== undefined) {
+      /*
+        if the error is 4XX or 5XX server resp return it.
+      */
+      this.get('metrics').trackEvent({
+        category: 'auth',
+        action: 'login',
+        label: 'Failed'
       });
+      return Ember.RSVP.reject(err.jqXHR.responseJSON);
+    } else {
+      throw err;
     }
   }
 });

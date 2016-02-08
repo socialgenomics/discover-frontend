@@ -3,7 +3,7 @@ import { poisson } from 'repositive/utils/distributions';
 
 
 export default DS.Model.extend({
-  owner: DS.belongsTo('user', { async: true }),
+  owner: DS.belongsTo('user'),
   properties : DS.belongsTo('property'),
   repository: DS.belongsTo('repository'),
   favorites: DS.hasMany('favourite'),

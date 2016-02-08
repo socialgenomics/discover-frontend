@@ -2,7 +2,7 @@ import DS from 'ember-data';
 import Ember from 'ember';
 
 export default DS.Model.extend({
-  email: DS.attr('string'),
+  email: DS.attr('string'), // should only be availible for current user
   username: DS.attr('string'),
   firstname: DS.attr('string'),
   lastname: DS.attr('string'),
@@ -11,7 +11,7 @@ export default DS.Model.extend({
   comments: DS.hasMany('comments'),
   createdAt: DS.attr('isodate'),
   updatedAt: DS.attr('isodate'),
-  profile: DS.belongsTo('profile', { async: true }),
+  profile: DS.belongsTo('profile'),
   displayName: function() {
     if (Ember.isPresent(this.get('firstname')) || Ember.isPresent(this.get('lastname'))) {
       var fn = this.get('firstname') || '';

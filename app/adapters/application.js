@@ -1,16 +1,11 @@
 import DS from 'ember-data';
 import ENV from 'repositive/config/environment';
+import DataAdapterMixin from 'ember-simple-auth/mixins/data-adapter-mixin';
 
-
-if (ENV.environment === 'development') {
-  var ApplicationAdapter = DS.RESTAdapter.extend({
-    namespace: 'api'
-  });
-} else if (ENV.environment === 'production' || ENV.environment === 'testing') {
-  var ApplicationAdapter = DS.RESTAdapter.extend({
-    namespace: 'api',
-    host: ENV.APIBaseURL
-  });
-}
+var ApplicationAdapter = DS.RESTAdapter.extend(DataAdapterMixin, {
+  namespace: 'api',
+  host: ENV.APIBaseURL,
+  authorizer: 'authorizer:repositive'
+});
 
 export default ApplicationAdapter;

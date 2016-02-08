@@ -8,7 +8,8 @@
       focus-out="focusedOut"
       type=type
       class=class
-      placeholder=placeholder}}
+      placeholder=placeholder
+    }}
   {{else}}
     {{input
       value=value
@@ -17,20 +18,24 @@
       type=type
       class=class
       placeholder=placeholder
-      insert-newline='submitForm'}}
+      insert-newline='submitForm'
+    }}
   {{/if}}
 </div>
 <div class="lbl">{{lbl}}</div>
-{{#if (eq icon "fullname")}} <i class="mdi-action-perm-identity"></i> {{/if}}
-{{#if (eq icon "password")}} <i class="mdi-action-lock-outline"></i> {{/if}}
-{{#if (eq icon "email")}} <i class="mdi-communication-email"></i> {{/if}}
 
-  {{#if showInvalid}}
-    <div class="errors">
-    {{#each errors as |error|}}
-      <div class="text-invalid error-text">{{ error }}</div>
-    {{/each}}
-    </div>
-  {{else}}
-    <div class="input-helper">{{helpText}}</div>
-  {{/if}}
+{{#if (eq icon "fullname")}} <i class="fa fa-user"></i> {{/if}}
+{{#if (eq icon "password")}} <i class="fa fa-lock"></i> {{/if}}
+{{#if (eq icon "email")}} <i class="fa fa-envelope"></i> {{/if}}
+
+{{#if showInvalid}}
+  <div class="errors">
+    <ul class="text-invalid error-text">
+      {{#each errors as |error|}}
+        <li>{{error}}</li>
+      {{/each}}
+    </ul>
+  </div>
+{{else}}
+  <div class="input-helper">{{helpText}}</div>
+{{/if}}

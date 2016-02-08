@@ -5,23 +5,39 @@ import ENV from 'repositive/config/environment';
 import ajax from 'ic-ajax';
 import { validator } from 'ember-validations';
 
-export default Ember.ObjectController.extend(
+export default Ember.Controller.extend(
    EmberValidations,
    ServerValidationMixin,
 {
-  needs: ['root'],
+  session: Ember.inject.service(),
+
+  fullname: null,
+  firstname: null,
+  lastname: null,
+  email: null,
+  password: null,
+  strength: null,
+  showPassword: false,
+  loading: false,
+  formSubmitted: false,
 
   validations: {
 
     fullname: {
       presence: {
         message: 'Can\'t be blank.'
-      }
+      },
+      inline: validator(function() {
+        let fn = this.get('fullname');
+        if (/@/.test(fn)) {
+          return 'Please enter your full name.';
+        }
+      })
     },
 
     email: {
       presence: {
-        message: 'Can\'t be blank.'
+        message: ''
       },
       format: {
         with: /^[\w+\-.]+@[a-z\d\-.]+\.[a-z]+$/i,
@@ -47,14 +63,7 @@ export default Ember.ObjectController.extend(
       })
     }
   },
-  fullname: null,
-  firstname: null,
-  lastname: null,
-  email: null,
-  password: null,
-  strength: null,
-  showPassword: false,
-  formSubmitted: false,
+
 
   type: function() {
     return this.get('showPassword') ? 'text' : 'password';
@@ -67,6 +76,10 @@ export default Ember.ObjectController.extend(
     this.set('firstname', firstname);
     this.set('lastname', lastname);
   }.observes('fullname'),
+
+  buttonDisabled: function() {
+    return !this.get('isValid') || this.get('loading');
+  }.property('isValid', 'loading'),
 
   passwordStrength: function() {
     let numErrors = this.get('errors.password.length');
@@ -89,38 +102,56 @@ export default Ember.ObjectController.extend(
     }
   }.observes('password'),
 
-  showMessages : function(messages) {
+  displayMessages : function(resp) {
+    let messages = resp.messages;
+    this.addValidationErrors(messages);
+    messages = messages.reject(item => {
+      return item.type === 'validation';
+    });
     if (messages) {
-      messages.forEach(function(message) {
+      messages.forEach(message => {
         this.flashMessages.success(message);
-      }.bind(this));
+      });
     }
+    this.set('loading', false);
   },
 
   actions: {
-    submitForm: function() {
-      this.set('formSubmitted', true);
+    signupAndAuthenticate: function() {
       if (this.get('isValid')) {
-        var credentials = this.getProperties('firstname', 'lastname', 'email', 'password');
+        this.set('formSubmitted', true);
+        let credentials = this.getProperties('firstname', 'lastname', 'email', 'password');
+        this.set('loading', true);
+        /*
+          Signup with repositive.
+         */
         ajax({
-          url: ENV.APIRoutes[ENV['simple-auth'].signupRoute],
+          url: ENV.APIRoutes[ENV['ember-simple-auth'].signupRoute],
           type: 'POST',
           data: credentials
         })
         .then((resp)=> { // signup has suceeded, now login
           // render any messages provided by the backend
-          this.showMessages(resp.messages);
-          // We would like to show a welcome screen if this is the first visit.
-          this.get('controllers.root').set('firstVisit', true);
+          if ('messages' in resp) {
+            this.displayMessages(resp);
+          }
           // login!
-          this.get('session').authenticate('authenticator:repositive', credentials);
+          this.get('session')
+          .authenticate('authenticator:repositive', credentials)
+          // We would like to show a welcome screen if this is the first visit.
+          .then(() => this.get('session').set('data.firstVisit', true))
+          .catch(this.displayMessages.bind(this));
         })
-        .catch((err)=> {
-          //_this.showMessages(xhr.responseJSON.messages);
-          this.addValidationErrors(err.jqXHR.responseJSON.errors);
+        .catch(err => { // error with signup
+          if (err.jqXHR !== undefined) {
+            /*
+              if the error is 4XX or 5XX server resp display the error messages.
+             */
+            this.displayMessages(err.jqXHR.responseJSON);
+          } else {
+            throw err;
+          }
         });
-      } else {
-        console.log('invalid');
       }
     },
     toggleCheckbox: function() {

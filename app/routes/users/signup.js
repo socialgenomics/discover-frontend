@@ -2,10 +2,10 @@ import Ember from 'ember';
 import ThirdParty from 'repositive/mixins/third-party-route-mixin';
 
 export default Ember.Route.extend(ThirdParty, {
+  session: Ember.inject.service(),
   beforeModel: function() {
-    //if not verified transition to verify route
-    if (!this.controllerFor('Application').get('isVerified')) {
-      this.transitionTo('verify');
+    if (!this.get('session').get('data.hasInvite')) {
+      this.transitionTo('landing-page');
     }
   }
 });

@@ -1,0 +1,21 @@
+{
+  "build": {
+    "environment": "production"
+  },
+  "s3": {
+    "bucket": "frontend-prod-amzn-us-east-1.repositive.io",
+    "region": "us-east-1"
+  },
+  "ssh-tunnel":{
+    "host": "frontend-prod-amzn-us-east-1.repositive.io",
+    "username": "repositive"
+  },
+  "redis":{
+    "host": "localhost",
+    "allowOverwrite": true,
+    "keyPrefix": "repositive-frontend:index"
+  },
+  "pipeline":{
+    "activateOnDeploy": true
+  }
+}

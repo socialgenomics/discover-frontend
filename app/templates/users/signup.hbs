@@ -1,85 +1,179 @@
-  <div class="container-signup">
-    <form {{action "submitForm" on="submit"}}>
-      <div class="row">
-        <div class="col m12 center">
-          <ul class="list-inline">
-            <li>
-              <a {{ action 'authenticateWithGooglePlus' }}>
-                <img class="social-media-icon btn-floating" src="/assets/images/icons/social/googleplus.png">
-              </a>
-            </li>
-            <li>
-              <a {{ action 'authenticateWithLinkedIn' }}>
-                <img class="social-media-icon btn-floating" src="/assets/images/icons/social/linkedin.png">
-              </a>
-            </li>
-          </ul>
-          <h6 class="center-align">We won't use any of your personal data, only your email.</h6>
-        </div>
-      </div>
-      <div class="or-div">
-        <span>
-          OR
-        </span>
-      </div>
+<div class="container-signup">
+   <form {{action "signupAndAuthenticate" on="submit"}}>
+     <div class="row">
+       <div class="col m12 center">
+         <ul class="list-inline">
+           <li>
+             <a {{ action 'authenticateWithGooglePlus' }}>
+               <img class="social-media-icon btn-floating" src="/assets/images/icons/social/googleplus.png">
+             </a>
+           </li>
+           <li>
+             <a {{ action 'authenticateWithLinkedIn' }}>
+               <img class="social-media-icon btn-floating" src="/assets/images/icons/social/linkedin.png">
+             </a>
+           </li>
+         </ul>
+         <h6 class="center-align">We won't use any of your personal data, only your email.</h6>
+       </div>
+     </div>
+     <div class="or-div">
+       <span>
+         OR
+       </span>
+     </div>
 
-      {{validated-input
-        type="Text"
-        lbl="Full Name"
-        value=fullname
-        errors=errors.fullname
-        placeholder="Full Name"
-        helpText="You can change your name later in the settings."
-        icon="fullname"
-        formSubmitted=formSubmitted
-        class="signup-fullname"
-      }}
-      {{validated-input
-        type="Email"
-        lbl="Email"
-        value=email
-        errors=errors.email
-        placeholder="Email"
-        helpText="You'll need to verify this later."
-        icon="email"
-        formSubmitted=formSubmitted
-        class="signup-email"
-      }}
-      {{validated-input
-        type=type
-        lbl="Password"
-        value=password
-        errors=errors.password
-        placeholder="Password"
-        helpText="Must be at least 8 characters and include an uppercase letter or number."
-        icon="password"
-        showPassword=showPassword
-        formSubmitted=formSubmitted
-        class="signup-password"
-      }}
-      <div class="password-div">
-        <div class="pw-check left">
-          <input type="checkbox" id="showPassword" onClick={{action 'toggleCheckbox'}} >
-          <label for="showPassword">Show password</label>
+     {{validated-input
+       type="Text"
+       lbl="Full Name"
+       value=fullname
+       errors=errors.fullname
+       placeholder="Full Name"
+       helpText="You can change your name later in the settings."
+       icon="fullname"
+       formSubmitted=formSubmitted
+       class="signup-fullname"
+     }}
+     {{validated-input
+       type="Email"
+       lbl="Email"
+       value=email
+       errors=errors.email
+       placeholder="Email"
+       helpText="You'll need to verify this later."
+       icon="email"
+       formSubmitted=formSubmitted
+       class="signup-email"
+     }}
+     {{validated-input
+       type=type
+       lbl="Password"
+       value=password
+       errors=errors.password
+       placeholder="Password"
+       helpText="Must be at least 8 characters and include an uppercase letter or number."
+       icon="password"
+       showPassword=showPassword
+       formSubmitted=formSubmitted
+       class="signup-password"
+     }}
+     <div class="password-div">
+       <div class="pw-check left">
+         <input type="checkbox" id="showPassword" onClick={{action 'toggleCheckbox'}} >
+         <label for="showPassword">Show password</label>
+       </div>
+       <div class="pw-strength right">
+         <span class="pw-tag">Password strength<span class="{{strength}}"> {{strength}}</span></span>
+       </div>
+     </div>
+     <div class="input-container center">
+       {{#full-width-button class="teal" type="submit"}}SIGN UP{{/full-width-button}}
+       <h6 class="center-align">By signing up you agree to our {{#link-to 'policies' class="link"}}Terms &amp; Privacy Policy.{{/link-to}} </h6>
+     </div>
+   </form>
+ </div>
+<div class="row stick-to-bottom privacy-msg">
+   <div class="col m12 center">
+     <div class="divider"></div>
+     <h3>We take your privacy seriously.</h3>
+     <div class="col m12">
+         <span class="col m4">We advocate full adherence to patient consent.</span>
+         <span class="col m4">We don't sell and share any private data with 3rd party.</span>
+         <span class="col m4">We encourage responsible custodianship of genomic data.</span>
+     </div>
+   </div>
+ </div>
+
+<!-- <div class="content">
+  <div class="row center-align">
+    <div class="col m12">
+      <div class="card">
+        <div class="card-content">
+          <div class="card-body">
+            <div class="row">
+              <div class="col m5 center">
+                <h2>We care about your privacy</h2>
+                <img class="icon" src="/assets/images/icons/about-people-first.png">
+                <p>We advocate full adherence to patient consent.</p>
+                <img class="icon" src="/assets/images/icons/about-privacy.png">
+                <p>We don't sell and share any private data with 3rd party.</p>
+                <img class="icon" src="/assets/images/icons/about-custordian.png">
+                <p>We encourage responsible custodianship of genomic data.</p>
+              </div>
+              <div class="col m5 offset-m2 center">
+                <form {{action "submitForm" on="submit"}}>
+                  <ul class="list-inline">
+                    <li>
+                      <a {{ action 'authenticateWithGooglePlus' }}>
+                        <img class="social-media-icon btn-floating" src="/assets/images/icons/social/googleplus.png">
+                      </a>
+                    </li>
+                    <li>
+                      <a {{ action 'authenticateWithLinkedIn' }}>
+                        <img class="social-media-icon btn-floating" src="/assets/images/icons/social/linkedin.png">
+                      </a>
+                    </li>
+                  </ul>
+                  <h6 class="center-align">We won't use any of your personal data, only your email.</h6>
+
+                  <div class="or-div">
+                    <span>
+                      OR
+                    </span>
+                  </div>
+                  {{validated-input
+                    type="Text"
+                    lbl="Full Name"
+                    value=fullname
+                    errors=errors.fullname
+                    placeholder="Full Name"
+                    helpText="You can change your name later in the settings."
+                    icon="fullname"
+                    formSubmitted=formSubmitted
+                    class="signup-fullname"
+                  }}
+                  {{validated-input
+                    type="Email"
+                    lbl="Email"
+                    value=email
+                    errors=errors.email
+                    placeholder="Email"
+                    helpText="You'll need to verify this later."
+                    icon="email"
+                    formSubmitted=formSubmitted
+                    class="signup-email"
+                  }}
+                  {{validated-input
+                    type=type
+                    lbl="Password"
+                    value=password
+                    errors=errors.password
+                    placeholder="Password"
+                    helpText="Must be at least 8 characters and include an uppercase letter or number."
+                    icon="password"
+                    showPassword=showPassword
+                    formSubmitted=formSubmitted
+                    class="signup-password"
+                  }}
+                  <div class="password-div">
+                    <div class="pw-check left">
+                      <input type="checkbox" id="showPassword" onClick={{action 'toggleCheckbox'}} >
+                      <label for="showPassword">Show password</label>
+                    </div>
+                    <div class="pw-strength right">
+                      <span class="pw-tag">Password strength<span class="{{strength}}"> {{strength}}</span></span>
+                    </div>
+                  </div>
+                  <div class="input-container center">
+                    {{#full-width-button class="teal {{#if buttonDisabled 'disabled'}}" disabled=buttonDisabled type="submit"}}SIGN UP{{/full-width-button}}
+                    <h6 class="center-align">By signing up you agree to our {{#link-to 'policies' class="link"}}Terms &amp; Privacy Policy.{{/link-to}} </h6>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="pw-strength right">
-          <span class="pw-tag">Password strength<span class="{{strength}}"> {{strength}}</span></span>
-        </div>
-      </div>
-      <div class="input-container center">
-        {{#full-width-button class="teal {{#if buttonDisabled 'disabled'}}" disabled=buttonDisabled type="submit"}}SIGN UP{{/full-width-button}}
-        <h6 class="center-align">By signing up you agree to our {{#link-to 'policies' class="link"}}Terms &amp; Privacy Policy.{{/link-to}} </h6>
-      </div>
-    </form>
-  </div>
- <div class="row stick-to-bottom privacy-msg">
-    <div class="col m12 center">
-      <div class="divider"></div>
-      <h3>We take your privacy seriously.</h3>
-      <div class="col m12">
-          <span class="col m4">We advocate full adherence to patient consent.</span>
-          <span class="col m4">We don't sell and share any private data with 3rd party.</span>
-          <span class="col m4">We encourage responsible custodianship of genomic data.</span>
       </div>
     </div>
   </div>
+</div> -->

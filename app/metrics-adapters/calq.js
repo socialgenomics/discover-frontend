@@ -2,6 +2,7 @@ import Ember from 'ember';
 import canUseDOM from 'ember-metrics/utils/can-use-dom';
 import objectTransforms from 'ember-metrics/utils/object-transforms';
 import BaseAdapter from 'ember-metrics/metrics-adapters/base';
+import ENV from 'repositive/config/environment';
 
 const {
   copy,
@@ -67,23 +68,26 @@ export default BaseAdapter.extend({
   identify(options = {}) {
     const compactedOptions = compact(options);
     const { email, inviteCode, firstname, lastname, username } = compactedOptions;
-    window.calq.user.identify(email);
+    const fullname = firstname + " " + lastname;
+    window.calq.user.identify(username);
+    window.calq.user.profile({"$full_name":fullname, "$email":email});
     window.calq.user.profile({ inviteCode, email, firstname, lastname, username });
   },
 
   trackEvent(options = {}) {
     //const compactedOptions = compact(options);
-    var actionName = options.category + '.' + options.action;
-    delete options.category;
-    delete options.action;
-    window.calq.action.track(actionName, options);
-
+    if (ENV.environment === 'production') {
+      var actionName = options.category + '.' + options.action;
+      delete options.category;
+      delete options.action;
+      window.calq.action.track(actionName, options);
+    }
     return options;
   },
 
   trackPage(options = {}) {
     //const compactedOptions = compact(options);
-    //calq.action.trackPageView();
+    window.calq.action.trackPageView();
     return options;
   },
 

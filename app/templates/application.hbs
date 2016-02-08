@@ -1,4 +1,9 @@
-{{#unless isLandingPage}}{{platform-navbar action="search" initAvatar="initAvatar" avatar=avatar}}{{/unless}}
+{{platform-navbar
+  action="search"
+  avatar=session.authenticatedUser.profile.avatar
+  firstname=session.authenticatedUser.firstname
+  username=session.authenticatedUser.username
+}}
 <div class="container">
   {{#each flashMessages.queue as |flash|}}
     {{ui-message flash=flash}}
@@ -9,13 +14,20 @@
 
 {{#if isShowingModal}}
   {{#modal-dialog close="toggleModal" targetAttachment="center" translucentOverlay=true}}
+  <div class="modal">
     <div class="modal-content center-align">
-      <img src="/assets/images/icons/work-in-progress.png" alt="Logo" class="social-media-icon"/>
       <h2>We are still working hard.</h2>
-      <h5>This feature will be available very soon. Please don't leave us.</h5>
+      <h4 class="thin"><em>This feature will be available very soon.</em></h4>
+      <img class="modal-img" src="/assets/images/lizard-working-hard.png" alt="Logo"/>
     </div>
     <div class="modal-footer center-align">
-      <a {{action "toggleModal"}} class="modal-action modal-close waves-effect">OK</a>
+      <button {{action "toggleModal"}} class="btn center btn-light teal modal-action modal-close waves-effect">OK, no worries</button>
     </div>
+  </div>
   {{/modal-dialog}}
 {{/if}}
+
+{{platform-footer}}
+
+{{!-- ember-cli-materialize modal container --}}
+{{!-- md-modal-container --}}

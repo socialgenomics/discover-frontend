@@ -1,10 +1,31 @@
 # Setup development instance of repositive api
 ---
 
+# Delete node_modules for avoilding cross compilation issues between vagrant VM and host
+- stat: path=/home/vagrant/app/node_modules
+  register: node_modules
+- name: Delete project folder node modules
+  file: path=/home/vagrant/app/node_modules state=absent
+  when: node_modules.stat.isdir is defined and node_modules.stat.isdir == true
+
+# Delete bower_components for avoilding cross compilation issues between vagrant VM and host
+# TODO: Should not delete when "bower_components/repositive_styles" is a mount
+#- stat: path=/home/vagrant/app/bower_components
+#  register: bower_components
+#- name: Delete project folder bower_components
+#  file: path=/home/vagrant/app/bower_components state=absent
+#  when: bower_components.stat.isdir is defined and bower_components.stat.isdir == true
+
+# Delete tmp folder
+- stat: path=/home/vagrant/app/tmp
+  register: tmp
+- name: Delete project folder tmp
+  file: path=/home/vagrant/app/tmp state=absent
+  when: tmp.stat.isdir is defined and tmp.stat.isdir == true
+
 - name: Link packages.json
   file: src=/home/vagrant/app/package.json dest=/home/vagrant/package.json state=link
 
-# Example from Ansible Playbooks
 - name:
   copy: src=known_hosts dest=/home/vagrant/.ssh/known_hosts owner=vagrant group=vagrant mode=0644
 
@@ -39,8 +60,8 @@
    dest="/etc/supervisor/conf.d/repositive-frontend.conf" owner=root group=root
   notify: Restart repositive-frontend
 
-- name: Ensure Supervisord is running
-  service: name="supervisor" state=started
-
-- name: Start Upstart job and ensure it runs at boot time
-  supervisorctl: name="repositive-frontend" state=present
+# - name: Ensure Supervisord is running
+#   service: name="supervisor" state=started
+#
+# - name: Start Upstart job and ensure it runs at boot time
+#   supervisorctl: name="repositive-frontend" state=present

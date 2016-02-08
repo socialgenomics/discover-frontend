@@ -6,7 +6,7 @@ export default Ember.Route.extend({
   model: function(params) {
     this.set('resetKey', params.resetKey);
   },
-  setupController: function(controller, model) {
+  setupController: function(controller /* model */) {
     controller.set('resetKey', this.get('resetKey'));
   }
 });

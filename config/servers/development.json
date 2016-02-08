@@ -1,0 +1,21 @@
+{
+  "build": {
+    "environment": "development"
+  },
+  "s3": {
+    "bucket": "frontend-dev-sol-lon02.repositive.io",
+    "region": "us-east-1"
+  },
+  "ssh-tunnel":{
+    "host": "frontend-dev-sol-lon02.repositive.io",
+    "username": "repositive"
+  },
+  "redis":{
+    "host": "localhost",
+    "allowOverwrite": true,
+    "keyPrefix": "repositive-frontend:index"
+  },
+  "pipeline":{
+    "activateOnDeploy": true
+  }
+}

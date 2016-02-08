@@ -3,6 +3,7 @@
 # compiled output
 /dist
 /tmp
+ansible/tmp
 
 # dependencies
 /node_modules
@@ -21,3 +22,5 @@ testem.log
 git_stats/
 .idea/
 .vagrant
+
+.env

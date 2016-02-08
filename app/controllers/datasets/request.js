@@ -8,10 +8,12 @@ export default Ember.Controller.extend(
   description: null,
   validations: {
     title: {
-      presence: true
+      presence: true,
+      presence: { message: 'This field can\'t be blank.' }
     },
     description: {
-      presence: true
+      presence: true,
+      presence: { message: 'This field can\'t be blank.' }
     }
   },
   actions: {
@@ -26,7 +28,11 @@ export default Ember.Controller.extend(
       dataset
       .save()
       .then((created)=> {
-        this.flashMessages.success('Request posted successfully.');
+        this.flashMessages.add({
+          message: 'Request posted successfully',
+          type: 'success',
+          timeout: 5000
+        });
         this.transitionToRoute('datasets.detail', created.id);
         this.get('metrics').trackEvent({
           category: 'dataset',

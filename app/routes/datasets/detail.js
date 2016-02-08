@@ -1,13 +1,19 @@
 import Ember from 'ember';
-import AuthenticatedRouteMixin from 'simple-auth/mixins/authenticated-route-mixin';
 
-export default Ember.Route.extend(AuthenticatedRouteMixin, {
+export default Ember.Route.extend({
   model: function(params) {
-    return this.store.find('dataset', params.id);
+    return this.store.findRecord('dataset', params.id);
   },
-  afterModel: function(model) {
-    model.get('comments.@each.UserId').forEach((id)=> {
-      this.store.query('profile', { UserId: id });
-    });
+  afterModel: function() {
+    // model.get('comments').forEach((comment)=> {
+    //   this.store.query('profile', { UserId: comment.get('UserId') });
+    // });
+  },
+  actions:{
+    didTransition: function(){
+      this.get('metrics').trackPage();
+      return true;
+    }
   }
+
 });

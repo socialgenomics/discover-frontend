@@ -3,13 +3,8 @@ import ajax from 'ic-ajax';
 import ENV from 'repositive/config/environment';
 
 export default Ember.Route.extend({
+  session: Ember.inject.service(),
   verificationId: null,
-  isAuthenticated: Ember.computed(function() {
-    return this.get('session.isAuthenticated');
-  }),
-  currentUser: Ember.computed(function() {
-    return this.get('session.secure.user');
-  }),
 
   model: function(params) {
     // return a promise.. this pauses the page rendering until the promise is resolved or rejected
@@ -26,17 +21,14 @@ export default Ember.Route.extend({
       * Backend validated the email address - transitionTo the profile without
       * rendering the current page (i.e do not resolve the promise before transitioning).
       */
-      this.store.findRecord('user', this.get('session.secure.user.id'))
-      .then(user=> {
-        user.set('isEmailValidated', true);
-      });
+      this.get('session.authenticatedUser').set('isEmailValidated', true);
       /*
         We cannot know the username of the current user unless it is stored in the
         session. This means we cannot redirect to current user's profile if they're
         not logged in.
       */
       if (this.get('session.isAuthenticated')) {
-        this.transitionTo('user', this.get('session.secure.user.username'));
+        this.transitionTo('user', this.get('session.authenticatedUser.username'));
       } else {
         this.transitionTo('users.login');
       }
@@ -50,7 +42,7 @@ export default Ember.Route.extend({
   actions: {
     resendVerifyEmail: function() {
       ajax({
-        url: '/api/users/verify/resend/' + this.get('session.secure.user.email'),
+        url: '/api/users/verify/resend/' + this.get('session.authenticatedUser.email'),
         type: 'GET'
       });
     }

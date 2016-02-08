@@ -1,46 +1,31 @@
-/* global require, module */
 var EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
+/*
+  brocolli related build conf.
+ */
+
 var environment = EmberApp.env();
+var appConf = require('./config/app/' + environment + '.json');
 
-var isProductionLikeBuild = ['production', 'testing'].indexOf(environment) > -1;
+var isProductionLikeBuild = ['development', 'production', 'staging'].indexOf(environment) > -1;
 
-var prepend;
-if (environment === 'production') {
-  prepend = 'http://dg2kcfbxc77v1.cloudfront.net/';
-} else if (environment === 'testing') {
-  prepend = 'http://testing.discover.repositive.io.s3-website-us-east-1.amazonaws.com/';
-} else {
-  prepend = '';
-}
-
-console.log('\n');
 console.log(environment);
-console.log(prepend);
-console.log('\n');
 
 module.exports = function(defaults) {
   var app = new EmberApp(defaults, {
-    outputPaths: {
-      app: {
-        css: {
-          'main': '/assets/main.css'
-        },
-        js: '/assets/main.js'
-      },
-      vendor: {
-        css: '/assets/vendor.css',
-        js: '/assets/vendor.js'
-      }
+    sassOptions: {
+      inputFile: 'app.scss',
+      outputFile: 'main.css',
+      includePaths: [
+        'bower_components'
+      ]
     },
     fingerprint: {
       enabled: isProductionLikeBuild,
       exclude: [],
-      prepend: prepend
+      prepend: appConf.assetsPrependPath
     },
-    sourcemaps: {
-      enabled: !isProductionLikeBuild
-    },
+    sourcemaps: { enabled: !isProductionLikeBuild },
     minifyCSS: { enabled: isProductionLikeBuild },
     minifyJS: { enabled: isProductionLikeBuild },
     jscsOptions: {
@@ -64,7 +49,8 @@ module.exports = function(defaults) {
   // please specify an object with the list of modules as keys
   // along with the exports of each module as its value.
 
-  app.import('bower_components/JavaScript-MD5/js/md5.js');
+  app.import('bower_components/materialize/dist/js/materialize.js');
+  app.import('vendor/typeform.js');
 
   return app.toTree();
 };

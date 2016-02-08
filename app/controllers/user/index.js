@@ -1,13 +1,12 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-
-  currentUser: Ember.computed(function() {
-    return this.get('session.secure.user');
-  }),
-
+  session: Ember.inject.service(),
+  /*
+  * session.secure returns number and model.user returns string, hence double =
+  */
   isOwnProfile: function() {
-    return this.get('session.secure.user.id') === this.get('model.user.id');
+    return this.get('session.authenticatedUser.id') == this.get('model.user.id');
   }.property('model'),
 
   isEmailValidated: function() {

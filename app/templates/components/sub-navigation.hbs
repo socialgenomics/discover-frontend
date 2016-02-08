@@ -1,3 +1,42 @@
+<div class="settings-tabs content">
+  <div class="settings-tabs row">
+    <div class="col m12">
+      <div class="card">
+        <ul class="tabs">
+          <li class="tab s-tab">
+            {{#if (eq active "settings")}}
+              {{#link-to 'users.settings' class="active"}}SETTINGS <i class="mdi-action-settings"></i>{{/link-to}}
+            {{else}}
+              {{#link-to "users.settings"}}SETTINGS <i class="mdi-action-settings"></i>{{/link-to}}
+            {{/if}}
+          </li>
+          <li class="tab s-tab">
+            {{#if (eq active "profile")}}
+              {{#link-to "users.profile"  class="active"}}EDIT PROFILE <i class="mdi-action-account-circle"></i>{{/link-to}}
+            {{else}}
+              {{#link-to "users.profile" }}EDIT PROFILE <i class="mdi-action-account-circle"></i>{{/link-to}}
+            {{/if}}
+          </li>
+          <li class="tab s-tab">
+            {{#if (eq active "trust")}}
+              {{#link-to "users.trust" class="active"}}TRUST <i class="mdi-action-verified-user"></i>{{/link-to}}
+            {{else}}
+              {{#link-to "users.trust"}}TRUST <i class="mdi-action-verified-user"></i>{{/link-to}}
+            {{/if}}
+          </li>
+          <li class="tab s-tab">
+            {{#if (eq active "references")}}
+              {{#link-to "users.references" class="active"}}REFERENCES <i class="mdi-action-redeem"></i>{{/link-to}}
+            {{else}}
+              {{#link-to "users.references"}}REFERENCES <i class="mdi-action-redeem"></i>{{/link-to}}
+            {{/if}}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<!--
 <nav class="sideNav">
   <div class="nav-wrapper darken-1 card">
     <ul>
@@ -31,4 +70,4 @@
       </li>
     </ul>
   </div>
-</nav>
+</nav> -->

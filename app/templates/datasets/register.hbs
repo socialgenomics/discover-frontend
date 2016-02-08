@@ -1,55 +1,52 @@
 <div id="register-form" class="content">
-  <div class="row">
-    <div class="contain">
-      <h5 class="subtitles-left unfocus-grey-text">Register Data</h5>
-      <div class="col m12">
-        <div class="card activity-card">
+  <h5 class="subtitles-left unfocus-grey-text">Register Data</h5>
+  <div class="card">
+    <div class="card-body">
+      <div class="row">
+        <h2 class="col m12 center">Do you have a data to share?</h2>
+        <h4 class="color-silver-chalice-text center thin"><em>Make it visible for other researchers.</em></h4>
+      </div>
 
-          <div class="card-header bg-register grey-text">
-            <p class="main-dark">
-              This will register a new dataset which will be visible and searchable on REPOSITIVE. By registering a dataset you let other users know about the dataset you have, help with better research or initiate collaboration.
-            </p>
-          </div>
-          <div class="card-body center">
-            <h3>Register a New Dataset</h3>
-            <div class="col m6 offset-m3">
-          <form {{action "addDataset" on="submit"}}>
+      <div class="row">
+        {{!-- <div class="divider"></div> --}}
+        <h4 class="col m6 color-salmon-text thin">How to register dataset?</h4>
+        <h4 class="col m6 color-salmon-text thin">Registation form</h4>
+        <div class="col m5 steps-how-to sub-grey">
+          <div><span class="numb col m2 color-salmon-text">1</span><p> Fill in the simple registration form. Add the title, description and url link to the dataset.</p></div>
+          <div><span class="numb col m2 color-salmon-text">2</span><p> We will list your dataset on the platform and it will become searchable for other users.</p></div>
+          <div><span class="numb col m2 color-salmon-text">3</span><p> By listing your dataset you can help improve research or initiate collaborations.</p></div>
+        </div>
+
+        <div class="col m6 offset-m1">
+          <form {{action "addDataset" on="submit"}} class="side-form">
             {{validated-input
               type="text"
               value=title
               errors=errors.title
               placeholder="Add a title for your dataset."
               action=addDataset
-              lbl="Title"
             }}
-
             {{validated-input
-              type="text"
+              type="textarea"
               value=description
               errors=errors.description
-              placeholder="A short description of the dataset"
-              style="height:150px"
+              placeholder="A short description of the dataset. You can -include assay type, platform used, tissue source, associated diseases and ethnicity of patients."
               action=addDataset
               textarea="true"
-              lbl="Description"
             }}
-
             {{validated-input
               type="url"
               value=webURL
               errors=errors.webURL
               placeholder="A link to the dataset if available"
               action=addDataset
-              lbl="URL"
             }}
-            <div class="input-container">
-              <button type="submit" class="btn bg-register main-dark">Register Dataset</button>
+            <div class="center input-container">
+              <button type="submit" class="btn bg-register white-text">Register Dataset</button>
             </div>
-
           </form>
-          </div>
         </div>
-        </div>
+
       </div>
     </div>
   </div>

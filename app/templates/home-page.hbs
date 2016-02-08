@@ -5,7 +5,7 @@
       <div class="col m12 center-align">
         <div class="card">
           <div class="stats">
-            <h2 class="numb">{{ model.stats.datasets }}<span class="stats-text light"> Human Genomic Datasets </span><span class="thin">from</span>
+            <h2 class="numb">{{ model.stats.datasets }}<span class="stats-text light"> Human Genomic Datasets </span><span class="stats-text thin">from</span>
               {{ model.stats.repos }}<span class="stats-text light"> Repositories</span>
             </h2>
           </div>
@@ -15,22 +15,24 @@
     <div class="contain">
       <h5 class="subtitles-left unfocus-grey-text">Start Exploring</h5>
       {{#each model.datasets as |dataset|}}
-        {{render 'datasets.card' dataset dataset=dataset}}
+        {{dataset-card dataset=dataset toggleModal="toggleModal"}}
       {{/each}}
     </div>
     <div class="contain">
       <h5 class="subtitles-left unfocus-grey-text">User Activity</h5>
       <!-- data registrations -->
-      <div class="col s12 m6 ">
-        <div class="card  activity-card registered-data">
+      <div class="col s12 m6">
+        <div class="card activity-card registered-data">
           <div class="card-header card-title center">
-            {{#link-to 'datasets.register'}}<i class="mdi-action-note-add"></i>{{/link-to}}
-            <h4 class="uppercase">Registered Data</h4>
+            {{#link-to 'datasets.register'}}
+              {{fa-icon "book"}}
+              <h4 class="uppercase">Registered Data</h4>
+            {{/link-to}}
           </div>
           <p class="info-text">
             These are datasets contributed by our community. You can easily register your dataset and make it visible for others.
           </p>
-          <div class="card-body">
+          <div class="card-content">
               {{#each registrationsSorted as |registration|}}
                 {{mini-dataset dataset=registration action="toggleModal"}}
               {{/each}}
@@ -41,16 +43,18 @@
       <div class="col s12 m6">
         <div class="card activity-card requested-data">
           <div class="card-header center card-title">
-              {{#link-to 'datasets.request'}}<i class="mdi-content-content-paste"></i>{{/link-to}}
-              <h4 class="uppercase">Requested Data</h4>
+              {{#link-to 'datasets.request'}}
+                {{fa-icon "clipboard"}}
+                <h4 class="uppercase">Requested Data</h4>
+              {{/link-to}}
           </div>
           <p class="info-text">
             Help our community by connecting them with the datasets they're looking for.
   If you’re seeking datasets you can make a request too.
           </p>
-          <div class="card-body">
+          <div class="card-content">
             {{#each requestsSorted as |request|}}
-              {{mini-dataset dataset=request}}
+              {{mini-dataset dataset=request action="toggleModal"}}
             {{/each}}
           </div>
         </div>

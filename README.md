@@ -170,5 +170,27 @@ Make use of the many generators for code, try `ember help generate` for more det
 
 ### Deploying
 
-* `npm run deployTesting`
-* `npm run deployLive`
+We are using ember CLI deploy packages with the 'lightening approach' for deployment.
+In summary this means that when you run `ember deploy` 2 things happen:
+
+ - assets are uploaded to an s3 bucket
+ - the index.html file is uploaded to a small server with a redis instance.
+
+In order to deploy you need to add your AWS Iams credentials to a .env file in the
+root of the project.
+
+```
+# /.env
+
+AWS_KEY=123456
+AWS_SECRET=abcdef
+```
+
+You can then use ember cli to deploy from your local machine:
+
+```
+ember deploy development
+```
+
+You can specify the location of the config file you want to use for deployment by
+using the env variable `FRONTEND_DEPLOY_CONFIG_PATH`.

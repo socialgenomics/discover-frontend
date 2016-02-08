@@ -2,47 +2,35 @@
   <div class="row">
     <div class="contain">
       {{#if isOwnProfile}}
-      <h5 class="subtitles-left unfocus-grey-text">Your Profile</h5>
+        <h5 class="subtitles-left unfocus-grey-text">Your Profile</h5>
       {{/if}}
-      <div class="col m12 center-align">
-        <div class="card ">
+      <div class="col m12 center">
+        <div class="card">
           <div class="card-content">
-            <h3>{{ model.user.displayName }}</h3>
-            <div class="card-body">
-              <div class="col m12 center">
-                <div class="profile-img">
-                  {{
-                    gravatar-image
-                    class="gravatar"
-                    defaultImage=model.profile.avatar
-                  }}
-                </div>
-              </div>
-              <!-- <div class="input-container col m12">
-                <label for="upload-avatar">Upload Avatar</label>
-                {{s3-upload id="upload-avatar" field="image"}}
-              </div> -->
+            <h1>{{model.user.displayName}}</h1>
+            {{#if isOwnProfile}}{{#link-to "users.profile" class="edit-btn fa-2x sub-dark"}}{{fa-icon "pencil-square-o"}}{{/link-to}}{{/if}}
+            <div class="profile-img">
+              <img src={{model.profile.avatar}}>
+            </div>
               {{#if isOwnProfile}}
                 {{#if isEmailValidated}}
-                  <div class="verified">
-                    <h3><i class="mdi-action-verified-user"></i> Verified Account</h3>
+                  <div>
+                    <h4 class="verified">{{fa-icon "check-circle"}} Verified Account</h4>
                   </div>
                 {{else}}
-                  <div class="not-verified">
-                    <h3><i class="mdi-communication-email"></i> Please verify your email</h3>
+                  <div>
+                    <h4 class="not-verified">{{fa-icon "envelope"}} Please verify your email</h4>
                   </div>
                 {{/if}}
-                {{#link-to "users.profile" class="btn yellow white-text"}}EDIT PROFILE{{/link-to}}
-
               {{else}}
-                {{#if isEmailValidated}}
-                  <div class="verified">
-                    <h3><i class="mdi-action-verified-user"></i> Verified Account</h3>
-                  </div>
-                {{/if}}
-              {{/if}}
-              <div class="card-action">
-                <div class="activity-stats col m12">
+                 {{#if isEmailValidated}}
+                   <div>
+                     <h3 class="verified">{{fa-icon "check-circle"}} Verified Account</h3>
+                   </div>
+                 {{/if}}
+               {{/if}}
+               <div class="divider"></div>
+                <div class="activity-stats">
                   <div class="activity-saved-data">
                     <span class="numb">0</span>
                     <h5>Saved data</h5>
@@ -61,45 +49,61 @@
                   </div>
                   <span class="stretch"></span>
                 </div>
-              </div>
-            </div>
+              <!-- </div> -->
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="row">
+
     <div class="contain">
       {{#if isOwnProfile}}
       <h5 class="subtitles-left unfocus-grey-text">Your Activity</h5>
       {{/if}}
       <!-- data registrations -->
-      <div class="col m6 activity-card">
+      <div class="col s12 m6 activity-card">
         <div class="card registered-data">
           <div class="card-header card-title center">
-            {{#link-to 'datasets.register'}}<i class="mdi-action-note-add"></i>{{/link-to}}
-            <h4 class="uppercase">Registered Data</h4>
+            {{#link-to 'datasets.register'}}
+              {{fa-icon "book"}}
+              <h4 class="uppercase">Registered Data</h4>
+            {{/link-to}}
           </div>
-          <div class="card-body">
-            {{#each model.registrations as |dataset|}}
-
-              {{mini-dataset hideSubmitter=isOwnProfile dataset=dataset action="toggleModal"}}
-
-            {{/each}}
+          <div class="card-content">
+            {{#if model.registrations}}
+              {{#each model.registrations as |dataset|}}
+                {{mini-dataset hideSubmitter=isOwnProfile dataset=dataset action="toggleModal"}}
+              {{/each}}
+            {{else}}
+              {{#if isOwnProfile}}
+                <p class="color-silver-chalice-text center-align">You have not registered any data to REPOSITIVE.</p>
+              {{else}}
+                <p class="color-silver-chalice-text center-align">This user has not registered any data to REPOSITIVE.</p>
+              {{/if}}
+            {{/if}}
           </div>
         </div>
       </div>
       <!--data requests-->
-      <div class="col m6 activity-card">
+      <div class="col s12 m6 activity-card">
         <div class="card requested-data">
           <div class="card-header center card-title">
-              {{#link-to 'datasets.request'}}<i class="mdi-content-content-paste"></i>{{/link-to}}
-              <h4 class="uppercase">Requested Data</h4>
+              {{#link-to 'datasets.request'}}
+                {{fa-icon "clipboard"}}
+                <h4 class="uppercase">Requested Data</h4>
+              {{/link-to}}
           </div>
-          <div class="card-body">
-            {{#each model.requests as |dataset|}}
-              {{mini-dataset dataset=dataset hideSubmitter=isOwnProfile}}
-            {{/each}}
+          <div class="card-content">
+            {{#if model.requests}}
+              {{#each model.requests as |dataset|}}
+                {{mini-dataset dataset=dataset hideSubmitter=isOwnProfile action="toggleModal"}}
+              {{/each}}
+            {{else}}
+              {{#if isOwnProfile}}
+                <p class="color-silver-chalice-text center-align">You have not requested any data from our community on REPOSITIVE.</p>
+              {{else}}
+                <p class="color-silver-chalice-text center-align">This user has not made any requests for data from our community on REPOSITIVE.</p>
+              {{/if}}
+            {{/if}}
           </div>
         </div>
       </div>

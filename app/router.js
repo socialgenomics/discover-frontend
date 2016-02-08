@@ -2,7 +2,7 @@ import Ember from 'ember';
 import config from './config/environment';
 import TrackingMixin from 'repositive/mixins/tracking-mixin';
 
-var Router = Ember.Router.extend(TrackingMixin, {
+const Router = Ember.Router.extend(TrackingMixin, {
   location: config.locationType
 });
 
@@ -19,6 +19,8 @@ Router.map(function() {
   this.route('help');
   this.route('verify');
   this.route('policies');
+  this.route('signup-form');
+  this.route('video');
 
   this.resource('users', function() {
     this.route('signup');
@@ -63,11 +65,11 @@ Router.map(function() {
 });
 
 var pagesWithSideNavigation = [
-  'datasets-search',
-  'users-settings',
-  'users-profile',
-  'users-trust',
-  'users-references'
+  'datasets-search'
+  // 'users-settings',
+  // 'users-profile',
+  // 'users-trust',
+  // 'users-references'
 ];
 
 Ember.Route.reopen({

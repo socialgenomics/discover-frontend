@@ -1,4 +1,3 @@
-
 <nav id="navbar">
   <div class="navbar-wrapper">
 
@@ -9,51 +8,54 @@
     </div>
     {{/link-to}}
 
-    {{#if session.isAuthenticated}}
+    {{#if isAuthenticated}}
 
-    <div class="navbar-container">
-      <div class="navbar-search">
-        <form {{action 'search' on='submit'}}>
-            <i class="small mdi-action-search"></i>
-            {{input
-              type="text"
-              class="unfocus-grey-text"
-              placeholder="search cancer, prostate..."
-              value=query
-            }}
-        </form>
-      </div>
-      <div class="navbar-buttons">
-        <div class="navbar-button">
-          {{#active-link}}
-          {{#link-to "datasets.request" class="valign-wrapper"}}
-            <i class="mdi-content-content-paste"></i><h6 class="uppercase">Request Data</h6>
-          {{/link-to}}
-          {{/active-link}}
+      <div class="navbar-container">
+        <div class="navbar-search">
+          <form {{action 'search' on='submit'}}>
+              {{fa-icon "search"}}
+              {{input
+                type="text"
+                class="unfocus-grey-text"
+                placeholder="search cancer, prostate..."
+                value=query
+              }}
+          </form>
         </div>
-        <div class="navbar-button">
-          {{#active-link}}
-          {{#link-to "datasets.register" class="valign-wrapper"}}
-          <i class="mdi-action-note-add"></i><h6 class="uppercase">Register Data</h6>
-          {{/link-to}}
-          {{/active-link}}
+        <div class="navbar-buttons">
+          <div class="navbar-button">
+            {{#active-link}}
+            {{#link-to "datasets.request" class="valign-wrapper"}}
+              {{fa-icon "clipboard"}}<h6 class="uppercase">Request Data</h6>
+            {{/link-to}}
+            {{/active-link}}
+          </div>
+          <div class="navbar-button">
+            {{#active-link}}
+            {{#link-to "datasets.register" class="valign-wrapper"}}
+              {{fa-icon "book"}}<h6 class="uppercase">Register Data</h6>
+            {{/link-to}}
+            {{/active-link}}
+          </div>
         </div>
       </div>
-    </div>
 
-
-    {{navbar-dropdown action="initAvatar" avatar=avatar}}
+      {{navbar-dropdown avatar=avatar firstname=firstname username=username}}
 
     {{else}}
 
-    <ul class="buttons-logged-out">
-      {{#active-link}}
-      {{link-to 'SIGNUP' 'users.signup'}}
-      {{/active-link}}
-      {{#active-link}}
-      {{link-to 'LOGIN' 'users.login'}}
-      {{/active-link}}
-    </ul>
+      <div class="navbar-buttons">
+        <div class="navbar-button">
+          {{#active-link}}
+            {{#link-to 'users.login' class="valign-wrapper"}}LOGIN{{/link-to}}
+          {{/active-link}}
+        </div>
+        <div class="navbar-button">
+          {{#active-link}}
+            {{#link-to 'signup-form' class="valign-wrapper"}}SIGNUP FOR BETA{{/link-to}}
+          {{/active-link}}
+        </div>
+      </div>
 
     {{/if}}
   </div>

@@ -1,12 +1,12 @@
 import Ember from 'ember';
-import AuthenticatedRouteMixin from 'simple-auth/mixins/authenticated-route-mixin';
 
 
-export default Ember.Route.extend(AuthenticatedRouteMixin, {
+export default Ember.Route.extend({
+  session: Ember.inject.service(),
   model: function(params) {
     return this.store.createRecord('Search', {
       queryParams: params,
-      user: this.get('currentUser')
+      user: this.get('session.data.authenticatedUser')
     });
   }
 });
