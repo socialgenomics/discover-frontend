@@ -6,30 +6,21 @@ export default SessionService.extend({
   setAuthenticatedUser: Ember.observer('data.authenticated.user', function() {
     if (this.get('isAuthenticated')) {
       let userData = this.get('data.authenticated.user');
+      let profileData = this.get('data.authenticated.profile');
+      let settingData = this.get('data.authenticated.setting');
 
       let userId = userData.id;
-      let profileId = userData.ProfileId;
-      delete userData.id;
-      delete userData.ProfileId;
+      let profileId = profileData.id;
+      let settingId = settingData.id;
 
-      let jsonAPIUser = {
-        data: {
-          id: userId,
-          type: 'user',
-          attributes: userData,
-          relationships: {
-            profile: {
-              data: {
-                id: profileId,
-                type: 'profile'
-              }
-            }
-          }
-        }
-      };
-
-      let authenticatedUser = this.get('store').push(jsonAPIUser);
-      this.set('authenticatedUser', authenticatedUser);
+      this.get('store')
+      .findRecord('user', userId)
+      .then(user => {
+        // HACK: add the private stuff from the session data.
+        user.set('email', userData.email);
+        user.set('isEmailValidated', userData.isEmailValidated);
+        this.set('authenticatedUser', user);
+      });
     }
   })
 });
