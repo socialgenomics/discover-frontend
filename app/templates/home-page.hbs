@@ -8,17 +8,22 @@
             <h2 class="numb">{{ model.stats.datasets }}<span class="stats-text thin"> Human Genomic Datasets </span><span class="stats-text thin">from</span>
               {{ model.stats.repos }}<span class="stats-text thin"> Repositories</span>
             </h2>
-              <div class="col m6 offset-m3 news-notice">
+              <div class="col m10 offset-m1 news-notice">
                 <div class="divider"></div>
                 <div class="row">
-                <a class="sub-grey" href="http://discover.repositive.io/datasets/search?q=xpress"><p class="col m6 no-padding right-align offset-m1 bold">We are now indexing data from</p>
-                <div class="logo-image col m3"><img class="img-responsive" src="assets/images/logos/xpressomics-logo.png"/></div></a>
+                  <a class="sub-grey" href="/datasets/search?q=xpress">
+                    <p class="col m9 no-padding bold">Now search over 6,000 normalised, annotated and curated open access expression datasets with</p>
+                      <div class="logo-image col m2">
+                        <img class="img-responsive" src="assets/images/logos/xpressomics-logo.png"/>
+                      </div>
+                  </a>
+                </div>
+              </div>
                 </div>
               </div>
           </div>
         </div>
-      </div>
-    </div>
+
     <div class="contain">
       <h5 class="subtitles-left unfocus-grey-text">Start Exploring</h5>
       {{#each model.datasets as |dataset|}}
