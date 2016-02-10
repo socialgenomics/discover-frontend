@@ -4,8 +4,8 @@
   <div class="col l7 m6 s12 card-main-wrapper"><!-- MAIN CONTENT DIV -->
     <div class="top-action card-header">
       <span class="assay-small {{model.colour}}"></span>
-      <div class="share-favourite">
-        {{action-favourite}}
+      <div class="actions-container valign-wrapper">
+        {{action-favourite dataset=dataset}}
         <span class="grey-text">{{data.favourite}}</span>
         {{action-share action="toggleModal"}}
       </div>
