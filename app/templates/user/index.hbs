@@ -12,44 +12,33 @@
             <div class="profile-img">
               <img src={{model.profile.avatar}}>
             </div>
+            {{#if session.authenticatedUser.isEmailValidated}}
+              <h4 class="verified">{{fa-icon "check-circle"}} Verified Account</h4>
+            {{else}}
               {{#if isOwnProfile}}
-                {{#if isEmailValidated}}
-                  <div>
-                    <h4 class="verified">{{fa-icon "check-circle"}} Verified Account</h4>
-                  </div>
-                {{else}}
-                  <div>
-                    <h4 class="not-verified">{{fa-icon "envelope"}} Please verify your email</h4>
-                  </div>
-                {{/if}}
-              {{else}}
-                 {{#if isEmailValidated}}
-                   <div>
-                     <h3 class="verified">{{fa-icon "check-circle"}} Verified Account</h3>
-                   </div>
-                 {{/if}}
-               {{/if}}
-               <div class="divider"></div>
-                <div class="activity-stats">
-                  <div class="activity-saved-data">
-                    <span class="numb">0</span>
-                    <h5>Saved data</h5>
-                  </div>
-                  <div class="activity-uploads">
-                    <span class="numb">{{model.registrations.length}}</span>
-                    <h5>Registrations</h5>
-                  </div>
-                  <div class="activity-request">
-                    <span class="numb">{{model.requests.length}}</span>
-                    <h5>Requests</h5>
-                  </div>
-                  <div class="activity-comments">
-                    <span class="numb">0</span>
-                    <h5>Discussions</h5>
-                  </div>
-                  <span class="stretch"></span>
-                </div>
-              <!-- </div> -->
+                <h4>{{#link-to 'users.trust' class="not-verified"}}{{fa-icon "envelope"}} Please verify your email{{/link-to}}</h4>
+              {{/if}}
+            {{/if}}
+            <div class="divider"></div>
+            <div class="activity-stats">
+              <div class="activity-saved-data">
+                <span class="numb">0</span>
+                <h5>Saved data</h5>
+              </div>
+              <div class="activity-uploads">
+                <span class="numb">{{model.registrations.length}}</span>
+                <h5>Registrations</h5>
+              </div>
+              <div class="activity-request">
+                <span class="numb">{{model.requests.length}}</span>
+                <h5>Requests</h5>
+              </div>
+              <div class="activity-comments">
+                <span class="numb">0</span>
+                <h5>Discussions</h5>
+              </div>
+              <span class="stretch"></span>
+            </div>
           </div>
         </div>
       </div>
@@ -87,10 +76,10 @@
       <div class="col s12 m6 activity-card">
         <div class="card requested-data">
           <div class="card-header center card-title">
-              {{#link-to 'datasets.request'}}
-                {{fa-icon "clipboard"}}
-                <h4 class="uppercase">Requested Data</h4>
-              {{/link-to}}
+            {{#link-to 'datasets.request'}}
+              {{fa-icon "clipboard"}}
+              <h4 class="uppercase">Requested Data</h4>
+            {{/link-to}}
           </div>
           <div class="card-content">
             {{#if model.requests}}
