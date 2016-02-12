@@ -9,7 +9,7 @@ export default Base.extend({
   session: Ember.inject.service(),
 
   restore: function(data) {
-    return new Ember.RSVP.Promise(function(resolve, reject) {
+    return new Ember.RSVP.Promise(resolve => {
       // TODO: display any notifications - i.e if you have new messages etc
       resolve(data);
     });

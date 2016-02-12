@@ -13,8 +13,8 @@ module('Acceptance | user can access signup via invite code', {
 });
 
 test('correct code takes user to signup page', function(assert) {
-  visit('/verify').then(()=> {
-    fillIn('input[placeholder="please enter your code"]', 'QT7VwsqYbAI=').then(()=> {
+  visit('/').then(()=> {
+    fillIn('input[placeholder="Your activation code"]', 'QT7VwsqYbAI=').then(()=> {
       click('button:contains("Continue")').then(()=> {
         assert.equal(currentURL(), '/users/signup');
       });

@@ -13,8 +13,8 @@ module('Acceptance | user can signup', {
 });
 
 test('user can signup and go to homepage', function(assert) {
-  visit('/verify');
-  fillIn('input[placeholder="please enter your code"]', 'QT7VwsqYbAI=');
+  visit('/');
+  fillIn('input[placeholder="Your activation code"]', 'QT7VwsqYbAI=');
   click('button:contains("Continue")');
   andThen(function() {
     assert.equal(currentURL(), '/users/signup');
