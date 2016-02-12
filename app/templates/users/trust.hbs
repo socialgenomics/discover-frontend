@@ -7,20 +7,20 @@
           <hr class="yellow">
           <p class="helper-text">Build your trust by verifying your email</p>
         </div>
-        <div class="card-action">
-          <form class="row">
-            <div class="input-container col m6 offset-m3">
-              <div class="input-field">
-                <input id="email" type="text" placeholder="Email">
-              </div>
-              <div class="lbl">Email</div>
-            </div>
-            <button class="btn waves-effect waves-light col m1" type="submit" name="action" style="margin-top:0.5em">Verify</button>
-          </form>
+        <div class="card-action center-align">
+          {{#if isEmailValidated}}
+            <h4>{{fa-icon "check-circle"}} Your account is already verified.</h4>
+          {{else}}
+            <h4>Email: {{session.authenticatedUser.email}}</h4>
+            {{#if sentEmail}}
+              <p class="text-valid">We have sent you a new verification email.</p>
+            {{/if}}
+            <button class="btn" type="submit" {{action "resendVerifyEmail"}}>Verify</button>
+          {{/if}}
         </div>
       </div>
     </div>
-    <div class="col m12">
+    <!-- <div class="col m12">
       <div class="card white darken-1">
         <div class="card-content center-align">
           <span class="card-title"><h1>3rd Party Verification</h1></span>
@@ -58,5 +58,5 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
