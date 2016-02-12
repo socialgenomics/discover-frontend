@@ -8,15 +8,12 @@
           <p class="helper-text">Build your trust by verifying your email</p>
         </div>
         <div class="card-action center-align">
-          {{#if session.authenticatedUser.isEmailValidated}}
-            <h4>{{fa-icon "check-circle"}} Your account is already verified.</h4>
+          {{#unless session.authenticatedUser.isEmailValidated}}
+            <h4 class="color-fruit-salad-text">{{fa-icon "check-circle"}} Your account is already verified.</h4>
           {{else}}
-            <h4>Email: {{session.authenticatedUser.email}}</h4>
-            {{#if sentEmail}}
-              <p class="text-valid">We have sent you a new verification email.</p>
-            {{/if}}
+            <h4 class="color-red-error-text">{{fa-icon "envelope"}} {{session.authenticatedUser.email}}</h4>
             <button class="btn" type="submit" {{action "resendVerifyEmail"}}>Verify</button>
-          {{/if}}
+          {{/unless}}
         </div>
       </div>
     </div>
