@@ -6,12 +6,12 @@
           <h1>Edit Profile</h1>
           <hr class="yellow">
           <form class="row section">
-            <div class="input-container col m6 offset-m3">
-              <div class="col m12 center">
-                <div class="profile-img">
-                  <img src={{session.authenticatedUser.profile.avatar}}>
-                </div>
+            <div class="col m12 center">
+              <div class="profile-img">
+                <img src={{session.authenticatedUser.profile.avatar}}>
               </div>
+            </div>
+            <div class="input-container col m6 offset-m3">
               <div class="input-field no-margin-top">
                 {{input type="text" placeholder="First Name" value=session.authenticatedUser.firstname}}
               </div>
@@ -23,17 +23,11 @@
               </div>
               <div class="lbl">Last name</div>
             </div>
-{{!--             <div class="input-container col m6 offset-m3">
-              <div class="input-field">
-                {{input type="email" placeholder="Email" value=model.user.email}}
-              </div>
-              <div class="lbl">Email</div>
-            </div>
             <div class="input-container col m6 offset-m3">
               <div class="input-field">
                 {{input type="text" placeholder="Affiliation" value=session.authenticatedUser.profile.workOrganisation}}
               </div>
-              <div class="lbl">Last name</div>
+              <div class="lbl">Affiliation</div>
             </div>
             <div class="input-container col m6 offset-m3">
               {{#if saved}}
