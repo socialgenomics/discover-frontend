@@ -8,7 +8,7 @@
           <p class="helper-text">Build your trust by verifying your email</p>
         </div>
         <div class="card-action center-align">
-          {{#if isEmailValidated}}
+          {{#if session.authenticatedUser.isEmailValidated}}
             <h4>{{fa-icon "check-circle"}} Your account is already verified.</h4>
           {{else}}
             <h4>Email: {{session.authenticatedUser.email}}</h4>

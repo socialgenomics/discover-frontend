@@ -9,10 +9,6 @@ export default Ember.Controller.extend({
     return this.get('session.authenticatedUser.id') == this.get('model.user.id');
   }.property('model'),
 
-  isEmailValidated: function() {
-    return this.get('model.user.isEmailValidated');
-  }.property('model'),
-
   actions: {
 
   }

@@ -12,7 +12,7 @@
             <div class="profile-img">
               <img src={{model.profile.avatar}}>
             </div>
-            {{#if isEmailvalidated}}
+            {{#if session.authenticatedUser.isEmailValidated}}
               <h4 class="verified">{{fa-icon "check-circle"}} Verified Account</h4>
             {{else}}
               {{#if isOwnProfile}}
