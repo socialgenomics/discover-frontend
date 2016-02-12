@@ -13,7 +13,7 @@ export default Ember.Route.extend({
         this.store.query('dataset', { isRequest: true }),
         this.store.query('dataset', { repository: 'REPOSITIVE', isRequest: false })
       ])
-      .then(function(data) {
+      .then(data => {
         return {
           stats: data[0],
           datasets: data[1].datasets,
@@ -21,7 +21,7 @@ export default Ember.Route.extend({
           registered: data[3]
         };
       })
-      .catch(function(err) {
+      .catch(err => {
         Ember.Logger.error(err);
         throw err;
       });
@@ -29,6 +29,7 @@ export default Ember.Route.extend({
       return null;
     }
   },
-  actions: {
-  }
+  deactivateWeclomeMesssage: function() {
+    this.get('session').set('data.firstVisit', false);
+  }.on('deactivate')
 });
