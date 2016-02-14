@@ -17,9 +17,9 @@ export default Ember.Controller.extend(
     lastname: {
       presence: {
         message: 'can\'t be blank'
-      },
-    },
-  }
+      }
+    }
+  },
   actions: {
     save: function() {
       this.get('session.authenticatedUser').save();
