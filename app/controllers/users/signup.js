@@ -108,11 +108,11 @@ export default Ember.Controller.extend(
     messages = messages.reject(item => {
       return item.type === 'validation';
     });
-    if (messages) {
-      messages.forEach(message => {
-        this.flashMessages.success(message);
-      });
-    }
+    // if (messages) {
+    //   messages.forEach(message => {
+    //     this.flashMessages.success(message);
+    //   });
+    // }
     this.set('loading', false);
   },
 

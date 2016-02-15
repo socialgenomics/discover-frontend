@@ -9,7 +9,7 @@
   },
   "scripts": {
     "start": "ember server --watcher=polling --proxy=http://backend-dev-sol-lon02.repositive.io",
-    "startLocal": "ember server --proxy=http://192.168.33.11:3000",
+    "startLocal": "ember server --proxy=http://192.168.33.11",
     "build": "ember build",
     "test": "ember test"
   },
