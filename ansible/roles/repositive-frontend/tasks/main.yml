@@ -1,6 +1,12 @@
 # Setup development instance of repositive api
 ---
 
+- name: Install OS packages
+  apt: name=phantomjs state=present
+
+- name: Configure Bashrc (for `ember` command to resolve)
+  lineinfile: dest=/home/vagrant/.bashrc line="export PATH=$PATH:$HOME/node_modules/.bin"
+
 # Delete node_modules for avoilding cross compilation issues between vagrant VM and host
 - stat: path=/home/vagrant/app/node_modules
   register: node_modules
