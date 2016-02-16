@@ -14,7 +14,7 @@ export default Ember.Mixin.create({
       this.set(field, term); // change the query params
     },
 
-    removeFilter: function(field, term) {
+    removeFilter: function(field /*term*/) {
       this.set(field, null); // set query param to null
     },
 

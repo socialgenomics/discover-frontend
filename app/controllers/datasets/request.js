@@ -8,11 +8,9 @@ export default Ember.Controller.extend(
   description: null,
   validations: {
     title: {
-      presence: true,
       presence: { message: 'This field can\'t be blank.' }
     },
     description: {
-      presence: true,
       presence: { message: 'This field can\'t be blank.' }
     }
   },

@@ -9,7 +9,7 @@ export default DS.RESTSerializer.extend(DS.EmbeddedRecordsMixin, {
     comments: { embedded: 'always' },
     owner: { serialize: 'ids' }
   },
-  serialize: function(snapshot, options) {
+  serialize: function(snapshot /*, options*/) {
     let sourceJSON = {
       webURL: snapshot.record.properties.get('webURL'),
       title: snapshot.record.properties.get('title'),
@@ -20,7 +20,7 @@ export default DS.RESTSerializer.extend(DS.EmbeddedRecordsMixin, {
       repository: 'REPOSITIVE',
       isRequest: snapshot.attr('isRequest')
     };
-  },
+  }
   // keyForRelationship: function(key, relationship, method) {
   //   if (key === 'owner') {
   //     return 'userId';
