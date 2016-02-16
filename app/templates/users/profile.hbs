@@ -11,18 +11,22 @@
                 <img src={{session.authenticatedUser.profile.avatar}}>
               </div>
             </div>
-            <div class="input-container col m6 offset-m3">
-              <div class="input-field no-margin-top">
-                {{input type="text" placeholder="First Name" value=session.authenticatedUser.firstname}}
-              </div>
-              <div class="lbl">First Name</div>
-            </div>
-            <div class="input-container col m6 offset-m3">
-              <div class="input-field">
-                {{input type="text" placeholder="Last Name" value=session.authenticatedUser.lastname}}
-              </div>
-              <div class="lbl">Last name</div>
-            </div>
+            {{validated-input
+              type="text"
+              lbl="First Name"
+              value=firstname
+              errors=errors.firstname
+              placeholder="First Name"
+              formSubmitted=formSubmitted
+            }}
+            {{validated-input
+              type="text"
+              lbl="Last Name"
+              value=lastname
+              errors=errors.lastname
+              placeholder="Last Name"
+              formSubmitted=formSubmitted
+            }}
             <div class="input-container col m6 offset-m3">
               <div class="input-field">
                 {{input type="text" placeholder="Affiliation" value=session.authenticatedUser.profile.workOrganisation}}

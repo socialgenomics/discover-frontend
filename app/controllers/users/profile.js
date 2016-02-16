@@ -5,8 +5,8 @@ export default Ember.Controller.extend(
   EmberValidations,
 {
   session: Ember.inject.service(),
-  firstname: null,
-  lastname: null,
+  firstname: Ember.computed.alias('session.authenticatedUser.firstname'),
+  lastname: Ember.computed.alias('session.authenticatedUser.lastname'),
   saved: false,
   validations: {
     firstname: {
