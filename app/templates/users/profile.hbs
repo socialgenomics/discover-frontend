@@ -31,12 +31,15 @@
                 formSubmitted=formSubmitted
                 class="col m6 offset-m3"
               }}
-            </div>
-            <div class="input-container col m6 offset-m3">
-              <div class="input-field">
-                {{input type="text" placeholder="Affiliation" value=session.authenticatedUser.profile.workOrganisation}}
-              </div>
-              <div class="lbl">Affiliation</div>
+              {{validated-input
+                type="text"
+                lbl="Affiliation"
+                value=affiliation
+                errors=errors.affiliation
+                placeholder="Affiliation"
+                formSubmitted=formSubmitted
+                class="col m6 offset-m3"
+              }}
             </div>
             <div class="input-container col m6 offset-m3">
               {{#if saved}}

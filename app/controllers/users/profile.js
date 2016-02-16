@@ -7,6 +7,7 @@ export default Ember.Controller.extend(
   session: Ember.inject.service(),
   firstname: Ember.computed.alias('session.authenticatedUser.firstname'),
   lastname: Ember.computed.alias('session.authenticatedUser.lastname'),
+  affiliation: Ember.computed.alias('session.authenticatedUser.profile.workOrganisation'),
   saved: false,
   validations: {
     firstname: {
@@ -23,7 +24,7 @@ export default Ember.Controller.extend(
   actions: {
     save: function() {
       this.get('session.authenticatedUser').save();
-      this.get('session.authenticatedUser.profile').save();
+      //this.get('session.authenticatedUser.profile').save();
       this.set('saved', true);
     }
   }
