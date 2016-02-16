@@ -25,7 +25,9 @@
       placeholder="Email"
       email=true
       formSubmitted=formSubmitted
-      icon="email"}}
+      icon="email"
+      class="col m6 offset-m3"
+    }}
     {{validated-input
       type="password"
       lbl="Password"
@@ -34,7 +36,9 @@
       placeholder="Password"
       password=true
       formSubmitted=formSubmitted
-      icon="password"}}
+      icon="password"
+      class="col m6 offset-m3"
+    }}
     <h6><a {{action 'resetPassword'}} class="link" style="cursor:pointer">Click here</a> to reset your password.</h6>
     <div class="input-container">
       {{#full-width-button class="teal" type="submit"}}LOGIN{{/full-width-button}}
