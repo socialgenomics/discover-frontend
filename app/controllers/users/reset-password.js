@@ -71,8 +71,8 @@ export default Ember.Controller.extend(
           this.reloadMessages(resp.messages);
         })
         .catch(err=> {
-          // TODO: remove this
           this.set('resendEmailMessage', true);
+          Ember.Logger.error(err);
           //TODO write a helper to render messages
           //this.get("messages").addObjects(err.jqXHR.responseJSON.messages)
         });

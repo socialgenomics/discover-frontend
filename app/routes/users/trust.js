@@ -13,7 +13,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         url: '/api/users/verify/resend/' + this.get('session.authenticatedUser.email'), // t,
         type: 'GET'
       })
-      .then((created)=> {
+      .then(() => {
         this.flashMessages.add({
           message: 'We have sent a verification email to your inbox',
           type: 'success',
@@ -21,7 +21,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         });
       })
       .catch(function(err) {
-        console.log(err);
+        Ember.Logger.error(err);
       });
     }
   }
