@@ -9,19 +9,18 @@ export default Ember.Controller.extend(
   loading: false,
   validations: {
     title: {
-      presence: true,
       presence: { message: 'This field can\'t be blank.' }
     },
     description: {
-      presence: true,
       presence: { message: 'This field can\'t be blank.' }
+    },
+    webURL: {
+      format: {
+        with: /[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/,
+        allowBlank: true,
+        message: 'must be a valid url'
+      }
     }
-    //    webURL:{
-    //      format: {
-    //        with: /[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/,
-    //        message: 'must be a valid url',
-    //      },
-    //    },
   },
   actions: {
     addDataset: function() {
