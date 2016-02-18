@@ -114,6 +114,10 @@ module.exports = function(environment) {
           },
           environments: ['production']
         },
+        {
+          name: 'GoSquared',
+          environments: ['production']
+        }
       ],
       rollbar: {
         // enabled only on online servers
