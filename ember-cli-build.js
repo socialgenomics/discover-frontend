@@ -51,7 +51,6 @@ module.exports = function(defaults) {
 
   app.import('bower_components/materialize/dist/js/materialize.js');
   app.import('vendor/typeform.js');
-  app.import('vendor/gosquared.js');
 
   return app.toTree();
 };
