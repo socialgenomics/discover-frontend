@@ -1,12 +1,14 @@
 import Ember from 'ember';
+import objectTransforms from 'ember-metrics/utils/object-transforms';
 import BaseAdapter from 'ember-metrics/metrics-adapters/base';
 // import ENV from 'repositive/config/environment';
+
+const { compact } = objectTransforms;
 
 export default BaseAdapter.extend({
   toStringExtension() {
     return 'gosquared';
   },
-  session: Ember.inject.service(),
 
   init() {
     ! function(g, s, q, r, d) {
@@ -24,11 +26,17 @@ export default BaseAdapter.extend({
     _gs('GSN-838111-G'); // site token
   },
 
-  identify() {
+  identify(options = {}) {
+    const compactedOptions = compact(options);
+    const { email, inviteCode, firstname, lastname, username } = compactedOptions;
+    const fullname = firstname + ' ' + lastname;
     _gs('identify', {
-      id:    session.authenticatedUser.id,
-      name:  session.authenticatedUser.displayName,
-      email: session.authenticatedUser.email
+      id:    username,
+      name:  fullname,
+      email: email,
+      custom: {
+        inviteCode: inviteCode
+      }
     });
   },
 
