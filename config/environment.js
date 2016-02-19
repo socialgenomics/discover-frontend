@@ -115,8 +115,8 @@ module.exports = function(environment) {
           environments: ['production']
         },
         {
-          name: 'GoSquared',
-          environments: ['production']
+          name: 'Gosquared',
+          environments: ['local-development']
         }
       ],
       rollbar: {
