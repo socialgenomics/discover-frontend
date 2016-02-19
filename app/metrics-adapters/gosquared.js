@@ -24,9 +24,7 @@ export default BaseAdapter.extend({
       insertBefore(d, q);
     }(window, document, 'script', '_gs');
 
-    _gs('GSN-838111-G'); // site token
-
-
+    _gs('GSN-041822-M'); // site token
   },
 
   identify(options = {}) {
