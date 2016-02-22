@@ -95,6 +95,5 @@ export default BaseAdapter.extend({
   },
 
   willDestroy() {
-    delete window.calq;
   }
 });

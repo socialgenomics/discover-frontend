@@ -7,7 +7,7 @@ moduleFor('metrics-adapter:calq', 'calq adapter', {
   beforeEach() {
     sandbox = sinon.sandbox.create();
     config = {
-      id: 'GSN-092810-X'
+      id: 'ca78eed5d34a041ab5cf164295cf2c25'
     };
   },
   afterEach() {
