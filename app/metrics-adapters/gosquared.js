@@ -4,6 +4,7 @@ import objectTransforms from 'ember-metrics/utils/object-transforms';
 // import ENV from 'repositive/config/environment';
 import ajax from 'ic-ajax';
 
+const { copy, get } = Ember;
 const { compact } = objectTransforms;
 
 export default BaseAdapter.extend({
@@ -12,6 +13,9 @@ export default BaseAdapter.extend({
   },
 
   init(options = {}) {
+    const config = copy(get(this, 'config'));
+    const { token, signature } = config;
+
     ! function(g, s, q, r, d) {
       r = g[r] = g[r] || function() {
         (r.q = r.q || []).push(
@@ -24,9 +28,9 @@ export default BaseAdapter.extend({
       insertBefore(d, q);
     }(window, document, 'script', '_gs');
 
-    window._gs('GSN-041822-M', false); // site token, setting to false disables automatic tracking
+    window._gs(token, false); // site token, setting to false disables automatic tracking
     window._gs('set', 'trackLocal', true); // set to true for testing
-    window._gs('auth', 'd88198c60ca1d4b9077bee59bfd69381'); // secure mode, signature
+    window._gs('auth', signature); // secure mode, signature
   },
 
   identify(options = {}) {
