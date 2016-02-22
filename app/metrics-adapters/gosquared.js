@@ -62,6 +62,8 @@ export default BaseAdapter.extend({
     window._gs('track', path, title);
   },
 
-  alias() {
+  willDestroy() {
+    $('script[src*="gosquared"]').remove();
+    delete window._gs;
   }
 });
