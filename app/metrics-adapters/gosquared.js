@@ -1,6 +1,6 @@
 import Ember from 'ember';
-import objectTransforms from 'ember-metrics/utils/object-transforms';
 import BaseAdapter from 'ember-metrics/metrics-adapters/base';
+import objectTransforms from 'ember-metrics/utils/object-transforms';
 // import ENV from 'repositive/config/environment';
 import ajax from 'ic-ajax';
 
@@ -11,7 +11,7 @@ export default BaseAdapter.extend({
     return 'gosquared';
   },
 
-  init() {
+  init(options = {}) {
     ! function(g, s, q, r, d) {
       r = g[r] = g[r] || function() {
         (r.q = r.q || []).push(
@@ -24,7 +24,9 @@ export default BaseAdapter.extend({
       insertBefore(d, q);
     }(window, document, 'script', '_gs');
 
-    _gs('GSN-041822-M'); // site token
+    window._gs('GSN-041822-M', false); // site token, setting to false disables automatic tracking
+    window._gs('set', 'trackLocal', true); // set to true for testing
+    window._gs('auth', 'd88198c60ca1d4b9077bee59bfd69381'); // secure mode, signature
   },
 
   identify(options = {}) {
@@ -32,32 +34,28 @@ export default BaseAdapter.extend({
     const { email, inviteCode, firstname, lastname, username } = compactedOptions;
     const fullname = firstname + ' ' + lastname;
 
-    ajax({
-      url: 'http://api.gosquared.com/tracking/v1/identify?api_key=FXSKFOKS3ELCYLTM&site_token=GSN-041822-M',
-      data: {
-        person_id: username,
-        properties: {
-          id: username,
-          first_name: firstname,
-          last_name: lastname,
-          email: email,
-          name: fullname
-        }
-      },
-      type: 'POST'
-    })
-    .then(resp => {
-      console.log(111);
-    })
-    .catch(resp => {
-      console.log(2222);
-    })
+    window._gs('identify', {
+      id: username,
+      name: fullname,
+      email: email,
+      custom: {
+        inviteCode: inviteCode
+      }
+    });
   },
 
-  trackEvent() {
+  trackEvent(options = {}) {
+    let { category, action, label, value } = options;
+    let actionName = category + ' ' + action;
+    window._gs('event', actionName, {
+      label: label,
+      value: value
+    });
   },
 
-  trackPage() {
+  trackPage(options={}) {
+    let { path, title } = options;
+    window._gs('track', path, title);
   },
 
   alias() {
