@@ -2,7 +2,6 @@ import Ember from 'ember';
 import BaseAdapter from 'ember-metrics/metrics-adapters/base';
 import objectTransforms from 'ember-metrics/utils/object-transforms';
 // import ENV from 'repositive/config/environment';
-import ajax from 'ic-ajax';
 
 const { copy, get } = Ember;
 const { compact } = objectTransforms;
@@ -12,10 +11,11 @@ export default BaseAdapter.extend({
     return 'gosquared';
   },
 
-  init(options = {}) {
+  init() {
     const config = copy(get(this, 'config'));
     const { token, signature } = config;
 
+    /* jshint ignore:start */
     ! function(g, s, q, r, d) {
       r = g[r] = g[r] || function() {
         (r.q = r.q || []).push(
@@ -27,6 +27,7 @@ export default BaseAdapter.extend({
       q.parentNode.
       insertBefore(d, q);
     }(window, document, 'script', '_gs');
+    /* jshint ignore:end */
 
     window._gs(token, false); // site token, setting to false disables automatic tracking
     window._gs('set', 'trackLocal', true); // set to true for testing
@@ -63,7 +64,6 @@ export default BaseAdapter.extend({
   },
 
   willDestroy() {
-    $('script[src*="gosquared"]').remove();
     delete window._gs;
   }
 });
