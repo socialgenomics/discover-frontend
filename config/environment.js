@@ -114,6 +114,14 @@ module.exports = function(environment) {
           },
           environments: ['production']
         },
+        {
+          name: 'Gosquared',
+          environments: ['production'],
+          config: {
+            token: 'GSN-041822-M',
+            signature: 'd88198c60ca1d4b9077bee59bfd69381'
+          }
+        }
       ],
       rollbar: {
         // enabled only on online servers
