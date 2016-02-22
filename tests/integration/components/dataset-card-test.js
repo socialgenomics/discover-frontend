@@ -11,7 +11,7 @@ test('it renders', function(assert) {
 
   this.render(hbs`{{dataset-card}}`);
 
-  assert.equal(this.$().text().trim(), '');
+  assert.ok(this.$()); // element is rendered
 
   // Template block usage:"
   // this.render(hbs`
