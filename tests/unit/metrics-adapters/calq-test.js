@@ -21,7 +21,7 @@ test('#identify calls `calq.identify` with the right arguments', function(assert
   const stub1 = sandbox.stub(window.calq.user, 'identify', () => {
     return true;
   });
-  const stub2 = sandbox.stub(window.calq.user, 'profile', () => {
+  sandbox.stub(window.calq.user, 'profile', () => {
     return true;
   });
   adapter.identify({
