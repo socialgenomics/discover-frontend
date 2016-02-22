@@ -48,7 +48,7 @@ export default Ember.Controller.extend(
   actions: {
     submitForm: function() {
       // fix for password manager bug
-      $('#login-form').find('input').trigger('change');
+      this.$('#login-form').find('input').trigger('change');
 
       this.set('loading', true);
       this.set('formSubmitted', true);

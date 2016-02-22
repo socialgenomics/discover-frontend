@@ -1,12 +1,10 @@
-import {
-  poissonDist
-} from '../../../helpers/poisson-dist';
+import { poisson } from '../../../utils/distributions';
 import { module, test } from 'qunit';
 
-module('PoissonDistHelper');
+module('Unit | Utility | distributions');
 
 // Replace this with your real tests.
 test('it works', function(assert) {
-  var result = poissonDist(42);
+  let result = poisson(100);
   assert.ok(result);
 });
