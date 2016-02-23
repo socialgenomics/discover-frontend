@@ -14,10 +14,12 @@ module('Acceptance | user can login', {
 
 test('user can login and go to homepage', function(assert) {
   visit('/users/login');
-  fillIn('input[type="email"]', 'testaccount@repositive.io');
-  fillIn('input[type="password"]', 'abcdefghi');
-  click('button.full-width');
   andThen(function() {
-    assert.equal(currentURL(), '/');
+    fillIn('input[type="email"]', 'test@repositive.io');
+    fillIn('input[type="password"]', '12345678');
+    click('button:contains("LOGIN")');
+    andThen(function () {
+      assert.equal(currentURL(), '/');
+    });
   });
 });
