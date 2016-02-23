@@ -2,7 +2,10 @@ import { moduleFor, test } from 'ember-qunit';
 
 moduleFor('controller:datasets/request', {
   // Specify the other units that are required for this test.
-  needs: ['service:metrics']
+  needs: [
+    'service:metrics',
+    'ember-validations@validator:local/presence'
+  ]
 });
 
 // Replace this with your real tests.
