@@ -121,6 +121,13 @@ module.exports = function(environment) {
             token: 'GSN-041822-M',
             signature: 'd88198c60ca1d4b9077bee59bfd69381'
           }
+        },
+        {
+          name: 'Intercom',
+          environments: ['local-development'],
+          config: {
+            id: 'tz4k4icz'
+          }
         }
       ],
       rollbar: {
