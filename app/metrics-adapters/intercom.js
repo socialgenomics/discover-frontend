@@ -49,11 +49,12 @@ export default BaseAdapter.extend({
     const config = copy(get(this, 'config'));
     const { id } = config;
     const compactedOptions = compact(options);
-    const { email, firstname, lastname } = compactedOptions;
+    const { email, firstname, lastname, username } = compactedOptions;
     const fullname = firstname + ' ' + lastname;
 
     window.Intercom('boot', {
       app_id: id,
+      user_id: username,
       name: fullname,
       email: email
     });
