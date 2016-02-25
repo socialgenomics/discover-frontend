@@ -7,7 +7,7 @@ export default Ember.Mixin.create({
 
   didTransition() {
     this._super(...arguments);
-    if (ENV.environment === 'production') {
+    if (ENV.metricsAdapters[2].environments.indexOf(ENV.environment) >= 0) {
       this._trackPage();
     } else {
       this._logTracking();
