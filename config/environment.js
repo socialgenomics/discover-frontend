@@ -116,7 +116,7 @@ module.exports = function(environment) {
         },
         {
           name: 'Gosquared',
-          environments: ['development', 'staging', 'production'],
+          environments: ['production'],
           config: {
             token: 'GSN-041822-M',
             signature: 'd88198c60ca1d4b9077bee59bfd69381'
@@ -124,7 +124,7 @@ module.exports = function(environment) {
         },
         {
           name: 'Intercom',
-          environments: ['development', 'staging', 'production'],
+          environments: ['production'],
           config: {
             id: 'tz4k4icz'
           }
