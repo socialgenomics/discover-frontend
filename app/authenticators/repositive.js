@@ -65,6 +65,9 @@ export default Base.extend({
           lastname: resp.user.lastname,
           username: resp.user.username
         });
+        this.get('metrics').identify('google-analytics', {
+          distinctId: this.get(resp.user.username)
+        });
       } catch (err) {
         console.error('Error on metrics.identify', err);
       }

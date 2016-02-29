@@ -103,7 +103,7 @@ module.exports = function(environment) {
         {
           name: 'GoogleAnalytics',
           config: {
-            id: 'UA-54495053-2'
+            id: 'UA-54495053-1'
           },
           environments: ['production']
         },
