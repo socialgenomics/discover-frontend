@@ -5,7 +5,7 @@ export default Ember.Component.extend({
     console.debug('Initializing typeform');
     try {
       // run typeform code
-      new Typeform.Widget;
+      new window.Typeform.Widget();
     } catch (e) {
       console.error('Error running type form code', e);
     }
