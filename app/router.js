@@ -3,7 +3,11 @@ import config from './config/environment';
 import TrackingMixin from 'repositive/mixins/tracking-mixin';
 
 const Router = Ember.Router.extend(TrackingMixin, {
-  location: config.locationType
+  location: config.locationType,
+
+  redirects: {
+    'signup-form' : 'beta-signup-form'
+  }
 });
 
 Router.map(function() {
@@ -19,6 +23,7 @@ Router.map(function() {
   this.route('help');
   this.route('verify');
   this.route('policies');
+  this.route('signup-form');
   this.route('beta-signup-form');
   this.route('video');
 
