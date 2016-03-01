@@ -33,6 +33,9 @@ module.exports = function(defaults) {
       enabled: true,
       esnext: true,
       disableTestGenerator: false
+    },
+    babel: {
+      optional: ['es7.decorators']
     }
   });
 
