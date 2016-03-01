@@ -59,6 +59,7 @@
     "ember-modal-dialog": "0.8.3",
     "ember-moment": "6.0.0",
     "ember-radio-button": "1.0.7",
+    "ember-redirect": "4.0.0",
     "ember-simple-auth": "1.1.0-beta.1",
     "ember-sinon": "0.4.0",
     "ember-truth-helpers": "1.1.0",
