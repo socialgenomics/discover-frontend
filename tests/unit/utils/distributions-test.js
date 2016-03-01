@@ -1,12 +1,10 @@
-import {
-  assayKey
-} from '../../../helpers/assay-key';
+import { poisson } from '../../../utils/distributions';
 import { module, test } from 'qunit';
 
-module('AssayKeyHelper');
+module('Unit | Utility | distributions');
 
 // Replace this with your real tests.
 test('it works', function(assert) {
-  var result = assayKey(42);
+  let result = poisson(100);
   assert.ok(result);
 });

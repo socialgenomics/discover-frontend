@@ -8,7 +8,7 @@ Component.reopen({
   metrics: inject.service()
 });
 
-export function initialize(container, application) {
+export function initialize(application) {
   Ember.Component = Component;
 
   application.inject('route', 'metrics', 'service:metrics');

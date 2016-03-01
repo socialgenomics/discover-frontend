@@ -7,29 +7,23 @@ export default SessionService.extend({
     if (this.get('isAuthenticated')) {
       let userData = this.get('data.authenticated.user');
 
-      let userId = userData.id;
-      let profileId = userData.ProfileId;
-      delete userData.id;
-      delete userData.ProfileId;
+      if (!userData) {
+        /*
+          stale session data - force logout
+         */
+        this.invalidate();
+      } else {
+        let userId = userData.id;
 
-      let jsonAPIUser = {
-        data: {
-          id: userId,
-          type: 'user',
-          attributes: userData,
-          relationships: {
-            profile: {
-              data: {
-                id: profileId,
-                type: 'profile'
-              }
-            }
-          }
-        }
-      };
-
-      let authenticatedUser = this.get('store').push(jsonAPIUser);
-      this.set('authenticatedUser', authenticatedUser);
+        this.get('store')
+        .findRecord('user', userId)
+        .then(user => {
+          // HACK: add the private stuff from the session data.
+          user.set('email', userData.email);
+          user.set('isEmailValidated', userData.isEmailValidated);
+          this.set('authenticatedUser', user);
+        });
+      }
     }
   })
 });

@@ -9,7 +9,7 @@ export default Base.extend({
   session: Ember.inject.service(),
 
   restore: function(data) {
-    return new Ember.RSVP.Promise(function(resolve, reject) {
+    return new Ember.RSVP.Promise(resolve => {
       // TODO: display any notifications - i.e if you have new messages etc
       resolve(data);
     });
@@ -64,6 +64,9 @@ export default Base.extend({
           firstname: resp.user.firstname,
           lastname: resp.user.lastname,
           username: resp.user.username
+        });
+        this.get('metrics').identify('google-analytics', {
+          distinctId: this.get(resp.user.username)
         });
       } catch (err) {
         console.error('Error on metrics.identify', err);

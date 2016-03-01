@@ -7,7 +7,7 @@ export default Ember.Mixin.create({
 
   didTransition() {
     this._super(...arguments);
-    if (ENV.environment === 'production') {
+    if (ENV.metricsAdapters[2].environments.indexOf(ENV.environment) >= 0) {
       this._trackPage();
     } else {
       this._logTracking();
@@ -17,7 +17,7 @@ export default Ember.Mixin.create({
   _trackPage() {
     Ember.run.scheduleOnce('afterRender', this, () => {
       const page = document.location.href;
-      const title = Ember.getWithDefault(this, 'routeName', 'unknown');
+      const title = Ember.getWithDefault(this, 'currentRouteName', 'unknown');
 
       Ember.get(this, 'metrics').trackPage({ page, title });
     });

@@ -93,17 +93,17 @@ module.exports = function(environment) {
         'default-src': "'none'",
         'font-src': "'self' data: fonts.gstatic.com",
         'style-src': "'self' 'unsafe-inline' fonts.googleapis.com",
-        'script-src': "'self' 'unsafe-inline' http://api.calq.io http://www.google-analytics.com/analytics.js https://d37gvrvc0wt4s1.cloudfront.net/js/v1.8/rollbar.min.js https://s3-eu-west-1.amazonaws.com/share.typeform.com/widget.js", // Allow scripts from api.calq.io
-        'connect-src': "'self' 'unsafe-inline' http://api.calq.io", // Allow data (ajax/websocket) from api.calq.io
-        'img-src': "'self' data: http://www.google-analytics.com https://www.gravatar.com http://i2.wp.com/dg2kcfbxc77v1.cloudfront.net http://i0.wp.com/dg2kcfbxc77v1.cloudfront.net/assets",
+        'script-src': "'self' 'unsafe-inline' http://api.calq.io http://www.google-analytics.com/analytics.js https://d37gvrvc0wt4s1.cloudfront.net/js/v1.8/rollbar.min.js https://s3-eu-west-1.amazonaws.com/share.typeform.com/widget.js http://api.calq.io https://s3-eu-west-1.amazonaws.com/share.typeform.com/widget.js https://widget.intercom.io https://js.intercomcdn.com",
+        'connect-src': "'self' 'unsafe-inline' http://api.calq.io https://api-ping.intercom.io https://nexus-websocket-a.intercom.io https://nexus-websocket-b.intercom.io wss://nexus-websocket-a.intercom.io wss://nexus-websocket-b.intercom.io https://api-iam.intercom.io", // Allow data (ajax/websocket) from api.calq.io
+        'img-src': "'self' data: http://www.google-analytics.com https://www.gravatar.com http://i2.wp.com/dg2kcfbxc77v1.cloudfront.net http://i0.wp.com/dg2kcfbxc77v1.cloudfront.net/assets https://js.intercomcdn.com https://static.intercomassets.com/",
         'media-src': "'self'",
-        'frame-src':"'self' 'unsafe-inline' https://repositive.typeform.com/to/pktwPz"
+        'frame-src':"'self' 'unsafe-inline' https://repositive.typeform.com/to/pktwPz",
       },
       metricsAdapters: [
         {
           name: 'GoogleAnalytics',
           config: {
-            id: 'UA-54495053-2'
+            id: 'UA-54495053-1'
           },
           environments: ['production']
         },
@@ -114,6 +114,21 @@ module.exports = function(environment) {
           },
           environments: ['production']
         },
+        {
+          name: 'Gosquared',
+          environments: ['production'],
+          config: {
+            token: 'GSN-041822-M',
+            signature: 'd88198c60ca1d4b9077bee59bfd69381'
+          }
+        },
+        {
+          name: 'Intercom',
+          environments: ['production'],
+          config: {
+            id: 'tz4k4icz'
+          }
+        }
       ],
       rollbar: {
         // enabled only on online servers
@@ -123,11 +138,11 @@ module.exports = function(environment) {
     };
 
     if (environment === 'local-development') {
-      ENV.APP.LOG_RESOLVER = true;
-      ENV.APP.LOG_ACTIVE_GENERATION = true;
-      ENV.APP.LOG_TRANSITIONS = true;
-      ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
-      ENV.APP.LOG_VIEW_LOOKUPS = true;
+      // ENV.APP.LOG_RESOLVER = true;
+      // ENV.APP.LOG_ACTIVE_GENERATION = true;
+      // ENV.APP.LOG_TRANSITIONS = true;
+      // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
+      // ENV.APP.LOG_VIEW_LOOKUPS = true;
     }
 
     if (environment === 'test') {

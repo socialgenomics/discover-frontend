@@ -12,6 +12,7 @@ export default DS.Model.extend({
   createdAt: DS.attr('isodate'),
   updatedAt: DS.attr('isodate'),
   profile: DS.belongsTo('profile'),
+  setting: DS.belongsTo('setting'),
   displayName: function() {
     if (Ember.isPresent(this.get('firstname')) || Ember.isPresent(this.get('lastname'))) {
       var fn = this.get('firstname') || '';

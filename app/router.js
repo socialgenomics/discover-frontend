@@ -19,10 +19,10 @@ Router.map(function() {
   this.route('help');
   this.route('verify');
   this.route('policies');
-  this.route('signup-form');
+  this.route('beta-signup-form');
   this.route('video');
 
-  this.resource('users', function() {
+  this.route('users', { resetNamespace: true }, function() {
     this.route('signup');
     this.route('login');
     this.route('settings');
@@ -40,11 +40,12 @@ Router.map(function() {
     });
   });
 
-  this.resource('user', {
+  this.route('user', {
+    resetNamespace: true,
     path: '/user/:username'
   }, function() {});
 
-  this.resource('datasets', function() {
+  this.route('datasets', { resetNamespace: true }, function() {
     this.route('detail', {
       path: ':id'
     });

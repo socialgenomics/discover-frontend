@@ -18,7 +18,7 @@
                 <div class="landing-form">
                   <span class="helper-text center-align">The platform is in beta testing. We will invite you for beta testing as soon as we are ready to accommodate you.</span>
                   {{#unless codeEntered}}
-                    {{#link-to 'signup-form'}}{{#full-width-button class="btn teal"}}SIGN UP FOR BETA{{/full-width-button}}{{/link-to}}
+                    {{#link-to 'beta-signup-form'}}{{#full-width-button class="btn teal"}}SIGN UP FOR BETA{{/full-width-button}}{{/link-to}}
                   {{else}}
                     {{#full-width-button class="btn {{#if codeEntered 'disabled'}}" disabled=codeEntered}}SIGN UP FOR BETA{{/full-width-button}}
                   {{/unless}}

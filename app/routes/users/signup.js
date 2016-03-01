@@ -5,7 +5,7 @@ import UnauthenticatedRouteMixin from 'ember-simple-auth/mixins/unauthenticated-
 export default Ember.Route.extend(ThirdParty, UnauthenticatedRouteMixin, {
   session: Ember.inject.service(),
 
-  beforeModel: function(transition) {
+  beforeModel: function(/*transition*/) {
     if (!this.get('session').get('data.hasInvite')) {
       this.transitionTo('landing-page');
     }

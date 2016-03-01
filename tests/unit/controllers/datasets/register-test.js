@@ -5,7 +5,11 @@ import {
 
 moduleFor('controller:datasets/register', {
   // Specify the other units that are required for this test.
-  // needs: ['controller:foo']
+  needs: [
+    'service:metrics',
+    'ember-validations@validator:local/presence',
+    'ember-validations@validator:local/format'
+  ]
 });
 
 // Replace this with your real tests.

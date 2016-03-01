@@ -1,12 +1,12 @@
 import Ember from 'ember';
-import GoogleAnalyticsTrackingMixinMixin from '../../../mixins/google-analytics-tracking-mixin';
+import TrackingMixinMixin from '../../../mixins/tracking-mixin';
 import { module, test } from 'qunit';
 
-module('Unit | Mixin | google analytics tracking mixin');
+module('Unit | Mixin | tracking mixin');
 
 // Replace this with your real tests.
 test('it works', function(assert) {
-  var GoogleAnalyticsTrackingMixinObject = Ember.Object.extend(GoogleAnalyticsTrackingMixinMixin);
-  var subject = GoogleAnalyticsTrackingMixinObject.create();
+  var TrackingMixinObject = Ember.Object.extend(TrackingMixinMixin);
+  var subject = TrackingMixinObject.create();
   assert.ok(subject);
 });

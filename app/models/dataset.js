@@ -20,6 +20,6 @@ export default DS.Model.extend({
   }.property('externalID'),
   colour: null,
   views: function() {
-    return this.get('count') + poisson(0.5);
+    return this.get('count') + poisson(2);
   }.property('count')
 });

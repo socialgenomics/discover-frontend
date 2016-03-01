@@ -13,16 +13,16 @@ module('Acceptance | user can signup', {
 });
 
 test('user can signup and go to homepage', function(assert) {
-  visit('/verify');
-  fillIn('input[placeholder="please enter your code"]', 'QT7VwsqYbAI=');
+  visit('/');
+  fillIn('input[placeholder="Your activation code"]', 'QT7VwsqYbAI=');
   click('button:contains("Continue")');
   andThen(function() {
     assert.equal(currentURL(), '/users/signup');
   });
 
-  fillIn('input.signup-fullname', 'Test Name');
-  fillIn('input.signup-email', 'testemail@repositive.io');
-  fillIn('input.signup-password', 'abcdefghi');
+  fillIn('input[type=text]', 'Test Name');
+  fillIn('input[type=email]', 'testemail@repositive.io');
+  fillIn('input[type=password]', 'abcdefghi');
   click('button.full-width');
   andThen(function() {
     assert.equal(currentURL(), '/');
