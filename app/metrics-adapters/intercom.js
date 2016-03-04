@@ -9,7 +9,7 @@ export default BaseAdapter.extend({
   toStringExtension() {
     return 'intercom';
   },
-
+  /* jshint ignore:start */
   init() {
     (function() {
       var w = window;
@@ -44,6 +44,7 @@ export default BaseAdapter.extend({
       }
     })();
   },
+  /* jshint ignore:end */
 
   identify(options = {}) {
     const config = copy(get(this, 'config'));
