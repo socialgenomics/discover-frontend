@@ -4,6 +4,7 @@ import ServerValidationMixin from 'repositive/validators/remote/server/mixin';
 import ENV from 'repositive/config/environment';
 import ajax from 'ic-ajax';
 import { validator } from 'ember-validations';
+const{ get } = Ember;
 
 export default Ember.Controller.extend(
    EmberValidations,
@@ -103,17 +104,19 @@ export default Ember.Controller.extend(
   }.observes('password'),
 
   displayMessages : function(resp) {
-    let messages = resp.messages;
-    this.addValidationErrors(messages);
-    messages = messages.reject(item => {
-      return item.type === 'validation';
-    });
-    // if (messages) {
-    //   messages.forEach(message => {
-    //     this.flashMessages.success(message);
-    //   });
-    // }
-    this.set('loading', false);
+    let messages = get(resp, 'messages');
+    if (messages) {
+      this.addValidationErrors(messages);
+      messages = messages.reject(item => {
+        return item.type === 'validation';
+      });
+      // if (messages) {
+      //   messages.forEach(message => {
+      //     this.flashMessages.success(message);
+      //   });
+      // }
+      this.set('loading', false);
+    }
   },
 
   actions: {
