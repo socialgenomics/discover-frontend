@@ -70,9 +70,9 @@ export default Ember.Controller.extend(
   }.property('showPassword'),
 
   setFirstAndLastNamesFromFullName: function() {
-    let fullname = this.get('fullname');
-    let firstname = fullname.substr(0, fullname.indexOf(' '));
-    let lastname = fullname.substr(fullname.indexOf(' ') + 1);
+    let fullname = this.get('fullname').split(' ');
+    let firstname = fullname.shift();
+    let lastname = fullname.shift() || "";
     this.set('firstname', firstname);
     this.set('lastname', lastname);
   }.observes('fullname'),
