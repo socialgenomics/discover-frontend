@@ -59,7 +59,11 @@ export default BaseAdapter.extend({
       email: email
     });
 
-    window.Intercom('update');
+    window.Intercom('update', {
+      user_id: username,
+      name: fullname,
+      email: email
+    });
   },
 
   trackEvent() {
