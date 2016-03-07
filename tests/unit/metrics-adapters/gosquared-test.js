@@ -1,19 +1,19 @@
-import { moduleFor, test } from 'ember-qunit';
-import sinon from 'sinon';
-
-let sandbox, config;
-
-moduleFor('metrics-adapter:gosquared', 'gosquared adapter', {
-  beforeEach() {
-    sandbox = sinon.sandbox.create();
-    config = {
-      token: 'GSN-041822-M'
-    };
-  },
-  afterEach() {
-    sandbox.restore();
-  }
-});
+// import { moduleFor, test } from 'ember-qunit';
+// import sinon from 'sinon';
+//
+// let sandbox, config;
+//
+// moduleFor('metrics-adapter:gosquared', 'gosquared adapter', {
+//   beforeEach() {
+//     sandbox = sinon.sandbox.create();
+//     config = {
+//       token: 'GSN-041822-M'
+//     };
+//   },
+//   afterEach() {
+//     sandbox.restore();
+//   }
+// });
 
 // test('#identify calls gs with the right arguments', function(assert) {
 //   const adapter = this.subject({ config });

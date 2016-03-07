@@ -11,7 +11,8 @@
     "repositive-styles": "git@github.com:repositive/repositive-styles.git#development",
     "showdown": "~1.2.3",
     "materialize": "~0.97.0",
-    "sinonjs": "^1.17.1"
+    "sinonjs": "^1.17.1",
+    "font-awesome": "~4.5.0"
   },
   "resolutions": {
     "ember-qunit-notifications": "0.1.0",
