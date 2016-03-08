@@ -6,7 +6,7 @@
   {{textarea value=comment placeholder="Write a comment..." focus-in="focusedIn"}}
   {{#if isActive}}
   <div class="buttons">
-    <button {{action 'addComment'}} class="btn post-btn teal white-text"><i class="mdi-action-done"></i></button>
+    <button {{action 'addComment'}} class="btn post-btn teal white-text">{{fa-icon "check"}}</button>
     <a {{action 'cancel'}} class="grey-text cancel-btn">cancel</a>
   </div>
   {{/if}}

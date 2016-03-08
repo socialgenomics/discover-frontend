@@ -27,7 +27,7 @@
         {{#if (eq dataset.repository.access "Open")}}
         <li class="access-icons">
           <i
-            class="mdi-social-public color-fruit-salad-text tooltiped"
+            class="fa fa-globe color-fruit-salad-text tooltiped"
             data-position="bottom"
             data-tooltip="Public Access"
             title="Public"></i>
@@ -40,7 +40,7 @@
         {{#if (eq dataset.repository.access "Restricted")}}
         <li class="access-icons">
           <i
-            class="mdi-action-lock color-red-error-text tooltiped"
+            class="fa fa-lock color-red-error-text tooltiped"
             data-position="bottom"
             data-tooltip="Restricted Access"
             title="Access application needed"></i>
@@ -51,9 +51,16 @@
         {{/if}}
 
         <li class="tooltipped" data-position="bottom" data-tooltip="Views">
-        <i class="mdi-action-visibility"></i><span>{{dataset.views}}</span>
+        	{{fa-icon "eye"}}<span>{{dataset.views}}</span>
         </li>
-        <li class="tooltipped" data-position="bottom" data-tooltip="Comments"><i class="mdi-action-question-answer"></i><span>{{dataset.comments.length}}</span></li>
+        <li class="tooltipped" data-position="bottom" data-tooltip="Comments">
+					{{fa-icon "comments"}}<span>{{dataset.comments.length}}</span>
+				</li>
+				<!-- <li class="tooltipped" data-position="bottom">
+					{{#if dataset.createdAt}}
+						{{fa-icon "calendar"}} <span>{{moment-format dataset.createdAt}}</span>
+					{{/if}}
+        </li> -->
       </ul>
     </div>
 	</div>
