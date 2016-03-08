@@ -1,23 +1,6 @@
 @import "repositive-styles/app/styles/app";
 
-// @import 'materialize';
-// @import 'ember-cli-materialize';
-
 @import "ember-modal-dialog/ember-modal-structure";
 @import "ember-modal-dialog/ember-modal-appearance";
 @import "materialize/sass/components/_icons-material-design.scss";
 @import "font-awesome/scss/font-awesome";
-
-
-// HACK there should be no styles in here really.
-.navbar-buttons .navbar-button{
-  h6{
-    line-height: 2.86rem;
-    margin-top:0;
-    margin-bottom: 0;
-  }
-}
-
-#profile-drop{
-  right:1rem !important;
-}
