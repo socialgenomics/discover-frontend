@@ -27,26 +27,29 @@
       </div>
     </div><!-- end .card-main-comtent -->
     <div class="row bottom-static">
-        <div class="dataset-more-info-section">
-          <div class="col m12">
-            <ul class="card-info-list left-align">
-              {{#if model.owner}}
+      <div class="dataset-more-info-section">
+        <div class="col m12">
+          <ul class="card-info-list left-align">
+            {{#if model.owner}}
               <li class="card-info-attr">Submitted by: {{#link-to 'user' model.owner.username }}<span>{{model.owner.displayName}}</span>{{/link-to}}</li>
-              {{else}}
+            {{else}}
               <li class="card-info-attr">Sourced from: <a><span>{{model.repository.name}}</span></a></li>
-                {{#unless (eq model.repository "REPOSITIVE")}}
+              {{#unless (eq model.repository.name "REPOSITIVE")}}
                 {{#if model.accession}}
                   <li class="card-info-attr">Accession: <span>{{model.externalID}}</span></li>
                 {{/if}}
-                {{/unless}}
-              {{/if}}
+              {{/unless}}
+            {{/if}}
+            {{#if (eq model.repository.name "REPOSITIVE")}}
               {{#if model.createdAt}}
+                <li class="card-info-attr">Registered on: <span>{{moment-format model.createdAt}}</span></li>
               {{/if}}
-              <li class="card-info-attr">Access: <span>{{model.repository.access}}</span></li>
-              {{#if model.contributors}}
-              <li class="card-info-attr">Access: <span>{{model.repository.access}}</span></li>
-              {{/if}}
-            </ul>
+            {{/if}}
+            <li class="card-info-attr">Access: <span>{{model.repository.access}}</span></li>
+            {{#if model.contributors}}
+            <li class="card-info-attr">Access: <span>{{model.repository.access}}</span></li>
+            {{/if}}
+          </ul>
         </div>
         <div class="col m12 center">
           {{#if model.properties.webURL}}

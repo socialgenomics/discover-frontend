@@ -77,10 +77,11 @@ module.exports = function(environment) {
       'simple-auth-cookie-store' : {
         cookieName: 'repositive.io'
       },
-      // moment: {
-      //   includeTimezone: 'all',
-      //   outputFormat: 'L'
-      // },
+      moment: {
+        includeTimezone: 'all',
+        outputFormat: 'L',
+        includeLocales: ['en-gb']
+      },
       torii: {
         providers: {
           'google-oauth2': {
