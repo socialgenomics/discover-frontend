@@ -1,0 +1,14 @@
+app:
+  build: ./
+  volumes:
+    - .:/app
+  environment:
+    # make ssh keys available via ssh forwarding (see volume_from entry)
+    - SSH_AUTH_SOCK=/root/.ssh/socket
+  volumes_from:
+    # Use configured whilp/ssh-agent long running container for keys
+    - ssh-agent
+  command: bash -c 'npm install && bower install && npm run start'
+  ports:
+    - 4200:4200
+    - 49152:49152
