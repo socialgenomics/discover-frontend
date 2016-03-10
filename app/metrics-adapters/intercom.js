@@ -74,5 +74,9 @@ export default BaseAdapter.extend({
   },
 
   alias() {
+  },
+
+  willDestroy() {
+    delete window.Intercom;
   }
 });

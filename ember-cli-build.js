@@ -32,7 +32,7 @@ module.exports = function(defaults) {
       configPath: '.jscsrc',
       enabled: true,
       esnext: true,
-      disableTestGenerator: false
+      disableTestGenerator: process.env.CI ? true : false
     },
     babel: {
       optional: ['es7.decorators']

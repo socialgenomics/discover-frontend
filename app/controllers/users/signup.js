@@ -73,7 +73,7 @@ export default Ember.Controller.extend(
   setFirstAndLastNamesFromFullName: function() {
     let fullname = this.get('fullname').split(' ');
     let firstname = fullname.shift();
-    let lastname = fullname.shift() || "";
+    let lastname = fullname.shift() || '';
     this.set('firstname', firstname);
     this.set('lastname', lastname);
   }.observes('fullname'),

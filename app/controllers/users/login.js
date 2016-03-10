@@ -41,7 +41,7 @@ export default Ember.Controller.extend(
   },
   displayMessages: function(resp) {
     let messages = get(resp, 'messages');
-    if(messages){
+    if (messages) {
       this.addValidationErrors(messages);
       this.set('messages', []);
       this.get('messages').addObjects(messages);
