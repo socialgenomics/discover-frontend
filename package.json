@@ -11,7 +11,8 @@
     "start": "ember server --watcher=polling --proxy=http://backend-dev-sol-lon02.repositive.io",
     "startLocal": "ember server --proxy=http://192.168.33.11",
     "build": "ember build",
-    "test": "ember test"
+    "test": "ember test",
+    "security": "snyk test"
   },
   "repository": "https://bitbucket.org/repositive/repositive.io",
   "engines": {
@@ -69,7 +70,8 @@
     "moment": "^2.10.6",
     "onchange": "^2.0.0",
     "torii": "^0.6.1",
-    "underscore": "^1.8.3"
+    "underscore": "^1.8.3",
+    "snyk": "^1.12.0"
   },
   "dependencies": {
     "ember-computed-decorators": "^0.2.2",
