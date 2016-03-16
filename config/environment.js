@@ -54,7 +54,8 @@ module.exports = function(environment) {
           'invites': '/api/invites',
           'users.profiles': '/api/users/profiles',
           'reset-password': '/api/users/password-reset',
-          'verify-email': '/api/users/verify'
+          'verify-email': '/api/users/verify',
+          'verify-email-resend': '/api/users/verify/resend'
         };
         _.each(mapping,
           function(path, key, obj) {
