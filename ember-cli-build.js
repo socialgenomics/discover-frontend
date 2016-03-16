@@ -15,10 +15,22 @@ module.exports = function(defaults) {
   var app = new EmberApp(defaults, {
     sassOptions: {
       inputFile: 'app.scss',
-      outputFile: 'main.css',
+      outputFile: 'app.css',
       includePaths: [
         'bower_components'
       ]
+    },
+    outputPaths: {
+      app: {
+        css: {
+          app: '/assets/app.css'
+        },
+        js: '/assets/main.js'
+      },
+      vendor: {
+        css: '/assets/vendor.css',
+        js: '/assets/vendor.js'
+      }
     },
     fingerprint: {
       enabled: isProductionLikeBuild,
