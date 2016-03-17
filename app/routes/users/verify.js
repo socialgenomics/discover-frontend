@@ -26,8 +26,13 @@ export default Ember.Route.extend({
         not logged in.
       */
       if (this.get('session.isAuthenticated')) {
-        this.get('session.authenticatedUser').set('isEmailValidated', true);
-        this.transitionTo('user', this.get('session.authenticatedUser.username'));
+        if (this.get('session.authenticatedUser')) {
+          this.get('session.authenticatedUser').set('isEmailValidated', true);
+          this.transitionTo('user', this.get('session.authenticatedUser.username'));
+        } else {
+          console.warn('session.authenticatedUser is undefined but session.isAuthenticated "true"')
+          this.transitionTo('users.login');
+        }
       } else {
         this.transitionTo('users.login');
       }
