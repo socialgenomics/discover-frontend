@@ -163,13 +163,21 @@ module.exports = function(environment) {
       ENV.APP.rootElement = '#ember-testing';
     }
 
+    if (environment === 'development') {
+      ENV.APP.INSPECTLET_WID = 1989736952;
+      ENV.torii.providers['google-oauth2'].redirectUri = 'https://frontend-dev-sol-lon02.repositive.io';
+      ENV.torii.providers['linked-in-oauth2'].redirectUri = 'https://frontend-dev-sol-lon02.repositive.io';
+    }
+
     if (environment === 'staging') {
       ENV.APP.INSPECTLET_WID = 1989736952;
+      ENV.torii.providers['google-oauth2'].redirectUri = 'https://frontend-staging-sol-lon02.repositive.io';
+      ENV.torii.providers['linked-in-oauth2'].redirectUri = 'https://frontend-staging-sol-lon02.repositive.io';
     }
 
     if (environment === 'production') {
-      ENV.torii.providers['google-oauth2'].redirectUri = 'http://discover.repositive.io';
-      ENV.torii.providers['linked-in-oauth2'].redirectUri = 'http://discover.repositive.io';
+      ENV.torii.providers['google-oauth2'].redirectUri = 'https://discover.repositive.io';
+      ENV.torii.providers['linked-in-oauth2'].redirectUri = 'https://discover.repositive.io';
       ENV.APP.INSPECTLET_WID = 1989736952;
     }
 
