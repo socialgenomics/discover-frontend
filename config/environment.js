@@ -86,7 +86,7 @@ module.exports = function(environment) {
       torii: {
         providers: {
           'google-oauth2': {
-            apiKey:      '677526813069-6tmd1flqovp5miud67phqlks49bqdo8i.apps.googleusercontent.com',
+            apiKey:      '625615936247-udf8t0o94vmk5tp48pbsdsog84g4vu93.apps.googleusercontent.com',
             redirectUri: 'http://localhost:4200'
           },
           'linked-in-oauth2': {
