@@ -63,7 +63,8 @@ export default Ember.Controller.extend(
       });
     },
 
-    completeForm: function() {
+    completeOnboardForm: function() {
+      this.get('session').set('data.firstVisit', false);
       this.transitionToRoute('welcome');
     }
   }
