@@ -24,10 +24,10 @@ Router.map(function() {
 
   this.route('users', { resetNamespace: true }, function() {
     this.route('signup', {
-      path: 'signup'
+      path: '/signup'
     });
     this.route('login', {
-      path: 'login'
+      path: '/login'
     });
     this.route('settings');
     this.route('profile');
