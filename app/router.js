@@ -23,8 +23,12 @@ Router.map(function() {
   this.route('welcome');
 
   this.route('users', { resetNamespace: true }, function() {
-    this.route('signup');
-    this.route('login');
+    this.route('signup', {
+      path: 'signup'
+    });
+    this.route('login', {
+      path: 'login'
+    });
     this.route('settings');
     this.route('profile');
     this.route('references');

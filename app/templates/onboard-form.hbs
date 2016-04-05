@@ -1,17 +1,19 @@
 <div class="content">
-  <div class="row center-align">
+  <div class="row">
     <div class="col m12">
       <div class="card">
         <div class="card-content">
-          <h2>Welcome on board!</h2>
-          <h3 class="thin">To start with tell us more about your previous experience.</h3>
+          <header class="center-align">
+            <h2>Welcome on board!</h2>
+            <h3 class="thin">To start with tell us more about your previous experience.</h3>
+          </header>
 
           <div class="divider"></div>
 
-          <div class="row">
+          <div class="row form-checklist">
             <div class="col m4">
-              <h1 class="yellow-text">1.</h1>
-              <p>In the past year, how often did you SEARCH for genomic datasets?</p>
+              <h1 class="yellow-text center-align">1.</h1>
+              <p class="color-silver-chalice-text">In the past year, how often did you SEARCH for genomic datasets?</p>
               <ul class="checkbox-list">
                 <li class="checkbox">
                   <input type="checkbox" id="week1">
@@ -37,8 +39,8 @@
             </div>
 
             <div class="col m4">
-              <h1 class="yellow-text">2.</h1>
-              <p>In the past year, how often did you SEARCH for genomic datasets?</p>
+              <h1 class="yellow-text center-align">2.</h1>
+              <p class="color-silver-chalice-text">In the past year, how often did you SEARCH for genomic datasets?</p>
               <div class="checkbox">
                 <input type="checkbox" id="week2">
                 <label for="week2">Several times a week</label>
@@ -62,8 +64,8 @@
             </div>
 
             <div class="col m4">
-              <h1 class="yellow-text">3.</h1>
-              <p>In the past year, how often did you DEPOSIT/SHARE genomic datasets?</p>
+              <h1 class="yellow-text center-align">3.</h1>
+              <p class="color-silver-chalice-text">In the past year, how often did you DEPOSIT/SHARE genomic datasets?</p>
               <div class="checkbox">
                 <input type="checkbox" id="week3">
                 <label for="week3">Several times a week</label>
@@ -102,21 +104,21 @@
               {{#link-to 'root'}}<button class="btn yellow full-width" {{action "completeOnboardForm"}}>Done</button>{{/link-to}}
             </div>
             <div class="col m3">
-              {{#link-to 'root'}}<button class="btn btn-light white-text full-width" {{action "completeOnboardForm"}}>Skip</button>{{/link-to}}
+              {{#link-to 'root'}}<button class="btn btn-light-yellow full-width" {{action "completeOnboardForm"}}>Skip</button>{{/link-to}}
             </div>
           </div>
 
           <div class="divider"></div>
 
           <div class="row bottom-banner">
-            <div class="col m4">
+            <div class="col m3">
               <img class="responsive-img" src="/assets/images/we-are-testing.png">
             </div>
-            <div class="col m8">
-              <p>
+            <div class="col m9">
+              <span class="color-silver-chalice-text">
                 That means as an early access beta user your feedback is vital in helping us build a
                 great product. To do this, we will ask you a few questions during our beta phase.
-              </p>
+              </span>
             </div>
           </div>
 
