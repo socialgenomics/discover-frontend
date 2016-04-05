@@ -26,7 +26,9 @@ Router.map(function() {
   this.route('signup-form');
   this.route('beta-signup-form');
   this.route('video');
-  this.route('onboard-form', { path: 'onboard' });
+  this.route('onboard-form', {
+    path: 'onboard'
+  });
 
   this.route('users', { resetNamespace: true }, function() {
     this.route('signup');
