@@ -64,21 +64,21 @@
 
   <div class="col l5 m6 s12 card-side-wrapper"><!-- SIDE CONTENT DIV -->
     <ul class="tabs">
-      <li class="tab col s3">
+      <li class="tab">
         {{#if (eq tab "comments")}}
         {{#link-to 'datasets.detail' model (query-params tab="comments") class="active"}}Discussion{{/link-to}}
         {{else}}
         {{#link-to 'datasets.detail' model (query-params tab="comments")}}Discussion{{/link-to}}
         {{/if}}
       </li>
-      <li class="tab col s3">
+      <li class="tab">
         {{#if (eq tab "rating")}}
         {{#link-to 'datasets.detail' model (query-params tab="rating") class="active"}}Rating{{/link-to}}
         {{else}}
         {{#link-to 'datasets.detail' model (query-params tab="rating") }}Rating{{/link-to}}
         {{/if}}
       </li>
-      <li class="tab col s3">
+      <li class="tab">
         {{#if (eq tab "related")}}
         {{#link-to 'datasets.detail' model (query-params tab="related") class="active"}}Related{{/link-to}}
         {{else}}
