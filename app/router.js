@@ -15,12 +15,6 @@ Router.map(function() {
     path: '/'
   });
 
-  this.route('about');
-  this.route('team');
-  this.route('faq');
-  this.route('press');
-  this.route('jobs');
-  this.route('help');
   this.route('verify');
   this.route('policies');
   this.route('signup-form');
