@@ -29,8 +29,8 @@ export default BaseAdapter.extend({
     }(window, document, 'script', '_gs');
     /* jshint ignore:end */
 
-    window._gs(token, false); // site token, setting to false disables automatic tracking
-    window._gs('set', 'trackLocal', true); // set to true for testing
+    window._gs(token); // site token, setting to false disables automatic tracking
+    window._gs('set', 'trackLocal', false); // set to true for testing
     window._gs('auth', signature); // secure mode, signature
   },
 
@@ -64,6 +64,7 @@ export default BaseAdapter.extend({
   },
 
   willDestroy() {
+    window._gs('unidentify');
     delete window._gs;
   }
 });

@@ -27,7 +27,7 @@ export default Ember.Controller.extend({
       this.get('metrics').trackEvent({
         category: 'dataset',
         action: 'download',
-        label: this.get('model.id')
+        label: this.get('model.properties.title')
       });
       //HACK to open link in new tab - NEED TO TEST THIS IN OTHER BROWSERS!
       var tab = window.open(this.get('model.properties.webURL'), '_blank');
