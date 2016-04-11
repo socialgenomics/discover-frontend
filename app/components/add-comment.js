@@ -10,7 +10,7 @@ export default Ember.Component.extend({
   comment: null,
 
   actions: {
-    focusedIn: function() {
+    showButtons: function() {
       this.set('isActive', true);
     },
     cancel: function() {
