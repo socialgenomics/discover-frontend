@@ -7,57 +7,27 @@
         <h3 class="color-silver-chalice-text center thin">Let the community help you find the data you need.</h3>
       </div>
 
-      <div class="row center">
-        <div class="divider"></div>
-          <div class="col m3">
-            <h4 class="bold">Didn't find the data?</h4>
-            <img src="/assets/images/request-intro-01.png" class="responsive-img" alt="intro-01">
+      <div class="divider"></div>
+
+      <div class="row center rq-animation">
+          <div class="rq-animation-section col m3">
+            <h4 class="animated fadeIn fadeIn1">Didn't find the data?</h4>
+            <img src="/assets/images/request-intro-01.png" class="responsive-img animated fadeIn fadeIn1" alt="intro-01">
           </div>
-          <div class="col m3">
-            <h4 class="bold">Fill in the request form.</h4>
-            <img src="/assets/images/request-intro-02.png" class="responsive-img" alt="intro-02">
+          <div class="rq-animation-section col m3">
+            <h4 class="animated fadeIn fadeIn2">Fill in the request form.</h4>
+            <img src="/assets/images/request-intro-02.png" class="responsive-img animated fadeIn fadeIn2" alt="intro-02">
           </div>
-          <div class="col m3">
-            <h4 class="bold">Others can see your request.</h4>
-            <img src="/assets/images/request-intro-03.png" class="responsive-img" alt="intro-03">
+          <div class="rq-animation-section col m3">
+            <h4 class="animated fadeIn fadeIn3">Others can see your request.</h4>
+            <img src="/assets/images/request-intro-03.png" class="responsive-img animated fadeIn fadeIn3" alt="intro-03">
           </div>
-          <div class="col m3">
-            <h4 class="bold">And give you a response with help.</h4>
-            <img src="/assets/images/request-intro-04.png" class="responsive-img" alt="intro-04">
+          <div class="rq-animation-section col m3">
+            <h4 class="animated fadeIn fadeIn4">And give you a response with help.</h4>
+            <img src="/assets/images/request-intro-04.png" class="responsive-img animated fadeIn fadeIn4" alt="intro-04">
           </div>
 
           {{#link-to 'datasets.request.new' class="btn white-text"}}Make a Request{{/link-to}}
-
-        <!-- <div class="col m5 steps-how-to sub-grey">
-          <h4 class="color-havelock-blue-text margin-bottom">How to make request?</h4>
-          <div><span class="numb col m2 color-havelock-blue-text">1</span><p> Fill in the request form with information about the data you are looking for.</p></div>
-          <div><span class="numb col m2 color-havelock-blue-text">2</span><p> Your request will be visible and searchable on REPOSITIVE.</p></div>
-          <div><span class="numb col m2 color-havelock-blue-text">3</span><p> This will help you to find the data you are looking for and initiate collaborations.</p></div>
-        </div>
-        <div class="col m6 offset-m1">
-          <h4 class="color-havelock-blue-text margin-bottom no-padding">Request form</h4>
-          <form {{action "addRequest" on="submit"}} class="side-form">
-            {{validated-input
-              type="text"
-              value=title
-              errors=errors.title
-              placeholder="Name your request"
-              action=addDataset
-            }}
-            {{validated-input
-              type="text"
-              value=description
-              errors=errors.description
-              placeholder="Describe the dataset you're looking for. You can include ethnicity of patients, number of samples, assay type or associated diseases."
-              action=addDataset
-              textarea="true"
-            }}
-            <div class="input-container center">
-              <button type="submit" class="btn bg-request white-text">Submit Request</button>
-            </div>
-          </form>
-        </div> -->
-
       </div>
     </div>
   </div>

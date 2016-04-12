@@ -1,8 +1,62 @@
 <div id="request-form" class="content">
-  <!-- <h5 class="subtitles-left unfocus-grey-text">Request Data</h5> -->
   <div class="card">
     <div class="card-body">
-      <h2 class="col m12 center">Request Data</h2>
+      <header class="relative">
+        <div class="header-logo center-block">
+          <img src="/assets/images/icon-request.png" class="responsive-img">
+        </div>
+        <h3 class="center teal-text uppercase margin-top">Request Data</h3>
+      </header>
+
+      <div class="divider"></div>
+
+      <div class="row">
+        <div class="col m6 offset-m3">
+          <form>
+            <div class="row">
+              <span class="col m1 numb grey-text">1</span>
+              <div class="col m11">
+                {{validated-input
+                  type="text"
+                  value=title
+                  errors=errors.title
+                  lbl="Add title"
+                  placeholder="Name your request"
+                  action=addDataset
+                }}
+              </div>
+            </div>
+            <div class="row">
+              <span class="col m1 numb grey-text">2</span>
+              <div class="col m11">
+                {{validated-input
+                  type="text"
+                  value=description
+                  errors=errors.description
+                  lbl="Add description"
+                  placeholder="Describe the dataset you're looking for. You can include ethnicity of patients, number of samples, assay type or associated diseases."
+                  action=addDataset
+                  textarea="true"
+                }}
+              </div>
+            </div>
+          </form>
+          <div class="row">
+            <span class="col m1 numb grey-text">3</span>
+            <div class="col m11">
+              <div class="tags">
+                {{#each model.tags as |tag|}}
+                  <span class="tag"> {{tag.word}}</span>
+                {{/each}}
+                {{add-tag addTag="addTag" class="add-btn"}}
+              </div>
+            </div>
+          </div>
+          <div class="input-container center">
+            <button type="submit" {{action "addRequest"}} class="btn">Submit Request</button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
