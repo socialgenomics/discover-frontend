@@ -3,6 +3,7 @@
     {{add-comment addComment="addComment" avatar=session.authenticatedUser.profile.avatar}}
     {{#each commentsSorted as |comment|}}
       {{user-comment user=comment.user text=comment.text date=comment.createdAt avatar=comment.user.profile.avatar}}
+      <div class="divider"></div>
     {{/each}}
   </div>
 </div>

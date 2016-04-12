@@ -20,10 +20,15 @@ export default Ember.Component.extend({
   classNameBindings: ['isActive:active', 'showValid:valid', 'showInvalid:invalid'],
 
   actions: {
+    toggleMarkdownModal() {
+      this.toggleProperty('isShowingMarkdownModal');
+    },
+
     focusedIn: function() {
       this.set('defaultPlaceholder', this.get('placeholder'));
       this.set('placeholder', '');
       this.set('isActive', true);
+      this.sendAction();
     },
     focusedOut: function() {
       this.set('hasBeenFocused', true);

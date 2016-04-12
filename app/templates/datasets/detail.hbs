@@ -14,7 +14,7 @@
 	<div class="dataset-main-info">
       <h2>{{model.properties.title}}</h2>
       <span>{{user.displayName}}</span>
-      <p>{{markdown-to-html markdown=model.properties.description}}</p>
+      {{markdown-text value=model.properties.description}}
 
         <div class="tags">
           {{#each model.tags as |tag|}}
