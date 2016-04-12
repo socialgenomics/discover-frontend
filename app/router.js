@@ -56,7 +56,10 @@ Router.map(function() {
     });
     this.route('search');
     this.route('register');
-    this.route('request');
+
+    this.route('request', function() {
+      this.route('new');
+    });
   });
 
   this.route('404', {
