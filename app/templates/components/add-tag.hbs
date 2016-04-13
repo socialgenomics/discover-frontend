@@ -1,18 +1,21 @@
-{{#if isOpen}}
-<!-- <form {{action "addTag" on="submit"}}>
-  {{input value=tag type="text" placeholder="Enter tag name"}}
-  <button class="btn white grey-text" type="submit">Add Tag</button>
-  <a {{action "toggleInput"}} class="grey-text cancel-btn">Cancel</a>
-</form> -->
-  <form {{action "addTag" on="submit"}}>
-    <!-- <button {{action "toggleInput"}}class="btn add-tag grey white-text" type="submit">+</button> -->
+<div class="input-container">
+
+  {{#if isOpen}}
+    <form {{action "addTag" on="submit"}}>
+      <div class="input-field">
+        {{input value=tag type="text" placeholder="Enter tag name" class="col m5 input-tag"}}
+        <button class="btn post-btn no-margin teal white-text" type="submit">{{fa-icon "check"}}</button>
+        <a {{action "toggleInput"}} class="grey-text cancel-btn">cancel</a>
+      </div>
+    </form>
+  {{else}}
     <div class="input-field">
-      {{input value=tag type="text" placeholder="Enter tag name" class="col m5 input-tag"}}
-      <button class="btn post-btn no-margin teal white-text" type="submit">{{fa-icon "check"}}</button>
-      <a {{action "toggleInput"}} class="grey-text cancel-btn">cancel</a>
+      <span class="sub-grey tag-button grey-text" {{action "toggleInput"}}>Add a new tag</span>
     </div>
-  </form>
-{{else}}
-  <span class="sub-grey tag grey-text">Add a new tag</span>
-  <button {{action "toggleInput"}} class="btn add-tag grey white-text">+</button>
-{{/if}}
+  {{/if}}
+
+  {{#if top-lbl}}
+    <div class="top-label">{{top-lbl}} <a data-balloon-length="medium" data-balloon="You can add tags to filter and categorize the data." data-balloon-pos="up"><span class="help-button">?</span></a></div>
+  {{/if}}
+
+</div>

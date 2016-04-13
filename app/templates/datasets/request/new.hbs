@@ -10,30 +10,30 @@
 
       <div class="divider"></div>
 
-      <div class="row">
+      <section class="request-form row">
         <div class="col m6 offset-m3">
           <form>
-            <div class="row">
+            <div class="rq-section row">
               <span class="col m1 numb grey-text">1</span>
               <div class="col m11">
                 {{validated-input
                   type="text"
                   value=title
                   errors=errors.title
-                  lbl="Add title"
+                  top-lbl="Add title"
                   placeholder="Name your request"
                   action=addDataset
                 }}
               </div>
             </div>
-            <div class="row">
+            <div class="rq-section row">
               <span class="col m1 numb grey-text">2</span>
               <div class="col m11">
                 {{validated-input
                   type="text"
                   value=description
                   errors=errors.description
-                  lbl="Add description"
+                  top-lbl="Add description"
                   placeholder="Describe the dataset you're looking for. You can include ethnicity of patients, number of samples, assay type or associated diseases."
                   action=addDataset
                   textarea="true"
@@ -41,14 +41,14 @@
               </div>
             </div>
           </form>
-          <div class="row">
+          <div class="rq-section row">
             <span class="col m1 numb grey-text">3</span>
             <div class="col m11">
               <div class="tags">
                 {{#each model.tags as |tag|}}
                   <span class="tag"> {{tag.word}}</span>
                 {{/each}}
-                {{add-tag addTag="addTag" class="add-btn"}}
+                {{add-tag addTag="addTag" class="add-btn" top-lbl="Include tags"}}
               </div>
             </div>
           </div>
@@ -56,7 +56,7 @@
             <button type="submit" {{action "addRequest"}} class="btn">Submit Request</button>
           </div>
         </div>
-      </div>
+      </section>
     </div>
   </div>
 </div>
