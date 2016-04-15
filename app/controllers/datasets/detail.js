@@ -5,6 +5,17 @@ export default Ember.Controller.extend({
   queryParams: ['tab'],
   tab: 'comments',
   isEditingTags: false,
+  isEditingDataset: false,
+
+  isDatasetOwner: function() {
+    let sessionUser = this.get('session.data.authenticatedUser.username');
+    let modelOwner = this.get('model.owner.username');
+
+    if (sessionUser === modelOwner) {
+      return true;
+    }
+  }.property('owner'),
+
   commentsSorted: Ember.computed.sort('model.comments', (a, b)=> {
     if (a.get('createdAt') < b.get('createdAt')) {
       return 1;
@@ -32,6 +43,21 @@ export default Ember.Controller.extend({
       //HACK to open link in new tab - NEED TO TEST THIS IN OTHER BROWSERS!
       var tab = window.open(this.get('model.properties.webURL'), '_blank');
       tab.focus();
+    },
+
+    editDataset: function() {
+      this.toggleProperty('isEditingDataset');
+    },
+
+    saveDataset: function() {
+      let dataset = this.get('model');
+      var props = this.get('model.properties', {
+        title: this.title,
+        description: this.description
+      });
+      dataset.properties = props;
+
+      dataset.save()
     },
 
     addComment(text) {

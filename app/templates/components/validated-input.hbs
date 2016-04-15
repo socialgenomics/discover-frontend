@@ -10,7 +10,7 @@
       type=type
       placeholder=placeholder
     }}
-    <img src="/assets/images/markdown.svg" {{action "toggleMarkdownModal"}} alt="markdown-help">
+    <!-- <img src="/assets/images/markdown.svg" {{action "toggleMarkdownModal"}} alt="markdown-help"> -->
   </div>
   {{else}}
     {{input
@@ -48,7 +48,6 @@
     <div class="modal-content center-align">
       <h2>Markdown Help</h2>
       <hr class="yellow">
-      <!-- <h4 class="thin"><em>This feature will be available very soon.</em></h4> -->
       <p><em>Italic: </em>*text*</p>
       <p><strong>Bold: </strong>**text**</p>
       <p><strong><em>Bold Italic: </em></strong>***text***</p>
@@ -57,7 +56,6 @@
     </div>
     <div class="modal-footer center-align">
       <p>For further Markdown syntax reference, check out: <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">Markdown Cheat Sheet</a></p>
-      <!-- <button {{action "toggleMarkdownModal"}} class="btn center btn-light teal modal-action modal-close waves-effect">OK, no worries</button> -->
     </div>
   </div>
   {{/modal-dialog}}

@@ -13,6 +13,8 @@ export default Ember.Controller.extend(EmberValidations, {
     }
   },
   isEditingTags: false,
+  isShowingMarkdownHelp: false,
+  isShowingTagHelp: false,
 
   actions: {
 
@@ -30,6 +32,14 @@ export default Ember.Controller.extend(EmberValidations, {
       this.toggleProperty('isEditingTags');
     },
 
+    toggleMarkdownHelp() {
+      this.toggleProperty('isShowingMarkdownHelp');
+    },
+
+    toggleTagHelp() {
+      this.toggleProperty('isShowingTagHelp');
+    },
+
     addRequest: function() {
       var dataset = this.store.createRecord('dataset', { isRequest: 1 });
       var props = this.store.createRecord('property', {
@@ -38,8 +48,7 @@ export default Ember.Controller.extend(EmberValidations, {
       });
       dataset.properties = props;
 
-      dataset
-      .save()
+      dataset.save()
       .then((created)=> {
         this.flashMessages.add({
           message: 'Thank you! Your request has been submitted.',
