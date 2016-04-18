@@ -13,9 +13,9 @@
         {{action-favourite dataset=dataset}}
         <span class="grey-text">{{data.favourite}}</span>
         {{action-share action="toggleModal"}}
-        <span {{action "editDataset"}}>{{fa-icon "pencil"}}</span>
-        <!-- {{#if isDatasetOwner}} -->
-        <!-- {{/if}} -->
+        {{#if isOwner}}
+          <span {{action "editDataset"}}>{{fa-icon "pencil"}}</span>
+        {{/if}}
       </div>
     </div>
     <div class="card-main-content">

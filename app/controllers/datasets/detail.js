@@ -7,15 +7,6 @@ export default Ember.Controller.extend({
   isEditingTags: false,
   isEditingDataset: false,
 
-  isDatasetOwner: function() {
-    let sessionUser = this.get('session.data.authenticatedUser.username');
-    let modelOwner = this.get('model.owner.username');
-
-    if (sessionUser === modelOwner) {
-      return true;
-    }
-  }.property('owner'),
-
   commentsSorted: Ember.computed.sort('model.comments', (a, b)=> {
     if (a.get('createdAt') < b.get('createdAt')) {
       return 1;
@@ -31,6 +22,13 @@ export default Ember.Controller.extend({
       return true;
     }
   }.property('access'),
+
+
+  isOwner: function() {
+    const user = this.get('session.authenticatedUser.id');
+    const owner = this.get('model.owner.id');
+    return (user === owner);
+  }.property('id'),
 
   actions: {
     //Register when someone click the "Access Data" button
