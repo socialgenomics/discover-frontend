@@ -30,7 +30,7 @@ export default Ember.Route.extend({
           this.get('session.authenticatedUser').set('isEmailValidated', true);
           this.transitionTo('user', this.get('session.authenticatedUser.username'));
         } else {
-          console.warn('session.authenticatedUser is undefined but session.isAuthenticated "true"')
+          console.warn('session.authenticatedUser is undefined but session.isAuthenticated "true"');
           this.transitionTo('users.login');
         }
       } else {
@@ -46,7 +46,7 @@ export default Ember.Route.extend({
   actions: {
     resendVerifyEmail: function() {
       ajax({
-        url: '/api/users/verify/resend/' + this.get('session.authenticatedUser.email'),
+        url: ENV.APIRoutes['verify-email-resend'] + '/' + this.get('session.authenticatedUser.email'),
         type: 'GET'
       });
     }
