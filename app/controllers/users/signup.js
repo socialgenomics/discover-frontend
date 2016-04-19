@@ -142,7 +142,14 @@ export default Ember.Controller.extend(
           this.get('session')
           .authenticate('authenticator:repositive', credentials)
           // We would like to show a welcome screen if this is the first visit.
-          .then(() => this.get('session').set('data.firstVisit', true))
+          // .then(() => this.get('session').set('data.firstVisit', true))
+          .then(() => {
+            this.flashMessages.add({
+              message: 'Please check your email to verify your account',
+              type: 'success',
+              timeout: 5000
+            });
+          })
           .catch(this.displayMessages.bind(this));
         })
         .catch(err => { // error with signup
