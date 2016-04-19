@@ -3,24 +3,53 @@
 <div class="row card dataset full-view">
   <div class="col l7 m6 s12 card-main-wrapper"><!-- MAIN CONTENT DIV -->
     <div class="top-action card-header">
+      {{#if model.isRequest}}
+        <img src="/assets/images/icon-request.png" class="responsive-img data-icon" alt="request">
+      {{else}}
+        <img src="/assets/images/icon-register.png" class="responsive-img data-icon" alt="request">
+      {{/if}}
       <span class="assay-small {{model.colour}}"></span>
       <div class="actions-container valign-wrapper">
-        {{action-favourite dataset=dataset}}
+        {{action-favourite dataset=dataset action="toggleModal"}}
         <span class="grey-text">{{data.favourite}}</span>
         {{action-share action="toggleModal"}}
+        {{#if isOwner}}
+          <span {{action "editDataset"}}>{{fa-icon "pencil"}}</span>
+        {{/if}}
       </div>
     </div>
     <div class="card-main-content">
-	<div class="dataset-main-info">
-      <h2>{{model.properties.title}}</h2>
-      <span>{{user.displayName}}</span>
-      <p>{{markdown-to-html markdown=model.properties.description}}</p>
+    	<div class="dataset-main-info">
+        {{#if isEditingDataset}}
+          <div class="rq-section">
+            {{validated-input
+              type="text"
+              value=model.properties.title
+              errors=errors.title
+              top-lbl="Title"
+            }}
+          </div>
+          <div class="rq-section">
+            {{validated-input
+              type="text"
+              value=model.properties.description
+              errors=errors.description
+              textarea="true"
+              top-lbl="Description"
+            }}
+          </div>
+          <button class="btn post-btn" {{action "saveDataset"}}>{{fa-icon "check"}}</button>
+        {{else}}
+          <h2>{{model.properties.title}}</h2>
+          <span>{{user.displayName}}</span>
+          {{markdown-text value=model.properties.description}}
+        {{/if}}
 
         <div class="tags">
           {{#each model.tags as |tag|}}
-          {{#link-to 'datasets.tags' tag.word}}
-          <span class="tag"> {{tag.word}}</span>
-          {{/link-to}}
+              {{#link-to 'datasets.tags' tag.word}}
+                <span class="tag"> {{tag.word}}</span>
+              {{/link-to}}
           {{/each}}
           {{add-tag addTag="addTag" class="add-btn"}}
         </div>

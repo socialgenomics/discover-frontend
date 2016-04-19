@@ -3,11 +3,18 @@
   <img src={{avatar}}>
 </div>
 <div class="input-field">
-  {{textarea value=comment placeholder="Write a comment..." focus-in="focusedIn"}}
+  {{validated-input
+    type="textarea"
+    value=comment
+    placeholder="Write a comment..."
+    action="showButtons"
+    textarea="true"
+  }}
+  <!-- {{textarea value=comment placeholder="Write a comment..." focus-in="focusedIn"}} -->
   {{#if isActive}}
-  <div class="buttons">
-    <button {{action 'addComment'}} class="btn post-btn teal white-text">{{fa-icon "check"}}</button>
-    <a {{action 'cancel'}} class="grey-text cancel-btn">cancel</a>
-  </div>
+    <div class="buttons">
+      <button {{action 'addComment'}} class="btn post-btn teal white-text">{{fa-icon "check"}}</button>
+      <a {{action 'cancel'}} class="grey-text cancel-btn">cancel</a>
+    </div>
   {{/if}}
 </div>

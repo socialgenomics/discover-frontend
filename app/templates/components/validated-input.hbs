@@ -2,6 +2,7 @@
 
 <div class="input-field">
   {{#if textarea}}
+  <div class="markdown-textarea">
     {{textarea
       value=value
       focus-in="focusedIn"
@@ -9,6 +10,8 @@
       type=type
       placeholder=placeholder
     }}
+    <!-- <img src="/assets/images/markdown.svg" {{action "toggleMarkdownModal"}} alt="markdown-help"> -->
+  </div>
   {{else}}
     {{input
       value=value
@@ -21,6 +24,7 @@
   {{/if}}
 </div>
 <div class="lbl">{{lbl}}</div>
+<div class="top-label">{{top-lbl}}</div>
 
 {{#if (eq icon "fullname")}}{{fa-icon "user"}}{{/if}}
 {{#if (eq icon "password")}}{{fa-icon "lock"}}{{/if}}
@@ -36,4 +40,23 @@
   </div>
 {{else}}
   <div class="input-helper">{{helpText}}</div>
+{{/if}}
+
+{{#if isShowingMarkdownModal}}
+  {{#modal-dialog close="toggleMarkdownModal" targetAttachment="center" translucentOverlay=true}}
+  <div class="modal">
+    <div class="modal-content center-align">
+      <h2>Markdown Help</h2>
+      <hr class="yellow">
+      <p><em>Italic: </em>*text*</p>
+      <p><strong>Bold: </strong>**text**</p>
+      <p><strong><em>Bold Italic: </em></strong>***text***</p>
+      <p><a href="#">Link: </a>[link-text](link)</p>
+      <p>List Items: * item</p>
+    </div>
+    <div class="modal-footer center-align">
+      <p>For further Markdown syntax reference, check out: <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">Markdown Cheat Sheet</a></p>
+    </div>
+  </div>
+  {{/modal-dialog}}
 {{/if}}

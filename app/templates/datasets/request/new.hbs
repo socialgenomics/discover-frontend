@@ -1,0 +1,87 @@
+<div id="request-form" class="content">
+  <div class="card">
+    <div class="card-body">
+      <header class="relative">
+        <div class="header-logo center-block">
+          <img src="/assets/images/icon-request.png" class="responsive-img">
+        </div>
+        <h3 class="center teal-text uppercase margin-top">Request Data</h3>
+      </header>
+
+      <div class="fw-divider"></div>
+
+      <section class="request-form row">
+        <!-- <div class="col m6 offset-m3"> -->
+          <form>
+            <div class="rq-section row">
+              <div class="col m6 offset-m3">
+                {{validated-input
+                  type="text"
+                  value=title
+                  errors=errors.title
+                  top-lbl="What are you looking for?"
+                  placeholder="Make it short and descriptive (max 50 characters)"
+                  action=addDataset
+                }}
+              </div>
+            </div>
+            <div class="rq-section row">
+              {{#if isShowingMarkdownHelp}}
+                <div class="helper-section">
+                  <span class="close-button" {{action "toggleMarkdownHelp"}}>{{fa-icon "times"}}</span>
+                  <h4>Markdown help</h4>
+                  <ul>
+                    <li><em>*italic*</em></li>
+                    <li><strong>**bold**</strong></li>
+                    <li><a>[link-text](link-url)</a></li>
+                  </ul>
+                  <a href="https://guides.github.com/features/mastering-markdown/" target="_blank">
+                    <img src="/assets/images/markdown.svg" class="responsive-img data-icon no-margin"><span> Markdown Documentation</span>
+                  </a>
+                </div>
+              {{/if}}
+              <div class="col m6 offset-m3">
+                {{validated-input
+                  type="text"
+                  value=description
+                  errors=errors.description
+                  top-lbl="Describe the data you need."
+                  placeholder="Describe the dataset you're looking for. You can include:
+                  - the data type
+                  - ethnicity of patients
+                  - number of samples
+                  - assay type
+                  - associated diseases"
+                  action=addDataset
+                  textarea="true"
+                }}
+                <a class="help-link" {{action "toggleMarkdownHelp"}}><span>Need help formatting with Markdown?</span></a>
+              </div>
+            </div>
+          </form>
+          <div class="rq-section row">
+            {{#if isShowingTagHelp}}
+              <div class="helper-section">
+                <span class="close-button" {{action "toggleTagHelp"}}>{{fa-icon "times"}}</span>
+                <p>A tag is a keyword or label that categorizes your request with other, similar questions.</p>
+                <p>Using the right tags makes it easier for others to find and give response to your request.</p>
+              </div>
+            {{/if}}
+            <div class="col m6 offset-m3">
+              <div class="tags">
+                {{#each model.tags as |tag|}}
+                  <span class="tag">{{fa-icon "tag"}} {{tag.word}}</span>
+                {{/each}}
+                {{add-tag addTag="addTag" class="add-btn" top-lbl="Add tags to categorize the request."}}
+                <span {{action "toggleTagHelp"}} class="help-button">?</span>
+              </div>
+            </div>
+          </div>
+          <div class="input-container center">
+            <button type="submit" {{action "addRequest"}} class="btn no-margin">Submit Request</button>
+          </div>
+        <!-- </div> -->
+      </section>
+    </div>
+  </div>
+</div>

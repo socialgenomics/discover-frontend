@@ -1,9 +1,7 @@
 import Ember from 'ember';
 import EmberValidations from 'ember-validations';
 
-export default Ember.Controller.extend(
-  EmberValidations,
-{
+export default Ember.Controller.extend(EmberValidations, {
   title: null,
   description: null,
   validations: {
@@ -14,7 +12,34 @@ export default Ember.Controller.extend(
       presence: { message: 'This field can\'t be blank.' }
     }
   },
+  isEditingTags: false,
+  isShowingMarkdownHelp: false,
+  isShowingTagHelp: false,
+
   actions: {
+
+    addTag(text) {
+      var tag = this.store.createRecord('tag', {
+        word: text
+      });
+      tag.dataset = this.model;
+      this.get('model.tags').pushObject(tag);
+      tag.save();
+      this.set('isEditingTags', true);
+    },
+
+    toggleEditTags() {
+      this.toggleProperty('isEditingTags');
+    },
+
+    toggleMarkdownHelp() {
+      this.toggleProperty('isShowingMarkdownHelp');
+    },
+
+    toggleTagHelp() {
+      this.toggleProperty('isShowingTagHelp');
+    },
+
     addRequest: function() {
       var dataset = this.store.createRecord('dataset', { isRequest: 1 });
       var props = this.store.createRecord('property', {
@@ -23,11 +48,10 @@ export default Ember.Controller.extend(
       });
       dataset.properties = props;
 
-      dataset
-      .save()
+      dataset.save()
       .then((created)=> {
         this.flashMessages.add({
-          message: 'Request posted successfully',
+          message: 'Thank you! Your request has been submitted.',
           type: 'success',
           timeout: 5000
         });
