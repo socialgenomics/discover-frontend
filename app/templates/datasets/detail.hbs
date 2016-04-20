@@ -63,7 +63,10 @@
   </div><!-- MAIN CONTENT DIV -->
 
   <div class="col l5 m6 s12 card-side-wrapper"><!-- SIDE CONTENT DIV -->
-    <ul class="tabs">
+    <div class="card-header center-align teal-text">
+      Discussion
+    </div>
+    <!-- <ul class="tabs">
       <li class="tab">
         {{#if (eq tab "comments")}}
         {{#link-to 'datasets.detail' model (query-params tab="comments") class="active"}}Discussion{{/link-to}}
@@ -85,13 +88,14 @@
         {{#link-to 'datasets.detail' model (query-params tab="related") }}Related{{/link-to}}
         {{/if}}
       </li>
-    </ul>
-    {{#if (eq tab "rating")}}
+    </ul> -->
+    <!-- {{#if (eq tab "rating")}}
     {{partial "datasets/tab-ratings"}}
     {{else if (eq tab "related")}}
     {{partial "datasets/tab-related"}}
     {{else}}
     {{partial "datasets/tab-comments"}}
-    {{/if}}
+    {{/if}} -->
+    {{partial "datasets/tab-comments"}}
   </div><!-- SIDE CONTENT DIV -->
 </div>

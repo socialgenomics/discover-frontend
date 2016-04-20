@@ -26,7 +26,7 @@ Router.map(function() {
     this.route('login');
     this.route('settings');
     this.route('profile');
-    this.route('references');
+    // this.route('references');
     this.route('trust');
     this.route('verify', {
       path: '/verify/:verificationId'

@@ -4,13 +4,6 @@
       <div class="card">
         <ul class="tabs">
           <li class="tab">
-            {{#if (eq active "settings")}}
-              {{#link-to 'users.settings' class="active"}}SETTINGS{{fa-icon "cog"}}{{/link-to}}
-            {{else}}
-              {{#link-to "users.settings"}}SETTINGS{{fa-icon "cog"}}{{/link-to}}
-            {{/if}}
-          </li>
-          <li class="tab">
             {{#if (eq active "profile")}}
               {{#link-to "users.profile"  class="active"}}EDIT PROFILE{{fa-icon "user"}}{{/link-to}}
             {{else}}
@@ -25,12 +18,19 @@
             {{/if}}
           </li>
           <li class="tab">
+            {{#if (eq active "settings")}}
+              {{#link-to 'users.settings' class="active"}}SETTINGS{{fa-icon "cog"}}{{/link-to}}
+            {{else}}
+              {{#link-to "users.settings"}}SETTINGS{{fa-icon "cog"}}{{/link-to}}
+            {{/if}}
+          </li>
+          <!-- <li class="tab">
             {{#if (eq active "references")}}
               {{#link-to "users.references" class="active"}}REFERENCES{{fa-icon "gift"}}{{/link-to}}
             {{else}}
               {{#link-to "users.references"}}REFERENCES{{fa-icon "gift"}}{{/link-to}}
             {{/if}}
-          </li>
+          </li> -->
         </ul>
       </div>
     </div>
