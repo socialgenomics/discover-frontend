@@ -65,7 +65,12 @@ export default Ember.Controller.extend(
 
     completeOnboardForm: function() {
       this.get('session').set('data.firstVisit', false);
-      this.transitionToRoute('welcome');
+      this.transitionToRoute('root');
+      this.flashMessages.add({
+        message: 'Please check your email to verify your account',
+        type: 'success',
+        timeout: 7000
+      });
     }
   }
 });
