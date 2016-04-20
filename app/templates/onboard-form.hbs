@@ -13,7 +13,7 @@
           <div class="row form-checklist">
             <div class="col m4">
               <h1 class="yellow-text center-align">1.</h1>
-              <p class="color-silver-chalice-text">In the past year, how often did you SEARCH for genomic datasets?</p>
+              <p>In the past year, how often did you SEARCH for genomic datasets?</p>
               <ul class="checkbox-list">
                 <li class="checkbox">
                   <input type="checkbox" id="week1">
@@ -40,7 +40,7 @@
 
             <div class="col m4">
               <h1 class="yellow-text center-align">2.</h1>
-              <p class="color-silver-chalice-text">In the past year, how often did you SEARCH for genomic datasets?</p>
+              <p>In the past year, how often did you ACCESS genomic datasets?</p>
               <div class="checkbox">
                 <input type="checkbox" id="week2">
                 <label for="week2">Several times a week</label>
@@ -65,18 +65,18 @@
 
             <div class="col m4">
               <h1 class="yellow-text center-align">3.</h1>
-              <p class="color-silver-chalice-text">In the past year, how often did you DEPOSIT/SHARE genomic datasets?</p>
+              <p>In the past year, how often did you DEPOSIT/SHARE genomic datasets?</p>
               <div class="checkbox">
                 <input type="checkbox" id="week3">
                 <label for="week3">Several times a week</label>
               </div>
               <div class="checkbox">
-                <input type="checkbox" id="month3">
+                {{input type="checkbox" id="month3"}}
                 <label for="month3">Several times a month</label>
               </div>
               <div class="checkbox">
                 <input type="checkbox" id="year3">
-                <label for="year3">Once a year</label>
+                <label for="year3" class="sub-dark">Once a year</label>
               </div>
               <div class="checkbox">
                 <input type="checkbox" id="rarely3">
@@ -90,10 +90,9 @@
           </div>
 
           <div class="row">
-            <div class="col m6 offset-m3">
+            <div class="col m6 offset-m3 margin-top">
               {{validated-input
                 type="Text"
-                lbl="Where did you hear about us?"
                 value=referrer
                 errors=errors.referrer
                 placeholder="Where did you hear about us? (e.g. conference, newsletter)"
