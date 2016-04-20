@@ -19,7 +19,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         this.flashMessages.add({
           message: 'We have sent a verification email to your inbox',
           type: 'success',
-          timeout: 5000,
+          timeout: 5000
         });
       })
       .catch(function(err) {

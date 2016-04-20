@@ -1,0 +1,128 @@
+<div class="content">
+  <div class="row">
+    <div class="col m12">
+      <div class="card">
+        <div class="card-content">
+          <header class="center-align">
+            <h2>Welcome on board!</h2>
+            <h3 class="thin">To start with tell us more about your previous experience.</h3>
+          </header>
+
+          <div class="divider"></div>
+
+          <div class="row form-checklist">
+            <div class="col m4">
+              <h1 class="yellow-text center-align">1.</h1>
+              <p>In the past year, how often did you SEARCH for genomic datasets?</p>
+              <ul class="checkbox-list">
+                <li class="checkbox">
+                  <input type="checkbox" id="week1">
+                  <label for="week1">Several times a week</label>
+                </li>
+                <li class="checkbox">
+                  <input type="checkbox" id="month1">
+                  <label for="month1">Several times a month</label>
+                </li>
+                <li class="checkbox">
+                  <input type="checkbox" id="year1">
+                  <label for="year1">Once a year</label>
+                </li>
+                <li class="checkbox">
+                  <input type="checkbox" id="rarely1">
+                  <label for="rarely1">Rarely</label>
+                </li>
+                <li class="checkbox">
+                  <input type="checkbox" id="never1">
+                  <label for="never1">Never</label>
+                </li>
+              </ul>
+            </div>
+
+            <div class="col m4">
+              <h1 class="yellow-text center-align">2.</h1>
+              <p>In the past year, how often did you ACCESS genomic datasets?</p>
+              <div class="checkbox">
+                <input type="checkbox" id="week2">
+                <label for="week2">Several times a week</label>
+              </div>
+              <div class="checkbox">
+                <input type="checkbox" id="month2">
+                <label for="month2">Several times a month</label>
+              </div>
+              <div class="checkbox">
+                <input type="checkbox" id="year2">
+                <label for="year2">Once a year</label>
+              </div>
+              <div class="checkbox">
+                <input type="checkbox" id="rarely2">
+                <label for="rarely2">Rarely</label>
+              </div>
+              <div class="checkbox">
+                <input type="checkbox" id="never2">
+                <label for="never2">Never</label>
+              </div>
+            </div>
+
+            <div class="col m4">
+              <h1 class="yellow-text center-align">3.</h1>
+              <p>In the past year, how often did you DEPOSIT/SHARE genomic datasets?</p>
+              <div class="checkbox">
+                <input type="checkbox" id="week3">
+                <label for="week3">Several times a week</label>
+              </div>
+              <div class="checkbox">
+                {{input type="checkbox" id="month3"}}
+                <label for="month3">Several times a month</label>
+              </div>
+              <div class="checkbox">
+                <input type="checkbox" id="year3">
+                <label for="year3" class="sub-dark">Once a year</label>
+              </div>
+              <div class="checkbox">
+                <input type="checkbox" id="rarely3">
+                <label for="rarely3">Rarely</label>
+              </div>
+              <div class="checkbox">
+                <input type="checkbox" id="never3">
+                <label for="never3">Never</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col m6 offset-m3 margin-top">
+              {{validated-input
+                type="Text"
+                value=referrer
+                errors=errors.referrer
+                placeholder="Where did you hear about us? (e.g. conference, newsletter)"
+                formSubmitted=formSubmitted
+              }}
+            </div>
+            <div class="col m3 offset-m3">
+              {{#link-to 'root'}}<button class="btn yellow full-width" {{action "completeOnboardForm"}}>Done</button>{{/link-to}}
+            </div>
+            <div class="col m3">
+              {{#link-to 'root'}}<button class="btn btn-light-yellow full-width" {{action "completeOnboardForm"}}>Skip</button>{{/link-to}}
+            </div>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="row bottom-banner">
+            <div class="col m3">
+              <img class="responsive-img" src="/assets/images/we-are-testing.png">
+            </div>
+            <div class="col m9">
+              <span class="color-silver-chalice-text">
+                That means as an early access beta user your feedback is vital in helping us build a
+                great product. To do this, we will ask you a few questions during our beta phase.
+              </span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

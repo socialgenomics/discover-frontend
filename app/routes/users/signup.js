@@ -6,8 +6,8 @@ export default Ember.Route.extend(ThirdParty, UnauthenticatedRouteMixin, {
   session: Ember.inject.service(),
 
   beforeModel: function(/*transition*/) {
-    if (!this.get('session').get('data.hasInvite')) {
-      this.transitionTo('landing-page');
-    }
+    // if (!this.get('session').get('data.hasInvite')) {
+    //   this.transitionTo('landing-page');
+    // }
   }
 });

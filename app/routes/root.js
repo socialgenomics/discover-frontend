@@ -34,6 +34,7 @@ export default Ember.Route.extend({
         throw err;
       });
     } else {
+      this.transitionTo('users.signup');
       return null;
     }
   },

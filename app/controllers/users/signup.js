@@ -144,11 +144,7 @@ export default Ember.Controller.extend(
           // We would like to show a welcome screen if this is the first visit.
           // .then(() => this.get('session').set('data.firstVisit', true))
           .then(() => {
-            this.flashMessages.add({
-              message: 'Please check your email to verify your account',
-              type: 'success',
-              timeout: 5000
-            });
+            this.get('session').set('data.firstVisit', true);
           })
           .catch(this.displayMessages.bind(this));
         })

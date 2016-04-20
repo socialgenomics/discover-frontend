@@ -10,7 +10,7 @@ export default Ember.Controller.extend(
   ServerValidationMixin,
 {
   session: Ember.inject.service(),
-  showWelcome: Ember.computed.alias('session.data.firstVisit'),
+  showOnboardForm: Ember.computed.alias('session.data.firstVisit'),
   sortUpdatedAt: ['updatedAt:desc'],
   requestsSorted: Ember.computed.sort('model.requests', 'sortUpdatedAt'),
   registrationsSorted: Ember.computed.sort('model.registered', 'sortUpdatedAt'),
@@ -36,10 +36,6 @@ export default Ember.Controller.extend(
   },
 
   actions : {
-    // user clicks button on welcome page to enter site
-    enterSite: function() {
-      this.get('session').set('data.firstVisit', false);
-    },
     submitForm: function() {
       //check code against api
       ajax({
@@ -64,6 +60,16 @@ export default Ember.Controller.extend(
           Ember.Logger.error(messages);
           this.addValidationErrors(messages);
         }
+      });
+    },
+
+    completeOnboardForm: function() {
+      this.get('session').set('data.firstVisit', false);
+      this.transitionToRoute('root');
+      this.flashMessages.add({
+        message: 'Please check your email to verify your account',
+        type: 'success',
+        timeout: 7000
       });
     }
   }
