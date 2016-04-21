@@ -5,55 +5,20 @@
         <div class="card-content center-align">
           <h1>Trust & Verification</h1>
           <hr class="yellow">
-          <p class="helper-text">Build your trust by verifying your email</p>
-        </div>
-        <div class="card-action center-align">
           {{#if session.authenticatedUser.isEmailValidated}}
-            <h4 class="color-fruit-salad-text">{{fa-icon "check-circle"}} Your account is already verified.</h4>
+            <h4 class="color-fruit-salad-text">{{fa-icon "check-circle"}} Your email is verified.</h4>
+            <div class="divider"></div>
+            <h4 class="margin-top">{{fa-icon "envelope"}} {{session.authenticatedUser.email}}</h4>
           {{else}}
-            <h4 class="color-red-error-text">{{fa-icon "envelope"}} {{session.authenticatedUser.email}}</h4>
-            <button class="btn" type="submit" {{action "resendVerifyEmail"}}>Verify</button>
+            <h4 class="color-red-error-text">Please verify your email.</h4>
+            <div class="divider"></div>
+
+            <div class="row valign-wrapper">
+              <h4 class="col m3 offset-m3">{{fa-icon "envelope"}} {{session.authenticatedUser.email}}</h4>
+              <button class="btn btn-light" type="submit" {{action "resendVerifyEmail"}}>Resend Verification Email</button>
+            </div>
           {{/if}}
         </div>
       </div>
     </div>
-    <!-- <div class="col m12">
-      <div class="card white darken-1">
-        <div class="card-content center-align">
-          <span class="card-title"><h1>3rd Party Verification</h1></span>
-          <hr class="yellow">
-          <p class="helper-text">Improve your trust level by verifying other channels</p>
-        </div>
-        <div class="card-action">
-          <div class="row">
-            <div class="col m6 offset-m3">
-              <h3>Google</h3>
-              <p class="helper-text left"> Connect your REPOSITIVE account to your Google account.</p>
-            </div>
-            <button class="btn waves-effect waves-light col m1" type="submit" name="action" style="margin-top:0.5em">Verify</button>
-          </div>
-          <div class="row">
-            <div class="col m6 offset-m3">
-              <h3>LinkedIn</h3>
-              <p class="helper-text left"> Connect your REPOSITIVE account to your LinkedIn account.</p>
-            </div>
-            <button class="btn waves-effect waves-light col m1" type="submit" name="action" style="margin-top:0.5em">Verify</button>
-          </div>
-          <div class="row">
-            <div class="col m6 offset-m3">
-              <h3>Facebook</h3>
-              <p class="helper-text left"> Connect your REPOSITIVE account to your LinkedIn account.</p>
-            </div>
-            <button class="btn waves-effect waves-light col m1" type="submit" name="action" style="margin-top:0.5em">Verify</button>
-          </div>
-          <div class="row">
-            <div class="col m6 offset-m3">
-            <h3>Orcid</h3>
-              <p class="helper-text left">Connect your REPOSITIVE account to your Orcid account.</p>
-            </div>
-            <button class="btn waves-effect waves-light col m1" type="submit" name="action" style="margin-top:0.5em">Verify</button>
-          </div>
-        </div>
-      </div>
-    </div> -->
   </div>

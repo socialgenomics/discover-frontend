@@ -3,6 +3,7 @@ import EmberValidations from 'ember-validations';
 import ServerValidationMixin from 'repositive/validators/remote/server/mixin';
 import ENV from 'repositive/config/environment';
 import ajax from 'ic-ajax';
+const { get } = Ember;
 
 export default Ember.Controller.extend(
   EmberValidations,
@@ -10,8 +11,9 @@ export default Ember.Controller.extend(
 {
   session: Ember.inject.service(),
   showWelcome: Ember.computed.alias('session.data.firstVisit'),
-  requestsSorted: Ember.computed.sort('model.requests', 'updatedAt'),
-  registrationsSorted:  Ember.computed.sort('model.registered', 'updatedAt'),
+  sortUpdatedAt: ['updatedAt:desc'],
+  requestsSorted: Ember.computed.sort('model.requests', 'sortUpdatedAt'),
+  registrationsSorted: Ember.computed.sort('model.registered', 'sortUpdatedAt'),
 
   buttonDisabled: function() {
     return Ember.isEmpty(this.get('code'));
@@ -57,9 +59,11 @@ export default Ember.Controller.extend(
         }
       })
       .catch((resp)=> {
-        let messages = resp.jqXHR.responseJSON.messages;
-        Ember.Logger.error(messages);
-        this.addValidationErrors(messages);
+        let messages = get(resp, 'jqXHR.responseJSON.messages');
+        if (messages) {
+          Ember.Logger.error(messages);
+          this.addValidationErrors(messages);
+        }
       });
     }
   }

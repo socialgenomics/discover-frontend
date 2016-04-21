@@ -9,7 +9,7 @@ export default BaseAdapter.extend({
   toStringExtension() {
     return 'intercom';
   },
-
+  /* jshint ignore:start */
   init() {
     (function() {
       var w = window;
@@ -44,6 +44,7 @@ export default BaseAdapter.extend({
       }
     })();
   },
+  /* jshint ignore:end */
 
   identify(options = {}) {
     const config = copy(get(this, 'config'));
@@ -59,7 +60,11 @@ export default BaseAdapter.extend({
       email: email
     });
 
-    window.Intercom('update');
+    window.Intercom('update', {
+      user_id: username,
+      name: fullname,
+      email: email
+    });
   },
 
   trackEvent() {
@@ -69,5 +74,9 @@ export default BaseAdapter.extend({
   },
 
   alias() {
+  },
+
+  willDestroy() {
+    delete window.Intercom;
   }
 });

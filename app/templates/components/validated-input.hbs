@@ -22,9 +22,9 @@
 </div>
 <div class="lbl">{{lbl}}</div>
 
-{{#if (eq icon "fullname")}} <i class="fa fa-user"></i> {{/if}}
-{{#if (eq icon "password")}} <i class="fa fa-lock"></i> {{/if}}
-{{#if (eq icon "email")}} <i class="fa fa-envelope"></i> {{/if}}
+{{#if (eq icon "fullname")}}{{fa-icon "user"}}{{/if}}
+{{#if (eq icon "password")}}{{fa-icon "lock"}}{{/if}}
+{{#if (eq icon "email")}}{{fa-icon "envelope"}}{{/if}}
 
 {{#if showInvalid}}
   <div class="errors">

@@ -4,6 +4,7 @@ import ServerValidationMixin from 'repositive/validators/remote/server/mixin';
 import ENV from 'repositive/config/environment';
 import ajax from 'ic-ajax';
 import { validator } from 'ember-validations';
+const{ get } = Ember;
 
 export default Ember.Controller.extend(
    EmberValidations,
@@ -70,9 +71,9 @@ export default Ember.Controller.extend(
   }.property('showPassword'),
 
   setFirstAndLastNamesFromFullName: function() {
-    let fullname = this.get('fullname');
-    let firstname = fullname.substr(0, fullname.indexOf(' '));
-    let lastname = fullname.substr(fullname.indexOf(' ') + 1);
+    let fullname = this.get('fullname').split(' ');
+    let firstname = fullname.shift();
+    let lastname = fullname.shift() || '';
     this.set('firstname', firstname);
     this.set('lastname', lastname);
   }.observes('fullname'),
@@ -103,17 +104,19 @@ export default Ember.Controller.extend(
   }.observes('password'),
 
   displayMessages : function(resp) {
-    let messages = resp.messages;
-    this.addValidationErrors(messages);
-    messages = messages.reject(item => {
-      return item.type === 'validation';
-    });
-    // if (messages) {
-    //   messages.forEach(message => {
-    //     this.flashMessages.success(message);
-    //   });
-    // }
-    this.set('loading', false);
+    let messages = get(resp, 'messages');
+    if (messages) {
+      this.addValidationErrors(messages);
+      messages = messages.reject(item => {
+        return item.type === 'validation';
+      });
+      // if (messages) {
+      //   messages.forEach(message => {
+      //     this.flashMessages.success(message);
+      //   });
+      // }
+      this.set('loading', false);
+    }
   },
 
   actions: {
@@ -139,7 +142,14 @@ export default Ember.Controller.extend(
           this.get('session')
           .authenticate('authenticator:repositive', credentials)
           // We would like to show a welcome screen if this is the first visit.
-          .then(() => this.get('session').set('data.firstVisit', true))
+          // .then(() => this.get('session').set('data.firstVisit', true))
+          .then(() => {
+            this.flashMessages.add({
+              message: 'Please check your email to verify your account',
+              type: 'success',
+              timeout: 7000
+            });
+          })
           .catch(this.displayMessages.bind(this));
         })
         .catch(err => { // error with signup

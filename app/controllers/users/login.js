@@ -3,6 +3,7 @@ import EmberValidations from 'ember-validations';
 import ServerValidationMixin from 'repositive/validators/remote/server/mixin';
 import ajax from 'ic-ajax';
 import ENV from 'repositive/config/environment';
+const { get } = Ember;
 
 export default Ember.Controller.extend(
   EmberValidations,
@@ -39,12 +40,15 @@ export default Ember.Controller.extend(
     }
   },
   displayMessages: function(resp) {
-    let messages = resp.messages;
-    this.addValidationErrors(messages);
-    this.set('messages', []);
-    this.get('messages').addObjects(messages);
+    let messages = get(resp, 'messages');
+    if (messages) {
+      this.addValidationErrors(messages);
+      this.set('messages', []);
+      this.get('messages').addObjects(messages);
+    }
     this.set('loading', false);
   },
+
   actions: {
     submitForm: function() {
       // fix for password manager bug

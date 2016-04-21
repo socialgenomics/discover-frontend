@@ -2,9 +2,14 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
   session: Ember.inject.service(),
+
   isOwnProfile: function() {
-    return parseInt(this.get('session.authenticatedUser.id')) === this.get('model.user.id');
-  }.property('model'),
+    const sessionUser = this.get('session.authenticatedUser.id');
+    const profileUser = this.get('model.user.id');
+    if (sessionUser === profileUser) {
+      return true;
+    }
+  }.property('id'),
 
   actions: {
 

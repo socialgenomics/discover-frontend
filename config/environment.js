@@ -54,7 +54,8 @@ module.exports = function(environment) {
           'invites': '/api/invites',
           'users.profiles': '/api/users/profiles',
           'reset-password': '/api/users/password-reset',
-          'verify-email': '/api/users/verify'
+          'verify-email': '/api/users/verify',
+          'verify-email-resend': '/api/users/verify/resend'
         };
         _.each(mapping,
           function(path, key, obj) {
@@ -77,10 +78,15 @@ module.exports = function(environment) {
       'simple-auth-cookie-store' : {
         cookieName: 'repositive.io'
       },
+      moment: {
+        includeTimezone: 'all',
+        outputFormat: 'L',
+        includeLocales: ['en-gb']
+      },
       torii: {
         providers: {
           'google-oauth2': {
-            apiKey:      '677526813069-6tmd1flqovp5miud67phqlks49bqdo8i.apps.googleusercontent.com',
+            apiKey:      '625615936247-udf8t0o94vmk5tp48pbsdsog84g4vu93.apps.googleusercontent.com',
             redirectUri: 'http://localhost:4200'
           },
           'linked-in-oauth2': {
@@ -93,8 +99,8 @@ module.exports = function(environment) {
         'default-src': "'none'",
         'font-src': "'self' data: fonts.gstatic.com",
         'style-src': "'self' 'unsafe-inline' fonts.googleapis.com",
-        'script-src': "'self' 'unsafe-inline' http://api.calq.io http://www.google-analytics.com/analytics.js https://d37gvrvc0wt4s1.cloudfront.net/js/v1.8/rollbar.min.js https://s3-eu-west-1.amazonaws.com/share.typeform.com/widget.js http://api.calq.io https://s3-eu-west-1.amazonaws.com/share.typeform.com/widget.js https://widget.intercom.io https://js.intercomcdn.com",
-        'connect-src': "'self' 'unsafe-inline' http://api.calq.io https://api-ping.intercom.io https://nexus-websocket-a.intercom.io https://nexus-websocket-b.intercom.io wss://nexus-websocket-a.intercom.io wss://nexus-websocket-b.intercom.io https://api-iam.intercom.io", // Allow data (ajax/websocket) from api.calq.io
+        'script-src': "'self' 'unsafe-inline' http://docker-vm:49152 http://api.calq.io http://www.google-analytics.com/analytics.js https://d37gvrvc0wt4s1.cloudfront.net/js/v1.8/rollbar.min.js https://s3-eu-west-1.amazonaws.com/share.typeform.com/widget.js http://api.calq.io https://s3-eu-west-1.amazonaws.com/share.typeform.com/widget.js https://widget.intercom.io https://js.intercomcdn.com",
+        'connect-src': "'self' 'unsafe-inline' ws://docker-vm:49152 http://api.calq.io https://api-ping.intercom.io https://nexus-websocket-a.intercom.io https://nexus-websocket-b.intercom.io wss://nexus-websocket-a.intercom.io wss://nexus-websocket-b.intercom.io https://api-iam.intercom.io", // Allow data (ajax/websocket) from api.calq.io
         'img-src': "'self' data: http://www.google-analytics.com https://www.gravatar.com http://i2.wp.com/dg2kcfbxc77v1.cloudfront.net http://i0.wp.com/dg2kcfbxc77v1.cloudfront.net/assets https://js.intercomcdn.com https://static.intercomassets.com/",
         'media-src': "'self'",
         'frame-src':"'self' 'unsafe-inline' https://repositive.typeform.com/to/pktwPz",
@@ -157,9 +163,22 @@ module.exports = function(environment) {
       ENV.APP.rootElement = '#ember-testing';
     }
 
+    if (environment === 'development') {
+      ENV.APP.INSPECTLET_WID = 1989736952;
+      ENV.torii.providers['google-oauth2'].redirectUri = 'https://frontend-dev-sol-lon02.repositive.io';
+      ENV.torii.providers['linked-in-oauth2'].redirectUri = 'https://frontend-dev-sol-lon02.repositive.io';
+    }
+
+    if (environment === 'staging') {
+      ENV.APP.INSPECTLET_WID = 1989736952;
+      ENV.torii.providers['google-oauth2'].redirectUri = 'https://frontend-staging-sol-lon02.repositive.io';
+      ENV.torii.providers['linked-in-oauth2'].redirectUri = 'https://frontend-staging-sol-lon02.repositive.io';
+    }
+
     if (environment === 'production') {
-      ENV.torii.providers['google-oauth2'].redirectUri = 'http://discover.repositive.io';
-      ENV.torii.providers['linked-in-oauth2'].redirectUri = 'http://discover.repositive.io';
+      ENV.torii.providers['google-oauth2'].redirectUri = 'https://discover.repositive.io';
+      ENV.torii.providers['linked-in-oauth2'].redirectUri = 'https://discover.repositive.io';
+      ENV.APP.INSPECTLET_WID = 1989736952;
     }
 
     return ENV;

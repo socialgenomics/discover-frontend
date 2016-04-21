@@ -8,8 +8,8 @@ export default Ember.Component.extend({
       if (this.tag) {
         this.get('metrics').trackEvent({
           category: 'dataset',
-          action: 'tag',
-          label: this.get('dataset.id')
+          action: 'added tag',
+          label: this.tag
         });
         this.sendAction('addTag', this.tag);
       }
