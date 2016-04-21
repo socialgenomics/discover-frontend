@@ -146,8 +146,9 @@ export default Ember.Controller.extend(
           .then(() => {
             this.flashMessages.add({
               message: 'Please check your email to verify your account',
-              type: 'success',
-              timeout: 7000
+              type: 'info',
+              timeout: 7000,
+              sticky: true
             });
           })
           .catch(this.displayMessages.bind(this));
