@@ -8,7 +8,7 @@
         <div class="card">
           <div class="card-content">
             <h1>{{model.user.displayName}}</h1>
-            {{#if session.authenticatedUser.isOwnProfile}}{{#link-to "users.profile" class="edit-btn fa-2x sub-dark"}}{{fa-icon "pencil-square-o"}}{{/link-to}}{{/if}}
+            {{#if isOwnProfile}}{{#link-to "users.profile" class="edit-btn fa-2x sub-dark"}}{{fa-icon "pencil-square-o"}}{{/link-to}}{{/if}}
             <div class="profile-img">
               <img src={{model.profile.avatar}}>
             </div>
