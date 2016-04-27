@@ -1,7 +1,7 @@
 <div class="container-login">
-  <form {{action "submitForm" on="submit"}} id="login-form">
-  <h1 class="center-align">Login</h1>
-    <div class="row">
+  <h1 class="center-align margin-bottom">Login</h1>
+  <form {{action "submitForm" on="submit"}} id="login-form" class="margin-top">
+    <!-- <div class="row">
       <div class="col m12 s12 center-align">
         <ul class="list-inline">
           <li><a {{ action 'authenticateWithGooglePlus' }}><img class="social-media-icon btn-floating" src="/assets/images/icons/social/googleplus.png"></a></li>
@@ -13,7 +13,7 @@
       <span>
         OR
       </span>
-    </div>
+    </div> -->
     {{#each messages as |message|}}
       <div class="message {{message.type}}">{{message.text}}</div>
     {{/each}}
