@@ -110,11 +110,6 @@ export default Ember.Controller.extend(
       messages = messages.reject(item => {
         return item.type === 'validation';
       });
-      // if (messages) {
-      //   messages.forEach(message => {
-      //     this.flashMessages.success(message);
-      //   });
-      // }
       this.set('loading', false);
     }
   },
@@ -139,9 +134,7 @@ export default Ember.Controller.extend(
             this.displayMessages(resp);
           }
           // login!
-          this.get('session')
-          .authenticate('authenticator:repositive', credentials)
-          // We would like to show a welcome screen if this is the first visit.
+          this.get('session').authenticate('authenticator:repositive', credentials)
           // .then(() => this.get('session').set('data.firstVisit', true))
           .then(() => {
             this.flashMessages.add({
@@ -165,6 +158,7 @@ export default Ember.Controller.extend(
         });
       }
     },
+
     toggleCheckbox: function() {
       this.set('showPassword', !this.get('showPassword'));
     }

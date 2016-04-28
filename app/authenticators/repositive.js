@@ -3,7 +3,6 @@ import Base from 'ember-simple-auth/authenticators/base';
 import ajax from 'ic-ajax';
 import ENV from 'repositive/config/environment';
 
-
 export default Base.extend({
   metrics: Ember.inject.service(),
   session: Ember.inject.service(),
