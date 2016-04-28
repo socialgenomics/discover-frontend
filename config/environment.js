@@ -152,6 +152,9 @@ module.exports = function(environment) {
     }
 
     if (environment === 'test') {
+      ENV['ember-cli-mirage'] = {
+        enabled: true
+      };
       // Testem prefers this...
       ENV.baseURL = '/';
       ENV.locationType = 'none';
