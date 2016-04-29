@@ -110,11 +110,6 @@ export default Ember.Controller.extend(
       messages = messages.reject(item => {
         return item.type === 'validation';
       });
-      // if (messages) {
-      //   messages.forEach(message => {
-      //     this.flashMessages.success(message);
-      //   });
-      // }
       this.set('loading', false);
     }
   },
@@ -139,18 +134,8 @@ export default Ember.Controller.extend(
             this.displayMessages(resp);
           }
           // login!
-          this.get('session')
-          .authenticate('authenticator:repositive', credentials)
-          // We would like to show a welcome screen if this is the first visit.
-          // .then(() => this.get('session').set('data.firstVisit', true))
-          .then(() => {
-            this.flashMessages.add({
-              message: 'Please check your email to verify your account',
-              type: 'info',
-              timeout: 7000,
-              sticky: true
-            });
-          })
+          this.get('session').authenticate('authenticator:repositive', credentials)
+          .then(() => this.get('session').set('data.firstVisit', true))
           .catch(this.displayMessages.bind(this));
         })
         .catch(err => { // error with signup
@@ -165,6 +150,7 @@ export default Ember.Controller.extend(
         });
       }
     },
+
     toggleCheckbox: function() {
       this.set('showPassword', !this.get('showPassword'));
     }

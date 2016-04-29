@@ -2,13 +2,16 @@
 
 <div class="input-field">
   {{#if textarea}}
-    {{textarea
-      value=value
-      focus-in="focusedIn"
-      focus-out="focusedOut"
-      type=type
-      placeholder=placeholder
-    }}
+    <div class="markdown-textarea">
+      {{textarea
+        value=value
+        focus-in="focusedIn"
+        focus-out="focusedOut"
+        type=type
+        placeholder=placeholder
+      }}
+    </div>
+    <a class="help-link" {{action "toggleMarkdownModal"}}><span>How to format text with Markdown?</span></a>
   {{else}}
     {{input
       value=value
@@ -36,4 +39,8 @@
   </div>
 {{else}}
   <div class="input-helper">{{helpText}}</div>
+{{/if}}
+
+{{#if isShowingMarkdownModal}}
+  {{markdown-modal action="toggleMarkdownModal"}}
 {{/if}}

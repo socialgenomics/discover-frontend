@@ -4,38 +4,29 @@
     <div class="col m12">
       <div class="card">
         <div class="card-content">
-            <div class="row no-margin">
-              <div class="col m12">
-                <div class="landing-title center-align">
-                  <h1><strong>DATA DISCOVERY PLATFORM</strong></h1>
-                  <h3 class="color-silver-chalice-text thin"><em>Designed for researchers who use, share and collaborate on human genomic data.</em></h3>
-                </div>
+          <div class="row no-margin">
+            <header class="col m12">
+              <div class="landing-title center-align">
+                <h1><strong>DATA DISCOVERY PLATFORM</strong></h1>
+                <h3 class="color-silver-chalice-text ultra-thin"><em>Designed for researchers who use, share and collaborate on human genomic data.</em></h3>
               </div>
-              <div class="col m6 center-align">
+            </header>
+            <main>
+              <section class="col m6 center-align">
                 <img src="/assets/images/landing-page.png" class="lizard-image-landing" alt="landing page lizard">
-              </div>
-              <div class="col m5 offset-m1">
+              </section>
+              <section class="col m6">
                 <div class="landing-form">
-                  <span class="helper-text center-align">The platform is in beta testing. We will invite you for beta testing as soon as we are ready to accommodate you.</span>
-                  {{#unless codeEntered}}
-                    {{#link-to 'beta-signup-form'}}{{#full-width-button class="btn teal"}}SIGN UP FOR BETA{{/full-width-button}}{{/link-to}}
-                  {{else}}
-                    {{#full-width-button class="btn {{#if codeEntered 'disabled'}}" disabled=codeEntered}}SIGN UP FOR BETA{{/full-width-button}}
-                  {{/unless}}
-                  {{#if codeEntered}}<span class="helper-text center-align hidden-span">Enable the button by removing the text from the input field.</span>{{/if}}
+                  <h3 class="center-align padding-top">Discover a better way of searching for genomic data</h3>
+                  {{#link-to 'users.signup'}}<button class="btn teal center-block margin-top">SIGNUP</button>{{/link-to}}
                   <div class="or-div">
-                    <span>DO YOU HAVE THE ACTIVATION CODE?</span>
+                    <span>ALREADY HAVE AN ACCOUNT?</span>
                   </div>
-                  <form {{action "submitForm" on="submit"}} class="side-form">
-                    {{validated-input
-                      placeholder="Your activation code"
-                      value=code
-                      errors=errors.code
-                    }}
-                    {{#full-width-button class="btn teal {{#if buttonDisabled 'disabled'}}" disabled=buttonDisabled type="submit"}}Continue{{/full-width-button}}
-                  </form>
+                  {{#link-to 'users.login'}}<button class="btn btn-light center-block margin-bottom no-margin-top">LOGIN</button>{{/link-to}}
+                  <span class="helper-text padding-top"><strong class="sub-dark">We are currently in beta testing.</strong> That means as an early access beta user, your feedback is vital in helping us build a great product. To do this, we will ask you a few questions during our beta phase.</span>
                 </div>
-              </div>
+              </section>
+            </main>
           </div>
         </div>
       </div>

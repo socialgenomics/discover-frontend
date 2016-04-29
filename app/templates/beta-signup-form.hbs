@@ -2,7 +2,21 @@
   <div class="row center-align">
     <div class="col m12">
       <div class="card">
-        {{typeform-markup}}
+        <header class="col m12 header-border">
+          <div class="landing-title center-align">
+            <img src="/assets/images/liz-happy.png" class="welcome-img responsive-img">
+            <h1><strong>Welcome on board!</strong></h1>
+            <h3 class="color-silver-chalice-text ultra-thin">We have 4 questions to ask before you start using the platform.</h3>
+          </div>
+        </header>
+        <main>
+          {{typeform-markup}}
+        </main>
+        <div class="row margin-top">
+          <div class="col m12">
+            <button class="btn btn-light-grey btn-wider" {{action "enterSite"}}>SKIP</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>

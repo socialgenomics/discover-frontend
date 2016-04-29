@@ -35,7 +35,7 @@ export default BaseAdapter.extend({
 
   identify(options = {}) {
     const compactedOptions = compact(options);
-    const { email, inviteCode, firstname, lastname, username } = compactedOptions;
+    const { email, firstname, lastname, username } = compactedOptions;
     const fullname = firstname + ' ' + lastname;
     const config = copy(get(this, 'config'));
     const { signature } = config;
@@ -44,10 +44,7 @@ export default BaseAdapter.extend({
     window._gs('identify', {
       id: username,
       name: fullname,
-      email: email,
-      custom: {
-        inviteCode: inviteCode
-      }
+      email: email
     });
 
     window._gs('auth', personSig); // secure mode, signature
