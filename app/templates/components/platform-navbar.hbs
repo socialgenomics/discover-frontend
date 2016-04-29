@@ -10,37 +10,39 @@
 
     {{#if isAuthenticated}}
 
-      <div class="navbar-container">
-        <div class="navbar-search">
-          <form {{action 'search' on='submit'}}>
-              {{fa-icon "search"}}
-              {{input
-                type="text"
-                class="unfocus-grey-text"
-                placeholder="search cancer, prostate..."
-                value=query
-              }}
-          </form>
-        </div>
-        <div class="navbar-buttons">
-          <div class="navbar-button">
-            {{#active-link}}
-            {{#link-to "datasets.request" class="valign-wrapper"}}
-              {{fa-icon "clipboard"}}<h6 class="uppercase">Request Data</h6>
-            {{/link-to}}
-            {{/active-link}}
+      {{#unless session.data.firstVisit}}
+        <div class="navbar-container">
+          <div class="navbar-search">
+            <form {{action 'search' on='submit'}}>
+                {{fa-icon "search"}}
+                {{input
+                  type="text"
+                  class="unfocus-grey-text"
+                  placeholder="search cancer, prostate..."
+                  value=query
+                }}
+            </form>
           </div>
-          <div class="navbar-button">
-            {{#active-link}}
-            {{#link-to "datasets.register" class="valign-wrapper"}}
-              {{fa-icon "book"}}<h6 class="uppercase">Register Data</h6>
-            {{/link-to}}
-            {{/active-link}}
+          <div class="navbar-buttons">
+            <div class="navbar-button">
+              {{#active-link}}
+              {{#link-to "datasets.request" class="valign-wrapper"}}
+                {{fa-icon "clipboard"}}<h6 class="uppercase">Request Data</h6>
+              {{/link-to}}
+              {{/active-link}}
+            </div>
+            <div class="navbar-button">
+              {{#active-link}}
+              {{#link-to "datasets.register" class="valign-wrapper"}}
+                {{fa-icon "book"}}<h6 class="uppercase">Register Data</h6>
+              {{/link-to}}
+              {{/active-link}}
+            </div>
           </div>
         </div>
-      </div>
 
-      {{navbar-dropdown avatar=avatar firstname=firstname username=username}}
+        {{navbar-dropdown avatar=avatar firstname=firstname username=username}}
+      {{/unless}}
 
     {{else}}
 
