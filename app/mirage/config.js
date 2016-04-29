@@ -1,9 +1,9 @@
 export default function() {
-  this.get('/api/users', function(db, request) {
-    return {
-      users: db.users
-    };
-  });
+  // this.get('/api/users', function(db, request) {
+  //   return {
+  //     users: db.users
+  //   };
+  // });
 
   // These comments are here to help you get started. Feel free to delete them.
 
