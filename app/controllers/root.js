@@ -51,8 +51,6 @@ export default Ember.Controller.extend(
       })
       .then((resp)=> {
         if (resp.permitted) {
-          this.get('session').set('data.hasInvite', true);
-          this.get('session').set('data.inviteCode', this.get('code'));
           this.transitionToRoute('users.signup');
         } else {
           this.addValidationErrors(resp.errors);
