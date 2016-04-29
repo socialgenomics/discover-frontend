@@ -10,58 +10,23 @@ export default Ember.Controller.extend(
   ServerValidationMixin,
 {
   session: Ember.inject.service(),
+  loading: false,
   showForm: Ember.computed.alias('session.data.firstVisit'),
+  displayWelcomeMessage: Ember.computed.alias('session.data.displayWelcomeMessage'),
   sortUpdatedAt: ['updatedAt:desc'],
   requestsSorted: Ember.computed.sort('model.requests', 'sortUpdatedAt'),
   registrationsSorted: Ember.computed.sort('model.registered', 'sortUpdatedAt'),
 
-  buttonDisabled: function() {
-    return Ember.isEmpty(this.get('code'));
-  }.property('code'),
-
-  codeEntered: function() {
-    return !Ember.isEmpty(this.get('code'));
-  }.property('code'),
-
-  queryParams: ['code'],
-  code: null,
-
-  validations: {
-    code: {
-      presence: {
-        message: 'This field can\'t be blank.'
-      },
-      server: true // must be last - unknown bug
-    }
-  },
-
   actions : {
-    // user clicks button on welcome page to enter site
+    // user clicks button on welcome page to enter site, displays welcome flash message
     enterSite: function() {
       this.get('session').set('data.firstVisit', false);
-    },
-    submitForm: function() {
-      //check code against api
-      ajax({
-        url: ENV.APIRoutes['invites'],
-        type: 'POST',
-        data: {
-          'invite': this.get('code')
-        }
-      })
-      .then((resp)=> {
-        if (resp.permitted) {
-          this.transitionToRoute('users.signup');
-        } else {
-          this.addValidationErrors(resp.errors);
-        }
-      })
-      .catch((resp)=> {
-        let messages = get(resp, 'jqXHR.responseJSON.messages');
-        if (messages) {
-          Ember.Logger.error(messages);
-          this.addValidationErrors(messages);
-        }
+      this.get('session').set('data.displayWelcomeMessage', true); // HACK - needed for transitioning from typeform
+      this.flashMessages.add({
+        message: 'Please check your email to verify your account',
+        type: 'info',
+        timeout: 7000,
+        sticky: true
       });
     }
   }
