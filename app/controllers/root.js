@@ -10,7 +10,7 @@ export default Ember.Controller.extend(
   ServerValidationMixin,
 {
   session: Ember.inject.service(),
-  showWelcome: Ember.computed.alias('session.data.firstVisit'),
+  showForm: Ember.computed.alias('session.data.firstVisit'),
   sortUpdatedAt: ['updatedAt:desc'],
   requestsSorted: Ember.computed.sort('model.requests', 'sortUpdatedAt'),
   registrationsSorted: Ember.computed.sort('model.registered', 'sortUpdatedAt'),
