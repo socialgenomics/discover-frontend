@@ -135,15 +135,7 @@ export default Ember.Controller.extend(
           }
           // login!
           this.get('session').authenticate('authenticator:repositive', credentials)
-          // .then(() => this.get('session').set('data.firstVisit', true))
-          .then(() => {
-            this.flashMessages.add({
-              message: 'Please check your email to verify your account',
-              type: 'info',
-              timeout: 7000,
-              sticky: true
-            });
-          })
+          .then(() => this.get('session').set('data.firstVisit', true))
           .catch(this.displayMessages.bind(this));
         })
         .catch(err => { // error with signup

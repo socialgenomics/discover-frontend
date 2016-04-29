@@ -59,7 +59,6 @@ export default Base.extend({
         });
         this.get('metrics').identify({
           email: resp.user.email,
-          inviteCode: this.get('session.data.inviteCode'),
           firstname: resp.user.firstname,
           lastname: resp.user.lastname,
           username: resp.user.username

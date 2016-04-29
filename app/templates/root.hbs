@@ -1,5 +1,5 @@
-{{#if showWelcome}}
-  {{partial 'welcome'}}
+{{#if showForm}}
+  {{partial 'beta-signup-form'}}
 {{else if session.isAuthenticated }}
   {{partial 'home-page'}}
 {{else}}

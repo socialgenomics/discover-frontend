@@ -5,6 +5,17 @@ import ENV from 'repositive/config/environment';
 export default Ember.Route.extend({
   session: Ember.inject.service(),
 
+  beforeModel: function() {
+    if (this.get('session.data.displayWelcomeMessage', true)) {
+      this.flashMessages.add({
+        message: 'Please check your email to verify your account',
+        type: 'info',
+        timeout: 7000,
+        sticky: true
+      });
+    }
+  },
+
   model: function() {
     if (this.get('session.isAuthenticated')) {
       return Ember.RSVP.all([
@@ -15,9 +26,6 @@ export default Ember.Route.extend({
       ])
       .then(data => {
         // this.get('store').pushPayload(data[1].datasets);
-        // let trending = data[1].datasets.map(ds => {
-        //   return this.store.peekRecord('dataset', ds.id);
-        // });
         // HACK - pushPayload isnt working so get the dataset again!!
         let trending = data[1].datasets.map(ds => {
           return this.store.findRecord('dataset', ds.id);
