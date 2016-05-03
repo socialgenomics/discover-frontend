@@ -26,7 +26,8 @@ export default Ember.Controller.extend(
         message: 'Please check your email to verify your account',
         type: 'info',
         timeout: 7000,
-        sticky: true
+        sticky: true,
+        class: 'fadeIn'
       });
     }
   }
