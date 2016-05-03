@@ -41,7 +41,8 @@ export default Ember.Controller.extend(
           this.flashMessages.add({
             message: 'Dataset successfully registered',
             type: 'success',
-            timeout: 7000
+            timeout: 7000,
+            class: 'fadeInOut'
           });
           this.transitionToRoute('datasets.detail', created.id);
           this.get('metrics').trackEvent({
