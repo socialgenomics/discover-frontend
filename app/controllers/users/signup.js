@@ -136,6 +136,7 @@ export default Ember.Controller.extend(
           // login!
           this.get('session').authenticate('authenticator:repositive', credentials)
           .then(() => this.get('session').set('data.firstVisit', true))
+          .then(() => this.get('session').set('data.displayWelcomeMessage', false))
           .catch(this.displayMessages.bind(this));
         })
         .catch(err => { // error with signup

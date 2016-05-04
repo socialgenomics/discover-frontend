@@ -1,6 +1,4 @@
-{{#if showForm}}
-  {{partial 'beta-signup-form'}}
-{{else if session.isAuthenticated }}
+{{#if session.isAuthenticated }}
   {{partial 'home-page'}}
 {{else}}
   {{partial 'landing-page'}}
