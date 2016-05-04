@@ -6,12 +6,18 @@ export default Ember.Route.extend({
   session: Ember.inject.service(),
 
   beforeModel: function() {
+    if (this.get('session.data.firstVisit', true) && this.get('session.isAuthenticated')) {
+      this.transitionTo('beta-signup-form')
+      .then(() => this.get('session').set('data.displayWelcomeMessage', true))
+    }
+
     if (this.get('session.data.displayWelcomeMessage', true)) {
       this.flashMessages.add({
         message: 'Please check your email to verify your account',
         type: 'info',
         timeout: 7000,
-        sticky: true
+        sticky: true,
+        class: 'fadeIn'
       });
     }
   },

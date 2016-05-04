@@ -11,7 +11,7 @@ export default Ember.Controller.extend(
 {
   session: Ember.inject.service(),
   loading: false,
-  showForm: Ember.computed.alias('session.data.firstVisit'),
+  firstVisit: Ember.computed.alias('session.data.firstVisit'),
   displayWelcomeMessage: Ember.computed.alias('session.data.displayWelcomeMessage'),
   sortUpdatedAt: ['updatedAt:desc'],
   requestsSorted: Ember.computed.sort('model.requests', 'sortUpdatedAt'),
@@ -20,8 +20,7 @@ export default Ember.Controller.extend(
   actions : {
     // user clicks button on welcome page to enter site, displays welcome flash message
     enterSite: function() {
-      this.get('session').set('data.firstVisit', false);
-      this.get('session').set('data.displayWelcomeMessage', true); // HACK - needed for transitioning from typeform
+      // this.get('session').set('data.firstVisit', false);
       this.flashMessages.add({
         message: 'Please check your email to verify your account',
         type: 'info',
