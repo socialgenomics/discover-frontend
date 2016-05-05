@@ -22,12 +22,13 @@ export default Ember.Component.extend({
 
   actions: {
     logout: function() {
+      this.flashMessages.clearMessages();
       this.get('metrics').trackEvent({
         category: 'auth',
         action: 'logout',
         label: this.get('session.data.authenticatedUser.email')
       });
-      this.get('session').invalidate();
+      this.get('session').invalidate()
     }
   }
 

@@ -11,7 +11,7 @@ export default Ember.Route.extend({
       .then(() => this.get('session').set('data.displayWelcomeMessage', true))
     }
 
-    if (this.get('session.data.displayWelcomeMessage', true)) {
+    if (this.get('session.data.displayWelcomeMessage', true) && this.get('session.isAuthenticated')) {
       this.flashMessages.add({
         message: 'Please check your email to verify your account',
         type: 'info',
