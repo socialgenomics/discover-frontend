@@ -18,15 +18,15 @@
     <div class="card-body">
       {{#if dataset.highlights.title}}
         {{#link-to 'datasets.detail' dataset.id classNames="data-title"}}
-        <h4 class="data-title">
-            {{{dataset.highlights.title}}}
-        </h4>
+        <div data-balloon={{dataset.properties.title}} data-balloon-pos="up" data-balloon-length="large">
+          <h4 class="data-title">{{{dataset.highlights.title}}}</h4>
+        </div>
         {{/link-to}}
       {{else}}
         {{#link-to 'datasets.detail' dataset.id classNames="data-title"}}
-        <h4 class="data-title">
-          {{dataset.properties.title}}
-        </h4>
+        <div data-balloon={{dataset.properties.title}} data-balloon-pos="up" data-balloon-length="large">
+          <h4 class="data-title">{{dataset.properties.title}}</h4>
+        </div>
         {{/link-to}}
       {{/if}}
 
