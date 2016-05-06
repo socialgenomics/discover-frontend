@@ -13,10 +13,8 @@
             <h4 class="color-red-error-text margin-bottom">Please verify your email.</h4>
             <div class="divider"></div>
 
-            <div class="row valign-wrapper">
-              <h4 class="col m3 offset-m3">{{fa-icon "envelope"}} {{session.authenticatedUser.email}}</h4>
-              <button class="btn btn-light" type="submit" {{action "resendVerifyEmail"}}>Resend Verification Email</button>
-            </div>
+            <h4 class="center-align margin-top">{{fa-icon "envelope"}} {{session.authenticatedUser.email}}</h4>
+            <button class="btn btn-light btn-no-shadow" type="submit" {{action "resendVerifyEmail"}}>Resend Verification Email</button>
           {{/if}}
         </div>
       </div>
