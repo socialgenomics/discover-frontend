@@ -134,6 +134,13 @@ module.exports = function(environment) {
           config: {
             id: 'tz4k4icz'
           }
+        },
+        {
+          name: 'Survicate',
+          environments: ['staging'],
+          config: {
+            code: 'vMBxljpAIEgLPliAJkMNKmjhaeDjmMhc'
+          }
         }
       ],
       rollbar: {
