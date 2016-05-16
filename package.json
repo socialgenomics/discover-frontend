@@ -60,6 +60,7 @@
     "ember-data": "2.4.2",
     "ember-disable-proxy-controllers": "^1.0.1",
     "ember-export-application-global": "^1.0.4",
+    "ember-fr-markdown-file": "0.0.0",
     "ember-metrics": "0.5.3",
     "ember-modal-dialog": "0.8.3",
     "ember-moment": "^6.0.0",
