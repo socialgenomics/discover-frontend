@@ -7,7 +7,7 @@
     "region": "us-east-1"
   },
   "ssh-tunnel":{
-    "host": "frontend-staging-sol-lon02.repositive.io",
+    "host": "frontend-staging.repositive.io",
     "username": "repositive"
   },
   "redis":{
