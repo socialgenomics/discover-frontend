@@ -125,7 +125,7 @@ module.exports = function(environment) {
           environments: ['production'],
           config: {
             token: 'GSN-041822-M',
-            signature: 'd88198c60ca1d4b9077bee59bfd69381'
+            signature: '5157e5f51f0967aee05141aff8037b69'
           }
         },
         {
@@ -133,6 +133,13 @@ module.exports = function(environment) {
           environments: ['production'],
           config: {
             id: 'tz4k4icz'
+          }
+        },
+        {
+          name: 'Survicate',
+          environments: ['staging'],
+          config: {
+            code: 'vMBxljpAIEgLPliAJkMNKmjhaeDjmMhc'
           }
         }
       ],

@@ -3,11 +3,7 @@ import config from './config/environment';
 import TrackingMixin from 'repositive/mixins/tracking-mixin';
 
 const Router = Ember.Router.extend(TrackingMixin, {
-  location: config.locationType,
-
-  redirects: {
-    'signup-form' : 'beta-signup-form'
-  }
+  location: config.locationType
 });
 
 Router.map(function() {
@@ -18,7 +14,9 @@ Router.map(function() {
   this.route('verify');
   this.route('policies');
   this.route('signup-form');
-  this.route('beta-signup-form');
+  this.route('beta-signup-form', {
+    path: '/survey'
+  });
   this.route('video');
 
   this.route('users', { resetNamespace: true }, function() {

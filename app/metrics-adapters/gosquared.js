@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import BaseAdapter from 'ember-metrics/metrics-adapters/base';
 import objectTransforms from 'ember-metrics/utils/object-transforms';
-// import ENV from 'repositive/config/environment';
+import CryptoJS from 'npm:crypto-js';
 
 const { copy, get } = Ember;
 const { compact } = objectTransforms;
@@ -13,7 +13,7 @@ export default BaseAdapter.extend({
 
   init() {
     const config = copy(get(this, 'config'));
-    const { token, signature } = config;
+    const { token } = config;
 
     /* jshint ignore:start */
     ! function(g, s, q, r, d) {
@@ -30,23 +30,24 @@ export default BaseAdapter.extend({
     /* jshint ignore:end */
 
     window._gs(token); // site token, setting to false disables automatic tracking
-    window._gs('set', 'trackLocal', false); // set to true for testing
-    window._gs('auth', signature); // secure mode, signature
+    window._gs('set', 'trackLocal', true); // set to true for testing
   },
 
   identify(options = {}) {
     const compactedOptions = compact(options);
-    const { email, inviteCode, firstname, lastname, username } = compactedOptions;
+    const { email, firstname, lastname, username } = compactedOptions;
     const fullname = firstname + ' ' + lastname;
+    const config = copy(get(this, 'config'));
+    const { signature } = config;
+    const personSig = CryptoJS.SHA256(signature, username); // Generate HMAC signature
 
     window._gs('identify', {
       id: username,
       name: fullname,
-      email: email,
-      custom: {
-        inviteCode: inviteCode
-      }
+      email: email
     });
+
+    window._gs('auth', personSig); // secure mode, signature
   },
 
   trackEvent(options = {}) {

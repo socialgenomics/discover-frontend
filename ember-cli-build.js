@@ -2,9 +2,7 @@ var path = require('path');
 var EmberApp = require('ember-cli/lib/broccoli/ember-app');
 var jsStringEscape = require('js-string-escape');
 
-/*
-  brocolli related build conf.
- */
+// brocolli related build conf.
 
 var environment = EmberApp.env();
 var appConf = require('./config/app/' + environment + '.json');
@@ -78,6 +76,7 @@ module.exports = function(defaults) {
   // please specify an object with the list of modules as keys
   // along with the exports of each module as its value.
 
+  app.import('bower_components/crypto-js/crypto-js.js');
   app.import('bower_components/materialize/dist/js/materialize.js');
   app.import('vendor/typeform.js');
 

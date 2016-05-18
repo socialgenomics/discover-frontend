@@ -6,17 +6,15 @@
           <h1>Trust & Verification</h1>
           <hr class="yellow">
           {{#if session.authenticatedUser.isEmailValidated}}
-            <h4 class="color-fruit-salad-text">{{fa-icon "check-circle"}} Your email is verified.</h4>
+            <h4 class="color-fruit-salad-text margin-bottom">{{fa-icon "check-circle"}} Your email is verified.</h4>
             <div class="divider"></div>
             <h4 class="margin-top">{{fa-icon "envelope"}} {{session.authenticatedUser.email}}</h4>
           {{else}}
-            <h4 class="color-red-error-text">Please verify your email.</h4>
+            <h4 class="color-red-error-text margin-bottom">Please verify your email.</h4>
             <div class="divider"></div>
 
-            <div class="row valign-wrapper">
-              <h4 class="col m3 offset-m3">{{fa-icon "envelope"}} {{session.authenticatedUser.email}}</h4>
-              <button class="btn btn-light" type="submit" {{action "resendVerifyEmail"}}>Resend Verification Email</button>
-            </div>
+            <h4 class="center-align margin-top">{{fa-icon "envelope"}} {{session.authenticatedUser.email}}</h4>
+            <button class="btn btn-light btn-no-shadow" type="submit" {{action "resendVerifyEmail"}}>Resend Verification Email</button>
           {{/if}}
         </div>
       </div>

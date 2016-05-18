@@ -1,10 +1,11 @@
 <div class="container-signup">
-   <form {{action "signupAndAuthenticate" on="submit"}}>
-     <div class="row">
+  <h1 class="center-align margin-bottom">Signup</h1>
+   <form {{action "signupAndAuthenticate" on="submit"}} class="margin-top">
+     <!-- <div class="row">
        <div class="col m12 center">
          <ul class="list-inline">
            <li>
-             <a {{ action 'authenticateWithGooglePlus' }}>
+             <a {{action "thirdPartyAuth" "google-oauth2"}}>
                <img class="social-media-icon btn-floating" src="/assets/images/icons/social/googleplus.png">
              </a>
            </li>
@@ -21,7 +22,7 @@
        <span>
          OR
        </span>
-     </div>
+     </div> -->
 
      {{validated-input
        type="Text"
@@ -63,11 +64,11 @@
          <label for="showPassword">Show password</label>
        </div>
        <div class="pw-strength right">
-         <span class="pw-tag">Password strength<span class="{{strength}}"> {{strength}}</span></span>
+         <span class="pw-tag sub-dark">Password strength<span class="{{strength}}"> {{strength}}</span></span>
        </div>
      </div>
      <div class="input-container center">
-       {{#full-width-button class="teal" type="submit"}}SIGN UP{{/full-width-button}}
+       {{#full-width-button class="teal" type="submit"}}SIGNUP{{/full-width-button}}
        <h6 class="center-align">By signing up you agree to our {{#link-to 'policies' class="link"}}Terms &amp; Privacy Policy.{{/link-to}} </h6>
      </div>
    </form>

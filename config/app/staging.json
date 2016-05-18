@@ -1,4 +1,4 @@
 {
-  "apiBaseURL": "https://backend-staging-sol-lon02.repositive.io",
+  "apiBaseURL": "https://backend-staging.repositive.io",
   "assetsPrependPath": "https://s3.amazonaws.com/frontend-staging-sol-lon02.repositive.io/"
 }

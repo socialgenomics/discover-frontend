@@ -1,6 +1,4 @@
-{{#if showWelcome}}
-  {{partial 'welcome'}}
-{{else if session.isAuthenticated }}
+{{#if session.isAuthenticated }}
   {{partial 'home-page'}}
 {{else}}
   {{partial 'landing-page'}}

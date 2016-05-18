@@ -3,7 +3,6 @@ import Base from 'ember-simple-auth/authenticators/base';
 import ajax from 'ic-ajax';
 import ENV from 'repositive/config/environment';
 
-
 export default Base.extend({
   metrics: Ember.inject.service(),
   session: Ember.inject.service(),
@@ -60,7 +59,6 @@ export default Base.extend({
         });
         this.get('metrics').identify({
           email: resp.user.email,
-          inviteCode: this.get('session.data.inviteCode'),
           firstname: resp.user.firstname,
           lastname: resp.user.lastname,
           username: resp.user.username

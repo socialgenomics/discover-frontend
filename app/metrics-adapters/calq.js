@@ -67,11 +67,11 @@ export default BaseAdapter.extend({
 
   identify(options = {}) {
     const compactedOptions = compact(options);
-    const { email, inviteCode, firstname, lastname, username } = compactedOptions;
+    const { email, firstname, lastname, username } = compactedOptions;
     const fullname = firstname + ' ' + lastname;
     window.calq.user.identify(username);
     window.calq.user.profile({ '$full_name': fullname, '$email': email });
-    window.calq.user.profile({ inviteCode, email, firstname, lastname, username });
+    window.calq.user.profile({ email, firstname, lastname, username });
   },
 
   trackEvent(options = {}) {

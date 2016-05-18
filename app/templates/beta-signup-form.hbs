@@ -1,8 +1,26 @@
 <div class="content">
-  <div class="row center-align">
+  <div class="row">
     <div class="col m12">
       <div class="card">
-        {{typeform-markup}}
+        <header class="col m12 header-border">
+          <div class="padding-top">
+            <div class="col m8 offset-m1 landing-title">
+              <h1><strong>Welcome on board!</strong></h1>
+              <p class="helper-text sub-dark margin-bottom">We are currently in beta testing. That means as an early access beta user, your feedback is vital in helping us build a great product. To do this, we will ask you a few questions during our beta phase.</p>
+            </div>
+            <div class="col m3">
+              <img src="/assets/images/we-are-testing.png" class="responsive-img">
+            </div>
+          </div>
+        </header>
+        <main>
+          {{typeform-markup}}
+        </main>
+        <div class="row margin-top center-align">
+          <div class="col m12">
+            {{#link-to 'root'}}<button class="btn btn-light-grey btn-no-shadow btn-wider">SKIP</button>{{/link-to}}
+          </div>
+        </div>
       </div>
     </div>
   </div>

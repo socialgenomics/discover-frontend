@@ -29,7 +29,8 @@ export default Ember.Controller.extend(
         this.flashMessages.add({
           message: 'Request posted successfully',
           type: 'success',
-          timeout: 5000
+          timeout: 7000,
+          class: 'fadeInOut'
         });
         this.transitionToRoute('datasets.detail', created.id);
         this.get('metrics').trackEvent({
