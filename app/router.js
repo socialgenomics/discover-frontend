@@ -3,6 +3,7 @@ import config from './config/environment';
 import TrackingMixin from 'repositive/mixins/tracking-mixin';
 
 const Router = Ember.Router.extend(TrackingMixin, {
+  session: Ember.inject.service(),
   location: config.locationType
 });
 
@@ -10,21 +11,16 @@ Router.map(function() {
   this.route('root', {
     path: '/'
   });
-
-  this.route('verify');
   this.route('policies');
-  this.route('signup-form');
   this.route('beta-signup-form', {
     path: '/survey'
   });
-  this.route('video');
 
   this.route('users', { resetNamespace: true }, function() {
     this.route('signup');
     this.route('login');
     this.route('settings');
     this.route('profile');
-    // this.route('references');
     this.route('trust');
     this.route('verify', {
       path: '/verify/:verificationId'
@@ -62,30 +58,27 @@ Router.map(function() {
   });
 });
 
-var pagesWithSideNavigation = [
-  'datasets-search'
-  // 'users-settings',
-  // 'users-profile',
-  // 'users-trust',
-  // 'users-references'
-];
+let pagesWithSideNavigation = ['datasets-search'];
+let landingPage = ['root'];
 
 Ember.Route.reopen({
   activate: function() {
-    var cssClass = this.toCssClass();
-    // you probably don't need the application class
-    // to be added to the body
+    let cssClass = this.toCssClass();
     if (cssClass !== 'application') {
       Ember.$('body').addClass(cssClass);
       if (pagesWithSideNavigation.indexOf(cssClass) !== -1) {
         // Add the class here for all the pages with side navigation
         Ember.$('body').addClass('has-sidenav');
+      } else if (landingPage.indexOf(cssClass) !== -1 && this.get('session.isAuthenticated') === false) {
+        // Add the landing page class to home
+        Ember.$('body').addClass('landing-page');
       }
     }
   },
   deactivate: function() {
     Ember.$('body').removeClass(this.toCssClass());
     Ember.$('body').removeClass('has-sidenav');
+    Ember.$('body').removeClass('landing-page');
   },
   toCssClass: function() {
     return this.routeName.replace(/\./g, '-').dasherize();
