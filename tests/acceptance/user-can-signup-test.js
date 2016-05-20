@@ -12,6 +12,8 @@ module('Acceptance | user can signup', {
   }
 });
 
+/*
+we don't have input any more
 test('user can signup and go to homepage', function(assert) {
   visit('/');
   fillIn('input[placeholder="Your activation code"]', 'QT7VwsqYbAI=');
@@ -28,8 +30,10 @@ test('user can signup and go to homepage', function(assert) {
     //   assert.equal(currentURL(), '/?code=QT7VwsqYbAI%3D', 'URL is /?code=QT7VwsqYbAI%3D');
     // });
   });
-});
+});*/
 
+/*
+we don't have input any more
 test('existing user can not signup', function(assert) {
   visit('/');
   fillIn('input[placeholder="Your activation code"]', 'QT7VwsqYbAI=');
@@ -45,3 +49,4 @@ test('existing user can not signup', function(assert) {
     });
   });
 });
+*/

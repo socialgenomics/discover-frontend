@@ -12,6 +12,8 @@ module('Acceptance | user cannot access signup via bad invite code', {
   }
 });
 
+/*
+we don't have input any more
 test('bad invite code shows error message', function(assert) {
   visit('/');
   fillIn('input[placeholder="Your activation code"]', 'rubbish');
@@ -20,4 +22,4 @@ test('bad invite code shows error message', function(assert) {
     assert.equal(currentURL(), '/?code=rubbish', 'route does not change');
     //assert.equal(find('.error-text')[0].innerText,'This invite code is invalid.', "error message shows");
   });
-});
+});*/

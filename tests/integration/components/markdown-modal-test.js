@@ -12,13 +12,4 @@ test('it renders', function(assert) {
   this.render(hbs`{{markdown-modal}}`);
 
   assert.equal(this.$().text().trim(), '');
-
-  // Template block usage:
-  this.render(hbs`
-    {{#markdown-modal}}
-      template block text
-    {{/markdown-modal}}
-  `);
-
-  assert.equal(this.$().text().trim(), 'template block text');
 });
