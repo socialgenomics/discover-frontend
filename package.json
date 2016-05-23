@@ -1,6 +1,6 @@
 {
   "name": "repositive",
-  "version": "0.4.7",
+  "version": "0.4.8",
   "description": "Frontend app for repositive.io",
   "private": true,
   "directories": {
@@ -8,7 +8,7 @@
     "test": "tests"
   },
   "scripts": {
-    "start": "ember server --watcher=polling --proxy=http://backend-dev.repositive.io",
+    "start": "ember server --watcher=polling --proxy=https://backend-dev.repositive.io",
     "startLocal": "ember server --proxy=http://192.168.33.11",
     "build": "ember build",
     "test": "ember test",
@@ -28,7 +28,7 @@
     "dotenv": "^1.2.0",
     "ember-ajax": "0.7.1",
     "ember-browserify": "^1.1.8",
-    "ember-cli": "2.4.2",
+    "ember-cli": "^2.5.0",
     "ember-cli-active-link-wrapper": "0.0.4",
     "ember-cli-app-version": "^1.0.0",
     "ember-cli-babel": "^5.1.5",
@@ -57,7 +57,7 @@
     "ember-cli-showdown": "2.5.0",
     "ember-cli-sri": "^2.0.0",
     "ember-cli-uglify": "^1.2.0",
-    "ember-data": "2.4.2",
+    "ember-data": "2.5.3",
     "ember-disable-proxy-controllers": "^1.0.1",
     "ember-export-application-global": "^1.0.4",
     "ember-fr-markdown-file": "0.0.0",

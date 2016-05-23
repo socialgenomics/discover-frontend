@@ -12,6 +12,8 @@ module('Acceptance | user can access signup via invite code', {
   }
 });
 
+/*
+we don't have input any more
 test('correct code takes user to signup page', function(assert) {
   visit('/')
   .then(()=> {
@@ -23,3 +25,4 @@ test('correct code takes user to signup page', function(assert) {
     });
   });
 });
+*/

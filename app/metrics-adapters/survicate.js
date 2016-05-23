@@ -12,7 +12,7 @@ export default BaseAdapter.extend({
 
   init(options = {}) {
     const config = copy(get(this, 'config'));
-    const { code } = config;
+    const { code } = config || {};
     const compactedOptions = compact(options);
     const { username } = compactedOptions;
 
@@ -26,6 +26,10 @@ export default BaseAdapter.extend({
       var e = document.getElementsByTagName('script')[0];
       e.parentNode.insertBefore(s, e);
     })(window);
+  },
+
+  willDestroy() {
+    //todo implement it
   },
 
   identify(options = {}) {
