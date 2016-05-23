@@ -1,7 +1,7 @@
 <!-- {{dataset-detail dataset=model tab=tab addComment="addComment"}} -->
 
 <div class="row card dataset full-view">
-  <div class="col l7 m6 s12 card-main-wrapper"><!-- MAIN CONTENT DIV -->
+  <div class="col l7 m6 s12 card-main-wrapper">
     <div class="top-action card-header">
       <span class="assay-small {{model.colour}}"></span>
       <div class="actions-container valign-wrapper">
@@ -25,7 +25,7 @@
           {{add-tag addTag="addTag" class="add-btn"}}
         </div>
       </div>
-    </div><!-- end .card-main-comtent -->
+    </div>
     <div class="row bottom-static">
       <div class="dataset-more-info-section">
         <div class="col m12">
@@ -42,7 +42,11 @@
             {{/if}}
             {{#if (eq model.repository.name "REPOSITIVE")}}
               {{#if model.createdAt}}
-                <li class="card-info-attr">Registered on: <span>{{moment-format model.createdAt}}</span></li>
+                {{#if model.isRequest}}
+                  <li class="card-info-attr">Requested on: <span>{{moment-format model.createdAt}}</span></li>
+                {{else}}
+                  <li class="card-info-attr">Registered on: <span>{{moment-format model.createdAt}}</span></li>
+                {{/if}}
               {{/if}}
             {{/if}}
             <li class="card-info-attr">Access: <span>{{model.repository.access}}</span></li>
@@ -52,50 +56,20 @@
           </ul>
         </div>
         <div class="col m12 center">
-          {{#if model.properties.webURL}}
-          <a target="_blank" {{action "trackExit"}} class="btn waves-effect teal white-text">{{#if isPublic}}Access Data{{else}}Go To Dataset{{/if}}</a>
-          {{else}}
-          <a class="btn disabled white-text">{{#if isPublic}}Access Data{{else}}Apply for Access{{/if}}</a>
-          {{/if}}
+          {{#unless model.isRequest}}
+            {{#if model.properties.webURL}}
+              <a target="_blank" {{action "trackExit"}} class="btn waves-effect teal white-text">{{#if isPublic}}Access Data{{else}}Go To Dataset{{/if}}</a>
+            {{else}}
+              <a class="btn disabled white-text">{{#if isPublic}}Access Data{{else}}Apply for Access{{/if}}</a>
+            {{/if}}
+          {{/unless}}
         </div>
       </div>
     </div>
-  </div><!-- MAIN CONTENT DIV -->
+  </div>
 
-  <div class="col l5 m6 s12 card-side-wrapper"><!-- SIDE CONTENT DIV -->
-    <div class="card-header center-align teal-text">
-      Discussion
-    </div>
-    <!-- <ul class="tabs">
-      <li class="tab">
-        {{#if (eq tab "comments")}}
-        {{#link-to 'datasets.detail' model (query-params tab="comments") class="active"}}Discussion{{/link-to}}
-        {{else}}
-        {{#link-to 'datasets.detail' model (query-params tab="comments")}}Discussion{{/link-to}}
-        {{/if}}
-      </li>
-      <li class="tab">
-        {{#if (eq tab "rating")}}
-        {{#link-to 'datasets.detail' model (query-params tab="rating") class="active"}}Rating{{/link-to}}
-        {{else}}
-        {{#link-to 'datasets.detail' model (query-params tab="rating") }}Rating{{/link-to}}
-        {{/if}}
-      </li>
-      <li class="tab">
-        {{#if (eq tab "related")}}
-        {{#link-to 'datasets.detail' model (query-params tab="related") class="active"}}Related{{/link-to}}
-        {{else}}
-        {{#link-to 'datasets.detail' model (query-params tab="related") }}Related{{/link-to}}
-        {{/if}}
-      </li>
-    </ul> -->
-    <!-- {{#if (eq tab "rating")}}
-    {{partial "datasets/tab-ratings"}}
-    {{else if (eq tab "related")}}
-    {{partial "datasets/tab-related"}}
-    {{else}}
+  <div class="col l5 m6 s12 card-side-wrapper">
+    <div class="card-header center-align teal-text">Discussion</div>
     {{partial "datasets/tab-comments"}}
-    {{/if}} -->
-    {{partial "datasets/tab-comments"}}
-  </div><!-- SIDE CONTENT DIV -->
+  </div>
 </div>
