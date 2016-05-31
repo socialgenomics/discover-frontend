@@ -30,7 +30,7 @@ export default BaseAdapter.extend({
     /* jshint ignore:end */
 
     window._gs(token); // site token, setting to false disables automatic tracking
-    window._gs('set', 'trackLocal', true); // set to true for testing
+    window._gs('set', 'trackLocal', false); // set to true for testing
   },
 
   identify(options = {}) {
