@@ -1,0 +1,33 @@
+{{#modal-dialog
+    close="toggleTagModal"
+    targetAttachment="center"
+    translucentOverlay=true
+    destinationElementId=destinationElementId
+}}
+<div class="modal modal-fixed-footer">
+  <header class="modal-header">
+    <h4><span class="orange-text">{{fa-icon "tags"}}</span> Tags and Tagging</h4>
+    <span class="close-button large-text" {{action "toggleTagModal"}}>{{fa-icon "times"}}</span>
+  </header>
+  <main class="modal-content">
+    <p>A tag is a keyword or label which categorises a dataset and enables it to appear with other similar
+      datasets.
+    </p>
+    <p>Using the right tags makes it easier for others to find a dataset with related properties and allow
+      browsing through similar data.
+    </p>
+    <div class="divider"></div>
+    <h4 class="center-align">What makes a good tag?</h4>
+    <p>Useful tags describe specific details about that dataset. Tags are micro-data that you can use to
+      micro-categorise your content. Unlike categories, tags are not heirachical and cannot have subtags.
+    </p>
+    <p>When writing tags, it is important to use the correct spelling and be mindful of capital and lower
+      case letters and additional characters (e.g. /;-_).
+    </p>
+    <p>Usually a tag is compromised of only one word, however in some cases two or three word tags
+      can be more helpful.
+    </p>
+    <p>A dataset can contain an inlimited number of tags, so you can add as many as you need.</p>
+  </main>
+</div>
+{{/modal-dialog}}

@@ -15,14 +15,14 @@
       <h2>{{model.properties.title}}</h2>
       <span>{{user.displayName}}</span>
       <p class="markdown-text">{{markdown-to-html markdown=model.properties.description}}</p>
-
         <div class="tags">
           {{#each model.tags as |tag|}}
-          {{#link-to 'datasets.tags' tag.word}}
-          <span class="tag"> {{tag.word}}</span>
-          {{/link-to}}
+            {{#link-to 'datasets.tags' tag.word}}
+              <span class="tag"> {{tag.word}}</span>
+            {{/link-to}}
           {{/each}}
           {{add-tag addTag="addTag" class="add-btn"}}
+          <br><span class="help-link">Please add tags to improve searching and browsing through data. <a class="help-button" {{action "toggleTagModal"}}>?</a></span>
         </div>
       </div>
     </div>
@@ -73,3 +73,7 @@
     {{partial "datasets/tab-comments"}}
   </div>
 </div>
+
+{{#if isShowingTagModal}}
+  {{tag-modal action="toggleTagModal"}}
+{{/if}}
