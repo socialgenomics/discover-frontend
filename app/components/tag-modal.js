@@ -5,5 +5,8 @@ export default Ember.Component.extend({
     toggleTagModal: function() {
       this.sendAction();
     }
-  }
+  },
+  destinationElementId: function () {
+    return Ember.testing ? 'ember-testing' : undefined;
+  }.property()
 });
