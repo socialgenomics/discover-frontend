@@ -61,6 +61,10 @@ export default Ember.Controller.extend({
 
     toggleEditTags() {
       this.toggleProperty('isEditingTags');
+    },
+
+    toggleTagModal: function() {
+      this.toggleProperty('isShowingTagModal');
     }
   }
 });
