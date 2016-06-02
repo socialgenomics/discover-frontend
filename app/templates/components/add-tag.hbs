@@ -1,18 +1,10 @@
 {{#if isOpen}}
-<!-- <form {{action "addTag" on="submit"}}>
-  {{input value=tag type="text" placeholder="Enter tag name"}}
-  <button class="btn white grey-text" type="submit">Add Tag</button>
-  <a {{action "toggleInput"}} class="grey-text cancel-btn">Cancel</a>
-</form> -->
-  <form {{action "addTag" on="submit"}}>
-    <!-- <button {{action "toggleInput"}}class="btn add-tag grey white-text" type="submit">+</button> -->
-    <div class="input-field">
-      {{input value=tag type="text" placeholder="Enter tag name" class="col m5 input-tag"}}
-      <button class="btn post-btn teal white-text" type="submit">{{fa-icon "check"}}</button>
-      <a {{action "toggleInput"}} class="grey-text cancel-btn">cancel</a>
+  <form {{action "addTag" on "submit"}}>
+    <div class="input-field no-margin">
+      {{input value=tag type="text" placeholder="Enter tag name" class="input-tag"}}
+      <button type="submit" class="teal-text save-tag-btn">Add the tag</button>
     </div>
   </form>
 {{else}}
-  <span class="sub-grey tag grey-text">Add a new tag</span>
-  <button {{action "toggleInput"}} class="btn add-tag grey white-text">+</button>
+  <a {{action "toggleInput"}}><span class="tag add-tag-btn">Add a new tag</span></a>
 {{/if}}

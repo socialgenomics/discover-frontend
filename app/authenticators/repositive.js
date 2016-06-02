@@ -50,34 +50,12 @@ export default Base.extend({
   },
 
   _resolveWithResp: function(resp) {
-    return new Ember.RSVP.Promise((resolve)=> {
-      try {
-        this.get('metrics').trackEvent({
-          category: 'auth',
-          action: 'login',
-          label: 'Success'
-        });
-        this.get('metrics').identify({
-          email: resp.user.email,
-          firstname: resp.user.firstname,
-          lastname: resp.user.lastname,
-          username: resp.user.username
-        });
-        this.get('metrics').identify('google-analytics', {
-          distinctId: this.get(resp.user.username)
-        });
-      } catch (err) {
-        console.error('Error on metrics.identify', err);
-      }
-      /*
-        Use ember run to avoid pain.
-       */
-      Ember.run(function() {
-        // all the properties of the object you resolve with
-        // will be added to the session
-        resolve(resp);
-      });
+    this.get('metrics').trackEvent({
+      category: 'auth',
+      action: 'login',
+      label: 'Success'
     });
+    return resp;
   },
 
   _handleError: function(err) {
