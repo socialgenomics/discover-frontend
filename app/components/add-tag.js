@@ -3,6 +3,7 @@ import Ember from 'ember';
 export default Ember.Component.extend({
   tag: null,
   isOpen: null,
+
   actions: {
     addTag: function() {
       if (this.tag) {
@@ -14,8 +15,9 @@ export default Ember.Component.extend({
         this.sendAction('addTag', this.tag);
       }
       this.set('tag', null);
-      this.set('isOpen', true);
+      this.toggleProperty('isOpen');
     },
+
     toggleInput: function() {
       this.toggleProperty('isOpen');
       this.sendAction('toggleEditTags');
