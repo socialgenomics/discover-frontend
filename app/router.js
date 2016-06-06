@@ -56,6 +56,7 @@ Router.map(function() {
   this.route('404', {
     path: '/*path'
   });
+  this.route('help');
 });
 
 let pagesWithSideNavigation = ['datasets-search'];
