@@ -56,7 +56,13 @@ Router.map(function() {
   this.route('404', {
     path: '/*path'
   });
-  this.route('help');
+  this.route('help', { resetNamespace: true }, function() {
+    this.route('searching-for-data');
+    this.route('requesting-data');
+    this.route('registering-new-data');
+    this.route('your-account');
+    this.route('other');
+  });
 });
 
 let pagesWithSideNavigation = ['datasets-search'];

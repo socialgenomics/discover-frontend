@@ -1,0 +1,28 @@
+<div class="content">
+  <div class="row">
+    {{help-tabs tab="requesting"}}
+    <div class="col m12">
+      <div class="card white no-margin darken-1">
+        <div class="card-content">
+          <div class="row margin-top">
+            <div class="col m4 help-menu">
+              <ol>
+                <li>{{#link-to 'help.requesting-data' (query-params help="searching")}}How to Write a Good Search Query{{/link-to}}</li>
+                <li>{{#link-to 'help.requesting-data' (query-params help="algorithm")}}What searching algorithm are we using?{{/link-to}}</li>
+              </ol>
+            </div>
+            <div class="col m8 help-content">
+              <div class="markdown-text">
+                {{#if (eq help "searching")}}
+                  {{markdown-to-html markdown=(fr-markdown-file 'help/write-good-search')}}
+                {{else if (eq help "algorithm")}}
+                  {{markdown-to-html markdown=(fr-markdown-file 'help/search-algorithm')}}
+                {{/if}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
