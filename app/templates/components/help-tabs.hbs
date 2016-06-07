@@ -1,0 +1,42 @@
+<h5 class="subtitles-left unfocus-grey-text">Help Documentation</h5>
+<div class="col m12">
+  <div class="card">
+    <ul class="tabs">
+      <li class="tab">
+        {{#if (eq tab "searching")}}
+          {{#link-to 'help.searching-for-data' class="active"}}Searching for Data{{/link-to}}
+        {{else}}
+          {{#link-to 'help.searching-for-data'}}Searching for Data{{/link-to}}
+        {{/if}}
+      </li>
+      <li class="tab">
+        {{#if (eq tab "requesting")}}
+        {{#link-to 'help.requesting-data' class="active"}}Requesting Data{{/link-to}}
+        {{else}}
+        {{#link-to 'help.requesting-data'}}Requesting Data{{/link-to}}
+        {{/if}}
+      </li>
+      <li class="tab">
+        {{#if (eq tab "registering")}}
+        {{#link-to 'help.registering-new-data' class="active"}}Registering New Data{{/link-to}}
+        {{else}}
+        {{#link-to 'help.registering-new-data'}}Registering New Data{{/link-to}}
+        {{/if}}
+      </li>
+      <li class="tab">
+        {{#if (eq tab "account")}}
+        {{#link-to 'help.your-account' class="active"}}Your Account{{/link-to}}
+        {{else}}
+        {{#link-to 'help.your-account'}}Your Account{{/link-to}}
+        {{/if}}
+      </li>
+      <li class="tab">
+        {{#if (eq tab "other")}}
+        {{#link-to 'help.other' class="active"}}Other Commom Issues{{/link-to}}
+        {{else}}
+        {{#link-to 'help.other'}}Other Common Issues{{/link-to}}
+        {{/if}}
+      </li>
+    </ul>
+  </div>
+</div>
