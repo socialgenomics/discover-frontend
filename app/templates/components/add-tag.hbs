@@ -1,8 +1,8 @@
 {{#if isOpen}}
   <form {{action "addTag" on "submit"}}>
-    <div  class="input-field no-margin">
-      {{focus-input value=tag type="text" placeholder="Enter tag name" class="input-tag" escape-press="toggleInput"}}
-      <button type="submit" class="teal-text save-tag-btn">Add the tag</button>
+    <div class="input-field no-margin">
+      {{focus-input value=tag type="text" placeholder="Enter tag name" class="input-tag" escape-press="toggleInput" focus-out="toggleInput"}}
+      <button type="submit" class="sub-dark save-tag-btn">Cancel</button>
     </div>
   </form>
 {{else}}
