@@ -7,13 +7,13 @@
           <div class="row margin-top">
             <div class="col m4 help-menu">
               <ol>
-                <li>{{#link-to 'help.your-account' (query-params help="searching")}}How to Write a Good Search Query{{/link-to}}</li>
+                <li>{{#link-to 'help.your-account' (query-params help="search-query")}}How to Write a Good Search Query{{/link-to}}</li>
                 <li>{{#link-to 'help.your-account' (query-params help="algorithm")}}What searching algorithm are we using?{{/link-to}}</li>
               </ol>
             </div>
             <div class="col m8 help-content">
               <div class="markdown-text">
-                {{#if (eq help "searching")}}
+                {{#if (eq help "search-query")}}
                   {{markdown-to-html markdown=(fr-markdown-file 'help/write-good-search')}}
                 {{else if (eq help "algorithm")}}
                   {{markdown-to-html markdown=(fr-markdown-file 'help/search-algorithm')}}
