@@ -1,12 +1,12 @@
 <nav class="navbar" id="navbar">
   <div class="navbar-wrapper">
 
-    {{#link-to 'root'}}
-    <div class="navbar-logo valign-wrapper">
-      {{!-- <img id="mobile-logo" class="hide-on-med-and-up nav-logo-square" src="/assets/images/repositive-logo.png" alt="Repositive DNA logo"> --}}
-      <img id="full-logo" class="responsive-img hide-on-small-only" src="/assets/images/logo-full.png" alt="Repositive DNA logo">
-    </div>
-    {{/link-to}}
+    <a href="https://repositive.io">
+      <div class="navbar-logo valign-wrapper">
+        {{!-- <img id="mobile-logo" class="hide-on-med-and-up nav-logo-square" src="/assets/images/repositive-logo.png" alt="Repositive DNA logo"> --}}
+        <img id="full-logo" class="responsive-img hide-on-small-only" src="/assets/images/logo-full.png" alt="Repositive DNA logo">
+      </div>
+    </a>
 
     {{#if isAuthenticated}}
 
@@ -51,11 +51,6 @@
         <div class="navbar-button">
           {{#active-link}}
             {{#link-to 'users.login' class="valign-wrapper"}}LOGIN{{/link-to}}
-          {{/active-link}}
-        </div>
-        <div class="navbar-button">
-          {{#active-link}}
-            {{#link-to 'users.signup' class="valign-wrapper"}}SIGNUP{{/link-to}}
           {{/active-link}}
         </div>
       </div>
