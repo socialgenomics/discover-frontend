@@ -1,29 +1,24 @@
-<div class="container-signup">
-  <h1 class="center-align margin-bottom">Signup</h1>
-   <form {{action "signupAndAuthenticate" on="submit"}} class="margin-top">
-     <!-- <div class="row">
-       <div class="col m12 center">
-         <ul class="list-inline">
-           <li>
-             <a {{action "thirdPartyAuth" "google-oauth2"}}>
-               <img class="social-media-icon btn-floating" src="/assets/images/icons/social/googleplus.png">
-             </a>
-           </li>
-           <li>
-             <a {{ action 'authenticateWithLinkedIn' }}>
-               <img class="social-media-icon btn-floating" src="/assets/images/icons/social/linkedin.png">
-             </a>
-           </li>
-         </ul>
-         <h6 class="center-align">We won't use any of your personal data, only your email.</h6>
-       </div>
-     </div>
-     <div class="or-div">
-       <span>
-         OR
-       </span>
-     </div> -->
+<div class="content sub-grey">
+  <header class="padding-top">
+    <h2 class="center-align margin-bottom">Create your free account to make use of all available features</h2>
+    <div class="row center sub-grey">
+      <div class="col m4">
+        <img src="/assets/images/request2.png" class="smaller-icon">
+        <p class="padding-sides">Request data from the community if you didn't find what you were looking for.</p>
+      </div>
+      <div class="col m4">
+        <img src="/assets/images/register2.png" class="smaller-icon">
+        <p class="padding-sides">Register your datasets to make them visible to other researchers.</p>
+      </div>
+      <div class="col m4">
+        <img src="/assets/images/discuss2.png" class="smaller-icon">
+        <p class="padding-sides">Have discussions with other members of the community about data.</p>
+      </div>
+    </div>
+  </header>
 
+  <section class="container-signup no-padding">
+   <form {{action "signupAndAuthenticate" on="submit"}} class="margin-top margin-bottom">
      {{validated-input
        type="Text"
        lbl="Full Name"
@@ -58,29 +53,30 @@
        formSubmitted=formSubmitted
        class="signup-password"
      }}
-     <div class="password-div">
+     <div class="password-div no-margin">
        <div class="pw-check left">
          <input type="checkbox" id="showPassword" onClick={{action 'toggleCheckbox'}} >
-         <label for="showPassword">Show password</label>
+         <label for="showPassword"><span class="grey-text">Show password</span></label>
        </div>
        <div class="pw-strength right">
-         <span class="pw-tag sub-dark">Password strength<span class="{{strength}}"> {{strength}}</span></span>
+         <span class="pw-tag grey-text">Password strength: <span class="{{strength}}">{{strength}}</span></span>
        </div>
      </div>
      <div class="input-container center">
-       {{#full-width-button class="teal" type="submit"}}SIGNUP{{/full-width-button}}
-       <h6 class="center-align">By signing up you agree to our {{#link-to 'policies' class="link"}}Terms &amp; Privacy Policy.{{/link-to}} </h6>
+       {{#full-width-button class="teal" type="submit"}}CREATE YOUR ACCOUNT{{/full-width-button}}
+       <h6 class="center-align grey-text">By signing up you agree to our {{#link-to 'policies' class="link"}}Terms &amp; Privacy Policy.{{/link-to}} </h6>
      </div>
    </form>
- </div>
-<div class="row stick-to-bottom privacy-msg">
+  </section>
+
+  <section class="row stick-to-bottom privacy-msg">
    <div class="col m12 center">
      <div class="divider"></div>
-     <h3>We take your privacy seriously.</h3>
-     <div class="col m12">
-         <span class="col m4">We advocate full adherence to patient consent.</span>
-         <span class="col m4">We don't sell and share any private data with 3rd party.</span>
-         <span class="col m4">We encourage responsible custodianship of genomic data.</span>
-     </div>
+     <h3>We care about your privacy</h3>
+     <p class="col m4 padding-sides">We advocate full adherence to patient consent.</p>
+     <p class="col m4 padding-sides">We don't sell and share any private data with 3rd party.</p>
+     <p class="col m4 padding-sides">We encourage responsible custodianship of genomic data.</p>
    </div>
- </div>
+ </section>
+
+</div>
