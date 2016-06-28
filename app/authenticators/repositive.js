@@ -18,8 +18,9 @@ export default Base.extend({
     if ('provider' in data) {
       // this is a third party login
       return ajax({
-        url: ENV.APIRoutes['users.signup'],
+        url: ENV.APIRoutes['users.login'],
         type: 'POST',
+        contentType: 'application/json',
         data: data
       })
       .then(resp => this._resolveWithResp(resp))
