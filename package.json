@@ -10,6 +10,7 @@
   "scripts": {
     "start": "ember server --watcher=polling --proxy=https://backend-dev.repositive.io",
     "startLocal": "ember server --proxy=http://192.168.33.11",
+    "startVM": "ember server --watcher=polling --proxy=http://localhost:3000",
     "build": "ember build",
     "test": "ember test",
     "security": "snyk test"
