@@ -7,10 +7,10 @@ export default Ember.Mixin.create({
 
     thirdPartyAuth: function(providerName) {
       this.get('session')
-          .authenticate('authenticator:torii', providerName)
-          .catch((err)=> {
-            Ember.Logger.error(err.trace);
-          });
+      .authenticate('authenticator:torii', providerName)
+      .catch((err)=> {
+        Ember.Logger.error(err.trace);
+      });
     }
   }
 });

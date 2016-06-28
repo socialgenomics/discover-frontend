@@ -14,21 +14,19 @@ export default Torii.extend({
    */
   authenticate(options) {
     return this._super(options).then(function (data) {
-
       return ajax({
-            url: ENV.APIRoutes['users.signup'],
-            method: 'post',
-            data: {
-              provider: data.provider,
-              authorizationCode: data.authorizationCode
-            }
-          })
-          .then(function(response){
-            console.log(response);
-            debugger;
-            return Object.assign(response, data);
-          });
-
+        url: ENV.APIRoutes['users.signup'],
+        method: 'post',
+        data: {
+          provider: data.provider,
+          authorizationCode: data.authorizationCode
+        }
+      })
+      .then(function(response){
+        console.log(response);
+        debugger;
+        return Object.assign(response, data);
+      });
     });
   }
 });
