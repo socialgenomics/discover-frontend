@@ -47,7 +47,7 @@ module.exports = function(environment) {
       APIRoutes : (function() {
         var mapping = {
           'users.login' : '/v1/auth/login',
-          'users.logout' : '/v1/api/users/logout',
+          'users.logout' : '/v1/auth/logout',
           'users.signup' : '/v1/auth/register',
           'datasets.search' : '/v1/search',
           'datasets.trending' : '/v1/search/trending',

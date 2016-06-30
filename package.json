@@ -8,6 +8,7 @@
     "test": "tests"
   },
   "scripts": {
+    "postinstall": "bower install",
     "start": "ember server --watcher=polling --proxy=https://backend-dev.repositive.io",
     "startLocal": "ember server --proxy=http://192.168.33.11",
     "startVM": "ember server --watcher=polling --proxy=http://localhost:3000",
@@ -23,6 +24,7 @@
   "license": "MIT",
   "devDependencies": {
     "babel-eslint": "^6.0.0",
+    "bower": "1.7.7",
     "broccoli-asset-rev": "^2.2.0",
     "broccoli-jscs": "^1.1.0",
     "crypto-js": "^3.1.6",

@@ -2,7 +2,7 @@ import ApplicationAdapter from 'repositive/adapters/application';
 
 
 export default ApplicationAdapter.extend({
-  namespace: 'api/users',
+  namespace: 'v1/users',
   pathForType: function() {
     return 'settings';
   }
