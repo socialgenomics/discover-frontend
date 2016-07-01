@@ -14,14 +14,14 @@ export default SessionService.extend({
         this.invalidate();
       } else {
         let userId = userData.id;
-        
+
         this.get('metrics').identify({
-          email: userData.email,
+          email: userData.main_email,
           firstname: userData.firstname,
           lastname: userData.lastname,
           username: userData.username
         });
-        
+
         try {
           this.get('metrics').identify('GoogleAnalytics', {
             distinctId: this.get(userData.username)
@@ -32,7 +32,7 @@ export default SessionService.extend({
 
         this.get('store').findRecord('user', userId)
         .then(user => {
-          user.set('email', userData.email);
+          user.set('email', userData.main_email);
           user.set('isEmailValidated', userData.isEmailValidated);
           this.set('authenticatedUser', user);
         });

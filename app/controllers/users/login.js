@@ -58,7 +58,7 @@ export default Ember.Controller.extend(
       this.set('formSubmitted', true);
       this.get('session')
       .authenticate('authenticator:repositive', {
-        email: this.get('email'),
+        email: this.get('main_email'),
         password: this.get('password')
       })
       .then(this.displayMessages.bind(this))
@@ -66,9 +66,9 @@ export default Ember.Controller.extend(
     },
 
     resetPassword: function() {
-      if (!Ember.isBlank(this.get('email'))) {
+      if (!Ember.isBlank(this.get('main_email'))) {
         ajax({
-          url: ENV.APIRoutes['reset-password'] + '/' + this.get('email'),
+          url: ENV.APIRoutes['reset-password'] + '/' + this.get('main_email'),
           type: 'GET'
         })
         .then(this.displayMessages.bind(this))

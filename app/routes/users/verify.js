@@ -46,7 +46,7 @@ export default Ember.Route.extend({
   actions: {
     resendVerifyEmail: function() {
       ajax({
-        url: ENV.APIRoutes['verify-email-resend'] + '/' + this.get('session.authenticatedUser.email'),
+        url: ENV.APIRoutes['verify-email-resend'] + '/' + this.get('session.authenticatedUser.main_email'),
         type: 'GET'
       });
     }
