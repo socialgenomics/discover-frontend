@@ -58,7 +58,7 @@ export default Ember.Controller.extend(
       this.set('formSubmitted', true);
       this.get('session')
       .authenticate('authenticator:repositive', {
-        email: this.get('main_email'),
+        email: this.get('email'),
         password: this.get('password')
       })
       .then(this.displayMessages.bind(this))

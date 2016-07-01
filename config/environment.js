@@ -46,15 +46,15 @@ module.exports = function(environment) {
        */
       APIRoutes : (function() {
         var mapping = {
-          'users.login' : '/v1/auth/login',
-          'users.logout' : '/v1/auth/logout',
-          'users.signup' : '/v1/auth/register',
-          'datasets.search' : '/v1/search',
-          'datasets.trending' : '/v1/search/trending',
-          'users.profiles': '/v1/users/{id}/profile',
-          'reset-password': '/v1/auth/password-reset',
-          'verify-email': '/v1/auth/verify',
-          'verify-email-resend': '/v1/auth/verify/resend'
+          'users.login' : '/auth/login',
+          'users.logout' : '/auth/logout',
+          'users.signup' : '/auth/register',
+          'datasets.search' : '/search',
+          'datasets.trending' : '/search/trending',
+          'users.profiles': '/users/{id}/profile',
+          'reset-password': '/auth/password-reset',
+          'verify-email': '/auth/verify',
+          'verify-email-resend': '/auth/verify/resend'
         };
         _.each(mapping,
           function(path, key, obj) {

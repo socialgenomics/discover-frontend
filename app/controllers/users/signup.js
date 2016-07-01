@@ -118,7 +118,7 @@ export default Ember.Controller.extend(
     signupAndAuthenticate: function() {
       if (this.get('isValid')) {
         this.set('formSubmitted', true);
-        let credentials = this.getProperties('firstname', 'lastname', 'main_email', 'password');
+        let credentials = this.getProperties('firstname', 'lastname', 'email', 'password');
         this.set('loading', true);
         /*
           Signup with repositive.

@@ -1,9 +1,8 @@
 import ApplicationAdapter from 'repositive/adapters/application';
 
-
 export default ApplicationAdapter.extend({
-  namespace: 'v1/users',
+  namespace: 'users',
   pathForType: function() {
-    return 'profiles';
+    return 'user_settings';
   }
 });

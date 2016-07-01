@@ -1,9 +1,8 @@
 import DS from 'ember-data';
 import { poisson } from 'repositive/utils/distributions';
 
-
 export default DS.Model.extend({
-  owner: DS.belongsTo('user'),
+  user: DS.belongsTo('user'),
   properties : DS.belongsTo('property'),
   repository: DS.belongsTo('repository'),
   favorites: DS.hasMany('favourite'),
