@@ -35,14 +35,14 @@ export default BaseAdapter.extend({
 
   identify(options = {}) {
     const compactedOptions = compact(options);
-    const { email, firstname, lastname, username } = compactedOptions;
+    const { email, firstname, lastname, username, id } = compactedOptions;
     const fullname = firstname + ' ' + lastname;
     const config = copy(get(this, 'config'));
     const { signature } = config;
-    const personSig = CryptoJS.SHA256(signature, username); // Generate HMAC signature
+    const personSig = CryptoJS.SHA256(signature, username | id); // Generate HMAC signature
 
     window._gs('identify', {
-      id: username,
+      id: username | id,
       name: fullname,
       email: email
     });

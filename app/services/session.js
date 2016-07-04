@@ -18,10 +18,11 @@ export default SessionService.extend({
         let settingsId = userData.user_settings.id;
 
         this.get('metrics').identify({
-          email: userData.main_email,
+          email: userData.credentials[0].email,
           firstname: userData.firstname,
           lastname: userData.lastname,
-          username: userData.username
+          username: userData.username | userData.id,
+          id: userData.id
         });
 
         try {

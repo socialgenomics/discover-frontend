@@ -7,7 +7,7 @@
 				{{else}}
 				<h6>Registered by</h6>
 				{{/if}}
-				{{#link-to 'user' dataset.owner.username}}<h6 class="user-name">{{dataset.owner.displayName}}</h6>{{/link-to}}
+				{{#link-to 'user' dataset.user.id}}<h6 class="user-name">{{dataset.user.displayName}}</h6>{{/link-to}}
 			<!--not applicable yet-->
 			{{!-- <div class="assay-container">
 				<span class="assay-small">{{assay}}</span>

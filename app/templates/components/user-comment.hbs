@@ -2,11 +2,11 @@
 <div class="comment">
   <div class="comment-header">
     <div class="dp-wrapper">
-      {{#link-to 'user' user.username}}
+      {{#link-to 'user' user.id}}
         <img src={{avatar}}>
       {{/link-to}}
     </div>
-    {{#link-to 'user' user.username}}<h4>{{user.displayName}}</h4>{{/link-to}}
+    {{#link-to 'user' user.id}}<h4>{{user.displayName}}</h4>{{/link-to}}
     <span>{{moment-from-now date}}</span>
   </div>
   <div class="comment-body">

@@ -7,7 +7,7 @@ export default DS.RESTSerializer.extend(DS.EmbeddedRecordsMixin, {
     highlights: { embedded: 'always' },
     tags: { embedded: 'always' },
     comments: { embedded: 'always' },
-    owner: { serialize: 'ids' }
+    user: { serialize: 'ids' }
   },
   serialize: function(snapshot /*, options*/) {
     let sourceJSON = {

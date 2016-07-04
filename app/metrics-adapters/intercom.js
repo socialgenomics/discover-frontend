@@ -50,18 +50,18 @@ export default BaseAdapter.extend({
     const config = copy(get(this, 'config'));
     const { id } = config;
     const compactedOptions = compact(options);
-    const { email, firstname, lastname, username } = compactedOptions;
+    const { email, firstname, lastname, username, id } = compactedOptions;
     const fullname = firstname + ' ' + lastname;
 
     window.Intercom('boot', {
       app_id: id,
-      user_id: username,
+      user_id: username | id,
       name: fullname,
       email: email
     });
 
     window.Intercom('update', {
-      user_id: username,
+      user_id: username | id,
       name: fullname,
       email: email
     });

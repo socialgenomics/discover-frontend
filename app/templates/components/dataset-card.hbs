@@ -35,10 +35,10 @@
         {{#link-to 'datasets.search' (query-params repository=dataset.repository.name) }}
           {{dataset.repository.name}}
         {{/link-to}}
-        {{#if dataset.owner.displayName}}
+        {{#if dataset.user.displayName}}
           <span>by</span>
-          {{#link-to 'user' dataset.owner.username}}
-            {{dataset.owner.displayName}}
+          {{#link-to 'user' dataset.user.id}}
+            {{dataset.user.displayName}}
           {{/link-to}}
         {{/if}}
         <!-- {{#if dataset.createdAt}}
