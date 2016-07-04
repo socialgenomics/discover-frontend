@@ -4,11 +4,13 @@ export default Ember.Component.extend({
   firstname: null,
   username: null,
   avatar: null,
+  id: null,
   session: Ember.inject.service(),
-
+  
   didRender() {
     this._super(...arguments);
     //dropdown initialization
+    
     this.$('.dropdown-button').dropdown({
       inDuration: 500,
       outDuration: 225,

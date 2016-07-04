@@ -39,7 +39,7 @@ Router.map(function() {
 
   this.route('user', {
     resetNamespace: true,
-    path: '/user/:username'
+    path: '/user/:id'
   }, function() {});
 
   this.route('datasets', { resetNamespace: true }, function() {
