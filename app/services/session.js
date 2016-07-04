@@ -41,9 +41,11 @@ export default SessionService.extend({
         .then(data => {
           let user = data[0];
           let credentials = data[1].content;
+          let profile = data[2];
           user.set('email', credentials[0].email);
           user.set('isEmailValidated', userData.isEmailValidated);
           user.set('isCurrentUser', true);
+          user.set('profile', profile);
           this.set('authenticatedUser', user);
         });
    
