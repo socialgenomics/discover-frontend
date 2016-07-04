@@ -5,9 +5,8 @@ import { belongsTo } from 'ember-data/relationships';
 export default Model.extend({
   provider: attr('string'),
   email: attr('string'),
-  user_id: attr('string'),
+  userId: belongsTo('user'),
   verified: attr('boolean'),
-  user: belongsTo('user'),
-  created_at: attr('isodate'),
-  updated_at: attr('isodate')
+  createdAt: attr('isodate'),
+  updatedAt: attr('isodate')
 });

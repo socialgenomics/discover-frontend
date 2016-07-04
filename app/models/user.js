@@ -3,16 +3,14 @@ import attr from 'ember-data/attr';
 import { belongsTo, hasMany } from 'ember-data/relationships';
 
 export default Model.extend({
-  main_email: attr('string'), // should only be availible for current user
-  password_hash: attr(),
   username: attr('string'),
   firstname: attr('string'),
   lastname: attr('string'),
   credentials: hasMany('credentials'),
   datasets: hasMany('datasets'),
   comments: hasMany('comments'),
-  user_profile: belongsTo('user_profile'),
-  user_settings: belongsTo('user_settings'),
+  userProfile: belongsTo('userProfile'),
+  userSettings: belongsTo('userSettings'),
   createdAt: attr('isodate'),
   updatedAt: attr('isodate'),
   isCurrentUser: attr('boolean', { defaultValue: false }), // checks the current authenticated user

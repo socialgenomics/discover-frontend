@@ -14,6 +14,8 @@ export default SessionService.extend({
         this.invalidate();
       } else {
         let userId = userData.id;
+        let profileId = userData.user_profile.id;
+        let settingsId = userData.user_settings.id;
 
         this.get('metrics').identify({
           email: userData.main_email,
@@ -24,17 +26,31 @@ export default SessionService.extend({
 
         try {
           this.get('metrics').identify('GoogleAnalytics', {
-            distinctId: this.get(userData.username)
+            distinctId: this.get(userId)
           });
         } catch(e){
           //adapters can be disabled on some env. so we will have an error
         }
-
-        this.get('store').findRecord('user', userId)
+        
+        
+        return this.get('store').findRecord('user', userId)
         .then(user => {
-          user.set('email', userData.main_email);
-          user.set('isEmailValidated', userData.isEmailValidated);
-          this.set('authenticatedUser', user);
+          return this.get('store').findRecord('user_profile', profileId)
+          .then(profile => {
+            return this.get('store').query('credential', {user_id: userId})
+            .then((credential) => {
+              debugger;
+              return this.get('store').findRecord('user_setting', settingsId)
+              .then((settings) => {
+                user.set('email', userData.credentials[0].email);
+                user.set('isEmailValidated', userData.isEmailValidated);
+                user.set('isCurrentUser', true);
+                this.set('authenticatedUser', user);
+                debugger;
+              })
+            })
+          })
+         
         });
       }
     }

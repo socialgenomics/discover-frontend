@@ -2,10 +2,10 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
   model: function(params) {
-    return this.store.query('user', { username: params.username }).then(users => {
+    return this.store.query('user', { id: params.id }).then(users => {
       let user = users.get('firstObject');
       return new Ember.RSVP.all([
-        this.store.query('user_profile', { UserId: user.get('id') }),
+        this.store.query('userProfile', { UserId: user.get('id') }),
         this.store.query('dataset', { UserId: user.get('id'), isRequest: 1 }),
         this.store.query('dataset', { UserId: user.get('id'), isRequest: 0 })
       ])
