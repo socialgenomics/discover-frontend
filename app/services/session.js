@@ -32,26 +32,21 @@ export default SessionService.extend({
           //adapters can be disabled on some env. so we will have an error
         }
         
-        
-        return this.get('store').findRecord('user', userId)
-        .then(user => {
-          return this.get('store').findRecord('user_profile', profileId)
-          .then(profile => {
-            return this.get('store').query('credential', {user_id: userId})
-            .then((credential) => {
-              debugger;
-              return this.get('store').findRecord('user_setting', settingsId)
-              .then((settings) => {
-                user.set('email', userData.credentials[0].email);
-                user.set('isEmailValidated', userData.isEmailValidated);
-                user.set('isCurrentUser', true);
-                this.set('authenticatedUser', user);
-                debugger;
-              })
-            })
-          })
-         
+        return Ember.RSVP.all([
+          this.get('store').findRecord('user', userId),
+          this.get('store').query('credential', {user_id: userId, primary: true}),
+          this.get('store').findRecord('user_profile', profileId),
+          this.get('store').findRecord('user_setting', settingsId)
+        ])
+        .then(data => {
+          let user = data[0];
+          let credentials = data[1].content;
+          user.set('email', credentials[0].email);
+          user.set('isEmailValidated', userData.isEmailValidated);
+          user.set('isCurrentUser', true);
+          this.set('authenticatedUser', user);
         });
+   
       }
     }
   })
