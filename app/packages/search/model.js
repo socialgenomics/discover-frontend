@@ -35,7 +35,6 @@ export default DS.Model.extend({
       this.set('ordering', params.ordering);
       delete params.q;
       delete params.ordering;
-
       for (var key in params) {
         var agg = Agg.create({
           name: key,
@@ -106,15 +105,16 @@ export default DS.Model.extend({
       }
       delete resp.aggs;
 
-      // load the results
-      this.store.pushPayload('Dataset', resp);
-      this.get('datasets').clear();
+      //TODO Use the elasticsearch response instead of request a new one
+      // Create a new entry in the store
       resp.datasets.forEach(dataset => {
-        let emberDataDataset = this.store.peekRecord('Dataset', dataset.id);
+        let emberDataDataset = this.store.findRecord('dataset', dataset.id);
         emberDataDataset.set('colour', this.getAssayColourForDataset(emberDataDataset));
         this.get('datasets').pushObject(emberDataDataset);
       });
+      debugger;
       this.set('isLoading', false);
+      debugger;
     })
     .catch(function(err) {
       return Ember.RSVP.reject(err);

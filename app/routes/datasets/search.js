@@ -6,7 +6,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
   model: function(params) {
     return this.store.createRecord('Search', {
       queryParams: params,
-      user: this.get('session.data.authenticatedUser')
+      user: this.get('session.authenticatedUser')
     });
   }
 });

@@ -39,10 +39,10 @@ export default BaseAdapter.extend({
     const fullname = firstname + ' ' + lastname;
     const config = copy(get(this, 'config'));
     const { signature } = config;
-    const personSig = CryptoJS.SHA256(signature, username | id); // Generate HMAC signature
+    const personSig = CryptoJS.SHA256(signature, username || id); // Generate HMAC signature
 
     window._gs('identify', {
-      id: username | id,
+      id: username || id,
       name: fullname,
       email: email
     });

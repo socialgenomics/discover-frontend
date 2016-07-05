@@ -8,7 +8,10 @@ export default Ember.Component.extend({
 
   actions: {
     search: function() {
+      debugger;
+      console.log('HERE I AM!');
       this.sendAction('action', this.get('query'));
+      debugger;
     }
   }
 });
