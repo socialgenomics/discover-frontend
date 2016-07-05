@@ -22,9 +22,7 @@ export default Torii.extend({
           authorizationCode: data.authorizationCode
         }
       })
-      .then(function(response){
-        console.log(response);
-        debugger;
+      .then(function(response) {
         return Object.assign(response, data);
       });
     });
