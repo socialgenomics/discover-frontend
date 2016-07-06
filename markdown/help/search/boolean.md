@@ -1,0 +1,15 @@
+## What boolean operators can I use?
+
+Boolean operators allow terms to be combined through logic operators AND, "+", OR, NOT and "-".
+
+**(Note: Boolean operators must be ALL CAPS).**
+
+* " " retrieves results that include those search terms in the exact same order.  
+* AND retrieves results that include all of the search terms.  
+  * To search for data that contain "breast cancer" and "cell line" type the query: `/"breast cancer" AND "cell line"/`
+* OR retrieves results that include a least one of the search terms.  
+  * To search for data that contain either "breast cancer" and cancer use the query: `/"breast cancer" OR cancer /` or `/"breast cancer" cancer/`
+* NOT excludes the retrieval of terms from your search.  
+  * To search for data that contain "breast cancer" but not "tumor" type to search box: `/"breast cancer" NOT "tumor"/`
+
+These are the basic boolean operators. Our search supports Lucene search syntax. You can find more search query examples in the [Lucern website](https://lucene.apache.org/core/2_9_4/queryparsersyntax.html).
