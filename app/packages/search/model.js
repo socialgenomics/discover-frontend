@@ -107,14 +107,18 @@ export default DS.Model.extend({
 
       //TODO Use the elasticsearch response instead of request a new one
       // Create a new entry in the store
-      resp.datasets.forEach(dataset => {
-        let emberDataDataset = this.store.findRecord('dataset', dataset.id);
-        emberDataDataset.set('colour', this.getAssayColourForDataset(emberDataDataset));
-        this.get('datasets').pushObject(emberDataDataset);
+      let promisedDatasets = resp.datasets.map(dataset => {
+        return this.store.findRecord('dataset', dataset.id);
+        //emberDataDataset.set('colour', this.getAssayColourForDataset(emberDataDataset));
       });
-      debugger;
+
+      return Promise.all(promisedDatasets);
+    })
+    .then(datasets => {
+      datasets.forEach(dataset => { 
+        this.get('datasets').pushObject(dataset);
+      })
       this.set('isLoading', false);
-      debugger;
     })
     .catch(function(err) {
       return Ember.RSVP.reject(err);
@@ -180,19 +184,21 @@ export default DS.Model.extend({
   }.property('query', 'offset', 'filters.@each.value'),
 
   getAssayColourForDataset: function(dataset) {
-    var buckets = this.get('aggs').findBy('name', 'assayType').get('buckets');
-    var bucket = buckets.findBy('key', dataset.get('properties.assayType'));
-    if (Ember.isEmpty(bucket)) {
-      bucket = buckets.findBy('key', 'Other');
-    }
-    if (Ember.isEmpty(bucket)) {
-      bucket = buckets.findBy('key', 'other');
-    }
-    if (!Ember.isEmpty(bucket)) {
-      return bucket.get('colour');
-    } else {
-      return '';
-    }
+    return '';
+    // TODO Figure out where this fits and fix it.
+    //var buckets = this.get('aggs').findby('name', 'assay').get('buckets');
+    //var bucket = buckets.findby('key', dataset.get('assay'));
+    //if (ember.isempty(bucket)) {
+    //  bucket = buckets.findby('key', 'other');
+    //}
+    //if (ember.isempty(bucket)) {
+    //  bucket = buckets.findby('key', 'other');
+    //}
+    //if (!ember.isempty(bucket)) {
+    //  return bucket.get('colour');
+    //} else {
+    //  return '';
+    //}
   },
 
   datasetsAllInARow: function() {

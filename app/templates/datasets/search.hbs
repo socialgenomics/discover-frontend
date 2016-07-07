@@ -6,7 +6,7 @@
       <h4>{{ agg.displayName }}</h4>
       {{#each agg.buckets as |bucket|}}
         <div>
-        {{#if (eq agg.name "assayType")}}
+        {{#if (eq agg.name "assay")}}
           <div class="label {{bucket.colour}}"></div>
         {{else}}
           <div class="label"></div>

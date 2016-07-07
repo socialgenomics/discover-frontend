@@ -2,9 +2,13 @@ import DS from 'ember-data';
 import { poisson } from 'repositive/utils/distributions';
 
 export default DS.Model.extend({
-  user: DS.belongsTo('user'),
+  userId: DS.belongsTo('user'),
+  title: DS.attr('string'),
+  description: DS.attr('string'),
+  tech: DS.attr('string'),
+  assay: DS.attr('string'),
   properties : DS.belongsTo('property'),
-  repository: DS.belongsTo('repository'),
+  datasourceId: DS.belongsTo('datasource'),
   favorites: DS.hasMany('favourite'),
   comments: DS.hasMany('comments'),
   tags: DS.hasMany('tag'),
@@ -17,6 +21,14 @@ export default DS.Model.extend({
   accession: function() {
     return this.get('externalID');
   }.property('externalID'),
+  shortDescription: function() {
+    let length = 100;
+    let description = this.get('description');
+    if (description.length > length) {
+      description = description.substr(0, length) + ' ..';
+    }
+    return description;
+  }.property('description'),
   colour: null,
   views: function() {
     return this.get('count') + poisson(2);

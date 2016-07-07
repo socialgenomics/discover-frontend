@@ -6,12 +6,12 @@ export default Ember.Controller.extend(
   searchMixin,
   Ember.Evented,
 {
-  queryParams: ['q', 'ordering', 'assayType', 'repository', 'access'],
+  queryParams: ['q', 'ordering', 'assay', 'datasourceId', 'access'],
   q: null,
   ordering: null,
-  assayType: null,
+  assay: null,
   //tags: null,
-  repository: null,
+  datasourceId: null,
   access: null,
 
   modelLoadingDidChange: function() {

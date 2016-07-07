@@ -1,6 +1,6 @@
 export default {
-  'assayType': 'dataset.properties.assayType',
-  'access': 'dataset.repository.access',
-  'repository': 'dataset.repository.name',
+  'assay': 'dataset.assay',
+  'access': 'dataset.datasource.access',
+  'datasource': 'dataset.datasource.name',
   'tags': 'dataset.tags'
 };

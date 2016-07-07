@@ -27,8 +27,7 @@ export default Ember.Route.extend({
       return Ember.RSVP.all([
         ajax({ url: ENV.APIRoutes['datasets.search'] , type: 'GET' }),
         ajax({ url: ENV.APIRoutes['datasets.trending'] , type: 'GET' }),
-        this.store.query('dataset', { isRequest: true }),
-        this.store.query('dataset', { repository: 'REPOSITIVE', isRequest: false })
+        this.store.query('dataset', {})
       ])
       .then(data => {
         // this.get('store').pushPayload(data[1].datasets);
@@ -40,7 +39,7 @@ export default Ember.Route.extend({
           stats: data[0],
           datasets: trending,
           requests: data[2],
-          registered: data[3]
+          registered: data[2]
         };
       })
       .catch(err => {
