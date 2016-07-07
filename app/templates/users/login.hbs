@@ -1,6 +1,19 @@
 <div class="container-login">
   <h1 class="center-align margin-bottom">Login</h1>
   <form {{action "submitForm" on="submit"}} id="login-form" class="margin-top">
+    <div class="row">
+      <div class="col m12 s12 center-align">
+        <ul class="list-inline">
+          <li><a {{ action 'thirdPartyAuth' 'google-oauth2' }}><img class="social-media-icon btn-floating" src="/assets/images/icons/social/googleplus.png"></a></li>
+          <li><a {{ action 'thirdPartyAuth' 'linked-in-oauth2'}}><img class="social-media-icon btn-floating" src="/assets/images/icons/social/linkedin.png"></a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="or-div">
+      <span>
+        OR
+      </span>
+    </div>
     {{#each messages as |message|}}
       <div class="message {{message.type}}">{{message.text}}</div>
     {{/each}}

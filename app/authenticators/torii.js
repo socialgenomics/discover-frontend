@@ -1,23 +1,30 @@
 import Ember from 'ember';
-import Base from 'ember-simple-auth/authenticators/base';
 import Torii from 'ember-simple-auth/authenticators/torii';
-import ajax from 'ic-ajax';
 import ENV from 'repositive/config/environment';
-
-const { service } = Ember.inject;
+import ajax from 'ic-ajax';
 
 export default Torii.extend({
-  session: Ember.inject.service(),
-  torii: service('torii'),
-
+  torii: Ember.inject.service('torii'),
+  ajax: Ember.inject.service('ajax'),
+  /**
+   * docs
+   * https://tech.liftforward.com/2016/01/19/ember-simple-auth-torii-google-oauth2-part-1.html
+   * @param options
+   * @returns {*}
+   */
   authenticate(options) {
-    return this._super(options).then(function() {
-      ajax({
-        url: ENV.APIRoutes[ENV['ember-simple-auth'].authenticationRoute],
-        type: 'POST',
-        data: options
+    return this._super(options).then(function (data) {
+      return ajax({
+        url: ENV.APIRoutes['users.signup'],
+        method: 'post',
+        data: {
+          provider: data.provider,
+          authorizationCode: data.authorizationCode
+        }
       })
-      console.log(`authorizationCode:\n${data.authorizationCode}\nprovider: ${data.provider}\nredirectUri: ${data.redirectUri}`)
-    })
+      .then(function(response) {
+        return Object.assign(response, data);
+      });
+    });
   }
 });
