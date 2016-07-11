@@ -115,9 +115,18 @@ export default DS.Model.extend({
       return Promise.all(promisedDatasets);
     })
     .then(datasets => {
-      datasets.forEach(dataset => { 
+      return Promise.all(datasets.map(dataset => {
+        return dataset.get('datasourceId').then(datasource => {
+          dataset.set('datasource', datasource);
+          return dataset;
+        });
+      }));
+    })
+    .then(datasets => {
+      datasets.forEach(dataset => {
         this.get('datasets').pushObject(dataset);
-      })
+      });
+      
       this.set('isLoading', false);
     })
     .catch(function(err) {
