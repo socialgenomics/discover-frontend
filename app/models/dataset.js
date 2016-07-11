@@ -7,7 +7,7 @@ export default DS.Model.extend({
   description: DS.attr('string'),
   tech: DS.attr('string'),
   assay: DS.attr('string'),
-  properties : DS.belongsTo('property'),
+  //properties : DS.belongsTo('property'),
   datasourceId: DS.belongsTo('datasource'),
   favorites: DS.hasMany('favourite'),
   comments: DS.hasMany('comments'),

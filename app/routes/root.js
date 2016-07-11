@@ -8,7 +8,7 @@ export default Ember.Route.extend({
   beforeModel: function() {
     if (this.get('session.data.firstVisit', true) && this.get('session.isAuthenticated')) {
       this.transitionTo('beta-signup-form')
-      .then(() => this.get('session').set('data.displayWelcomeMessage', true))
+      .then(() => this.get('session').set('data.displayWelcomeMessage', true));
     }
 
     if (this.get('session.data.displayWelcomeMessage', true) && this.get('session.isAuthenticated')) {
@@ -26,8 +26,10 @@ export default Ember.Route.extend({
     if (this.get('session.isAuthenticated')) {
       return Ember.RSVP.all([
         ajax({ url: ENV.APIRoutes['datasets.search'] , type: 'GET' }),
-        ajax({ url: ENV.APIRoutes['datasets.trending'] , type: 'GET' }),
-        this.store.query('dataset', {})
+        ajax({ url: ENV.APIRoutes['datasets.trending'] , type: 'GET' }), //TODO response = empty obj
+        // this.store.query('dataset', {})// TODO query for most recent requests & registrations
+        this.store.query('dataset', { isRequest: true }),
+        this.store.query('dataset', { isRequest: false })
       ])
       .then(data => {
         // this.get('store').pushPayload(data[1].datasets);
@@ -39,7 +41,7 @@ export default Ember.Route.extend({
           stats: data[0],
           datasets: trending,
           requests: data[2],
-          registered: data[2]
+          registered: data[3]
         };
       })
       .catch(err => {
