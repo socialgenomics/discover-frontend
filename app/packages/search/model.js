@@ -57,6 +57,7 @@ export default DS.Model.extend({
 
   queryParamsDidChange: function() {
     this.set('isLoading', true);
+    this.set('datasets', []);
     if (!Ember.isNone(this.get('filters'))) {
       var qps = this.get('queryParams');
       this.set('query', qps.q);
@@ -108,7 +109,11 @@ export default DS.Model.extend({
 
       //TODO Use the elasticsearch response instead of request a new one
       // Create a new entry in the store
-      let promisedDatasets = _.tail(resp.datasets).map(dataset => {
+      if (resp.datasets.length > 0 && !resp.datasets[0].id) {
+        resp.datasets.shift();
+      }
+
+      let promisedDatasets = resp.datasets.map(dataset => {
         let emberDataDataset =  this.store.findRecord('dataset', dataset.id);
         return emberDataDataset;
       });
