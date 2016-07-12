@@ -122,12 +122,8 @@ export default DS.Model.extend({
     })
     .then(datasets => {
       return Promise.all(datasets.map(dataset => {
-        
         dataset.set('colour', this.getAssayColourForDataset(dataset));
-        return dataset.get('datasourceId').then(datasource => {
-          dataset.set('datasource', datasource);
-          return dataset;
-        });
+        return dataset;
       }));
     })
     .then(datasets => {
