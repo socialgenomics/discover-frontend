@@ -1,6 +1,7 @@
 export default {
-  'assay': 'dataset.assay',
-  'access': 'dataset.datasource.access',
-  'datasource': 'dataset.datasource.shortName',
+  'assay': 'assay',
+  'access': 'access',
+  'datasourceId': 'datasource.id',
+  'datasource': 'datasource.short_name',
   'tags': 'dataset.tags'
 };
