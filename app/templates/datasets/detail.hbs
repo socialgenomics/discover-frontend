@@ -57,8 +57,8 @@
         </div>
         <div class="col m12 center">
           {{#unless model.isRequest}}
-            {{#if model.properties.webURL}}
-              <a target="_blank" {{action "trackExit"}} class="btn waves-effect teal white-text">{{#if isPublic}}Access Data{{else}}Go To Dataset{{/if}}</a>
+            {{#if model.url}}
+              <a target="_blank" {{action "trackExit"}} href="{{model.url}}" class="btn waves-effect teal white-text">{{#if isPublic}}Access Data{{else}}Go To Dataset{{/if}}</a>
             {{else}}
               <a class="btn disabled white-text">{{#if isPublic}}Access Data{{else}}Apply for Access{{/if}}</a>
             {{/if}}

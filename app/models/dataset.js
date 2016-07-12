@@ -5,6 +5,7 @@ export default DS.Model.extend({
   userId: DS.belongsTo('user'),
   title: DS.attr('string'),
   description: DS.attr('string'),
+  url: DS.attr('string'),
   tech: DS.attr('string'),
   assay: DS.attr('string'),
   //properties : DS.belongsTo('property'),
