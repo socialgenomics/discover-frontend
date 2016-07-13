@@ -50,6 +50,17 @@ You will need the following things properly installed on your computer.
 * `npm start`
 * Visit your app at [http://localhost:4200](http://localhost:4200). (it is important you use this address and not 127.0.0.1:4200 for the 3rd party authentication to work correctly)
 
+### Writing and Running Tests
+
+We use (ember-cli-mocha)[https://github.com/switchfly/ember-cli-mocha] for running our tests. This uses the (Chai)[http://chaijs.com/] assertion library. Ember-cli-mocha overrides the test blueprints of ember-cli.
+
+The actual testing modules are from (ember-mocha)[https://github.com/switchfly/ember-mocha], so reference this when writing tests.
+
+We also use (ember-sinon)[https://github.com/csantero/ember-sinon] for spies and better stubbing.
+
+To run the tests use: `ember test --server` or `ember t -s` for short.
+
+
 ## Live editing of repositive-styles
 
 To link a separate checkout of repositive-styles into the project and do live editing with reload support:
@@ -157,16 +168,10 @@ Work as usual on both projects. When finishing work on both branches:
 
 
 
-
-
 ### Code Generators
 
 Make use of the many generators for code, try `ember help generate` for more details
 
-### Running Tests
-
-* `ember test`
-* `ember test --server`
 
 ### Deploying
 
