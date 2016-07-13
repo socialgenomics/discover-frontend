@@ -9,8 +9,11 @@ describeModule(
   'controller:application',
   'ApplicationController',
   {
-    // Specify the other units that are required for this test.
-    // needs: ['controller:foo']
+    needs: [
+      'service:session',
+      'service:metrics',
+      'service:moment'
+    ]
   },
   function() {
     // Replace this with your real tests.

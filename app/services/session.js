@@ -34,7 +34,7 @@ export default SessionService.extend({
 
         return Ember.RSVP.all([
           this.get('store').findRecord('user', userId),
-          this.get('store').query('credential', {user_id: userId, primary: true}),
+          this.get('store').query('credential', { user_id: userId, primary: true }),
           this.get('store').findRecord('user_profile', profileId),
           this.get('store').findRecord('user_setting', settingsId)
         ])
@@ -48,7 +48,6 @@ export default SessionService.extend({
           user.set('profile', profile);
           this.set('authenticatedUser', user);
         });
-
       }
     }
   })

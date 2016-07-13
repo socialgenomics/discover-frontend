@@ -130,7 +130,7 @@ export default DS.Model.extend({
       datasets.forEach(dataset => {
         this.get('datasets').pushObject(dataset);
       });
-      
+
       this.set('isLoading', false);
     })
     .catch(function(err) {
@@ -199,11 +199,9 @@ export default DS.Model.extend({
   getAssayColourForDataset: function(dataset) {
     let aggs = this.get('aggs');
     let assay;
-
     if (assay = dataset.get('assay')) {
       assay = assay.toLowerCase();
-    }
-    else {
+    } else {
       assay = 'other';
     }
     return colours.getColour(assay.split('-')[0]);
