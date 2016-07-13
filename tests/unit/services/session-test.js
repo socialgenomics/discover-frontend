@@ -1,12 +1,22 @@
-import { moduleFor, test } from 'ember-qunit';
+/* jshint expr:true */
+import { expect } from 'chai';
+import {
+  describeModule,
+  it
+} from 'ember-mocha';
 
-moduleFor('service:session', 'Unit | Service | session', {
-  // Specify the other units that are required for this test.
-  // needs: ['service:foo']
-});
-
-// Replace this with your real tests.
-test('it exists', function(assert) {
-  let service = this.subject();
-  assert.ok(service);
-});
+describeModule(
+  'service:session',
+  'SessionService',
+  {
+    // Specify the other units that are required for this test.
+    // needs: ['service:foo']
+  },
+  function() {
+    // Replace this with your real tests.
+    it('exists', function() {
+      let service = this.subject();
+      expect(service).to.be.ok;
+    });
+  }
+);
