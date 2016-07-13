@@ -6,17 +6,11 @@ import {
 } from 'ember-mocha';
 
 describeModule(
-  'controller:datasets/register',
-  'DatasetsRegisterController',
+  'controller:application',
+  'ApplicationController',
   {
     // Specify the other units that are required for this test.
-    needs: [
-      'service:session',
-      'service:metrics',
-      'ember-validations@validator:local/presence',
-      'ember-validations@validator:local/format'
-    ]
-
+    // needs: ['controller:foo']
   },
   function() {
     // Replace this with your real tests.
