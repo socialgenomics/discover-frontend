@@ -1,9 +1,9 @@
 import Ember from 'ember';
 import EmberValidations from 'ember-validations';
 import ServerValidationMixin from 'repositive/validators/remote/server/mixin';
-import ENV from 'repositive/config/environment';
-import ajax from 'ic-ajax';
-const { get } = Ember;
+// import ENV from 'repositive/config/environment';
+// import ajax from 'ic-ajax';
+// const { get } = Ember;
 
 export default Ember.Controller.extend(
   EmberValidations,
