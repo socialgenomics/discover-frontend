@@ -1,20 +1,28 @@
+/* jshint expr:true */
+import { expect } from 'chai';
 import {
-  moduleFor,
-  test
-} from 'ember-qunit';
+  describeModule,
+  it
+} from 'ember-mocha';
 
-moduleFor('controller:datasets/register', {
-  // Specify the other units that are required for this test.
-  needs: [
-    'service:session',
-    'service:metrics',
-    'ember-validations@validator:local/presence',
-    'ember-validations@validator:local/format'
-  ]
-});
+describeModule(
+  'controller:datasets/register',
+  'DatasetsRegisterController',
+  {
+    // Specify the other units that are required for this test.
+    needs: [
+      'service:session',
+      'service:metrics',
+      'ember-validations@validator:local/presence',
+      'ember-validations@validator:local/format'
+    ]
 
-// Replace this with your real tests.
-test('it exists', function(assert) {
-  var controller = this.subject();
-  assert.ok(controller);
-});
+  },
+  function() {
+    // Replace this with your real tests.
+    it('exists', function() {
+      let controller = this.subject();
+      expect(controller).to.be.ok;
+    });
+  }
+);

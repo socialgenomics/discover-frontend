@@ -86,7 +86,7 @@ module.exports = function(defaults) {
 
 
 // ESLint Mocha test generator
-// TODO: Need to change for mocha
+// TODO: Inprocess of changing this for Mocha setup
 // function eslintTestGenerator(relativePath, errors) {
 //   var pass = !errors || errors.length === 0;
 //   return "import { expect } from 'chai';\n"+
