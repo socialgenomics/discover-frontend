@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import Bucket from './bucket';
-import { getColours } from 'repositive/utils/colours';
+import colours from 'repositive/utils/colours';
 import { titleCase } from 'repositive/utils/case';
 import keyMappings from './mappings';
 
@@ -22,14 +22,11 @@ export default Ember.Object.extend({
       var name = Object.keys(DSL)[0];
       this.set('name', name);
       var buckets = DSL[name].buckets;
-      var colours = getColours(buckets.length);
-      var i = 0;
       this.set('buckets', []);
       buckets.forEach(function(bucket) {
-        bucket.colour = colours[i];
+        bucket.colour = colours.getColour(bucket.key);
         var b = Bucket.create(bucket);
         this.buckets.pushObject(b);
-        i++;
       }.bind(this));
     }
   },

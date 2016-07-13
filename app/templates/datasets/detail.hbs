@@ -12,9 +12,9 @@
     </div>
     <div class="card-main-content">
 	<div class="dataset-main-info">
-      <h2>{{model.properties.title}}</h2>
+      <h2>{{model.title}}</h2>
       <span>{{user.displayName}}</span>
-      <p class="markdown-text">{{markdown-to-html markdown=model.properties.description}}</p>
+      <p class="markdown-text">{{markdown-to-html markdown=model.description}}</p>
         <div class="tags">
           {{#each model.tags as |tag|}}
             {{#link-to 'datasets.tags' tag.word}}
@@ -33,14 +33,14 @@
             {{#if model.user}}
               <li class="card-info-attr">Submitted by: {{#link-to 'user' model.user.id }}<span>{{model.owner.displayName}}</span>{{/link-to}}</li>
             {{else}}
-              <li class="card-info-attr">Sourced from: <a><span>{{model.dataset.name}}</span></a></li>
-              {{#unless (eq model.dataset.name "REPOSITIVE")}}
+              <li class="card-info-attr">Sourced from: <a><span>{{model.datasourceId.shortName}}</span></a></li>
+              {{#unless (eq model.datasourceId.shortName "REPOSITIVE")}}
                 {{#if model.accession}}
                   <li class="card-info-attr">Accession: <span>{{model.externalID}}</span></li>
                 {{/if}}
               {{/unless}}
             {{/if}}
-            {{#if (eq model.dataset.name "REPOSITIVE")}}
+            {{#if (eq model.datasourceId.shortName "REPOSITIVE")}}
               {{#if model.createdAt}}
                 {{#if model.isRequest}}
                   <li class="card-info-attr">Requested on: <span>{{moment-format model.createdAt}}</span></li>
@@ -49,16 +49,16 @@
                 {{/if}}
               {{/if}}
             {{/if}}
-            <li class="card-info-attr">Access: <span>{{model.dataset.access}}</span></li>
+            <li class="card-info-attr">Access: <span>{{model.access}}</span></li>
             {{#if model.contributors}}
-            <li class="card-info-attr">Access: <span>{{model.dataset.access}}</span></li>
+            <li class="card-info-attr">Access: <span>{{model.access}}</span></li>
             {{/if}}
           </ul>
         </div>
         <div class="col m12 center">
           {{#unless model.isRequest}}
-            {{#if model.properties.webURL}}
-              <a target="_blank" {{action "trackExit"}} class="btn waves-effect teal white-text">{{#if isPublic}}Access Data{{else}}Go To Dataset{{/if}}</a>
+            {{#if model.url}}
+              <a target="_blank" {{action "trackExit"}} href="{{model.url}}" class="btn waves-effect teal white-text">{{#if isPublic}}Access Data{{else}}Go To Dataset{{/if}}</a>
             {{else}}
               <a class="btn disabled white-text">{{#if isPublic}}Access Data{{else}}Apply for Access{{/if}}</a>
             {{/if}}
