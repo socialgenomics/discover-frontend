@@ -8,7 +8,6 @@ export default SessionService.extend({
   setAuthenticatedUser: Ember.observer('data.authenticated.user', function() {
     if (this.get('isAuthenticated')) {
       const userData = this.get('data.authenticated.user');
-
       if (!userData) {
         // force logout
         this.invalidate();
@@ -29,7 +28,7 @@ export default SessionService.extend({
           this.get('metrics').identify('GoogleAnalytics', {
             distinctId: this.get(userId)
           });
-        } catch(e){
+        } catch(e) {
           //adapters can be disabled on some env. so we will have an error
         }
         
