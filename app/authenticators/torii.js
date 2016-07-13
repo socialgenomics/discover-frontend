@@ -15,7 +15,7 @@ export default Torii.extend({
   authenticate(options) {
     return this._super(options).then(function (data) {
       return ajax({
-        url: ENV.APIRoutes['users.signup'],
+        url: ENV.APIRoutes['users.login'],
         method: 'post',
         data: {
           provider: data.provider,

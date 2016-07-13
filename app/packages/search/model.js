@@ -4,7 +4,8 @@ import ENV from 'repositive/config/environment';
 import Agg from './aggregation';
 import Filter from './filter';
 import Ember from 'ember';
-
+import _ from 'npm:lodash';
+import colours from '../../utils/colours';
 
 export default DS.Model.extend({
   user: DS.belongsTo('user'),
@@ -35,7 +36,6 @@ export default DS.Model.extend({
       this.set('ordering', params.ordering);
       delete params.q;
       delete params.ordering;
-
       for (var key in params) {
         var agg = Agg.create({
           name: key,
@@ -57,6 +57,7 @@ export default DS.Model.extend({
 
   queryParamsDidChange: function() {
     this.set('isLoading', true);
+    this.set('datasets', []);
     if (!Ember.isNone(this.get('filters'))) {
       var qps = this.get('queryParams');
       this.set('query', qps.q);
@@ -106,14 +107,30 @@ export default DS.Model.extend({
       }
       delete resp.aggs;
 
-      // load the results
-      this.store.pushPayload('Dataset', resp);
-      this.get('datasets').clear();
-      resp.datasets.forEach(dataset => {
-        let emberDataDataset = this.store.peekRecord('Dataset', dataset.id);
-        emberDataDataset.set('colour', this.getAssayColourForDataset(emberDataDataset));
-        this.get('datasets').pushObject(emberDataDataset);
+      //TODO Use the elasticsearch response instead of request a new one
+      // Create a new entry in the store
+      if (resp.datasets.length > 0 && !resp.datasets[0].id) {
+        resp.datasets.shift();
+      }
+
+      let promisedDatasets = resp.datasets.map(dataset => {
+        let emberDataDataset =  this.store.findRecord('dataset', dataset.id);
+        return emberDataDataset;
       });
+
+      return Promise.all(promisedDatasets);
+    })
+    .then(datasets => {
+      return Promise.all(datasets.map(dataset => {
+        dataset.set('colour', this.getAssayColourForDataset(dataset));
+        return dataset;
+      }));
+    })
+    .then(datasets => {
+      datasets.forEach(dataset => {
+        this.get('datasets').pushObject(dataset);
+      });
+      
       this.set('isLoading', false);
     })
     .catch(function(err) {
@@ -180,19 +197,16 @@ export default DS.Model.extend({
   }.property('query', 'offset', 'filters.@each.value'),
 
   getAssayColourForDataset: function(dataset) {
-    var buckets = this.get('aggs').findBy('name', 'assayType').get('buckets');
-    var bucket = buckets.findBy('key', dataset.get('properties.assayType'));
-    if (Ember.isEmpty(bucket)) {
-      bucket = buckets.findBy('key', 'Other');
+    let aggs = this.get('aggs');
+    let assay;
+
+    if (assay = dataset.get('assay')) {
+      assay = assay.toLowerCase();
     }
-    if (Ember.isEmpty(bucket)) {
-      bucket = buckets.findBy('key', 'other');
+    else {
+      assay = 'other';
     }
-    if (!Ember.isEmpty(bucket)) {
-      return bucket.get('colour');
-    } else {
-      return '';
-    }
+    return colours.getColour(assay.split('-')[0]);
   },
 
   datasetsAllInARow: function() {

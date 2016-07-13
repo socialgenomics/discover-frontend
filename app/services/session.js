@@ -13,25 +13,42 @@ export default SessionService.extend({
         this.invalidate();
       } else {
         let userId = userData.id;
+        let profileId = userData.user_profile.id;
+        let settingsId = userData.user_settings.id;
+
         this.get('metrics').identify({
-          email: userData.email,
+          email: userData.credentials[0].email,
           firstname: userData.firstname,
           lastname: userData.lastname,
-          username: userData.username
+          username: userData.username | userData.id,
+          id: userData.id
         });
+
         try {
           this.get('metrics').identify('GoogleAnalytics', {
-            distinctId: this.get(userData.username)
+            distinctId: this.get(userId)
           });
         } catch(e) {
           //adapters can be disabled on some env. so we will have an error
         }
-        this.get('store').findRecord('user', userId)
-        .then(user => {
-          user.set('email', userData.email);
+
+        return Ember.RSVP.all([
+          this.get('store').findRecord('user', userId),
+          this.get('store').query('credential', {user_id: userId, primary: true}),
+          this.get('store').findRecord('user_profile', profileId),
+          this.get('store').findRecord('user_setting', settingsId)
+        ])
+        .then(data => {
+          let user = data[0];
+          let credentials = data[1].content;
+          let profile = data[2];
+          user.set('email', credentials[0].email);
           user.set('isEmailValidated', userData.isEmailValidated);
+          user.set('isCurrentUser', true);
+          user.set('profile', profile);
           this.set('authenticatedUser', user);
         });
+
       }
     }
   })

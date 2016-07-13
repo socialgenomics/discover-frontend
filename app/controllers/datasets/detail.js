@@ -15,7 +15,7 @@ export default Ember.Controller.extend({
   }),
 
   isPublic: function() {
-    var access = this.get('model.repository.access');
+    var access = this.get('model.datasource.access');
     if (access === 'public' || access === 'open') {
       return true;
     }

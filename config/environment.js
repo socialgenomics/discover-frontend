@@ -46,16 +46,15 @@ module.exports = function(environment) {
        */
       APIRoutes : (function() {
         var mapping = {
-          'users.login' : '/api/users/login',
-          'users.logout' : '/api/users/logout',
-          'users.signup' : '/api/users',
-          'datasets.search' : '/api/datasets/search',
-          'datasets.trending' : '/api/datasets/search/trending',
-          'invites': '/api/invites',
-          'users.profiles': '/api/users/profiles',
-          'reset-password': '/api/users/password-reset',
-          'verify-email': '/api/users/verify',
-          'verify-email-resend': '/api/users/verify/resend'
+          'users.login' : '/auth/login',
+          'users.logout' : '/auth/logout',
+          'users.signup' : '/auth/register',
+          'datasets.search' : '/search',
+          'datasets.trending' : '/search/trending',
+          'users.profiles': '/users/{id}/profile',
+          'reset-password': '/auth/password-reset',
+          'verify-email': '/auth/verify',
+          'verify-email-resend': '/auth/verify/resend'
         };
         _.each(mapping,
           function(path, key, obj) {

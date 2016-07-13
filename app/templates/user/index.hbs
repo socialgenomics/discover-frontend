@@ -8,9 +8,9 @@
         <div class="card">
           <div class="card-content">
             <h1>{{model.user.displayName}}</h1>
-            {{#if isOwnProfile}}{{#link-to "users.profile" class="edit-btn fa-2x sub-dark"}}{{fa-icon "pencil-square-o"}}{{/link-to}}{{/if}}
+            {{#if isOwnProfile}}{{#link-to "users.user_profile" class="edit-btn fa-2x sub-dark"}}{{fa-icon "pencil-square-o"}}{{/link-to}}{{/if}}
             <div class="profile-img">
-              <img src={{model.profile.avatar}}>
+              <img src={{model.user_profile.avatar}}>
             </div>
             {{#if session.authenticatedUser.isEmailValidated}}
               <h4 class="verified">{{fa-icon "check-circle"}} Verified Account</h4>

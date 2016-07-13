@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import _ from 'npm:underscore';
+import _ from 'npm:lodash';
 
 export default Ember.Mixin.create({
 

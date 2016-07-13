@@ -4,11 +4,13 @@ export default Ember.Component.extend({
   firstname: null,
   username: null,
   avatar: null,
+  id: null,
   session: Ember.inject.service(),
-
+  
   didRender() {
     this._super(...arguments);
     //dropdown initialization
+    
     this.$('.dropdown-button').dropdown({
       inDuration: 500,
       outDuration: 225,
@@ -26,7 +28,7 @@ export default Ember.Component.extend({
       this.get('metrics').trackEvent({
         category: 'auth',
         action: 'logout',
-        label: this.get('session.data.authenticatedUser.email')
+        label: this.get('session.data.authenticatedUser.main_email')
       });
       this.get('session').invalidate()
     }

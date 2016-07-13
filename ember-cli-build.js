@@ -47,6 +47,7 @@ module.exports = function(defaults) {
       disableTestGenerator: process.env.CI ? true : false
     },
     babel: {
+      sourceMaps: 'inline',
       optional: ['es7.decorators']
     },
     // Disable JSHint

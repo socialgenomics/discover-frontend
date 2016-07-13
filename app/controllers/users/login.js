@@ -66,9 +66,9 @@ export default Ember.Controller.extend(
     },
 
     resetPassword: function() {
-      if (!Ember.isBlank(this.get('email'))) {
+      if (!Ember.isBlank(this.get('main_email'))) {
         ajax({
-          url: ENV.APIRoutes['reset-password'] + '/' + this.get('email'),
+          url: ENV.APIRoutes['reset-password'] + '/' + this.get('main_email'),
           type: 'GET'
         })
         .then(this.displayMessages.bind(this))

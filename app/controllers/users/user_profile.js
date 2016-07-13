@@ -7,7 +7,7 @@ export default Ember.Controller.extend(
   session: Ember.inject.service(),
   firstname: Ember.computed.alias('session.authenticatedUser.firstname'),
   lastname: Ember.computed.alias('session.authenticatedUser.lastname'),
-  affiliation: Ember.computed.alias('session.authenticatedUser.profile.workOrganisation'),
+  affiliation: Ember.computed.alias('session.authenticatedUser.user_profile.work_organisation'),
   saved: false,
   validations: {
     firstname: {
