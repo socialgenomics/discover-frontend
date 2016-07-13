@@ -54,9 +54,6 @@ module.exports = function(defaults) {
     'ember-cli-mocha': {
       useLintTree: false
     },
-    'ember-cli-qunit': {
-      useLintTree: false
-    },
     // Use ESLint
     // eslint: {
     //   testGenerator: eslintTestGenerator
