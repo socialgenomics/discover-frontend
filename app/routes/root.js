@@ -34,16 +34,11 @@ export default Ember.Route.extend({
         this.store.query('dataset', { isRequest: false })
       ])
       .then(data => {
-        // let datasets = this.store.peekAll('dataset');
-        // let datasources = datasets.map(dataset =>{
-        //   return this.store.findRecord('datasource', dataset.id);
-        // });
-
-        // this.get('store').pushPayload(data[1].datasets);
-        // HACK - pushPayload isnt working so get the dataset again!!
-        let trending = data[1].datasets.map(ds => {
-          return this.store.findRecord('dataset', ds.id);
+        //Normalize and push trending datasets
+        let trending = data[1].datasets.map((datasetObj) => {
+          return this.store.push(this.store.normalize('dataset', datasetObj));
         });
+
         return {
           stats: data[0],
           datasets: trending,
