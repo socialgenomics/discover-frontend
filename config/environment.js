@@ -136,7 +136,7 @@ module.exports = function(environment) {
         },
         {
           name: 'Survicate',
-          environments: ['staging'],
+          environments: ['production'],
           config: {
             code: 'vMBxljpAIEgLPliAJkMNKmjhaeDjmMhc'
           }
