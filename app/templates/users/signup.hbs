@@ -19,6 +19,19 @@
 
   <section class="container-signup no-padding">
    <form {{action "signupAndAuthenticate" on="submit"}} class="margin-top margin-bottom">
+     <div class="row">
+       <div class="col m12 s12 center-align">
+         <ul class="list-inline">
+           <li><a {{ action 'thirdPartyAuth' 'google-oauth2' }}><img class="social-media-icon btn-floating" src="/assets/images/icons/social/googleplus.png"></a></li>
+           <li><a {{ action 'thirdPartyAuth' 'linked-in-oauth2'}}><img class="social-media-icon btn-floating" src="/assets/images/icons/social/linkedin.png"></a></li>
+         </ul>
+       </div>
+     </div>
+     <div class="or-div">
+       <span>
+         OR
+       </span>
+     </div>
      {{validated-input
        type="Text"
        lbl="Full Name"
