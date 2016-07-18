@@ -15,11 +15,11 @@ export default Torii.extend({
   authenticate(options) {
     return this._super(options).then(function (data) {
       return ajax({
-        url: ENV.APIRoutes['users.login'],
+        url: ENV.APIRoutes['auth.oauth'],
         method: 'post',
         data: {
           provider: data.provider,
-          authorizationCode: data.authorizationCode
+          auth_code: data.authorizationCode
         }
       })
       .then(function(response) {
