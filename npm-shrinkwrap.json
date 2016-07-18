@@ -2000,9 +2000,9 @@
       "resolved": "https://registry.npmjs.org/ember-cli-get-component-path-option/-/ember-cli-get-component-path-option-1.0.0.tgz"
     },
     "ember-cli-htmlbars": {
-      "version": "1.0.3",
+      "version": "1.0.8",
       "from": "ember-cli-htmlbars@>=1.0.1 <2.0.0",
-      "resolved": "https://registry.npmjs.org/ember-cli-htmlbars/-/ember-cli-htmlbars-1.0.3.tgz"
+      "resolved": "https://registry.npmjs.org/ember-cli-htmlbars/-/ember-cli-htmlbars-1.0.8.tgz"
     },
     "ember-cli-is-package-missing": {
       "version": "1.0.0",
