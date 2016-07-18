@@ -29,7 +29,7 @@ export default Ember.Route.extend({
       //Get recent requests and registrations
       return Ember.RSVP.all([
         ajax({ url: ENV.APIRoutes['datasets.search'] , type: 'GET' }),
-        ajax({ url: ENV.APIRoutes['datasets.trending'] , type: 'GET' }), //TODO response = empty obj
+        ajax({ url: ENV.APIRoutes['datasets.trending'] , type: 'GET' }),
         this.store.query('dataset', { isRequest: true }),
         this.store.query('dataset', { isRequest: false })
       ])

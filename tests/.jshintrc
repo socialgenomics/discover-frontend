@@ -6,6 +6,7 @@
     "setTimeout",
     "$",
     "-Promise",
+    "Promise",
     "define",
     "console",
     "visit",
