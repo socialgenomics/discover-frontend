@@ -7,7 +7,6 @@
     "ember-cli-test-loader": "0.2.2",
     "ember-load-initializers": "0.1.7",
     "jquery": "2.1.4",
-    "loader.js": "^3.5.0",
     "moment": ">= 2.8.0",
     "repositive-styles": "git@github.com:repositive/repositive-styles.git#development",
     "showdown": "^1.4.2",
@@ -21,5 +20,8 @@
     "mocha": "~2.2.4",
     "chai": "~2.3.0",
     "ember-mocha-adapter": "~0.3.1"
+  },
+  "resolutions": {
+    "loader.js": "^3.5.0"
   }
 }
