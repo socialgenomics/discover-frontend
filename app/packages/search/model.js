@@ -112,12 +112,10 @@ export default DS.Model.extend({
       if (resp.datasets.length > 0 && !resp.datasets[0].id) {
         resp.datasets.shift();
       }
-
       let promisedDatasets = resp.datasets.map(dataset => {
         let emberDataDataset =  this.store.findRecord('dataset', dataset.id);
         return emberDataDataset;
       });
-
       return Promise.all(promisedDatasets);
     })
     .then(datasets => {
@@ -130,7 +128,6 @@ export default DS.Model.extend({
       datasets.forEach(dataset => {
         this.get('datasets').pushObject(dataset);
       });
-
       this.set('isLoading', false);
     })
     .catch(function(err) {
