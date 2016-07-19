@@ -30,8 +30,5 @@ export default DS.Model.extend({
     }
     return description;
   }.property('description'),
-  colour: DS.attr('string'),
-  // views: function() {
-  //   return this.get('count') + poisson(2);
-  // }.property('count')
+  colour: DS.attr('string')
 });
