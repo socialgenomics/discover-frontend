@@ -82,9 +82,11 @@
           </span>
         </li>
         {{/if}}
+        {{#if dataset.count}}
         <li class="tooltipped" data-position="bottom" data-tooltip="Views">
-          {{fa-icon "eye"}}<span>{{dataset.views}}</span>
+          {{fa-icon "eye"}}<span>{{dataset.count}}</span>
         </li>
+        {{/if}}
         <li class="tooltipped" data-position="bottom" data-tooltip="Discussion">{{fa-icon "comments"}}<span>{{dataset.comments.length}}</span></li>
       </ul>
     </div>
