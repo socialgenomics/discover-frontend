@@ -4,8 +4,6 @@ export default Ember.Component.extend({
   errors: null,
   isActive: false,
   hasBeenFocused: false,
-  //formSubmitted: false,
-  value: '',
 
   showValid: function() {
     return (this.get('hasBeenFocused') || this.get('formSubmitted')) && Ember.isEmpty(this.get('errors'));
@@ -15,7 +13,6 @@ export default Ember.Component.extend({
     return (this.get('hasBeenFocused') || this.get('formSubmitted')) && !Ember.isEmpty(this.get('errors'));
   }.property('hasBeenFocused', 'errors', 'formSubmitted'),
 
-  //sets the class names of this component
   classNames: 'input-container',
   classNameBindings: ['isActive:active', 'showValid:valid', 'showInvalid:invalid'],
 

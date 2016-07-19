@@ -25,9 +25,9 @@
 </div>
 <div class="lbl">{{lbl}}</div>
 
-{{#if (eq icon "fullname")}}{{fa-icon "user"}}{{/if}}
-{{#if (eq icon "password")}}{{fa-icon "lock"}}{{/if}}
-{{#if (eq icon "email")}}{{fa-icon "envelope"}}{{/if}}
+{{#if (eq placeholder "Full Name")}}{{fa-icon "user"}}{{/if}}
+{{#if (eq type "password")}}{{fa-icon "lock"}}{{/if}}
+{{#if (eq type "email")}}{{fa-icon "envelope"}}{{/if}}
 
 {{#if showInvalid}}
   <div class="errors">
