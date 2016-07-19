@@ -1,13 +1,11 @@
 import Ember from 'ember';
 import EmberValidations from 'ember-validations';
-import ServerValidationMixin from 'repositive/validators/remote/server/mixin';
 import ajax from 'ic-ajax';
 import ENV from 'repositive/config/environment';
 const { get } = Ember;
 
 export default Ember.Controller.extend(
   EmberValidations,
-  ServerValidationMixin,
 {
   session: Ember.inject.service(),
   email: null,

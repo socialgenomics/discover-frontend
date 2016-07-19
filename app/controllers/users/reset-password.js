@@ -1,12 +1,10 @@
 import Ember from 'ember';
 import EmberValidations from 'ember-validations';
-import ServerValidationMixin from 'repositive/validators/remote/server/mixin';
 import ENV from 'repositive/config/environment';
 import ajax from 'ic-ajax';
 
 export default Ember.Controller.extend(
   EmberValidations,
-  ServerValidationMixin,
 {
   resetKey: null,
   password1: null,
@@ -72,15 +70,13 @@ export default Ember.Controller.extend(
         .then(resp => {
           this.set('passwordChanged', true)
           .then(() => {
-            this.reloadMessages(resp.messages)
-          })
+            this.reloadMessages(resp.messages);
+          });
         })
         .catch(err => {
           console.log('ERROR ' + err);
           if (err) {
             this.reloadMessages(err.jqXHR.responseJSON.messages);
-            //TODO write a helper to render messages
-            //this.get("messages").addObjects(err.jqXHR.responseJSON.messages)
           }
         });
       }

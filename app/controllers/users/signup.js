@@ -1,6 +1,5 @@
 import Ember from 'ember';
 import EmberValidations from 'ember-validations';
-import ServerValidationMixin from 'repositive/validators/remote/server/mixin';
 import ENV from 'repositive/config/environment';
 import ajax from 'ic-ajax';
 import { validator } from 'ember-validations';
@@ -8,7 +7,6 @@ const{ get } = Ember;
 
 export default Ember.Controller.extend(
    EmberValidations,
-   ServerValidationMixin,
 {
   session: Ember.inject.service(),
 
