@@ -1,5 +1,4 @@
 import DS from 'ember-data';
-import { poisson } from 'repositive/utils/distributions';
 
 export default DS.Model.extend({
   userId: DS.belongsTo('user'),
@@ -8,7 +7,6 @@ export default DS.Model.extend({
   url: DS.attr('string'),
   tech: DS.attr('string'),
   assay: DS.attr('string'),
-  //properties : DS.belongsTo('property'),
   datasourceId: DS.belongsTo('datasource'),
   favorites: DS.hasMany('favourite'),
   comments: DS.hasMany('comments'),
