@@ -6,16 +6,17 @@ import {
 } from 'ember-mocha';
 
 describeModule(
-  'controller:datasets/request',
-  'DatasetsRequestController',
+  'controller:application',
+  'ApplicationController',
   {
     needs: [
       'service:session',
       'service:metrics',
-      'ember-validations@validator:local/presence'
+      'service:moment'
     ]
   },
   function() {
+    // Replace this with your real tests.
     it('exists', function() {
       let controller = this.subject();
       expect(controller).to.be.ok;

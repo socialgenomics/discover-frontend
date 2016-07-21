@@ -1,20 +1,30 @@
-import { moduleForComponent, test } from 'ember-qunit';
+/* jshint expr:true */
+import { expect } from 'chai';
+import {
+  describeComponent,
+  it
+} from 'ember-mocha';
 import hbs from 'htmlbars-inline-precompile';
 
-moduleForComponent('dataset-card', 'Integration | Component | dataset card', {
-  integration: true
-});
+describeComponent(
+  'dataset-card',
+  'Integration: DatasetCardComponent',
+  {
+    integration: true
+  },
+  function() {
+    it('renders', function() {
+      // Set any properties with this.set('myProperty', 'value');
+      // Handle any actions with this.on('myAction', function(val) { ... });
+      // Template block usage:
+      // this.render(hbs`
+      //   {{#dataset-card}}
+      //     template content
+      //   {{/dataset-card}}
+      // `);
 
-test('it renders', function(assert) {
-  // Set any properties with this.set('myProperty', 'value');
-  // Handle any actions with this.on('myAction', function(val) { ... });"
-
-  this.render(hbs`{{dataset-card}}`);
-
-  assert.ok(this.$()); // element is rendered
-
-  // Template block usage:"
-  // this.render(hbs`
-  //   {{dataset-card}}
-  // `);
-});
+      this.render(hbs`{{dataset-card}}`);
+      expect(this.$()).to.have.length(1);
+    });
+  }
+);

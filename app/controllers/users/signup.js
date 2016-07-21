@@ -1,6 +1,5 @@
 import Ember from 'ember';
 import EmberValidations from 'ember-validations';
-import ServerValidationMixin from 'repositive/validators/remote/server/mixin';
 import ENV from 'repositive/config/environment';
 import ajax from 'ic-ajax';
 import { validator } from 'ember-validations';
@@ -8,7 +7,6 @@ const{ get } = Ember;
 
 export default Ember.Controller.extend(
    EmberValidations,
-   ServerValidationMixin,
 {
   session: Ember.inject.service(),
 
@@ -103,14 +101,21 @@ export default Ember.Controller.extend(
     }
   }.observes('password'),
 
-  displayMessages : function(resp) {
-    let messages = get(resp, 'messages');
-    if (messages) {
-      this.addValidationErrors(messages);
-      messages = messages.reject(item => {
-        return item.type === 'validation';
+  displayMessage(resp) {
+    const errorCode = get(resp, 'status_code');
+    let message;
+    if (errorCode === 400) { //Bad Request
+      message = 'Error: Invalid email or an account already exists with this email.';
+    } else {
+      message = get(resp, 'message');
+    }
+    if (message) {
+      this.flashMessages.add({
+        message: message,
+        type: 'warning',
+        timeout: 7000,
+        class: 'fadeIn'
       });
-      this.set('loading', false);
     }
   },
 
@@ -129,22 +134,17 @@ export default Ember.Controller.extend(
           data: credentials
         })
         .then((resp)=> { // signup has suceeded, now login
-          // render any messages provided by the backend
-          if ('messages' in resp) {
-            this.displayMessages(resp);
-          }
-          // login!
           this.get('session').authenticate('authenticator:repositive', credentials)
           .then(() => this.get('session').set('data.firstVisit', true))
           .then(() => this.get('session').set('data.displayWelcomeMessage', false))
-          .catch(this.displayMessages.bind(this));
+          .catch(this.displayMessage.bind(this));
         })
         .catch(err => { // error with signup
           if (err.jqXHR !== undefined) {
             /*
               if the error is 4XX or 5XX server resp display the error messages.
              */
-            this.displayMessages(err.jqXHR.responseJSON);
+            this.displayMessage(err.jqXHR.responseJSON);
           } else {
             throw err;
           }
@@ -153,7 +153,7 @@ export default Ember.Controller.extend(
     },
 
     toggleCheckbox: function() {
-      this.set('showPassword', !this.get('showPassword'));
+      this.toggleProperty('showPassword');
     }
   }
 });

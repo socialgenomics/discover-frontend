@@ -1,12 +1,21 @@
 <nav class="navbar" id="navbar">
   <div class="navbar-wrapper">
 
-    <a href="https://repositive.io">
-      <div class="navbar-logo valign-wrapper">
-        {{!-- <img id="mobile-logo" class="hide-on-med-and-up nav-logo-square" src="/assets/images/repositive-logo.png" alt="Repositive DNA logo"> --}}
-        <img id="full-logo" class="responsive-img hide-on-small-only" src="/assets/images/logo-full.png" alt="Repositive DNA logo">
-      </div>
-    </a>
+    {{#unless isAuthenticated}}
+      <a href="https://repositive.io">
+        <div class="navbar-logo valign-wrapper">
+          {{!-- <img id="mobile-logo" class="hide-on-med-and-up nav-logo-square" src="/assets/images/repositive-logo.png" alt="Repositive DNA logo"> --}}
+          <img id="full-logo" class="responsive-img hide-on-small-only" src="/assets/images/logo-full.png" alt="Repositive DNA logo">
+        </div>
+      </a>
+    {{else}}
+      {{#link-to 'root'}}
+        <div class="navbar-logo valign-wrapper">
+          {{!-- <img id="mobile-logo" class="hide-on-med-and-up nav-logo-square" src="/assets/images/repositive-logo.png" alt="Repositive DNA logo"> --}}
+          <img id="full-logo" class="responsive-img hide-on-small-only" src="/assets/images/logo-full.png" alt="Repositive DNA logo">
+        </div>
+      {{/link-to}}
+    {{/unless}}
 
     {{#if isAuthenticated}}
 
@@ -42,7 +51,7 @@
           </div>
         </div>
 
-        {{navbar-dropdown avatar=avatar firstname=firstname username=username}}
+        {{navbar-dropdown avatar=avatar firstname=firstname username=username id=id}}
       {{/unless}}
 
     {{else}}

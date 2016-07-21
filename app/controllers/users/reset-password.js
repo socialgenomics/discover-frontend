@@ -1,20 +1,17 @@
 import Ember from 'ember';
 import EmberValidations from 'ember-validations';
-import ServerValidationMixin from 'repositive/validators/remote/server/mixin';
 import ENV from 'repositive/config/environment';
 import ajax from 'ic-ajax';
 
-
 export default Ember.Controller.extend(
   EmberValidations,
-  ServerValidationMixin,
 {
   resetKey: null,
   password1: null,
   password2: null,
   loading: false,
   messages: [],
-  resendEmailMessage: false,
+  passwordChanged: false,
 
   buttonDisabled: function() {
     return !this.get('isValid') || this.get('loading');
@@ -54,10 +51,13 @@ export default Ember.Controller.extend(
     submitForm: function() {
       this.set('loading', true);
       if (this.get('password1') !== this.get('password2')) {
-        this.reloadMessages([{
+        this.flashMessages.add({
+          message: 'Passwords do not match.',
           type: 'warning',
-          text: 'Passwords do not match'
-        }]);
+          timeout: 7000,
+          sticky: true,
+          class: 'fadeIn'
+        });
       } else {
         ajax({
           url: ENV.APIRoutes['reset-password'],
@@ -67,14 +67,17 @@ export default Ember.Controller.extend(
             password: this.get('password1')
           }
         })
-        .then(resp=> {
-          this.reloadMessages(resp.messages);
+        .then(resp => {
+          this.set('passwordChanged', true)
+          .then(() => {
+            this.reloadMessages(resp.messages);
+          });
         })
-        .catch(err=> {
-          this.set('resendEmailMessage', true);
-          Ember.Logger.error(err);
-          //TODO write a helper to render messages
-          //this.get("messages").addObjects(err.jqXHR.responseJSON.messages)
+        .catch(err => {
+          console.log('ERROR ' + err);
+          if (err) {
+            this.reloadMessages(err.jqXHR.responseJSON.messages);
+          }
         });
       }
     }

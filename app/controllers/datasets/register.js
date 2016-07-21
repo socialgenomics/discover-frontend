@@ -1,11 +1,15 @@
 import Ember from 'ember';
 import EmberValidations from 'ember-validations';
+import ajax from 'ic-ajax';
+
 export default Ember.Controller.extend(
   EmberValidations,
 {
+  session: Ember.inject.service(),
+
   title: null,
   description: null,
-  webURL: null,
+  url: null,
   loading: false,
   validations: {
     title: {
@@ -14,7 +18,7 @@ export default Ember.Controller.extend(
     description: {
       presence: { message: 'This field can\'t be blank.' }
     },
-    webURL: {
+    url: {
       format: {
         with: /[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/,
         allowBlank: true,
@@ -26,18 +30,26 @@ export default Ember.Controller.extend(
     addDataset: function() {
       if (this.get('isValid')) {
         this.set('loading', true);
-
-        var dataset = this.store.createRecord('dataset', {});
-        var props = this.store.createRecord('property', {
-          title: this.title,
-          description: this.description,
-          webURL: this.webURL
-        });
-        dataset.properties = props;
-
-        dataset
-        .save()
-        .then((created)=> {
+        //TODO: Remove hard-coded URL - Define it in config/environment
+        ajax({ url: 'https://backend-dev.repositive.io/datasources?short_name=REPOSITIVE', type: 'GET' })
+        .then(datasource => {
+          return this.store.findRecord('datasource', datasource.datasources[0].id);
+        })
+        .then(datasourceModel => {
+          const userModel = this.get('session.authenticatedUser');
+          return this.store.createRecord('dataset', {
+            title: this.title,
+            description: this.description,
+            url: this.url,
+            datasourceId: datasourceModel,
+            externalID: userModel.id + Date.now(),
+            userId: userModel
+          });
+        })
+        .then(dataset => {
+          return dataset.save();
+        })
+        .then(created => {
           this.flashMessages.add({
             message: 'Dataset successfully registered',
             type: 'success',
@@ -51,12 +63,17 @@ export default Ember.Controller.extend(
             label: created.get('id')
           });
         })
-        .catch(function(err) {
-          console.log(err);
+        .catch(err => {
           this.set('loading', false);
+          this.flashMessages.add({
+            message: 'Oh dear. There was a problem registering your dataset.',
+            type: 'warning',
+            timeout: 7000,
+            class: 'fadeInOut'
+          });
+          Ember.Logger.error(err);
         });
       }
     }
-
   }
 });

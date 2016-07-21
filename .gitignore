@@ -17,6 +17,7 @@ ansible/tmp
 npm-debug.log
 testem.log
 .DS_Store
+Session.vim
 
 *.sw*
 git_stats/

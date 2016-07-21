@@ -8,9 +8,9 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
         queryParams: {
           q: query,
           ordering: null,
-          assayType: null,
+          assay: null,
           tags: null,
-          repository: null,
+          datasource: null,
           access: null
         }
       });

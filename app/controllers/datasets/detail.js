@@ -15,7 +15,7 @@ export default Ember.Controller.extend({
   }),
 
   isPublic: function() {
-    var access = this.get('model.repository.access');
+    var access = this.get('model.datasource.access');
     if (access === 'public' || access === 'open') {
       return true;
     }
@@ -30,7 +30,7 @@ export default Ember.Controller.extend({
         label: this.get('model.properties.title')
       });
       //HACK to open link in new tab - NEED TO TEST THIS IN OTHER BROWSERS!
-      var tab = window.open(this.get('model.properties.webURL'), '_blank');
+      var tab = window.open(this.get('model.url'), '_blank');
       tab.focus();
     },
 
