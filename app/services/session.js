@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import DS from 'ember-data';
 import SessionService from 'ember-simple-auth/services/session';
 
 export default SessionService.extend({
@@ -8,6 +9,7 @@ export default SessionService.extend({
   setAuthenticatedUser: Ember.observer('data.authenticated.user', function() {
     if (this.get('isAuthenticated')) {
       const userData = this.get('data.authenticated.user');
+
       if (!userData) {
         // force logout
         this.invalidate();
@@ -15,7 +17,6 @@ export default SessionService.extend({
         let userId = userData.id;
         let profileId = userData.user_profile.id;
         let settingsId = userData.user_settings.id;
-
         this.get('metrics').identify({
           email: userData.credentials[0].email,
           firstname: userData.firstname,
@@ -28,7 +29,7 @@ export default SessionService.extend({
           this.get('metrics').identify('GoogleAnalytics', {
             distinctId: this.get(userId)
           });
-        } catch(e) {
+        } catch(e){
           //adapters can be disabled on some env. so we will have an error
         }
 
