@@ -1,20 +1,17 @@
 import Ember from 'ember';
 import EmberValidations from 'ember-validations';
-import ServerValidationMixin from 'repositive/validators/remote/server/mixin';
 import ajax from 'ic-ajax';
 import ENV from 'repositive/config/environment';
 const { get } = Ember;
 
 export default Ember.Controller.extend(
   EmberValidations,
-  ServerValidationMixin,
 {
   session: Ember.inject.service(),
   email: null,
   password: null,
   loading: false,
   formSubmitted: false,
-  messages: [],
 
   buttonDisabled: function() {
     return !this.get('isValid') || this.get('loading');
@@ -39,14 +36,24 @@ export default Ember.Controller.extend(
       server: true // must be last - unknown bug
     }
   },
-  displayMessages: function(resp) {
-    let messages = get(resp, 'messages');
-    if (messages) {
-      this.addValidationErrors(messages);
-      this.set('messages', []);
-      this.get('messages').addObjects(messages);
+  displayMessage(resp) {
+    if (resp) {
+      const errorCode = get(resp, 'status_code');
+      let message;
+      if (errorCode === 400) { //Bad Request
+        message = 'Error: Invalid Email. Please check that you have typed your email correctly.';
+      } else {
+        message = get(resp, 'message');
+      }
+      if (message) {
+        this.flashMessages.add({
+          message: message,
+          type: 'warning',
+          timeout: 7000,
+          class: 'fadeIn'
+        })
+      }
     }
-    this.set('loading', false);
   },
 
   actions: {
@@ -61,21 +68,12 @@ export default Ember.Controller.extend(
         email: this.get('email'),
         password: this.get('password')
       })
-      .then(this.displayMessages.bind(this))
-      .catch(this.displayMessages.bind(this));
+      .then(this.displayMessage.bind(this))
+      .catch(this.displayMessage.bind(this));
     },
 
     resetPassword: function() {
-      if (!Ember.isBlank(this.get('email'))) {
-        ajax({
-          url: ENV.APIRoutes['reset-password'] + '/' + this.get('email'),
-          type: 'GET'
-        })
-        .then(this.displayMessages.bind(this))
-        .catch(this.displayMessages.bind(this));
-      } else {
-        this.transitionToRoute('users.resend-password');
-      }
+      this.transitionToRoute('users.resend-password');
     }
   }
 });

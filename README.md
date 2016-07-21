@@ -1,26 +1,5 @@
 # Ember Frontend for repositive.io
 
-
-## Utilising Vagrant
-
-See <https://github.com/repositive/api.repositive.io/wiki/Vagrant>.
-
-### Setting up SSH agent
-
-See <https://github.com/repositive/api.repositive.io/wiki/SSH>.
-
-### About the Vagrant setup
-
-The VM has a static IP address, `192.168.33.12`. You can optionally add an entry to `/etc/hosts` to access the VM by a `repositive-frontend` domain name instead of IP, for example utilising [Gas Mask](http://clockwise.ee).
-
-    # /etc/hosts
-    192.168.33.12 repositive-frontend
-
-The following services are running in the VM:
-
-* Ember app: <http://repositive-frontend:4200/>
-* Supervisor Web UI: <http://repositive-frontend:9001>. This allows start/stop/restart and monitor the logs of the Ember app.
-
 ## Application Architecture
 
 ### Prerequisites
@@ -49,6 +28,17 @@ You will need the following things properly installed on your computer.
  * sublime - [SublimeLinter-jscs](https://packagecontrol.io/packages/SublimeLinter-jscs). See [this article](https://medium.com/@addyosmani/auto-formatting-javascript-code-style-fe0f98a923b8#.jud0r23pu)
 * `npm start`
 * Visit your app at [http://localhost:4200](http://localhost:4200). (it is important you use this address and not 127.0.0.1:4200 for the 3rd party authentication to work correctly)
+
+### Writing and Running Tests
+
+We use [ember-cli-mocha](https://github.com/switchfly/ember-cli-mocha) for running our tests. This uses the [Chai](http://chaijs.com/) assertion library. Ember-cli-mocha overrides the test blueprints of ember-cli.
+
+The actual testing modules are from [ember-mocha](https://github.com/switchfly/ember-mocha), so reference this when writing tests.
+
+We also use [ember-sinon](https://github.com/csantero/ember-sinon) for spies and better stubbing.
+
+To run the tests use: `ember test --server` or `ember t -s` for short.
+
 
 ## Live editing of repositive-styles
 
@@ -157,16 +147,10 @@ Work as usual on both projects. When finishing work on both branches:
 
 
 
-
-
 ### Code Generators
 
 Make use of the many generators for code, try `ember help generate` for more details
 
-### Running Tests
-
-* `ember test`
-* `ember test --server`
 
 ### Deploying
 

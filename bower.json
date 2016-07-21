@@ -6,21 +6,22 @@
     "ember-cli-shims": "0.1.0",
     "ember-cli-test-loader": "0.2.2",
     "ember-load-initializers": "0.1.7",
-    "ember-qunit-notifications": "0.1.0",
     "jquery": "2.1.4",
-    "loader.js": "^3.5.0",
     "moment": ">= 2.8.0",
     "repositive-styles": "git@github.com:repositive/repositive-styles.git#development",
-    "showdown": "^1.4.0",
+    "showdown": "^1.4.2",
     "materialize": "~0.97.0",
     "sinonjs": "^1.17.1",
     "font-awesome": "~4.5.0",
     "moment-timezone": ">= 0.1.0",
     "pretender": "~0.10.1",
     "lodash": "~3.7.0",
-    "Faker": "~3.0.0"
+    "Faker": "~3.0.0",
+    "mocha": "~2.2.4",
+    "chai": "~2.3.0",
+    "ember-mocha-adapter": "~0.3.1"
   },
   "resolutions": {
-    "ember": "2.5.1"
+    "loader.js": "^3.5.0"
   }
 }

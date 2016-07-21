@@ -8,7 +8,6 @@ export default Ember.Mixin.create({
   session: Ember.inject.service(),
 
   actions: {
-
     thirdPartyAuth: function(providerName) {
       this.get('torii').open(providerName)
       .then((data)=> {

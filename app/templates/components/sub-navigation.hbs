@@ -5,9 +5,9 @@
         <ul class="tabs">
           <li class="tab">
             {{#if (eq active "profile")}}
-              {{#link-to "users.profile"  class="active"}}EDIT PROFILE{{fa-icon "user"}}{{/link-to}}
+              {{#link-to "users.user_profile"  class="active"}}EDIT PROFILE{{fa-icon "user"}}{{/link-to}}
             {{else}}
-              {{#link-to "users.profile" }}EDIT PROFILE{{fa-icon "user"}}{{/link-to}}
+              {{#link-to "users.user_profile" }}EDIT PROFILE{{fa-icon "user"}}{{/link-to}}
             {{/if}}
           </li>
           <li class="tab">
@@ -19,9 +19,9 @@
           </li>
           <li class="tab">
             {{#if (eq active "settings")}}
-              {{#link-to 'users.settings' class="active"}}SETTINGS{{fa-icon "cog"}}{{/link-to}}
+              {{#link-to 'users.user_settings' class="active"}}SETTINGS{{fa-icon "cog"}}{{/link-to}}
             {{else}}
-              {{#link-to "users.settings"}}SETTINGS{{fa-icon "cog"}}{{/link-to}}
+              {{#link-to "users.user_settings"}}SETTINGS{{fa-icon "cog"}}{{/link-to}}
             {{/if}}
           </li>
           <!-- <li class="tab">

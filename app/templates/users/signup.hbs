@@ -1,24 +1,19 @@
 <div class="content sub-grey">
-  <header class="padding-top">
-    <h2 class="center-align margin-bottom">Create your free account to make use of all available features</h2>
-    <div class="row center sub-grey">
-      <div class="col m4">
-        <img src="/assets/images/request2.png" class="smaller-icon">
-        <p class="padding-sides">Request data from the community if you didn't find what you were looking for.</p>
-      </div>
-      <div class="col m4">
-        <img src="/assets/images/register2.png" class="smaller-icon">
-        <p class="padding-sides">Register your datasets to make them visible to other researchers.</p>
-      </div>
-      <div class="col m4">
-        <img src="/assets/images/discuss2.png" class="smaller-icon">
-        <p class="padding-sides">Have discussions with other members of the community about data.</p>
-      </div>
-    </div>
-  </header>
-
   <section class="container-signup no-padding">
    <form {{action "signupAndAuthenticate" on="submit"}} class="margin-top margin-bottom">
+     <div class="row">
+       <div class="col m12 s12 center-align">
+         <ul class="list-inline">
+           <li><a {{ action 'thirdPartyAuth' 'google-oauth2' }}><img class="social-media-icon btn-floating" src="/assets/images/icons/social/googleplus.png"></a></li>
+           <li><a {{ action 'thirdPartyAuth' 'linked-in-oauth2'}}><img class="social-media-icon btn-floating" src="/assets/images/icons/social/linkedin.png"></a></li>
+         </ul>
+       </div>
+     </div>
+     <div class="or-div">
+       <span>
+         OR
+       </span>
+     </div>
      {{validated-input
        type="Text"
        lbl="Full Name"
@@ -26,32 +21,33 @@
        errors=errors.fullname
        placeholder="Full Name"
        helpText="You can change your name later in the settings."
-       icon="fullname"
        formSubmitted=formSubmitted
        class="signup-fullname"
+       icon="fullname"
      }}
      {{validated-input
-       type="Email"
+       type="email"
        lbl="Email"
        value=email
        errors=errors.email
        placeholder="Email"
        helpText="You'll need to verify this later."
-       icon="email"
        formSubmitted=formSubmitted
        class="signup-email"
+       icon="email"
      }}
      {{validated-input
        type=type
        lbl="Password"
        value=password
+       password=true
        errors=errors.password
        placeholder="Password"
        helpText="Must be at least 8 characters and include an uppercase letter or number."
-       icon="password"
        showPassword=showPassword
        formSubmitted=formSubmitted
        class="signup-password"
+       icon="password"
      }}
      <div class="password-div no-margin">
        <div class="pw-check left">

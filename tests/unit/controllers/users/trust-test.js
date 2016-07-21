@@ -1,15 +1,24 @@
-import { moduleFor, test } from 'ember-qunit';
+/* jshint expr:true */
+import { expect } from 'chai';
+import {
+  describeModule,
+  it
+} from 'ember-mocha';
 
-moduleFor('controller:users/trust', 'Unit | Controller | users/trust', {
-  // Specify the other units that are required for this test.
-  needs: [
-    'service:metrics',
-    'service:session'
-  ]
-});
-
-// Replace this with your real tests.
-test('it exists', function(assert) {
-  let controller = this.subject();
-  assert.ok(controller);
-});
+describeModule(
+  'controller:users/trust',
+  'UsersTrustController',
+  {
+    needs: [
+      'service:metrics',
+      'service:session'
+    ]
+  },
+  function() {
+    // Replace this with your real tests.
+    it('exists', function() {
+      let controller = this.subject();
+      expect(controller).to.be.ok;
+    });
+  }
+);

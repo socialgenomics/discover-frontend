@@ -1,13 +1,10 @@
 import Ember from 'ember';
 import EmberValidations from 'ember-validations';
-import ServerValidationMixin from 'repositive/validators/remote/server/mixin';
 import ENV from 'repositive/config/environment';
 import ajax from 'ic-ajax';
 
-
 export default Ember.Controller.extend(
   EmberValidations,
-  ServerValidationMixin,
 {
   email: null,
   loading: false,
@@ -35,16 +32,38 @@ export default Ember.Controller.extend(
   },
   actions: {
     submitForm: function() {
+      this.flashMessages.clearMessages();
       this.set('loading', true);
       ajax({
         url: ENV.APIRoutes['reset-password'] + '/' + this.get('email'),
         type: 'GET'
       })
-      .then(resp=> {
-        this.reloadMessages(resp.messages);
+      .then(resp => {
+        this.flashMessages.add({
+          message: 'We have sent an email to ' + this.get('email'),
+          type: 'info',
+          timeout: 7000,
+          sticky: true,
+          class: 'fadeIn'
+        })
+        .then(() => {
+          this.reloadMessages(resp.messages);
+        })
       })
-      .catch(err=> {
-        this.reloadMessages(err.jqXHR.responseJSON.messages);
+      .catch(err => {
+        console.log(err);
+        if (err.errorThrown === 'Not Found') {
+          this.flashMessages.add({
+            message: 'We could not send an email to ' + this.get('email') + '. Please check you\'ve entered the correct email.',
+            type: 'warning',
+            timeout: 7000,
+            sticky: true,
+            class: 'fadeIn'
+          })
+          .then(() => {
+            this.reloadMessages(err.jqXHR.responseJSON.messages);
+          })
+        }
       });
     }
   },

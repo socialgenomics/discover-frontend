@@ -46,16 +46,16 @@ module.exports = function(environment) {
        */
       APIRoutes : (function() {
         var mapping = {
-          'users.login' : '/api/users/login',
-          'users.logout' : '/api/users/logout',
-          'users.signup' : '/api/users',
-          'datasets.search' : '/api/datasets/search',
-          'datasets.trending' : '/api/datasets/search/trending',
-          'invites': '/api/invites',
-          'users.profiles': '/api/users/profiles',
-          'reset-password': '/api/users/password-reset',
-          'verify-email': '/api/users/verify',
-          'verify-email-resend': '/api/users/verify/resend'
+          'auth.oauth': '/auth/oauth',
+          'users.login' : '/auth/login',
+          'users.logout' : '/auth/logout',
+          'users.signup' : '/auth/register',
+          'datasets.search' : '/search',
+          'datasets.trending' : '/search/trending',
+          'users.profiles': '/users/{id}/profile',
+          'reset-password': '/auth/password-reset',
+          'verify-email': '/auth/verify',
+          'verify-email-resend': '/auth/verify/resend'
         };
         _.each(mapping,
           function(path, key, obj) {
@@ -137,7 +137,7 @@ module.exports = function(environment) {
         },
         {
           name: 'Survicate',
-          environments: ['staging'],
+          environments: ['production'],
           config: {
             code: 'vMBxljpAIEgLPliAJkMNKmjhaeDjmMhc'
           }
@@ -172,14 +172,14 @@ module.exports = function(environment) {
 
     if (environment === 'development') {
       ENV.APP.INSPECTLET_WID = 1989736952;
-      ENV.torii.providers['google-oauth2'].redirectUri = 'https://frontend-dev-sol-lon02.repositive.io';
-      ENV.torii.providers['linked-in-oauth2'].redirectUri = 'https://frontend-dev-sol-lon02.repositive.io';
+      ENV.torii.providers['google-oauth2'].redirectUri = 'https://frontend-dev.repositive.io';
+      ENV.torii.providers['linked-in-oauth2'].redirectUri = 'https://frontend-dev.repositive.io';
     }
 
     if (environment === 'staging') {
       ENV.APP.INSPECTLET_WID = 1989736952;
-      ENV.torii.providers['google-oauth2'].redirectUri = 'https://frontend-staging-sol-lon02.repositive.io';
-      ENV.torii.providers['linked-in-oauth2'].redirectUri = 'https://frontend-staging-sol-lon02.repositive.io';
+      ENV.torii.providers['google-oauth2'].redirectUri = 'https://frontend-staging.repositive.io';
+      ENV.torii.providers['linked-in-oauth2'].redirectUri = 'https://frontend-staging.repositive.io';
     }
 
     if (environment === 'production') {

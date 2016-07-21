@@ -8,7 +8,7 @@ export default Ember.Route.extend({
   beforeModel: function() {
     if (this.get('session.data.firstVisit', true) && this.get('session.isAuthenticated')) {
       this.transitionTo('beta-signup-form')
-      .then(() => this.get('session').set('data.displayWelcomeMessage', true))
+      .then(() => this.get('session').set('data.displayWelcomeMessage', true));
     }
 
     if (this.get('session.data.displayWelcomeMessage', true) && this.get('session.isAuthenticated')) {
@@ -24,18 +24,21 @@ export default Ember.Route.extend({
 
   model: function() {
     if (this.get('session.isAuthenticated')) {
+      //Get search data
+      //Get trending datasets
+      //Get recent requests and registrations
       return Ember.RSVP.all([
         ajax({ url: ENV.APIRoutes['datasets.search'] , type: 'GET' }),
-        ajax({ url: ENV.APIRoutes['datasets.trending'] , type: 'GET' }),
-        this.store.query('dataset', { isRequest: true }),
-        this.store.query('dataset', { repository: 'REPOSITIVE', isRequest: false })
+        ajax({ url: ENV.APIRoutes['datasets.trending'] , type: 'GET' }), //TODO response = empty obj
+        this.store.query('request', {}),
+        this.store.query('dataset', { user_registered: true })
       ])
       .then(data => {
-        // this.get('store').pushPayload(data[1].datasets);
-        // HACK - pushPayload isnt working so get the dataset again!!
-        let trending = data[1].datasets.map(ds => {
-          return this.store.findRecord('dataset', ds.id);
+        //Normalize and push trending datasets
+        let trending = data[1].datasets.map((datasetObj) => {
+          return this.store.push(this.store.normalize('dataset', datasetObj));
         });
+
         return {
           stats: data[0],
           datasets: trending,

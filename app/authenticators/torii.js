@@ -11,11 +11,14 @@ export default Torii.extend({
   torii: service('torii'),
 
   authenticate(options) {
-    return this._super(options).then(function() {
-      ajax({
-        url: ENV.APIRoutes[ENV['ember-simple-auth'].authenticationRoute],
-        type: 'POST',
-        data: options
+    return this._super(options).then(function (data) {
+      return ajax({
+        url: ENV.APIRoutes['auth.oauth'],
+        method: 'post',
+        data: {
+          provider: data.provider,
+          auth_code: data.authorizationCode
+        }
       })
       console.log(`authorizationCode:\n${data.authorizationCode}\nprovider: ${data.provider}\nredirectUri: ${data.redirectUri}`)
     })

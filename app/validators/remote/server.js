@@ -1,6 +1,5 @@
 import Base from 'ember-validations/validators/base';
 
-
 export default Base.extend({
   message: null,
   isValid: true,
@@ -11,6 +10,7 @@ export default Base.extend({
       this.options = {};
     }
   },
+  //What is this for?
   call: function() {
     if (this.get('message')) {
       this.errors.pushObject(this.get('message'));

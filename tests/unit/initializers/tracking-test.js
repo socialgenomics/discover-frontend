@@ -1,23 +1,30 @@
-import Ember from 'ember';
-import { initialize } from '../../../initializers/tracking';
-import { module, test } from 'qunit';
-
-var container, application;
-
-module('Unit | Initializer | tracking', {
-  beforeEach: function() {
-    Ember.run(function() {
-      application = Ember.Application.create();
-      container = application.__container__;
-      application.deferReadiness();
-    });
-  }
-});
-
-// Replace this with your real tests.
-test('it works', function(assert) {
-  initialize(application);
-
-  // you would normally confirm the results of the initializer here
-  assert.ok(true);
-});
+// /* jshint expr:true */
+//TODO check that metrics is injected into gummy controller and route
+// import { expect } from 'chai';
+// import {
+//   describe,
+//   it,
+//   beforeEach
+// } from 'mocha';
+// import Ember from 'ember';
+// import { initialize } from 'repositive/initializers/tracking';
+//
+// describe('TrackingInitializer', function() {
+//   let container, application;
+//
+//   beforeEach(function() {
+//     Ember.run(function() {
+//       application = Ember.Application.create();
+//       container = application.__container__;
+//       application.deferReadiness();
+//     });
+//   });
+//
+//   // Replace this with your real tests.
+//   it('works', function() {
+//     initialize(container, application);
+//
+//     // you would normally confirm the results of the initializer here
+//     expect(true).to.be.ok;
+//   });
+// });

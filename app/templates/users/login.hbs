@@ -2,29 +2,27 @@
   <h1 class="center-align margin-bottom">Login</h1>
   <form {{action "submitForm" on="submit"}} id="login-form" class="margin-top">
     {{#each messages as |message|}}
-      <div class="message {{message.type}}">{{message.text}}</div>
+      <div class="message error">{{message}}</div>
     {{/each}}
     {{validated-input
       type="email"
-      lbl="Email"
       value=email
+      lbl="Email"
       errors=errors.email
       placeholder="Email"
-      email=true
       formSubmitted=formSubmitted
-      icon="email"
       class="col m6 offset-m3"
+      icon="email"
     }}
     {{validated-input
       type="password"
-      lbl="Password"
       value=password
+      lbl="Password"
       errors=errors.password
       placeholder="Password"
-      password=true
       formSubmitted=formSubmitted
-      icon="password"
       class="col m6 offset-m3"
+      icon="password"
     }}
     <h6><a {{action 'resetPassword'}} class="link" style="cursor:pointer">Click here</a> to reset your password.</h6>
     <div class="input-container">

@@ -1,6 +1,6 @@
 {
   "name": "repositive",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "dependencies": {
     "abbrev": {
       "version": "1.0.7",
@@ -2000,9 +2000,9 @@
       "resolved": "https://registry.npmjs.org/ember-cli-get-component-path-option/-/ember-cli-get-component-path-option-1.0.0.tgz"
     },
     "ember-cli-htmlbars": {
-      "version": "1.0.3",
+      "version": "1.0.8",
       "from": "ember-cli-htmlbars@>=1.0.1 <2.0.0",
-      "resolved": "https://registry.npmjs.org/ember-cli-htmlbars/-/ember-cli-htmlbars-1.0.3.tgz"
+      "resolved": "https://registry.npmjs.org/ember-cli-htmlbars/-/ember-cli-htmlbars-1.0.8.tgz"
     },
     "ember-cli-is-package-missing": {
       "version": "1.0.0",
@@ -3474,9 +3474,9 @@
       "resolved": "https://registry.npmjs.org/load-json-file/-/load-json-file-1.1.0.tgz"
     },
     "loader.js": {
-      "version": "4.0.1",
+      "version": "4.0.10",
       "from": "loader.js@>=4.0.0 <5.0.0",
-      "resolved": "https://registry.npmjs.org/loader.js/-/loader.js-4.0.1.tgz"
+      "resolved": "https://registry.npmjs.org/loader.js/-/loader.js-4.0.10.tgz"
     },
     "lodash": {
       "version": "3.10.1",

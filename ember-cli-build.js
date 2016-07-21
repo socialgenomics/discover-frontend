@@ -47,19 +47,17 @@ module.exports = function(defaults) {
       disableTestGenerator: process.env.CI ? true : false
     },
     babel: {
+      sourceMaps: 'inline',
       optional: ['es7.decorators']
     },
     // Disable JSHint
     'ember-cli-mocha': {
       useLintTree: false
     },
-    'ember-cli-qunit': {
-      useLintTree: false
-    },
     // Use ESLint
-    eslint: {
-      testGenerator: eslintTestGenerator
-    },
+    // eslint: {
+    //   testGenerator: eslintTestGenerator
+    // },
     "parser": "babel-eslint"
   });
 
@@ -84,21 +82,30 @@ module.exports = function(defaults) {
 };
 
 
-// ESLint Qunit test generator
-function eslintTestGenerator(relativePath, errors) {
-  var pass = !errors || errors.length === 0;
-  return "import { module, test } from 'qunit';\n" +
-    "module('ESLint - " + path.dirname(relativePath) + "');\n" +
-    "test('" + relativePath + " should pass ESLint', function(assert) {\n" +
-    "  assert.ok(" + pass + ", '" + relativePath + " should pass ESLint." +
-    jsStringEscape("\n" + render(errors)) + "');\n" +
-   "});\n";
-}
-
-function render(errors) {
-  if (!errors) { return ''; }
-  return errors.map(function(error) {
-    return error.line + ':' + error.column + ' ' +
-    ' - ' + error.message + ' (' + error.ruleId +')';
-  }).join('\n');
-}
+// ESLint Mocha test generator
+// TODO: Inprocess of changing this for Mocha setup
+// function eslintTestGenerator(relativePath, errors) {
+//   var pass = !errors || errors.length === 0;
+//   return "import { expect } from 'chai';\n"+
+//     "import { describeModule, it } from 'ember-mocha';\n"+
+//     "describeModule('ESLint - " + path.dirname(relativePath) + "');\n"+
+//     "it('" + relativePath + " should pass ESLint', function(expect) {\n" +
+//     "  expect(" + pass + ", '" + relativePath + " should pass ESLint." +
+//     jsStringEscape("\n" + render(errors)) + "').to.be.ok;\n" +
+//   "});\n";
+// }
+// //     "module('ESLint - " + path.dirname(relativePath) + "');\n" +
+// //     "it('" + relativePath + " should pass ESLint', function(assert) {\n" +
+// //     "  assert.ok(" + pass + ", '" + relativePath + " should pass ESLint." +
+//
+//
+//
+//
+//
+// function render(errors) {
+//   if (!errors) { return ''; }
+//   return errors.map(function(error) {
+//     return error.line + ':' + error.column + ' ' +
+//     ' - ' + error.message + ' (' + error.ruleId +')';
+//   }).join('\n');
+// }
