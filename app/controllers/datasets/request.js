@@ -19,7 +19,7 @@ export default Ember.Controller.extend(
   },
   actions: {
     addRequest: function() {
-      if (this.get('isValid')){
+      if (this.get('isValid')) {
         this.store.createRecord('request', {
           userId: this.get('session.authenticatedUser'),
           title: this.title,

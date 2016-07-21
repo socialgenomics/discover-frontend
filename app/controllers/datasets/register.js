@@ -46,7 +46,7 @@ export default Ember.Controller.extend(
             userId: userModel
           });
         })
-        .then(dataset =>{
+        .then(dataset => {
           return dataset.save();
         })
         .then(created => {
