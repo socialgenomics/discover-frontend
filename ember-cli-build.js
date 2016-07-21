@@ -2,14 +2,10 @@ var path = require('path');
 var EmberApp = require('ember-cli/lib/broccoli/ember-app');
 var jsStringEscape = require('js-string-escape');
 
-// brocolli related build conf.
-
 var environment = EmberApp.env();
 var appConf = require('./config/app/' + environment + '.json');
 
 var isProductionLikeBuild = ['development', 'production', 'staging'].indexOf(environment) > -1;
-
-console.log(environment);
 
 module.exports = function(defaults) {
   var app = new EmberApp(defaults, {

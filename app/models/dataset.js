@@ -9,13 +9,13 @@ export default DS.Model.extend({
   assay: DS.attr('string'),
   datasourceId: DS.belongsTo('datasource'),
   favorites: DS.hasMany('favourite'),
-  comments: DS.hasMany('comments'),
+  comments: DS.hasMany('comments'),//TODO swtich for actions
   tags: DS.hasMany('tag'),
   highlights: DS.belongsTo('highlight'),
   createdAt: DS.attr('isodate'),
   updatedAt: DS.attr('isodate'),
   count: DS.attr('number'),
-  isRequest: DS.attr('boolean'),
+  isRequest: DS.attr('boolean'), //not needed?
   externalID: DS.attr('string'),
   accession: function() {
     return this.get('externalID');

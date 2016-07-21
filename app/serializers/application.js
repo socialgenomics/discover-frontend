@@ -4,8 +4,13 @@ import Ember from 'ember';
 export default DS.RESTSerializer.extend({
   keyForRelationship: function(key, kind, method)  {
     if (method === 'serialize') {
-      let toReturn = `${key}_id`;
-      return toReturn;
+      //check that last 2 chars of key are not "Id" first
+      const lastTwoCharsOfKey = key.slice(-2).toLowerCase();
+      if (lastTwoCharsOfKey !== 'id' ) {
+        return `${key}_id`;
+      } else {
+        return key.slice(0, -2) + '_id';
+      }
     } else {
       let toReturn = Ember.String.underscore(key).toLowerCase();
       return toReturn;
