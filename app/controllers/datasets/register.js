@@ -35,14 +35,13 @@ export default Ember.Controller.extend(
           return this.store.findRecord('datasource', datasource.datasources[0].id);
         })
         .then(datasourceModel => {
-          const userId = this.get('session.authenticatedUser.id');
           const userModel = this.get('session.authenticatedUser');
           const dataset = this.store.createRecord('dataset', {
             title: this.title,
             description: this.description,
             url: this.url,
             datasourceId: datasourceModel,
-            externalID: userId + Date.now(),
+            externalID: userModel.id + Date.now(),
             userId: userModel
           });
           dataset.save()
