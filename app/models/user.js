@@ -10,7 +10,7 @@ export default Model.extend({
   datasets: hasMany('datasets'),
   comments: hasMany('comments'),
   userProfile: belongsTo('userProfile'),
-  userSettings: belongsTo('userSettings'),
+  userSetting: belongsTo('userSetting'),
   createdAt: attr('isodate'),
   updatedAt: attr('isodate'),
   isCurrentUser: attr('boolean', { defaultValue: false }), // checks the current authenticated user
