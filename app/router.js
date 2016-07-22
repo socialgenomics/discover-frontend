@@ -57,6 +57,14 @@ Router.map(function() {
     this.route('request');
   });
 
+  this.route('help', { resetNamespace: true }, function() {
+    this.route('searching-for-data');
+    this.route('requesting-data');
+    this.route('registering-new-data');
+    this.route('your-account');
+    this.route('other');
+  });
+
   this.route('404', {
     path: '/*path'
   });

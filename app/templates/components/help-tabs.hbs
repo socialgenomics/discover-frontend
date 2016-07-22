@@ -1,0 +1,41 @@
+<div class="col m12">
+  <div class="card">
+    <ul class="tabs">
+      <li class="tab">
+        {{#if (eq tab "searching")}}
+          {{#link-to 'help.searching-for-data' (query-params help=null) class="active"}}Searching for Data{{/link-to}}
+        {{else}}
+          {{#link-to 'help.searching-for-data' (query-params help=null)}}Searching for Data{{/link-to}}
+        {{/if}}
+      </li>
+      <li class="tab">
+        {{#if (eq tab "requesting")}}
+          {{#link-to 'help.requesting-data' (query-params help=null) class="active"}}Requesting Data{{/link-to}}
+        {{else}}
+          {{#link-to 'help.requesting-data' (query-params help=null)}}Requesting Data{{/link-to}}
+        {{/if}}
+      </li>
+      <li class="tab">
+        {{#if (eq tab "registering")}}
+          {{#link-to 'help.registering-new-data' (query-params help=null) class="active"}}Registering New Data{{/link-to}}
+        {{else}}
+          {{#link-to 'help.registering-new-data' (query-params help=null)}}Registering New Data{{/link-to}}
+        {{/if}}
+      </li>
+      <li class="tab">
+        {{#if (eq tab "account")}}
+          {{#link-to 'help.your-account' (query-params help=null) class="active"}}Your Account{{/link-to}}
+        {{else}}
+          {{#link-to 'help.your-account' (query-params help=null)}}Your Account{{/link-to}}
+        {{/if}}
+      </li>
+      <li class="tab">
+        {{#if (eq tab "other")}}
+          {{#link-to 'help.other' (query-params help=null) class="active"}}Other Commom Issues{{/link-to}}
+        {{else}}
+          {{#link-to 'help.other' (query-params help=null)}}Other Common Issues{{/link-to}}
+        {{/if}}
+      </li>
+    </ul>
+  </div>
+</div>
