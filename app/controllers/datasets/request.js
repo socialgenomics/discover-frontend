@@ -43,7 +43,7 @@ export default Ember.Controller.extend(
         .catch(err => {
           this.set('loading', false);
           this.flashMessages.add({
-            message: 'Oh dear. There was a submitting your dataset request.',
+            message: 'Oh dear. There was a problem submitting your dataset request.',
             type: 'warning',
             timeout: 7000,
             class: 'fadeInOut'
