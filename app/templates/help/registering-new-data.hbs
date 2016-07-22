@@ -18,8 +18,7 @@
             </div>
             <div class="col m8 help-content">
               <div class="markdown-text">
-                {{#if (not help)}}
-                  <h1>Please select a question.</h1>
+                {{#if (not help)}}{{markdown-to-html markdown=(fr-markdown-file 'help/registering/data-reg')}}
                 {{else if (eq help "data-reg")}}{{markdown-to-html markdown=(fr-markdown-file 'help/registering/data-reg')}}
                 {{else if (eq help "see-reg")}}{{markdown-to-html markdown=(fr-markdown-file 'help/registering/see-reg')}}
                 {{else if (eq help "include-reg")}}{{markdown-to-html markdown=(fr-markdown-file 'help/registering/include-reg')}}

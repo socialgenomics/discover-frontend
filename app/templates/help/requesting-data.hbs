@@ -20,8 +20,7 @@
             </div>
             <div class="col m8 help-content">
               <div class="markdown-text">
-                {{#if (not help)}}
-                  <h1>Please select a question.</h1>
+                {{#if (not help)}}{{markdown-to-html markdown=(fr-markdown-file 'help/requesting/what-is-request')}}
                 {{else if (eq help "what-is")}}{{markdown-to-html markdown=(fr-markdown-file 'help/requesting/what-is-request')}}
                 {{else if (eq help "what-can")}}{{markdown-to-html markdown=(fr-markdown-file 'help/requesting/what-can-request')}}
                 {{else if (eq help "who-can-see")}}{{markdown-to-html markdown=(fr-markdown-file 'help/requesting/who-can-see')}}
