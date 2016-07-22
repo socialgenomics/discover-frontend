@@ -7,17 +7,32 @@
           <div class="row margin-top">
             <div class="col m4 help-menu">
               <ol>
-                <li>{{#link-to 'help.registering-new-data' (query-params help="searching")}}How to Write a Good Search Query{{/link-to}}</li>
-                <li>{{#link-to 'help.registering-new-data' (query-params help="algorithm")}}What searching algorithm are we using?{{/link-to}}</li>
+                <li>{{#link-to 'help.registering-new-data' (query-params help="data-reg")}}What data can I register?{{/link-to}}</li>
+                <li>{{#link-to 'help.registering-new-data' (query-params help="see-reg")}}Who can see my registration?{{/link-to}}</li>
+                <li>{{#link-to 'help.registering-new-data' (query-params help="include-reg")}}What information should I include in my registration?{{/link-to}}</li>
+                <li>{{#link-to 'help.registering-new-data' (query-params help="store-raw")}}Do you store the raw data alongside the metadata I register?{{/link-to}}</li>
+                <li>{{#link-to 'help.registering-new-data' (query-params help="view-reg")}}How do I know who has viewed my data registration?{{/link-to}}</li>
+                <li>{{#link-to 'help.registering-new-data' (query-params help="add-meta")}}Can I add more metadata and description later?{{/link-to}}</li>
+                <li>{{#link-to 'help.registering-new-data' (query-params help="access-reg")}}Can I choose who has access to my data?{{/link-to}}</li>
               </ol>
             </div>
             <div class="col m8 help-content">
               <div class="markdown-text">
-                {{#if (eq help "searching")}}
-                  {{markdown-to-html markdown=(fr-markdown-file 'help/write-good-search')}}
-                {{else if (eq help "algorithm")}}
-                  {{markdown-to-html markdown=(fr-markdown-file 'help/search-algorithm')}}
+                {{#if (not help)}}
+                  <h1>Please select a question.</h1>
+                {{else if (eq help "data-reg")}}{{markdown-to-html markdown=(fr-markdown-file 'help/registering/data-reg')}}
+                {{else if (eq help "see-reg")}}{{markdown-to-html markdown=(fr-markdown-file 'help/registering/see-reg')}}
+                {{else if (eq help "include-reg")}}{{markdown-to-html markdown=(fr-markdown-file 'help/registering/include-reg')}}
+                {{else if (eq help "store-raw")}}{{markdown-to-html markdown=(fr-markdown-file 'help/registering/store-raw')}}
+                {{else if (eq help "view-reg")}}{{markdown-to-html markdown=(fr-markdown-file 'help/registering/view-reg')}}
+                {{else if (eq help "add-meta")}}{{markdown-to-html markdown=(fr-markdown-file 'help/registering/add-meta')}}
+                {{else if (eq help "access-reg")}}{{markdown-to-html markdown=(fr-markdown-file 'help/registering/access-reg')}}
                 {{/if}}
+              </div>
+              <div class="divider"></div>
+              <div class="center-align margin-top">
+                <p class="sub-dark"><strong>Do you need more help?</strong></p>
+                <a href="mailto:dev@repositive.io" class="btn btn-light no-margin">Contact Us</a>
               </div>
             </div>
           </div>

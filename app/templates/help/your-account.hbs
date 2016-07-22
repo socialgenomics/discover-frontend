@@ -7,17 +7,28 @@
           <div class="row margin-top">
             <div class="col m4 help-menu">
               <ol>
-                <li>{{#link-to 'help.your-account' (query-params help="search-query")}}How to Write a Good Search Query{{/link-to}}</li>
-                <li>{{#link-to 'help.your-account' (query-params help="algorithm")}}What searching algorithm are we using?{{/link-to}}</li>
+                <li>{{#link-to 'help.your-account' (query-params help="access")}}How can I access my account?{{/link-to}}</li>
+                <li>{{#link-to 'help.your-account' (query-params help="personalise")}}Can I personalise my notifications?{{/link-to}}</li>
+                <li>{{#link-to 'help.your-account' (query-params help="change-cred")}}How can I change my credentials?{{/link-to}}</li>
+                <li>{{#link-to 'help.your-account' (query-params help="change-pw")}}How can I change my password?{{/link-to}}</li>
+                <li>{{#link-to 'help.your-account' (query-params help="profile")}}Can I control who can see my profile?{{/link-to}}</li>
               </ol>
             </div>
             <div class="col m8 help-content">
               <div class="markdown-text">
-                {{#if (eq help "search-query")}}
-                  {{markdown-to-html markdown=(fr-markdown-file 'help/write-good-search')}}
-                {{else if (eq help "algorithm")}}
-                  {{markdown-to-html markdown=(fr-markdown-file 'help/search-algorithm')}}
+                {{#if (not help)}}
+                  <h1>Please select a question.</h1>
+                {{else if (eq help "access")}}{{markdown-to-html markdown=(fr-markdown-file 'help/account/access')}}
+                {{else if (eq help "personalise")}}{{markdown-to-html markdown=(fr-markdown-file 'help/account/personalise')}}
+                {{else if (eq help "change-cred")}}{{markdown-to-html markdown=(fr-markdown-file 'help/account/change-cred')}}
+                {{else if (eq help "change-pw")}}{{markdown-to-html markdown=(fr-markdown-file 'help/account/change-pw')}}
+                {{else if (eq help "profile")}}{{markdown-to-html markdown=(fr-markdown-file 'help/account/profile')}}
                 {{/if}}
+              </div>
+              <div class="divider"></div>
+              <div class="center-align margin-top">
+                <p class="sub-dark"><strong>Do you need more help?</strong></p>
+                <a href="mailto:dev@repositive.io" class="btn btn-light no-margin">Contact Us</a>
               </div>
             </div>
           </div>

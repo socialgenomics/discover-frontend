@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-  queryParams: ['tab'],
-  tab: 'searching-for-data'
+  queryParams: ['help'],
+  help: null
 });

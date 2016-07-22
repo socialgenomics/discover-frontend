@@ -7,17 +7,36 @@
           <div class="row margin-top">
             <div class="col m4 help-menu">
               <ol>
-                <li>{{#link-to 'help.requesting-data' (query-params help="searching")}}How to Write a Good Search Query{{/link-to}}</li>
-                <li>{{#link-to 'help.requesting-data' (query-params help="algorithm")}}What searching algorithm are we using?{{/link-to}}</li>
+                <li>{{#link-to 'help.requesting-data' (query-params help="what-is")}}What is a data request?{{/link-to}}</li>
+                <li>{{#link-to 'help.requesting-data' (query-params help="what-can")}}What data can I request?{{/link-to}}</li>
+                <li>{{#link-to 'help.requesting-data' (query-params help="who-can-see")}}Who can see my request?{{/link-to}}</li>
+                <li>{{#link-to 'help.requesting-data' (query-params help="information-include")}}What information should I include in my request?{{/link-to}}</li>
+                <li>{{#link-to 'help.requesting-data' (query-params help="add-meta-later")}}Can I add more metadata and description later?{{/link-to}}</li>
+                <li>{{#link-to 'help.requesting-data' (query-params help="no-response")}}I don't have any responses to my request.{{/link-to}}</li>
+                <li>{{#link-to 'help.requesting-data' (query-params help="incorrect-response")}}The response to my request is not what I am looking for.{{/link-to}}</li>
+                <li>{{#link-to 'help.requesting-data' (query-params help="how-long")}}How long will my request be live for?{{/link-to}}</li>
+                <li>{{#link-to 'help.requesting-data' (query-params help="fulfil-request")}}I know where the requested data are. How can I respond to the request?{{/link-to}}</li>
               </ol>
             </div>
             <div class="col m8 help-content">
               <div class="markdown-text">
-                {{#if (eq help "searching")}}
-                  {{markdown-to-html markdown=(fr-markdown-file 'help/write-good-search')}}
-                {{else if (eq help "algorithm")}}
-                  {{markdown-to-html markdown=(fr-markdown-file 'help/search-algorithm')}}
+                {{#if (not help)}}
+                  <h1>Please select a question.</h1>
+                {{else if (eq help "what-is")}}{{markdown-to-html markdown=(fr-markdown-file 'help/requesting/what-is-request')}}
+                {{else if (eq help "what-can")}}{{markdown-to-html markdown=(fr-markdown-file 'help/requesting/what-can-request')}}
+                {{else if (eq help "who-can-see")}}{{markdown-to-html markdown=(fr-markdown-file 'help/requesting/who-can-see')}}
+                {{else if (eq help "information-include")}}{{markdown-to-html markdown=(fr-markdown-file 'help/requesting/information-include')}}
+                {{else if (eq help "add-meta-later")}}{{markdown-to-html markdown=(fr-markdown-file 'help/requesting/add-meta-later')}}
+                {{else if (eq help "no-response")}}{{markdown-to-html markdown=(fr-markdown-file 'help/requesting/no-response')}}
+                {{else if (eq help "incorrect-response")}}{{markdown-to-html markdown=(fr-markdown-file 'help/requesting/incorrect-response')}}
+                {{else if (eq help "how-long")}}{{markdown-to-html markdown=(fr-markdown-file 'help/requesting/how-long')}}
+                {{else if (eq help "fulfil-request")}}{{markdown-to-html markdown=(fr-markdown-file 'help/requesting/fulfil-request')}}
                 {{/if}}
+              </div>
+              <div class="divider"></div>
+              <div class="center-align margin-top">
+                <p class="sub-dark"><strong>Do you need more help?</strong></p>
+                <a href="mailto:dev@repositive.io" class="btn btn-light no-margin">Contact Us</a>
               </div>
             </div>
           </div>
