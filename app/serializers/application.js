@@ -16,19 +16,29 @@ export default DS.RESTSerializer.extend({
       return toReturn;
     }
   },
+
   keyForAttribute: function(attr, method) {
     return Ember.String.underscore(attr).toLowerCase();
-  },
-  serializeIntoHash: function(hash, type, record, options) {
-    Ember.merge(hash, this.serialize(record, options));
   }
+
+  // //Removes JSON root object on requests, as needed by server.
+  // serializeIntoHash: function(hash, type, record, options) {
+  //   Ember.merge(hash, this.serialize(record, options));
+  // },
+
   // normalizeSingleResponse: function(store, primaryModelClass, payload, id, requestType) {
   //   let typeKey = primaryModelClass.modelName;
   //   payload[typeKey] = payload;
-  //   //delete payload['data'];
   //   console.log(payload);
   //   return this._normalizeResponse(store, primaryModelClass, payload, id, requestType, true);
   // },
+
+  // normalizeArrayResponse: function(store, primaryModelClass, payload, id, requestType) {
+  //   var pluralTypeKey = Ember.Inflector.inflector.pluralize(primaryModelClass.modelName);
+  //   payload[pluralTypeKey] = payload;
+  //   console.log(payload);
+  //   return this._normalizeResponse(store, primaryModelClass, payload, id, requestType, false);
+  // }
   // normalizeResponse(store, primaryModelClass, payload, id, requestType) {
   //   let newPayload = {
   //     [primaryModelClass.modelName] : payload

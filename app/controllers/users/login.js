@@ -51,7 +51,7 @@ export default Ember.Controller.extend(
           type: 'warning',
           timeout: 7000,
           class: 'fadeIn'
-        })
+        });
       }
     }
   },

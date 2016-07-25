@@ -15,7 +15,6 @@ export default DS.Model.extend({
   createdAt: DS.attr('isodate'),
   updatedAt: DS.attr('isodate'),
   count: DS.attr('number'),
-  isRequest: DS.attr('boolean'), //not needed?
   externalID: DS.attr('string'),
   accession: function() {
     return this.get('externalID');
