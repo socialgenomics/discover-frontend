@@ -15,10 +15,10 @@ export default DS.Model.extend({
   createdAt: DS.attr('isodate'),
   updatedAt: DS.attr('isodate'),
   count: DS.attr('number'),
-  externalID: DS.attr('string'),
+  externalId: DS.attr('string'),
   accession: function() {
-    return this.get('externalID');
-  }.property('externalID'),
+    return this.get('externalId');
+  }.property('externalId'),
   shortDescription: function() {
     let length = 100;
     let description = this.get('description');

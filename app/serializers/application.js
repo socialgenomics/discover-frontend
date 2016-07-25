@@ -1,7 +1,7 @@
-import DS from 'ember-data';
 import Ember from 'ember';
+import JSONSerializer from 'ember-data/serializers/json';
 
-export default DS.RESTSerializer.extend({
+export default JSONSerializer.extend({
   keyForRelationship: function(key, kind, method)  {
     if (method === 'serialize') {
       //check that last 2 chars of key are not "Id" first
@@ -25,25 +25,4 @@ export default DS.RESTSerializer.extend({
   // serializeIntoHash: function(hash, type, record, options) {
   //   Ember.merge(hash, this.serialize(record, options));
   // },
-
-  // normalizeSingleResponse: function(store, primaryModelClass, payload, id, requestType) {
-  //   let typeKey = primaryModelClass.modelName;
-  //   payload[typeKey] = payload;
-  //   console.log(payload);
-  //   return this._normalizeResponse(store, primaryModelClass, payload, id, requestType, true);
-  // },
-
-  // normalizeArrayResponse: function(store, primaryModelClass, payload, id, requestType) {
-  //   var pluralTypeKey = Ember.Inflector.inflector.pluralize(primaryModelClass.modelName);
-  //   payload[pluralTypeKey] = payload;
-  //   console.log(payload);
-  //   return this._normalizeResponse(store, primaryModelClass, payload, id, requestType, false);
-  // }
-  // normalizeResponse(store, primaryModelClass, payload, id, requestType) {
-  //   let newPayload = {
-  //     [primaryModelClass.modelName] : payload
-  //   };
-  //   console.log(newPayload);
-  //   return this._super(store, primaryModelClass, newPayload, id, requestType);
-  // }
 });

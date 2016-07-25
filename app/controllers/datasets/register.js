@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import EmberValidations from 'ember-validations';
 import ajax from 'ic-ajax';
+import ENV from 'repositive/config/environment';
 
 export default Ember.Controller.extend(
   EmberValidations,
@@ -31,9 +32,10 @@ export default Ember.Controller.extend(
       if (this.get('isValid')) {
         this.set('loading', true);
         //TODO: Remove hard-coded URL - Define it in config/environment
+        // ajax({ url: ENV.APIRoutes['datasources'] + '?short_name=REPOSITIVE' })
         ajax({ url: 'https://backend-dev.repositive.io/datasources?short_name=REPOSITIVE', type: 'GET' })
         .then(datasource => {
-          return this.store.findRecord('datasource', datasource.datasources[0].id);
+          return this.store.findRecord('datasource', datasource[0].id);
         })
         .then(datasourceModel => {
           const userModel = this.get('session.authenticatedUser');
@@ -42,7 +44,7 @@ export default Ember.Controller.extend(
             description: this.description,
             url: this.url,
             datasourceId: datasourceModel,
-            externalID: userModel.id + Date.now(),
+            externalId: userModel.id + Date.now(),
             userId: userModel
           });
         })
