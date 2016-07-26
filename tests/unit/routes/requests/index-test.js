@@ -6,8 +6,8 @@ import {
 } from 'ember-mocha';
 
 describeModule(
-  'route:requests/detail',
-  'RequestsDetailRoute',
+  'route:requests/index',
+  'RequestsRoute',
   {
     // Specify the other units that are required for this test.
     needs: [

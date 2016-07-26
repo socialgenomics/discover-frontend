@@ -56,8 +56,8 @@ Router.map(function() {
     this.route('register');
     this.route('request');
   });
-  
-  this.route('requests', { resetNamespace: true}, function(){
+
+  this.route('requests', { resetNamespace: true }, function() {
     this.route('detail', {
       path: ':id'
     });

@@ -1,19 +1,17 @@
-<!-- {{dataset-detail dataset=model tab=tab addComment="addComment"}} -->
 <div class="row card dataset full-view">
   <div class="col l7 m6 s12 card-main-wrapper">
     <div class="top-action card-header">
       <span class="assay-small {{model.colour}}"></span>
       <div class="actions-container valign-wrapper">
         {{action-favourite dataset=dataset action="toggleModal"}}
-        <span class="grey-text">{{data.favourite}}</span>
         {{action-share action="toggleModal"}}
       </div>
     </div>
     <div class="card-main-content">
-	<div class="dataset-main-info">
-      <h2>{{model.title}}</h2>
-      <span>{{user.displayName}}</span>
-      <p class="markdown-text">{{markdown-to-html markdown=model.description}}</p>
+  	  <div class="dataset-main-info">
+        <h2>{{model.title}}</h2>
+        <span>{{user.displayName}}</span>
+        <p class="markdown-text">{{markdown-to-html markdown=model.description}}</p>
         <div class="tags">
           {{#each model.tags as |tag|}}
             {{#link-to 'datasets.tags' tag.word}}
@@ -41,11 +39,7 @@
             {{/if}}
             {{#if (eq model.datasourceId.shortName "REPOSITIVE")}}
               {{#if model.createdAt}}
-                {{#if model.isRequest}}
-                  <li class="card-info-attr">Requested on: <span>{{moment-format model.createdAt}}</span></li>
-                {{else}}
-                  <li class="card-info-attr">Registered on: <span>{{moment-format model.createdAt}}</span></li>
-                {{/if}}
+                <li class="card-info-attr">Registered on: <span>{{moment-format model.createdAt}}</span></li>
               {{/if}}
             {{/if}}
             <li class="card-info-attr">Access: <span>{{model.access}}</span></li>
@@ -55,13 +49,11 @@
           </ul>
         </div>
         <div class="col m12 center">
-          {{#unless model.isRequest}}
-            {{#if model.url}}
-              <a target="_blank" {{action "trackExit"}} href="{{model.url}}" class="btn waves-effect teal white-text">{{#if isPublic}}Access Data{{else}}Go To Dataset{{/if}}</a>
-            {{else}}
-              <a class="btn disabled white-text">{{#if isPublic}}Access Data{{else}}Apply for Access{{/if}}</a>
-            {{/if}}
-          {{/unless}}
+          {{#if model.url}}
+            <a target="_blank" {{action "trackExit"}} href="{{model.url}}" class="btn waves-effect teal white-text">{{#if isPublic}}Access Data{{else}}Go To Dataset{{/if}}</a>
+          {{else}}
+            <a class="btn disabled white-text">{{#if isPublic}}Access Data{{else}}Apply for Access{{/if}}</a>
+          {{/if}}
         </div>
       </div>
     </div>
