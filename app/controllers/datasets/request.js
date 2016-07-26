@@ -33,7 +33,7 @@ export default Ember.Controller.extend(
             timeout: 7000,
             class: 'fadeInOut'
           });
-          this.transitionToRoute('datasets.detail', created.id);
+          this.transitionToRoute('requests.detail', created.id);
           this.get('metrics').trackEvent({
             category: 'dataset',
             action: 'request',

@@ -31,9 +31,7 @@ export default Ember.Controller.extend(
     addDataset: function() {
       if (this.get('isValid')) {
         this.set('loading', true);
-        //TODO: Remove hard-coded URL - Define it in config/environment
-        // ajax({ url: ENV.APIRoutes['datasources'] + '?short_name=REPOSITIVE' })
-        ajax({ url: 'https://backend-dev.repositive.io/datasources?short_name=REPOSITIVE', type: 'GET' })
+        ajax({ url: ENV.APIRoutes['datasources'] + '?short_name=REPOSITIVE' })
         .then(datasource => {
           return this.store.findRecord('datasource', datasource[0].id);
         })
