@@ -6,14 +6,15 @@ export default Ember.Route.extend({
       let user = users.get('firstObject');
       return new Ember.RSVP.all([
         this.store.query('userProfile', { user_id: user.get('id') }),
-        this.store.query('dataset', { user_id: user.get('id') })
+        this.store.query('dataset', { user_id: user.get('id') }),
+        this.store.query('request', { user_id: user.get('id') })
       ])
       .then(values => {
         return {
           user: user,
           user_profile: values[0].get('firstObject'),
-          requests: [],
-          registrations: values[1]
+          registrations: values[1],
+          requests: values[2]
         };
       });
     });

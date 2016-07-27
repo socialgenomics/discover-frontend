@@ -83,8 +83,8 @@
           </div>
           <div class="card-content">
             {{#if model.requests}}
-              {{#each model.requests as |dataset|}}
-                {{mini-dataset dataset=dataset hideSubmitter=isOwnProfile action="toggleModal"}}
+              {{#each model.requests as |request|}}
+                {{mini-dataset dataset=request type="request" hideSubmitter=isOwnProfile action="toggleModal"}}
               {{/each}}
             {{else}}
               {{#if isOwnProfile}}
