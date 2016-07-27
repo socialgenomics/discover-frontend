@@ -77,7 +77,6 @@
           {{action-share action="toggleModal" dataset=dataset}}
         </div>
       </div>
-
       <div class="card-body">
         {{#if dataset.highlights.title}}
           {{#link-to 'datasets.detail' dataset.id classNames="data-title"}}
@@ -120,7 +119,7 @@
 
       <div class="card-footer">
         <ul class="color-silver-chalice-text">
-          {{#if (eq dataset.access "Open")}}
+          {{#if (eq dataset.datasourceId.access "Open")}}
           <li class="access-icons">
             <i
               class="fa fa-globe color-fruit-salad-text tooltiped"
@@ -128,12 +127,12 @@
               data-tooltip="Public Access"
               title="Public"></i>
             <span class="color-fruit-salad-text">
-              {{dataset.access}}
+              {{dataset.datasourceId.access}}
             </span>
           </li>
           {{/if}}
 
-          {{#if (eq dataset.access "Restricted")}}
+          {{#if (eq dataset.datasourceId.access "Restricted")}}
           <li class="access-icons">
             <i
               class="fa fa-lock color-red-error-text tooltiped"
@@ -141,7 +140,7 @@
               data-tooltip="Restricted Access"
               title="Access application needed"></i>
             <span class="color-red-error-text">
-              {{dataset.access}}
+              {{dataset.datasourceId.access}}
             </span>
           </li>
           {{/if}}

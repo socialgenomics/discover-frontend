@@ -42,10 +42,7 @@
                 <li class="card-info-attr">Registered on: <span>{{moment-format model.createdAt}}</span></li>
               {{/if}}
             {{/if}}
-            <li class="card-info-attr">Access: <span>{{model.access}}</span></li>
-            {{#if model.contributors}}
-            <li class="card-info-attr">Access: <span>{{model.access}}</span></li>
-            {{/if}}
+            <li class="card-info-attr">Access: <span>{{model.datasourceId.access}}</span></li>
           </ul>
         </div>
         <div class="col m12 center">
