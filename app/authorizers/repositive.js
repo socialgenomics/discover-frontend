@@ -9,7 +9,7 @@ export default Base.extend({
       //jqXHR.setRequestHeader('X-CSRF-Token', token);
       //jqXHR.crossDomain = true;
       //jqXHR.xhrFields = {withCredentials: true};
-      block('x-access-token', sessionData.token);
+      block('authorization', `JWT ${sessionData.token}`);
     }
   }
 });
