@@ -1,52 +1,73 @@
 {{yield}}
 <div class="card dataset mini">
-	{{#unless hideSubmitter}}
-	<div class="submitted">
-		{{#if dataset.isRequest}}
-		<h6>Request from</h6>
-		{{else}}
-		<h6>Registered by</h6>
-		{{/if}}
-		{{#link-to 'user' dataset.userId.id}}<h6 class="user-name">{{dataset.userId.displayName}}</h6>{{/link-to}}
-	</div>
-	{{/unless}}
-	<div class="title-details">
-    {{#link-to 'datasets.detail' dataset.id}}<h5 class="data-title" alt="dataset title">{{dataset.title}}</h5>{{/link-to}}
-    <div class="card-footer">
-      <ul class="color-silver-chalice-text">
-        {{#if (eq dataset.dataset.access "Open")}}
-	        <li class="access-icons">
-	          <i
-	            class="fa fa-globe color-fruit-salad-text tooltiped"
-	            data-position="bottom"
-	            data-tooltip="Public Access"
-	            title="Public"></i>
-	          <span class="color-fruit-salad-text">
-	            {{dataset.dataset.access}}
-	          </span>
-	        </li>
-        {{/if}}
+	{{#if (eq type "request")}}
+		{{#unless hideSubmitter}}
+			<div class="submitted">
+				<h6>Request from</h6>
+				{{#link-to 'user' dataset.userId.id}}<h6 class="user-name">{{dataset.userId.displayName}}</h6>{{/link-to}}
+			</div>
+		{{/unless}}
 
-        {{#if (eq dataset.dataset.access "Restricted")}}
-	        <li class="access-icons">
-	          <i
-	            class="fa fa-lock color-red-error-text tooltiped"
-	            data-position="bottom"
-	            data-tooltip="Restricted Access"
-	            title="Access application needed"></i>
-	          <span class="color-red-error-text">
-	            {{dataset.dataset.access}}
-	          </span>
-	        </li>
-        {{/if}}
+		<div class="title-details">
+			{{#link-to 'requests.detail' dataset.id}}<h5 class="data-title" alt="dataset title">{{dataset.title}}</h5>{{/link-to}}
+			<div class="card-footer">
+				<ul class="color-silver-chalice-text">
+					<li class="tooltipped" data-position="bottom" data-tooltip="Views">
+						{{fa-icon "eye"}}<span>{{dataset.views}}</span>
+					</li>
+					<li class="tooltipped" data-position="bottom" data-tooltip="Comments">
+						{{fa-icon "comments"}}<span>{{dataset.comments.length}}</span>
+					</li>
+				</ul>
+			</div>
+		</div>
 
-        <li class="tooltipped" data-position="bottom" data-tooltip="Views">
-        	{{fa-icon "eye"}}<span>{{dataset.views}}</span>
-        </li>
-        <li class="tooltipped" data-position="bottom" data-tooltip="Comments">
-					{{fa-icon "comments"}}<span>{{dataset.comments.length}}</span>
-				</li>
-      </ul>
-    </div>
-	</div>
+	{{else}}	<!-- Registration -->
+
+		{{#unless hideSubmitter}}
+			<div class="submitted">
+				<h6>Registered by</h6>
+				{{#link-to 'user' dataset.userId.id}}<h6 class="user-name">{{dataset.userId.displayName}}</h6>{{/link-to}}
+			</div>
+		{{/unless}}
+
+		<div class="title-details">
+	    {{#link-to 'datasets.detail' dataset.id}}<h5 class="data-title" alt="dataset title">{{dataset.title}}</h5>{{/link-to}}
+	    <div class="card-footer">
+	      <ul class="color-silver-chalice-text">
+	        {{#if (eq dataset.dataset.access "Open")}}
+		        <li class="access-icons">
+		          <i
+		            class="fa fa-globe color-fruit-salad-text tooltiped"
+		            data-position="bottom"
+		            data-tooltip="Public Access"
+		            title="Public"></i>
+		          <span class="color-fruit-salad-text">
+		            {{dataset.dataset.access}}
+		          </span>
+		        </li>
+	        {{/if}}
+
+	        {{#if (eq dataset.dataset.access "Restricted")}}
+		        <li class="access-icons">
+		          <i
+		            class="fa fa-lock color-red-error-text tooltiped"
+		            data-position="bottom"
+		            data-tooltip="Restricted Access"
+		            title="Access application needed"></i>
+		          <span class="color-red-error-text">
+		            {{dataset.dataset.access}}
+		          </span>
+		        </li>
+	        {{/if}}
+	        <li class="tooltipped" data-position="bottom" data-tooltip="Views">
+	        	{{fa-icon "eye"}}<span>{{dataset.views}}</span>
+	        </li>
+	        <li class="tooltipped" data-position="bottom" data-tooltip="Comments">
+						{{fa-icon "comments"}}<span>{{dataset.comments.length}}</span>
+					</li>
+	      </ul>
+	    </div>
+		</div>
+	{{/if}}
 </div>
