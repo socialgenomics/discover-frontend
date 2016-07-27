@@ -81,12 +81,13 @@ export default DS.Model.extend({
   }.observes('query'),
 
   updateModelFromAPI: function() {
+    console.log(this.get('DSL'));
     return ajax({
       url: ENV.APIRoutes['datasets.search'],
       type: 'POST',
       data: 'query=' + this.get('DSL')
     })
-    .then((resp)=> {
+    .then((resp) => {
       this.set('meta', resp.meta);
       if (this.get('meta.total') < 0) {
         return Ember.RSVP.reject('No results');

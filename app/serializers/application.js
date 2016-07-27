@@ -20,7 +20,6 @@ export default JSONSerializer.extend({
   keyForAttribute: function(attr, method) {
     return Ember.String.underscore(attr).toLowerCase();
   }
-
   // //Removes JSON root object on requests, as needed by server.
   // serializeIntoHash: function(hash, type, record, options) {
   //   Ember.merge(hash, this.serialize(record, options));

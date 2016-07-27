@@ -22,7 +22,6 @@ export default Ember.Controller.extend(
   },
   actions: {
     save: function() {
-      console.log(this.get('affiliation'));
       this.get('session.authenticatedUser').save()
       .then((resp) => {
         return resp.profile.save();
