@@ -4,11 +4,12 @@ export default Ember.Route.extend({
   model: function(params) {
     return this.store.findRecord('user', params.id)
     .then(user => {
+      const userId = user.get('id');
       return new Ember.RSVP.all([
         user,
-        this.store.query('userProfile', { user_id: user.get('id') }),
-        this.store.query('dataset', { user_id: user.get('id') }),
-        this.store.query('request', { user_id: user.get('id') })
+        this.store.query('userProfile', {'user_id': userId}),
+        this.store.query('dataset', {'user_id': userId}),
+        this.store.query('request', {'user_id': userId})
       ]);
     })
     .then(values => {
@@ -20,7 +21,7 @@ export default Ember.Route.extend({
       };
     })
     .catch(err => {
-      Ember.Logger.err(err);
+      Ember.Logger.error(err);
     });
   }
 });
