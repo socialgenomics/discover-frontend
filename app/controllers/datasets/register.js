@@ -41,7 +41,7 @@ export default Ember.Controller.extend(
             title: this.title,
             description: this.description,
             url: this.url,
-            datasourceId: datasourceModel,
+            datasource: datasourceModel,
             externalId: userModel.id + Date.now(),
             userId: userModel
           });

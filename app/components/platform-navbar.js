@@ -5,9 +5,9 @@ export default Ember.Component.extend({
   isAuthenticated: Ember.computed.alias('session.isAuthenticated'),
   query: '',
 
-  autocomplete: function() {
-    console.log(this.get('query'));
-  }.observes('query'),
+  // autocomplete: function() {
+  //   console.log(this.get('query'));
+  // }.observes('query'),
 
   actions: {
 

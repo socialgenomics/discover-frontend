@@ -7,7 +7,8 @@ export default DS.Model.extend({
   url: DS.attr('string'),
   tech: DS.attr('string'),
   assay: DS.attr('string'),
-  datasourceId: DS.belongsTo('datasource'),
+  access: DS.attr('string'),
+  datasource: DS.belongsTo('datasource'),
   favorites: DS.hasMany('favourite'),
   comments: DS.hasMany('comments'),//TODO swtich for actions
   tags: DS.hasMany('tag'),

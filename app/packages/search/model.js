@@ -81,7 +81,6 @@ export default DS.Model.extend({
   }.observes('query'),
 
   updateModelFromAPI: function() {
-    console.log(this.get('DSL'));
     return ajax({
       url: ENV.APIRoutes['datasets.search'],
       type: 'POST',
@@ -130,7 +129,8 @@ export default DS.Model.extend({
       });
       this.set('isLoading', false);
     })
-    .catch(function(err) {
+    .catch((err) => {
+      Ember.Logger.error(err);
       return Ember.RSVP.reject(err);
     });
   }.observes('DSL'),

@@ -93,8 +93,8 @@
         {{/if}}
         <h6>
         <span>from</span>
-          {{#link-to 'datasets.search' (query-params datasourceId=dataset.datasourceId.id) }}
-            {{dataset.datasourceId.shortName}}
+          {{#link-to 'datasets.search' (query-params datasource=dataset.datasource.id) }}
+            {{dataset.datasource.shortName}}
           {{/link-to}}
           {{#if dataset.user.displayName}}
             <span>by</span>
@@ -119,7 +119,7 @@
 
       <div class="card-footer">
         <ul class="color-silver-chalice-text">
-          {{#if (eq dataset.datasourceId.access "Open")}}
+          {{#if (eq dataset.access "open")}}
           <li class="access-icons">
             <i
               class="fa fa-globe color-fruit-salad-text tooltiped"
@@ -127,12 +127,12 @@
               data-tooltip="Public Access"
               title="Public"></i>
             <span class="color-fruit-salad-text">
-              {{dataset.datasourceId.access}}
+              {{dataset.access}}
             </span>
           </li>
           {{/if}}
 
-          {{#if (eq dataset.datasourceId.access "Restricted")}}
+          {{#if (eq dataset.access "restricted")}}
           <li class="access-icons">
             <i
               class="fa fa-lock color-red-error-text tooltiped"
@@ -140,7 +140,7 @@
               data-tooltip="Restricted Access"
               title="Access application needed"></i>
             <span class="color-red-error-text">
-              {{dataset.datasourceId.access}}
+              {{dataset.access}}
             </span>
           </li>
           {{/if}}
