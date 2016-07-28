@@ -114,10 +114,9 @@ export default DS.Model.extend({
         resp.datasets.shift();
       }
       let promisedDatasets = resp.datasets.map(dataset => {
-        let emberDataDataset =  this.store.findRecord('dataset', dataset.id);
-        return emberDataDataset;
+        return this.store.push(this.store.normalize('dataset', dataset));
       });
-      return Promise.all(promisedDatasets);
+      return promisedDatasets;
     })
     .then(datasets => {
       return Promise.all(datasets.map(dataset => {
