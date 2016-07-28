@@ -7,9 +7,9 @@ export default Ember.Route.extend({
       const userId = user.get('id');
       return new Ember.RSVP.all([
         user,
-        this.store.query('userProfile', {'user_id': userId}),
-        this.store.query('dataset', {'user_id': userId}),
-        this.store.query('request', {'user_id': userId})
+        this.store.query('userProfile', { 'user_id': userId }),
+        this.store.query('dataset', { 'user_id': userId }),
+        this.store.query('request', { 'user_id': userId })
       ]);
     })
     .then(values => {
