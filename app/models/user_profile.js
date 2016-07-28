@@ -10,5 +10,4 @@ export default Model.extend({
   workOrganisation: attr('string'),
   interests: attr('string'),
   userId: belongsTo('user')
-
 });
