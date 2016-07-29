@@ -27,7 +27,7 @@ export default Ember.Controller.extend({
       this.get('metrics').trackEvent({
         category: 'dataset',
         action: 'download',
-        label: this.get('model.properties.title')
+        label: this.get('model.title')
       });
       //HACK to open link in new tab - NEED TO TEST THIS IN OTHER BROWSERS!
       let tab = window.open(this.get('model.url'), '_blank');
@@ -35,12 +35,21 @@ export default Ember.Controller.extend({
     },
 
     addComment(text) {
-      var cmnt = this.store.createRecord('comment', {
-        text: text,
-        dataset: this.model,
-        owner: this.get('session.data.authenticatedUser.id')
+      const userId = this.get('session.authenticatedUser');
+      const currentModelId = this.get('model.id');
+      let comment = this.store.createRecord('action', {
+        actionableId: currentModelId,
+        userId: userId,
+        type: 'comment',
+        properties: {
+          text: text
+        }
       });
-      cmnt.save();
+      comment.save().then((resp) => {
+        console.log(resp);
+      }).catch((err) => {
+        Ember.Logger.error(err);
+      });
     },
 
     addTag(text) {
