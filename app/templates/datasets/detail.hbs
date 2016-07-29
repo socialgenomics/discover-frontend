@@ -29,8 +29,8 @@
             {{#if model.userId}}
               <li class="card-info-attr">Submitted by: {{#link-to 'user' model.userId.id }}<span>{{model.userId.displayName}}</span>{{/link-to}}</li>
             {{else}}
-              {{#if model.datasource.shortName}}
-                <li class="card-info-attr">Sourced from: <a><span>{{model.datasource.shortName}}</span></a></li>
+              {{#if model.datasourceId.shortName}}
+                <li class="card-info-attr">Sourced from: <a><span>{{model.datasourceId.shortName}}</span></a></li>
               {{/if}}
               {{#if model.accession}}
                 <li class="card-info-attr">Accession: <span>{{model.externalId}}</span></li>

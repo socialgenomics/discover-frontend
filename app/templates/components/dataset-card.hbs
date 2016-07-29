@@ -28,9 +28,8 @@
           {{/link-to}}
         {{/if}}
         <h6>
-          <span>from</span>
           {{#if dataset.userId.displayName}}
-            <span>by</span>
+            <span>Requested by </span>
             {{#link-to 'user' dataset.user.id}}
               {{dataset.userId.displayName}}
             {{/link-to}}
@@ -92,14 +91,16 @@
           {{/link-to}}
         {{/if}}
         <h6>
-        <span>from</span>
-          {{#link-to 'datasets.search' (query-params datasource=dataset.datasource.id) }}
-            {{dataset.datasource.shortName}}
-          {{/link-to}}
-          {{#if dataset.user.displayName}}
+          {{#if dataset.datasourceId.shortName}}
+            <span>from</span>
+            {{#link-to 'datasets.search' (query-params datasource=dataset.datasourceId.id) }}
+              {{dataset.datasourceId.shortName}}
+            {{/link-to}}
+          {{/if}}
+          {{#if dataset.userId.displayName}}
             <span>by</span>
-            {{#link-to 'user' dataset.user.id}}
-              {{dataset.user.displayName}}
+            {{#link-to 'user' dataset.userId.id}}
+              {{dataset.userId.displayName}}
             {{/link-to}}
           {{/if}}
         </h6>

@@ -31,17 +31,14 @@ export default Ember.Controller.extend(
     addDataset: function() {
       if (this.get('isValid')) {
         this.set('loading', true);
-        ajax({ url: ENV.APIRoutes['datasources'] + '?short_name=REPOSITIVE' })
-        .then(datasource => {
-          return this.store.findRecord('datasource', datasource[0].id);
-        })
+        this.store.findRecord('datasource', 'REPOSITIVE')
         .then(datasourceModel => {
           const userModel = this.get('session.authenticatedUser');
           return this.store.createRecord('dataset', {
             title: this.title,
             description: this.description,
             url: this.url,
-            datasource: datasourceModel,
+            datasourceId: datasourceModel,
             externalId: userModel.id + Date.now(),
             userId: userModel
           });

@@ -4,8 +4,7 @@ import Ember from 'ember';
 
 export default JSONSerializer.extend(DS.EmbeddedRecordsMixin, {
   attrs: {
-    highlights: { embedded: 'always' },
-    datasource: { embedded: 'always' }
+    highlights: { embedded: 'always' }
   },
   keyForRelationship: function(key, kind, method)  {
     if (method === 'serialize') {

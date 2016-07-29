@@ -113,6 +113,7 @@ export default DS.Model.extend({
         resp.datasets.shift();
       }
       let promisedDatasets = resp.datasets.map(dataset => {
+        delete dataset.datasource;
         return this.store.push(this.store.normalize('dataset', dataset));
       });
       return promisedDatasets;
