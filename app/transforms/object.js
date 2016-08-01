@@ -3,10 +3,10 @@ import Ember from 'ember';
 
 
 export default DS.Transform.extend({
-  from: function(serialized) {
-    return Ember.none(serialized) ? {} : serialized;
+  deserialize: function(serialized) {
+    return Ember.isNone(serialized) ? {} : serialized;
   },
-  to: function(deserialized) {
-    return Ember.none(deserialized) ? {} : deserialized;
+  serialize: function(deserialized) {
+    return Ember.isNone(deserialized) ? {} : deserialized;
   }
 });

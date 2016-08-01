@@ -45,7 +45,8 @@ export default Ember.Controller.extend({
           text: text
         }
       });
-      comment.save().then((resp) => {
+      comment.save()
+      .then((resp) => {
         console.log(resp);
       }).catch((err) => {
         Ember.Logger.error(err);
