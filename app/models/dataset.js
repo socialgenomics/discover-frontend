@@ -1,4 +1,5 @@
 import DS from 'ember-data';
+import Ember from 'ember';
 
 export default DS.Model.extend({
   userId: DS.belongsTo('user'),
@@ -9,9 +10,10 @@ export default DS.Model.extend({
   assay: DS.attr('string'),
   access: DS.attr('string'),
   datasourceId: DS.belongsTo('datasource'),
-  favorites: DS.hasMany('favourite'),
-  comments: DS.hasMany('comments'),//TODO swtich for actions
-  tags: DS.hasMany('tag'),
+  actions: DS.hasMany('action'),
+  // favorites: DS.hasMany('favourite'),
+  // comments: DS.hasMany('comments'),
+  // tags: DS.hasMany('tag'),
   highlights: DS.belongsTo('highlight'),
   createdAt: DS.attr('isodate'),
   updatedAt: DS.attr('isodate'),
@@ -28,5 +30,8 @@ export default DS.Model.extend({
     }
     return description;
   }.property('description'),
+  // filter the actions by type
+  // return only the comments from the actions
+  comments: Ember.computed.filterBy('actions', 'type', 'comment'),
   colour: DS.attr('string')
 });

@@ -5,10 +5,10 @@ export default Ember.Controller.extend({
   queryParams: ['tab'],
   tab: 'comments',
   isEditingTags: false,
-  commentsSorted: Ember.computed.sort('model.comments', (a, b)=> {
-    if (a.get('createdAt') < b.get('createdAt')) {
+  commentsSorted : Ember.computed.sort('model.comments', (itemA, itemB) => {
+    if (itemA.get('createdAt') < itemB.get('createdAt')) {
       return 1;
-    } else if (a.get('createdAt') > b.get('createdAt')) {
+    } else if (itemA.get('createdAt') > itemB.get('createdAt')) {
       return -1;
     }
     return 0;
@@ -22,14 +22,12 @@ export default Ember.Controller.extend({
   }.property('access'),
 
   actions: {
-    //Register when someone click the "Access Data" button
     trackExit: function() {
       this.get('metrics').trackEvent({
         category: 'dataset',
         action: 'download',
         label: this.get('model.title')
       });
-      //HACK to open link in new tab - NEED TO TEST THIS IN OTHER BROWSERS!
       let tab = window.open(this.get('model.url'), '_blank');
       tab.focus();
     },
@@ -47,6 +45,7 @@ export default Ember.Controller.extend({
       });
       comment.save()
       .then((resp) => {
+        this.get('model.actions').pushObject(comment);
         console.log(resp);
       }).catch((err) => {
         Ember.Logger.error(err);

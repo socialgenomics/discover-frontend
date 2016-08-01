@@ -7,4 +7,6 @@ export default Model.extend({
   properties: attr('object'),
   type: attr('string'),
   userId: belongsTo('user')
+  // actionable: belongsTo('actionable') e.g. dataset model or
+  //need some relationship with dataset etc. - Actionable?
 });
