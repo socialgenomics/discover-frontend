@@ -5,7 +5,7 @@ export default Ember.Controller.extend({
   queryParams: ['tab'],
   tab: 'comments',
   isEditingTags: false,
-  commentsSorted : Ember.computed.sort('model.actionableId.actions', (itemA, itemB) => {
+  commentsSorted : Ember.computed.sort('model.comments', (itemA, itemB) => {
     if (itemA.get('createdAt') < itemB.get('createdAt')) {
       return 1;
     } else if (itemA.get('createdAt') > itemB.get('createdAt')) {
