@@ -1,28 +1,32 @@
-<div id="homepage" class="content">
+<main id="homepage" class="homepage content">
+
+  <section class="map-search">
+
+    <header class="stats center-align">
+      <h2 class="numb red-text">
+        {{model.stats.datasets}}<span class="stats-text light"> Human Genomic Datasets from </span>{{model.stats.repos}}<span class="stats-text light"> Repositories</span>
+      </h2>
+    </header>
+
+    <div class="search-container">
+      <div class="navbar-search">
+        <form {{action 'search' on='submit'}}>
+          {{fa-icon "search"}}
+          {{input
+            type="text"
+            class="unfocus-grey-text"
+            placeholder="title:cancer AND description:lung OR tumor tag: RNAseq"
+            value=query
+          }}
+          <button class="btn">Search</button>
+        </form>
+      </div>
+      {{#link-to 'help.searching-for-data'}}<p class="helper-text">How to write advanced search queries?</p>{{/link-to}}
+    </div>
+
+  </section>
+
   <div class="row">
-    <div class="contain">
-      <h5 class="subtitles-left unfocus-grey-text">Search Through</h5>
-      <div class="col m12 center-align">
-        <div class="card">
-          <div class="stats">
-            <h2 class="numb">{{ model.stats.datasets }}<span class="stats-text thin"> Human Genomic Datasets </span><span class="stats-text thin">from</span>
-              {{ model.stats.repos }}<span class="stats-text thin"> Repositories</span>
-            </h2>
-              <div class="col m10 offset-m1 news-notice">
-                <div class="divider"></div>
-                <div class="row">
-                  <a class="sub-grey" href="/datasets/search?q=xpress">
-                    <p class="col m10 no-padding bold">Now you can search over 6,000 normalised, annotated and curated open access expression datasets with</p>
-                      <div class="logo-image col m2">
-                        <img class="img-responsive" src="assets/images/logos/xpressomics-logo.png"/>
-                      </div>
-                  </a>
-                </div>
-              </div>
-                </div>
-              </div>
-          </div>
-        </div>
 
     <div class="contain">
       <h5 class="subtitles-left unfocus-grey-text">Start Exploring</h5>
@@ -73,4 +77,4 @@
       </div>
     </div>
   </div>
-</div>
+</main>

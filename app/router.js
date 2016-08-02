@@ -87,8 +87,8 @@ Ember.Route.reopen({
       if (pagesWithSideNavigation.indexOf(cssClass) !== -1) {
         // Add the class here for all the pages with side navigation
         Ember.$('body').addClass('has-sidenav');
-      } else if (landingPage.indexOf(cssClass) !== -1 && this.get('session.isAuthenticated') === false) {
-        // Add the landing page class to home
+      } else if (landingPage.indexOf(cssClass) !== -1) {
+        // Add the landing page class to home (makes background white)
         Ember.$('body').addClass('landing-page');
       }
     }
