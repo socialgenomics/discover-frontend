@@ -163,7 +163,7 @@ export default DS.Model.extend({
     if (Ember.isEmpty(this.get('filters'))) {
       query.body.query = {
         'query_string': {
-          'query': this.get('query'),
+          'query': this.escapeQuery(this.get('query')),
           'default_operator': 'AND'
         }
       };
@@ -172,7 +172,7 @@ export default DS.Model.extend({
         'filtered': {
           'query': {
             'query_string': {
-              'query': this.get('query'),
+              'query': this.escapeQuery(this.get('query')),
               'default_operator': 'AND'
             }
           },
@@ -213,6 +213,19 @@ export default DS.Model.extend({
       out.push(datasets.slice(i, i + perRow));
     }
     return out;
-  }.property('datasets')
+  }.property('datasets'),
+
+  /**
+    * Escapes search query string.
+    * Based on :
+    * - https://www.elastic.co/guide/en/elasticsearch/reference/1.7/query-dsl-query-string-query.html#_reserved_characters
+    * - https://github.com/elastic/elasticsearch-js/issues/257
+    * See: http://lucene.apache.org/core/3_4_0/queryparsersyntax.html#Escaping%20Special%20Characters
+    */
+  escapeQuery: function(query) {
+    var escaped = query.replace(/([\!\*\+\&\|\(\)\[\]\{\}\^\~\?\:\/])/g, "\\$1");
+    console.debug("Escaped query", query, "as", escaped);
+    return escaped;
+  }
 
 });
