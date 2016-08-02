@@ -1,80 +1,41 @@
 <main id="homepage" class="homepage content">
 
   <section class="map-search">
-
     <header class="stats center-align">
       <h2 class="numb red-text">
         {{model.stats.datasets}}<span class="stats-text light"> Human Genomic Datasets from </span>{{model.stats.repos}}<span class="stats-text light"> Repositories</span>
       </h2>
     </header>
 
-    <div class="search-container">
-      <div class="navbar-search">
-        <form {{action 'search' on='submit'}}>
-          {{fa-icon "search"}}
-          {{input
-            type="text"
-            class="unfocus-grey-text"
-            placeholder="title:cancer AND description:lung OR tumor tag: RNAseq"
-            value=query
-          }}
-          <button class="btn">Search</button>
-        </form>
-      </div>
-      {{#link-to 'help.searching-for-data'}}<p class="helper-text">How to write advanced search queries?</p>{{/link-to}}
-    </div>
-
+    {{search-box action="search"}}
   </section>
 
-  <div class="row">
+  <section class="selection-tabs">
+    {{home-tabs}}
+  </section>
 
+  <section class="row">
     <div class="contain">
-      <h5 class="subtitles-left unfocus-grey-text">Start Exploring</h5>
-      {{#each model.datasets as |dataset|}}
-        {{dataset-card dataset=dataset toggleModal="toggleModal"}}
-      {{/each}}
+      {{#if (eq tab "default")}}
+        {{#each model.datasets as |dataset|}}
+          {{dataset-card dataset=dataset toggleModal="toggleModal"}}
+        {{/each}}
+      {{else if (eq tab "sources")}}
+        <h1>Data Sources</h1>
+        {{#each model.datasets as |dataset|}}
+          {{dataset-card dataset=dataset toggleModal="toggleModal"}}
+        {{/each}}
+      {{else if (eq tab "collections")}}
+        <h1>Collections</h1>
+        {{#each model.datasets as |dataset|}}
+          {{dataset-card dataset=dataset toggleModal="toggleModal"}}
+        {{/each}}
+      {{else if (eq tab "requests")}}
+        <h1>Data Requests</h1>
+      {{else if (eq tab "discussions")}}
+        <h1>Discussions</h1>
+      {{/if}}
     </div>
-    <div class="contain">
-      <h5 class="subtitles-left unfocus-grey-text">User Activity</h5>
-      <!-- data registrations -->
-      <div class="col s12 m6">
-        <div class="card activity-card registered-data">
-          <div class="card-header card-title center">
-            {{#link-to 'datasets.register'}}
-              {{fa-icon "book"}}
-              <h4 class="uppercase">Registered Data</h4>
-            {{/link-to}}
-          </div>
-          <p class="info-text">
-            These are datasets contributed by our community. You can easily register your dataset and make it visible for others.
-          </p>
-          <div class="card-content">
-              {{#each registrationsSorted as |registration|}}
-                {{mini-dataset dataset=registration action="toggleModal"}}
-              {{/each}}
-          </div>
-        </div>
-      </div>
-      <!--data requests-->
-      <div class="col s12 m6">
-        <div class="card activity-card requested-data">
-          <div class="card-header center card-title">
-              {{#link-to 'datasets.request'}}
-                {{fa-icon "clipboard"}}
-                <h4 class="uppercase">Requested Data</h4>
-              {{/link-to}}
-          </div>
-          <p class="info-text">
-            Help our community by connecting them with the datasets they're looking for.
-  If you’re seeking datasets you can make a request too.
-          </p>
-          <div class="card-content">
-            {{#each requestsSorted as |request|}}
-              {{mini-dataset dataset=request type="request" action="toggleModal"}}
-            {{/each}}
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  </section>
+
 </main>
