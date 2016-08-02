@@ -8,7 +8,8 @@ describeModel(
   {
     // Specify the other units that are required for this test.
     needs: [
-      'model:user'
+      'model:user',
+      'model:actionable'
     ]
   },
   function() {

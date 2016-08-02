@@ -5,9 +5,8 @@ function peekOrCreate(store, id) {
   let existing = store.peekRecord('actionable', id);
   if (existing) {
     return existing;
-  }
-  else {
-    return store.createRecord('actionable', {id: id});
+  } else {
+    return store.createRecord('actionable', { id: id });
   }
 }
 
