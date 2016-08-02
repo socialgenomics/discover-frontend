@@ -5,7 +5,7 @@ export default Ember.Controller.extend({
   queryParams: ['tab'],
   tab: 'comments',
   isEditingTags: false,
-  commentsSorted : Ember.computed.sort('model.comments', (itemA, itemB) => {
+  commentsSorted : Ember.computed.sort('model.actionableId.actions', (itemA, itemB) => {
     if (itemA.get('createdAt') < itemB.get('createdAt')) {
       return 1;
     } else if (itemA.get('createdAt') > itemB.get('createdAt')) {
@@ -35,21 +35,16 @@ export default Ember.Controller.extend({
     addComment(text) {
       const userId = this.get('session.authenticatedUser');
       const currentModel = this.get('model');
-      this.store.findRecord('actionable', currentModel.id)
-      .then(actionable => {
-        let comment = this.store.createRecord('action', {
-          actionableId: actionable,
-          userId: userId,
-          type: 'comment',
-          properties: {
-            text: text
-          }
-        });
-        return comment.save();
-      })
-      .then((resp) => {
-        console.log(resp);
-      }).catch((err) => {
+      let comment = this.store.createRecord('action', {
+        actionableId: currentModel.actionableId,
+        userId: userId,
+        type: 'comment',
+        properties: {
+          text: text
+        }
+      });
+      comment.save()
+      .catch((err) => {
         Ember.Logger.error(err);
       });
     },
