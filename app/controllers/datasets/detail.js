@@ -34,18 +34,20 @@ export default Ember.Controller.extend({
 
     addComment(text) {
       const userId = this.get('session.authenticatedUser');
-      const currentModelId = this.get('model.id');
-      let comment = this.store.createRecord('action', {
-        actionableId: currentModelId,
-        userId: userId,
-        type: 'comment',
-        properties: {
-          text: text
-        }
-      });
-      comment.save()
+      const currentModel = this.get('model');
+      this.store.findRecord('actionable', currentModel.id)
+      .then(actionable => {
+        let comment = this.store.createRecord('action', {
+          actionableId: actionable,
+          userId: userId,
+          type: 'comment',
+          properties: {
+            text: text
+          }
+        });
+        return comment.save();
+      })
       .then((resp) => {
-        this.get('model.actions').pushObject(comment);
         console.log(resp);
       }).catch((err) => {
         Ember.Logger.error(err);

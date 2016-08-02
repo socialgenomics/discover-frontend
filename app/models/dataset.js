@@ -10,10 +10,11 @@ export default DS.Model.extend({
   assay: DS.attr('string'),
   access: DS.attr('string'),
   datasourceId: DS.belongsTo('datasource'),
-  actions: DS.hasMany('action'),
-  // favorites: DS.hasMany('favourite'),
-  // comments: DS.hasMany('comments'),
-  // tags: DS.hasMany('tag'),
+  // actions: DS.hasMany('action'),
+  actionableId: DS.belongsTo('actionable', {inverse: 'dataset'}),
+  // filter the actions by type
+  // return only the comments from the actions
+  // comments: Ember.computed.filterBy('actions', 'type', 'comment'),
   highlights: DS.belongsTo('highlight'),
   createdAt: DS.attr('isodate'),
   updatedAt: DS.attr('isodate'),
@@ -30,8 +31,6 @@ export default DS.Model.extend({
     }
     return description;
   }.property('description'),
-  // filter the actions by type
-  // return only the comments from the actions
-  comments: Ember.computed.filterBy('actions', 'type', 'comment'),
+
   colour: DS.attr('string')
 });
