@@ -1,5 +1,4 @@
 import DS from 'ember-data';
-import Ember from 'ember';
 
 export default DS.Model.extend({
   userId: DS.belongsTo('user'),
@@ -11,7 +10,6 @@ export default DS.Model.extend({
   access: DS.attr('string'),
   datasourceId: DS.belongsTo('datasource'),
   actionableId: DS.belongsTo('actionable', { inverse: 'dataset' }),
-  comments: Ember.computed.filterBy('actionableId.actions', 'type', 'comment'),
   highlights: DS.belongsTo('highlight'),
   createdAt: DS.attr('isodate'),
   updatedAt: DS.attr('isodate'),

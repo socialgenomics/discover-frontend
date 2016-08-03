@@ -2,10 +2,9 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
   session: Ember.inject.service(),
-  queryParams: ['tab'],
-  tab: 'comments',
   isEditingTags: false,
-  commentsSorted : Ember.computed.sort('model.comments', (itemA, itemB) => {
+  comments: Ember.computed.filterBy('model.actionableId.actions', 'type', 'comment'),
+  commentsSorted : Ember.computed.sort('comments', (itemA, itemB) => {
     if (itemA.get('createdAt') < itemB.get('createdAt')) {
       return 1;
     } else if (itemA.get('createdAt') > itemB.get('createdAt')) {
