@@ -10,8 +10,8 @@
     </div>
     <div class="card-main-content">
   	  <div class="dataset-main-info">
-        <h2>{{model.request.title}}</h2>
-        <p class="markdown-text">{{markdown-to-html markdown=model.request.description}}</p>
+        <h2>{{model.title}}</h2>
+        <p class="markdown-text">{{markdown-to-html markdown=model.description}}</p>
         <!-- <div class="tags">
           {{#each model.tags as |tag|}}
             {{#link-to 'datasets.tags' tag.word}}
@@ -27,12 +27,12 @@
       <div class="dataset-more-info-section">
         <div class="col m12">
           <ul class="card-info-list left-align">
-            {{#if model.user}}
-              <li class="card-info-attr">Submitted by: {{#link-to 'user' model.user.id }}<span>{{model.user.displayName}}</span>{{/link-to}}</li>
+            {{#if model.userId}}
+              <li class="card-info-attr">Submitted by: {{#link-to 'user' model.usesId.id }}<span>{{model.userId.displayName}}</span>{{/link-to}}</li>
             {{/if}}
 
-            {{#if model.request.createdAt}}
-              <li class="card-info-attr">Requested on: <span>{{moment-format model.request.createdAt}}</span></li>
+            {{#if model.createdAt}}
+              <li class="card-info-attr">Requested on: <span>{{moment-format model.createdAt}}</span></li>
             {{/if}}
           </ul>
         </div>

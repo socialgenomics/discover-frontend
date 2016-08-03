@@ -7,7 +7,7 @@
       {{/link-to}}
     </div>
     {{#link-to 'user' user.id}}<h4>{{user.displayName}}</h4>{{/link-to}}
-    <span>{{moment-from-now date}}</span>
+    <span>{{moment-from-now date allowEmpty=true}}</span>
   </div>
   <div class="comment-body">
     <p class="markdown-text">{{markdown-to-html markdown=text}}</p>

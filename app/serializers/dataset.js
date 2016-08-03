@@ -19,8 +19,7 @@ export default JSONSerializer.extend(DS.EmbeddedRecordsMixin, {
         return key.slice(0, -2) + '_id';
       }
     } else {
-      let toReturn = Ember.String.underscore(key).toLowerCase();
-      return toReturn;
+      return Ember.String.underscore(key).toLowerCase();
     }
   },
 

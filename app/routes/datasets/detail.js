@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
 
+//TODO move into mixin?
 function peekOrCreate(store, id) {
   let existing = store.peekRecord('actionable', id);
   if (existing) {
