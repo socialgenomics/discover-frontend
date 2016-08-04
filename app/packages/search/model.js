@@ -14,7 +14,7 @@ export default DS.Model.extend({
   query: DS.attr('string'),
   meta: DS.attr('object'),
   ordering: DS.attr('boolean'),
-  offset: DS.attr('number'),
+  offset: DS.attr('number', { defaultValue: 0 }),
   aggs: null,
   filters: null,
   isLoading: true,

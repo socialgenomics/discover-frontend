@@ -52,13 +52,19 @@
         {{/each}}
       {{/if}}
     </div>
+    <p>Total pages: {{totalPages}}</p>
+    <p>Current page: {{currentPageNumber}}</p>
 
-    {{#if isFirstPage}}
+    {{#if (eq currentPageNumber 1)}}
       <button class="btn disabled">Previous</button>
     {{else}}
       <button class="btn" {{action "previousPage"}}>Previous</button>
     {{/if}}
-    <button class="btn" {{action "nextPage"}}>Next</button>
+    {{#if (eq currentPageNumber totalPages)}}
+      <button class="btn disabled">Next</button>
+    {{else}}
+      <button class="btn" {{action "nextPage"}}>Next</button>
+    {{/if}}
     <!-- {{pagination-bar}} -->
   {{/if}}
 </div>

@@ -13,13 +13,15 @@ export default Ember.Controller.extend(
   //tags: null,
   datasource: null,
   access: null,
-  isFirstPage: Ember.computed('model.offset', function() {
+  totalPages: Ember.computed('model.meta.total', function() {
+    const resultsPerPage = 30;
+    const totalResults = this.get('model.meta.total');
+    return Math.ceil(totalResults / resultsPerPage);
+  }),
+  currentPageNumber: Ember.computed('totalPages', 'model.offset', function() {
     const offset = this.get('model.offset');
-    if (offset === undefined || offset === 0) {
-      return true;
-    } else {
-      return false;
-    }
+    const resultsPerPage = 30;
+    return Math.ceil(offset / resultsPerPage) + 1;
   }),
 
   modelLoadingDidChange: function() {
