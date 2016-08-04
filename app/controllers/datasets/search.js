@@ -13,6 +13,14 @@ export default Ember.Controller.extend(
   //tags: null,
   datasource: null,
   access: null,
+  isFirstPage: Ember.computed('model.offset', function(){
+    const offset = this.get('model.offset');
+    if (offset === undefined || offset === 0){
+      return true;
+    } else {
+      return false;
+    }
+  }),
 
   modelLoadingDidChange: function() {
     if (!this.get('model.isLoading')) {
@@ -25,8 +33,17 @@ export default Ember.Controller.extend(
     }
   }.observes('model.isLoading'),
 
+
   actions: {
+    previousPage() {
+      this.set('model.isLoading', true);
+      this.get('model.datasets').clear();
+      this.get('model').decrementProperty('offset', 30);
+    },
+
     nextPage() {
+      this.set('model.isLoading', true);
+      this.get('model.datasets').clear();
       this.get('model').incrementProperty('offset', 30);
     }
   }

@@ -52,8 +52,13 @@
         {{/each}}
       {{/if}}
     </div>
+
+    {{#if isFirstPage}}
+      <button class="btn disabled">Previous</button>
+    {{else}}
+      <button class="btn" {{action "previousPage"}}>Previous</button>
+    {{/if}}
+    <button class="btn" {{action "nextPage"}}>Next</button>
+    <!-- {{pagination-bar}} -->
   {{/if}}
-  {{model.offset}}
-  <button {{action "nextPage"}}>Next</button>
-  {{pagination-bar}}
 </div>

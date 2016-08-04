@@ -161,12 +161,14 @@ export default DS.Model.extend({
     });
 
     if (Ember.isEmpty(this.get('filters'))) {
-      query.body.query = {
-        'query_string': {
-          'query': this.get('query'),
-          'default_operator': 'AND'
-        }
-      };
+      if(this.get('query') !== '' ){
+        query.body.query = {
+          'query_string': {
+            'query': this.get('query'),
+            'default_operator': 'AND'
+          }
+        };
+      }
     } else {
       query.body.query = {
         'filtered': {
