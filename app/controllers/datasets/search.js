@@ -26,5 +26,8 @@ export default Ember.Controller.extend(
   }.observes('model.isLoading'),
 
   actions: {
+    nextPage() {
+      this.get('model').incrementProperty('offset', 30);
+    }
   }
 });
