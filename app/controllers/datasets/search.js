@@ -13,9 +13,9 @@ export default Ember.Controller.extend(
   //tags: null,
   datasource: null,
   access: null,
-  isFirstPage: Ember.computed('model.offset', function(){
+  isFirstPage: Ember.computed('model.offset', function() {
     const offset = this.get('model.offset');
-    if (offset === undefined || offset === 0){
+    if (offset === undefined || offset === 0) {
       return true;
     } else {
       return false;

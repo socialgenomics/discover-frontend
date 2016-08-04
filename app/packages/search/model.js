@@ -161,7 +161,7 @@ export default DS.Model.extend({
     });
 
     if (Ember.isEmpty(this.get('filters'))) {
-      if(this.get('query') !== '' ){
+      if (this.get('query') !== '' ) {
         query.body.query = {
           'query_string': {
             'query': this.get('query'),
