@@ -65,6 +65,16 @@
     {{else}}
       <button class="btn" {{action "nextPage"}}>Next</button>
     {{/if}}
+
+    <ul class="pagination">
+      <li class="disabled"><a href="#!">{{fa-icon "chevron-left"}}</a></li>
+      <li class="active"><a {{action "changePage" 1}}>1</a></li>
+      <li class="waves-effect"><a {{action "changePage" 2}}>2</a></li>
+      <li class="waves-effect"><a {{action "changePage" 3}}>3</a></li>
+      <li class="waves-effect"><a {{action "changePage" 4}}>4</a></li>
+      <li class="waves-effect"><a {{action "changePage" 5}}>5</a></li>
+      <li class="waves-effect"><a>{{fa-icon "chevron-right"}}</a></li>
+    </ul>
     <!-- {{pagination-bar}} -->
   {{/if}}
 </div>

@@ -13,15 +13,26 @@ export default Ember.Controller.extend(
   //tags: null,
   datasource: null,
   access: null,
-  totalPages: Ember.computed('model.meta.total', function() {
-    const resultsPerPage = 30;
+  resultsPerPage: 30,
+  totalPages: Ember.computed('model.meta.total', 'resultsPerPage', function() {
+    const resultsPerPage = this.get('resultsPerPage');
     const totalResults = this.get('model.meta.total');
     return Math.ceil(totalResults / resultsPerPage);
   }),
-  currentPageNumber: Ember.computed('totalPages', 'model.offset', function() {
+  currentPageNumber: Ember.computed('model.offset', 'resultsPerPage', function() {
+    const resultsPerPage = this.get('resultsPerPage');
     const offset = this.get('model.offset');
-    const resultsPerPage = 30;
     return Math.ceil(offset / resultsPerPage) + 1;
+  }),
+  pageNumberList: Ember.computed('totalPages', 'resultsPerPage', function() {
+    const totalPages = this.get('totalPages');
+    const resultsPerPage = this.get('resultsPerPage');
+    let pageList = [];
+    for (let i = 0; i < totalPages; i++) {
+      const pageOffset = i * resultsPerPage;
+      pageList.push(pageOffset);
+    }
+    return pageList;
   }),
 
   modelLoadingDidChange: function() {
@@ -37,16 +48,25 @@ export default Ember.Controller.extend(
 
 
   actions: {
-    previousPage() {
+    changePage(pageNumber) {
+      const pageNumberList = this.get('pageNumberList');
       this.set('model.isLoading', true);
       this.get('model.datasets').clear();
-      this.get('model').decrementProperty('offset', 30);
+      this.set('model.offset', pageNumberList[pageNumber - 1]);
+    },
+
+    previousPage() {
+      const resultsPerPage = this.get('resultsPerPage');
+      this.set('model.isLoading', true);
+      this.get('model.datasets').clear();
+      this.get('model').decrementProperty('offset', resultsPerPage);
     },
 
     nextPage() {
+      const resultsPerPage = this.get('resultsPerPage');
       this.set('model.isLoading', true);
       this.get('model.datasets').clear();
-      this.get('model').incrementProperty('offset', 30);
+      this.get('model').incrementProperty('offset', resultsPerPage);
     }
   }
 });
