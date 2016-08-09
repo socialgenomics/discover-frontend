@@ -24,6 +24,8 @@ export default Ember.Controller.extend(
     const offset = this.get('model.offset');
     return Math.ceil(offset / resultsPerPage) + 1;
   }),
+  //returns list of offsets
+  //element 0 = offset for firstpage etc.
   pageNumberList: Ember.computed('totalPages', 'resultsPerPage', function() {
     const totalPages = this.get('totalPages');
     const resultsPerPage = this.get('resultsPerPage');
