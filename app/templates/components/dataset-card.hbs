@@ -93,7 +93,7 @@
         <h6>
           {{#if dataset.datasourceId.shortName}}
             <span>from</span>
-            {{#link-to 'datasets.search' (query-params datasource=dataset.datasourceId.id) }}
+            {{#link-to 'datasets.search' (query-params datasource=dataset.datasourceId.shortName) }}
               {{dataset.datasourceId.shortName}}
             {{/link-to}}
           {{/if}}

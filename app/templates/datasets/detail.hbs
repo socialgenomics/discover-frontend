@@ -10,7 +10,9 @@
     <div class="card-main-content">
   	  <div class="dataset-main-info">
         <h2>{{model.title}}</h2>
-        <p class="markdown-text">{{markdown-to-html markdown=model.description}}</p>
+        {{#if model.description}}
+          <p class="markdown-text">{{markdown-to-html markdown=model.description}}</p>
+        {{/if}}
         <div class="tags">
           {{#each model.tags as |tag|}}
             {{#link-to 'datasets.tags' tag.word}}
