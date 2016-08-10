@@ -11,7 +11,8 @@ describeModel(
       'serializer:request',
       'model:actionable',
       'model:user',
-      'transform:isodate'
+      'transform:isodate',
+      'transform:object'
     ]
   },
   function() {

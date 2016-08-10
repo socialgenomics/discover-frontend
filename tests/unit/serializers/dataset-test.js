@@ -13,7 +13,8 @@ describeModel(
       'model:datasource',
       'model:highlight',
       'model:user',
-      'transform:isodate'
+      'transform:isodate',
+      'transform:object'
     ]
   },
   function() {
