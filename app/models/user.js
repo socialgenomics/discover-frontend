@@ -7,8 +7,6 @@ export default Model.extend({
   firstname: attr('string'),
   lastname: attr('string'),
   credentials: hasMany('credentials'),
-  datasets: hasMany('datasets'),
-  comments: hasMany('comments'),
   userProfile: belongsTo('userProfile'),
   userSetting: belongsTo('userSetting'),
   createdAt: attr('isodate'),
