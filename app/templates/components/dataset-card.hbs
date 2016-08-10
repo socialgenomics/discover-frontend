@@ -128,7 +128,7 @@
               data-tooltip="Public Access"
               title="Public"></i>
             <span class="color-fruit-salad-text">
-              {{dataset.access}}
+              {{capitalize dataset.access}}
             </span>
           </li>
           {{/if}}
@@ -141,7 +141,7 @@
               data-tooltip="Restricted Access"
               title="Access application needed"></i>
             <span class="color-red-error-text">
-              {{dataset.access}}
+              {{capitalize dataset.access}}
             </span>
           </li>
           {{/if}}
