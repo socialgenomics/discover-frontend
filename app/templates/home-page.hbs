@@ -27,7 +27,7 @@
           {{dataset-card dataset=dataset toggleModal="toggleModal"}}
         {{/each}}
       {{else if (eq tab "requests")}}
-        {{#each model.requests as |dataset|}}
+        {{#each requestsSorted as |dataset|}}
           {{requests-card dataset=dataset user=user toggleModal="toggleModal"}}
         {{/each}}
       {{else if (eq tab "discussions")}}

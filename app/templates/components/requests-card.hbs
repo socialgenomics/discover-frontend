@@ -3,9 +3,8 @@
 
     <header class="card-header">
       <div class="assay-container">
-        <div class="request">
-          <img src="/assets/images/icon-request-2.0.png">
-        </div>
+        <img src="/assets/images/icon-request-2.0.png">
+        {{#if dataset.createdAt}}<p>{{moment-from-now dataset.createdAt hideSuffix=true}} ago</p>{{/if}}
       </div>
       <div class="actions-container valign-wrapper">
         {{action-favourite action="toggleModal" dataset=dataset}}
@@ -15,15 +14,18 @@
     </header>
 
     <div class="card-body">
-      <img src="{{dataset.userId.avatar}}">
-      <h6>
-        {{#if dataset.userId.displayName}}
-          <span>Requested by </span>
-          {{#link-to 'user' dataset.user.id}}
-            {{dataset.userId.displayName}}
-          {{/link-to}}
-        {{/if}}
-      </h6>
+      <header class="card-user">
+        <img src={{user.user_profile.avatar}}>
+        <h6>
+          {{#if dataset.userId.displayName}}
+            {{#link-to 'user' dataset.userId.id}}{{dataset.userId.displayName}}{{/link-to}}
+          {{else}}
+            A Repositive user
+          {{/if}}
+          <br>
+          <span>Is looking for data</span>
+        </h6>
+      </header>
 
       {{#if dataset.highlights.title}}
         {{#link-to 'requests.detail' dataset.id classNames="data-title"}}
