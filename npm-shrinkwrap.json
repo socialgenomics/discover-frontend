@@ -1,6 +1,6 @@
 {
   "name": "repositive",
-  "version": "0.7.15",
+  "version": "0.7.16",
   "dependencies": {
     "abbrev": {
       "version": "1.0.7",
