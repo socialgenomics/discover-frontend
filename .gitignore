@@ -18,6 +18,7 @@ npm-debug.log
 testem.log
 .DS_Store
 Session.vim
+/async-disk-cache
 
 *.sw*
 git_stats/
