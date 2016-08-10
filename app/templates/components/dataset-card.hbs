@@ -51,10 +51,13 @@
 
       <div class="card-footer">
         <ul class="color-silver-chalice-text">
-          <li class="tooltipped" data-position="bottom" data-tooltip="Views">
-            {{fa-icon "eye"}}<span>{{dataset.stats.view}}</span>
-          </li>
-          <li class="tooltipped" data-position="bottom" data-tooltip="Discussion">{{fa-icon "comments"}}<span>{{dataset.stats.comment}}</span></li>
+          {{#if dataset.stats}}
+
+            <li class="tooltipped" data-position="bottom" data-tooltip="Views">
+              {{fa-icon "eye"}}<span>{{dataset.stats.view}}</span>
+            </li>
+            <li class="tooltipped" data-position="bottom" data-tooltip="Discussion">{{fa-icon "comments"}}<span>{{dataset.stats.comment}}</span></li>
+          {{/if}}
         </ul>
       </div>
 
@@ -143,10 +146,12 @@
             </span>
           </li>
           {{/if}}
-          <li class="tooltipped" data-position="bottom" data-tooltip="Views">
-            {{fa-icon "eye"}}<span>{{dataset.stats.view}}</span>
-          </li>
-          <li class="tooltipped" data-position="bottom" data-tooltip="Discussion">{{fa-icon "comments"}}<span>{{dataset.stats.comment}}</span></li>
+          {{#if dataset.stats}}
+            <li class="tooltipped" data-position="bottom" data-tooltip="Views">
+              {{fa-icon "eye"}}<span>{{dataset.stats.view}}</span>
+            </li>
+            <li class="tooltipped" data-position="bottom" data-tooltip="Discussion">{{fa-icon "comments"}}<span>{{dataset.stats.comment}}</span></li>
+          {{/if}}
         </ul>
       </div>
     {{/if}}
