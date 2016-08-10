@@ -21,7 +21,7 @@ export default Ember.Controller.extend(
   }),
   currentPageNumber: Ember.computed('model.offset', 'resultsPerPage', function() {
     const resultsPerPage = this.get('resultsPerPage');
-    const offset = this.get('model.offset');
+    const offset = this.get('model.offset') || 0;
     return Math.ceil(offset / resultsPerPage) + 1;
   }),
   //returns list of offsets
