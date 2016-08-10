@@ -34,6 +34,8 @@
       </li>
     {{/if}}
 
+    {{#if model.comments}}
       <li class="tooltipped" data-position="bottom" data-tooltip="Discussion">{{fa-icon "comments"}}<span>{{model.comments.length}}</span></li>
+    {{/if}}
   </ul>
 </footer>

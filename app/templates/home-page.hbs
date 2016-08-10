@@ -31,7 +31,9 @@
           {{requests-card dataset=dataset user=user toggleModal="toggleModal"}}
         {{/each}}
       {{else if (eq tab "discussions")}}
-        <h1>Discussions</h1>
+      {{#each model.datasets as |dataset|}}
+        {{discussions-card dataset=dataset toggleModal="toggleModal"}}
+      {{/each}}
       {{/if}}
     </div>
   </section>

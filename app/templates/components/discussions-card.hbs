@@ -3,7 +3,7 @@
 
     <header class="card-header">
       <div class="assay-container">
-        <img src="/assets/images/icon-request-2.0.png">
+        <img src="/assets/images/icon-discussion-2.0.png">
         {{#if dataset.createdAt}}<p>{{moment-from-now dataset.createdAt hideSuffix=true}} ago</p>{{/if}}
       </div>
       <div class="actions-container valign-wrapper">
@@ -23,7 +23,7 @@
             A Repositive user
           {{/if}}
           <br>
-          <span>Is looking for data</span>
+          <span>commented on</span>
         </h6>
       </header>
 
@@ -42,15 +42,13 @@
       {{/if}}
 
       <div class="line-limit-desc">
-        <div class="ellipsis">
-          <p class="sub-grey">
-            {{#if dataset.highlights.description}}
-              {{{dataset.highlights.description}}}
-            {{else}}
-              {{dataset.description}}
-            {{/if}}
-          </p>
-        </div>
+        <blockquote>
+          {{#if dataset.highlights.description}}
+            "{{{dataset.highlights.description}}}"
+          {{else}}
+            "{{dataset.description}}"
+          {{/if}}
+        </blockquote>
       </div>
 
     </div>
