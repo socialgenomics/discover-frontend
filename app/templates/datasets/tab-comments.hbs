@@ -1,8 +1,8 @@
 <div class="card-side-content">
   <div class="col s12">
-    {{add-comment addComment="addComment" avatar=session.authenticatedUser.profile.avatar}}
+    {{add-comment addComment="addComment" avatar=session.authenticatedUser.userProfile.avatar}}
     {{#each commentsSorted as |comment|}}
-      {{user-comment user=comment.userId text=comment.properties.text date=comment.createdAt avatar=comment.userId.profile.avatar}}
+      {{user-comment user=comment.userId text=comment.properties.text date=comment.createdAt avatar=comment.userId.userProfile.avatar}}
       <div class="divider"></div>
     {{/each}}
   </div>
