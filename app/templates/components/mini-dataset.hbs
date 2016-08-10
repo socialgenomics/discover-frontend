@@ -13,12 +13,14 @@
 			{{#link-to 'requests.detail' dataset.id}}<h5 class="data-title" alt="dataset title">{{dataset.title}}</h5>{{/link-to}}
 			<div class="card-footer">
 				<ul class="color-silver-chalice-text">
-					<li class="tooltipped" data-position="bottom" data-tooltip="Views">
-						{{fa-icon "eye"}}<span>{{dataset.views}}</span>
-					</li>
-					<li class="tooltipped" data-position="bottom" data-tooltip="Comments">
-						{{fa-icon "comments"}}<span>{{dataset.comments.length}}</span>
-					</li>
+					{{#if dataset.stats}}
+						<li class="tooltipped" data-position="bottom" data-tooltip="Views">
+							{{fa-icon "eye"}}<span>{{dataset.stats.view}}</span>
+						</li>
+						<li class="tooltipped" data-position="bottom" data-tooltip="Comments">
+							{{fa-icon "comments"}}<span>{{dataset.stats.comment}}</span>
+						</li>
+					{{/if}}
 				</ul>
 			</div>
 		</div>
@@ -62,13 +64,14 @@
 		          </span>
 		        </li>
 	        {{/if}}
-
-	        <li class="tooltipped" data-position="bottom" data-tooltip="Views">
-	        	{{fa-icon "eye"}}<span>{{dataset.views}}</span>
-	        </li>
-	        <li class="tooltipped" data-position="bottom" data-tooltip="Comments">
-						{{fa-icon "comments"}}<span>{{dataset.comments.length}}</span>
-					</li>
+					{{#if dataset.stats}}
+		        <li class="tooltipped" data-position="bottom" data-tooltip="Views">
+		        	{{fa-icon "eye"}}<span>{{dataset.stats.view}}</span>
+		        </li>
+		        <li class="tooltipped" data-position="bottom" data-tooltip="Comments">
+							{{fa-icon "comments"}}<span>{{dataset.stats.comment}}</span>
+						</li>
+					{{/if}}
 	      </ul>
 	    </div>
 		</div>

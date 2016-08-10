@@ -5,6 +5,7 @@ export default DS.Model.extend({
   title: DS.attr('string'),
   description: DS.attr('string'),
   actionableId: DS.belongsTo('actionable', { inverse: 'request' }),
+  stats: DS.attr('object'),
   createdAt: DS.attr('isodate'),
   updatedAt: DS.attr('isodate')
 });

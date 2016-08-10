@@ -13,6 +13,7 @@ export default DS.Model.extend({
   highlights: DS.belongsTo('highlight'),
   createdAt: DS.attr('isodate'),
   updatedAt: DS.attr('isodate'),
+  stats: DS.attr('object'),
   count: DS.attr('number'),
   externalId: DS.attr('string'),
   accession: function() {
