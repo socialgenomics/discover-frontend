@@ -13,13 +13,6 @@ export default Ember.Controller.extend({
     return 0;
   }),
 
-  isPublic: function() {
-    let access = this.get('model.access');
-    if (access === 'public' || access === 'open') {
-      return true;
-    }
-  }.property('access'),
-
   actions: {
     trackExit: function() {
       this.get('metrics').trackEvent({
@@ -56,12 +49,6 @@ export default Ember.Controller.extend({
       this.get('model.tags').pushObject(tag);
       tag.save();
       this.set('isEditingTags', true);
-    },
-
-    removeTag(tag) {
-      var abc = this.get('model.tags').removeObject(tag);
-      abc.save();
-      console.log('removed tag');
     },
 
     toggleEditTags() {
