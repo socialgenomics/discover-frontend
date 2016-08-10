@@ -1,47 +1,44 @@
-<div class="col s12 m4 l4">
+<main class="col s12 m4 l4">
   <div class="card dataset">
-    <div class="card-header">
+
+    <header class="card-header">
       <div class="assay-container">
-        {{#link-to 'datasets.search' (query-params assay=dataset.assay) }}
-          <div class="assay-container">
-            <span class="assay-small {{dataset.colour}}"></span>
-          </div>
-        {{/link-to}}
+        <div class="request">
+          <img src="/assets/images/icon-request-2.0.png">
+        </div>
       </div>
       <div class="actions-container valign-wrapper">
         {{action-favourite action="toggleModal" dataset=dataset}}
         <span class="grey-text">{{dataset.favourite}}</span>
         {{action-share action="toggleModal" dataset=dataset}}
       </div>
-    </div>
+    </header>
+
     <div class="card-body">
+      <img src="{{dataset.userId.avatar}}">
+      <h6>
+        {{#if dataset.userId.displayName}}
+          <span>Requested by </span>
+          {{#link-to 'user' dataset.user.id}}
+            {{dataset.userId.displayName}}
+          {{/link-to}}
+        {{/if}}
+      </h6>
+
       {{#if dataset.highlights.title}}
-        {{#link-to 'datasets.detail' dataset.id classNames="data-title"}}
+        {{#link-to 'requests.detail' dataset.id classNames="data-title"}}
         <div data-balloon={{dataset.title}} data-balloon-pos="up" data-balloon-length="large">
           <h4 class="data-title">{{{dataset.highlights.title}}}</h4>
         </div>
         {{/link-to}}
       {{else}}
-        {{#link-to 'datasets.detail' dataset.id classNames="data-title"}}
+        {{#link-to 'requests.detail' dataset.id classNames="data-title"}}
         <div data-balloon={{dataset.title}} data-balloon-pos="up" data-balloon-length="large">
           <h4 class="data-title">{{dataset.title}}</h4>
         </div>
         {{/link-to}}
       {{/if}}
-      <h6>
-        {{#if dataset.datasourceId.shortName}}
-          <span>from</span>
-          {{#link-to 'datasets.search' (query-params datasource=dataset.datasourceId.id) }}
-            {{dataset.datasourceId.shortName}}
-          {{/link-to}}
-        {{/if}}
-        {{#if dataset.userId.displayName}}
-          <span>by</span>
-          {{#link-to 'user' dataset.userId.id}}
-            {{dataset.userId.displayName}}
-          {{/link-to}}
-        {{/if}}
-      </h6>
+
 
       <div class="line-limit-desc">
         <div class="ellipsis">
@@ -54,8 +51,9 @@
           </p>
         </div>
       </div>
+
     </div>
 
     {{card-footer model=dataset}}
   </div>
-</div>
+</main>

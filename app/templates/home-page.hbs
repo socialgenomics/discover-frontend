@@ -16,14 +16,10 @@
 
   <section class="row">
     <div class="contain">
-      {{#if (eq tab "default")}}
-        {{#each model.datasets as |dataset|}}
-          {{dataset-card dataset=dataset toggleModal="toggleModal"}}
-        {{/each}}
-      {{else if (eq tab "sources")}}
+      {{#if (eq tab "sources")}}
         <h1>Data Sources</h1>
         {{#each model.datasets as |dataset|}}
-          {{dataset-card dataset=dataset toggleModal="toggleModal"}}
+          {{sources-card dataset=dataset toggleModal="toggleModal"}}
         {{/each}}
       {{else if (eq tab "collections")}}
         <h1>Collections</h1>
@@ -31,7 +27,9 @@
           {{dataset-card dataset=dataset toggleModal="toggleModal"}}
         {{/each}}
       {{else if (eq tab "requests")}}
-        <h1>Data Requests</h1>
+        {{#each model.requests as |dataset|}}
+          {{requests-card dataset=dataset user=user toggleModal="toggleModal"}}
+        {{/each}}
       {{else if (eq tab "discussions")}}
         <h1>Discussions</h1>
       {{/if}}

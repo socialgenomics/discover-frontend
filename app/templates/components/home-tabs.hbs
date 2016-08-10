@@ -1,7 +1,7 @@
 <ul class="tabs">
   <li class="tab">
     {{#if (eq tab "sources")}}
-      {{#link-to 'root' (query-params tab="default") class="active"}}
+      {{#link-to 'root' (query-params tab="") class="active"}}
         <img class="tab-icon" src="/assets/images/icon-datasource.png">Data Sources
       {{/link-to}}
     {{else}}
@@ -12,7 +12,7 @@
   </li>
   <li class="tab">
     {{#if (eq tab "collections")}}
-      {{#link-to 'root' (query-params tab="default") class="active"}}
+      {{#link-to 'root' (query-params tab="") class="active"}}
         <img class="tab-icon" src="/assets/images/icon-collection.png">Collections
       {{/link-to}}
     {{else}}
@@ -23,7 +23,7 @@
   </li>
   <li class="tab">
     {{#if (eq tab "requests")}}
-      {{#link-to 'root' (query-params tab="default") class="active"}}
+      {{#link-to 'root' (query-params tab="") class="active"}}
         <img class="tab-icon" src="/assets/images/icon-request.png">Data Requests
       {{/link-to}}
     {{else}}
@@ -34,7 +34,7 @@
   </li>
   <li class="tab">
     {{#if (eq tab "discussions")}}
-      {{#link-to 'root' (query-params tab="default") class="active"}}
+      {{#link-to 'root' (query-params tab="") class="active"}}
         <img class="tab-icon" src="/assets/images/icon-discussion.png">Discussions
       {{/link-to}}
     {{else}}
