@@ -16,15 +16,15 @@
       <div class="card-body">
         {{#if dataset.highlights.title}}
           {{#link-to 'requests.detail' dataset.id classNames="data-title"}}
-          <div data-balloon={{dataset.title}} data-balloon-pos="up" data-balloon-length="large">
-            <h4 class="data-title">{{{dataset.highlights.title}}}</h4>
-          </div>
+            <div data-balloon={{dataset.title}} data-balloon-pos="up" data-balloon-length="large">
+              <h4 class="data-title">{{{truncate dataset.highlights.title 75}}}</h4>
+            </div>
           {{/link-to}}
         {{else}}
           {{#link-to 'requests.detail' dataset.id classNames="data-title"}}
-          <div data-balloon={{dataset.title}} data-balloon-pos="up" data-balloon-length="large">
-            <h4 class="data-title">{{dataset.title}}</h4>
-          </div>
+            <div data-balloon={{dataset.title}} data-balloon-pos="up" data-balloon-length="large">
+              <h4 class="data-title">{{truncate dataset.title 75}}</h4>
+            </div>
           {{/link-to}}
         {{/if}}
         <h6>
@@ -52,7 +52,6 @@
       <div class="card-footer">
         <ul class="color-silver-chalice-text">
           {{#if dataset.stats}}
-
             <li class="tooltipped" data-position="bottom" data-tooltip="Views">
               {{fa-icon "eye"}}<span>{{dataset.stats.view}}</span>
             </li>
@@ -80,15 +79,15 @@
       <div class="card-body">
         {{#if dataset.highlights.title}}
           {{#link-to 'datasets.detail' dataset.id classNames="data-title"}}
-          <div data-balloon={{dataset.title}} data-balloon-pos="up" data-balloon-length="large">
-            <h4 class="data-title">{{{dataset.highlights.title}}}</h4>
-          </div>
+            <div data-balloon={{dataset.title}} data-balloon-pos="up" data-balloon-length="large">
+              <h4 class="data-title">{{{truncate dataset.highlights.title 75}}}</h4>
+            </div>
           {{/link-to}}
         {{else}}
           {{#link-to 'datasets.detail' dataset.id classNames="data-title"}}
-          <div data-balloon={{dataset.title}} data-balloon-pos="up" data-balloon-length="large">
-            <h4 class="data-title">{{dataset.title}}</h4>
-          </div>
+            <div data-balloon={{dataset.title}} data-balloon-pos="up" data-balloon-length="large">
+              <h4 class="data-title">{{truncate dataset.title 75}}</h4>
+            </div>
           {{/link-to}}
         {{/if}}
         <h6>
@@ -122,29 +121,29 @@
       <div class="card-footer">
         <ul class="color-silver-chalice-text">
           {{#if (eq dataset.access "Open")}}
-          <li class="access-icons">
-            <i
-              class="fa fa-globe color-fruit-salad-text tooltiped"
-              data-position="bottom"
-              data-tooltip="Public Access"
-              title="Public"></i>
-            <span class="color-fruit-salad-text">
-              {{dataset.access}}
-            </span>
-          </li>
+            <li class="access-icons">
+              <i
+                class="fa fa-globe color-fruit-salad-text tooltiped"
+                data-position="bottom"
+                data-tooltip="Public Access"
+                title="Public"></i>
+              <span class="color-fruit-salad-text">
+                {{dataset.access}}
+              </span>
+            </li>
           {{/if}}
 
           {{#if (eq dataset.access "Restricted")}}
-          <li class="access-icons">
-            <i
-              class="fa fa-lock color-red-error-text tooltiped"
-              data-position="bottom"
-              data-tooltip="Restricted Access"
-              title="Access application needed"></i>
-            <span class="color-red-error-text">
-              {{dataset.access}}
-            </span>
-          </li>
+            <li class="access-icons">
+              <i
+                class="fa fa-lock color-red-error-text tooltiped"
+                data-position="bottom"
+                data-tooltip="Restricted Access"
+                title="Access application needed"></i>
+              <span class="color-red-error-text">
+                {{dataset.access}}
+              </span>
+            </li>
           {{/if}}
           {{#if dataset.stats}}
             <li class="tooltipped" data-position="bottom" data-tooltip="Views">

@@ -14,7 +14,6 @@ export default DS.Model.extend({
   createdAt: DS.attr('isodate'),
   updatedAt: DS.attr('isodate'),
   stats: DS.attr('object'),
-  count: DS.attr('number'),
   externalId: DS.attr('string'),
   accession: function() {
     return this.get('externalId');
