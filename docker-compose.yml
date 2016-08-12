@@ -10,7 +10,7 @@ services:
       - .:/opt
       - ~/.ssh:/root/.ssh
     environment:
-      BACKEND_SERVER: http://node:3000
+      BACKEND_SERVER: http://backend:3000
 networks:
   default:
     external:
