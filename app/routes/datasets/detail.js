@@ -19,6 +19,8 @@ function reducer(acc, curr) {
 }
 
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
+  session: Ember.inject.service(),
+
   model: function(params) {
     let actionable = peekOrCreate(this.store, params.id);
     return Ember.RSVP.all([
@@ -45,6 +47,22 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
       Ember.Logger.error(err);
     });
   },
+
+  afterModel: function(dataset) {
+    //TODO: Refactor - This code is used in several places e.g. request and dataset detail controllers & routes
+    const userId = this.get('session.authenticatedUser');
+    const currentModel = dataset;
+    let view = this.store.createRecord('action', {
+      actionableId: currentModel.actionableId,
+      userId: userId,
+      type: 'view'
+    });
+    view.save()
+    .catch((err) => {
+      Ember.Logger.error(err);
+    });
+  },
+
 
   actions: {
     didTransition: function() {
