@@ -108,6 +108,14 @@ module.exports = function(environment) {
       },
       metricsAdapters: [
         {
+          name: 'Gosquared',
+          environments: ['production'],
+          config: {
+            token: 'GSN-041822-M',
+            signature: '5157e5f51f0967aee05141aff8037b69'
+          }
+        },
+        {
           name: 'GoogleAnalytics',
           config: {
             id: 'UA-54495053-1'
@@ -120,14 +128,6 @@ module.exports = function(environment) {
             id: 'ca78eed5d34a041ab5cf164295cf2c25'
           },
           environments: ['production']
-        },
-        {
-          name: 'Gosquared',
-          environments: ['staging', 'production'],
-          config: {
-            token: 'GSN-041822-M',
-            signature: '5157e5f51f0967aee05141aff8037b69'
-          }
         },
         {
           name: 'Intercom',
