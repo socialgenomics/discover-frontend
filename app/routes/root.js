@@ -32,7 +32,8 @@ export default Ember.Route.extend({
         ajax({ url: ENV.APIRoutes['datasets.search'] , type: 'GET' }),
         ajax({ url: ENV.APIRoutes['datasets.trending'] , type: 'GET' }), //TODO response = empty obj
         this.store.query('request', {}),
-        this.store.query('dataset', { user_registered: true })
+        this.store.query('dataset', { user_registered: true }),
+        this.store.query('datasource', {})
       ])
       .then(data => {
         //Normalize and push trending datasets
@@ -68,7 +69,8 @@ export default Ember.Route.extend({
             stats: data[0],
             datasets: trending,
             requests: data[2],
-            registered: data[3]
+            registered: data[3],
+            datasources: data[4]
           };
         })
       })

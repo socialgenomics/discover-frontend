@@ -17,22 +17,20 @@
   <section class="row">
     <div class="contain">
       {{#if (eq tab "sources")}}
-        <h1>Data Sources</h1>
-        {{#each model.datasets as |dataset|}}
-          {{sources-card dataset=dataset toggleModal="toggleModal"}}
+        {{#each model.datasources as |source|}}
+          {{sources-card source=source toggleModal="toggleModal"}}
         {{/each}}
       {{else if (eq tab "collections")}}
-        <h1>Collections</h1>
-        {{#each model.datasets as |dataset|}}
-          {{dataset-card dataset=dataset toggleModal="toggleModal"}}
+        {{#each requestsSorted as |collection|}}
+          {{collections-card collection=collection toggleModal="toggleModal"}}
         {{/each}}
       {{else if (eq tab "requests")}}
         {{#each requestsSorted as |dataset|}}
           {{requests-card dataset=dataset toggleModal="toggleModal"}}
         {{/each}}
       {{else if (eq tab "discussions")}}
-      {{#each model.datasets as |dataset|}}
-        {{discussions-card dataset=dataset toggleModal="toggleModal"}}
+      {{#each registrationsSorted as |discussion|}}
+        {{discussions-card discussion=discussion toggleModal="toggleModal"}}
       {{/each}}
       {{/if}}
     </div>

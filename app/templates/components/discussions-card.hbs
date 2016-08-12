@@ -4,21 +4,21 @@
     <header class="card-header">
       <div class="assay-container">
         <img src="/assets/images/icon-discussion-2.0.png">
-        {{#if dataset.createdAt}}<p>{{moment-from-now dataset.createdAt hideSuffix=true}} ago</p>{{/if}}
+        {{#if discussion.createdAt}}<p>{{moment-from-now discussion.createdAt hideSuffix=true}} ago</p>{{/if}}
       </div>
       <div class="actions-container valign-wrapper">
-        {{action-favourite action="toggleModal" dataset=dataset}}
+        {{action-favourite action="toggleModal" discussion=discussion}}
         <span class="grey-text">{{dataset.favourite}}</span>
-        {{action-share action="toggleModal" dataset=dataset}}
+        {{action-share action="toggleModal" discussion=discussion}}
       </div>
     </header>
 
     <div class="card-body">
       <header class="card-user">
-        <img src={{dataset.userId.userProfile.avatar}}>
+        <img src={{discussion.userId.userProfile.avatar}}>
         <h6>
-          {{#if dataset.userId.displayName}}
-            {{#link-to 'user' dataset.userId.id}}{{dataset.userId.displayName}}{{/link-to}}
+          {{#if discussion.userId.displayName}}
+            {{#link-to 'user' discussion.userId.id}}{{discussion.userId.displayName}}{{/link-to}}
           {{else}}
             A Repositive user
           {{/if}}
@@ -27,32 +27,20 @@
         </h6>
       </header>
 
-      {{#if dataset.highlights.title}}
-        {{#link-to 'requests.detail' dataset.id classNames="data-title"}}
-        <div data-balloon={{dataset.title}} data-balloon-pos="up" data-balloon-length="large">
-          <h4 class="data-title">{{{dataset.highlights.title}}}</h4>
+      {{#link-to 'requests.detail' discussion.id classNames="data-title"}}
+        <div data-balloon={{discussion.title}} data-balloon-pos="up" data-balloon-length="large">
+          <h4 class="data-title">{{discussion.title}}</h4>
         </div>
-        {{/link-to}}
-      {{else}}
-        {{#link-to 'requests.detail' dataset.id classNames="data-title"}}
-        <div data-balloon={{dataset.title}} data-balloon-pos="up" data-balloon-length="large">
-          <h4 class="data-title">{{dataset.title}}</h4>
-        </div>
-        {{/link-to}}
-      {{/if}}
+      {{/link-to}}
 
       <div class="line-limit-desc">
         <blockquote>
-          {{#if dataset.highlights.description}}
-            "{{{dataset.highlights.description}}}"
-          {{else}}
-            "{{dataset.description}}"
-          {{/if}}
+          "{{discussion.description}}"
         </blockquote>
       </div>
 
     </div>
 
-    {{card-footer model=dataset}}
+    {{card-footer model=discussion}}
   </div>
 </main>
