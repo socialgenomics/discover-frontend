@@ -70,7 +70,7 @@
         <li class="waves-effect"><a {{action "changePage" 3}}>3</a></li>
         <li class="waves-effect"><a {{action "changePage" 4}}>4</a></li>
         <li class="waves-effect"><a {{action "changePage" 5}}>5</a></li> -->
-      {{#if (eq currentPageNumber totalPages)}}
+      {{#if (gte currentPageNumber totalPages)}}
         <button class="btn disabled">Next</button>
       {{else}}
         <button class="btn" {{action "nextPage"}}>Next</button>
