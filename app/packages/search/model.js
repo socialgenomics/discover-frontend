@@ -160,24 +160,25 @@ export default DS.Model.extend({
       query.body.aggs[agg.name] = a[agg.name];
     });
 
-    if (Ember.isEmpty(this.get('filters'))) {
-      if (this.get('query') !== '' ) {
-        query.body.query = {
-          'query_string': {
-            'query': this.get('query'),
-            'default_operator': 'AND'
-          }
-        };
+    let queryInstance;
+    if (this.get('query') !== '') {
+      queryInstance = {
+        'query_string': {
+          'query': this.get('query'),
+          'default_operator': 'AND'
+        }
       }
+    }
+    else {
+      queryInstance = null;
+    }
+
+    if (Ember.isEmpty(this.get('filters'))) {
+      query.body.query = queryInstance;
     } else {
       query.body.query = {
         'filtered': {
-          'query': {
-            'query_string': {
-              'query': this.get('query'),
-              'default_operator': 'AND'
-            }
-          },
+          'query': queryInstance,
           'filter': {
             'bool': {
               'must': null
