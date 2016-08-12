@@ -11,6 +11,7 @@
     "setup": "npm i && bower install --allow-root && npm rebuild node-sass",
     "postinstall": "bower install",
     "start": "ember server --watcher=polling --proxy=https://backend-dev.repositive.io",
+    "startStaging": "ember server --watcher=polling --proxy=https://backend-staging.repositive.io",
     "startLocal": "ember server --proxy=http://192.168.33.11",
     "startDocker": "ember server --watcher=polling --proxy=$BACKEND_SERVER",
     "build": "ember build",

@@ -167,7 +167,7 @@ export default DS.Model.extend({
           'query': this.get('query'),
           'default_operator': 'AND'
         }
-      }
+      };
     } else {
       queryInstance = null;
     }
@@ -197,7 +197,6 @@ export default DS.Model.extend({
   }.property('query', 'offset', 'filters.@each.value'),
 
   getAssayColourForDataset: function(dataset) {
-    let aggs = this.get('aggs');
     let assay;
     if (assay = dataset.get('assay')) {
       assay = assay;
