@@ -1,5 +1,5 @@
 <main class="col s12 m4 l4">
-  <div class="card dataset">
+  <div class="card dataset card-comp">
 
     <header class="card-header">
       <div class="assay-container">
@@ -15,7 +15,7 @@
 
     <div class="card-body">
       <header class="card-user">
-        <img src={{user.user_profile.avatar}}>
+        <img src={{dataset.userId.userProfile.avatar}}>
         <h6>
           {{#if dataset.userId.displayName}}
             {{#link-to 'user' dataset.userId.id}}{{dataset.userId.displayName}}{{/link-to}}
