@@ -1,14 +1,17 @@
-app:
-  build: ./
-  volumes:
-    - .:/app
-  environment:
-    # make ssh keys available via ssh forwarding (see volume_from entry)
-    - SSH_AUTH_SOCK=/root/.ssh/socket
-  volumes_from:
-    # Use configured whilp/ssh-agent long running container for keys
-    - ssh-agent
-  command: bash -c 'npm install && bower install && npm run start'
-  ports:
-    - 4200:4200
-    - 49152:49152
+version: '2'
+services:
+  frontend:
+    command:  /bin/sh -c "npm run setup && npm run startDocker"
+    image: node
+    working_dir: /opt
+    ports:
+      - "4200:4200"
+    volumes:
+      - .:/opt
+      - ~/.ssh:/root/.ssh
+    environment:
+      BACKEND_SERVER: http://backend:3000
+networks:
+  default:
+    external:
+      name: apirepositiveio_default

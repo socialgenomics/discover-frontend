@@ -200,11 +200,11 @@ export default DS.Model.extend({
     let aggs = this.get('aggs');
     let assay;
     if (assay = dataset.get('assay')) {
-      assay = assay.toLowerCase();
+      assay = assay;
     } else {
-      assay = 'other';
+      assay = 'Not Available';
     }
-    return colours.getColour(assay.split('-')[0]);
+    return colours.getColour(assay);
   },
 
   datasetsAllInARow: function() {
