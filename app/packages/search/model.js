@@ -168,8 +168,7 @@ export default DS.Model.extend({
           'default_operator': 'AND'
         }
       }
-    }
-    else {
+    } else {
       queryInstance = null;
     }
 
