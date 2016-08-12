@@ -63,7 +63,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     });
   },
 
-
   actions: {
     didTransition: function() {
       this.get('metrics').trackPage();
