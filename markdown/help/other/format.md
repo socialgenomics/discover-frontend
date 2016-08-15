@@ -1,6 +1,6 @@
 ## How can I format my description and discussions?
 
-We support the use of Markdown in all our free-text boxes on the platform. Tips for how to use markdown can found by clicking the link below each free-text box. Please remember all Markdown properties should be spaced with one line between them.
+We support the use of Markdown in all our free-text boxes on the platform. Tips for how to use markdown can found by clicking the link below each free-text box. Please remember that all Markdown properties should be spaced with one line between them.
 More details can be found below:
 
 * Add a linebreak between paragraphs (press enter)
