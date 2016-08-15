@@ -31,20 +31,20 @@ export default DS.Model.extend({
         this.filters = [];
       }
 
-      var params = this.get('queryParams');
+      let params = this.get('queryParams');
       this.set('query', params.q);
       this.set('ordering', params.ordering);
       delete params.q;
       delete params.ordering;
-      for (var key in params) {
-        var agg = Agg.create({
+      for (let key in params) {
+        let agg = Agg.create({
           name: key,
           value: params[key],
           show: false
         });
         this.aggs.pushObject(agg);
 
-        var filter = Filter.create({
+        let filter = Filter.create({
           name: key,
           value: params[key]
         });
@@ -59,7 +59,7 @@ export default DS.Model.extend({
     this.set('isLoading', true);
     this.set('datasets', []);
     if (!Ember.isNone(this.get('filters'))) {
-      var qps = this.get('queryParams');
+      let qps = this.get('queryParams');
       this.set('query', qps.q);
       delete qps.q;
       this.set('ordering', qps.ordering);
@@ -67,8 +67,8 @@ export default DS.Model.extend({
       this.set('offset', qps.offset);
       delete qps.offset;
 
-      for (var key in qps) {
-        var filter = this.filters.findBy('name', key);
+      for (let key in qps) {
+        let filter = this.filters.findBy('name', key);
         filter.set('value', this.get('queryParams.' + key));
       }
     }
@@ -91,27 +91,20 @@ export default DS.Model.extend({
       if (this.get('meta.total') < 0) {
         return Ember.RSVP.reject('No results');
       }
-
       delete resp.meta;
 
       // load the aggs from the resp
       this.set('aggs', []);
-      for (var key in resp.aggs) {
+      for (let key in resp.aggs) {
         var DSL = {};
         DSL[key] = resp.aggs[key];
-        var agg = Agg.create({
+        let agg = Agg.create({
           aggDSL: DSL, //TODO:: this is dodgy
           show: true
         });
         this.aggs.pushObject(agg);
       }
       delete resp.aggs;
-
-      //TODO Use the elasticsearch response instead of request a new one
-      // Create a new entry in the store
-      if (resp.datasets.length > 0 && !resp.datasets[0].id) {
-        resp.datasets.shift();
-      }
       let promisedDatasets = resp.datasets.map(dataset => {
         delete dataset.datasource;
         return this.store.push(this.store.normalize('dataset', dataset));
@@ -125,6 +118,7 @@ export default DS.Model.extend({
       }));
     })
     .then(datasets => {
+      this.set('datasets', []);
       datasets.forEach(dataset => {
         this.get('datasets').pushObject(dataset);
       });
@@ -136,8 +130,9 @@ export default DS.Model.extend({
     });
   }.observes('DSL'),
 
-  DSL: function() {
-    var query = {
+
+  DSL: Ember.computed('query', 'offset', 'filters.@each.value', function() {
+    let query = {
       'index': 'datasets',
       'type': 'dataset',
       'from': this.get('offset'),
@@ -156,7 +151,7 @@ export default DS.Model.extend({
     };
 
     this.get('aggs').forEach(function(agg) {
-      var a = agg.get('DSL');
+      let a = agg.get('DSL');
       query.body.aggs[agg.name] = a[agg.name];
     });
 
@@ -185,16 +180,15 @@ export default DS.Model.extend({
           }
         }
       };
-      var filtersBool = this.get('filters').map(function(filter) {
-        return filter.get('DSL');
-      })
-      .filter(function(value) {
+      let filtersBool = this.get('filters')
+      .map(filter => filter.get('DSL'))
+      .filter(value => {
         if (!Ember.isNone(value)) { return value; }
       });
       query.body.query.filtered.filter.bool.must = filtersBool;
     }
     return JSON.stringify(query);
-  }.property('query', 'offset', 'filters.@each.value'),
+  }),
 
   getAssayColourForDataset: function(dataset) {
     let assay;
@@ -204,15 +198,5 @@ export default DS.Model.extend({
       assay = 'Not Available';
     }
     return colours.getColour(assay);
-  },
-
-  datasetsAllInARow: function() {
-    let perRow = 3;
-    let datasets = this.get('datasets');
-    let out = [];
-    for (var i = 0; i < datasets.length; i += perRow) {
-      out.push(datasets.slice(i, i + perRow));
-    }
-    return out;
-  }.property('datasets')
+  }
 });

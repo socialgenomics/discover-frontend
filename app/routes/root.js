@@ -51,7 +51,10 @@ export default Ember.Route.extend({
         throw err;
       });
     } else {
-      return ajax({ url: ENV.APIRoutes['datasets.search'] , type: 'GET' }).then(stat => {return {stats: stat}})
+      return ajax({ url: ENV.APIRoutes['datasets.search'] , type: 'GET' })
+      .then(stat => {
+        return { stats: stat };
+      });
     }
   },
 
