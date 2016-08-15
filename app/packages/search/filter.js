@@ -6,11 +6,11 @@ export default Ember.Object.extend({
   name: null,
   value: null,
 
-  displayName: Ember.computed('name', function(){
+  displayName: Ember.computed('name', function() {
     return titleCase(this.get('name'));
   }),
 
-  DSL: Ember.computed('name', 'value', function(){
+  DSL: Ember.computed('name', 'value', function() {
     if (Ember.isNone(this.get('value'))) {
       return null;
     }

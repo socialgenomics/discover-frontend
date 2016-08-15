@@ -118,7 +118,7 @@ export default DS.Model.extend({
       }));
     })
     .then(datasets => {
-      this.set('datasets',[]);
+      this.set('datasets', []);
       datasets.forEach(dataset => {
         this.get('datasets').pushObject(dataset);
       });
