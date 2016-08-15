@@ -6,6 +6,7 @@ services:
     working_dir: /opt
     ports:
       - "4200:4200"
+      - "49152:49152"
     volumes:
       - .:/opt
       - ~/.ssh:/root/.ssh
