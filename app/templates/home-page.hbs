@@ -11,12 +11,12 @@
               <div class="col m10 offset-m1 news-notice">
                 <div class="divider"></div>
                 <div class="row">
-                  <a class="sub-grey" href="/datasets/search?q=xpress">
+                  {{#link-to 'datasets.search' (query-params q="xpressomics") class="sub-grey"}}
                     <p class="col m10 no-padding bold">Now you can search over 6,000 normalised, annotated and curated open access expression datasets with</p>
                       <div class="logo-image col m2">
                         <img class="img-responsive" src="assets/images/logos/xpressomics-logo.png"/>
                       </div>
-                  </a>
+                  {{/link-to}}
                 </div>
               </div>
                 </div>
