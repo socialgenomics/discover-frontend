@@ -3,24 +3,18 @@
     <h4 class="unfocus-grey-text">Filters</h4>
     {{#each model.aggs as |agg|}}
       {{#if agg.show}}
-      <div class="section">
-        <h4>{{ agg.displayName }}</h4>
-        {{#each agg.buckets as |bucket|}}
-          <div>
-          {{#if (eq agg.name "assay")}}
-            <div class="label {{bucket.colour}}"></div>
-          {{else}}
-            <div class="label"></div>
-          {{/if}}
-          {{#if (eq agg.name "access")}}
-            <span {{action "addFilter" agg.name bucket.key}} style="cursor:pointer;">{{bucket.key}} ({{bucket.doc_count}})</span>
-          {{else}}
-            <span {{action "addFilter" agg.name bucket.key}} style="cursor:pointer;">{{bucket.key}} ({{bucket.doc_count}})</span>
-          {{/if}}
+        <div class="section">
+          <h4>{{ agg.displayName }}</h4>
+          {{#each agg.buckets as |bucket|}}
+            <div>
+              {{#if (eq agg.name "assay")}}
+                <div class="label {{bucket.colour}}"></div>
+              {{/if}}
+              <span {{action "addFilter" agg.name bucket.key}} style="cursor:pointer;">{{bucket.key}} ({{bucket.doc_count}})</span>
+            </div>
+          {{/each}}
+          <div class="divider"></div>
         </div>
-        {{/each}}
-      </div>
-      <div class="divider"></div>
       {{/if}}
     {{/each}}
   </nav>
