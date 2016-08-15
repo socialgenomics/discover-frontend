@@ -51,9 +51,13 @@ export default Ember.Route.extend({
         throw err;
       });
     } else {
-      return null;
+      return ajax({ url: ENV.APIRoutes['datasets.search'] , type: 'GET' })
+      .then(stat => {
+        return { stats: stat };
+      });
     }
   },
+
   deactivateWeclomeMesssage: function() {
     this.get('session').set('data.firstVisit', false);
   }.on('deactivate')

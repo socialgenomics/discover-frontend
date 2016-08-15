@@ -1,28 +1,24 @@
-<nav class="sideNav" id="aggregation">
-  <h4 class="unfocus-grey-text">Filters</h4>
-  {{#each model.aggs as |agg|}}
-    {{#if agg.show}}
-    <div class="section">
-      <h4>{{ agg.displayName }}</h4>
-      {{#each agg.buckets as |bucket|}}
-        <div>
-        {{#if (eq agg.name "assay")}}
-          <div class="label {{bucket.colour}}"></div>
-        {{else}}
-          <div class="label"></div>
-        {{/if}}
-        {{#if (eq agg.name "access")}}
-          <span {{action "addFilter" agg.name bucket.key}} style="cursor:pointer;">{{bucket.key}} ({{bucket.doc_count}})</span>
-        {{else}}
-          <span {{action "addFilter" agg.name bucket.key}} style="cursor:pointer;">{{bucket.key}} ({{bucket.doc_count}})</span>
-        {{/if}}
-      </div>
-      {{/each}}
-    </div>
-    <div class="divider"></div>
-    {{/if}}
-  {{/each}}
-</nav>
+{{#if (gt model.meta.total 0)}}
+  <nav class="sideNav" id="aggregation">
+    <h4 class="unfocus-grey-text">Filters</h4>
+    {{#each model.aggs as |agg|}}
+      {{#if agg.show}}
+        <div class="section">
+          <h4>{{ agg.displayName }}</h4>
+          {{#each agg.buckets as |bucket|}}
+            <div>
+              {{#if (eq agg.name "assay")}}
+                <div class="label {{bucket.colour}}"></div>
+              {{/if}}
+              <span {{action "addFilter" agg.name bucket.key}} style="cursor:pointer;">{{bucket.key}} ({{bucket.doc_count}})</span>
+            </div>
+          {{/each}}
+          <div class="divider"></div>
+        </div>
+      {{/if}}
+    {{/each}}
+  </nav>
+{{/if}}
 
 <div class="content right">
   <div class="">
@@ -56,25 +52,27 @@
         {{/each}}
       {{/if}}
     </div>
-    <p>Total pages: {{totalPages}}</p>
-    <p>Current page: {{currentPageNumber}}</p>
-    <ul class="pagination">
-      {{#if (eq currentPageNumber 1)}}
-        <button class="btn disabled">Previous</button>
-      {{else}}
-        <button class="btn" {{action "previousPage"}}>Previous</button>
-      {{/if}}
+    {{#if (gt model.meta.total 0)}}
+      <p>Total pages: {{totalPages}}</p>
+      <p>Current page: {{currentPageNumber}}</p>
+      <ul class="pagination">
+        {{#if (eq currentPageNumber 1)}}
+          <button class="btn disabled">Previous</button>
+        {{else}}
+          <button class="btn" {{action "previousPage"}}>Previous</button>
+        {{/if}}
 
-        <!-- <li class="active"><a {{action "changePage" 1}}>1</a></li>
-        <li class="waves-effect"><a {{action "changePage" 2}}>2</a></li>
-        <li class="waves-effect"><a {{action "changePage" 3}}>3</a></li>
-        <li class="waves-effect"><a {{action "changePage" 4}}>4</a></li>
-        <li class="waves-effect"><a {{action "changePage" 5}}>5</a></li> -->
-      {{#if (gte currentPageNumber totalPages)}}
-        <button class="btn disabled">Next</button>
-      {{else}}
-        <button class="btn" {{action "nextPage"}}>Next</button>
-      {{/if}}
-    </ul>
+          <!-- <li class="active"><a {{action "changePage" 1}}>1</a></li>
+          <li class="waves-effect"><a {{action "changePage" 2}}>2</a></li>
+          <li class="waves-effect"><a {{action "changePage" 3}}>3</a></li>
+          <li class="waves-effect"><a {{action "changePage" 4}}>4</a></li>
+          <li class="waves-effect"><a {{action "changePage" 5}}>5</a></li> -->
+        {{#if (gte currentPageNumber totalPages)}}
+          <button class="btn disabled">Next</button>
+        {{else}}
+          <button class="btn" {{action "nextPage"}}>Next</button>
+        {{/if}}
+      </ul>
+    {{/if}}
   {{/if}}
 </div>
