@@ -37,14 +37,12 @@
         </h6>
 
         <div class="line-limit-desc">
-          <div class="ellipsis">
-            <p class="sub-grey">
-              {{#if dataset.highlights.description}}
-                {{{dataset.highlights.description}}}
-              {{else}}
-                {{dataset.description}}
-              {{/if}}
-            </p>
+          <div class="ellipsis sub-grey markdown-text">
+            {{#if dataset.highlights.description}}
+              {{{markdown-to-html markdown=dataset.highlights.description}}}
+            {{else}}
+              {{markdown-to-html markdown=dataset.description}}
+            {{/if}}
           </div>
         </div>
       </div>
@@ -106,14 +104,12 @@
         </h6>
 
         <div class="line-limit-desc">
-          <div class="ellipsis">
-            <p class="sub-grey">
-              {{#if dataset.highlights.description}}
-                {{{dataset.highlights.description}}}
-              {{else}}
-                {{dataset.description}}
-              {{/if}}
-            </p>
+          <div class="ellipsis sub-grey markdown-text">
+            {{#if dataset.highlights.description}}
+              {{{markdown-to-html markdown=dataset.highlights.description}}}
+            {{else}}
+              {{markdown-to-html markdown=dataset.description}}
+            {{/if}}
           </div>
         </div>
       </div>
