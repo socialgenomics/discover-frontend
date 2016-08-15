@@ -18,7 +18,7 @@ export function handleError(ctx) {
     } else {
       throw err;
     }
-  }
+  };
 }
 
 export function resolveWithResp(ctx) {
@@ -29,7 +29,7 @@ export function resolveWithResp(ctx) {
       label: 'Success'
     });
     return resp;
-  }
+  };
 }
 
 export function invalidate(ctx) {
@@ -42,8 +42,7 @@ export function invalidate(ctx) {
       }
     })
     .catch(handleError(ctx));
-  }
-
+  };
 }
 
 export default Base.extend({
