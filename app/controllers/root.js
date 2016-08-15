@@ -8,6 +8,10 @@ export default Ember.Controller.extend({
   sortUpdatedAt: ['updatedAt:desc'],
   requestsSorted: Ember.computed.sort('model.requests', 'sortUpdatedAt'),
   registrationsSorted: Ember.computed.sort('model.registered', 'sortUpdatedAt'),
+  datasetsNumber: Ember.computed('model.stats.datasets', function() {
+    const x = this.get('model.stats.datasets');
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  }),
 
   actions : {
     // user clicks button on welcome page to enter site, displays welcome flash message
