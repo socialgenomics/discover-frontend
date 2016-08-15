@@ -5,8 +5,12 @@
       <div class="col m12 center-align">
         <div class="card">
           <div class="stats">
-            <h2 class="numb">{{datasetsNumber}}<span class="stats-text thin"> Human Genomic Datasets </span><span class="stats-text thin">from</span>
-              {{ model.stats.repos }}<span class="stats-text thin"> Repositories</span>
+            <h2 class="numb">
+              {{#link-to 'datasets.search' (query-params q="") class="sub-grey"}}
+                {{datasetsNumber}}
+              {{/link-to}}
+              <span class="stats-text thin"> Human Genomic Datasets </span><span class="stats-text thin">from</span>
+              {{model.stats.repos}}<span class="stats-text thin"> Repositories</span>
             </h2>
               <div class="col m10 offset-m1 news-notice">
                 <div class="divider"></div>
