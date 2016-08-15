@@ -57,8 +57,7 @@ export default DS.Model.extend({
 
   queryParamsDidChange: function() {
     this.set('isLoading', true);
-    // this.set('datasets', []);
-    this.get('datasets').clear();
+    this.set('datasets', []);
     if (!Ember.isNone(this.get('filters'))) {
       let qps = this.get('queryParams');
       this.set('query', qps.q);
@@ -80,8 +79,6 @@ export default DS.Model.extend({
     this.get('aggs').setEach('show', false);
     this.get('datasets').clear();
   }.observes('query'),
-
-
 
   updateModelFromAPI: function() {
     return ajax({
@@ -121,6 +118,7 @@ export default DS.Model.extend({
       }));
     })
     .then(datasets => {
+      this.set('datasets',[]);
       datasets.forEach(dataset => {
         this.get('datasets').pushObject(dataset);
       });
