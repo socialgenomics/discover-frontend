@@ -8,14 +8,8 @@
         <div>
         {{#if (eq agg.name "assay")}}
           <div class="label {{bucket.colour}}"></div>
-        {{else}}
-          <div class="label"></div>
         {{/if}}
-        {{#if (eq agg.name "access")}}
-          <span {{action "addFilter" agg.name bucket.key}} style="cursor:pointer;">{{bucket.key}} ({{bucket.doc_count}})</span>
-        {{else}}
-          <span {{action "addFilter" agg.name bucket.key}} style="cursor:pointer;">{{bucket.key}} ({{bucket.doc_count}})</span>
-        {{/if}}
+        <span {{action "addFilter" agg.name bucket.key}} style="cursor:pointer;">{{bucket.key}} ({{bucket.doc_count}})</span>
       </div>
       {{/each}}
     </div>
