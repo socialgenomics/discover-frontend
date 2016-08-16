@@ -1,7 +1,6 @@
 import Ember from 'ember';
-import UnauthenticatedRouteMixin from 'ember-simple-auth/mixins/unauthenticated-route-mixin';
 
-export default Ember.Route.extend(UnauthenticatedRouteMixin, {
+export default Ember.Route.extend({
   session: Ember.inject.service(),
 
   beforeModel: function(transition) {
@@ -10,5 +9,13 @@ export default Ember.Route.extend(UnauthenticatedRouteMixin, {
     if (this.get('session.data.firstVisit', false)) {
       this.transitionTo('root');
     }
+  },
+
+  model: function() {
+    let user = this.get('session.session.content.authenticated.user');
+    return {
+      cred: user.credentials[0],
+      name: user.firstname + ' ' + user.lastname
+    };
   }
 });

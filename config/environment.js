@@ -104,7 +104,7 @@ module.exports = function(environment) {
         'connect-src': "'self' 'unsafe-inline' ws://docker-vm:49152 http://api.calq.io https://api-ping.intercom.io https://nexus-websocket-a.intercom.io https://nexus-websocket-b.intercom.io wss://nexus-websocket-a.intercom.io wss://nexus-websocket-b.intercom.io https://api-iam.intercom.io", // Allow data (ajax/websocket) from api.calq.io
         'img-src': "'self' data: http://www.google-analytics.com https://www.gravatar.com http://i2.wp.com/dg2kcfbxc77v1.cloudfront.net http://i0.wp.com/dg2kcfbxc77v1.cloudfront.net/assets https://js.intercomcdn.com https://static.intercomassets.com/ https://dg2kcfbxc77v1.cloudfront.net/",
         'media-src': "'self'",
-        'frame-src':"'self' 'unsafe-inline' https://repositive.typeform.com/to/pktwPz",
+        'frame-src':"'self' 'unsafe-inline' https://repositive.typeform.com/to/pktwPz https://repositive.typeform.com/to/viIWx1",
       },
       metricsAdapters: [
         {
