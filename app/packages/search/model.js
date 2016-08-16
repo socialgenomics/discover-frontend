@@ -57,9 +57,7 @@ export default DS.Model.extend({
 
   queryParamsDidChange: Ember.observer('queryParams', function() {
     this.set('isLoading', true);
-    debugger;
     this.set('datasets', []);
-    debugger;
     if (Ember.isPresent(this.get('filters'))) {
       let qps = this.get('queryParams');
       this.set('query', qps.q);
@@ -186,7 +184,7 @@ export default DS.Model.extend({
       let filtersBool = this.get('filters')
       .map(filter => filter.get('DSL'))
       .filter(value => {
-        // debugger;
+        // debugger; //Debugging here makes the issue disappear.
         if (Ember.isPresent(value)) { return value; }
       });
       query.body.query.filtered.filter.bool.must = filtersBool;
