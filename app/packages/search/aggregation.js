@@ -17,6 +17,7 @@ export default Ember.Object.extend({
   }.property('name'),
 
   init: function() {
+    //Where does 'aggDSL' even come from???
     if (!Ember.$.isEmptyObject(this.get('aggDSL'))) {
       var DSL = this.get('aggDSL'); // TODO: rmove this dependancy on aggDSL as it is confusing
       var name = Object.keys(DSL)[0];

@@ -55,10 +55,12 @@ export default DS.Model.extend({
     }
   }.on('ready'),
 
-  queryParamsDidChange: function() {
+  queryParamsDidChange: Ember.observer('queryParams', function() {
     this.set('isLoading', true);
+    debugger;
     this.set('datasets', []);
-    if (!Ember.isNone(this.get('filters'))) {
+    debugger;
+    if (Ember.isPresent(this.get('filters'))) {
       let qps = this.get('queryParams');
       this.set('query', qps.q);
       delete qps.q;
@@ -67,26 +69,27 @@ export default DS.Model.extend({
       this.set('offset', qps.offset);
       delete qps.offset;
 
+      //Set the new filter in the filters array.
       for (let key in qps) {
         let filter = this.filters.findBy('name', key);
         filter.set('value', this.get('queryParams.' + key));
       }
     }
-  }.observes('queryParams'),
+  }),
 
-  queryDidChange: function() {
+  queryDidChange: Ember.observer('query', function() {
     this.set('isLoading', true);
     this.get('aggs').setEach('show', false);
     this.get('datasets').clear();
-  }.observes('query'),
+  }),
 
-  updateModelFromAPI: function() {
+  updateModelFromAPI: Ember.observer('DSL', function() {
     return ajax({
       url: ENV.APIRoutes['datasets.search'],
       type: 'POST',
       data: 'query=' + this.get('DSL')
     })
-    .then((resp) => {
+    .then(resp => {
       this.set('meta', resp.meta);
       if (this.get('meta.total') < 0) {
         return Ember.RSVP.reject('No results');
@@ -128,7 +131,7 @@ export default DS.Model.extend({
       Ember.Logger.error(err);
       return Ember.RSVP.reject(err);
     });
-  }.observes('DSL'),
+  }),
 
 
   DSL: Ember.computed('query', 'offset', 'filters.@each.value', function() {
@@ -183,7 +186,8 @@ export default DS.Model.extend({
       let filtersBool = this.get('filters')
       .map(filter => filter.get('DSL'))
       .filter(value => {
-        if (!Ember.isNone(value)) { return value; }
+        // debugger;
+        if (Ember.isPresent(value)) { return value; }
       });
       query.body.query.filtered.filter.bool.must = filtersBool;
     }
