@@ -63,13 +63,15 @@
     {{else}} <!-- It is a Dataset -->
 
       <div class="card-header">
-        <div class="assay-container">
-          {{#link-to 'datasets.search' (query-params assay=dataset.assay) }}
-            <div class="assay-container" data-balloon={{dataset.assay}} data-balloon-pos="up">
-              <span class="assay-small {{dataset.colour}}"></span>
-            </div>
-          {{/link-to}}
-        </div>
+        {{#if dataset.assay}}
+          <div class="assay-container">
+            {{#link-to 'datasets.search' (query-params assay=dataset.assay) }}
+              <div class="assay-container" data-balloon={{dataset.assay}} data-balloon-pos="up">
+                <span class="assay-small {{dataset.colour}}"></span>
+              </div>
+            {{/link-to}}
+          </div>
+        {{/if}}
         <div class="actions-container valign-wrapper">
           {{action-favourite action="toggleModal" dataset=dataset}}
           <span class="grey-text">{{dataset.favourite}}</span>
