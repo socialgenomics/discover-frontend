@@ -10,7 +10,6 @@ export default Ember.Controller.extend(
   q: null,
   ordering: null,
   assay: null,
-  //tags: null,
   datasource: null,
   access: null,
   resultsPerPage: 30,
