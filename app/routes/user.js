@@ -17,7 +17,6 @@ export default Ember.Route.extend({
       ]);
     })
     .then(values => {
-      let verified =
       return {
         user: values[0],
         user_profile: values[1].get('firstObject'),

@@ -26,26 +26,21 @@ export default Ember.Route.extend({
         not logged in.
       */
       if (this.get('session.isAuthenticated')) {
-        debugger;
         if (this.get('session.authenticatedUser')) {
-          debugger;
           this.get('session.authenticatedUser').set('isEmailValidated', true);
           this.get('session.data').set('displayWelcomeMessage', false);
           this.transitionTo('user', this.get('session.authenticatedUser.id'));
         } else {
-          debugger;
           console.warn('session.authenticatedUser is undefined but session.isAuthenticated "true"');
           this.transitionTo('users.login');
         }
       } else {
-        debugger;
         this.transitionTo('root');
       }
 
       this.showMessages(resp);
     })
     .catch((err)=> {
-      debugger;
       Ember.Logger.error(err);
       Ember.RSVP.resolve(); // fulfills the promise - this causes ember to render the template
     });
