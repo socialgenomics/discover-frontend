@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import ajax from 'ic-ajax';
 import ENV from 'repositive/config/environment';
+import {verifyEmail} from './trust';
 
 export default Ember.Route.extend({
   session: Ember.inject.service(),
@@ -14,8 +15,7 @@ export default Ember.Route.extend({
       url: ENV.APIRoutes['verify-email'] + '/' + params.verificationId,
       type: 'GET'
     })
-    .then(resp=> {
-      this.showMessages(resp.messages);
+    .then(resp => {
 
       /**
       * Backend validated the email address - transitionTo the profile without
@@ -26,35 +26,50 @@ export default Ember.Route.extend({
         not logged in.
       */
       if (this.get('session.isAuthenticated')) {
+        debugger;
         if (this.get('session.authenticatedUser')) {
+          debugger;
           this.get('session.authenticatedUser').set('isEmailValidated', true);
           this.get('session.data').set('displayWelcomeMessage', false);
           this.transitionTo('user', this.get('session.authenticatedUser.id'));
         } else {
+          debugger;
           console.warn('session.authenticatedUser is undefined but session.isAuthenticated "true"');
           this.transitionTo('users.login');
         }
       } else {
-        this.transitionTo('users.login');
+        debugger;
+        this.transitionTo('root');
       }
+
+      this.showMessages(resp);
     })
     .catch((err)=> {
+      debugger;
       Ember.Logger.error(err);
       Ember.RSVP.resolve(); // fulfills the promise - this causes ember to render the template
     });
   },
 
   actions: {
-    resendVerifyEmail: function() {
-      ajax({
-        url: ENV.APIRoutes['verify-email-resend'] + '/' + this.get('session.authenticatedUser.main_email'),
-        type: 'GET'
+    resendVerifyEmail: verifyEmail
+  },
+
+  showMessages: function(content) {
+    if (content.message === 'success') {
+      this.flashMessages.add({
+        message: 'Your credential is now validated',
+        type: 'info',
+        timeout: 7000,
+        class: 'fadeInOut'
+      });
+    } else {
+      this.flashMessages.add({
+        message: 'An unexpected error occurred',
+        type: 'warn',
+        timeout: 7000,
+        class: 'fadeInOut'
       });
     }
-  },
-  showMessages: function(messages) {
-    messages.forEach(message=> {
-      Ember.get(this, 'flashMessages')[message.type](message.text);
-    });
   }
 });
