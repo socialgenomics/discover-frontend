@@ -3,6 +3,14 @@ import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-rout
 import ajax from 'ic-ajax';
 import ENV from 'repositive/config/environment';
 
+export function isVerified(credentials) {
+  return credentials.reduce((acc, curr) => acc || curr.get('verified'), false);
+}
+
+export function mainCredential(credentials) {
+  return credentials.filter((c) => c.get('primary'))[0];
+}
+
 export function verifyEmail() {
     let email = this.get('session.authenticatedUser.credentials.content.currentState')[0].record.get('email');
     this.set('sentEmail', true);
@@ -29,5 +37,15 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
   actions: {
     resendVerifyEmail: verifyEmail
+  },
+
+  model: function() {
+    let userId = this.get('session.session.authenticated.user.id');
+    return this.store.query('credential', {'user_id': userId}).then((credentials) => {
+      return {
+        is_verified: isVerified(credentials),
+        main_credential: mainCredential(credentials)
+      }
+    })
   }
 });
