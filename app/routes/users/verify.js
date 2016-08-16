@@ -16,7 +16,6 @@ export default Ember.Route.extend({
       type: 'GET'
     })
     .then(resp => {
-
       /**
       * Backend validated the email address - transitionTo the profile without
       * rendering the current page (i.e do not resolve the promise before transitioning).
@@ -37,7 +36,6 @@ export default Ember.Route.extend({
       } else {
         this.transitionTo('root');
       }
-
       this.showMessages(resp);
     })
     .catch((err)=> {

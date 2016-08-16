@@ -3,7 +3,7 @@ import {isVerified} from './users/trust';
 
 export default Ember.Route.extend({
   session: Ember.inject.service(),
-  
+
   model: function(params) {
     return this.store.findRecord('user', params.id)
     .then(user => {
@@ -13,7 +13,7 @@ export default Ember.Route.extend({
         this.store.query('userProfile', { 'user_id': userId }),
         this.store.query('dataset', { 'user_id': userId }),
         this.store.query('request', { 'user_id': userId }),
-        this.store.query('credential', {'user_id': userId})
+        this.store.query('credential', { 'user_id': userId })
       ]);
     })
     .then(values => {
