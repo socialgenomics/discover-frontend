@@ -209,10 +209,11 @@ export default DS.Model.extend({
   updateOffset: function(value, type) {
     if (type === 'increment') {
       this.incrementProperty('offset', value);
-    } else {
+    } else if (type === 'decrement') {
       this.decrementProperty('offset', value);
+    } else {
+      this.set('offset', value);
     }
     this.updateModelFromAPI();
   }
-
 });

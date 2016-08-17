@@ -52,7 +52,7 @@ export default Ember.Controller.extend(
       const pageNumberList = this.get('pageNumberList');
       this.set('model.isLoading', true);
       this.get('model.datasets').clear();
-      this.set('model.offset', pageNumberList[pageNumber - 1]);
+      this.get('model').updateOffset(pageNumberList[pageNumber - 1]);
     },
 
     previousPage() {
@@ -60,8 +60,6 @@ export default Ember.Controller.extend(
       this.set('model.isLoading', true);
       this.get('model.datasets').clear();
       this.get('model').updateOffset(resultsPerPage, 'decrement');
-
-      // this.get('model').decrementProperty('offset', resultsPerPage);
     },
 
     nextPage() {
@@ -69,7 +67,6 @@ export default Ember.Controller.extend(
       this.set('model.isLoading', true);
       this.get('model.datasets').clear();
       this.get('model').updateOffset(resultsPerPage, 'increment');
-      // this.get('model').incrementProperty('offset', resultsPerPage);
     }
   }
 });
