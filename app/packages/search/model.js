@@ -74,7 +74,6 @@ export default DS.Model.extend({
         let filter = this.filters.findBy('name', key);
         filter.set('value', this.get('queryParams.' + key));
       }
-
       this.updateModelFromAPI();
     }
   }),
@@ -84,10 +83,6 @@ export default DS.Model.extend({
     this.get('aggs').setEach('show', false);
     this.get('datasets').clear();
     // Somehow this calls queryParamsDidChange
-  }),
-
-  offsetDidChange: Ember.observer('offset', function() {
-    this.updateModelFromAPI();
   }),
 
   updateModelFromAPI: function() {

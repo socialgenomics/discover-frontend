@@ -8,5 +8,22 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
       queryParams: params,
       user: this.get('session.authenticatedUser')
     });
+  },
+  actions: {
+    willTransition: function() {
+      this._resetController();
+    }
+  },
+
+  _resetController: function() {
+    this.controller.get('model').removeObserver('queryParams');
+    this.controller.setProperties({
+      queryParams: ['q', 'ordering', 'assay', 'datasource', 'access'],
+      q: null,
+      ordering: null,
+      assay: null,
+      datasource: null,
+      access: null
+    });
   }
 });
