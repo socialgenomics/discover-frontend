@@ -86,6 +86,10 @@ export default DS.Model.extend({
     // Somehow this calls queryParamsDidChange
   }),
 
+  offsetDidChange: Ember.observer('offset', function() {
+    this.updateModelFromAPI();
+  }),
+
   updateModelFromAPI: function() {
     return ajax({
       url: ENV.APIRoutes['datasets.search'],
