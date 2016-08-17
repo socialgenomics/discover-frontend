@@ -22,8 +22,8 @@
 
 <div class="content right">
   <div class="">
-    <h5 class="unfocus-grey-text">Your Query</h5>
     <p id="filters">
+      <h5 class="unfocus-grey-text inline-text">Your Query:</h5>
       <span class="filter first">
         <em class="highlight">"{{model.query}}"</em>
       </span>
@@ -35,45 +35,48 @@
     </p>
     <div class="divider"></div>
   </div>
-  <div class="margin-top">
-    {{#if model.isLoading}}
-    {{else}}
-      <h5 class="unfocus-grey-text">Search Results ({{ model.meta.total }})</h5>
-    {{/if}}
-  </div>
-  {{#if model.isLoading}}
-    {{partial 'loading'}}
+  {{#if model.isError}}
+    {{render 'datasets/search-error'}}
   {{else}}
-    <div class="row">
-      {{#if (eq model.meta.total 0)}}
-        {{render 'datasets/noResults'}}
-      {{else}}
-        {{#each model.datasets as |dataset|}}
-          {{dataset-card dataset=dataset toggleModal="toggleModal"}}
-        {{/each}}
-      {{/if}}
+    <div class="margin-top">
+      {{#unless model.isLoading}}
+        <h5 class="unfocus-grey-text">Search Results ({{ model.meta.total }})</h5>
+      {{/unless}}
     </div>
-    {{#if (gt model.meta.total 0)}}
-      <p>Total pages: {{totalPages}}</p>
-      <p>Current page: {{currentPageNumber}}</p>
-      <ul class="pagination">
-        {{#if (eq currentPageNumber 1)}}
-          <button class="btn disabled">Previous</button>
+    {{#if model.isLoading}}
+      {{partial 'loading'}}
+    {{else}}
+      <div class="row">
+        {{#if (eq model.meta.total 0)}}
+          {{render 'datasets/noResults'}}
         {{else}}
-          <button class="btn" {{action "previousPage"}}>Previous</button>
+          {{#each model.datasets as |dataset|}}
+            {{dataset-card dataset=dataset toggleModal="toggleModal"}}
+          {{/each}}
         {{/if}}
+      </div>
+      {{#if (gt model.meta.total 0)}}
+        <p>Total pages: {{totalPages}}</p>
+        <p>Current page: {{currentPageNumber}}</p>
+        <ul class="pagination">
+          {{#if (eq currentPageNumber 1)}}
+            <button class="btn disabled">Previous</button>
+          {{else}}
+            <button class="btn" {{action "previousPage"}}>Previous</button>
+          {{/if}}
 
-          <!-- <li class="active"><a {{action "changePage" 1}}>1</a></li>
-          <li class="waves-effect"><a {{action "changePage" 2}}>2</a></li>
-          <li class="waves-effect"><a {{action "changePage" 3}}>3</a></li>
-          <li class="waves-effect"><a {{action "changePage" 4}}>4</a></li>
-          <li class="waves-effect"><a {{action "changePage" 5}}>5</a></li> -->
-        {{#if (gte currentPageNumber totalPages)}}
-          <button class="btn disabled">Next</button>
-        {{else}}
-          <button class="btn" {{action "nextPage"}}>Next</button>
-        {{/if}}
-      </ul>
+            <!-- <li class="active"><a {{action "changePage" 1}}>1</a></li>
+            <li class="waves-effect"><a {{action "changePage" 2}}>2</a></li>
+            <li class="waves-effect"><a {{action "changePage" 3}}>3</a></li>
+            <li class="waves-effect"><a {{action "changePage" 4}}>4</a></li>
+            <li class="waves-effect"><a {{action "changePage" 5}}>5</a></li> -->
+          {{#if (gte currentPageNumber totalPages)}}
+            <button class="btn disabled">Next</button>
+          {{else}}
+            <button class="btn" {{action "nextPage"}}>Next</button>
+          {{/if}}
+        </ul>
+      {{/if}}
     {{/if}}
   {{/if}}
 </div>
