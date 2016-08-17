@@ -59,14 +59,17 @@ export default Ember.Controller.extend(
       const resultsPerPage = this.get('resultsPerPage');
       this.set('model.isLoading', true);
       this.get('model.datasets').clear();
-      this.get('model').decrementProperty('offset', resultsPerPage);
+      this.get('model').updateOffset(resultsPerPage, 'decrement');
+
+      // this.get('model').decrementProperty('offset', resultsPerPage);
     },
 
     nextPage() {
       const resultsPerPage = this.get('resultsPerPage');
       this.set('model.isLoading', true);
       this.get('model.datasets').clear();
-      this.get('model').incrementProperty('offset', resultsPerPage);
+      this.get('model').updateOffset(resultsPerPage, 'increment');
+      // this.get('model').incrementProperty('offset', resultsPerPage);
     }
   }
 });

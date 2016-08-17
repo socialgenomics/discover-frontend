@@ -205,5 +205,14 @@ export default DS.Model.extend({
       assay = 'Not Available';
     }
     return colours.getColour(assay);
+  },
+  updateOffset: function(value, type) {
+    if (type === 'increment') {
+      this.incrementProperty('offset', value);
+    } else {
+      this.decrementProperty('offset', value);
+    }
+    this.updateModelFromAPI();
   }
+
 });
