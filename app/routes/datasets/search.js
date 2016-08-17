@@ -18,7 +18,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
   _resetController: function() {
     this.controller.get('model').removeObserver('queryParams');
     this.controller.setProperties({
-      queryParams: ['q', 'ordering', 'assay', 'datasource', 'access'],
       q: null,
       ordering: null,
       assay: null,
