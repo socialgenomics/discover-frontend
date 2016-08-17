@@ -72,6 +72,8 @@ export default DS.Model.extend({
         let filter = this.filters.findBy('name', key);
         filter.set('value', this.get('queryParams.' + key));
       }
+
+      this.updateModelFromAPI();
     }
   }),
 
@@ -79,9 +81,10 @@ export default DS.Model.extend({
     this.set('isLoading', true);
     this.get('aggs').setEach('show', false);
     this.get('datasets').clear();
+    // Somehow this calls queryParamsDidChange
   }),
 
-  updateModelFromAPI: Ember.observer('DSL', function() {
+  updateModelFromAPI: function() {
     return ajax({
       url: ENV.APIRoutes['datasets.search'],
       type: 'POST',
@@ -129,7 +132,7 @@ export default DS.Model.extend({
       Ember.Logger.error(err);
       return Ember.RSVP.reject(err);
     });
-  }),
+  },
 
 
   DSL: Ember.computed('query', 'offset', 'filters.@each.value', function() {
@@ -184,7 +187,6 @@ export default DS.Model.extend({
       let filtersBool = this.get('filters')
       .map(filter => filter.get('DSL'))
       .filter(value => {
-        // debugger; //Debugging here makes the issue disappear.
         if (Ember.isPresent(value)) { return value; }
       });
       query.body.query.filtered.filter.bool.must = filtersBool;
