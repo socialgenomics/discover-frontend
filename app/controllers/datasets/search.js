@@ -47,7 +47,6 @@ export default Ember.Controller.extend(
     }
   }.observes('model.isLoading'),
 
-
   actions: {
     changePage(pageNumber) {
       const pageNumberList = this.get('pageNumberList');

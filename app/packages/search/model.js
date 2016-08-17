@@ -18,6 +18,7 @@ export default DS.Model.extend({
   aggs: null,
   filters: null,
   isLoading: true,
+  isError: false,
 
   initialise: function() {
     if (Ember.isEmpty(this.get('queryParams'))) {
@@ -57,6 +58,7 @@ export default DS.Model.extend({
 
   queryParamsDidChange: Ember.observer('queryParams', function() {
     this.set('isLoading', true);
+    this.set('isError', false);
     this.set('datasets', []);
     if (Ember.isPresent(this.get('filters'))) {
       let qps = this.get('queryParams');
@@ -129,6 +131,8 @@ export default DS.Model.extend({
       this.set('isLoading', false);
     })
     .catch((err) => {
+      this.set('isLoading', false);
+      this.set('isError', true);
       Ember.Logger.error(err);
       return Ember.RSVP.reject(err);
     });
