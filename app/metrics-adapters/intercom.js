@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import BaseAdapter from 'ember-metrics/metrics-adapters/base';
 import objectTransforms from 'ember-metrics/utils/object-transforms';
+// import Intercom from 'intercom-client ';
 
 const { copy, get } = Ember;
 const { compact } = objectTransforms;
@@ -68,10 +69,22 @@ export default BaseAdapter.extend({
     });
   },
 
-  trackEvent() {
+  trackEvent(options = {}) {
+    let { category, action, label, value } = options;
+    let actionName = category + ' ' + action;
+    window.Intercom('trackEvent', actionName, {
+      label: label,
+      value: value
+    });
   },
 
-  trackPage() {
+  trackPage(options = {}) {
+    let { page, title } = options;
+    let action = 'navigate: ' + title;
+    window.Intercom('trackEvent', action, {
+      page: page,
+      title: title
+    });
   },
 
   alias() {
