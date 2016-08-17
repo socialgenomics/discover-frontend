@@ -91,7 +91,7 @@ module.exports = function(environment) {
             redirectUri: 'http://localhost:4200'
           },
           'linked-in-oauth2': {
-            apiKey:      '75fsbvpfgi1667',
+            apiKey:      '77moxyb7enik8v',
             redirectUri: 'http://localhost:4200'
           }
         }
