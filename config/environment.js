@@ -135,6 +135,12 @@ module.exports = function(environment) {
           config: {
             id: 'tz4k4icz'
           }
+        },{
+          name: 'Intercom',
+          environments: ['local-development'],
+          config: {
+            id: 'vdoi8br5'
+          }
         },
         {
           name: 'Survicate',
