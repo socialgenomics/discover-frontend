@@ -65,7 +65,7 @@
       <div class="card-header">
         {{#if dataset.assay}}
           <div class="assay-container">
-            {{#link-to 'datasets.search' (query-params assay=dataset.assay) }}
+            {{#link-to 'datasets.search' (query-params q="" assay=dataset.assay) }}
               <div class="assay-container" data-balloon={{dataset.assay}} data-balloon-pos="up">
                 <span class="assay-small {{dataset.colour}}"></span>
               </div>
