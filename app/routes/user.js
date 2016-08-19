@@ -28,5 +28,10 @@ export default Ember.Route.extend({
     .catch(err => {
       Ember.Logger.error(err);
     });
+  },
+  afterModel: function(model) {
+    if (model.user.get('currentState.isDirty')) {
+      model.user.set('currentState.isDirty', false);
+    }
   }
 });

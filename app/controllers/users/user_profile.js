@@ -20,29 +20,36 @@ export default Ember.Controller.extend(
       }
     }
   },
+  isSavable: Ember.computed.or(
+    'session.authenticatedUser.currentState.isDirty',
+    'session.authenticatedUser.profile.currentState.isDirty'
+  ),
   actions: {
     save: function() {
-      this.get('session.authenticatedUser').save()
-      .then((resp) => {
-        return resp.profile.save();
-      })
-      .then(() => {
-        this.flashMessages.add({
-          message: 'Your profile has been updated.',
-          type: 'success',
-          timeout: 7000,
-          class: 'fadeInOut'
+      const user = this.get('session.authenticatedUser');
+      if (this.isSavable) {
+        user.save()
+        .then((resp) => {
+          return resp.profile.save();
+        })
+        .then(() => {
+          this.flashMessages.add({
+            message: 'Your profile has been updated.',
+            type: 'success',
+            timeout: 7000,
+            class: 'fadeInOut'
+          });
+        })
+        .catch((err) => {
+          Ember.Logger.error(err);
+          this.flashMessages.add({
+            message: 'Sorry. There was a problem saving your changes.',
+            type: 'warning',
+            timeout: 7000,
+            class: 'fadeInOut'
+          });
         });
-      })
-      .catch((err) => {
-        Ember.Logger.error(err);
-        this.flashMessages.add({
-          message: 'Sorry. There was a problem saving your changes.',
-          type: 'warning',
-          timeout: 7000,
-          class: 'fadeInOut'
-        });
-      });
+      }
     }
   }
 });
