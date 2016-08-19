@@ -117,12 +117,6 @@ export default DS.Model.extend({
       return promisedDatasets;
     })
     .then(datasets => {
-      return Promise.all(datasets.map(dataset => {
-        dataset.set('colour', this.getAssayColourForDataset(dataset));
-        return dataset;
-      }));
-    })
-    .then(datasets => {
       this.set('datasets', []);
       datasets.forEach(dataset => {
         this.get('datasets').pushObject(dataset);
@@ -198,15 +192,6 @@ export default DS.Model.extend({
     return JSON.stringify(query);
   }),
 
-  getAssayColourForDataset: function(dataset) {
-    let assay;
-    if (assay = dataset.get('assay')) {
-      assay = assay;
-    } else {
-      assay = 'Not Available';
-    }
-    return colours.getColour(assay);
-  },
   updateOffset: function(value, type) {
     if (type === 'increment') {
       this.incrementProperty('offset', value);
