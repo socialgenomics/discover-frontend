@@ -16,14 +16,27 @@ export default Ember.Controller.extend(
     },
     lastname: {
       presence: {
-        message: 'can\'t be blank'
+        message: 'Can\'t be blank'
       }
     }
   },
-  isSavable: Ember.computed.or(
+  isValid: Ember.computed.and(
+    'firstname',
+    'lastname'
+  ),
+  infoHasChanged: Ember.computed.or(
     'session.authenticatedUser.currentState.isDirty',
     'session.authenticatedUser.profile.currentState.isDirty'
   ),
+  isSavable: Ember.computed('isValid', 'infoHasChanged', function() {
+    const isValid = this.get('isValid');
+    const infoHasChanged = this.get('infoHasChanged');
+    if (isValid && infoHasChanged) {
+      return true;
+    }
+    return false;
+  }),
+
   actions: {
     save: function() {
       const user = this.get('session.authenticatedUser');
