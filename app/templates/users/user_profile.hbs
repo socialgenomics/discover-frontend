@@ -41,7 +41,11 @@
               }}
             </div>
             <div class="input-container col m6 offset-m3">
-              <button type="submit" class="btn teal white-text"  {{action "save" model}}>Save</button>
+              {{#if isSavable}}
+                <button type="submit" class="btn teal white-text" {{action "save"}}>Save</button>
+              {{else}}
+                <button type="button" class="btn disabled">Save</button>
+              {{/if}}
             </div>
           </form>
         </div>

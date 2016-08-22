@@ -79,6 +79,13 @@ module.exports = function(environment) {
       'simple-auth-cookie-store' : {
         cookieName: 'repositive.io'
       },
+      flashMessageDefaults: {
+        timeout: 5000,
+        extendedTimeout: 0,
+        priority: 200,
+        showProgress: true,
+        preventDuplicates: true
+      },
       moment: {
         includeTimezone: 'all',
         outputFormat: 'L',

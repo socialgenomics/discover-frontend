@@ -1,7 +1,9 @@
 <div class="row card dataset full-view">
   <div class="col l7 m6 s12 card-main-wrapper">
     <div class="top-action card-header">
-      <span class="assay-small {{model.colour}}"></span>
+      {{#if model.colour}}
+        <span class="assay-small {{model.colour}}" data-balloon={{model.assay}} data-balloon-pos="up"></span>
+      {{/if}}
       <div class="actions-container valign-wrapper">
         {{action-favourite dataset=dataset action="toggleModal"}}
         {{action-share action="toggleModal"}}
