@@ -4,7 +4,11 @@
     {{#each model.aggs as |agg|}}
       {{#if agg.show}}
         <div class="section">
-          <h4>{{ agg.displayName }}</h4>
+          {{#if (eq agg.displayName "Datasource")}}
+            <h4>Data Source</h4>
+          {{else}}
+            <h4>{{ agg.displayName }}</h4>
+          {{/if}}
           {{#each agg.buckets as |bucket|}}
             <div>
               {{#if (eq agg.name "assay")}}

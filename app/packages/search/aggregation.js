@@ -22,9 +22,6 @@ export default Ember.Object.extend({
       var DSL = this.get('aggDSL'); // TODO: rmove this dependancy on aggDSL as it is confusing
       var name = Object.keys(DSL)[0];
       this.set('name', name);
-      if (this.get('name') === 'datasource') {
-        this.set('name', 'data source');
-      }
       var buckets = DSL[name].buckets;
       this.set('buckets', []);
       buckets.forEach(function(bucket) {
