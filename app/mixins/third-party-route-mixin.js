@@ -10,6 +10,7 @@ export default Ember.Mixin.create({
         if (type === 'signup') {
           this.get('session').set('data.firstVisit', true)
           .then(() => this.get('session').set('data.displayWelcomeMessage', false))
+          .then(() => this.get('session').set('data.thirdPartySignup', true))
           .catch(this.displayMessage.bind(this));
         }
       })
