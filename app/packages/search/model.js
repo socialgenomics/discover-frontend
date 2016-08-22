@@ -144,7 +144,7 @@ export default DS.Model.extend({
             'title': {},
             'description': {}
           },
-          "require_field_match": false,
+          'require_field_match': false,
           'pre_tags': ['<em class="highlight">'],
           'post_tags': ['</em>']
         },
