@@ -144,7 +144,7 @@ export default DS.Model.extend({
             'title': {},
             'description': {}
           },
-          "require_field_match": false,
+          'require_field_match': false,
           'pre_tags': ['<em class="highlight">'],
           'post_tags': ['</em>']
         },
@@ -159,9 +159,10 @@ export default DS.Model.extend({
 
     let queryInstance;
     if (this.get('query') !== '') {
+      let q = this.get('query') + '*';
       queryInstance = {
         'query_string': {
-          'query': this.get('query'),
+          'query': q,
           'default_operator': 'AND'
         }
       };
