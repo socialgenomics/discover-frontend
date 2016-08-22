@@ -1,0 +1,18 @@
+{{#modal-dialog
+  close="toggleModal"
+  targetAttachment="center"
+  translucentOverlay=true
+}}
+
+<div class="modal">
+  <div class="modal-content center-align">
+    <h2>We are still working hard.</h2>
+    <h4 class="thin"><em>This feature will be available very soon.</em></h4>
+    <img class="modal-img" src="/assets/images/lizard-working-hard.png" alt="Logo"/>
+  </div>
+  <div class="modal-footer center-align">
+    <button {{action "toggleModal"}} class="btn center btn-light teal modal-action modal-close waves-effect">OK, no worries</button>
+  </div>
+</div>
+
+{{/modal-dialog}}
