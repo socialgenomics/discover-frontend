@@ -159,9 +159,10 @@ export default DS.Model.extend({
 
     let queryInstance;
     if (this.get('query') !== '') {
+      let q = this.get('query') + '*';
       queryInstance = {
         'query_string': {
-          'query': this.get('query'),
+          'query': q,
           'default_operator': 'AND'
         }
       };
