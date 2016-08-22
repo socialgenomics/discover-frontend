@@ -4,8 +4,6 @@ import ENV from 'repositive/config/environment';
 import Agg from './aggregation';
 import Filter from './filter';
 import Ember from 'ember';
-import _ from 'npm:lodash';
-import colours from '../../utils/colours';
 
 export default DS.Model.extend({
   user: DS.belongsTo('user'),
