@@ -8,7 +8,12 @@ export default Ember.Route.extend({
   beforeModel: function() {
     if (this.get('session.data.firstVisit', true) && this.get('session.isAuthenticated')) {
       this.transitionTo('beta-signup-form')
-      .then(() => this.get('session').set('data.displayWelcomeMessage', true));
+      .then(() => {
+        // Don't display the 'verify email' message if user signed up with third party auth
+        if (!this.get('session.data.thirdPartySignup')) {
+          this.get('session').set('data.displayWelcomeMessage', true);
+        }
+      })
     }
 
     if (this.get('session.data.displayWelcomeMessage', true) && this.get('session.isAuthenticated')) {

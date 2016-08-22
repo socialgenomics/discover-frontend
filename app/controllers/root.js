@@ -5,6 +5,7 @@ export default Ember.Controller.extend({
   loading: false,
   firstVisit: Ember.computed.alias('session.data.firstVisit'),
   displayWelcomeMessage: Ember.computed.alias('session.data.displayWelcomeMessage'),
+  thirdPartySignup: Ember.computed.alias('session.data.thirdPartySignup'),
   sortUpdatedAt: ['updatedAt:desc'],
   requestsSorted: Ember.computed.sort('model.requests', 'sortUpdatedAt'),
   registrationsSorted: Ember.computed.sort('model.registered', 'sortUpdatedAt'),
