@@ -8,6 +8,7 @@
         <div class="card">
           <div class="card-content">
             <h1>{{model.user.displayName}}</h1>
+            <h4>{{model.user_profile.workOrganisation}}</h4>
             {{#if isOwnProfile}}{{#link-to "users.user_profile" class="edit-btn fa-2x sub-dark"}}{{fa-icon "pencil-square-o"}}{{/link-to}}{{/if}}
             <div class="profile-img">
               <img src={{model.user_profile.avatar}}>

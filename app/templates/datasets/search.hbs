@@ -29,7 +29,9 @@
     <h5 class="unfocus-grey-text">Your Query:</h5>
     <p id="filters">
       <span class="filter first">
-        <em class="highlight">"{{model.query}}"</em>
+          <em class="highlight">
+            {{#if model.query}}"{{model.query}}"{{else}}"All Data"{{/if}}
+          </em>
       </span>
       {{#each model.filters as |filter|}}
         {{#if filter.value}}
