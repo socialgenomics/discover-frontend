@@ -139,7 +139,7 @@ export default DS.Model.extend({
       'body': {
         'highlight': {
           'fields': {
-            'title': {},
+            // 'title': {},
             'description': {}
           },
           'require_field_match': false,
