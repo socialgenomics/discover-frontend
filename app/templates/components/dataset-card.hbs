@@ -39,9 +39,9 @@
         <div class="line-limit-desc">
           <div class="ellipsis sub-grey markdown-text">
             {{#if dataset.highlights.description}}
-              {{{markdown-to-html markdown=dataset.highlights.description}}}
+              {{{markdown-to-html markdown=dataset.highlights.truncatedDescription}}}
             {{else}}
-              {{markdown-to-html markdown=dataset.description}}
+              {{markdown-to-html markdown=dataset.truncatedDescription}}
             {{/if}}
           </div>
         </div>

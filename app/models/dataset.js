@@ -1,4 +1,6 @@
 import DS from 'ember-data';
+import Ember from 'ember';
+import { truncateAndRemoveNewlines } from '../utils/truncate';
 
 export default DS.Model.extend({
   userId: DS.belongsTo('user'),
@@ -18,13 +20,11 @@ export default DS.Model.extend({
   accession: function() {
     return this.get('externalId');
   }.property('externalId'),
-  shortDescription: function() {
-    let length = 100;
+  truncatedDescription: Ember.computed('description', function() {
+    const charLimit = 100;
     let description = this.get('description');
-    if (description.length > length) {
-      description = description.substr(0, length) + ' ..';
-    }
+    truncateAndRemoveNewlines(description, charLimit);
     return description;
-  }.property('description'),
+  }),
   colour: DS.attr('string')
 });
