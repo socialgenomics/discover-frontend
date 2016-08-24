@@ -2,12 +2,10 @@
   <li class="tab">
     {{#if (or (eq tab "all") (eq tab "default"))}}
       {{#link-to 'root' (query-params tab="all") class="active"}}
-        <img class="tab-icon" src="/assets/images/icon-datasource.png">
         <span class="all-tab">All</span>
       {{/link-to}}
     {{else}}
       {{#link-to 'root' (query-params tab="all")}}
-        <img class="tab-icon" src="/assets/images/icon-datasource.png">
         <span class="all-tab">All</span>
       {{/link-to}}
     {{/if}}
@@ -41,12 +39,12 @@
   <li class="tab">
     {{#if (eq tab "requests")}}
       {{#link-to 'root' (query-params tab="requests") class="active"}}
-        <img class="tab-icon" src="/assets/images/icon-request.png">
+        <img class="tab-icon" src="/assets/images/icon-request-2.0.png">
         <span>Data Requests</span>
       {{/link-to}}
     {{else}}
       {{#link-to 'root' (query-params tab="requests")}}
-        <img class="tab-icon" src="/assets/images/icon-request.png">
+        <img class="tab-icon" src="/assets/images/icon-request-2.0.png">
         <span>Data Requests</span>
       {{/link-to}}
     {{/if}}
