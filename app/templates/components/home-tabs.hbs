@@ -1,45 +1,66 @@
 <ul class="tabs">
   <li class="tab">
+    {{#if (or (eq tab "all") (eq tab "default"))}}
+      {{#link-to 'root' (query-params tab="all") class="active"}}
+        <img class="tab-icon" src="/assets/images/icon-datasource.png">
+        <span class="all-tab">All</span>
+      {{/link-to}}
+    {{else}}
+      {{#link-to 'root' (query-params tab="all")}}
+        <img class="tab-icon" src="/assets/images/icon-datasource.png">
+        <span class="all-tab">All</span>
+      {{/link-to}}
+    {{/if}}
+  </li>
+  <li class="tab">
     {{#if (eq tab "sources")}}
-      {{#link-to 'root' (query-params tab="") class="active"}}
-        <img class="tab-icon" src="/assets/images/icon-datasource.png">Data Sources
+      {{#link-to 'root' (query-params tab="sources") class="active"}}
+        <img class="tab-icon" src="/assets/images/icon-datasource.png">
+        <span>Data Sources</span>
       {{/link-to}}
     {{else}}
       {{#link-to 'root' (query-params tab="sources")}}
-        <img class="tab-icon" src="/assets/images/icon-datasource.png">Data Sources
+        <img class="tab-icon" src="/assets/images/icon-datasource.png">
+        <span>Data Sources</span>
       {{/link-to}}
     {{/if}}
   </li>
   <li class="tab">
     {{#if (eq tab "collections")}}
-      {{#link-to 'root' (query-params tab="") class="active"}}
-        <img class="tab-icon" src="/assets/images/icon-collection.png">Collections
+      {{#link-to 'root' (query-params tab="collections") class="active"}}
+        <img class="tab-icon" src="/assets/images/icon-collection.png">
+        <span>Collections</span>
       {{/link-to}}
     {{else}}
       {{#link-to 'root' (query-params tab="collections")}}
-        <img class="tab-icon" src="/assets/images/icon-collection.png">Collections
+        <img class="tab-icon" src="/assets/images/icon-collection.png">
+        <span>Collections</span>
       {{/link-to}}
     {{/if}}
   </li>
   <li class="tab">
     {{#if (eq tab "requests")}}
-      {{#link-to 'root' (query-params tab="") class="active"}}
-        <img class="tab-icon" src="/assets/images/icon-request.png">Data Requests
+      {{#link-to 'root' (query-params tab="requests") class="active"}}
+        <img class="tab-icon" src="/assets/images/icon-request.png">
+        <span>Data Requests</span>
       {{/link-to}}
     {{else}}
       {{#link-to 'root' (query-params tab="requests")}}
-        <img class="tab-icon" src="/assets/images/icon-request.png">Data Requests
+        <img class="tab-icon" src="/assets/images/icon-request.png">
+        <span>Data Requests</span>
       {{/link-to}}
     {{/if}}
   </li>
   <li class="tab">
     {{#if (eq tab "discussions")}}
-      {{#link-to 'root' (query-params tab="") class="active"}}
-        <img class="tab-icon" src="/assets/images/icon-discussion.png">Discussions
+      {{#link-to 'root' (query-params tab="discussions") class="active"}}
+        <img class="tab-icon" src="/assets/images/icon-discussion.png">
+        <span>Discussions</span>
       {{/link-to}}
     {{else}}
       {{#link-to 'root' (query-params tab="discussions")}}
-        <img class="tab-icon" src="/assets/images/icon-discussion.png">Discussions
+        <img class="tab-icon" src="/assets/images/icon-discussion.png">
+        <span>Discussions</span>
       {{/link-to}}
     {{/if}}
   </li>
