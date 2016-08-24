@@ -157,11 +157,9 @@ export default DS.Model.extend({
 
     let queryInstance;
     if (this.get('query') !== '') {
-      // Add an asterisk to the end of every work for partial matching.
-      let q = this.get('query').split(' ').join('* ') + '*';
       queryInstance = {
         'query_string': {
-          'query': q,
+          'query': this.get('query'),
           'default_operator': 'AND'
         }
       };
