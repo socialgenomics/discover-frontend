@@ -17,9 +17,9 @@ export default DS.Model.extend({
   updatedAt: DS.attr('isodate'),
   stats: DS.attr('object'),
   externalId: DS.attr('string'),
-  accession: function() {
+  accession: Ember.computed('externalId', function() {
     return this.get('externalId');
-  }.property('externalId'),
+  }),
   truncatedDescription: Ember.computed('description', function() {
     const charLimit = 100;
     let description = this.get('description');
