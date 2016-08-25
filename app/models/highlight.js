@@ -9,7 +9,6 @@ export default DS.Model.extend({
   truncatedDescription: Ember.computed('description', function() {
     const charLimit = 100;
     let description = this.get('description');
-    truncateAndRemoveNewlines(description, charLimit);
-    return description;
+    return truncateAndRemoveNewlines(description, charLimit);
   })
 });
