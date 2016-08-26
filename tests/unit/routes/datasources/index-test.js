@@ -6,11 +6,14 @@ import {
 } from 'ember-mocha';
 
 describeModule(
-  'route:datasources',
+  'route:datasources/index',
   'DatasourcesRoute',
   {
     // Specify the other units that are required for this test.
-    // needs: ['controller:foo']
+    needs: [
+      'service:session',
+      'service:metrics'
+    ]
   },
   function() {
     it('exists', function() {
