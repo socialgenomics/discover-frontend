@@ -2,7 +2,8 @@ import Ember from 'ember';
 import _ from 'npm:lodash';
 
 export default Ember.Mixin.create({
-
+  //It makes the code difficult to understand when messing with ember internals like this.
+  //TODO: REFACTOR
   _qpChanged: function(controller, _prop) {
     this._super(controller, _prop);
     this.send('queryParamsDidChange');
