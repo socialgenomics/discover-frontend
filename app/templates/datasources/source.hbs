@@ -1,1 +1,15 @@
-<h1>Source</h1>
+<section class="row card dataset">
+  {{#link-to 'datasources'}}
+    {{fa-icon 'chevron-left'}} Back to all data sources
+  {{/link-to}}
+
+  <h1>{{model.shortName}}</h1>
+
+  {{#if model.createdAt}}
+    <p>Created on{{moment-format model.createdAt hideSuffix=true}}</p>
+  {{/if}}
+
+  {{#if model.updatedAt}}
+    <p>Updated on {{moment-format model.updatedAt hideSuffix=true}}</p>
+  {{/if}}
+</section>
