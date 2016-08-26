@@ -57,6 +57,10 @@ Router.map(function() {
     this.route('request');
   });
 
+  this.route('datasources', function() {
+    this.route('source');
+  });
+
   this.route('requests', { resetNamespace: true }, function() {
     this.route('detail', {
       path: ':id'
