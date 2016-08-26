@@ -13,7 +13,6 @@ export default Ember.Component.extend({
         label: this.get('query')
       });
       this.attrs.search(this.get('query'));
-      // this.sendAction('action', this.get('query'));
     }
   }
 });
