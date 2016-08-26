@@ -1,3 +1,9 @@
-<h1>Datasources</h1>
+<div class="row">
+  <h1>Datasources</h1>
 
-{{#link-to 'datasources.source'}}Source{{/link-to}}
+  {{#link-to 'datasources.source'}}Source{{/link-to}}
+
+  {{#each model as |source|}}
+    {{sources-card source=source toggleModal="toggleModal"}}
+  {{/each}}
+</div>
