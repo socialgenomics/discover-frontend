@@ -19,10 +19,10 @@ export default Ember.Mixin.create({
     },
 
     queryParamsDidChange: function() {
-      if (!Ember.isNone(this.get('model'))) {
-        var qps = _.object(this.get('queryParams').map(function(param) {
+      if (Ember.isPresent(this.get('model'))) {
+        var qps = _.object(this.get('queryParams').map(param => {
           return [param, this.get(param)];
-        }.bind(this)));
+        }));
         this.set('model.queryParams', qps);
       }
     }.on('queryParamsDidChange')
