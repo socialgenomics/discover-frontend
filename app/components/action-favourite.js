@@ -4,7 +4,7 @@ export default Ember.Component.extend({
   tagName: 'a',
   isStarred: false,
   classNameBindings: ['isStarred:starred'],
-  click: function() {
+  click() {
     this.toggleProperty('isStarred');
     if (this.get('isStarred')) {
       this.get('metrics').trackEvent({

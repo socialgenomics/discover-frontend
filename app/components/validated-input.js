@@ -32,7 +32,6 @@ export default Ember.Component.extend({
       this.set('isActive', false);
     },
     submitForm: function() {
-      //this.send('showInvalid');
       this.sendAction('submitForm');
     }
   }
