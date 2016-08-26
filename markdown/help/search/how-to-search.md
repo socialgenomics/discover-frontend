@@ -1,6 +1,6 @@
 ## How do I search on Repositive?
 
-Identify your research questions (e.g. Which genes affect women with breast cancer in China?)
+Identify your research question (e.g. Which genes affect women with breast cancer in China?).
 Identify the key concepts for your search (e.g. breast cancer, female, Chinese).
 
 Enter these key concepts as keywords into the search box.  
