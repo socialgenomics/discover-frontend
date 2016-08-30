@@ -1,0 +1,25 @@
+<section class="metadata-panel">
+  {{#unless showMore}}
+    <header>
+      <a {{action "showMoreMeta"}}>
+        <h4 class="white-text">{{source.shortName}} {{fa-icon 'chevron-down'}}</h4>
+      </a>
+    </header>
+  {{else}}
+    <header>
+      <a {{action "showMoreMeta"}}>
+        <h4 class="white-text">{{source.shortName}} {{fa-icon 'chevron-up'}}</h4>
+      </a>
+    </header>
+    <main>
+      <p>{{source.description}}</p>
+      <p>Datasets from this source: {{datasets.meta.total}}</p>
+      {{#if source.createdAt}}
+        <p>Created on: {{moment-format source.createdAt hideSuffix=true}}</p>
+      {{/if}}
+      {{#if source.updatedAt}}
+        <p>Updated on: {{moment-format source.updatedAt hideSuffix=true}}</p>
+      {{/if}}
+    </main>
+  {{/unless}}
+</section>
