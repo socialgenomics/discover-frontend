@@ -2,7 +2,8 @@ import Ember from 'ember';
 import _ from 'npm:lodash';
 
 export default Ember.Mixin.create({
-
+  //It makes the code difficult to understand when messing with ember internals like this.
+  //TODO: REFACTOR
   _qpChanged: function(controller, _prop) {
     this._super(controller, _prop);
     this.send('queryParamsDidChange');
@@ -19,10 +20,10 @@ export default Ember.Mixin.create({
     },
 
     queryParamsDidChange: function() {
-      if (!Ember.isNone(this.get('model'))) {
-        var qps = _.object(this.get('queryParams').map(function(param) {
+      if (Ember.isPresent(this.get('model'))) {
+        var qps = _.object(this.get('queryParams').map(param => {
           return [param, this.get(param)];
-        }.bind(this)));
+        }));
         this.set('model.queryParams', qps);
       }
     }.on('queryParamsDidChange')
