@@ -80,7 +80,8 @@ export default DS.Model.extend({
     this.set('isLoading', true);
     this.get('aggs').setEach('show', false);
     this.get('datasets').clear();
-    // Somehow this calls queryParamsDidChange
+    // Because the query is stored in queryParams as 'q'
+    // whenever query is changed, the queryParams are updated.
   }),
 
   updateModelFromAPI: function() {

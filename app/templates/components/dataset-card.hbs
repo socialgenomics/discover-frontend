@@ -65,11 +65,21 @@
       <div class="card-header">
         {{#if dataset.assay}}
           <div class="assay-container">
-            {{#link-to 'datasets.search' (query-params q="" assay=dataset.assay) }}
-              <div class="assay-container" data-balloon={{dataset.assay}} data-balloon-pos="up">
-                <span class="assay-small {{dataset.colour}}"></span>
-              </div>
-            {{/link-to}}
+            <!-- HACK #380 -->
+            {{#if searchRoute}}
+              {{#link-to 'datasets.search' (query-params assay=dataset.assay) }}
+                <div class="assay-container" data-balloon={{dataset.assay}} data-balloon-pos="up">
+                  <span class="assay-small {{dataset.colour}}"></span>
+                </div>
+              {{/link-to}}
+            {{else}}
+              {{#link-to 'datasets.search' (query-params q="" assay=dataset.assay) }}
+                <div class="assay-container" data-balloon={{dataset.assay}} data-balloon-pos="up">
+                  <span class="assay-small {{dataset.colour}}"></span>
+                </div>
+              {{/link-to}}
+            {{/if}}
+
           </div>
         {{/if}}
         <div class="actions-container valign-wrapper">
