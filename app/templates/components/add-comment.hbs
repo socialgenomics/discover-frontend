@@ -6,14 +6,14 @@
   {{validated-input
     type="textarea"
     value=comment
-    placeholder="Write a comment..."
+    placeholder="Share your thoughts or ask more questions about the data."
     action="showButtons"
     textarea="true"
   }}
   {{#if isActive}}
     <div class="buttons">
       <button {{action 'addComment'}} class="btn post-btn teal white-text">{{fa-icon "check"}}</button>
-      <a {{action 'cancel'}} class="grey-text cancel-btn">cancel</a>
+      <a {{action 'cancel'}} class="cancel-btn">cancel</a>
     </div>
   {{/if}}
 </div>
