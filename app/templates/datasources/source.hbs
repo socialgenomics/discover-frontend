@@ -1,15 +1,39 @@
-<section class="row card dataset">
-  {{#link-to 'datasources'}}
-    {{fa-icon 'chevron-left'}} Back to all data sources
-  {{/link-to}}
+<section class="metadata-panel">
+  {{#unless showMore}}
+    <header>
+      <a {{action "showMoreMeta"}}>
+        <h4 class="white-text">{{model.source.shortName}} {{fa-icon 'chevron-down'}}</h4>
+      </a>
+    </header>
+  {{else}}
+    <header>
+      <a {{action "showMoreMeta"}}>
+        <h4 class="white-text">{{model.source.shortName}} {{fa-icon 'chevron-up'}}</h4>
+      </a>
+    </header>
+    <main>
+      <p>{{model.source.description}}</p>
+      <p>Datasets from this source: {{model.datasets.meta.total}}</p>
+      {{#if model.source.createdAt}}
+        <p>Created on: {{moment-format model.createdAt hideSuffix=true}}</p>
+      {{/if}}
+      {{#if model.source.updatedAt}}
+        <p>Updated on: {{moment-format model.updatedAt hideSuffix=true}}</p>
+      {{/if}}
+    </main>
+  {{/unless}}
+</section>
 
-  <h1>{{model.shortName}}</h1>
+<section class="row content">
+  <div class="contain">
+    {{#link-to 'datasources'}}
+      {{fa-icon 'chevron-left'}} Back to all data sources
+    {{/link-to}}
 
-  {{#if model.createdAt}}
-    <p>Created on{{moment-format model.createdAt hideSuffix=true}}</p>
-  {{/if}}
-
-  {{#if model.updatedAt}}
-    <p>Updated on {{moment-format model.updatedAt hideSuffix=true}}</p>
-  {{/if}}
+    <div class="card-content">
+      {{#each model.datasets as |dataset|}}
+        {{dataset-card dataset=dataset action="toggleModal"}}
+      {{/each}}
+    </div>
+  </div>
 </section>
