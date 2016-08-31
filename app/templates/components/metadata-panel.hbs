@@ -2,23 +2,26 @@
   {{#unless showMore}}
     <header>
       <a {{action "showMoreMeta"}}>
-        <h4 class="white-text">{{source.shortName}} {{fa-icon 'chevron-down'}}</h4>
+        <h5>{{source.shortName}} {{fa-icon 'chevron-down'}}</h5>
       </a>
     </header>
   {{else}}
     <header>
       <a {{action "showMoreMeta"}}>
-        <h4 class="white-text">{{source.shortName}} {{fa-icon 'chevron-up'}}</h4>
+        <h5>{{source.shortName}} {{fa-icon 'chevron-up'}}</h5>
       </a>
     </header>
     <main>
-      <p>{{source.description}}</p>
-      <p>Datasets from this source: {{datasets.meta.total}}</p>
+      <h3>{{source.shortName}}</h3>
+      {{#if source.description}}
+        <p>{{source.description}}</p>
+      {{/if}}
+      <p>Datasets from this source: <strong>{{datasets.meta.total}}</strong></p>
       {{#if source.createdAt}}
-        <p>Created on: {{moment-format source.createdAt hideSuffix=true}}</p>
+        <p>Created on: <strong>{{moment-format source.createdAt hideSuffix=true}}</strong></p>
       {{/if}}
       {{#if source.updatedAt}}
-        <p>Updated on: {{moment-format source.updatedAt hideSuffix=true}}</p>
+        <p>Updated on: <strong>{{moment-format source.updatedAt hideSuffix=true}}</strong></p>
       {{/if}}
     </main>
   {{/unless}}
