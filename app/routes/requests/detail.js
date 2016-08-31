@@ -11,6 +11,13 @@ function peekOrCreate(store, id) {
   }
 }
 
+function reducer(acc, curr) {
+  if (acc.indexOf(curr) === -1) {
+    acc.push({ user_id: curr });
+  }
+  return acc;
+}
+
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
   session: Ember.inject.service(),
 
@@ -26,8 +33,17 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
       let request = data[1];
       actionable.set('actions', data[0]);
       request.actionableId = actionable;
-      return request;
-    }).catch(err => {
+      let commenterIds = data[0].content
+      .map(action => action.record.get('userId.id'))
+      .reduce(reducer, []);
+      return Ember.RSVP.hash({
+        userProfiles: commenterIds.map(id => this.store.query('userProfile', id)),
+        request: request
+      });
+    }).then((data) => {
+      return data.request;
+    })
+    .catch(err => {
       Ember.Logger.error(err);
     });
   },
