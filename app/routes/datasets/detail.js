@@ -10,7 +10,7 @@ function peekOrCreate(store, id) {
     return store.createRecord('actionable', { id: id });
   }
 }
-
+//This returns a list of user_ids, no duplicates.
 function reducer(acc, curr) {
   if (acc.indexOf(curr) === -1) {
     acc.push({ user_id: curr });
