@@ -18,7 +18,7 @@
               <div class="divider"></div>
               <div class="row">
                 <div class="featured-content col m4">
-                  {{#link-to 'datasets.search' (query-params q="xpressomics") class="sub-grey"}}
+                  {{#link-to 'datasets.search' (query-params datasource="XPRESSOMICS" q="") class="sub-grey"}}
                     <span class="no-padding font-varela-round">Featured Data Source</span>
                     <div class="logo-image">
                       <img class="img-responsive" src="assets/images/logos/xpressomics-logo.png"/>
@@ -26,7 +26,7 @@
                   {{/link-to}}
                 </div>
                 <div class="featured-content col m4">
-                  {{#link-to 'datasets.search' (query-params q="Chinese Control Data") class="sub-grey"}}
+                  {{#link-to 'datasets.search' (query-params q="'Chinese Control Data'") class="sub-grey"}}
                     <span class="no-padding font-varela-round">New Collection</span>
                     <div class="logo-image">
                       <h2>Chinese Control Data</h2>
