@@ -1,6 +1,7 @@
 <div id="homepage" class="content">
   <div class="row">
-    <div class="contain">
+
+    <header class="contain">
       <h5 class="subtitles-left unfocus-grey-text">Search Through</h5>
       <div class="col m12 center-align">
         <div class="card">
@@ -12,21 +13,41 @@
               <span class="stats-text thin"> Human Genomic Datasets </span><span class="stats-text thin">from</span>
               {{model.stats.repos}}<span class="stats-text thin"> Repositories</span>
             </h2>
-              <div class="col m10 offset-m1 news-notice">
-                <div class="divider"></div>
-                <div class="row">
+
+            <section class="featured-section col m10 offset-m1">
+              <div class="divider"></div>
+              <div class="row">
+                <div class="featured-content col m4">
                   {{#link-to 'datasets.search' (query-params q="xpressomics") class="sub-grey"}}
-                    <p class="col m10 no-padding bold">Now you can search over 6,000 normalised, annotated and curated open access expression datasets with</p>
-                      <div class="logo-image col m2">
-                        <img class="img-responsive" src="assets/images/logos/xpressomics-logo.png"/>
-                      </div>
+                    <span class="no-padding bold">Featured Data Source</span>
+                    <div class="logo-image">
+                      <img class="img-responsive" src="assets/images/logos/xpressomics-logo.png"/>
+                    </div>
+                  {{/link-to}}
+                </div>
+                <div class="featured-content col m4">
+                  {{#link-to 'datasets.search' (query-params q="Chinese Control Data") class="sub-grey"}}
+                    <span class="no-padding bold">New Collection</span>
+                    <div class="logo-image">
+                      <h2>Chinese Control Data</h2>
+                    </div>
+                  {{/link-to}}
+                </div>
+                <div class="featured-content col m4">
+                  {{#link-to 'datasets.search' (query-params datasource="HORIZON_DISCOVERY" q="") class="sub-grey"}}
+                    <span class="no-padding bold">New Data Source</span>
+                    <div class="logo-image">
+                      <img class="img-responsive" src="assets/images/logos/horizon-logo.png"/>
+                    </div>
                   {{/link-to}}
                 </div>
               </div>
-                </div>
-              </div>
+            </section>
+
           </div>
         </div>
+    </div>
+  </header>
 
     <div class="contain">
       <h5 class="subtitles-left unfocus-grey-text">Start Exploring</h5>
