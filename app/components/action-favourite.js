@@ -6,38 +6,41 @@ export default Ember.Component.extend({
 
   tagName: 'a',
   isStarred: false,
+
   classNameBindings: ['isStarred:starred'],
   click() {
-    const userId = this.get('session.authenticatedUser');
-    const currentModel = this.model;
-    const currentModelActionableId = currentModel.id;
-    let actionable = this.get('store').query('action', {
-      actionableId: currentModelActionableId,
-      type: 'favourite'
-    }).then(resp => {
-      return resp;
-    });
-    console.log(userId);
-    console.log(currentModel.id);
-    console.log(actionable);
-    //Check if this dataset has a favourite with this userId
-    //if so, check value
-      //if value === false -> make true
-      //else value ===true -> make false
-    //else create new action with value set to true
+    const store = this.get('store');
+    const currentUser = this.get('session.authenticatedUser');
+    const currentModel = this.model; //can be request or dataset
 
-    // let favourite = this.store.createRecord('action', {
-    //   actionableId: currentModel.actionableId,
-    //   userId: userId,
+    //TODO:
+    //All user actions will be loaded when the session starts.
+    //Check actions for favourite associated with this dataset/request.
+    //If none -> make one
+    //Else -> toggle properties.value
+
+    //get the actions associated with currentModel
+    //load actionable for model
+
+    store.findRecord('actionable', currentModel.id)
+    .then(actionable => {
+      console.log(actionable);
+    })
+    .catch(err => {
+      Ember.logger.error(err);
+    });
+
+
+    // --- Create new favourite ---
+    // let newFavourite = store.createRecord('action', {
+    //   actionableId: resp.actionable, //needs to be actionable model
+    //   userId: resp.user,
     //   type: 'favourite',
     //   properties: {
-    //     value: true
+    //     value: false
     //   }
     // });
-    // favourite.save()
-    // .catch((err) => {
-    //   Ember.Logger.error(err);
-    // });
+    // return newFavourite.save();
 
 
     // this.toggleProperty('isStarred');
