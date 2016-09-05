@@ -1,11 +1,13 @@
-<section class="metadata-panel">
-  {{#unless showMore}}
-    <header>
-      <a {{action "showMoreMeta"}}>
-        <h5>{{source.shortName}} {{fa-icon 'chevron-down'}}</h5>
-      </a>
-    </header>
-  {{else}}
+{{#unless showMore}}
+  <section class="metadata-panel">
+      <header>
+        <a {{action "showMoreMeta"}}>
+          <h5>{{source.shortName}} {{fa-icon 'chevron-down'}}</h5>
+        </a>
+      </header>
+  </section>
+{{else}}
+  <section class="metadata-panel side-meta">
     <header>
       <a {{action "showMoreMeta"}}>
         <h5>{{source.shortName}} {{fa-icon 'chevron-up'}}</h5>
@@ -24,5 +26,5 @@
         <p>Updated on: <strong>{{moment-format source.updatedAt hideSuffix=true}}</strong></p>
       {{/if}}
     </main>
-  {{/unless}}
-</section>
+  </section>
+{{/unless}}

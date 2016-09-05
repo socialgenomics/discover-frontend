@@ -1,15 +1,12 @@
-{{metadata-panel source=model.source datasets=model.datasets}}
+{{metadata-panel source=model.source datasets=model.datasets action="showMoreMeta" param=showMore}}
 
-<section class="row content">
-  <div class="contain">
+<div class="content {{if showMore "right"}}">
+  <div class="row card-content">
     {{#link-to 'datasources'}}
       {{fa-icon 'chevron-left'}} Back to all data sources
     {{/link-to}}
-
-    <div class="card-content">
-      {{#each model.datasets as |dataset|}}
-        {{dataset-card dataset=dataset action="toggleModal"}}
-      {{/each}}
-    </div>
+    {{#each model.datasets as |dataset|}}
+      {{dataset-card dataset=dataset action="toggleModal"}}
+    {{/each}}
   </div>
-</section>
+</div>
