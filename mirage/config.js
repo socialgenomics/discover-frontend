@@ -1,9 +1,22 @@
 export default function() {
+  // this.get('/collections', function(db, request) {
+  //   return {
+  //     collections: db.collections
+  //   };
+  // });
   this.get('/collections', function(db, request) {
     return {
-      collections: db.collections
+      data: db.collections.map(attrs => (
+        {
+          type: 'collections',
+          id: attrs.id,
+          attributes: attrs
+        }
+      ))
     };
   });
+
+  this.get('/collections/:id');
 
   // These comments are here to help you get started. Feel free to delete them.
 
@@ -13,7 +26,7 @@ export default function() {
     Note: these only affect routes defined *after* them!
   */
 
-  // this.urlPrefix = '';    // make this `http://localhost:8080`, for example, if your API is on a different server
+  this.urlPrefix = 'http://localhost:4200';    // make this `http://localhost:8080`, for example, if your API is on a different server
   // this.namespace = '';    // make this `api`, for example, if your API is namespaced
   // this.timing = 400;      // delay for each request, automatically set to 0 during testing
 

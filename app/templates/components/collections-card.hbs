@@ -28,25 +28,21 @@
       </header>
 
       {{#link-to 'requests.detail' collection.id classNames="data-title"}}
-        <div data-balloon={{collection.title}} data-balloon-pos="up" data-balloon-length="large">
-          <h4 class="data-title">{{collection.title}}</h4>
+        <div data-balloon={{collection.name}} data-balloon-pos="up" data-balloon-length="large">
+          <h4 class="data-title">{{collection.name}}</h4>
         </div>
       {{/link-to}}
 
       <div class="line-limit-desc">
         <div class="ellipsis">
           <p class="sub-grey">
-            {{#if dataset.highlights.description}}
-              {{{dataset.highlights.description}}}
-            {{else}}
-              {{dataset.description}}
-            {{/if}}
+            {{collection.description}}
           </p>
         </div>
       </div>
 
     </div>
 
-    {{card-footer model=dataset}}
+    {{card-footer model=collection}}
   </div>
 </main>

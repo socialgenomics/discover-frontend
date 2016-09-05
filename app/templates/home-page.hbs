@@ -26,6 +26,7 @@
           {{sources-card source=source toggleModal="toggleModal"}}
         {{/each}}
       {{else if (eq tab "collections")}}
+        {{#link-to 'collections'}}View all collections{{/link-to}}
         {{#each requestsSorted as |collection|}}
           {{collections-card collection=collection toggleModal="toggleModal"}}
         {{/each}}
