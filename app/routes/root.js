@@ -32,15 +32,20 @@ export default Ember.Route.extend({
       //Get search data
       //Get trending datasets
       //Get recent requests and registrations
+      let token = this.get('session.session.content.authenticated.token');
+      let authHeaders = {
+        authorization: `JWT ${token}`
+      }
+
       return Ember.RSVP.all([
-        ajax({ url: ENV.APIRoutes['datasets.search'] , type: 'GET' }),
-        ajax({ url: ENV.APIRoutes['datasets.trending'] , type: 'GET' }),
+        ajax({ url: ENV.APIRoutes['datasets.search'] , type: 'GET', headers: authHeaders }),
+        ajax({ url: ENV.APIRoutes['datasets.trending'] , type: 'GET', headers: authHeaders }),
         this.store.query('request', {}),
         this.store.query('dataset', { user_registered: true })
       ])
       .then(data => {
         //Normalize and push trending datasets
-        let trending = data[1].datasets.map((datasetObj) => {
+        let trending = data[1].map((datasetObj) => {
           return this.store.push(this.store.normalize('dataset', datasetObj));
         });
 
