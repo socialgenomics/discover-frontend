@@ -40,37 +40,13 @@ We also use [ember-sinon](https://github.com/csantero/ember-sinon) for spies and
 To run the tests use: `ember test --server` or `ember t -s` for short.
 
 
-## Live editing of repositive-styles
+## Styles / CSS
 
-To link a separate checkout of repositive-styles into the project and do live editing with reload support:
-
-1. Create a Bower global link
-
-    ```
-    $ cd path/to/repositive-styles
-    $ bower link
-    ```
-
-2. Link the Bower component into this project  
-
-    ```
-    $ cd path/to/discover.repositive.io
-    $ bower link repositive-styles
-    ```
-
-    This will create a symlink from `bower_components/repositive-styles` to `path/to/repositive-styles`
-
-3. To start Ember server with live editing (reloading) of the SCSS styles, utilise the node-foreman support:
-
-
-    ```
-    $ cd path/to/discover.repositive.io
-    $ nf start
-    ```
-
-  This will start 2 background processes, one for ember server and another to watch SCSS changes and trigger a reload.
-  This is required because fb-watchman does not currently support watching for filesystem changes over symlinks
-  (https://github.com/facebook/watchman/issues/105).
+### Setting up styles submodule
+The project styles are kept as a submodule. To get setup with using the styles you must initialize the submodule. In the project directory run:
+```
+git submodule update --init repositive-styles
+```
 
 ## Working on feature branches in both "discover.repositive.io" and "repositive-styles" projects
 
@@ -182,20 +158,20 @@ using the env variable `FRONTEND_DEPLOY_CONFIG_PATH`.
 
 ## Use Docker on OSX (Faster alternative to Vagrant for development)
 
-This provides almost instant detection of file changes and rebuild/refresh of the 
-repositive frontend, while still running everything in a controlled and isolated 
+This provides almost instant detection of file changes and rebuild/refresh of the
+repositive frontend, while still running everything in a controlled and isolated
 environment.  
-This is currently not a replacement for Vagrant. Instead, it's a better alternative 
-to installing the frontend locally (with just ```npm install``` & ```bower install```). 
-During live development (e.g., changing page layout), Vagrant might be 
-too heavy or take too long to detect file changes and rebuild the app, so developers 
+This is currently not a replacement for Vagrant. Instead, it's a better alternative
+to installing the frontend locally (with just ```npm install``` & ```bower install```).
+During live development (e.g., changing page layout), Vagrant might be
+too heavy or take too long to detect file changes and rebuild the app, so developers
 end up avoiding Vagrant.  
 
 #### Technical notes
 
-Since OSX is not Linux, Docker will still have to run inside a Linux VM 
-(losing some performance) and file watching will be performed on the host (OSX) 
-with rsync synchronizing the file changes to the guest (Linux VM) and making them 
+Since OSX is not Linux, Docker will still have to run inside a Linux VM
+(losing some performance) and file watching will be performed on the host (OSX)
+with rsync synchronizing the file changes to the guest (Linux VM) and making them
 quickly visible to the Docker containers (through docker-osx-dev tool).  
 [Here's a blog post with more information](http://www.ybrikman.com/writing/2015/05/19/docker-osx-dev/) about this approach.
 
@@ -249,7 +225,7 @@ docker-machine rm docker-vm
 
 ## Docker on Linux (Faster alternative to Vagrant for development)
 
-On Linux, using Docker should be much easier than OSX since we don't need a VM, 
+On Linux, using Docker should be much easier than OSX since we don't need a VM,
 and performance should be near native speed.
 
 ```bash
@@ -263,4 +239,3 @@ docker run --rm --volumes-from=ssh-agent -v ~/.ssh:/ssh -it whilp/ssh-agent:late
 # Start app server
 docker-compose up
 ```
-
