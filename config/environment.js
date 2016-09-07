@@ -113,6 +113,10 @@ module.exports = function(environment) {
         'media-src': "'self'",
         'frame-src':"'self' 'unsafe-inline' https://repositive.typeform.com/to/pktwPz https://repositive.typeform.com/to/viIWx1",
       },
+
+      // 'ember-metrics': {
+      //   includeAdapters: ['google-analytics']
+      // },
       metricsAdapters: [
         {
           name: 'Gosquared',
@@ -125,7 +129,16 @@ module.exports = function(environment) {
         {
           name: 'GoogleAnalytics',
           config: {
-            id: 'UA-54495053-1'
+            //company-wide website
+            id: 'UA-54495053-1',
+          },
+          environments: ['production']
+        },
+        {
+          name: 'GoogleAnalytics',
+          config: {
+            //discover app
+            id: 'UA-54495053-2'
           },
           environments: ['production']
         },
