@@ -14,7 +14,7 @@ export default Service.extend({
     })
     .then(resp => {
       return resp;
-    })
+    });
     return favourites;
   })
 });
