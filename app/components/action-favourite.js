@@ -9,18 +9,14 @@ export default Ember.Component.extend({
 
   classNameBindings: ['isStarred:starred'],
   click() {
-    let actionsService = this.get('actions');
-    let favourites = actionsService.get('favouriteList');
-    console.log(favourites);
-    // favourites.content.map(favourite => {
-    //   console.log(favourite._data.properties.value);
-    //   // return favourite;
-    // })
-
-    // const store = this.get('store');
+    const actionsService = this.get('actions');
+    const currentModel = this.model; //can be request or dataset
     // const currentUser = this.get('session.authenticatedUser');
-    // const currentModel = this.model; //can be request or dataset
-    //
+
+    // let allFavourites = actionsService.get('allFavourites');
+    let favourites = actionsService.getFavouritesByActionable(currentModel.id);
+
+
     // //TODO:
     // //All user actions will be loaded when the session starts.
     // //Check actions for favourite associated with this dataset/request.
