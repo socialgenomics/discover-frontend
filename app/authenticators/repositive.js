@@ -37,9 +37,10 @@ export function invalidate(ctx) {
     return ajax({
       url: ENV.APIRoutes[ENV['ember-simple-auth'].logoutRoute],
       type: 'POST',
-      headers: {
-        authorization: `JWT ${user.token}`
-      }
+      contentType: 'application/json',
+      data: JSON.stringify({
+        token: user.token
+      })
     })
     .catch(handleError(ctx));
   };
