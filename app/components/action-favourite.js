@@ -5,18 +5,20 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   store: Ember.inject.service(),
-  // session: Ember.inject.service(),
-  actions: Ember.inject.service(),
+  actionsService: Ember.inject.service('actions'),
+  isStarred: Ember.computed('actionsService', function() {
+    const actionsService = this.get('actionsService');
+    return actionsService.actionableIsFavourite(this.model.id);
+  }),
   tagName: 'a',
-  isStarred: false,
   classNameBindings: ['isStarred:starred'],
-  doubleClick() {
-    const actionsService = this.get('actions');
-    console.log(actionsService.actionableIsFavourite(this.model.id));
-    // console.log(actionsService.get('userFavourites'));
-  },
+
+  // doubleClick() {
+  //   const actionsService = this.get('actionsService');
+  //   console.log(actionsService.actionableIsFavourite(this.model.id));
+  // },
   click() {
-    const actionsService = this.get('actions');
+    const actionsService = this.get('actionsService');
     actionsService.updateFavourites();
 
     // const currentModel = this.model; //can be request or dataset

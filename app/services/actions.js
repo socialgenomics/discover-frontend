@@ -11,10 +11,11 @@ export default Service.extend({
   // - on app load
   // - when something has been favourited/unfaved
   updateFavourites() {
-    const currentUser = this.get('session.authenticatedUser');
+    console.log('Favourites Updated!');
+    const currentUserId = this.get('session.session.authenticated.user.id');
     const store = this.get('store');
     store.query('action', {
-      user_id: currentUser.id,
+      user_id: currentUserId,
       type: 'favourite'
     })
     .then(favourites => {
@@ -25,32 +26,19 @@ export default Service.extend({
     });
   },
 
+  //Returns true if the actionableId matches the actionableId
+  //for any favourites in userFavourites
   actionableIsFavourite(actionableId) {
-    //returns true if the actionableId matches the actionableId
-    //for any favourites in userFavourites
     let favourites = this.get('userFavourites');
     return favourites.isAny('actionableId.id', actionableId);
   },
 
-  //Not needed - all datasets seem to already have an actionableId
-  // findOrCreate(store, id) {
-  //   store.findRecord('actionable', id)
-  //   .then(actionable => {
-  //     console.log(actionable);
-  //   });
-  //   // if (existing) {
-  //   //   return existing;
-  //   // } else {
-  //   //   return store.createRecord('actionable', { id: id });
-  //   // }
-  // },
-
   getFavouritesByActionable(actionableId) {
-    const currentUser = this.get('session.authenticatedUser');
+    const currentUserId = this.get('session.session.authenticated.user.id');
     const store = this.get('store');
     let favourites = store.query('action', {
       actionable_id: actionableId,
-      user_id: currentUser.id, //if userId you have to supply a model ... Ths WON't work
+      user_id: currentUserId,
       type: 'favourite'
     })
     .then(resp => {

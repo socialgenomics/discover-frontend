@@ -13,7 +13,7 @@ export default Ember.Route.extend({
         if (!this.get('session.data.thirdPartySignup')) {
           this.get('session').set('data.displayWelcomeMessage', true);
         }
-      })
+      });
     }
 
     if (this.get('session.data.displayWelcomeMessage', true) && this.get('session.isAuthenticated')) {
@@ -35,7 +35,7 @@ export default Ember.Route.extend({
       let token = this.get('session.session.content.authenticated.token');
       let authHeaders = {
         authorization: `JWT ${token}`
-      }
+      };
 
       return Ember.RSVP.all([
         ajax({ url: ENV.APIRoutes['datasets.search'] , type: 'GET', headers: authHeaders }),
