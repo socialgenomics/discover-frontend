@@ -1,50 +1,59 @@
 import Ember from 'ember';
 
+// This component should not be concerned about how the favourites are loaded.
+// That is the role of the actions service.
+
 export default Ember.Component.extend({
-  // store: Ember.inject.service(),
+  store: Ember.inject.service(),
   // session: Ember.inject.service(),
   actions: Ember.inject.service(),
   tagName: 'a',
   isStarred: false,
-
   classNameBindings: ['isStarred:starred'],
+  doubleClick() {
+    const actionsService = this.get('actions');
+    console.log(actionsService.actionableIsFavourite(this.model.id));
+    // console.log(actionsService.get('userFavourites'));
+  },
   click() {
     const actionsService = this.get('actions');
-    const currentModel = this.model; //can be request or dataset
-    // const currentUser = this.get('session.authenticatedUser');
+    actionsService.updateFavourites();
 
-    // let allFavourites = actionsService.get('allFavourites');
-    let favourites = actionsService.getFavouritesByActionable(currentModel.id);
-
-
-    // //TODO:
-    // //All user actions will be loaded when the session starts.
-    // //Check actions for favourite associated with this dataset/request.
-    // //If none -> make one
-    // //Else -> toggle properties.value
+    // const currentModel = this.model; //can be request or dataset
+    // const store = this.get('store');
+    // // const currentUser = this.get('session.authenticatedUser');
     //
-    // //get the actions associated with currentModel
-    // //load actionable for model
+    // //TODO: move into hash directly - get userId from session not query
+    // actionsService.getFavouritesByActionable(currentModel.id)
+    // .then(fav => {
+    //   return Ember.RSVP.hash({
+    //     user: store.peekRecord('user', fav.query.user_id),
+    //     actionable: store.findRecord('actionable', currentModel.id),
+    //     favourite: fav
+    //   });
+    // })
+    // .then(resp => {
+    //   if(resp.favourite.content.length === 0){
+    //     // --- Create new favourite ---
+    //     let newFavourite = store.createRecord('action', {
+    //       actionableId: resp.actionable,
+    //       userId: resp.user,
+    //       type: 'favourite'
+    //     });
+    //     return newFavourite.save();
+    //   } else {
+    //     // --- Delete the favourite ---
+    //     let existingFavourite = resp.favourite.get('firstObject');
+    //     return existingFavourite.destroyRecord();
+    //   }
+    // })
+    // .then(savedOrDeletedFavourite => {
+    //   console.log(savedOrDeletedFavourite);
     //
-    // store.findRecord('actionable', currentModel.id)
-    // .then(actionable => {
-    //   console.log(actionable);
     // })
     // .catch(err => {
-    //   Ember.logger.error(err);
+    //   Ember.Logger.error(err);
     // });
-
-
-    // --- Create new favourite ---
-    // let newFavourite = store.createRecord('action', {
-    //   actionableId: resp.actionable, //needs to be actionable model
-    //   userId: resp.user,
-    //   type: 'favourite',
-    //   properties: {
-    //     value: false
-    //   }
-    // });
-    // return newFavourite.save();
 
 
     // this.toggleProperty('isStarred');
