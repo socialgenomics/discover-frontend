@@ -25,9 +25,18 @@ export default Service.extend({
     }
   },
 
+  removeFavourite(favourite) {
+    const updatedFavourites = this.get('userFavourites').without(favourite);
+    this.set('userFavourites', updatedFavourites);
+  },
+
   pushFavourite(favourite) {
     this.get('userFavourites').push(favourite);
     this.notifyPropertyChange('userFavourites');
+  },
+
+  getFavourite(actionableId) {
+    return this.get('userFavourites').findBy('actionableId.id', actionableId);
   },
 
   //Returns true if the actionableId matches the actionableId
@@ -35,19 +44,5 @@ export default Service.extend({
   actionableIsFavourite(actionableId) {
     let favourites = this.get('userFavourites');
     return favourites.isAny('actionableId.id', actionableId);
-  },
-  //TODO refactor to query the already loaded favourites rather than DB
-  getFavouritesByActionable(actionableId) {
-    const currentUserId = this.get('session.session.authenticated.user.id');
-    const store = this.get('store');
-    let favourites = store.query('action', {
-      actionable_id: actionableId,
-      user_id: currentUserId,
-      type: 'favourite'
-    })
-    .then(resp => {
-      return resp;
-    });
-    return favourites;
   }
 });

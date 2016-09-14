@@ -1,11 +1,13 @@
 import Ember from 'ember';
-
+const { inject: { service } } = Ember;
 // This component should not be concerned about how the favourites are loaded.
 // That is the role of the actions service.
 
 export default Ember.Component.extend({
-  store: Ember.inject.service(),
-  actionsService: Ember.inject.service('actions'),
+  store: service(),
+  session: service(),
+  actionsService: service('actions'),
+
   isStarred: Ember.computed('actionsService.userFavourites', function() {
     const actionsService = this.get('actionsService');
     return actionsService.actionableIsFavourite(this.model.id);
@@ -17,54 +19,45 @@ export default Ember.Component.extend({
     const actionsService = this.get('actionsService');
     const currentModel = this.model; //can be request or dataset
     const store = this.get('store');
-
-    actionsService.getFavouritesByActionable(currentModel.id)
-    .then(fav => {
-      return Ember.RSVP.hash({
-        user: store.peekRecord('user', fav.query.user_id),
-        actionable: store.findRecord('actionable', currentModel.id),
-        favourite: fav
+    const currentUser = this.get('session.authenticatedUser');
+    let favourite = actionsService.getFavourite(currentModel.id);
+    if (favourite) {
+      favourite.destroyRecord()
+      .then(deletedFavourite => {
+        console.log('Favourite Deleted');
+        console.log(deletedFavourite);
+        this.get('metrics').trackEvent({
+          category: 'dataset',
+          action: 'favourite',
+          label: currentModel.id,
+          value: false
+        });
+      })
+      .catch(err => {
+        Ember.Logger.error(err);
       });
-    })
-    .then(resp => {
-      if (resp.favourite.content.length === 0) {
-        // --- Create new favourite ---
-        let newFavourite = store.createRecord('action', {
-          actionableId: resp.actionable,
-          userId: resp.user,
+    } else {
+      store.findRecord('actionable', currentModel.id)
+      .then(actionable => {
+        favourite = store.createRecord('action', {
+          actionableId: actionable,
+          userId: currentUser,
           type: 'favourite'
         });
-        return newFavourite.save();
-      } else {
-        // --- Delete the favourite ---
-        let existingFavourite = resp.favourite.get('firstObject');
-        return existingFavourite.destroyRecord();
-      }
-    })
-    .then(savedOrDeletedFavourite => {
-      //get state from currentState.stateName
-      //push saved favourite into userFavourites
-      //pop deleted favourite from userFavourites
-      actionsService.pushFavourite(savedOrDeletedFavourite);
-    })
-    .catch(err => {
-      Ember.Logger.error(err);
-    });
-
-    // if (this.get('isStarred')) {
-    //   this.get('metrics').trackEvent({
-    //     category: 'dataset',
-    //     action: 'favourite',
-    //     label: this.get('dataset.id'),
-    //     value: true
-    //   });
-    // } else {
-    //   this.get('metrics').trackEvent({
-    //     category: 'dataset',
-    //     action: 'favourite',
-    //     label: this.get('dataset.id'),
-    //     value: false
-    //   });
-    // }
+        return favourite.save();
+      })
+      .then(savedFavourite => {
+        actionsService.pushFavourite(savedFavourite);
+        this.get('metrics').trackEvent({
+          category: 'dataset',
+          action: 'favourite',
+          label: currentModel.id,
+          value: true
+        });
+      })
+      .catch(err => {
+        Ember.Logger.error(err);
+      });
+    }
   }
 });
