@@ -20,6 +20,7 @@ function reducer(acc, curr) {
 
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
   session: Ember.inject.service(),
+  actionsService: Ember.inject.service('actions'),
 
   model: function(params) {
     let actionable = peekOrCreate(this.store, params.id);
@@ -52,6 +53,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     //TODO: Refactor - This code is used in several places e.g. request and dataset detail controllers & routes
     const userId = this.get('session.authenticatedUser');
     const currentModel = dataset;
+    this.get('actionsService').updateFavourites();
     let view = this.store.createRecord('action', {
       actionableId: currentModel.actionableId,
       userId: userId,

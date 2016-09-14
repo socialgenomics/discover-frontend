@@ -3,6 +3,7 @@ import {isVerified} from './users/trust';
 
 export default Ember.Route.extend({
   session: Ember.inject.service(),
+  actionsService: Ember.inject.service('actions'),
 
   model: function(params) {
     return this.store.findRecord('user', params.id)
@@ -28,5 +29,8 @@ export default Ember.Route.extend({
     .catch(err => {
       Ember.Logger.error(err);
     });
+  },
+  afterModel() {
+    this.get('actionsService').updateFavourites();
   }
 });

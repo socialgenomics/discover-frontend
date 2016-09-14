@@ -12,9 +12,9 @@ export default Route.extend(AuthenticatedRouteMixin, {
       user: this.get('session.authenticatedUser')
     });
   },
-  // afterModel() {
-  //   this.get('actionsService').updateFavourites();
-  // },
+  afterModel() {
+    this.get('actionsService').updateFavourites();
+  },
 
   actions: {
     willTransition: function() {

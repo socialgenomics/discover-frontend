@@ -4,6 +4,7 @@ import ENV from 'repositive/config/environment';
 
 export default Ember.Route.extend({
   session: Ember.inject.service(),
+  actionsService: Ember.inject.service('actions'),
 
   beforeModel: function() {
     if (this.get('session.data.firstVisit', true) && this.get('session.isAuthenticated')) {
@@ -66,6 +67,9 @@ export default Ember.Route.extend({
         return { stats: stat };
       });
     }
+  },
+  afterModel() {
+    this.get('actionsService').updateFavourites();
   },
 
   deactivateWeclomeMesssage: function() {

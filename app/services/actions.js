@@ -7,23 +7,27 @@ export default Service.extend({
   session: service(),
   userFavourites: [],
 
-  //Called:
-  // - on app load
-  // - when something has been favourited/unfaved
   updateFavourites() {
-    console.log('Favourites Updated!');
-    const currentUserId = this.get('session.session.authenticated.user.id');
-    const store = this.get('store');
-    store.query('action', {
-      user_id: currentUserId,
-      type: 'favourite'
-    })
-    .then(favourites => {
-      this.set('userFavourites', []);
-      favourites.map(favourite => {
-        this.get('userFavourites').push(favourite);
+    //Only update there are no favourites loaded
+    if (this.get('userFavourites').length === 0) {
+      const currentUserId = this.get('session.session.authenticated.user.id');
+      const store = this.get('store');
+      store.query('action', {
+        user_id: currentUserId,
+        type: 'favourite'
+      })
+      .then(favourites => {
+        this.set('userFavourites', []);
+        favourites.map(favourite => {
+          this.get('userFavourites').push(favourite);
+        });
       });
-    });
+    }
+  },
+
+  pushFavourite(favourite) {
+    this.get('userFavourites').push(favourite);
+    this.notifyPropertyChange('userFavourites');
   },
 
   //Returns true if the actionableId matches the actionableId
@@ -32,7 +36,7 @@ export default Service.extend({
     let favourites = this.get('userFavourites');
     return favourites.isAny('actionableId.id', actionableId);
   },
-
+  //TODO refactor to query the already loaded favourites rather than DB
   getFavouritesByActionable(actionableId) {
     const currentUserId = this.get('session.session.authenticated.user.id');
     const store = this.get('store');
