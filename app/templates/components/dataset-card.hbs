@@ -48,14 +48,15 @@
 
       <div class="card-footer">
         <ul class="color-silver-chalice-text">
-          {{#if dataset.stats}}
-            <li data-balloon="Views" data-balloon-pos="down">
-              {{fa-icon "eye"}}<span>{{dataset.stats.view}}</span>
-            </li>
-            <li data-balloon="Discussion" data-balloon-pos="down">
-              {{fa-icon "comments"}}<span>{{dataset.stats.comment}}</span>
-            </li>
-          {{/if}}
+          <li data-balloon="Views" data-balloon-pos="down">
+            {{fa-icon "eye"}}<span>{{dataset.stats.view}}</span>
+          </li>
+          <li data-balloon="Discussion" data-balloon-pos="down">
+            {{fa-icon "comments"}}<span>{{dataset.stats.comment}}</span>
+          </li>
+          <li data-balloon="Favourites" data-balloon-pos="down">
+            {{fa-icon "star"}}<span>{{dataset.stats.favourite}}</span>
+          </li>
         </ul>
       </div>
 
@@ -152,14 +153,15 @@
               </span>
             </li>
           {{/if}}
-          {{#if dataset.stats}}
-            <li class="center-align" data-balloon="Views" data-balloon-pos="down">
-              {{fa-icon "eye"}}<span>{{dataset.stats.view}}</span>
-            </li>
-            <li class="center-align" data-balloon="Discussion" data-balloon-pos="down">
-              {{fa-icon "comments"}}<span>{{dataset.stats.comment}}</span>
-            </li>
-          {{/if}}
+          <li class="center-align" data-balloon="Views" data-balloon-pos="down">
+            {{fa-icon "eye"}}<span>{{dataset.stats.view}}</span>
+          </li>
+          <li class="center-align" data-balloon="Discussion" data-balloon-pos="down">
+            {{fa-icon "comments"}}<span>{{dataset.stats.comment}}</span>
+          </li>
+          <li data-balloon="Favourites" data-balloon-pos="down">
+            {{fa-icon "star"}}<span>{{dataset.stats.favourite}}</span>
+          </li>
         </ul>
       </div>
     {{/if}}
