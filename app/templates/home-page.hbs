@@ -18,7 +18,7 @@
     <div class="contain">
       {{#if (or (eq tab "all") (eq tab "default"))}}
         {{#each requestsSorted as |dataset|}}
-          {{dataset-card dataset=dataset toggleModal="toggleModal"}}
+          {{feed-item dataset=dataset toggleModal="toggleModal"}}
         {{/each}}
       {{else if (eq tab "sources")}}
         {{#link-to 'datasources'}}View all data sources{{/link-to}}

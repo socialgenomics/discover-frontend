@@ -1,0 +1,34 @@
+<main class="col m12">
+  <div class="card dataset card-comp">
+
+    <div class="row">
+      <div class="col m2">
+        <img src="/assets/images/icons/icon-request-color_2@2x.png" class="data-icon">
+        <h4>Data Request</h4>
+      </div>
+
+      <div class="col m3">
+        <div class="dp-wrapper">
+          <img src="/assets/images/avatar/bear.png">
+        </div>
+        <p>
+          {{#if collection.userId.displayName}}
+            {{#link-to 'user' collection.userId.id}}{{collection.userId.displayName}}{{/link-to}}
+          {{else}}
+            A Repositive user
+          {{/if}}
+        </p>
+        <p class="helper-text">is looking for data</p>
+      </div>
+
+      <div class="col m7">
+        {{#link-to 'requests.detail' dataset.id classNames="data-title"}}
+          <h4 class="data-title">{{dataset.title}}</h4>
+        {{/link-to}}
+
+        <h4>{{dataset.description}}</h4>
+      </div>
+    </div>
+
+  </div>
+</main>
