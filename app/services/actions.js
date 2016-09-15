@@ -1,4 +1,6 @@
 import Ember from 'ember';
+import ajax from 'ic-ajax';
+import ENV from 'repositive/config/environment';
 
 const { inject: { service }, Service } = Ember;
 
@@ -6,6 +8,7 @@ export default Service.extend({
   store: service(),
   session: service(),
   userFavourites: [], //list of actions where type = 'favourite'
+  favouritedData: [],
 
   updateFavourites() {
     //Only update there are no favourites loaded
@@ -37,6 +40,30 @@ export default Service.extend({
 
   getFavourite(actionableId) {
     return this.get('userFavourites').findBy('actionableId.id', actionableId);
+  },
+  getFavouritedData() {
+    const currentUserId = this.get('session.session.authenticated.user.id');
+    let token = this.get('session.session.content.authenticated.token');
+    let authHeaders = {
+      authorization: `JWT ${token}`
+    };
+    return Ember.RSVP.hash({
+      datasets: ajax({ url: ENV.APIRoutes['favourite-datasets'].replace('{user_id}', currentUserId),
+        type: 'GET',
+        headers: authHeaders
+      }),
+      requests: ajax({ url: ENV.APIRoutes['favourite-requests'].replace('{user_id}', currentUserId),
+        type: 'GET',
+        headers: authHeaders
+      })
+    })
+    .then(data => {
+      let allFavourites = data.datasets.concat(data.requests);
+      this.set('favouritedData', allFavourites);
+    })
+    .catch(err => {
+      Ember.Logger.error(err);
+    });
   },
 
   //Returns true if the actionableId matches the actionableId

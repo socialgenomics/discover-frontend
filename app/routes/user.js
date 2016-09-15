@@ -32,5 +32,6 @@ export default Ember.Route.extend({
   },
   afterModel() {
     this.get('actionsService').updateFavourites();
+    this.get('actionsService').getFavouritedData();
   }
 });
