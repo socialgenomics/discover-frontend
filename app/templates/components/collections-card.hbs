@@ -15,7 +15,9 @@
 
     <div class="card-body">
       <header class="card-user">
-        <img src={{collection.userId.userProfile.avatar}}>
+        {{#if collection.userId.userProfile.avatar}}
+          <img src={{collection.userId.userProfile.avatar}}>
+        {{/if}}
         <h6>
           {{#if collection.userId.displayName}}
             {{#link-to 'user' collection.userId.id}}{{collection.userId.displayName}}{{/link-to}}
