@@ -24,8 +24,7 @@ export default Ember.Component.extend({
     if (favourite) {
       favourite.destroyRecord()
       .then(deletedFavourite => {
-        console.log('Favourite Deleted');
-        console.log(deletedFavourite);
+        actionsService.removeFavourite(deletedFavourite);
         this.get('metrics').trackEvent({
           category: 'dataset',
           action: 'favourite',

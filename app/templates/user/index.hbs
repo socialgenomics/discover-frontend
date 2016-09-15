@@ -52,16 +52,16 @@
       <!-- data registrations -->
       <div class="col s12 m6 activity-card">
         <div class="card registered-data">
-          <div class="card-header card-title center">
+          <div class="card-header card-title">
             {{#link-to 'datasets.register'}}
               {{fa-icon "book"}}
-              <h4 class="uppercase">Registered Data</h4>
+              <h4>Registered Data</h4>
             {{/link-to}}
           </div>
           <div class="card-content">
             {{#if model.registrations}}
               {{#each model.registrations as |dataset|}}
-                {{mini-dataset hideSubmitter=isOwnProfile dataset=dataset action="toggleModal"}}
+                {{mini-dataset hideSubmitter=isOwnProfile dataset=dataset}}
               {{/each}}
             {{else}}
               {{#if isOwnProfile}}
@@ -76,16 +76,16 @@
       <!--data requests-->
       <div class="col s12 m6 activity-card">
         <div class="card requested-data">
-          <div class="card-header center card-title">
+          <div class="card-header card-title">
             {{#link-to 'datasets.request'}}
               {{fa-icon "clipboard"}}
-              <h4 class="uppercase">Requested Data</h4>
+              <h4>Requested Data</h4>
             {{/link-to}}
           </div>
           <div class="card-content">
             {{#if model.requests}}
               {{#each model.requests as |request|}}
-                {{mini-dataset dataset=request type="request" hideSubmitter=isOwnProfile action="toggleModal"}}
+                {{mini-dataset dataset=request type="request" hideSubmitter=isOwnProfile}}
               {{/each}}
             {{else}}
               {{#if isOwnProfile}}
@@ -97,6 +97,27 @@
           </div>
         </div>
       </div>
+
+      <!-- Favourites -->
+      {{#if isOwnProfile}}
+        <div class="col s12 m6 activity-card">
+          <div class="card favourited-data">
+            <div class="card-header card-title">
+              {{fa-icon "star"}}
+              <h4>Favourites</h4>
+            </div>
+            <div class="card-content">
+              {{#if actionsService.userFavourites}}
+                {{#each actionsService.userFavourites as |favourite|}}
+                  {{mini-dataset dataset=favourite type="request" hideSubmitter=isOwnProfile}}
+                {{/each}}
+              {{else}}
+                <p class="color-silver-chalice-text center-align">You don't have any favourites yet.</p>
+              {{/if}}
+            </div>
+          </div>
+        </div>
+      {{/if}}
     </div>
   </div>
 </div>

@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
   session: Ember.inject.service(),
-
+  actionsService: Ember.inject.service('actions'),
   isOwnProfile: Ember.computed('model.user.id', 'session.authenticatedUser.id', function() {
     const sessionUser = this.get('session.authenticatedUser.id');
     const profileUser = this.get('model.user.id');

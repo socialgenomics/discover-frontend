@@ -5,7 +5,7 @@ const { inject: { service }, Service } = Ember;
 export default Service.extend({
   store: service(),
   session: service(),
-  userFavourites: [],
+  userFavourites: [], //list of actions where type = 'favourite'
 
   updateFavourites() {
     //Only update there are no favourites loaded
