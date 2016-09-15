@@ -20,6 +20,7 @@ export default Ember.Component.extend({
     const currentModel = this.model; //can be request or dataset
     const store = this.get('store');
     const currentUser = this.get('session.authenticatedUser');
+
     let favourite = actionsService.getFavourite(currentModel.id);
     if (favourite) {
       favourite.destroyRecord()
@@ -41,7 +42,8 @@ export default Ember.Component.extend({
         favourite = store.createRecord('action', {
           actionableId: actionable,
           userId: currentUser,
-          type: 'favourite'
+          type: 'favourite',
+          actionable_model: currentModel.constructor.modelName
         });
         return favourite.save();
       })

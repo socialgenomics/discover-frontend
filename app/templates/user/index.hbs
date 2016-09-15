@@ -61,7 +61,7 @@
           <div class="card-content">
             {{#if model.registrations}}
               {{#each model.registrations as |dataset|}}
-                {{mini-dataset hideSubmitter=isOwnProfile dataset=dataset}}
+                {{mini-dataset hideSubmitter=isOwnProfile dataset=dataset type="registration"}}
               {{/each}}
             {{else}}
               {{#if isOwnProfile}}
@@ -109,6 +109,7 @@
             <div class="card-content">
               {{#if actionsService.favouritedData}}
                 {{#each actionsService.favouritedData as |favourite|}}
+                  <!-- TODO based on type of favourite, ammend type on mini-dataset -->
                   {{mini-dataset dataset=favourite type="request"}}
                 {{/each}}
               {{else}}

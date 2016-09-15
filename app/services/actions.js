@@ -60,6 +60,7 @@ export default Service.extend({
     .then(data => {
       let allFavourites = data.datasets.concat(data.requests);
       this.set('favouritedData', allFavourites);
+      console.log(allFavourites);
     })
     .catch(err => {
       Ember.Logger.error(err);
