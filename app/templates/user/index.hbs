@@ -61,7 +61,7 @@
           <div class="card-content">
             {{#if model.registrations}}
               {{#each model.registrations as |dataset|}}
-                {{mini-dataset hideSubmitter=isOwnProfile dataset=dataset type="registration"}}
+                {{mini-dataset dataset=dataset type="registration"}}
               {{/each}}
             {{else}}
               {{#if isOwnProfile}}
@@ -85,7 +85,7 @@
           <div class="card-content">
             {{#if model.requests}}
               {{#each model.requests as |request|}}
-                {{mini-dataset dataset=request type="request" hideSubmitter=isOwnProfile}}
+                {{mini-dataset dataset=request type="request"}}
               {{/each}}
             {{else}}
               {{#if isOwnProfile}}
@@ -109,8 +109,7 @@
             <div class="card-content">
               {{#if actionsService.favouritedData}}
                 {{#each actionsService.favouritedData as |favourite|}}
-                  <!-- TODO based on type of favourite, ammend type on mini-dataset -->
-                  {{mini-dataset dataset=favourite type="request"}}
+                  {{mini-dataset dataset=favourite type=favourite.type}}
                 {{/each}}
               {{else}}
                 <p class="color-silver-chalice-text center-align">You don't have any favourites yet.</p>

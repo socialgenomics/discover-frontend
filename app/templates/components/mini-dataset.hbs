@@ -31,15 +31,17 @@
 	    {{#link-to 'datasets.detail' dataset.id}}<h5 class="data-title" alt="dataset title">{{truncate dataset.title 55}}</h5>{{/link-to}}
 			{{#unless hideSubmitter}}
 				<div class="submitted">
-					{{#if (eq type "dataset")}}
-					<h6>from
-						{{#link-to 'datasets.search' (query-params q="" datasource=dataset.datasourceId.shortName) }}
-							{{dataset.datasourceId.shortName}}
-						{{/link-to}}
-					</h6>
-					{{else}}
+					<!-- If shortname = repositive -> show "Requested by user"-->
+					<!-- else show "from datasource"-->
+					{{#if (eq dataset.datasourceId.shortName "REPOSITIVE")}}
 						<h6>Registered by
 							{{#link-to 'user' dataset.userId.id class="user-name"}}{{dataset.userId.displayName}}{{/link-to}}
+						</h6>
+					{{else}}
+						<h6>from
+							{{#link-to 'datasets.search' (query-params q="" datasource=dataset.datasourceId.shortName) }}
+								{{dataset.datasourceId.shortName}}
+							{{/link-to}}
 						</h6>
 					{{/if}}
 				</div>

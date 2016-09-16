@@ -58,9 +58,16 @@ export default Service.extend({
       })
     })
     .then(data => {
-      let allFavourites = data.datasets.concat(data.requests);
+      let datasets = data.datasets.map(dataset => {
+        dataset.type = 'dataset';
+        return dataset;
+      });
+      let requests = data.requests.map(request => {
+        request.type = 'request';
+        return request;
+      });
+      let allFavourites = datasets.concat(requests);
       this.set('favouritedData', allFavourites);
-      console.log(allFavourites);
     })
     .catch(err => {
       Ember.Logger.error(err);
