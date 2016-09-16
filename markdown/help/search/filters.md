@@ -14,4 +14,4 @@ Some restricted access datasets may require you to pay for the data rather than 
 
 A **Data Source** is any place where human genomic data are stored or managed.
 
-*Technology describes the specific technology/platform or analytic machinery involved in the sample processing. For example: Affymetrix or Illumina HiSeq.*
+<!-- Technology describes the specific technology/platform or analytic machinery involved in the sample processing. For example: Affymetrix or Illumina HiSeq. -->
