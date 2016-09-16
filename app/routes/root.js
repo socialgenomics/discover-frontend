@@ -4,6 +4,7 @@ import ENV from 'repositive/config/environment';
 
 export default Ember.Route.extend({
   session: Ember.inject.service(),
+  actionsService: Ember.inject.service('actions'),
 
   beforeModel: function() {
     if (this.get('session.data.firstVisit', true) && this.get('session.isAuthenticated')) {
@@ -13,7 +14,7 @@ export default Ember.Route.extend({
         if (!this.get('session.data.thirdPartySignup')) {
           this.get('session').set('data.displayWelcomeMessage', true);
         }
-      })
+      });
     }
 
     if (this.get('session.data.displayWelcomeMessage', true) && this.get('session.isAuthenticated')) {
@@ -35,7 +36,7 @@ export default Ember.Route.extend({
       let token = this.get('session.session.content.authenticated.token');
       let authHeaders = {
         authorization: `JWT ${token}`
-      }
+      };
 
       return Ember.RSVP.all([
         ajax({ url: ENV.APIRoutes['datasets.search'] , type: 'GET', headers: authHeaders }),
@@ -66,6 +67,9 @@ export default Ember.Route.extend({
         return { stats: stat };
       });
     }
+  },
+  afterModel() {
+    this.get('actionsService').updateFavourites();
   },
 
   deactivateWeclomeMesssage: function() {

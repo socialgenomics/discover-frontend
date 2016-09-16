@@ -7,5 +7,6 @@ export default Model.extend({
   type: attr('string'),
   userId: belongsTo('user'),
   actionableId: belongsTo('actionable'),
+  actionable_model: attr('string'),
   createdAt: attr('isodate')
 });

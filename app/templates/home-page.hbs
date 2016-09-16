@@ -60,10 +60,10 @@
       <!-- data registrations -->
       <div class="col s12 m6">
         <div class="card activity-card registered-data">
-          <div class="card-header card-title center">
+          <div class="card-header card-title">
             {{#link-to 'datasets.register'}}
               {{fa-icon "book"}}
-              <h4 class="uppercase">Registered Data</h4>
+              <h4>Registered Data</h4>
             {{/link-to}}
           </div>
           <p class="info-text">
@@ -71,7 +71,7 @@
           </p>
           <div class="card-content">
               {{#each registrationsSorted as |registration|}}
-                {{mini-dataset dataset=registration action="toggleModal"}}
+                {{mini-dataset dataset=registration}}
               {{/each}}
           </div>
         </div>
@@ -79,10 +79,10 @@
       <!--data requests-->
       <div class="col s12 m6">
         <div class="card activity-card requested-data">
-          <div class="card-header center card-title">
+          <div class="card-header card-title">
               {{#link-to 'datasets.request'}}
                 {{fa-icon "clipboard"}}
-                <h4 class="uppercase">Requested Data</h4>
+                <h4>Requested Data</h4>
               {{/link-to}}
           </div>
           <p class="info-text">
@@ -91,7 +91,7 @@
           </p>
           <div class="card-content">
             {{#each requestsSorted as |request|}}
-              {{mini-dataset dataset=request type="request" action="toggleModal"}}
+              {{mini-dataset dataset=request type="request"}}
             {{/each}}
           </div>
         </div>
