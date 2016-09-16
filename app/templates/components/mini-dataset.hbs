@@ -5,21 +5,48 @@
 			{{#link-to 'requests.detail' dataset.id}}<h5 class="data-title" alt="dataset title">{{truncate dataset.title 55}}</h5>{{/link-to}}
 			{{#unless hideSubmitter}}
 				<div class="submitted">
-					<h6>Requested by
-						{{#link-to 'user' dataset.userId.id class="user-name"}}{{dataset.userId.displayName}}{{/link-to}}
-					</h6>
+					{{#if isFavourite}}
+						<h6>Requested by
+							{{#link-to 'user' dataset.user.id class="user-name"}}{{dataset.user.firstname}} {{dataset.user.lastname}}{{/link-to}}
+						</h6>
+					{{else}}
+						<h6>Requested by
+							{{#link-to 'user' dataset.userId.id class="user-name"}}{{dataset.userId.displayName}}{{/link-to}}
+						</h6>
+					{{/if}}
 				</div>
 			{{/unless}}
 			<div class="card-footer">
 				<ul class="color-silver-chalice-text">
 					<li class="tooltipped" data-position="bottom" data-tooltip="Views">
-						{{fa-icon "eye"}}<span>{{dataset.stats.view}}</span>
+						{{fa-icon "eye"}}
+						<span>
+              {{#if dataset.stats.view}}
+                {{dataset.stats.view}}
+              {{else}}
+                0
+              {{/if}}
+            </span>
 					</li>
 					<li class="tooltipped" data-position="bottom" data-tooltip="Comments">
-						{{fa-icon "comments"}}<span>{{dataset.stats.comment}}</span>
+						{{fa-icon "comments"}}
+						<span>
+              {{#if dataset.stats.comment}}
+                {{dataset.stats.comment}}
+              {{else}}
+                0
+              {{/if}}
+            </span>
 					</li>
 					<li class="tooltipped" data-position="bottom" data-tooltip="Favourites">
-						{{fa-icon "star"}}<span>{{dataset.stats.favourite}}</span>
+						{{fa-icon "star"}}
+						<span>
+              {{#if dataset.stats.favourite}}
+                {{dataset.stats.favourite}}
+              {{else}}
+                0
+              {{/if}}
+            </span>
 					</li>
 				</ul>
 			</div>
@@ -31,19 +58,36 @@
 	    {{#link-to 'datasets.detail' dataset.id}}<h5 class="data-title" alt="dataset title">{{truncate dataset.title 55}}</h5>{{/link-to}}
 			{{#unless hideSubmitter}}
 				<div class="submitted">
+
 					<!-- If shortname = repositive -> show "Requested by user"-->
-					<!-- else show "from datasource"-->
-					{{#if (eq dataset.datasourceId.shortName "REPOSITIVE")}}
-						<h6>Registered by
-							{{#link-to 'user' dataset.userId.id class="user-name"}}{{dataset.userId.displayName}}{{/link-to}}
-						</h6>
+					<!-- else show "from datasource" -->
+					{{#if isFavourite}}
+						{{#if (eq dataset.datasource.short_name "REPOSITIVE")}}
+							<h6>Registered by
+								{{#link-to 'user' dataset.user.id class="user-name"}}{{dataset.user.firstname}} {{dataset.user.lastname}}{{/link-to}}
+							</h6>
+						{{else}}
+							<h6>from
+								{{#link-to 'datasets.search' (query-params q="" datasource=dataset.datasource.short_name) class="user-name"}}
+									{{dataset.datasource.short_name}}
+								{{/link-to}}
+							</h6>
+						{{/if}}
 					{{else}}
-						<h6>from
-							{{#link-to 'datasets.search' (query-params q="" datasource=dataset.datasourceId.shortName) }}
-								{{dataset.datasourceId.shortName}}
-							{{/link-to}}
-						</h6>
+						{{#if (eq dataset.datasourceId.shortName "REPOSITIVE")}}
+							<h6>Registered by
+								{{#link-to 'user' dataset.userId.id class="user-name"}}{{dataset.userId.displayName}}{{/link-to}}
+							</h6>
+						{{else}}
+							<h6>from
+								{{#link-to 'datasets.search' (query-params q="" datasource=dataset.datasourceId.shortName) class="user-name"}}
+									{{dataset.datasourceId.shortName}}
+								{{/link-to}}
+							</h6>
+						{{/if}}
 					{{/if}}
+
+
 				</div>
 			{{/unless}}
 			<div class="card-footer">
@@ -74,14 +118,35 @@
 		          </span>
 		        </li>
 	        {{/if}}
-	        <li class="tooltipped" data-position="bottom" data-tooltip="Views">
-	        	{{fa-icon "eye"}}<span>{{dataset.stats.view}}</span>
-	        </li>
-	        <li class="tooltipped" data-position="bottom" data-tooltip="Comments">
-						{{fa-icon "comments"}}<span>{{dataset.stats.comment}}</span>
+					<li class="tooltipped" data-position="bottom" data-tooltip="Views">
+						{{fa-icon "eye"}}
+						<span>
+              {{#if dataset.stats.view}}
+                {{dataset.stats.view}}
+              {{else}}
+                0
+              {{/if}}
+            </span>
+					</li>
+					<li class="tooltipped" data-position="bottom" data-tooltip="Comments">
+						{{fa-icon "comments"}}
+						<span>
+              {{#if dataset.stats.comment}}
+                {{dataset.stats.comment}}
+              {{else}}
+                0
+              {{/if}}
+            </span>
 					</li>
 					<li class="tooltipped" data-position="bottom" data-tooltip="Favourites">
-						{{fa-icon "star"}}<span>{{dataset.stats.favourite}}</span>
+						{{fa-icon "star"}}
+						<span>
+              {{#if dataset.stats.favourite}}
+                {{dataset.stats.favourite}}
+              {{else}}
+                0
+              {{/if}}
+            </span>
 					</li>
 	      </ul>
 	    </div>
