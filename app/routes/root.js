@@ -69,7 +69,9 @@ export default Ember.Route.extend({
     }
   },
   afterModel() {
-    this.get('actionsService').updateFavourites();
+    if (this.get('session.isAuthenticated')) {
+      this.get('actionsService').updateFavourites();
+    }
   },
 
   deactivateWeclomeMesssage: function() {
