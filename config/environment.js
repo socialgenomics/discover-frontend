@@ -53,6 +53,8 @@ module.exports = function(environment) {
           'datasets.search' : '/search',
           'datasets.trending' : '/trending',
           'datasources' : '/datasources',
+          'favourite-datasets' : '/favourites/{user_id}/dataset',
+          'favourite-requests' : '/favourites/{user_id}/request',
           'users.profiles': '/users/{id}/profile',
           'reset-password': '/auth/password-reset',
           'verify-email': '/auth/verify',

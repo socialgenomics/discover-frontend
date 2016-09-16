@@ -55,7 +55,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     let view = this.store.createRecord('action', {
       actionableId: currentModel.actionableId,
       userId: userId,
-      type: 'view'
+      type: 'view',
+      actionable_model: currentModel.constructor.modelName
     });
     view.save()
     .catch((err) => {

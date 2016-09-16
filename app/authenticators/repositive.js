@@ -49,7 +49,6 @@ export function invalidate(ctx) {
 export default Base.extend({
   metrics: Ember.inject.service(),
   session: Ember.inject.service(),
-
   restore: function(data) {
     return new Ember.RSVP.Promise(resolve => {
       // TODO: display any notifications - i.e if you have new messages etc

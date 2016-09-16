@@ -29,6 +29,7 @@ export default Ember.Controller.extend({
       const currentModel = this.get('model');
       let comment = this.store.createRecord('action', {
         actionableId: currentModel.actionableId,
+        actionable_model: currentModel.constructor.modelName,
         userId: userId,
         type: 'comment',
         properties: {

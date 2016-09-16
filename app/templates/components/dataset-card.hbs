@@ -7,8 +7,7 @@
           <div class="request">Request</div>
         </div>
         <div class="actions-container valign-wrapper">
-          {{action-favourite action="toggleModal" dataset=dataset}}
-          <span class="grey-text">{{dataset.favourite}}</span>
+          {{action-favourite model=dataset}}
           {{action-share action="toggleModal" dataset=dataset}}
         </div>
       </div>
@@ -49,14 +48,36 @@
 
       <div class="card-footer">
         <ul class="color-silver-chalice-text">
-          {{#if dataset.stats}}
-            <li data-balloon="Views" data-balloon-pos="down">
-              {{fa-icon "eye"}}<span>{{dataset.stats.view}}</span>
-            </li>
-            <li data-balloon="Discussion" data-balloon-pos="down">
-              {{fa-icon "comments"}}<span>{{dataset.stats.comment}}</span>
-            </li>
-          {{/if}}
+          <li class="center-align" data-balloon="Views" data-balloon-pos="down">
+            {{fa-icon "eye"}}
+            <span>
+              {{#if dataset.stats.view}}
+                {{dataset.stats.view}}
+              {{else}}
+                0
+              {{/if}}
+            </span>
+          </li>
+          <li class="center-align" data-balloon="Discussion" data-balloon-pos="down">
+            {{fa-icon "comments"}}
+            <span>
+              {{#if dataset.stats.comment}}
+                {{dataset.stats.comment}}
+              {{else}}
+                0
+              {{/if}}
+            </span>
+          </li>
+          <li data-balloon="Favourites" data-balloon-pos="down">
+            {{fa-icon "star"}}
+            <span>
+              {{#if dataset.stats.favourite}}
+                {{dataset.stats.favourite}}
+              {{else}}
+                0
+              {{/if}}
+            </span>
+          </li>
         </ul>
       </div>
 
@@ -83,8 +104,7 @@
           </div>
         {{/if}}
         <div class="actions-container valign-wrapper">
-          {{action-favourite action="toggleModal" dataset=dataset}}
-          <span class="grey-text">{{dataset.favourite}}</span>
+          {{action-favourite model=dataset}}
           {{action-share action="toggleModal" dataset=dataset}}
         </div>
       </div>
@@ -154,14 +174,38 @@
               </span>
             </li>
           {{/if}}
-          {{#if dataset.stats}}
-            <li class="center-align" data-balloon="Views" data-balloon-pos="down">
-              {{fa-icon "eye"}}<span>{{dataset.stats.view}}</span>
-            </li>
-            <li class="center-align" data-balloon="Discussion" data-balloon-pos="down">
-              {{fa-icon "comments"}}<span>{{dataset.stats.comment}}</span>
-            </li>
-          {{/if}}
+
+          <li class="center-align" data-balloon="Views" data-balloon-pos="down">
+            {{fa-icon "eye"}}
+            <span>
+              {{#if dataset.stats.view}}
+                {{dataset.stats.view}}
+              {{else}}
+                0
+              {{/if}}
+            </span>
+          </li>
+          <li class="center-align" data-balloon="Discussion" data-balloon-pos="down">
+            {{fa-icon "comments"}}
+            <span>
+              {{#if dataset.stats.comment}}
+                {{dataset.stats.comment}}
+              {{else}}
+                0
+              {{/if}}
+            </span>
+          </li>
+          <li data-balloon="Favourites" data-balloon-pos="down">
+            {{fa-icon "star"}}
+            <span>
+              {{#if dataset.stats.favourite}}
+                {{dataset.stats.favourite}}
+              {{else}}
+                0
+              {{/if}}
+            </span>
+          </li>
+
         </ul>
       </div>
     {{/if}}
