@@ -9,11 +9,11 @@ export function handleError(ctx) {
       /*
         if the error is 4XX or 5XX server resp return it.
       */
-      ctx.get('metrics').trackEvent({
-        category: 'auth',
-        action: 'login',
-        label: 'Failed'
-      });
+      // ctx.get('metrics').trackEvent({
+      //   category: 'auth',
+      //   action: 'login',
+      //   label: 'Failed'
+      // });
       return Ember.RSVP.reject(err.jqXHR.responseJSON);
     } else {
       throw err;
@@ -23,11 +23,6 @@ export function handleError(ctx) {
 
 export function resolveWithResp(ctx) {
   return function(resp) {
-    ctx.get('metrics').trackEvent({
-      category: 'auth',
-      action: 'login',
-      label: 'Success'
-    });
     return resp;
   };
 }
