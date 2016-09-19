@@ -21,22 +21,20 @@
           {{feed-item dataset=dataset toggleModal="toggleModal"}}
         {{/each}}
       {{else if (eq tab "sources")}}
-        {{#link-to 'datasources'}}View all data sources{{/link-to}}
         {{#each model.datasources as |source|}}
-          {{sources-card source=source toggleModal="toggleModal"}}
+          {{feed-item dataset=source toggleModal="toggleModal"}}
         {{/each}}
       {{else if (eq tab "collections")}}
-        {{#link-to 'collections'}}View all collections{{/link-to}}
         {{#each requestsSorted as |collection|}}
-          {{collections-card collection=collection toggleModal="toggleModal"}}
+          {{feed-item dataset=collection toggleModal="toggleModal"}}
         {{/each}}
       {{else if (eq tab "requests")}}
         {{#each requestsSorted as |dataset|}}
-          {{requests-card dataset=dataset toggleModal="toggleModal"}}
+          {{feed-item dataset=dataset toggleModal="toggleModal"}}
         {{/each}}
       {{else if (eq tab "discussions")}}
       {{#each registrationsSorted as |discussion|}}
-        {{discussions-card discussion=discussion toggleModal="toggleModal"}}
+        {{discussion-feed-item discussion=discussion toggleModal="toggleModal"}}
       {{/each}}
       {{/if}}
     </div>
