@@ -7,8 +7,8 @@ import {
 import hbs from 'htmlbars-inline-precompile';
 
 describeComponent(
-  'requests-card',
-  'Integration: RequestsCardComponent',
+  'request-feed-item',
+  'Integration: RequestFeedItemComponent',
   {
     integration: true
   },
@@ -23,7 +23,7 @@ describeComponent(
       //   {{/requests-card}}
       // `);
 
-      this.render(hbs`{{requests-card}}`);
+      this.render(hbs`{{request-feed-item}}`);
       expect(this.$()).to.have.length(1);
     });
   }

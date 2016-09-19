@@ -7,8 +7,8 @@ import {
 import hbs from 'htmlbars-inline-precompile';
 
 describeComponent(
-  'sources-card',
-  'Integration: SourcesCardComponent',
+  'collection-feed-item',
+  'Integration: CollectionFeedItemComponent',
   {
     integration: true
   },
@@ -18,12 +18,12 @@ describeComponent(
       // Handle any actions with this.on('myAction', function(val) { ... });
       // Template block usage:
       // this.render(hbs`
-      //   {{#sources-card}}
+      //   {{#collections-card}}
       //     template content
-      //   {{/sources-card}}
+      //   {{/collections-card}}
       // `);
 
-      this.render(hbs`{{sources-card}}`);
+      this.render(hbs`{{collection-feed-item}}`);
       expect(this.$()).to.have.length(1);
     });
   }

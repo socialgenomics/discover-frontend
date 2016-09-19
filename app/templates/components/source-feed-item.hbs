@@ -1,0 +1,32 @@
+<main class="col m12">
+  <div class="card dataset card-comp">
+
+    <section class="card-type-section col m2">
+      <img src="/assets/images/icons/icon-datasource@2x.png" class="data-icon">
+      <p>Data Source</p>
+    </section>
+
+    <section class="card-user-section col m2">
+      {{#if source.shortName}}
+        {{#link-to 'user' source.userId.id}}
+          <img src={{source.userId.userProfile.avatar}} class="data-icon">
+          <p>{{source.shortName}}</p>
+        {{/link-to}}
+      {{else}}
+        <a>
+          <img src="/assets/images/logo-repositive.png" class="data-icon">
+          <p>A new data source</p>
+        </a>
+      {{/if}}
+      <span class="helper-text">uploaded new data</span>
+    </section>
+
+    <section class="card-content-section col m7">
+      {{#link-to 'datasources.source' source.id classNames="data-title"}}
+        <h4 class="data-title">{{source.shortName}}</h4>
+      {{/link-to}}
+      <p class="markdown-text">{{markdown-to-html markdown=source.description}}</p>
+    </section>
+
+  </div>
+</main>

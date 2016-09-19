@@ -7,8 +7,8 @@ import {
 import hbs from 'htmlbars-inline-precompile';
 
 describeComponent(
-  'discussion-feed-item',
-  'Integration: DiscussionFeedItemComponent',
+  'source-feed-item',
+  'Integration: SourceFeedItemComponent',
   {
     integration: true
   },
@@ -18,12 +18,12 @@ describeComponent(
       // Handle any actions with this.on('myAction', function(val) { ... });
       // Template block usage:
       // this.render(hbs`
-      //   {{#discussions-card}}
+      //   {{#sources-card}}
       //     template content
-      //   {{/discussions-card}}
+      //   {{/sources-card}}
       // `);
 
-      this.render(hbs`{{discussion-feed-item}}`);
+      this.render(hbs`{{source-feed-item}}`);
       expect(this.$()).to.have.length(1);
     });
   }

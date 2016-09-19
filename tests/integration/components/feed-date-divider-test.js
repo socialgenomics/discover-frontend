@@ -7,8 +7,8 @@ import {
 import hbs from 'htmlbars-inline-precompile';
 
 describeComponent(
-  'collections-card',
-  'Integration: CollectionsCardComponent',
+  'feed-date-divider',
+  'Integration: FeedDateDividerComponent',
   {
     integration: true
   },
@@ -18,12 +18,12 @@ describeComponent(
       // Handle any actions with this.on('myAction', function(val) { ... });
       // Template block usage:
       // this.render(hbs`
-      //   {{#collections-card}}
+      //   {{#feed-date-divider}}
       //     template content
-      //   {{/collections-card}}
+      //   {{/feed-date-divider}}
       // `);
 
-      this.render(hbs`{{collections-card}}`);
+      this.render(hbs`{{feed-date-divider}}`);
       expect(this.$()).to.have.length(1);
     });
   }

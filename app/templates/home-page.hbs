@@ -18,19 +18,20 @@
     <div class="contain">
       {{#if (or (eq tab "all") (eq tab "default"))}}
         {{#each requestsSorted as |dataset|}}
-          {{feed-item dataset=dataset toggleModal="toggleModal"}}
+          {{request-feed-item dataset=dataset toggleModal="toggleModal"}}
+          {{feed-date-divider date="09/01/16"}}
         {{/each}}
       {{else if (eq tab "sources")}}
         {{#each model.datasources as |source|}}
-          {{feed-item dataset=source toggleModal="toggleModal"}}
+          {{source-feed-item source=source toggleModal="toggleModal"}}
         {{/each}}
       {{else if (eq tab "collections")}}
         {{#each requestsSorted as |collection|}}
-          {{feed-item dataset=collection toggleModal="toggleModal"}}
+          {{collection-feed-item collection=collection toggleModal="toggleModal"}}
         {{/each}}
       {{else if (eq tab "requests")}}
         {{#each requestsSorted as |dataset|}}
-          {{feed-item dataset=dataset toggleModal="toggleModal"}}
+          {{request-feed-item dataset=dataset toggleModal="toggleModal"}}
         {{/each}}
       {{else if (eq tab "discussions")}}
       {{#each registrationsSorted as |discussion|}}
