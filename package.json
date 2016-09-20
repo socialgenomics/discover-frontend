@@ -1,6 +1,6 @@
 {
   "name": "repositive",
-  "version": "0.9.1",
+  "version": "0.9.3",
   "description": "Frontend app for repositive.io",
   "private": true,
   "directories": {
@@ -76,7 +76,7 @@
     "ember-radio-button": "1.0.7",
     "ember-redirect": "4.0.0",
     "ember-route-action-helper": "1.0.0",
-    "ember-simple-auth": "1.1.0-beta.4",
+    "ember-simple-auth": "1.1.0",
     "ember-sinon": "0.4.0",
     "ember-truth-helpers": "1.2.0",
     "ember-validations": "2.0.0-alpha.4",

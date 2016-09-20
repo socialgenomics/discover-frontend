@@ -7,14 +7,17 @@ export default Ember.Component.extend({
   store: service(),
   session: service(),
   actionsService: service('actions'),
-
   isStarred: Ember.computed('actionsService.userFavourites', function() {
     const actionsService = this.get('actionsService');
     return actionsService.actionableIsFavourite(this.model.id);
   }),
   tagName: 'a',
-  classNameBindings: ['isStarred:starred'],
-
+  mouseEnter() {
+    this.set('isHovered', true);
+  },
+  mouseLeave() {
+    this.set('isHovered', false);
+  },
   click() {
     const actionsService = this.get('actionsService');
     const currentModel = this.model; //can be request or dataset
