@@ -12,6 +12,8 @@ export default Ember.Controller.extend({
     }
     return 0;
   }),
+  tags: Ember.computed.filterBy('model.actionableId.actions', 'type', 'tag'),
+
 
   actions: {
     trackExit: function() {
@@ -43,20 +45,28 @@ export default Ember.Controller.extend({
     },
 
     addTag(text) {
-      var tag = this.store.createRecord('tag', {
-        word: text
+      const userId = this.get('session.authenticatedUser');
+      const currentModel = this.get('model');
+      let tag = this.store.createRecord('action', {
+        actionableId: currentModel.actionableId,
+        actionable_model: currentModel.constructor.modelName,
+        userId: userId,
+        type: 'tag',
+        properties: {
+          text: text
+        }
       });
-      tag.dataset = this.model;
-      this.get('model.tags').pushObject(tag);
-      tag.save();
-      this.set('isEditingTags', true);
+      tag.save()
+      .catch((err) => {
+        Ember.Logger.error(err);
+      });
     },
 
     toggleEditTags() {
       this.toggleProperty('isEditingTags');
     },
 
-    toggleTagModal: function() {
+    toggleTagModal() {
       this.toggleProperty('isShowingTagModal');
     }
   }

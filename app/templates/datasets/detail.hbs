@@ -15,15 +15,15 @@
         {{#if model.description}}
           <p class="markdown-text">{{markdown-to-html markdown=model.description}}</p>
         {{/if}}
+
         <div class="tags">
-          {{#each model.tags as |tag|}}
-            {{#link-to 'datasets.tags' tag.word}}
-              <span class="tag"> {{tag.word}}</span>
-            {{/link-to}}
+          {{#each tags as |tag|}}
+            <span class="tag"> {{tag.properties.text}}</span>
           {{/each}}
-          <!-- {{add-tag addTag="addTag" class="add-btn"}}
-          <br><span class="help-link">Please add tags to improve searching and browsing through data. <a class="help-button" {{action "toggleTagModal"}}>?</a></span> -->
+          {{add-tag addTag="addTag" class="add-btn"}}
+          <br><span class="help-link">Please add tags to improve searching and browsing through data. <a class="help-button" {{action "toggleTagModal"}}>?</a></span>
         </div>
+
       </div>
     </div>
     <div class="row bottom-static">
