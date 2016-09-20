@@ -14,7 +14,6 @@ export default Ember.Controller.extend({
   }),
   tags: Ember.computed.filterBy('model.actionableId.actions', 'type', 'tag'),
 
-
   actions: {
     trackExit: function() {
       this.get('metrics').trackEvent({
@@ -47,19 +46,31 @@ export default Ember.Controller.extend({
     addTag(text) {
       const userId = this.get('session.authenticatedUser');
       const currentModel = this.get('model');
-      let tag = this.store.createRecord('action', {
-        actionableId: currentModel.actionableId,
-        actionable_model: currentModel.constructor.modelName,
-        userId: userId,
-        type: 'tag',
-        properties: {
-          text: text
-        }
-      });
-      tag.save()
-      .catch((err) => {
-        Ember.Logger.error(err);
-      });
+      const existingTags = this.get('tags');
+      // if the tag already exists
+      if(existingTags.findBy('properties.text', text)){
+        console.log('Tag exists');
+        this.flashMessages.add({
+          message: 'The tag: ' + text + ' already exists.',
+          type: 'warning',
+          timeout: 7000,
+          class: 'fadeInOut'
+        });
+      } else {
+        let tag = this.store.createRecord('action', {
+          actionableId: currentModel.actionableId,
+          actionable_model: currentModel.constructor.modelName,
+          userId: userId,
+          type: 'tag',
+          properties: {
+            text: text
+          }
+        });
+        tag.save()
+        .catch((err) => {
+          Ember.Logger.error(err);
+        });
+      }
     },
 
     toggleEditTags() {
