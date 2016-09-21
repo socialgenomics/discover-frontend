@@ -6,7 +6,7 @@ export default Ember.Route.extend({
   actionsService: Ember.inject.service('actions'),
 
   model: function(params) {
-    if(this.get('session.session.isAuthenticated') === true){
+    if (this.get('session.session.isAuthenticated') === true) {
       return this.store.findRecord('user', params.id)
       .then(user => {
         const userId = user.get('id');
@@ -33,7 +33,6 @@ export default Ember.Route.extend({
     } else {
       this.transitionTo('/');
     }
-
   },
   afterModel() {
     this.get('actionsService').updateFavourites();
