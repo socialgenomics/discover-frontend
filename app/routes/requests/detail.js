@@ -36,7 +36,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     })
     .then(data => {
       let request = data.request;
-      request.actionableId = actionable;
+      request.set('actionableId', actionable);
       let commenterIds = data.comments.content
       .map(action => action.record.get('userId.id'))
       .reduce(reducer, []);
@@ -57,7 +57,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     const userId = this.get('session.authenticatedUser');
     const currentModel = request;
     let view = this.store.createRecord('action', {
-      actionableId: currentModel.actionableId,
+      actionableId: currentModel.get('actionableId'),
       userId: userId,
       type: 'view',
       actionable_model: currentModel.constructor.modelName

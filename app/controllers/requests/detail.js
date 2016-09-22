@@ -18,7 +18,7 @@ export default Ember.Controller.extend({
       const userId = this.get('session.authenticatedUser');
       const currentModel = this.get('model');
       let comment = this.store.createRecord('action', {
-        actionableId: currentModel.actionableId,
+        actionableId: currentModel.get('actionableId'),
         actionable_model: currentModel.constructor.modelName,
         userId: userId,
         type: 'comment',
@@ -47,7 +47,7 @@ export default Ember.Controller.extend({
         });
       } else {
         let tag = this.store.createRecord('action', {
-          actionableId: currentModel.actionableId,
+          actionableId: currentModel.get('actionableId'),
           actionable_model: currentModel.constructor.modelName,
           userId: userId,
           type: 'tag',

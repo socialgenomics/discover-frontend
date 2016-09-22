@@ -37,7 +37,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     })
     .then(data => {
       let dataset = data.dataset;
-      dataset.actionableId = actionable;
+      dataset.set('actionableId', actionable);
       let commenterIds = data.comments.content
       .map(action => action.record.get('userId.id'))
       .reduce(reducer, []);
@@ -59,7 +59,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     const currentModel = dataset;
     this.get('actionsService').updateFavourites();
     let view = this.store.createRecord('action', {
-      actionableId: currentModel.actionableId,
+      actionableId: currentModel.get('actionableId'),
       userId: userId,
       type: 'view',
       actionable_model: currentModel.constructor.modelName
