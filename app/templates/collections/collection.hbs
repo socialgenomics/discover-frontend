@@ -1,9 +1,19 @@
-{{metadata-panel collection=model.collection}}
+<main class="row contain">
+  {{#each model as |collection|}}
+    {{metadata-panel model=collection}}
 
-<section class="row content">
-  <div class="contain">
-    {{#link-to 'collections'}}
-      {{fa-icon 'chevron-left'}} Back to all collectionss
-    {{/link-to}}
-  </div>
-</section>
+      <div class="content right">
+        <div class="col m11 offset-m1">
+          {{dataset-card}}
+          {{dataset-card}}
+          {{dataset-card}}
+          {{dataset-card}}
+          {{dataset-card}}
+          {{dataset-card}}
+          {{dataset-card}}
+          {{dataset-card}}
+          {{dataset-card}}
+        </div>
+      </div>
+  {{/each}}
+</main>

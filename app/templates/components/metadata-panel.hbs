@@ -1,30 +1,46 @@
-{{#unless showMore}}
-  <section class="metadata-panel">
-      <header>
-        <a {{action "showMoreMeta"}}>
-          <h5>{{source.shortName}} {{fa-icon 'chevron-down'}}</h5>
-        </a>
-      </header>
-  </section>
-{{else}}
-  <section class="metadata-panel side-meta">
-    <header>
-      <a {{action "showMoreMeta"}}>
-        <h5>{{source.shortName}} {{fa-icon 'chevron-up'}}</h5>
-      </a>
-    </header>
-    <main>
-      <h3>{{source.shortName}}</h3>
-      {{#if source.description}}
-        <p>{{source.description}}</p>
+<section class="metadata-panel">
+  <header>
+    {{#link-to 'root' class="left-align"}}
+      {{fa-icon "chevron-left"}}
+    {{/link-to}}
+    <h5>About this collection</h5>
+  </header>
+
+  <ul class="tabs">
+    <a {{action "showInfo"}}>
+      <li class="tab"><h5>More Information</h5></li>
+    </a>
+    <a {{action "showFilters"}}>
+      <li class="tab"><h5>Filters</h5></li>
+    </a>
+  </ul>
+
+  <main>
+    {{#if displayInfo}}
+      <h3>{{model.name}}</h3>
+      <p class="helper-text">
+        created by {{#link-to 'user' model.owner.id}}Repositive{{/link-to}}
+      </p>
+      {{#if model.description}}
+        <p>{{model.description}}</p>
       {{/if}}
-      <p>Datasets from this source: <strong>{{datasets.meta.total}}</strong></p>
-      {{#if source.createdAt}}
-        <p>Created on: <strong>{{moment-format source.createdAt hideSuffix=true}}</strong></p>
-      {{/if}}
-      {{#if source.updatedAt}}
-        <p>Updated on: <strong>{{moment-format source.updatedAt hideSuffix=true}}</strong></p>
-      {{/if}}
-    </main>
-  </section>
-{{/unless}}
+
+      <div class="divider"></div>
+
+      <section class="stats-numbers">
+        <div class="stats-number">
+          <span class="data-num">{{model.datasetsNo}}</span>
+          <p>Datasets</p>
+        </div>
+
+        <div class="stats-number">
+          <span class="data-num">{{model.sourcesNo}}</span>
+          <p>Sources</p>
+        </div>
+      </section>
+
+    {{else}}
+      <h3>Filters</h3>
+    {{/if}}
+  </main>
+</section>

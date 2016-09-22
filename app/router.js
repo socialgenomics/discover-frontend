@@ -88,7 +88,7 @@ Router.map(function() {
   });
 });
 
-let pagesWithSideNavigation = ['datasets-search', 'datasources-source'];
+let pagesWithSideNavigation = ['datasets-search', 'datasources-source', 'collections-collection'];
 let landingPage = ['root'];
 
 Ember.Route.reopen({

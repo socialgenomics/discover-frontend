@@ -24,6 +24,7 @@
       {{else if (eq tab "sources")}}
         {{#each model.datasources as |source|}}
           {{source-feed-item source=source toggleModal="toggleModal"}}
+          {{feed-date-divider date="09/01/16"}}
         {{/each}}
       {{else if (eq tab "collections")}}
         {{#each requestsSorted as |collection|}}

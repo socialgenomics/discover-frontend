@@ -1,10 +1,15 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
+  displayInfo: true,
+
   actions: {
-    showMoreMeta() {
-      this.toggleProperty('showMore');
-      this.sendAction('action', this.get('param'));
+    showInfo() {
+      this.set('displayInfo', true);
+    },
+
+    showFilters() {
+      this.set('displayInfo', false);
     }
   }
 });

@@ -1,6 +1,6 @@
 <div class="row">
   <h1>Collections</h1>
   {{#each model as |collection|}}
-    {{collections-card collection=collection toggleModal="toggleModal"}}
+    {{collection-feed-item collection=collection toggleModal="toggleModal"}}
   {{/each}}
 </div>
