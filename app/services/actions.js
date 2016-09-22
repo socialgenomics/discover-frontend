@@ -7,6 +7,7 @@ const { inject: { service }, Service } = Ember;
 export default Service.extend({
   store: service(),
   session: service(),
+  flashMessages: service(),
   userFavourites: [], //list of actions where type = 'favourite'
   favouritedData: [],
 
@@ -79,5 +80,20 @@ export default Service.extend({
   actionableIsFavourite(actionableId) {
     let favourites = this.get('userFavourites');
     return favourites.isAny('actionableId.id', actionableId);
+  },
+
+  deleteTag(tag) {
+    tag.destroyRecord()
+    .then(() => {
+      this.get('flashMessages').add({
+        message: 'Tag successfully deleted.',
+        type: 'success',
+        timeout: 7000,
+        class: 'fadeInOut'
+      });
+    })
+    .catch(err => {
+      Ember.Logger.error(err);
+    });
   }
 });

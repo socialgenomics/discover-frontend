@@ -23,17 +23,21 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
   model: function(params) {
     let actionable = peekOrCreate(this.store, params.id);
-    return Ember.RSVP.all([
-      this.store.query('action', {
-        actionable_id: params.id
+    return Ember.RSVP.hash({
+      comments: this.store.query('action', {
+        actionable_id: params.id,
+        type: 'comment'
       }),
-      this.store.findRecord('request', params.id)
-    ])
+      tags: this.store.query('action', {
+        actionable_id: params.id,
+        type: 'tag'
+      }),
+      request: this.store.findRecord('request', params.id)
+    })
     .then(data => {
-      let request = data[1];
-      actionable.set('actions', data[0]);
+      let request = data.request;
       request.actionableId = actionable;
-      let commenterIds = data[0].content
+      let commenterIds = data.comments.content
       .map(action => action.record.get('userId.id'))
       .reduce(reducer, []);
       return Ember.RSVP.hash({

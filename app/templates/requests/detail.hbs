@@ -10,15 +10,13 @@
   	  <div class="dataset-main-info">
         <h2>{{model.title}}</h2>
         <p class="markdown-text">{{markdown-to-html markdown=model.description}}</p>
-        <!-- <div class="tags">
-          {{#each model.tags as |tag|}}
-            {{#link-to 'datasets.tags' tag.word}}
-              <span class="tag"> {{tag.word}}</span>
-            {{/link-to}}
+        <div class="tags">
+          {{#each tags as |tag|}}
+            {{tag-item tag=tag}}
           {{/each}}
-          {{add-tag addTag="addTag" class="add-btn"}}
+          {{add-tag addTag=(action 'addTag') class="add-btn"}}
           <br><span class="help-link">Please add tags to improve searching and browsing through data. <a class="help-button" {{action "toggleTagModal"}}>?</a></span>
-        </div> -->
+        </div>
       </div>
     </div>
     <div class="row bottom-static">

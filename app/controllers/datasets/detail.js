@@ -2,7 +2,6 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
   session: Ember.inject.service(),
-  isEditingTags: false,
   comments: Ember.computed.filterBy('model.actionableId.actions', 'type', 'comment'),
   commentsSorted : Ember.computed.sort('comments', (itemA, itemB) => {
     if (itemA.get('createdAt') < itemB.get('createdAt')) {
@@ -12,6 +11,7 @@ export default Ember.Controller.extend({
     }
     return 0;
   }),
+  tags: Ember.computed.filterBy('model.actionableId.actions', 'type', 'tag'),
 
   actions: {
     trackExit: function() {
@@ -43,20 +43,36 @@ export default Ember.Controller.extend({
     },
 
     addTag(text) {
-      var tag = this.store.createRecord('tag', {
-        word: text
-      });
-      tag.dataset = this.model;
-      this.get('model.tags').pushObject(tag);
-      tag.save();
-      this.set('isEditingTags', true);
+      const userId = this.get('session.authenticatedUser');
+      const currentModel = this.get('model');
+      const existingTags = this.get('tags');
+      // if the tag already exists
+      if (existingTags.findBy('properties.text', text)) {
+        console.log('Tag exists');
+        this.flashMessages.add({
+          message: 'The tag: ' + text + ' already exists.',
+          type: 'warning',
+          timeout: 7000,
+          class: 'fadeInOut'
+        });
+      } else {
+        let tag = this.store.createRecord('action', {
+          actionableId: currentModel.actionableId,
+          actionable_model: currentModel.constructor.modelName,
+          userId: userId,
+          type: 'tag',
+          properties: {
+            text: text
+          }
+        });
+        tag.save()
+        .catch((err) => {
+          Ember.Logger.error(err);
+        });
+      }
     },
 
-    toggleEditTags() {
-      this.toggleProperty('isEditingTags');
-    },
-
-    toggleTagModal: function() {
+    toggleTagModal() {
       this.toggleProperty('isShowingTagModal');
     }
   }

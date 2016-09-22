@@ -1,0 +1,6 @@
+{{#link-to 'datasets.search' (query-params q=tag.properties.text)}}
+  {{tag.properties.text}}
+{{/link-to}}
+{{#if belongsToUser}}
+  <span {{action 'deleteTag' tag target=actionsService}} class="tag-delete">{{fa-icon "fa-times"}}</span>
+{{/if}}
