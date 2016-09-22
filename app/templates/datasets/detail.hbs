@@ -18,9 +18,9 @@
 
         <div class="tags">
           {{#each tags as |tag|}}
-            <span class="tag"> {{tag.properties.text}}</span>
+            {{tag-item tag=tag}}
           {{/each}}
-          {{add-tag addTag="addTag" class="add-btn"}}
+          {{add-tag addTag=(action 'addTag') class="add-btn"}}
           <br><span class="help-link">Please add tags to improve searching and browsing through data. <a class="help-button" {{action "toggleTagModal"}}>?</a></span>
         </div>
 

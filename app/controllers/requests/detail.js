@@ -37,7 +37,7 @@ export default Ember.Controller.extend({
       const currentModel = this.get('model');
       const existingTags = this.get('tags');
       // if the tag already exists
-      if(existingTags.findBy('properties.text', text)){
+      if (existingTags.findBy('properties.text', text)) {
         console.log('Tag exists');
         this.flashMessages.add({
           message: 'The tag: ' + text + ' already exists.',
@@ -60,6 +60,9 @@ export default Ember.Controller.extend({
           Ember.Logger.error(err);
         });
       }
+    },
+    toggleTagModal() {
+      this.toggleProperty('isShowingTagModal');
     }
   }
 });
