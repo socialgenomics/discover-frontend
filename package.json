@@ -32,6 +32,7 @@
     "crypto-js": "^3.1.6",
     "dotenv": "^1.2.0",
     "ember-ajax": "^2.0.1",
+    "ember-async-button": "1.0.2",
     "ember-browserify": "^1.1.8",
     "ember-cli": "2.7.0",
     "ember-cli-active-link-wrapper": "0.0.4",
