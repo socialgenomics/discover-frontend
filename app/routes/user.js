@@ -34,8 +34,21 @@ export default Ember.Route.extend({
       this.transitionTo('/');
     }
   },
-  afterModel() {
+  afterModel(loadedModels) {
+    // Get favourites
     this.get('actionsService').updateFavourites();
     this.get('actionsService').getFavouritedData();
+    // Get number of comments
+    this.store.query('action', {
+      user_id: loadedModels.user.get('id'),
+      type: 'comment'
+    })
+    .then(comments => {
+      const numberOfComments = comments.get('content').length;
+      this.controllerFor('user.index').set('numberOfComments', numberOfComments);
+    })
+    .catch(err => {
+      Ember.Logger.error(err);
+    });
   }
 });

@@ -12,7 +12,7 @@ export default Service.extend({
   favouritedData: [],
 
   updateFavourites() {
-    //Only update there are no favourites loaded
+    //Only update when there are no favourites loaded
     if (this.get('userFavourites').length === 0) {
       const currentUserId = this.get('session.session.authenticated.user.id');
       const store = this.get('store');
