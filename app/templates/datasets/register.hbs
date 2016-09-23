@@ -8,7 +8,6 @@
       </div>
 
       <div class="row">
-        {{!-- <div class="divider"></div> --}}
         <div class="col m5 steps-how-to sub-grey">
           <h4 class="color-salmon-text margin-bottom">How to register dataset?</h4>
           <div><span class="numb col m2 color-salmon-text">1</span><p> Fill in the simple registration form. Add the title, description and url link to the dataset.</p></div>
@@ -18,7 +17,7 @@
 
         <div class="col m6 offset-m1">
           <h4 class="color-salmon-text margin-bottom">Registation form</h4>
-          <form {{action "addDataset" on="submit"}} class="side-form">
+          <form class="side-form">
             {{validated-input
               type="text"
               value=title
@@ -41,8 +40,14 @@
               placeholder="A link to the dataset if available"
               action=addDataset
             }}
-            <div class="center input-container">
-              <button type="submit" class="btn bg-register white-text">Register Dataset</button>
+            <div class="input-container center">
+              {{async-button
+                class="btn bg-register white-text"
+                action=(action 'addDataset')
+                default="Register Dataset"
+                pending="Submitting..."
+                disableWhen=isInvalid
+              }}
             </div>
           </form>
         </div>

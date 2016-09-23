@@ -28,6 +28,7 @@ export default Ember.Controller.extend(
     'session.authenticatedUser.currentState.isDirty',
     'session.authenticatedUser.profile.currentState.isDirty'
   ),
+
   isSavable: Ember.computed('isValid', 'infoHasChanged', function() {
     const isValid = this.get('isValid');
     const infoHasChanged = this.get('infoHasChanged');

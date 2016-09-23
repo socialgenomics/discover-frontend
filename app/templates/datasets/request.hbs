@@ -16,7 +16,7 @@
         </div>
         <div class="col m6 offset-m1">
           <h4 class="color-havelock-blue-text margin-bottom no-padding">Request form</h4>
-          <form {{action "addRequest" on="submit"}} class="side-form">
+          <form class="side-form">
             {{validated-input
               type="text"
               value=title
@@ -33,7 +33,13 @@
               textarea="true"
             }}
             <div class="input-container center">
-              <button type="submit" class="btn bg-request white-text">Submit Request</button>
+              {{async-button
+                class="btn bg-request white-text"
+                action=(action 'addRequest')
+                default="Submit Request"
+                pending="Submitting..."
+                disableWhen=isInvalid
+              }}
             </div>
           </form>
         </div>

@@ -63,7 +63,6 @@ export default Ember.Controller.extend(
     }
   },
 
-
   type: function() {
     return this.get('showPassword') ? 'text' : 'password';
   }.property('showPassword'),

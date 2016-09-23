@@ -27,6 +27,7 @@ export default Ember.Controller.extend(
       }
     }
   },
+  isInvalid: Ember.computed.not('isValid'),
   actions: {
     addDataset: function() {
       if (this.get('isValid')) {
