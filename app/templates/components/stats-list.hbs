@@ -1,0 +1,49 @@
+{{#if (eq access "Open")}}
+  <li class="access-icons center-align" data-balloon="Access Type" data-balloon-pos="down">
+    <i class="fa fa-globe color-fruit-salad-text"></i>
+    <span class="color-fruit-salad-text">
+      {{access}}
+    </span>
+  </li>
+{{/if}}
+
+{{#if (eq access "Restricted")}}
+  <li class="access-icons center-align" data-balloon="Access Type" data-balloon-pos="down">
+    <i class="fa fa-lock color-red-error-text"></i>
+    <span class="color-red-error-text">
+      {{access}}
+    </span>
+  </li>
+{{/if}}
+
+<!-- Each of these can be a stats-list-item -->
+<li class="center-align" data-balloon="Views" data-balloon-pos="down">
+  {{fa-icon "eye"}}
+  <span>
+    {{#if stats.view}}
+      {{stats.view}}
+    {{else}}
+      0
+    {{/if}}
+  </span>
+</li>
+<li class="center-align" data-balloon="Discussion" data-balloon-pos="down">
+  {{fa-icon "comments"}}
+  <span>
+    {{#if stats.comment}}
+      {{stats.comment}}
+    {{else}}
+      0
+    {{/if}}
+  </span>
+</li>
+<li data-balloon="Favourites" data-balloon-pos="down">
+  {{fa-icon "star"}}
+  <span>
+    {{#if stats.favourite}}
+      {{stats.favourite}}
+    {{else}}
+      0
+    {{/if}}
+  </span>
+</li>

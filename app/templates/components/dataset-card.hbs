@@ -47,38 +47,7 @@
       </div>
 
       <div class="card-footer">
-        <ul class="color-silver-chalice-text">
-          <li class="center-align" data-balloon="Views" data-balloon-pos="down">
-            {{fa-icon "eye"}}
-            <span>
-              {{#if dataset.stats.view}}
-                {{dataset.stats.view}}
-              {{else}}
-                0
-              {{/if}}
-            </span>
-          </li>
-          <li class="center-align" data-balloon="Discussion" data-balloon-pos="down">
-            {{fa-icon "comments"}}
-            <span>
-              {{#if dataset.stats.comment}}
-                {{dataset.stats.comment}}
-              {{else}}
-                0
-              {{/if}}
-            </span>
-          </li>
-          <li data-balloon="Favourites" data-balloon-pos="down">
-            {{fa-icon "star"}}
-            <span>
-              {{#if dataset.stats.favourite}}
-                {{dataset.stats.favourite}}
-              {{else}}
-                0
-              {{/if}}
-            </span>
-          </li>
-        </ul>
+        {{stats-list stats=dataset.stats}}
       </div>
 
     {{else}} <!-- It is a Dataset -->
@@ -156,57 +125,7 @@
       </div>
 
       <div class="card-footer">
-        <ul class="color-silver-chalice-text">
-          {{#if (eq dataset.access "Open")}}
-            <li class="access-icons center-align" data-balloon="Access Type" data-balloon-pos="down">
-              <i class="fa fa-globe color-fruit-salad-text"></i>
-              <span class="color-fruit-salad-text">
-                {{dataset.access}}
-              </span>
-            </li>
-          {{/if}}
-
-          {{#if (eq dataset.access "Restricted")}}
-            <li class="access-icons center-align" data-balloon="Access Type" data-balloon-pos="down">
-              <i class="fa fa-lock color-red-error-text"></i>
-              <span class="color-red-error-text">
-                {{dataset.access}}
-              </span>
-            </li>
-          {{/if}}
-
-          <li class="center-align" data-balloon="Views" data-balloon-pos="down">
-            {{fa-icon "eye"}}
-            <span>
-              {{#if dataset.stats.view}}
-                {{dataset.stats.view}}
-              {{else}}
-                0
-              {{/if}}
-            </span>
-          </li>
-          <li class="center-align" data-balloon="Discussion" data-balloon-pos="down">
-            {{fa-icon "comments"}}
-            <span>
-              {{#if dataset.stats.comment}}
-                {{dataset.stats.comment}}
-              {{else}}
-                0
-              {{/if}}
-            </span>
-          </li>
-          <li data-balloon="Favourites" data-balloon-pos="down">
-            {{fa-icon "star"}}
-            <span>
-              {{#if dataset.stats.favourite}}
-                {{dataset.stats.favourite}}
-              {{else}}
-                0
-              {{/if}}
-            </span>
-          </li>
-
-        </ul>
+        {{stats-list stats=dataset.stats access=dataset.access}}
       </div>
     {{/if}}
   </div>

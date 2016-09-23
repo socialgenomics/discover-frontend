@@ -17,41 +17,9 @@
 				</div>
 			{{/unless}}
 			<div class="card-footer">
-				<ul class="color-silver-chalice-text">
-					<li class="tooltipped" data-position="bottom" data-tooltip="Views">
-						{{fa-icon "eye"}}
-						<span>
-              {{#if dataset.stats.view}}
-                {{dataset.stats.view}}
-              {{else}}
-                0
-              {{/if}}
-            </span>
-					</li>
-					<li class="tooltipped" data-position="bottom" data-tooltip="Comments">
-						{{fa-icon "comments"}}
-						<span>
-              {{#if dataset.stats.comment}}
-                {{dataset.stats.comment}}
-              {{else}}
-                0
-              {{/if}}
-            </span>
-					</li>
-					<li class="tooltipped" data-position="bottom" data-tooltip="Favourites">
-						{{fa-icon "star"}}
-						<span>
-              {{#if dataset.stats.favourite}}
-                {{dataset.stats.favourite}}
-              {{else}}
-                0
-              {{/if}}
-            </span>
-					</li>
-				</ul>
+				{{stats-list stats=dataset.stats}}
 			</div>
 		</div>
-
 	{{else}}	<!-- Dataset or Registration -->
 
 		<div class="title-details">
@@ -91,64 +59,7 @@
 				</div>
 			{{/unless}}
 			<div class="card-footer">
-	      <ul class="color-silver-chalice-text">
-
-	        {{#if (eq dataset.access "Open")}}
-		        <li class="access-icons">
-		          <i
-		            class="fa fa-globe color-fruit-salad-text tooltiped"
-		            data-position="bottom"
-		            data-tooltip="Public Access"
-		            title="Public"></i>
-		          <span class="color-fruit-salad-text">
-		            {{dataset.access}}
-		          </span>
-		        </li>
-	        {{/if}}
-
-	        {{#if (eq dataset.access "Restricted")}}
-		        <li class="access-icons">
-		          <i
-		            class="fa fa-lock color-red-error-text tooltiped"
-		            data-position="bottom"
-		            data-tooltip="Restricted Access"
-		            title="Access application needed"></i>
-		          <span class="color-red-error-text">
-		            {{dataset.access}}
-		          </span>
-		        </li>
-	        {{/if}}
-					<li class="tooltipped" data-position="bottom" data-tooltip="Views">
-						{{fa-icon "eye"}}
-						<span>
-              {{#if dataset.stats.view}}
-                {{dataset.stats.view}}
-              {{else}}
-                0
-              {{/if}}
-            </span>
-					</li>
-					<li class="tooltipped" data-position="bottom" data-tooltip="Comments">
-						{{fa-icon "comments"}}
-						<span>
-              {{#if dataset.stats.comment}}
-                {{dataset.stats.comment}}
-              {{else}}
-                0
-              {{/if}}
-            </span>
-					</li>
-					<li class="tooltipped" data-position="bottom" data-tooltip="Favourites">
-						{{fa-icon "star"}}
-						<span>
-              {{#if dataset.stats.favourite}}
-                {{dataset.stats.favourite}}
-              {{else}}
-                0
-              {{/if}}
-            </span>
-					</li>
-	      </ul>
+				{{stats-list stats=dataset.stats access=dataset.access}}
 	    </div>
 		</div>
 
