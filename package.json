@@ -10,7 +10,7 @@
   "scripts": {
     "setup": "npm i && bower install --allow-root && npm rebuild node-sass",
     "postinstall": "bower install",
-    "start": "ember server --watcher=polling --proxy=https://backend-dev.repositive.io",
+    "start": "ember server --watcher=polling --proxy=https://api-dev.repositive.io",
     "startStaging": "ember server --watcher=polling --proxy=https://backend-staging.repositive.io",
     "startLocal": "ember server --proxy=http://localhost:3000",
     "startDocker": "ember server --watcher=polling --proxy=$BACKEND_SERVER",
