@@ -19,7 +19,7 @@ test:
     - npm run test
 deployment:
   development:
-    branch: rancher
+    branch: development
     commands:
       - node_modules/ember-cli/bin/ember build --environment development
       - docker build -t registry.repositive.io:5000/repositive/frontend:dev .
