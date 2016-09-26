@@ -19,6 +19,7 @@ deployment:
   development:
     branch: rancher
     commands:
+      - node_modules/ember-cli/bin/ember build --environment development
       - docker build -t registry.repositive.io:5000/repositive/frontend:dev .
       - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS registry.repositive.io:5000
       - docker push registry.repositive.io:5000/repositive/frontend:dev
