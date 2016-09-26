@@ -1,4 +1,0 @@
----
-
-- name: Restart repositive-frontend
-  supervisorctl: name="repositive-frontend" state="restarted"
