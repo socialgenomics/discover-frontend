@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import ajax from 'ic-ajax';
 import ENV from 'repositive/config/environment';
+import {verifyEmail} from './trust';
 
 export default Ember.Route.extend({
   session: Ember.inject.service(),
@@ -14,9 +15,7 @@ export default Ember.Route.extend({
       url: ENV.APIRoutes['verify-email'] + '/' + params.verificationId,
       type: 'GET'
     })
-    .then(resp=> {
-      this.showMessages(resp.messages);
-
+    .then(resp => {
       /**
       * Backend validated the email address - transitionTo the profile without
       * rendering the current page (i.e do not resolve the promise before transitioning).
@@ -35,8 +34,9 @@ export default Ember.Route.extend({
           this.transitionTo('users.login');
         }
       } else {
-        this.transitionTo('users.login');
+        this.transitionTo('root');
       }
+      this.showMessages(resp);
     })
     .catch((err)=> {
       Ember.Logger.error(err);
@@ -45,16 +45,24 @@ export default Ember.Route.extend({
   },
 
   actions: {
-    resendVerifyEmail: function() {
-      ajax({
-        url: ENV.APIRoutes['verify-email-resend'] + '/' + this.get('session.authenticatedUser.main_email'),
-        type: 'GET'
+    resendVerifyEmail: verifyEmail
+  },
+
+  showMessages: function(content) {
+    if (content.message === 'success') {
+      this.flashMessages.add({
+        message: 'Your credential is now validated',
+        type: 'info',
+        timeout: 7000,
+        class: 'fadeInOut'
+      });
+    } else {
+      this.flashMessages.add({
+        message: 'An unexpected error occurred',
+        type: 'warn',
+        timeout: 7000,
+        class: 'fadeInOut'
       });
     }
-  },
-  showMessages: function(messages) {
-    messages.forEach(message=> {
-      Ember.get(this, 'flashMessages')[message.type](message.text);
-    });
   }
 });

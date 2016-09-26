@@ -1,4 +1,5 @@
 export function titleCase(text) {
-  let result = text.replace(/([A-Z])/g, ' $1');
-  return result.charAt(0).toUpperCase() + result.slice(1);
+  return text.replace(/\w\S*/g, function(result) {
+    return result.charAt(0).toUpperCase() + result.substr(1).toLowerCase();
+  });
 }

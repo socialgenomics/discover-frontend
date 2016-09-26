@@ -2,37 +2,33 @@
   <div class="col l7 m6 s12 card-main-wrapper">
     <div class="top-action card-header">
       <div class="actions-container valign-wrapper">
-        <!-- TODO: Implement this when actionables is done.-->
-        <!-- {{action-favourite dataset=dataset action="toggleModal"}}
-        <span class="grey-text">{{data.favourite}}</span>
-        {{action-share action="toggleModal"}} -->
+        {{action-favourite model=model}}
+        {{action-share action="toggleModal"}}
       </div>
     </div>
     <div class="card-main-content">
   	  <div class="dataset-main-info">
-        <h2>{{model.request.title}}</h2>
-        <p class="markdown-text">{{markdown-to-html markdown=model.request.description}}</p>
-        <!-- <div class="tags">
-          {{#each model.tags as |tag|}}
-            {{#link-to 'datasets.tags' tag.word}}
-              <span class="tag"> {{tag.word}}</span>
-            {{/link-to}}
+        <h2>{{model.title}}</h2>
+        <p class="markdown-text">{{markdown-to-html markdown=model.description}}</p>
+        <div class="tags">
+          {{#each tags as |tag|}}
+            {{tag-item tag=tag}}
           {{/each}}
-          {{add-tag addTag="addTag" class="add-btn"}}
+          {{add-tag addTag=(action 'addTag') class="add-btn"}}
           <br><span class="help-link">Please add tags to improve searching and browsing through data. <a class="help-button" {{action "toggleTagModal"}}>?</a></span>
-        </div> -->
+        </div>
       </div>
     </div>
     <div class="row bottom-static">
       <div class="dataset-more-info-section">
         <div class="col m12">
           <ul class="card-info-list left-align">
-            {{#if model.user}}
-              <li class="card-info-attr">Submitted by: {{#link-to 'user' model.user.id }}<span>{{model.user.displayName}}</span>{{/link-to}}</li>
+            {{#if model.userId}}
+              <li class="card-info-attr">Submitted by: {{#link-to 'user' model.usesId.id }}<span>{{model.userId.displayName}}</span>{{/link-to}}</li>
             {{/if}}
 
-            {{#if model.request.createdAt}}
-              <li class="card-info-attr">Requested on: <span>{{moment-format model.request.createdAt}}</span></li>
+            {{#if model.createdAt}}
+              <li class="card-info-attr">Requested on: <span>{{moment-format model.createdAt}}</span></li>
             {{/if}}
           </ul>
         </div>

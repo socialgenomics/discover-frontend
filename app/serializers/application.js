@@ -12,16 +12,11 @@ export default JSONSerializer.extend({
         return key.slice(0, -2) + '_id';
       }
     } else {
-      let toReturn = Ember.String.underscore(key).toLowerCase();
-      return toReturn;
+      return Ember.String.underscore(key).toLowerCase();
     }
   },
 
   keyForAttribute: function(attr, method) {
     return Ember.String.underscore(attr).toLowerCase();
   }
-  // //Removes JSON root object on requests, as needed by server.
-  // serializeIntoHash: function(hash, type, record, options) {
-  //   Ember.merge(hash, this.serialize(record, options));
-  // },
 });

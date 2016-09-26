@@ -17,6 +17,8 @@ export default Ember.Controller.extend(
       presence: { message: 'This field can\'t be blank.' }
     }
   },
+  isInvalid: Ember.computed.not('isValid'),
+
   actions: {
     addRequest: function() {
       if (this.get('isValid')) {

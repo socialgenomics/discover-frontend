@@ -1,1 +1,9 @@
-{{fa-icon "star"}}
+{{#if isHovered}}
+  {{fa-icon "star-o" class="starred"}}
+{{else}}
+  {{#if isStarred}}
+    {{fa-icon "star" class="starred"}}
+  {{else}}
+    {{fa-icon "star-o"}}
+  {{/if}}
+{{/if}}

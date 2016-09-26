@@ -4,11 +4,17 @@ import ENV from 'repositive/config/environment';
 
 export default Ember.Route.extend({
   session: Ember.inject.service(),
+  actionsService: Ember.inject.service('actions'),
 
   beforeModel: function() {
     if (this.get('session.data.firstVisit', true) && this.get('session.isAuthenticated')) {
       this.transitionTo('beta-signup-form')
-      .then(() => this.get('session').set('data.displayWelcomeMessage', true));
+      .then(() => {
+        // Don't display the 'verify email' message if user signed up with third party auth
+        if (!this.get('session.data.thirdPartySignup')) {
+          this.get('session').set('data.displayWelcomeMessage', true);
+        }
+      });
     }
 
     if (this.get('session.data.displayWelcomeMessage', true) && this.get('session.isAuthenticated')) {
@@ -28,16 +34,21 @@ export default Ember.Route.extend({
       //Get search data
       //Get trending datasets
       //Get recent requests and registrations
+      let token = this.get('session.session.content.authenticated.token');
+      let authHeaders = {
+        authorization: `JWT ${token}`
+      };
+
       return Ember.RSVP.all([
-        ajax({ url: ENV.APIRoutes['datasets.search'] , type: 'GET' }),
-        ajax({ url: ENV.APIRoutes['datasets.trending'] , type: 'GET' }), //TODO response = empty obj
+        ajax({ url: ENV.APIRoutes['datasets.search'] , type: 'GET', headers: authHeaders }),
+        ajax({ url: ENV.APIRoutes['datasets.trending'] , type: 'GET', headers: authHeaders }),
         this.store.query('request', {}),
         this.store.query('dataset', { user_registered: true }),
         this.store.query('datasource', {})
       ])
       .then(data => {
         //Normalize and push trending datasets
-        let trending = data[1].datasets.map((datasetObj) => {
+        let trending = data[1].map((datasetObj) => {
           return this.store.push(this.store.normalize('dataset', datasetObj));
         });
 
@@ -79,9 +90,18 @@ export default Ember.Route.extend({
         throw err;
       });
     } else {
-      return null;
+      return ajax({ url: ENV.APIRoutes['datasets.search'] , type: 'GET' })
+      .then(stat => {
+        return { stats: stat };
+      });
     }
   },
+  afterModel() {
+    if (this.get('session.isAuthenticated')) {
+      this.get('actionsService').updateFavourites();
+    }
+  },
+
   deactivateWeclomeMesssage: function() {
     this.get('session').set('data.firstVisit', false);
   }.on('deactivate')

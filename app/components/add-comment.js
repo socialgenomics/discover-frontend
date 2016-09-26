@@ -7,7 +7,6 @@ export default Ember.Component.extend({
   isValid: false,
   classNames: 'write-comment',
   classNameBindings: ['isActive:active'],
-  comment: null,
 
   actions: {
     showButtons: function() {
@@ -25,7 +24,7 @@ export default Ember.Component.extend({
           action: 'comment',
           label: this.get('dataset.id')
         });
-        this.sendAction('addComment', this.comment);
+        this.attrs.addComment(this.comment);
       }
       this.send('cancel');
     }

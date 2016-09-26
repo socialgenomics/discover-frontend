@@ -4,8 +4,6 @@ import ENV from 'repositive/config/environment';
 import Agg from './aggregation';
 import Filter from './filter';
 import Ember from 'ember';
-import _ from 'npm:lodash';
-import colours from '../../utils/colours';
 
 export default DS.Model.extend({
   user: DS.belongsTo('user'),
@@ -14,10 +12,11 @@ export default DS.Model.extend({
   query: DS.attr('string'),
   meta: DS.attr('object'),
   ordering: DS.attr('boolean'),
-  offset: DS.attr('number'),
+  offset: DS.attr('number', { defaultValue: 0 }),
   aggs: null,
   filters: null,
   isLoading: true,
+  isError: false,
 
   initialise: function() {
     if (Ember.isEmpty(this.get('queryParams'))) {
@@ -31,20 +30,20 @@ export default DS.Model.extend({
         this.filters = [];
       }
 
-      var params = this.get('queryParams');
+      let params = this.get('queryParams');
       this.set('query', params.q);
       this.set('ordering', params.ordering);
       delete params.q;
       delete params.ordering;
-      for (var key in params) {
-        var agg = Agg.create({
+      for (let key in params) {
+        let agg = Agg.create({
           name: key,
           value: params[key],
           show: false
         });
         this.aggs.pushObject(agg);
 
-        var filter = Filter.create({
+        let filter = Filter.create({
           name: key,
           value: params[key]
         });
@@ -55,11 +54,12 @@ export default DS.Model.extend({
     }
   }.on('ready'),
 
-  queryParamsDidChange: function() {
+  queryParamsDidChange: Ember.observer('queryParams', function() {
     this.set('isLoading', true);
+    this.set('isError', false);
     this.set('datasets', []);
-    if (!Ember.isNone(this.get('filters'))) {
-      var qps = this.get('queryParams');
+    if (Ember.isPresent(this.get('filters'))) {
+      let qps = this.get('queryParams');
       this.set('query', qps.q);
       delete qps.q;
       this.set('ordering', qps.ordering);
@@ -67,18 +67,22 @@ export default DS.Model.extend({
       this.set('offset', qps.offset);
       delete qps.offset;
 
-      for (var key in qps) {
-        var filter = this.filters.findBy('name', key);
+      //Set the new filter in the filters array.
+      for (let key in qps) {
+        let filter = this.filters.findBy('name', key);
         filter.set('value', this.get('queryParams.' + key));
       }
+      this.updateModelFromAPI();
     }
-  }.observes('queryParams'),
+  }),
 
-  queryDidChange: function() {
+  queryDidChange: Ember.observer('query', function() {
     this.set('isLoading', true);
     this.get('aggs').setEach('show', false);
     this.get('datasets').clear();
-  }.observes('query'),
+    // Because the query is stored in queryParams as 'q'
+    // whenever query is changed, the queryParams are updated.
+  }),
 
   updateModelFromAPI: function() {
     return ajax({
@@ -86,32 +90,25 @@ export default DS.Model.extend({
       type: 'POST',
       data: 'query=' + this.get('DSL')
     })
-    .then((resp) => {
+    .then(resp => {
       this.set('meta', resp.meta);
       if (this.get('meta.total') < 0) {
         return Ember.RSVP.reject('No results');
       }
-
       delete resp.meta;
 
       // load the aggs from the resp
       this.set('aggs', []);
-      for (var key in resp.aggs) {
+      for (let key in resp.aggs) {
         var DSL = {};
         DSL[key] = resp.aggs[key];
-        var agg = Agg.create({
+        let agg = Agg.create({
           aggDSL: DSL, //TODO:: this is dodgy
           show: true
         });
         this.aggs.pushObject(agg);
       }
       delete resp.aggs;
-
-      //TODO Use the elasticsearch response instead of request a new one
-      // Create a new entry in the store
-      if (resp.datasets.length > 0 && !resp.datasets[0].id) {
-        resp.datasets.shift();
-      }
       let promisedDatasets = resp.datasets.map(dataset => {
         delete dataset.datasource;
         return this.store.push(this.store.normalize('dataset', dataset));
@@ -119,25 +116,23 @@ export default DS.Model.extend({
       return promisedDatasets;
     })
     .then(datasets => {
-      return Promise.all(datasets.map(dataset => {
-        dataset.set('colour', this.getAssayColourForDataset(dataset));
-        return dataset;
-      }));
-    })
-    .then(datasets => {
+      this.set('datasets', []);
       datasets.forEach(dataset => {
         this.get('datasets').pushObject(dataset);
       });
       this.set('isLoading', false);
     })
     .catch((err) => {
+      this.set('isLoading', false);
+      this.set('isError', true);
       Ember.Logger.error(err);
       return Ember.RSVP.reject(err);
     });
-  }.observes('DSL'),
+  },
 
-  DSL: function() {
-    var query = {
+
+  DSL: Ember.computed('query', 'offset', 'filters.@each.value', function() {
+    let query = {
       'index': 'datasets',
       'type': 'dataset',
       'from': this.get('offset'),
@@ -145,9 +140,10 @@ export default DS.Model.extend({
       'body': {
         'highlight': {
           'fields': {
-            'title': {},
+            // 'title': {},
             'description': {}
           },
+          'require_field_match': false,
           'pre_tags': ['<em class="highlight">'],
           'post_tags': ['</em>']
         },
@@ -156,26 +152,28 @@ export default DS.Model.extend({
     };
 
     this.get('aggs').forEach(function(agg) {
-      var a = agg.get('DSL');
+      let a = agg.get('DSL');
       query.body.aggs[agg.name] = a[agg.name];
     });
 
-    if (Ember.isEmpty(this.get('filters'))) {
-      query.body.query = {
+    let queryInstance;
+    if (this.get('query') !== '') {
+      queryInstance = {
         'query_string': {
           'query': this.get('query'),
           'default_operator': 'AND'
         }
       };
     } else {
+      queryInstance = null;
+    }
+
+    if (Ember.isEmpty(this.get('filters'))) {
+      query.body.query = queryInstance;
+    } else {
       query.body.query = {
         'filtered': {
-          'query': {
-            'query_string': {
-              'query': this.get('query'),
-              'default_operator': 'AND'
-            }
-          },
+          'query': queryInstance,
           'filter': {
             'bool': {
               'must': null
@@ -183,36 +181,24 @@ export default DS.Model.extend({
           }
         }
       };
-      var filtersBool = this.get('filters').map(function(filter) {
-        return filter.get('DSL');
-      })
-      .filter(function(value) {
-        if (!Ember.isNone(value)) { return value; }
+      let filtersBool = this.get('filters')
+      .map(filter => filter.get('DSL'))
+      .filter(value => {
+        if (Ember.isPresent(value)) { return value; }
       });
       query.body.query.filtered.filter.bool.must = filtersBool;
     }
     return JSON.stringify(query);
-  }.property('query', 'offset', 'filters.@each.value'),
+  }),
 
-  getAssayColourForDataset: function(dataset) {
-    let aggs = this.get('aggs');
-    let assay;
-    if (assay = dataset.get('assay')) {
-      assay = assay.toLowerCase();
+  updateOffset: function(value, type) {
+    if (type === 'increment') {
+      this.incrementProperty('offset', value);
+    } else if (type === 'decrement') {
+      this.decrementProperty('offset', value);
     } else {
-      assay = 'other';
+      this.set('offset', value);
     }
-    return colours.getColour(assay.split('-')[0]);
-  },
-
-  datasetsAllInARow: function() {
-    let perRow = 3;
-    let datasets = this.get('datasets');
-    let out = [];
-    for (var i = 0; i < datasets.length; i += perRow) {
-      out.push(datasets.slice(i, i + perRow));
-    }
-    return out;
-  }.property('datasets')
-
+    this.updateModelFromAPI();
+  }
 });

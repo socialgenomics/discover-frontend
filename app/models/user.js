@@ -1,14 +1,13 @@
 import Model from 'ember-data/model';
 import attr from 'ember-data/attr';
 import { belongsTo, hasMany } from 'ember-data/relationships';
+import Ember from 'ember';
 
 export default Model.extend({
   username: attr('string'),
   firstname: attr('string'),
   lastname: attr('string'),
   credentials: hasMany('credentials'),
-  datasets: hasMany('datasets'),
-  comments: hasMany('comments'),
   userProfile: belongsTo('userProfile'),
   userSetting: belongsTo('userSetting'),
   createdAt: attr('isodate'),

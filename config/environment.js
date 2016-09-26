@@ -21,7 +21,7 @@ module.exports = function(environment) {
     var ENV = {
       modulePrefix: 'repositive',
       environment: environment,
-      baseURL: '/',
+      rootURL: '/',
       locationType: 'auto',
       EmberENV: {
         FEATURES: {
@@ -51,8 +51,10 @@ module.exports = function(environment) {
           'users.logout' : '/auth/logout',
           'users.signup' : '/auth/register',
           'datasets.search' : '/search',
-          'datasets.trending' : '/search/trending',
+          'datasets.trending' : '/trending',
           'datasources' : '/datasources',
+          'favourite-datasets' : '/favourites/{user_id}/dataset',
+          'favourite-requests' : '/favourites/{user_id}/request',
           'users.profiles': '/users/{id}/profile',
           'reset-password': '/auth/password-reset',
           'verify-email': '/auth/verify',
@@ -79,6 +81,13 @@ module.exports = function(environment) {
       'simple-auth-cookie-store' : {
         cookieName: 'repositive.io'
       },
+      flashMessageDefaults: {
+        timeout: 5000,
+        extendedTimeout: 0,
+        priority: 200,
+        showProgress: true,
+        preventDuplicates: true
+      },
       moment: {
         includeTimezone: 'all',
         outputFormat: 'L',
@@ -91,7 +100,7 @@ module.exports = function(environment) {
             redirectUri: 'http://localhost:4200'
           },
           'linked-in-oauth2': {
-            apiKey:      '75fsbvpfgi1667',
+            apiKey:      '77moxyb7enik8v',
             redirectUri: 'http://localhost:4200'
           }
         }
@@ -100,40 +109,49 @@ module.exports = function(environment) {
         'default-src': "'none'",
         'font-src': "'self' data: fonts.gstatic.com",
         'style-src': "'self' 'unsafe-inline' fonts.googleapis.com",
-        'script-src': "'self' 'unsafe-inline' http://docker-vm:49152 http://api.calq.io http://www.google-analytics.com/analytics.js https://d37gvrvc0wt4s1.cloudfront.net/js/v1.8/rollbar.min.js https://s3-eu-west-1.amazonaws.com/share.typeform.com/widget.js http://api.calq.io https://s3-eu-west-1.amazonaws.com/share.typeform.com/widget.js https://widget.intercom.io https://js.intercomcdn.com",
-        'connect-src': "'self' 'unsafe-inline' ws://docker-vm:49152 http://api.calq.io https://api-ping.intercom.io https://nexus-websocket-a.intercom.io https://nexus-websocket-b.intercom.io wss://nexus-websocket-a.intercom.io wss://nexus-websocket-b.intercom.io https://api-iam.intercom.io", // Allow data (ajax/websocket) from api.calq.io
+        'script-src': "'self' 'unsafe-inline' http://docker-vm:49152 http://www.google-analytics.com/analytics.js https://d37gvrvc0wt4s1.cloudfront.net/js/v1.8/rollbar.min.js https://s3-eu-west-1.amazonaws.com/share.typeform.com/widget.js https://s3-eu-west-1.amazonaws.com/share.typeform.com/widget.js https://widget.intercom.io https://js.intercomcdn.com",
+        'connect-src': "'self' 'unsafe-inline' ws://docker-vm:49152 https://api-ping.intercom.io https://nexus-websocket-a.intercom.io https://nexus-websocket-b.intercom.io wss://nexus-websocket-a.intercom.io wss://nexus-websocket-b.intercom.io https://api-iam.intercom.io",
         'img-src': "'self' data: http://www.google-analytics.com https://www.gravatar.com http://i2.wp.com/dg2kcfbxc77v1.cloudfront.net http://i0.wp.com/dg2kcfbxc77v1.cloudfront.net/assets https://js.intercomcdn.com https://static.intercomassets.com/ https://dg2kcfbxc77v1.cloudfront.net/",
         'media-src': "'self'",
-        'frame-src':"'self' 'unsafe-inline' https://repositive.typeform.com/to/pktwPz",
+        'frame-src':"'self' 'unsafe-inline' https://repositive.typeform.com/to/pktwPz https://repositive.typeform.com/to/viIWx1",
       },
       metricsAdapters: [
         {
-          name: 'GoogleAnalytics',
-          config: {
-            id: 'UA-54495053-1'
-          },
-          environments: ['production']
-        },
-        {
-          name: 'Calq',
-          config: {
-            id: 'ca78eed5d34a041ab5cf164295cf2c25'
-          },
-          environments: ['production']
-        },
-        {
           name: 'Gosquared',
-          environments: ['staging', 'production'],
+          environments: ['production'],
           config: {
             token: 'GSN-041822-M',
             signature: '5157e5f51f0967aee05141aff8037b69'
           }
         },
         {
+          name: 'GoogleAnalytics',
+          config: {
+            //company-wide website
+            id: 'UA-54495053-1'
+          },
+          environments: ['production']
+        },
+        {
+          name: 'GoogleAnalytics',
+          config: {
+            //discover app
+            id: 'UA-54495053-2'
+          },
+          environments: ['production']
+        },
+        {
           name: 'Intercom',
           environments: ['production'],
           config: {
             id: 'tz4k4icz'
+          }
+        },
+        {
+          name: 'Intercom',
+          environments: ['local-development'],
+          config: {
+            id: 'vdoi8br5'
           }
         },
         {
@@ -152,9 +170,6 @@ module.exports = function(environment) {
     };
 
     if (environment === 'local-development') {
-      ENV['ember-cli-mirage'] = {
-        enabled: true
-      };
       // ENV.APP.LOG_RESOLVER = true;
       // ENV.APP.LOG_ACTIVE_GENERATION = true;
       // ENV.APP.LOG_TRANSITIONS = true;
@@ -164,7 +179,7 @@ module.exports = function(environment) {
 
     if (environment === 'test') {
       // Testem prefers this...
-      ENV.baseURL = '/';
+      ENV.rootURL = '/';
       ENV.locationType = 'none';
 
       // keep test console output quieter

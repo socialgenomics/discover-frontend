@@ -7,7 +7,10 @@ describeModel(
   'Unit | Model | action',
   {
     // Specify the other units that are required for this test.
-    needs: []
+    needs: [
+      'model:user',
+      'model:actionable'
+    ]
   },
   function() {
     // Replace this with your real tests.

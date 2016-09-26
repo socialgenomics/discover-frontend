@@ -7,9 +7,14 @@ export default Ember.Controller.extend({
   loading: false,
   firstVisit: Ember.computed.alias('session.data.firstVisit'),
   displayWelcomeMessage: Ember.computed.alias('session.data.displayWelcomeMessage'),
+  thirdPartySignup: Ember.computed.alias('session.data.thirdPartySignup'),
   sortUpdatedAt: ['updatedAt:desc'],
   requestsSorted: Ember.computed.sort('model.requests', 'sortUpdatedAt'),
   registrationsSorted: Ember.computed.sort('model.registered', 'sortUpdatedAt'),
+  datasetsNumber: Ember.computed('model.stats.datasets', function() {
+    const x = this.get('model.stats.datasets');
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  }),
 
   actions : {
     // user clicks button on welcome page to enter site, displays welcome flash message

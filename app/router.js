@@ -4,7 +4,8 @@ import TrackingMixin from 'repositive/mixins/tracking-mixin';
 
 const Router = Ember.Router.extend(TrackingMixin, {
   session: Ember.inject.service(),
-  location: config.locationType
+  location: config.locationType,
+  rootURL: config.rootURL
 });
 
 Router.map(function() {

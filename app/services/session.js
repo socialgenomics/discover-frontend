@@ -46,6 +46,7 @@ export default SessionService.extend({
           user.set('isEmailValidated', userData.isEmailValidated);
           user.set('isCurrentUser', true);
           user.set('profile', profile);
+          user.save();
           this.set('authenticatedUser', user);
         });
       }

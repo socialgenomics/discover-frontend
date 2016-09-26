@@ -5,10 +5,9 @@ import {
   it
 } from 'ember-mocha';
 import hbs from 'htmlbars-inline-precompile';
-
 describeComponent(
-  'dataset-card',
-  'Integration: DatasetCardComponent',
+  'tag-item',
+  'Integration: TagItemComponent',
   {
     integration: true
   },
@@ -18,12 +17,12 @@ describeComponent(
       // Handle any actions with this.on('myAction', function(val) { ... });
       // Template block usage:
       // this.render(hbs`
-      //   {{#dataset-card}}
+      //   {{#tag-item}}
       //     template content
-      //   {{/dataset-card}}
+      //   {{/tag-item}}
       // `);
 
-      this.render(hbs`{{dataset-card}}`);
+      this.render(hbs`{{tag-item}}`);
       expect(this.$()).to.have.length(1);
     });
   }

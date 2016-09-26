@@ -9,13 +9,12 @@ describeModel(
     // Specify the other units that are required for this test.
     needs: [
       'serializer:dataset',
+      'model:actionable',
       'model:datasource',
-      'model:favourite',
-      'model:comment',
-      'model:tag',
       'model:highlight',
       'model:user',
-      'transform:isodate'
+      'transform:isodate',
+      'transform:object'
     ]
   },
   function() {

@@ -1,7 +1,5 @@
 import Ember from 'ember';
 import EmberValidations from 'ember-validations';
-import ajax from 'ic-ajax';
-import ENV from 'repositive/config/environment';
 const { get } = Ember;
 
 export default Ember.Controller.extend(

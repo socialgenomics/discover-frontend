@@ -8,6 +8,9 @@ export default JSONSerializer.extend(DS.EmbeddedRecordsMixin, {
   },
   keyForRelationship: function(key, kind, method)  {
     if (method === 'serialize') {
+      if (key === 'actionableId') {
+        return 'id';
+      }
       //check that last 2 chars of key are not "Id" first
       const lastTwoCharsOfKey = key.slice(-2).toLowerCase();
       if (lastTwoCharsOfKey !== 'id' ) {
@@ -16,8 +19,7 @@ export default JSONSerializer.extend(DS.EmbeddedRecordsMixin, {
         return key.slice(0, -2) + '_id';
       }
     } else {
-      let toReturn = Ember.String.underscore(key).toLowerCase();
-      return toReturn;
+      return Ember.String.underscore(key).toLowerCase();
     }
   },
 

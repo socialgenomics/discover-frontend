@@ -1,4 +1,5 @@
 import DS from 'ember-data';
+import Ember from 'ember';
 
 export default DS.Model.extend({
   userId: DS.belongsTo('user'),
@@ -9,24 +10,14 @@ export default DS.Model.extend({
   assay: DS.attr('string'),
   access: DS.attr('string'),
   datasourceId: DS.belongsTo('datasource'),
-  favorites: DS.hasMany('favourite'),
-  comments: DS.hasMany('comments'),//TODO swtich for actions
-  tags: DS.hasMany('tag'),
+  actionableId: DS.belongsTo('actionable', { inverse: 'dataset' }),
   highlights: DS.belongsTo('highlight'),
   createdAt: DS.attr('isodate'),
   updatedAt: DS.attr('isodate'),
-  count: DS.attr('number'),
+  stats: DS.attr('object'),
   externalId: DS.attr('string'),
-  accession: function() {
+  accession: Ember.computed('externalId', function() {
     return this.get('externalId');
-  }.property('externalId'),
-  shortDescription: function() {
-    let length = 100;
-    let description = this.get('description');
-    if (description.length > length) {
-      description = description.substr(0, length) + ' ..';
-    }
-    return description;
-  }.property('description'),
+  }),
   colour: DS.attr('string')
 });
