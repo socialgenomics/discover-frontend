@@ -3,27 +3,28 @@
     {{#link-to 'root' class="left-align"}}
       {{fa-icon "chevron-left"}}
     {{/link-to}}
-    <h5>About this collection</h5>
+
+    <img src="/assets/images/icons/icon-collection@2x.png" class="data-icon">
+    <h5>Collection</h5>
+
+    <!-- {{action-favourite dataset=dataset action="toggleModal"}}
+    {{action-share action="toggleModal"}} -->
   </header>
 
   <ul class="tabs">
     <a {{action "showInfo"}}>
-      <li class="tab"><h5>More Information</h5></li>
+      <li class="tab {{if displayInfo "active-tab"}}"><h5>More Information</h5></li>
     </a>
     <a {{action "showFilters"}}>
-      <li class="tab"><h5>Filters</h5></li>
+      <li class="tab {{unless displayInfo "active-tab"}}"><h5>Filters</h5></li>
     </a>
   </ul>
 
   <main>
     {{#if displayInfo}}
       <h3>{{model.name}}</h3>
-      <p class="helper-text">
-        created by {{#link-to 'user' model.owner.id}}Repositive{{/link-to}}
-      </p>
-      {{#if model.description}}
-        <p>{{model.description}}</p>
-      {{/if}}
+      <span class="helper-text">created by </span>
+      <span>{{#link-to 'user' model.owner.id}}Repositive{{/link-to}}</span>
 
       <div class="divider"></div>
 
@@ -38,6 +39,12 @@
           <p>Sources</p>
         </div>
       </section>
+
+      <div class="divider"></div>
+
+      {{#if model.description}}
+        <p>{{model.description}}</p>
+      {{/if}}
 
     {{else}}
       <h3>Filters</h3>
