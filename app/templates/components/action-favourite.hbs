@@ -1,9 +1,13 @@
-{{#if isHovered}}
-  {{fa-icon "star-o" class="starred"}}
+{{#if isSubmitting}}
+  {{fa-icon "circle-o-notch" pulse=true}}
 {{else}}
-  {{#if isStarred}}
-    {{fa-icon "star" class="starred"}}
+  {{#if isHovered}}
+    {{fa-icon "star-o" class="starred"}}
   {{else}}
-    {{fa-icon "star-o"}}
+    {{#if isStarred}}
+      {{fa-icon "star" class="starred"}}
+    {{else}}
+      {{fa-icon "star-o"}}
+    {{/if}}
   {{/if}}
 {{/if}}
