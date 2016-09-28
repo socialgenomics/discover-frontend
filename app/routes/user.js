@@ -36,7 +36,7 @@ export default Ember.Route.extend({
   },
   afterModel(loadedModels) {
     // Get favourites
-    this.get('actionsService').updateFavourites();
+    this.get('actionsService').loadFavourites();
     this.get('actionsService').getFavouritedData();
     // Get number of comments
     this.store.query('action', {

@@ -13,7 +13,7 @@ export default Route.extend(AuthenticatedRouteMixin, {
     });
   },
   afterModel() {
-    this.get('actionsService').updateFavourites();
+    this.get('actionsService').loadFavourites();
   },
 
   actions: {
