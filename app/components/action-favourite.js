@@ -47,8 +47,7 @@ export default Ember.Component.extend({
     })
     .then(savedFavourite => {
       actionsService.pushFavourite(savedFavourite);
-      debugger;
-      currentModel.get('stats');
+      currentModel.incrementProperty('stats.favourite');
       this.set('isSubmitting', false);
       this.get('metrics').trackEvent({
         category: 'dataset',
@@ -68,6 +67,7 @@ export default Ember.Component.extend({
     favourite.destroyRecord()
     .then(deletedFavourite => {
       this.set('isSubmitting', false);
+      currentModel.decrementProperty('stats.favourite');
       actionsService.removeFavourite(deletedFavourite);
       this.get('metrics').trackEvent({
         category: 'dataset',
