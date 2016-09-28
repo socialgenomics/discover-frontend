@@ -10,11 +10,9 @@ export default Ember.Controller.extend({
       return true;
     }
   }),
-  // numberOfFavourites: Ember.computed('actionsService.userFavourites', function() {
-  //   const actionsService = this.get('actionsService');
-  //   return actionsService.get('userFavourites').length;
-  // })
-  numberOfFavourites: Ember.computed(function(){
+  // Watches isOwnProfile so that the stat updates for each user profile.
+  // TODO move user's stats into component to not have this issue with state.
+  numberOfFavourites: Ember.computed('isOwnProfile', function() {
     const profileUser = this.get('model.user.id');
     const allActions = this.store.peekAll('action');
     const allUserFavourites = allActions.filter((action) => {
