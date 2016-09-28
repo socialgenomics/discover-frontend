@@ -10,8 +10,8 @@ export default Ember.Controller.extend({
       return true;
     }
   }),
-  numberOfFavourites: Ember.computed('actionsService.userFavourites', function(){
+  numberOfFavourites: Ember.computed('actionsService.userFavourites', function() {
     const actionsService = this.get('actionsService');
     return actionsService.get('userFavourites').length;
-  }),
+  })
 });

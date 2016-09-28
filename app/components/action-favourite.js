@@ -21,7 +21,7 @@ export default Ember.Component.extend({
     const actionsService = this.get('actionsService');
     const currentModel = this.model; //can be request or dataset
     let favourite = actionsService.getFavourite(currentModel.id);
-    if(!this.get('isSubmitting')){
+    if (!this.get('isSubmitting')) {
       if (favourite) {
         this._deleteFavourite(favourite);
       } else {
