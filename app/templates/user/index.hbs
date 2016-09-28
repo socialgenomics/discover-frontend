@@ -1,9 +1,6 @@
 <div id="profile" class="profile content">
   <div class="row">
     <div class="contain">
-      {{#if isOwnProfile}}
-        <h5 class="subtitles-left unfocus-grey-text">Your Profile</h5>
-      {{/if}}
       <div class="col m12 center">
         <div class="card">
           <div class="card-content">
@@ -46,9 +43,6 @@
     </div>
 
     <div class="contain">
-      {{#if isOwnProfile}}
-      <h5 class="subtitles-left unfocus-grey-text">Your Activity</h5>
-      {{/if}}
       <!-- data registrations -->
       <div class="col s12 m6 activity-card">
         <div class="card registered-data">
@@ -99,25 +93,23 @@
       </div>
 
       <!-- Favourites -->
-      {{#if isOwnProfile}}
-        <div class="col s12 m6 activity-card">
-          <div class="card favourited-data">
-            <div class="card-header card-title">
-              {{fa-icon "star"}}
-              <h4>Favourites</h4>
-            </div>
-            <div class="card-content">
-              {{#if actionsService.favouritedData}}
-                {{#each actionsService.favouritedData as |favourite|}}
-                  {{mini-dataset dataset=favourite type=favourite.type isFavourite=true}}
-                {{/each}}
-              {{else}}
-                <p class="color-silver-chalice-text center-align">You don't have any favourites yet.</p>
-              {{/if}}
-            </div>
+      <div class="col s12 m6 activity-card">
+        <div class="card favourited-data">
+          <div class="card-header card-title">
+            {{fa-icon "star"}}
+            <h4>Favourites</h4>
+          </div>
+          <div class="card-content">
+            {{#if actionsService.favouritedData}}
+              {{#each actionsService.favouritedData as |favourite|}}
+                {{mini-dataset dataset=favourite type=favourite.type isFavourite=true}}
+              {{/each}}
+            {{else}}
+              <p class="color-silver-chalice-text center-align">You don't have any favourites yet.</p>
+            {{/if}}
           </div>
         </div>
-      {{/if}}
+      </div>
     </div>
   </div>
 </div>

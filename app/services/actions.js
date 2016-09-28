@@ -38,19 +38,18 @@ export default Service.extend({
   getFavourite(actionableId) {
     return this.get('userFavourites').findBy('actionableId.id', actionableId);
   },
-  getFavouritedData() {
+  getFavouritedData(userIdOfProfile) {
     //TODO use the params from the user route
-    const currentUserId = this.get('session.session.authenticated.user.id');
     let token = this.get('session.session.content.authenticated.token');
     let authHeaders = {
       authorization: `JWT ${token}`
     };
     return Ember.RSVP.hash({
-      datasets: ajax({ url: ENV.APIRoutes['favourite-datasets'].replace('{user_id}', currentUserId),
+      datasets: ajax({ url: ENV.APIRoutes['favourite-datasets'].replace('{user_id}', userIdOfProfile),
         type: 'GET',
         headers: authHeaders
       }),
-      requests: ajax({ url: ENV.APIRoutes['favourite-requests'].replace('{user_id}', currentUserId),
+      requests: ajax({ url: ENV.APIRoutes['favourite-requests'].replace('{user_id}', userIdOfProfile),
         type: 'GET',
         headers: authHeaders
       })

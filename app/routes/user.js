@@ -17,7 +17,7 @@ export default Ember.Route.extend({
           requests: this.store.query('request', { 'user_id': userId }),
           user_credential: this.store.query('credential', { 'user_id': userId }),
           user_favourites: this.get('actionsService').loadFavourites(),
-          favourited_data: this.get('actionsService').getFavouritedData(),
+          favourited_data: this.get('actionsService').getFavouritedData(params.id),
           user_comments: this.store.query('action', { user_id: userId, type: 'comment' })
         });
       })
