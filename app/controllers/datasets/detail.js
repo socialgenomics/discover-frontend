@@ -48,7 +48,6 @@ export default Ember.Controller.extend({
       const existingTags = this.get('tags');
       // if the tag already exists
       if (existingTags.findBy('properties.text', text)) {
-        console.log('Tag exists');
         this.flashMessages.add({
           message: 'The tag: ' + text + ' already exists.',
           type: 'warning',

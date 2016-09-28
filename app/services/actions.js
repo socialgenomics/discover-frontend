@@ -10,50 +10,45 @@ export default Service.extend({
   flashMessages: service(),
   userFavourites: [], //list of actions where type = 'favourite'
   favouritedData: [],
-
-  updateFavourites() {
-    //Only update there are no favourites loaded
-    if (this.get('userFavourites').length === 0) {
-      const currentUserId = this.get('session.session.authenticated.user.id');
-      const store = this.get('store');
-      store.query('action', {
-        user_id: currentUserId,
-        type: 'favourite'
-      })
-      .then(favourites => {
-        this.set('userFavourites', []);
-        favourites.map(favourite => {
-          this.get('userFavourites').push(favourite);
-        });
+  loadFavourites() {
+    const currentUserId = this.get('session.session.authenticated.user.id');
+    const store = this.get('store');
+    return store.query('action', {
+      user_id: currentUserId,
+      type: 'favourite'
+    })
+    .then(favourites => {
+      this.set('userFavourites', []);
+      favourites.map(favourite => {
+        this.get('userFavourites').push(favourite);
       });
-    }
+    })
+    .catch(err => {
+      Ember.Logger.error(err);
+    });
   },
-
   removeFavourite(favourite) {
     const updatedFavourites = this.get('userFavourites').without(favourite);
     this.set('userFavourites', updatedFavourites);
   },
-
   pushFavourite(favourite) {
     this.get('userFavourites').push(favourite);
     this.notifyPropertyChange('userFavourites');
   },
-
   getFavourite(actionableId) {
     return this.get('userFavourites').findBy('actionableId.id', actionableId);
   },
-  getFavouritedData() {
-    const currentUserId = this.get('session.session.authenticated.user.id');
+  getFavouritedData(userIdOfProfile) {
     let token = this.get('session.session.content.authenticated.token');
     let authHeaders = {
       authorization: `JWT ${token}`
     };
     return Ember.RSVP.hash({
-      datasets: ajax({ url: ENV.APIRoutes['favourite-datasets'].replace('{user_id}', currentUserId),
+      datasets: ajax({ url: ENV.APIRoutes['favourite-datasets'].replace('{user_id}', userIdOfProfile),
         type: 'GET',
         headers: authHeaders
       }),
-      requests: ajax({ url: ENV.APIRoutes['favourite-requests'].replace('{user_id}', currentUserId),
+      requests: ajax({ url: ENV.APIRoutes['favourite-requests'].replace('{user_id}', userIdOfProfile),
         type: 'GET',
         headers: authHeaders
       })
@@ -74,14 +69,7 @@ export default Service.extend({
       Ember.Logger.error(err);
     });
   },
-
-  //Returns true if the actionableId matches the actionableId
-  //for any favourites in userFavourites
-  actionableIsFavourite(actionableId) {
-    let favourites = this.get('userFavourites');
-    return favourites.isAny('actionableId.id', actionableId);
-  },
-
+  //TODO Move to delete-tag component and rename service to favourites
   deleteTag(tag) {
     tag.destroyRecord()
     .then(() => {
