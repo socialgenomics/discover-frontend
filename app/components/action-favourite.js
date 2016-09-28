@@ -47,8 +47,8 @@ export default Ember.Component.extend({
     })
     .then(savedFavourite => {
       actionsService.pushFavourite(savedFavourite);
-      currentModel.incrementProperty('stats.favourite');
       this.set('isSubmitting', false);
+      currentModel.incrementProperty('stats.favourite');
       this.get('metrics').trackEvent({
         category: 'dataset',
         action: 'favourite',
