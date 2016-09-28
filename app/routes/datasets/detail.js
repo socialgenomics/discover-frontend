@@ -57,7 +57,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     //TODO: Refactor - This code is used in several places e.g. request and dataset detail controllers & routes
     const userId = this.get('session.authenticatedUser');
     const currentModel = dataset;
-    this.get('actionsService').updateFavourites();
+    this.get('actionsService').loadFavourites();
     let view = this.store.createRecord('action', {
       actionableId: currentModel.get('actionableId'),
       userId: userId,

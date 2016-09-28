@@ -5,6 +5,6 @@ import { hasMany } from 'ember-data/relationships';
 export default Model.extend({
   name: attr('string'),
   description: attr('string'),
-  datasets: attr('number'),
-  views: attr('number')
+  properties: attr('object'),
+  type: attr('string')
 });

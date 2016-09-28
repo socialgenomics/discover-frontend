@@ -44,7 +44,8 @@ export default Ember.Route.extend({
         ajax({ url: ENV.APIRoutes['datasets.trending'] , type: 'GET', headers: authHeaders }),
         this.store.query('request', {}),
         this.store.query('dataset', { user_registered: true }),
-        this.store.query('datasource', {})
+        this.store.query('datasource', {}),
+        this.get('actionsService').loadFavourites()
       ])
       .then(data => {
         //Normalize and push trending datasets
@@ -94,11 +95,6 @@ export default Ember.Route.extend({
       .then(stat => {
         return { stats: stat };
       });
-    }
-  },
-  afterModel() {
-    if (this.get('session.isAuthenticated')) {
-      this.get('actionsService').updateFavourites();
     }
   },
 

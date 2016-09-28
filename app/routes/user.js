@@ -10,21 +10,26 @@ export default Ember.Route.extend({
       return this.store.findRecord('user', params.id)
       .then(user => {
         const userId = user.get('id');
-        return new Ember.RSVP.all([
-          user,
-          this.store.query('userProfile', { 'user_id': userId }),
-          this.store.query('dataset', { 'user_id': userId }),
-          this.store.query('request', { 'user_id': userId }),
-          this.store.query('credential', { 'user_id': userId })
-        ]);
+        return new Ember.RSVP.hash({
+          user: user,
+          user_profile: this.store.query('userProfile', { 'user_id': userId }),
+          registrations: this.store.query('dataset', { 'user_id': userId }),
+          requests: this.store.query('request', { 'user_id': userId }),
+          user_credential: this.store.query('credential', { 'user_id': userId }),
+          user_favourites: this.get('actionsService').loadFavourites(),
+          favourited_data: this.get('actionsService').getFavouritedData(params.id),
+          user_comments: this.store.query('action', { user_id: userId, type: 'comment' })
+        });
       })
       .then(values => {
+        const numberOfComments = values.user_comments.get('content').length;
+        this.controllerFor('user.index').set('numberOfComments', numberOfComments);
         return {
-          user: values[0],
-          user_profile: values[1].get('firstObject'),
-          registrations: values[2],
-          requests: values[3],
-          is_verified: isVerified(values[4])
+          user: values.user,
+          user_profile: values.user_profile.get('firstObject'),
+          registrations: values.registrations,
+          requests: values.requests,
+          is_verified: isVerified(values.user_credential)
         };
       })
       .catch(err => {
@@ -33,9 +38,5 @@ export default Ember.Route.extend({
     } else {
       this.transitionTo('/');
     }
-  },
-  afterModel() {
-    this.get('actionsService').updateFavourites();
-    this.get('actionsService').getFavouritedData();
   }
 });

@@ -48,10 +48,10 @@ export default Ember.Controller.extend(
         })
         .then(() => {
           this.reloadMessages(resp.messages);
-        })
+        });
       })
       .catch(err => {
-        console.log(err);
+        Ember.Logger.error(err);
         if (err.errorThrown === 'Not Found') {
           this.flashMessages.add({
             message: 'We could not send an email to ' + this.get('email') + '. Please check you\'ve entered the correct email.',
@@ -62,7 +62,7 @@ export default Ember.Controller.extend(
           })
           .then(() => {
             this.reloadMessages(err.jqXHR.responseJSON.messages);
-          })
+          });
         }
       });
     }
