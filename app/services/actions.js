@@ -39,7 +39,6 @@ export default Service.extend({
     return this.get('userFavourites').findBy('actionableId.id', actionableId);
   },
   getFavouritedData(userIdOfProfile) {
-    //TODO use the params from the user route
     let token = this.get('session.session.content.authenticated.token');
     let authHeaders = {
       authorization: `JWT ${token}`
@@ -70,7 +69,7 @@ export default Service.extend({
       Ember.Logger.error(err);
     });
   },
-  //TODO Remove this and rename service to favourites
+  //TODO Move to delete-tag component and rename service to favourites
   deleteTag(tag) {
     tag.destroyRecord()
     .then(() => {
