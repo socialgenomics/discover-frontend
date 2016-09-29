@@ -18,13 +18,13 @@
     <div class="contain">
       {{#if (or (eq tab "all") (eq tab "default"))}}
         {{#each requestsSorted as |dataset|}}
-          {{request-feed-item dataset=dataset toggleModal="toggleModal"}}
           {{feed-date-divider date="09/01/16"}}
+          {{request-feed-item dataset=dataset toggleModal="toggleModal"}}
         {{/each}}
       {{else if (eq tab "sources")}}
         {{#each model.datasources as |source|}}
-          {{source-feed-item source=source toggleModal="toggleModal"}}
           {{feed-date-divider date="09/01/16"}}
+          {{source-feed-item source=source toggleModal="toggleModal"}}
         {{/each}}
       {{else if (eq tab "collections")}}
         {{#each requestsSorted as |collection|}}
@@ -35,7 +35,7 @@
           {{request-feed-item dataset=dataset toggleModal="toggleModal"}}
         {{/each}}
       {{else if (eq tab "discussions")}}
-      {{#each registrationsSorted as |discussion|}}
+      {{#each requestsSorted as |discussion|}}
         {{discussion-feed-item discussion=discussion toggleModal="toggleModal"}}
       {{/each}}
       {{/if}}

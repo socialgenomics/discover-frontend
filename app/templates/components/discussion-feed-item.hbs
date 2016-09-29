@@ -9,12 +9,12 @@
     <section class="card-user-section col m2">
       {{#if discussion.userId.displayName}}
         {{#link-to 'user' dataset.userId.id}}
-          <img src={{discussion.userId.userProfile.avatar}} class="data-icon">
+          <img src={{discussion.userId.userProfile.avatar}} class="data-icon round-img">
           <p>{{discussion.userId.displayName}}</p>
         {{/link-to}}
       {{else}}
         <a>
-          <img src="/assets/images/logo-repositive.png" class="data-icon">
+          <img src="/assets/images/logo-repositive.png" class="data-icon round-img">
           <p>A Repositive user</p>
         </a>
       {{/if}}
