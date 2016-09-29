@@ -21,11 +21,16 @@ You will need the following things properly installed on your computer.
 * `bower install`
 * `npm install -g onchange`
 
-
 ## Running / Development
 
 * `npm start`
 * Visit your app at [http://localhost:4200](http://localhost:4200).
+
+## Setting up styles submodule
+The project styles are kept as a submodule. To get setup with using the styles you must initialize the submodule. In the project directory run:
+```
+git submodule update --init repositive-styles
+```
 
 ## Writing and Running Tests
 
@@ -37,17 +42,17 @@ We also use [ember-sinon](https://github.com/csantero/ember-sinon) for spies and
 
 To run the tests use: `ember test --server` or `ember t -s` for short.
 
+## Development Guidelines
+It's easy to cut corners. We have in the past, however this leaves us with nasty code which comes with many undesirable traits.
 
-## Setting up styles submodule
-The project styles are kept as a submodule. To get setup with using the styles you must initialize the submodule. In the project directory run:
-```
-git submodule update --init repositive-styles
-```
+To ensure our code follows best practices, please become familiar with this [ember coding style-guide](https://github.com/netguru/ember-styleguide).
+
+As well as this, we encourage component based design. So before you create a controller, or add markup directly into a top level template, STOP. Create a component for it.
+
 
 ## Code Generators
 
 Make use of the many generators for code, try `ember help generate` for more details
-
 
 ## Deploying
 
