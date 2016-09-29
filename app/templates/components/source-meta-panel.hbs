@@ -20,8 +20,8 @@
     </a>
   </ul>
 
-  <main>
-    {{#if displayInfo}}
+  {{#if displayInfo}}
+    <main>
       <h3>{{model.shortName}}</h3>
       <span class="helper-text">created by </span>
       <span>{{#link-to 'user' model.owner.id}}Repositive{{/link-to}}</span>
@@ -54,14 +54,57 @@
         </div>
       </section>
 
-      <div class="divider"></div>
-
       {{#if model.description}}
+        <div class="divider"></div>
         <p>{{model.description}}</p>
       {{/if}}
 
-    {{else}}
+      {{#if model.image}}
+        <div class="divider"></div>
+        <img src="{{model.image}}" class="logo-img">
+      {{/if}}
+
+      <!-- Dummy desctiption and image section until models -->
+      <div class="divider"></div>
+      <p>Lots and lots and lots and lots and lots and lots and lots and lots and lots and lots and lots and lots and lots and lots and lots and lots and lots and lots and lots and lots and lots and lots and lots and lots and lots and lots and lots and lots and lots and lots and lots and lots and lots and lots and lots and lots and lots and lots and lots and lots and lots and lots and lots and lots and lots and lots and lots and lots and lots and lots of text.</p>
+      <div class="divider"></div>
+      <img src="/assets/images/logos/xpressomics-logo.png" class="logo-img">
+    </main>
+
+  {{else}}
+    <main class="meta-filters" id="aggregation">
       <h3>Filters</h3>
-    {{/if}}
-  </main>
+
+      <section>
+        <h4>Assay Type</h4>
+        <div>
+          <div class="label light-blue"></div>
+          <span>RNA-Seq (15)</span>
+        </div>
+        <div>
+          <div class="label light-blue"></div>
+          <span>Expression profiling by array (7)</span>
+        </div>
+        <div>
+          <div class="label light-blue"></div>
+          <span>Transcription profiling by array (3)</span>
+        </div>
+      </section>
+
+      <section>
+        <h4>Data Sources (4)</h4>
+        <div><span>Expressomics (9)</span></div>
+        <div><span>ArrayExpress (5)</span></div>
+        <div><span>GigaScience (6)</span></div>
+        <div><span>SRA (5)</span></div>
+      </section>
+
+      <section>
+        <h4>Access Type</h4>
+        <div><span>Open (20)</span></div>
+        <div><span>Restricted (5)</span></div>
+      </section>
+    </main>
+
+  {{/if}}
 </section>
