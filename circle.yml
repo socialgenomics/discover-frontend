@@ -27,9 +27,17 @@ deployment:
       - docker push registry.repositive.io:5000/repositive/frontend:dev
       - mkdir rancher && cd rancher && rancher export Frontend > compose.tar && tar -xf compose.tar && rancher-compose -p Frontend up --upgrade -d frontend
       - rancher exec nginx service nginx reload
-  master:
+  staging:
     branch: master
     commands:
-      - docker build -t registry.repositive.io:5000/repositive/frontend:prod .
+      - node_modules/ember-cli/bin/ember build --environment staging
+      - docker build -t registry.repositive.io:5000/repositive/frontend .
       - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS registry.repositive.io:5000
-      - docker push registry.repositive.io:5000/repositive/frontend:prod
+      - docker push registry.repositive.io:5000/repositive/frontend
+  release:
+    tag: /release-.*/
+    commands:
+      - node_modules/ember-cli/bin/ember build --environment production
+      - docker build -t registry.repositive.io:5000/repositive/frontend:$CIRCLE_TAG .
+      - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS registry.repositive.io:5000
+      - docker push registry.repositive.io:5000/repositive/frontend
