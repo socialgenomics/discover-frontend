@@ -21,6 +21,7 @@ deployment:
   development:
     branch: development
     commands:
+      - export RANCHER_ENVIRONMENT=1a77
       - node_modules/ember-cli/bin/ember build --environment development
       - docker build -t registry.repositive.io:5000/discover:dev .
       - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS registry.repositive.io:5000
@@ -30,10 +31,13 @@ deployment:
   staging:
     branch: master
     commands:
+      - export RANCHER_ENVIRONMENT=1a94
       - node_modules/ember-cli/bin/ember build --environment staging
       - docker build -t registry.repositive.io:5000/discover .
       - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS registry.repositive.io:5000
       - docker push registry.repositive.io:5000/discover
+      - mkdir rancher && cd rancher && rancher export Frontend > compose.tar && tar -xf compose.tar && rancher-compose -p Frontend up --upgrade -d frontend
+      - rancher exec nginx service nginx reload
   release:
     tag: /release-.*/
     commands:
