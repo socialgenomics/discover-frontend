@@ -21,6 +21,8 @@ deployment:
   development:
     branch: development
     commands:
+      - export RANCHER_ACCESS_KEY=$ACCESS_DEV
+      - export RANCHER_SECRET_KEY=$SECRET_DEV
       - export RANCHER_ENVIRONMENT=1a77
       - node_modules/ember-cli/bin/ember build --environment development
       - docker build -t registry.repositive.io:5000/discover:dev .
@@ -31,6 +33,8 @@ deployment:
   staging:
     branch: master
     commands:
+      - export RANCHER_ACCESS_KEY=$ACCESS_STA
+      - export RANCHER_SECRET_KEY=$SECRET_STA
       - export RANCHER_ENVIRONMENT=1a94
       - node_modules/ember-cli/bin/ember build --environment staging
       - docker build -t registry.repositive.io:5000/discover .
