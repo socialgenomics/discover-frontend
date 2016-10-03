@@ -18,16 +18,16 @@
               <div class="divider"></div>
               <div class="row">
                 <div class="featured-content col m4">
-                  {{#link-to 'datasets.search' (query-params datasource="XPRESSOMICS" q="") class="sub-grey"}}
-                    <span class="no-padding font-varela-round">Featured Data Source</span>
+                  {{#link-to 'datasets.search' (query-params q='(datasource.short_name:IN_SILICO_DB AND NOT assay:"Whole Exome") OR datasource.short_name:XPRESSOMICS OR datasource.short_name:GEO OR (datasource.short_name:GXA AND NOT assay:Proteomics) OR (datasource.short_name:ARRAY_EXPRESS AND (assay:"Transcription Profiling by Array" OR assay:"RNA-seq of Coding RNA" OR assay:"RNA-seq of non Coding RNA")) OR (datasource.short_name:SRA AND assay:RNA-Seq) OR (datasource.short_name:DBGAP AND assay:RNA_Seq) OR datasource.short_name:ALLEN_INSTITUTE') class="sub-grey"}}
+                    <span class="red-text no-padding font-varela-round">New Collection</span>
                     <div class="logo-image">
-                      <img class="img-responsive" src="assets/images/logos/xpressomics-logo.png"/>
+                      <h2>Expression Data</h2>
                     </div>
                   {{/link-to}}
                 </div>
                 <div class="featured-content col m4">
                   {{#link-to 'datasets.search' (query-params q='"DNA methylation"') class="sub-grey"}}
-                    <span class="red-text no-padding font-varela-round">New Collection</span>
+                    <span class="no-padding font-varela-round">Collection</span>
                     <div class="logo-image">
                       <h2>Methylation Data</h2>
                     </div>
