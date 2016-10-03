@@ -45,6 +45,7 @@ export default Ember.Route.extend({
         this.store.query('request', {}),
         this.store.query('dataset', { user_registered: true }),
         this.store.query('datasource', {}),
+        this.store.query('collection', {}),
         this.get('actionsService').loadFavourites()
       ])
       .then(data => {
@@ -82,7 +83,8 @@ export default Ember.Route.extend({
             datasets: trending,
             requests: data[2],
             registered: data[3],
-            datasources: data[4]
+            datasources: data[4],
+            collections: data[5]
           };
         })
       })

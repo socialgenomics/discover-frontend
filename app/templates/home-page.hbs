@@ -27,7 +27,7 @@
           {{source-feed-item source=source toggleModal="toggleModal"}}
         {{/each}}
       {{else if (eq tab "collections")}}
-        {{#each requestsSorted as |collection|}}
+        {{#each model.collections as |collection|}}
           {{collection-feed-item collection=collection toggleModal="toggleModal"}}
         {{/each}}
       {{else if (eq tab "requests")}}
