@@ -7,17 +7,14 @@
     </section>
 
     <section class="card-user-section col m2">
-      {{#if source.shortName}}
-        {{#link-to 'user' source.userId.id}}
-          <img src={{source.userId.userProfile.avatar}} class="data-icon round-img">
-          <p>{{source.shortName}}</p>
-        {{/link-to}}
-      {{else}}
-        <a>
-          <img src="/assets/images/logo-repositive.png" class="data-icon round-img">
-          <p>A new data source</p>
-        </a>
-      {{/if}}
+      {{#link-to 'datasources.source' source.id}}
+        {{#if source.logo}}
+          <img src={{source.logo}} class="logo-img">
+        {{else}}
+          <img src="/assets/images/logos/xpressomics-logo.png" class="logo-img">
+        {{/if}}
+        <p>{{source.shortName}}</p>
+      {{/link-to}}
       <span class="helper-text">uploaded new data</span>
     </section>
 
