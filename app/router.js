@@ -90,7 +90,7 @@ Router.map(function() {
 });
 
 let pagesWithSideNavigation = ['datasets-search', 'datasources-source', 'collections-collection'];
-let landingPage = ['root'];
+// let landingPage = ['root']; // TODO re-apply this for new homepage
 
 Ember.Route.reopen({
   activate: function() {
@@ -100,16 +100,18 @@ Ember.Route.reopen({
       if (pagesWithSideNavigation.indexOf(cssClass) !== -1) {
         // Add the class here for all the pages with side navigation
         Ember.$('body').addClass('has-sidenav');
-      } else if (landingPage.indexOf(cssClass) !== -1) {
-        // Add the landing page class to home (makes background white)
-        Ember.$('body').addClass('landing-page');
       }
+       // TODO re-apply this for new homepage
+      // else if (landingPage.indexOf(cssClass) !== -1) {
+      //   // Add the landing page class to home (makes background white)
+      //   Ember.$('body').addClass('landing-page');
+      // }
     }
   },
   deactivate: function() {
     Ember.$('body').removeClass(this.toCssClass());
     Ember.$('body').removeClass('has-sidenav');
-    Ember.$('body').removeClass('landing-page');
+    // Ember.$('body').removeClass('landing-page'); // TODO re-apply this for new homepage
   },
   toCssClass: function() {
     return this.routeName.replace(/\./g, '-').dasherize();

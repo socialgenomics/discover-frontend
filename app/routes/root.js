@@ -29,7 +29,6 @@ export default Ember.Route.extend({
   },
 
   model: function() {
-    let self = this;
     if (this.get('session.isAuthenticated')) {
       //Get search data
       //Get trending datasets
@@ -44,8 +43,6 @@ export default Ember.Route.extend({
         ajax({ url: ENV.APIRoutes['datasets.trending'] , type: 'GET', headers: authHeaders }),
         this.store.query('request', {}),
         this.store.query('dataset', { user_registered: true }),
-        this.store.query('datasource', {}),
-        this.store.query('collection', {}),
         this.get('actionsService').loadFavourites()
       ])
       .then(data => {
@@ -54,39 +51,12 @@ export default Ember.Route.extend({
           return this.store.push(this.store.normalize('dataset', datasetObj));
         });
 
-        // Reduce the array of objects to single obj
-        function reducer(acc, curr) {
-          if (curr && !acc.find(id => id === curr)) {
-            acc.push(curr);
-          }
-          return acc;
-        }
-
-        function getProfiles(userGeneratedRecords) {
-          return Ember.RSVP.all(
-            userGeneratedRecords.get('content')
-            .map(m => m.record.get('userId').get('id'))
-            .reduce(reducer, [])
-            .map(userId => self.store.query('userProfile', {
-              'user_id': userId
-            }))
-          )
-        }
-
-        return Ember.RSVP.all([
-          getProfiles(data[2]),
-          getProfiles(data[3])
-        ])
-        .then(o => {
-          return {
-            stats: data[0],
-            datasets: trending,
-            requests: data[2],
-            registered: data[3],
-            datasources: data[4],
-            collections: data[5]
-          };
-        })
+        return {
+          stats: data[0],
+          datasets: trending,
+          requests: data[2],
+          registered: data[3]
+        };
       })
       .catch(err => {
         Ember.Logger.error(err);
