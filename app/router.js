@@ -101,7 +101,7 @@ Ember.Route.reopen({
         // Add the class here for all the pages with side navigation
         Ember.$('body').addClass('has-sidenav');
       }
-       // TODO re-apply this for new homepage
+      // TODO re-apply this for new homepage
       // else if (landingPage.indexOf(cssClass) !== -1) {
       //   // Add the landing page class to home (makes background white)
       //   Ember.$('body').addClass('landing-page');
