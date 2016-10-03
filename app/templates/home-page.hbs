@@ -31,7 +31,7 @@
           {{collection-feed-item collection=collection toggleModal="toggleModal"}}
         {{/each}}
       {{else if (eq tab "requests")}}
-        {{#each requestsSorted as |dataset|}}
+        {{#each model.requests as |dataset|}}
           {{request-feed-item dataset=dataset toggleModal="toggleModal"}}
         {{/each}}
       {{else if (eq tab "discussions")}}

@@ -1,19 +1,11 @@
 <main class="row contain">
-  {{#each model as |collection|}}
-    {{collection-meta-panel model=collection}}
+  {{collection-meta-panel model=model.collection datasets=model.datasets}}
 
-    <div class="content right">
-      <div class="col m11 offset-m1">
-        {{dataset-card}}
-        {{dataset-card}}
-        {{dataset-card}}
-        {{dataset-card}}
-        {{dataset-card}}
-        {{dataset-card}}
-        {{dataset-card}}
-        {{dataset-card}}
-        {{dataset-card}}
-      </div>
+  <div class="content right">
+    <div class="col m11 offset-m1">
+      {{#each model.datasets as |dataset|}}
+        {{dataset-card dataset=dataset action="toggleModal"}}
+      {{/each}}
     </div>
-  {{/each}}
+  </div>
 </main>
