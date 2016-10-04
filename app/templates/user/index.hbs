@@ -43,6 +43,25 @@
     </div>
 
     <div class="contain">
+      <!-- Favourites -->
+      <div class="col s12 m6 activity-card">
+        <div class="card favourited-data">
+          <div class="card-header card-title">
+            {{fa-icon "star"}}
+            <h4>Favourites</h4>
+          </div>
+          <div class="card-content">
+            {{#if actionsService.favouritedData}}
+              {{#each actionsService.favouritedData as |favourite|}}
+                {{mini-dataset dataset=favourite type=favourite.type isFavourite=true}}
+              {{/each}}
+            {{else}}
+              <p class="color-silver-chalice-text center-align">You don't have any favourites yet.</p>
+            {{/if}}
+          </div>
+        </div>
+      </div>
+
       <!-- data registrations -->
       <div class="col s12 m6 activity-card">
         <div class="card registered-data">
@@ -67,6 +86,7 @@
           </div>
         </div>
       </div>
+      
       <!--data requests-->
       <div class="col s12 m6 activity-card">
         <div class="card requested-data">
@@ -87,25 +107,6 @@
               {{else}}
                 <p class="color-silver-chalice-text center-align">This user has not made any requests for data from our community on REPOSITIVE.</p>
               {{/if}}
-            {{/if}}
-          </div>
-        </div>
-      </div>
-
-      <!-- Favourites -->
-      <div class="col s12 m6 activity-card">
-        <div class="card favourited-data">
-          <div class="card-header card-title">
-            {{fa-icon "star"}}
-            <h4>Favourites</h4>
-          </div>
-          <div class="card-content">
-            {{#if actionsService.favouritedData}}
-              {{#each actionsService.favouritedData as |favourite|}}
-                {{mini-dataset dataset=favourite type=favourite.type isFavourite=true}}
-              {{/each}}
-            {{else}}
-              <p class="color-silver-chalice-text center-align">You don't have any favourites yet.</p>
             {{/if}}
           </div>
         </div>
