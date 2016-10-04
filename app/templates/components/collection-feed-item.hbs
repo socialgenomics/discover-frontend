@@ -1,0 +1,31 @@
+<main class="col m12">
+  <div class="card dataset card-comp">
+
+    <section class="card-type-section col m2">
+      <img src="/assets/images/icons/icon-collection_2@2x.png" class="data-icon">
+      <p>Collection</p>
+    </section>
+
+    <section class="card-user-section col m2">
+      {{#if collection.userId.displayName}}
+        {{#link-to 'user' collection.userId.id}}
+          <img src={{collection.userId.userProfile.avatar}} class="data-icon round-img">
+          <p>{{collection.userId.displayName}}</p>
+        {{/link-to}}
+      {{else}}
+        <a>
+          <img src="/assets/images/logo-repositive.png" class="data-icon round-img">
+          <p>A Repositive user</p>
+        </a>
+      {{/if}}
+      <span class="helper-text">is looking for data</span>
+    </section>
+
+    <section class="card-content-section col m7">
+      {{#link-to 'collections.collection' collection.id classNames="data-title"}}
+        <h4 class="data-title">{{collection.properties.short_name}}</h4>
+      {{/link-to}}
+      <p class="markdown-text">{{markdown-to-html markdown=collection.description}}</p>
+    </section>
+  </div>
+</main>
