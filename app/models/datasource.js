@@ -6,7 +6,7 @@ export default DS.Model.extend({
   shortName: DS.attr('string'),
   description: DS.attr('string'),
   access: DS.attr('string'),
-  datasets: DS.hasMany('datasets'),
+  datasets: DS.hasMany('dataset'),
   createdAt: DS.attr('isodate'),
   updatedAt: DS.attr('isodate')
 });

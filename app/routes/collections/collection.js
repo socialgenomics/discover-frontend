@@ -6,15 +6,15 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     return this.store.findRecord('collection', params.id)
     .then(collection => {
       const collectionID = collection.get('id');
-      return new Ember.RSVP.all([
-        collection,
-        this.store.query('collection', { 'collection_id': collectionID })
-      ]);
+      return new Ember.RSVP.hash({
+        collection: collection,
+        datasets: this.store.query('dataset', { 'collection_id': collectionID })
+      });
     })
     .then(values => {
       return {
-        collection: values[0],
-        datasets: values[1]
+        collection: values.collection,
+        datasets: values.datasets
       };
     })
     .catch(err => {
