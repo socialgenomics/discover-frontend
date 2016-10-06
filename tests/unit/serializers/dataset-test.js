@@ -11,6 +11,7 @@ describeModel(
       'serializer:dataset',
       'model:actionable',
       'model:datasource',
+      'model:collection',
       'model:highlight',
       'model:user',
       'transform:isodate',
