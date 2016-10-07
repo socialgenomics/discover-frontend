@@ -16,7 +16,7 @@
 					{{/if}}
 				</div>
 			{{/unless}} -->
-			{{from-label model=dataset isRequest=true}}
+			{{from-label model=dataset isRequest=true isFavourite=isFavourite}}
 			<div class="card-footer">
 				{{stats-list stats=dataset.stats}}
 			</div>
@@ -57,7 +57,7 @@
 
 				</div>
 			{{/unless}} -->
-			{{from-label model=dataset}}
+			{{from-label model=dataset isFavourite=isFavourite}}
 			<div class="card-footer">
 				{{stats-list stats=dataset.stats access=dataset.access}}
 	    </div>

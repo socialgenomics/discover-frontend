@@ -1,5 +1,13 @@
-{{#if source.name}}
-  {{source.name}}
+{{#if isFavourite}}
+  {{#if source.name}}
+    {{source.name}}
+  {{else}}
+    {{source.short_name}}
+  {{/if}}
 {{else}}
-  {{source.properties.short_name}}
+  {{#if source.name}}
+    {{source.name}}
+  {{else}}
+    {{source.properties.short_name}}
+  {{/if}}
 {{/if}}
