@@ -1,13 +1,14 @@
+<!-- TODO when the data returned by the favourites query is the same structure as a dataset, this condition can be removed.  -->
 {{#if isFavourite}}
   {{#if isRequest}}
-    <span>Requested by </span>
+    <span class="descriptor">Requested by </span>
     {{#link-to 'user' model.user.id}}
       {{model.user.firstname}} {{model.user.lastname}}
     {{/link-to}}
   {{else if (eq model.datasourceId.properties.short_name "REPOSITIVE")}}
     <!-- Registration -->
 
-    <span>Registered by </span>
+    <span class="descriptor">Registered by </span>
     {{#link-to 'user' model.user.id class="user-name"}}
       {{model.user.firstname}} {{model.user.lastname}}
     {{/link-to}}
@@ -30,7 +31,7 @@
 
   {{#if isRequest}}
     {{#if model.userId.displayName}}
-      <span>Requested by </span>
+      <span class="descriptor">Requested by </span>
       {{#link-to 'user' model.userId.id}}
         {{model.userId.displayName}}
       {{/link-to}}
@@ -39,8 +40,8 @@
     <!-- Registration -->
 
     {{#if model.userId.displayName}}
-      <span>Registered by </span>
-      {{#link-to 'user' model.user.id}}
+      <span class="descriptor">Registered by </span>
+      {{#link-to 'user' model.userId.id}}
         {{model.userId.displayName}}
       {{/link-to}}
     {{/if}}
