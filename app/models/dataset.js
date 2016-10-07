@@ -12,7 +12,7 @@ export default Model.extend({
   assay: attr('string'),
   access: attr('string'),
   collections: hasMany('collection'),
-  datasourceId: belongsTo('datasource'),
+  datasourceId: belongsTo('collection', { inverse: 'datasets' }),
   actionableId: belongsTo('actionable', { inverse: 'dataset' }),
   highlights: belongsTo('highlight'),
   createdAt: attr('isodate'),
