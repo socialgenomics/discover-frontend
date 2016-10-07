@@ -3,7 +3,7 @@
 	{{#if (eq type "request")}}
 		<div class="title-details">
 			{{#link-to 'requests.detail' dataset.id}}<h5 class="data-title" alt="dataset title">{{truncate dataset.title 55}}</h5>{{/link-to}}
-			{{#unless hideSubmitter}}
+			<!-- {{#unless hideSubmitter}}
 				<div class="submitted">
 					{{#if isFavourite}}
 						<h6>Requested by
@@ -15,7 +15,8 @@
 						</h6>
 					{{/if}}
 				</div>
-			{{/unless}}
+			{{/unless}} -->
+			{{from-label model=dataset isRequest=true}}
 			<div class="card-footer">
 				{{stats-list stats=dataset.stats}}
 			</div>
@@ -24,11 +25,9 @@
 
 		<div class="title-details">
 	    {{#link-to 'datasets.detail' dataset.id}}<h5 class="data-title" alt="dataset title">{{truncate dataset.title 55}}</h5>{{/link-to}}
-			{{#unless hideSubmitter}}
+			<!-- {{#unless hideSubmitter}}
 				<div class="submitted">
 
-					<!-- If shortname = repositive -> show "Requested by user"-->
-					<!-- else show "from datasource" -->
 					{{#if isFavourite}}
 						{{#if (eq dataset.datasource.short_name "REPOSITIVE")}}
 							<h6>Registered by
@@ -57,7 +56,8 @@
 
 
 				</div>
-			{{/unless}}
+			{{/unless}} -->
+			{{from-label model=dataset}}
 			<div class="card-footer">
 				{{stats-list stats=dataset.stats access=dataset.access}}
 	    </div>

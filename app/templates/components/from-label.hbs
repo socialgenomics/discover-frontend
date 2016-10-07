@@ -1,0 +1,37 @@
+{{#if isRequest}}
+  {{#if isFavourite}}
+    <span>Requested by </span>
+    {{#link-to 'user' model.user.id}}
+      {{model.user.firstname}} {{model.user.lastname}}
+    {{/link-to}}
+  {{else}}
+    {{#if model.userId.displayName}}
+      <span>Requested by </span>
+      {{#link-to 'user' model.userId.id}}
+        {{model.userId.displayName}}
+      {{/link-to}}
+    {{/if}}
+  {{/if}}
+
+{{else if (eq model.datasourceId.properties.short_name "REPOSITIVE")}}
+  <!-- Registration -->
+  {{#if model.userId.displayName}}
+    <span>Registered by </span>
+    {{#link-to 'user' model.user.id}}
+      {{model.userId.displayName}}
+    {{/link-to}}
+  {{/if}}
+
+{{else}}
+  <!-- Regular Dataset-->
+  <span class="descriptor">from</span>
+  {{#if searchRoute}}
+    {{#link-to 'datasets.search' (query-params datasource=model.datasourceId.properties.short_name) }}
+      {{datasource-name source=model.datasourceId}}
+    {{/link-to}}
+  {{else}}
+    {{#link-to 'datasets.search' (query-params q="" datasource=model.datasourceId.properties.short_name) }}
+      {{datasource-name source=model.datasourceId}}
+    {{/link-to}}
+  {{/if}}
+{{/if}}

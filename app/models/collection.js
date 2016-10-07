@@ -7,6 +7,7 @@ export default Model.extend({
   description: attr('string'),
   properties: attr('object'),
   type: attr('string'),
+  owns: hasMany('dataset'),
   datasets: hasMany('dataset'),
   createdAt: attr('isodate'),
   updatedAt: attr('isodate')
