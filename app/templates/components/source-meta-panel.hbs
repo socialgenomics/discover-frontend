@@ -3,31 +3,32 @@
     {{#link-to 'root' class="left-align"}}
       {{fa-icon "chevron-left"}}
     {{/link-to}}
-
     <img src="/assets/images/icons/icon-datasource-white@2x.png" class="data-icon">
     <h5>Data Source</h5>
-
-    <!-- {{action-favourite dataset=dataset action="toggleModal"}}
-    {{action-share action="toggleModal"}} -->
   </header>
 
-  <ul class="tabs">
+  <!-- <ul class="tabs">
     <a {{action "showInfo"}}>
       <li class="tab {{if displayInfo "active-tab"}}"><h5>More Information</h5></li>
     </a>
     <a {{action "showFilters"}}>
       <li class="tab {{unless displayInfo "active-tab"}}"><h5>Filters</h5></li>
     </a>
-  </ul>
+  </ul> -->
 
   {{#if displayInfo}}
     <main>
-      <h3>{{model.shortName}}</h3>
+      {{#if model.name}}
+        <h3>{{model.name}}</h3>
+      {{else}}
+        <h3>{{model.properties.short_name}}</h3>
+      {{/if}}
       <span class="helper-text">created by </span>
       <span>{{#link-to 'user' model.owner.id}}Repositive{{/link-to}}</span>
 
       <div class="divider"></div>
 
+      <!-- TODO turn these into components -->
       <section class="stats-numbers">
         <div class="stats-number">
           <span class="data-num">{{model.sourcesNo}} 125</span>
@@ -42,16 +43,15 @@
             <span class="data-num">{{fa-icon "lock"}}</span>
             <p>Restricted</p>
           {{else}}
-            <!-- temp until new models -->
             <span class="data-num">{{fa-icon "globe"}}</span>
             <p>Open Access</p>
           {{/if}}
         </div>
 
-        <div class="stats-number">
+        <!-- <div class="stats-number">
           <span class="data-num">{{fa-icon "map-marker"}}</span>
           <p>China</p>
-        </div>
+        </div> -->
       </section>
 
       {{#if model.description}}
@@ -63,12 +63,6 @@
         <div class="divider"></div>
         <img src="{{model.image}}" class="logo-img">
       {{/if}}
-
-      <!-- Dummy desctiption and image section until models -->
-      <div class="divider"></div>
-      <p>ArrayExpress is a new public database of microarray gene expression data at the EBI, which is a generic gene expression database designed to hold data from all microarray platforms.</p>
-      <div class="divider"></div>
-      <img src="/assets/images/logos/xpressomics-logo.png" class="logo-img">
     </main>
 
   {{else}}
