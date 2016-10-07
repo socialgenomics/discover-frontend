@@ -8,8 +8,9 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
       const collectionID = collection.get('id');
       return new Ember.RSVP.hash({
         collection: collection,
-        //This would not work as there are multiple collection ids associated with each dataset
-        datasets: this.store.query('dataset', { 'collection_id': collectionID })
+        datasets: this.store.query('dataset', {
+          'datasource_id': collectionID
+        })
       });
     })
     .then(values => {
