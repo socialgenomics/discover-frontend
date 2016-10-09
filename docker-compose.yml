@@ -10,10 +10,8 @@ services:
     volumes:
       - .:/opt
       - ~/.ssh:/root/.ssh
-      - /opt/bower_components
-      - /opt/node_modules
     environment:
-      BACKEND_SERVER: http://api:3000
+      BACKEND_SERVER: http://backend:3000
     networks:
       - api
 networks:
