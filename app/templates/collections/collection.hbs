@@ -1,8 +1,8 @@
 <main class="row contain">
   {{collection-meta-panel model=model.collection datasets=model.datasets}}
 
-  <div class="content right">
-    <div class="col m11 offset-m1">
+  <div class="content push-right">
+    <div class="col m12">
       {{#each model.datasets as |dataset|}}
         {{dataset-card dataset=dataset action="toggleModal"}}
       {{/each}}
