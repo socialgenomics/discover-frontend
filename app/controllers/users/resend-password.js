@@ -51,12 +51,11 @@ export default Ember.Controller.extend(
       })
       .catch(err => {
         Ember.Logger.error(err);
-        if (err.errorThrown === 'Not Found') {
+        if (err.errorThrown === 'Not Found' || err.errorThrown === 'Bad Request') {
           this.flashMessages.add({
             message: 'We could not send an email to ' + this.get('email') + '. Please check you\'ve entered the correct email.',
             type: 'warning',
             timeout: 7000,
-            sticky: true,
             class: 'fadeIn'
           })
           .then(() => {
