@@ -43,7 +43,6 @@ export default Ember.Controller.extend(
           message: 'We have sent an email to ' + this.get('email'),
           type: 'info',
           timeout: 7000,
-          sticky: true,
           class: 'fadeIn'
         })
         .then(() => {
