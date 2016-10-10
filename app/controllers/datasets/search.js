@@ -11,7 +11,6 @@ export default Ember.Controller.extend(
   assay: null,
   datasource: null,
   access: null,
-  resultsPerPage: 9,
   modelLoadingDidChange: function() {
     if (!this.get('model.isLoading')) {
       // The view subscribes to this function
@@ -25,13 +24,13 @@ export default Ember.Controller.extend(
 
   actions: {
     previousPage() {
-      const resultsPerPage = this.get('resultsPerPage');
+      const resultsPerPage = this.get('model.resultsPerPage');
       this.set('model.isLoading', true);
       this.get('model.datasets').clear();
       this.get('model').updateOffset(resultsPerPage, 'decrement');
     },
     nextPage() {
-      const resultsPerPage = this.get('resultsPerPage');
+      const resultsPerPage = this.get('model.resultsPerPage');
       this.set('model.isLoading', true);
       this.get('model.datasets').clear();
       this.get('model').updateOffset(resultsPerPage, 'increment');

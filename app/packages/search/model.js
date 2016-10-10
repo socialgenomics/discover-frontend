@@ -17,6 +17,7 @@ export default DS.Model.extend({
   filters: null,
   isLoading: true,
   isError: false,
+  resultsPerPage: 9,
 
   initialise: function() {
     if (Ember.isEmpty(this.get('queryParams'))) {
@@ -136,7 +137,7 @@ export default DS.Model.extend({
       'index': 'datasets',
       'type': 'dataset',
       'from': this.get('offset'),
-      'size': 9,
+      'size': this.get('resultsPerPage'),
       'body': {
         'highlight': {
           'fields': {
