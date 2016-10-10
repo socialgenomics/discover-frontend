@@ -62,6 +62,7 @@
       </div>
       {{#if (gt model.meta.total 0)}}
         {{pagination-bar
+          resultsPerPage=resultsPerPage
           totalResults=model.meta.total
           currentOffset=model.offset
           nextPage=(action 'nextPage')

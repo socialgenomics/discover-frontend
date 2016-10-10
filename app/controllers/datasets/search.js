@@ -11,7 +11,7 @@ export default Ember.Controller.extend(
   assay: null,
   datasource: null,
   access: null,
-
+  resultsPerPage: 9,
   modelLoadingDidChange: function() {
     if (!this.get('model.isLoading')) {
       // The view subscribes to this function

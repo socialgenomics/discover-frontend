@@ -1,7 +1,6 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  resultsPerPage: 9,
   totalPages: Ember.computed('totalResults', 'resultsPerPage', function() {
     const resultsPerPage = this.get('resultsPerPage');
     const totalResults = this.get('totalResults');
