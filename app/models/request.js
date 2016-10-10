@@ -1,11 +1,13 @@
-import DS from 'ember-data';
+import Model from 'ember-data/model';
+import attr from 'ember-data/attr';
+import { belongsTo } from 'ember-data/relationships';
 
-export default DS.Model.extend({
-  userId: DS.belongsTo('user'),
-  title: DS.attr('string'),
-  description: DS.attr('string'),
-  actionableId: DS.belongsTo('actionable', { inverse: 'request' }),
-  stats: DS.attr('object'),
-  createdAt: DS.attr('isodate'),
-  updatedAt: DS.attr('isodate')
+export default Model.extend({
+  userId: belongsTo('user'),
+  title: attr('string'),
+  description: attr('string'),
+  actionableId: belongsTo('actionable', { inverse: 'request' }),
+  stats: attr('object'),
+  createdAt: attr('isodate'),
+  updatedAt: attr('isodate')
 });

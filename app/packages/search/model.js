@@ -1,18 +1,20 @@
-import DS from 'ember-data';
+import Ember from 'ember';
+import Model from 'ember-data/model';
+import attr from 'ember-data/attr';
+import { belongsTo, hasMany } from 'ember-data/relationships';
 import ajax from 'ic-ajax';
 import ENV from 'repositive/config/environment';
 import Agg from './aggregation';
 import Filter from './filter';
-import Ember from 'ember';
 
-export default DS.Model.extend({
-  user: DS.belongsTo('user'),
-  datasets: DS.hasMany('dataset'),
-  queryParams: DS.attr('object'),
-  query: DS.attr('string'),
-  meta: DS.attr('object'),
-  ordering: DS.attr('boolean'),
-  offset: DS.attr('number', { defaultValue: 0 }),
+export default Model.extend({
+  user: belongsTo('user'),
+  datasets: hasMany('dataset'),
+  queryParams: attr('object'),
+  query: attr('string'),
+  meta: attr('object'),
+  ordering: attr('boolean'),
+  offset: attr('number', { defaultValue: 0 }),
   aggs: null,
   filters: null,
   isLoading: true,
@@ -141,7 +143,6 @@ export default DS.Model.extend({
       'body': {
         'highlight': {
           'fields': {
-            // 'title': {},
             'description': {}
           },
           'require_field_match': false,
