@@ -24,7 +24,7 @@
         <h3>{{model.properties.short_name}}</h3>
       {{/if}}
       <span class="helper-text">created by </span>
-      <span>{{#link-to 'user' model.owner.id}}Repositive{{/link-to}}</span>
+      <span>{{#link-to 'user' model.userId.id}}{{model.userId.displayName}}{{/link-to}}</span>
 
       <div class="divider"></div>
 
