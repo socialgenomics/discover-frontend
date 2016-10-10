@@ -10,7 +10,6 @@ describeModel(
     needs: [
       'serializer:dataset',
       'model:actionable',
-      'model:datasource',
       'model:collection',
       'model:highlight',
       'model:user',
