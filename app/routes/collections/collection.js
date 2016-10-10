@@ -10,6 +10,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         collection: collection,
         datasets: this.store.query('dataset', {
           'datasource_id': collectionID
+          // 'offset': 0,
+          // 'limit': 9
         })
       });
     })
