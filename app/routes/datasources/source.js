@@ -9,7 +9,9 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
       return new Ember.RSVP.hash({
         source: source,
         datasets: this.store.query('dataset', {
-           'datasource_id': sourceId
+           'where.datasource_id': sourceId,
+           'offset': 0,
+           'limit': 9
          })
       });
     })
