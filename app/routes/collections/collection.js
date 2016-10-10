@@ -15,12 +15,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         })
       });
     })
-    .then(values => {
-      return {
-        collection: values.collection,
-        datasets: values.datasets
-      };
-    })
     .catch(err => {
       Ember.Logger.error(err);
     });
