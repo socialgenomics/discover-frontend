@@ -136,7 +136,7 @@ export default DS.Model.extend({
       'index': 'datasets',
       'type': 'dataset',
       'from': this.get('offset'),
-      'size': 30,
+      'size': 9,
       'body': {
         'highlight': {
           'fields': {
