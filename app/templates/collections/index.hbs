@@ -1,6 +1,10 @@
-<div class="row">
-  <h1>Collections</h1>
-  {{#each model as |collection|}}
-    {{collection-feed-item collection=collection toggleModal="toggleModal"}}
-  {{/each}}
-</div>
+<main class="row">
+  <div class="col m12">
+    <header class="center-align">
+      <h1>Collections</h1>
+    </header>
+    {{#each model as |collection|}}
+      {{collection-feed-item collection=collection toggleModal="toggleModal"}}
+    {{/each}}
+  </div>
+</main>
