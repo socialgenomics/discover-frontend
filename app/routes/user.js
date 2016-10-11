@@ -10,15 +10,16 @@ export default Ember.Route.extend({
       return this.store.findRecord('user', params.id)
       .then(user => {
         const userId = user.get('id');
+        // TODO: The majority of this info can be cached and retrieved from the same session instead of doing unnecesary calls. 
         return new Ember.RSVP.hash({
           user: user,
-          user_profile: this.store.query('userProfile', { 'user_id': userId }),
-          registrations: this.store.query('dataset', { 'user_id': userId }),
-          requests: this.store.query('request', { 'user_id': userId }),
-          user_credential: this.store.query('credential', { 'user_id': userId }),
+          user_profile: this.store.query('userProfile', { 'where.user_id': userId }),
+          registrations: this.store.query('dataset', { 'where.user_id': userId }),
+          requests: this.store.query('request', { 'where.user_id': userId }),
+          user_credential: this.store.query('credential', { 'where.user_id': userId }),
           user_favourites: this.get('actionsService').loadFavourites(),
           favourited_data: this.get('actionsService').getFavouritedData(params.id),
-          user_comments: this.store.query('action', { user_id: userId, type: 'comment' })
+          user_comments: this.store.query('action', { 'where.user_id': userId, 'where.type': 'comment' })
         });
       })
       .then(values => {
