@@ -41,7 +41,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
   model: function() {
     let userId = this.get('session.session.authenticated.user.id');
-    return this.store.query('credential', { 'user_id': userId }).then((credentials) => {
+    return this.store.query('credential', { 'where.user_id': userId }).then((credentials) => {
       return {
         is_verified: isVerified(credentials),
         main_credential: mainCredential(credentials)
