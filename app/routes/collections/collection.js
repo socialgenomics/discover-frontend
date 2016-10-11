@@ -28,6 +28,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     });
   },
   setupController(controller, models) {
+    this._super(controller, models);
     controller.set('collectionStats', models.collectionStats);
   }
 });
