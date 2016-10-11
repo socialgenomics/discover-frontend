@@ -25,14 +25,8 @@
             </div>
           {{/link-to}}
         {{/if}}
-        <h6>
-          {{#if dataset.userId.displayName}}
-            <span>Requested by </span>
-            {{#link-to 'user' dataset.user.id}}
-              {{dataset.userId.displayName}}
-            {{/link-to}}
-          {{/if}}
-        </h6>
+
+        {{from-label model=dataset searchRoute=searchRoute isRequest=true}}
 
         <div class="line-limit-desc">
           <div class="ellipsis sub-grey markdown-text">
@@ -89,28 +83,7 @@
             </div>
           {{/link-to}}
         {{/if}}
-        <h6>
-          {{#if dataset.datasourceId.shortName}}
-            <span>from</span>
-            <!-- HACK #380 -->
-            {{#if searchRoute}}
-              {{#link-to 'datasets.search' (query-params datasource=dataset.datasourceId.shortName) }}
-                {{dataset.datasourceId.shortName}}
-              {{/link-to}}
-            {{else}}
-              {{#link-to 'datasets.search' (query-params q="" datasource=dataset.datasourceId.shortName) }}
-                {{dataset.datasourceId.shortName}}
-              {{/link-to}}
-            {{/if}}
-          {{/if}}
-          {{#if dataset.userId.displayName}}
-            <span>by</span>
-            {{#link-to 'user' dataset.userId.id}}
-              {{dataset.userId.displayName}}
-            {{/link-to}}
-          {{/if}}
-        </h6>
-
+        {{from-label model=dataset searchRoute=searchRoute}}
         <div class="line-limit-desc">
           <div class="ellipsis sub-grey markdown-text">
             {{#if dataset.highlights.description}}

@@ -5,24 +5,17 @@
       <img src="/assets/images/icons/icon-datasource@2x.png" class="data-icon">
       <p>Data Source</p>
     </section>
-
-    <section class="card-user-section col m2">
-      {{#link-to 'datasources.source' source.id}}
-        {{#if source.logo}}
-          <img src={{source.logo}} class="logo-img">
-        {{else}}
-          <img src="/assets/images/logos/xpressomics-logo.png" class="logo-img">
-        {{/if}}
-        <p>{{source.shortName}}</p>
-      {{/link-to}}
-      <span class="helper-text">uploaded new data</span>
-    </section>
-
     <section class="card-content-section col m7">
       {{#link-to 'datasources.source' source.id classNames="data-title"}}
-        <h4 class="data-title">{{source.shortName}}</h4>
+        {{#if source.name}}
+          <h4 class="data-title">{{source.name}}</h4>
+        {{else}}
+          <h4 class="data-title">{{source.properties.short_name}}</h4>
+        {{/if}}
       {{/link-to}}
-      <p class="markdown-text">{{markdown-to-html markdown=source.description}}</p>
+      {{#if source.description}}
+        <p class="markdown-text">{{markdown-to-html markdown=source.description}}</p>
+      {{/if}}
     </section>
 
   </div>

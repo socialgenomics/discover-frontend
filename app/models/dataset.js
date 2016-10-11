@@ -1,23 +1,26 @@
-import DS from 'ember-data';
 import Ember from 'ember';
+import Model from 'ember-data/model';
+import attr from 'ember-data/attr';
+import { belongsTo, hasMany } from 'ember-data/relationships';
 
-export default DS.Model.extend({
-  userId: DS.belongsTo('user'),
-  title: DS.attr('string'),
-  description: DS.attr('string'),
-  url: DS.attr('string'),
-  tech: DS.attr('string'),
-  assay: DS.attr('string'),
-  access: DS.attr('string'),
-  datasourceId: DS.belongsTo('datasource'),
-  actionableId: DS.belongsTo('actionable', { inverse: 'dataset' }),
-  highlights: DS.belongsTo('highlight'),
-  createdAt: DS.attr('isodate'),
-  updatedAt: DS.attr('isodate'),
-  stats: DS.attr('object'),
-  externalId: DS.attr('string'),
+export default Model.extend({
+  userId: belongsTo('user'),
+  title: attr('string'),
+  description: attr('string'),
+  url: attr('string'),
+  tech: attr('string'),
+  assay: attr('string'),
+  access: attr('string'),
+  collections: hasMany('collection', { inverse: 'datasets' }),
+  datasourceId: belongsTo('collection', { inverse: 'owns' }),
+  actionableId: belongsTo('actionable', { inverse: 'dataset' }),
+  highlights: belongsTo('highlight'),
+  createdAt: attr('isodate'),
+  updatedAt: attr('isodate'),
+  stats: attr('object'),
+  externalId: attr('string'),
   accession: Ember.computed('externalId', function() {
     return this.get('externalId');
   }),
-  colour: DS.attr('string')
+  colour: attr('string')
 });

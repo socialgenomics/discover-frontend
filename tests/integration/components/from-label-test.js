@@ -7,8 +7,8 @@ import {
 import hbs from 'htmlbars-inline-precompile';
 
 describeComponent(
-  'pagination-bar',
-  'Integration: PaginationBarComponent',
+  'from-label',
+  'Integration: FromLabelComponent',
   {
     integration: true
   },
@@ -16,15 +16,15 @@ describeComponent(
     it('renders', function() {
       // Set any properties with this.set('myProperty', 'value');
       // Handle any actions with this.on('myAction', function(val) { ... });
+      // Template block usage:
+      // this.render(hbs`
+      //   {{#from-label}}
+      //     template content
+      //   {{/from-label}}
+      // `);
 
-      this.render(hbs`{{pagination-bar}}`);
+      this.render(hbs`{{from-label}}`);
       expect(this.$()).to.have.length(1);
-    });
-
-    it('adds class disabled to previous button on first page', function() {
-    });
-
-    it('adds class disabled to next button when there are no pages left to load', function() {
     });
   }
 );

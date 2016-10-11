@@ -51,6 +51,8 @@ module.exports = function(environment) {
           'users.logout' : '/auth/logout',
           'users.signup' : '/auth/register',
           'datasets.search' : '/search',
+          'collection-stats': '/collection-stats/{collection_id}',
+          'stats': '/stats',
           'datasets.trending' : '/trending',
           'datasources' : '/datasources',
           'favourite-datasets' : '/favourites/{user_id}/dataset',
@@ -197,8 +199,8 @@ module.exports = function(environment) {
 
     if (environment === 'staging') {
       ENV.APP.INSPECTLET_WID = 1989736952;
-      ENV.torii.providers['google-oauth2'].redirectUri = 'https://frontend-staging.repositive.io';
-      ENV.torii.providers['linked-in-oauth2'].redirectUri = 'https://frontend-staging.repositive.io';
+      ENV.torii.providers['google-oauth2'].redirectUri = 'https://discover-staging.repositive.io';
+      ENV.torii.providers['linked-in-oauth2'].redirectUri = 'https://discover-staging.repositive.io';
     }
 
     if (environment === 'production') {
