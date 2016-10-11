@@ -68,20 +68,5 @@ export default Service.extend({
     .catch(err => {
       Ember.Logger.error(err);
     });
-  },
-  //TODO Move to delete-tag component and rename service to favourites
-  deleteTag(tag) {
-    tag.destroyRecord()
-    .then(() => {
-      this.get('flashMessages').add({
-        message: 'Tag successfully deleted.',
-        type: 'success',
-        timeout: 7000,
-        class: 'fadeInOut'
-      });
-    })
-    .catch(err => {
-      Ember.Logger.error(err);
-    });
   }
 });
