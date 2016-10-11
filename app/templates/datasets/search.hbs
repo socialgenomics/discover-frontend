@@ -61,26 +61,13 @@
         {{/if}}
       </div>
       {{#if (gt model.meta.total 0)}}
-        <p>Total pages: {{totalPages}}</p>
-        <p>Current page: {{currentPageNumber}}</p>
-        <ul class="pagination">
-          {{#if (eq currentPageNumber 1)}}
-            <button class="btn disabled">Previous</button>
-          {{else}}
-            <button class="btn" {{action "previousPage"}}>Previous</button>
-          {{/if}}
-
-            <!-- <li class="active"><a {{action "changePage" 1}}>1</a></li>
-            <li class="waves-effect"><a {{action "changePage" 2}}>2</a></li>
-            <li class="waves-effect"><a {{action "changePage" 3}}>3</a></li>
-            <li class="waves-effect"><a {{action "changePage" 4}}>4</a></li>
-            <li class="waves-effect"><a {{action "changePage" 5}}>5</a></li> -->
-          {{#if (gte currentPageNumber totalPages)}}
-            <button class="btn disabled">Next</button>
-          {{else}}
-            <button class="btn" {{action "nextPage"}}>Next</button>
-          {{/if}}
-        </ul>
+        {{pagination-bar
+          resultsPerPage=model.resultsPerPage
+          totalResults=model.meta.total
+          currentOffset=model.offset
+          nextPage=(action 'nextPage')
+          previousPage=(action 'previousPage')
+        }}
       {{/if}}
     {{/if}}
   {{/if}}
