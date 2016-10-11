@@ -55,7 +55,6 @@ export default Ember.Controller.extend(
           message: 'Passwords do not match.',
           type: 'warning',
           timeout: 7000,
-          sticky: true,
           class: 'fadeIn'
         });
       } else {

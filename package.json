@@ -71,6 +71,7 @@
     "ember-disable-proxy-controllers": "^1.0.1",
     "ember-export-application-global": "1.0.5",
     "ember-fr-markdown-file": "0.0.0",
+    "ember-link-action": "0.0.35",
     "ember-metrics": "0.5.3",
     "ember-modal-dialog": "0.8.8",
     "ember-moment": "^6.0.0",
