@@ -31,22 +31,20 @@
       <!-- TODO turn these into components -->
       <section class="stats-numbers">
         <div class="stats-number">
-          <span class="data-num">{{model.sourcesNo}} 125</span>
-          <p>Sources</p>
+          <span class="data-num">{{collectionStats.datasets}}</span>
+          <p>Datasets</p>
         </div>
-
-        <div class="stats-number">
-          {{#if (eq model.access "open")}}
-            <span class="data-num">{{fa-icon "globe"}}</span>
-            <p>Open Access</p>
-          {{else if (eq model.access "restricted")}}
-            <span class="data-num">{{fa-icon "lock"}}</span>
-            <p>Restricted</p>
-          {{else}}
-            <span class="data-num">{{fa-icon "globe"}}</span>
-            <p>Open Access</p>
-          {{/if}}
-        </div>
+        {{#if model.properties.access}}
+          <div class="stats-number">
+            {{#if (eq model.properties.access "open")}}
+              <span class="data-num">{{fa-icon "globe"}}</span>
+              <p>Open Access</p>
+            {{else if (eq model.properties.access "restricted")}}
+              <span class="data-num">{{fa-icon "lock"}}</span>
+              <p>Restricted</p>
+            {{/if}}
+          </div>
+        {{/if}}
 
         <!-- <div class="stats-number">
           <span class="data-num">{{fa-icon "map-marker"}}</span>
