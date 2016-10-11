@@ -27,7 +27,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
       Ember.Logger.error(err);
     });
   },
-  setupController(controller, models){
+  setupController(controller, models) {
     controller.set('collectionStats', models.collectionStats);
   }
 });
