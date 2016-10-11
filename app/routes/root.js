@@ -39,7 +39,7 @@ export default Ember.Route.extend({
       };
 
       return Ember.RSVP.all([
-        ajax({ url: ENV.APIRoutes['datasets.search'] , type: 'GET', headers: authHeaders }),
+        ajax({ url: ENV.APIRoutes['stats'] , type: 'GET', headers: authHeaders }),
         ajax({ url: ENV.APIRoutes['datasets.trending'] , type: 'GET', headers: authHeaders }),
         this.store.query('request', {}),
         this.store.query('dataset', { user_registered: true }),
@@ -63,7 +63,7 @@ export default Ember.Route.extend({
         throw err;
       });
     } else {
-      return ajax({ url: ENV.APIRoutes['datasets.search'] , type: 'GET' })
+      return ajax({ url: ENV.APIRoutes['stats'] , type: 'GET' })
       .then(stat => {
         return { stats: stat };
       });

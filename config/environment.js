@@ -51,6 +51,7 @@ module.exports = function(environment) {
           'users.logout' : '/auth/logout',
           'users.signup' : '/auth/register',
           'datasets.search' : '/search',
+          'stats': '/stats',
           'datasets.trending' : '/trending',
           'datasources' : '/datasources',
           'favourite-datasets' : '/favourites/{user_id}/dataset',
