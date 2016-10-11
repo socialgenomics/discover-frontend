@@ -1,6 +1,6 @@
 <section class="metadata-panel">
   <header>
-    {{#link-to 'root' class="left-align"}}
+    {{#link-to 'collections' class="left-align"}}
       {{fa-icon "chevron-left"}}
     {{/link-to}}
 
@@ -11,37 +11,40 @@
     {{action-share action="toggleModal"}} -->
   </header>
 
-  <ul class="tabs">
+  <!-- <ul class="tabs">
     <a {{action "showInfo"}}>
       <li class="tab {{if displayInfo "active-tab"}}"><h5>More Information</h5></li>
     </a>
     <a {{action "showFilters"}}>
       <li class="tab {{unless displayInfo "active-tab"}}"><h5>Filters</h5></li>
     </a>
-  </ul>
+  </ul> -->
 
   <main>
     {{#if displayInfo}}
-      <h3>{{model.properties.short_name}}</h3>
+      {{#if model.name}}
+        <h3>{{model.name}}</h3>
+      {{else}}
+        <h3>{{model.properties.short_name}}</h3>
+      {{/if}}
       <span class="helper-text">created by </span>
-      <span>{{#link-to 'user' model.owner.id}}Repositive{{/link-to}}</span>
+      <span>{{#link-to 'user' model.userId.id}}{{model.userId.displayName}}{{/link-to}}</span>
 
       <div class="divider"></div>
 
       <section class="stats-numbers">
         <div class="stats-number">
-          <span class="data-num">{{model.datasetsNo}}</span>
+          <span class="data-num">{{collectionStats.datasets}}</span>
           <p>Datasets</p>
         </div>
 
         <div class="stats-number">
-          <span class="data-num">{{model.sourcesNo}}</span>
+          <span class="data-num">{{collectionStats.datasources}}</span>
           <p>Sources</p>
         </div>
       </section>
 
       <div class="divider"></div>
-
       {{#if model.description}}
         <p>{{model.description}}</p>
       {{/if}}

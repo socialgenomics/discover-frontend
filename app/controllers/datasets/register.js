@@ -30,16 +30,16 @@ export default Ember.Controller.extend(
   isInvalid: Ember.computed.not('isValid'),
   actions: {
     addDataset: function() {
+      const userModel = this.get('session.authenticatedUser');
       if (this.get('isValid')) {
         this.set('loading', true);
-        this.store.findRecord('datasource', 'REPOSITIVE')
-        .then(datasourceModel => {
-          const userModel = this.get('session.authenticatedUser');
+        this.store.findRecord('collection', userModel.id)
+        .then(collectionModel => {
           return this.store.createRecord('dataset', {
             title: this.title,
             description: this.description,
             url: this.url,
-            datasourceId: datasourceModel,
+            datasourceId: collectionModel,
             externalId: userModel.id + Date.now(),
             userId: userModel
           });
