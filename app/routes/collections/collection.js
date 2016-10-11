@@ -15,7 +15,11 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
       const collectionId = collection.get('id');
       return new Ember.RSVP.hash({
         collection: collection,
-        collectionStats: ajax({ url: ENV.APIRoutes['collection-stats'].replace('{collection_id}', collectionId) , type: 'GET', headers: authHeaders }),
+        collectionStats: ajax({
+          url: ENV.APIRoutes['collection-stats'].replace('{collection_id}', collectionId),
+          type: 'GET',
+          headers: authHeaders
+        }),
         datasets: this.store.query('dataset', {
           'where.datasource_id': collectionId,
           'offset': 0,
