@@ -14,7 +14,7 @@ export default SessionService.extend({
       } else {
         let userId = userData.id;
         let profileId = userData.user_profile.id;
-        let settingsId = userData.user_settings.id;
+        let settingsId = userData.user_setting.id;
 
         this.get('metrics').identify({
           email: userData.credentials[0].email,
