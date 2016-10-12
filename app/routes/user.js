@@ -10,7 +10,7 @@ export default Ember.Route.extend({
       return this.store.findRecord('user', params.id)
       .then(user => {
         const userId = user.get('id');
-        // TODO: The majority of this info can be cached and retrieved from the same session instead of doing unnecesary calls. 
+        // TODO: The majority of this info can be cached and retrieved from the same session instead of doing unnecesary calls.
         return new Ember.RSVP.hash({
           user: user,
           user_profile: this.store.query('userProfile', { 'where.user_id': userId }),
