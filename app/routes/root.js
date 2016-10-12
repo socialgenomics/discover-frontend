@@ -41,7 +41,7 @@ export default Ember.Route.extend({
       return Ember.RSVP.all([
         ajax({ url: ENV.APIRoutes['stats'] , type: 'GET', headers: authHeaders }),
         ajax({ url: ENV.APIRoutes['datasets.trending'] , type: 'GET', headers: authHeaders }),
-        this.store.query('request', {'order[0][0]': 'updated_at', 'order[0][1]': 'DESC'}),
+        this.store.query('request', { 'order[0][0]': 'updated_at', 'order[0][1]': 'DESC' }),
         this.store.query('dataset', { 'where.user_id.$ne': 'null', 'order[0][0]': 'updated_at', 'order[0][1]': 'DESC' }),
         this.get('actionsService').loadFavourites()
       ])
