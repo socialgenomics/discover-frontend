@@ -10,7 +10,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     .then(user => {
       return new Ember.RSVP.all([
         user,
-        this.store.query('userSetting', { user_id: user.get('id') })
+        this.store.query('userSetting', { 'where.user_id': user.get('id') })
       ]);
     })
     .then(values => {
