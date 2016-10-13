@@ -2,7 +2,6 @@ import Ember from 'ember';
 
 export function roughEstimate(value) {
   // Get digits
-  // let digits = Math.floor(Math.log10(value)) + 1;
   let digits = Math.floor(log10(value)) + 1;
   // Only start at 1k
   if (digits > 3) {
