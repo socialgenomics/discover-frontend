@@ -27,6 +27,9 @@
             {{#link-to 'datasources'}}
               <h3>Data Sources {{stats.datasources}}</h3>
             {{/link-to}}
+            {{#each featuredDatasources as |datasource|}}
+              <h4>{{datasource.name}}</h4>
+            {{/each}}
           </div>
         </div>
       </section>

@@ -43,7 +43,8 @@ export default Ember.Route.extend({
         ajax({ url: ENV.APIRoutes['datasets.trending'] , type: 'GET', headers: authHeaders }),
         this.store.query('request', { 'order[0][0]': 'updated_at', 'order[0][1]': 'DESC' }),
         this.store.query('dataset', { 'where.user_id.$ne': 'null', 'order[0][0]': 'updated_at', 'order[0][1]': 'DESC' }),
-        this.store.query('collection', { 'where.type': 'repositive_collection', 'order[0][0]': 'updated_at', 'order[0][1]': 'limit', '3': 'DESC' }),
+        this.store.query('collection', { 'where.type': 'repositive_collection', 'order[0][0]': 'updated_at', 'order[0][1]': 'DESC', 'limit': '3' }),
+        this.store.query('collection', { 'where.type': 'datasource', 'order[0][0]': 'updated_at', 'order[0][1]': 'DESC', 'limit': '3' }),
         this.get('actionsService').loadFavourites()
       ])
       .then(data => {
@@ -57,7 +58,8 @@ export default Ember.Route.extend({
           datasets: trending,
           requests: data[2],
           registered: data[3],
-          featuredCollections: data[4]
+          featuredCollections: data[4],
+          featuredDatasources: data[5]
         };
       })
       .catch(err => {
