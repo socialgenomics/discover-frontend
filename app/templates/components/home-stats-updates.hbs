@@ -17,8 +17,11 @@
         <div class="row">
           <div class="col m6">
             {{#link-to 'collections'}}
-              <h3>Collections {{stats.collections}}</h3>
+              <h3>Collections {{stats.repositive_collections}}</h3>
             {{/link-to}}
+            {{#each featuredCollections as |collection|}}
+              <h4>{{collection.name}}</h4>
+            {{/each}}
           </div>
           <div class="col m6">
             {{#link-to 'datasources'}}
