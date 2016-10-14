@@ -1,0 +1,47 @@
+<header class="contain">
+  <h5 class="subtitles-left unfocus-grey-text">Search Through</h5>
+  <div class="col m12 center-align">
+    <div class="card">
+      <div class="stats">
+        <h2 class="numb">
+          {{#link-to 'datasets.search' (query-params q="") class="sub-grey"}}
+            {{datasetsNumber}}
+          {{/link-to}}
+          <span class="stats-text thin"> Human Genomic Datasets </span><span class="stats-text thin">from</span>
+          {{stats.datasources}}<span class="stats-text thin"> Data Sources</span>
+        </h2>
+
+        <section class="featured-section col m10 offset-m1">
+          <div class="divider"></div>
+          <div class="row">
+            <div class="featured-content col m4">
+              {{#link-to 'datasets.search' (query-params q='(datasource.short_name:IN_SILICO_DB AND NOT assay:"Whole Exome") OR datasource.short_name:XPRESSOMICS OR datasource.short_name:GEO OR (datasource.short_name:GXA AND NOT assay:Proteomics) OR (datasource.short_name:ARRAY_EXPRESS AND (assay:"Transcription Profiling by Array" OR assay:"RNA-seq of Coding RNA" OR assay:"RNA-seq of non Coding RNA")) OR (datasource.short_name:SRA AND assay:RNA-Seq) OR (datasource.short_name:DBGAP AND assay:RNA_Seq) OR datasource.short_name:ALLEN_INSTITUTE') class="sub-grey"}}
+                <span class="red-text no-padding font-varela-round">New Collection</span>
+                <div class="logo-image">
+                  <h2>Expression Data</h2>
+                </div>
+              {{/link-to}}
+            </div>
+            <div class="featured-content col m4">
+              {{#link-to 'datasets.search' (query-params q='"DNA methylation"') class="sub-grey"}}
+                <span class="no-padding font-varela-round">Collection</span>
+                <div class="logo-image">
+                  <h2>Methylation Data</h2>
+                </div>
+              {{/link-to}}
+            </div>
+            <div class="featured-content col m4">
+              {{#link-to 'datasets.search' (query-params q='"chinese control data"') class="sub-grey"}}
+                <span class="no-padding font-varela-round">Collection</span>
+                <div class="logo-image">
+                  <h2>Chinese Control Data</h2>
+                </div>
+              {{/link-to}}
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </div>
+</header>
