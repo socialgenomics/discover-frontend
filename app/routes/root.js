@@ -58,8 +58,8 @@ export default Ember.Route.extend({
           datasets: trending,
           requests: data[2],
           registered: data[3],
-          featuredCollections: data[4],
-          featuredDatasources: data[5]
+          collections: data[4],
+          datasources: data[5]
         };
       })
       .catch(err => {
