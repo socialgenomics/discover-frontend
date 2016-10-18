@@ -23,17 +23,16 @@
                 Collections <span class="stats-text thin">{{stats.repositive_collections}}</span>
               </h3>
             {{/link-to}}
-<!--
-            <div class="featured-item">
-              <a href="#"><h4>Chinese Control Data</h4></a>
-            </div>
-            <div class="featured-item">
-              <a href="#"><h4>Methylation Data</h4></a>
-            </div> -->
 
             {{#each collections as |collection|}}
-              <h4>{{collection.name}}</h4>
-              <p>{{collection.description}}</p>
+              <div class="featured-item">
+                {{#link-to 'collections.collection' collection.id}}
+                  <h4>{{collection.name}}</h4>
+                  {{#if collection.description}}
+                    <p>{{collection.description}}</p>
+                  {{/if}}
+                {{/link-to}}
+              </div>
             {{/each}}
           </div>
 
@@ -44,17 +43,19 @@
                 Data Sources <span class="stats-text thin">{{stats.datasources}}</span>
               </h3>
             {{/link-to}}
-<!--
-            <div class="featured-item">
-              <a href="#"><img class="img-responsive" src="assets/images/logos/xpressomics-logo.png"/></a>
-            </div>
-            <div class="featured-item">
-              <a href="#"><img class="img-responsive" src="assets/images/logos/xpressomics-logo.png"/></a>
-            </div> -->
 
             {{#each datasources as |datasource|}}
-              <h4>{{datasource.name}}</h4>
-              <p>{{datasource.description}}</p>
+              <div class="featured-item">
+                {{#link-to 'datasources.source' datasource.id}}
+                  {{#if datasource.properties.logo}}
+                    <img src={{datasource.properties.logo}}>
+                  {{/if}}
+                  <h4>{{datasource.name}}</h4>
+                  <!-- {{#if datasource.description}}
+                    <p>{{datasource.description}}</p>
+                  {{/if}} -->
+                {{/link-to}}
+              </div>
             {{/each}}
           </div>
 
