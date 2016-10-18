@@ -38,12 +38,16 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
       Ember.Logger.error(err);
     });
   },
+
   setupController(controller, models) {
     this._super(controller, models);
+    this.controller = controller;
+    controller.set('isLoading', false);
   },
   actions: {
     invalidateModel: function() {
-      this.refresh();
+      this.controller.set('isLoading', true);
+      this.refresh().promise.then(() => this.controller.set('isLoading', false));
     }
   }
 });
