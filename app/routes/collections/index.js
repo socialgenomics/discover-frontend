@@ -4,9 +4,9 @@ import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-rout
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
   model: function() {
     return this.store.query('collection', {
-      'where.type.$ne': 'datasource',
+      'where.type': 'repositive_collection',
       'offset': 0,
-      'limit': 9
+      'limit': 100
     });
   }
 });
