@@ -21,7 +21,9 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
           headers: authHeaders
         }),
         datasets: this.store.query('dataset', {
-          'where.datasource_id': collectionId,
+          'include[0][model]': 'dataset_collection',
+          'include[0][where][collection_id]': collectionId,
+          'include[0][required]': true,
           'offset': 0,
           'limit': 9
         })

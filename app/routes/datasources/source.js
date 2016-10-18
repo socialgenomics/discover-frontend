@@ -12,19 +12,21 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
     return this.store.findRecord('collection', params.id)
     .then(source => {
-      const sourceId = source.get('id');
+      const collectionId = source.get('id');
       return new Ember.RSVP.hash({
         source: source,
         collectionStats: ajax({
-          url: ENV.APIRoutes['collection-stats'].replace('{collection_id}', sourceId),
+          url: ENV.APIRoutes['collection-stats'].replace('{collection_id}', collectionId),
           type: 'GET',
           headers: authHeaders
         }),
         datasets: this.store.query('dataset', {
-           'where.datasource_id': sourceId,
-           'offset': 0,
-           'limit': 9
-         })
+          'include[0][model]': 'dataset_collection',
+          'include[0][where][collection_id]': collectionId,
+          'include[0][required]': true,
+          'offset': 0,
+          'limit': 9
+        })
       });
     })
     .catch(err => {
