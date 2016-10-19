@@ -6,7 +6,7 @@ import {
 } from 'ember-mocha';
 
 describeModule(
-  'service:actions',
+  'service:favourites',
   'favouritesService',
   {
     // Specify the other units that are required for this test.
