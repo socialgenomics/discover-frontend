@@ -51,8 +51,8 @@
             <h4>Favourites</h4>
           </div>
           <div class="card-content">
-            {{#if favouritesService.favouritedData}}
-              {{#each favouritesService.favouritedData as |favourite|}}
+            {{#if favouritedData}}
+              {{#each favouritedData as |favourite|}}
                 {{mini-dataset dataset=favourite type=favourite.type isFavourite=true}}
               {{/each}}
             {{else}}
@@ -86,7 +86,7 @@
           </div>
         </div>
       </div>
-      
+
       <!--data requests-->
       <div class="col s12 m6 activity-card">
         <div class="card requested-data">
