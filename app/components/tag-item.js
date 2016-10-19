@@ -3,7 +3,7 @@ const { inject: { service }, Component } = Ember;
 
 export default Component.extend({
   session: service(),
-  actionsService: service('actions'),
+  favouritesService: service('favourites'),
   tagName: 'span',
   classNames: ['tag'],
 

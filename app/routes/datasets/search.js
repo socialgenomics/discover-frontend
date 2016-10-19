@@ -4,7 +4,7 @@ const { inject: { service }, Route } = Ember;
 
 export default Route.extend(AuthenticatedRouteMixin, {
   session: service(),
-  actionsService: service('actions'),
+  favouritesService: service('favourites'),
 
   model: function(params) {
     return this.store.createRecord('Search', {
@@ -13,7 +13,7 @@ export default Route.extend(AuthenticatedRouteMixin, {
     });
   },
   afterModel() {
-    this.get('actionsService').loadFavourites();
+    this.get('favouritesService').loadFavourites();
   },
 
   actions: {

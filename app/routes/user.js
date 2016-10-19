@@ -1,9 +1,10 @@
 import Ember from 'ember';
-import {isVerified} from './users/trust';
+import { isVerified } from './users/trust';
+const { inject: { service }, Route, RSVP } = Ember;
 
-export default Ember.Route.extend({
-  session: Ember.inject.service(),
-  actionsService: Ember.inject.service('actions'),
+export default Route.extend({
+  session: service(),
+  favouritesService: service('favourites'),
 
   model: function(params) {
     if (this.get('session.session.isAuthenticated') === true) {
@@ -11,14 +12,14 @@ export default Ember.Route.extend({
       .then(user => {
         const userId = user.get('id');
         // TODO: The majority of this info can be cached and retrieved from the same session instead of doing unnecesary calls.
-        return new Ember.RSVP.hash({
+        return new RSVP.hash({
           user: user,
           user_profile: this.store.query('userProfile', { 'where.user_id': userId }),
           registrations: this.store.query('dataset', { 'where.user_id': userId }),
           requests: this.store.query('request', { 'where.user_id': userId }),
           user_credential: this.store.query('credential', { 'where.user_id': userId }),
-          user_favourites: this.get('actionsService').loadFavourites(),
-          favourited_data: this.get('actionsService').getFavouritedData(params.id),
+          user_favourites: this.get('favouritesService').loadFavourites(),
+          favourited_data: this.get('favouritesService').getFavouritedData(params.id),
           user_comments: this.store.query('action', { 'where.user_id': userId, 'where.type': 'comment' })
         });
       })

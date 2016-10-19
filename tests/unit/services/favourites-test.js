@@ -7,7 +7,7 @@ import {
 
 describeModule(
   'service:actions',
-  'ActionsService',
+  'favouritesService',
   {
     // Specify the other units that are required for this test.
     // needs: ['service:foo']

@@ -1,10 +1,11 @@
 import Ember from 'ember';
 import ajax from 'ic-ajax';
 import ENV from 'repositive/config/environment';
+const { inject: { service }, Route, RSVP } = Ember;
 
-export default Ember.Route.extend({
-  session: Ember.inject.service(),
-  actionsService: Ember.inject.service('actions'),
+export default Route.extend({
+  session: service(),
+  favouritesService: service('favourites'),
 
   beforeModel: function() {
     if (this.get('session.data.firstVisit', true) && this.get('session.isAuthenticated')) {
@@ -38,14 +39,14 @@ export default Ember.Route.extend({
         authorization: `JWT ${token}`
       };
 
-      return Ember.RSVP.all([
+      return RSVP.all([
         ajax({ url: ENV.APIRoutes['stats'] , type: 'GET', headers: authHeaders }),
         ajax({ url: ENV.APIRoutes['datasets.trending'] , type: 'GET', headers: authHeaders }),
         this.store.query('request', { 'order[0][0]': 'updated_at', 'order[0][1]': 'DESC' }),
         this.store.query('dataset', { 'where.user_id.$ne': 'null', 'order[0][0]': 'updated_at', 'order[0][1]': 'DESC' }),
         this.store.query('collection', { 'where.type': 'repositive_collection', 'order[0][0]': 'updated_at', 'order[0][1]': 'DESC', 'limit': '3' }),
         this.store.query('collection', { 'where.type': 'datasource', 'order[0][0]': 'updated_at', 'order[0][1]': 'DESC', 'limit': '3' }),
-        this.get('actionsService').loadFavourites()
+        this.get('favouritesService').loadFavourites()
       ])
       .then(data => {
         //Normalize and push trending datasets
