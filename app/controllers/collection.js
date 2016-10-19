@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
   showMore: false,
-  limit: 9,  
+  limit: 9,
   page: 1,
   queryParams: ['page', 'limit'],
   isLoading: true,
@@ -20,5 +20,4 @@ export default Ember.Controller.extend({
       this.toggleProperty('showMore');
     }
   }
-
 });
