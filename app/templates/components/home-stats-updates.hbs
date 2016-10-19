@@ -1,0 +1,67 @@
+<header class="contain">
+  <div class="col m12 center-align">
+
+    <section class="stats">
+      <h2 class="numb">
+        <span class="stats-text thin">Search through </span>
+        {{#link-to 'datasets.search' (query-params q="") class="sub-grey"}}
+          {{datasetsNumber}}
+        {{/link-to}}
+        <span class="stats-text thin"> Human Genomic Datasets </span>
+      </h2>
+    </section>
+
+    <div class="card">
+
+      <section class="featured-section center-align">
+        <div class="row">
+
+          <div class="col m6">
+            {{#link-to 'collections'}}
+              <h3>
+                <img src="/assets/images/icons/icon-collection@2x.png" class="data-icon">
+                Collections <span class="stats-text thin">{{stats.repositive_collections}}</span>
+              </h3>
+            {{/link-to}}
+
+            {{#each collections as |collection|}}
+              <div class="featured-item">
+                {{#link-to 'collections.collection' collection.id}}
+                  <h4>{{collection.name}}</h4>
+                  {{#if collection.description}}
+                    <p>{{collection.description}}</p>
+                  {{/if}}
+                {{/link-to}}
+              </div>
+            {{/each}}
+          </div>
+
+          <div class="col m6">
+            {{#link-to 'datasources'}}
+              <h3>
+                <img src="/assets/images/icons/icon-datasource_2@2x.png" class="data-icon">
+                Data Sources <span class="stats-text thin">{{stats.datasources}}</span>
+              </h3>
+            {{/link-to}}
+
+            {{#each datasources as |datasource|}}
+              <div class="featured-item">
+                {{#link-to 'datasources.source' datasource.id}}
+                  {{#if datasource.properties.logo}}
+                    <img src={{datasource.properties.logo}}>
+                  {{/if}}
+                  <h4>{{datasource.name}}</h4>
+                  <!-- {{#if datasource.description}}
+                    <p>{{datasource.description}}</p>
+                  {{/if}} -->
+                {{/link-to}}
+              </div>
+            {{/each}}
+          </div>
+
+        </div>
+      </section>
+
+    </div>
+  </div>
+</header>

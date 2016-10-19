@@ -5,7 +5,7 @@
     {{#link-to 'user' model.user.id}}
       {{model.user.firstname}} {{model.user.lastname}}
     {{/link-to}}
-  {{else if (eq model.datasourceId.properties.short_name "REPOSITIVE")}}
+  {{else if (eq model.datasource.properties.short_name "REPOSITIVE")}}
     <!-- Registration -->
 
     <span class="descriptor">Registered by </span>
@@ -16,15 +16,9 @@
   {{else}}
     <!-- Regular Dataset-->
     <span class="descriptor">from</span>
-    {{#if searchRoute}}
-      {{#link-to 'datasets.search' (query-params datasource=model.datasource.short_name) }}
-        {{datasource-name source=model.datasource isFavourite=isFavourite}}
-      {{/link-to}}
-    {{else}}
-      {{#link-to 'datasets.search' (query-params q="" datasource=model.datasource.short_name) }}
-        {{datasource-name source=model.datasource isFavourite=isFavourite}}
-      {{/link-to}}
-    {{/if}}
+    {{#link-to 'datasources.source' model.datasource.id}}
+      {{datasource-name source=model.datasource isFavourite=isFavourite}}
+    {{/link-to}}
   {{/if}}
 
 {{else}} <!-- Not a favourite -->
@@ -49,14 +43,8 @@
   {{else}}
     <!-- Regular Dataset-->
     <span class="descriptor">from</span>
-    {{#if searchRoute}}
-      {{#link-to 'datasets.search' (query-params datasource=model.datasourceId.properties.short_name) }}
-        {{datasource-name source=model.datasourceId}}
-      {{/link-to}}
-    {{else}}
-      {{#link-to 'datasets.search' (query-params q="" datasource=model.datasourceId.properties.short_name) }}
-        {{datasource-name source=model.datasourceId}}
-      {{/link-to}}
-    {{/if}}
+    {{#link-to 'datasources.source' model.datasourceId.id}}
+      {{datasource-name source=model.datasourceId}}
+    {{/link-to}}
   {{/if}}
 {{/if}}

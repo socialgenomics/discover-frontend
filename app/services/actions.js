@@ -13,9 +13,11 @@ export default Service.extend({
   loadFavourites() {
     const currentUserId = this.get('session.session.authenticated.user.id');
     const store = this.get('store');
+
     return store.query('action', {
-      user_id: currentUserId,
-      type: 'favourite'
+      'where.user_id': currentUserId,
+      'where.type': 'favourite',
+      limit: 1000 // remove the limit to 10 response
     })
     .then(favourites => {
       this.set('userFavourites', []);
@@ -27,6 +29,7 @@ export default Service.extend({
       Ember.Logger.error(err);
     });
   },
+
   removeFavourite(favourite) {
     const updatedFavourites = this.get('userFavourites').without(favourite);
     this.set('userFavourites', updatedFavourites);
@@ -64,21 +67,6 @@ export default Service.extend({
       });
       let allFavourites = datasets.concat(requests);
       this.set('favouritedData', allFavourites);
-    })
-    .catch(err => {
-      Ember.Logger.error(err);
-    });
-  },
-  //TODO Move to delete-tag component and rename service to favourites
-  deleteTag(tag) {
-    tag.destroyRecord()
-    .then(() => {
-      this.get('flashMessages').add({
-        message: 'Tag successfully deleted.',
-        type: 'success',
-        timeout: 7000,
-        class: 'fadeInOut'
-      });
     })
     .catch(err => {
       Ember.Logger.error(err);

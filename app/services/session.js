@@ -14,7 +14,7 @@ export default SessionService.extend({
       } else {
         let userId = userData.id;
         let profileId = userData.user_profile.id;
-        let settingsId = userData.user_settings.id;
+        let settingsId = userData.user_setting.id;
 
         this.get('metrics').identify({
           email: userData.credentials[0].email,
@@ -34,7 +34,7 @@ export default SessionService.extend({
 
         return Ember.RSVP.all([
           this.get('store').findRecord('user', userId),
-          this.get('store').query('credential', { user_id: userId, primary: true }),
+          this.get('store').query('credential', { 'where.user_id': userId, 'where.primary': true }),
           this.get('store').findRecord('user_profile', profileId),
           this.get('store').findRecord('user_setting', settingsId)
         ])

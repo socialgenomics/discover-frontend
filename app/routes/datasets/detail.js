@@ -26,12 +26,15 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     let actionable = peekOrCreate(this.store, params.id);
     return Ember.RSVP.hash({
       comments: this.store.query('action', {
-        actionable_id: params.id,
-        type: 'comment'
+        'were.actionable_id': params.id,
+        'where.type': 'comment',
+        'order[0][0]': 'updated_at',
+        'order[0][1]': 'DESC',
+        limit: 100 // Remove limit to 10 elements
       }),
       tags: this.store.query('action', {
-        actionable_id: params.id,
-        type: 'tag'
+        'where.actionable_id': params.id,
+        'where.type': 'tag'
       }),
       dataset: this.store.findRecord('dataset', params.id)
     })
