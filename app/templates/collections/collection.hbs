@@ -2,12 +2,28 @@
   {{collection-meta-panel collectionStats=collectionStats model=model.collection datasets=model.datasets}}
 
   <div class="content push-right">
-    <div class="row">
-      <div class="col m12">
-        {{#each model.datasets as |dataset|}}
-          {{dataset-card dataset=dataset action="toggleModal"}}
-        {{/each}}
+
+    {{#unless isLoading}}
+      <div class="row">
+        <div class="col m12">
+          {{#each model.datasets as |dataset|}}
+            {{dataset-card dataset=dataset action="toggleModal"}}
+          {{/each}}
+        </div>
       </div>
-    </div>
+      {{#if (gt model.collectionStats.datasets 0)}}
+        {{pagination-bar
+          currentPageNumber=page
+          resultsPerPage=limit
+          totalResults=model.collectionStats.datasets
+          currentOffset=offset
+          nextPage=(action 'nextPage')
+          previousPage=(action 'previousPage')
+        }}
+      {{/if}}
+    {{/unless}}
+    {{#if isLoading}}
+      {{partial 'loading'}}
+    {{/if}}
   </div>
 </main>
