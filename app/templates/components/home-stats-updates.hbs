@@ -27,9 +27,9 @@
             {{#each collections as |collection|}}
               <div class="featured-item">
                 {{#link-to 'collections.collection' collection.id}}
-                  <h4>{{collection.name}}</h4>
+                  <h4 class="collection-item truncate">{{collection.name}}</h4>
                   {{#if collection.description}}
-                    <p>{{collection.description}}</p>
+                    <p class="truncate">{{collection.description}}</p>
                   {{/if}}
                 {{/link-to}}
               </div>
@@ -48,12 +48,15 @@
               <div class="featured-item">
                 {{#link-to 'datasources.source' datasource.id}}
                   {{#if datasource.properties.logo}}
-                    <img src={{datasource.properties.logo}}>
+                    <img class="datasource-item" src="{{datasource.properties.logo}}">
+                  {{else}}
+                    <h4 class="datasource-item truncate">{{datasource.name}}</h4>
                   {{/if}}
-                  <h4>{{datasource.name}}</h4>
-                  <!-- {{#if datasource.description}}
-                    <p>{{datasource.description}}</p>
-                  {{/if}} -->
+                  {{#if datasource.properties.summary}}
+                    <p class="truncate">{{datasource.properties.summary}}</p>
+                  {{else}}
+                    <p class="truncate">{{datasource.description}}</p>
+                  {{/if}}
                 {{/link-to}}
               </div>
             {{/each}}
