@@ -1,4 +1,4 @@
-{{collections-list-tabs}}
+{{collections-list-tabs stats=model.stats}}
 
 <main class="row">
   <div class="col m12">
@@ -6,7 +6,7 @@
     <div class="card no-margin">
       <div class="card-content">
         <div class="card-body">
-          {{#each model as |source|}}
+          {{#each model.datasources as |source|}}
             {{source-feed-item source=source toggleModal="toggleModal"}}
           {{/each}}
         </div>
