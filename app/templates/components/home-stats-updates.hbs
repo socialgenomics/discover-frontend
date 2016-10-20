@@ -24,20 +24,8 @@
               </h3>
             {{/link-to}}
 
-            {{#each collections as |collection|}}
-              <div class="featured-item">
-                {{#link-to 'collections.collection' collection.id}}
-                  <div class="truncate">
-                    <h4 class="collection-item">
-                      {{collection.name}}
-                      <span class="red-text">NEW</span>
-                    </h4>
-                    {{#if collection.description}}
-                      <p class="truncate two-lines">{{collection.description}}</p>
-                    {{/if}}
-                  </div>
-                {{/link-to}}
-              </div>
+            {{#each (sort-by "updatedAt:desc" collections) as |collection|}}
+              {{featured-list-item model=collection type='collection'}}
             {{/each}}
           </div>
 
@@ -49,21 +37,8 @@
               </h3>
             {{/link-to}}
 
-            {{#each datasources as |datasource|}}
-              <div class="featured-item">
-                {{#link-to 'datasources.source' datasource.id}}
-                  {{#if datasource.properties.logo}}
-                    <img class="datasource-item" src="{{datasource.properties.logo}}">
-                  {{else}}
-                    <h4 class="datasource-item truncate">{{datasource.name}}</h4>
-                  {{/if}}
-                  {{#if datasource.properties.summary}}
-                    <p class="truncate">{{datasource.properties.summary}}</p>
-                  {{else}}
-                    <p class="truncate">{{datasource.description}}</p>
-                  {{/if}}
-                {{/link-to}}
-              </div>
+            {{#each (sort-by "name" datasources) as |datasource|}}
+              {{featured-list-item model=datasource type='datasource'}}
             {{/each}}
           </div>
 
