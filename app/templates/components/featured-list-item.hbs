@@ -3,9 +3,7 @@
     <div class="truncate">
       <h4 class="collection-item">
         {{model.name}}
-        {{#if isNew}}
-          <span class="red-text">NEW</span>
-        {{/if}}
+        {{is-new-label updatedAt=model.updatedAt}}
       </h4>
       {{#if model.description}}
         <p class="truncate two-lines">{{model.description}}</p>
