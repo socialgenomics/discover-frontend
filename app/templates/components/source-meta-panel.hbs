@@ -51,7 +51,7 @@
 
       {{#if model.description}}
         <div class="divider"></div>
-        <p>{{model.description}}</p>
+        <p class="markdown-text">{{markdown-to-html markdown=model.description}}</p>
       {{/if}}
 
       {{#if model.image}}

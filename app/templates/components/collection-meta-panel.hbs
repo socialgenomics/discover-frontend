@@ -44,9 +44,9 @@
         </div>
       </section>
 
-      <div class="divider"></div>
       {{#if model.description}}
-        <p>{{model.description}}</p>
+        <div class="divider"></div>
+        <p class="markdown-text">{{markdown-to-html markdown=model.description}}</p>
       {{/if}}
 
     {{else}}
