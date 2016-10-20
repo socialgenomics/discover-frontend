@@ -4,12 +4,12 @@ import moment from 'moment';
 export default Ember.Component.extend({
   tagName: 'span',
   classNames: ['red-text'],
-  didReceiveAttrs(){
-    if(this._checkIfNew()){
+  didReceiveAttrs() {
+    if (this._checkIfNew()) {
       this.set('isNew', true);
     }
   },
-  _checkIfNew(){
+  _checkIfNew() {
     let now = moment(new Date());
     let dateUpdated = moment(this.updatedAt);
     let daysDifference = now.diff(dateUpdated, 'days');
