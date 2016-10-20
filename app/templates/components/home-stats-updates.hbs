@@ -1,15 +1,7 @@
 <header class="contain">
   <div class="col m12 center-align">
 
-    <section class="stats">
-      <h2 class="numb">
-        <span class="stats-text thin">Search through </span>
-        {{#link-to 'datasets.search' (query-params q="") class="sub-grey"}}
-          {{datasetsNumber}}
-        {{/link-to}}
-        <span class="stats-text thin"> Human Genomic Datasets </span>
-      </h2>
-    </section>
+    {{dataset-number-stats datasetsNumber=datasetsNumber}}
 
     <div class="card">
 
