@@ -10,9 +10,9 @@ export default Ember.Component.extend({
     }
   },
   _checkIfNew() {
-    let now = moment(new Date());
-    let dateUpdated = moment(this.updatedAt);
-    let daysDifference = now.diff(dateUpdated, 'days');
+    const now = moment(new Date());
+    const dateUpdated = moment(this.updatedAt);
+    const daysDifference = now.diff(dateUpdated, 'days');
     if (daysDifference < 7) {
       return true;
     } else {
