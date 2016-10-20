@@ -7,10 +7,18 @@
     </section>
 
     <section class="card-user-section col m2">
-      {{#link-to 'user' collection.userId.id}}
-        <img src={{collection.userId.userProfile.avatar}} class="data-icon round-img">
-        <p>{{collection.userId.displayName}}</p>
-      {{/link-to}}
+      {{#if collection.userId.displayName}}
+        {{#link-to 'user' collection.userId.id}}
+          <img src={{collection.userId.userProfile.avatar}} class="data-icon round-img">
+          <p>{{collection.userId.displayName}}</p>
+        {{/link-to}}
+      {{else}}
+        <div class="round-img">
+          <img src="/assets/images/favicon.ico" class="data-icon">
+        </div>
+        <p>Repositive</p>
+        <span class="helper-text">created collection</span>
+      {{/if}}
     </section>
 
     <section class="card-content-section col m7">
