@@ -1,0 +1,31 @@
+<div class="settings-tabs row">
+  <div class="col m12">
+    <div class="card">
+      <ul class="tabs">
+        <li class="tab">
+          {{#if (eq active "collections")}}
+            {{#link-to "collections" class="active"}}
+              Collections
+            {{/link-to}}
+          {{else}}
+            {{#link-to "collections"}}
+              Collections
+            {{/link-to}}
+          {{/if}}
+        </li>
+
+        <li class="tab">
+          {{#if (eq active "datasources")}}
+            {{#link-to "datasources" class="active"}}
+              Data Sources
+            {{/link-to}}
+          {{else}}
+            {{#link-to "datasources"}}
+              Data Sources
+            {{/link-to}}
+          {{/if}}
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

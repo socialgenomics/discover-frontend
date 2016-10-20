@@ -1,10 +1,17 @@
+{{collections-list-tabs}}
+
 <main class="row">
   <div class="col m12">
-    <header class="center-align">
-      <h1>Datasources</h1>
-    </header>
-    {{#each model as |source|}}
-      {{source-feed-item source=source toggleModal="toggleModal"}}
-    {{/each}}
+
+    <div class="card no-margin">
+      <div class="card-content">
+        <div class="card-body">
+          {{#each model as |source|}}
+            {{source-feed-item source=source toggleModal="toggleModal"}}
+          {{/each}}
+        </div>
+      </div>
+    </div>
+
   </div>
 </main>

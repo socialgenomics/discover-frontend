@@ -27,10 +27,15 @@
             {{#each collections as |collection|}}
               <div class="featured-item">
                 {{#link-to 'collections.collection' collection.id}}
-                  <h4 class="collection-item truncate">{{collection.name}}</h4>
-                  {{#if collection.description}}
-                    <p class="truncate">{{collection.description}}</p>
-                  {{/if}}
+                  <div class="truncate">
+                    <h4 class="collection-item">
+                      {{collection.name}}
+                      <span class="red-text">NEW</span>
+                    </h4>
+                    {{#if collection.description}}
+                      <p class="truncate two-lines">{{collection.description}}</p>
+                    {{/if}}
+                  </div>
                 {{/link-to}}
               </div>
             {{/each}}
