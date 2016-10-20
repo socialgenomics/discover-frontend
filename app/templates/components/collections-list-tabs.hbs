@@ -1,35 +1,35 @@
-<div class="settings-tabs row">
-  <div class="col m12">
-    <div class="card">
-      <ul class="tabs">
-        <li class="tab">
-          {{#if (eq active "collections")}}
-            {{#link-to "collections" class="active"}}
-              <img src="/assets/images/icons/icon-collection@2x.png" class="data-icon">
-              Collections <span class="stats-text thin">{{stats.repositive_collections}}</span>
-            {{/link-to}}
-          {{else}}
-            {{#link-to "collections"}}
-              <img src="/assets/images/icons/icon-collection@2x.png" class="data-icon">
-              Collections <span class="stats-text thin">{{stats.repositive_collections}}</span>
-            {{/link-to}}
-          {{/if}}
-        </li>
+<section class="content settings-tabs">
 
-        <li class="tab">
-          {{#if (eq active "datasources")}}
-            {{#link-to "datasources" class="active"}}
-              <img src="/assets/images/icons/icon-datasource_2@2x.png" class="data-icon">
-              Data Sources <span class="stats-text thin">{{stats.datasources}}</span>
-            {{/link-to}}
-          {{else}}
-            {{#link-to "datasources"}}
-              <img src="/assets/images/icons/icon-datasource_2@2x.png" class="data-icon">
-              Data Sources <span class="stats-text thin">{{stats.datasources}}</span>
-            {{/link-to}}
-          {{/if}}
-        </li>
-      </ul>
-    </div>
+  <div class="card">
+    <ul class="tabs">
+      <li class="tab">
+        {{#if (eq active "collections")}}
+          {{#link-to "collections" class="active"}}
+            <img src="/assets/images/icons/icon-collection@2x.png" class="data-icon">
+            Collections <span class="stats-text thin">{{stats.repositive_collections}}</span>
+          {{/link-to}}
+        {{else}}
+          {{#link-to "collections"}}
+            <img src="/assets/images/icons/icon-collection@2x.png" class="data-icon">
+            Collections <span class="stats-text thin">{{stats.repositive_collections}}</span>
+          {{/link-to}}
+        {{/if}}
+      </li>
+
+      <li class="tab">
+        {{#if (eq active "datasources")}}
+          {{#link-to "datasources" class="active"}}
+            <img src="/assets/images/icons/icon-datasource_2@2x.png" class="data-icon">
+            Data Sources <span class="stats-text thin">{{stats.datasources}}</span>
+          {{/link-to}}
+        {{else}}
+          {{#link-to "datasources"}}
+            <img src="/assets/images/icons/icon-datasource_2@2x.png" class="data-icon">
+            Data Sources <span class="stats-text thin">{{stats.datasources}}</span>
+          {{/link-to}}
+        {{/if}}
+      </li>
+    </ul>
   </div>
-</div>
+
+</section>
