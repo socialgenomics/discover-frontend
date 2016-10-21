@@ -13,7 +13,7 @@
 {{else}}
   {{#link-to 'datasources.source' model.id}}
     {{#if model.properties.logo}}
-      <img class="datasource-item" src="{{datasource.properties.logo}}">
+      <img class="datasource-item" src="{{model.properties.logo}}">
     {{else}}
       <h4 class="datasource-item truncate">{{model.name}}</h4>
     {{/if}}
