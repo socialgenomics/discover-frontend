@@ -9,9 +9,15 @@ export function model(params) {
     authorization: `JWT ${token}`
   };
 
-  return this.store.findRecord('collection', params.id)
+  let store = this.store;
+
+  return store.findRecord('collection', params.id)
   .then(collection => {
     const collectionId = collection.get('id');
+
+    let limit = params.limit;
+    let offset = limit * (params.page -1);
+    let datasetsUrl = ENV.APIRoutes['collection-datasets'].replace('{collection_id}', collectionId) + `?limit=${params.limit}&offset=${offset}`;
     return new Ember.RSVP.hash({
       collection: collection,
       collectionStats: ajax({
@@ -20,10 +26,13 @@ export function model(params) {
         headers: authHeaders
       }),
       datasets: ajax({
-        url: ENV.APIRoutes['collection-datasets'].replace('{collection_id}', collectionId),
+        url: datasetsUrl,
         type: 'GET',
         headers: authHeaders
-      })
+      }).then(datasets => datasets.map(d => {
+        let dataset = store.normalize('dataset', d);
+        return store.push(dataset);
+      }))
     });
   })
   .catch(err => {
