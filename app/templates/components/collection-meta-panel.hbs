@@ -31,7 +31,7 @@
       {{#if model.userId.id}}
         <span>{{#link-to 'user' model.userId.id}}{{model.userId.displayName}}{{/link-to}}</span>
       {{else if (eq model.type 'repositive_collection')}}
-        <span>{{#link-to 'datasources.source' 'ebb9c7a7-2287-49c4-8b2a-a507392637d9'}}Repositive{{/link-to}}</span>
+        <span>{{#link-to 'datasources.source' repositiveSourceId}}Repositive{{/link-to}}</span>
       {{/if}}
       <div class="divider"></div>
 
