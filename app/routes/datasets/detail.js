@@ -3,13 +3,9 @@ const { inject: { service }, Logger, Route, RSVP } = Ember;
 
 //TODO move into mixin?
 function peekOrCreate(store, id) {
-  let existing = store.peekRecord('actionable', id);
-  if (existing) {
-    return existing;
-  } else {
-    return store.createRecord('actionable', { id: id });
-  }
+  return store.peekRecord('actionable', id) || store.createRecord('actionable', { id });
 }
+
 //This returns a list of user_ids, no duplicates.
 function reducer(acc, curr) {
   if (acc.indexOf(curr) === -1) {
@@ -22,8 +18,9 @@ export default Route.extend({
   session: service(),
   favouritesService: service('favourites'),
 
-  model: function(params) {
-    let actionable = peekOrCreate(this.store, params.id);
+  model(params) {
+    const actionable = peekOrCreate(this.store, params.id);
+
     return RSVP.hash({
       comments: this.store.query('action', {
         'were.actionable_id': params.id,
@@ -38,22 +35,21 @@ export default Route.extend({
       }),
       dataset: this.store.findRecord('dataset', params.id)
     })
-    .then(data => {
-      let dataset = data.dataset;
-      dataset.set('actionableId', actionable);
-      let commenterIds = data.comments.content
-      .map(action => action.record.get('userId.id'))
-      .reduce(reducer, []);
-      return RSVP.hash({
-        userProfiles: commenterIds.map(id => this.store.query('userProfile', id)),
-        dataset: dataset
-      });
-    }).then((data) => {
-      return data.dataset;
-    })
-    .catch(err => {
-      Logger.error(err);
-    });
+      .then(data => {
+        const dataset = data.dataset;
+        const commenterIds = data.comments.content
+          .map(action => action.record.get('userId.id'))
+          .reduce(reducer, []);
+
+        dataset.set('actionableId', actionable);
+
+        return RSVP.hash({
+          dataset,
+          userProfiles: commenterIds.map(id => this.store.query('userProfile', id))
+        });
+      })
+      .then(data => data.dataset)
+      .catch(Logger.error);
   },
 
   afterModel(dataset) {
@@ -74,7 +70,7 @@ export default Route.extend({
   },
 
   actions: {
-    didTransition: function() {
+    didTransition() {
       this.get('metrics').trackPage();
       return true;
     }
