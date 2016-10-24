@@ -1,5 +1,5 @@
 import Ember from 'ember';
-const { inject: { service }, Route, RSVP } = Ember;
+const { inject: { service }, Logger, Route, RSVP } = Ember;
 
 //TODO move into mixin?
 function peekOrCreate(store, id) {
@@ -52,25 +52,25 @@ export default Route.extend({
       return data.dataset;
     })
     .catch(err => {
-      Ember.Logger.error(err);
+      Logger.error(err);
     });
   },
 
-  afterModel: function(dataset) {
+  afterModel(dataset) {
     //TODO: Refactor - This code is used in several places e.g. request and dataset detail controllers & routes
     const userId = this.get('session.authenticatedUser');
-    const currentModel = dataset;
-    this.get('favouritesService').loadFavourites();
-    let view = this.store.createRecord('action', {
-      actionableId: currentModel.get('actionableId'),
-      userId: userId,
-      type: 'view',
-      actionable_model: currentModel.constructor.modelName
-    });
-    view.save()
-    .catch((err) => {
-      Ember.Logger.error(err);
-    });
+
+    if (userId) {
+      this.get('favouritesService').loadFavourites();
+      this.store.createRecord('action', {
+        userId,
+        actionableId: dataset.get('actionableId'),
+        type: 'view',
+        actionable_model: dataset.constructor.modelName
+      })
+        .save()
+        .catch(Logger.error);
+    }
   },
 
   actions: {
