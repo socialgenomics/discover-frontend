@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
 const { inject: { service }, Route, RSVP } = Ember;
 
 //TODO move into mixin?
@@ -19,7 +18,7 @@ function reducer(acc, curr) {
   return acc;
 }
 
-export default Route.extend(AuthenticatedRouteMixin, {
+export default Route.extend({
   session: service(),
   favouritesService: service('favourites'),
 
