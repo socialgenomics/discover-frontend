@@ -52,6 +52,7 @@ module.exports = function(environment) {
           'users.signup' : '/auth/register',
           'datasets.search' : '/search',
           'collection-stats': '/collection-stats/{collection_id}',
+          'collection-datasets': '/collection-datasets/{collection_id}',
           'stats': '/stats',
           'datasets.trending' : '/trending',
           'datasources' : '/datasources',

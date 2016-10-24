@@ -6,11 +6,21 @@
       <p>Collection</p>
     </section>
 
-    <section class="card-user-section col m2">
-      {{#link-to 'user' collection.userId.id}}
-        <img src={{collection.userId.userProfile.avatar}} class="data-icon round-img">
-        <p>{{collection.userId.displayName}}</p>
-      {{/link-to}}
+    <section class="card-user-section col m3">
+      {{#if collection.userId.displayName}}
+        {{#link-to 'user' collection.userId.id}}
+          <img src={{collection.userId.userProfile.avatar}} width="35px" height="35px">
+          <p>{{collection.userId.displayName}}</p>
+        {{/link-to}}
+      {{else}}
+        {{#link-to 'collections.collection' collection.id classNames="data-title"}}
+          <div class="round-img">
+            <img src="/assets/images/favicon.ico" class="data-icon">
+          </div>
+          <p>Repositive</p>
+          <span class="helper-text">created collection</span>
+        {{/link-to}}
+      {{/if}}
     </section>
 
     <section class="card-content-section col m7">
