@@ -7,15 +7,16 @@
     </section>
 
     <section class="card-user-section col m3">
-      {{#if source.name}}
-        {{#link-to 'datasources.source' source.id classNames="data-title"}}
-          {{#if source.properties.logo}}
-            <img src={{source.properties.logo}} height="35px">
-          {{/if}}
+      {{#link-to 'datasources.source' source.id classNames="data-title"}}
+        {{#if source.properties.logo}}
+          <img src={{source.properties.logo}} height="35px">
+        {{/if}}
+        {{#if source.name}}
           <p class="data-title">{{source.name}}</p>
-          <span class="helper-text">uploaded new data</span>
-        {{/link-to}}
-      {{/if}}
+        {{else}}
+          <p class="data-title">{{source.properties.short_name}}</p>
+        {{/if}}
+      {{/link-to}}
     </section>
 
     <section class="card-content-section col m7">
