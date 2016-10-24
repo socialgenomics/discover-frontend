@@ -6,16 +6,25 @@
       <p>Data Source</p>
     </section>
 
+    <section class="card-user-section col m3">
+      {{#if source.name}}
+        {{#link-to 'datasources.source' source.id classNames="data-title"}}
+          <div class="source-img">
+            {{#if source.properties.logo}}
+              <img src={{source.properties.logo}} class="data-icon round-img">
+            {{/if}}
+          </div>
+          <p class="data-title">{{source.name}}</p>
+          <span class="helper-text">uploaded new data</span>
+        {{/link-to}}
+      {{/if}}
+    </section>
+
     <section class="card-content-section col m7">
-      {{#link-to 'datasources.source' source.id classNames="data-title"}}
-        {{#if source.name}}
-          <h4 class="data-title">{{source.name}}</h4>
-        {{else}}
-          <h4 class="data-title">{{source.properties.short_name}}</h4>
-        {{/if}}
-      {{/link-to}}
       {{#if source.description}}
-        <p class="markdown-text">{{markdown-to-html markdown=source.description}}</p>
+        <div class="source-text">
+          <p class="markdown-text">{{markdown-to-html markdown=source.description}}</p>
+        </div>
       {{/if}}
     </section>
 
