@@ -9,7 +9,7 @@
     <section class="card-user-section col m3">
       {{#if collection.userId.displayName}}
         {{#link-to 'user' collection.userId.id}}
-          <img src={{collection.userId.userProfile.avatar}} class="data-icon round-img">
+          <img src={{collection.userId.userProfile.avatar}} width="35px" height="35px">
           <p>{{collection.userId.displayName}}</p>
         {{/link-to}}
       {{else}}

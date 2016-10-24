@@ -9,11 +9,9 @@
     <section class="card-user-section col m3">
       {{#if source.name}}
         {{#link-to 'datasources.source' source.id classNames="data-title"}}
-          <div class="source-img">
-            {{#if source.properties.logo}}
-              <img src={{source.properties.logo}} class="data-icon round-img">
-            {{/if}}
-          </div>
+          {{#if source.properties.logo}}
+            <img src={{source.properties.logo}} height="35px">
+          {{/if}}
           <p class="data-title">{{source.name}}</p>
           <span class="helper-text">uploaded new data</span>
         {{/link-to}}
