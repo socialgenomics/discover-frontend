@@ -1,5 +1,5 @@
 import Ember from 'ember';
-const { inject: { service }, Component, computed } = Ember;
+const { inject: { service }, Component, computed, isPresent } = Ember;
 
 export default Component.extend({
   store: service(),
@@ -7,8 +7,7 @@ export default Component.extend({
   favouritesService: service('favourites'),
   isSubmitting: false,
   isStarred: computed('favouritesService.userFavourites', function() {
-    const favouritesService = this.get('favouritesService');
-    return Ember.isPresent(favouritesService.getFavourite(this.model.id));
+    return isPresent(this.get('favouritesService').getFavourite(this.get('model.id')));
   }),
   tagName: 'a',
   mouseEnter() {
