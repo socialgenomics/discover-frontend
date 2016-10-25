@@ -13,18 +13,28 @@ describeComponent(
     integration: true
   },
   function() {
-    it('renders', function() {
-      // Set any properties with this.set('myProperty', 'value');
-      // Handle any actions with this.on('myAction', function(val) { ... });
-      // Template block usage:
-      // this.render(hbs`
-      //   {{#name-fallback}}
-      //     template content
-      //   {{/name-fallback}}
-      // `);
+    it('prints the name when present', function() {
+      const model = {
+        name: 'primary-name',
+        properties: {
+          short_name: 'secondary-name'
+        }
+      };
+      this.set('model', model);
+      this.render(hbs`{{name-fallback model=model}}`);
+      expect(this.$().text().trim()).to.eql('primary-name');
+    });
 
-      this.render(hbs`{{name-fallback}}`);
-      expect(this.$()).to.have.length(1);
+    it('falls back to the secondary name when no name is present', function() {
+      const model = {
+        name: null,
+        properties: {
+          short_name: 'secondary-name'
+        }
+      };
+      this.set('model', model);
+      this.render(hbs`{{name-fallback model=model}}`);
+      expect(this.$().text().trim()).to.eql('secondary-name');
     });
   }
 );
