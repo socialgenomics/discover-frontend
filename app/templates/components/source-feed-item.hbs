@@ -11,11 +11,7 @@
         {{#if source.properties.logo}}
           <img src={{source.properties.logo}} height="35px">
         {{/if}}
-        {{#if source.name}}
-          <p class="data-title">{{source.name}}</p>
-        {{else}}
-          <p class="data-title">{{source.properties.short_name}}</p>
-        {{/if}}
+        <h4 class="data-title">{{name-fallback model=source}}</h4>
       {{/link-to}}
     </section>
 
