@@ -6,12 +6,20 @@
       <p>Data Source</p>
     </section>
 
-    <section class="card-content-section col m7">
+    <section class="card-user-section col m3">
       {{#link-to 'datasources.source' source.id classNames="data-title"}}
+        {{#if source.properties.logo}}
+          <img src={{source.properties.logo}} height="35px">
+        {{/if}}
         <h4 class="data-title">{{name-fallback model=source}}</h4>
       {{/link-to}}
+    </section>
+
+    <section class="card-content-section col m7">
       {{#if source.description}}
-        <p class="markdown-text">{{markdown-to-html markdown=source.description}}</p>
+        <div class="source-text">
+          <p class="markdown-text">{{markdown-to-html markdown=source.description}}</p>
+        </div>
       {{/if}}
     </section>
 
