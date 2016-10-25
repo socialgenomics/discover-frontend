@@ -7,8 +7,8 @@ import {
 import hbs from 'htmlbars-inline-precompile';
 
 describeComponent(
-  'datasource-name',
-  'Integration: DatasourceNameComponent',
+  'name-fallback',
+  'Integration: NameFallbackComponent',
   {
     integration: true
   },
@@ -18,12 +18,12 @@ describeComponent(
       // Handle any actions with this.on('myAction', function(val) { ... });
       // Template block usage:
       // this.render(hbs`
-      //   {{#datasource-name}}
+      //   {{#name-fallback}}
       //     template content
-      //   {{/datasource-name}}
+      //   {{/name-fallback}}
       // `);
 
-      this.render(hbs`{{datasource-name}}`);
+      this.render(hbs`{{name-fallback}}`);
       expect(this.$()).to.have.length(1);
     });
   }

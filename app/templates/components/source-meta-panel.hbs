@@ -18,11 +18,7 @@
 
   {{#if displayInfo}}
     <main>
-      {{#if model.name}}
-        <h3>{{model.name}}</h3>
-      {{else}}
-        <h3>{{model.properties.short_name}}</h3>
-      {{/if}}
+      <h3>{{name-fallback model=model}}</h3>
       <div class="divider"></div>
 
       <!-- TODO turn these into components -->

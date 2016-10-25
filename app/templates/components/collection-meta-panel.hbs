@@ -22,11 +22,7 @@
 
   <main>
     {{#if displayInfo}}
-      {{#if model.name}}
-        <h3>{{model.name}}</h3>
-      {{else}}
-        <h3>{{model.properties.short_name}}</h3>
-      {{/if}}
+      <h3>{{name-fallback model=model}}</h3>
       <span class="helper-text">created by </span>
       {{#if model.userId.id}}
         <span>{{#link-to 'user' model.userId.id}}{{model.userId.displayName}}{{/link-to}}</span>

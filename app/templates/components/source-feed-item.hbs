@@ -8,11 +8,7 @@
 
     <section class="card-content-section col m7">
       {{#link-to 'datasources.source' source.id classNames="data-title"}}
-        {{#if source.name}}
-          <h4 class="data-title">{{source.name}}</h4>
-        {{else}}
-          <h4 class="data-title">{{source.properties.short_name}}</h4>
-        {{/if}}
+        <h4 class="data-title">{{name-fallback model=source}}</h4>
       {{/link-to}}
       {{#if source.description}}
         <p class="markdown-text">{{markdown-to-html markdown=source.description}}</p>
