@@ -1,67 +1,19 @@
-{{yield}}
 <div class="card dataset mini">
 	{{#if (eq type "request")}}
 		<div class="title-details">
 			{{#link-to 'requests.detail' dataset.id}}<h5 class="data-title" alt="dataset title">{{truncate dataset.title 55}}</h5>{{/link-to}}
-			{{#unless hideSubmitter}}
-				<div class="submitted">
-					{{#if isFavourite}}
-						<h6>Requested by
-							{{#link-to 'user' dataset.user.id class="user-name"}}{{dataset.user.firstname}} {{dataset.user.lastname}}{{/link-to}}
-						</h6>
-					{{else}}
-						<h6>Requested by
-							{{#link-to 'user' dataset.userId.id class="user-name"}}{{dataset.userId.displayName}}{{/link-to}}
-						</h6>
-					{{/if}}
-				</div>
-			{{/unless}}
+			{{from-label model=dataset isRequest=true isFavourite=isFavourite}}
 			<div class="card-footer">
 				{{stats-list stats=dataset.stats}}
 			</div>
 		</div>
 	{{else}}	<!-- Dataset or Registration -->
-
 		<div class="title-details">
 	    {{#link-to 'datasets.detail' dataset.id}}<h5 class="data-title" alt="dataset title">{{truncate dataset.title 55}}</h5>{{/link-to}}
-			{{#unless hideSubmitter}}
-				<div class="submitted">
-
-					<!-- If shortname = repositive -> show "Requested by user"-->
-					<!-- else show "from datasource" -->
-					{{#if isFavourite}}
-						{{#if (eq dataset.datasource.short_name "REPOSITIVE")}}
-							<h6>Registered by
-								{{#link-to 'user' dataset.user.id class="user-name"}}{{dataset.user.firstname}} {{dataset.user.lastname}}{{/link-to}}
-							</h6>
-						{{else}}
-							<h6>from
-								{{#link-to 'datasets.search' (query-params q="" datasource=dataset.datasource.short_name) class="user-name"}}
-									{{dataset.datasource.short_name}}
-								{{/link-to}}
-							</h6>
-						{{/if}}
-					{{else}}
-						{{#if (eq dataset.datasourceId.shortName "REPOSITIVE")}}
-							<h6>Registered by
-								{{#link-to 'user' dataset.userId.id class="user-name"}}{{dataset.userId.displayName}}{{/link-to}}
-							</h6>
-						{{else}}
-							<h6>from
-								{{#link-to 'datasets.search' (query-params q="" datasource=dataset.datasourceId.shortName) class="user-name"}}
-									{{dataset.datasourceId.shortName}}
-								{{/link-to}}
-							</h6>
-						{{/if}}
-					{{/if}}
-
-
-				</div>
-			{{/unless}}
+			{{from-label model=dataset isFavourite=isFavourite}}
 			<div class="card-footer">
 				{{stats-list stats=dataset.stats access=dataset.access}}
 	    </div>
 		</div>
-
 	{{/if}}
 </div>

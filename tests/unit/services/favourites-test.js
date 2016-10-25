@@ -6,20 +6,17 @@ import {
 } from 'ember-mocha';
 
 describeModule(
-  'controller:datasources/source',
-  'DatasourcesSourceController',
+  'service:favourites',
+  'favouritesService',
   {
     // Specify the other units that are required for this test.
-    needs: [
-      'service:session',
-      'service:metrics'
-    ]
+    // needs: ['service:foo']
   },
   function() {
     // Replace this with your real tests.
     it('exists', function() {
-      let controller = this.subject();
-      expect(controller).to.be.ok;
+      let service = this.subject();
+      expect(service).to.be.ok;
     });
   }
 );

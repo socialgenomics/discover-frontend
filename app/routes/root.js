@@ -1,10 +1,11 @@
 import Ember from 'ember';
 import ajax from 'ic-ajax';
 import ENV from 'repositive/config/environment';
+const { inject: { service }, Route, RSVP } = Ember;
 
-export default Ember.Route.extend({
-  session: Ember.inject.service(),
-  actionsService: Ember.inject.service('actions'),
+export default Route.extend({
+  session: service(),
+  favouritesService: service('favourites'),
 
   beforeModel: function() {
     if (this.get('session.data.firstVisit', true) && this.get('session.isAuthenticated')) {
@@ -38,12 +39,14 @@ export default Ember.Route.extend({
         authorization: `JWT ${token}`
       };
 
-      return Ember.RSVP.all([
-        ajax({ url: ENV.APIRoutes['datasets.search'] , type: 'GET', headers: authHeaders }),
+      return RSVP.all([
+        ajax({ url: ENV.APIRoutes['stats'] , type: 'GET', headers: authHeaders }),
         ajax({ url: ENV.APIRoutes['datasets.trending'] , type: 'GET', headers: authHeaders }),
-        this.store.query('request', {}),
-        this.store.query('dataset', { user_registered: true }),
-        this.get('actionsService').loadFavourites()
+        this.store.query('request', { 'order[0][0]': 'updated_at', 'order[0][1]': 'DESC' }),
+        this.store.query('dataset', { 'where.user_id.$ne': 'null', 'order[0][0]': 'updated_at', 'order[0][1]': 'DESC' }),
+        this.store.query('collection', { 'where.type': 'repositive_collection', 'order[0][0]': 'updated_at', 'order[0][1]': 'DESC', 'limit': '3' }),
+        this.store.query('collection', { 'where.type': 'datasource', 'order[0][0]': 'updated_at', 'order[0][1]': 'DESC', 'limit': '3' }),
+        this.get('favouritesService').loadFavourites()
       ])
       .then(data => {
         //Normalize and push trending datasets
@@ -55,7 +58,9 @@ export default Ember.Route.extend({
           stats: data[0],
           datasets: trending,
           requests: data[2],
-          registered: data[3]
+          registered: data[3],
+          collections: data[4],
+          datasources: data[5]
         };
       })
       .catch(err => {
@@ -63,7 +68,7 @@ export default Ember.Route.extend({
         throw err;
       });
     } else {
-      return ajax({ url: ENV.APIRoutes['datasets.search'] , type: 'GET' })
+      return ajax({ url: ENV.APIRoutes['stats'] , type: 'GET' })
       .then(stat => {
         return { stats: stat };
       });

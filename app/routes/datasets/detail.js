@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
+const { inject: { service }, Route, RSVP } = Ember;
 
 //TODO move into mixin?
 function peekOrCreate(store, id) {
@@ -18,20 +19,23 @@ function reducer(acc, curr) {
   return acc;
 }
 
-export default Ember.Route.extend(AuthenticatedRouteMixin, {
-  session: Ember.inject.service(),
-  actionsService: Ember.inject.service('actions'),
+export default Route.extend(AuthenticatedRouteMixin, {
+  session: service(),
+  favouritesService: service('favourites'),
 
   model: function(params) {
     let actionable = peekOrCreate(this.store, params.id);
-    return Ember.RSVP.hash({
+    return RSVP.hash({
       comments: this.store.query('action', {
-        actionable_id: params.id,
-        type: 'comment'
+        'were.actionable_id': params.id,
+        'where.type': 'comment',
+        'order[0][0]': 'updated_at',
+        'order[0][1]': 'DESC',
+        limit: 100 // Remove limit to 10 elements
       }),
       tags: this.store.query('action', {
-        actionable_id: params.id,
-        type: 'tag'
+        'where.actionable_id': params.id,
+        'where.type': 'tag'
       }),
       dataset: this.store.findRecord('dataset', params.id)
     })
@@ -41,7 +45,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
       let commenterIds = data.comments.content
       .map(action => action.record.get('userId.id'))
       .reduce(reducer, []);
-      return Ember.RSVP.hash({
+      return RSVP.hash({
         userProfiles: commenterIds.map(id => this.store.query('userProfile', id)),
         dataset: dataset
       });
@@ -57,7 +61,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     //TODO: Refactor - This code is used in several places e.g. request and dataset detail controllers & routes
     const userId = this.get('session.authenticatedUser');
     const currentModel = dataset;
-    this.get('actionsService').loadFavourites();
+    this.get('favouritesService').loadFavourites();
     let view = this.store.createRecord('action', {
       actionableId: currentModel.get('actionableId'),
       userId: userId,

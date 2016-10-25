@@ -27,10 +27,9 @@ deployment:
       - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS registry.repositive.io:5000
       - docker push registry.repositive.io:5000/discover:dev
       - mkdir rancher && cd rancher
-      - rancher --env 1a77 --access-key $ACCESS_DEV --secret-key $SECRET_DEV export Frontend > compose.tar
+      - rancher --env 1a77 --access-key $ACCESS_DEV --secret-key $SECRET_DEV export Backend > compose.tar
       - tar -xf compose.tar
-      - rancher-compose --access-key $ACCESS_DEV --secret-key $SECRET_DEV -p Frontend up --force-upgrade -c -d discover
-      - rancher --env 1a77 --access-key $ACCESS_DEV --secret-key $SECRET_DEV exec nginx service nginx reload
+      - rancher-compose --access-key $ACCESS_DEV --secret-key $SECRET_DEV -p Backend up --force-upgrade -c -d discover
   staging:
     branch: master
     commands:

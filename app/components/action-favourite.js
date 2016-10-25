@@ -4,11 +4,11 @@ const { inject: { service } } = Ember;
 export default Ember.Component.extend({
   store: service(),
   session: service(),
-  actionsService: service('actions'),
+  favouritesService: service('favourites'),
   isSubmitting: false,
-  isStarred: Ember.computed('actionsService.userFavourites', function() {
-    const actionsService = this.get('actionsService');
-    return Ember.isPresent(actionsService.getFavourite(this.model.id));
+  isStarred: Ember.computed('favouritesService.userFavourites', function() {
+    const favouritesService = this.get('favouritesService');
+    return Ember.isPresent(favouritesService.getFavourite(this.model.id));
   }),
   tagName: 'a',
   mouseEnter() {
@@ -18,9 +18,9 @@ export default Ember.Component.extend({
     this.set('isHovered', false);
   },
   click() {
-    const actionsService = this.get('actionsService');
+    const favouritesService = this.get('favouritesService');
     const currentModel = this.model; //can be request or dataset
-    let favourite = actionsService.getFavourite(currentModel.id);
+    let favourite = favouritesService.getFavourite(currentModel.id);
     if (!this.get('isSubmitting')) {
       if (favourite) {
         this._deleteFavourite(favourite);
@@ -30,7 +30,7 @@ export default Ember.Component.extend({
     }
   },
   _addFavourite() {
-    const actionsService = this.get('actionsService');
+    const favouritesService = this.get('favouritesService');
     const currentModel = this.model; //can be request or dataset
     const store = this.get('store');
     const currentUser = this.get('session.authenticatedUser');
@@ -46,7 +46,7 @@ export default Ember.Component.extend({
       return favourite.save();
     })
     .then(savedFavourite => {
-      actionsService.pushFavourite(savedFavourite);
+      favouritesService.pushFavourite(savedFavourite);
       this.set('isSubmitting', false);
       currentModel.incrementProperty('stats.favourite');
       this.get('metrics').trackEvent({
@@ -61,14 +61,14 @@ export default Ember.Component.extend({
     });
   },
   _deleteFavourite(favourite) {
-    const actionsService = this.get('actionsService');
+    const favouritesService = this.get('favouritesService');
     const currentModel = this.model; //can be request or dataset
     this.set('isSubmitting', true);
     favourite.destroyRecord()
     .then(deletedFavourite => {
       this.set('isSubmitting', false);
       currentModel.decrementProperty('stats.favourite');
-      actionsService.removeFavourite(deletedFavourite);
+      favouritesService.removeFavourite(deletedFavourite);
       this.get('metrics').trackEvent({
         category: 'dataset',
         action: 'favourite',

@@ -21,7 +21,7 @@
   {{fa-icon "eye"}}
   <span>
     {{#if stats.view}}
-      {{stats.view}}
+      {{rough-estimate stats.view}}
     {{else}}
       0
     {{/if}}
@@ -31,7 +31,7 @@
   {{fa-icon "comments"}}
   <span>
     {{#if stats.comment}}
-      {{stats.comment}}
+      {{rough-estimate stats.comment}}
     {{else}}
       0
     {{/if}}
@@ -41,7 +41,7 @@
   {{fa-icon "star"}}
   <span>
     {{#if stats.favourite}}
-      {{stats.favourite}}
+      {{rough-estimate stats.favourite}}
     {{else}}
       0
     {{/if}}
