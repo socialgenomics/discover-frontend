@@ -26,7 +26,7 @@
 
       </div>
     </div>
-    <div class="row bottom-static">
+    <div class="row bottom-static ember install ember-component-css">
       <div class="dataset-more-info-section">
         <div class="col m12">
           <ul class="card-info-list left-align">
@@ -47,12 +47,15 @@
         </div>
         <div class="col m12 center">
           {{#if model.url}}
-            <a target="_blank" {{action "trackExit"}} href="{{model.url}}" class="btn waves-effect teal white-text">{{#if (eq model.access 'Open')}}Access Data{{else}}Go To Dataset{{/if}}</a>
+            <a target="_blank" {{action "trackExit"}} href="{{if session.isAuthenticated model.url ''}}" class="btn waves-effect teal white-text">{{#if (eq model.access 'Open')}}Access Data{{else}}Go To Dataset{{/if}}</a>
           {{else}}
             <a class="btn disabled white-text">{{#if (eq model.access 'Open')}}Access Data{{else}}Apply for Access{{/if}}</a>
           {{/if}}
         </div>
       </div>
+      {{#unless session.isAuthenticated}}
+        {{create-account-call-to-action}}
+      {{/unless}}
     </div>
   </div>
 
