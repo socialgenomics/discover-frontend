@@ -1,14 +1,13 @@
 import Ember from 'ember';
-const { inject: { service } } = Ember;
+const { inject: { service }, Component, computed, isPresent } = Ember;
 
-export default Ember.Component.extend({
+export default Component.extend({
   store: service(),
   session: service(),
   favouritesService: service('favourites'),
   isSubmitting: false,
-  isStarred: Ember.computed('favouritesService.userFavourites', function() {
-    const favouritesService = this.get('favouritesService');
-    return Ember.isPresent(favouritesService.getFavourite(this.model.id));
+  isStarred: computed('favouritesService.userFavourites', function() {
+    return isPresent(this.get('favouritesService').getFavourite(this.get('model.id')));
   }),
   tagName: 'a',
   mouseEnter() {
