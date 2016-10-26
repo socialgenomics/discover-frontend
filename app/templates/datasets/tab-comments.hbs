@@ -4,7 +4,13 @@
       {{add-comment addComment=(action 'addComment') avatar=session.authenticatedUser.userProfile.avatar}}
     {{/if}}
     {{#each commentsSorted as |comment|}}
-      {{user-comment user=comment.userId text=comment.properties.text date=comment.createdAt avatar=comment.userId.userProfile.avatar}}
+      {{user-comment
+        user=comment.userId
+        text=comment.properties.text
+        date=comment.createdAt
+        avatar=comment.userId.userProfile.avatar
+        disabled=(not session.isAuthenticated)
+      }}
       <div class="divider"></div>
     {{/each}}
   </div>

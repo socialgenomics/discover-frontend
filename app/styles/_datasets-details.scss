@@ -9,3 +9,9 @@
   right: 0;
   top: 0;
 }
+
+// disable pointer cursor on disabled links in comment section
+// TODO: move to comment item component when creating one
+.dataset .comment-author-link.disabled {
+  cursor: text;
+}
