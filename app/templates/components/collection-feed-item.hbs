@@ -1,32 +1,34 @@
-<main class="col m12">
-  <div class="card dataset card-comp">
+{{#link-to 'collections.collection' collection.id classNames="data-title"}}
+  <main class="col m12">
+    <div class="card dataset card-comp">
 
-    <section class="card-type-section col m2">
-      <img src="/assets/images/icons/icon-collection_2@2x.png" class="data-icon">
-      <p>Collection</p>
-    </section>
+      <section class="card-type-section col m2">
+        <img src="/assets/images/icons/icon-collection_2@2x.png" class="data-icon">
+        <p>Collection</p>
+      </section>
 
-    <section class="card-user-section col m3">
-      {{#if collection.userId.displayName}}
-        {{#link-to 'user' collection.userId.id}}
-          <img src={{collection.userId.userProfile.avatar}} width="35px" height="35px">
-          <p>{{collection.userId.displayName}}</p>
-        {{/link-to}}
-      {{else}}
-        {{#link-to 'collections.collection' collection.id classNames="data-title"}}
-          <div class="round-img">
-            <img src="/assets/images/favicon.ico" class="data-icon">
+      <section class="card-user-section col m3">
+        {{#if collection.userId.displayName}}
+          {{#link-to 'user' collection.userId.id}}
+            <img src={{collection.userId.userProfile.avatar}} width="35px" height="35px">
+            <p>{{collection.userId.displayName}}</p>
+          {{/link-to}}
+        {{else}}
+          <div class="">
+            <div class="round-img">
+              <img src="/assets/images/favicon.ico" class="data-icon">
+            </div>
+            <p>Repositive</p>
           </div>
-          <p>Repositive</p>
-        {{/link-to}}
-      {{/if}}
-    </section>
+        {{/if}}
+      </section>
 
-    <section class="card-content-section col m7">
-      {{#link-to 'collections.collection' collection.id classNames="data-title"}}
-        <h4 class="data-title">{{collection.name}}</h4>
-      {{/link-to}}
-      <p class="markdown-text">{{markdown-to-html markdown=collection.description}}</p>
-    </section>
-  </div>
-</main>
+      <section class="card-content-section col m7">
+        {{#link-to 'collections.collection' collection.id classNames="data-title"}}
+          <h4 class="data-title">{{collection.name}}</h4>
+        {{/link-to}}
+        <p class="markdown-text">{{markdown-to-html markdown=collection.description}}</p>
+      </section>
+    </div>
+  </main>
+{{/link-to}}
