@@ -47,10 +47,8 @@ export default Controller.extend(
             type: 'info',
             timeout: 7000,
             class: 'fadeIn'
-          })
-          .then(() => {
-            this.reloadMessages(resp.messages);
           });
+          this.reloadMessages(resp.messages);
         })
         .catch(err => {
           this.set('loading', false);
@@ -61,10 +59,8 @@ export default Controller.extend(
               type: 'warning',
               timeout: 7000,
               class: 'fadeIn'
-            })
-            .then(() => {
-              this.reloadMessages(err.jqXHR.responseJSON.messages);
             });
+            this.reloadMessages(err.jqXHR.responseJSON.messages);
           }
         });
       }

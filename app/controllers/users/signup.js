@@ -19,10 +19,8 @@ export default Ember.Controller.extend(
   showPassword: false,
   loading: false,
   formSubmitted: false,
-  isDisabled: computed('loading', 'isValid', function() {
-    if (this.get('loading') || !this.get('isValid')) {
-      return true;
-    }
+  isDisabled: computed('loading', 'isValid', function() {    
+    return this.get('loading') || !this.get('isValid');
   }),
 
   validations: {

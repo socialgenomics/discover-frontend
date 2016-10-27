@@ -11,9 +11,7 @@ export default Ember.Controller.extend(
   loading: false,
   formSubmitted: false,
   isDisabled: computed('loading', 'isValid', function() {
-    if (this.get('loading') || !this.get('isValid')) {
-      return true;
-    }
+    return this.get('loading') || !this.get('isValid');
   }),
 
   validations: {
@@ -67,8 +65,7 @@ export default Ember.Controller.extend(
           email: this.get('email'),
           password: this.get('password')
         })
-        .then(this.displayMessage.bind(this))
-        .catch(this.displayMessage.bind(this));
+        .finally(this.displayMessage.bind(this));
       }
     },
 
