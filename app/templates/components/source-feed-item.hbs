@@ -16,7 +16,11 @@
     </section>
 
     <section class="card-content-section col m7">
-      {{#if source.description}}
+      {{#if source.properties.summary}}
+        <div class="source-text">
+          <p class="markdown-text">{{markdown-to-html markdown=source.properties.summary}}</p>
+        </div>
+      {{else if source.description}}
         <div class="source-text">
           <p class="markdown-text">{{markdown-to-html markdown=source.description}}</p>
         </div>
