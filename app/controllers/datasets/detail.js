@@ -1,9 +1,11 @@
 import Ember from 'ember';
 
-export default Ember.Controller.extend({
-  session: Ember.inject.service(),
-  comments: Ember.computed.filterBy('model.actionableId.actions', 'type', 'comment'),
-  commentsSorted : Ember.computed.sort('comments', (itemA, itemB) => {
+const { Controller, computed, inject: { service }, Logger } = Ember;
+
+export default Controller.extend({
+  session: service(),
+  comments: computed.filterBy('model.actionableId.actions', 'type', 'comment'),
+  commentsSorted : computed.sort('comments', (itemA, itemB) => {
     if (itemA.get('createdAt') < itemB.get('createdAt')) {
       return 1;
     } else if (itemA.get('createdAt') > itemB.get('createdAt')) {
@@ -11,7 +13,7 @@ export default Ember.Controller.extend({
     }
     return 0;
   }),
-  tags: Ember.computed.filterBy('model.actionableId.actions', 'type', 'tag'),
+  tags: computed.filterBy('model.actionableId.actions', 'type', 'tag'),
 
   actions: {
     trackExit: function() {
@@ -36,10 +38,7 @@ export default Ember.Controller.extend({
           text: text
         }
       });
-      comment.save()
-      .catch((err) => {
-        Ember.Logger.error(err);
-      });
+      comment.save().catch(Logger.error);
     },
 
     addTag(text) {
