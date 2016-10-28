@@ -2,7 +2,9 @@
   <div class="col l7 m6 s12 card-main-wrapper">
     <div class="top-action card-header">
       {{#if model.colour}}
-        <span class="assay-small {{model.colour}}" data-balloon={{model.assay}} data-balloon-pos="up"></span>
+        {{#link-to 'datasets.search' (query-params q="" assay=model.assay) }}
+          <span class="assay-small {{model.colour}}" data-balloon={{model.assay}} data-balloon-pos="up"></span>
+        {{/link-to}}
       {{/if}}
       <div class="actions-container valign-wrapper">
         {{action-favourite model=model}}
