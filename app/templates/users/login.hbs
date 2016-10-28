@@ -39,7 +39,13 @@
     }}
     <h6><a {{action 'resetPassword'}} class="link" style="cursor:pointer">Click here</a> to reset your password.</h6>
     <div class="input-container">
-      {{#full-width-button class="teal" type="submit"}}LOGIN{{/full-width-button}}
+      {{#if loading}}
+        {{#full-width-button class="disabled"}}Logging in...{{/full-width-button}}
+      {{else if isDisabled}}
+        {{#full-width-button class="disabled"}}LOGIN{{/full-width-button}}
+      {{else}}
+        {{#full-width-button class="teal" type="submit"}}LOGIN{{/full-width-button}}
+      {{/if}}
     </div>
     {{message-queue}}
     <div class="divider"></div>
