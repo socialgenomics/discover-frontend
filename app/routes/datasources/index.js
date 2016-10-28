@@ -13,7 +13,7 @@ export default Route.extend(AuthenticatedRouteMixin, {
       };
       return RSVP.all([
         ajax({ url: ENV.APIRoutes['stats'] , type: 'GET', headers: authHeaders }),
-        ajax({ url: ENV.APIRoutes['datasources'] , type: 'GET', headers: authHeaders }),
+        ajax({ url: ENV.APIRoutes['datasources'] , type: 'GET', headers: authHeaders })
       ])
       .then(data => {
         return {

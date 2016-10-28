@@ -19,7 +19,7 @@ export default Ember.Controller.extend(
   showPassword: false,
   loading: false,
   formSubmitted: false,
-  isDisabled: computed('loading', 'isValid', function() {    
+  isDisabled: computed('loading', 'isValid', function() {
     return this.get('loading') || !this.get('isValid');
   }),
 
