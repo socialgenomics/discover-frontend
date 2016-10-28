@@ -50,14 +50,14 @@
             <!-- HACK #380 -->
             {{#if searchRoute}}
               {{#link-to 'datasets.search' (query-params assay=dataset.assay) }}
-                <div class="assay-container" data-balloon={{dataset.assay}} data-balloon-pos="up">
-                  <span class="assay-small {{dataset.colour}}"></span>
+                <div class="assay-container">
+                  <span class="assay-small {{dataset.colour}}" data-balloon={{dataset.assay}} data-balloon-pos="up"></span>
                 </div>
               {{/link-to}}
             {{else}}
               {{#link-to 'datasets.search' (query-params q="" assay=dataset.assay) }}
-                <div class="assay-container" data-balloon={{dataset.assay}} data-balloon-pos="up">
-                  <span class="assay-small {{dataset.colour}}"></span>
+                <div class="assay-container">
+                  <span class="assay-small {{dataset.colour}}" data-balloon={{dataset.assay}} data-balloon-pos="up"></span>
                 </div>
               {{/link-to}}
             {{/if}}
@@ -73,13 +73,17 @@
         {{#if dataset.highlights.title}}
           {{#link-to 'datasets.detail' dataset.id classNames="data-title"}}
             <div data-balloon={{dataset.title}} data-balloon-pos="up" data-balloon-length="large">
-              <h4 class="data-title">{{{truncate dataset.highlights.title 70}}}</h4>
+              <h4 class="data-title">
+                {{{truncate dataset.highlights.title 70}}}
+              </h4>
             </div>
           {{/link-to}}
         {{else}}
           {{#link-to 'datasets.detail' dataset.id classNames="data-title"}}
             <div data-balloon={{dataset.title}} data-balloon-pos="up" data-balloon-length="large">
-              <h4 class="data-title">{{truncate dataset.title 70}}</h4>
+              <h4 class="data-title">
+                {{truncate dataset.title 70}}
+              </h4>
             </div>
           {{/link-to}}
         {{/if}}
