@@ -3,7 +3,7 @@ import { isVerified } from './users/trust';
 import ajax from 'ic-ajax';
 import ENV from 'repositive/config/environment';
 
-const { inject: { service }, Route, RSVP } = Ember;
+const { inject: { service }, Route, RSVP, get } = Ember;
 
 export default Route.extend({
   session: service(),
@@ -43,6 +43,7 @@ export default Route.extend({
       })
       .catch(err => {
         Ember.Logger.error(err);
+        throw err;
       });
     } else {
       this.transitionTo('/');
