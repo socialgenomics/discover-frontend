@@ -3,16 +3,17 @@ import EmberValidations from 'ember-validations';
 import ENV from 'repositive/config/environment';
 import ajax from 'ic-ajax';
 
-export default Ember.Controller.extend(
+const { Controller, computed, Logger } = Ember;
+
+export default Controller.extend(
   EmberValidations,
 {
   email: null,
   loading: false,
   messages: [],
-
-  buttonDisabled: function() {
+  isDisabled: computed('loading', 'isValid', function() {
     return !this.get('isValid') || this.get('loading');
-  }.property('isValid', 'loading'),
+  }),
 
   clearMessages: function() {
     this.set('messages', []);
@@ -32,37 +33,37 @@ export default Ember.Controller.extend(
   },
   actions: {
     submitForm: function() {
-      this.flashMessages.clearMessages();
-      this.set('loading', true);
-      ajax({
-        url: ENV.APIRoutes['reset-password'] + '/' + this.get('email'),
-        type: 'GET'
-      })
-      .then(resp => {
-        this.flashMessages.add({
-          message: 'We have sent an email to ' + this.get('email'),
-          type: 'info',
-          timeout: 7000,
-          class: 'fadeIn'
+      if (!this.get('isDisabled')) {
+        this.flashMessages.clearMessages();
+        this.set('loading', true);
+        ajax({
+          url: ENV.APIRoutes['reset-password'] + '/' + this.get('email'),
+          type: 'GET'
         })
-        .then(() => {
-          this.reloadMessages(resp.messages);
-        });
-      })
-      .catch(err => {
-        Ember.Logger.error(err);
-        if (err.errorThrown === 'Not Found' || err.errorThrown === 'Bad Request') {
+        .then(resp => {
+          this.set('loading', false);
           this.flashMessages.add({
-            message: 'We could not send an email to ' + this.get('email') + '. Please check you\'ve entered the correct email.',
-            type: 'warning',
+            message: 'We have sent an email to ' + this.get('email'),
+            type: 'info',
             timeout: 7000,
             class: 'fadeIn'
-          })
-          .then(() => {
-            this.reloadMessages(err.jqXHR.responseJSON.messages);
           });
-        }
-      });
+          this.reloadMessages(resp.messages);
+        })
+        .catch(err => {
+          this.set('loading', false);
+          Logger.error(err);
+          if (err.errorThrown === 'Not Found' || err.errorThrown === 'Bad Request') {
+            this.flashMessages.add({
+              message: 'We could not send an email to ' + this.get('email') + '. Please check you\'ve entered the correct email.',
+              type: 'warning',
+              timeout: 7000,
+              class: 'fadeIn'
+            });
+            this.reloadMessages(err.jqXHR.responseJSON.messages);
+          }
+        });
+      }
     }
   },
   reloadMessages: function(messages) {

@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import EmberValidations from 'ember-validations';
-const { get } = Ember;
+const { get, computed } = Ember;
 
 export default Ember.Controller.extend(
   EmberValidations,
@@ -10,10 +10,9 @@ export default Ember.Controller.extend(
   password: null,
   loading: false,
   formSubmitted: false,
-
-  buttonDisabled: function() {
-    return !this.get('isValid') || this.get('loading');
-  }.property('isValid', 'loading'),
+  isDisabled: computed('loading', 'isValid', function() {
+    return this.get('loading') || !this.get('isValid');
+  }),
 
   validations: {
     email: {
@@ -35,6 +34,7 @@ export default Ember.Controller.extend(
     }
   },
   displayMessage(resp) {
+    this.set('loading', false);
     if (resp) {
       const errorCode = get(resp, 'status_code');
       let message;
@@ -56,18 +56,17 @@ export default Ember.Controller.extend(
 
   actions: {
     submitForm: function() {
-      // fix for password manager bug
-      Ember.$('#login-form').find('input').trigger('change');
-
-      this.set('loading', true);
-      this.set('formSubmitted', true);
-      this.get('session')
-      .authenticate('authenticator:repositive', {
-        email: this.get('email'),
-        password: this.get('password')
-      })
-      .then(this.displayMessage.bind(this))
-      .catch(this.displayMessage.bind(this));
+      if (!this.get('isDisabled')) {
+        Ember.$('#login-form').find('input').trigger('change'); // fix for password manager bug
+        this.set('loading', true);
+        this.set('formSubmitted', true);
+        this.get('session')
+        .authenticate('authenticator:repositive', {
+          email: this.get('email'),
+          password: this.get('password')
+        })
+        .finally(this.displayMessage.bind(this));
+      }
     },
 
     resetPassword: function() {
