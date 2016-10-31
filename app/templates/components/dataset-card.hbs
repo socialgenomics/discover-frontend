@@ -50,9 +50,7 @@
             <!-- HACK #380 -->
             {{#if searchRoute}}
               {{#link-to 'datasets.search' (query-params assay=dataset.assay) }}
-                <div class="assay-container">
-                  <span class="assay-small {{dataset.colour}}" data-balloon={{dataset.assay}} data-balloon-pos="up"></span>
-                </div>
+                {{assay-type assay=dataset}}
               {{/link-to}}
             {{else}}
               {{#link-to 'datasets.search' (query-params q="" assay=dataset.assay) }}

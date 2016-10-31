@@ -3,7 +3,7 @@
     <div class="top-action card-header">
       {{#if model.colour}}
         {{#link-to 'datasets.search' (query-params q="" assay=model.assay) }}
-          <span class="assay-small {{model.colour}}" data-balloon={{model.assay}} data-balloon-pos="up"></span>
+          {{assay-type assay=model}}
         {{/link-to}}
       {{/if}}
       <div class="actions-container valign-wrapper">
