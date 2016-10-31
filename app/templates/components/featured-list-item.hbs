@@ -5,11 +5,11 @@
         {{model.name}}
         {{is-new-label updatedAt=model.updatedAt}}
       </h4>
-        {{#if model.properties.summary}}
-            <p class="truncate two-lines">{{model.properties.summary}}</p>
-        {{else}}
-            <p class="truncate two-lines">{{model.description}}</p>
-        {{/if}}
+      {{#if model.properties.summary}}
+          <p class="collection-item truncate two-lines">{{model.properties.summary}}</p>
+      {{else}}
+          <p class="collection-item truncate two-lines">{{model.description}}</p>
+      {{/if}}
     </div>
   {{/link-to}}
 {{else}}
