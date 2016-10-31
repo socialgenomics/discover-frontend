@@ -1,6 +1,7 @@
-<div id="profile" class="profile content">
+<main id="profile" class="profile content">
   <div class="row">
-    <div class="contain">
+
+    <section class="contain">
       <div class="col m12 center">
         <div class="card">
           <div class="card-content">
@@ -40,11 +41,12 @@
           </div>
         </div>
       </div>
-    </div>
+    </section>
 
-    <div class="contain">
-      <!-- Favourites -->
+    <section class="contain">
       <div class="col s12 m6 activity-card">
+
+        <!-- Favourites -->
         <div class="card favourited-data">
           <div class="card-header card-title">
             {{fa-icon "star"}}
@@ -60,10 +62,33 @@
             {{/if}}
           </div>
         </div>
+
+        <!--data requests-->
+        <div class="card requested-data">
+          <div class="card-header card-title">
+            {{#link-to 'datasets.request'}}
+              {{fa-icon "clipboard"}}
+              <h4>Requested Data</h4>
+            {{/link-to}}
+          </div>
+          <div class="card-content">
+            {{#if model.requests}}
+              {{#each model.requests as |request|}}
+                {{mini-dataset dataset=request type="request"}}
+              {{/each}}
+            {{else}}
+              {{#if isOwnProfile}}
+                <p class="color-silver-chalice-text center-align">You have not requested any data from our community on REPOSITIVE.</p>
+              {{else}}
+                <p class="color-silver-chalice-text center-align">This user has not made any requests for data from our community on REPOSITIVE.</p>
+              {{/if}}
+            {{/if}}
+          </div>
+        </div>
       </div>
 
-      <!-- data registrations -->
       <div class="col s12 m6 activity-card">
+        <!-- data registrations -->
         <div class="card registered-data">
           <div class="card-header card-title">
             {{#link-to 'datasets.register'}}
@@ -87,30 +112,6 @@
         </div>
       </div>
 
-      <!--data requests-->
-      <div class="col s12 m6 activity-card">
-        <div class="card requested-data">
-          <div class="card-header card-title">
-            {{#link-to 'datasets.request'}}
-              {{fa-icon "clipboard"}}
-              <h4>Requested Data</h4>
-            {{/link-to}}
-          </div>
-          <div class="card-content">
-            {{#if model.requests}}
-              {{#each model.requests as |request|}}
-                {{mini-dataset dataset=request type="request"}}
-              {{/each}}
-            {{else}}
-              {{#if isOwnProfile}}
-                <p class="color-silver-chalice-text center-align">You have not requested any data from our community on REPOSITIVE.</p>
-              {{else}}
-                <p class="color-silver-chalice-text center-align">This user has not made any requests for data from our community on REPOSITIVE.</p>
-              {{/if}}
-            {{/if}}
-          </div>
-        </div>
-      </div>
-    </div>
+    </section>
   </div>
-</div>
+</main>
