@@ -3,7 +3,7 @@ import EmberValidations from 'ember-validations';
 import ENV from 'repositive/config/environment';
 import ajax from 'ic-ajax';
 import { validator } from 'ember-validations';
-const{ get } = Ember;
+const{ get, computed } = Ember;
 
 export default Ember.Controller.extend(
    EmberValidations,
@@ -19,6 +19,9 @@ export default Ember.Controller.extend(
   showPassword: false,
   loading: false,
   formSubmitted: false,
+  isDisabled: computed('loading', 'isValid', function() {
+    return this.get('loading') || !this.get('isValid');
+  }),
 
   validations: {
 
@@ -75,10 +78,6 @@ export default Ember.Controller.extend(
     this.set('lastname', lastname);
   }.observes('fullname'),
 
-  buttonDisabled: function() {
-    return !this.get('isValid') || this.get('loading');
-  }.property('isValid', 'loading'),
-
   passwordStrength: function() {
     let numErrors = this.get('errors.password.length');
 
@@ -120,7 +119,7 @@ export default Ember.Controller.extend(
 
   actions: {
     signupAndAuthenticate: function() {
-      if (this.get('isValid')) {
+      if (!this.get('isDisabled')) {
         this.set('formSubmitted', true);
         let credentials = this.getProperties('firstname', 'lastname', 'email', 'password');
         this.set('loading', true);
@@ -135,10 +134,14 @@ export default Ember.Controller.extend(
         .then((resp)=> { // signup has suceeded, now login
           this.get('session').authenticate('authenticator:repositive', credentials)
           .then(() => this.get('session').set('data.firstVisit', true))
-          .then(() => this.get('session').set('data.displayWelcomeMessage', false))
+          .then(() => {
+            this.get('session').set('data.displayWelcomeMessage', false);
+            this.set('loading', false);
+          })
           .catch(this.displayMessage.bind(this));
         })
         .catch(err => { // error with signup
+          this.set('loading', false);
           if (err.jqXHR !== undefined) {
             /*
               if the error is 4XX or 5XX server resp display the error messages.

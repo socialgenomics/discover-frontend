@@ -1,7 +1,9 @@
 <section class="metadata-panel source-panel">
   <header>
     {{#link-to 'datasources' class="left-align" invokeAction=(action 'trackBackClick')}}
-      {{fa-icon "chevron-left"}}
+      <div class="back-arrow center-align" data-balloon="See all data sources" data-balloon-pos="right" data-balloon-length="medium">
+        {{fa-icon "chevron-left"}}
+      </div>
     {{/link-to}}
     <img src="/assets/images/icons/icon-datasource-white@2x.png" class="data-icon">
     <h5>Data Source</h5>
@@ -19,6 +21,10 @@
   {{#if displayInfo}}
     <main>
       <h3>{{name-fallback model=model}}</h3>
+      {{#if (eq model.type 'personal_repository')}}
+        <span class="helper-text">created by </span>
+        <span>{{#link-to 'user' model.userId.id}}{{model.userId.displayName}}{{/link-to}}</span>
+      {{/if}}
       <div class="divider"></div>
 
       <!-- TODO turn these into components -->

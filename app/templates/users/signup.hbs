@@ -59,7 +59,13 @@
        </div>
      </div>
      <div class="input-container center">
-       {{#full-width-button class="teal" type="submit"}}CREATE YOUR ACCOUNT{{/full-width-button}}
+      {{#if loading}}
+        {{#full-width-button class="disabled"}}Signing up...{{/full-width-button}}
+      {{else if isDisabled}}
+        {{#full-width-button class="disabled"}}CREATE YOUR ACCOUNT{{/full-width-button}}
+      {{else}}
+        {{#full-width-button class="teal" type="submit"}}CREATE YOUR ACCOUNT{{/full-width-button}}
+      {{/if}}
        <h6 class="center-align grey-text">By signing up you agree to our {{#link-to 'policies' class="link"}}Terms &amp; Privacy Policy.{{/link-to}} </h6>
      </div>
    </form>

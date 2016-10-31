@@ -3,7 +3,9 @@ import EmberValidations from 'ember-validations';
 import ENV from 'repositive/config/environment';
 import ajax from 'ic-ajax';
 
-export default Ember.Controller.extend(
+const { Controller, computed, Logger } = Ember;
+
+export default Controller.extend(
   EmberValidations,
 {
   resetKey: null,
@@ -13,9 +15,9 @@ export default Ember.Controller.extend(
   messages: [],
   passwordChanged: false,
 
-  buttonDisabled: function() {
+  isDisabled: computed('loading', 'isValid', function() {
     return !this.get('isValid') || this.get('loading');
-  }.property('isValid', 'loading'),
+  }),
 
   clearMessages: function() {
     this.set('messages', []);
@@ -49,35 +51,39 @@ export default Ember.Controller.extend(
   },
   actions: {
     submitForm: function() {
-      this.set('loading', true);
-      if (this.get('password1') !== this.get('password2')) {
-        this.flashMessages.add({
-          message: 'Passwords do not match.',
-          type: 'warning',
-          timeout: 7000,
-          class: 'fadeIn'
-        });
-      } else {
-        ajax({
-          url: ENV.APIRoutes['reset-password'],
-          type: 'POST',
-          data: {
-            token: this.get('resetKey'),
-            password: this.get('password1')
-          }
-        })
-        .then(resp => {
-          this.set('passwordChanged', true)
-          .then(() => {
-            this.reloadMessages(resp.messages);
+      if (!this.get('isDisabled')) {
+        this.set('loading', true);
+        if (this.get('password1') !== this.get('password2')) {
+          this.flashMessages.add({
+            message: 'Passwords do not match.',
+            type: 'warning',
+            timeout: 7000,
+            class: 'fadeIn'
           });
-        })
-        .catch(err => {
-          console.log('ERROR ' + err);
-          if (err) {
-            this.reloadMessages(err.jqXHR.responseJSON.messages);
-          }
-        });
+        } else {
+          ajax({
+            url: ENV.APIRoutes['reset-password'],
+            type: 'POST',
+            data: {
+              token: this.get('resetKey'),
+              password: this.get('password1')
+            }
+          })
+          .then(resp => {
+            this.set('loading', false);
+            this.set('passwordChanged', true)
+            .then(() => {
+              this.reloadMessages(resp.messages);
+            });
+          })
+          .catch(err => {
+            this.set('loading', false);
+            Logger.error(err);
+            if (err) {
+              this.reloadMessages(err.jqXHR.responseJSON.messages);
+            }
+          });
+        }
       }
     }
   },
