@@ -46,7 +46,7 @@ export default Route.extend({
       .then(data => {
         return RSVP.hash({
           dataset: data.dataset,
-          stats: this.get('session.isAuthenticated') === false ? {datasets: 1000000} : null
+          stats: this.get('session.isAuthenticated') === false ? this._getStats() : null
         });
       })
       .catch(Logger.error);
