@@ -1,8 +1,9 @@
 import Ember from 'ember';
 import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
 import { model } from '../datasources/source';
+const { Route } = Ember;
 
-export default Ember.Route.extend(AuthenticatedRouteMixin, {
+export default Route.extend(AuthenticatedRouteMixin, {
   controllerName: 'collection',
   model: model,
   setupController(controller, models) {

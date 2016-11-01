@@ -2,9 +2,11 @@ import Ember from 'ember';
 import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
 import ajax from 'ic-ajax';
 import ENV from 'repositive/config/environment';
+import RememberScrollMixin from 'repositive/mixins/remember-scroll';
+
 const { Route, RSVP } = Ember;
 
-export default Route.extend(AuthenticatedRouteMixin, {
+export default Route.extend(AuthenticatedRouteMixin, RememberScrollMixin, {
   model: function() {
     if (this.get('session.isAuthenticated')) {
       const token = this.get('session.session.content.authenticated.token');
