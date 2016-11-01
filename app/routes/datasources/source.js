@@ -2,6 +2,7 @@ import Ember from 'ember';
 import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
 import ajax from 'ic-ajax';
 import ENV from 'repositive/config/environment';
+import ResetScrollMixin from 'repositive/mixins/reset-scroll';
 
 const storeDatasets = (store) => (datasets) => datasets.map(dataset => store.push(store.normalize('dataset', dataset)));
 
@@ -33,7 +34,7 @@ export function model(params) {
   });
 }
 
-export default Ember.Route.extend(AuthenticatedRouteMixin, {
+export default Ember.Route.extend(AuthenticatedRouteMixin, ResetScrollMixin, {
   controllerName: 'collection',
   model: model,
 
