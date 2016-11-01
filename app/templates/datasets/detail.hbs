@@ -22,13 +22,15 @@
           {{#each tags as |tag|}}
             {{tag-item tag=tag}}
           {{/each}}
-          {{add-tag addTag=(action 'addTag') class="add-btn"}}
-          <br><span class="help-link">Please add tags to improve searching and browsing through data. <a class="help-button" {{action "toggleTagModal"}}>?</a></span>
+          {{#if session.isAuthenticated}}
+            {{add-tag addTag=(action 'addTag') class="add-btn"}}
+            <br><span class="help-link">Please add tags to improve searching and browsing through data. <a class="help-button" {{action "toggleTagModal"}}>?</a></span>
+          {{/if}}
         </div>
 
       </div>
     </div>
-    <div class="row bottom-static">
+    <div class="row bottom-static dataset-more-info-section-wrapper">
       <div class="dataset-more-info-section">
         <div class="col m12">
           <ul class="card-info-list left-align">
@@ -49,12 +51,15 @@
         </div>
         <div class="col m12 center">
           {{#if model.url}}
-            <a target="_blank" {{action "trackExit"}} href="{{model.url}}" class="btn waves-effect teal white-text">{{#if (eq model.access 'Open')}}Access Data{{else}}Go To Dataset{{/if}}</a>
+            <a target="_blank" {{action "trackExit"}} href="{{if session.isAuthenticated model.url ''}}" class="btn waves-effect teal white-text">{{#if (eq model.access 'Open')}}Access Data{{else}}Go To Dataset{{/if}}</a>
           {{else}}
             <a class="btn disabled white-text">{{#if (eq model.access 'Open')}}Access Data{{else}}Apply for Access{{/if}}</a>
           {{/if}}
         </div>
       </div>
+      {{#unless session.isAuthenticated}}
+        {{create-account-call-to-action}}
+      {{/unless}}
     </div>
   </div>
 

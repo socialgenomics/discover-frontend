@@ -1,0 +1,11 @@
+& {
+  background-color: transparentize($color-white, .05);
+  display: flex;
+  justify-content: center;
+  padding-top: 30px;
+
+  a {
+    color: $color-pelorous;
+    text-decoration: underline;
+  }
+}
