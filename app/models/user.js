@@ -3,6 +3,7 @@ import attr from 'ember-data/attr';
 import { belongsTo, hasMany } from 'ember-data/relationships';
 import Ember from 'ember';
 const { computed, isPresent, get } = Ember;
+
 export default Model.extend({
   username: attr('string'),
   firstname: attr('string'),
