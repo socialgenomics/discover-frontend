@@ -1,3 +1,32 @@
 // All CSS imported from the styles app.
 @import "../../../repositive-styles/app/styles/app"; //Used to import the styles from the submodule
 // @import "repositive-styles/app/styles/app"; //This is used to import the styles as a bower component.
+@import "pod-styles";
+
+.dataset.dataset-notification-margin {
+  margin-top: 5.5rem;
+}
+
+.create-account-notification {
+  .stats {
+    padding: 0;
+  }
+
+  h3 {
+    margin-right: 30px;
+  }
+
+  strong {
+    font-size: $h2-fontsize;
+    padding: {
+      left: 5px;
+      right: 5px;
+    };
+  }
+}
+
+.navbar {
+  .primary-action {
+    color: $color-pelorous;
+  }
+}
