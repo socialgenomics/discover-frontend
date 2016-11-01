@@ -1,9 +1,16 @@
 import Ember from 'ember';
 
-export default Ember.Controller.extend({
-  session: Ember.inject.service(),
-  comments: Ember.computed.filterBy('model.actionableId.actions', 'type', 'comment'),
-  commentsSorted : Ember.computed.sort('comments', (itemA, itemB) => {
+const { Controller, computed, inject: { service } } = Ember;
+
+export default Controller.extend({
+  session: service(),
+
+  dataset: computed.alias('model.dataset'),
+  stats: computed.alias('model.stats'),
+  comments: computed.filterBy('dataset.actionableId.actions', 'type', 'comment'),
+  tags: computed.filterBy('dataset.actionableId.actions', 'type', 'tag'),
+
+  commentsSorted : computed.sort('comments', (itemA, itemB) => {
     if (itemA.get('createdAt') < itemB.get('createdAt')) {
       return 1;
     } else if (itemA.get('createdAt') > itemB.get('createdAt')) {
@@ -11,25 +18,28 @@ export default Ember.Controller.extend({
     }
     return 0;
   }),
-  tags: Ember.computed.filterBy('model.actionableId.actions', 'type', 'tag'),
+
+  datasetsNumber: Ember.computed('stats.datasets', function() {
+    return this.get('stats.datasets').toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  }),
 
   actions: {
     trackExit: function() {
       this.get('metrics').trackEvent({
         category: 'dataset',
         action: 'download',
-        label: this.get('model.title')
+        label: this.get('dataset.title')
       });
-      let tab = window.open(this.get('model.url'), '_blank');
+      let tab = window.open(this.get('dataset.url'), '_blank');
       tab.focus();
     },
 
     addComment(text) {
       const userId = this.get('session.authenticatedUser');
-      const currentModel = this.get('model');
+      const dataset = this.get('dataset');
       let comment = this.store.createRecord('action', {
-        actionableId: currentModel.get('actionableId'),
-        actionable_model: currentModel.constructor.modelName,
+        actionableId: dataset.get('actionableId'),
+        actionable_model: dataset.constructor.modelName,
         userId: userId,
         type: 'comment',
         properties: {
@@ -44,7 +54,7 @@ export default Ember.Controller.extend({
 
     addTag(text) {
       const userId = this.get('session.authenticatedUser');
-      const currentModel = this.get('model');
+      const dataset = this.get('dataset');
       const existingTags = this.get('tags');
       // if the tag already exists
       if (existingTags.findBy('properties.text', text)) {
@@ -56,8 +66,8 @@ export default Ember.Controller.extend({
         });
       } else {
         let tag = this.store.createRecord('action', {
-          actionableId: currentModel.get('actionableId'),
-          actionable_model: currentModel.constructor.modelName,
+          actionableId: dataset.get('actionableId'),
+          actionable_model: dataset.constructor.modelName,
           userId: userId,
           type: 'tag',
           properties: {
