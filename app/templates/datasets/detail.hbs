@@ -1,21 +1,28 @@
-<div class="row card dataset full-view">
+{{#unless session.isAuthenticated}}
+  {{#full-page-notification customClassName='create-account-notification'}}
+    <h3>Search through <strong>{{datasetsNumber}}</strong> human genomic datasets</h3>
+    {{#link-to 'users.signup' class='btn waves-effect teal white-text'}}Create account{{/link-to}}
+  {{/full-page-notification}}
+{{/unless}}
+
+<div class="row card dataset full-view {{unless session.isAuthenticated 'dataset-notification-margin' ''}}">
   <div class="col l7 m6 s12 card-main-wrapper">
     <div class="top-action card-header">
-      {{#if model.colour}}
-        {{#link-to 'datasets.search' (query-params q="" assay=model.assay) }}
-          {{assay-type assay=model}}
+      {{#if dataset.colour}}
+        {{#link-to 'datasets.search' (query-params q="" assay=dataset.assay) }}
+          {{assay-type assay=dataset}}
         {{/link-to}}
       {{/if}}
       <div class="actions-container valign-wrapper">
-        {{action-favourite model=model}}
+        {{action-favourite model=dataset}}
         {{action-share action="toggleModal"}}
       </div>
     </div>
     <div class="card-main-content">
-  	  <div class="dataset-main-info">
-        <h2>{{model.title}}</h2>
-        {{#if model.description}}
-          <p class="markdown-text">{{markdown-to-html markdown=model.description}}</p>
+      <div class="dataset-main-info">
+        <h2>{{dataset.title}}</h2>
+        {{#if dataset.description}}
+          <p class="markdown-text">{{markdown-to-html markdown=dataset.description}}</p>
         {{/if}}
 
         <div class="tags">
@@ -34,26 +41,26 @@
       <div class="dataset-more-info-section">
         <div class="col m12">
           <ul class="card-info-list left-align">
-            {{#if model.userId}}
-              <li class="card-info-attr">Submitted by: {{#link-to 'user' model.userId.id }}<span>{{model.userId.displayName}}</span>{{/link-to}}</li>
+            {{#if dataset.userId}}
+              <li class="card-info-attr">Submitted by: {{#link-to 'user' dataset.userId.id }}<span>{{dataset.userId.displayName}}</span>{{/link-to}}</li>
             {{else}}
-              {{#if model.datasourceId.shortName}}
-                <li class="card-info-attr">Sourced from: <a><span>{{model.datasourceId.shortName}}</span></a></li>
+              {{#if dataset.datasourceId.shortName}}
+                <li class="card-info-attr">Sourced from: <a><span>{{dataset.datasourceId.shortName}}</span></a></li>
               {{/if}}
-              {{#if model.accession}}
-                <li class="card-info-attr">Accession: <span>{{model.externalId}}</span></li>
+              {{#if dataset.accession}}
+                <li class="card-info-attr">Accession: <span>{{dataset.externalId}}</span></li>
               {{/if}}
             {{/if}}
-            {{#if model.access}}
-              <li class="card-info-attr">Access: <span>{{model.access}}</span></li>
+            {{#if dataset.access}}
+              <li class="card-info-attr">Access: <span>{{dataset.access}}</span></li>
             {{/if}}
           </ul>
         </div>
         <div class="col m12 center">
-          {{#if model.url}}
-            <a target="_blank" {{action "trackExit"}} href="{{if session.isAuthenticated model.url ''}}" class="btn waves-effect teal white-text">{{#if (eq model.access 'Open')}}Access Data{{else}}Go To Dataset{{/if}}</a>
+          {{#if dataset.url}}
+            <a target="_blank" {{action "trackExit"}} href="{{if session.isAuthenticated dataset.url ''}}" class="btn waves-effect teal white-text">{{#if (eq dataset.access 'Open')}}Access Data{{else}}Go To Dataset{{/if}}</a>
           {{else}}
-            <a class="btn disabled white-text">{{#if (eq model.access 'Open')}}Access Data{{else}}Apply for Access{{/if}}</a>
+            <a class="btn disabled white-text">{{#if (eq dataset.access 'Open')}}Access Data{{else}}Apply for Access{{/if}}</a>
           {{/if}}
         </div>
       </div>

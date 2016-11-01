@@ -1,3 +1,27 @@
+$datasets-number-spacing: 5px;
+
+.dataset.dataset-notification-margin {
+  margin-top: 5.5rem;
+}
+
+.create-account-notification {
+  .stats {
+    padding: 0;
+  }
+
+  h3 {
+    margin-right: 30px;
+  }
+
+  strong {
+    font-size: $h2-fontsize;
+    padding: {
+      left: $datasets-number-spacing;
+      right: $datasets-number-spacing;
+    };
+  }
+}
+
 .dataset-more-info-section-wrapper {
   position: relative;
 }
