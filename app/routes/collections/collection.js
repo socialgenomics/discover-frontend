@@ -6,10 +6,7 @@ import ResetScrollMixin from 'repositive/mixins/reset-scroll';
 export default Ember.Route.extend(AuthenticatedRouteMixin, ResetScrollMixin, {
   controllerName: 'collection',
   model: model,
-  setupController(controller, models) {
-    this._super(controller, models);
-    controller.set('isLoading', false);
-  },
+
   actions: {
     invalidateModel: function() {
       this.controller.set('isLoading', true);
