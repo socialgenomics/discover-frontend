@@ -21,9 +21,7 @@ export default Route.extend(AuthenticatedRouteMixin, {
           'limit': 100
         })
       })
-      .catch(err => {
-        Logger.error(err);
-      });
+      .catch(Logger.error);
     }
   }
 });
