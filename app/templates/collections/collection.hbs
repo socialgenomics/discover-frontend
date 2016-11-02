@@ -1,17 +1,16 @@
-<main class="contain">
-  {{collection-meta-panel store=store collectionStats=model.collectionStats model=model.collection datasets=model.datasets}}
+{{collection-meta-panel store=store collectionStats=model.collectionStats model=model.collection datasets=model.datasets}}
 
-  <div class="content push-right">
-
-    {{#unless isLoading}}
-      <div class="row">
-        <div class="col m12">
-          {{#each model.datasets as |dataset|}}
-            {{dataset-card dataset=dataset action="toggleModal"}}
-          {{/each}}
-        </div>
+<div class="content push-right">
+  {{#unless isLoading}}
+    <div class="row">
+      <div class="col m12">
+        {{#each model.datasets as |dataset|}}
+          {{dataset-card dataset=dataset action="toggleModal"}}
+        {{/each}}
       </div>
-      {{#if (gt model.collectionStats.datasets 0)}}
+    </div>
+    {{#if (gt model.collectionStats.datasets 0)}}
+      <div class="pagination-container">
         {{pagination-bar
           currentPageNumber=page
           resultsPerPage=limit
@@ -20,8 +19,7 @@
           nextPage=(action 'nextPage')
           previousPage=(action 'previousPage')
         }}
-      {{/if}}
-    {{/unless}}
-
-  </div>
-</main>
+      </div>
+    {{/if}}
+  {{/unless}}
+</div>

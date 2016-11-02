@@ -1,6 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
+  classNames: ['pagination-bar'],
   totalPages: Ember.computed('totalResults', 'resultsPerPage', function() {
     const resultsPerPage = this.get('resultsPerPage');
     const totalResults = this.get('totalResults');
