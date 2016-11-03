@@ -1,7 +1,7 @@
 # Web Acceptable Use Policy
 
 This acceptable use policy sets out the terms between you and us under which you may
-access our website [repositive.io](https://repositive.io)]. This acceptable
+access our website [repositive.io](https://repositive.io). This acceptable
 use policy applies to all users of, and visitors to, our site.
 
 Your use of our site means that you accept, and agree to abide by, all the policies in
