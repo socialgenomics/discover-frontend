@@ -16,8 +16,12 @@
               </h3>
             {{/link-to}}
 
-            {{#each (sort-by "updatedAt:desc" collections) as |collection|}}
-              {{featured-list-item model=collection type='collection'}}
+            {{#each (sort-by "updatedAt:desc" collections) as |collection index|}}
+              {{featured-list-item
+                model=collection
+                isNew=(eq index 0)
+                type='collection'
+              }}
             {{/each}}
           </div>
 
