@@ -10,6 +10,7 @@
     <span>{{moment-from-now date allowEmpty=true}}</span>
   </div>
   <div class="comment-body">
-    <p class="markdown-text">{{markdown-to-html markdown=text}}</p>
+    {{log text}}
+    <p class="markdown-text">{{markdown-to-html markdown=text extensions='targetBlankLinks'}}</p>
   </div>
 </div>
