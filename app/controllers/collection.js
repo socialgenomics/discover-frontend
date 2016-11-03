@@ -5,7 +5,6 @@ export default Ember.Controller.extend({
   limit: 9,
   page: 1,
   queryParams: ['page', 'limit'],
-  isLoading: true,
 
   actions: {
     nextPage() {

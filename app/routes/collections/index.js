@@ -4,12 +4,12 @@ import ajax from 'ic-ajax';
 import ENV from 'repositive/config/environment';
 import RememberScrollMixin from 'repositive/mixins/remember-scroll';
 
-const { Route, RSVP } = Ember;
+const { Route, RSVP, get, Logger } = Ember;
 
 export default Route.extend(AuthenticatedRouteMixin, RememberScrollMixin, {
   model: function() {
-    if (this.get('session.isAuthenticated')) {
-      const token = this.get('session.session.content.authenticated.token');
+    if (get(this, 'session.isAuthenticated')) {
+      const token = get(this, 'session.session.content.authenticated.token');
       const authHeaders = {
         authorization: `JWT ${token}`
       };
@@ -23,10 +23,7 @@ export default Route.extend(AuthenticatedRouteMixin, RememberScrollMixin, {
           'limit': 100
         })
       })
-      .catch(err => {
-        Ember.Logger.error(err);
-        throw err;
-      });
+      .catch(Logger.error);
     }
   }
 });
