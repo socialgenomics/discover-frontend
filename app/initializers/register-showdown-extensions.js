@@ -1,5 +1,3 @@
-/* globals showdown */
-
 export function initialize() {
   showdown.extension('targetBlankLinks', function() {
     return [{

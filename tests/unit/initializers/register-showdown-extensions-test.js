@@ -1,5 +1,4 @@
 /* jshint expr:true */
-/* globals showdown */
 
 import { expect } from 'chai';
 import {
