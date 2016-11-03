@@ -3,7 +3,9 @@ import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-rout
 import { model } from '../datasources/source';
 import ResetScrollMixin from 'repositive/mixins/reset-scroll';
 
-export default Ember.Route.extend(AuthenticatedRouteMixin, ResetScrollMixin, {
+const { Route } = Ember;
+
+export default Route.extend(AuthenticatedRouteMixin, ResetScrollMixin, {
   controllerName: 'collection',
   model: model,
 
