@@ -13,18 +13,21 @@ describeComponent(
     integration: true
   },
   function() {
-    it('renders', function() {
-      // Set any properties with this.set('myProperty', 'value');
-      // Handle any actions with this.on('myAction', function(val) { ... });
-      // Template block usage:
-      // this.render(hbs`
-      //   {{#collection-created-by}}
-      //     template content
-      //   {{/collection-created-by}}
-      // `);
-
-      this.render(hbs`{{collection-created-by}}`);
-      expect(this.$()).to.have.length(1);
+    it('renders repositive for repositive owned collections', function() {
+      const type = 'repositive_collection';
+      this.set('type', type);
+      this.render(hbs`{{collection-created-by type=type}}`);
+      expect(this.$('.collection-owner').text().trim()).to.eql('Repositive');
+    });
+    it('renders the displayName of the owner if the type is personal_repository', function() {
+      const user = {
+        id: 1,
+        displayName: 'Nikola Tesla'
+      };
+      const type = 'personal_repository';
+      this.setProperties({ type: type, user: user });
+      this.render(hbs`{{collection-created-by user=user type=type}}`);
+      expect(this.$('.collection-owner').text().trim()).to.eql('Nikola Tesla');
     });
   }
 );
