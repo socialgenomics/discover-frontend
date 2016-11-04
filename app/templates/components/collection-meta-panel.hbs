@@ -27,9 +27,9 @@
       <h3>{{name-fallback model=model}}</h3>
       <span class="helper-text">created by </span>
       {{#if model.userId.id}}
-        <span>{{#link-to 'user' model.userId.id}}{{model.userId.displayName}}{{/link-to}}</span>
+        <span class="collection-owner">{{#link-to 'user' model.userId.id}}{{model.userId.displayName}}{{/link-to}}</span>
       {{else if (eq model.type 'repositive_collection')}}
-        <span>Repositive</span>
+        <span class="collection-owner">Repositive</span>
       {{/if}}
       <div class="divider"></div>
 
