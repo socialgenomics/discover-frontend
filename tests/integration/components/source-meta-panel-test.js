@@ -13,18 +13,17 @@ describeComponent(
     integration: true
   },
   function() {
-    it('renders', function() {
-      // Set any properties with this.set('myProperty', 'value');
-      // Handle any actions with this.on('myAction', function(val) { ... });
-      // Template block usage:
-      // this.render(hbs`
-      //   {{#source-meta-panel}}
-      //     template content
-      //   {{/source-meta-panel}}
-      // `);
-
-      this.render(hbs`{{source-meta-panel}}`);
-      expect(this.$()).to.have.length(1);
+    it('renders the collection owner dipsplayName', function() {
+      const model = {
+        userId: {
+          id: 1,
+          displayName: 'Nikola Tesla'
+        },
+        type: 'personal_repository'
+      };
+      this.set('model', model);
+      this.render(hbs`{{source-meta-panel model=model}}`);
+      expect(this.$('.collection-owner').text().trim()).to.eql(model.userId.displayName);
     });
   }
 );

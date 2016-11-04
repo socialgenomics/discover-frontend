@@ -23,11 +23,13 @@
     {{#if displayInfo}}
       <h3>{{name-fallback model=model}}</h3>
       <span class="helper-text">created by </span>
-      {{#if model.userId.id}}
-        <span class="collection-owner">{{#link-to 'user' model.userId.id}}{{model.userId.displayName}}{{/link-to}}</span>
-      {{else if (eq model.type 'repositive_collection')}}
-        <span class="collection-owner">Repositive</span>
-      {{/if}}
+      <span class="collection-owner">
+        {{#if model.userId.id}}
+          {{#link-to 'user' model.userId.id}}{{model.userId.displayName}}{{/link-to}}
+        {{else if (eq model.type 'repositive_collection')}}
+          Repositive
+        {{/if}}
+      </span>
       <div class="divider"></div>
 
       <section class="stats-numbers">
