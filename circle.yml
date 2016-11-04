@@ -39,7 +39,7 @@ deployment:
       - docker push registry.repositive.io:5000/discover
 
   staging-tag:
-    tag: staging-.*
+    tag: /staging-.*/
     commands:
       - node_modules/ember-cli/bin/ember build --environment staging
       - docker build -t registry.repositive.io:5000/discover:$CIRCLE_TAG .
