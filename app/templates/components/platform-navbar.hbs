@@ -58,6 +58,11 @@
 
       <div class="navbar-button">
         {{#active-link}}
+          {{#link-to 'users.signup' class="valign-wrapper primary-action"}}CREATE ACCOUNT{{/link-to}}
+        {{/active-link}}
+      </div>
+      <div class="navbar-button">
+        {{#active-link}}
           {{#link-to 'users.login' class="valign-wrapper"}}LOGIN{{/link-to}}
         {{/active-link}}
       </div>
