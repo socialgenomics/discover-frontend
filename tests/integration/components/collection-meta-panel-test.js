@@ -13,18 +13,23 @@ describeComponent(
     integration: true
   },
   function() {
-    it('renders', function() {
-      // Set any properties with this.set('myProperty', 'value');
-      // Handle any actions with this.on('myAction', function(val) { ... });
-      // Template block usage:
-      // this.render(hbs`
-      //   {{#metadata-panel}}
-      //     template content
-      //   {{/metadata-panel}}
-      // `);
+    it('shows the displayName of the collection owner when present', function() {
+      const model = {
+        userId: {
+          id: 1,
+          displayName: 'Nikola Tesla'
+        }
+      };
+      this.set('model', model);
+      this.render(hbs`{{collection-meta-panel model=model}}`);
+      expect(this.$('.collection-owner').text().trim()).to.eql(model.userId.displayName);
+    });
 
-      this.render(hbs`{{metadata-panel}}`);
-      expect(this.$()).to.have.length(1);
+    it('shows the creator as repositive when it has type repositive_collection', function() {
+      const model = { type: 'repositive_collection' };
+      this.set('model', model);
+      this.render(hbs`{{collection-meta-panel model=model}}`);
+      expect(this.$('.collection-owner').text().trim()).to.eql('Repositive');
     });
   }
 );
