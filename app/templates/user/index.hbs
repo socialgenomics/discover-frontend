@@ -58,7 +58,11 @@
                 {{mini-dataset dataset=favourite type=favourite.type isFavourite=true}}
               {{/each}}
             {{else}}
-              <p class="color-silver-chalice-text center-align">You don't have any favourites yet.</p>
+              {{#if isOwnProfile}}
+                <p class="color-silver-chalice-text center-align">You don't have any favourites yet.</p>
+              {{else}}
+                <p class="color-silver-chalice-text center-align">This user doesn't have any favourites yet.</p>
+              {{/if}}
             {{/if}}
           </div>
         </div>
