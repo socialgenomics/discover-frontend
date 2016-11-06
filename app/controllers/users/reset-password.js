@@ -72,23 +72,13 @@ export default Controller.extend(
           .then(resp => {
             this.set('loading', false);
             this.set('passwordChanged', true)
-            .then(() => {
-              this.reloadMessages(resp.messages);
-            });
           })
           .catch(err => {
             this.set('loading', false);
             Logger.error(err);
-            if (err) {
-              this.reloadMessages(err.jqXHR.responseJSON.messages);
-            }
           });
         }
       }
     }
-  },
-  reloadMessages: function(messages) {
-    this.set('messages', []);
-    this.get('messages').addObjects(messages);
   }
 });
