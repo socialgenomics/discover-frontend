@@ -2,12 +2,14 @@ import Ember from 'ember';
 import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
 import ajax from 'ic-ajax';
 import ENV from 'repositive/config/environment';
-const { Route, RSVP } = Ember;
+import RememberScrollMixin from 'repositive/mixins/remember-scroll';
 
-export default Route.extend(AuthenticatedRouteMixin, {
+const { Route, RSVP, get, Logger } = Ember;
+
+export default Route.extend(AuthenticatedRouteMixin, RememberScrollMixin, {
   model: function() {
-    if (this.get('session.isAuthenticated')) {
-      const token = this.get('session.session.content.authenticated.token');
+    if (get(this, 'session.isAuthenticated')) {
+      const token = get(this, 'session.session.content.authenticated.token');
       const authHeaders = {
         authorization: `JWT ${token}`
       };
@@ -21,10 +23,7 @@ export default Route.extend(AuthenticatedRouteMixin, {
           'limit': 100
         })
       })
-      .catch(err => {
-        Ember.Logger.error(err);
-        throw err;
-      });
+      .catch(Logger.error);
     }
   }
 });

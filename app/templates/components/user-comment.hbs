@@ -6,10 +6,10 @@
         <img src={{avatar}}>
       {{/link-to}}
     </div>
-    {{#link-to 'user' user.id}}<h4>{{user.displayName}}</h4>{{/link-to}}
+    {{#link-to 'user' user.id disabled=disabled class='comment-author-link'}}<h4>{{user.displayName}}</h4>{{/link-to}}
     <span>{{moment-from-now date allowEmpty=true}}</span>
   </div>
   <div class="comment-body">
-    <p class="markdown-text">{{markdown-to-html markdown=text}}</p>
+    <p class="markdown-text">{{markdown-to-html markdown=text extensions='targetBlankLinks'}}</p>
   </div>
 </div>

@@ -1,5 +1,5 @@
 import DS from 'ember-data';
-import moment from 'npm:moment';
+import moment from 'moment';
 
 
 export default DS.Transform.extend({

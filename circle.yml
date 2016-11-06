@@ -37,6 +37,15 @@ deployment:
       - docker build -t registry.repositive.io:5000/discover .
       - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS registry.repositive.io:5000
       - docker push registry.repositive.io:5000/discover
+
+  staging-tag:
+    tag: /staging-.*/
+    commands:
+      - node_modules/ember-cli/bin/ember build --environment staging
+      - docker build -t registry.repositive.io:5000/discover:$CIRCLE_TAG .
+      - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS registry.repositive.io:5000
+      - docker push registry.repositive.io:5000/discover:$CIRCLE_TAG
+
   release:
     tag: /release-.*/
     commands:
