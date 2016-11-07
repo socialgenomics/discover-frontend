@@ -1,3 +1,6 @@
 // All CSS imported from the styles app.
 @import "../../../repositive-styles/app/styles/app"; //Used to import the styles from the submodule
 // @import "repositive-styles/app/styles/app"; //This is used to import the styles as a bower component.
+@import "pod-styles";
+@import "navbar";
+@import "datasets-details";
