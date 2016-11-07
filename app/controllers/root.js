@@ -1,6 +1,8 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
+  queryParams: ['tab'],
+  tab: 'default',
   session: Ember.inject.service(),
   loading: false,
   firstVisit: Ember.computed.alias('session.data.firstVisit'),
