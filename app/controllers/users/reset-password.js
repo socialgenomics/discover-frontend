@@ -3,7 +3,7 @@ import EmberValidations from 'ember-validations';
 import ENV from 'repositive/config/environment';
 import ajax from 'ic-ajax';
 
-const { Controller, computed, Logger, get, set } = Ember;
+const { Controller, computed, observer, Logger, get, set } = Ember;
 
 export default Controller.extend(EmberValidations, {
   resetKey: null,
@@ -14,12 +14,11 @@ export default Controller.extend(EmberValidations, {
   passwordChanged: false,
 
   isDisabled: computed('loading', 'isValid', function() {
-    return !this.get('isValid') || this.get('loading');
+    return !get(this, 'isValid') || get(this, 'loading');
   }),
-
-  clearMessages: function() {
+  clearMessages: observer('password1', 'password2', function() {
     set(this, 'messages', []);
-  }.observes('password1', 'password2'),
+  }),
 
   validations: {
     password1: {
