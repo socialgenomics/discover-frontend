@@ -48,7 +48,6 @@ export default Controller.extend(
             timeout: 7000,
             class: 'fadeIn'
           });
-          this.reloadMessages(resp.messages);
         })
         .catch(err => {
           this.set('loading', false);
@@ -60,14 +59,9 @@ export default Controller.extend(
               timeout: 7000,
               class: 'fadeIn'
             });
-            this.reloadMessages(err.jqXHR.responseJSON.messages);
           }
         });
       }
     }
-  },
-  reloadMessages: function(messages) {
-    this.set('messages', []);
-    this.get('messages').addObjects(messages);
   }
 });
