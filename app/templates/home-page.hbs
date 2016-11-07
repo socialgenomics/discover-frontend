@@ -1,57 +1,40 @@
-<main id="homepage" class="content">
-  <div class="row">
+<main id="homepage" class="homepage content">
 
-    {{home-stats-updates datasetsNumber=datasetsNumber stats=model.stats collections=model.collections datasources=model.datasources}}
+  <section class="map-search">
+    {{dataset-number-stats datasetsNumber=datasetsNumber}}
+    {{search-box action="search"}}
+  </section>
 
-    <section class="contain">
-      <h5 class="subtitles-left unfocus-grey-text">Popular Datasets</h5>
-      {{#each model.datasets as |dataset|}}
-        {{dataset-card dataset=dataset toggleModal="toggleModal"}}
+  <section class="selection-tabs">
+    {{home-tabs}}
+  </section>
+
+  <section class="row">
+    <div class="contain">
+      {{#if (or (eq tab "all") (eq tab "default"))}}
+        {{#each requestsSorted as |dataset|}}
+          {{feed-date-divider date="09/01/16"}}
+          {{request-feed-item dataset=dataset toggleModal="toggleModal"}}
+        {{/each}}
+      {{else if (eq tab "sources")}}
+        {{#each model.datasources as |source|}}
+          {{feed-date-divider date="09/01/16"}}
+          {{source-feed-item source=source toggleModal="toggleModal"}}
+        {{/each}}
+      {{else if (eq tab "collections")}}
+        {{#each model.collections as |collection|}}
+          {{collection-feed-item collection=collection toggleModal="toggleModal"}}
+        {{/each}}
+      {{else if (eq tab "requests")}}
+        {{#each model.requests as |dataset|}}
+          {{request-feed-item dataset=dataset toggleModal="toggleModal"}}
+        {{/each}}
+      {{else if (eq tab "discussions")}}
+      {{#each requestsSorted as |discussion|}}
+        {{discussion-feed-item discussion=discussion toggleModal="toggleModal"}}
       {{/each}}
-    </section>
+      {{/if}}
+    </div>
+  </section>
 
-    <section class="contain">
-      <h5 class="subtitles-left unfocus-grey-text">User Activity</h5>
-      <!-- data registrations -->
-      <div class="col s12 m6">
-        <div class="card activity-card registered-data">
-          <div class="card-header card-title">
-            {{#link-to 'datasets.register'}}
-              {{fa-icon "file-text"}}
-              <h4>Registered Data</h4>
-            {{/link-to}}
-          </div>
-          <p class="info-text">
-            These are datasets contributed by our community. You can easily register your dataset and make it visible for others.
-          </p>
-          <div class="card-content">
-              {{#each registrationsSorted as |registration|}}
-                {{mini-dataset dataset=registration}}
-              {{/each}}
-          </div>
-        </div>
-      </div>
-      <!--data requests-->
-      <div class="col s12 m6">
-        <div class="card activity-card requested-data">
-          <div class="card-header card-title">
-              {{#link-to 'datasets.request'}}
-                {{fa-icon "clipboard"}}
-                <h4>Requested Data</h4>
-              {{/link-to}}
-          </div>
-          <p class="info-text">
-            Help our community by connecting them with the datasets they're looking for.
-  If you’re seeking datasets you can make a request too.
-          </p>
-          <div class="card-content">
-            {{#each requestsSorted as |request|}}
-              {{mini-dataset dataset=request type="request"}}
-            {{/each}}
-          </div>
-        </div>
-      </div>
-    </section>
-
-  </div>
 </main>
