@@ -28,7 +28,7 @@
           {{request-feed-item request=request toggleModal="toggleModal"}}
         {{/each}}
       {{else if (eq tab "discussions")}}
-      {{#each requestsSorted as |discussion|}}
+      {{#each model.datasets as |discussion|}}
         {{discussion-feed-item discussion=discussion toggleModal="toggleModal"}}
       {{/each}}
       {{/if}}

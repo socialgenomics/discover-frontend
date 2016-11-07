@@ -1,36 +1,40 @@
-<main class="col m12">
-  <div class="card dataset card-comp">
+{{#link-to 'datasets.detail' discussion.id classNames="feed-item-component"}}
+  <main class="col m12">
+    <div class="card dataset card-comp">
 
-    <section class="card-type-section col m2">
-      <img src="/assets/images/icons/icon-discussion_2@2x.png" class="data-icon">
-      <p>Discussion</p>
-    </section>
+      <section class="card-type-section col m2">
+        <img src="/assets/images/icons/icon-discussion_2@2x.png" class="data-icon">
+        <p>Discussion</p>
+      </section>
 
-    <section class="card-user-section col m2">
-      {{#if discussion.userId.displayName}}
-        {{#link-to 'user' dataset.userId.id}}
-          <img src={{discussion.userId.userProfile.avatar}} class="data-icon round-img">
-          <p>{{discussion.userId.displayName}}</p>
+      <section class="card-user-section col m3">
+        {{#if discussion.userId.displayName}}
+          {{#link-to 'user' request.userId.id}}
+            <img src={{discussion.userId.userProfile.avatar}} width="35px" height="35px">
+            <p>{{discussion.userId.displayName}}</p>
+          {{/link-to}}
+        {{else}}
+          <div class="">
+            <div class="round-img">
+              <img src="/assets/images/favicon.ico" class="data-icon">
+            </div>
+            <h4 class="data-title">A Repositive User</h4>
+          </div>
+        {{/if}}
+        <!-- <p class="helper-text">commented on</p> -->
+      </section>
+
+      <section class="card-content-section col m7">
+        {{#link-to 'datasets.detail' discussion.id classNames="data-title"}}
+          <h4 class="data-title">{{discussion.title}}</h4>
         {{/link-to}}
-      {{else}}
-        <a>
-          <img src="/assets/images/logo-repositive.png" class="data-icon round-img">
-          <p>A Repositive user</p>
-        </a>
-      {{/if}}
-      <span class="helper-text">commented on</span>
-    </section>
+        <div class="truncate">
+          <blockquote class="truncate two-lines">
+            {{discussion.description}}
+          </blockquote>
+        </div>
+      </section>
 
-    <section class="card-content-section col m7">
-      {{#link-to 'requests.detail' discussion.id classNames="data-title"}}
-        <h4 class="data-title">{{discussion.title}}</h4>
-      {{/link-to}}
-      <div class="line-limit-desc">
-        <blockquote>
-          "{{discussion.description}}"
-        </blockquote>
-      </div>
-    </section>
-
-  </div>
-</main>
+    </div>
+  </main>
+{{/link-to}}
