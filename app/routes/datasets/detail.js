@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import ajax from 'ic-ajax';
 import ENV from 'repositive/config/environment';
+import ResetScrollMixin from 'repositive/mixins/reset-scroll';
 
 const { inject: { service }, Logger, Route, RSVP } = Ember;
 
@@ -17,7 +18,7 @@ function reducer(acc, curr) {
   return acc;
 }
 
-export default Route.extend({
+export default Route.extend(ResetScrollMixin, {
   session: service(),
   favouritesService: service('favourites'),
 
