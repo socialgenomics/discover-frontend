@@ -14,8 +14,7 @@ describeComponent(
   },
   function() {
     it('renders repositive for repositive owned collections', function() {
-      const type = 'repositive_collection';
-      this.set('type', type);
+      this.set('type', 'repositive_collection');
       this.render(hbs`{{collection-created-by type=type}}`);
       expect(this.$('.collection-owner').text().trim()).to.eql('Repositive');
     });
@@ -25,7 +24,7 @@ describeComponent(
         displayName: 'Nikola Tesla'
       };
       const type = 'personal_repository';
-      this.setProperties({ type: type, user: user });
+      this.setProperties({ type, user });
       this.render(hbs`{{collection-created-by user=user type=type}}`);
       expect(this.$('.collection-owner').text().trim()).to.eql('Nikola Tesla');
     });
