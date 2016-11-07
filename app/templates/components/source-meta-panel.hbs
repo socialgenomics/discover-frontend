@@ -21,7 +21,9 @@
   {{#if displayInfo}}
     <main>
       <h3>{{name-fallback model=model}}</h3>
-      {{collection-created-by user=model.userId type=model.type}}
+      {{#unless (eq model.type 'datasource')}}
+        {{collection-created-by user=model.userId type=model.type}}
+      {{/unless}}
       <div class="divider"></div>
 
       <!-- TODO turn these into components -->
