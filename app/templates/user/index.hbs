@@ -58,11 +58,9 @@
                 {{mini-dataset dataset=favourite type=favourite.type isFavourite=true}}
               {{/each}}
             {{else}}
-              {{#if isOwnProfile}}
-                <p class="color-silver-chalice-text center-align">You don't have any favourites yet.</p>
-              {{else}}
-                <p class="color-silver-chalice-text center-align">This user doesn't have any favourites yet.</p>
-              {{/if}}
+              <p class="color-silver-chalice-text center-align">
+                {{if isOwnProfile "You don't have any favourites yet." "This user doesn't have any favourites yet."}}
+              </p>
             {{/if}}
           </div>
         </div>
@@ -81,11 +79,9 @@
                 {{mini-dataset dataset=request type="request"}}
               {{/each}}
             {{else}}
-              {{#if isOwnProfile}}
-                <p class="color-silver-chalice-text center-align">You have not requested any data from our community on REPOSITIVE.</p>
-              {{else}}
-                <p class="color-silver-chalice-text center-align">This user has not made any requests for data from our community on REPOSITIVE.</p>
-              {{/if}}
+              <p class="color-silver-chalice-text center-align">
+                {{if isOwnProfile "You have not requested any data from our community on REPOSITIVE." "This user has not made any requests for data from our community on REPOSITIVE."}}
+              </p>
             {{/if}}
           </div>
         </div>
@@ -106,11 +102,9 @@
                 {{mini-dataset dataset=dataset type="registration"}}
               {{/each}}
             {{else}}
-              {{#if isOwnProfile}}
-                <p class="color-silver-chalice-text center-align">You have not registered any data to REPOSITIVE.</p>
-              {{else}}
-                <p class="color-silver-chalice-text center-align">This user has not registered any data to REPOSITIVE.</p>
-              {{/if}}
+              <p class="color-silver-chalice-text center-align">
+                {{if isOwnProfile "You have not registered any data to REPOSITIVE." "This user has not registered any data to REPOSITIVE."}}
+              </p>
             {{/if}}
           </div>
         </div>
