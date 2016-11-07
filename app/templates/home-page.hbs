@@ -13,12 +13,10 @@
     <div class="contain">
       {{#if (or (eq tab "all") (eq tab "default"))}}
         {{#each requestsSorted as |dataset|}}
-          {{feed-date-divider date="09/01/16"}}
           {{request-feed-item dataset=dataset toggleModal="toggleModal"}}
         {{/each}}
       {{else if (eq tab "sources")}}
         {{#each model.datasources as |source|}}
-          {{feed-date-divider date="09/01/16"}}
           {{source-feed-item source=source toggleModal="toggleModal"}}
         {{/each}}
       {{else if (eq tab "collections")}}
@@ -26,8 +24,8 @@
           {{collection-feed-item collection=collection toggleModal="toggleModal"}}
         {{/each}}
       {{else if (eq tab "requests")}}
-        {{#each model.requests as |dataset|}}
-          {{request-feed-item dataset=dataset toggleModal="toggleModal"}}
+        {{#each model.requests as |request|}}
+          {{request-feed-item request=request toggleModal="toggleModal"}}
         {{/each}}
       {{else if (eq tab "discussions")}}
       {{#each requestsSorted as |discussion|}}
