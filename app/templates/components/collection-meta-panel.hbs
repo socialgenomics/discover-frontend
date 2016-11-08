@@ -24,7 +24,7 @@
 
   <main>
     {{#if displayInfo}}
-      <h3>{{name-fallback model=model}}</h3>
+      <h3>{{source-name-fallback model=model}}</h3>
       <span class="helper-text">created by </span>
       {{#if model.userId.id}}
         <span>{{#link-to 'user' model.userId.id}}{{model.userId.displayName}}{{/link-to}}</span>
