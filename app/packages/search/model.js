@@ -88,6 +88,7 @@ export default Model.extend({
   }),
 
   updateModelFromAPI: function() {
+    console.log("updating model from api");
     return ajax({
       url: ENV.APIRoutes['datasets.search'],
       type: 'POST',
@@ -109,6 +110,12 @@ export default Model.extend({
           aggDSL: DSL, //TODO:: this is dodgy
           show: true
         });
+        if (agg.name === "assay") {
+          const filteredAssays = agg.buckets.reject((bucket) => {
+            return bucket.key === "Not Available";
+          });
+          agg.set('buckets', filteredAssays);
+        }
         this.aggs.pushObject(agg);
       }
       delete resp.aggs;
