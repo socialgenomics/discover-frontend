@@ -13,18 +13,34 @@ describeComponent(
     integration: true
   },
   function() {
-    it('renders', function() {
-      // Set any properties with this.set('myProperty', 'value');
-      // Handle any actions with this.on('myAction', function(val) { ... });
-      // Template block usage:
-      // this.render(hbs`
-      //   {{#collection-summary-fallback}}
-      //     template content
-      //   {{/collection-summary-fallback}}
-      // `);
+    it('renders the summary when present', function() {
+      const summary = 'The quick brown fox.';
+      this.set('summary', summary);
+      this.render(hbs`{{collection-summary-fallback summary=summary}}`);
+      expect(this.$('.markdown-text').text().trim()).to.eql(summary);
+    });
 
-      this.render(hbs`{{collection-summary-fallback}}`);
-      expect(this.$()).to.have.length(1);
+    it('renders the description when there is no summary', function() {
+      const description = 'Jumps over the lazy dog.';
+      this.set('description', description);
+      this.render(hbs`{{collection-summary-fallback description=description}}`);
+      expect(this.$('.markdown-text').text().trim()).to.eql(description);
+    });
+
+    it('renders the summary when summary and description are present', function() {
+      const description = 'Jumps over the lazy dog.';
+      const summary = 'The quick brown fox.';
+      this.setProperties({ description, summary });
+      this.render(hbs`{{collection-summary-fallback summary=summary description=description}}`);
+      expect(this.$('.markdown-text').text().trim()).to.eql(summary);
+    });
+
+    it('renders the description when summary is empty', function() {
+      const description = 'Jumps over the lazy dog.';
+      const summary = '';
+      this.setProperties({ description, summary });
+      this.render(hbs`{{collection-summary-fallback summary=summary description=description}}`);
+      expect(this.$('.markdown-text').text().trim()).to.eql(description);
     });
   }
 );
