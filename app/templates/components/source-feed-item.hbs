@@ -17,11 +17,9 @@
       </section>
 
       <section class="card-content-section source-text col m7">
-        {{#if source.properties.summary}}
-          <p class="markdown-text">{{markdown-to-html markdown=source.properties.summary}}</p>
-        {{else if source.description}}
-          <p class="markdown-text">{{markdown-to-html markdown=source.description}}</p>
-        {{/if}}
+        {{collection-summary-fallback
+          summary=source.properties.summary
+          description=source.description}}
       </section>
 
     </div>
