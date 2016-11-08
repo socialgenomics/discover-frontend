@@ -27,7 +27,11 @@
         {{#link-to 'collections.collection' collection.id classNames="data-title"}}
           <h4 class="data-title">{{collection.name}}</h4>
         {{/link-to}}
-        <p class="markdown-text">{{markdown-to-html markdown=collection.description}}</p>
+        {{#if collection.properties.summary}}
+          <p class="markdown-text">{{markdown-to-html collection.properties.summary}}</p>
+        {{else}}
+          <p class="markdown-text">{{markdown-to-html collection.description}}</p>
+        {{/if}}
       </section>
     </div>
   </main>
