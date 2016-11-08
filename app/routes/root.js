@@ -1,11 +1,11 @@
 import Ember from 'ember';
 import ajax from 'ic-ajax';
 import ENV from 'repositive/config/environment';
+
 const { inject: { service }, Route, RSVP } = Ember;
 
 export default Route.extend({
   session: service(),
-  favouritesService: service('favourites'),
 
   beforeModel: function() {
     if (this.get('session.data.firstVisit', true) && this.get('session.isAuthenticated')) {
@@ -46,7 +46,6 @@ export default Route.extend({
         this.store.query('dataset', { 'where.user_id.$ne': 'null', 'order[0][0]': 'updated_at', 'order[0][1]': 'DESC' }),
         this.store.query('collection', { 'where.type': 'repositive_collection', 'order[0][0]': 'updated_at', 'order[0][1]': 'DESC', 'limit': '3' }),
         this.store.query('collection', { 'where.type': 'datasource', 'order[0][0]': 'updated_at', 'order[0][1]': 'DESC', 'limit': '3' }),
-        this.get('favouritesService').loadFavourites()
       ])
       .then(data => {
         //Normalize and push trending datasets

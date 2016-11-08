@@ -20,7 +20,6 @@ function reducer(acc, curr) {
 
 export default Route.extend(ResetScrollMixin, {
   session: service(),
-  favouritesService: service('favourites'),
 
   model(params) {
     const datasetId = params.id;
@@ -59,15 +58,14 @@ export default Route.extend(ResetScrollMixin, {
     const dataset = model.dataset;
 
     if (userId) {
-      this.get('favouritesService').loadFavourites();
       this.store.createRecord('action', {
         userId,
         actionableId: dataset.get('actionableId'),
         type: 'view',
         actionable_model: dataset.constructor.modelName
       })
-        .save()
-        .catch(Logger.error);
+      .save()
+      .catch(Logger.error);
     }
   },
 
