@@ -1,10 +1,16 @@
 import Ember from 'ember';
 import ApplicationRouteMixin from 'ember-simple-auth/mixins/application-route-mixin';
 
-export default Ember.Route.extend(ApplicationRouteMixin, {
+const { Route, inject: { service }, get } = Ember;
+
+export default Route.extend(ApplicationRouteMixin, {
+  favouritesService: service('favourites'),
+  session: service(),
   afterModel(){
-    //check if authenticated and load
-    console.log('In application route');
+    const isAuthenticated = get(this, 'session').get('isAuthenticated');
+    if (isAuthenticated) {
+      get(this, 'favouritesService').loadFavourites();
+    }
   },
   actions: {
     search: function(query) {
