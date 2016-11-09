@@ -26,11 +26,35 @@ You will need the following things properly installed on your computer.
 * `npm start`
 * Visit your app at [http://localhost:4200](http://localhost:4200).
 
-## Setting up styles submodule
-The project styles are kept as a submodule. To get setup with using the styles you must initialize the submodule. In the project directory run:
+## Styles Submodule
+
+### Setting up the styles submodule
+
+To get setup with using the styles you must initialize the submodule. In the project directory run:
 ```
 git submodule update --init repositive-styles
 ```
+
+The repositive-styles submodule will be added to the root directory.
+
+### Getting the latest styles
+
+To ensure you're working with the latest styles, in the root directory of the app, run:
+```
+git submodule update
+```
+
+### Editing styles
+
+To make changes to the styles, first create a new branch in the submodule.
+
+```
+cd repositive-styles
+git checkout -b bugfix/example
+```
+
+When you're happy with the styles changes you have made. Push the branch, make a pull request and assign someone to review it.
+
 
 ## Writing and Running Tests
 
