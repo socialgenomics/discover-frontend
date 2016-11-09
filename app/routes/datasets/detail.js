@@ -13,7 +13,7 @@ function peekOrCreate(store, id) {
 //This returns a list of user_ids, no duplicates.
 function reducer(acc, curr) {
   if (acc.indexOf(curr) === -1) {
-    acc.push({ user_id: curr });
+    acc.push({ 'where.user_id': curr });
   }
   return acc;
 }
@@ -33,7 +33,7 @@ export default Route.extend(ResetScrollMixin, {
     .then(data => {
       const dataset = data.dataset;
       const commenterIds = data.comments.content
-      .map(commenterId => get(commenterId, 'id'))
+      .map(action => action.record.get('userId').get('id'))
       .reduce(reducer, []);
       dataset.set('actionableId', actionable);
 
