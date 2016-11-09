@@ -8,9 +8,6 @@
 
     <img src="/assets/images/icons/icon-collection-white@2x.png" class="data-icon">
     <h5>Collection</h5>
-
-    <!-- {{action-favourite dataset=dataset action="toggleModal"}}
-    {{action-share action="toggleModal"}} -->
   </header>
 
   <!-- <ul class="tabs">
@@ -25,12 +22,7 @@
   <main>
     {{#if displayInfo}}
       <h3>{{name-fallback model=model}}</h3>
-      <span class="helper-text">created by </span>
-      {{#if model.userId.id}}
-        <span>{{#link-to 'user' model.userId.id}}{{model.userId.displayName}}{{/link-to}}</span>
-      {{else if (eq model.type 'repositive_collection')}}
-        <span>Repositive</span>
-      {{/if}}
+      {{collection-created-by user=model.userId type=model.type}}
       <div class="divider"></div>
 
       <section class="stats-numbers">
