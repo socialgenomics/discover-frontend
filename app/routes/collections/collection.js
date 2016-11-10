@@ -8,7 +8,6 @@ const { Route } = Ember;
 export default Route.extend(AuthenticatedRouteMixin, ResetScrollMixin, {
   controllerName: 'collection',
   model: model,
-
   actions: {
     invalidateModel: function() {
       this.controller.set('isLoading', true);

@@ -17,7 +17,7 @@
     <!-- Regular Dataset-->
     <span class="descriptor">from</span>
     {{#link-to 'datasources.source' model.datasource.id}}
-      {{name-fallback model=model.datasource}}
+      {{source-name-fallback model=model.datasource}}
     {{/link-to}}
   {{/if}}
 
@@ -44,7 +44,7 @@
     <!-- Regular Dataset-->
     <span class="descriptor">from</span>
     {{#link-to 'datasources.source' model.datasourceId.id}}
-      {{name-fallback model=model.datasourceId}}
+      {{source-name-fallback model=model.datasourceId}}
     {{/link-to}}
   {{/if}}
 {{/if}}

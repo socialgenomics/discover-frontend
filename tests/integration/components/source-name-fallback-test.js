@@ -7,7 +7,7 @@ import {
 import hbs from 'htmlbars-inline-precompile';
 
 describeComponent(
-  'name-fallback',
+  'source-name-fallback',
   'Integration: NameFallbackComponent',
   {
     integration: true
@@ -21,7 +21,7 @@ describeComponent(
         }
       };
       this.set('model', model);
-      this.render(hbs`{{name-fallback model=model}}`);
+      this.render(hbs`{{source-name-fallback model=model}}`);
       expect(this.$().text().trim()).to.eql('primary-name');
     });
 
@@ -33,7 +33,7 @@ describeComponent(
         }
       };
       this.set('model', model);
-      this.render(hbs`{{name-fallback model=model}}`);
+      this.render(hbs`{{source-name-fallback model=model}}`);
       expect(this.$().text().trim()).to.eql('secondary-name');
     });
   }

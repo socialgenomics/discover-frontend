@@ -3,11 +3,9 @@ import EmberValidations from 'ember-validations';
 import ENV from 'repositive/config/environment';
 import ajax from 'ic-ajax';
 
-const { Controller, computed, Logger } = Ember;
+const { Controller, computed, observer, Logger, get, set } = Ember;
 
-export default Controller.extend(
-  EmberValidations,
-{
+export default Controller.extend(EmberValidations, {
   resetKey: null,
   password1: null,
   password2: null,
@@ -16,12 +14,11 @@ export default Controller.extend(
   passwordChanged: false,
 
   isDisabled: computed('loading', 'isValid', function() {
-    return !this.get('isValid') || this.get('loading');
+    return !get(this, 'isValid') || get(this, 'loading');
   }),
-
-  clearMessages: function() {
-    this.set('messages', []);
-  }.observes('password1', 'password2'),
+  clearMessages: observer('password1', 'password2', function() {
+    set(this, 'messages', []);
+  }),
 
   validations: {
     password1: {
@@ -31,7 +28,6 @@ export default Controller.extend(
       length: { minimum: 8, messages: { tooShort: ' ' } },
       format: {
         with: /(?=.*\d)(?=.*[A-Z])/,
-        //allowBlank: true,
         message: 'Must be at least 8 characters and include an uppercase letter and a number.'
       },
       server: true
@@ -43,7 +39,6 @@ export default Controller.extend(
       length: { minimum: 8, messages: { tooShort: ' ' } },
       format: {
         with: /(?=.*\d)(?=.*[A-Z])/,
-        //allowBlank: true,
         message: 'Must be at least 8 characters and include an uppercase letter and a number.'
       },
       server: true
@@ -51,9 +46,9 @@ export default Controller.extend(
   },
   actions: {
     submitForm: function() {
-      if (!this.get('isDisabled')) {
-        this.set('loading', true);
-        if (this.get('password1') !== this.get('password2')) {
+      if (!get(this, 'isDisabled')) {
+        set(this, 'loading', true);
+        if (get(this, 'password1') !== get(this, 'password2')) {
           this.flashMessages.add({
             message: 'Passwords do not match.',
             type: 'warning',
@@ -70,11 +65,11 @@ export default Controller.extend(
             }
           })
           .then(resp => {
-            this.set('loading', false);
-            this.set('passwordChanged', true)
+            set(this, 'loading', false);
+            set(this, 'passwordChanged', true);
           })
           .catch(err => {
-            this.set('loading', false);
+            set(this, 'loading', false);
             Logger.error(err);
           });
         }

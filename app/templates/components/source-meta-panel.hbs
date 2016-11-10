@@ -20,11 +20,11 @@
 
   {{#if displayInfo}}
     <main>
-      <h3>{{name-fallback model=model}}</h3>
-      {{#if (eq model.type 'personal_repository')}}
-        <span class="helper-text">created by </span>
-        <span>{{#link-to 'user' model.userId.id}}{{model.userId.displayName}}{{/link-to}}</span>
-      {{/if}}
+      <h3>{{source-name-fallback model=model}}</h3>
+      {{#unless (eq model.type 'datasource')}}
+        {{collection-created-by user=model.userId type=model.type}}
+      {{/unless}}
+
       <div class="divider"></div>
 
       <!-- TODO turn these into components -->
