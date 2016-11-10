@@ -110,10 +110,7 @@ export default Model.extend({
           show: true
         });
         if (agg.name === 'assay') {
-          const filteredAssays = agg.buckets.reject((bucket) => {
-            return bucket.key === 'Not Available';
-          });
-          agg.set('buckets', filteredAssays);
+          agg.set('buckets', agg.buckets.reject(bucket => bucket.key === 'Not Available'));
         }
         this.aggs.pushObject(agg);
       }
