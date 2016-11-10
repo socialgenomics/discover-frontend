@@ -3,21 +3,19 @@ import EmberValidations from 'ember-validations';
 import ENV from 'repositive/config/environment';
 import ajax from 'ic-ajax';
 
-const { Controller, computed, Logger } = Ember;
+const { Controller, computed, observer, Logger, get, set } = Ember;
 
-export default Controller.extend(
-  EmberValidations,
-{
+export default Controller.extend(EmberValidations, {
   email: null,
   loading: false,
   messages: [],
   isDisabled: computed('loading', 'isValid', function() {
-    return !this.get('isValid') || this.get('loading');
+    return !get(this, 'isValid') || get(this, 'loading');
   }),
 
-  clearMessages: function() {
-    this.set('messages', []);
-  }.observes('email'),
+  clearMessages: observer('email', function() {
+    set(this, 'messages', []);
+  }),
 
   validations: {
     email: {
@@ -35,26 +33,26 @@ export default Controller.extend(
     submitForm: function() {
       if (!this.get('isDisabled')) {
         this.flashMessages.clearMessages();
-        this.set('loading', true);
+        set(this, 'loading', true);
         ajax({
-          url: ENV.APIRoutes['reset-password'] + '/' + this.get('email'),
+          url: ENV.APIRoutes['reset-password'] + '/' + get(this, 'email'),
           type: 'GET'
         })
         .then(resp => {
-          this.set('loading', false);
+          set(this, 'loading', false);
           this.flashMessages.add({
-            message: 'We have sent an email to ' + this.get('email'),
+            message: 'We have sent an email to ' + get(this, 'email'),
             type: 'info',
             timeout: 7000,
             class: 'fadeIn'
           });
         })
         .catch(err => {
-          this.set('loading', false);
+          set(this, 'loading', false);
           Logger.error(err);
           if (err.errorThrown === 'Not Found' || err.errorThrown === 'Bad Request') {
             this.flashMessages.add({
-              message: 'We could not send an email to ' + this.get('email') + '. Please check you\'ve entered the correct email.',
+              message: 'We could not send an email to ' + get(this, 'email') + '. Please check you\'ve entered the correct email.',
               type: 'warning',
               timeout: 7000,
               class: 'fadeIn'
