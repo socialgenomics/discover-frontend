@@ -2,7 +2,7 @@
   <h2 class="numb">
     <span class="stats-text thin">Search through </span>
     {{#link-to 'datasets.search' (query-params q="") class="sub-grey"}}
-      {{datasetsNumber}}
+      <span class="red-text">{{datasetsNumber}}</span>
     {{/link-to}}
     <span class="stats-text thin"> Human Genomic Datasets </span>
   </h2>
