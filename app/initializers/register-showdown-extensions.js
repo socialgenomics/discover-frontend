@@ -6,6 +6,14 @@ export function initialize() {
       replace: '<a target="_blank" rel="noopener noreferrer"'
     }];
   });
+
+  showdown.extension('truncateClass', function() {
+    return [{
+      type: 'html',
+      regex: '<p>',
+      replace: '<p class="markdown-text truncate two-lines">'
+    }];
+  });
 }
 
 export default {
