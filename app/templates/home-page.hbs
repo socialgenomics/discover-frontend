@@ -10,29 +10,7 @@
   </section>
 
   <section class="row">
-    <div class="contain">
-      {{#if (or (eq tab "all") (eq tab "default"))}}
-        {{#each requestsSorted as |dataset|}}
-          {{request-feed-item dataset=dataset toggleModal="toggleModal"}}
-        {{/each}}
-      {{else if (eq tab "sources")}}
-        {{#each model.datasources as |source|}}
-          {{source-feed-item source=source toggleModal="toggleModal"}}
-        {{/each}}
-      {{else if (eq tab "collections")}}
-        {{#each model.collections as |collection|}}
-          {{collection-feed-item collection=collection toggleModal="toggleModal"}}
-        {{/each}}
-      {{else if (eq tab "requests")}}
-        {{#each model.requests as |request|}}
-          {{request-feed-item request=request toggleModal="toggleModal"}}
-        {{/each}}
-      {{else if (eq tab "discussions")}}
-      {{#each model.datasets as |discussion|}}
-        {{discussion-feed-item discussion=discussion toggleModal="toggleModal"}}
-      {{/each}}
-      {{/if}}
-    </div>
+    {{home-feed-content tab=tab datasets=model.datasets requests=model.requests collections=model.collections datasources=model.datasources}}
   </section>
 
 </main>

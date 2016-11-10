@@ -1,0 +1,23 @@
+<div class="contain">
+  {{#if (or (eq tab "all") (eq tab "default"))}}
+    {{#each datasets as |dataset|}}
+      {{request-feed-item dataset=dataset toggleModal="toggleModal"}}
+    {{/each}}
+  {{else if (eq tab "sources")}}
+    {{#each datasources as |source|}}
+      {{source-feed-item source=source toggleModal="toggleModal"}}
+    {{/each}}
+  {{else if (eq tab "collections")}}
+    {{#each collections as |collection|}}
+      {{collection-feed-item collection=collection toggleModal="toggleModal"}}
+    {{/each}}
+  {{else if (eq tab "requests")}}
+    {{#each requests as |request|}}
+      {{request-feed-item request=request toggleModal="toggleModal"}}
+    {{/each}}
+  {{else if (eq tab "discussions")}}
+  {{#each datasets as |discussion|}}
+    {{discussion-feed-item discussion=discussion toggleModal="toggleModal"}}
+  {{/each}}
+  {{/if}}
+</div>
