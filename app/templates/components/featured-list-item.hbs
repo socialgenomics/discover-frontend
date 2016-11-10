@@ -7,11 +7,10 @@
           {{is-new-label}}
         {{/if}}
       </h4>
-      {{#if model.properties.summary}}
-          <p class="collection-item truncate two-lines">{{model.properties.summary}}</p>
-      {{else}}
-          <p class="collection-item truncate two-lines">{{model.description}}</p>
-      {{/if}}
+      {{collection-summary-fallback
+        summary=model.properties.summary
+        description=model.description
+        class="collection-item truncate two-lines"}}
     </div>
   {{/link-to}}
 {{else}}
@@ -21,10 +20,9 @@
     {{else}}
       <h4 class="datasource-item truncate">{{model.name}}</h4>
     {{/if}}
-    {{#if model.properties.summary}}
-      <p class="truncate">{{model.properties.summary}}</p>
-    {{else}}
-      <p class="truncate">{{model.description}}</p>
-    {{/if}}
+    {{collection-summary-fallback
+      summary=model.properties.summary
+      description=model.description
+      class="truncate"}}
   {{/link-to}}
 {{/if}}
