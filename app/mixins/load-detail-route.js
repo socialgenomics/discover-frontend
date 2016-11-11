@@ -31,7 +31,7 @@ export default Mixin.create({
       const model = data.model;
       const commenterIds = data.comments.content
       .map(action => get(action, 'record.userId.id'))
-      .reduce(this._removeDuplicates, []);
+      .uniq(); //removes duplicates
       model.set('actionableId', data.actionable);
       return RSVP.hash({
         model,
@@ -62,13 +62,5 @@ export default Mixin.create({
 
   _peekOrCreate(store, id) {
     return store.peekRecord('actionable', id) || store.createRecord('actionable', { id });
-  },
-
-  //This returns a list of user_ids, no duplicates.
-  _removeDuplicates(acc, curr) {
-    if (acc.indexOf(curr) === -1) {
-      acc.push({ 'where.user_id': curr });
-    }
-    return acc;
   }
 });
