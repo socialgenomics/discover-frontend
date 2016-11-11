@@ -11,7 +11,7 @@ function peekOrCreate(store, id) {
 }
 
 //This returns a list of user_ids, no duplicates.
-function reducer(acc, curr) {
+function removeDuplicates(acc, curr) {
   if (acc.indexOf(curr) === -1) {
     acc.push({ 'where.user_id': curr });
   }
@@ -20,7 +20,6 @@ function reducer(acc, curr) {
 
 export default Route.extend(ResetScrollMixin, {
   session: service(),
-  favouritesService: service('favourites'),
 
   model(params) {
     const datasetId = params.id;
@@ -34,8 +33,7 @@ export default Route.extend(ResetScrollMixin, {
       const dataset = data.dataset;
       const commenterIds = data.comments.content
       .map(action => get(action, 'record.userId.id'))
-      .reduce(reducer, []);
-      console.log(commenterIds);
+      .reduce(removeDuplicates, []);
       dataset.set('actionableId', actionable);
 
       return RSVP.hash({
