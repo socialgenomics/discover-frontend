@@ -33,15 +33,16 @@ export default Route.extend(AuthenticatedRouteMixin, LoadDetailRouteMixin, {
   afterModel(model) {
     //TODO: Refactor - This code is used in several places e.g. request and dataset detail controllers & routes
     const userId = get(this, 'session.authenticatedUser');
-    const currentModel = model.request;
-    let view = this.store.createRecord('action', {
-      actionableId: get(currentModel, 'actionableId'),
-      userId: userId,
-      type: 'view',
-      actionable_model: currentModel.constructor.modelName
-    });
-    view.save()
-    .catch(Logger.error);
+    const request = model.request;
+    if (userId) {
+      this.store.createRecord('action', {
+        actionableId: get(request, 'actionableId'),
+        userId: userId,
+        type: 'view',
+        actionable_model: request.constructor.modelName
+      })
+      .save().catch(Logger.error);
+    }
   },
 
   actions: {

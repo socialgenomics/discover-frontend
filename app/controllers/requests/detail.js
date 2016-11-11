@@ -20,10 +20,10 @@ export default Controller.extend({
   actions: {
     addComment(text) {
       const userId = this.get('session.authenticatedUser');
-      const currentModel = this.get('request');
+      const request = this.get('request');
       let comment = this.store.createRecord('action', {
-        actionableId: currentModel.get('actionableId'),
-        actionable_model: currentModel.constructor.modelName,
+        actionableId: request.get('actionableId'),
+        actionable_model: request.constructor.modelName,
         userId: userId,
         type: 'comment',
         properties: {
@@ -35,7 +35,7 @@ export default Controller.extend({
 
     addTag(text) {
       const userId = this.get('session.authenticatedUser');
-      const currentModel = this.get('request');
+      const request = this.get('request');
       const existingTags = this.get('tags');
       // if the tag already exists
       if (existingTags.findBy('properties.text', text)) {
@@ -47,8 +47,8 @@ export default Controller.extend({
         });
       } else {
         const tag = this.store.createRecord('action', {
-          actionableId: currentModel.get('actionableId'),
-          actionable_model: currentModel.constructor.modelName,
+          actionableId: request.get('actionableId'),
+          actionable_model: request.constructor.modelName,
           userId: userId,
           type: 'tag',
           properties: {
