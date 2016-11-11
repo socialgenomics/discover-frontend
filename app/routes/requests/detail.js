@@ -1,26 +1,15 @@
 import Ember from 'ember';
 import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
+import LoadDetailRouteMixin from 'repositive/mixins/load-detail-route';
 
 const { inject: { service }, Logger, Route, RSVP, get } = Ember;
 
-//TODO move into mixin?
-function peekOrCreate(store, id) {
-  return store.peekRecord('actionable', id) || store.createRecord('actionable', { id });
-}
-//This returns a list of user_ids, no duplicates.
-function removeDuplicates(acc, curr) {
-  if (acc.indexOf(curr) === -1) {
-    acc.push({ 'where.user_id': curr });
-  }
-  return acc;
-}
-
-export default Route.extend(AuthenticatedRouteMixin, {
+export default Route.extend(AuthenticatedRouteMixin, LoadDetailRouteMixin, {
   session: service(),
 
   model(params) {
     const requestId = params.id;
-    const actionable = peekOrCreate(this.store, requestId);
+    const actionable = this._peekOrCreate(this.store, requestId);
     return RSVP.hash({
       comments: this._getComments(requestId),
       tags: this._getTags(requestId),
@@ -30,7 +19,7 @@ export default Route.extend(AuthenticatedRouteMixin, {
       const request = data.request;
       const commenterIds = data.comments.content
       .map(action => get(action, 'record.userId.id'))
-      .reduce(removeDuplicates, []);
+      .reduce(this._removeDuplicates, []);
       request.set('actionableId', actionable);
 
       return RSVP.hash({
@@ -61,20 +50,5 @@ export default Route.extend(AuthenticatedRouteMixin, {
       get(this, 'metrics').trackPage();
       return true;
     }
-  },
-  _getComments(actionableId) {
-    return this.store.query('action', {
-      'where.actionable_id': actionableId,
-      'where.type': 'comment',
-      'order[0][0]': 'updated_at',
-      'order[0][1]': 'DESC',
-      limit: 100 // Remove limit to 10 elements
-    });
-  },
-  _getTags(actionableId) {
-    return this.store.query('action', {
-      'where.actionable_id': actionableId,
-      'where.type': 'tag'
-    });
   }
 });
