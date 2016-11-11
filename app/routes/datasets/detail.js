@@ -33,8 +33,9 @@ export default Route.extend(ResetScrollMixin, {
     .then(data => {
       const dataset = data.dataset;
       const commenterIds = data.comments.content
-      .map(action => action.record.get('userId').get('id'))
+      .map(action => get(action, 'record.userId.id'))
       .reduce(reducer, []);
+      console.log(commenterIds);
       dataset.set('actionableId', actionable);
 
       return RSVP.hash({
@@ -45,7 +46,7 @@ export default Route.extend(ResetScrollMixin, {
     .then(data => {
       return RSVP.hash({
         dataset: data.dataset,
-        stats: this.get('session.isAuthenticated') === false ? this._getStats() : null
+        stats: get(this, 'session.isAuthenticated') === false ? this._getStats() : null
       });
     })
     .catch(Logger.error);
@@ -53,14 +54,12 @@ export default Route.extend(ResetScrollMixin, {
 
   afterModel(model) {
     //TODO: Refactor - This code is used in several places e.g. request and dataset detail controllers & routes
-    const userId = this.get('session.authenticatedUser');
+    const userId = get(this, 'session.authenticatedUser');
     const dataset = model.dataset;
-
     if (userId) {
-      this.get('favouritesService').loadFavourites();
       this.store.createRecord('action', {
         userId,
-        actionableId: dataset.get('actionableId'),
+        actionableId: get(dataset, 'actionableId'),
         type: 'view',
         actionable_model: dataset.constructor.modelName
       })
@@ -71,7 +70,7 @@ export default Route.extend(ResetScrollMixin, {
 
   actions: {
     didTransition() {
-      this.get('metrics').trackPage();
+      get(this, 'metrics').trackPage();
       return true;
     }
   },
