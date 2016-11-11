@@ -15,7 +15,6 @@ export default SessionService.extend({
         let userId = userData.id;
         let profileId = userData.user_profile.id;
         let settingsId = userData.user_setting.id;
-
         this.get('metrics').identify({
           email: userData.credentials[0].email,
           firstname: userData.firstname,
@@ -48,7 +47,8 @@ export default SessionService.extend({
           user.set('profile', profile);
           user.save();
           this.set('authenticatedUser', user);
-        });
+        })
+        .catch(Ember.Logger.error);
       }
     }
   })
