@@ -8,28 +8,10 @@ export default Route.extend(ResetScrollMixin, LoadDetailRouteMixin, {
   session: service(),
 
   model(params) {
-    const datasetId = params.id;
-    const actionable = this._peekOrCreate(this.store, datasetId);
-    return RSVP.hash({
-      comments: this._getComments(datasetId),
-      tags: this._getTags(datasetId),
-      dataset: this.store.findRecord('dataset', datasetId)
-    })
-    .then(data => {
-      const dataset = data.dataset;
-      const commenterIds = data.comments.content
-      .map(action => get(action, 'record.userId.id'))
-      .reduce(this._removeDuplicates, []);
-      dataset.set('actionableId', actionable);
-
-      return RSVP.hash({
-        dataset,
-        userProfiles: commenterIds.map(id => this.store.query('userProfile', id))
-      });
-    })
+    return this._getModelData(params, 'dataset')
     .then(data => {
       return RSVP.hash({
-        dataset: data.dataset,
+        dataset: data.model,
         stats: get(this, 'session.isAuthenticated') === false ? this._getStats() : null
       });
     })

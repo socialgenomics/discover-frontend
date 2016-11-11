@@ -8,23 +8,10 @@ export default Route.extend(AuthenticatedRouteMixin, LoadDetailRouteMixin, {
   session: service(),
 
   model(params) {
-    const requestId = params.id;
-    const actionable = this._peekOrCreate(this.store, requestId);
-    return RSVP.hash({
-      comments: this._getComments(requestId),
-      tags: this._getTags(requestId),
-      request: this.store.findRecord('request', requestId)
-    })
+    return this._getModelData(params, 'request')
     .then(data => {
-      const request = data.request;
-      const commenterIds = data.comments.content
-      .map(action => get(action, 'record.userId.id'))
-      .reduce(this._removeDuplicates, []);
-      request.set('actionableId', actionable);
-
       return RSVP.hash({
-        userProfiles: commenterIds.map(id => this.store.query('userProfile', id)),
-        request: request
+        request: data.model
       });
     })
     .catch(Logger.error);

@@ -2,7 +2,7 @@ import Ember from 'ember';
 import ajax from 'ic-ajax';
 import ENV from 'repositive/config/environment';
 
-const { Mixin, get, Logger } = Ember;
+const { Mixin, get, Logger, RSVP } = Ember;
 
 export default Mixin.create({
   _getStats() {
@@ -19,13 +19,34 @@ export default Mixin.create({
     });
   },
 
+  _getModelData(params, modelType) {
+    const modelId = params.id;
+    return RSVP.hash({
+      actionable: this._peekOrCreate(this.store, modelId),
+      comments: this._getComments(modelId),
+      tags: this._getTags(modelId),
+      model: this.store.findRecord(modelType, modelId)
+    })
+    .then(data => {
+      const model = data.model;
+      const commenterIds = data.comments.content
+      .map(action => get(action, 'record.userId.id'))
+      .reduce(this._removeDuplicates, []);
+      model.set('actionableId', data.actionable);
+      return RSVP.hash({
+        model,
+        userProfiles: commenterIds.map(id => this.store.query('userProfile', id))
+      });
+    });
+  },
+
   _getTags(actionableId) {
     return this.store.query('action', {
       'where.actionable_id': actionableId,
       'where.type': 'tag'
     });
   },
-  
+
   _logPageView(model) {
     const userId = get(this, 'session.authenticatedUser');
     if (userId) {
