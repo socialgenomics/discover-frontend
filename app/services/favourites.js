@@ -1,41 +1,37 @@
 import Ember from 'ember';
 
-const { inject: { service }, Service } = Ember;
+const { inject: { service }, Service, Logger, get, set } = Ember;
 
 export default Service.extend({
   store: service(),
   session: service(),
   flashMessages: service(),
-  userFavourites: [], //list of actions where type = 'favourite'
+  userFavourites: null, //list of actions where type = 'favourite'
   loadFavourites() {
-    const currentUserId = this.get('session.session.authenticated.user.id');
-    const store = this.get('store');
-
-    return store.query('action', {
-      'where.user_id': currentUserId,
-      'where.type': 'favourite',
-      limit: 1000 // remove the limit to 10 response
-    })
-    .then(favourites => {
-      this.set('userFavourites', []);
-      favourites.map(favourite => {
-        this.get('userFavourites').push(favourite);
-      });
-    })
-    .catch(err => {
-      Ember.Logger.error(err);
-    });
+    if (!get(this, 'userFavourites')) { //favourites haven't been loaded yet
+      const currentUserId = get(this, 'session.session.authenticated.user.id');
+      const store = get(this, 'store');
+      return store.query('action', {
+        'where.user_id': currentUserId,
+        'where.type': 'favourite',
+        limit: 1000 // remove the limit to 10 response
+      })
+      .then(favourites => {
+        set(this, 'userFavourites', []);
+        favourites.map(favourite => get(this, 'userFavourites').push(favourite));
+      })
+      .catch(Logger.error);
+    }
   },
-
   removeFavourite(favourite) {
-    const updatedFavourites = this.get('userFavourites').without(favourite);
-    this.set('userFavourites', updatedFavourites);
+    const updatedFavourites = get(this, 'userFavourites').without(favourite);
+    set(this, 'userFavourites', updatedFavourites);
   },
   pushFavourite(favourite) {
-    this.get('userFavourites').push(favourite);
+    get(this, 'userFavourites').push(favourite);
     this.notifyPropertyChange('userFavourites');
   },
   getFavourite(actionableId) {
-    return this.get('userFavourites').findBy('actionableId.id', actionableId);
+    return get(this, 'userFavourites').findBy('actionableId.id', actionableId);
   }
 });

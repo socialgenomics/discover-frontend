@@ -10,10 +10,10 @@ export default Route.extend({
   favouritesService: service('favourites'),
 
   model: function(params) {
-    if (this.get('session.session.isAuthenticated') === true) {
+    if (get(this, 'session.session.isAuthenticated')) {
       return this.store.findRecord('user', params.id)
       .then(user => {
-        const userId = user.get('id');
+        const userId = get(user, 'id');
         // TODO: The majority of this info can be cached and retrieved from the same session instead of doing unnecesary calls.
         return new RSVP.hash({
           user: user,
@@ -21,7 +21,6 @@ export default Route.extend({
           registrations: this.store.query('dataset', { 'where.user_id': userId }),
           requests: this.store.query('request', { 'where.user_id': userId }),
           user_credential: this.store.query('credential', { 'where.user_id': userId }),
-          user_favourites: this.get('favouritesService').loadFavourites(),
           favourited_data: this._getFavouritedData(params.id),
           user_comments: this.store.query('action', { 'where.user_id': userId, 'where.type': 'comment' })
         });
@@ -52,10 +51,8 @@ export default Route.extend({
     }
   },
   _getFavouritedData(userIdOfProfile) {
-    let token = this.get('session.session.content.authenticated.token');
-    let authHeaders = {
-      authorization: `JWT ${token}`
-    };
+    const token = get(this, 'session.session.content.authenticated.token');
+    const authHeaders = { authorization: `JWT ${token}` };
     return RSVP.hash({
       datasets: ajax({ url: ENV.APIRoutes['favourite-datasets'].replace('{user_id}', userIdOfProfile),
         type: 'GET',
@@ -67,19 +64,17 @@ export default Route.extend({
       })
     })
     .then(data => {
-      let datasets = data.datasets.map(dataset => {
+      const datasets = data.datasets.map(dataset => {
         dataset.type = 'dataset';
         return dataset;
       });
-      let requests = data.requests.map(request => {
+      const requests = data.requests.map(request => {
         request.type = 'request';
         return request;
       });
-      let allFavourites = datasets.concat(requests);
+      const allFavourites = datasets.concat(requests);
       return allFavourites;
     })
-    .catch(err => {
-      Ember.Logger.error(err);
-    });
+    .catch(Logger.error);
   }
 });

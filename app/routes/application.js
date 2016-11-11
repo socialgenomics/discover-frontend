@@ -7,8 +7,7 @@ export default Route.extend(ApplicationRouteMixin, {
   favouritesService: service('favourites'),
   session: service(),
   afterModel() {
-    const isAuthenticated = get(this, 'session').get('isAuthenticated');
-    if (isAuthenticated) {
+    if (get(this, 'session.isAuthenticated')) {
       get(this, 'favouritesService').loadFavourites();
     }
   },
