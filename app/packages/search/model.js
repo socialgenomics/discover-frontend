@@ -109,6 +109,9 @@ export default Model.extend({
           aggDSL: DSL, //TODO:: this is dodgy
           show: true
         });
+        if (agg.name === 'assay') {
+          agg.set('buckets', agg.buckets.reject(bucket => bucket.key === 'Not Available'));
+        }
         this.aggs.pushObject(agg);
       }
       delete resp.aggs;
