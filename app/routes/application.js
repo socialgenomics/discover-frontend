@@ -6,7 +6,7 @@ const { Route, inject: { service }, get } = Ember;
 export default Route.extend(ApplicationRouteMixin, {
   favouritesService: service('favourites'),
   session: service(),
-  afterModel() {
+  model() {
     if (get(this, 'session.isAuthenticated')) {
       get(this, 'favouritesService').loadFavourites();
     }

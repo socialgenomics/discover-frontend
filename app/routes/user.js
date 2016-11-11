@@ -42,7 +42,7 @@ export default Route.extend({
       })
       .catch(err => {
         Logger.error(err);
-        if (err.errors[0].status == 500) {
+        if (err.errors[0].status === 500) {
           throw err;
         }
       });
