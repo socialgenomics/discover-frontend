@@ -3,7 +3,7 @@ import ajax from 'ic-ajax';
 import ENV from 'repositive/config/environment';
 import ResetScrollMixin from 'repositive/mixins/reset-scroll';
 
-const { inject: { service }, Logger, Route, RSVP } = Ember;
+const { inject: { service }, Logger, Route, RSVP, get } = Ember;
 
 //TODO move into mixin?
 function peekOrCreate(store, id) {
@@ -13,7 +13,7 @@ function peekOrCreate(store, id) {
 //This returns a list of user_ids, no duplicates.
 function reducer(acc, curr) {
   if (acc.indexOf(curr) === -1) {
-    acc.push({ user_id: curr });
+    acc.push({ 'where.user_id': curr });
   }
   return acc;
 }
@@ -25,32 +25,30 @@ export default Route.extend(ResetScrollMixin, {
   model(params) {
     const datasetId = params.id;
     const actionable = peekOrCreate(this.store, datasetId);
-
     return RSVP.hash({
       comments: this._getComments(datasetId),
       tags: this._getTags(datasetId),
       dataset: this.store.findRecord('dataset', datasetId)
     })
-      .then(data => {
-        const dataset = data.dataset;
-        const commenterIds = data.comments.content
-          .map(action => action.record.get('userId.id'))
-          .reduce(reducer, []);
+    .then(data => {
+      const dataset = data.dataset;
+      const commenterIds = data.comments.content
+      .map(action => action.record.get('userId').get('id'))
+      .reduce(reducer, []);
+      dataset.set('actionableId', actionable);
 
-        dataset.set('actionableId', actionable);
-
-        return RSVP.hash({
-          dataset,
-          userProfiles: commenterIds.map(id => this.store.query('userProfile', id))
-        });
-      })
-      .then(data => {
-        return RSVP.hash({
-          dataset: data.dataset,
-          stats: this.get('session.isAuthenticated') === false ? this._getStats() : null
-        });
-      })
-      .catch(Logger.error);
+      return RSVP.hash({
+        dataset,
+        userProfiles: commenterIds.map(id => this.store.query('userProfile', id))
+      });
+    })
+    .then(data => {
+      return RSVP.hash({
+        dataset: data.dataset,
+        stats: this.get('session.isAuthenticated') === false ? this._getStats() : null
+      });
+    })
+    .catch(Logger.error);
   },
 
   afterModel(model) {
@@ -66,8 +64,8 @@ export default Route.extend(ResetScrollMixin, {
         type: 'view',
         actionable_model: dataset.constructor.modelName
       })
-        .save()
-        .catch(Logger.error);
+      .save()
+      .catch(Logger.error);
     }
   },
 
@@ -84,7 +82,7 @@ export default Route.extend(ResetScrollMixin, {
 
   _getComments(actionableId) {
     return this.store.query('action', {
-      'were.actionable_id': actionableId,
+      'where.actionable_id': actionableId,
       'where.type': 'comment',
       'order[0][0]': 'updated_at',
       'order[0][1]': 'DESC',
