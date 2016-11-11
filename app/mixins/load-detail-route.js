@@ -2,7 +2,7 @@ import Ember from 'ember';
 import ajax from 'ic-ajax';
 import ENV from 'repositive/config/environment';
 
-const { Mixin } = Ember;
+const { Mixin, get, Logger } = Ember;
 
 export default Mixin.create({
   _getStats() {
@@ -25,6 +25,20 @@ export default Mixin.create({
       'where.type': 'tag'
     });
   },
+  
+  _logPageView(model) {
+    const userId = get(this, 'session.authenticatedUser');
+    if (userId) {
+      this.store.createRecord('action', {
+        userId,
+        actionableId: get(model, 'actionableId'),
+        type: 'view',
+        actionable_model: model.constructor.modelName
+      })
+      .save().catch(Logger.error);
+    }
+  },
+
   _peekOrCreate(store, id) {
     return store.peekRecord('actionable', id) || store.createRecord('actionable', { id });
   },

@@ -37,19 +37,7 @@ export default Route.extend(ResetScrollMixin, LoadDetailRouteMixin, {
   },
 
   afterModel(model) {
-    //TODO: Refactor - This code is used in several places e.g. request and dataset detail controllers & routes
-    const userId = get(this, 'session.authenticatedUser');
-    const dataset = model.dataset;
-    if (userId) {
-      this.store.createRecord('action', {
-        userId,
-        actionableId: get(dataset, 'actionableId'),
-        type: 'view',
-        actionable_model: dataset.constructor.modelName
-      })
-      .save()
-      .catch(Logger.error);
-    }
+    this._logPageView(model.dataset);
   },
 
   actions: {
