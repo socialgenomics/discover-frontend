@@ -38,7 +38,9 @@ deployment:
       - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS registry.repositive.io:5000
       - docker push registry.repositive.io:5000/discover
       - mkdir rancher && cd rancher
-      - rancher --env 1a94 --access-key $ACCESS_STA --secret-key $SECRET_STA -p discover-app up --force-upgrade -c -d discover
+      - rancher --env 1a94 --access-key $ACCESS_STA --secret-key $SECRET_STA export discover-app > compose.tar
+      - tar -xf compose.tar
+      - rancher-compose --access-key $ACCESS_STA --secret-key $SECRET_STA -p discover-app up --force-upgrade -c -d discover
 
   deployment:
     tag: /.*/
