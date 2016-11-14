@@ -1,11 +1,7 @@
 <section class="metadata-panel source-panel">
   <header>
     {{#unless (eq model.type 'personal_repository')}}
-      {{#link-to 'datasources' class="left-align" invokeAction=(action 'trackBackClick')}}
-        <div class="back-arrow center-align" data-balloon="See all data sources" data-balloon-pos="right" data-balloon-length="medium">
-          {{fa-icon "chevron-left"}}
-        </div>
-      {{/link-to}}
+      {{panel-back-button type='datasources'}}
     {{/unless}}
     <img src="/assets/images/icons/icon-datasource-white@2x.png" class="data-icon">
     <h5>Data Source</h5>
