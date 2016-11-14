@@ -14,7 +14,11 @@
         {{/link-to}}
       {{/if}}
       <div class="actions-container valign-wrapper">
-        {{action-favourite model=dataset}}
+        {{#if session.isAuthenticated}}
+          {{action-favourite model=dataset}}
+        {{else}}
+          {{action-favourite action="toggleSignupModal"}}
+        {{/if}}
         {{action-share action="toggleModal"}}
       </div>
     </div>
@@ -75,7 +79,9 @@
     {{partial "datasets/tab-comments"}}
   </div>
 </div>
-
+{{#if isShowingSignupModal}}
+  {{signup-modal action="toggleSignupModal"}}
+{{/if}}
 {{#if isShowingTagModal}}
   {{tag-modal action="toggleTagModal"}}
 {{/if}}
