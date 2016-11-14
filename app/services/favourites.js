@@ -25,8 +25,7 @@ export default Service.extend({
     }
   },
   removeFavourite(favourite) {
-    const updatedFavourites = get(this, 'userFavourites').without(favourite);
-    set(this, 'userFavourites', updatedFavourites);
+    set(this, 'userFavourites', get(this, 'userFavourites').without(favourite));
   },
   pushFavourite(favourite) {
     get(this, 'userFavourites').push(favourite);
