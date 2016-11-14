@@ -1,14 +1,14 @@
 import Ember from 'ember';
 import ApplicationRouteMixin from 'ember-simple-auth/mixins/application-route-mixin';
 
-const { Route, inject: { service }, get } = Ember;
+const { Route, inject: { service }, get, RSVP } = Ember;
 
 export default Route.extend(ApplicationRouteMixin, {
   favouritesService: service('favourites'),
   session: service(),
   model() {
     if (get(this, 'session.isAuthenticated')) {
-      get(this, 'favouritesService').loadFavourites();
+      RSVP.resolve(get(this, 'favouritesService').loadFavourites());
     }
   },
   actions: {
