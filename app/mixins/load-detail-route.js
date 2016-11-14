@@ -47,7 +47,7 @@ export default Mixin.create({
     });
   },
 
-  _logPageView(model) {
+  _incrementViewCounter(model) {
     const userId = get(this, 'session.authenticatedUser');
     if (userId) {
       this.store.createRecord('action', {
