@@ -24,6 +24,7 @@ export default Component.extend({
   click() {
     // disable favorite functionality for not logged in users
     if (this.get('session.isAuthenticated') === false) {
+      this.sendAction();
       return;
     }
 

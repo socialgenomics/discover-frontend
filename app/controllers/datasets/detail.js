@@ -77,7 +77,9 @@ export default Controller.extend({
         });
       }
     },
-
+    toggleSignupModal() {
+      this.toggleProperty('isShowingSignupModal');
+    },
     toggleTagModal() {
       this.toggleProperty('isShowingTagModal');
     }
