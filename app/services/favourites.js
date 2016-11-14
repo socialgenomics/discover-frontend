@@ -1,12 +1,12 @@
 import Ember from 'ember';
 
-const { inject: { service }, Service, Logger, get, set } = Ember;
+const { inject: { service }, Service, Logger, get, getWithDefault, set } = Ember;
 
 export default Service.extend({
   store: service(),
   session: service(),
   flashMessages: service(),
-  userFavourites: null, //list of actions where type = 'favourite'
+  userFavourites: undefined, //list of actions where type = 'favourite'
   loadFavourites() {
     if (!get(this, 'userFavourites')) { //favourites haven't been loaded yet
       const currentUserId = get(this, 'session.session.authenticated.user.id');
@@ -32,6 +32,6 @@ export default Service.extend({
     this.notifyPropertyChange('userFavourites');
   },
   getFavourite(actionableId) {
-    return get(this, 'userFavourites').findBy('actionableId.id', actionableId);
+    return this.getWithDefault('userFavourites', []).findBy('actionableId.id', actionableId);
   }
 });
