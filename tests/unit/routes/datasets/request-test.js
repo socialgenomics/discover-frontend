@@ -32,7 +32,7 @@ describeModule(
 
       expect(get(controllerMock, 'title')).to.eql(null);
       expect(get(controllerMock, 'description')).to.eql(null);
-      expect(get(controllerMock, 'didRegister')).to.eql(false);
+      expect(get(controllerMock, 'didRequest')).to.eql(false);
     });
 
     it('resetController does not reset register form params', function() {

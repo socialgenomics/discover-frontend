@@ -9,7 +9,7 @@ export default Route.extend(AuthenticatedRouteMixin, {
       setProperties(controller, {
         title: null,
         description: null,
-        didRegister: false
+        didRequest: false
       });
     }
   }
