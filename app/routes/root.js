@@ -2,13 +2,15 @@ import Ember from 'ember';
 import ajax from 'ic-ajax';
 import ENV from 'repositive/config/environment';
 
-const { inject: { service }, Route, RSVP, get, Logger } = Ember;
+const { inject: { service }, computed, Route, RSVP, get, Logger } = Ember;
 
 export default Route.extend({
   session: service(),
+  isFirstLogin: computed.and('session.data.firstVisit', 'session.isAuthenticated'),
+  displayWelcomeMessage: computed.and('session.data.displayWelcomeMessage', 'session.isAuthenticated'),
 
   beforeModel: function() {
-    if (get(this, 'session.data.firstVisit') && get(this, 'session.isAuthenticated')) {
+    if (get(this, 'isFirstLogin')) {
       this.transitionTo('beta-signup-form')
       .then(() => {
         // Don't display the 'verify email' message if user signed up with third party auth
@@ -18,7 +20,7 @@ export default Route.extend({
       });
     }
 
-    if (get(this, 'session.data.displayWelcomeMessage') && get(this, 'session.isAuthenticated')) {
+    if (get(this, 'displayWelcomeMessage')) {
       this.flashMessages.add({
         message: 'Please check your email to verify your account',
         type: 'info',

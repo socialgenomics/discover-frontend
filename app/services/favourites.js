@@ -7,7 +7,7 @@ export default Service.extend({
   session: service(),
   flashMessages: service(),
   userFavourites: undefined, //list of actions where type = 'favourite'
-  
+
   loadFavourites() {
     if (!get(this, 'userFavourites')) { //favourites haven't been loaded yet
       const currentUserId = get(this, 'session.session.authenticated.user.id');
