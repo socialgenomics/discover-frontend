@@ -12,12 +12,12 @@ export default Route.extend({
   beforeModel: function() {
     if (get(this, 'isFirstLogin')) {
       this.transitionTo('beta-signup-form')
-      .then(() => {
-        // Don't display the 'verify email' message if user signed up with third party auth
-        if (!get(this, 'session.data.thirdPartySignup')) {
-          get(this, 'session').set('data.displayWelcomeMessage', true);
-        }
-      });
+        .then(() => {
+          // Don't display the 'verify email' message if user signed up with third party auth
+          if (!get(this, 'session.data.thirdPartySignup')) {
+            get(this, 'session').set('data.displayWelcomeMessage', true);
+          }
+        });
     }
 
     if (get(this, 'displayWelcomeMessage')) {
@@ -46,27 +46,27 @@ export default Route.extend({
         collections: this.store.query('collection', { 'where.type': 'repositive_collection', 'order[0][0]': 'updated_at', 'order[0][1]': 'DESC', 'limit': '3' }),
         datasources: this.store.query('collection', { 'where.type': 'datasource', 'order[0][0]': 'updated_at', 'order[0][1]': 'DESC', 'limit': '3' })
       })
-      .then(data => {
-        //Normalize and push trending datasets
-        let trending = data.datasets.map((datasetObj) => {
-          return this.store.push(this.store.normalize('dataset', datasetObj));
-        });
+        .then(data => {
+          //Normalize and push trending datasets
+          const trending = data.datasets.map((datasetObj) => {
+            return this.store.push(this.store.normalize('dataset', datasetObj));
+          });
 
-        return {
-          stats: data.stats,
-          datasets: trending,
-          requests: data.requests,
-          registered: data.registered,
-          collections: data.collections,
-          datasources: data.datasources
-        };
-      })
-      .catch(Logger.error);
+          return {
+            stats: data.stats,
+            datasets: trending,
+            requests: data.requests,
+            registered: data.registered,
+            collections: data.collections,
+            datasources: data.datasources
+          };
+        })
+        .catch(Logger.error);
     } else {
       return ajax({ url: ENV.APIRoutes['stats'] , type: 'GET' })
-      .then(stat => {
-        return { stats: stat };
-      });
+        .then(stat => {
+          return { stats: stat };
+        });
     }
   },
 
