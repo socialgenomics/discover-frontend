@@ -27,17 +27,17 @@ export default Mixin.create({
       tags: this._getTags(modelId),
       model: this.store.findRecord(modelType, modelId)
     })
-    .then(data => {
-      const model = data.model;
-      const commenterIds = data.comments.content
-      .map(action => get(action, 'record.userId.id'))
-      .uniq(); //removes duplicates
-      model.set('actionableId', data.actionable);
-      return RSVP.hash({
-        model,
-        userProfiles: commenterIds.map(id => this.store.query('userProfile', id))
+      .then(data => {
+        const model = data.model;
+        const commenterIds = data.comments.content
+          .map(action => get(action, 'record.userId.id'))
+          .uniq(); //removes duplicates
+        model.set('actionableId', data.actionable);
+        return RSVP.hash({
+          model,
+          userProfiles: commenterIds.map(id => this.store.query('userProfile', id))
+        });
       });
-    });
   },
 
   _getTags(actionableId) {
