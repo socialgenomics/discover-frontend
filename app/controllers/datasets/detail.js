@@ -62,7 +62,7 @@ export default Controller.extend({
           class: 'fadeInOut'
         });
       } else {
-        let tag = this.store.createRecord('action', {
+        const tag = this.store.createRecord('action', {
           actionableId: dataset.get('actionableId'),
           actionable_model: dataset.constructor.modelName,
           userId: userId,
@@ -71,10 +71,7 @@ export default Controller.extend({
             text: text
           }
         });
-        tag.save()
-        .catch((err) => {
-          Ember.Logger.error(err);
-        });
+        tag.save().catch(Logger.error);
       }
     },
 

@@ -1,79 +1,29 @@
 import Ember from 'ember';
 import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
+import LoadDetailRouteMixin from 'repositive/mixins/load-detail-route';
 
-//TODO move into mixin?
-function peekOrCreate(store, id) {
-  let existing = store.peekRecord('actionable', id);
-  if (existing) {
-    return existing;
-  } else {
-    return store.createRecord('actionable', { id: id });
-  }
-}
-//This returns a list of user_ids, no duplicates.
-function reducer(acc, curr) {
-  if (acc.indexOf(curr) === -1) {
-    acc.push({ user_id: curr });
-  }
-  return acc;
-}
+const { inject: { service }, Logger, Route, RSVP, get } = Ember;
 
-export default Ember.Route.extend(AuthenticatedRouteMixin, {
-  session: Ember.inject.service(),
+export default Route.extend(AuthenticatedRouteMixin, LoadDetailRouteMixin, {
+  session: service(),
 
-  model: function(params) {
-    let actionable = peekOrCreate(this.store, params.id);
-    return Ember.RSVP.hash({
-      comments: this.store.query('action', {
-        'were.actionable_id': params.id,
-        'where.type': 'comment',
-        'order[0][0]': 'updated_at',
-        'order[0][1]': 'DESC',
-        limit: 100 // Remove limit to 10 elements
-      }),
-      tags: this.store.query('action', {
-        'where.actionable_id': params.id,
-        'where.type': 'tag'
-      }),
-      request: this.store.findRecord('request', params.id)
-    })
+  model(params) {
+    return this._getModelData(params, 'request')
     .then(data => {
-      let request = data.request;
-      request.set('actionableId', actionable);
-      let commenterIds = data.comments.content
-      .map(action => action.record.get('userId.id'))
-      .reduce(reducer, []);
-      return Ember.RSVP.hash({
-        userProfiles: commenterIds.map(id => this.store.query('userProfile', id)),
-        request: request
+      return RSVP.hash({
+        request: data.model
       });
-    }).then((data) => {
-      return data.request;
     })
-    .catch(err => {
-      Ember.Logger.error(err);
-    });
+    .catch(Logger.error);
   },
 
-  afterModel: function(request) {
-    //TODO: Refactor - This code is used in several places e.g. request and dataset detail controllers & routes
-    const userId = this.get('session.authenticatedUser');
-    const currentModel = request;
-    let view = this.store.createRecord('action', {
-      actionableId: currentModel.get('actionableId'),
-      userId: userId,
-      type: 'view',
-      actionable_model: currentModel.constructor.modelName
-    });
-    view.save()
-    .catch((err) => {
-      Ember.Logger.error(err);
-    });
+  afterModel(model) {
+    this._logPageView(model.request);
   },
 
   actions: {
     didTransition: function() {
-      this.get('metrics').trackPage();
+      get(this, 'metrics').trackPage();
       return true;
     }
   }
