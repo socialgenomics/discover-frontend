@@ -7,9 +7,12 @@
         focus-out="focusedOut"
         type=type
         placeholder=placeholder
+        disabled=disabled
       }}
     </div>
-    <a class="help-link" {{action "toggleMarkdownModal"}}><span>How to format text with Markdown?</span></a>
+    {{#unless disabled}}
+      <a class="help-link" {{action "toggleMarkdownModal"}}><span>How to format text with Markdown?</span></a>
+    {{/unless}}
   {{else}}
     {{input
       value=value
@@ -18,6 +21,7 @@
       type=type
       placeholder=placeholder
       insert-newline='submitForm'
+      disabled=disabled
     }}
   {{/if}}
 </div>
