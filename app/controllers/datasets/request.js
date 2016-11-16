@@ -62,9 +62,9 @@ export default Controller.extend(
       const id = get(request, 'id');
 
       set(this, 'didRequest', true);
-      this.addFlashMessage('Request created successfully.', 'success');
+      this._addFlashMessage('Request created successfully.', 'success');
       this.transitionToRoute('requests.detail', id);
-      this.trackEvent('dataset', 'request', id);
+      this._trackEvent('dataset', 'request', id);
     },
 
     /**
@@ -74,7 +74,7 @@ export default Controller.extend(
      */
     _createRequestError(error) {
       set(this, 'loading', false);
-      this.addFlashMessage('Oh dear. There was a problem submitting your dataset request.', 'warning');
+      this._addFlashMessage('Oh dear. There was a problem submitting your dataset request.', 'warning');
       Logger.error(error);
     }
   });

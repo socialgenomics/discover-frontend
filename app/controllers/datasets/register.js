@@ -80,8 +80,8 @@ export default Controller.extend(
       const id = get(dataset, 'id');
 
       set(this, 'didRegister', true);
-      this.addFlashMessage('Dataset successfully registered', 'success');
-      this.trackEvent('dataset', 'register', id);
+      this._addFlashMessage('Dataset successfully registered', 'success');
+      this._trackEvent('dataset', 'register', id);
       this.transitionToRoute('datasets.detail', id);
     },
 
@@ -93,7 +93,7 @@ export default Controller.extend(
     _createDatasetError(error) {
       Logger.error(error);
       set(this, 'loading', false);
-      this.addFlashMessage('Oh dear. There was a problem registering your dataset.', 'warning');
+      this._addFlashMessage('Oh dear. There was a problem registering your dataset.', 'warning');
     }
   }
 );

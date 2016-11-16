@@ -10,8 +10,8 @@ function mockParams(controller) {
   setProperties(controller, {
     loading: true,
     didRequest: false,
-    addFlashMessage: sinon.spy(),
-    trackEvent: sinon.spy(),
+    _addFlashMessage: sinon.spy(),
+    _trackEvent: sinon.spy(),
     transitionToRoute: sinon.spy()
   });
 }
@@ -64,7 +64,7 @@ describeModule(
       mockParams(controller);
       controller._createRequestSuccess(request);
 
-      expect(get(controller, 'addFlashMessage').calledWith('Request created successfully.', 'success')).to.eql(true);
+      expect(get(controller, '_addFlashMessage').calledWith('Request created successfully.', 'success')).to.eql(true);
     });
 
     it('_createRequestSuccess tracks event', function () {
@@ -74,7 +74,7 @@ describeModule(
       mockParams(controller);
       controller._createRequestSuccess(request);
 
-      expect(get(controller, 'trackEvent').calledWith('dataset', 'request', request.id)).to.eql(true);
+      expect(get(controller, '_trackEvent').calledWith('dataset', 'request', request.id)).to.eql(true);
     });
 
     it('_createRequestSuccess does transition', function () {
@@ -105,7 +105,7 @@ describeModule(
       controller._createRequestError(error);
 
       expect(
-        get(controller, 'addFlashMessage').calledWith(
+        get(controller, '_addFlashMessage').calledWith(
           'Oh dear. There was a problem submitting your dataset request.', 'warning'
         )
       ).to.eql(true);

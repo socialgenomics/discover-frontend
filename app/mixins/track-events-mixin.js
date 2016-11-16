@@ -10,7 +10,7 @@ export default Mixin.create({
    * @param {String} label
    * @private
    */
-  trackEvent(category, action, label) {
+  _trackEvent(category, action, label) {
     get(this, 'metrics').trackEvent({ category, action, label });
   }
 });

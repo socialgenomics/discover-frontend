@@ -9,7 +9,7 @@ export default Mixin.create({
    * @param {String} type - flash message type
    * @private
    */
-  addFlashMessage(message, type) {
+  _addFlashMessage(message, type) {
     this.flashMessages.add({
       message,
       type,
