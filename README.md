@@ -80,30 +80,31 @@ Make use of the many generators for code, try `ember help generate` for more det
 
 ## Deploying
 
-### Deploying to development
-When you push to development, this build is deployed to the development machine at [https://discover-dev.repositive.io/](https://discover-dev.repositive.io/).
-
-### Deploying to staging
-To deploy to staging you must first merge the master branch into the development branch:
+### Deploying to Staging
 
 ```
 git checkout master
 
 git pull
-
-git checkout development
-
-git merge master
 ```
 
-After checking everything is working. You then need to merge the development branch into master. Check everything is working as it should then push the changes:
+If there are branches ready to be merged, merge them.
+
+Increment version number with `npm version <major | minor | patch>`
+
+Then push:
 
 ```
-git checkout master
 
-git merge development
-
-git push
+git push --tags
 ```
-
 This build will be deployed to the staging machine at [https://discover-staging.repositive.io](https://discover-staging.repositive.io)
+
+### Deploying to Production
+
+1. [Deploy to staging](#deploying-to-staging)
+2. Wait for successful deployment to staging.:watch:
+3. Go to [Rancher](http://rancher.repositive.io:8080/env/1a100/apps/stacks/1e39) :cow:
+4. Within the 'production' environment 'discover-platform' stack (link should take you there), click the 'upgrade' button on the 'discover' service.
+5. In the input labeled 'Select Image', change the version number to the build you'd like to deploy.
+6. Click upgrade and pray to the deployment god that nothing bad happens. :pray:
