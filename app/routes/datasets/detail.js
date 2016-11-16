@@ -19,7 +19,7 @@ export default Route.extend(ResetScrollMixin, LoadDetailRouteMixin, {
   },
 
   afterModel(model) {
-    this._logPageView(model.dataset);
+    this._incrementViewCounter(model.dataset);
   },
 
   actions: {
