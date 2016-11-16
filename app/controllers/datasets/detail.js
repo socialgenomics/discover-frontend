@@ -74,7 +74,9 @@ export default Controller.extend({
         tag.save().catch(Logger.error);
       }
     },
-
+    toggleSignupModal() {
+      this.toggleProperty('isShowingSignupModal');
+    },
     toggleTagModal() {
       this.toggleProperty('isShowingTagModal');
     }
