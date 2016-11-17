@@ -1,9 +1,14 @@
 import Ember from 'ember';
 
-export default Ember.Controller.extend({
-  session: Ember.inject.service(),
-  comments: Ember.computed.filterBy('model.actionableId.actions', 'type', 'comment'),
-  commentsSorted : Ember.computed.sort('comments', (itemA, itemB) => {
+const { Controller, computed, inject: { service }, Logger } = Ember;
+
+export default Controller.extend({
+  session: service(),
+
+  request: computed.alias('model.request'),
+  comments: computed.filterBy('request.actionableId.actions', 'type', 'comment'),
+  tags: computed.filterBy('request.actionableId.actions', 'type', 'tag'),
+  commentsSorted: computed.sort('comments', (itemA, itemB) => {
     if (itemA.get('createdAt') < itemB.get('createdAt')) {
       return 1;
     } else if (itemA.get('createdAt') > itemB.get('createdAt')) {
@@ -11,30 +16,26 @@ export default Ember.Controller.extend({
     }
     return 0;
   }),
-  tags: Ember.computed.filterBy('model.actionableId.actions', 'type', 'tag'),
 
   actions: {
     addComment(text) {
       const userId = this.get('session.authenticatedUser');
-      const currentModel = this.get('model');
+      const request = this.get('request');
       let comment = this.store.createRecord('action', {
-        actionableId: currentModel.get('actionableId'),
-        actionable_model: currentModel.constructor.modelName,
+        actionableId: request.get('actionableId'),
+        actionable_model: request.constructor.modelName,
         userId: userId,
         type: 'comment',
         properties: {
           text: text
         }
       });
-      comment.save()
-      .catch((err) => {
-        Ember.Logger.error(err);
-      });
+      comment.save().catch(Logger.error);
     },
 
     addTag(text) {
       const userId = this.get('session.authenticatedUser');
-      const currentModel = this.get('model');
+      const request = this.get('request');
       const existingTags = this.get('tags');
       // if the tag already exists
       if (existingTags.findBy('properties.text', text)) {
@@ -45,19 +46,16 @@ export default Ember.Controller.extend({
           class: 'fadeInOut'
         });
       } else {
-        let tag = this.store.createRecord('action', {
-          actionableId: currentModel.get('actionableId'),
-          actionable_model: currentModel.constructor.modelName,
+        const tag = this.store.createRecord('action', {
+          actionableId: request.get('actionableId'),
+          actionable_model: request.constructor.modelName,
           userId: userId,
           type: 'tag',
           properties: {
             text: text
           }
         });
-        tag.save()
-        .catch((err) => {
-          Ember.Logger.error(err);
-        });
+        tag.save().catch(Logger.error);
       }
     },
     toggleTagModal() {
