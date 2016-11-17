@@ -7,6 +7,14 @@ const { inject: { service }, Logger, Route, RSVP, get } = Ember;
 export default Route.extend(ResetScrollMixin, LoadDetailRouteMixin, {
   session: service(),
 
+  beforeModel() {
+    console.log(get(this, 'session.data.isOpenPage'));
+    if (get(this, 'session.isAuthenticated') === false) {
+      get(this, 'session').set('data.isOpenPage', true);
+      console.log(get(this, 'session.data.isOpenPage'));
+    }
+  },
+
   model(params) {
     return this._getModelData(params, 'dataset')
     .then(data => {

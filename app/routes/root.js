@@ -8,6 +8,7 @@ export default Route.extend({
   session: service(),
   isFirstLogin: computed.and('session.data.firstVisit', 'session.isAuthenticated'),
   displayWelcomeMessage: computed.and('session.data.displayWelcomeMessage', 'session.isAuthenticated'),
+  isOpenPage: computed.and('session.data.isOpenPage'),
 
   beforeModel: function() {
     if (get(this, 'isFirstLogin')) {
@@ -19,6 +20,8 @@ export default Route.extend({
           }
         });
     }
+
+    get(this, 'session').set('data.isOpenPage', false);
 
     if (get(this, 'displayWelcomeMessage')) {
       this.flashMessages.add({
