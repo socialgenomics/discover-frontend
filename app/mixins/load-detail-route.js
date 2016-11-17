@@ -1,10 +1,11 @@
 import Ember from 'ember';
 import ajax from 'ic-ajax';
 import ENV from 'repositive/config/environment';
+import ActionableMixin from 'repositive/mixins/actionable';
 
-const { Mixin, get, Logger, RSVP } = Ember;
+const { Mixin, get, RSVP } = Ember;
 
-export default Mixin.create({
+export default Mixin.create(ActionableMixin, {
   _getStats() {
     return ajax({ url: ENV.APIRoutes['stats'] , type: 'GET' });
   },
@@ -45,21 +46,5 @@ export default Mixin.create({
       'where.actionable_id': actionableId,
       'where.type': 'tag'
     });
-  },
-  //this can be exported and used for collections
-  _incrementViewCounter(model, userId) {
-    if (userId) {
-      this.store.createRecord('action', {
-        userId,
-        actionableId: get(model, 'actionableId'),
-        type: 'view',
-        actionable_model: model.constructor.modelName
-      })
-      .save().catch(Logger.error);
-    }
-  },
-
-  _peekOrCreate(store, id) {
-    return store.peekRecord('actionable', id) || store.createRecord('actionable', { id });
   }
 });

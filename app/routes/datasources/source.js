@@ -3,8 +3,9 @@ import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-rout
 import ajax from 'ic-ajax';
 import ENV from 'repositive/config/environment';
 import ResetScrollMixin from 'repositive/mixins/reset-scroll';
+import ActionableMixin from 'repositive/mixins/actionable';
 
-const { get, Route, RSVP } = Ember;
+const { get, Route, RSVP, inject: { service }, Logger, set } = Ember;
 
 const storeDatasets = (store) => (datasets) => datasets.map(dataset => store.push(store.normalize('dataset', dataset)));
 
@@ -22,6 +23,7 @@ export function model(params) {
   const datasetsUrl = ENV.APIRoutes['collection-datasets'].replace('{collection_id}', collectionId) + `?limit=${params.limit}&offset=${offset}`;
 
   return RSVP.hash({
+    actionable: this._peekOrCreate(store, collectionId),
     collection: store.findRecord('collection', collectionId),
     collectionStats: ajax({
       url: ENV.APIRoutes['collection-stats'].replace('{collection_id}', collectionId),
@@ -33,12 +35,20 @@ export function model(params) {
       type: 'GET',
       headers: authHeaders
     }).then(storeDatasets(store))
-  });
+  })
+    .then(data => {
+      set(data, 'collection.actionableId', data.actionable);
+      return data;
+    }).catch(Logger.error);
 }
 
-export default Route.extend(AuthenticatedRouteMixin, ResetScrollMixin, {
+export default Route.extend(AuthenticatedRouteMixin, ResetScrollMixin, ActionableMixin, {
+  session: service(),
   controllerName: 'collection',
   model: model,
+  afterModel(model) {
+    this._incrementViewCounter(model.collection, get(this, 'session.authenticatedUser'));
+  },
 
   actions: {
     invalidateModel: function() {

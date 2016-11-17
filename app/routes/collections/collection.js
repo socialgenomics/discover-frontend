@@ -2,28 +2,17 @@ import Ember from 'ember';
 import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
 import { model } from '../datasources/source';
 import ResetScrollMixin from 'repositive/mixins/reset-scroll';
+import ActionableMixin from 'repositive/mixins/actionable';
 
-const { Route , inject: { service }, get, Logger } = Ember;
+const { get, Route , inject: { service } } = Ember;
 
-export default Route.extend(AuthenticatedRouteMixin, ResetScrollMixin, {
+export default Route.extend(AuthenticatedRouteMixin, ResetScrollMixin, ActionableMixin, {
   session: service(),
 
   controllerName: 'collection',
   model: model,
   afterModel(model) {
-    this._incrementViewCounter(model.collection);
-  },
-  _incrementViewCounter(model) {
-    const userId = get(this, 'session.authenticatedUser');
-    if (userId) {
-      this.store.createRecord('action', {
-        userId,
-        actionableId: get(model, 'actionableId'),
-        type: 'view',
-        actionable_model: model.constructor.modelName
-      })
-      .save().catch(Logger.error);
-    }
+    this._incrementViewCounter(model.collection, get(this, 'session.authenticatedUser'));
   },
   actions: {
     invalidateModel: function() {
