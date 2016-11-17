@@ -1,7 +1,16 @@
 import Ember from 'ember';
 import ApplicationRouteMixin from 'ember-simple-auth/mixins/application-route-mixin';
 
-export default Ember.Route.extend(ApplicationRouteMixin, {
+const { Route, inject: { service }, get } = Ember;
+
+export default Route.extend(ApplicationRouteMixin, {
+  favouritesService: service('favourites'),
+  session: service(),
+  model() {
+    if (get(this, 'session.isAuthenticated')) {
+      get(this, 'favouritesService').loadFavourites();
+    }
+  },
   actions: {
     search: function(query) {
       this.transitionTo('datasets.search', {
