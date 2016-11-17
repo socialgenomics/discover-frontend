@@ -4,7 +4,7 @@ const { get, Mixin, Logger } = Ember;
 
 export default Mixin.create({
   _incrementViewCounter(model, userId) {
-    if (userId) {
+    if (model && userId) {
       this.store.createRecord('action', {
         userId,
         actionableId: get(model, 'actionableId'),
