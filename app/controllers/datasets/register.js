@@ -1,77 +1,99 @@
 import Ember from 'ember';
 import EmberValidations from 'ember-validations';
-import ajax from 'ic-ajax';
-import ENV from 'repositive/config/environment';
+import FlashMessageMixin from 'repositive/mixins/flash-message-mixin';
+import TrackEventsMixin from 'repositive/mixins/track-events-mixin';
 
-export default Ember.Controller.extend(
+const { Controller, computed, get, getProperties, set, inject: { service }, Logger } = Ember;
+
+export default Controller.extend(
   EmberValidations,
-{
-  session: Ember.inject.service(),
+  FlashMessageMixin,
+  TrackEventsMixin,
+  {
+    session: service(),
 
-  title: null,
-  description: null,
-  url: null,
-  loading: false,
-  validations: {
-    title: {
-      presence: { message: 'This field can\'t be blank.' }
-    },
-    description: {
-      presence: { message: 'This field can\'t be blank.' }
-    },
-    url: {
-      format: {
-        with: /[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/,
-        allowBlank: true,
-        message: 'must be a valid url'
+    title: null,
+    description: null,
+    url: null,
+    didRegister: false,
+    loading: false,
+
+    validations: {
+      title: {
+        presence: { message: 'This field can\'t be blank.' }
+      },
+      description: {
+        presence: { message: 'This field can\'t be blank.' }
+      },
+      url: {
+        format: {
+          with: /[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/,
+          allowBlank: true,
+          message: 'must be a valid url'
+        }
       }
-    }
-  },
-  isInvalid: Ember.computed.not('isValid'),
-  actions: {
-    addDataset: function() {
-      const userModel = this.get('session.authenticatedUser');
-      if (this.get('isValid')) {
-        this.set('loading', true);
-        this.store.findRecord('collection', userModel.id)
-        .then(collectionModel => {
-          return this.store.createRecord('dataset', {
-            title: this.title,
-            description: this.description,
-            url: this.url,
-            datasourceId: collectionModel,
-            externalId: userModel.id + Date.now(),
-            userId: userModel
-          });
-        })
-        .then(dataset => {
-          return dataset.save();
-        })
-        .then(created => {
-          this.flashMessages.add({
-            message: 'Dataset successfully registered',
-            type: 'success',
-            timeout: 7000,
-            class: 'fadeInOut'
-          });
-          this.transitionToRoute('datasets.detail', created.id);
-          this.get('metrics').trackEvent({
-            category: 'dataset',
-            action: 'register',
-            label: created.get('id')
-          });
-        })
-        .catch(err => {
-          this.set('loading', false);
-          this.flashMessages.add({
-            message: 'Oh dear. There was a problem registering your dataset.',
-            type: 'warning',
-            timeout: 7000,
-            class: 'fadeInOut'
-          });
-          Ember.Logger.error(err);
-        });
+    },
+
+    isInvalid: computed.not('isValid'),
+
+    actions: {
+      addDataset: function () {
+        if (this.get('isValid')) {
+          const userModel = this.get('session.authenticatedUser');
+
+          set(this, 'loading', true);
+
+          this.store.findRecord('collection', get(userModel, 'id'))
+            .then(this._createDataset.bind(this, userModel))
+            .then(this._createDatasetSuccess.bind(this))
+            .catch(this._createDatasetError.bind(this));
+        }
       }
+    },
+
+    /**
+     * @desc creates new dataset model and saves it to backend
+     * @param {DS.Model} userModel
+     * @param {DS.Model} dataSource
+     * @returns {Promise}
+     * @private
+     */
+    _createDataset(userModel, dataSource) {
+      const { title, description, url } = getProperties(this, 'title', 'description', 'url');
+
+      return this.store.createRecord('dataset', {
+        title,
+        description,
+        url,
+        datasourceId: dataSource,
+        externalId: get(userModel, 'id') + Date.now(),
+        userId: userModel
+      }).save();
+    },
+
+    /**
+     * @desc create dataset promise resolve callback
+     * @param {DS.Model} dataset
+     * @private
+     */
+    _createDatasetSuccess(dataset) {
+      const id = get(dataset, 'id');
+
+      set(this, 'didRegister', true);
+      this._addFlashMessage('Dataset successfully registered', 'success');
+      this._trackEvent('dataset', 'register', id);
+      this.transitionToRoute('datasets.detail', id);
+    },
+
+    /**
+     * @desc create dataset promise reject callback
+     * @param {Error} error
+     * @private
+     */
+    _createDatasetError(error) {
+      Logger.error(error);
+      set(this, 'loading', false);
+      this._addFlashMessage('Oh dear. There was a problem registering your dataset.', 'warning');
     }
   }
-});
+);
