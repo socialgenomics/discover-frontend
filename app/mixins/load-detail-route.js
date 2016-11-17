@@ -46,9 +46,8 @@ export default Mixin.create({
       'where.type': 'tag'
     });
   },
-
-  _incrementViewCounter(model) {
-    const userId = get(this, 'session.authenticatedUser');
+  //this can be exported and used for collections
+  _incrementViewCounter(model, userId) {
     if (userId) {
       this.store.createRecord('action', {
         userId,

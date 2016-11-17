@@ -4,10 +4,12 @@ import ajax from 'ic-ajax';
 import ENV from 'repositive/config/environment';
 import ResetScrollMixin from 'repositive/mixins/reset-scroll';
 
+const { get, Route, RSVP } = Ember;
+
 const storeDatasets = (store) => (datasets) => datasets.map(dataset => store.push(store.normalize('dataset', dataset)));
 
 export function model(params) {
-  const token = this.get('session.session.content.authenticated.token');
+  const token = get(this, 'session.session.content.authenticated.token');
   const authHeaders = {
     authorization: `JWT ${token}`
   };
@@ -19,7 +21,7 @@ export function model(params) {
   const offset = limit * (params.page - 1);
   const datasetsUrl = ENV.APIRoutes['collection-datasets'].replace('{collection_id}', collectionId) + `?limit=${params.limit}&offset=${offset}`;
 
-  return new Ember.RSVP.hash({
+  return RSVP.hash({
     collection: store.findRecord('collection', collectionId),
     collectionStats: ajax({
       url: ENV.APIRoutes['collection-stats'].replace('{collection_id}', collectionId),
@@ -34,7 +36,7 @@ export function model(params) {
   });
 }
 
-export default Ember.Route.extend(AuthenticatedRouteMixin, ResetScrollMixin, {
+export default Route.extend(AuthenticatedRouteMixin, ResetScrollMixin, {
   controllerName: 'collection',
   model: model,
 
