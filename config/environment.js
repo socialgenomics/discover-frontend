@@ -110,7 +110,7 @@ module.exports = function(environment) {
       },
       contentSecurityPolicy: {
         'default-src': "'none'",
-        'font-src': "'self' data: fonts.gstatic.com",
+        'font-src': "'self' data: fonts.gstatic.com https://js.intercomcdn.com/fonts/",
         'style-src': "'self' 'unsafe-inline' fonts.googleapis.com",
         'script-src': "'self' 'unsafe-inline' http://docker-vm:49152 http://www.google-analytics.com/analytics.js https://s3-eu-west-1.amazonaws.com/share.typeform.com/widget.js https://s3-eu-west-1.amazonaws.com/share.typeform.com/widget.js https://widget.intercom.io https://js.intercomcdn.com",
         'connect-src': "'self' 'unsafe-inline' ws://docker-vm:49152 https://api-ping.intercom.io https://nexus-websocket-a.intercom.io https://nexus-websocket-b.intercom.io wss://nexus-websocket-a.intercom.io wss://nexus-websocket-b.intercom.io https://api-iam.intercom.io",
