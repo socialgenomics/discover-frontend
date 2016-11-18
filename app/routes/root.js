@@ -45,7 +45,7 @@ export default Route.extend({
         this.store.query('request', { 'order[0][0]': 'updated_at', 'order[0][1]': 'DESC' }),
         this.store.query('dataset', { 'where.user_id.$ne': 'null', 'order[0][0]': 'updated_at', 'order[0][1]': 'DESC' }),
         this.store.query('collection', { 'where.type': 'repositive_collection', 'order[0][0]': 'updated_at', 'order[0][1]': 'DESC', 'limit': '3' }),
-        this.store.query('collection', { 'where.type': 'datasource', 'order[0][0]': 'updated_at', 'order[0][1]': 'DESC', 'limit': '3' }),
+        ajax({ url: ENV.APIRoutes['datasources'] , type: 'GET', headers: authHeaders }),
         this.get('favouritesService').loadFavourites()
       ])
       .then(data => {
@@ -60,7 +60,7 @@ export default Route.extend({
           requests: data[2],
           registered: data[3],
           collections: data[4],
-          datasources: data[5]
+          datasources: data[5].slice(0,3)
         };
       })
       .catch(err => {
