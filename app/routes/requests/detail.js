@@ -18,7 +18,7 @@ export default Route.extend(AuthenticatedRouteMixin, LoadDetailRouteMixin, {
   },
 
   afterModel(model) {
-    this._incrementViewCounter(model.request);
+    this._incrementViewCounter(model.request, get(this, 'session.authenticatedUser'));
   },
 
   actions: {
