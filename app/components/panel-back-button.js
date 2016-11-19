@@ -5,8 +5,8 @@ const { Component, get } = Ember;
 export default Ember.Component.extend({
   actions: {
     trackBackClick() {
-      Ember.get(this, 'metrics').trackEvent({
-        category: this.get('route'),
+      get(this, 'metrics').trackEvent({
+        category: get(this, 'route'),
         action: 'back button clicked'
       });
     }
