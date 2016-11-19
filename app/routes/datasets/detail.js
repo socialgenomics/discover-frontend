@@ -8,10 +8,8 @@ export default Route.extend(ResetScrollMixin, LoadDetailRouteMixin, {
   session: service(),
 
   beforeModel() {
-    console.log(get(this, 'session.data.isOpenPage'));
     if (get(this, 'session.isAuthenticated') === false) {
       get(this, 'session').set('data.isOpenPage', true);
-      console.log(get(this, 'session.data.isOpenPage'));
     }
   },
 
