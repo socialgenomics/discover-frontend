@@ -2,13 +2,12 @@ import Ember from 'ember';
 import ajax from 'ic-ajax';
 import ENV from 'repositive/config/environment';
 
-const { inject: { service }, computed, Route, RSVP, get, Logger } = Ember;
+const { inject: { service }, computed, Route, RSVP, get, set, Logger } = Ember;
 
 export default Route.extend({
   session: service(),
   isFirstLogin: computed.and('session.data.firstVisit', 'session.isAuthenticated'),
   displayWelcomeMessage: computed.and('session.data.displayWelcomeMessage', 'session.isAuthenticated'),
-  isOpenPage: computed.bool('session.data.isOpenPage'),
 
   beforeModel: function() {
     if (get(this, 'isFirstLogin')) {
@@ -16,7 +15,7 @@ export default Route.extend({
         .then(() => {
           // Don't display the 'verify email' message if user signed up with third party auth
           if (!get(this, 'session.data.thirdPartySignup')) {
-            set(this, 'session.data.isOpenPage', true);
+            set(this, 'session.data.displayWelcomeMessage', true);
           }
         });
     }
