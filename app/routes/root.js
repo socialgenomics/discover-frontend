@@ -8,7 +8,7 @@ export default Route.extend({
   session: service(),
   isFirstLogin: computed.and('session.data.firstVisit', 'session.isAuthenticated'),
   displayWelcomeMessage: computed.and('session.data.displayWelcomeMessage', 'session.isAuthenticated'),
-  isOpenPage: computed.and('session.data.isOpenPage'),
+  isOpenPage: computed.bool('session.data.isOpenPage'),
 
   beforeModel: function() {
     if (get(this, 'isFirstLogin')) {
@@ -16,12 +16,12 @@ export default Route.extend({
         .then(() => {
           // Don't display the 'verify email' message if user signed up with third party auth
           if (!get(this, 'session.data.thirdPartySignup')) {
-            get(this, 'session').set('data.displayWelcomeMessage', true);
+            set(this, 'session.data.isOpenPage', true);
           }
         });
     }
 
-    get(this, 'session').set('data.isOpenPage', false);
+    set(this, 'session.data.isOpenPage', false);
 
     if (get(this, 'displayWelcomeMessage')) {
       this.flashMessages.add({
