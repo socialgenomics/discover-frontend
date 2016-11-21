@@ -54,13 +54,15 @@ export default Route.extend({
           return this.store.push(this.store.normalize('dataset', datasetObj));
         });
 
+        let featuredSources = data[5].length > 3 ? data[5].slice(0,3) : data[5];
+
         return {
           stats: data[0],
           datasets: trending,
           requests: data[2],
           registered: data[3],
           collections: data[4],
-          datasources: data[5].slice(0,3)
+          datasources: featuredSources
         };
       })
       .catch(err => {
