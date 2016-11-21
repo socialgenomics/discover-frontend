@@ -20,8 +20,6 @@ export default Route.extend({
         });
     }
 
-    set(this, 'session.data.isOpenPage', false);
-
     if (get(this, 'displayWelcomeMessage')) {
       this.flashMessages.add({
         message: 'Please check your email to verify your account',
