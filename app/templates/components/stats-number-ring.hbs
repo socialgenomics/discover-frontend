@@ -1,2 +1,10 @@
-<span class="data-num">{{rough-estimate stat}}</span>
-<p>{{label}}</p>
+{{#if (eq stat 'open')}}
+  <span class="data-num">{{fa-icon "globe"}}</span>
+  <p>{{capitalize stat}}</p>
+{{else if (eq stat 'restricted')}}
+  <span class="data-num">{{fa-icon "lock"}}</span>
+  <p>{{capitalize stat}}</p>
+{{else}}
+  <span class="data-num">{{rough-estimate stat}}</span>
+  <p>{{label}}</p>
+{{/if}}
