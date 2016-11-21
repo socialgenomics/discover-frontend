@@ -13,18 +13,14 @@ describeComponent(
     integration: true
   },
   function() {
-    it('renders', function() {
-      // Set any properties with this.set('myProperty', 'value');
-      // Handle any actions with this.on('myAction', function(val) { ... });
-      // Template block usage:
-      // this.render(hbs`
-      //   {{#stats-number-ring}}
-      //     template content
-      //   {{/stats-number-ring}}
-      // `);
+    it('Renders open text when the stat is open', function() {
+      this.render(hbs`{{stats-number-ring stat="open"}}`);
+      expect(this.$('p').text().trim()).to.eql('Open');
+    });
 
-      this.render(hbs`{{stats-number-ring}}`);
-      expect(this.$()).to.have.length(1);
+    it('Renders restricted text when the stat is restricted', function() {
+      this.render(hbs`{{stats-number-ring stat="restricted"}}`);
+      expect(this.$('p').text().trim()).to.eql('Restricted');
     });
   }
 );
