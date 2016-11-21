@@ -1,15 +1,32 @@
-{{yield}}
 <div class="comment">
   <div class="comment-header">
-    <div class="dp-wrapper">
-      {{#link-to 'user' user.id}}
+    {{#link-to 'user' user.id disabled=disabled invokeAction=(action 'toggleCreateAccountModal')}}
+      <div class="dp-wrapper">
         <img src={{avatar}}>
-      {{/link-to}}
-    </div>
-    {{#link-to 'user' user.id disabled=disabled class='comment-author-link'}}<h4>{{user.displayName}}</h4>{{/link-to}}
+      </div>
+      <h4>{{user.displayName}}</h4>
+    {{/link-to}}
     <span>{{moment-from-now date allowEmpty=true}}</span>
   </div>
   <div class="comment-body">
     <p class="markdown-text">{{markdown-to-html markdown=text extensions='targetBlankLinks'}}</p>
   </div>
 </div>
+
+{{#if showCreateAccountModal}}
+  {{#modal-dialog
+    close=(action 'toggleCreateAccountModal')
+    targetAttachment="center"
+    translucentOverlay=true
+  }}
+    {{#repositive-modal/wrapper size='medium'}}
+      {{repositive-modal/header
+        image=avatar
+        alternateBackground=true
+        title=(concat 'View ' user.firstname '\'s profile')
+        onClose=(action 'toggleCreateAccountModal')
+      }}
+      {{create-account-modal-content text='To see other users profile you need to create your own at first.'}}
+    {{/repositive-modal/wrapper}}
+  {{/modal-dialog}}
+{{/if}}
