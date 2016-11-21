@@ -22,5 +22,11 @@ describeComponent(
       this.render(hbs`{{stats-number-ring stat="restricted"}}`);
       expect(this.$('p').text().trim()).to.eql('Restricted');
     });
+
+    it('Renders a stat number and its label', function() {
+      this.render(hbs`{{stats-number-ring stat=6 label="abc"}}`);
+      expect(this.$('span').text().trim()).to.eql('6');
+      expect(this.$('p').text().trim()).to.eql('abc');
+    });
   }
 );
