@@ -40,7 +40,7 @@ export default Route.extend(ResetScrollMixin, LoadDetailRouteMixin, {
   },
 
   afterModel(model) {
-    this._incrementViewCounter(model.dataset);
+    this._incrementViewCounter(model.dataset, get(this, 'session.authenticatedUser'));
   },
 
   actions: {
