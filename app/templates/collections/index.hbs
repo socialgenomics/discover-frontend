@@ -3,7 +3,7 @@
 <main class="card no-margin">
   <div class="card-content">
     <div class="row">
-      {{#each model.collections as |collection|}}
+      {{#each (sort-by "name" model.collections) as |collection|}}
         {{collection-feed-item collection=collection}}
       {{/each}}
     </div>
