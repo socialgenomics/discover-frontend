@@ -8,6 +8,7 @@ export default Component.extend({
 
   tagName: 'a',
   isSubmitting: false,
+  showCreateAccountModal: false,
 
   isStarred: computed('favouritesService.userFavourites', function() {
     return isPresent(get(this, 'favouritesService').getFavourite(get(this, 'model.id')));
@@ -22,8 +23,8 @@ export default Component.extend({
   },
 
   click() {
-    // disable favorite functionality for not logged in users
-    if (!get(this, 'session.isAuthenticated')) {
+    if (this.get('session.isAuthenticated') === false) {
+      this.send('toggleCreateAccountModal');
       return;
     }
 
@@ -36,6 +37,12 @@ export default Component.extend({
       } else {
         this._addFavourite();
       }
+    }
+  },
+
+  actions: {
+    toggleCreateAccountModal() {
+      this.toggleProperty('showCreateAccountModal');
     }
   },
 
