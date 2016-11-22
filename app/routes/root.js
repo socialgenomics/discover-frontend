@@ -38,31 +38,31 @@ export default Route.extend({
         authorization: `JWT ${token}`
       };
 
-      return RSVP.all([
-        ajax({ url: ENV.APIRoutes['stats'] , type: 'GET', headers: authHeaders }),
-        ajax({ url: ENV.APIRoutes['datasets.trending'] , type: 'GET', headers: authHeaders }),
-        this.store.query('request', { 'order[0][0]': 'updated_at', 'order[0][1]': 'DESC' }),
-        this.store.query('dataset', { 'where.user_id.$ne': 'null', 'order[0][0]': 'updated_at', 'order[0][1]': 'DESC' }),
-        this.store.query('collection', { 'where.type': 'repositive_collection', 'order[0][0]': 'updated_at', 'order[0][1]': 'DESC', 'limit': '3' }),
-        ajax({ url: ENV.APIRoutes['datasources'] + '?limit=3' , type: 'GET', headers: authHeaders })
-      ])
+      return RSVP.hash({
+        stats: ajax({ url: ENV.APIRoutes['stats'] , type: 'GET', headers: authHeaders }),
+        datasets: ajax({ url: ENV.APIRoutes['datasets.trending'] , type: 'GET', headers: authHeaders }),
+        requests: this.store.query('request', { 'order[0][0]': 'updated_at', 'order[0][1]': 'DESC' }),
+        registered: this.store.query('dataset', { 'where.user_id.$ne': 'null', 'order[0][0]': 'updated_at', 'order[0][1]': 'DESC' }),
+        collections: this.store.query('collection', { 'where.type': 'repositive_collection', 'order[0][0]': 'updated_at', 'order[0][1]': 'DESC', 'limit': '3' }),
+        datasources: ajax({ url: ENV.APIRoutes['datasources'] + '?limit=3' , type: 'GET', headers: authHeaders })
+      })
         .then(data => {
           //Normalize and push trending datasets
-          const trending = data[1].map((datasetObj) => {
+          const trending = data.datasets.map((datasetObj) => {
             return this.store.push(this.store.normalize('dataset', datasetObj));
           });
 
           return {
-            stats: data[0],
+            stats: data.stats,
             datasets: trending,
-            requests: data[2],
-            registered: data[3],
-            collections: data[4],
-            datasources: data[5]
+            requests: data.requests,
+            registered: data.registered,
+            collections: data.collections,
+            datasources: data.datasources
           };
-
         })
         .catch(Logger.error);
+
     } else {
       return ajax({ url: ENV.APIRoutes['stats'] , type: 'GET' })
         .then(stat => {
