@@ -27,15 +27,9 @@
       <div class="divider"></div>
 
       <section class="stats-numbers">
-        <div class="stats-number">
-          <span class="data-num">{{rough-estimate collectionStats.datasets}}</span>
-          <p>Datasets</p>
-        </div>
-
-        <div class="stats-number">
-          <span class="data-num">{{rough-estimate collectionStats.datasources}}</span>
-          <p>Sources</p>
-        </div>
+        {{stats-number-ring stat=collectionStats.datasets label="Datasets"}}
+        {{stats-number-ring stat=collectionStats.datasources label="Sources"}}
+        {{stats-number-ring stat=collectionStats.view label="Views"}}
       </section>
 
       {{#if model.description}}
