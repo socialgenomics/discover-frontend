@@ -22,15 +22,15 @@ export default Route.extend(ResetScrollMixin, LoadDetailRouteMixin, {
             const dataset = hash.dataset;
 
             // Building schema.org JSON-LD
-            const schema = `<script type="application/ld+json">
-                {\n
-                    "@context": "http:\/\/schema.org\/",\n"@type": "Dataset",\n
-                    "name": "${get(dataset, 'title')}",\n
-                    "description": "${get(dataset, 'description')}",\n
-                    "url": "${get(dataset, 'url')}",\n
-                    "keywords": ${JSON.stringify(keywords)}\n
-                }\n
-            </script>`;
+            const schemaObject = {
+              '@context': 'http://schema.org/',
+              '@type': 'Dataset',
+              name: get(dataset, 'title'),
+              description: get(dataset, 'description'),
+              url: get(dataset, 'url'),
+              keywords: keywords
+            };
+            const schema = `<script type="application/ld+json">${JSON.stringify(schemaObject, 0, 2)}</script>`;
 
             return RSVP.hash({
               dataset: dataset,
