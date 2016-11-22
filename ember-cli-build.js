@@ -72,6 +72,7 @@ module.exports = function(defaults) {
 
   app.import('bower_components/crypto-js/crypto-js.js');
   app.import('bower_components/materialize/dist/js/materialize.js');
+  app.import('bower_components/d3/d3.js');
   app.import('vendor/typeform.js');
 
   return app.toTree();
