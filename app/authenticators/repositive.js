@@ -1,6 +1,5 @@
 import Ember from 'ember';
 import Base from 'ember-simple-auth/authenticators/base';
-import ajax from 'ic-ajax';
 import ENV from 'repositive/config/environment';
 
 const { RSVP, inject: { service }, get } = Ember;
