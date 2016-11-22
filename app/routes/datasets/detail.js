@@ -19,18 +19,21 @@ export default Route.extend(ResetScrollMixin, LoadDetailRouteMixin, {
             let keywords = [];
             hash.tags.forEach(t => keywords.push(get(t, 'properties').text));
 
-            let dataset = hash.dataset;
+            const dataset = hash.dataset;
+
             // Building schema.org JSON-LD
-            let schema = '<script type="application/ld+json">';
-            schema += '{\n"@context": "http:\/\/schema.org\/",\n"@type": "Dataset",\n';
-            schema += `"name": "${get(dataset, 'title')}",\n`;
-            schema += `"description": "${get(dataset, 'description')}",\n`;
-            schema += `"url": "${get(dataset, 'url')}",\n`;
-            schema += `"keywords": ${JSON.stringify(keywords)}\n`;
-            schema += '}\n</script>';
+            const schema = `<script type="application/ld+json">
+                {\n
+                    "@context": "http:\/\/schema.org\/",\n"@type": "Dataset",\n
+                    "name": "${get(dataset, 'title')}",\n
+                    "description": "${get(dataset, 'description')}",\n
+                    "url": "${get(dataset, 'url')}",\n
+                    "keywords": ${JSON.stringify(keywords)}\n
+                }\n
+            </script>`;
 
             return RSVP.hash({
-              dataset: hash.dataset,
+              dataset: dataset,
               stats: hash.stats,
               schema: schema
             });

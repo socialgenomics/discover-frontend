@@ -48,7 +48,7 @@ export default Route.extend({
       ])
         .then(data => {
           //Normalize and push trending datasets
-          let trending = data[1].map((datasetObj) => {
+          const trending = data[1].map((datasetObj) => {
             return this.store.push(this.store.normalize('dataset', datasetObj));
           });
 
