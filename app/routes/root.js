@@ -44,39 +44,23 @@ export default Route.extend({
         this.store.query('request', { 'order[0][0]': 'updated_at', 'order[0][1]': 'DESC' }),
         this.store.query('dataset', { 'where.user_id.$ne': 'null', 'order[0][0]': 'updated_at', 'order[0][1]': 'DESC' }),
         this.store.query('collection', { 'where.type': 'repositive_collection', 'order[0][0]': 'updated_at', 'order[0][1]': 'DESC', 'limit': '3' }),
-        ajax({ url: ENV.APIRoutes['datasources'] + '?limit=3' , type: 'GET', headers: authHeaders }),
-        this.get('favouritesService').loadFavourites()
+        ajax({ url: ENV.APIRoutes['datasources'] + '?limit=3' , type: 'GET', headers: authHeaders })
       ])
-      .then(data => {
-        //Normalize and push trending datasets
-        let trending = data[1].map((datasetObj) => {
-          return this.store.push(this.store.normalize('dataset', datasetObj));
-        });
-
-        return {
-          stats: data[0],
-          datasets: trending,
-          requests: data[2],
-          registered: data[3],
-          collections: data[4],
-          datasources: data[5]
-        };
-
-      })
         .then(data => {
           //Normalize and push trending datasets
-          const trending = data.datasets.map((datasetObj) => {
+          let trending = data[1].map((datasetObj) => {
             return this.store.push(this.store.normalize('dataset', datasetObj));
           });
 
           return {
-            stats: data.stats,
+            stats: data[0],
             datasets: trending,
-            requests: data.requests,
-            registered: data.registered,
-            collections: data.collections,
-            datasources: data.datasources
+            requests: data[2],
+            registered: data[3],
+            collections: data[4],
+            datasources: data[5]
           };
+
         })
         .catch(Logger.error);
     } else {
