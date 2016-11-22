@@ -1,10 +1,11 @@
 import Ember from 'ember';
 import EmberValidations from 'ember-validations';
 import ENV from 'repositive/config/environment';
+import FlashMessageMixin from 'repositive/mixins/flash-message-mixin';
 
 const { Controller, computed, observer, Logger, get, set, inject: { service } } = Ember;
 
-export default Controller.extend(EmberValidations, {
+export default Controller.extend(EmberValidations, FlashMessageMixin, {
   ajax: service(),
 
   email: null,
@@ -32,31 +33,19 @@ export default Controller.extend(EmberValidations, {
   },
   actions: {
     submitForm: function() {
-      if (!this.get('isDisabled')) {
+      if (!get(this, 'isDisabled')) {
         this.flashMessages.clearMessages();
         set(this, 'loading', true);
-        get(this, 'ajax').request(ENV.APIRoutes['reset-password'] + '/' + get(this, 'email'), { method: 'GET' })
-        .then(resp => {
-          set(this, 'loading', false);
-          this.flashMessages.add({
-            message: 'We have sent an email to ' + get(this, 'email'),
-            type: 'info',
-            timeout: 7000,
-            class: 'fadeIn'
+        get(this, 'ajax').request(ENV.APIRoutes['reset-password'] + `/${get(this, 'email')}`, { method: 'GET' })
+          .then(resp => {
+            set(this, 'loading', false);
+            this._addFlashMessage(`We have sent an email to ${get(this, 'email')}.`, 'success');
+          })
+          .catch(err => {
+            set(this, 'loading', false);
+            Logger.error(err);
+            this._addFlashMessage(`We could not send an email to ${get(this, 'email')}. Please check you\'ve entered the correct email.`, 'warning');
           });
-        })
-        .catch(err => {
-          set(this, 'loading', false);
-          Logger.error(err);
-          if (err.errorThrown === 'Not Found' || err.errorThrown === 'Bad Request') {
-            this.flashMessages.add({
-              message: 'We could not send an email to ' + get(this, 'email') + '. Please check you\'ve entered the correct email.',
-              type: 'warning',
-              timeout: 7000,
-              class: 'fadeIn'
-            });
-          }
-        });
       }
     }
   }
