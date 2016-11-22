@@ -1,11 +1,12 @@
 import Ember from 'ember';
 import EmberValidations from 'ember-validations';
 import ENV from 'repositive/config/environment';
-import ajax from 'ic-ajax';
 
-const { Controller, computed, observer, Logger, get, set } = Ember;
+const { Controller, computed, observer, Logger, get, set, inject: { service } } = Ember;
 
 export default Controller.extend(EmberValidations, {
+  ajax: service(),
+
   email: null,
   loading: false,
   messages: [],
@@ -34,10 +35,7 @@ export default Controller.extend(EmberValidations, {
       if (!this.get('isDisabled')) {
         this.flashMessages.clearMessages();
         set(this, 'loading', true);
-        ajax({
-          url: ENV.APIRoutes['reset-password'] + '/' + get(this, 'email'),
-          type: 'GET'
-        })
+        get(this, 'ajax').request(ENV.APIRoutes['reset-password'] + '/' + get(this, 'email'), { method: 'GET' })
         .then(resp => {
           set(this, 'loading', false);
           this.flashMessages.add({
