@@ -2,7 +2,7 @@ version: '2'
 services:
   frontend:
     command:  /bin/sh -c "npm run setup && npm run startDocker"
-    image: node
+    image: node:6.4
     working_dir: /opt
     ports:
       - "4200:4200"
@@ -11,10 +11,4 @@ services:
       - .:/opt
       - ~/.ssh:/root/.ssh
     environment:
-      BACKEND_SERVER: http://backend:3000
-    networks:
-      - api
-networks:
-  api:
-    external:
-      name: api_service
+      BACKEND_SERVER: https://api-staging.repositive.io
