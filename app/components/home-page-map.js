@@ -8,7 +8,10 @@ export default Ember.Component.extend({
   didInsertElement: function() {
     const width = this.$().innerWidth();
     const height = this.$().innerHeight() > 0 ? this.$().innerHeight() : 500;
-    const radius = 2;
+    const mapColour = '#E2E8EA';
+    const datasourceColour = '#E97275';
+    const datasetColour = '#39AFB5';
+    const pointRadius = 2;
 
 
     let svg = d3.select('.map-background').insert("svg",":first-child")
@@ -32,12 +35,12 @@ export default Ember.Component.extend({
         .enter()
         .append("path")
         .attr("d", path)
-        .attr('fill', '#E2E8EA');
+        .attr('fill', mapColour);
 
       d3.json('assets/points.json', function (error, topology) {
 
         const color = d3.scaleOrdinal().domain(['datasource','dataset'])
-          .range([d3.rgb('#E97275'), d3.rgb('#39AFB5')]);
+          .range([d3.rgb(datasourceColour), d3.rgb(datasetColour)]);
 
         svg.selectAll('circle')
           .data(topology.features)
@@ -45,20 +48,20 @@ export default Ember.Component.extend({
           .append('circle')
           .attr('cx', d => points(d)[0])
           .attr('cy', d => points(d)[1])
-          .attr('r', radius)
+          .attr('r', pointRadius)
           .attr('fill', d => color(d.properties.type))
           .attr('cursor', 'pointer')
           .on('mouseover', function (d, i) {
             d3.select(this).transition()
               .duration('500')
               .ease(d3.easeElastic)
-              .attr('r', radius * 3);
+              .attr('r', pointRadius * 3);
           })
           .on('mouseout', function (d, i) {
             d3.select(this).transition()
               .duration('500')
               .ease(d3.easeElastic)
-              .attr('r', radius);
+              .attr('r', pointRadius);
           });
       });
 
