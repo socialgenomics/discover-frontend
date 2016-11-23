@@ -1,17 +1,17 @@
 <main id="homepage" class="homepage content">
 
-  <section class="map-search">
-    {{home-page-map}}
-    {{dataset-number-stats datasetsNumber=datasetsNumber}}
-    {{search-box action="search"}}
-  </section>
+    <section class="map-search">
+      {{home-page-map}}
+      {{dataset-number-stats datasetsNumber=datasetsNumber}}
+      {{search-box action="search"}}
+    </section>
 
-  <section class="selection-tabs">
-    {{home-tabs}}
-  </section>
+    <section class="selection-tabs">
+        {{home-tabs}}
+    </section>
 
-  <section class="row">
-    {{home-feed-content tab=tab datasets=model.datasets requests=model.requests collections=model.collections datasources=model.datasources}}
-  </section>
+    <section class="row">
+        {{home-feed-content tab=tab datasets=model.datasets requests=model.requests collections=model.collections datasources=model.datasources}}
+    </section>
 
 </main>
