@@ -11,10 +11,9 @@ export default Ember.Component.extend({
     const mapColour = '#E2E8EA';
     const datasourceColour = '#E97275';
     const datasetColour = '#39AFB5';
-    const pointRadius = 2;
+    const pointRadius = 3;
 
-
-    let svg = d3.select('.map-background').insert("svg",":first-child")
+    let svg = d3.select('.map-background').append('svg')
       .attr('width', width)
       .attr('height', height)
       .attr('id', 'map');
@@ -28,20 +27,17 @@ export default Ember.Component.extend({
     const path = d3.geoPath().projection(mercator);
     const points = d => mercator([d.geometry.coordinates[0], d.geometry.coordinates[1]]);
 
-    d3.json("assets/worldmap.json", function(error, topo) {
-
-      g.selectAll("path")
+    d3.json('assets/worldmap.json', function(error, topo) {
+      g.selectAll('path')
         .data(topojson.feature(topo, topo.objects.countries).features)
         .enter()
-        .append("path")
-        .attr("d", path)
+        .append('path')
+        .attr('d', path)
         .attr('fill', mapColour);
 
       d3.json('assets/points.json', function (error, topology) {
-
         const color = d3.scaleOrdinal().domain(['datasource','dataset'])
           .range([d3.rgb(datasourceColour), d3.rgb(datasetColour)]);
-
         svg.selectAll('circle')
           .data(topology.features)
           .enter()
@@ -49,23 +45,9 @@ export default Ember.Component.extend({
           .attr('cx', d => points(d)[0])
           .attr('cy', d => points(d)[1])
           .attr('r', pointRadius)
-          .attr('fill', d => color(d.properties.type))
-          .attr('cursor', 'pointer')
-          .on('mouseover', function (d, i) {
-            d3.select(this).transition()
-              .duration('500')
-              .ease(d3.easeElastic)
-              .attr('r', pointRadius * 3);
-          })
-          .on('mouseout', function (d, i) {
-            d3.select(this).transition()
-              .duration('500')
-              .ease(d3.easeElastic)
-              .attr('r', pointRadius);
-          });
+          .attr('fill', d => color(d.properties.type));
+
       });
-
     });
-
   }
 });
