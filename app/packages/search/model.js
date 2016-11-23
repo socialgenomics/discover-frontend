@@ -93,7 +93,6 @@ export default Model.extend({
       data: 'query=' + this.get('DSL')
     })
     .then(resp => {
-      console.log(resp);
       this.set('meta', resp.meta);
       if (this.get('meta.total') < 0) {
         return Ember.RSVP.reject('No results');
