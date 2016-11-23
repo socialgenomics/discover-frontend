@@ -2,10 +2,10 @@ import Ember from 'ember';
 import Model from 'ember-data/model';
 import attr from 'ember-data/attr';
 import { belongsTo, hasMany } from 'ember-data/relationships';
-import ajax from 'ic-ajax';
 import ENV from 'repositive/config/environment';
 import Agg from './aggregation';
 import Filter from './filter';
+import request from 'ember-ajax/request';
 
 export default Model.extend({
   user: belongsTo('user'),
@@ -88,12 +88,12 @@ export default Model.extend({
   }),
 
   updateModelFromAPI: function() {
-    return ajax({
-      url: ENV.APIRoutes['datasets.search'],
-      type: 'POST',
+    return request(ENV.APIRoutes['datasets.search'], {
+      method: 'POST',
       data: 'query=' + this.get('DSL')
     })
     .then(resp => {
+      console.log(resp);
       this.set('meta', resp.meta);
       if (this.get('meta.total') < 0) {
         return Ember.RSVP.reject('No results');
