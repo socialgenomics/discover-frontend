@@ -1,11 +1,11 @@
 import Ember from 'ember';
 import { isVerified } from './users/trust';
-import ajax from 'ic-ajax';
 import ENV from 'repositive/config/environment';
 
 const { inject: { service }, Route, RSVP, get, Logger } = Ember;
 
 export default Route.extend({
+  ajax: service(),
   session: service(),
   favouritesService: service('favourites'),
 
@@ -51,30 +51,23 @@ export default Route.extend({
     }
   },
   _getFavouritedData(userIdOfProfile) {
-    const token = get(this, 'session.session.content.authenticated.token');
-    const authHeaders = { authorization: `JWT ${token}` };
+    const ajax = get(this, 'ajax');
     return RSVP.hash({
-      datasets: ajax({ url: ENV.APIRoutes['favourite-datasets'].replace('{user_id}', userIdOfProfile),
-        type: 'GET',
-        headers: authHeaders
-      }),
-      requests: ajax({ url: ENV.APIRoutes['favourite-requests'].replace('{user_id}', userIdOfProfile),
-        type: 'GET',
-        headers: authHeaders
+      datasets: ajax.request(ENV.APIRoutes['favourite-datasets'].replace('{user_id}', userIdOfProfile), { method: 'GET' }),
+      requests: ajax.request(ENV.APIRoutes['favourite-requests'].replace('{user_id}', userIdOfProfile), { method: 'GET' })
+    })
+      .then(data => {
+        const datasets = data.datasets.map(dataset => {
+          dataset.type = 'dataset';
+          return dataset;
+        });
+        const requests = data.requests.map(request => {
+          request.type = 'request';
+          return request;
+        });
+        const allFavourites = datasets.concat(requests);
+        return allFavourites;
       })
-    })
-    .then(data => {
-      const datasets = data.datasets.map(dataset => {
-        dataset.type = 'dataset';
-        return dataset;
-      });
-      const requests = data.requests.map(request => {
-        request.type = 'request';
-        return request;
-      });
-      const allFavourites = datasets.concat(requests);
-      return allFavourites;
-    })
-    .catch(Logger.error);
+      .catch(Logger.error);
   }
 });
