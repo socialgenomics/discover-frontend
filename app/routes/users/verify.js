@@ -1,5 +1,4 @@
 import Ember from 'ember';
-// import ajax from 'ic-ajax';
 import ENV from 'repositive/config/environment';
 import {verifyEmail} from './trust';
 import FlashMessageMixin from 'repositive/mixins/flash-message-mixin';

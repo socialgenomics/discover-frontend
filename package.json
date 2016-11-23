@@ -54,7 +54,6 @@
     "ember-cli-focus-input": "^1.0.0",
     "ember-cli-htmlbars": "1.0.8",
     "ember-cli-htmlbars-inline-precompile": "0.3.2",
-    "ember-cli-ic-ajax": "^0.2.1",
     "ember-cli-inject-live-reload": "^1.4.0",
     "ember-cli-inspectlet": "^1.1.0",
     "ember-cli-mocha": "0.10.4",
