@@ -18,8 +18,7 @@ export default Route.extend(AuthenticatedRouteMixin, RememberScrollMixin, {
           'offset': 0,
           'limit': 100
         })
-      })
-      .catch(Logger.error);
+      }).catch(Logger.error);
     }
   }
 });
