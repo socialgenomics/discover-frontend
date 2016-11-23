@@ -1,9 +1,10 @@
 import Ember from 'ember';
 import ENV from 'repositive/config/environment';
+import FlashMessageMixin from 'repositive/mixins/flash-message-mixin';
 
-const { inject: { service }, computed, Route, RSVP, get, Logger } = Ember;
+const { inject: { service }, computed, Route, RSVP, get, set, Logger } = Ember;
 
-export default Route.extend({
+export default Route.extend(FlashMessageMixin, {
   session: service(),
   ajax: service(),
   isFirstLogin: computed.and('session.data.firstVisit', 'session.isAuthenticated'),
@@ -21,13 +22,7 @@ export default Route.extend({
     }
 
     if (get(this, 'displayWelcomeMessage')) {
-      this.flashMessages.add({
-        message: 'Please check your email to verify your account',
-        type: 'info',
-        timeout: 7000,
-        sticky: true,
-        class: 'fadeIn'
-      });
+      this._addFlashMessage('Please check your email to verify your account', 'info');
     }
   },
 
@@ -40,7 +35,7 @@ export default Route.extend({
         requests: this.store.query('request', { 'order[0][0]': 'updated_at', 'order[0][1]': 'DESC' }),
         registered: this.store.query('dataset', { 'where.user_id.$ne': 'null', 'order[0][0]': 'updated_at', 'order[0][1]': 'DESC' }),
         collections: this.store.query('collection', { 'where.type': 'repositive_collection', 'order[0][0]': 'updated_at', 'order[0][1]': 'DESC', 'limit': '3' }),
-        datasources: ajax({ url: ENV.APIRoutes['datasources'] + '?limit=3' , type: 'GET', headers: authHeaders })
+        datasources: ajax.request(ENV.APIRoutes['datasources'] + '?limit=3', { method: 'GET' })
       })
         .then(data => {
           //Normalize and push trending datasets
@@ -56,9 +51,7 @@ export default Route.extend({
             collections: data.collections,
             datasources: data.datasources
           };
-        })
-        .catch(Logger.error);
-
+        }).catch(Logger.error);
     } else {
       return ajax.request(ENV.APIRoutes['stats'], { method: 'GET' })
         .then(stat => {
@@ -68,6 +61,6 @@ export default Route.extend({
   },
 
   deactivateWeclomeMesssage: function() {
-    get(this, 'session').set('data.firstVisit', false);
+    set(this, 'session.data.firstVisit', false);
   }.on('deactivate')
 });
