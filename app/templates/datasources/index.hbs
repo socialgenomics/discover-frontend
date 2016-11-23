@@ -3,7 +3,7 @@
 <main class="card no-margin">
   <div class="card-content">
     <div class="row">
-      {{#each model.datasources as |source|}}
+      {{#each (sort-by "name" model.datasources) as |source|}}
         {{source-feed-item source=source}}
       {{/each}}
     </div>
