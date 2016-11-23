@@ -8,6 +8,7 @@ export default Ember.Component.extend({
   didInsertElement: function() {
     const width = this.$().innerWidth();
     const height = this.$().innerHeight() > 0 ? this.$().innerHeight() : 500;
+    const radius = 3;
 
 
     let svg = d3.select('.map-search').insert("svg",":first-child")
@@ -17,15 +18,15 @@ export default Ember.Component.extend({
 
     let g = svg.append('g');
 
-    let mercator = d3.geoMercator()
+    const mercator = d3.geoMercator()
       .center([0, 20])
       .scale(150);
 
-    let path = d3.geoPath().projection(mercator);
+    const path = d3.geoPath().projection(mercator);
+    const points = d => mercator([d.geometry.coordinates[0], d.geometry.coordinates[1]]);
 
     d3.json("assets/worldmap.json", function(error, topo) {
 
-      console.log(topojson.feature(topo, topo.objects.countries));
       g.selectAll("path")
         .data(topojson.feature(topo, topo.objects.countries).features)
         .enter()
@@ -35,16 +36,28 @@ export default Ember.Component.extend({
 
       d3.json('assets/points.json', function (error, topology) {
 
-        let color = d3.scaleOrdinal(d3.schemeCategory10);
+        const color = d3.scaleOrdinal(d3.schemeCategory10);
 
-        svg.selectAll('.samples')
+        svg.selectAll('circle')
           .data(topology.features)
           .enter()
-          .append('path')
-          .attr('d', path)
-          .attr("cursor", "pointer")
-          .attr('fill', d => {
-            return color(d.properties.type);
+          .append('circle')
+          .attr('cx', d => points(d)[0])
+          .attr('cy', d => points(d)[1])
+          .attr('r', radius)
+          .attr('fill', d => color(d.properties.type))
+          .attr('cursor', 'pointer')
+          .on('mouseover', function (d, i) {
+            d3.select(this).transition()
+              .duration('500')
+              .ease(d3.easeElastic)
+              .attr('r', radius * 3);
+          })
+          .on('mouseout', function (d, i) {
+            d3.select(this).transition()
+              .duration('500')
+              .ease(d3.easeElastic)
+              .attr('r', radius);
           });
       });
 
