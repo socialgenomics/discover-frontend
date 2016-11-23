@@ -8,10 +8,10 @@ export default Ember.Component.extend({
   didInsertElement: function() {
     const width = this.$().innerWidth();
     const height = this.$().innerHeight() > 0 ? this.$().innerHeight() : 500;
-    const radius = 3;
+    const radius = 2;
 
 
-    let svg = d3.select('.map-search').insert("svg",":first-child")
+    let svg = d3.select('.map-background').insert("svg",":first-child")
       .attr('width', width)
       .attr('height', height)
       .attr('id', 'map');
@@ -19,7 +19,7 @@ export default Ember.Component.extend({
     let g = svg.append('g');
 
     const mercator = d3.geoMercator()
-      .center([0, 20])
+      .center([0, 25])
       .scale(150);
 
     const path = d3.geoPath().projection(mercator);
@@ -32,11 +32,12 @@ export default Ember.Component.extend({
         .enter()
         .append("path")
         .attr("d", path)
-        .attr('fill', '#888');
+        .attr('fill', '#E2E8EA');
 
       d3.json('assets/points.json', function (error, topology) {
 
-        const color = d3.scaleOrdinal(d3.schemeCategory10);
+        const color = d3.scaleOrdinal().domain(['datasource','dataset'])
+          .range([d3.rgb('#E97275'), d3.rgb('#39AFB5')]);
 
         svg.selectAll('circle')
           .data(topology.features)
