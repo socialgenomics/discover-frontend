@@ -95,7 +95,7 @@ export default Controller.extend(EmberValidations, FlashMessageMixin, {
         const firstname = this._getFirstAndLastNames(get(this, 'fullname')).firstName;
         const lastname = this._getFirstAndLastNames(get(this, 'fullname')).lastName;
         const credentials = getProperties(this, 'email', 'password');
-        setProperties(credentials, { firstname, lastname});
+        setProperties(credentials, { firstname, lastname });
         set(this, 'loading', true);
         /*
           Signup with repositive.
