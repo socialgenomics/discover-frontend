@@ -102,6 +102,6 @@
     "foreman": "^1.4.1",
     "loader.js": "^4.0.10",
     "rimraf": "^2.5.0",
-    "topojson": "^2.0.0"
+    "topojson": "^1.6.27"
   }
 }
