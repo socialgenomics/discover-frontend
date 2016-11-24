@@ -1,10 +1,10 @@
 <div class="share-options-icons">
-  {{fa-icon "twitter" size=2 class='color-twitter-text' click=(action 'share')}}
-  {{fa-icon "linkedin" size=2 class='color-linkedin-text' click=(action 'share')}}
-  {{fa-icon "envelope" size=2 class='yellow-text'}}
+  {{fa-icon 'twitter' size=2 class='color-twitter-text' click=(action 'share' 'twitter')}}
+  {{fa-icon 'linkedin' size=2 class='color-linkedin-text' click=(action 'share' 'linkedin')}}
+  {{fa-icon 'envelope' size=2 class='yellow-text'}}
 </div>
 <div class="share-url-section">
   {{!-- TODO: use dataset url instead of hardcoded value --}}
-  <p class="url-box">http://mysite.com</p>
+  <p class="url-box">{{shareUrl}}</p>
   <button class="btn-flat">Copy</button>
 </div>
