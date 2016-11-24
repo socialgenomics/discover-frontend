@@ -6,16 +6,15 @@ const { Component, computed, get } = Ember;
 export default Component.extend({
   windowWidth: 555,
   windowHeight: 424,
-  windowTitle: 'lorem ipusm',
+  windowTitle: 'Share this dataset',
 
   // TODO: set proper data for sharing
   channels: {
     twitter: {
       baseUrl: 'https://twitter.com/intent/tweet',
       qsParams: {
-        hashtags: 'repositive, dataset',
-        text: 'lorem ipusm',
-        via: 'repositiveio'
+        hashtags: 'findthatdata',
+        text: '@repositiveio helped me find this awesome human #genomic #dataset & now I am helping you find it',
       }
     },
     linkedin: {
@@ -23,8 +22,8 @@ export default Component.extend({
       qsParams: {
         mini: true,
         source: 'Repositive',
-        summary: 'lorem ipsum',
-        title: 'lorem ipsum'
+        summary: '#Repositive helped me find this awesome human #genomic #dataset & now I am helping you find it #findthatdata',
+        title: 'Repositive helped me find this awesome human genomeic dataset'
       }
     }
   },
