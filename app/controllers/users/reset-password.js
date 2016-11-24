@@ -4,7 +4,7 @@ import ENV from 'repositive/config/environment';
 import FlashMessageMixin from 'repositive/mixins/flash-message-mixin';
 
 
-const { Controller, computed, observer, Logger, get, set, inject: { service } } = Ember;
+const { Controller, computed, observer, Logger, get, set, setProperties, inject: { service } } = Ember;
 
 export default Controller.extend(EmberValidations, FlashMessageMixin, {
   ajax: service(),
@@ -62,8 +62,10 @@ export default Controller.extend(EmberValidations, FlashMessageMixin, {
             }
           })
             .then(resp => {
-              set(this, 'loading', false);
-              set(this, 'passwordChanged', true);
+              setProperties(this, {
+                loading: false,
+                passwordChanged: true
+              });
             })
             .catch(err => {
               set(this, 'loading', false);

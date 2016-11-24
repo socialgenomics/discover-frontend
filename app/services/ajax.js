@@ -5,14 +5,10 @@ const { inject: { service }, computed, get } = Ember;
 
 export default AjaxService.extend({
   session: service(),
-  headers: computed('session.authToken', {
+  headers: computed('session.session.content.authenticated.token', {
     get() {
-      let headers = {};
       const authToken = get(this, 'session.session.content.authenticated.token');
-      if (authToken) {
-        headers['authorization'] = `JWT ${authToken}`;
-      }
-      return headers;
+      return authToken ? { authorization: `JWT ${authToken}` } : {};
     }
   })
 });

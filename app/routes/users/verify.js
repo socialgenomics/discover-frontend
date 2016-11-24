@@ -3,7 +3,7 @@ import ENV from 'repositive/config/environment';
 import {verifyEmail} from './trust';
 import FlashMessageMixin from 'repositive/mixins/flash-message-mixin';
 
-const { inject: { service }, get, set, RSVP, Logger, Route } = Ember;
+const { inject: { service }, get, setProperties, RSVP, Logger, Route } = Ember;
 
 export default Route.extend(FlashMessageMixin, {
   ajax: service(),
@@ -26,8 +26,10 @@ export default Route.extend(FlashMessageMixin, {
       */
       if (get(this, 'session.isAuthenticated')) {
         if (get(this, 'session.authenticatedUser')) {
-          set(this, 'session.authenticatedUser.isEmailValidated', true);
-          set(this, 'session.data.displayWelcomeMessage', false);
+          setProperties(this, {
+            'session.authenticatedUser.isEmailValidated': true,
+            'session.data.displayWelcomeMessage': false
+          });
           this.transitionTo('user', get(this, 'session.authenticatedUser.id'));
         } else {
           console.warn('session.authenticatedUser is undefined but session.isAuthenticated "true"');

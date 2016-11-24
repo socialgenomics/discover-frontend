@@ -8,8 +8,11 @@ export default Route.extend(FlashMessageMixin, {
   session: service(),
   ajax: service(),
   isFirstLogin: computed.and('session.data.firstVisit', 'session.isAuthenticated'),
-  displayWelcomeMessage: computed.and('session.data.displayWelcomeMessage', 'session.isAuthenticated'),
-
+  displayWelcomeMessage: computed('session.session.content.authenticated.user.credentials.firstObject.verified', 'session.isAuthenticated', function() {
+    const isVerified = get(this, 'session.session.content.authenticated.user.credentials.firstObject.verified');
+    const isAuthenticated = get(this, 'session.isAuthenticated');
+    return isAuthenticated ? !isVerified : false;
+  }),
   beforeModel: function() {
     if (get(this, 'isFirstLogin')) {
       this.transitionTo('beta-signup-form')
@@ -20,7 +23,6 @@ export default Route.extend(FlashMessageMixin, {
           }
         });
     }
-
     if (get(this, 'displayWelcomeMessage')) {
       this._addFlashMessage('Please check your email to verify your account', 'info');
     }

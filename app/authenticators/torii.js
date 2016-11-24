@@ -6,8 +6,8 @@ import {invalidate, handleError, resolveWithResp} from './repositive';
 const { get, inject: { service }, RSVP } = Ember;
 
 export default Torii.extend({
-  torii: service('torii'),
-  ajax: service('ajax'),
+  torii: service(),
+  ajax: service(),
 
   restore: function(data) {
     return new RSVP.Promise(resolve => {

@@ -92,8 +92,7 @@ export default Controller.extend(EmberValidations, FlashMessageMixin, {
     signupAndAuthenticate: function() {
       if (!get(this, 'isDisabled')) {
         set(this, 'formSubmitted', true);
-        const firstname = this._getFirstAndLastNames(get(this, 'fullname')).firstName;
-        const lastname = this._getFirstAndLastNames(get(this, 'fullname')).lastName;
+        const { firstname, lastname } = this._getFirstAndLastNames(get(this, 'fullname'));
         const credentials = getProperties(this, 'email', 'password');
         setProperties(credentials, { firstname, lastname });
         set(this, 'loading', true);
@@ -108,9 +107,11 @@ export default Controller.extend(EmberValidations, FlashMessageMixin, {
             return get(this, 'session').authenticate('authenticator:repositive', credentials);
           })
           .then(() => {
-            set(this, 'session.data.firstVisit', true);
-            set(this, 'session.data.displayWelcomeMessage', false);
-            set(this, 'loading', false);
+            setProperties(this, {
+              'session.data.firstVisit': true,
+              'session.data.displayWelcomeMessage': false,
+              'loading': false
+            });
           })
           .catch(err => { // error with signup
             set(this, 'loading', false);
@@ -134,8 +135,8 @@ export default Controller.extend(EmberValidations, FlashMessageMixin, {
 
   _getFirstAndLastNames: function(fullName) {
     const fullNameArray = fullName.split(' ');
-    const firstName = fullNameArray.shift();
-    const lastName = fullNameArray.join(' ') || '';
-    return { firstName, lastName };
+    const firstname = fullNameArray.shift();
+    const lastname = fullNameArray.join(' ') || '';
+    return { firstname, lastname };
   }
 });
