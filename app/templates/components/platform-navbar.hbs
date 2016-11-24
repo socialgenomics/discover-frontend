@@ -25,7 +25,7 @@
                 {{input
                   type="text"
                   class="unfocus-grey-text"
-                  placeholder="search cancer, prostate..."
+                  placeholder="title:cancer AND description:lung"
                   value=query
                   autofocus=true
                 }}
@@ -56,16 +56,31 @@
 
     {{else}}
 
-      <div class="navbar-button">
-        {{#active-link}}
-          {{#link-to 'users.signup' class="valign-wrapper primary-action"}}CREATE ACCOUNT{{/link-to}}
-        {{/active-link}}
-      </div>
-      <div class="navbar-button">
-        {{#active-link}}
-          {{#link-to 'users.login' class="valign-wrapper"}}LOGIN{{/link-to}}
-        {{/active-link}}
-      </div>
+      <section class="navbar-button-group">
+        <div class="navbar-button">
+          {{#active-link}}
+            {{#link-to 'users.signup' class="valign-wrapper primary-action"}}CREATE ACCOUNT{{/link-to}}
+          {{/active-link}}
+        </div>
+        <div class="navbar-button">
+          {{#active-link}}
+            {{#link-to 'users.login' class="valign-wrapper"}}LOGIN{{/link-to}}
+          {{/active-link}}
+        </div>
+      </section>
+
+      <section class="navbar-button-group">
+        <div class="navbar-button">
+          {{#active-link}}
+            <a href="http://blog.repositive.io/" target="_blank" class="valign-wrapper">BLOG</a>
+          {{/active-link}}
+        </div>
+        <div class="navbar-button">
+          {{#active-link}}
+            <a href="http://repositive.io/about" target="_blank" class="valign-wrapper">ABOUT</a>
+          {{/active-link}}
+        </div>
+      </section>
 
     {{/if}}
   </div>
