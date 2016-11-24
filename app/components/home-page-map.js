@@ -38,7 +38,7 @@ export default Ember.Component.extend({
       d3.json('assets/points.json', function (error, topology) {
         const color = d3.scaleOrdinal().domain(['datasource','dataset'])
           .range([d3.rgb(datasourceColour), d3.rgb(datasetColour)]);
-        svg.selectAll('circle')
+        const circles = svg.selectAll('circle')
           .data(topology.features)
           .enter()
           .append('circle')
@@ -50,6 +50,20 @@ export default Ember.Component.extend({
         document
           .getElementsByClassName('map-background')[0]
           .appendChild(frag);
+
+        circles.each(function (d, i) {
+          setTimeout(() => {
+            d3.select(this).raise();
+            d3.select(this).transition()
+              .attr('r', pointRadius * 2)
+              .ease(d3.easeElastic)
+              .duration(1000)
+              .transition()
+              .attr('r', pointRadius)
+              .ease(d3.easeLinear)
+              .duration(500)
+          }, i * (Math.floor(Math.random()*(6000-500+1)+500)));
+        });
       });
     });
   }
