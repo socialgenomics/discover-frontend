@@ -5,6 +5,11 @@
 </div>
 <div class="share-url-section">
   {{!-- TODO: use dataset url instead of hardcoded value --}}
-  <p class="url-box">http://mysite.com</p>
-  <button class="btn-flat">Copy</button>
+  <p class="url-box">{{shareUrl}}</p>
+  {{#copy-button
+    class='btn-flat'
+    clipboardText=shareUrl
+  }}
+    Copy
+  {{/copy-button}}
 </div>

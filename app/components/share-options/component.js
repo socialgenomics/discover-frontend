@@ -1,11 +1,15 @@
 import Ember from 'ember';
 import openCenteredPopupWindow from '../../utils/open-centered-popup-window';
 
-const { Component } = Ember;
+const { Component, computed } = Ember;
 
 export default Component.extend({
   windowWidth: 555,
   windowHeight: 424,
+
+  shareUrl: computed(function() {
+    return window.location;
+  }),
 
   actions: {
     share() {
