@@ -33,10 +33,6 @@ export default Component.extend({
     return window.location;
   }),
 
-  shareUrl: computed(function() {
-    return window.location;
-  }),
-
   actions: {
     share(channel) {
       openCenteredPopupWindow(
