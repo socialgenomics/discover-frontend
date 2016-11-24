@@ -35,7 +35,7 @@ export default (url, title, width, height) => {
     menubar: 'no',
     copyhistory: 'no',
     top: calculateStartingPosition('height', height),
-    left: calculateStartingPosition('width', width),
+    left: calculateStartingPosition('width', width)
   };
 
   window.open(url, title, createWindowParamsString(windowParams));
