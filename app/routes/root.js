@@ -19,7 +19,7 @@ export default Route.extend(FlashMessageMixin, {
         .then(() => {
           // Don't display the 'verify email' message if user signed up with third party auth
           if (!get(this, 'session.data.thirdPartySignup')) {
-            get(this, 'session').set('data.displayWelcomeMessage', true);
+            set(this, 'session.data.displayWelcomeMessage', true);
           }
         });
     }
