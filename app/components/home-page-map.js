@@ -11,12 +11,14 @@ export default Ember.Component.extend({
     const datasetColour = '#39AFB5';
     const pointRadius = 3;
 
-    let svg = d3.select('.map-background').append('svg')
+    const frag = document.createDocumentFragment();
+
+    const svg = d3.select(frag).append('svg')
       .attr('width', width)
       .attr('height', height)
       .attr('id', 'map');
 
-    let g = svg.append('g');
+    const g = svg.append('g');
 
     const mercator = d3.geoMercator()
       .center([0, 25])
@@ -45,6 +47,9 @@ export default Ember.Component.extend({
           .attr('r', pointRadius)
           .attr('fill', d => color(d.properties.type));
 
+        document
+          .getElementsByClassName('map-background')[0]
+          .appendChild(frag);
       });
     });
   }
