@@ -9,7 +9,7 @@ export default Service.extend({
   userFavourites: undefined, //list of actions where type = 'favourite'
 
   loadFavourites() {
-    if (get(this, 'userFavourites') === undefined) { //favourites haven't been loaded yet
+    if (get(this, 'userFavourites') === undefined && get(this, 'session.isAuthenticated')) { //favourites haven't been loaded yet
       const currentUserId = get(this, 'session.session.authenticated.user.id');
       const store = get(this, 'store');
       return store.query('action', {
