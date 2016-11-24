@@ -1,25 +1,56 @@
 import Ember from 'ember';
 import openCenteredPopupWindow from '../../utils/open-centered-popup-window';
 
-const { Component, computed } = Ember;
+const { Component, computed, get } = Ember;
 
 export default Component.extend({
   windowWidth: 555,
   windowHeight: 424,
+  windowTitle: 'lorem ipusm',
+
+  // TODO: set proper data for sharing
+  channels: {
+    twitter: {
+      baseUrl: 'https://twitter.com/intent/tweet',
+      qsParams: {
+        hashtags: 'repositive, dataset',
+        text: 'lorem ipusm',
+        via: 'repositiveio'
+      }
+    },
+    linkedin: {
+      baseUrl: 'https://www.linkedin.com/shareArticle',
+      qsParams: {
+        mini: true,
+        source: 'Repositive',
+        summary: 'lorem ipsum',
+        title: 'lorem ipsum'
+      }
+    }
+  },
+
+  shareUrl: computed(function() {
+    return window.location;
+  }),
 
   shareUrl: computed(function() {
     return window.location;
   }),
 
   actions: {
-    share() {
-      // WIP TODO: introduce sharing config for both twitter and linkedin
+    share(channel) {
       openCenteredPopupWindow(
-        'https://www.linkedin.com/shareArticle?url=aaaaa.com&mini=true',
-        this.get('Lorem ipsum'),
-        this.get('windowWidth'),
-        this.get('windowHeight')
+        this._createShareWindowUrl(get(this, `channels.${channel}`)),
+        get(this, 'windowTitle'),
+        get(this, 'windowWidth'),
+        get(this, 'windowHeight')
       );
     }
+  },
+
+  _createShareWindowUrl(channelOptions) {
+    return new window.URI(get(channelOptions, 'baseUrl')).query(
+      Object.assign({}, get(channelOptions, 'qsParams'), { url: get(this, 'shareUrl') })
+    ).toString();
   }
 });
