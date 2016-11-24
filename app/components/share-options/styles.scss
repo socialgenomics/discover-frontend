@@ -1,0 +1,45 @@
+$spacing: 10px;
+$icon-area-width: 80px;
+$border-size: 1px;
+$button-padding: 15px;
+
+.share-options-icons {
+  margin-top: $spacing;
+  margin-bottom: $spacing;
+
+  .fa {
+    cursor: pointer;
+    text-align: center;
+    width: $icon-area-width;
+
+    &:not(:first-child) {
+      border-left: $border-size solid $color-alto;
+    }
+  }
+}
+
+.share-url-section {
+  display: flex;
+  margin-left: $spacing;
+
+  button {
+    background: transparent;
+    border: none;
+    color: $color-pelorous;
+    padding: {
+      left: $button-padding;
+      right: $button-padding;
+    };
+    text-transform: uppercase;
+  }
+}
+
+.url-box {
+  border: $border-size solid $color-alto;
+  flex: 1;
+  overflow: hidden;
+  padding: $border-size * 2;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 0;
+}
