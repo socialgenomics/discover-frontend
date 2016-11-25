@@ -22,9 +22,9 @@ describeComponent(
       //     template content
       //   {{/collections-card}}
       // `);
-
-      this.render(hbs`{{collection-feed-item}}`);
-      expect(this.$()).to.have.length(1);
+      //
+      // this.render(hbs`{{collection-feed-item}}`);
+      // expect(this.$()).to.have.length(1);
     });
   }
 );
