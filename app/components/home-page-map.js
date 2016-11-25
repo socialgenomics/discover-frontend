@@ -36,7 +36,7 @@ export default Ember.Component.extend({
         .attr('fill', mapColour);
 
       d3.json('assets/points.json', function (error, topology) {
-        const color = d3.scaleOrdinal().domain(['datasource','dataset'])
+        const color = d3.scaleOrdinal().domain(['datasource', 'dataset'])
           .range([d3.rgb(datasourceColour), d3.rgb(datasetColour)]);
         const circles = svg.selectAll('circle')
           .data(topology.features)
@@ -45,8 +45,7 @@ export default Ember.Component.extend({
           .attr('cx', d => points(d)[0])
           .attr('cy', d => points(d)[1])
           .attr('r', pointRadius)
-          .attr('fill', d => color(d.properties.type))
-          .on('mouseover', () => console.log('Clicked!'));
+          .attr('fill', d => color(d.properties.type));
 
         document
           .getElementsByClassName('map-background')[0]
@@ -63,7 +62,7 @@ export default Ember.Component.extend({
               .attr('r', pointRadius)
               .ease(d3.easeLinear)
               .duration(500)
-          }, i * (Math.floor(Math.random()*(6000-500+1)+500)));
+          }, i * ( Math.floor( Math.random() * ( 6000 - 500 + 1 ) + 500 ) ) );
         });
       });
     });
