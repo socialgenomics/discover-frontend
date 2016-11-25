@@ -14,9 +14,17 @@ describeComponent(
   },
   function() {
     it('renders back to datasource button if is not a personal repository', function() {
-      this.set('type', 'datasource');
+      const type = 'datasource';
+      this.set('type', type);
       this.render(hbs`{{source-meta-panel type=type}}`);
-      expect(this.render(hbs`{{panel-back-button type='datasources'}}`));
+      expect(this.$('a.left-align')).to.have.length(1);
+    });
+
+    it('does not render back to datasource button if it is a personal repository', function() {
+      const type = 'personal_repository'
+      this.set('type', type);
+      this.render(hbs`{{source-meta-panel type=type}}`);
+      expect(this.$('a.left-align')).to.have.length(0);
     });
   }
 );
