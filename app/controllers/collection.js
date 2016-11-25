@@ -1,6 +1,8 @@
 import Ember from 'ember';
 
-export default Ember.Controller.extend({
+const { Controller, set } = Ember;
+
+export default Controller.extend({
   showMore: false,
   limit: 9,
   page: 1,
@@ -8,15 +10,18 @@ export default Ember.Controller.extend({
 
   actions: {
     nextPage() {
-      this.set('page', this.page + 1);
+      set(this, 'page', this.page + 1);
       this.send('invalidateModel');
     },
     previousPage() {
-      this.set('page', this.page - 1);
+      set(this, 'page', this.page - 1);
       this.send('invalidateModel');
     },
     showMoreMeta() {
       this.toggleProperty('showMore');
     }
+  },
+  _resetController: function() {
+    set(this, 'page', 1);
   }
 });
