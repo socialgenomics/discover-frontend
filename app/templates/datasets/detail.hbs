@@ -59,7 +59,7 @@
             {{/if}}
             {{#if dataset.access}}
               <li class="card-info-attr">
-                Access type: <span>{{dataset.access}}</span>
+                Access type: {{#link-to 'help.searching-for-data' (query-params help="filters")}}<span>{{dataset.access}}</span>{{/link-to}}
               </li>
             {{/if}}
           </ul>
