@@ -45,7 +45,8 @@ export default Ember.Component.extend({
           .attr('cx', d => points(d)[0])
           .attr('cy', d => points(d)[1])
           .attr('r', pointRadius)
-          .attr('fill', d => color(d.properties.type));
+          .attr('fill', d => color(d.properties.type))
+          .on('mouseover', () => console.log('Clicked!'));
 
         document
           .getElementsByClassName('map-background')[0]
