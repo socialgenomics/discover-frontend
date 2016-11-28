@@ -32,6 +32,7 @@ export default Route.extend({
   },
 
   model: function() {
+    set(this, 'session.data.isRootRoute', true);
     if (get(this, 'session.isAuthenticated')) {
       const token = get(this, 'session.session.content.authenticated.token');
       const authHeaders = {
@@ -62,7 +63,6 @@ export default Route.extend({
           };
         })
         .catch(Logger.error);
-
     } else {
       return ajax({ url: ENV.APIRoutes['stats'] , type: 'GET' })
         .then(stat => {
@@ -73,5 +73,6 @@ export default Route.extend({
 
   deactivateWeclomeMesssage: function() {
     get(this, 'session').set('data.firstVisit', false);
+    set(this, 'session.data.isRootRoute', false);
   }.on('deactivate')
 });

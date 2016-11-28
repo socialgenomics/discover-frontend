@@ -5,6 +5,7 @@ const { inject: { service }, get, set } = Ember;
 export default Ember.Controller.extend({
   session: Ember.inject.service(),
   loading: false,
+  isRootRoute: Ember.computed.alias('session.data.isRootRoute'),
   firstVisit: Ember.computed.alias('session.data.firstVisit'),
   displayWelcomeMessage: Ember.computed.alias('session.data.displayWelcomeMessage'),
   thirdPartySignup: Ember.computed.alias('session.data.thirdPartySignup'),

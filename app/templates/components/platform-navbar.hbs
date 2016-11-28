@@ -59,7 +59,11 @@
       <section class="navbar-button-group">
         <div class="navbar-button">
           {{#active-link}}
-            {{#link-to 'users.signup' class="valign-wrapper primary-action" invokeAction=(action 'trackCreateAccount' 'DISCOVER NAV')}}CREATE ACCOUNT{{/link-to}}
+            {{#if isRootRoute}}
+              {{#link-to 'users.signup' class="valign-wrapper primary-action" invokeAction=(action 'trackCreateAccount' 'DISCOVER NAV')}}CREATE ACCOUNT{{/link-to}}
+            {{else}}
+              {{#link-to 'users.signup' class="valign-wrapper primary-action" invokeAction=(action 'trackCreateAccount' 'OPENPAGE NAV')}}CREATE ACCOUNT{{/link-to}}
+            {{/if}}
           {{/active-link}}
         </div>
         <div class="navbar-button">

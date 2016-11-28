@@ -4,6 +4,7 @@
   firstname=session.authenticatedUser.firstname
   username=session.authenticatedUser.username
   id=session.authenticatedUser.id
+  isRootRoute=session.data.isRootRoute
 }}
 <main class="container">
   {{#each flashMessages.queue as |flash|}}
