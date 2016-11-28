@@ -18,18 +18,6 @@ test:
   override:
     - npm run test
 deployment:
-  development:
-    branch: development
-    commands:
-      - export RANCHER_ENVIRONMENT=1a77
-      - node_modules/ember-cli/bin/ember build --environment development
-      - docker build -t registry.repositive.io:5000/discover:dev .
-      - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS registry.repositive.io:5000
-      - docker push registry.repositive.io:5000/discover:dev
-      - mkdir rancher && cd rancher
-      - rancher --env 1a77 --access-key $ACCESS_DEV --secret-key $SECRET_DEV export Backend > compose.tar
-      - tar -xf compose.tar
-      - rancher-compose --access-key $ACCESS_DEV --secret-key $SECRET_DEV -p Backend up --force-upgrade -c -d discover
   staging:
     branch: master
     commands:
@@ -38,7 +26,7 @@ deployment:
       - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS registry.repositive.io:5000
       - docker push registry.repositive.io:5000/discover
       - mkdir rancher && cd rancher
-      - rancher --env 1a94 --access-key $ACCESS_STA --secret-key $SECRET_STA export discover-app > compose.tar
+      - rancher --env 1a7 --access-key $ACCESS_STA --secret-key $SECRET_STA export discover-app > compose.tar
       - tar -xf compose.tar
       - rancher-compose --access-key $ACCESS_STA --secret-key $SECRET_STA -p discover-app up --force-upgrade -c -d discover
 
