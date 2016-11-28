@@ -21,7 +21,7 @@ export default Controller.extend({
       this.toggleProperty('showMore');
     }
   },
-  _resetController: function() {
+  resetController: function() {
     set(this, 'page', 1);
   }
 });

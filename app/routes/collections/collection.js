@@ -17,7 +17,6 @@ export default Route.extend(AuthenticatedRouteMixin, ResetScrollMixin, Actionabl
   actions: {
     willTransition(transition) {
       resetControllerOnRouteChange(transition.targetName, this.routeName, this.controller);
-      // if (transition.targetName !== this.routeName) { this.controller._resetController(); }
     },
     invalidateModel: function() {
       this.controller.set('isLoading', true);
