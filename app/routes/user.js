@@ -57,10 +57,10 @@ export default Route.extend({
       requests: ajax.request(ENV.APIRoutes['favourite-requests'].replace('{user_id}', userIdOfProfile), { method: 'GET' })
     })
       .then(data => {
-        const datasets = data.datasets.map(dataset => this._setModelType(dataset, 'dataset'));
-        const requests = data.requests.map(request => this._setModelType(request, 'request'));
-        const allFavourites = datasets.concat(requests);
-        return allFavourites;
+        return [
+          ...data.datasets.map(dataset => this._setModelType(dataset, 'dataset')),
+          ...data.requests.map(request => this._setModelType(request, 'request'))
+        ];
       })
       .catch(Logger.error);
   },
