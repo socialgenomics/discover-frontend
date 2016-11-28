@@ -20,16 +20,7 @@
       {{#unless session.data.firstVisit}}
         <div class="navbar-container">
           <div class="navbar-search">
-            <form {{action 'search' on='submit'}}>
-                {{fa-icon "search"}}
-                {{input
-                  type="text"
-                  class="unfocus-grey-text"
-                  placeholder="title:cancer AND description:lung"
-                  value=query
-                  autofocus=true
-                }}
-            </form>
+            {{search-bar search=(route-action 'search')}}
           </div>
           <div class="navbar-buttons">
             <div class="navbar-button">

@@ -78,7 +78,7 @@
     "ember-moment": "6.1.0",
     "ember-radio-button": "1.0.7",
     "ember-redirect": "4.0.0",
-    "ember-route-action-helper": "1.0.0",
+    "ember-route-action-helper": "2.0.0",
     "ember-simple-auth": "1.1.0",
     "ember-sinon": "0.4.0",
     "ember-truth-helpers": "1.2.0",

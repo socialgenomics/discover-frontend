@@ -1,18 +1,7 @@
 import Ember from 'ember';
+const { Component, computed, inject: { service } } = Ember;
 
-export default Ember.Component.extend({
-  session: Ember.inject.service(),
-  isAuthenticated: Ember.computed.alias('session.isAuthenticated'),
-  query: '',
-
-  actions: {
-    search: function() {
-      this.get('metrics').trackEvent({
-        category: 'search',
-        action: 'query',
-        label: this.get('query')
-      });
-      this.attrs.search(this.get('query'));
-    }
-  }
+export default Component.extend({
+  session: service(),
+  isAuthenticated: computed.alias('session.isAuthenticated')
 });

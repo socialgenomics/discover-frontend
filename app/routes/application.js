@@ -14,7 +14,7 @@ export default Route.extend(ApplicationRouteMixin, {
     get(this, 'favouritesService').loadFavourites();
   },
   actions: {
-    search: function(query) {
+    search(query) {
       this.transitionTo('datasets.search', {
         queryParams: {
           q: query,
