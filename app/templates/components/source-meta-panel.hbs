@@ -1,10 +1,8 @@
 <section class="metadata-panel source-panel">
   <header>
-    {{#link-to 'datasources' class="left-align" invokeAction=(action 'trackBackClick')}}
-      <div class="back-arrow center-align" data-balloon="See all data sources" data-balloon-pos="right" data-balloon-length="medium">
-        {{fa-icon "chevron-left"}}
-      </div>
-    {{/link-to}}
+    {{#unless (eq type 'personal_repository')}}
+      {{panel-back-button route='datasources'}}
+    {{/unless}}
     <img src="/assets/images/icons/icon-datasource-white@2x.png" class="data-icon">
     <h5>Data Source</h5>
   </header>
@@ -21,8 +19,8 @@
   {{#if displayInfo}}
     <main>
       <h3>{{source-name-fallback model=model}}</h3>
-      {{#unless (eq model.type 'datasource')}}
-        {{collection-created-by user=model.userId type=model.type}}
+      {{#unless (eq type 'datasource')}}
+        {{collection-created-by user=model.userId type=type}}
       {{/unless}}
 
       <div class="divider"></div>
