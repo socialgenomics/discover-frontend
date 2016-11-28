@@ -5,7 +5,7 @@ import { validator } from 'ember-validations';
 import { isBadRequestError } from 'ember-ajax/errors';
 import FlashMessageMixin from 'repositive/mixins/flash-message-mixin';
 
-const{ get, getProperties, set, setProperties, computed, Controller, inject: { service }, observer } = Ember;
+const{ assign, get, getProperties, set, setProperties, computed, Controller, inject: { service }, observer } = Ember;
 
 export default Controller.extend(EmberValidations, FlashMessageMixin, {
   session: service(),
@@ -91,11 +91,8 @@ export default Controller.extend(EmberValidations, FlashMessageMixin, {
   actions: {
     signupAndAuthenticate: function() {
       if (!get(this, 'isDisabled')) {
-        set(this, 'formSubmitted', true);
-        const { firstname, lastname } = this._getFirstAndLastNames(get(this, 'fullname'));
-        const credentials = getProperties(this, 'email', 'password');
-        setProperties(credentials, { firstname, lastname });
-        set(this, 'loading', true);
+        setProperties(this, { 'formSubmitted': true, 'loading': true });
+        const credentials = this._buildCredentials();
         /*
           Signup with repositive.
          */
@@ -124,7 +121,13 @@ export default Controller.extend(EmberValidations, FlashMessageMixin, {
       this.toggleProperty('showPassword');
     }
   },
-
+  _buildCredentials() {
+    return assign(
+      {},
+      this._getFirstAndLastNames(get(this, 'fullname')),
+      getProperties(this, 'email', 'password')
+    );
+  },
   _displayMessage(resp) {
     if (isBadRequestError(resp)) {
       this._addFlashMessage('Error: Invalid email or an account already exists with this email.', 'warning');
@@ -132,7 +135,6 @@ export default Controller.extend(EmberValidations, FlashMessageMixin, {
       this._addFlashMessage(get(resp, 'message'), 'warning');
     }
   },
-
   _getFirstAndLastNames: function(fullName) {
     const fullNameArray = fullName.split(' ');
     const firstname = fullNameArray.shift();

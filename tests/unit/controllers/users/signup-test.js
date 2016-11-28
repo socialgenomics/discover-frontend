@@ -62,5 +62,19 @@ describeModule(
       set(controller, 'showPassword', false);
       expect(get(controller, 'type')).to.eql('password');
     });
+
+    it('_buildCredentials returns object with email, pw, first and lastname', function() {
+      const controller = this.subject();
+      setProperties(controller, {
+        'fullname': 'Test Name',
+        'email': 'testemail@example.com',
+        'password': 'Abcdefghi'
+      });
+      const credentials = controller._buildCredentials();
+      expect(credentials.firstname).to.eql('Test');
+      expect(credentials.lastname).to.eql('Name');
+      expect(credentials.email).to.eql('testemail@example.com');
+      expect(credentials.password).to.eql('Abcdefghi');
+    });
   }
 );
