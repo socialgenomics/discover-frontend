@@ -1,5 +1,7 @@
 import Ember from 'ember';
 
+const { inject: { service }, get, set } = Ember;
+
 export default Ember.Controller.extend({
   session: Ember.inject.service(),
   loading: false,
@@ -24,6 +26,13 @@ export default Ember.Controller.extend({
         timeout: 7000,
         sticky: true,
         class: 'fadeIn'
+      });
+    },
+    trackCreateAccount(route) {
+      get(this, 'metrics').trackEvent({
+        category: route,
+        action: 'create account button',
+        label: 'clicked'
       });
     }
   }

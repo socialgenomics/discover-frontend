@@ -59,7 +59,7 @@
       <section class="navbar-button-group">
         <div class="navbar-button">
           {{#active-link}}
-            {{#link-to 'users.signup' class="valign-wrapper primary-action"}}CREATE ACCOUNT{{/link-to}}
+            {{#link-to 'users.signup' class="valign-wrapper primary-action" invokeAction=(action 'trackCreateAccount' 'DISCOVER NAV')}}CREATE ACCOUNT{{/link-to}}
           {{/active-link}}
         </div>
         <div class="navbar-button">
