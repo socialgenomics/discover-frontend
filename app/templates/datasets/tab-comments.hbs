@@ -1,8 +1,19 @@
 <div class="card-side-content">
   <div class="col s12">
-    {{#if session.isAuthenticated}}
-      {{add-comment addComment=(action 'addComment') avatar=session.authenticatedUser.userProfile.avatar}}
-    {{/if}}
+    {{add-comment
+      addComment=(action 'addComment')
+      avatar=(
+        if session.isAuthenticated
+          session.authenticatedUser.userProfile.avatar
+          '/assets/images/avatar/lizard.png'
+      )
+      placeholder=(
+        if session.isAuthenticated
+          'Share your thoughts or ask more questions about the data.'
+          'To join this discussion, create a free account.'
+      )
+      disabled=(not session.isAuthenticated)
+    }}
     {{#each commentsSorted as |comment|}}
       {{user-comment
         user=comment.userId
