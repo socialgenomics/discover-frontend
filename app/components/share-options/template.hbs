@@ -5,7 +5,23 @@
 </div>
 <div class="share-url-section">
   <p class="url-box">{{shareUrl}}</p>
-  {{#copy-button class='btn-flat' clipboardText=shareUrl}}
-    Copy
+  {{#copy-button
+    class=copyButtonClasses
+    clipboardText=shareUrl
+    success='copySuccess'
+    error='copyError'
+  }}
+    {{#if copyAttempt}}
+      {{#if copySuccess}}
+        {{fa-icon 'check'}} Copied
+      {{else}}
+        {{fa-icon 'exclamation-triangle'}} Failed
+      {{/if}}
+    {{else}}
+      Copy
+    {{/if}}
   {{/copy-button}}
 </div>
+{{#if copyFailed}}
+  <div class="copy-failed-tooltip">You can select and copy the link manually.</div>
+{{/if}}
