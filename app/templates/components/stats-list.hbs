@@ -27,16 +27,33 @@
     {{/if}}
   </span>
 </li>
-<li class="center-align" data-balloon="Discussion" data-balloon-pos="down">
-  {{fa-icon "comments"}}
-  <span>
-    {{#if stats.comment}}
-      {{rough-estimate stats.comment}}
-    {{else}}
-      0
-    {{/if}}
-  </span>
-</li>
+
+{{#if (eq statType "datasets")}}
+  <li class="center-align" data-balloon="Discussion" data-balloon-pos="down">
+    {{fa-icon "comments"}}
+    <span>
+      {{#if stats.comment}}
+        {{rough-estimate stats.comment}}
+      {{else}}
+        0
+      {{/if}}
+    </span>
+  </li>
+{{/if}}
+
+{{#if (eq statType "collection")}}
+  <li data-balloon="Shares" data-balloon-pos="down">
+    {{fa-icon "share-alt"}}
+    <span>
+      {{#if stats.share}}
+        {{rough-estimate stats.share}}
+      {{else}}
+        0
+      {{/if}}
+    </span>
+  </li>
+{{/if}}
+
 <li data-balloon="Favourites" data-balloon-pos="down">
   {{fa-icon "star"}}
   <span>
