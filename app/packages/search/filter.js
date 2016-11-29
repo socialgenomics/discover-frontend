@@ -2,20 +2,20 @@ import Ember from 'ember';
 import keyMappings from './mappings';
 import { titleCase } from 'repositive/utils/case';
 
+const { computed, isNone, get } = Ember;
+
 export default Ember.Object.extend({
   name: null,
   value: null,
-
-  displayName: Ember.computed('name', function() {
-    return titleCase(this.get('name'));
+  displayName: computed('name', function() {
+    return titleCase(get(this, 'name'));
   }),
-
-  DSL: Ember.computed('name', 'value', function() {
-    if (Ember.isNone(this.get('value'))) {
+  DSL: computed('name', 'value', function() {
+    if (isNone(get(this, 'value'))) {
       return null;
     }
-    let d = { term: {} };
-    d.term[keyMappings[this.get('name')]] = this.get('value');
+    const d = { term: {} };
+    d.term[keyMappings[get(this, 'name')]] = get(this, 'value');
     return d;
   })
 });

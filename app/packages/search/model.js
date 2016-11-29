@@ -23,16 +23,15 @@ export default Model.extend({
   isError: false,
   resultsPerPage: 9,
 
-
   initialise: function() {
     if (isEmpty(get(this, 'queryParams'))) {
       throw 'please initialise with query params object';
     } else {
       if (isNone(get(this, 'aggs'))) {
-        this.aggs = [];
+        set(this, 'aggs', []);
       }
       if (isNone(get(this, 'filters'))) {
-        this.filters = [];
+        set(this, 'filters', []);
       }
       const params = get(this, 'queryParams');
       setProperties(this, { 'query': params.q, 'ordering': params.ordering });
@@ -160,7 +159,7 @@ export default Model.extend({
     };
 
     get(this, 'aggs').forEach(function(agg) {
-      let a = get(agg, 'DSL');
+      const a = get(agg, 'DSL');
       query.body.aggs[agg.name] = a[agg.name];
     });
 
@@ -189,7 +188,7 @@ export default Model.extend({
           }
         }
       };
-      let filtersBool = get(this, 'filters')
+      const filtersBool = get(this, 'filters')
       .map(filter => get(filter, 'DSL'))
       .filter(value => {
         if (isPresent(value)) { return value; }

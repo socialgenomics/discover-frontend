@@ -12,7 +12,6 @@ export default Mixin.create({
   },
 
   actions: {
-
     addFilter: function(field, term) {
       set(this, field, term); // change the query params
     },
@@ -31,6 +30,5 @@ export default Mixin.create({
         set(this, 'model.queryParams', qps);
       }
     }.on('queryParamsDidChange')
-
   }
 });
