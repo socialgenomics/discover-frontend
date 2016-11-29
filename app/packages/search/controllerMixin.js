@@ -1,7 +1,9 @@
 import Ember from 'ember';
 import _ from 'npm:lodash';
 
-export default Ember.Mixin.create({
+const { Mixin, set, get, isPresent } = Ember;
+
+export default Mixin.create({
   //It makes the code difficult to understand when messing with ember internals like this.
   //TODO: REFACTOR
   _qpChanged: function(controller, _prop) {
@@ -12,19 +14,20 @@ export default Ember.Mixin.create({
   actions: {
 
     addFilter: function(field, term) {
-      this.set(field, term); // change the query params
+      set(this, field, term); // change the query params
     },
 
     removeFilter: function(field /*term*/) {
-      this.set(field, null); // set query param to null
+      set(this, field, null); // set query param to null
     },
 
     queryParamsDidChange: function() {
-      if (Ember.isPresent(this.get('model'))) {
-        var qps = _.object(this.get('queryParams').map(param => {
-          return [param, this.get(param)];
+      if (isPresent(get(this, 'model'))) {
+        //lodash is only used for this one line...
+        const qps = _.object(get(this, 'queryParams').map(param => {
+          return [param, get(this, param)];
         }));
-        this.set('model.queryParams', qps);
+        set(this, 'model.queryParams', qps);
       }
     }.on('queryParamsDidChange')
 
