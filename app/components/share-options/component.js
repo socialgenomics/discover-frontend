@@ -23,7 +23,7 @@ export default Component.extend({
         mini: true,
         source: 'Repositive',
         summary: '#Repositive helped me find this awesome human #genomic #dataset & now I am helping you find it #findthatdata',
-        title: 'Repositive helped me find this awesome human genomeic dataset'
+        title: 'Repositive helped me find this awesome human genomic dataset'
       }
     }
   },
