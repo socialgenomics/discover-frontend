@@ -15,6 +15,11 @@ export default Route.extend(ApplicationRouteMixin, {
   },
   actions: {
     search(query) {
+      get(this, 'metrics').trackEvent({
+        category: 'search',
+        action: 'query',
+        label: query
+      });
       this.transitionTo('datasets.search', {
         queryParams: {
           q: query,
