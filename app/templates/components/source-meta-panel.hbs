@@ -32,6 +32,12 @@
         {{/if}}
       </section>
 
+      <div class="divider"></div>
+
+      <section class="stats-numbers">
+        {{stats-list stats=collectionStats}}
+      </section>
+
       {{#if model.description}}
         <div class="divider"></div>
         <p class="markdown-text">{{markdown-to-html markdown=model.description}}</p>

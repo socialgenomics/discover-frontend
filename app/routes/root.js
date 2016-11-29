@@ -62,7 +62,6 @@ export default Route.extend({
           };
         })
         .catch(Logger.error);
-
     } else {
       return ajax({ url: ENV.APIRoutes['stats'] , type: 'GET' })
         .then(stat => {
