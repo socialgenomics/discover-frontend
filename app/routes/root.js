@@ -1,14 +1,18 @@
 import Ember from 'ember';
-import ajax from 'ic-ajax';
 import ENV from 'repositive/config/environment';
+import FlashMessageMixin from 'repositive/mixins/flash-message-mixin';
 
 const { inject: { service }, computed, Route, RSVP, get, set, Logger } = Ember;
 
-export default Route.extend({
+export default Route.extend(FlashMessageMixin, {
   session: service(),
+  ajax: service(),
   isFirstLogin: computed.and('session.data.firstVisit', 'session.isAuthenticated'),
-  displayWelcomeMessage: computed.and('session.data.displayWelcomeMessage', 'session.isAuthenticated'),
-
+  displayWelcomeMessage: computed('session.session.content.authenticated.user.credentials.firstObject.verified', 'session.isAuthenticated', function() {
+    const isVerified = get(this, 'session.session.content.authenticated.user.credentials.firstObject.verified');
+    const isAuthenticated = get(this, 'session.isAuthenticated');
+    return isAuthenticated ? !isVerified : false;
+  }),
   beforeModel: function() {
     if (get(this, 'isFirstLogin')) {
       this.transitionTo('beta-signup-form')
@@ -19,32 +23,21 @@ export default Route.extend({
           }
         });
     }
-
     if (get(this, 'displayWelcomeMessage')) {
-      this.flashMessages.add({
-        message: 'Please check your email to verify your account',
-        type: 'info',
-        timeout: 7000,
-        sticky: true,
-        class: 'fadeIn'
-      });
+      this._addFlashMessage('Please check your email to verify your account', 'info');
     }
   },
 
   model: function() {
+    const ajax = get(this, 'ajax');
     if (get(this, 'session.isAuthenticated')) {
-      const token = get(this, 'session.session.content.authenticated.token');
-      const authHeaders = {
-        authorization: `JWT ${token}`
-      };
-
       return RSVP.hash({
-        stats: ajax({ url: ENV.APIRoutes['stats'] , type: 'GET', headers: authHeaders }),
-        datasets: ajax({ url: ENV.APIRoutes['datasets.trending'] , type: 'GET', headers: authHeaders }),
+        stats: ajax.request(ENV.APIRoutes['stats'], { method: 'GET' }),
+        datasets: ajax.request(ENV.APIRoutes['datasets.trending'], { method: 'GET' }),
         requests: this.store.query('request', { 'order[0][0]': 'updated_at', 'order[0][1]': 'DESC' }),
         registered: this.store.query('dataset', { 'where.user_id.$ne': 'null', 'order[0][0]': 'updated_at', 'order[0][1]': 'DESC' }),
         collections: this.store.query('collection', { 'where.type': 'repositive_collection', 'order[0][0]': 'updated_at', 'order[0][1]': 'DESC', 'limit': '3' }),
-        datasources: ajax({ url: ENV.APIRoutes['datasources'] + '?limit=3' , type: 'GET', headers: authHeaders })
+        datasources: ajax.request(ENV.APIRoutes['datasources'] + '?limit=3', { method: 'GET' })
       })
         .then(data => {
           //Normalize and push trending datasets
@@ -60,10 +53,9 @@ export default Route.extend({
             collections: data.collections,
             datasources: data.datasources
           };
-        })
-        .catch(Logger.error);
+        }).catch(Logger.error);
     } else {
-      return ajax({ url: ENV.APIRoutes['stats'] , type: 'GET' })
+      return ajax.request(ENV.APIRoutes['stats'], { method: 'GET' })
         .then(stat => {
           return { stats: stat };
         });
@@ -71,6 +63,6 @@ export default Route.extend({
   },
 
   deactivateWeclomeMesssage: function() {
-    get(this, 'session').set('data.firstVisit', false);
+    set(this, 'session.data.firstVisit', false);
   }.on('deactivate')
 });
