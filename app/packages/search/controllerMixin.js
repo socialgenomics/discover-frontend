@@ -24,6 +24,7 @@ export default Mixin.create({
     queryParamsDidChange: function() {
       if (isPresent(get(this, 'model'))) {
         //lodash is only used for this one line...
+        //TODO: refactor this so that we can remove lodash dependency
         const qps = _.object(get(this, 'queryParams').map(param => {
           return [param, get(this, param)];
         }));

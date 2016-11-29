@@ -7,6 +7,8 @@ import Agg from './aggregation';
 import Filter from './filter';
 import request from 'ember-ajax/request';
 
+const { computed, get, set, setProperties, RSVP, Logger } = Ember;
+
 export default Model.extend({
   user: belongsTo('user'),
   datasets: hasMany('dataset'),
@@ -20,6 +22,7 @@ export default Model.extend({
   isLoading: true,
   isError: false,
   resultsPerPage: 9,
+
 
   initialise: function() {
     if (Ember.isEmpty(this.get('queryParams'))) {
@@ -87,56 +90,48 @@ export default Model.extend({
     // whenever query is changed, the queryParams are updated.
   }),
 
+  /*
+    Makes request to datasets.search using the DSL.
+      Then handles response:
+        If no results -> reject
+        Loads the aggregations from the response
+        Push datasets to store
+  */
   updateModelFromAPI: function() {
     return request(ENV.APIRoutes['datasets.search'], {
       method: 'POST',
-      data: 'query=' + this.get('DSL')
+      data: 'query=' + get(this, 'DSL')
     })
-    .then(resp => {
-      this.set('meta', resp.meta);
-      if (this.get('meta.total') < 0) {
-        return Ember.RSVP.reject('No results');
-      }
-      delete resp.meta;
-
-      // load the aggs from the resp
-      this.set('aggs', []);
-      for (let key in resp.aggs) {
-        var DSL = {};
-        DSL[key] = resp.aggs[key];
-        let agg = Agg.create({
-          aggDSL: DSL, //TODO:: this is dodgy
-          show: true
-        });
-        if (agg.name === 'assay') {
-          agg.set('buckets', agg.buckets.reject(bucket => bucket.key === 'Not Available'));
+      .then(resp => {
+        setProperties(this, { 'meta': resp.meta, 'aggs': [] });
+        if (get(this, 'meta.total') < 0) {
+          return RSVP.reject('No results');
         }
-        this.aggs.pushObject(agg);
-      }
-      delete resp.aggs;
-      let promisedDatasets = resp.datasets.map(dataset => {
-        delete dataset.datasource;
-        return this.store.push(this.store.normalize('dataset', dataset));
-      });
-      return promisedDatasets;
-    })
-    .then(datasets => {
-      this.set('datasets', []);
-      datasets.forEach(dataset => {
-        this.get('datasets').pushObject(dataset);
-      });
-      this.set('isLoading', false);
-    })
-    .catch((err) => {
-      this.set('isLoading', false);
-      this.set('isError', true);
-      Ember.Logger.error(err);
-      return Ember.RSVP.reject(err);
-    });
+        delete resp.meta;
+        set(this, 'aggs', this._buildFilters(resp.aggs));
+        delete resp.aggs;
+        const promisedDatasets = resp.datasets.map(dataset => {
+          delete dataset.datasource;
+          return this.store.push(this.store.normalize('dataset', dataset));
+        });
+        return promisedDatasets;
+      })
+        .then(datasets => {
+          set(this, 'datasets', []);
+          datasets.forEach(dataset => {
+            get(this, 'datasets').pushObject(dataset);
+          });
+          set(this, 'isLoading', false);
+        })
+        .catch(err => {
+          setProperties(this, { 'isLoading': false, 'isError': true });
+          Logger.error(err);
+          return RSVP.reject(err);
+        });
   },
 
 
-  DSL: Ember.computed('query', 'offset', 'filters.@each.value', function() {
+  DSL: computed('query', 'offset', 'filters.@each.value', function() {
     let query = {
       'index': 'datasets',
       'type': 'dataset',
@@ -204,5 +199,23 @@ export default Model.extend({
       this.set('offset', value);
     }
     this.updateModelFromAPI();
+  },
+
+  //TODO: refactor to use reduce
+  _buildFilters(aggs) {
+    const aggsToReturn = [];
+    for (const key in aggs) {
+      const DSL = {};
+      DSL[key] = aggs[key];
+      const agg = Agg.create({
+        aggDSL: DSL, //TODO:: this is dodgy
+        show: true
+      });
+      if (agg.name === 'assay') {
+        set(agg, 'buckets', agg.buckets.reject(bucket => bucket.key === 'Not Available'));
+      }
+      aggsToReturn.pushObject(agg);
+    }
+    return aggsToReturn;
   }
 });
