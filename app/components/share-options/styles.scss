@@ -1,7 +1,6 @@
 $spacing: 10px;
 $icon-area-width: 80px;
 $border-size: 1px;
-$button-padding: 15px;
 
 .share-options-icons {
   margin-top: $spacing;
@@ -27,10 +26,20 @@ $button-padding: 15px;
     border: none;
     color: $color-pelorous;
     padding: {
-      left: $button-padding;
-      right: $button-padding;
+      left: 0;
+      right: 0;
     };
+    text-align: center;
     text-transform: uppercase;
+    width: $icon-area-width;
+
+    &.copy-failed {
+      color: $color-sunglo;
+    }
+
+    .fa {
+      padding: 0;
+    }
   }
 }
 
@@ -43,3 +52,11 @@ $button-padding: 15px;
   white-space: nowrap;
   width: 0;
 }
+
+.copy-failed-tooltip {
+  color: $color-boulder;
+  text-align: center;
+  font-size: 0.75rem;
+  padding-bottom: $spacing;
+}
+
