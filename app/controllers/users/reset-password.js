@@ -1,11 +1,14 @@
 import Ember from 'ember';
 import EmberValidations from 'ember-validations';
 import ENV from 'repositive/config/environment';
-import ajax from 'ic-ajax';
+import FlashMessageMixin from 'repositive/mixins/flash-message-mixin';
 
-const { Controller, computed, observer, Logger, get, set } = Ember;
 
-export default Controller.extend(EmberValidations, {
+const { Controller, computed, observer, Logger, get, set, setProperties, inject: { service } } = Ember;
+
+export default Controller.extend(EmberValidations, FlashMessageMixin, {
+  ajax: service(),
+
   resetKey: null,
   password1: null,
   password2: null,
@@ -49,29 +52,25 @@ export default Controller.extend(EmberValidations, {
       if (!get(this, 'isDisabled')) {
         set(this, 'loading', true);
         if (get(this, 'password1') !== get(this, 'password2')) {
-          this.flashMessages.add({
-            message: 'Passwords do not match.',
-            type: 'warning',
-            timeout: 7000,
-            class: 'fadeIn'
-          });
+          this._addFlashMessage(`Passwords do not match.`, 'warning');
         } else {
-          ajax({
-            url: ENV.APIRoutes['reset-password'],
-            type: 'POST',
+          get(this, 'ajax').request(ENV.APIRoutes['reset-password'], {
+            method: 'POST',
             data: {
-              token: this.get('resetKey'),
-              password: this.get('password1')
+              token: get(this, 'resetKey'),
+              password: get(this, 'password1')
             }
           })
-          .then(resp => {
-            set(this, 'loading', false);
-            set(this, 'passwordChanged', true);
-          })
-          .catch(err => {
-            set(this, 'loading', false);
-            Logger.error(err);
-          });
+            .then(resp => {
+              setProperties(this, {
+                loading: false,
+                passwordChanged: true
+              });
+            })
+            .catch(err => {
+              set(this, 'loading', false);
+              Logger.error(err);
+            });
         }
       }
     }
