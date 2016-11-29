@@ -1,0 +1,21 @@
+<h4 class="unfocus-grey-text">Filters</h4>
+{{#each aggs as |agg|}}
+  {{#if agg.show}}
+    <div class="section">
+      {{#if (eq agg.displayName "Datasource")}}
+        <h4>Data Source</h4>
+      {{else}}
+        <h4>{{ agg.displayName }}</h4>
+      {{/if}}
+      {{#each agg.buckets as |bucket|}}
+        <div>
+          {{#if (eq agg.name "assay")}}
+            <div class="label {{bucket.colour}}"></div>
+          {{/if}}
+          <span {{action "addFilter" agg.name bucket.key}} style="cursor:pointer;">{{bucket.key}} ({{bucket.doc_count}})</span>
+        </div>
+      {{/each}}
+      <div class="divider"></div>
+    </div>
+  {{/if}}
+{{/each}}
