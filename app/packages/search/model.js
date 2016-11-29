@@ -7,7 +7,7 @@ import Agg from './aggregation';
 import Filter from './filter';
 import request from 'ember-ajax/request';
 
-const { computed, get, set, setProperties, RSVP, Logger } = Ember;
+const { get, set, setProperties, isEmpty, isPresent, isNone, RSVP, Logger } = Ember;
 
 export default Model.extend({
   user: belongsTo('user'),
@@ -25,67 +25,66 @@ export default Model.extend({
 
 
   initialise: function() {
-    if (Ember.isEmpty(this.get('queryParams'))) {
+    if (isEmpty(get(this, 'queryParams'))) {
       throw 'please initialise with query params object';
     } else {
-      if (Ember.isNone(this.get('aggs'))) {
+      if (isNone(get(this, 'aggs'))) {
         this.aggs = [];
       }
-
-      if (Ember.isNone(this.get('filters'))) {
+      if (isNone(get(this, 'filters'))) {
         this.filters = [];
       }
-
-      let params = this.get('queryParams');
-      this.set('query', params.q);
-      this.set('ordering', params.ordering);
+      const params = get(this, 'queryParams');
+      setProperties(this, { 'query': params.q, 'ordering': params.ordering });
       delete params.q;
       delete params.ordering;
-      for (let key in params) {
-        let agg = Agg.create({
+      for (const key in params) {
+        const agg = Agg.create({
           name: key,
           value: params[key],
           show: false
         });
         this.aggs.pushObject(agg);
-
-        let filter = Filter.create({
+        const filter = Filter.create({
           name: key,
           value: params[key]
         });
         this.filters.pushObject(filter);
       }
-
       this.updateModelFromAPI();
     }
   }.on('ready'),
 
+  // Calls updateModelFromAPI whenever a filter is added/removed
   queryParamsDidChange: Ember.observer('queryParams', function() {
-    this.set('isLoading', true);
-    this.set('isError', false);
-    this.set('datasets', []);
-    if (Ember.isPresent(this.get('filters'))) {
-      let qps = this.get('queryParams');
-      this.set('query', qps.q);
+    setProperties(this, {
+      'isLoading': true,
+      'isError': false,
+      'datasets': []
+    });
+    if (isPresent(get(this, 'filters'))) {
+      const qps = get(this, 'queryParams');
+      setProperties(this, {
+        'query': qps.q,
+        'ordering': qps.ordering,
+        'offset': qps.offset
+      });
       delete qps.q;
-      this.set('ordering', qps.ordering);
       delete qps.ordering;
-      this.set('offset', qps.offset);
       delete qps.offset;
-
       //Set the new filter in the filters array.
-      for (let key in qps) {
-        let filter = this.filters.findBy('name', key);
-        filter.set('value', this.get('queryParams.' + key));
+      for (const key in qps) {
+        const filter = this.filters.findBy('name', key);
+        set(filter, 'value', get(this, 'queryParams.' + key));
       }
       this.updateModelFromAPI();
     }
   }),
 
   queryDidChange: Ember.observer('query', function() {
-    this.set('isLoading', true);
-    this.get('aggs').setEach('show', false);
-    this.get('datasets').clear();
+    set(this, 'isLoading', true);
+    get(this, 'aggs').setEach('show', false);
+    get(this, 'datasets').clear();
     // Because the query is stored in queryParams as 'q'
     // whenever query is changed, the queryParams are updated.
   }),
@@ -100,7 +99,7 @@ export default Model.extend({
   updateModelFromAPI: function() {
     return request(ENV.APIRoutes['datasets.search'], {
       method: 'POST',
-      data: 'query=' + get(this, 'DSL')
+      data: 'query=' + this._buildDSL()
     })
       .then(resp => {
         setProperties(this, { 'meta': resp.meta, 'aggs': [] });
@@ -130,13 +129,23 @@ export default Model.extend({
         });
   },
 
+  updateOffset: function(value, type) {
+    if (type === 'increment') {
+      this.incrementProperty('offset', value);
+    } else if (type === 'decrement') {
+      this.decrementProperty('offset', value);
+    } else {
+      set(this, 'offset', value);
+    }
+    this.updateModelFromAPI();
+  },
 
-  DSL: computed('query', 'offset', 'filters.@each.value', function() {
+  _buildDSL() {
     let query = {
       'index': 'datasets',
       'type': 'dataset',
-      'from': this.get('offset'),
-      'size': this.get('resultsPerPage'),
+      'from': get(this, 'offset'),
+      'size': get(this, 'resultsPerPage'),
       'body': {
         'highlight': {
           'fields': {
@@ -150,16 +159,16 @@ export default Model.extend({
       }
     };
 
-    this.get('aggs').forEach(function(agg) {
-      let a = agg.get('DSL');
+    get(this, 'aggs').forEach(function(agg) {
+      let a = get(agg, 'DSL');
       query.body.aggs[agg.name] = a[agg.name];
     });
 
     let queryInstance;
-    if (this.get('query') !== '') {
+    if (get(this, 'query') !== '') {
       queryInstance = {
         'query_string': {
-          'query': this.get('query'),
+          'query': get(this, 'query'),
           'default_operator': 'AND'
         }
       };
@@ -167,7 +176,7 @@ export default Model.extend({
       queryInstance = null;
     }
 
-    if (Ember.isEmpty(this.get('filters'))) {
+    if (isEmpty(get(this, 'filters'))) {
       query.body.query = queryInstance;
     } else {
       query.body.query = {
@@ -180,25 +189,14 @@ export default Model.extend({
           }
         }
       };
-      let filtersBool = this.get('filters')
-      .map(filter => filter.get('DSL'))
+      let filtersBool = get(this, 'filters')
+      .map(filter => get(filter, 'DSL'))
       .filter(value => {
-        if (Ember.isPresent(value)) { return value; }
+        if (isPresent(value)) { return value; }
       });
       query.body.query.filtered.filter.bool.must = filtersBool;
     }
     return JSON.stringify(query);
-  }),
-
-  updateOffset: function(value, type) {
-    if (type === 'increment') {
-      this.incrementProperty('offset', value);
-    } else if (type === 'decrement') {
-      this.decrementProperty('offset', value);
-    } else {
-      this.set('offset', value);
-    }
-    this.updateModelFromAPI();
   },
 
   //TODO: refactor to use reduce
