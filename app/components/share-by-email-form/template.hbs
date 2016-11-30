@@ -1,0 +1,23 @@
+{{#unless sendSuccess}}
+  {{validated-input
+    type="text"
+    value=emailAddress
+    errors=errors.emailAddress
+    placeholder="Email"
+  }}
+  {{validated-input
+    type='textarea'
+    value=customMessage
+    placeholder='Include personal message with this dataset.'
+    textarea="true"
+  }}
+{{else}}
+  <h2 class="success-message">Success! <br> Your email has been sent.</h2>
+{{/unless}}
+<button
+  type="submit"
+  class="btn waves-effect {{unless submitDisabled 'teal white-text'}}"
+  disabled={{submitDisabled}}
+>
+  {{submitButtonLabel}}
+</button>
