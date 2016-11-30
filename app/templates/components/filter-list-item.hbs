@@ -1,0 +1,4 @@
+{{#if (eq aggName "assay")}}
+  <div class="label {{bucket.colour}}"></div>
+{{/if}}
+<span {{action "addFilter" aggName bucket.key}} style="cursor:pointer;">{{bucket.key}} ({{bucket.doc_count}})</span>
