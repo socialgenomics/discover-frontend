@@ -4,6 +4,7 @@ import colours from 'repositive/utils/colours';
 import { titleCase } from 'repositive/utils/case';
 import keyMappings from './mappings';
 
+const { computed, get, set, $ } = Ember;
 
 export default Ember.Object.extend({
   name: null,
@@ -12,35 +13,34 @@ export default Ember.Object.extend({
   buckets: null,
   show: false,
 
-  displayName: function() {
-    return titleCase(this.get('name'));
-  }.property('name'),
+  displayName: computed('name', function() {
+    return titleCase(get(this, 'name'));
+  }),
 
   init: function() {
-    //Where does 'aggDSL' even come from???
-    if (!Ember.$.isEmptyObject(this.get('aggDSL'))) {
-      var DSL = this.get('aggDSL'); // TODO: rmove this dependancy on aggDSL as it is confusing
-      var name = Object.keys(DSL)[0];
-      this.set('name', name);
-      var buckets = DSL[name].buckets;
-      this.set('buckets', []);
-      buckets.forEach(function(bucket) {
+    if (!$.isEmptyObject(get(this, 'aggDSL'))) {
+      const DSL = get(this, 'aggDSL'); // TODO: rmove this dependancy on aggDSL as it is confusing
+      const name = Object.keys(DSL)[0];
+      set(this, 'name', name);
+      const buckets = DSL[name].buckets;
+      set(this, 'buckets', []);
+      buckets.forEach(bucket => {
         bucket.colour = colours.getColour(bucket.key);
-        var b = Bucket.create(bucket);
+        const b = Bucket.create(bucket);
         this.buckets.pushObject(b);
-      }.bind(this));
+      });
     }
   },
 
   initDSL: function() {
-    var fieldName = keyMappings[this.name];
-    var q = {};
-    q[this.get('name')] = {
+    const fieldName = keyMappings[this.name];
+    const q = {};
+    q[get(this, 'name')] = {
       terms: {
         field: fieldName
       }
     };
-    this.set('DSL', q);
+    set(this, 'DSL', q);
   }.observes('name', 'value').on('init')
 
 });
