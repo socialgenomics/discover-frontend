@@ -1,4 +1,5 @@
 {{fa-icon "share-alt"}}
+
 {{#if showShareOptionsModal}}
   {{#tether-dialog
     close=(action 'toggleShareOptionsModal')
@@ -8,6 +9,27 @@
     translucentOverlay=false
     container-class='share-options-modal'
   }}
-    {{share-options}}
+    {{share-options onEnvelopeClick=(action 'toggleShareEmailModal')}}
   {{/tether-dialog}}
+{{/if}}
+
+{{#if showShareEmailModal}}
+  {{#modal-dialog
+    close=(action 'toggleShareEmailModal')
+    targetAttachment="center"
+    translucentOverlay=true
+  }}
+    {{#repositive-modal/wrapper size='medium'}}
+      {{repositive-modal/header
+        icon='envelope'
+        alternateBackground=true
+        title='Share this dataset'
+        onClose=(action 'toggleShareEmailModal')
+      }}
+        {{share-by-email-form
+          actionableId=actionableId
+          onClose=(action 'toggleShareEmailModal')
+        }}
+    {{/repositive-modal/wrapper}}
+  {{/modal-dialog}}
 {{/if}}

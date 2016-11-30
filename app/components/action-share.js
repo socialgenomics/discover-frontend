@@ -1,8 +1,11 @@
 import Ember from 'ember';
 
-export default Ember.Component.extend({
+const { Component, set } = Ember;
+
+export default Component.extend({
   classNames: ['share-options-button'],
   showShareOptionsModal: false,
+  showShareEmailModal: false,
 
   click: function() {
     this.get('metrics').trackEvent({
@@ -18,6 +21,11 @@ export default Ember.Component.extend({
   actions: {
     toggleShareOptionsModal() {
       this.toggleProperty('showShareOptionsModal');
+    },
+
+    toggleShareEmailModal() {
+      set(this, 'showShareOptionsModal', false);
+      this.toggleProperty('showShareEmailModal');
     }
   }
 });
