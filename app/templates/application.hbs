@@ -13,7 +13,7 @@
 </main>
 
 {{#if isShowingModal}}
-  {{unfinished-modal action="toggleModal"}}
+  {{unfinished-modal toggleModal=(route-action 'toggleModal')}}
 {{/if}}
 
 {{platform-footer}}

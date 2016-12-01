@@ -29,15 +29,7 @@
     {{#if model.isLoading}}
       {{partial 'loading'}}
     {{else}}
-      <div class="row">
-        {{#if (eq model.meta.total 0)}}
-          {{render 'datasets/noResults'}}
-        {{else}}
-          {{#each model.datasets as |dataset|}}
-            {{dataset-card dataset=dataset searchRoute=true toggleModal="toggleModal"}}
-          {{/each}}
-        {{/if}}
-      </div>
+      {{search-results-list results=model.datasets totalResults=model.meta.total}}
       {{#if (gt model.meta.total 0)}}
         {{pagination-bar
           resultsPerPage=model.resultsPerPage

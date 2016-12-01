@@ -7,9 +7,9 @@
         {{#if dataset.createdAt}}<p>{{moment-from-now dataset.createdAt hideSuffix=true}} ago</p>{{/if}}
       </div>
       <div class="actions-container valign-wrapper">
-        {{action-favourite action="toggleModal" dataset=dataset}}
+        {{action-favourite dataset=dataset}}
         <span class="grey-text">{{dataset.favourite}}</span>
-        {{action-share action="toggleModal" dataset=dataset}}
+        {{action-share toggleModal=(route-action 'toggleModal') dataset=dataset}}
       </div>
     </header>
 
