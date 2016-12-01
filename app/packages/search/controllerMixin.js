@@ -12,6 +12,7 @@ export default Mixin.create({
   },
 
   actions: {
+    //These functions only allow one filter per aggregation.
     addFilter: function(field, term) {
       set(this, field, term); // change the query params
     },

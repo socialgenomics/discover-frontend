@@ -1,32 +1,10 @@
 {{#if (gt model.meta.total 0)}}
-  <nav class="side-nav" id="aggregation">
-    <h4 class="unfocus-grey-text">Filters</h4>
-    {{#each model.aggs as |agg|}}
-      {{#if agg.show}}
-        <div class="section">
-          {{#if (eq agg.displayName "Datasource")}}
-            <h4>Data Source</h4>
-          {{else}}
-            <h4>{{ agg.displayName }}</h4>
-          {{/if}}
-          {{#each agg.buckets as |bucket|}}
-            <div>
-              {{#if (eq agg.name "assay")}}
-                <div class="label {{bucket.colour}}"></div>
-              {{/if}}
-              <span {{action "addFilter" agg.name bucket.key}} style="cursor:pointer;">{{bucket.key}} ({{bucket.doc_count}})</span>
-            </div>
-          {{/each}}
-          <div class="divider"></div>
-        </div>
-      {{/if}}
-    {{/each}}
-  </nav>
+  {{filters-list aggs=model.aggs addFilter=(action 'addFilter') removeFilter=(action 'removeFilter')}}
 {{/if}}
 <div class="content right">
-  <div class="">
+  <div>
     <h5 class="unfocus-grey-text">Your Query:</h5>
-    <p id="filters">
+    <p id="your-query">
       <span class="filter first">
           <em class="highlight">
             {{#if model.query}}"{{model.query}}"{{else}}"All Data"{{/if}}
@@ -34,7 +12,7 @@
       </span>
       {{#each model.filters as |filter|}}
         {{#if filter.value}}
-        <span class="filter" {{action "removeFilter" filter.name filter.value}}>{{ filter.displayName }} : {{filter.value}}<span class="remove">x</span></span>
+        <span class="filter" {{action "removeFilter" filter.name}}>{{ filter.displayName }} : {{filter.value}}<span class="remove">x</span></span>
         {{/if}}
       {{/each}}
     </p>
