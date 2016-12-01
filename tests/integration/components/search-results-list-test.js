@@ -13,18 +13,11 @@ describeComponent(
     integration: true
   },
   function() {
-    it('renders', function() {
-      // Set any properties with this.set('myProperty', 'value');
-      // Handle any actions with this.on('myAction', function(val) { ... });
-      // Template block usage:
-      // this.render(hbs`
-      //   {{#search-results-list}}
-      //     template content
-      //   {{/search-results-list}}
-      // `);
-
-      this.render(hbs`{{search-results-list}}`);
-      expect(this.$()).to.have.length(1);
+    it('Displays message when there are no results.', function() {
+      const message = `Sorry, there are no matching datasets. You can make request to ask our community for help.`;
+      this.set('totalResults', 0);
+      this.render(hbs`{{search-results-list totalResults=totalResults}}`);
+      expect(this.$('h3').text().trim()).to.eql(message);
     });
   }
 );
