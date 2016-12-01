@@ -1,15 +1,16 @@
 import Ember from 'ember';
 
-export default Ember.Component.extend({
+const { Component, get } = Ember;
+
+export default Component.extend({
   tagName: 'a',
   click: function() {
-    this.get('metrics').trackEvent({
+    get(this, 'metrics').trackEvent({
       category: 'dataset',
       action: 'share',
-      label: this.get('dataset.id'),
+      label: get(this, 'dataset.id'),
       value: true
     });
-    //sends to showModal in parent controller
-    this.sendAction();
+    get(this, 'toggleModal')();
   }
 });

@@ -15,7 +15,7 @@
       {{/if}}
       <div class="actions-container valign-wrapper">
         {{action-favourite model=dataset}}
-        {{action-share action="toggleModal"}}
+        {{action-share toggleModal=(route-action 'toggleModal')}}
       </div>
     </div>
     <div class="card-main-content">
