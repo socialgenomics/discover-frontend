@@ -17,11 +17,7 @@ export default Controller.extend({
       set(this, 'page', this.page - 1);
       this.send('invalidateModel');
     },
-    showMoreMeta() {
-      this.toggleProperty('showMore');
-    }
+    showMoreMeta() { this.toggleProperty('showMore'); }
   },
-  resetController: function() {
-    set(this, 'page', 1);
-  }
+  resetController() { set(this, 'page', 1); }
 });

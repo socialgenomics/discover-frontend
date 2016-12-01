@@ -41,6 +41,7 @@ export function model(params) {
       return data;
     }).catch(Logger.error);
 }
+// Calls the resetController method on the controller provided when the current route name changes.
 export function resetControllerOnRouteChange(targetName, currentRouteName, controller) {
   if (targetName !== currentRouteName) {
     controller.resetController();
