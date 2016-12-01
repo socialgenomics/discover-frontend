@@ -1,11 +1,14 @@
 import Ember from 'ember';
 
-const { Component, set } = Ember;
+const { Component, set, inject: { service } } = Ember;
 
 export default Component.extend({
+  session: service(),
+
   classNames: ['share-options-button'],
   showShareOptionsModal: false,
   showShareEmailModal: false,
+  showCreateAccountModal: false,
 
   click: function() {
     this.get('metrics').trackEvent({
@@ -26,6 +29,11 @@ export default Component.extend({
     toggleShareEmailModal() {
       set(this, 'showShareOptionsModal', false);
       this.toggleProperty('showShareEmailModal');
+    },
+
+    toggleCreateAccountModal() {
+      set(this, 'showShareOptionsModal', false);
+      this.toggleProperty('showCreateAccountModal');
     }
   }
 });

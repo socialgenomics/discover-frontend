@@ -26,18 +26,18 @@ export default Component.extend(EmberValidations, {
     }
   },
 
-  // TODO: add test
   submitDisabled: computed('isLoading', 'errors.emailAddress.length', function() {
     return get(this, 'isLoading') || get(this, 'errors.emailAddress.length') !== 0;
   }),
 
-  // TODO: add test
   submitButtonLabel: computed('isLoading', 'sendSuccess', 'sendError', function () {
     switch (true) {
       case get(this, 'isLoading') :
         return 'Sending the email...';
-      case get(this, 'sendSuccess') || get(this, 'sendError') :
+      case get(this, 'sendSuccess') :
         return 'Back to dataset';
+      case get(this, 'sendError') :
+        return 'Try again later';
       default:
         return 'Send the Email';
     }
@@ -70,7 +70,6 @@ export default Component.extend(EmberValidations, {
       sendError: true,
       isLoading: false
     });
-    // TODO need to add error state to UI
   },
 
   _sendCustomEmail() {
