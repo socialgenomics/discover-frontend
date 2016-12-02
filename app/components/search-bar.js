@@ -1,11 +1,13 @@
 import Ember from 'ember';
 
-const { Component, get } = Ember;
+const { Component, get, inject: { service } } = Ember;
 
 export default Component.extend({
+  search: service(),
   actions: {
     search(query) {
-      get(this, 'search')(query);
+      const searchSession = get(this, 'search');
+      searchSession.updateQuery(query);
     }
   }
 });
