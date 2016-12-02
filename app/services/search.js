@@ -13,31 +13,33 @@ export default Service.extend({
   resetQuery() { set(this, 'query', null); },
 
   /**
-   * Updates the query property.
-   * @param {(string|Object)} value - Value to be appended to query
+   * Updates the query property and makes a request with this
+   * @param {string} query - New query string
    */
-  updateQuery(value) {
-    //calls _generateQueryObject or similar function from package.
-    this._setQuery(value);
-    this._makeRequest(get(this, 'query'));
+  updateQuery(query) {
+    const queryTree = this._parseString(query);
+    this._setQuery(this._serializeToString(queryTree));
+    this._makeRequest(queryTree)
+      .then(this._handleResponse.bind(this))
+      .catch(Logger.error);
   },
 
   /**
-  * Adds a filter to query tree if it's not already there. Returns new tree.
-  * @param {BTree} queryTree - Tree which the filter will be appended to
-  * @param {Object} filter - Filter to be appended to tree e.g. { assay: 'Chip-Seq' }
+  * Adds a predicate to query tree if it's not already there. Returns new tree.
+  * @param {BTree} queryTree - Tree which the predicate will be appended to
+  * @param {Object} predicate - Predicate to be appended to tree e.g. { assay: 'Chip-Seq' }
   * @returns {BTree} - New binary tree representation of the query
   */
-  _addFilter(queryTree, filter) {
+  _addPredicate(queryTree, predicate) {
   },
 
   /**
-  * Removes the filter from the query tree if present. Returns new tree.
-  * @param {BTree} queryTree - Tree which the filter will be removed from
-  * @param {Object} filter - Filter to be removed from the tree
+  * Removes the predicate from the query tree if present. Returns new tree.
+  * @param {BTree} queryTree - Tree which the predicate will be removed from
+  * @param {Object} predicate - Predicate to be removed from the tree
   * @returns {BTree} - New binary tree representation of the query
   */
-  _removeFilter(queryTree, filter) {
+  _removePredicate(queryTree, predicate) {
   },
 
   /**
@@ -56,17 +58,22 @@ export default Service.extend({
   _serializeToString(queryTree) {
   },
 
-  _setQuery(query) { set(this, 'query', query); },
+  /**
+  * Sets the query property to the string provided
+  * @param {string} queryString - string to be set as the service's query property
+  */
+  _setQuery(queryString) { set(this, 'query', queryString); },
 
-  _makeRequest(query) {
+  /**
+  * Sets the query property to the string provided
+  * @param {BTree} queryTree - query tree sent with POST request
+  * @returns {Promise} - The promised data
+  */
+  _makeRequest(queryTree) {
     return get(this, 'ajax').request(ENV.APIRoutes['datasets.search'], {
       method: 'POST',
       contentType: 'application/json',
-      data: query
-    })
-      .then(resp => {
-        console.log(resp);
-      })
-      .catch(Logger.error);
+      data: queryTree
+    });
   }
 });
