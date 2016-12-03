@@ -1,7 +1,9 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  tagName: 'a',
+  classNames: ['share-options-button'],
+  showShareOptionsModal: false,
+
   click: function() {
     this.get('metrics').trackEvent({
       category: 'dataset',
@@ -9,7 +11,13 @@ export default Ember.Component.extend({
       label: this.get('dataset.id'),
       value: true
     });
-    //sends to showModal in parent controller
-    this.sendAction();
+
+    this.send('toggleShareOptionsModal');
+  },
+
+  actions: {
+    toggleShareOptionsModal() {
+      this.toggleProperty('showShareOptionsModal');
+    }
   }
 });
