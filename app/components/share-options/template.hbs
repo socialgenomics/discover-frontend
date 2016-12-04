@@ -1,0 +1,27 @@
+<div class="share-options-icons">
+  {{fa-icon 'twitter' size=2 class='color-twitter-text' click=(action 'share' 'twitter')}}
+  {{fa-icon 'linkedin' size=2 class='color-linkedin-text' click=(action 'share' 'linkedin')}}
+  <!-- {{fa-icon 'envelope' size=2 class='yellow-text'}} -->
+</div>
+<div class="share-url-section">
+  <p class="url-box">{{shareUrl}}</p>
+  {{#copy-button
+    class=copyButtonClasses
+    clipboardText=shareUrl
+    success='copySuccess'
+    error='copyError'
+  }}
+    {{#if copyAttempt}}
+      {{#if copySuccess}}
+        {{fa-icon 'check'}} Copied
+      {{else}}
+        {{fa-icon 'exclamation-triangle'}} Failed
+      {{/if}}
+    {{else}}
+      Copy
+    {{/if}}
+  {{/copy-button}}
+</div>
+{{#if copyFailed}}
+  <div class="copy-failed-tooltip">You can select and copy the link manually.</div>
+{{/if}}
