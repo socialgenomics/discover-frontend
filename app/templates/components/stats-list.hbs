@@ -16,6 +16,32 @@
   </li>
 {{/if}}
 
+{{#if (or (eq statType "collection") (eq statType "datasource"))}}
+  <li class="center-align" data-balloon="Datasets" data-balloon-pos="down">
+    {{fa-icon "file-text"}}
+    <span>
+      {{#if stats.datasets}}
+        {{rough-estimate stats.datasets}}
+      {{else}}
+        0
+      {{/if}}
+    </span>
+  </li>
+{{/if}}
+
+{{#if (eq statType "collection")}}
+  <li class="center-align" data-balloon="Sources" data-balloon-pos="down">
+    <img src="/assets/images/icons/icon-datasource-white@2x.png" class="data-icon">
+    <span>
+      {{#if stats.datasources}}
+        {{rough-estimate stats.datasources}}
+      {{else}}
+        0
+      {{/if}}
+    </span>
+  </li>
+{{/if}}
+
 <!-- Each of these can be a stats-list-item -->
 <li class="center-align" data-balloon="Views" data-balloon-pos="down">
   {{fa-icon "eye"}}
@@ -41,7 +67,7 @@
   </li>
 {{/if}}
 
-{{#if (eq statType "collection")}}
+{{#if (or (eq statType "collection") (eq statType "datasource"))}}
   <li data-balloon="Shares" data-balloon-pos="down">
     {{fa-icon "share-alt"}}
     <span>

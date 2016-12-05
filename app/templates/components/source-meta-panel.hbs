@@ -26,16 +26,7 @@
       <div class="divider"></div>
 
       <section class="stats-numbers">
-        {{stats-number-ring stat=collectionStats.datasets label="Datasets"}}
-        {{#if model.properties.access}}
-          {{stats-number-ring stat=model.properties.access}}
-        {{/if}}
-      </section>
-
-      <div class="divider"></div>
-
-      <section class="stats-numbers">
-        {{stats-list stats=collectionStats statType="collection"}}
+        {{stats-list stats=collectionStats statType="datasource"}}
       </section>
 
       {{#if model.description}}
