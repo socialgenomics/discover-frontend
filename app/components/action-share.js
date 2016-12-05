@@ -3,14 +3,22 @@ import Ember from 'ember';
 const { Component, get } = Ember;
 
 export default Component.extend({
-  tagName: 'a',
-  click: function() {
+  classNames: ['share-options-button'],
+  showShareOptionsModal: false,
+
+  click() {
     get(this, 'metrics').trackEvent({
       category: 'dataset',
       action: 'share',
       label: get(this, 'dataset.id'),
       value: true
     });
-    get(this, 'toggleModal')();
+    this.send('toggleShareOptionsModal');
+  },
+
+  actions: {
+    toggleShareOptionsModal() {
+      this.toggleProperty('showShareOptionsModal');
+    }
   }
 });
