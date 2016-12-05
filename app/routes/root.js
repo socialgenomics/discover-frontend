@@ -2,7 +2,7 @@ import Ember from 'ember';
 import ajax from 'ic-ajax';
 import ENV from 'repositive/config/environment';
 
-const { inject: { service }, computed, Route, RSVP, get, set, Logger } = Ember;
+const { inject: { service }, computed, Route, RSVP, get, set, Logger, setProperties } = Ember;
 
 export default Route.extend({
   session: service(),
@@ -72,7 +72,9 @@ export default Route.extend({
   },
 
   deactivateWeclomeMesssage: function() {
-    get(this, 'session').set('data.firstVisit', false);
-    set(this, 'session.data.isRootRoute', false);
+    setProperties(this, {
+      'session.data.firstVisit': false,
+      'session.data.isRootRoute': false
+    });
   }.on('deactivate')
 });

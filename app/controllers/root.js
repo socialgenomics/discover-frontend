@@ -1,18 +1,18 @@
 import Ember from 'ember';
 
-const { inject: { service }, get, set } = Ember;
+const { Controller, inject: { service }, get, set, computed } = Ember;
 
-export default Ember.Controller.extend({
-  session: Ember.inject.service(),
+export default Controller.extend({
+  session: service(),
   loading: false,
-  isRootRoute: Ember.computed.alias('session.data.isRootRoute'),
-  firstVisit: Ember.computed.alias('session.data.firstVisit'),
-  displayWelcomeMessage: Ember.computed.alias('session.data.displayWelcomeMessage'),
-  thirdPartySignup: Ember.computed.alias('session.data.thirdPartySignup'),
+  isRootRoute: computed.alias('session.data.isRootRoute'),
+  firstVisit: computed.alias('session.data.firstVisit'),
+  displayWelcomeMessage: computed.alias('session.data.displayWelcomeMessage'),
+  thirdPartySignup: computed.alias('session.data.thirdPartySignup'),
   sortUpdatedAt: ['updatedAt:desc'],
-  requestsSorted: Ember.computed.sort('model.requests', 'sortUpdatedAt'),
-  registrationsSorted: Ember.computed.sort('model.registered', 'sortUpdatedAt'),
-  datasetsNumber: Ember.computed('model.stats.datasets', function() {
+  requestsSorted: computed.sort('model.requests', 'sortUpdatedAt'),
+  registrationsSorted: computed.sort('model.registered', 'sortUpdatedAt'),
+  datasetsNumber: computed('model.stats.datasets', function() {
     const x = this.get('model.stats.datasets');
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   }),
