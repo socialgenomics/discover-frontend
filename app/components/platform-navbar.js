@@ -1,10 +1,10 @@
 import Ember from 'ember';
 
-const { inject: { service }, get } = Ember;
+const { Component, inject: { service }, get, computed } = Ember;
 
-export default Ember.Component.extend({
-  session: Ember.inject.service(),
-  isAuthenticated: Ember.computed.alias('session.isAuthenticated'),
+export default Component.extend({
+  session: service(),
+  isAuthenticated: computed.alias('session.isAuthenticated'),
   query: '',
 
   actions: {
