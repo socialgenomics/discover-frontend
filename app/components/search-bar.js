@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-const { Component, get, inject: { service } } = Ember;
+const { Component, get, set, inject: { service } } = Ember;
 
 export default Component.extend({
   search: service(),
@@ -8,6 +8,7 @@ export default Component.extend({
     search(query) {
       const searchSession = get(this, 'search');
       searchSession.updateQuery(query);
+      set(this, 'query', searchSession.getQueryString());
     }
   }
 });

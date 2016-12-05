@@ -8,12 +8,13 @@ export default Service.extend({
 
   queryString: null, //<String>
   queryTree: null, //<BTree>
+  queryParams: [],
   offset: 0,
   resultsPerPage: 9,
 
-  getQuery() { return get(this, 'queryString'); },
+  getQueryString() { return get(this, 'queryString'); },
 
-  resetQuery() { set(this, 'queryString', null); },
+  resetQueryString() { set(this, 'queryString', null); },
 
   /**
    * @desc Updates the query property and makes a request with this
