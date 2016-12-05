@@ -30,9 +30,9 @@ export default Service.extend({
   * @param {BTree} queryTree - Tree which the predicate will be appended to
   * @param {Object} predicate - Predicate to be appended to tree e.g. { assay: 'Chip-Seq' }
   * @returns {BTree} - New binary tree representation of the query
-  * @private
+  * @public
   */
-  _addPredicate(queryTree, predicate) {
+  addPredicate(queryTree, predicate) {
   },
 
   /**
@@ -40,9 +40,9 @@ export default Service.extend({
   * @param {BTree} queryTree - Tree which the predicate will be removed from
   * @param {Object} predicate - Predicate to be removed from the tree
   * @returns {BTree} - New binary tree representation of the query
-  * @private
+  * @public
   */
-  _removePredicate(queryTree, predicate) {
+  removePredicate(queryTree, predicate) {
   },
 
   /**
