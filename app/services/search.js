@@ -6,19 +6,27 @@ const { get, inject: { service }, Service, set, Logger } = Ember;
 export default Service.extend({
   ajax: service(),
 
-  query: null, //<string>
+  queryString: null, //<String>
+  queryTree: null, //<BTree>
+  offset: 0,
+  resultsPerPage: 9,
 
-  getQuery() { return get(this, 'query'); },
+  getQuery() { return get(this, 'queryString'); },
 
-  resetQuery() { set(this, 'query', null); },
+  resetQuery() { set(this, 'queryString', null); },
 
   /**
    * @desc Updates the query property and makes a request with this
-   * @param {string} query - New query string
+   * @param {string | object} query - New query string/tree
    * @public
    */
-  updateQuery(query) {
-    const queryTree = this._parseString(query);
+  updateQuery(queryStringOrTree) {
+    let queryTree;
+    if (queryStringOrTree instanceof String) {
+      queryTree = this._parseString(queryStringOrTree);
+    } else if (queryStringOrTree instanceof Object) {
+      queryTree = queryStringOrTree;
+    }
     this._setQuery(this._serializeToString(queryTree));
     this._makeRequest(queryTree)
       .then(this._handleQueryResponse.bind(this))
@@ -32,7 +40,12 @@ export default Service.extend({
   * @returns {BTree} - New binary tree representation of the query
   * @public
   */
-  addPredicate(queryTree, predicate) {
+  addPredicate(predicate) {
+    // Can get the query tree from the service (get(this, 'queryTree'));
+    // So we don't need to pass in query tree
+    const queryTree = (get(this, 'queryTree'));
+    //moduleMethod addPredicate(queryTree, predictate);
+    // this._updateQuery(addPredicate(queryTree, predictate));
   },
 
   /**
@@ -52,6 +65,11 @@ export default Service.extend({
   * @private
   */
   _parseString(queryString) {
+    return {
+      value: 'AND',
+      left: 'cancer',
+      right: 'lung'
+    };
   },
 
   /**
@@ -61,6 +79,7 @@ export default Service.extend({
   * @private
   */
   _serializeToString(queryTree) {
+    return 'cancer AND lung';
   },
 
   /**
@@ -68,7 +87,7 @@ export default Service.extend({
   * @param {string} queryString - string to be set as the service's query property
   * @private
   */
-  _setQuery(queryString) { set(this, 'query', queryString); },
+  _setQuery(queryString) { set(this, 'queryString', queryString); },
 
   /**
   * @desc Sets the query property to the string provided
@@ -80,11 +99,19 @@ export default Service.extend({
     return get(this, 'ajax').request(ENV.APIRoutes['datasets.search'], {
       method: 'POST',
       contentType: 'application/json',
-      data: queryTree
+      // data: queryTree
+      data: {
+        'index': 'datasets',
+        'type': 'dataset',
+        'from': get(this, 'offset'),
+        'size': get(this, 'resultsPerPage'),
+        'body': queryTree
+      }
     });
   },
 
   _handleQueryResponse(results) {
+    console.log(results);
     //load the datasets into the model
     //pagination?
   }
