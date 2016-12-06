@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import ENV from 'repositive/config/environment';
+import QP from 'npm:../../query-parser';
 
 const { get, inject: { service }, Service, set, Logger } = Ember;
 
@@ -23,9 +24,9 @@ export default Service.extend({
    */
   updateQuery(queryStringOrTree) {
     let queryTree;
-    if (queryStringOrTree instanceof String) {
+    if (typeof queryStringOrTree === 'string') {
       queryTree = this._parseString(queryStringOrTree);
-    } else if (queryStringOrTree instanceof Object) {
+    } else if (typeof queryStringOrTree === 'object') {
       queryTree = queryStringOrTree;
     }
     this._setQuery(this._serializeToString(queryTree));
@@ -66,11 +67,7 @@ export default Service.extend({
   * @private
   */
   _parseString(queryString) {
-    return {
-      value: 'AND',
-      left: 'cancer',
-      right: 'lung'
-    };
+    return QP.parseString(queryString);
   },
 
   /**
@@ -80,7 +77,7 @@ export default Service.extend({
   * @private
   */
   _serializeToString(queryTree) {
-    return 'cancer AND lung';
+    return QP.toBoolString(queryTree);
   },
 
   /**
