@@ -1,5 +1,5 @@
 {{#if (gt model.meta.total 0)}}
-  {{filters-list filters=model.aggs addFilter=(action 'addFilter') removeFilter=(action 'removeFilter')}}
+  <!-- {{filters-list filters=model.aggs addFilter=(action 'addFilter') removeFilter=(action 'removeFilter')}} -->
 {{/if}}
 <div class="content right">
   <div>
@@ -30,7 +30,7 @@
       {{partial 'loading'}}
     {{else}}
       {{search-results-list results=model.datasets totalResults=model.meta.total}}
-      {{#if (gt model.meta.total 0)}}
+      <!-- {{#if (gt model.meta.total 0)}}
         {{pagination-bar
           resultsPerPage=model.resultsPerPage
           totalResults=model.meta.total
@@ -38,7 +38,7 @@
           nextPage=(action 'nextPage')
           previousPage=(action 'previousPage')
         }}
-      {{/if}}
+      {{/if}} -->
     {{/if}}
   {{/if}}
 </div>

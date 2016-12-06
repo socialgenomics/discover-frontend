@@ -25,14 +25,6 @@ export default Route.extend(ApplicationRouteMixin, {
         queryParams: {
           query: query
         }
-        // queryParams: {
-        //   q: query,
-        //   ordering: null,
-        //   assay: null,
-        //   tags: null,
-        //   datasource: null,
-        //   access: null
-        // }
       });
     },
     toggleModal() {

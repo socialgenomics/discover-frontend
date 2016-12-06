@@ -6,10 +6,10 @@ const { get, inject: { service }, Service, set, Logger } = Ember;
 
 export default Service.extend({
   ajax: service(),
+  store: service(),
 
   queryString: null, //<String> This is the only queryParam
   queryTree: null, //<BTree>
-  queryParams: [],
   offset: 0,
   resultsPerPage: 9,
 
@@ -107,9 +107,8 @@ export default Service.extend({
   },
 
   _handleQueryResponse(results) {
-    console.log(results);
+    const store = get(this, 'store');
+    results.datasets.map(dataset => store.push(store.normalize('dataset', dataset)));
     return results;
-    //load the datasets into the model
-    //pagination?
   }
 });
