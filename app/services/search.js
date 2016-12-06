@@ -7,7 +7,7 @@ const { get, inject: { service }, Service, set, Logger } = Ember;
 export default Service.extend({
   ajax: service(),
 
-  queryString: null, //<String>
+  queryString: null, //<String> This is the only queryParam
   queryTree: null, //<BTree>
   queryParams: [],
   offset: 0,
@@ -30,7 +30,7 @@ export default Service.extend({
       queryTree = queryStringOrTree;
     }
     this._setQuery(this._serializeToString(queryTree));
-    this._makeRequest(queryTree)
+    return this._makeRequest(queryTree)
       .then(this._handleQueryResponse.bind(this))
       .catch(Logger.error);
   },
@@ -97,7 +97,6 @@ export default Service.extend({
     return get(this, 'ajax').request(ENV.APIRoutes['datasets.search'], {
       method: 'POST',
       contentType: 'application/json',
-      // data: queryTree
       data: JSON.stringify({
         'type': 'dataset',
         'offset': get(this, 'offset'),
@@ -109,6 +108,7 @@ export default Service.extend({
 
   _handleQueryResponse(results) {
     console.log(results);
+    return results;
     //load the datasets into the model
     //pagination?
   }

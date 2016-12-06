@@ -3,12 +3,12 @@ import Ember from 'ember';
 const { Component, get, set, inject: { service } } = Ember;
 
 export default Component.extend({
-  search: service(),
+  searchService: service('search'),
   actions: {
     search(query) {
-      const searchSession = get(this, 'search');
-      searchSession.updateQuery(query);
-      set(this, 'query', searchSession.getQueryString());
+      const searchService = get(this, 'searchService');
+      get(this, 'search')(query); //calls search on application route
+      set(this, 'query', searchService.getQueryString());
     }
   }
 });
