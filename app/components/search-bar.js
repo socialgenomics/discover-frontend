@@ -7,7 +7,7 @@ export default Component.extend({
   // I couldn't find a different way to get the latest query from
   // the service, into the search bar.
   setQuery: observer('searchService.queryString', function() {
-    set(this, 'query', get(this, 'searchService.queryString'));
+    set(this, 'query', get(this, 'searchService').getQueryString());
   }),
   init() {
     this._super(...arguments);
