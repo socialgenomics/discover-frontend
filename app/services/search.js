@@ -99,10 +99,9 @@ export default Service.extend({
       contentType: 'application/json',
       // data: queryTree
       data: JSON.stringify({
-        'index': 'datasets',
         'type': 'dataset',
-        'from': get(this, 'offset'),
-        'size': get(this, 'resultsPerPage'),
+        'offset': get(this, 'offset'),
+        'limit': get(this, 'resultsPerPage'),
         'body': queryTree
       })
     });
