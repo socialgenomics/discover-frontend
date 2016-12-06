@@ -98,13 +98,13 @@ export default Service.extend({
       method: 'POST',
       contentType: 'application/json',
       // data: queryTree
-      data: {
+      data: JSON.stringify({
         'index': 'datasets',
         'type': 'dataset',
         'from': get(this, 'offset'),
         'size': get(this, 'resultsPerPage'),
         'body': queryTree
-      }
+      })
     });
   },
 
