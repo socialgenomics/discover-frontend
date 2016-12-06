@@ -106,9 +106,9 @@ export default Service.extend({
     });
   },
 
-  _handleQueryResponse(results) {
+  _handleQueryResponse(resp) {
     const store = get(this, 'store');
-    results.datasets.map(dataset => store.push(store.normalize('dataset', dataset)));
-    return results;
+    resp.datasets.map(dataset => store.push(store.normalize('dataset', dataset)));
+    return resp;
   }
 });
