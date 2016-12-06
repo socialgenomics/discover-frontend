@@ -8,7 +8,7 @@ export default Component.extend({
     search(query) {
       const searchService = get(this, 'searchService');
       get(this, 'search')(query); //calls search on application route
-      set(this, 'query', searchService.getQueryString());
+      // set(this, 'query', searchService.getQueryString());
     }
   }
 });

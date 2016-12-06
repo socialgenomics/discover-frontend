@@ -6,9 +6,12 @@ const { get, inject: { service }, Route } = Ember;
 export default Route.extend(AuthenticatedRouteMixin, {
   session: service(),
   searchService: service('search'),
-
-  model: function(params) {
-    console.log(params);
+  queryParams: {
+    query: {
+      refreshModel: true
+    }
+  },
+  model(params) {
     const searchService = get(this, 'searchService');
     return searchService.updateQuery(params.query);
   }
