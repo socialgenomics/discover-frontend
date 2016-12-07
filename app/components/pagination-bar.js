@@ -6,25 +6,27 @@ export default Component.extend({
   searchService: service('search'),
 
   classNames: ['pagination-bar'],
-  // totalPages: computed('totalResults', 'resultsPerPage', function() {
-  //   const resultsPerPage = get(this, 'resultsPerPage');
-  //   const totalResults = get(this, 'totalResults');
-  //   return Math.ceil(totalResults / resultsPerPage);
-  // }),
-  // currentPageNumber: computed('currentOffset', 'resultsPerPage', function() {
-  //   const resultsPerPage = get(this, 'resultsPerPage');
-  //   const offset = get(this, 'currentOffset') || 0;
-  //   return Math.ceil(offset / resultsPerPage) + 1;
-  // }),
+
+  currentPageNumber: computed('searchService.offset', 'searchService.resultsPerPage', function() {
+    const offset = get(this, 'searchService.offset');
+    const resultsPerPage = get(this, 'searchService.resultsPerPage');
+    return Math.ceil(offset / resultsPerPage) || 0 + 1;
+  }),
+
+  totalPages: computed('totalResults', 'searchService.resultsPerPage', function() {
+    const resultsPerPage = get(this, 'searchService.resultsPerPage');
+    const totalResults = get(this, 'totalResults');
+    return Math.ceil(totalResults / resultsPerPage);
+  }),
 
   actions: {
     nextPage() {
       const searchService = get(this, 'searchService');
-      get(this, 'search')(searchService.getQueryString(), searchService.getPageNumberFromOffset() + 1);
+      get(this, 'search')(searchService.getQueryString(), get(this, 'currentPageNumber') + 1);
     },
     previousPage() {
       const searchService = get(this, 'searchService');
-      get(this, 'search')(searchService.getQueryString(), searchService.getPageNumberFromOffset() - 1);
+      get(this, 'search')(searchService.getQueryString(), get(this, 'currentPageNumber') - 1);
     }
   }
 });

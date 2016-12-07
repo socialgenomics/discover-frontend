@@ -19,7 +19,7 @@ export default Route.extend(ApplicationRouteMixin, {
       this.transitionTo('datasets.search', {
         queryParams: {
           query: query,
-          page: pageNumber
+          page: pageNumber || 1
         }
       });
       get(this, 'metrics').trackEvent({

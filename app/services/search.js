@@ -58,9 +58,6 @@ export default Service.extend({
   removePredicate(queryTree, predicate) {
   },
 
-  getPageNumberFromOffset() {
-    return Math.ceil(get(this, 'offset') / get(this, 'resultsPerPage')) || 0 + 1;
-  },
   _setOffsetFromPageNumber(pageNumber) {
     set(this, 'offset', pageNumber * get(this, 'resultsPerPage'));
   },

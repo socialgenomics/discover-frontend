@@ -16,6 +16,6 @@ export default Route.extend(AuthenticatedRouteMixin, {
   },
   model(params) {
     const searchService = get(this, 'searchService');
-    return searchService.updateQuery(params.query, params.page || 1);
+    return searchService.updateQuery(params.query, params.page);
   }
 });
