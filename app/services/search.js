@@ -19,8 +19,8 @@ export default Service.extend({
 
   /**
    * @desc Updates the query property and makes a request with this
-   * @param {string | object} query - New query string/tree
    * @public
+   * @param queryStringOrTree
    */
   updateQuery(queryStringOrTree) {
     let queryTree;
@@ -29,7 +29,8 @@ export default Service.extend({
     } else if (typeof queryStringOrTree === 'object') {
       queryTree = queryStringOrTree;
     }
-    this._setQuery(this._serializeToString(queryTree));
+    this._setQueryString(this._serializeToString(queryTree));
+    this._setQueryTree(queryTree);
     return this._makeRequest(queryTree)
       .then(this._handleQueryResponse.bind(this))
       .catch(Logger.error);
@@ -45,7 +46,7 @@ export default Service.extend({
     // Can get the query tree from the service (get(this, 'queryTree'));
     // So we don't need to pass in query tree
     const queryTree = (get(this, 'queryTree'));
-    this._updateQuery(QP.addFilter(queryTree, predicate, text));
+    this.updateQuery(QP.addFilter(queryTree, predicate, text));
   },
 
   /**
@@ -80,11 +81,18 @@ export default Service.extend({
   },
 
   /**
-  * @desc Sets the query property to the string provided
+  * @desc Sets the queryString property to the string provided
   * @param {string} queryString - string to be set as the service's query property
   * @private
   */
-  _setQuery(queryString) { set(this, 'queryString', queryString); },
+  _setQueryString(queryString) { set(this, 'queryString', queryString); },
+
+  /**
+   * @desc Sets the queryTree to the tree provided
+   * @param {BTree} queryTree
+   * @private
+   */
+  _setQueryTree(queryTree) { set(this, 'queryTree', queryTree); },
 
   /**
   * @desc Sets the query property to the string provided
