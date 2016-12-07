@@ -37,45 +37,44 @@ export default Service.extend({
 
   /**
   * @desc Adds a predicate to query tree if it's not already there. Returns new tree.
-  * @param {BTree} queryTree - Tree which the predicate will be appended to
-  * @param {Object} predicate - Predicate to be appended to tree e.g. { assay: 'Chip-Seq' }
-  * @returns {BTree} - New binary tree representation of the query
+  * @param {string} predicate - Predicate if filter to be added to tree e.g. 'assay'
+  * @param {string} text - The text of the filter to be added e.g. 'Chip-Seq'
   * @public
   */
-  addPredicate(predicate) {
+  addPredicate(predicate, text) {
     // Can get the query tree from the service (get(this, 'queryTree'));
     // So we don't need to pass in query tree
     const queryTree = (get(this, 'queryTree'));
-    //moduleMethod addPredicate(queryTree, predictate);
-    // this._updateQuery(addPredicate(queryTree, predictate));
+    this._updateQuery(QP.addFilter(queryTree, predicate, text));
   },
 
   /**
   * @desc Removes the predicate from the query tree if present. Returns new tree.
-  * @param {BTree} queryTree - Tree which the predicate will be removed from
-  * @param {Object} predicate - Predicate to be removed from the tree
-  * @returns {BTree} - New binary tree representation of the query
+  * @param {string} predicate - Predicate/Type of filter to be removed from the tree
+  * @param {string} text - Specific text of filter to be removed
   * @public
   */
-  removePredicate(queryTree, predicate) {
+  removePredicate(predicate, text) {
+    const queryTree = (get(this, 'queryTree'));
+    this._updateQuery(QP.removeFilter(queryTree, predicate, text));
   },
 
   /**
-  * @desc Converts query String to BTree.
-  * @param {string} query - query to be parsed
-  * @returns {BTree} - New binary tree representation of the query
-  * @private
-  */
+   * @desc Converts query String to BTree.
+   * @returns {BTree} - New binary tree representation of the query
+   * @private
+   * @param {string} queryString - Query to be parsed.
+   */
   _parseString(queryString) {
     return QP.parseString(queryString);
   },
 
   /**
-  * @desc Converts query BTree to String.
-  * @param {BTree} query - query to be serialized into string
-  * @returns {string} - New string representation of the query
-  * @private
-  */
+   * @desc Converts query BTree to String.
+   * @returns {string} - New string representation of the query
+   * @private
+   * @param {BTree} queryTree - Tree to be serialized.
+   */
   _serializeToString(queryTree) {
     return QP.toBoolString(queryTree);
   },
