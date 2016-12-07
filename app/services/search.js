@@ -57,7 +57,7 @@ export default Service.extend({
   */
   removePredicate(predicate, text) {
     const queryTree = (get(this, 'queryTree'));
-    this._updateQuery(QP.removeFilter(queryTree, predicate, text));
+    this.updateQuery(QP.removeFilter(queryTree, predicate, text));
   },
 
   /**
