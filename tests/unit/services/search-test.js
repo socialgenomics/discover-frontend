@@ -28,11 +28,11 @@ describeModule(
       let service = this.subject();
       // Add a query
       service.updateQuery('cancer AND breast');
-      let string = service.getQueryString();
-      expect(string).to.eql('(cancer AND breast)');
+      const original = service.getQueryString();
+      expect(original).to.eql('(cancer AND breast)');
       service.addPredicate('assay', 'RNA-Seq');
-      string = service.getQueryString();
-      expect(string).to.eql('(assay:RNA-Seq AND (cancer AND breast))');
+      const newString = service.getQueryString();
+      expect(newString).to.eql('(assay:RNA-Seq AND (cancer AND breast))');
     });
   }
 );
