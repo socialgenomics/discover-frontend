@@ -15,16 +15,17 @@ export default Route.extend(ApplicationRouteMixin, {
     get(this, 'favouritesService').loadFavourites();
   },
   actions: {
-    search(query) {
+    search(query, pageNumber) {
+      this.transitionTo('datasets.search', {
+        queryParams: {
+          query: query,
+          page: pageNumber
+        }
+      });
       get(this, 'metrics').trackEvent({
         category: 'search',
         action: 'query',
         label: query
-      });
-      this.transitionTo('datasets.search', {
-        queryParams: {
-          query: query
-        }
       });
     },
     toggleModal() {

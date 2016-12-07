@@ -15,14 +15,12 @@ export default Service.extend({
 
   getQueryString() { return get(this, 'queryString'); },
 
-  resetQueryString() { set(this, 'queryString', null); },
-
   /**
    * @desc Updates the query property and makes a request with this
    * @param {string | object} query - New query string/tree
    * @public
    */
-  updateQuery(queryStringOrTree) {
+  updateQuery(queryStringOrTree, pageNumber) {
     let queryTree;
     if (typeof queryStringOrTree === 'string') {
       queryTree = this._parseString(queryStringOrTree);
@@ -30,6 +28,7 @@ export default Service.extend({
       queryTree = queryStringOrTree;
     }
     this._setQuery(this._serializeToString(queryTree));
+    this._setOffsetFromPageNumber(pageNumber);
     return this._makeRequest(queryTree)
       .then(this._handleQueryResponse.bind(this))
       .catch(Logger.error);
@@ -46,8 +45,7 @@ export default Service.extend({
     // Can get the query tree from the service (get(this, 'queryTree'));
     // So we don't need to pass in query tree
     const queryTree = (get(this, 'queryTree'));
-    //moduleMethod addPredicate(queryTree, predictate);
-    // this._updateQuery(addPredicate(queryTree, predictate));
+    // this.updateQuery(QP.addPredicate(queryTree, predictate));
   },
 
   /**
@@ -58,6 +56,13 @@ export default Service.extend({
   * @public
   */
   removePredicate(queryTree, predicate) {
+  },
+
+  getPageNumberFromOffset() {
+    return Math.ceil(get(this, 'offset') / get(this, 'resultsPerPage')) || 0 + 1;
+  },
+  _setOffsetFromPageNumber(pageNumber) {
+    set(this, 'offset', pageNumber * get(this, 'resultsPerPage'));
   },
 
   /**
