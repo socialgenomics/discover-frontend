@@ -6,6 +6,12 @@ const { Route, inject: { service }, get } = Ember;
 export default Route.extend(ApplicationRouteMixin, {
   favouritesService: service('favourites'),
   session: service(),
+  urlGenerator: service(),
+
+  init() {
+    get(this, 'urlGenerator').initialize(this.router);
+  },
+
   sessionAuthenticated() {
     this._super(...arguments);
     get(this, 'favouritesService').loadFavourites();
