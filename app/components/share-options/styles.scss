@@ -1,0 +1,62 @@
+$spacing: 10px;
+$icon-area-width: 80px;
+$border-size: 1px;
+
+.share-options-icons {
+  margin-top: $spacing;
+  margin-bottom: $spacing;
+
+  .fa {
+    cursor: pointer;
+    text-align: center;
+    width: $icon-area-width;
+
+    &:not(:first-child) {
+      border-left: $border-size solid $color-alto;
+    }
+  }
+}
+
+.share-url-section {
+  display: flex;
+  margin-left: $spacing;
+
+  button {
+    background: transparent;
+    border: none;
+    color: $color-pelorous;
+    padding: {
+      left: 0;
+      right: 0;
+    };
+    text-align: center;
+    text-transform: uppercase;
+    width: $icon-area-width;
+
+    &.copy-failed {
+      color: $color-sunglo;
+    }
+
+    .fa {
+      padding: 0;
+    }
+  }
+}
+
+.url-box {
+  border: $border-size solid $color-alto;
+  flex: 1;
+  overflow: hidden;
+  padding: $border-size * 2;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 0;
+}
+
+.copy-failed-tooltip {
+  color: $color-boulder;
+  text-align: center;
+  font-size: 0.75rem;
+  padding-bottom: $spacing;
+}
+
