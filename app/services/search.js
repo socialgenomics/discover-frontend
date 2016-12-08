@@ -132,7 +132,7 @@ export default Service.extend({
         });
         filters.push({
           name: filter,
-          displayName: filter.charAt(0).toUpperCase() + filter.slice(1),
+          displayName: filter.capitalize(),
           buckets: buckets
         });
       }
