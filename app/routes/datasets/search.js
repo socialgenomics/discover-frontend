@@ -1,18 +1,14 @@
 import Ember from 'ember';
 import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
-
+import SearchRouteMixin from '../../mixins/search-route';
 const { get, inject: { service }, Route } = Ember;
 
-export default Route.extend(AuthenticatedRouteMixin, {
+export default Route.extend(AuthenticatedRouteMixin, SearchRouteMixin, {
   session: service(),
   searchService: service('search'),
-  queryParams: {
-    query: {
-      refreshModel: true
-    }
-  },
+
   model(params) {
     const searchService = get(this, 'searchService');
-    return searchService.updateQuery(params.query);
+    return searchService.updateQuery(params.query, params.page);
   }
 });

@@ -3,6 +3,7 @@ import Ember from 'ember';
 const { Mixin } = Ember;
 
 export default Mixin.create({
-  queryParams: ['query'],
-  query: null
+  queryParams: ['query, page'],
+  query: null,
+  page: 1
 });

@@ -2,22 +2,6 @@
   <!-- {{filters-list filters=model.aggs addFilter=(action 'addFilter') removeFilter=(action 'removeFilter')}} -->
 {{/if}}
 <div class="content right">
-  <!-- <div>
-    <h5 class="unfocus-grey-text">Your Query:</h5>
-    <p class="your-query">
-      <span class="filter first">
-          <em class="highlight">
-            {{#if model.query}}"{{model.query}}"{{else}}"All Data"{{/if}}
-          </em>
-      </span>
-      {{#each model.filters as |filter|}}
-        {{#if filter.value}}
-        <span class="filter" {{action "removeFilter" filter.name}}>{{ filter.displayName }} : {{filter.value}}<span class="remove">x</span></span>
-        {{/if}}
-      {{/each}}
-    </p>
-    <div class="divider"></div>
-  </div> -->
   {{#if model.isError}}
     {{render 'datasets/search-error'}}
   {{else}}
@@ -30,15 +14,9 @@
       {{partial 'loading'}}
     {{else}}
       {{search-results-list results=model.datasets totalResults=model.meta.total}}
-      <!-- {{#if (gt model.meta.total 0)}}
-        {{pagination-bar
-          resultsPerPage=model.resultsPerPage
-          totalResults=model.meta.total
-          currentOffset=model.offset
-          nextPage=(action 'nextPage')
-          previousPage=(action 'previousPage')
-        }}
-      {{/if}} -->
+      {{#if (gt model.meta.total 0)}}
+        {{pagination-bar totalResults=model.meta.total search=(route-action 'search')}}
+      {{/if}}
     {{/if}}
   {{/if}}
 </div>

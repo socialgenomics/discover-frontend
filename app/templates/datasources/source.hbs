@@ -1,16 +1,7 @@
 {{source-meta-panel collectionStats=model.collectionStats model=model.collection type=model.collection.type datasets=model.datasets}}
-
 <div class="content push-right">
-
   {{#unless isLoading}}
-    <div class="row">
-      <div class="col m12">
-        {{#each model.datasets as |dataset|}}
-          {{dataset-card dataset=dataset}}
-        {{/each}}
-      </div>
-    </div>
-
+    {{search-results-list results=model.datasets}}
     {{#if (gt model.collectionStats.datasets 0)}}
       <div class="pagination-container">
         {{pagination-bar

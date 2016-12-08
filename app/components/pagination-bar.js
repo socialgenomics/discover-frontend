@@ -1,24 +1,32 @@
 import Ember from 'ember';
 
-export default Ember.Component.extend({
+const { Component, computed, get, inject: { service } } = Ember;
+
+export default Component.extend({
+  searchService: service('search'),
+
   classNames: ['pagination-bar'],
-  totalPages: Ember.computed('totalResults', 'resultsPerPage', function() {
-    const resultsPerPage = this.get('resultsPerPage');
-    const totalResults = this.get('totalResults');
-    return Math.ceil(totalResults / resultsPerPage);
+
+  currentPageNumber: computed('searchService.offset', 'searchService.resultsPerPage', function() {
+    const offset = get(this, 'searchService.offset');
+    const resultsPerPage = get(this, 'searchService.resultsPerPage');
+    return Math.ceil(offset / resultsPerPage) || 0 + 1;
   }),
-  currentPageNumber: Ember.computed('currentOffset', 'resultsPerPage', function() {
-    const resultsPerPage = this.get('resultsPerPage');
-    const offset = this.get('currentOffset') || 0;
-    return Math.ceil(offset / resultsPerPage) + 1;
+
+  totalPages: computed('totalResults', 'searchService.resultsPerPage', function() {
+    const resultsPerPage = get(this, 'searchService.resultsPerPage');
+    const totalResults = get(this, 'totalResults');
+    return Math.ceil(totalResults / resultsPerPage);
   }),
 
   actions: {
     nextPage() {
-      this.nextPage();
+      const searchService = get(this, 'searchService');
+      get(this, 'search')(searchService.getQueryString(), get(this, 'currentPageNumber') + 1);
     },
     previousPage() {
-      this.previousPage();
+      const searchService = get(this, 'searchService');
+      get(this, 'search')(searchService.getQueryString(), get(this, 'currentPageNumber') - 1);
     }
   }
 });
