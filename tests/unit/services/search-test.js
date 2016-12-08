@@ -26,23 +26,23 @@ describeModule(
       // Add a query
       service.updateQuery('cancer AND breast');
       const original = service.getQueryString();
-      expect(original).to.eql('(cancer AND breast)');
+      expect(original).to.eql('cancer breast');
       service.addPredicate('assay', 'RNA-Seq');
       const newString = service.getQueryString();
-      expect(newString).to.eql('(assay:RNA-Seq AND (cancer AND breast))');
+      expect(newString).to.eql('assay:RNA-Seq cancer breast');
     });
 
     it('removes filters', function () {
       let service = this.subject();
       // Add a query
-      const original = '(assay:RNA-Seq AND (cancer AND breast))';
+      const original = 'assay:RNA-Seq cancer breast';
       service.updateQuery(original);
       service.removePredicate('assay', 'TEST');
       expect(service.getQueryString()).to.eql(original);
       service.removePredicate('assay', 'RNA-Seq');
       const removed = service.getQueryString();
       expect(removed).to.not.eql(original);
-      expect(removed).to.eql('(cancer AND breast)');
+      expect(removed).to.eql('cancer breast');
     });
   }
 );
