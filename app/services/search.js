@@ -9,8 +9,8 @@ export default Service.extend({
   ajax: service(),
   store: service(),
 
-  queryString: null, //<String> This is the only queryParam
-  queryTree: null, //<BTree>
+  queryString: null,
+  queryTree: null,
   offset: 0,
   resultsPerPage: 9,
 
@@ -116,6 +116,19 @@ export default Service.extend({
   },
 
   /**
+   * @desc Process the query response from the backend
+   * @param {Object} resp - Response from API
+   * @returns {Object} - A transformed response w/ working filter buckets.
+   * @private
+   */
+  _handleQueryResponse(resp) {
+    const store = get(this, 'store');
+    resp.datasets.map(dataset => store.push(store.normalize('dataset', dataset)));
+    resp.aggs = this._normalizeFilters(resp.aggs);
+    return resp;
+  },
+
+  /**
    * @desc This function transforms the aggregations/filters into a more ember friendly format
    * @param {Object} aggs - The aggs found in the search response
    * @returns {Array} - The transformed filters
@@ -138,18 +151,5 @@ export default Service.extend({
       }
     }
     return filters;
-  },
-
-  /**
-   * @desc Process the query response from the backend
-   * @param {Object} resp - Response from API
-   * @returns {Object} - A transformed response w/ working filter buckets.
-   * @private
-   */
-  _handleQueryResponse(resp) {
-    const store = get(this, 'store');
-    resp.datasets.map(dataset => store.push(store.normalize('dataset', dataset)));
-    resp.aggs = this._normalizeFilters(resp.aggs);
-    return resp;
   }
 });
