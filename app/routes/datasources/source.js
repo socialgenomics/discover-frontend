@@ -27,12 +27,6 @@ export function model(params) {
       return data;
     }).catch(Logger.error);
 }
-// Calls the resetController method on the controller provided when the current route name changes.
-export function resetControllerOnRouteChange(targetName, currentRouteName, controller) {
-  if (targetName !== currentRouteName) {
-    controller.resetController();
-  }
-}
 
 export default Route.extend(AuthenticatedRouteMixin, ResetScrollMixin, ActionableMixin, {
   session: service(),
@@ -42,11 +36,13 @@ export default Route.extend(AuthenticatedRouteMixin, ResetScrollMixin, Actionabl
   afterModel(model) {
     this._incrementViewCounter(model.collection, get(this, 'session.authenticatedUser'));
   },
-
+  resetController(controller, isExiting) {
+    if (isExiting) {
+      set(controller, 'page', 1);
+    }
+  },
   actions: {
-    willTransition(transition) {
-      resetControllerOnRouteChange(transition.targetName, this.routeName, this.controller);
-    },
+
     invalidateModel: function() {
       this.controller.set('isLoading', true);
       this.refresh().promise.then(() => this.controller.set('isLoading', false));
