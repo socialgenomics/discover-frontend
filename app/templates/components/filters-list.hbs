@@ -1,6 +1,5 @@
 <h4 class="unfocus-grey-text">Filters</h4>
 {{#each filters as |filter|}}
-  {{#if filter.show}}
     <div class="section">
       {{#if (eq filter.displayName "Datasource")}}
         <h4>Data Source</h4>
@@ -11,11 +10,8 @@
         {{filter-list-item
           bucket=bucket
           aggName=filter.name
-          addFilter=(action addFilter)
-          removeFilter=(action removeFilter)
         }}
       {{/each}}
       <div class="divider"></div>
     </div>
-  {{/if}}
 {{/each}}

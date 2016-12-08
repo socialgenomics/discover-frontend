@@ -6,3 +6,4 @@
 {{else}}
   <span {{action "addFilter" aggName bucket.key}} class='filter-text' style="cursor:pointer;">{{bucket.key}} ({{bucket.doc_count}})</span>
 {{/if}}
+<span {{action "removeFilter" aggName bucket.key}} class='filter-text selected' style="cursor:pointer;">X</span>
