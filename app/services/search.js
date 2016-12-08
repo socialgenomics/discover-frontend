@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import ENV from 'repositive/config/environment';
 import QP from 'npm:../../query-parser';
+import colours from 'repositive/utils/colours';
 
 const { get, inject: { service }, Service, set, Logger } = Ember;
 
@@ -113,9 +114,41 @@ export default Service.extend({
     });
   },
 
+  /**
+   * @desc This function transforms the aggregations/filters into a more ember friendly format
+   * @param {Object} aggs - The aggs found in the search response
+   * @returns {Array} - The transformed filters
+   * @private
+   */
+  _normalizeFilters(aggs) {
+    let filters = [];
+    for (let filter in aggs) {
+      if (aggs.hasOwnProperty(filter)) {
+        let buckets = aggs[filter].buckets;
+        buckets.forEach(b => {
+          b.colour = colours.getColour(b.key);
+          return b;
+        });
+        filters.push({
+          name: filter,
+          displayName: filter.charAt(0).toUpperCase() + filter.slice(1),
+          buckets: buckets
+        });
+      }
+    }
+    return filters
+  },
+
+  /**
+   * @desc Process the query response from the backend
+   * @param {Object} resp - Response from API
+   * @returns {Object} - A transformed response w/ working filter buckets.
+   * @private
+   */
   _handleQueryResponse(resp) {
     const store = get(this, 'store');
     resp.datasets.map(dataset => store.push(store.normalize('dataset', dataset)));
+    resp.aggs = this._normalizeFilters(resp.aggs);
     return resp;
   }
 });
