@@ -6,18 +6,16 @@ export default Service.extend({
   router: null,
 
   /**
-   * @desc
-   * @param {Object} router
+   * @param {Object} router - Ember router object
    */
   initialize(router) {
     set(this, 'router', router);
   },
 
   /**
-   * @desc
-   * @param {String} route
-   * @param {Number} id
-   * @returns {String}
+   * @param {String} route - route name (same as used for link-to helper)
+   * @param {Number} id - model id
+   * @returns {String} - absolute URL
    */
   generateUrl(route, id) {
     const router = get(this, 'router');
