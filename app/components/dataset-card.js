@@ -1,7 +1,17 @@
 import Ember from 'ember';
 import colours from '../utils/colours';
 
-export default Ember.Component.extend({
+const { Component, computed, inject: { service }, get } = Ember;
+
+export default Component.extend({
+  urlGenerator: service(),
+
+  shareUrl: computed('type', 'dataset.id', function () {
+    const route = get(this, 'type') === 'request' ? 'requests.detail' : 'datasets.detail';
+
+    return get(this, 'urlGenerator').generateUrl(route, get(this, 'dataset.id'));
+  }),
+
   didReceiveAttrs() {
     this._super(...arguments);
     this.setAssayColourForDataset();
