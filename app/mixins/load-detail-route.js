@@ -1,13 +1,14 @@
 import Ember from 'ember';
-import ajax from 'ic-ajax';
 import ENV from 'repositive/config/environment';
 import ActionableMixin from 'repositive/mixins/actionable';
 
-const { Mixin, get, RSVP } = Ember;
+const { Mixin, get, RSVP, inject: { service } } = Ember;
 
 export default Mixin.create(ActionableMixin, {
+  ajax: service(),
+
   _getStats() {
-    return ajax({ url: ENV.APIRoutes['stats'] , type: 'GET' });
+    return get(this, 'ajax').request(ENV.APIRoutes['stats'], { method: 'GET' });
   },
   _getModelData(params, modelType) {
     const modelId = params.id;

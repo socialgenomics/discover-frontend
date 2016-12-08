@@ -8,7 +8,7 @@ const { get, Route , inject: { service } } = Ember;
 
 export default Route.extend(AuthenticatedRouteMixin, ResetScrollMixin, ActionableMixin, {
   session: service(),
-
+  ajax: service(),
   controllerName: 'collection',
   model: model,
   afterModel(model) {

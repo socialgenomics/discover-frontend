@@ -1,1 +1,13 @@
 {{fa-icon "share-alt"}}
+{{#if showShareOptionsModal}}
+  {{#tether-dialog
+    close=(action 'toggleShareOptionsModal')
+    target='.share-options-button'
+    targetAttachment='bottom left'
+    attachment='top left'
+    translucentOverlay=false
+    container-class='share-options-modal'
+  }}
+    {{share-options}}
+  {{/tether-dialog}}
+{{/if}}
