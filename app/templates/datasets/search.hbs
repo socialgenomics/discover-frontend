@@ -14,15 +14,9 @@
       {{partial 'loading'}}
     {{else}}
       {{search-results-list results=model.datasets totalResults=model.meta.total}}
-      <!-- {{#if (gt model.meta.total 0)}}
-        {{pagination-bar
-          resultsPerPage=model.resultsPerPage
-          totalResults=model.meta.total
-          currentOffset=model.offset
-          nextPage=(action 'nextPage')
-          previousPage=(action 'previousPage')
-        }}
-      {{/if}} -->
+      {{#if (gt model.meta.total 0)}}
+        {{pagination-bar totalResults=model.meta.total search=(route-action 'search')}}
+      {{/if}}
     {{/if}}
   {{/if}}
 </div>

@@ -16,14 +16,12 @@ export default Service.extend({
 
   getQueryString() { return get(this, 'queryString'); },
 
-  resetQueryString() { set(this, 'queryString', null); },
-
   /**
    * @desc Updates the query property and makes a request with this
    * @public
    * @param queryStringOrTree
    */
-  updateQuery(queryStringOrTree) {
+  updateQuery(queryStringOrTree, pageNumber) {
     let queryTree;
     if (typeof queryStringOrTree === 'string') {
       queryTree = this._parseString(queryStringOrTree);
@@ -32,6 +30,7 @@ export default Service.extend({
     }
     this._setQueryString(this._serializeToString(queryTree));
     this._setQueryTree(queryTree);
+    this._setOffsetFromPageNumber(pageNumber);
     return this._makeRequest(queryTree)
       .then(this._handleQueryResponse.bind(this))
       .catch(Logger.error);
@@ -44,8 +43,6 @@ export default Service.extend({
   * @public
   */
   addPredicate(predicate, text) {
-    // Can get the query tree from the service (get(this, 'queryTree'));
-    // So we don't need to pass in query tree
     const queryTree = (get(this, 'queryTree'));
     this.updateQuery(QP.addFilter(queryTree, predicate, text));
   },
@@ -59,6 +56,10 @@ export default Service.extend({
   removePredicate(predicate, text) {
     const queryTree = (get(this, 'queryTree'));
     this.updateQuery(QP.removeFilter(queryTree, predicate, text));
+  },
+
+  _setOffsetFromPageNumber(pageNumber) {
+    set(this, 'offset', pageNumber * get(this, 'resultsPerPage'));
   },
 
   /**
@@ -121,10 +122,10 @@ export default Service.extend({
    * @private
    */
   _normalizeFilters(aggs) {
-    let filters = [];
-    for (let filter in aggs) {
+    const filters = [];
+    for (const filter in aggs) {
       if (aggs.hasOwnProperty(filter)) {
-        let buckets = aggs[filter].buckets;
+        const buckets = aggs[filter].buckets;
         buckets.forEach(b => {
           b.colour = colours.getColour(b.key);
           return b;
@@ -136,7 +137,7 @@ export default Service.extend({
         });
       }
     }
-    return filters
+    return filters;
   },
 
   /**
