@@ -1,8 +1,13 @@
 import Ember from 'ember';
 
-export default Ember.Component.extend({
+const { Component } = Ember;
+
+export default Component.extend({
   classNames: ['share-options-button'],
   showShareOptionsModal: false,
+
+  // modal constraints prevents share options modal from bleeding out of the edge of browser window
+  shareOptionsModalConstraints: [{ to: 'window', pin: true }],
 
   click: function() {
     this.get('metrics').trackEvent({
