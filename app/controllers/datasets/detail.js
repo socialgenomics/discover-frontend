@@ -1,9 +1,10 @@
 import Ember from 'ember';
 
-const { Controller, computed, inject: { service }, Logger } = Ember;
+const { Controller, computed, inject: { service }, Logger, get } = Ember;
 
 export default Controller.extend({
   session: service(),
+  urlGenerator: service(),
 
   dataset: computed.alias('model.dataset'),
   stats: computed.alias('model.stats'),
@@ -21,6 +22,10 @@ export default Controller.extend({
 
   datasetsNumber: computed('stats.datasets', function() {
     return this.get('stats.datasets').toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  }),
+
+  datasetUrl: computed('type', 'dataset.id', function () {
+    return get(this, 'urlGenerator').generateUrl('datasets.detail', get(this, 'dataset.id'));
   }),
 
   actions: {
