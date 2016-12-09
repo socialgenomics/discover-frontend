@@ -16,10 +16,49 @@ export default Service.extend({
 
   getQueryString() { return get(this, 'queryString'); },
 
+
+  /**
+  * @desc Adds a predicate to query tree if it's not already there.
+  * @param {string} predicate - Predicate if filter to be added to tree e.g. 'assay'
+  * @param {string} text - The text of the filter to be added e.g. 'Chip-Seq'
+  * @returns {string} - The new queryString
+  * @public
+  */
+  addPredicate(predicate, text) {
+    const queryTree = (get(this, 'queryTree'));
+    return this._serializeToString(QP.addFilter(queryTree, predicate, text));
+  },
+
+  /**
+  * @desc Removes the predicate from the query tree if present
+  * @param {string} predicate - Predicate/Type of filter to be removed from the tree
+  * @param {string} text - Specific text of filter to be removed
+  * @returns {string} - The new queryString
+  * @public
+  */
+  removePredicate(predicate, text) {
+    const queryTree = (get(this, 'queryTree'));
+    return this._serializeToString(QP.removeFilter(queryTree, predicate, text));
+  },
+
   /**
    * @desc Updates the query property and makes a request with this
+   * @param {string|Object} queryStringOrTree - The new query value
+   * @param {number} pageNumber - The number of the page to fetch
    * @public
-   * @param queryStringOrTree
+   */
+  updateQueryAndMakeRequest(queryStringOrTree, pageNumber) {
+    return this._makeRequest(this._updateQuery(queryStringOrTree, pageNumber))
+      .then(this._handleQueryResponse.bind(this))
+      .catch(Logger.error);
+  },
+
+  /**
+   * @desc Updates the queryString and queryTree
+   * @param {string|Object} queryStringOrTree - The new query value
+   * @param {number} pageNumber - The number of the page to fetch
+   * @returns {Object} - the new queryTree
+   * @private
    */
   _updateQuery(queryStringOrTree, pageNumber) {
     let queryTree;
@@ -34,43 +73,30 @@ export default Service.extend({
     return queryTree;
   },
 
-  updateQueryAndMakeRequest(queryStringOrTree, pageNumber) {
-    return this._makeRequest(this._updateQuery(queryStringOrTree, pageNumber))
-      .then(this._handleQueryResponse.bind(this))
-      .catch(Logger.error);
-  },
-
   /**
-  * @desc Adds a predicate to query tree if it's not already there. Returns new tree.
-  * @param {string} predicate - Predicate if filter to be added to tree e.g. 'assay'
-  * @param {string} text - The text of the filter to be added e.g. 'Chip-Seq'
-  * @public
+  * @desc Makes an ajax request using the queryTree, offset and resultsPerPage
+  * @param {BTree} queryTree - query tree sent with POST request
+  * @returns {Promise} - The promised data
+  * @private
   */
-  addPredicate(predicate, text) {
-    const queryTree = (get(this, 'queryTree'));
-    return this._serializeToString(QP.addFilter(queryTree, predicate, text));
-  },
-
-  /**
-  * @desc Removes the predicate from the query tree if present. Returns new tree.
-  * @param {string} predicate - Predicate/Type of filter to be removed from the tree
-  * @param {string} text - Specific text of filter to be removed
-  * @public
-  */
-  removePredicate(predicate, text) {
-    const queryTree = (get(this, 'queryTree'));
-    return this._serializeToString(QP.removeFilter(queryTree, predicate, text));
-  },
-
-  _setOffsetFromPageNumber(pageNumber) {
-    set(this, 'offset', pageNumber * get(this, 'resultsPerPage'));
+  _makeRequest(queryTree) {
+    return get(this, 'ajax').request(ENV.APIRoutes['datasets.search'], {
+      method: 'POST',
+      contentType: 'application/json',
+      data: JSON.stringify({
+        'type': 'dataset',
+        'offset': get(this, 'offset'),
+        'limit': get(this, 'resultsPerPage'),
+        'body': queryTree
+      })
+    });
   },
 
   /**
    * @desc Converts query String to BTree.
+   * @param {string} queryString - Query to be parsed.
    * @returns {BTree} - New binary tree representation of the query
    * @private
-   * @param {string} queryString - Query to be parsed.
    */
   _parseString(queryString) {
     return QP.parseString(queryString);
@@ -78,9 +104,9 @@ export default Service.extend({
 
   /**
    * @desc Converts query BTree to String.
+   * @param {BTree} queryTree - Tree to be serialized.
    * @returns {string} - New string representation of the query
    * @private
-   * @param {BTree} queryTree - Tree to be serialized.
    */
   _serializeToString(queryTree) {
     return QP.toBoolString(queryTree);
@@ -101,22 +127,12 @@ export default Service.extend({
   _setQueryTree(queryTree) { set(this, 'queryTree', queryTree); },
 
   /**
-  * @desc Sets the query property to the string provided
-  * @param {BTree} queryTree - query tree sent with POST request
-  * @returns {Promise} - The promised data
-  * @private
-  */
-  _makeRequest(queryTree) {
-    return get(this, 'ajax').request(ENV.APIRoutes['datasets.search'], {
-      method: 'POST',
-      contentType: 'application/json',
-      data: JSON.stringify({
-        'type': 'dataset',
-        'offset': get(this, 'offset'),
-        'limit': get(this, 'resultsPerPage'),
-        'body': queryTree
-      })
-    });
+   * @desc Sets the service's offset value from a passed in page number
+   * @param {number} pageNumber - Page number to convert to offset value
+   * @private
+   */
+  _setOffsetFromPageNumber(pageNumber) {
+    set(this, 'offset', pageNumber * get(this, 'resultsPerPage'));
   },
 
   /**
