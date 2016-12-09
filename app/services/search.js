@@ -16,7 +16,6 @@ export default Service.extend({
 
   getQueryString() { return get(this, 'queryString'); },
 
-
   /**
   * @desc Adds a predicate to query tree if it's not already there.
   * @param {string} predicate - Predicate if filter to be added to tree e.g. 'assay'
