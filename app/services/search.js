@@ -21,7 +21,7 @@ export default Service.extend({
    * @public
    * @param queryStringOrTree
    */
-  updateQuery(queryStringOrTree, pageNumber) {
+  _updateQuery(queryStringOrTree, pageNumber) {
     let queryTree;
     if (typeof queryStringOrTree === 'string') {
       queryTree = this._parseString(queryStringOrTree);
@@ -31,7 +31,11 @@ export default Service.extend({
     this._setQueryString(this._serializeToString(queryTree));
     this._setQueryTree(queryTree);
     this._setOffsetFromPageNumber(pageNumber);
-    return this._makeRequest(queryTree)
+    return queryTree;
+  },
+
+  updateQueryAndMakeRequest(queryStringOrTree, pageNumber) {
+    return this._makeRequest(this._updateQuery(queryStringOrTree, pageNumber))
       .then(this._handleQueryResponse.bind(this))
       .catch(Logger.error);
   },
@@ -44,7 +48,7 @@ export default Service.extend({
   */
   addPredicate(predicate, text) {
     const queryTree = (get(this, 'queryTree'));
-    this.updateQuery(QP.addFilter(queryTree, predicate, text));
+    return this._serializeToString(QP.addFilter(queryTree, predicate, text));
   },
 
   /**
@@ -55,7 +59,7 @@ export default Service.extend({
   */
   removePredicate(predicate, text) {
     const queryTree = (get(this, 'queryTree'));
-    this.updateQuery(QP.removeFilter(queryTree, predicate, text));
+    return this._serializeToString(QP.removeFilter(queryTree, predicate, text));
   },
 
   _setOffsetFromPageNumber(pageNumber) {

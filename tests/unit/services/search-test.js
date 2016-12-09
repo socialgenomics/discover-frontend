@@ -24,7 +24,7 @@ describeModule(
     it('Adds filters', function () {
       let service = this.subject();
       // Add a query
-      service.updateQuery('cancer AND breast');
+      service.updateQueryAndMakeRequest('cancer AND breast');
       const original = service.getQueryString();
       expect(original).to.eql('cancer breast');
       service.addPredicate('assay', 'RNA-Seq');
@@ -36,7 +36,7 @@ describeModule(
       let service = this.subject();
       // Add a query
       const original = 'assay:RNA-Seq cancer breast';
-      service.updateQuery(original);
+      service.updateQueryAndMakeRequest(original);
       service.removePredicate('assay', 'TEST');
       expect(service.getQueryString()).to.eql(original);
       service.removePredicate('assay', 'RNA-Seq');
