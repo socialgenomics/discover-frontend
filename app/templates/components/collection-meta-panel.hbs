@@ -17,8 +17,10 @@
 
   <main>
     {{#if displayInfo}}
-      <h3>{{source-name-fallback model=model}}</h3>
-      {{collection-created-by user=model.userId type=model.type}}
+      <div class="panel-header">
+        <h3>{{source-name-fallback model=model}}</h3>
+        <h5>{{collection-created-by user=model.userId type=model.type}}</h5>
+      </div>
 
       <div class="divider"></div>
 
