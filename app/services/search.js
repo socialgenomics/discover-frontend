@@ -24,7 +24,7 @@ export default Service.extend({
   * @returns {string} - The new queryString
   * @public
   */
-  addPredicate(predicate, text) {
+  addFilter(predicate, text) {
     const queryTree = (get(this, 'queryTree'));
     return this._serializeToString(QP.addFilter(queryTree, predicate, text));
   },
@@ -36,7 +36,7 @@ export default Service.extend({
   * @returns {string} - The new queryString
   * @public
   */
-  removePredicate(predicate, text) {
+  removeFilter(predicate, text) {
     const queryTree = (get(this, 'queryTree'));
     return this._serializeToString(QP.removeFilter(queryTree, predicate, text));
   },

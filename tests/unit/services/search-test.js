@@ -21,28 +21,18 @@ describeModule(
       expect(service).to.be.ok;
     });
 
-    it('Adds filters', function () {
-      let service = this.subject();
-      // Add a query
-      service.updateQueryAndMakeRequest('cancer AND breast');
-      const original = service.getQueryString();
-      expect(original).to.eql('cancer breast');
-      service.addPredicate('assay', 'RNA-Seq');
-      const newString = service.getQueryString();
-      expect(newString).to.eql('assay:RNA-Seq cancer breast');
+    it('addFilter returns a new queryString with the filter appended', function () {
+      const service = this.subject();
+      const queryStringWithFilter = service.addFilter('assay', 'RNA-Seq');
+      expect(queryStringWithFilter).to.eql('assay:RNA-Seq');
     });
 
-    it('removes filters', function () {
-      let service = this.subject();
-      // Add a query
-      const original = 'assay:RNA-Seq cancer breast';
-      service.updateQueryAndMakeRequest(original);
-      service.removePredicate('assay', 'TEST');
-      expect(service.getQueryString()).to.eql(original);
-      service.removePredicate('assay', 'RNA-Seq');
-      const removed = service.getQueryString();
-      expect(removed).to.not.eql(original);
-      expect(removed).to.eql('cancer breast');
+    it('removeFilter returns a new queryString with the filter deleted', function () {
+      const service = this.subject();
+      const originalQuery = 'assay:RNA-Seq cancer breast';
+      service._updateQuery(originalQuery);
+      expect(service.removeFilter('assay', 'TEST')).to.eql(service.getQueryString());
+      expect(service.removeFilter('assay', 'RNA-Seq')).to.eql('cancer breast');
     });
   }
 );
