@@ -39,7 +39,7 @@
         </div>
       </div>
       <div class="card-footer">
-        {{stats-list stats=dataset.stats}}
+        {{stats-list stats=dataset.stats statType="datasets"}}
       </div>
 
     {{else}} <!-- It is a Dataset -->
@@ -97,7 +97,7 @@
         </div>
       </div>
       <div class="card-footer">
-        {{stats-list stats=dataset.stats access=dataset.access}}
+        {{stats-list stats=dataset.stats access=dataset.access statType="datasets"}}
       </div>
     {{/if}}
   </div>

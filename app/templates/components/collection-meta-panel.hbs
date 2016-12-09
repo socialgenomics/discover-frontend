@@ -25,9 +25,7 @@
       <div class="divider"></div>
 
       <section class="stats-numbers">
-        {{stats-number-ring stat=collectionStats.datasets label="Datasets"}}
-        {{stats-number-ring stat=collectionStats.datasources label="Sources"}}
-        {{stats-number-ring stat=collectionStats.view label="Views"}}
+        {{stats-list stats=collectionStats statType="collection"}}
       </section>
 
       {{#if model.description}}
