@@ -15,7 +15,7 @@ export default Component.extend({
   },
   actions: {
     search(query) {
-      get(this, 'search')(query); //calls search on application route
+      get(this, 'search')(query.trim()); //calls search on application route
     }
   }
 });

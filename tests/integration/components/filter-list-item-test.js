@@ -23,7 +23,7 @@ describeComponent(
         aggName: 'Datasource'
       });
       this.render(hbs`{{filter-list-item bucket=bucket aggName=aggName}}`);
-      expect(this.$('span').text().trim()).to.eql('Abc (8)');
+      expect(this.$('span').text().trim()).to.eql('Abc (8)x');
     });
 
     it('If filter is assay, render colour, filter name and count.', function() {
@@ -36,7 +36,7 @@ describeComponent(
         aggName: 'assay'
       });
       this.render(hbs`{{filter-list-item bucket=bucket aggName=aggName}}`);
-      expect(this.$('span').text().trim()).to.eql('Assay Abc (10)');
+      expect(this.$('span').text().trim()).to.eql('Assay Abc (10)x');
       expect(this.$('div.label').hasClass('indigo')).to.be.true;
     });
   }
