@@ -30,10 +30,6 @@ export default Component.extend({
     }
   },
 
-  shareUrl: computed(function() {
-    return window.location;
-  }),
-
   copyFailed: computed('copyAttempt', 'copySuccess', function () {
     return get(this, 'copyAttempt') && get(this, 'copySuccess') === false;
   }),
