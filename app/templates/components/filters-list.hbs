@@ -1,21 +1,18 @@
 <h4 class="unfocus-grey-text">Filters</h4>
-{{#each aggs as |agg|}}
-  {{#if agg.show}}
+{{#each filters as |filter|}}
     <div class="section">
-      {{#if (eq agg.displayName "Datasource")}}
+      {{#if (eq filter.displayName "Datasource")}}
         <h4>Data Source</h4>
       {{else}}
-        <h4>{{ agg.displayName }}</h4>
+        <h4>{{ filter.displayName }}</h4>
       {{/if}}
-      {{#each agg.buckets as |bucket|}}
+      {{#each filter.buckets as |bucket|}}
         {{filter-list-item
           bucket=bucket
-          aggName=agg.name
-          addFilter=(action addFilter)
-          removeFilter=(action removeFilter)
+          aggName=filter.name
+          search=(route-action 'search')
         }}
       {{/each}}
       <div class="divider"></div>
     </div>
-  {{/if}}
 {{/each}}

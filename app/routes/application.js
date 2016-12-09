@@ -6,6 +6,7 @@ const { Route, inject: { service }, get } = Ember;
 export default Route.extend(ApplicationRouteMixin, {
   favouritesService: service('favourites'),
   session: service(),
+
   sessionAuthenticated() {
     this._super(...arguments);
     get(this, 'favouritesService').loadFavourites();
@@ -14,21 +15,17 @@ export default Route.extend(ApplicationRouteMixin, {
     get(this, 'favouritesService').loadFavourites();
   },
   actions: {
-    search(query) {
+    search(query, pageNumber) {
+      this.transitionTo('datasets.search', {
+        queryParams: {
+          query: query,
+          page: pageNumber || 1
+        }
+      });
       get(this, 'metrics').trackEvent({
         category: 'search',
         action: 'query',
         label: query
-      });
-      this.transitionTo('datasets.search', {
-        queryParams: {
-          q: query,
-          ordering: null,
-          assay: null,
-          tags: null,
-          datasource: null,
-          access: null
-        }
       });
     },
     toggleModal() {
