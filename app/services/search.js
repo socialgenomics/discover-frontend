@@ -143,7 +143,7 @@ export default Service.extend({
    */
   _handleQueryResponse(resp) {
     const store = get(this, 'store');
-    resp.datasets.map(dataset => store.push(store.normalize('dataset', dataset)));
+    resp.datasets = resp.datasets.map(dataset => store.push(store.normalize('dataset', dataset)));
     resp.aggs = this._normalizeFilters(resp.aggs);
     return resp;
   },
