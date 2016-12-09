@@ -9,6 +9,6 @@ export default Route.extend(AuthenticatedRouteMixin, SearchRouteMixin, {
 
   model(params) {
     const searchService = get(this, 'searchService');
-    return searchService.updateQueryAndMakeRequest(params.query || searchService.getQueryString(), params.page);
+    return searchService.updateQueryAndMakeRequest(params.query, params.page);
   }
 });
