@@ -1,14 +1,17 @@
 import Ember from 'ember';
 
-const { Component, get } = Ember;
+const { Component, get, inject: { service } } = Ember;
 
 export default Component.extend({
+  searchService: service('search'),
   actions: {
-    addFilter(aggName, bucketKey) {
-      get(this, 'addFilter')(aggName, bucketKey);
+    addFilter(name, key) {
+      const queryString = get(this, 'searchService').addFilter(name, key);
+      get(this, 'search')(queryString);
     },
-    removeFilter(aggName) {
-      get(this, 'removeFilter')(aggName);
+    removeFilter(name, key) {
+      const queryString = get(this, 'searchService').removeFilter(name, key);
+      get(this, 'search')(queryString);
     }
   }
 });

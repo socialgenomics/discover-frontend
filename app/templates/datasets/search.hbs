@@ -1,5 +1,5 @@
 {{#if (gt model.meta.total 0)}}
-  <!-- {{filters-list filters=model.aggs addFilter=(action 'addFilter') removeFilter=(action 'removeFilter')}} -->
+  {{filters-list filters=model.aggs}}
 {{/if}}
 <div class="content right">
   {{#if model.isError}}
