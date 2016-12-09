@@ -29,8 +29,7 @@
       </section>
 
       {{#if model.description}}
-        <div class="divider"></div>
-        <p class="markdown-text">{{markdown-to-html markdown=model.description}}</p>
+        {{collapsible-description description=model.description}}
       {{/if}}
 
     {{else}}
