@@ -10,7 +10,6 @@ export default Component.extend({
   copyAttempt: false,
   copySuccess: false,
 
-  // TODO: set proper data for sharing
   channels: {
     twitter: {
       baseUrl: 'https://twitter.com/intent/tweet',
