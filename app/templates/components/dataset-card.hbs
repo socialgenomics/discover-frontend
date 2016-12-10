@@ -7,7 +7,12 @@
         </div>
         <div class="actions-container valign-wrapper">
           {{action-favourite model=dataset}}
-          {{action-share action="toggleModal" dataset=dataset shareUrl=shareUrl}}
+          {{action-share
+            action="toggleModal"
+            actionableId=dataset.id
+            actionableType='dataset'
+            shareUrl=shareUrl
+          }}
         </div>
       </div>
 
@@ -64,7 +69,12 @@
         {{/if}}
         <div class="actions-container valign-wrapper">
           {{action-favourite model=dataset}}
-          {{action-share action="toggleModal" dataset=dataset shareUrl=shareUrl}}
+          {{action-share
+            action="toggleModal"
+            actionableId=dataset.id
+            actionableType='dataset'
+            shareUrl=shareUrl
+          }}
         </div>
       </div>
       <div class="card-body">

@@ -44,7 +44,7 @@ export default Base.extend({
   authenticate: function(data) {
     if ('provider' in data) {
       // this is a third party login
-      return get(this, 'ajax').request(ENV.APIRoutes['users.login'], {
+      return get(this, 'ajax').raw(ENV.APIRoutes['users.login'], {
         method: 'POST',
         contentType: 'application/json',
         data: data
@@ -52,7 +52,7 @@ export default Base.extend({
         .then(resolveWithResp(this))
         .catch(handleError(this));
     } else {
-      return get(this, 'ajax').request(ENV.APIRoutes[ENV['ember-simple-auth'].authenticationRoute], {
+      return get(this, 'ajax').raw(ENV.APIRoutes[ENV['ember-simple-auth'].authenticationRoute], {
         method: 'POST',
         data: data
       })
