@@ -2,7 +2,7 @@ import Ember from 'ember';
 import ENV from 'repositive/config/environment';
 import FlashMessageMixin from 'repositive/mixins/flash-message-mixin';
 
-const { inject: { service }, computed, Route, RSVP, get, set, Logger } = Ember;
+const { inject: { service }, computed, Route, RSVP, get, set, Logger, setProperties } = Ember;
 
 export default Route.extend(FlashMessageMixin, {
   session: service(),
@@ -29,6 +29,7 @@ export default Route.extend(FlashMessageMixin, {
   },
 
   model: function() {
+    set(this, 'session.data.isRootRoute', true);
     const ajax = get(this, 'ajax');
     if (get(this, 'session.isAuthenticated')) {
       return RSVP.hash({
@@ -53,7 +54,8 @@ export default Route.extend(FlashMessageMixin, {
             collections: data.collections,
             datasources: data.datasources
           };
-        }).catch(Logger.error);
+        })
+        .catch(Logger.error);
     } else {
       return ajax.request(ENV.APIRoutes['stats'], { method: 'GET' })
         .then(stat => {
@@ -63,6 +65,9 @@ export default Route.extend(FlashMessageMixin, {
   },
 
   deactivateWeclomeMesssage: function() {
-    set(this, 'session.data.firstVisit', false);
+    setProperties(this, {
+      'session.data.firstVisit': false,
+      'session.data.isRootRoute': false
+    });
   }.on('deactivate')
 });

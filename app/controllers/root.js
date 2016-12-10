@@ -1,15 +1,18 @@
 import Ember from 'ember';
 
-export default Ember.Controller.extend({
-  session: Ember.inject.service(),
+const { Controller, inject: { service }, get, set, computed } = Ember;
+
+export default Controller.extend({
+  session: service(),
   loading: false,
-  firstVisit: Ember.computed.alias('session.data.firstVisit'),
-  displayWelcomeMessage: Ember.computed.alias('session.data.displayWelcomeMessage'),
-  thirdPartySignup: Ember.computed.alias('session.data.thirdPartySignup'),
+  isRootRoute: computed.alias('session.data.isRootRoute'),
+  firstVisit: computed.alias('session.data.firstVisit'),
+  displayWelcomeMessage: computed.alias('session.data.displayWelcomeMessage'),
+  thirdPartySignup: computed.alias('session.data.thirdPartySignup'),
   sortUpdatedAt: ['updatedAt:desc'],
-  requestsSorted: Ember.computed.sort('model.requests', 'sortUpdatedAt'),
-  registrationsSorted: Ember.computed.sort('model.registered', 'sortUpdatedAt'),
-  datasetsNumber: Ember.computed('model.stats.datasets', function() {
+  requestsSorted: computed.sort('model.requests', 'sortUpdatedAt'),
+  registrationsSorted: computed.sort('model.registered', 'sortUpdatedAt'),
+  datasetsNumber: computed('model.stats.datasets', function() {
     const x = this.get('model.stats.datasets');
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   }),
@@ -24,6 +27,13 @@ export default Ember.Controller.extend({
         timeout: 7000,
         sticky: true,
         class: 'fadeIn'
+      });
+    },
+    trackCreateAccount(route) {
+      get(this, 'metrics').trackEvent({
+        category: route,
+        action: 'create account button',
+        label: 'clicked'
       });
     }
   }
