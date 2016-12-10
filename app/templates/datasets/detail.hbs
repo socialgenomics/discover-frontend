@@ -15,7 +15,12 @@
       {{/if}}
       <div class="actions-container valign-wrapper">
         {{action-favourite model=dataset}}
-        {{action-share action="toggleModal" shareUrl=datasetUrl}}
+        {{action-share
+          actionableId=dataset.id
+          actionableType='dataset'
+          action="toggleModal"
+          shareUrl=datasetUrl
+        }}
       </div>
     </div>
     <div class="card-main-content">
