@@ -10,6 +10,9 @@ export default Component.extend({
   showShareEmailModal: false,
   showCreateAccountModal: false,
 
+  // modal constraints prevents share options modal from bleeding out of the edge of browser window
+  shareOptionsModalConstraints: [{ to: 'window', pin: true }],
+
   click: function() {
     this.get('metrics').trackEvent({
       category: 'dataset',

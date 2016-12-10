@@ -1,9 +1,10 @@
 import Ember from 'ember';
 
-const { Controller, computed, inject: { service }, Logger } = Ember;
+const { Controller, computed, inject: { service }, Logger, get } = Ember;
 
 export default Controller.extend({
   session: service(),
+  urlGenerator: service(),
 
   request: computed.alias('model.request'),
   comments: computed.filterBy('request.actionableId.actions', 'type', 'comment'),
@@ -15,6 +16,10 @@ export default Controller.extend({
       return -1;
     }
     return 0;
+  }),
+
+  requestUrl: computed('request.id', function () {
+    return get(this, 'urlGenerator').generateUrl('requests.detail', get(this, 'request.id'));
   }),
 
   actions: {

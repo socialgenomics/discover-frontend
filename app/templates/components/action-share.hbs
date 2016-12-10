@@ -3,13 +3,15 @@
 {{#if showShareOptionsModal}}
   {{#tether-dialog
     close=(action 'toggleShareOptionsModal')
-    target='.share-options-button'
+    target=(concat '#' elementId)
     targetAttachment='bottom left'
     attachment='top left'
     translucentOverlay=false
     container-class='share-options-modal'
+    constraints=shareOptionsModalConstraints
   }}
     {{share-options
+      shareUrl=shareUrl
       onEnvelopeClick=(action (if session.isAuthenticated 'toggleShareEmailModal' 'toggleCreateAccountModal'))
     }}
   {{/tether-dialog}}
