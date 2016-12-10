@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-const { Component, set, inject: { service } } = Ember;
+const { Component, set, inject: { service }, get } = Ember;
 
 export default Component.extend({
   session: service(),
@@ -14,10 +14,10 @@ export default Component.extend({
   shareOptionsModalConstraints: [{ to: 'window', pin: true }],
 
   click: function() {
-    this.get('metrics').trackEvent({
+    get(this, 'metrics').trackEvent({
       category: 'dataset',
       action: 'share',
-      label: this.get('dataset.id'),
+      label: get(this, 'actionableId'),
       value: true
     });
 

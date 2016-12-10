@@ -11,6 +11,7 @@ export default Component.extend(EmberValidations, {
   emailAddress: '',
   customMessage: '',
   actionableId: null,
+  actionableType: null,
   sendSuccess: false,
   sendError: false,
   isLoading: false,
@@ -79,9 +80,9 @@ export default Component.extend(EmberValidations, {
         method: 'POST',
         data: {
           to: get(this, 'emailAddress'),
-          customMessage: get(this, 'customMessage'),
+          content: get(this, 'customMessage'),
           actionable_id: get(this, 'actionableId'),
-          actionable_model: 'dataset'
+          actionable_model: get(this, 'actionableType')
         }
       }
     );
