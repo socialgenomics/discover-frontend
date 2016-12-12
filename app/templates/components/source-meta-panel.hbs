@@ -21,7 +21,7 @@
       <div class="panel-header">
         <h3>{{source-name-fallback model=model}}</h3>
         {{#unless (eq type 'datasource')}}
-          <h5>{{collection-created-by user=model.userId type=type}}</h5>
+          <p>{{collection-created-by user=model.userId type=type}}</p>
         {{/unless}}
       </div>
 

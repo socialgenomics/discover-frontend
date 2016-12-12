@@ -1,12 +1,10 @@
-<section class="truncate">
-  <p class="markdown-text {{unless showFullDescription "truncate ten-lines"}}">
-    {{markdown-to-html markdown=description}}
-  </p>
-  <a href="" class="center-align" {{action "toggleDescription"}}>
-    {{#if showFullDescription}}
-      <p>Show Less{{fa-icon "chevron-up"}}</p>
-    {{else}}
-      <p>Read More{{fa-icon "chevron-down"}}</p>
-    {{/if}}
-  </a>
-</section>
+<p class="markdown-text {{unless showFullDescription "truncate ten-lines"}}">
+  {{markdown-to-html markdown=description}}
+</p>
+<a href="" class="center-align" {{action "toggleDescription"}}>
+  {{#if showFullDescription}}
+    <p>Show Less{{fa-icon "chevron-up"}}</p>
+  {{else}}
+    <p>Read More{{fa-icon "chevron-down"}}</p>
+  {{/if}}
+</a>
