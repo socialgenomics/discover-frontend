@@ -1,6 +1,9 @@
 import Ember from 'ember';
+import searchControllerMixin from '../mixins/search-controller';
 
-export default Ember.Controller.extend({
+const { Controller } = Ember;
+
+export default Controller.extend(searchControllerMixin, {
   showMore: false,
   limit: 9,
   page: 1,

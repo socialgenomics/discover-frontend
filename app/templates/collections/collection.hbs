@@ -1,6 +1,7 @@
 {{collection-meta-panel
   collectionStats=model.collectionStats
   model=model.collection
+  filters=model.aggs
   datasets=model.datasets}}
 
 <div class="content push-right">
@@ -8,14 +9,7 @@
     {{search-results-list results=model.datasets}}
     {{#if (gt model.collectionStats.datasets 0)}}
       <div class="pagination-container">
-        {{pagination-bar
-          currentPageNumber=page
-          resultsPerPage=limit
-          totalResults=model.collectionStats.datasets
-          currentOffset=offset
-          nextPage=(action 'nextPage')
-          previousPage=(action 'previousPage')
-        }}
+        {{pagination-bar totalResults=model.meta.total search=(route-action 'search')}}
       </div>
     {{/if}}
   {{/unless}}
