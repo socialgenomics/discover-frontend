@@ -6,10 +6,11 @@ const { inject: { service }, computed, get } = Ember;
 export default AjaxService.extend({
   trustedHosts: [/api.*\.repositive\.io/],
   session: service(),
-  headers: computed('session.session.content.authenticated.token', {
+  headers: computed('session.session.content.authenticated.payload.token', {
     get() {
-      const authToken = get(this, 'session.session.content.authenticated.token');
-      return authToken ? { authorization: `JWT ${authToken}` } : {};
+      const authToken = get(this, 'session.session.content.authenticated.payload.token');
+      const token = authToken ? { authorization: `JWT ${authToken}` } : {};
+      return token;
     }
   })
 });
