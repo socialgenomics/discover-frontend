@@ -2,15 +2,15 @@
   {{filters-list filters=model.aggs}}
 {{/if}}
 <div class="content right">
-  {{#if model.isError}}
+  {{#if isError}}
     {{render 'datasets/search-error'}}
   {{else}}
     <div class="margin-top">
-      {{#unless model.isLoading}}
+      {{#unless isLoading}}
         <h5 class="unfocus-grey-text">Search Results ({{ model.meta.total }})</h5>
       {{/unless}}
     </div>
-    {{#if model.isLoading}}
+    {{#if isLoading}}
       {{partial 'loading'}}
     {{else}}
       {{search-results-list results=model.datasets totalResults=model.meta.total}}
