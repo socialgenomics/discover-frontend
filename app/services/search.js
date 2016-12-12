@@ -40,6 +40,11 @@ export default Service.extend({
     return this._serializeToString(QP.removeFilter(queryTree, predicate, text));
   },
 
+  /**
+   * @desc Checks if a 'predicate:term' filter string is currently on the query (Active filter test)
+   * @param filterString
+   * @returns {boolean}
+   */
   isFilterActive(filterString) {
     return this._getActiveFilters().indexOf(filterString) > -1;
   },
@@ -130,9 +135,18 @@ export default Service.extend({
    */
   _setQueryTree(queryTree) { set(this, 'queryTree', queryTree); },
 
-
+  /**
+   * @desc Set the list of filters currently on the query
+   * @param filters - An array of 'predicate:term' strings
+   * @private
+   */
   _setActiveFilters(filters) { set(this, 'activeFilters', filters); },
 
+  /**
+   * @desc Returns list of filters on current tree
+   * @returns {Array} - An array of 'predicate:term' strings
+   * @private
+   */
   _getActiveFilters() { return get(this, 'activeFilters'); },
 
   /**
