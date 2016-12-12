@@ -1,8 +1,11 @@
 import Ember from 'ember';
 
-export default Ember.Component.extend({
-  displayInfo: true,
+const { Component } = Ember;
 
+export default Component.extend({
+  tagName: 'section',
+  classNames: ['metadata-panel source-panel'],
+  displayInfo: true,
   actions: {
     showInfo() {
       this.set('displayInfo', true);
