@@ -40,6 +40,10 @@ export default Service.extend({
     return this._serializeToString(QP.removeFilter(queryTree, predicate, text));
   },
 
+  isFilterActive(filterString) {
+    return this._getActiveFilters().indexOf(filterString) > -1;
+  },
+
   /**
    * @desc Updates the query property and makes a request with this
    * @param {string|Object} queryStringOrTree - The new query value
@@ -69,6 +73,7 @@ export default Service.extend({
     this._setQueryString(this._serializeToString(queryTree));
     this._setQueryTree(queryTree);
     this._setOffsetFromPageNumber(pageNumber);
+    this._setActiveFilters(QP.getFilters(queryTree).map(f => `${f.predicate}:${f.text}`));
     return queryTree;
   },
 
@@ -124,6 +129,11 @@ export default Service.extend({
    * @private
    */
   _setQueryTree(queryTree) { set(this, 'queryTree', queryTree); },
+
+
+  _setActiveFilters(filters) { set(this, 'activeFilters', filters); },
+
+  _getActiveFilters() { return get(this, 'activeFilters'); },
 
   /**
    * @desc Sets the service's offset value from a passed in page number
