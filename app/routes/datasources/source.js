@@ -21,7 +21,8 @@ export function model(params) {
     collectionStats: get(this, 'ajax').request(ENV.APIRoutes['collection-stats'].replace('{collection_id}', collectionId), { method: 'GET' })
   })
     .then(data => {
-      return get(this, 'searchService').updateQueryAndMakeRequest(`collection:${collectionId}`, params.page || 0).then(m => {
+      return get(this, 'searchService').updateQueryAndMakeRequest(`collection:${collectionId}`, params.page || 0)
+      .then(m => {
         const model = assign(data, m);
         set(model, 'collection.actionableId', model.actionable);
         return model
