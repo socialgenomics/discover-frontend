@@ -49,6 +49,7 @@ export default Base.extend({
         contentType: 'application/json',
         data: data
       })
+        .then(r => r.response)
         .then(resolveWithResp(this))
         .catch(handleError(this));
     } else {
@@ -56,6 +57,7 @@ export default Base.extend({
         method: 'POST',
         data: data
       })
+        .then(r => r.response)
         .then(resolveWithResp(this))
         .catch(handleError(this));
     }

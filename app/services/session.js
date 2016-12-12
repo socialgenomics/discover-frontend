@@ -5,9 +5,9 @@ export default SessionService.extend({
   store: Ember.inject.service('store'),
   metrics: Ember.inject.service(),
 
-  setAuthenticatedUser: Ember.observer('data.authenticated.payload.user', function() {
+  setAuthenticatedUser: Ember.observer('data.authenticated.user', function() {
     if (this.get('isAuthenticated')) {
-      const userData = this.get('data.authenticated.payload.user');
+      const userData = this.get('data.authenticated.user');
       if (!userData) {
         // force logout
         this.invalidate();
