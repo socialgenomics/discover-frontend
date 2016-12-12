@@ -1,7 +1,10 @@
-{{#if (eq aggName "assay")}}
-  <div class="label {{bucket.colour}}"></div>
-{{/if}}
-<span {{action "addFilter" aggName bucket.key}} class='filter-text' style="cursor:pointer;">{{bucket.key}} ({{bucket.doc_count}})</span>
-{{#if active}}
-  <span {{action "removeFilter" aggName bucket.key}} class='filter-text selected' style="cursor:pointer;">x</span>
-{{/if}}
+<div class="filter-item {{if active 'remove' 'activate'}}">
+  {{#if (eq aggName "assay")}}<div class="label {{bucket.colour}}"></div>{{/if}}
+  {{#unless active}}
+    <span {{action "addFilter" aggName bucket.key}}>{{bucket.key}} ({{bucket.doc_count}})</span>
+  {{else}}
+    <span {{action "removeFilter" aggName bucket.key}}>
+      {{bucket.key}} ({{bucket.doc_count}}) <span class="filter-icon">{{fa-icon "times"}}</span>
+    </span>
+{{/unless}}
+</div>
