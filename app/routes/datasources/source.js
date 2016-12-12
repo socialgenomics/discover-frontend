@@ -3,6 +3,7 @@ import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-rout
 import ENV from 'repositive/config/environment';
 import ResetScrollMixin from 'repositive/mixins/reset-scroll';
 import ActionableMixin from 'repositive/mixins/actionable';
+import SearchRouteMixin from '../../mixins/search-route';
 
 const { get, Route, RSVP, inject: { service }, Logger, set } = Ember;
 
@@ -28,9 +29,10 @@ export function model(params) {
     }).catch(Logger.error);
 }
 
-export default Route.extend(AuthenticatedRouteMixin, ResetScrollMixin, ActionableMixin, {
+export default Route.extend(AuthenticatedRouteMixin, ResetScrollMixin, ActionableMixin, SearchRouteMixin, {
   session: service(),
   ajax: service(),
+  searchService: service('search'),
   controllerName: 'collection',
   model: model,
   afterModel(model) {
