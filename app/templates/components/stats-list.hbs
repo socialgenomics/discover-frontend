@@ -31,7 +31,7 @@
 
 {{#if (eq statType "collection")}}
   <li class="center-align" data-balloon="Sources" data-balloon-pos="down">
-    <img src="/assets/images/icons/icon-datasource-white@2x.png" class="data-icon">
+    {{fa-icon "database"}}
     <span>
       {{#if stats.datasources}}
         {{rough-estimate stats.datasources}}
