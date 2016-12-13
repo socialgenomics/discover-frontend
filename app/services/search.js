@@ -155,7 +155,7 @@ export default Service.extend({
    * @private
    */
   _setOffsetFromPageNumber(pageNumber) {
-    set(this, 'offset', pageNumber * get(this, 'resultsPerPage'));
+    set(this, 'offset', (pageNumber - 1) * get(this, 'resultsPerPage'));
   },
 
   /**
