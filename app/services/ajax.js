@@ -9,7 +9,8 @@ export default AjaxService.extend({
   headers: computed('session.session.content.authenticated.token', {
     get() {
       const authToken = get(this, 'session.session.content.authenticated.token');
-      return authToken ? { authorization: `JWT ${authToken}` } : {};
+      const token = authToken ? { authorization: `JWT ${authToken}` } : {};
+      return token;
     }
   })
 });

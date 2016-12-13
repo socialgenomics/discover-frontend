@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import searchControllerMixin from '../mixins/search-controller';
 
-const { Controller } = Ember;
+const { Controller, set } = Ember;
 
 export default Controller.extend(searchControllerMixin, {
   showMore: false,
@@ -11,15 +11,13 @@ export default Controller.extend(searchControllerMixin, {
 
   actions: {
     nextPage() {
-      this.set('page', this.page + 1);
+      set(this, 'page', this.page + 1);
       this.send('invalidateModel');
     },
     previousPage() {
-      this.set('page', this.page - 1);
+      set(this, 'page', this.page - 1);
       this.send('invalidateModel');
     },
-    showMoreMeta() {
-      this.toggleProperty('showMore');
-    }
+    showMoreMeta() { this.toggleProperty('showMore'); }
   }
 });
