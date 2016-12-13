@@ -29,7 +29,7 @@ export default Service.extend({
   */
   addFilter(predicate, text) {
     const queryTree = (get(this, 'queryTree'));
-    return this.serializeToString(QP.addFilter(queryTree, predicate, text));
+    return QP.addFilter(queryTree, predicate, text);
   },
 
   /**
@@ -41,7 +41,7 @@ export default Service.extend({
   */
   removeFilter(predicate, text) {
     const queryTree = (get(this, 'queryTree'));
-    return this.serializeToString(QP.removeFilter(queryTree, predicate, text));
+    return QP.removeFilter(queryTree, predicate, text);
   },
 
   /**
