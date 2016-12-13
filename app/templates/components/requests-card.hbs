@@ -9,7 +9,11 @@
       <div class="actions-container valign-wrapper">
         {{action-favourite dataset=dataset}}
         <span class="grey-text">{{dataset.favourite}}</span>
-        {{action-share toggleModal=(route-action 'toggleModal') dataset=dataset}}
+        {{action-share
+          actionableId=dataset.id
+          actionableType='dataset'
+          shareUrl=datasetUrl
+        }}
       </div>
     </header>
 

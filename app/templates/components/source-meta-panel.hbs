@@ -22,13 +22,8 @@
       {{collection-created-by user=model.userId type=type}}
     {{/unless}}
 
-    <div class="divider"></div>
-
     <section class="stats-numbers">
-      {{stats-number-ring stat=collectionStats.datasets label="Datasets"}}
-      {{#if model.properties.access}}
-        {{stats-number-ring stat=model.properties.access}}
-      {{/if}}
+      {{stats-list stats=collectionStats statType="datasource"}}
     </section>
 
     {{#if model.description}}

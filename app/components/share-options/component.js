@@ -10,7 +10,6 @@ export default Component.extend({
   copyAttempt: false,
   copySuccess: false,
 
-  // TODO: set proper data for sharing
   channels: {
     twitter: {
       baseUrl: 'https://twitter.com/intent/tweet',
@@ -29,10 +28,6 @@ export default Component.extend({
       }
     }
   },
-
-  shareUrl: computed(function() {
-    return window.location;
-  }),
 
   copyFailed: computed('copyAttempt', 'copySuccess', function () {
     return get(this, 'copyAttempt') && get(this, 'copySuccess') === false;

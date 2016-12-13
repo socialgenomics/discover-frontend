@@ -61,7 +61,8 @@ module.exports = function(environment) {
           'users.profiles': '/users/{id}/profile',
           'reset-password': '/auth/password-reset',
           'verify-email': '/auth/verify',
-          'verify-email-resend': '/auth/verify/resend'
+          'verify-email-resend': '/auth/verify/resend',
+          'share': '/share'
         };
         _.each(mapping,
           function(path, key, obj) {
