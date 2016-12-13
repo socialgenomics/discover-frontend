@@ -106,6 +106,15 @@ export default Service.extend({
       })
     });
   },
+  /**
+   * @desc Converts query BTree to String.
+   * @param {BTree} queryTree - Tree to be serialized.
+   * @returns {string} - New string representation of the query
+   * @public
+   */
+  serializeToString(queryTree) {
+    return QP.toBoolString(queryTree);
+  },
 
   /**
    * @desc Converts query String to BTree.
@@ -115,16 +124,6 @@ export default Service.extend({
    */
   _parseString(queryString) {
     return QP.parseString(queryString);
-  },
-
-  /**
-   * @desc Converts query BTree to String.
-   * @param {BTree} queryTree - Tree to be serialized.
-   * @returns {string} - New string representation of the query
-   * @private
-   */
-  serializeToString(queryTree) {
-    return QP.toBoolString(queryTree);
   },
 
   /**
