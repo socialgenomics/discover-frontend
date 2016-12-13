@@ -14,7 +14,11 @@ export default Service.extend({
   offset: 0,
   resultsPerPage: 9,
 
-  getQueryString() { return get(this, 'queryString'); },
+  getQueryString() { return this.serializeToString(get(this, 'queryTree')); },
+
+  getQueryTree() {
+    return get(this, 'queryTree');
+  },
 
   /**
   * @desc Adds a predicate to query tree if it's not already there.
@@ -25,7 +29,7 @@ export default Service.extend({
   */
   addFilter(predicate, text) {
     const queryTree = (get(this, 'queryTree'));
-    return this._serializeToString(QP.addFilter(queryTree, predicate, text));
+    return this.serializeToString(QP.addFilter(queryTree, predicate, text));
   },
 
   /**
@@ -37,7 +41,7 @@ export default Service.extend({
   */
   removeFilter(predicate, text) {
     const queryTree = (get(this, 'queryTree'));
-    return this._serializeToString(QP.removeFilter(queryTree, predicate, text));
+    return this.serializeToString(QP.removeFilter(queryTree, predicate, text));
   },
 
   /**
@@ -47,7 +51,7 @@ export default Service.extend({
    * @public
    */
   updateQueryAndMakeRequest(queryStringOrTree, pageNumber) {
-    return this._makeRequest(this._updateQuery(queryStringOrTree, pageNumber))
+    return this.makeRequest(this.updateQuery(queryStringOrTree, pageNumber))
       .then(this._handleQueryResponse.bind(this))
       .catch(Logger.error);
   },
@@ -59,14 +63,14 @@ export default Service.extend({
    * @returns {Object} - the new queryTree
    * @private
    */
-  _updateQuery(queryStringOrTree, pageNumber) {
+  updateQuery(queryStringOrTree, pageNumber) {
     let queryTree;
     if (typeof queryStringOrTree === 'string') {
       queryTree = this._parseString(queryStringOrTree);
     } else if (typeof queryStringOrTree === 'object') {
       queryTree = queryStringOrTree;
     }
-    this._setQueryString(this._serializeToString(queryTree));
+    this._setQueryString(this.serializeToString(queryTree));
     this._setQueryTree(queryTree);
     this._setOffsetFromPageNumber(pageNumber);
     return queryTree;
@@ -78,7 +82,7 @@ export default Service.extend({
   * @returns {Promise} - The promised data
   * @private
   */
-  _makeRequest(queryTree) {
+  makeRequest(queryTree) {
     return get(this, 'ajax').request(ENV.APIRoutes['datasets.search'], {
       method: 'POST',
       contentType: 'application/json',
@@ -107,7 +111,7 @@ export default Service.extend({
    * @returns {string} - New string representation of the query
    * @private
    */
-  _serializeToString(queryTree) {
+  serializeToString(queryTree) {
     return QP.toBoolString(queryTree);
   },
 

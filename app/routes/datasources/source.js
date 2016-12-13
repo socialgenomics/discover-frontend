@@ -10,6 +10,7 @@ const { get, Route, RSVP, inject: { service }, Logger, set, assign } = Ember;
 const storeDatasets = (store) => (datasets) => datasets.map(dataset => store.push(store.normalize('dataset', dataset)));
 
 export function model(params) {
+  const searchService = get(this, 'searchService');
   const store = this.store;
   const collectionId = params.id;
   const limit = params.limit;
@@ -21,7 +22,8 @@ export function model(params) {
     collectionStats: get(this, 'ajax').request(ENV.APIRoutes['collection-stats'].replace('{collection_id}', collectionId), { method: 'GET' })
   })
     .then(data => {
-      return get(this, 'searchService').updateQueryAndMakeRequest(`collection:${collectionId}`, params.page || 0)
+      const queryTree = searchService.getQueryTree() || searchService.updateQuery(`collection:${collectionId}`);
+      return searchService.makeRequest(queryTree, params.page || 0)
       .then(m => {
         const model = assign(data, m);
         set(model, 'collection.actionableId', model.actionable);
