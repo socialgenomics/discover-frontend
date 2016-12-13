@@ -1,10 +1,12 @@
-{{#if (gt model.meta.total 0)}}
-  {{filters-list filters=model.aggs}}
-{{/if}}
-<div class="content right">
-  {{#if isError}}
-    {{render 'datasets/search-error'}}
-  {{else}}
+{{#if isError}}
+    <div class="content">
+      {{render 'datasets/search-error'}}
+    </div>
+{{else}}
+  {{#if (gt model.meta.total 0)}}
+    {{filters-list filters=model.aggs isLoading=isLoading}}
+  {{/if}}
+  <div class="content right">
     <div class="margin-top">
       {{#unless isLoading}}
         <h5 class="unfocus-grey-text">Search Results ({{ model.meta.total }})</h5>
@@ -18,5 +20,5 @@
         {{pagination-bar totalResults=model.meta.total search=(route-action 'search')}}
       {{/if}}
     {{/if}}
-  {{/if}}
-</div>
+  </div>
+{{/if}}
