@@ -14,7 +14,9 @@ export default Service.extend({
   offset: 0,
   resultsPerPage: 9,
 
-  getQueryString() { return this.serializeToString(get(this, 'queryTree')); },
+  getQueryString() {
+    return this.serializeToString(get(this, 'queryTree'));
+  },
 
   getQueryTree() {
     return get(this, 'queryTree');
