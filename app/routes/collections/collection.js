@@ -5,7 +5,7 @@ import ResetScrollMixin from 'repositive/mixins/reset-scroll';
 import ActionableMixin from 'repositive/mixins/actionable';
 import SearchRouteMixin from '../../mixins/search-route';
 
-const { get, Route , inject: { service } } = Ember;
+const { get, set, Route , inject: { service } } = Ember;
 
 export default Route.extend(AuthenticatedRouteMixin, ResetScrollMixin, ActionableMixin, SearchRouteMixin, {
   session: service(),
@@ -15,6 +15,11 @@ export default Route.extend(AuthenticatedRouteMixin, ResetScrollMixin, Actionabl
   model: model,
   afterModel(model) {
     this._incrementViewCounter(model.collection, get(this, 'session.authenticatedUser'));
+  },
+  resetController(controller, isExiting) {
+    if (isExiting) {
+      set(controller, 'page', 1);
+    }
   },
   actions: {
     invalidateModel: function() {

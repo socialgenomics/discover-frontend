@@ -47,6 +47,15 @@ export default Service.extend({
   },
 
   /**
+   * @desc Checks if a 'predicate:term' filter string is currently on the query (Active filter test)
+   * @param filterString
+   * @returns {boolean}
+   */
+  isFilterActive(filterString) {
+    return this._getActiveFilters().indexOf(filterString) > -1;
+  },
+
+  /**
    * @desc Updates the query property and makes a request with this
    * @param {string|Object} queryStringOrTree - The new query value
    * @param {number} pageNumber - The number of the page to fetch
@@ -75,6 +84,7 @@ export default Service.extend({
     this._setQueryString(this.serializeToString(queryTree));
     this._setQueryTree(queryTree);
     this._setOffsetFromPageNumber(pageNumber);
+    this._setActiveFilters(QP.getFilters(queryTree).map(f => `${f.predicate}:${f.text}`));
     return queryTree;
   },
 
@@ -132,12 +142,26 @@ export default Service.extend({
   _setQueryTree(queryTree) { set(this, 'queryTree', queryTree); },
 
   /**
+   * @desc Set the list of filters currently on the query
+   * @param filters - An array of 'predicate:term' strings
+   * @private
+   */
+  _setActiveFilters(filters) { set(this, 'activeFilters', filters); },
+
+  /**
+   * @desc Returns list of filters on current tree
+   * @returns {Array} - An array of 'predicate:term' strings
+   * @private
+   */
+  _getActiveFilters() { return get(this, 'activeFilters'); },
+
+  /**
    * @desc Sets the service's offset value from a passed in page number
    * @param {number} pageNumber - Page number to convert to offset value
    * @private
    */
   _setOffsetFromPageNumber(pageNumber) {
-    set(this, 'offset', pageNumber * get(this, 'resultsPerPage'));
+    set(this, 'offset', (pageNumber - 1) * get(this, 'resultsPerPage'));
   },
 
   /**

@@ -2,7 +2,8 @@
 import Ember from 'ember';
 import { expect } from 'chai';
 import sinon from 'sinon';
-import { describeModule, it } from 'ember-mocha';
+import { it, describe } from 'mocha';
+import { setupTest } from 'ember-mocha';
 
 const { get, setProperties } = Ember;
 
@@ -16,105 +17,102 @@ function mockParams(controller) {
   });
 }
 
-describeModule(
-  'controller:datasets/register',
-  'DatasetsRegisterController',
-  {
+describe('DatasetsRegisterController', function() {
+  setupTest('controller:datasets/register', {
     needs: [
       'service:session',
       'service:metrics',
       'ember-metrics@metrics-adapter:google-analytics'
     ]
-  },
-  function() {
-    it('_createDataset creates dataset with correct data', function () {
-      const controller = this.subject();
-      const storeMock = { save: sinon.spy() };
-      const store = { createRecord: sinon.stub().returns(storeMock) };
-      const title = 'lorem ipsum';
-      const description = 'lorem ipsum dolor';
-      const url = 'test.com';
-      const dataSource = 'test 123';
-      const userModel = { id: '12345' };
+  });
 
-      setProperties(controller, { store, title, description, url });
+  it('_createDataset creates dataset with correct data', function () {
+    const controller = this.subject();
+    const storeMock = { save: sinon.spy() };
+    const store = { createRecord: sinon.stub().returns(storeMock) };
+    const title = 'lorem ipsum';
+    const description = 'lorem ipsum dolor';
+    const url = 'test.com';
+    const dataSource = 'test 123';
+    const userModel = { id: '12345' };
 
-      controller._createDataset(userModel, dataSource);
+    setProperties(controller, { store, title, description, url });
 
-      const expectedDataObj = store.createRecord.args[0][1];
+    controller._createDataset(userModel, dataSource);
 
-      expect(store.createRecord.args[0][0]).to.eql('dataset');
-      expect(expectedDataObj).to.have.keys('title', 'description', 'url', 'datasourceId', 'externalId', 'userId');
-      expect(expectedDataObj).to.have.property('title', title);
-      expect(expectedDataObj).to.have.property('description', description);
-      expect(expectedDataObj).to.have.property('datasourceId', dataSource);
-      expect(expectedDataObj).to.have.property('userId', userModel);
-      expect(expectedDataObj.externalId).to.contain(userModel.id);
-      expect(storeMock.save.called).to.eql(true);
-    });
+    const expectedDataObj = store.createRecord.args[0][1];
 
-    it('_createDatasetSuccess sets didRegister to true', function () {
-      const controller = this.subject();
-      const dataset = { id: '12345' };
+    expect(store.createRecord.args[0][0]).to.eql('dataset');
+    expect(expectedDataObj).to.have.keys('title', 'description', 'url', 'datasourceId', 'externalId', 'userId');
+    expect(expectedDataObj).to.have.property('title', title);
+    expect(expectedDataObj).to.have.property('description', description);
+    expect(expectedDataObj).to.have.property('datasourceId', dataSource);
+    expect(expectedDataObj).to.have.property('userId', userModel);
+    expect(expectedDataObj.externalId).to.contain(userModel.id);
+    expect(storeMock.save.called).to.eql(true);
+  });
 
-      mockParams(controller);
-      controller._createDatasetSuccess(dataset);
+  it('_createDatasetSuccess sets didRegister to true', function () {
+    const controller = this.subject();
+    const dataset = { id: '12345' };
 
-      expect(get(controller, 'didRegister')).to.eql(true);
-    });
+    mockParams(controller);
+    controller._createDatasetSuccess(dataset);
 
-    it('_createDatasetSuccess add flash message', function () {
-      const controller = this.subject();
-      const dataset = { id: '12345' };
+    expect(get(controller, 'didRegister')).to.eql(true);
+  });
 
-      mockParams(controller);
-      controller._createDatasetSuccess(dataset);
+  it('_createDatasetSuccess add flash message', function () {
+    const controller = this.subject();
+    const dataset = { id: '12345' };
 
-      expect(get(controller, '_addFlashMessage').calledWith('Dataset successfully registered', 'success')).to.eql(true);
-    });
+    mockParams(controller);
+    controller._createDatasetSuccess(dataset);
 
-    it('_createDatasetSuccess tracks event', function () {
-      const controller = this.subject();
-      const dataset = { id: '12345' };
+    expect(get(controller, '_addFlashMessage').calledWith('Dataset successfully registered', 'success')).to.eql(true);
+  });
 
-      mockParams(controller);
-      controller._createDatasetSuccess(dataset);
+  it('_createDatasetSuccess tracks event', function () {
+    const controller = this.subject();
+    const dataset = { id: '12345' };
 
-      expect(get(controller, '_trackEvent').calledWith('dataset', 'register', dataset.id)).to.eql(true);
-    });
+    mockParams(controller);
+    controller._createDatasetSuccess(dataset);
 
-    it('_createDatasetSuccess does transition', function () {
-      const controller = this.subject();
-      const dataset = { id: '12345' };
+    expect(get(controller, '_trackEvent').calledWith('dataset', 'register', dataset.id)).to.eql(true);
+  });
 
-      mockParams(controller);
-      controller._createDatasetSuccess(dataset);
+  it('_createDatasetSuccess does transition', function () {
+    const controller = this.subject();
+    const dataset = { id: '12345' };
 
-      expect(get(controller, 'transitionToRoute').calledWith('datasets.detail', dataset.id)).to.eql(true);
-    });
+    mockParams(controller);
+    controller._createDatasetSuccess(dataset);
 
-    it('_createDatasetError sets loading to false', function () {
-      const controller = this.subject();
-      const error = 'lorem ipsum';
+    expect(get(controller, 'transitionToRoute').calledWith('datasets.detail', dataset.id)).to.eql(true);
+  });
 
-      mockParams(controller);
-      controller._createDatasetError(error);
+  it('_createDatasetError sets loading to false', function () {
+    const controller = this.subject();
+    const error = 'lorem ipsum';
 
-      expect(get(controller, 'loading')).to.eql(false);
-    });
+    mockParams(controller);
+    controller._createDatasetError(error);
 
-    it('_createDatasetError add flash message', function () {
-      const controller = this.subject();
-      const error = 'lorem ipsum';
+    expect(get(controller, 'loading')).to.eql(false);
+  });
 
-      mockParams(controller);
-      controller._createDatasetError(error);
+  it('_createDatasetError add flash message', function () {
+    const controller = this.subject();
+    const error = 'lorem ipsum';
 
-      expect(
-        get(controller, '_addFlashMessage').calledWith(
-          'Oh dear. There was a problem registering your dataset.', 'warning'
-        )
-      ).to.eql(true);
-    });
-  }
-);
+    mockParams(controller);
+    controller._createDatasetError(error);
+
+    expect(
+      get(controller, '_addFlashMessage').calledWith(
+        'Oh dear. There was a problem registering your dataset.', 'warning'
+      )
+    ).to.eql(true);
+  });
+});

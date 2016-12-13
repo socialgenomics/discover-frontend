@@ -1,5 +1,8 @@
 <h4 class="unfocus-grey-text">Filters</h4>
-{{#each filters as |filter|}}
+{{#if isLoading}}
+  {{partial 'loading'}}
+{{else}}
+  {{#each filters as |filter|}}
     <div class="section">
       {{#if (eq filter.displayName "Datasource")}}
         <h4>Data Source</h4>
@@ -15,4 +18,5 @@
       {{/each}}
       <div class="divider"></div>
     </div>
-{{/each}}
+  {{/each}}
+{{/if}}
