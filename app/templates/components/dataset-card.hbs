@@ -7,7 +7,11 @@
         </div>
         <div class="actions-container valign-wrapper">
           {{action-favourite model=dataset}}
-          {{action-share toggleModal=(route-action 'toggleModal') dataset=dataset}}
+          {{action-share
+            actionableId=dataset.id
+            actionableType='dataset'
+            shareUrl=shareUrl
+          }}
         </div>
       </div>
 
@@ -39,7 +43,7 @@
         </div>
       </div>
       <div class="card-footer">
-        {{stats-list stats=dataset.stats}}
+        {{stats-list stats=dataset.stats statType="datasets"}}
       </div>
 
     {{else}} <!-- It is a Dataset -->
@@ -64,7 +68,11 @@
         {{/if}}
         <div class="actions-container valign-wrapper">
           {{action-favourite model=dataset}}
-          {{action-share toggleModal=(route-action 'toggleModal') dataset=dataset}}
+          {{action-share
+            actionableId=dataset.id
+            actionableType='dataset'
+            shareUrl=shareUrl
+          }}
         </div>
       </div>
       <div class="card-body">
@@ -97,7 +105,7 @@
         </div>
       </div>
       <div class="card-footer">
-        {{stats-list stats=dataset.stats access=dataset.access}}
+        {{stats-list stats=dataset.stats access=dataset.access statType="datasets"}}
       </div>
     {{/if}}
   </div>

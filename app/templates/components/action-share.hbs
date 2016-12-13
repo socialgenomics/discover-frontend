@@ -1,13 +1,57 @@
 {{fa-icon "share-alt"}}
+
 {{#if showShareOptionsModal}}
   {{#tether-dialog
     close=(action 'toggleShareOptionsModal')
-    target='.share-options-button'
+    target=(concat '#' elementId)
     targetAttachment='bottom left'
     attachment='top left'
     translucentOverlay=false
     container-class='share-options-modal'
+    constraints=shareOptionsModalConstraints
   }}
-    {{share-options}}
+    {{share-options
+      shareUrl=shareUrl
+      onEnvelopeClick=(action (if session.isAuthenticated 'toggleShareEmailModal' 'toggleCreateAccountModal'))
+    }}
   {{/tether-dialog}}
+{{/if}}
+
+{{#if showShareEmailModal}}
+  {{#modal-dialog
+    close=(action 'toggleShareEmailModal')
+    targetAttachment="center"
+    translucentOverlay=true
+  }}
+    {{#repositive-modal/wrapper size='medium'}}
+      {{repositive-modal/header
+        icon='envelope'
+        alternateBackground=true
+        title='Share this dataset'
+        onClose=(action 'toggleShareEmailModal')
+      }}
+        {{share-by-email-form
+          actionableId=actionableId
+          actionableType=actionableType
+          onClose=(action 'toggleShareEmailModal')
+        }}
+    {{/repositive-modal/wrapper}}
+  {{/modal-dialog}}
+{{/if}}
+
+{{#if showCreateAccountModal}}
+  {{#modal-dialog
+    close=(action 'toggleCreateAccountModal')
+    targetAttachment="center"
+    translucentOverlay=true
+  }}
+    {{#repositive-modal/wrapper size='medium'}}
+      {{repositive-modal/header
+        icon='envelope'
+        title='Share via email'
+        onClose=(action 'toggleCreateAccountModal')
+      }}
+      {{create-account-modal-content text='To share this dataset via email you need to have an account.'}}
+    {{/repositive-modal/wrapper}}
+  {{/modal-dialog}}
 {{/if}}

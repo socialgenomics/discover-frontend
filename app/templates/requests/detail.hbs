@@ -3,7 +3,11 @@
     <div class="top-action card-header">
       <div class="actions-container valign-wrapper">
         {{action-favourite model=request}}
-        {{action-share toggleModal=(route-action 'toggleModal')}}
+        {{action-share
+          actionableId=request.id
+          actionableType='request'
+          shareUrl=requestUrl
+        }}
       </div>
     </div>
     <div class="card-main-content">
