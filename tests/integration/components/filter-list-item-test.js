@@ -13,6 +13,11 @@ describe('Integration: FilterListItemComponent', function() {
     integration: true
   });
 
+  beforeEach(function () {
+    this.register('service:search', searchServiceStub);
+    this.inject.service('search', { as: 'searchService' });
+  });
+
   it('Renders the filter name and count.', function() {
     this.setProperties({
       bucket: {
@@ -20,8 +25,7 @@ describe('Integration: FilterListItemComponent', function() {
         doc_count: 8,
         colour: null
       },
-      aggName: 'Datasource',
-      searchService: searchServiceStub
+      aggName: 'Datasource'
     });
     this.render(hbs`{{filter-list-item bucket=bucket aggName=aggName}}`);
     expect(this.$('span').text().trim()).to.eql('Abc (8)');
@@ -34,8 +38,7 @@ describe('Integration: FilterListItemComponent', function() {
         doc_count: 10,
         colour: 'indigo'
       },
-      aggName: 'assay',
-      searchService: searchServiceStub
+      aggName: 'assay'
     });
     this.render(hbs`{{filter-list-item bucket=bucket aggName=aggName}}`);
     expect(this.$('span').text().trim()).to.eql('Assay Abc (10)');
