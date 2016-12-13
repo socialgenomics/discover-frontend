@@ -22,11 +22,11 @@ export default Component.extend({
   actions: {
     nextPage() {
       const searchService = get(this, 'searchService');
-      get(this, 'search')(searchService.getQueryString(), get(this, 'currentPageNumber') + 1);
+      get(this, 'search')(searchService.getQueryTree(), get(this, 'currentPageNumber') + 1);
     },
     previousPage() {
       const searchService = get(this, 'searchService');
-      get(this, 'search')(searchService.getQueryString(), get(this, 'currentPageNumber') - 1);
+      get(this, 'search')(searchService.getQueryTree(), get(this, 'currentPageNumber') - 1);
     }
   }
 });
