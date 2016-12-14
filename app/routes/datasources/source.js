@@ -7,16 +7,11 @@ import SearchRouteMixin from '../../mixins/search-route';
 
 const { get, Route, RSVP, inject: { service }, Logger, set, assign } = Ember;
 
-const storeDatasets = (store) => (datasets) => datasets.map(dataset => store.push(store.normalize('dataset', dataset)));
-
 export function model(params) {
   const searchService = get(this, 'searchService');
   const store = this.store;
   const collectionId = params.id;
-  const limit = params.limit;
   const queryString = params.query;
-  const offset = limit * (params.page - 1);
-  const datasetsUrl = ENV.APIRoutes['collection-datasets'].replace('{collection_id}', collectionId) + `?limit=${params.limit}&offset=${offset}`;
   return RSVP.hash({
     actionable: this._peekOrCreate(store, collectionId),
     collection: store.findRecord('collection', collectionId),
@@ -34,28 +29,18 @@ export function model(params) {
         set(model, 'collection.actionableId', model.actionable);
         return model
       });
-    }).catch(Logger.error);
+    })
+      .catch(Logger.error);
 }
 
 export default Route.extend(AuthenticatedRouteMixin, ResetScrollMixin, ActionableMixin, SearchRouteMixin, {
-  session: service(),
   ajax: service(),
+  session: service(),
   searchService: service('search'),
+
   controllerName: 'collection',
   model: model,
   afterModel(model) {
     this._incrementViewCounter(model.collection, get(this, 'session.authenticatedUser'));
-  },
-  resetController(controller, isExiting) {
-    if (isExiting) {
-      set(controller, 'page', 1);
-    }
-  },
-  actions: {
-
-    invalidateModel: function() {
-      this.controller.set('isLoading', true);
-      this.refresh().promise.then(() => this.controller.set('isLoading', false));
-    }
   }
 });

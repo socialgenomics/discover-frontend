@@ -26,7 +26,7 @@ export default Service.extend({
   * @desc Adds a predicate to query tree if it's not already there.
   * @param {string} predicate - Predicate if filter to be added to tree e.g. 'assay'
   * @param {string} text - The text of the filter to be added e.g. 'Chip-Seq'
-  * @returns {string} - The new queryString
+  * @returns {Tree} - The new queryTree
   * @public
   */
   addFilter(predicate, text) {
@@ -38,7 +38,7 @@ export default Service.extend({
   * @desc Removes the predicate from the query tree if present
   * @param {string} predicate - Predicate/Type of filter to be removed from the tree
   * @param {string} text - Specific text of filter to be removed
-  * @returns {string} - The new queryString
+  * @returns {Tree} - The new queryTree
   * @public
   */
   removeFilter(predicate, text) {
@@ -105,6 +105,15 @@ export default Service.extend({
     }).then(this._handleQueryResponse.bind(this))
       .catch(Logger.error);
   },
+  /**
+   * @desc Converts query BTree to String.
+   * @param {BTree} queryTree - Tree to be serialized.
+   * @returns {string} - New string representation of the query
+   * @public
+   */
+  serializeToString(queryTree) {
+    return QP.toBoolString(queryTree);
+  },
 
   /**
    * @desc Converts query String to BTree.
@@ -114,16 +123,6 @@ export default Service.extend({
    */
   _parseString(queryString) {
     return QP.parseString(queryString);
-  },
-
-  /**
-   * @desc Converts query BTree to String.
-   * @param {BTree} queryTree - Tree to be serialized.
-   * @returns {string} - New string representation of the query
-   * @private
-   */
-  serializeToString(queryTree) {
-    return QP.toBoolString(queryTree);
   },
 
   /**
