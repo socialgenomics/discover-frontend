@@ -10,12 +10,14 @@ export default Component.extend({
   }),
   actions: {
     addFilter(name, key) {
-      const queryString = get(this, 'searchService').addFilter(name, key);
-      get(this, 'search')(queryString);
+      const query = get(this, 'searchService').addFilter(name, key);
+      get(this, 'searchService').updateQuery(query);
+      get(this, 'search')(query);
     },
     removeFilter(name, key) {
-      const queryString = get(this, 'searchService').removeFilter(name, key);
-      get(this, 'search')(queryString);
+      const query = get(this, 'searchService').removeFilter(name, key);
+      get(this, 'searchService').updateQuery(query);
+      get(this, 'search')(query);
     }
   }
 });

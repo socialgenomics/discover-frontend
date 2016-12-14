@@ -27,6 +27,7 @@ export function model(params) {
       const short_name = get(data.collection, 'properties.short_name');
       const type = get(data.collection, 'type') === 'datasource' ? 'datasource' : 'collection';
       const queryTree = searchService.getQueryTree() || searchService.updateQuery(`${type}:${short_name || normalisedName}`);
+      debugger;
       return searchService.makeRequest(queryTree, params.page || 0)
       .then(m => {
         const model = assign(data, m);

@@ -62,9 +62,7 @@ export default Service.extend({
    * @public
    */
   updateQueryAndMakeRequest(queryStringOrTree, pageNumber) {
-    return this.makeRequest(this.updateQuery(queryStringOrTree, pageNumber))
-      .then(this._handleQueryResponse.bind(this))
-      .catch(Logger.error);
+    return this.makeRequest(this.updateQuery(queryStringOrTree, pageNumber));
   },
 
   /**
@@ -104,7 +102,8 @@ export default Service.extend({
         'limit': get(this, 'resultsPerPage'),
         'body': queryTree
       })
-    });
+    }).then(this._handleQueryResponse.bind(this))
+      .catch(Logger.error);
   },
 
   /**

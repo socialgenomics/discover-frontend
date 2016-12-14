@@ -31,14 +31,18 @@ export default Route.extend(ApplicationRouteMixin, {
       const searchService = get(this,  'searchService');
       const currentRouteName = this.controllerFor('application').get('currentRouteName');
       // const queryTree = searchService.getQueryTree();
+
       const collectionF = BT.filter(queryTree, (node, left, right) => {
         return BX.isFilter(node) && node.predicate === 'collection'
       });
       const datasourceF = BT.filter(queryTree, (node, left, right) => {
         return BX.isFilter(node) && node.predicate === 'datasource'
       });
+
       const serializeTree = searchService.serializeToString(queryTree);
+
       if (collectionF.length === 1) {
+        debugger;
         this.transitionTo('collections.collection', collectionF[0].text, {
           queryParams: {
             query: serializeTree,
