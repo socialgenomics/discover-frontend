@@ -14,6 +14,7 @@ export function model(params) {
   const store = this.store;
   const collectionId = params.id;
   const limit = params.limit;
+  const queryString = params.query;
   const offset = limit * (params.page - 1);
   const datasetsUrl = ENV.APIRoutes['collection-datasets'].replace('{collection_id}', collectionId) + `?limit=${params.limit}&offset=${offset}`;
   return RSVP.hash({
@@ -26,8 +27,7 @@ export function model(params) {
       const normalisedName = /\s+/.test(name) ? `"${name}"` : name;
       const short_name = get(data.collection, 'properties.short_name');
       const type = get(data.collection, 'type') === 'datasource' ? 'datasource' : 'collection';
-      const queryTree = searchService.getQueryTree() || searchService.updateQuery(`${type}:${short_name || normalisedName}`);
-      debugger;
+      const queryTree = (queryString && searchService.updateQuery(queryString)) || searchService.updateQuery(`${type}:${short_name || normalisedName}`);
       return searchService.makeRequest(queryTree, params.page || 0)
       .then(m => {
         const model = assign(data, m);
