@@ -5,6 +5,8 @@ import BX from 'npm:../../query-parser/dist/main/b-exp-tree';
 
 const { Route, inject: { service }, get } = Ember;
 
+const re = new RegExp(/^[0-9A-F]{8}-[0-9A-F]{4}-[4][0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i);
+
 export default Route.extend(ApplicationRouteMixin, {
   favouritesService: service('favourites'),
   session: service(),
@@ -44,11 +46,23 @@ export default Route.extend(ApplicationRouteMixin, {
           }
         });
       } else if (datasourceF.length === 1) {
-        this.transitionTo('datasources.source', datasourceF[0].text, {
-          queryParams: {
-            query: serializeTree,
-            page: pageNumber || 1
-          }
+        let query = {};
+        if (re.test(datasourceF[0].text)) {
+          query = {'where.id' : datasourceF[0].text };
+        } else {
+          query = {
+            'where[$or][0][name]' : datasourceF[0].text,
+            'where[$or][1][properties][short_name]' : datasourceF[0].text,
+            'where[$or][2][properties][short_name]' : datasourceF[0].text.toUpperCase()
+          };
+        }
+        this.store.query('collection', query).then(c => {
+          this.transitionTo('datasources.source', c.content[0].id, {
+            queryParams: {
+              query: serializeTree,
+              page: pageNumber || 1
+            }
+          });
         });
       } else {
         this.transitionTo('datasets.search', {
