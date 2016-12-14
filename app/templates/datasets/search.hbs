@@ -1,7 +1,7 @@
 {{#if isError}}
-    <div class="content">
-      {{render 'datasets/search-error'}}
-    </div>
+  <div class="content">
+    {{partial 'datasets/search-error'}}
+  </div>
 {{else}}
   {{#if (gt model.meta.total 0)}}
     {{filters-list filters=model.aggs isLoading=isLoading}}
