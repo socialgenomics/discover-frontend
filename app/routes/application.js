@@ -28,6 +28,7 @@ export default Route.extend(ApplicationRouteMixin, {
   },
   actions: {
     search(queryTree, pageNumber) {
+
       const searchService = get(this,  'searchService');
       const currentRouteName = this.controllerFor('application').get('currentRouteName');
       // const queryTree = searchService.getQueryTree();
@@ -41,34 +42,31 @@ export default Route.extend(ApplicationRouteMixin, {
 
       const serializeTree = searchService.serializeToString(queryTree);
 
-      if (collectionF.length === 1) {
-        debugger;
-        this.transitionTo('collections.collection', collectionF[0].text, {
-          queryParams: {
-            query: serializeTree,
-            page: pageNumber || 1
-          }
-        });
-      } else if (datasourceF.length === 1) {
+      const transition = (dest, input) => {
         let query = {};
-        if (re.test(datasourceF[0].text)) {
-          query = {'where.id' : datasourceF[0].text };
-        } else {
+        if (re.test(input.text))
+          query = {'where.id' : input.text };
+        else
           query = {
-            'where[$or][0][name]' : datasourceF[0].text,
-            'where[$or][1][properties][short_name]' : datasourceF[0].text,
-            'where[$or][2][properties][short_name]' : datasourceF[0].text.toUpperCase()
+            'where[$or][0][name]' : input.text,
+            'where[$or][1][properties][short_name]' : input.text,
+            'where[$or][2][properties][short_name]' : input.text.toUpperCase()
           };
-        }
         this.store.query('collection', query).then(c => {
           this.store.push(this.store.normalize('collection', c.content[0]));
-          this.transitionTo('datasources.source', c.content[0].id, {
+          this.transitionTo(dest, c.content[0].id, {
             queryParams: {
               query: serializeTree,
               page: pageNumber || 1
             }
           });
         });
+      };
+
+      if (collectionF.length === 1) {
+        transition('collections.collection', collectionF[0]);
+      } else if (datasourceF.length === 1) {
+        transition('datasources.source', datasourceF[0]);
       } else {
         this.transitionTo('datasets.search', {
           queryParams: {
