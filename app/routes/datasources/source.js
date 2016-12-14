@@ -22,7 +22,11 @@ export function model(params) {
     collectionStats: get(this, 'ajax').request(ENV.APIRoutes['collection-stats'].replace('{collection_id}', collectionId), { method: 'GET' })
   })
     .then(data => {
-      const queryTree = searchService.getQueryTree() || searchService.updateQuery(`collection:${collectionId}`);
+      const name = get(data.collection, 'name');
+      const normalisedName = /\s+/.test(name) ? `"${name}"` : name;
+      const short_name = get(data.collection, 'properties.short_name');
+      const type = get(data.collection, 'type') === 'datasource' ? 'datasource' : 'collection';
+      const queryTree = searchService.getQueryTree() || searchService.updateQuery(`${type}:${short_name || normalisedName}`);
       return searchService.makeRequest(queryTree, params.page || 0)
       .then(m => {
         const model = assign(data, m);

@@ -57,6 +57,7 @@ export default Route.extend(ApplicationRouteMixin, {
           };
         }
         this.store.query('collection', query).then(c => {
+          this.store.push(this.store.normalize('collection', c.content[0]));
           this.transitionTo('datasources.source', c.content[0].id, {
             queryParams: {
               query: serializeTree,
