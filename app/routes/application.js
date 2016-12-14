@@ -27,8 +27,6 @@ export default Route.extend(ApplicationRouteMixin, {
   actions: {
     search(queryTree, pageNumber) {
       const searchService = get(this,  'searchService');
-      const currentRouteName = this.controllerFor('application').get('currentRouteName');
-      // const queryTree = searchService.getQueryTree();
       const collectionF = BT.filter(queryTree, (node, left, right) => {
         return BX.isFilter(node) && node.predicate === 'collection'
       });

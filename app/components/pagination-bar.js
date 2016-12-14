@@ -10,7 +10,7 @@ export default Component.extend({
   currentPageNumber: computed('searchService.offset', 'searchService.resultsPerPage', function() {
     const offset = get(this, 'searchService.offset');
     const resultsPerPage = get(this, 'searchService.resultsPerPage');
-    return Math.ceil(offset / resultsPerPage) || 0 + 1;
+    return Math.ceil((offset / resultsPerPage) || 0) + 1;
   }),
 
   totalPages: computed('totalResults', 'searchService.resultsPerPage', function() {

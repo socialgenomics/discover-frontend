@@ -1,15 +1,13 @@
 import Ember from 'ember';
 
-export default Ember.Component.extend({
-  firstname: null,
-  username: null,
-  avatar: null,
-  id: null,
-  session: Ember.inject.service(),
+const { Component, inject: { service }, $, get } = Ember;
+
+export default Component.extend({
+  session: service(),
   didRender() {
     this._super(...arguments);
     //dropdown initialization
-    this.$('.dropdown-button').dropdown({
+    $('.dropdown-button').dropdown({
       inDuration: 500,
       outDuration: 225,
       constrain_width: false, // Does not change width of dropdown to that of the activator
@@ -20,14 +18,14 @@ export default Ember.Component.extend({
     });
   },
   actions: {
-    logout: function() {
+    logout() {
       this.flashMessages.clearMessages();
-      this.get('metrics').trackEvent({
+      get(this, 'metrics').trackEvent({
         category: 'auth',
         action: 'logout',
-        label: this.get('session.data.authenticatedUser.main_email')
+        label: get(this, 'session.data.authenticatedUser.main_email')
       });
-      this.get('session').invalidate();
+      get(this, 'session').invalidate();
     }
   }
 });
