@@ -22,7 +22,7 @@ export function model(params) {
       const normalisedName = /\s+/.test(name) ? `"${name}"` : name;
       const short_name = get(data.collection, 'properties.short_name');
       const type = get(data.collection, 'type') === 'datasource' ? 'datasource' : 'collection';
-      const queryTree = (queryString && searchService.updateQuery(queryString)) || searchService.updateQuery(`${type}:${short_name || normalisedName}`);
+      const queryTree = (queryString && searchService.updateQuery(queryString, params.page)) || searchService.updateQuery(`${type}:${short_name || normalisedName}`, params.page);
       return searchService.makeRequest(queryTree, params.page || 0)
       .then(m => {
         const model = assign(data, m);
