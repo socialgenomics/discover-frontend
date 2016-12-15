@@ -10,7 +10,7 @@
         disabled=disabled
       }}
     </div>
-    {{#unless disabled}}
+    {{#unless (or disabled noMarkdown)}}
       <a class="help-link" {{action "toggleMarkdownModal"}}><span>How to format text with Markdown?</span></a>
     {{/unless}}
   {{else}}
