@@ -59,7 +59,7 @@ export default Route.extend(ApplicationRouteMixin, {
       if (collectionF.length === 1) {
         this.queryAndTransition('collections.collection', collectionF[0], serializeTree, pageNumber);
       } else if (datasourceF.length === 1) {
-        this.queryAndTransition('datasources.source', datasourceF[0]);
+        this.queryAndTransition('datasources.source', datasourceF[0], serializeTree, pageNumber);
       } else {
         this.transitionTo('datasets.search', {
           queryParams: {
