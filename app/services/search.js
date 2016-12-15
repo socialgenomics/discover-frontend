@@ -59,6 +59,7 @@ export default Service.extend({
    * @desc Updates the query property and makes a request with this
    * @param {string|Object} queryStringOrTree - The new query value
    * @param {number} pageNumber - The number of the page to fetch
+   * @returns {Promise} - promised data from makeRequest
    * @public
    */
   updateQueryAndMakeRequest(queryStringOrTree, pageNumber) {
@@ -72,7 +73,7 @@ export default Service.extend({
    * @param {string|Object} queryStringOrTree - The new query value
    * @param {number} pageNumber - The number of the page to fetch
    * @returns {Object} - the new queryTree
-   * @private
+   * @public
    */
   updateQuery(queryStringOrTree, pageNumber) {
     let queryTree;
