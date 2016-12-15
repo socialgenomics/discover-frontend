@@ -7,6 +7,17 @@ import SearchRouteMixin from '../../mixins/search-route';
 
 const { get, Route, RSVP, inject: { service }, Logger, set, assign } = Ember;
 
+function doQuery(data, queryString) {
+  // Return query if it already exists
+  if (queryString) return queryString;
+  const name = get(data.collection, 'name');
+  // Put name in quotes if it has spaces
+  const normalisedName = /\s+/.test(name) ? `"${name}"` : name;
+  const short_name = get(data.collection, 'properties.short_name');
+  const type = get(data.collection, 'type') === 'datasource' ? 'datasource' : 'collection';
+  return `${type}:${short_name || normalisedName}`;
+}
+
 export function model(params) {
   const searchService = get(this, 'searchService');
   const store = this.store;
@@ -18,11 +29,8 @@ export function model(params) {
     collectionStats: get(this, 'ajax').request(ENV.APIRoutes['collection-stats'].replace('{collection_id}', collectionId), { method: 'GET' })
   })
     .then(data => {
-      const name = get(data.collection, 'name');
-      const normalisedName = /\s+/.test(name) ? `"${name}"` : name;
-      const short_name = get(data.collection, 'properties.short_name');
-      const type = get(data.collection, 'type') === 'datasource' ? 'datasource' : 'collection';
-      const queryTree = (queryString && searchService.updateQuery(queryString, params.page)) || searchService.updateQuery(`${type}:${short_name || normalisedName}`, params.page);
+      const updatedQuery = doQuery(data, queryString);
+      const queryTree = searchService.updateQuery(updatedQuery, params.page);
       return searchService.makeRequest(queryTree, params.page || 0)
       .then(m => {
         const model = assign(data, m);
