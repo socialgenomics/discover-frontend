@@ -78,7 +78,12 @@ export default Service.extend({
   updateQuery(queryStringOrTree, pageNumber) {
     let queryTree;
     if (typeof queryStringOrTree === 'string') {
-      queryTree = this._parseString(queryStringOrTree);
+      try {
+        queryTree = this._parseString(queryStringOrTree);
+      } catch(err) {
+        //Returns to application-route search action, to render error page.
+        return { isError: true };
+      }
     } else if (typeof queryStringOrTree === 'object') {
       queryTree = queryStringOrTree;
     }
