@@ -51,10 +51,10 @@ export default Route.extend(ApplicationRouteMixin, {
     search(queryTree, pageNumber) {
       const searchService = get(this,  'searchService');
       const collectionF = BT.filter(queryTree, (node, left, right) => {
-        return BX.isFilter(node) && node.predicate === 'collection'
+        return BX.isFilter(node) && node.predicate === 'collection';
       });
       const datasourceF = BT.filter(queryTree, (node, left, right) => {
-        return BX.isFilter(node) && node.predicate === 'datasource'
+        return BX.isFilter(node) && node.predicate === 'datasource';
       });
       const serializeTree = searchService.serializeToString(queryTree);
       if (collectionF.length === 1) {

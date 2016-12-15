@@ -1,20 +1,16 @@
 {{#if isError}}
-    <div class="content">
-      {{render 'datasets/search-error'}}
-    </div>
+  <div class="content">
+    {{partial 'datasets/search-error'}}
+  </div>
 {{else}}
   {{#if (gt model.meta.total 0)}}
     {{filters-list filters=model.aggs isLoading=isLoading}}
   {{/if}}
   <div class="content right">
-    <div class="margin-top">
-      {{#unless isLoading}}
-        <h5 class="unfocus-grey-text">Search Results ({{ model.meta.total }})</h5>
-      {{/unless}}
-    </div>
     {{#if isLoading}}
       {{partial 'loading'}}
     {{else}}
+      <h5 class="unfocus-grey-text">Search Results ({{ model.meta.total }})</h5>
       {{search-results-list results=model.datasets totalResults=model.meta.total}}
       {{#if (gt model.meta.total 0)}}
         {{pagination-bar totalResults=model.meta.total search=(route-action 'search')}}
