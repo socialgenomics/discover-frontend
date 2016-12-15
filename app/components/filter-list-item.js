@@ -8,16 +8,18 @@ export default Component.extend({
     const filterString = `${get(this, 'aggName')}:${get(this, 'bucket.key')}`;
     return get(this, 'searchService').isFilterActive(filterString);
   }),
+  sendAction: function (query) {
+    get(this, 'searchService').updateQuery(query);
+    get(this, 'search')(query);
+  },
   actions: {
     addFilter(name, key) {
       const query = get(this, 'searchService').addFilter(name, key);
-      get(this, 'searchService').updateQuery(query);
-      get(this, 'search')(query);
+      this.sendAction(query);
     },
     removeFilter(name, key) {
       const query = get(this, 'searchService').removeFilter(name, key);
-      get(this, 'searchService').updateQuery(query);
-      get(this, 'search')(query);
+      this.sendAction(query);
     }
   }
 });
