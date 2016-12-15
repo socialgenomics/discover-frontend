@@ -2,16 +2,19 @@
   collectionStats=model.collectionStats
   model=model.collection
   filters=model.aggs
+  isLoading=isLoading
   type=model.collection.type
   datasets=model.datasets}}
 
 <div class="content push-right">
-  {{#unless isLoading}}
+  {{#if isLoading}}
+    {{partial 'loading'}}
+  {{else}}
     {{search-results-list results=model.datasets}}
     {{#if (gt model.collectionStats.datasets 0)}}
       <div class="pagination-container">
         {{pagination-bar totalResults=model.meta.total search=(route-action 'search')}}
       </div>
     {{/if}}
-  {{/unless}}
+  {{/if}}
 </div>
