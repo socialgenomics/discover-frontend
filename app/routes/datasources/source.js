@@ -9,7 +9,7 @@ const { get, Route, RSVP, inject: { service }, Logger, set, assign } = Ember;
 
 function doQuery(data, queryString) {
   // Return query if it already exists
-  if (queryString) return queryString;
+  if (queryString) { return queryString; }
   const name = get(data.collection, 'name');
   // Put name in quotes if it has spaces
   const normalisedName = /\s+/.test(name) ? `"${name}"` : name;
@@ -35,7 +35,7 @@ export function model(params) {
       .then(m => {
         const model = assign(data, m);
         set(model, 'collection.actionableId', model.actionable);
-        return model
+        return model;
       });
     })
       .catch(Logger.error);

@@ -28,14 +28,15 @@ export default Route.extend(ApplicationRouteMixin, {
   },
   queryAndTransition (dest, input, serializeTree, pageNumber) {
     let query = {};
-    if (isUUID.test(input.text))
-      query = {'where.id' : input.text };
-    else
+    if (isUUID.test(input.text)) {
+      query = { 'where.id' : input.text };
+    } else {
       query = {
         'where[$or][0][name]' : input.text,
         'where[$or][1][properties][short_name]' : input.text,
         'where[$or][2][properties][short_name]' : input.text.toUpperCase()
       };
+    }
     this.store.query('collection', query).then(collection => {
       this.store.push(this.store.normalize('collection', collection.content[0]));
       this.transitionTo(dest, collection.content[0].id, {
