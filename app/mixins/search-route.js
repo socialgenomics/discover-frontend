@@ -18,8 +18,6 @@ export default Mixin.create({
       transition.promise.finally(() => {
         set(controller, 'isLoading', false);
       });
-    },
-    error() { set(this, 'controller.isError', true); },
-    willTransition() { set(this, 'controller.isError', false); }
+    }
   }
 });
