@@ -14,8 +14,9 @@
   </a>
 </ul>
 
-<main>
-  {{#if displayInfo}}
+
+{{#if displayInfo}}
+  <main>
     <h3>{{source-name-fallback model=model}}</h3>
     {{collection-created-by user=model.userId type=model.type}}
 
@@ -28,8 +29,7 @@
       <div class="divider"></div>
       <p class="markdown-text">{{markdown-to-html markdown=model.description}}</p>
     {{/if}}
-
-  {{else}}
-    {{filters-list filters=filters isLoading=isLoading}}
-  {{/if}}
-</main>
+  </main>
+{{else}}
+  {{filters-list filters=filters isLoading=isLoading}}
+{{/if}}
