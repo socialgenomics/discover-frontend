@@ -10,7 +10,6 @@ export default Component.extend({
     showInfo() {
       this.set('displayInfo', true);
     },
-
     showFilters() {
       this.set('displayInfo', false);
     }

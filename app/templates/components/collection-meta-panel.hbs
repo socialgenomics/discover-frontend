@@ -5,15 +5,7 @@
   <h5>Collection</h5>
 </header>
 
-<ul class="tabs">
-  <a {{action "showInfo"}}>
-    <li class="tab {{if displayInfo "active-tab"}}"><h5>More Information</h5></li>
-  </a>
-  <a {{action "showFilters"}}>
-    <li class="tab {{unless displayInfo "active-tab"}}"><h5>Filters</h5></li>
-  </a>
-</ul>
-
+{{meta-panel-tabs showInfo=(action 'showInfo') showFilters=(action 'showFilters') displayInfo=displayInfo}}
 
 {{#if displayInfo}}
   <main>

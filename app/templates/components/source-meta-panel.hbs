@@ -1,25 +1,18 @@
 <header>
-  {{#unless (eq type 'personal_repository')}}
+  {{#unless (eq model.type 'personal_repository')}}
     {{panel-back-button route='datasources'}}
   {{/unless}}
   <img src="/assets/images/icons/icon-datasource-white@2x.png" class="data-icon">
   <h5>Data Source</h5>
 </header>
 
-<ul class="tabs">
-  <a {{action "showInfo"}}>
-    <li class="tab {{if displayInfo "active-tab"}}"><h5>More Information</h5></li>
-  </a>
-  <a {{action "showFilters"}}>
-    <li class="tab {{unless displayInfo "active-tab"}}"><h5>Filters</h5></li>
-  </a>
-</ul>
+{{meta-panel-tabs showInfo=(action 'showInfo') showFilters=(action 'showFilters') displayInfo=displayInfo}}
 
 {{#if displayInfo}}
   <main>
     <h3>{{source-name-fallback model=model}}</h3>
-    {{#unless (eq type 'datasource')}}
-      {{collection-created-by user=model.userId type=type}}
+    {{#unless (eq model.type 'datasource')}}
+      {{collection-created-by user=model.userId type=model.type}}
     {{/unless}}
 
     <section class="stats-numbers">
