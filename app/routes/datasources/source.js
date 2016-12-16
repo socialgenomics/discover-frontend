@@ -37,8 +37,7 @@ export function model(params) {
         set(model, 'collection.actionableId', model.actionable);
         return model;
       });
-    })
-      .catch(Logger.error);
+    }).catch(Logger.error);
 }
 
 export default Route.extend(AuthenticatedRouteMixin, ResetScrollMixin, ActionableMixin, SearchRouteMixin, {

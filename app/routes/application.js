@@ -49,6 +49,9 @@ export default Route.extend(ApplicationRouteMixin, {
   },
   actions: {
     search(queryTree, pageNumber) {
+      if (queryTree && queryTree.isError) {
+        return this.transitionTo('datasets.search-error');
+      }
       const searchService = get(this,  'searchService');
       const collectionF = BT.filter(queryTree, (node, left, right) => {
         return BX.isFilter(node) && node.predicate === 'collection';
