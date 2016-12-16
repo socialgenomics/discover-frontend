@@ -1,10 +1,11 @@
-{{source-meta-panel
+{{meta-panel
   collectionStats=model.collectionStats
   model=model.collection
   filters=model.aggs
   isLoading=isLoading
-  type=model.collection.type
-  datasets=model.datasets}}
+  datasets=model.datasets
+  class="source-panel"
+}}
 
 <div class="content push-right">
   {{#if isLoading}}
