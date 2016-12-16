@@ -4,7 +4,7 @@ const { Component } = Ember;
 
 export default Component.extend({
   tagName: 'section',
-  classNames: ['metadata-panel source-panel'],
+  classNames: ['metadata-panel'],
   displayInfo: true,
   actions: {
     showInfo() {

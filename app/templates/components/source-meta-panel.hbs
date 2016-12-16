@@ -1,9 +1,17 @@
 <header>
-  {{#unless (eq model.type 'personal_repository')}}
+  {{#if (eq model.type 'datasource')}}
     {{panel-back-button route='datasources'}}
-  {{/unless}}
-  <img src="/assets/images/icons/icon-datasource-white@2x.png" class="data-icon">
-  <h5>Data Source</h5>
+  {{else if (eq model.type 'repositive_collection')}}
+    {{panel-back-button route='collections'}}
+  {{/if}}
+
+  {{#if (eq model.type 'repositive_collection')}}
+    <img src="/assets/images/icons/icon-collection-white@2x.png" class="data-icon">
+    <h5>Collection</h5>
+  {{else}}
+    <img src="/assets/images/icons/icon-datasource-white@2x.png" class="data-icon">
+    <h5>Data Source</h5>
+  {{/if}}
 </header>
 
 {{meta-panel-tabs showInfo=(action 'showInfo') showFilters=(action 'showFilters') displayInfo=displayInfo}}
@@ -15,8 +23,14 @@
       {{collection-created-by user=model.userId type=model.type}}
     {{/unless}}
 
+    <div class="divider"></div>
+
     <section class="stats-numbers">
-      {{stats-list stats=collectionStats statType="datasource"}}
+      {{#if (eq model.type 'repositive_collection')}}
+        {{stats-list stats=collectionStats statType="collection"}}
+      {{else}}
+        {{stats-list stats=collectionStats statType="datasource"}}
+      {{/if}}
     </section>
 
     {{#if model.description}}
