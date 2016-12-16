@@ -4,7 +4,7 @@
 			{{#link-to 'requests.detail' dataset.id}}<h5 class="data-title" alt="dataset title">{{truncate dataset.title 55}}</h5>{{/link-to}}
 			{{from-label model=dataset isRequest=true isFavourite=isFavourite}}
 			<div class="card-footer">
-				{{stats-list stats=dataset.stats}}
+				{{stats-list stats=dataset.stats statType="datasets"}}
 			</div>
 		</div>
 	{{else}}	<!-- Dataset or Registration -->
@@ -12,7 +12,7 @@
 	    {{#link-to 'datasets.detail' dataset.id}}<h5 class="data-title" alt="dataset title">{{truncate dataset.title 55}}</h5>{{/link-to}}
 			{{from-label model=dataset isFavourite=isFavourite}}
 			<div class="card-footer">
-				{{stats-list stats=dataset.stats access=dataset.access}}
+				{{stats-list stats=dataset.stats access=dataset.access statType="datasets"}}
 	    </div>
 		</div>
 	{{/if}}
