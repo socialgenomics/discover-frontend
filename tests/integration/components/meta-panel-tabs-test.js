@@ -8,17 +8,15 @@ describe('Integration | Component | meta panel tabs', function() {
     integration: true
   });
 
-  it('renders', function() {
-    // Set any properties with this.set('myProperty', 'value');
-    // Handle any actions with this.on('myAction', function(val) { ... });
-    // Template block usage:
-    // this.render(hbs`
-    //   {{#meta-panel-tabs}}
-    //     template content
-    //   {{/meta-panel-tabs}}
-    // `);
+  it('When displayInfo is true, info tab is active', function() {
+    this.set('displayInfo', true);
+    this.render(hbs`{{meta-panel-tabs displayInfo=displayInfo}}`);
+    expect(this.$('.active-tab').text().trim()).to.eql('More Information');
+  });
 
-    this.render(hbs`{{meta-panel-tabs}}`);
-    expect(this.$()).to.have.length(1);
+  it('When displayInfo is false, filters tab is active', function() {
+    this.set('displayInfo', false);
+    this.render(hbs`{{meta-panel-tabs displayInfo=displayInfo}}`);
+    expect(this.$('.active-tab').text().trim()).to.eql('Filters');
   });
 });
