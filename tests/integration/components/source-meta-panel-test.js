@@ -9,15 +9,13 @@ describe('Integration: SourceMetaPanelComponent', function() {
     integration: true
   });
 
-  it('renders back to datasource button if is not a personal repository', function() {
-    this.set('model', { type: 'datasource' });
-    this.render(hbs`{{source-meta-panel model=model}}`);
-    expect(this.$('a.left-align')).to.have.length(1);
+  it('Renders filters when filters tab is active', function() {
+    this.render(hbs`{{source-meta-panel  model=model displayInfo=false}}`);
+    expect(this.$('.filters-list').find('h4').text().trim()).to.eql('Filters');
   });
-
-  it('does not render back to datasource button if it is a personal repository', function() {
-    this.set('model', { type: 'personal_repository' });
+  it('Renders info when info tab selected', function() {
+    this.set('model', { name: 'ABC' });
     this.render(hbs`{{source-meta-panel model=model}}`);
-    expect(this.$('a.left-align')).to.have.length(0);
+    expect(this.$('.source-name-fallback').text().trim()).to.eql('ABC');
   });
 });

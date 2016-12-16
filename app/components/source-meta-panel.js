@@ -7,11 +7,7 @@ export default Component.extend({
   classNames: ['metadata-panel'],
   displayInfo: true,
   actions: {
-    showInfo() {
-      this.set('displayInfo', true);
-    },
-    showFilters() {
-      this.set('displayInfo', false);
-    }
+    showInfo() { this.set('displayInfo', true); },
+    showFilters() { this.set('displayInfo', false); }
   }
 });
