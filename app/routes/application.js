@@ -26,7 +26,7 @@ export default Route.extend(ApplicationRouteMixin, {
   },
   actions: {
     search(queryTree, pageNumber) {
-      if ('isError' in queryTree && get(queryTree, 'isError')) {
+      if (queryTree && queryTree.isError) {
         return this.transitionTo('datasets.search-error');
       }
       const searchService = get(this,  'searchService');

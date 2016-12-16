@@ -11,7 +11,6 @@ export function model(params) {
   const searchService = get(this, 'searchService');
   const store = this.store;
   const collectionId = params.id;
-  // const limit = params.limit;
   return RSVP.hash({
     actionable: this._peekOrCreate(store, collectionId),
     collection: store.findRecord('collection', collectionId),
