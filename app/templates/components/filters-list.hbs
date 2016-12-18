@@ -1,11 +1,14 @@
 <h4 class="unfocus-grey-text">Filters</h4>
 {{#each filters as |filter|}}
-    <div class="section">
-      {{#if (eq filter.displayName "Datasource")}}
-        <h4>Data Source</h4>
-      {{else}}
-        <h4>{{ filter.displayName }}</h4>
-      {{/if}}
+  <div class="section">
+    {{#if (eq filter.displayName "Datasource")}}
+      <h4>Data Source</h4>
+    {{else}}
+      <h4>{{ filter.displayName }}</h4>
+    {{/if}}
+    {{#if isLoading}}
+      <p>Loading new filters...</p>
+    {{else}}
       {{#each filter.buckets as |bucket|}}
         {{filter-list-item
           bucket=bucket
@@ -13,6 +16,7 @@
           search=(route-action 'search')
         }}
       {{/each}}
-      <div class="divider"></div>
-    </div>
+    {{/if}}
+    <div class="divider"></div>
+  </div>
 {{/each}}

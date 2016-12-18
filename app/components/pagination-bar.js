@@ -10,7 +10,7 @@ export default Component.extend({
   currentPageNumber: computed('searchService.offset', 'searchService.resultsPerPage', function() {
     const offset = get(this, 'searchService.offset');
     const resultsPerPage = get(this, 'searchService.resultsPerPage');
-    return Math.ceil(offset / resultsPerPage) || 0 + 1;
+    return Math.ceil((offset / resultsPerPage) || 0) + 1;
   }),
 
   totalPages: computed('totalResults', 'searchService.resultsPerPage', function() {
@@ -22,11 +22,11 @@ export default Component.extend({
   actions: {
     nextPage() {
       const searchService = get(this, 'searchService');
-      get(this, 'search')(searchService.getQueryString(), get(this, 'currentPageNumber') + 1);
+      get(this, 'search')(searchService.getQueryTree(), get(this, 'currentPageNumber') + 1);
     },
     previousPage() {
       const searchService = get(this, 'searchService');
-      get(this, 'search')(searchService.getQueryString(), get(this, 'currentPageNumber') - 1);
+      get(this, 'search')(searchService.getQueryTree(), get(this, 'currentPageNumber') - 1);
     }
   }
 });

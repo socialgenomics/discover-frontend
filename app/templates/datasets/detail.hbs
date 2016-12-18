@@ -9,13 +9,15 @@
   <div class="col l7 m6 s12 card-main-wrapper">
     <div class="top-action card-header">
       {{#if dataset.colour}}
-        {{#link-to 'datasets.search' (query-params q="" assay=dataset.assay) }}
-          {{assay-type assay=dataset}}
-        {{/link-to}}
+        {{assay-type assay=dataset}}
       {{/if}}
       <div class="actions-container valign-wrapper">
         {{action-favourite model=dataset}}
-        {{action-share toggleModal=(route-action 'toggleModal')}}
+        {{action-share
+          actionableId=dataset.id
+          actionableType='dataset'
+          shareUrl=datasetUrl
+        }}
       </div>
     </div>
     <div class="card-main-content">
@@ -42,17 +44,25 @@
         <div class="col m12">
           <ul class="card-info-list left-align">
             {{#if dataset.userId}}
-              <li class="card-info-attr">Submitted by: {{#link-to 'user' dataset.userId.id }}<span>{{dataset.userId.displayName}}</span>{{/link-to}}</li>
+              <li class="card-info-attr">
+                Submitted by: {{#link-to 'user' dataset.userId.id }}<span>{{dataset.userId.displayName}}</span>{{/link-to}}
+              </li>
             {{else}}
-              {{#if dataset.datasourceId.shortName}}
-                <li class="card-info-attr">Sourced from: <a><span>{{dataset.datasourceId.shortName}}</span></a></li>
+              {{#if dataset.datasourceId.name}}
+                <li class="card-info-attr">
+                  Sourced from: {{#link-to 'datasources.source' dataset.datasourceId.id}}<span>{{dataset.datasourceId.name}}</span>{{/link-to}}
+                </li>
               {{/if}}
               {{#if dataset.accession}}
-                <li class="card-info-attr">Accession: <span>{{dataset.externalId}}</span></li>
+                <li class="card-info-attr">
+                  Accession ID: <span>{{dataset.externalId}}</span>
+                </li>
               {{/if}}
             {{/if}}
             {{#if dataset.access}}
-              <li class="card-info-attr">Access: <span>{{dataset.access}}</span></li>
+              <li class="card-info-attr">
+                Access type: {{#link-to 'help.searching-for-data' (query-params help="filters")}}<span>{{dataset.access}}</span>{{/link-to}}
+              </li>
             {{/if}}
           </ul>
         </div>

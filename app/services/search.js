@@ -14,42 +14,56 @@ export default Service.extend({
   offset: 0,
   resultsPerPage: 9,
 
-  getQueryString() { return get(this, 'queryString'); },
+  getQueryString() {
+    return this.serializeToString(get(this, 'queryTree'));
+  },
+
+  getQueryTree() {
+    return get(this, 'queryTree');
+  },
 
   /**
   * @desc Adds a predicate to query tree if it's not already there.
   * @param {string} predicate - Predicate if filter to be added to tree e.g. 'assay'
   * @param {string} text - The text of the filter to be added e.g. 'Chip-Seq'
-  * @returns {string} - The new queryString
+  * @returns {Tree} - The new queryTree
   * @public
   */
   addFilter(predicate, text) {
     const queryTree = (get(this, 'queryTree'));
-    return this._serializeToString(QP.addFilter(queryTree, predicate, text));
+    return QP.addFilter(queryTree, predicate, text);
   },
 
   /**
   * @desc Removes the predicate from the query tree if present
   * @param {string} predicate - Predicate/Type of filter to be removed from the tree
   * @param {string} text - Specific text of filter to be removed
-  * @returns {string} - The new queryString
+  * @returns {Tree} - The new queryTree
   * @public
   */
   removeFilter(predicate, text) {
     const queryTree = (get(this, 'queryTree'));
-    return this._serializeToString(QP.removeFilter(queryTree, predicate, text));
+    return QP.removeFilter(queryTree, predicate, text);
+  },
+
+  /**
+   * @desc Checks if a 'predicate:term' filter string is currently on the query (Active filter test)
+   * @param filterString
+   * @returns {boolean}
+   */
+  isFilterActive(filterString) {
+    return this._getActiveFilters().indexOf(filterString) > -1;
   },
 
   /**
    * @desc Updates the query property and makes a request with this
    * @param {string|Object} queryStringOrTree - The new query value
    * @param {number} pageNumber - The number of the page to fetch
+   * @returns {Promise} - promised data from makeRequest
    * @public
    */
   updateQueryAndMakeRequest(queryStringOrTree, pageNumber) {
-    return this._makeRequest(this._updateQuery(queryStringOrTree, pageNumber))
-      .then(this._handleQueryResponse.bind(this))
-      .catch(Logger.error);
+    return this.makeRequest(this.updateQuery(queryStringOrTree, pageNumber));
   },
 
   /**
@@ -57,18 +71,24 @@ export default Service.extend({
    * @param {string|Object} queryStringOrTree - The new query value
    * @param {number} pageNumber - The number of the page to fetch
    * @returns {Object} - the new queryTree
-   * @private
+   * @public
    */
-  _updateQuery(queryStringOrTree, pageNumber) {
+  updateQuery(queryStringOrTree, pageNumber) {
     let queryTree;
     if (typeof queryStringOrTree === 'string') {
-      queryTree = this._parseString(queryStringOrTree);
+      try {
+        queryTree = this._parseString(queryStringOrTree);
+      } catch(err) {
+        //Returns to application-route search action, to render error page.
+        return { isError: true };
+      }
     } else if (typeof queryStringOrTree === 'object') {
       queryTree = queryStringOrTree;
     }
-    this._setQueryString(this._serializeToString(queryTree));
+    this._setQueryString(this.serializeToString(queryTree));
     this._setQueryTree(queryTree);
     this._setOffsetFromPageNumber(pageNumber);
+    this._setActiveFilters(QP.getFilters(queryTree).map(f => `${f.predicate}:${f.text}`));
     return queryTree;
   },
 
@@ -78,7 +98,7 @@ export default Service.extend({
   * @returns {Promise} - The promised data
   * @private
   */
-  _makeRequest(queryTree) {
+  makeRequest(queryTree) {
     return get(this, 'ajax').request(ENV.APIRoutes['datasets.search'], {
       method: 'POST',
       contentType: 'application/json',
@@ -88,7 +108,17 @@ export default Service.extend({
         'limit': get(this, 'resultsPerPage'),
         'body': queryTree
       })
-    });
+    }).then(this._handleQueryResponse.bind(this))
+      .catch(Logger.error);
+  },
+  /**
+   * @desc Converts query BTree to String.
+   * @param {BTree} queryTree - Tree to be serialized.
+   * @returns {string} - New string representation of the query
+   * @public
+   */
+  serializeToString(queryTree) {
+    return QP.toBoolString(queryTree);
   },
 
   /**
@@ -99,16 +129,6 @@ export default Service.extend({
    */
   _parseString(queryString) {
     return QP.parseString(queryString);
-  },
-
-  /**
-   * @desc Converts query BTree to String.
-   * @param {BTree} queryTree - Tree to be serialized.
-   * @returns {string} - New string representation of the query
-   * @private
-   */
-  _serializeToString(queryTree) {
-    return QP.toBoolString(queryTree);
   },
 
   /**
@@ -126,12 +146,26 @@ export default Service.extend({
   _setQueryTree(queryTree) { set(this, 'queryTree', queryTree); },
 
   /**
+   * @desc Set the list of filters currently on the query
+   * @param filters - An array of 'predicate:term' strings
+   * @private
+   */
+  _setActiveFilters(filters) { set(this, 'activeFilters', filters); },
+
+  /**
+   * @desc Returns list of filters on current tree
+   * @returns {Array} - An array of 'predicate:term' strings
+   * @private
+   */
+  _getActiveFilters() { return get(this, 'activeFilters'); },
+
+  /**
    * @desc Sets the service's offset value from a passed in page number
    * @param {number} pageNumber - Page number to convert to offset value
    * @private
    */
   _setOffsetFromPageNumber(pageNumber) {
-    set(this, 'offset', pageNumber * get(this, 'resultsPerPage'));
+    set(this, 'offset', (pageNumber - 1) * get(this, 'resultsPerPage'));
   },
 
   /**

@@ -1,0 +1,26 @@
+{{#if sendSuccess}}
+  <h2 class="success-message">Success! <br> Your email has been sent.</h2>
+{{else if sendError}}
+  <h2 class="success-message">Oops, something didn’t work! <br> Your email has not been sent.</h2>
+{{else}}
+  {{validated-input
+    type="text"
+    value=emailAddress
+    errors=errors.emailAddress
+    placeholder="Email"
+  }}
+  {{validated-input
+    type='textarea'
+    value=customMessage
+    placeholder='Include personal message with this dataset.'
+    textarea="true"
+    noMarkdown= true
+  }}
+{{/if}}
+<button
+  type="submit"
+  class="btn waves-effect {{unless submitDisabled 'teal white-text'}}"
+  disabled={{submitDisabled}}
+>
+  {{submitButtonLabel}}
+</button>

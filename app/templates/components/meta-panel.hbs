@@ -1,0 +1,34 @@
+{{meta-panel-header type=model.type}}
+{{meta-panel-tabs showInfo=(action 'showInfo') showFilters=(action 'showFilters') displayInfo=displayInfo}}
+
+{{#if displayInfo}}
+  <main>
+    <h3>{{source-name-fallback model=model}}</h3>
+    {{#unless (eq model.type 'datasource')}}
+      {{collection-created-by user=model.userId type=model.type}}
+    {{/unless}}
+
+    <div class="divider"></div>
+
+    <section class="stats-numbers">
+      {{#if (eq model.type 'repositive_collection')}}
+        {{stats-list stats=collectionStats statType="collection"}}
+      {{else}}
+        {{stats-list stats=collectionStats statType="datasource"}}
+      {{/if}}
+    </section>
+
+    {{#if model.description}}
+      <div class="divider"></div>
+      <p class="markdown-text">{{markdown-to-html markdown=model.description}}</p>
+    {{/if}}
+
+    {{#if model.image}}
+      <div class="divider"></div>
+      <img src="{{model.image}}" class="logo-img">
+    {{/if}}
+  </main>
+
+{{else}}
+  {{filters-list filters=filters isLoading=isLoading}}
+{{/if}}

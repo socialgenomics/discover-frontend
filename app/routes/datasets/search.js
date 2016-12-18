@@ -15,6 +15,6 @@ export default Route.extend(AuthenticatedRouteMixin, SearchRouteMixin, {
       set(this, 'searchService.resultsPerPage', resultsPerPage);
     }
 
-    return searchService.updateQueryAndMakeRequest(params.query, params.page);
+    return searchService.updateQueryAndMakeRequest(params.query || '', params.page || 1);
   }
 });

@@ -10,6 +10,9 @@ export default Component.extend({
     const tagUserId = get(this, 'tag.userId.id');
     return tagUserId === currentUserId;
   }),
+  tagQuery: computed('tag.properties.text', function() {
+    return `tag:"${get(this, 'tag.properties.text')}"`;
+  }),
   actions: {
     deleteTag(tag) {
       tag.destroyRecord()
