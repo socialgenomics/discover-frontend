@@ -5,6 +5,5 @@ const { Mixin } = Ember;
 export default Mixin.create({
   queryParams: ['query, page, resultsPerPage'],
   query: null,
-  page: 1,
-  resultsPerPage: null
+  page: 1
 });
