@@ -23,14 +23,12 @@ export default Component.extend({
   },
 
   click() {
-    if (this.get('session.isAuthenticated') === false) {
+    if (get(this, 'session.isAuthenticated') === false) {
       this.send('toggleCreateAccountModal');
       return;
     }
-
     const currentModel = this.model; //can be request or dataset
     const favourite = get(this, 'favouritesService').getFavourite(currentModel.id);
-
     if (!get(this, 'isSubmitting')) {
       if (favourite) {
         this._deleteFavourite(favourite);

@@ -1,74 +1,14 @@
 {{#if (gt model.meta.total 0)}}
-  <nav class="side-nav" id="aggregation">
-    <h4 class="unfocus-grey-text">Filters</h4>
-    {{#each model.aggs as |agg|}}
-      {{#if agg.show}}
-        <div class="section">
-          {{#if (eq agg.displayName "Datasource")}}
-            <h4>Data Source</h4>
-          {{else}}
-            <h4>{{ agg.displayName }}</h4>
-          {{/if}}
-          {{#each agg.buckets as |bucket|}}
-            <div>
-              {{#if (eq agg.name "assay")}}
-                <div class="label {{bucket.colour}}"></div>
-              {{/if}}
-              <span {{action "addFilter" agg.name bucket.key}} style="cursor:pointer;">{{bucket.key}} ({{bucket.doc_count}})</span>
-            </div>
-          {{/each}}
-          <div class="divider"></div>
-        </div>
-      {{/if}}
-    {{/each}}
-  </nav>
+  {{filters-list filters=model.aggs isLoading=isLoading}}
 {{/if}}
 <div class="content right">
-  <div class="">
-    <h5 class="unfocus-grey-text">Your Query:</h5>
-    <p id="filters">
-      <span class="filter first">
-          <em class="highlight">
-            {{#if model.query}}"{{model.query}}"{{else}}"All Data"{{/if}}
-          </em>
-      </span>
-      {{#each model.filters as |filter|}}
-        {{#if filter.value}}
-        <span class="filter" {{action "removeFilter" filter.name filter.value}}>{{ filter.displayName }} : {{filter.value}}<span class="remove">x</span></span>
-        {{/if}}
-      {{/each}}
-    </p>
-    <div class="divider"></div>
-  </div>
-  {{#if model.isError}}
-    {{render 'datasets/search-error'}}
+  {{#if isLoading}}
+    {{partial 'loading'}}
   {{else}}
-    <div class="margin-top">
-      {{#unless model.isLoading}}
-        <h5 class="unfocus-grey-text">Search Results ({{ model.meta.total }})</h5>
-      {{/unless}}
-    </div>
-    {{#if model.isLoading}}
-      {{partial 'loading'}}
-    {{else}}
-      <div class="row">
-        {{#if (eq model.meta.total 0)}}
-          {{render 'datasets/noResults'}}
-        {{else}}
-          {{#each model.datasets as |dataset|}}
-            {{dataset-card dataset=dataset searchRoute=true toggleModal="toggleModal"}}
-          {{/each}}
-        {{/if}}
-      </div>
-      {{#if (gt model.meta.total 0)}}
-        {{pagination-bar
-          resultsPerPage=model.resultsPerPage
-          totalResults=model.meta.total
-          currentOffset=model.offset
-          nextPage=(action 'nextPage')
-          previousPage=(action 'previousPage')
-        }}
-      {{/if}}
+    <h5 class="unfocus-grey-text">Search Results ({{ model.meta.total }})</h5>
+    {{search-results-list results=model.datasets totalResults=model.meta.total}}
+    {{#if (gt model.meta.total 0)}}
+      {{pagination-bar totalResults=model.meta.total search=(route-action 'search')}}
     {{/if}}
   {{/if}}
 </div>

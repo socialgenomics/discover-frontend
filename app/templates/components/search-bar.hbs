@@ -1,0 +1,10 @@
+<form {{action 'search' query on='submit'}}>
+    {{fa-icon "search"}}
+    {{input
+      type="text"
+      class="unfocus-grey-text"
+      placeholder="title:cancer AND description:lung"
+      value=query
+      autofocus=true
+    }}
+</form>

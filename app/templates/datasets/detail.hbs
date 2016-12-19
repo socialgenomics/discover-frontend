@@ -9,16 +9,13 @@
   <div class="col l7 m6 s12 card-main-wrapper">
     <div class="top-action card-header">
       {{#if dataset.colour}}
-        {{#link-to 'datasets.search' (query-params q="" assay=dataset.assay) }}
-          {{assay-type assay=dataset}}
-        {{/link-to}}
+        {{assay-type assay=dataset}}
       {{/if}}
       <div class="actions-container valign-wrapper">
         {{action-favourite model=dataset}}
         {{action-share
           actionableId=dataset.id
           actionableType='dataset'
-          action="toggleModal"
           shareUrl=datasetUrl
         }}
       </div>

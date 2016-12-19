@@ -5,7 +5,6 @@ const { Component, inject: { service }, get, computed } = Ember;
 export default Component.extend({
   session: service(),
   isAuthenticated: computed.alias('session.isAuthenticated'),
-  query: '',
 
   actions: {
     trackCreateAccount(route) {
@@ -14,14 +13,6 @@ export default Component.extend({
         action: 'create account button',
         label: 'clicked'
       });
-    },
-    search() {
-      get(this, 'metrics').trackEvent({
-        category: 'search',
-        action: 'query',
-        label: get(this, 'query')
-      });
-      this.attrs.search(get(this, 'query'));
     }
   }
 });
