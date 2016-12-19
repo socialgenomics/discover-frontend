@@ -1,6 +1,7 @@
-<p class="markdown-text {{unless showFullDescription "truncate ten-lines"}}">
+<p class="markdown-text {{unless showFullDescription "truncate fifteen-lines"}}">
   {{markdown-to-html markdown=description}}
 </p>
+
 <a href="" class="center-align" {{action "toggleDescription"}}>
   {{#if showFullDescription}}
     <p>Show Less{{fa-icon "chevron-up"}}</p>
