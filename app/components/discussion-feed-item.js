@@ -1,13 +1,10 @@
 import Ember from 'ember';
 
-export default Ember.Component.extend({
+const { Component, $ } = Ember;
+
+export default Component.extend({
   didRender() {
     this._super(...arguments);
-    this.$('.tooltipped').tooltip({ delay: 300 });
-  },
-  actions: {
-    toggleModal() {
-      this.sendAction('toggleModal');
-    }
+    $('.tooltipped').tooltip({ delay: 300 });
   }
 });

@@ -13,14 +13,13 @@ export default Component.extend({
   // modal constraints prevents share options modal from bleeding out of the edge of browser window
   shareOptionsModalConstraints: [{ to: 'window', pin: true }],
 
-  click: function() {
+  click() {
     get(this, 'metrics').trackEvent({
       category: 'dataset',
       action: 'share',
       label: get(this, 'actionableId'),
       value: true
     });
-
     this.send('toggleShareOptionsModal');
   },
 

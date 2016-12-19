@@ -1,16 +1,13 @@
 import Ember from 'ember';
 
-export default Ember.Controller.extend({
-  session: Ember.inject.service(),
-  moment: Ember.inject.service(),
+const { Controller, inject: { service }, set } = Ember;
+
+export default Controller.extend({
+  session: service(),
+  moment: service(),
   isShowingModal: false,
   actions: {
-    toggleModal() {
-      this.toggleProperty('isShowingModal');
-    },
-
-    changeDefaultFormat() {
-     this.set('moment.defaultFormat', 'DD.MM.YYYY');
-   }
+    toggleModal() { this.toggleProperty('isShowingModal'); },
+    changeDefaultFormat() { set(this, 'moment.defaultFormat', 'DD.MM.YYYY'); }
   }
 });

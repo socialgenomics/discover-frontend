@@ -1,3 +1,6 @@
 [submodule "repositive-styles"]
 	path = repositive-styles
 	url = git@github.com:repositive/repositive-styles.git
+[submodule "query-parser"]
+	path = query-parser
+	url = git@github.com:repositive/query-parser.git

@@ -1,28 +1,19 @@
-{{collection-meta-panel
+{{meta-panel
   collectionStats=model.collectionStats
   model=model.collection
-  datasets=model.datasets}}
+  filters=model.aggs
+  isLoading=isLoading
+  datasets=model.datasets
+}}
 
 <div class="content push-right">
-  {{#unless isLoading}}
-    <div class="row">
-      <div class="col m12">
-        {{#each model.datasets as |dataset|}}
-          {{dataset-card dataset=dataset action="toggleModal"}}
-        {{/each}}
-      </div>
-    </div>
-    {{#if (gt model.collectionStats.datasets 0)}}
-      <div class="pagination-container">
-        {{pagination-bar
-          currentPageNumber=page
-          resultsPerPage=limit
-          totalResults=model.collectionStats.datasets
-          currentOffset=offset
-          nextPage=(action 'nextPage')
-          previousPage=(action 'previousPage')
-        }}
-      </div>
+  {{#if isLoading}}
+    {{partial 'loading'}}
+  {{else}}
+    <h5 class="unfocus-grey-text">Search Results ({{ model.meta.total }})</h5>
+    {{search-results-list results=model.datasets totalResults=model.meta.total}}
+    {{#if (gt model.meta.total 0)}}
+      {{pagination-bar totalResults=model.meta.total search=(route-action 'search')}}
     {{/if}}
-  {{/unless}}
+  {{/if}}
 </div>

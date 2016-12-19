@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-const { Component, computed, inject: { service }, get } = Ember;
+const { Component, computed, inject: { service }, get, $ } = Ember;
 
 export default Component.extend({
   urlGenerator: service(),
@@ -11,11 +11,6 @@ export default Component.extend({
 
   didRender() {
     this._super(...arguments);
-    this.$('.tooltipped').tooltip({ delay: 300 });
-  },
-  actions: {
-    toggleModal() {
-      this.sendAction('toggleModal');
-    }
+    $('.tooltipped').tooltip({ delay: 300 });
   }
 });
