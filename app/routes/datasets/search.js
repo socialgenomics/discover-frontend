@@ -1,32 +1,20 @@
 import Ember from 'ember';
 import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
+import SearchRouteMixin from '../../mixins/search-route';
+const { get, inject: { service }, Route, set } = Ember;
 
-const { inject: { service }, Route } = Ember;
-
-export default Route.extend(AuthenticatedRouteMixin, {
+export default Route.extend(AuthenticatedRouteMixin, SearchRouteMixin, {
   session: service(),
+  searchService: service('search'),
 
-  model: function(params) {
-    return this.store.createRecord('Search', {
-      queryParams: params,
-      user: this.get('session.authenticatedUser')
-    });
-  },
+  model(params) {
+    const searchService = get(this, 'searchService');
+    const resultsPerPage = parseInt(params.resultsPerPage, 10);
 
-  actions: {
-    willTransition: function() {
-      this._resetController();
+    if (resultsPerPage > 0) {
+      set(this, 'searchService.resultsPerPage', resultsPerPage);
     }
-  },
 
-  _resetController: function() {
-    this.controller.get('model').removeObserver('queryParams');
-    this.controller.setProperties({
-      q: null,
-      ordering: null,
-      assay: null,
-      datasource: null,
-      access: null
-    });
+    return searchService.updateQueryAndMakeRequest(params.query || '', params.page || 1);
   }
 });

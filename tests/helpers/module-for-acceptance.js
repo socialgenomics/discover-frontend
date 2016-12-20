@@ -1,4 +1,5 @@
-import { describeModule } from 'ember-mocha';
+import { describe } from 'mocha';
+import { setupTest } from 'ember-mocha';
 import Ember from 'ember';
 import startApp from '../helpers/start-app';
 import destroyApp from '../helpers/destroy-app';

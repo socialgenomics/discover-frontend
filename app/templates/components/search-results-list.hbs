@@ -1,0 +1,7 @@
+{{#if (eq totalResults 0)}}
+  {{partial 'datasets/no-results'}}
+{{else}}
+  {{#each results as |result|}}
+    {{dataset-card dataset=result searchRoute=true}}
+  {{/each}}
+{{/if}}

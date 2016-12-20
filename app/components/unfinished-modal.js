@@ -1,9 +1,11 @@
 import Ember from 'ember';
 
-export default Ember.Component.extend({
+const { get, Component } = Ember;
+
+export default Component.extend({
   actions: {
-    toggleModal: function() {
-      this.sendAction();
+    toggleModal() {
+      get(this, 'toggleModal')();
     }
   }
 });

@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import colours from '../utils/colours';
 
-const { Component, computed, inject: { service }, get } = Ember;
+const { Component, computed, inject: { service }, get, set, $ } = Ember;
 
 export default Component.extend({
   urlGenerator: service(),
@@ -16,31 +16,29 @@ export default Component.extend({
     this._super(...arguments);
     this.setAssayColourForDataset();
   },
+
   didRender() {
     this._super(...arguments);
-    this.$('.tooltipped').tooltip({ delay: 300 });
+    $('.tooltipped').tooltip({ delay: 300 });
   },
-  actions: {
-    toggleModal() {
-      this.sendAction('toggleModal');
-    }
-  },
-  getAssayColourForDataset: function() {
+
+  getAssayColourForDataset() {
     let assay;
-    const dataset = this.dataset;
+    const dataset = get(this, 'dataset');
     if (dataset) {
-      assay = dataset.get('assay');
+      assay = get(dataset, 'assay');
       if (!assay) {
         assay = 'Not Available';
       }
     }
     return colours.getColour(assay);
   },
-  setAssayColourForDataset: function() {
-    if (this.dataset) {
+
+  setAssayColourForDataset() {
+    if (get(this, 'dataset')) {
       const colour = this.getAssayColourForDataset();
       if (colour) {
-        this.dataset.set('colour', colour);
+        set(this, 'dataset.colour', colour);
       }
     }
   }
