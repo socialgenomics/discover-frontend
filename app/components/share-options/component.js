@@ -15,7 +15,7 @@ export default Component.extend({
       baseUrl: 'https://twitter.com/intent/tweet',
       qsParams: {
         hashtags: 'findthatdata',
-        text: '@repositiveio helped me find this awesome human #genomic #dataset & now I am helping you find it'
+        text: '!@repositiveio helped me find this awesome human #genomic #dataset & now I am helping you find it'
       }
     },
     linkedin: {
