@@ -3,12 +3,15 @@ import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-rout
 import { model } from '../datasources/source';
 import ResetScrollMixin from 'repositive/mixins/reset-scroll';
 import ActionableMixin from 'repositive/mixins/actionable';
+import SearchRouteMixin from '../../mixins/search-route';
 
-const { get, set, Route , inject: { service } } = Ember;
+const { get, Route , inject: { service } } = Ember;
 
-export default Route.extend(AuthenticatedRouteMixin, ResetScrollMixin, ActionableMixin, {
-  session: service(),
+export default Route.extend(AuthenticatedRouteMixin, ResetScrollMixin, ActionableMixin, SearchRouteMixin, {
   ajax: service(),
+  session: service(),
+  searchService: service('search'),
+
   controllerName: 'collection',
   // caching viewed collections to prevent multiple incrementViewCounter for single collection
   viewedCollections: [],
@@ -17,24 +20,10 @@ export default Route.extend(AuthenticatedRouteMixin, ResetScrollMixin, Actionabl
 
   afterModel(model) {
     const viewedCollections = get(this, 'viewedCollections');
-    const collectionId = get(model, 'collection.actionableId.id');
-
+    const collectionId = get(model, 'collection.id');
     if (viewedCollections.indexOf(collectionId) === -1) {
       this._incrementViewCounter(model.collection, get(this, 'session.authenticatedUser'));
       viewedCollections.push(collectionId);
-    }
-  },
-
-  resetController(controller, isExiting) {
-    if (isExiting) {
-      set(controller, 'page', 1);
-    }
-  },
-
-  actions: {
-    invalidateModel() {
-      this.controller.set('isLoading', true);
-      this.refresh().promise.then(() => this.controller.set('isLoading', false));
     }
   }
 });
