@@ -4,5 +4,6 @@ const { Component } = Ember;
 
 export default Component.extend({
   tagName: 'nav',
-  classNames: ['side-nav filters-list']
+  classNames: ['side-nav filters-list'],
+  classNameBindings: ['light-font-color']
 });
