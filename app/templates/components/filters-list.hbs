@@ -1,4 +1,6 @@
-<h4 class="unfocus-grey-text">Filters</h4>
+{{#unless light-font-color}}
+  <h4 class="unfocus-grey-text">Filters</h4>
+{{/unless}}
 {{#each filters as |filter|}}
   <div class="section">
     {{#if (eq filter.displayName "Datasource")}}
