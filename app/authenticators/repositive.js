@@ -25,7 +25,7 @@ export function invalidate(ctx) {
     return get(this, 'ajax').request(ENV.APIRoutes[ENV['ember-simple-auth'].logoutRoute], {
       method: 'POST',
       contentType: 'application/json',
-      data: JSON.stringify({ token: user.token })
+      data: JSON.stringify({ token: user.payload.token })
     }).catch(handleError(ctx));
   };
 }
