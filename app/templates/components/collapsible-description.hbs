@@ -2,10 +2,10 @@
   {{markdown-to-html markdown=description}}
 </p>
 
-<a href="" class="center-align" {{action "toggleDescription"}}>
+<p class="read-more-btn" {{action "toggleDescription"}}>
   {{#if showFullDescription}}
-    <p>Show Less{{fa-icon "chevron-up"}}</p>
+    Show Less {{fa-icon "chevron-up"}}
   {{else}}
-    <p>Read More{{fa-icon "chevron-down"}}</p>
+    Read More {{fa-icon "chevron-down"}}
   {{/if}}
-</a>
+</p>
