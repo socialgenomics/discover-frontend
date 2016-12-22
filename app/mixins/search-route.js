@@ -9,6 +9,9 @@ export default Mixin.create({
     },
     page: {
       refreshModel: true
+    },
+    resultsPerPage: {
+      refreshModel: true
     }
   },
   actions: {

@@ -11,7 +11,7 @@ describe('SearchControllerMixin', function() {
   it('Adds query and page queryParams to the object', function() {
     let SearchControllerObject = Ember.Object.extend(SearchControllerMixin);
     let subject = SearchControllerObject.create();
-    expect(subject.get('queryParams').toString()).to.eql('query, page');
+    expect(subject.get('queryParams').toString()).to.eql('query, page, resultsPerPage');
   });
 
   it('Sets default values for query and page on the object', function() {
