@@ -22,13 +22,13 @@ export default Service.extend({
     return get(this, 'queryTree');
   },
 
-  // resetSearchService() {
-  //   setProperties(this, {
-  //     queryString: null,
-  //     queryTree: null,
-  //     offset: 0
-  //   });
-  // },
+  resetSearchService() {
+    setProperties(this, {
+      queryString: null,
+      queryTree: null,
+      offset: 0
+    });
+  },
 
   /**
   * @desc Adds a predicate to query tree if it's not already there.
