@@ -24,6 +24,6 @@ describe('SearchService', function() {
     const tree = service.updateQuery(originalQuery);
     expect(service.removeFilter('assay', 'TEST')).to.eql(tree);
     const newTree = service.removeFilter('assay', 'RNA-Seq');
-    expect(newTree.left.text).to.eql(tree.left.right.text);
+    expect(newTree.left.text).to.eql(tree.right.left.text);
   });
 });
