@@ -18,8 +18,17 @@ describe('Integration: PaginationBarComponent', function() {
   });
 
   it('adds class disabled to previous button on first page', function() {
+    this.set('currentPageNumber', 1);
+    this.render(hbs`{{pagination-bar currentPageNumber=currentPageNumber}}`);
+    expect(this.$('button').hasClass('disabled')).to.eql(true);
   });
 
   it('adds class disabled to next button when there are no pages left to load', function() {
+    this.setProperties({
+      currentPageNumber: 5,
+      totalPages: 5
+    });
+    this.render(hbs`{{pagination-bar currentPageNumber=currentPageNumber totalPages=totalPages}}`);
+    expect(this.$('.btn').hasClass('disabled')).to.eql(true);
   });
 });
