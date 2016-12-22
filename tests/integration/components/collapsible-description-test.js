@@ -19,4 +19,11 @@ describe('Integration | Component | collapsible description', function() {
     this.render(hbs`{{collapsible-description description=model.description}}`);
     expect(this.$('p.read-more-btn').text().trim()).to.eql('Read More');
   });
+
+  it('does not display read more button if description is less than 500 characters', function() {
+    const text = 'short description.';
+    this.set('description', text)
+    this.render(hbs`{{collapsible-description description=description}}`);
+    expect(this.$('p.read-more-btn')).to.have.length(0);
+  });
 });
