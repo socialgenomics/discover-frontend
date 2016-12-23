@@ -3,7 +3,7 @@
     <div class="card dataset card-comp">
 
       <section class="card-type-section col m2">
-        <img src="/assets/images/icons/icon-collection_2@2x.png" class="data-icon">
+        {{fa-icon "book"}}
         <p>Collection</p>
       </section>
 
@@ -27,7 +27,7 @@
         {{#link-to 'collections.collection' collection.id classNames="data-title"}}
           <h4 class="data-title">{{collection.name}}</h4>
         {{/link-to}}
-        {{collection-summary-fallback 
+        {{collection-summary-fallback
           summary=collection.properties.summary
           description=collection.description}}
       </section>
