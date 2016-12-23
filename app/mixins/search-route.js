@@ -14,6 +14,14 @@ export default Mixin.create({
       refreshModel: true
     }
   },
+
+  resetController(controller, isExiting) {
+    if (isExiting) {
+      controller.set('query', null);
+      get(this, 'searchService').resetSearchService();
+    }
+  },
+
   actions: {
     loading(transition, route) {
       const controller = this.controllerFor(get(route, 'routeName'));
