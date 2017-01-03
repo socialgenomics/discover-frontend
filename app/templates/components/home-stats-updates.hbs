@@ -11,7 +11,7 @@
           <div class="col m6">
             {{#link-to 'collections' invokeAction=(action 'trackUpdatesHeaders' 'collections')}}
               <h3>
-                {{fa-icon "book"}}
+                {{fa-icon "book" class='grey-text'}}
                 Collections <span class="stats-text thin">{{stats.repositive_collections}}</span>
               </h3>
             {{/link-to}}
@@ -28,7 +28,7 @@
           <div class="col m6">
             {{#link-to 'datasources' invokeAction=(action 'trackUpdatesHeaders' 'datasources')}}
               <h3>
-                {{fa-icon "database"}}
+                {{fa-icon "database" class='grey-text'}}
                 Data Sources <span class="stats-text thin">{{stats.datasources}}</span>
               </h3>
             {{/link-to}}
