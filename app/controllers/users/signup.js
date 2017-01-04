@@ -5,7 +5,7 @@ import { validator } from 'ember-validations';
 import { isBadRequestError } from 'ember-ajax/errors';
 import FlashMessageMixin from 'repositive/mixins/flash-message-mixin';
 
-const{ assign, get, getProperties, set, setProperties, computed, Controller, inject: { service }, observer } = Ember;
+const{ assign, get, getProperties, set, setProperties, computed, Controller, inject: { service } } = Ember;
 
 export default Controller.extend(EmberValidations, FlashMessageMixin, {
   session: service(),
@@ -14,13 +14,13 @@ export default Controller.extend(EmberValidations, FlashMessageMixin, {
   fullName: null,
   email: null,
   password: null,
-  strength: null,
   showPassword: false,
   loading: false,
   formSubmitted: false,
+  // number, capital letter and special character
+  passwordPatterns: [/\d/, /[A-Z]/, /[!,@,#,$,%,^,&,*,?,_,~,-,(,)]/],
 
   validations: {
-
     fullname: {
       presence: {
         message: 'Can\'t be blank.'
@@ -52,40 +52,27 @@ export default Controller.extend(EmberValidations, FlashMessageMixin, {
         }
       },
       inline: validator(function() {
-        const pw = get(this, 'password');
-        if (!/\d/.test(pw) &&
-            !/[A-Z]/.test(pw) &&
-            !/[!,@,#,$,%,^,&,*,?,_,~,-,(,)]/.test(pw)) {
+        if (get(this, '_getPasswordStrength')(get(this, 'password'), get(this, 'passwordPatterns')) === 0) {
           return 'Please enter a number or capital letter.';
         }
       })
     }
   },
+
   isDisabled: computed('loading', 'isValid', function() {
     return get(this, 'loading') || !get(this, 'isValid');
   }),
+
   type: computed('showPassword', function() {
     return get(this, 'showPassword') ? 'text' : 'password';
   }),
 
-  //TODO: This can be refactored to a component which calls this function on input keypress instead of using an observer.
-  passwordStrength: observer('password', function() {
-    const numErrors = get(this, 'errors.password.length');
-    const pw = get(this, 'password');
-    const specials = [
-      /\d/.test(pw),
-      /[A-Z]/.test(pw),
-      /[!,@,#,$,%,^,&,*,?,_,~,-,(,)]/.test(pw)
-    ].reduce((prev, curr)=> {
-      return Number(curr) + Number(prev);
-    });
-    if (numErrors === 0 && (specials > 1)) {
-      set(this, 'strength', 'strong');
-    } else if (numErrors <= 1) {
-      set(this, 'strength', 'medium');
-    } else {
-      set(this, 'strength', 'weak');
+  strength: computed('password', 'errors.password.length', function () {
+    if ( get(this, 'errors.password.length') > 0) {
+      return 'weak';
     }
+
+    return this._getPasswordStrength(get(this, 'password'), get(this, 'passwordPatterns')) < 2 ? 'medium' : 'strong';
   }),
 
   actions: {
@@ -121,6 +108,7 @@ export default Controller.extend(EmberValidations, FlashMessageMixin, {
       this.toggleProperty('showPassword');
     }
   },
+
   _buildCredentials() {
     return assign(
       {},
@@ -128,6 +116,7 @@ export default Controller.extend(EmberValidations, FlashMessageMixin, {
       getProperties(this, 'email', 'password')
     );
   },
+
   _displayMessage(resp) {
     if (isBadRequestError(resp)) {
       this._addFlashMessage('Error: Invalid email or an account already exists with this email.', 'warning');
@@ -135,10 +124,21 @@ export default Controller.extend(EmberValidations, FlashMessageMixin, {
       this._addFlashMessage(get(resp, 'message'), 'warning');
     }
   },
+
   _getFirstAndLastNames: function(fullName) {
     const fullNameArray = fullName.split(' ');
     const firstname = fullNameArray.shift();
     const lastname = fullNameArray.join(' ') || '';
     return { firstname, lastname };
+  },
+
+  /**
+   * @desc Checks password strength. Each pattern match gets +1 to strength
+   * @param {String} password
+   * @param {Array<RegEx>} patterns
+   * @private
+   */
+  _getPasswordStrength(password, patterns) {
+    return patterns.reduce((acc, pattern) => acc + Number(pattern.test(password)), 0);
   }
 });
