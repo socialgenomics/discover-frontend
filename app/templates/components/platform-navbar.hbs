@@ -17,8 +17,7 @@
 
     {{#if isAuthenticated}}
 
-      {{#unless session.data.firstVisit}}
-        <div class="navbar-container">
+      <div class="navbar-container">
           <div class="navbar-search">
             {{search-bar search=(route-action 'search')}}
           </div>
@@ -42,8 +41,7 @@
           </div>
         </div>
 
-        {{navbar-dropdown avatar=avatar firstname=firstname username=username userId=userId}}
-      {{/unless}}
+      {{navbar-dropdown avatar=avatar firstname=firstname username=username userId=userId}}
 
     {{else}}
 
