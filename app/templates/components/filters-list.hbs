@@ -13,9 +13,11 @@
     {{else}}
       {{#each filter.buckets as |bucket|}}
         {{filter-list-item
-          bucket=bucket
+          addFilter=addFilter
+          removeFilter=removeFilter
+          activeFilters=activeFilters
           aggName=filter.name
-          search=(route-action 'search')
+          bucket=bucket
         }}
       {{/each}}
     {{/if}}
