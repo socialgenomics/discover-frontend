@@ -3,7 +3,7 @@ import QP from 'npm:../../query-parser';
 import colours from 'repositive/utils/colours';
 import ENV from 'repositive/config/environment';
 
-const { Mixin, Logger, inject: { service }, get, set } = Ember;
+const { Mixin, inject: { service }, get, set } = Ember;
 
 export default Mixin.create({
   ajax: service(),
@@ -15,14 +15,11 @@ export default Mixin.create({
     resultsPerPage: { refreshModel: true }
   },
 
-  query: null,
-  page: 1,
-  resultsPerPage: 6,
-
   actions: {
     addFilter(predicate, text) {
       const queryTree = QP.parseString(get(this, 'query'));
       const withFilter = QP.addFilter(queryTree, predicate, text);
+
       debugger;
       set(this, 'query', QP.toBoolString(withFilter));
     },
@@ -30,6 +27,7 @@ export default Mixin.create({
     removeFilter(predicate, text) {
       const queryTree = QP.parseString(get(this, 'query'));
       const withoutFilter = QP.removeFilter(queryTree, predicate, text);
+
       set(this, 'query', QP.toBoolString(withoutFilter));
     }
   },
@@ -43,22 +41,20 @@ export default Mixin.create({
     return true;
   },
 
-  makeRequest() {
-    const results = get(this, 'resultsPerPage');
-    const offset = (get(this, 'page') - 1) * results;
-    const query = get(this, 'query') || '';
-    const queryTree = query === '' ? {} : QP.parseString(query);
+  makeRequest(params) {
+    const limit = params.resultsPerPage || 9;
+    const offset = (params.page - 1) * limit;
+    const query = params.query || '';
+    const body = query === '' ? {} : QP.parseString(query);
 
-    return get(this, 'ajax').request(ENV.APIRoutes['datasets.search'], {
-      method: 'POST',
-      contentType: 'application/json',
-      data: JSON.stringify({
-        type: 'dataset',
-        offset: offset,
-        limit: results,
-        body: queryTree
-      })
-    }).then(this._handleQueryResponse.bind(this))
+    return get(this, 'ajax').request(
+      ENV.APIRoutes['datasets.search'],
+      {
+        method: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify({ type: 'dataset', offset, limit, body })
+      }
+    ).then(this._handleQueryResponse.bind(this));
   },
 
     /**
@@ -69,8 +65,10 @@ export default Mixin.create({
    */
   _handleQueryResponse(resp) {
     const store = get(this, 'store');
+
     resp.datasets = resp.datasets.map(dataset => store.push(store.normalize('dataset', dataset)));
     resp.aggs = this._normalizeFilters(resp.aggs);
+
     return resp;
   },
 
