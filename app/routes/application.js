@@ -11,7 +11,6 @@ const isUUID = new RegExp(/^[0-9A-F]{8}-[0-9A-F]{4}-[4][0-9A-F]{3}-[89AB][0-9A-F
 export default Route.extend(ApplicationRouteMixin, {
   favouritesService: service('favourites'),
   session: service(),
-  // searchService: service('search'),
   urlGenerator: service(),
 
   init() {
@@ -54,14 +53,12 @@ export default Route.extend(ApplicationRouteMixin, {
       if (queryTree && queryTree.isError) {
         return this.transitionTo('datasets.search-error');
       }
-      // const searchService = get(this,  'searchService');
       const collectionF = BT.filter(queryTree, (node, left, right) => {
         return BX.isFilter(node) && node.predicate === 'collection';
       });
       const datasourceF = BT.filter(queryTree, (node, left, right) => {
         return BX.isFilter(node) && node.predicate === 'datasource';
       });
-      // const serializeTree = searchService.serializeToString(queryTree);
       if (collectionF.length === 1) {
         this.queryAndTransition('collections.collection', collectionF[0], queryString, pageNumber);
       } else if (datasourceF.length === 1) {
@@ -80,6 +77,7 @@ export default Route.extend(ApplicationRouteMixin, {
         label: queryString
       });
     },
+
     toggleModal() {
       this.controllerFor('application').toggleProperty('isShowingModal');
     }

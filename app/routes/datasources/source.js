@@ -3,9 +3,7 @@ import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-rout
 import ENV from 'repositive/config/environment';
 import ResetScrollMixin from 'repositive/mixins/reset-scroll';
 import ActionableMixin from 'repositive/mixins/actionable';
-// import SearchRouteMixin from '../../mixins/search-route';
 import SearchRouteMixin from '../../mixins/search';
-
 
 const { get, Route, RSVP, inject: { service }, Logger, set, assign } = Ember;
 

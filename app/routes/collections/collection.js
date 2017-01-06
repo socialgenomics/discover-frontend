@@ -3,14 +3,12 @@ import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-rout
 import { model } from '../datasources/source';
 import ResetScrollMixin from 'repositive/mixins/reset-scroll';
 import ActionableMixin from 'repositive/mixins/actionable';
-import SearchRouteMixin from '../../mixins/search-route';
 
 const { get, Route , inject: { service } } = Ember;
 
-export default Route.extend(AuthenticatedRouteMixin, ResetScrollMixin, ActionableMixin, SearchRouteMixin, {
+export default Route.extend(AuthenticatedRouteMixin, ResetScrollMixin, ActionableMixin, {
   ajax: service(),
   session: service(),
-  searchService: service('search'),
 
   controllerName: 'collection',
   model: model,
