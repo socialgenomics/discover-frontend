@@ -1,7 +1,10 @@
 {{meta-panel
+  addFilter=(action 'addFilter')
+  removeFilter=(action 'removeFilter')
   collectionStats=model.collectionStats
   model=model.collection
   filters=model.aggs
+  activeFilters=activeFilters
   isLoading=isLoading
   datasets=model.datasets
   class="source-panel"

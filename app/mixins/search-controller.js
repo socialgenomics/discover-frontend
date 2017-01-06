@@ -6,11 +6,7 @@ const { Mixin, computed, inject: { service }, get, set } = Ember;
 export default Mixin.create({
   ajax: service(),
   store: service(),
-  // queryParams: {
-  //   query: { refreshModel: true },
-  //   page: { refreshModel: true },
-  //   resultsPerPage: { refreshModel: true }
-  // },
+
   queryParams: ['query', 'page', 'resultsPerPage'],
   query: null,
   page: 1,
@@ -21,9 +17,11 @@ export default Mixin.create({
   }),
 
   activeFilters: computed('query', function () {
-    const queryTree = QP.parseString(get(this, 'query'));
-
-    return QP.getFilters(queryTree).map(filter => `${filter.predicate}:${filter.text}`);
+    if (get(this, 'query')) {
+      const queryTree = QP.parseString(get(this, 'query'));
+      return QP.getFilters(queryTree).map(filter => `${filter.predicate}:${filter.text}`);
+    }
+    return [];
   }),
 
   actions: {
@@ -52,22 +50,11 @@ export default Mixin.create({
    * @private
    */
   _toggleFilter(action, predicate, text) {
-    const currentQueryTree = QP.parseString(get(this, 'query'));
+    let currentQueryTree = '';
+    if (get(this, 'query')) {
+      currentQueryTree = QP.parseString(get(this, 'query'));
+    }
     const newQueryTree = QP[action](currentQueryTree, predicate, text);
-
     set(this, 'query', QP.toBoolString(newQueryTree));
   }
-
-
-  // addFilter(predicate, text) {
-  //   const queryTree = QP.parseString(get(this, 'query'));
-  //   const withFilter = QP.addFilter(queryTree, predicate, text);
-  //   set(this, 'query', QP.toBoolString(withFilter));
-  // },
-  //
-  // removeFilter(predicate, text) {
-  //   const queryTree = QP.parseString(get(this, 'query'));
-  //   const withoutFilter = QP.removeFilter(queryTree, predicate, text);
-  //   set(this, 'query', QP.toBoolString(withoutFilter));
-  // }
 });
