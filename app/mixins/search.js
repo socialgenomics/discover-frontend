@@ -16,19 +16,12 @@ export default Mixin.create({
   },
 
   actions: {
-    addFilter(predicate, text) {
-      const queryTree = QP.parseString(get(this, 'query'));
-      const withFilter = QP.addFilter(queryTree, predicate, text);
-
-      debugger;
-      set(this, 'query', QP.toBoolString(withFilter));
-    },
-
-    removeFilter(predicate, text) {
-      const queryTree = QP.parseString(get(this, 'query'));
-      const withoutFilter = QP.removeFilter(queryTree, predicate, text);
-
-      set(this, 'query', QP.toBoolString(withoutFilter));
+    loading(transition, route) {
+      const controller = this.controllerFor(get(route, 'routeName'));
+      set(controller, 'isLoading', true);
+      transition.promise.finally(() => {
+        set(controller, 'isLoading', false);
+      });
     }
   },
 

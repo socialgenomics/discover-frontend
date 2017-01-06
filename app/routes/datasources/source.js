@@ -3,7 +3,7 @@ import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-rout
 import ENV from 'repositive/config/environment';
 import ResetScrollMixin from 'repositive/mixins/reset-scroll';
 import ActionableMixin from 'repositive/mixins/actionable';
-import SearchRouteMixin from '../../mixins/search-route';
+import SearchRouteMixin from '../../mixins/search';
 
 const { get, Route, RSVP, inject: { service }, Logger, set, assign } = Ember;
 
@@ -19,7 +19,6 @@ function doQuery(data, queryString) {
 }
 
 export function model(params) {
-  const searchService = get(this, 'searchService');
   const store = this.store;
   const collectionId = params.id;
   const queryString = params.query;
@@ -30,8 +29,8 @@ export function model(params) {
   })
     .then(data => {
       const updatedQuery = doQuery(data, queryString);
-      const queryTree = searchService.updateQuery(updatedQuery, params.page);
-      return searchService.makeRequest(queryTree, params.page || 0)
+      set(params, 'query', updatedQuery);
+      return this.makeRequest(params)
       .then(m => {
         const model = assign(data, m);
         set(model, 'collection.actionableId', model.actionable);
@@ -43,7 +42,6 @@ export function model(params) {
 export default Route.extend(AuthenticatedRouteMixin, ResetScrollMixin, ActionableMixin, SearchRouteMixin, {
   ajax: service(),
   session: service(),
-  searchService: service('search'),
 
   controllerName: 'collection',
   model: model,

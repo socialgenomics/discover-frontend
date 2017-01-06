@@ -20,7 +20,7 @@
       {{#unless session.data.firstVisit}}
         <div class="navbar-container">
           <div class="navbar-search">
-            {{search-bar search=search}}
+            {{search-bar search=(route-action 'search')}}
           </div>
           <div class="navbar-buttons">
             <div class="navbar-button">

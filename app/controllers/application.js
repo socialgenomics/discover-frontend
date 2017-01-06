@@ -6,8 +6,6 @@ export default Controller.extend({
   session: service(),
   moment: service(),
 
-  // queryParams: ['query'],
-  // query: null,
   isShowingModal: false,
 
   actions: {
@@ -17,10 +15,6 @@ export default Controller.extend({
 
     changeDefaultFormat() {
       set(this, 'moment.defaultFormat', 'DD.MM.YYYY');
-    },
-
-    search(query) {
-      set(this, 'query', query.trim());
     }
   }
 });

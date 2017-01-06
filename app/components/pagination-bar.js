@@ -1,7 +1,11 @@
 import Ember from 'ember';
 
-const { Component } = Ember;
+const { Component, get } = Ember;
 
 export default Component.extend({
-  classNames: ['pagination-bar']
+  classNames: ['pagination-bar'],
+  actions: {
+    nextPage() { get(this, 'nextPage')(); },
+    previousPage() { get(this, 'previousPage')(); }
+  }
 });
