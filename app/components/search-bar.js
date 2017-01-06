@@ -21,9 +21,10 @@ export default Component.extend({
 
   actions: {
     search(query) {
-      const searchService = get(this, 'searchService');
-      const queryTree = searchService.updateQuery(query.trim());
-      get(this, 'search')(queryTree); //calls search on application route
+      // const searchService = get(this, 'searchService');
+      // const queryTree = searchService.updateQuery(query.trim());
+      // get(this, 'search')(queryTree); //calls search on application route
+      get(this, 'search')(query.trim()); //calls search on application route
     }
   }
 });
