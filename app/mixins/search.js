@@ -16,6 +16,12 @@ export default Mixin.create({
   },
 
   actions: {
+    // resetController(controller, isExiting) {
+    //   if (isExiting) {
+    //     controller.set('query', null);
+    //     get(this, 'searchService').resetSearchService();
+    //   }
+    // },
     loading(transition, route) {
       const controller = this.controllerFor(get(route, 'routeName'));
       set(controller, 'isLoading', true);
@@ -28,10 +34,6 @@ export default Mixin.create({
   getActiveFilters() {
     const queryTree = QP.parseString(get(this, 'query'));
     return QP.getFilters(queryTree).map(f => `${f.predicate}:${f.text}`);
-  },
-
-  isFilterActive() {
-    return true;
   },
 
   makeRequest(params) {

@@ -8,8 +8,6 @@ export default Component.extend({
     //get the query string from params
   },
 
-  //observe the query
-
   actions: {
     search(query) {
       get(this, 'search')(query.trim()); //calls search on application route
