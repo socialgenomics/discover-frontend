@@ -1,0 +1,5600 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "24.666667",
+          "60.216667"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "www.auriabiopankki.fi"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "4.383333",
+          "51.466667"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "catalogue.bbmri.nl"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-89.0247222",
+          "45.5227778"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "victr.vanderbilt.edu"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-.093689",
+          "51.514125"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "bioinformatics.breastcancertissuebank.org"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "26.7361111",
+          "58.3661111"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "www.geenivaramu.ee"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-95.6688889",
+          "32.1677778"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "icahn.mssm.edu"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-79.9961111",
+          "40.4405556"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "www.mesotissue.org"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-95.3630556",
+          "29.7630556"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "txcrb.org"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "21.433333",
+          "60.6"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "www.thl.fi"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "22.283333",
+          "60.45"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "www.euengage.org"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          ".183333",
+          "52.083333"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "www.ebi.ac.uk"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-122.3308333",
+          "47.6063889"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "www.synapse.org"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-.093689",
+          "51.514125"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "www.abcodia.com"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-122.2352778",
+          "37.4852778"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "www.allelefrequencycommunity.org"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-111.8983333",
+          "33.5091667"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "www.ambryshare.com"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-95.6688889",
+          "32.1677778"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "www.stationxinc.com"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-78.2016667",
+          "37.8491667"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "www.criver.com"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-118.3955556",
+          "34.0211111"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "www.crownbio.com"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-7.2016667",
+          "53.3522222"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "genomicsmedicineireland.ie"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "4.316667",
+          "50.8"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "insilicodb.com"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-95.6688889",
+          "32.1677778"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "www.sequencebio.co"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-122.3308333",
+          "47.6063889"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "www.solvebio.com"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-101.8547222",
+          "33.5777778"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "txccr.org"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "110.732778",
+          "35.209167"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "www.wuxiapptec.com"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "24.7280556",
+          "59.4338889"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "xpressomics.com"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          ".183333",
+          "52.083333"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "www.1000genomes.org"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-82.1341667",
+          "38.8041667"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "brcaexchange.org"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "110.732778",
+          "35.209167"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "cancerdb.genomics.org.cn"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-21.95",
+          "64.15"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "www.decode.com"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-95.6688889",
+          "32.1677778"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "genomeasia100k.com"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "127.019722",
+          "37.003333"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "bme.unist.ac.kr"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-122.3308333",
+          "47.6063889"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "genomesunzipped.org"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-.093689",
+          "51.514125"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "www.ucl.ac.uk"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "127.019722",
+          "37.003333"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "koreagenome.kobic.re.kr"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          ".183333",
+          "52.083333"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "www.magicinvestigators.org"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "10.75",
+          "49.1"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "opensnp.org"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "46.71522",
+          "24.653664"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "shgp.kacst.edu.sa"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "21.433333",
+          "60.6"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "www.sisuproject.fi"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "4.383333",
+          "51.466667"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "www.nlgenome.nl"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "72.825833",
+          "18.975"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "www.igvdb.res.in"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-.093689",
+          "51.514125"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "www.genomicsengland.co.uk"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-95.6688889",
+          "32.1677778"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "www.cancermoonshot2020.org"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "5.683333",
+          "50.85"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "www.dixa-fp7.eu"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "110.732778",
+          "35.209167"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "adhd.psych.ac.cn"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "127.019722",
+          "37.003333"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "africangenome.org"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-95.6688889",
+          "32.1677778"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "agre.autismspeaks.org"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-122.2794444",
+          "48.4922222"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "aws.amazon.com"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          ".183333",
+          "52.083333"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "www.ebi.ac.uk"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "21.433333",
+          "60.6"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "www.cangem.org"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-98.5058333",
+          "45.8325000"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "cgci.nci.nih.gov"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-117.2733333",
+          "32.8472222"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "cghub.ucsc.edu"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          ".183333",
+          "52.083333"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "cancer.sanger.ac.uk"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "76.7933",
+          "30.7343"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "crdd.osdd.net"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          ".183333",
+          "52.083333"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "decipher.sanger.ac.uk"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          ".183333",
+          "52.083333"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "www.ebi.ac.uk"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-104.5952778",
+          "41.2055556"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "datadryad.org"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          ".183333",
+          "52.083333"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "www.ebi.ac.uk"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          ".183333",
+          "52.083333"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "www.ebi.ac.uk"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          ".183333",
+          "52.083333"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "www.ebi.ac.uk"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          ".183333",
+          "52.083333"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "www.ebi.ac.uk"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-122.3308333",
+          "47.6063889"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "evs.gs.washington.edu"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-117.8991667",
+          "33.9166667"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "www.findbase.org"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-95.6688889",
+          "32.1677778"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "jimb.stanford.edu"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-3.25",
+          "55.933333"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "gpxmea.gti.ed.ac.uk"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          ".183333",
+          "52.083333"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "www.lrg-sequence.org"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-.093689",
+          "51.514125"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "data.mendeley.com"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "110.732778",
+          "35.209167"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "methycancer.psych.ac.cn"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-76.5080556",
+          "39.1575000"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "tumor.informatics.jax.org"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-122.3308333",
+          "47.6063889"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "mygene2.org"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-81.7511111",
+          "40.2752778"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "nciphub.org"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "2.359919",
+          "48.793899"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "www.orpha.net"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-.093689",
+          "51.514125"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "www.nature.com"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-98.5058333",
+          "45.8325000"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "target.nci.nih.gov"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-98.5058333",
+          "45.8325000"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "cancergenome.nih.gov"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-95.3630556",
+          "29.7630556"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "www.genboree.org"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "127.019722",
+          "37.003333"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "tiara.gmi.ac.kr"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "15.2675",
+          "46.2361111"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "www.toxbank.net"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "110.732778",
+          "35.209167"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "yh.genomics.org.cn"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "6.050169",
+          "46.232352"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "zenodo.org"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "110.732778",
+          "35.209167"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "www.chgc.sh.cn"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-92.3686111",
+          "45.9375000"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "dash.cdlib.org"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "26.7361111",
+          "58.3661111"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "evolbio.ut.ee"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-98.8622222",
+          "35.5513889"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "compbio.iupui.edu"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-81.6327778",
+          "38.3497222"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "proteogenomics.musc.edu"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-83.7263889",
+          "42.2708333"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "www.icpsr.umich.edu"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "149.13435",
+          "-35.27603"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "ncig.anu.edu.au"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-111.8983333",
+          "33.5091667"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "www.njcts.org"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-95.6688889",
+          "32.1677778"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "rvs.u.hpc.mssm.edu"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-77.0880556",
+          "38.8191667"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "genome.unc.edu"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "25.733333",
+          "62.233333"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "www.gerec.fi"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-89.2641667",
+          "44.7127778"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "www.stsiweb.org"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-95.6688889",
+          "32.1677778"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "www.cbioportal.org"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-117.2733333",
+          "32.8472222"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "biogps.org"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-98.5058333",
+          "45.8325000"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "snp500cancer.nci.nih.gov"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-104.5952778",
+          "41.2055556"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "humangenome.duke.edu"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-89.0247222",
+          "45.5227778"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "emerge.mc.vanderbilt.edu"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          ".183333",
+          "52.083333"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "www.ebi.ac.uk"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-6.7666667",
+          "62.0166667"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "www.fargen.fo"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          ".183333",
+          "52.083333"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "www.hipsci.org"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-111.8983333",
+          "33.5091667"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "www.ihart.org"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-95.6688889",
+          "32.1677778"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "www.neuroepigenomics.org"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          ".183333",
+          "52.083333"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "rnacentral.org"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-89.1216667",
+          "43.8508333"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "smd.princeton.edu"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-122.3308333",
+          "47.6063889"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "www.biobase-international.com"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-122.3308333",
+          "47.6063889"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "www.nhlbiwgs.org"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-87.8247222",
+          "42.5861111"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "gdc.nci.nih.gov"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-122.3308333",
+          "47.6063889"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "cgc.systemsbiology.net"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-95.6688889",
+          "32.1677778"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "www.cancergenomicscloud.org"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-118.3955556",
+          "34.0211111"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "oriencancer.org"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-95.3630556",
+          "29.7630556"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "www.genebygene.com"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-118.3955556",
+          "34.0211111"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "mdrevolution.com"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-111.8902778",
+          "40.7608333"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "www.myriad.com"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-95.3630556",
+          "29.7630556"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "www.familytreedna.com"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-79.7705556",
+          "39.3822222"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "www.kimballgenetics.com"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-.093689",
+          "51.514125"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "www.medichecks.com"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "14.5144444",
+          "46.0552778"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "www.geneplanet.com"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-122.3308333",
+          "47.6063889"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "human.brain-map.org"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-111.8983333",
+          "33.5091667"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "theavestagenomeproject.org"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-111.8983333",
+          "33.5091667"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "www.immport.org"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-118.3955556",
+          "34.0211111"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "mrctcenter.org"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-79.7705556",
+          "39.3822222"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "www.copdgene.org"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-95.6688889",
+          "32.1677778"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "amaryllisnucleics.com"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          ".183333",
+          "52.083333"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "www.ebi.ac.uk"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-122.3308333",
+          "47.6063889"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "evs.gs.washington.edu"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-95.6688889",
+          "32.1677778"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "www.raregenomics.org"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-89.1216667",
+          "43.8508333"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "puma.princeton.edu"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-95.3630556",
+          "29.7630556"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "txcrb.org"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-122.3308333",
+          "47.6063889"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "www.genosresearch.com"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-118.3955556",
+          "34.0211111"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "www.foundationmedicine.com"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-87.8222222",
+          "42.6922222"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "www.bioreference.com"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-122.3308333",
+          "47.6063889"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "db.systemsbiology.net"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-89.6383333",
+          "42.6011111"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "neurobiobank.nih.gov"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-80.2444444",
+          "36.0997222"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "alsgen.phs.wakehealth.edu"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-88.9747222",
+          "43.1988889"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "OR"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-118.3955556",
+          "34.0211111"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "www.genomes2people.org"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-118.3955556",
+          "34.0211111"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "www.genomes2people.org"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-111.8983333",
+          "33.5091667"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "dna.land"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "6.666667",
+          "46.533333"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "www.tizianalifesciences.com"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-122.3308333",
+          "47.6063889"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "www.roadmapepigenomics.org"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-111.8902778",
+          "40.7608333"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "healthsciences.utah.edu"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-87.7472222",
+          "43.9150000"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "epicgenome.com"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "4.319965",
+          "46.099546"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "epic.iarc.fr"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-95.3630556",
+          "29.7630556"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "www.nursa.org"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-90.5575000",
+          "43.9519444"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "www.biochain.com"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-111.8983333",
+          "33.5091667"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "globalgenecorp.com"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-111.8983333",
+          "33.5091667"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "www.personalis.com"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "7.383333",
+          "50.866667"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "www.genomernai.org"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          "-111.6938889",
+          "40.2969444"
+        ]
+      },
+      "properties": {
+        "type": "datasource",
+        "url": "www.otogenetics.com"
+      }
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"19.0",
+		"-22.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"24.0",
+		"-28.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"21.45244764",
+		"-18.93725689"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"21.5",
+		"-18.9"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"21.5",
+		"-18.9"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"20.8",
+		"-27.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"-12.0",
+		"12.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"-96.58",
+		"16.95"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"-96.58",
+		"16.95"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"-68.0",
+		"3.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"-68.0",
+		"3.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"27.4",
+		"8.8"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"-108.0",
+		"29.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"16.7",
+		"13.4"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"-108.0",
+		"29.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"29",
+		"1"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"-97.2",
+		"16.5"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"29.0",
+		"1.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"166",
+		"55.18"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"-8.9",
+		"27.3"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"85.654",
+		"50.840"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"3.9",
+		"7.4"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"172.86",
+		"64.48"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"3.9",
+		"7.4"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"173.9",
+		"64.4"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"-63",
+		"-10"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"135.88",
+		"57.53"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"-63",
+		"-10"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"135.88",
+		"57.53"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"-63.0",
+		"-10.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"158.65",
+		"53"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"-91.0",
+		"19.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"121.185356",
+		"22.843145"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"-72.0",
+		"-13.5"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"96.7",
+		"17.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"-62.0",
+		"-11.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"100.0",
+		"21.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"74.6",
+		"42.9"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"114.0",
+		"32.3"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"74.6",
+		"42.9"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"139.0",
+		"37.85"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"166",
+		"55.18"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"100.0",
+		"22.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"87",
+		"51.13333333"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"140.45",
+		"52.37"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"129.5",
+		"63.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"121.296444",
+		"24.611712"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"105.0",
+		"12.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"100.0",
+		"21.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"124.0",
+		"48.5"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"114.0",
+		"32.3"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"105.9",
+		"21.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"109.0",
+		"28.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"83.3",
+		"17.7"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"100.0",
+		"26.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"83.3",
+		"17.7"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"126.5",
+		"50.4"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"64.0",
+		"26.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"100.5",
+		"13.8"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"83.3",
+		"17.7"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"101.0",
+		"36.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"83.3",
+		"17.7"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"81.5",
+		"43.5"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"70.5",
+		"33.5"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"103.0",
+		"28.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"74.3",
+		"31.5"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"143.0",
+		"-13.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"69.0",
+		"25.5"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"155.0",
+		"-6.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"39.0",
+		"44.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"35.0",
+		"32.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"0.7",
+		"51.2"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"41.850",
+		"42.500"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"-21.9",
+		"64.1"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"44.4",
+		"33.3"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"44.650",
+		"43.017"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"-3.0",
+		"59.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"-3.0",
+		"59.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"21.0",
+		"52.2"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"9.0",
+		"40.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"11.0",
+		"43.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"100",
+		"21"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"100.0",
+		"21.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"114",
+		"32.26566812"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"37.0",
+		"-3.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"133.5",
+		"47.5"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"24.0",
+		"-28.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"139.0",
+		"37.85"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"27.4",
+		"8.783333333"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"105.9",
+		"21.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"6.0",
+		"6.5"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"127.0",
+		"37.6"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"6.0",
+		"6.5"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"100.0",
+		"26.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"100.0",
+		"22.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"21.5",
+		"-18.9"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"126.5",
+		"50.4"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"100.0",
+		"26.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"36.8",
+		"1.3"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"119.0",
+		"27.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"101.0",
+		"36.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"36.8",
+		"1.3"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"119.0",
+		"27.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"109.0",
+		"29.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"34.3",
+		"-0.1"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"109.0",
+		"29.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"143",
+		"-13"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"-12",
+		"12"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"81.0",
+		"44.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"143.0",
+		"-13.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"-12.0",
+		"12.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"155.0",
+		"-6.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"143",
+		"-4"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"35.2",
+		"-1.5"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"143.0",
+		"-4.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"143.0",
+		"-4.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"29.0",
+		"1.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"143.0",
+		"-4.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"143.0",
+		"-4.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"-13.2",
+		"8.5"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"83.3",
+		"17.7"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"143.0",
+		"-4.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"-13.2",
+		"8.5"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"66.5",
+		"30.5"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"74.0",
+		"36.5"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"48.3",
+		"5.6"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"74.3",
+		"31.5"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"74.0",
+		"36.5"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"-96.58",
+		"16.95"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"83.3",
+		"17.7"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"80.0",
+		"13.5"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"-97.0",
+		"17.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"69.0",
+		"25.5"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"37.0",
+		"-3.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"80.0",
+		"13.5"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"-72.0",
+		"-13.5"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"41.015",
+		"43.003"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"17.0",
+		"4.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"17.0",
+		"4.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"-72.0",
+		"-13.5"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"19.8",
+		"41.3"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"27.4",
+		"8.8"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"16.7",
+		"13.4"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"-62.0",
+		"-11.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"0.0",
+		"43.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"34.3",
+		"-0.1"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"20.8",
+		"-27.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"169.71",
+		"66.02"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"0.0",
+		"43.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"-12",
+		"12"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"35.2",
+		"-1.5"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"61.45",
+		"63.8"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"35.0",
+		"31.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"29.0",
+		"1.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"-91.0",
+		"19.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"129.5",
+		"63.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"35.0",
+		"31.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"3.0",
+		"32.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"-97.0",
+		"17.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"121.185356",
+		"22.843145"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"24.9",
+		"60.2"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"3.0",
+		"32.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"169",
+		"69"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"114",
+		"32.26566812"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"2.0",
+		"46.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"-8.9",
+		"27.3"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"169.71",
+		"66.02"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"81.0",
+		"44.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"48.183",
+		"42.117"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"3.9",
+		"7.4"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"173.9",
+		"64.4"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"81.5",
+		"43.5"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"40.0",
+		"61.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"-63.82",
+		"-22.53"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"62.1",
+		"63.65"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"114.7",
+		"4.7"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"40.0",
+		"61.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"-63.0",
+		"-10.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"111.0",
+		"45.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"-157.8",
+		"21.3"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"9.0",
+		"40.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"-97.2",
+		"16.5"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"174.5",
+		"-41.3"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"-4.0",
+		"39.9"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"166",
+		"55.18"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"143.0",
+		"-4.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"44.2",
+		"15.4"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"135.88",
+		"57.53"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"143.0",
+		"-4.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"157",
+		"57"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"66.5",
+		"30.5"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"111.0",
+		"45.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"71.5",
+		"36.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"87",
+		"51.13333333"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"71.5",
+		"36.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"140.42",
+		"52.43"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"83.3",
+		"17.7"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"96.7",
+		"17.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"83.3",
+		"17.7"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"105.0",
+		"12.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"64.0",
+		"26.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"100",
+		"21"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"133.5",
+		"47.5"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"70.5",
+		"33.5"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"139.0",
+		"37.85"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"83.3",
+		"17.7"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"127.0",
+		"37.6"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"121.0",
+		"17.1"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"83.3",
+		"17.7"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"109.0",
+		"28.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"143.0",
+		"-4.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"41.015",
+		"43.003"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"100.5",
+		"13.8"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"143.0",
+		"-4.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"24.741",
+		"42.163"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"103.0",
+		"28.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"143.0",
+		"-4.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"24.741",
+		"42.163"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"114.7",
+		"4.7"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"90.4",
+		"23.7"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"24.9",
+		"60.2"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"121.0",
+		"17.1"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"70.0",
+		"33.5"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"2.0",
+		"46.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"143",
+		"-4"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"82.48778",
+		"28.07245287"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"23.7",
+		"38.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"143.0",
+		"-4.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"74.3",
+		"31.5"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"44.4",
+		"33.3"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"143.0",
+		"-4.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"83.3",
+		"17.7"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"35.0",
+		"32.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"143.0",
+		"-4.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"39.0",
+		"44.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"35.0",
+		"32.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"143.0",
+		"-4.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"46.752",
+		"39.815"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"9",
+		"40"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"66.5",
+		"30.5"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"45.650",
+		"43.333"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"71.568",
+		"37.508"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"90.4",
+		"23.7"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"14.4",
+		"50.1"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"35.5",
+		"38.7"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"83.3",
+		"17.7"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"35.0",
+		"32.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"11.0",
+		"43.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"70.0",
+		"33.5"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"2",
+		"46"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"82.9",
+		"18.3"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"23.7",
+		"38.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"84.259486",
+		"28.07245287"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"-21.9",
+		"64.1"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"74.3",
+		"31.5"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"48.183",
+		"42.117"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"43.101",
+		"40.605"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"44.650",
+		"43.017"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"10.0",
+		"46.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"35.0",
+		"32.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"0.7",
+		"51.2"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"24.9",
+		"60.2"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"41.850",
+		"42.500"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"19.1",
+		"47.5"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"19.0",
+		"-22.0"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"19.1",
+		"47.5"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"35.270",
+		"32.203"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"-4.0",
+		"39.9"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"71.568",
+		"37.508"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"35.5",
+		"38.7"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  },
+  {
+	"type": "Feature",
+	"geometry": {
+	  "type": "Point",
+	  "coordinates": [
+		"44.2",
+		"15.4"
+	  ]
+	},
+	"properties": {
+	  "type": "dataset"
+	}
+  }
+  ]
+}
