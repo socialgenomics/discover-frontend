@@ -8,14 +8,19 @@ import SearchRouteMixin from '../../mixins/search';
 const { get, Route, RSVP, inject: { service }, Logger, set, assign } = Ember;
 
 function doQuery(data, queryString) {
-  // Return query if it already exists
-  if (queryString) { return queryString; }
+  // Return query if it already exists and includes datasource/collection name
+  if (queryString) {
+    if (queryString.includes('datasource') || queryString.includes('collection')) {
+      return queryString;
+    }
+  }
   const name = get(data.collection, 'name');
   // Put name in quotes if it has spaces
   const normalisedName = /\s+/.test(name) ? `"${name}"` : name;
   const short_name = get(data.collection, 'properties.short_name');
   const type = get(data.collection, 'type') === 'datasource' ? 'datasource' : 'collection';
-  return `${type}:${short_name || normalisedName}`;
+  const predicateToAppend = `${type}:${short_name || normalisedName}`;
+  return queryString ? `${predicateToAppend} ${queryString}` : `${predicateToAppend}`;
 }
 
 export function model(params) {

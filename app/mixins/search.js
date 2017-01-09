@@ -8,6 +8,7 @@ const { Mixin, inject: { service }, get, set } = Ember;
 export default Mixin.create({
   ajax: service(),
   store: service(),
+  queryService: service('query'),
 
   queryParams: {
     query: { refreshModel: true },
@@ -25,13 +26,16 @@ export default Mixin.create({
     }
   },
 
+  resetController(controller, isExiting) {
+    if (isExiting) {
+      controller.set('query', '');
+      get(this, 'queryService').resetQueryString();
+    }
+  },
+
   getActiveFilters() {
     const queryTree = QP.parseString(get(this, 'query'));
     return QP.getFilters(queryTree).map(f => `${f.predicate}:${f.text}`);
-  },
-
-  isFilterActive() {
-    return true;
   },
 
   makeRequest(params) {
@@ -39,7 +43,8 @@ export default Mixin.create({
     const offset = (params.page - 1) * limit;
     const query = params.query || '';
     const body = query === '' ? {} : QP.parseString(query);
-
+    //set the query in the service
+    get(this, 'queryService').setQueryString(QP.toBoolString(QP.parseString(query)));
     return get(this, 'ajax').request(
       ENV.APIRoutes['datasets.search'],
       {
@@ -50,7 +55,7 @@ export default Mixin.create({
     ).then(this._handleQueryResponse.bind(this));
   },
 
-    /**
+  /**
    * @desc Process the query response from the backend
    * @param {Object} resp - Response from API
    * @returns {Object} - A transformed response w/ working filter buckets.
