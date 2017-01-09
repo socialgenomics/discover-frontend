@@ -3,7 +3,7 @@ import ENV from 'repositive/config/environment';
 import QP from 'npm:../../query-parser';
 import colours from 'repositive/utils/colours';
 
-const { get, inject: { service }, Service, set, Logger } = Ember;
+const { get, inject: { service }, Service, set, Logger, setProperties } = Ember;
 
 export default Service.extend({
   ajax: service(),
@@ -20,6 +20,14 @@ export default Service.extend({
 
   getQueryTree() {
     return get(this, 'queryTree');
+  },
+
+  resetSearchService() {
+    setProperties(this, {
+      queryString: null,
+      queryTree: null,
+      offset: 0
+    });
   },
 
   /**

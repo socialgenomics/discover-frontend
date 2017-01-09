@@ -4,6 +4,8 @@ import ENV from 'repositive/config/environment';
 import ResetScrollMixin from 'repositive/mixins/reset-scroll';
 import ActionableMixin from 'repositive/mixins/actionable';
 import SearchRouteMixin from '../../mixins/search-route';
+import IncrementCollectionViewCounterMixin from '../../mixins/increment-collection-view-counter-mixin';
+
 
 const { get, Route, RSVP, inject: { service }, Logger, set, assign } = Ember;
 
@@ -40,14 +42,22 @@ export function model(params) {
     }).catch(Logger.error);
 }
 
-export default Route.extend(AuthenticatedRouteMixin, ResetScrollMixin, ActionableMixin, SearchRouteMixin, {
-  ajax: service(),
-  session: service(),
-  searchService: service('search'),
+export default Route.extend(
+  AuthenticatedRouteMixin,
+  ResetScrollMixin,
+  ActionableMixin,
+  SearchRouteMixin,
+  IncrementCollectionViewCounterMixin,
+  {
+    ajax: service(),
+    session: service(),
+    searchService: service('search'),
 
-  controllerName: 'collection',
-  model: model,
-  afterModel(model) {
-    this._incrementViewCounter(model.collection, get(this, 'session.authenticatedUser'));
+    controllerName: 'collection',
+
+    model: model,
+    afterModel(model) {
+      this.incrementCollectionsViewCounter(model);
+    }
   }
-});
+);

@@ -69,10 +69,81 @@ describe('UsersSignupController', function() {
       'email': 'testemail@example.com',
       'password': 'Abcdefghi'
     });
+
     const credentials = controller._buildCredentials();
+
     expect(credentials.firstname).to.eql('Test');
     expect(credentials.lastname).to.eql('Name');
     expect(credentials.email).to.eql('testemail@example.com');
     expect(credentials.password).to.eql('Abcdefghi');
+  });
+
+  describe('_getPasswordStrength', function() {
+    it('should return number equal to positive pattern matches', function () {
+      const controller = this.subject();
+      const patterns = [/\d/, /[A-Z]/];
+      const dataProvider = [
+        { password: '', strength: 0 },
+        { password: 'aaaa', strength: 0 },
+        { password: 'Aaaa', strength: 1 },
+        { password: 'AAaa', strength: 1 },
+        { password: '1aaa', strength: 1 },
+        { password: '11aa', strength: 1 },
+        { password: '11AA', strength: 2 }
+      ];
+
+      dataProvider.forEach(dataset => {
+        expect(controller._getPasswordStrength(dataset.password, patterns)).to.be.equal(dataset.strength);
+      });
+    });
+  });
+
+  describe('strength computed property', function() {
+    it('should be equal "weak"', function () {
+      const controller = this.subject();
+      set(controller, 'password', '');
+
+      expect(get(controller, 'strength')).to.be.equal('weak');
+    });
+
+    it('should be equal "medium"', function () {
+      const controller = this.subject();
+      const passwords = ['aaaaaaa1', 'aaaaaaaA', 'aaaaaaa@'];
+
+      passwords.forEach(password => {
+        set(controller, 'password', password);
+        expect(get(controller, 'strength')).to.be.equal('medium');
+      });
+    });
+
+    it('should be equal "strong"', function () {
+      const controller = this.subject();
+      const passwords = ['aaaaaa1A', 'aaaaaa1@', 'aaaaaaA@'];
+
+      passwords.forEach(password => {
+        set(controller, 'password', password);
+        expect(get(controller, 'strength')).to.be.equal('strong');
+      });
+    });
+  });
+
+  describe('password inline validator', function () {
+    it('should return error', function () {
+      const controller = this.subject();
+
+      set(controller, 'password', 'aaaaaaaa');
+      expect(get(controller, 'errors.password.length')).to.be.equal(1);
+      expect(get(controller, 'errors.password')[0]).to.be.equal('Please enter a number or capital letter.');
+    });
+
+    it('should not return error', function () {
+      const controller = this.subject();
+      const passwords = ['aaaaaaa1', 'aaaaaaaA', 'aaaaaaa@'];
+
+      passwords.forEach(password => {
+        set(controller, 'password', password);
+        expect(get(controller, 'errors.password.length')).to.be.equal(0);
+      });
+    });
   });
 });

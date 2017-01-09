@@ -39,6 +39,8 @@ export default Component.extend({
 
   actions: {
     share(channel) {
+      this._trackClickEvent(channel);
+
       openCenteredPopupWindow(
         this._createShareWindowUrl(get(this, `channels.${channel}`)),
         get(this, 'windowTitle'),
@@ -47,7 +49,13 @@ export default Component.extend({
       );
     },
 
+    onEnvelopeClick() {
+      this._trackClickEvent('email');
+      get(this, 'onEnvelopeClick')();
+    },
+
     copySuccess() {
+      this._trackClickEvent('copy');
       setProperties(this, {
         copyAttempt: true,
         copySuccess: true
@@ -55,11 +63,20 @@ export default Component.extend({
     },
 
     copyError() {
+      this._trackClickEvent('copy');
       setProperties(this, {
         copyAttempt: true,
         copySuccess: false
       });
     }
+  },
+
+  _trackClickEvent(action) {
+    get(this, 'metrics').trackEvent({
+      category: 'share modal',
+      action,
+      label: get(this, 'actionableId')
+    });
   },
 
   _createShareWindowUrl(channelOptions) {
