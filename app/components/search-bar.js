@@ -1,12 +1,20 @@
 import Ember from 'ember';
 
-const { Component, get } = Ember;
+const { Component, get, observer, inject: { service }, set } = Ember;
 
 export default Component.extend({
+  queryService: service('query'),
+
   init() {
     this._super(...arguments);
+    const queryService = get(this, 'queryService');
+    set(this, 'query', queryService.getQueryString());
     //get the query string from params
   },
+  setQuery: observer('queryService.queryString', function() {
+    const queryService = get(this, 'queryService');
+    set(this, 'query', queryService.getQueryString());
+  }),
 
   actions: {
     search(query) {
