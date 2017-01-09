@@ -17,18 +17,19 @@ export default Mixin.create({
   },
 
   actions: {
-    // resetController(controller, isExiting) {
-    //   if (isExiting) {
-    //     controller.set('query', null);
-    //     get(this, 'searchService').resetSearchService();
-    //   }
-    // },
     loading(transition, route) {
       const controller = this.controllerFor(get(route, 'routeName'));
       set(controller, 'isLoading', true);
       transition.promise.finally(() => {
         set(controller, 'isLoading', false);
       });
+    }
+  },
+
+  resetController(controller, isExiting) {
+    if (isExiting) {
+      controller.set('query', '');
+      get(this, 'queryService').resetQueryString();
     }
   },
 

@@ -9,8 +9,8 @@ export default Component.extend({
     this._super(...arguments);
     const queryService = get(this, 'queryService');
     set(this, 'query', queryService.getQueryString());
-    //get the query string from params
   },
+  
   setQuery: observer('queryService.queryString', function() {
     const queryService = get(this, 'queryService');
     set(this, 'query', queryService.getQueryString());

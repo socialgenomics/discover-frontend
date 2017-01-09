@@ -10,5 +10,8 @@ export default Service.extend({
   },
   setQueryString(newString) {
     set(this, 'queryString', newString);
+  },
+  resetQueryString() {
+    set(this, 'queryString', null);
   }
 });
