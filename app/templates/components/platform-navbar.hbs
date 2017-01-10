@@ -1,19 +1,11 @@
 <nav class="navbar" id="navbar">
   <div class="navbar-wrapper">
 
-    {{#unless isAuthenticated}}
-      <a href="https://repositive.io">
-        <div class="navbar-logo valign-wrapper">
-          <img id="full-logo" class="responsive-img hide-on-small-only" src="/assets/images/logo-full-larger.png" alt="Repositive DNA logo">
-        </div>
-      </a>
-    {{else}}
-      {{#link-to 'root'}}
-        <div class="navbar-logo valign-wrapper">
-          <img id="full-logo" class="responsive-img hide-on-small-only" src="/assets/images/logo-full-larger.png" alt="Repositive DNA logo">
-        </div>
-      {{/link-to}}
-    {{/unless}}
+    {{#link-to 'root'}}
+      <div class="navbar-logo valign-wrapper">
+        <img id="full-logo" class="responsive-img hide-on-small-only" src="/assets/images/logo-full-larger.png" alt="Repositive DNA logo">
+      </div>
+    {{/link-to}}
 
     {{#if isAuthenticated}}
 
