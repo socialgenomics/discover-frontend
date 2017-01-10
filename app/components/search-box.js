@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-const { Component, Router, observer, get, set, inject: { service } } = Ember;
+const { Component, observer, get, set, inject: { service } } = Ember;
 
 export default Component.extend({
   searchService: service('search'),
