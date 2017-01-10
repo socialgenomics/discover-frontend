@@ -18,60 +18,63 @@
     {{#if isAuthenticated}}
 
       <div class="navbar-container">
-          <div class="navbar-search">
-            {{search-bar search=(route-action 'search')}}
-          </div>
-          <div class="navbar-buttons">
-            <div class="navbar-button">
-              {{#active-link}}
+        <div class="navbar-search">
+          {{search-bar search=(route-action 'search')}}
+        </div>
+        <div class="navbar-buttons">
+          <div class="navbar-button">
+            {{#active-link}}
               {{#link-to "datasets.request" class="valign-wrapper"}}
                 {{fa-icon "clipboard"}}
                 <h6 class="uppercase">Request Data</h6>
               {{/link-to}}
-              {{/active-link}}
-            </div>
-            <div class="navbar-button">
-              {{#active-link}}
+            {{/active-link}}
+          </div>
+          <div class="navbar-button">
+            {{#active-link}}
               {{#link-to "datasets.register" class="valign-wrapper"}}
                 {{fa-icon "file-text"}}
                 <h6 class="uppercase">Register Data</h6>
               {{/link-to}}
-              {{/active-link}}
-            </div>
+            {{/active-link}}
           </div>
         </div>
+      </div>
 
       {{navbar-dropdown avatar=avatar firstname=firstname username=username userId=userId}}
 
     {{else}}
-
-      <section class="navbar-button-group">
-        <div class="navbar-button">
-          {{#active-link}}
-            {{#if isRootRoute}}
-              {{#link-to 'users.signup' class="valign-wrapper primary-action" invokeAction=(action 'trackCreateAccount' 'DISCOVER NAV')}}CREATE ACCOUNT{{/link-to}}
-            {{else}}
-              {{#link-to 'users.signup' class="valign-wrapper primary-action" invokeAction=(action 'trackCreateAccount' 'OPENPAGE NAV')}}CREATE ACCOUNT{{/link-to}}
-            {{/if}}
-          {{/active-link}}
+      {{#unless isRootRoute}}
+        <div class="navbar-search">
+          {{search-bar search=(route-action 'search')}}
         </div>
-        <div class="navbar-button">
-          {{#active-link}}
-            {{#link-to 'users.login' class="valign-wrapper"}}LOGIN{{/link-to}}
-          {{/active-link}}
-        </div>
-      </section>
-
-      <section class="navbar-button-group">
-        <div class="navbar-button">
-          {{#active-link}}
-            <a href="http://blog.repositive.io/" target="_blank" class="valign-wrapper">BLOG</a>
-          {{/active-link}}
-        </div>
-        <div class="navbar-button">
-          {{#active-link}}
-            <a href="http://repositive.io/about" target="_blank" class="valign-wrapper">ABOUT</a>
-          {{/active-link}}
+      {{/unless}}
+      <section class="navbar-buttons">
+        <div class="navbar-button-group">
+          <div class="navbar-button">
+            {{#active-link}}
+              {{#if isRootRoute}}
+                {{#link-to 'users.signup' class="valign-wrapper primary-action" invokeAction=(action 'trackCreateAccount' 'DISCOVER NAV')}}CREATE ACCOUNT{{/link-to}}
+              {{else}}
+                {{#link-to 'users.signup' class="valign-wrapper primary-action" invokeAction=(action 'trackCreateAccount' 'OPENPAGE NAV')}}CREATE ACCOUNT{{/link-to}}
+              {{/if}}
+            {{/active-link}}
+          </div>
+          <div class="navbar-button button-divider">
+            {{#active-link}}
+              {{#link-to 'users.login' class="valign-wrapper"}}LOGIN{{/link-to}}
+            {{/active-link}}
+          </div>
+          <div class="navbar-button">
+            {{#active-link}}
+              <a href="http://blog.repositive.io/" target="_blank" class="valign-wrapper">BLOG</a>
+            {{/active-link}}
+          </div>
+          <div class="navbar-button button-divider">
+            {{#active-link}}
+              <a href="http://repositive.io/about" target="_blank" class="valign-wrapper">ABOUT</a>
+            {{/active-link}}
+          </div>
         </div>
       </section>
 

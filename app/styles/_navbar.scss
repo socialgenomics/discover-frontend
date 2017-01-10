@@ -2,4 +2,20 @@
   .primary-action {
     color: $color-pelorous;
   }
+
+  .button-divider {
+    border-left: 1px solid $color-alto;
+  }
+
+  .navbar-search {
+    margin-left: $sidenav-width - $sidenav-horiz-padding;
+    margin-right: $navbar-button-width * 3;
+    border: 1px solid $color-pelorous;
+
+    i {
+      border-right: 1px solid $color-pelorous;
+      margin-right: 1rem;
+    }
+
+  }
 }

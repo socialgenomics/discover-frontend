@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-const { Component, observer, get, set, inject: { service } } = Ember;
+const { Component, Router, observer, get, set, inject: { service } } = Ember;
 
 export default Component.extend({
   searchService: service('search'),
@@ -19,7 +19,8 @@ export default Component.extend({
     search(query) {
       const searchService = get(this, 'searchService');
       const queryTree = searchService.updateQuery(query.trim());
-      get(this, 'search')(queryTree); //calls search on application route
+      const serializedTree = searchService.serializeToString(queryTree);
+      get(this, 'search')(serializedTree); //calls search on application route
     }
   }
 });
