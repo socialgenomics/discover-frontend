@@ -35,6 +35,14 @@ export default Controller.extend({
         action: 'create account button',
         label: 'clicked'
       });
+    },
+    search(serializedTree) {
+      this.transitionToRoute('datasets.search', {
+        queryParams: {
+          query: serializedTree,
+          page: 1
+        }
+      });
     }
   }
 });
