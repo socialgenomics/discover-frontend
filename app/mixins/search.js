@@ -27,10 +27,7 @@ export default Mixin.create({
   },
 
   resetController(controller, isExiting) {
-    if (isExiting) {
-      controller.set('query', '');
-      get(this, 'queryService').resetQueryString();
-    }
+    if (isExiting) { controller.set('query', ''); }
   },
 
   getActiveFilters() {
@@ -53,7 +50,12 @@ export default Mixin.create({
     ).then(this._handleQueryResponse.bind(this));
   },
 
-  _updateQueryServiceValue(query){
+  /**
+  * @desc Update queryService query value
+  * @param {String} query - The new query value
+  * @private
+  */
+  _updateQueryServiceValue(query) {
     if (query) {
       get(this, 'queryService').setQueryString(QP.toBoolString(QP.parseString(query)));
     } else {
