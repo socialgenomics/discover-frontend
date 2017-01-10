@@ -3,7 +3,7 @@ import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-rout
 import SearchRouteMixin from '../../mixins/search-route';
 const { get, inject: { service }, Route, set } = Ember;
 
-export default Route.extend(AuthenticatedRouteMixin, SearchRouteMixin, {
+export default Route.extend(SearchRouteMixin, {
   session: service(),
   searchService: service('search'),
 
