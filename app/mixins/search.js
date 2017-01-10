@@ -43,8 +43,6 @@ export default Mixin.create({
     const offset = (params.page - 1) * limit;
     const query = params.query || '';
     const body = query === '' ? {} : QP.parseString(query);
-    //set the query in the service
-    get(this, 'queryService').setQueryString(QP.toBoolString(QP.parseString(query)));
     return get(this, 'ajax').request(
       ENV.APIRoutes['datasets.search'],
       {
@@ -53,6 +51,14 @@ export default Mixin.create({
         data: JSON.stringify({ type: 'dataset', offset, limit, body })
       }
     ).then(this._handleQueryResponse.bind(this));
+  },
+
+  _updateQueryServiceValue(query){
+    if (query) {
+      get(this, 'queryService').setQueryString(QP.toBoolString(QP.parseString(query)));
+    } else {
+      get(this, 'queryService').setQueryString(null);
+    }
   },
 
   /**
