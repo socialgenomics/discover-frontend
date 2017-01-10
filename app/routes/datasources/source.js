@@ -8,16 +8,16 @@ import SearchRouteMixin from '../../mixins/search';
 const { get, Route, RSVP, inject: { service }, Logger, set, assign } = Ember;
 
 function doQuery(data, queryString) {
-  // Return query if it already exists and includes datasource/collection name
-  if (queryString) {
-    if (queryString.includes('datasource') || queryString.includes('collection')) {
-      return queryString;
-    }
-  }
   const name = get(data.collection, 'name');
   // Put name in quotes if it has spaces
   const normalisedName = /\s+/.test(name) ? `"${name}"` : name;
   const short_name = get(data.collection, 'properties.short_name');
+  //Check if collection name has already been appended to queryString
+  if (queryString) {
+    if (queryString.includes(short_name) || queryString.includes(normalisedName)) {
+      return queryString;
+    }
+  }
   const type = get(data.collection, 'type') === 'datasource' ? 'datasource' : 'collection';
   const predicateToAppend = `${type}:${short_name || normalisedName}`;
   return queryString ? `${predicateToAppend} ${queryString}` : `${predicateToAppend}`;
@@ -39,6 +39,7 @@ export function model(params) {
       .then(m => {
         const model = assign(data, m);
         set(model, 'collection.actionableId', model.actionable);
+        this._updateQueryServiceValue(params.query);
         return model;
       });
     }).catch(Logger.error);
@@ -50,8 +51,7 @@ export default Route.extend(AuthenticatedRouteMixin, ResetScrollMixin, Actionabl
 
   controllerName: 'collection',
   model: model,
-  afterModel(model, transition) {
-    this._updateQueryServiceValue(get(transition, 'queryParams.query'));
+  afterModel(model) {
     this._incrementViewCounter(model.collection, get(this, 'session.authenticatedUser'));
   }
 });
