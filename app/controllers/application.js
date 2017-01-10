@@ -5,6 +5,7 @@ const { Controller, inject: { service }, set } = Ember;
 export default Controller.extend({
   session: service(),
   moment: service(),
+  isRootRoute: window.location.pathname === '/',
   isShowingModal: false,
   actions: {
     toggleModal() { this.toggleProperty('isShowingModal'); },
