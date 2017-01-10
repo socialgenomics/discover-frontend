@@ -50,7 +50,8 @@ export default Route.extend(AuthenticatedRouteMixin, ResetScrollMixin, Actionabl
 
   controllerName: 'collection',
   model: model,
-  afterModel(model) {
+  afterModel(model, transition) {
+    this._updateQueryServiceValue(get(transition, 'queryParams.query'));
     this._incrementViewCounter(model.collection, get(this, 'session.authenticatedUser'));
   }
 });

@@ -10,7 +10,7 @@ export default Component.extend({
     const queryService = get(this, 'queryService');
     set(this, 'query', queryService.getQueryString());
   },
-  
+
   setQuery: observer('queryService.queryString', function() {
     const queryService = get(this, 'queryService');
     set(this, 'query', queryService.getQueryString());
