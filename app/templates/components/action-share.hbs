@@ -12,6 +12,7 @@
   }}
     {{share-options
       shareUrl=shareUrl
+      actionableId=actionableId
       onEnvelopeClick=(action (if session.isAuthenticated 'toggleShareEmailModal' 'toggleCreateAccountModal'))
     }}
   {{/tether-dialog}}
