@@ -1,14 +1,22 @@
-{{#if (gt model.meta.total 0)}}
-  {{filters-list filters=model.aggs isLoading=isLoading light-font-color=false}}
-{{/if}}
-<div class="content right">
-  {{#if isLoading}}
-    {{partial 'loading'}}
-  {{else}}
-    <h5 class="unfocus-grey-text">Search Results ({{ model.meta.total }})</h5>
-    {{search-results-list results=model.datasets totalResults=model.meta.total}}
-    {{#if (gt model.meta.total 0)}}
-      {{pagination-bar totalResults=model.meta.total search=(route-action 'search')}}
-    {{/if}}
+{{#unless session.isAuthenticated}}
+  {{#full-page-notification customClassName='create-account-notification'}}
+    <h3>Sign up now to take full advantage of advanced search features!</h3>
+    {{#link-to 'users.signup' class='btn waves-effect teal white-text'}}Create account{{/link-to}}
+  {{/full-page-notification}}
+{{/unless}}
+<div class="{{unless session.isAuthenticated 'notification-margin' ''}}">
+  {{#if (gt model.meta.total 0)}}
+    {{filters-list filters=model.aggs isLoading=isLoading light-font-color=false}}
   {{/if}}
+  <div class="content right">
+    {{#if isLoading}}
+      {{partial 'loading'}}
+    {{else}}
+      <h5 class="unfocus-grey-text">Search Results ({{ model.meta.total }})</h5>
+      {{search-results-list results=model.datasets totalResults=model.meta.total}}
+      {{#if (gt model.meta.total 0)}}
+        {{pagination-bar totalResults=model.meta.total search=(route-action 'search')}}
+      {{/if}}
+    {{/if}}
+  </div>
 </div>
