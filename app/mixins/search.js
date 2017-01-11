@@ -27,7 +27,7 @@ export default Mixin.create({
        * the same route. So, show in-page loading spinners rather than global spinner.
        * Please refactor if this is too hacky.
       */
-      if (currentPath.includes(targetRouteName[0]) && slashesInPath > 1){
+      if (currentPath.includes(targetRouteName[0]) && slashesInPath > 1) {
         const controller = this.controllerFor(get(route, 'routeName'));
         set(controller, 'isLoading', true);
         transition.promise.finally(() => {
