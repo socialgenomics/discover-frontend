@@ -24,6 +24,7 @@
     <div class="divider"></div>
   </div>
 {{/each}}
+{{log session.isAuthenticated}}
 {{#unless session.isAuthenticated}}
   {{open-search-filter-overlay}}
 {{/unless}}

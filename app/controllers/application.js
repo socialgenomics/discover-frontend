@@ -6,7 +6,7 @@ export default Controller.extend({
   session: service(),
   moment: service(),
   isRootRoute: function () {
-    return window.location.pathname === '/'
+    return window.location.pathname === '/' || window.location.pathname.indexOf('/users/') !== -1;
   }.property('currentPath'),
   isShowingModal: false,
 
