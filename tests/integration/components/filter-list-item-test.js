@@ -4,18 +4,9 @@ import { it, describe } from 'mocha';
 import { setupComponentTest } from 'ember-mocha';
 import hbs from 'htmlbars-inline-precompile';
 
-const searchServiceStub = Ember.Service.extend({
-  isFilterActive: (filter) => false
-});
-
 describe('Integration: FilterListItemComponent', function() {
   setupComponentTest('filter-list-item', {
     integration: true
-  });
-
-  beforeEach(function () {
-    this.register('service:search', searchServiceStub);
-    this.inject.service('search', { as: 'searchService' });
   });
 
   it('Renders the filter name and count.', function() {
@@ -25,9 +16,10 @@ describe('Integration: FilterListItemComponent', function() {
         doc_count: 8,
         colour: null
       },
-      aggName: 'Datasource'
+      aggName: 'Datasource',
+      activeFilters: ['access:Open']
     });
-    this.render(hbs`{{filter-list-item bucket=bucket aggName=aggName}}`);
+    this.render(hbs`{{filter-list-item bucket=bucket aggName=aggName activeFilters=activeFilters}}`);
     expect(this.$('span').text().trim()).to.eql('Abc (8)');
   });
 
@@ -38,9 +30,10 @@ describe('Integration: FilterListItemComponent', function() {
         doc_count: 10,
         colour: 'indigo'
       },
-      aggName: 'assay'
+      aggName: 'assay',
+      activeFilters: ['access:Open']
     });
-    this.render(hbs`{{filter-list-item bucket=bucket aggName=aggName}}`);
+    this.render(hbs`{{filter-list-item bucket=bucket aggName=aggName activeFilters=activeFilters}}`);
     expect(this.$('span').text().trim()).to.eql('Assay Abc (10)');
     expect(this.$('div.label').hasClass('indigo')).to.be.true;
   });
