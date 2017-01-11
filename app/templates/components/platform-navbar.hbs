@@ -1,11 +1,19 @@
 <nav class="navbar" id="navbar">
   <div class="navbar-wrapper">
 
-    {{#link-to 'root'}}
-      <div class="navbar-logo valign-wrapper">
-        <img id="full-logo" class="responsive-img hide-on-small-only" src="/assets/images/logo-full-larger.png" alt="Repositive DNA logo">
-      </div>
-    {{/link-to}}
+    {{#unless isAuthenticated}}
+      <a href="https://repositive.io">
+        <div class="navbar-logo valign-wrapper">
+          <img id="full-logo" class="responsive-img hide-on-small-only" src="/assets/images/logo-full-larger.png" alt="Repositive DNA logo">
+        </div>
+      </a>
+    {{else}}
+      {{#link-to 'root'}}
+        <div class="navbar-logo valign-wrapper">
+          <img id="full-logo" class="responsive-img hide-on-small-only" src="/assets/images/logo-full-larger.png" alt="Repositive DNA logo">
+        </div>
+      {{/link-to}}
+    {{/unless}}
 
     {{#if isAuthenticated}}
 
@@ -36,13 +44,14 @@
       {{navbar-dropdown avatar=avatar firstname=firstname username=username userId=userId}}
 
     {{else}}
+    <div class="{{unless isRootRoute 'navbar-container' '' }}">
       {{#unless isRootRoute}}
         <div class="navbar-search">
           {{search-bar search=(route-action 'search')}}
         </div>
       {{/unless}}
-      <section class="navbar-buttons">
-        <div class="navbar-button-group">
+    </div>
+      <section class="open-search-buttons push-right">
           <div class="navbar-button">
             {{#active-link}}
               {{#if isRootRoute}}
@@ -59,17 +68,15 @@
           </div>
           <div class="navbar-button">
             {{#active-link}}
-              <a href="http://blog.repositive.io/" target="_blank" class="valign-wrapper">BLOG</a>
+              <a href="http://blog.repositive.io/" class="valign-wrapper">BLOG</a>
             {{/active-link}}
           </div>
-          <div class="navbar-button button-divider">
+          <div class="navbar-button">
             {{#active-link}}
-              <a href="http://repositive.io/about" target="_blank" class="valign-wrapper">ABOUT</a>
+              <a href="http://repositive.io/about" class="valign-wrapper">ABOUT</a>
             {{/active-link}}
           </div>
-        </div>
       </section>
-
     {{/if}}
   </div>
 </nav>
