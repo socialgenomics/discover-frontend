@@ -18,11 +18,24 @@ export default Mixin.create({
 
   actions: {
     loading(transition, route) {
-      const controller = this.controllerFor(get(route, 'routeName'));
-      set(controller, 'isLoading', true);
-      transition.promise.finally(() => {
-        set(controller, 'isLoading', false);
-      });
+      const targetRouteName = get(route, 'routeName').split('.');
+      const currentPath = window.location.pathname;
+      const slashesInPath = (currentPath.match(/[/]/g) || []).length;
+      /*
+       * If the path your are transitioning from includes the route name of the
+       * target route. And there is more than one slash in the path, it must be
+       * the same route. So, show in-page loading spinners rather than global spinner.
+       * Please refactor if this is too hacky.
+      */
+      if (currentPath.includes(targetRouteName[0]) && slashesInPath > 1){
+        const controller = this.controllerFor(get(route, 'routeName'));
+        set(controller, 'isLoading', true);
+        transition.promise.finally(() => {
+          set(controller, 'isLoading', false);
+        });
+      } else {
+        return true; //bubble up to root loading spinner
+      }
     }
   },
 
