@@ -1,20 +1,17 @@
 import Ember from 'ember';
 import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
-import SearchRouteMixin from '../../mixins/search-route';
-const { get, inject: { service }, Route, set } = Ember;
+import SearchRouteMixin from '../../mixins/search';
 
-export default Route.extend(SearchRouteMixin, {
-  session: service(),
-  searchService: service('search'),
+const { Route } = Ember;
 
-  model(params) {
-    const searchService = get(this, 'searchService');
-    const resultsPerPage = parseInt(params.resultsPerPage, 10);
-
-    if (resultsPerPage > 0) {
-      set(this, 'searchService.resultsPerPage', resultsPerPage);
+export default Route.extend(
+  SearchRouteMixin, {
+    model(params) {
+      return this.makeRequest(params)
+        .then(resp => {
+          this._updateQueryServiceValue(params.query);
+          return resp;
+        });
     }
-
-    return searchService.updateQueryAndMakeRequest(params.query || '', params.page || 1);
   }
-});
+);

@@ -9,8 +9,14 @@ export default Controller.extend({
     return window.location.pathname === '/'
   }.property('currentPath'),
   isShowingModal: false,
+
   actions: {
-    toggleModal() { this.toggleProperty('isShowingModal'); },
-    changeDefaultFormat() { set(this, 'moment.defaultFormat', 'DD.MM.YYYY'); }
+    toggleModal() {
+      this.toggleProperty('isShowingModal');
+    },
+
+    changeDefaultFormat() {
+      set(this, 'moment.defaultFormat', 'DD.MM.YYYY');
+    }
   }
 });

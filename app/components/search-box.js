@@ -1,26 +1,24 @@
 import Ember from 'ember';
 
-const { Component, observer, get, set, inject: { service } } = Ember;
+const { Component, get, observer, inject: { service }, set } = Ember;
 
 export default Component.extend({
-  searchService: service('search'),
-  // I couldn't find a different way to get the latest query from
-  // the service, into the search bar.
-  setQuery: observer('searchService.queryTree', function() {
-    const searchService = get(this, 'searchService');
-    set(this, 'query', searchService.getQueryString());
-  }),
+  queryService: service('query'),
+
   init() {
     this._super(...arguments);
-    const searchService = get(this, 'searchService');
-    set(this, 'query', searchService.getQueryString());
+    const queryService = get(this, 'queryService');
+    set(this, 'query', queryService.getQueryString());
   },
+
+  setQuery: observer('queryService.queryString', function() {
+    const queryService = get(this, 'queryService');
+    set(this, 'query', queryService.getQueryString());
+  }),
+
   actions: {
     search(query) {
-      const searchService = get(this, 'searchService');
-      const queryTree = searchService.updateQuery(query.trim());
-      const serializedTree = searchService.serializeToString(queryTree);
-      get(this, 'search')(serializedTree); //calls search on application route
+      get(this, 'search')(query.trim()); //calls search on application route
     }
   }
 });

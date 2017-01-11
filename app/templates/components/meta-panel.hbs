@@ -29,5 +29,12 @@
   </main>
 
 {{else}}
-  {{filters-list filters=filters isLoading=isLoading light-font-color=true}}
+  {{filters-list
+    addFilter=addFilter
+    removeFilter=removeFilter
+    filters=filters
+    activeFilters=activeFilters
+    isLoading=isLoading
+    modelType=model.type
+    light-font-color=true}}
 {{/if}}

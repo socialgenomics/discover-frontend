@@ -1,14 +1,29 @@
 {{#if (gt model.meta.total 0)}}
-  {{filters-list filters=model.aggs isLoading=isLoading light-font-color=false}}
+  {{filters-list
+    addFilter=(action 'addFilter')
+    removeFilter=(action 'removeFilter')
+    filters=model.aggs
+    activeFilters=activeFilters
+    isLoading=isLoading
+    light-font-color=false
+  }}
 {{/if}}
+
 <div class="content right">
   {{#if isLoading}}
     {{partial 'loading'}}
   {{else}}
-    <h5 class="unfocus-grey-text">Search Results ({{ model.meta.total }})</h5>
+    <h5 class="unfocus-grey-text">Search Results ({{model.meta.total}})</h5>
+
     {{search-results-list results=model.datasets totalResults=model.meta.total}}
+
     {{#if (gt model.meta.total 0)}}
-      {{pagination-bar totalResults=model.meta.total search=(route-action 'search')}}
+      {{pagination-bar
+        totalPages=totalPages
+        currentPageNumber=page
+        nextPage=(action 'nextPage')
+        previousPage=(action 'previousPage')
+      }}
     {{/if}}
   {{/if}}
 </div>

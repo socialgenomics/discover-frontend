@@ -2,6 +2,7 @@ import Ember from 'ember';
 import ApplicationRouteMixin from 'ember-simple-auth/mixins/application-route-mixin';
 import BT from 'npm:../../query-parser/dist/main/b-tree';
 import BX from 'npm:../../query-parser/dist/main/b-exp-tree';
+import QP from 'npm:../../query-parser';
 
 const { Route, inject: { service }, get } = Ember;
 
@@ -10,7 +11,6 @@ const isUUID = new RegExp(/^[0-9A-F]{8}-[0-9A-F]{4}-[4][0-9A-F]{3}-[89AB][0-9A-F
 export default Route.extend(ApplicationRouteMixin, {
   favouritesService: service('favourites'),
   session: service(),
-  searchService: service('search'),
   urlGenerator: service(),
 
   init() {
@@ -48,26 +48,25 @@ export default Route.extend(ApplicationRouteMixin, {
     });
   },
   actions: {
-    search(queryTree, pageNumber) {
+    search(queryString, pageNumber) {
+      const queryTree = QP.parseString(queryString);
       if (queryTree && queryTree.isError) {
         return this.transitionTo('datasets.search-error');
       }
-      const searchService = get(this,  'searchService');
       const collectionF = BT.filter(queryTree, (node, left, right) => {
         return BX.isFilter(node) && node.predicate === 'collection';
       });
       const datasourceF = BT.filter(queryTree, (node, left, right) => {
         return BX.isFilter(node) && node.predicate === 'datasource';
       });
-      const serializeTree = searchService.serializeToString(queryTree);
       if (collectionF.length === 1) {
-        this.queryAndTransition('collections.collection', collectionF[0], serializeTree, pageNumber);
+        this.queryAndTransition('collections.collection', collectionF[0], queryString, pageNumber);
       } else if (datasourceF.length === 1) {
-        this.queryAndTransition('datasources.source', datasourceF[0], serializeTree, pageNumber);
+        this.queryAndTransition('datasources.source', datasourceF[0], queryString, pageNumber);
       } else {
         this.transitionTo('datasets.search', {
           queryParams: {
-            query: serializeTree,
+            query: queryString,
             page: pageNumber || 1
           }
         });
@@ -75,9 +74,10 @@ export default Route.extend(ApplicationRouteMixin, {
       get(this, 'metrics').trackEvent({
         category: 'search',
         action: 'query',
-        label: serializeTree
+        label: queryString
       });
     },
+
     toggleModal() {
       this.controllerFor('application').toggleProperty('isShowingModal');
     }
