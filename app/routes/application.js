@@ -53,15 +53,15 @@ export default Route.extend(ApplicationRouteMixin, {
       if (queryTree && queryTree.isError) {
         return this.transitionTo('datasets.search-error');
       }
-      const collectionF = BT.filter(queryTree, (node, left, right) => {
+      const collectionF = BT.filter(queryTree, (node) => {
         return BX.isFilter(node) && node.predicate === 'collection';
       });
-      const datasourceF = BT.filter(queryTree, (node, left, right) => {
+      const datasourceF = BT.filter(queryTree, (node) => {
         return BX.isFilter(node) && node.predicate === 'datasource';
       });
-      if (collectionF.length === 1) {
+      if (collectionF.length === 1 && window.location.pathname.includes('collection')) {
         this.queryAndTransition('collections.collection', collectionF[0], queryString, pageNumber);
-      } else if (datasourceF.length === 1) {
+      } else if (datasourceF.length === 1 && window.location.pathname.includes('datasource')) {
         this.queryAndTransition('datasources.source', datasourceF[0], queryString, pageNumber);
       } else {
         this.transitionTo('datasets.search', {
