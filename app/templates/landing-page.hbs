@@ -4,19 +4,28 @@
     <div class="col m12">
 
       <div class="row no-margin">
-        <header class="col m12">
+        <section class="map-search">
+          {{home-page-map}}
           <div class="landing-title center-align">
-            <h1 class="ultra-thin">Search <strong>{{datasetsNumber}}</strong> datasets across <strong>{{model.stats.datasources}} different data sources.</strong></h1>
+            <h1>Discover, share and collaborate on human genomic data</h1>
           </div>
-          <div class="divider"></div>
-        </header>
+          {{search-box search=(action 'search')}}
+        </section>
       </div>
 
       <div class="row no-margin">
-        <section class="map-search">
-          {{home-page-map}}
-          {{search-box search=(action 'search')}}
-        </section>
+        <div class="col m4 center">
+          <h3><strong>{{datasetsNumber}}</strong></h3>
+          <span>human genomic datasets</span>
+        </div>
+        <div class="col m4 center">
+          <h3><strong>100+</strong></h3>
+          <span>researchers & bioinformaticians</span>
+        </div>
+        <div class="col m4 center">
+          <h3><strong>{{model.stats.datasources}}</strong></h3>
+          <span>different data sources</span>
+        </div>
       </div>
 
     </div>

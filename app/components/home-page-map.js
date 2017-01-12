@@ -5,7 +5,7 @@ import topojson from 'npm:topojson';
 export default Ember.Component.extend({
   didInsertElement: function() {
     const width = this.$().innerWidth();
-    const height = this.$().innerHeight() > 0 ? this.$().innerHeight() : 500;
+    const height = this.$().innerHeight() > 0 ? this.$().innerHeight() : 550;
     const mapColour = '#E2E8EA';
     const datasourceColour = '#E97275';
     const datasetColour = '#39AFB5';
@@ -21,8 +21,8 @@ export default Ember.Component.extend({
     const g = svg.append('g');
 
     const mercator = d3.geoMercator()
-      .center([0, 25])
-      .scale(150);
+      .center([0, 30])
+      .scale(155);
 
     const path = d3.geoPath().projection(mercator);
     const points = d => mercator([d.geometry.coordinates[0], d.geometry.coordinates[1]]);
