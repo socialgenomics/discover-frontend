@@ -1,5 +1,5 @@
   {{#if model.name}}
-    {{model.name}}
+    {{truncate model.name 40}}
   {{else}}
-    {{model.properties.short_name}}
+    {{truncate model.properties.short_name 40}}
   {{/if}}
