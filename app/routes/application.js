@@ -50,9 +50,9 @@ export default Route.extend(ApplicationRouteMixin, {
   },
 
   _conditionallyTransition(collectionPredicate, datasourcePredicate, queryString, pageNumber) {
-    if (collectionPredicate.length === 1 && window.location.pathname.includes('collection')) {
+    if (collectionPredicate.length === 1 && get(this, 'controller.currentPath').includes('collection')) {
       this._queryAndTransition('collections.collection', collectionPredicate[0], queryString, pageNumber);
-    } else if (datasourcePredicate.length === 1 && window.location.pathname.includes('datasource')) {
+    } else if (datasourcePredicate.length === 1 && get(this, 'controller.currentPath').includes('datasource')) {
       this._queryAndTransition('datasources.source', datasourcePredicate[0], queryString, pageNumber);
     } else {
       this.transitionTo('datasets.search', {
@@ -63,7 +63,7 @@ export default Route.extend(ApplicationRouteMixin, {
       });
     }
   },
-  _queryAndTransition (dest, input, serializeTree, pageNumber) {
+  _queryAndTransition(dest, input, serializeTree, pageNumber) {
     let query = {};
     if (isUUID.test(input.text)) {
       query = { 'where.id' : input.text };
