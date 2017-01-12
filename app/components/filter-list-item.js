@@ -1,25 +1,19 @@
 import Ember from 'ember';
 
-const { Component, get, computed, inject: { service } } = Ember;
+const { Component, computed, get } = Ember;
 
 export default Component.extend({
-  searchService: service('search'),
-  active: computed('model', 'active', function() {
-    const filterString = `${get(this, 'aggName')}:${get(this, 'bucket.key')}`;
-    return get(this, 'searchService').isFilterActive(filterString);
+  active: computed('activeFilters', 'aggName', 'bucket.key', function () {
+    const filter = `${get(this, 'aggName')}:${get(this, 'bucket.key')}`;
+
+    return get(this, 'activeFilters').indexOf(filter) !== -1;
   }),
-  sendFilterAction: function (query) {
-    get(this, 'searchService').updateQuery(query);
-    get(this, 'search')(query);
-  },
   actions: {
-    addFilter(name, key) {
-      const query = get(this, 'searchService').addFilter(name, key);
-      this.sendFilterAction(query);
+    addFilter(aggName, bucketKey) {
+      get(this, 'addFilter')(aggName, bucketKey);
     },
-    removeFilter(name, key) {
-      const query = get(this, 'searchService').removeFilter(name, key);
-      this.sendFilterAction(query);
+    removeFilter(aggName, bucketKey) {
+      get(this, 'removeFilter')(aggName, bucketKey);
     }
   }
 });

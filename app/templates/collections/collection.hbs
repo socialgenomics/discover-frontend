@@ -1,7 +1,10 @@
 {{meta-panel
+  addFilter=(action 'addFilter')
+  removeFilter=(action 'removeFilter')
   collectionStats=model.collectionStats
   model=model.collection
   filters=model.aggs
+  activeFilters=activeFilters
   isLoading=isLoading
   datasets=model.datasets
 }}
@@ -13,7 +16,12 @@
     <h5 class="unfocus-grey-text">Search Results ({{ model.meta.total }})</h5>
     {{search-results-list results=model.datasets totalResults=model.meta.total}}
     {{#if (gt model.meta.total 0)}}
-      {{pagination-bar totalResults=model.meta.total search=(route-action 'search')}}
+      {{pagination-bar
+        totalPages=totalPages
+        currentPageNumber=page
+        nextPage=(action 'nextPage')
+        previousPage=(action 'previousPage')
+       }}
     {{/if}}
   {{/if}}
 </div>
