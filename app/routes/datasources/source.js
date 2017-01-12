@@ -3,23 +3,28 @@ import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-rout
 import ENV from 'repositive/config/environment';
 import ResetScrollMixin from 'repositive/mixins/reset-scroll';
 import ActionableMixin from 'repositive/mixins/actionable';
-import SearchRouteMixin from '../../mixins/search-route';
+import SearchRouteMixin from '../../mixins/search';
+import IncrementCollectionViewCounterMixin from '../../mixins/increment-collection-view-counter-mixin';
 
 const { get, Route, RSVP, inject: { service }, Logger, set, assign } = Ember;
 
 function doQuery(data, queryString) {
-  // Return query if it already exists
-  if (queryString) { return queryString; }
   const name = get(data.collection, 'name');
   // Put name in quotes if it has spaces
   const normalisedName = /\s+/.test(name) ? `"${name}"` : name;
   const short_name = get(data.collection, 'properties.short_name');
+  //Check if collection name has already been appended to queryString
+  if (queryString) {
+    if (queryString.includes(short_name) || queryString.includes(normalisedName)) {
+      return queryString;
+    }
+  }
   const type = get(data.collection, 'type') === 'datasource' ? 'datasource' : 'collection';
-  return `${type}:${short_name || normalisedName}`;
+  const predicateToAppend = `${type}:${short_name || normalisedName}`;
+  return queryString ? `${predicateToAppend} ${queryString}` : `${predicateToAppend}`;
 }
 
 export function model(params) {
-  const searchService = get(this, 'searchService');
   const store = this.store;
   const collectionId = params.id;
   const queryString = params.query;
@@ -30,24 +35,32 @@ export function model(params) {
   })
     .then(data => {
       const updatedQuery = doQuery(data, queryString);
-      const queryTree = searchService.updateQuery(updatedQuery, params.page);
-      return searchService.makeRequest(queryTree, params.page || 0)
+      set(params, 'query', updatedQuery);
+      return this.makeRequest(params)
       .then(m => {
         const model = assign(data, m);
         set(model, 'collection.actionableId', model.actionable);
+        this._updateQueryServiceValue(params.query);
         return model;
       });
     }).catch(Logger.error);
 }
 
-export default Route.extend(AuthenticatedRouteMixin, ResetScrollMixin, ActionableMixin, SearchRouteMixin, {
-  ajax: service(),
-  session: service(),
-  searchService: service('search'),
+export default Route.extend(
+  AuthenticatedRouteMixin,
+  ResetScrollMixin,
+  ActionableMixin,
+  SearchRouteMixin,
+  IncrementCollectionViewCounterMixin,
+  {
+    ajax: service(),
+    session: service(),
 
-  controllerName: 'collection',
-  model: model,
-  afterModel(model) {
-    this._incrementViewCounter(model.collection, get(this, 'session.authenticatedUser'));
+    controllerName: 'collection',
+
+    model: model,
+    afterModel(model) {
+      this.incrementCollectionsViewCounter(model);
+    }
   }
-});
+);

@@ -19,8 +19,7 @@
     </section>
 
     {{#if model.description}}
-      <div class="divider"></div>
-      <p class="markdown-text">{{markdown-to-html markdown=model.description}}</p>
+      {{collapsible-description description=model.description}}
     {{/if}}
 
     {{#if model.image}}
@@ -30,5 +29,12 @@
   </main>
 
 {{else}}
-  {{filters-list filters=filters isLoading=isLoading light-font-color=true}}
+  {{filters-list
+    addFilter=addFilter
+    removeFilter=removeFilter
+    filters=filters
+    activeFilters=activeFilters
+    isLoading=isLoading
+    modelType=model.type
+    light-font-color=true}}
 {{/if}}

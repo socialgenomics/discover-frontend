@@ -3,7 +3,7 @@
 
     <header class="card-header">
       <div class="assay-container">
-        <img src="/assets/images/icon-request-2.0.png">
+        {{fa-icon "clipboard"}}
         {{#if dataset.createdAt}}<p>{{moment-from-now dataset.createdAt hideSuffix=true}} ago</p>{{/if}}
       </div>
       <div class="actions-container valign-wrapper">
