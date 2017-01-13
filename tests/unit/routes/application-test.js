@@ -5,7 +5,7 @@ import { describe, it } from 'mocha';
 import { setupTest } from 'ember-mocha';
 import sinon from 'sinon';
 
-const { get, set } = Ember;
+const { get, set, setProperties } = Ember;
 
 describe('Unit | Route | application', function() {
   setupTest('route:application', {
@@ -52,11 +52,52 @@ describe('Unit | Route | application', function() {
   it('_conditionallyTransition calls _queryAndTransition with a collection predicate on a collection rotue', function() {
     const route = this.subject();
     const queryString = 'collection:"ABC"';
-    const controller = { currentPath: 'collections.collection' };
-    set(route, 'metrics', { trackEvent: sinon.stub() });
-    set(route, 'controller', controller);
+    setProperties(route, {
+      'metrics': { trackEvent: sinon.stub() },
+      'controller': { currentPath: 'collections.collection' }
+    });
     route._queryAndTransition = sinon.spy();
     route._conditionallyTransition([{ predicate: 'collection', text: 'ABC' }], [], queryString, 1);
     expect(route._queryAndTransition.calledWith('collections.collection', { predicate: 'collection', text: 'ABC' }, queryString, 1)).to.be.true;
+  });
+
+  it('when in search route, all searches remain in that route', function() {
+    const route = this.subject();
+    const queryString = 'collection:"ABC" lung';
+    const currentPath = 'datasets.search';
+    const queryParams = {
+      queryParams: {
+        query: queryString,
+        page: 1
+      }
+    };
+    setProperties(route, {
+      'metrics': { trackEvent: sinon.stub() },
+      'controller': { currentPath: currentPath }
+    });
+    route._queryAndTransition = sinon.stub();
+    route.transitionTo = sinon.spy();
+    route._conditionallyTransition([{ predicate: 'collection', text: 'ABC' }], [], queryString, 1);
+    expect(route.transitionTo.calledWith(queryParams));
+  });
+
+  it('when in datasource route, making a search with no datasource predicate takes you to search route', function() {
+    const route = this.subject();
+    const queryString = 'lung';
+    const currentPath = 'datasources.datasource';
+    const queryParams = {
+      queryParams: {
+        query: queryString,
+        page: 1
+      }
+    };
+    setProperties(route, {
+      'metrics': { trackEvent: sinon.stub() },
+      'controller': { currentPath: currentPath }
+    });
+    route._queryAndTransition = sinon.stub();
+    route.transitionTo = sinon.spy();
+    route._conditionallyTransition([], [], queryString, 1);
+    expect(route.transitionTo.calledWith(queryParams));
   });
 });

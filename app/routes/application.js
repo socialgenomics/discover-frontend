@@ -18,7 +18,6 @@ export default Route.extend(ApplicationRouteMixin, {
     // do not remove this initialization. It's required for the url generator service to work properly
     get(this, 'urlGenerator').initialize(this.router);
   },
-
   sessionAuthenticated() {
     this._super(...arguments);
     get(this, 'favouritesService').loadFavourites();
