@@ -1,15 +1,15 @@
-<div class="filter-item {{if active 'remove' 'activate'}}">
+<div class="filter-item {{if active 'remove' 'activate'}}"
+  {{action (if active 'removeFilter' 'addFilter') aggName bucket.key}}
+>
   {{#if (eq aggName "assay")}}
     <div class="label {{bucket.colour}}"></div>
   {{/if}}
 
-  {{#unless active}}
-    <span {{action 'addFilter' aggName bucket.key}}>
-      {{bucket.key}} ({{bucket.doc_count}})
-    </span>
-  {{else}}
-    <span {{action 'removeFilter' aggName bucket.key}}>
-      {{bucket.key}} ({{bucket.doc_count}}) <span class="filter-icon">{{fa-icon "times"}}</span>
-    </span>
-{{/unless}}
+  <span>
+    {{bucket.key}} ({{bucket.doc_count}})
+    {{#if active}}
+      <span class="filter-icon">{{fa-icon "times"}}</span>
+    {{/if}}
+  </span>
 </div>
+
