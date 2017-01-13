@@ -1,0 +1,29 @@
+& {
+  position: absolute;
+  left: 0;
+  top: 0;
+  min-height: 100%;
+  width: $sidenav-width - $sidenav-horiz-padding;
+  background-color: transparentize(#eceff1, .1);
+  //background: -webkit-linear-gradient(mix($color-pelorous, $color-white, 20), transparentize($color-white, .5)); /*Safari 5.1-6*/
+  //background: -o-linear-gradient(mix($color-pelorous, $color-white, 20), transparentize($color-white, .5)); /*Opera 11.1-12*/
+  //background: -moz-linear-gradient(mix($color-pelorous, $color-white, 20), transparentize($color-white, .5)); /*Fx 3.6-15*/
+  //background: linear-gradient(transparentize(#eceff1, .7), #eceff1 30%, transparentize(#eceff1, .7));
+  align-items: center;
+
+  .call-to-action {
+    text-align: center;
+    padding: 1rem;
+    padding-top: 2rem;
+  }
+
+  a {
+    color: $color-pelorous;
+    text-decoration: underline;
+  }
+
+  .button-wrapper {
+    width: 100%;
+  }
+
+}

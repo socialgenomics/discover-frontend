@@ -1,15 +1,15 @@
 <div class="search-container">
-  <div class="navbar-search">
-    <form {{action 'search' on='submit'}}>
+  <div class="open-search">
+    <form {{action search query on='submit'}}>
       {{fa-icon "search"}}
       {{input
         type="text"
         class="unfocus-grey-text"
-        placeholder="title:cancer AND description:lung OR tumor tag: RNAseq"
+        placeholder="title:cancer AND description:lung"
         value=query
+        autofocus=true
       }}
       <button class="btn">Search</button>
     </form>
   </div>
-  {{#link-to 'help.searching-for-data'}}<p class="helper-text">How to write advanced search queries?</p>{{/link-to}}
 </div>

@@ -1,17 +1,24 @@
 import Ember from 'ember';
 
-export default Ember.Component.extend({
-  session: Ember.inject.service(),
-  query: '',
+const { Component, get, observer, inject: { service }, set } = Ember;
+
+export default Component.extend({
+  queryService: service('query'),
+
+  init() {
+    this._super(...arguments);
+    const queryService = get(this, 'queryService');
+    set(this, 'query', queryService.getQueryString());
+  },
+
+  setQuery: observer('queryService.queryString', function() {
+    const queryService = get(this, 'queryService');
+    set(this, 'query', queryService.getQueryString());
+  }),
 
   actions: {
-    search: function() {
-      this.get('metrics').trackEvent({
-        category: 'search',
-        action: 'query',
-        label: this.get('query')
-      });
-      this.sendAction('action', this.get('query'));
+    search(query) {
+      get(this, 'search')(query.trim()); //calls search on application route
     }
   }
 });

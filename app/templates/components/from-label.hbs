@@ -2,49 +2,90 @@
 {{#if isFavourite}}
   {{#if isRequest}}
     <span class="descriptor">Requested by </span>
-    {{#link-to 'user' model.user.id}}
-      {{model.user.firstname}} {{model.user.lastname}}
-    {{/link-to}}
+    {{#if session.isAuthenticated }}
+      {{#link-to 'user' model.user.id}}
+        {{model.user.firstname}} {{model.user.lastname}}
+      {{/link-to}}
+    {{else}}
+      <span class="fake-link">{{model.user.firstname}} {{model.user.lastname}}</span>
+    {{/if}}
   {{else if (eq model.datasource.properties.short_name "REPOSITIVE")}}
     <!-- Registration -->
 
     <span class="descriptor">Registered by </span>
-    {{#link-to 'user' model.user.id class="user-name"}}
-      {{model.user.firstname}} {{model.user.lastname}}
-    {{/link-to}}
+    {{#if session.isAuthenticated }}
+      {{#link-to 'user' model.user.id class="user-name"}}
+        {{model.user.firstname}} {{model.user.lastname}}
+      {{/link-to}}
+    {{else}}
+      <span class="fake-link">{{model.user.firstname}} {{model.user.lastname}}</span>
+    {{/if}}
 
   {{else}}
     <!-- Regular Dataset-->
     <span class="descriptor">from</span>
-    {{#link-to 'datasources.source' model.datasource.id}}
-      {{source-name-fallback model=model.datasource}}
-    {{/link-to}}
+    {{#if session.isAuthenticated }}
+      {{#link-to 'datasources.source' model.datasource.id}}
+        {{source-name-fallback model=model.datasource}}
+      {{/link-to}}
+    {{else}}
+      <span class="fake-link">{{source-name-fallback model=model.datasource}}</span>
+    {{/if}}
   {{/if}}
 
 {{else}} <!-- Not a favourite -->
 
-  {{#if isRequest}}
-    {{#if model.userId.displayName}}
-      <span class="descriptor">Requested by </span>
+{{#if isRequest}}
+  {{#if model.userId.displayName}}
+    <span class="descriptor">Requested by </span>
+    {{#if session.isAuthenticated }}
       {{#link-to 'user' model.userId.id}}
         {{model.userId.displayName}}
       {{/link-to}}
+    {{else}}
+      <span class="fake-link">{{model.userId.displayName}}</span>
     {{/if}}
-  {{else if (eq model.datasourceId.properties.short_name "REPOSITIVE")}}
-    <!-- Registration -->
+  {{/if}}
+{{else if (eq model.datasourceId.properties.short_name "REPOSITIVE")}}
+  <!-- Registration -->
 
-    {{#if model.userId.displayName}}
-      <span class="descriptor">Registered by </span>
+  {{#if model.userId.displayName}}
+    <span class="descriptor">Registered by </span>
+    {{#if session.isAuthenticated }}
       {{#link-to 'user' model.userId.id}}
         {{model.userId.displayName}}
       {{/link-to}}
+    {{else}}
+      <span class="fake-link">{{model.userId.displayName}}</span>
     {{/if}}
+  {{/if}}
 
-  {{else}}
-    <!-- Regular Dataset-->
-    <span class="descriptor">from</span>
+{{else}}
+  <!-- Regular Dataset-->
+  <span class="descriptor">from</span>
+  {{#if session.isAuthenticated }}
     {{#link-to 'datasources.source' model.datasourceId.id}}
       {{source-name-fallback model=model.datasourceId}}
     {{/link-to}}
+  {{else}}
+    <span class="fake-link">{{source-name-fallback model=model.datasourceId}}</span>
   {{/if}}
+{{/if}}
+{{/if}}
+
+{{#if showCreateAccountModal}}
+  {{#modal-dialog
+    close=(action 'toggleCreateAccountModal')
+    targetAttachment="center"
+    translucentOverlay=true
+  }}
+    {{#repositive-modal/wrapper size='medium'}}
+      {{repositive-modal/header
+        icon='database'
+        title='See data source'
+        onClose=(action 'toggleCreateAccountModal')
+      }}
+      {{create-account-modal-content text='To browse through this data source you need to have an account.'}}
+    {{/repositive-modal/wrapper}}
+  {{/modal-dialog}}
 {{/if}}

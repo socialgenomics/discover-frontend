@@ -29,3 +29,6 @@
 {{else}}
   <p>No filters available</p>
 {{/unless}}
+{{#unless session.isAuthenticated}}
+  {{open-search-filter-overlay}}
+{{/unless}}
