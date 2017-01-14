@@ -14,7 +14,11 @@ describe('Unit | Mixin | search', function() {
   });
 
   describe('queryParams', function () {
-    const paramsNames = Object.keys(get(mixinObjInstance, 'queryParams'));
+    let paramsNames;
+
+    beforeEach(function () {
+      paramsNames = Object.keys(get(mixinObjInstance, 'queryParams'));
+    });
 
     it('should have correct query params set', function () {
       expect(paramsNames).to.be.deep.equal(['query', 'page', 'resultsPerPage']);
@@ -25,7 +29,7 @@ describe('Unit | Mixin | search', function() {
         const paramConfig = get(mixinObjInstance, `queryParams.${param}`);
 
         expect(paramConfig).to.be.an('object');
-        expect(paramConfig.resultsPerPage).to.be.true;
+        expect(paramConfig.refreshModel).to.be.true;
       });
     });
   });
@@ -36,7 +40,7 @@ describe('Unit | Mixin | search', function() {
     let controllerMock;
 
     beforeEach(function () {
-      Ember.Object.create({ query: 'test' });
+      controllerMock = Ember.Object.create({ query: 'test' });
     });
 
     it('should set query to empty string when exiting the route', function () {
