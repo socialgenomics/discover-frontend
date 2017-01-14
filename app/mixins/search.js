@@ -53,6 +53,7 @@ export default Mixin.create({
     const offset = (params.page - 1) * limit;
     const query = params.query || '';
     const body = query === '' ? {} : QP.parseString(query);
+
     return get(this, 'ajax').request(
       ENV.APIRoutes['datasets.search'],
       {
@@ -99,13 +100,17 @@ export default Mixin.create({
    */
   _normalizeFilters(aggs) {
     const filters = [];
+
     for (const filter in aggs) {
       if (aggs.hasOwnProperty(filter)) {
         const buckets = aggs[filter].buckets;
+
         buckets.forEach(b => {
           b.colour = colours.getColour(b.key);
+
           return b;
         });
+
         filters.push({
           name: filter,
           displayName: filter.capitalize(),
@@ -113,7 +118,7 @@ export default Mixin.create({
         });
       }
     }
+
     return filters;
   }
-
 });
