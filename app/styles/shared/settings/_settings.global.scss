@@ -1,0 +1,47 @@
+/* ========================================================================
+    GLOBAL SETTINGS
+   ======================================================================== */
+
+// Standardised UI variables
+/* ==================================== */
+
+$global-border-radius:    2px !default;
+$global-transition:       all 300ms ease-in-out !default;
+
+// Font Family Variables
+/* ==================================== */
+
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,900|Varela+Round');
+
+$font-stack-roboto:       'Roboto', sans-serif ;
+$font-stack-varela:       'Varela Round', 'Roboto', sans-serif;
+
+$global-font-size:        16px !default;
+$global-line-height:      24px !default; // line-height converted to relative value later (see _elements.text)
+
+// Grid & Media
+/* ==================================== */
+
+// Gutter Width (used in _objects.toast-grid)
+$gutter-width: $global-line-height !default;
+
+// Breakpoints
+$breakpoint-medium: 780px !default;
+$breakpoint-small: 480px !default;
+
+// Spacing Units
+/* ==================================== */
+
+$global-spacing-unit:     round($global-line-height) !default; // line-height used as spacing baseline to set consistent vertical rhythm
+
+// Spacing Factors, selected to maintain consistent vertical rhythm
+$global-spacing-unit-factor-tiny:   0.25  !default;
+$global-spacing-unit-factor-small:  0.5   !default;
+$global-spacing-unit-factor-large:  2     !default;
+$global-spacing-unit-factor-huge:   4     !default;
+
+// Do not edit this block - this calculates the spacing units based on the factors defined above
+$global-spacing-unit-tiny:  round($global-spacing-unit * $global-spacing-unit-factor-tiny);
+$global-spacing-unit-small: round($global-spacing-unit * $global-spacing-unit-factor-small);
+$global-spacing-unit-large: round($global-spacing-unit * $global-spacing-unit-factor-large);
+$global-spacing-unit-huge:  round($global-spacing-unit * $global-spacing-unit-factor-huge);

@@ -1,0 +1,44 @@
+/* ==========================================================================
+   #BUTTONS
+   ========================================================================== */
+
+// Button
+/* ==================================== */
+
+.c-btn {
+   display: inline-block;
+   margin: 0;
+   text-align: center;
+   vertical-align: baseline;
+   cursor: pointer;
+   border: solid 1px;
+   border-radius: $global-border-radius; // $global-border-radius
+   font: inherit;
+   padding: $global-spacing-unit-tiny $global-spacing-unit;
+   transition: $global-transition; // $global-transition
+}
+
+.c-btn--primary {
+  font-family: $font-stack-varela;
+  text-transform: uppercase;
+  color: $color-white;
+  background: $color-primary-teal; //$color-teal
+  border-color: $color-primary-teal; //$
+}
+
+.c-btn--secondary {
+  font-family: $font-stack-varela;
+  text-transform: uppercase;
+  color: $color-primary-teal;
+  background-color: $color-white;
+  border-color: $color-primary-teal;
+}
+
+.c-btn--shadow {
+  box-shadow: 0 8px 3px -5px rgba(0, 0, 0, 0.14);
+
+  &:hover {
+    box-shadow: 0 20px 8px -15px rgba(0, 0, 0, 0.10);
+    transform: translateY(-1px);
+  }
+}

@@ -1,0 +1,39 @@
+//* ========================================================================
+//  COLOR UTILITIES
+// ======================================================================== */
+
+// Text Color
+/* ==================================== */
+
+.u-text-teal          { color: $color-primary-teal;   }
+.u-text-red           { color: $color-primary-red;    }
+.u-text-yellow        { color: $color-primary-yellow; }
+.u-text-white         { color: $color-white;          }
+.u-text-mid-grey      { color: $color-mid-grey;       }
+.u-text-light-grey    { color: $color-light-grey;     }
+.u-text-dark-grey     { color: $color-dark-grey;      }
+
+.t-light-bg {
+  .u-text-primary     { color: rgba(#000000, 0.87)    }
+  .u-text-secondary   { color: rgba(#000000, 0.54)    }
+  .u-text-tertiary    { color: rgba(#000000, 0.38)    }
+}
+
+.t-dark-bg {
+  .u-text-primary     { color: rgba(#ffffff,    1)    }
+  .u-text-secondary   { color: rgba(#ffffff,  0.7)    }
+  .u-text-tertiary    { color: rgba(#ffffff,  0.5)    }
+}
+
+
+// Background Colors
+/* ==================================== */
+
+.u-bg-teal      { background-color: $color-primary-teal;  }
+.u-bg-red       { background-color: $color-primary-red;   }
+.u-bg-yellow    { background-color: $color-primary-yellow;}
+.u-bg-blue      { background-color: $color-secondary-blue;}
+
+.u-bg-white     { background-color: $color-white;         }
+.u-bg-off-white { background-color: $color-off-white;     }
+.u-bg-grey      { background-color: $color-mid-grey;      }

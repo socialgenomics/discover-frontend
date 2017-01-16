@@ -1,0 +1,52 @@
+/* ==========================================================================
+    BASE ELEMENT STYLING
+   ========================================================================== */
+
+html {
+  font-size: ($global-font-size / 16px) * 1em;
+  line-height: $global-line-height / $global-font-size;
+  overflow-y: scroll;
+  min-height: 100%;
+  color: $color-dark-grey;
+}
+
+
+body {
+  -webkit-font-smoothing: antialiased; // A bit opinionated: text is antialiased for more consistent rendering across Chrome & Safari
+  -moz-osx-font-smoothing: grayscale;
+  font-family: $font-stack-roboto;
+}
+
+// Text
+/* ==================================== */
+/*
+  * h1 - h6 reset in favour of a component-based approach (see _components.type_setting.scss)
+  * > see article: http://csswizardry.com/2016/02/managing-typography-on-large-apps/
+*/
+
+h1, h2, h3, h4, h5, h6 {
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
+p {
+	font-size: 1rem;
+  color: $color-mid-grey;
+}
+
+a {
+  text-decoration: none;
+  color: $color-secondary-blue;
+}
+
+// remove mobile styling on iOS mobile devices
+a[href^="tel"]{
+    color:inherit;
+    text-decoration:none;
+}
+
+// remove list-style as default
+// to apply bullet points, use o-list-bullet
+ul {
+  list-style: none;
+}

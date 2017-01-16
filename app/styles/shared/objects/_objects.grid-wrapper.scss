@@ -1,0 +1,53 @@
+/* ========================================================================
+    WRAPPER SETTINGS
+   ======================================================================== */
+
+// Wrapper Classes
+/* ==================================== */
+
+.grid__wrap {
+  width: 100%;
+  padding: $global-spacing-unit;
+  margin: 0 auto;
+}
+
+.grid__wrap--no-top-pad {
+  @extend .grid__wrap;
+  padding-top: 0;
+}
+
+
+.grid__wrap,
+.grid__wrap--no-top-pad {
+  max-width: 1008px;
+
+}
+
+.grid__wrap--no-top-pad {
+  padding-top: 0;
+}
+
+.grid__wrap--step {
+  max-width: 1008px;
+  padding: $global-spacing-unit;
+  margin: 0 auto;
+}
+
+@media (max-width: $breakpoint-medium) {
+  .grid__wrap--step {
+    max-width: $breakpoint-small - $global-spacing-unit-large;
+  }
+}
+
+@media (max-width: $breakpoint-medium) {
+  .grid__wrap--step {
+    max-width: $breakpoint-medium - $global-spacing-unit-small;
+  }
+}
+
+.grid__wrap--wide {
+  width: 95%;
+  max-width: 1440px;
+  padding-top: $global-spacing-unit;
+  margin: 0 auto;
+}
