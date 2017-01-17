@@ -1,0 +1,16 @@
+/* ==========================================================================
+    #BORDER RADII
+   ========================================================================== */
+
+.u-rounded        { border-radius: $global-border-radius; }
+.u-rounded-top    { border-radius: $global-border-radius $global-border-radius 0 0; }
+.u-rounded-bottom { border-radius: 0 0 $global-border-radius $global-border-radius; }
+.u-circle         { border-radius: 100%; }
+
+$global-border-style: 1px solid $black !default;
+
+.u-border         { border: $global-border-style; }
+.u-border-top     { border-top: $global-border-style; }
+.u-border-bottom  { border-bottom: $global-border-style; }
+.u-border-left    { border-left: $global-border-style; }
+.u-border-right   { border-right: $global-border-style; }

@@ -5,35 +5,45 @@
 // Text Color
 /* ==================================== */
 
-.u-text-teal          { color: $color-primary-teal;   }
-.u-text-red           { color: $color-primary-red;    }
-.u-text-yellow        { color: $color-primary-yellow; }
-.u-text-white         { color: $color-white;          }
-.u-text-mid-grey      { color: $color-mid-grey;       }
-.u-text-light-grey    { color: $color-light-grey;     }
-.u-text-dark-grey     { color: $color-dark-grey;      }
+.u-tc-teal          { color: $color-primary-teal;   }
+.u-tc-red           { color: $color-primary-red;    }
+.u-tc-yellow        { color: $color-primary-yellow; }
 
-.t-light-bg {
-  .u-text-primary     { color: rgba(#000000, 0.87)    }
-  .u-text-secondary   { color: rgba(#000000, 0.54)    }
-  .u-text-tertiary    { color: rgba(#000000, 0.38)    }
+.t-light {
+  .u-tc-primary     { color: rgba(#000000, 0.87)    }
+  .u-tc-secondary   { color: rgba(#000000, 0.54)    }
+  .u-tc-tertiary    { color: rgba(#000000, 0.38)    }
 }
 
-.t-dark-bg {
-  .u-text-primary     { color: rgba(#ffffff,    1)    }
-  .u-text-secondary   { color: rgba(#ffffff,  0.7)    }
-  .u-text-tertiary    { color: rgba(#ffffff,  0.5)    }
+.t-dark {
+  .u-tc-primary     { color: rgba(#ffffff,    1)    }
+  .u-tc-secondary   { color: rgba(#ffffff,  0.7)    }
+  .u-tc-tertiary    { color: rgba(#ffffff,  0.5)    }
 }
 
 
 // Background Colors
 /* ==================================== */
 
-.u-bg-teal      { background-color: $color-primary-teal;  }
-.u-bg-red       { background-color: $color-primary-red;   }
-.u-bg-yellow    { background-color: $color-primary-yellow;}
-.u-bg-blue      { background-color: $color-secondary-blue;}
+.u-bc-teal        { background-color: $color-primary-teal;  }
+.u-bc-red         { background-color: $color-primary-red;   }
+.u-bc-yellow      { background-color: $color-primary-yellow;}
+.u-bc-blue        { background-color: $color-secondary-blue;}
 
-.u-bg-white     { background-color: $color-white;         }
-.u-bg-off-white { background-color: $color-off-white;     }
-.u-bg-grey      { background-color: $color-mid-grey;      }
+.u-bc-white       { background-color: $color-white;         }
+.u-bc-off-white   { background-color: $color-off-white;     }
+.u-bc-grey        { background-color: $color-mid-grey;      }
+
+.u-bc-pink        { background-color: $froly; }
+.u-bc-purple      { background-color: $amythest; }
+.u-bc-deep-purple { background-color: $lilac-bush; }
+.u-bc-indigo      { background-color: $sapphire; }
+.u-bc-light-blue  { background-color: $dodger-blue; }
+.u-bc-cyan        { background-color: $turquoise-blue; }
+.u-bc-green       { background-color: $fruit-salad; }
+.u-bc-light-green { background-color: $light-green; }
+.u-bc-lime        { background-color: $lime; }
+.u-bc-amber       { background-color: $amber; }
+.u-bc-orange      { background-color: $orange; }
+.u-bc-deep-orange { background-color: $deep-orange; }
+.u-bc-brown       { background-color: $brown; }
