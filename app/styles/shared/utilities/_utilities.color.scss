@@ -9,11 +9,9 @@
 .u-tc-red           { color: $color-primary-red;    }
 .u-tc-yellow        { color: $color-primary-yellow; }
 
-.t-light {
-  .u-tc-primary     { color: rgba(#000000, 0.87)    }
-  .u-tc-secondary   { color: rgba(#000000, 0.54)    }
-  .u-tc-tertiary    { color: rgba(#000000, 0.38)    }
-}
+.u-tc-primary     { color: rgba(#000000, 0.87)    }
+.u-tc-secondary   { color: rgba(#000000, 0.54)    }
+.u-tc-tertiary    { color: rgba(#000000, 0.38)    }
 
 .t-dark {
   .u-tc-primary     { color: rgba(#ffffff,    1)    }
