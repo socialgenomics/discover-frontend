@@ -1,100 +1,98 @@
-<div class="col s12 m4 l4">
-  <div class="card dataset">
-    {{#if (eq type "request")}}
-      <div class="card-header">
+<div class="card dataset">
+  {{#if (eq type "request")}}
+    <div class="card-header">
+      <div class="assay-container">
+        <div class="request">Request</div>
+      </div>
+      <div class="actions-container valign-wrapper">
+        {{action-favourite model=dataset}}
+        {{action-share
+          actionableId=dataset.id
+          actionableType='dataset'
+          shareUrl=shareUrl
+        }}
+      </div>
+    </div>
+
+    <div class="card-body">
+      {{#if dataset.highlights.title}}
+        {{#link-to 'requests.detail' dataset.id classNames="data-title"}}
+          <div data-balloon={{dataset.title}} data-balloon-pos="up" data-balloon-length="large">
+            <h4 class="data-title">{{{truncate dataset.highlights.title 70}}}</h4>
+          </div>
+        {{/link-to}}
+      {{else}}
+        {{#link-to 'requests.detail' dataset.id classNames="data-title"}}
+          <div data-balloon={{dataset.title}} data-balloon-pos="up" data-balloon-length="large">
+            <h4 class="data-title">{{truncate dataset.title 70}}</h4>
+          </div>
+        {{/link-to}}
+      {{/if}}
+
+      {{from-label model=dataset searchRoute=searchRoute isRequest=true}}
+
+      <div class="line-limit-desc">
+        <div class="ellipsis sub-grey markdown-text">
+          {{#if dataset.highlights.description}}
+            {{{markdown-to-html markdown=dataset.highlights.description}}}
+          {{else}}
+            {{markdown-to-html markdown=dataset.description}}
+          {{/if}}
+        </div>
+      </div>
+    </div>
+    <div class="card-footer">
+      {{stats-list stats=dataset.stats statType="datasets"}}
+    </div>
+
+  {{else}} <!-- It is a Dataset -->
+
+    <div class="card-header">
+      {{#if dataset.assay}}
         <div class="assay-container">
-          <div class="request">Request</div>
+          {{assay-type assay=dataset}}
         </div>
-        <div class="actions-container valign-wrapper">
-          {{action-favourite model=dataset}}
-          {{action-share
-            actionableId=dataset.id
-            actionableType='dataset'
-            shareUrl=shareUrl
-          }}
-        </div>
+      {{/if}}
+      <div class="actions-container valign-wrapper">
+        {{action-favourite model=dataset}}
+        {{action-share
+          actionableId=dataset.id
+          actionableType='dataset'
+          shareUrl=shareUrl
+        }}
       </div>
-
-      <div class="card-body">
-        {{#if dataset.highlights.title}}
-          {{#link-to 'requests.detail' dataset.id classNames="data-title"}}
-            <div data-balloon={{dataset.title}} data-balloon-pos="up" data-balloon-length="large">
-              <h4 class="data-title">{{{truncate dataset.highlights.title 70}}}</h4>
-            </div>
-          {{/link-to}}
-        {{else}}
-          {{#link-to 'requests.detail' dataset.id classNames="data-title"}}
-            <div data-balloon={{dataset.title}} data-balloon-pos="up" data-balloon-length="large">
-              <h4 class="data-title">{{truncate dataset.title 70}}</h4>
-            </div>
-          {{/link-to}}
-        {{/if}}
-
-        {{from-label model=dataset searchRoute=searchRoute isRequest=true}}
-
-        <div class="line-limit-desc">
-          <div class="ellipsis sub-grey markdown-text">
-            {{#if dataset.highlights.description}}
-              {{{markdown-to-html markdown=dataset.highlights.description}}}
-            {{else}}
-              {{markdown-to-html markdown=dataset.description}}
-            {{/if}}
+    </div>
+    <div class="card-body">
+      {{#if dataset.highlights.title}}
+        {{#link-to 'datasets.detail' dataset.id classNames="data-title"}}
+          <div data-balloon={{dataset.title}} data-balloon-pos="up" data-balloon-length="large">
+            <h4 class="data-title">
+              {{{truncate dataset.highlights.title 70}}}
+            </h4>
           </div>
-        </div>
-      </div>
-      <div class="card-footer">
-        {{stats-list stats=dataset.stats statType="datasets"}}
-      </div>
-
-    {{else}} <!-- It is a Dataset -->
-
-      <div class="card-header">
-        {{#if dataset.assay}}
-          <div class="assay-container">
-            {{assay-type assay=dataset}}
+        {{/link-to}}
+      {{else}}
+        {{#link-to 'datasets.detail' dataset.id classNames="data-title"}}
+          <div data-balloon={{dataset.title}} data-balloon-pos="up" data-balloon-length="large">
+            <h4 class="data-title">
+              {{truncate dataset.title 70}}
+            </h4>
           </div>
-        {{/if}}
-        <div class="actions-container valign-wrapper">
-          {{action-favourite model=dataset}}
-          {{action-share
-            actionableId=dataset.id
-            actionableType='dataset'
-            shareUrl=shareUrl
-          }}
+        {{/link-to}}
+      {{/if}}
+      {{from-label model=dataset searchRoute=searchRoute}}
+      <div class="line-limit-desc">
+        <div class="ellipsis sub-grey markdown-text">
+          {{#if dataset.highlights.description}}
+            {{{markdown-to-html markdown=dataset.highlights.description}}}
+          {{else}}
+            {{markdown-to-html markdown=dataset.description}}
+          {{/if}}
         </div>
       </div>
-      <div class="card-body">
-        {{#if dataset.highlights.title}}
-          {{#link-to 'datasets.detail' dataset.id classNames="data-title"}}
-            <div data-balloon={{dataset.title}} data-balloon-pos="up" data-balloon-length="large">
-              <h4 class="data-title">
-                {{{truncate dataset.highlights.title 70}}}
-              </h4>
-            </div>
-          {{/link-to}}
-        {{else}}
-          {{#link-to 'datasets.detail' dataset.id classNames="data-title"}}
-            <div data-balloon={{dataset.title}} data-balloon-pos="up" data-balloon-length="large">
-              <h4 class="data-title">
-                {{truncate dataset.title 70}}
-              </h4>
-            </div>
-          {{/link-to}}
-        {{/if}}
-        {{from-label model=dataset searchRoute=searchRoute}}
-        <div class="line-limit-desc">
-          <div class="ellipsis sub-grey markdown-text">
-            {{#if dataset.highlights.description}}
-              {{{markdown-to-html markdown=dataset.highlights.description}}}
-            {{else}}
-              {{markdown-to-html markdown=dataset.description}}
-            {{/if}}
-          </div>
-        </div>
-      </div>
-      <div class="card-footer">
-        {{stats-list stats=dataset.stats access=dataset.access statType="datasets"}}
-      </div>
-    {{/if}}
-  </div>
+    </div>
+    <div class="card-footer">
+      {{stats-list stats=dataset.stats access=dataset.access statType="datasets"}}
+    </div>
+  {{/if}}
 </div>

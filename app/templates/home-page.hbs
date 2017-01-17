@@ -1,57 +1,59 @@
-<main id="homepage" class="content">
-  <div class="row">
+<div class="grid-wrapper">
+  <div class="grid">
+    <main>
+      {{home-stats-updates datasetsNumber=datasetsNumber stats=model.stats collections=model.collections datasources=model.datasources}}
 
-    {{home-stats-updates datasetsNumber=datasetsNumber stats=model.stats collections=model.collections datasources=model.datasources}}
+      <section>
+        <!-- <h5 class="subtitles-left unfocus-grey-text">Popular Datasets</h5> -->
+        {{#each model.datasets as |dataset|}}
+          {{dataset-card dataset=dataset}}
+        {{/each}}
+      </section>
 
-    <section class="contain">
-      <h5 class="subtitles-left unfocus-grey-text">Popular Datasets</h5>
-      {{#each model.datasets as |dataset|}}
-        {{dataset-card dataset=dataset}}
-      {{/each}}
-    </section>
-
-    <section class="contain">
-      <h5 class="subtitles-left unfocus-grey-text">User Activity</h5>
-      <!-- data registrations -->
-      <div class="col s12 m6">
-        <div class="card activity-card registered-data">
-          <div class="card-header card-title">
-            {{#link-to 'datasets.register'}}
-              {{fa-icon "file-text"}}
-              <h4>Registered Data</h4>
-            {{/link-to}}
+      <section>
+        <div class="grid__col grid__col--1-of-2">
+          <!-- <h5 class="subtitles-left unfocus-grey-text">User Activity</h5> -->
+          <!-- data registrations -->
+          <div>
+            <div class="card activity-card registered-data">
+              <div class="card-header card-title">
+                {{#link-to 'datasets.register'}}
+                  {{fa-icon "file-text"}}
+                  <h4>Registered Data</h4>
+                {{/link-to}}
+              </div>
+              <p class="info-text">
+                These are datasets contributed by our community. You can easily register your dataset and make it visible for others.
+              </p>
+              <div class="card-content">
+                  {{#each registrationsSorted as |registration|}}
+                    {{mini-dataset dataset=registration}}
+                  {{/each}}
+              </div>
+            </div>
           </div>
-          <p class="info-text">
-            These are datasets contributed by our community. You can easily register your dataset and make it visible for others.
-          </p>
-          <div class="card-content">
-              {{#each registrationsSorted as |registration|}}
-                {{mini-dataset dataset=registration}}
+        </div>
+        <!--data requests-->
+        <div class="grid__col grid__col--1-of-2">
+          <div class="card activity-card requested-data">
+            <div class="card-header card-title">
+                {{#link-to 'datasets.request'}}
+                  {{fa-icon "clipboard"}}
+                  <h4>Requested Data</h4>
+                {{/link-to}}
+            </div>
+            <p class="info-text">
+              Help our community by connecting them with the datasets they're looking for.
+    If you’re seeking datasets you can make a request too.
+            </p>
+            <div class="card-content">
+              {{#each requestsSorted as |request|}}
+                {{mini-dataset dataset=request type="request"}}
               {{/each}}
+            </div>
           </div>
         </div>
-      </div>
-      <!--data requests-->
-      <div class="col s12 m6">
-        <div class="card activity-card requested-data">
-          <div class="card-header card-title">
-              {{#link-to 'datasets.request'}}
-                {{fa-icon "clipboard"}}
-                <h4>Requested Data</h4>
-              {{/link-to}}
-          </div>
-          <p class="info-text">
-            Help our community by connecting them with the datasets they're looking for.
-  If you’re seeking datasets you can make a request too.
-          </p>
-          <div class="card-content">
-            {{#each requestsSorted as |request|}}
-              {{mini-dataset dataset=request type="request"}}
-            {{/each}}
-          </div>
-        </div>
-      </div>
-    </section>
-
+      </section>
+    </main>
   </div>
-</main>
+</div>
