@@ -1,42 +1,41 @@
 <div class="grid-wrapper">
   <div class="grid">
-{{sub-navigation active="profile"}}
+    {{sub-navigation active="profile"}}
     <div class="grid__col grid__col--3-of-3">
-      <div class="c-card u-p1 u-ta-center u-mb3">
-          <h1 class="fs4 u-ta-center">Edit Profile</h1>
-                <img src={{session.authenticatedUser.profile.avatar}}>
-          <form>
-              {{validated-input
-                type="text"
-                lbl="First Name"
-                value=firstname
-                errors=errors.firstname
-                placeholder="First Name"
-                formSubmitted=formSubmitted
-              }}
-              {{validated-input
-                type="text"
-                lbl="Last Name"
-                value=lastname
-                errors=errors.lastname
-                placeholder="Last Name"
-                formSubmitted=formSubmitted
-              }}
-              {{validated-input
-                type="text"
-                lbl="Affiliation"
-                value=affiliation
-                errors=errors.affiliation
-                placeholder="Affiliation"
-                formSubmitted=formSubmitted
-              }}
-              {{#if isSavable}}
-                <button type="submit" class="c-btn c-btn--primary" {{action "save"}}>Save Changes</button>
-              {{else}}
-	      <!-- TO DO : disabled button -->
-                <button type="button" class="c-btn c-btn">Save Changes</button>
-              {{/if}}
-          </form>
+      <div class="c-card u-p1 u-ta-center">
+        <h1 class="fs4">Edit Profile</h1>
+        <img src={{session.authenticatedUser.profile.avatar}}>
+        <form>
+          {{validated-input
+            type="text"
+            lbl="First Name"
+            value=firstname
+            errors=errors.firstname
+            placeholder="First Name"
+            formSubmitted=formSubmitted
+          }}
+          {{validated-input
+            type="text"
+            lbl="Last Name"
+            value=lastname
+            errors=errors.lastname
+            placeholder="Last Name"
+            formSubmitted=formSubmitted
+          }}
+          {{validated-input
+            type="text"
+            lbl="Affiliation"
+            value=affiliation
+            errors=errors.affiliation
+            placeholder="Affiliation"
+            formSubmitted=formSubmitted
+          }}
+          {{#if isSavable}}
+            <button type="submit" class="c-btn c-btn-primary" {{action "save"}}>Save Changes</button>
+          {{else}}
+            <button type="button" class="c-btn c-btn-disabled">Save Changes</button>
+          {{/if}}
+        </form>
       </div>
     </div>
   </div>
