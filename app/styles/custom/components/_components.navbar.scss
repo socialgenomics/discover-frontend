@@ -4,7 +4,7 @@
 
 .c-navbar-wrapper {
   box-shadow: $global-box-shadow;
-  z-index: 100;
+  z-index: 1;
 }
 
 .c-navbar {
@@ -13,11 +13,9 @@
 }
 
 .c-navbar__search-input {
-  > input {
-    height: 48px;
-    width: 300px;
-    font-family: $font-stack-roboto;
-  }
+  height: $global-spacing-unit-large;
+  width: 300px;
+  font-family: $font-stack-roboto;
 }
 
 .c-navbar__nav-links {
