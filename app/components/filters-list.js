@@ -4,7 +4,7 @@ const { Component, get, set, computed, inject: { service } } = Ember;
 
 export default Component.extend({
   tagName: 'nav',
-  classNames: ['side-nav filters-list'],
+  classNames: [''],
   classNameBindings: ['light-font-color'],
   session: service(),
 
