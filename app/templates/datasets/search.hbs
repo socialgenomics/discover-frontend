@@ -1,3 +1,14 @@
+{{meta-panel
+  addFilter=(action 'addFilter')
+  removeFilter=(action 'removeFilter')
+  model=model
+  filters=model.aggs
+  activeFilters=activeFilters
+  isLoading=isLoading
+  class="u-bc-light-bluegrey"
+  isSearchPage=true
+}}
+
 <!-- {{#if (gt model.meta.total 0)}}
   {{filters-list
     addFilter=(action 'addFilter')
@@ -13,11 +24,11 @@
   {{#if isLoading}}
     {{partial 'loading'}}
   {{else}}
-    <!-- <h5 class="unfocus-grey-text">Search Results ({{model.meta.total}})</h5> -->
+    <!-- <h5>Search Results ({{model.meta.total}})</h5> -->
 
     {{search-results-list results=model.datasets totalResults=model.meta.total}}
 
-<!-- 
+<!--
     {{#if (gt model.meta.total 0)}}
       {{pagination-bar
         totalPages=totalPages

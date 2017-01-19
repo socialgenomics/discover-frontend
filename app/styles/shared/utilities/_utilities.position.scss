@@ -1,10 +1,6 @@
 /* ==========================================================================
-   #SIDEBAR
+    #POSITION
    ========================================================================== */
 
-.c-sidebar {
-  height: 100%;
-  width: $sidebar-width;
-  // TODO refactor box shadow styles
-  box-shadow: 2px 0 5px -1px rgba(0,0,0,0.2);
-}
+   .u-pos-relative { position: relative; }
+   .u-pos-absolute { position: absolute; }
