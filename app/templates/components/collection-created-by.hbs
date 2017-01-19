@@ -1,7 +1,7 @@
 {{#if (eq type 'personal_repository')}}
-  <span class="helper-text">created by </span>
-  <span class="collection-owner">{{#link-to 'user' user.id}}{{user.displayName}}{{/link-to}}</span>
+  <span class="u-tc-tertiary">created by </span>
+  <span class="u-tc-primary">{{#link-to 'user' user.id}}{{user.displayName}}{{/link-to}}</span>
 {{else if (eq type 'repositive_collection')}}
-  <span class="helper-text">created by </span>
-  <span class="collection-owner">Repositive</span>
+  <span class="u-tc-tertiary">created by </span>
+  <span class="u-tc-primary">Repositive</span>
 {{/if}}

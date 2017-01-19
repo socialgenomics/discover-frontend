@@ -10,3 +10,14 @@
   padding: $global-spacing-unit;
   margin: 0 auto;
 }
+
+.has-sidebar {
+  .grid-wrapper {
+    margin-left: $sidebar-width;
+
+    // TODO: change grid-wrapper width to variable
+    @media(min-width: $sidebar-width + $sidebar-width + 1008px) {
+      margin-left: auto;
+    }
+  }
+}

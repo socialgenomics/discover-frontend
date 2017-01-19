@@ -1,15 +1,14 @@
-<div class="filter-item {{if active 'remove' 'activate'}}"
+<div class="u-tc-primary u-px2 u-mb1 u-rounded {{if active 'u-bc-overlay'}}"
   {{action (if active 'removeFilter' 'addFilter') aggName bucket.key}}
 >
-  {{#if (eq aggName "assay")}}
+  <!-- {{#if (eq aggName "assay")}}
     <div class="label {{bucket.colour}}"></div>
-  {{/if}}
+  {{/if}} -->
 
   <span>
     {{bucket.key}} ({{bucket.doc_count}})
     {{#if active}}
-      <span class="filter-icon">{{fa-icon "times"}}</span>
+      <span class="">{{fa-icon "times"}}</span>
     {{/if}}
   </span>
 </div>
-
