@@ -6,14 +6,14 @@
 /* ==================================== */
 
 .u-ta {
-  &--justify { text-align: justify; }
-  &--right   { text-align: right;   }
-  &--left    { text-align: left;    }
-  &--center  { text-align: center;  }
+  &-justify { text-align: justify; }
+  &-right   { text-align: right;   }
+  &-left    { text-align: left;    }
+  &-center  { text-align: center;  }
 }
 
 @media (min-width: $breakpoint-small) {
-  .u-ta--md {
+  .u-ta-md {
     &-justify { text-align: justify; }
     &-right   { text-align: right;   }
     &-left    { text-align: left;    }
@@ -22,7 +22,7 @@
 }
 
 @media (min-width: $breakpoint-medium) {
-  .u-ta--lg {
+  .u-ta-lg {
     &-justify { text-align: justify; }
     &-right   { text-align: right;   }
     &-left    { text-align: left;    }
