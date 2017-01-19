@@ -1,13 +1,11 @@
-<div class="grid__col grid__col--1-of-2 grid__col--centered">
-<form class="u-ta-center u-border" {{action search query on='submit'}}>
-    {{fa-icon "search"}}
-    {{input
-      type="text"
-      class="unfocus-grey-text u-p2 u-mr0"
-      placeholder="title:cancer AND description:lung"
-      value=query
-      autofocus=true
-    }}
-    <button class="c-btn c-btn--primary">Search</button>
-  </form>
-</div>
+<form class="u-flex u-bc-white u-border u-border-fat u-border-color-teal" {{action search query on='submit'}}>
+  {{fa-icon "search" class='u-p2'}}
+  {{input
+    type="text"
+    class="u-flex-auto u-p2 u-mr0 u-border-none unfocus-grey-text"
+    placeholder="title:cancer AND description:lung"
+    value=query
+    autofocus=true
+  }}
+  <button class="c-btn c-btn--primary u-border-square">Search</button>
+</form>
