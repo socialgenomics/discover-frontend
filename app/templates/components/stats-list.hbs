@@ -1,23 +1,23 @@
 {{#if (eq access "Open")}}
-  <li class="access-icons center-align" data-balloon="Access Type" data-balloon-pos="down">
-    <i class="fa fa-globe color-fruit-salad-text"></i>
-    <span class="color-fruit-salad-text">
+  <li class="o-list-inline__item" data-balloon="Access Type" data-balloon-pos="down">
+    <i class="fa fa-globe u-tc-green"></i>
+    <span class="u-tc-green">
       {{access}}
     </span>
   </li>
 {{/if}}
 
 {{#if (eq access "Restricted")}}
-  <li class="access-icons center-align" data-balloon="Access Type" data-balloon-pos="down">
-    <i class="fa fa-lock color-red-error-text"></i>
-    <span class="color-red-error-text">
+  <li class="o-list-inline__item" data-balloon="Access Type" data-balloon-pos="down">
+    <i class="fa fa-lock u-tc-red"></i>
+    <span class="u-tc-red">
       {{access}}
     </span>
   </li>
 {{/if}}
 
 {{#if (or (eq statType "collection") (eq statType "datasource"))}}
-  <li class="center-align" data-balloon="Datasets" data-balloon-pos="down">
+  <li class="o-list-inline__item" data-balloon="Datasets" data-balloon-pos="down">
     {{fa-icon "file-text"}}
     <span>
       {{#if stats.datasets}}
@@ -30,7 +30,7 @@
 {{/if}}
 
 {{#if (eq statType "collection")}}
-  <li class="center-align" data-balloon="Sources" data-balloon-pos="down">
+  <li class="o-list-inline__item" data-balloon="Sources" data-balloon-pos="down">
     {{fa-icon "database"}}
     <span>
       {{#if stats.datasources}}
@@ -43,7 +43,7 @@
 {{/if}}
 
 <!-- Each of these can be a stats-list-item -->
-<li class="center-align" data-balloon="Views" data-balloon-pos="down">
+<li class="o-list-inline__item" data-balloon="Views" data-balloon-pos="down">
   {{fa-icon "eye"}}
   <span>
     {{#if stats.view}}
@@ -55,7 +55,7 @@
 </li>
 
 {{#if (eq statType "datasets")}}
-  <li class="center-align" data-balloon="Discussion" data-balloon-pos="down">
+  <li class="o-list-inline__item" data-balloon="Discussion" data-balloon-pos="down">
     {{fa-icon "comments"}}
     <span>
       {{#if stats.comment}}
@@ -81,7 +81,7 @@
 {{/if}} -->
 
 {{#if (eq statType "datasets")}}
-  <li data-balloon="Favourites" data-balloon-pos="down">
+  <li class="o-list-inline__item" data-balloon="Favourites" data-balloon-pos="down">
     {{fa-icon "star"}}
     <span>
       {{#if stats.favourite}}
