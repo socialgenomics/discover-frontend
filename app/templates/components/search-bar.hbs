@@ -1,8 +1,8 @@
-<form {{action "search" query on='submit'}}>
+<form {{action "search" query on="submit"}} class="u-tc-secondary u-bc-white u-px2 u-border-left u-border-right fs2">
     {{fa-icon "search"}}
     {{input
       type="text"
-      class="unfocus-grey-text"
+      class="u-border-none u-pl1 c-navbar__search-input"
       placeholder="title:cancer AND description:lung"
       value=query
       autofocus=true
