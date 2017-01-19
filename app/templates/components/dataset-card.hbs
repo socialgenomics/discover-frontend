@@ -1,6 +1,7 @@
-<div class="card u-border u-mb3 dataset">
+<div class="c-card dataset">
   {{#if (eq type "request")}}
-    <div class="card-header">
+  <!-- Card Header -->
+    <div class="u-bc-off-white">
       <div class="assay-container">
         <div class="request">Request</div>
       </div>
@@ -46,21 +47,22 @@
     </div>
 
   {{else}} <!-- It is a Dataset -->
-
-    <div class="">
+    <!-- Card Header -->
+    <div class="u-bc-off-white u-p1">
       {{#if dataset.assay}}
-        <div class="">
+        <ul class="o-list-inline o-list-flush-left u-mb0">
           {{assay-type assay=dataset}}
-        </div>
+          {{assay-type assay=dataset}}
+        </ul>
       {{/if}}
-      <div class="">
+      <ul class="o-list-inline o-list-flush-left u-mb0">
         {{action-favourite model=dataset}}
         {{action-share
           actionableId=dataset.id
           actionableType='dataset'
           shareUrl=shareUrl
         }}
-      </div>
+      </ul>
     </div>
     <div class="card-body u-p1">
       {{#if dataset.highlights.title}}

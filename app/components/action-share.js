@@ -4,8 +4,8 @@ const { Component, set, inject: { service }, get } = Ember;
 
 export default Component.extend({
   session: service(),
-
-  classNames: ['share-options-button'],
+  tagName: 'li',
+  classNames: ['o-list-inline__item'],
   showShareOptionsModal: false,
   showShareEmailModal: false,
   showCreateAccountModal: false,
