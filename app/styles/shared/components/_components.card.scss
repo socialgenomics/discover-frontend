@@ -3,3 +3,15 @@
   background-color: $color-white;
   box-shadow: $global-box-shadow;
 }
+
+.c-card-title {
+  height: ($global-line-height * 2);
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
+
+.c-card-description {
+  height: ($global-line-height * 5) - ($global-line-height / 2);
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
