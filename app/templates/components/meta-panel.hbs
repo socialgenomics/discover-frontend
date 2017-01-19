@@ -1,40 +1,47 @@
-{{meta-panel-header type=model.type}}
-{{meta-panel-tabs showInfo=(action 'showInfo') showFilters=(action 'showFilters') displayInfo=displayInfo}}
+{{#unless isSearchPage}}
+  {{meta-panel-header type=model.type}}
+  {{meta-panel-tabs showInfo=(action 'showInfo') showFilters=(action 'showFilters') displayInfo=displayInfo}}
+{{/unless}}
 
-{{#if displayInfo}}
-  <main>
-    <h3>{{source-name-fallback model=model}}</h3>
-    {{#unless (eq model.type 'datasource')}}
-      {{collection-created-by user=model.userId type=model.type}}
-    {{/unless}}
+<div class="grid__col grid__col--3-of-3">
+  <main class="u-px3">
 
-    <div class="divider"></div>
+    {{#if displayInfo}}
 
-    <section class="stats-numbers">
+      <div class="u-mb3">
+        <h3 class="u-tc-primary u-ta-center u-mb1">{{source-name-fallback model=model}}</h3>
+        {{#unless (eq model.type 'datasource')}}
+          {{collection-created-by user=model.userId type=model.type}}
+        {{/unless}}
+      </div>
+
+      <!-- <div class="divider"></div> -->
+
       {{#if (eq model.type 'repositive_collection')}}
         {{stats-list stats=collectionStats statType="collection"}}
       {{else}}
         {{stats-list stats=collectionStats statType="datasource"}}
       {{/if}}
-    </section>
 
-    {{#if model.description}}
-      {{collapsible-description description=model.description}}
-    {{/if}}
 
-    {{#if model.image}}
-      <div class="divider"></div>
-      <img src="{{model.image}}" class="logo-img">
+      {{#if model.description}}
+        {{collapsible-description description=model.description}}
+      {{/if}}
+
+      {{#if model.image}}
+        <!-- <div class="divider"></div> -->
+        <img src="{{model.image}}" class="logo-img">
+      {{/if}}
+
+    {{else}}
+      {{filters-list
+        addFilter=addFilter
+        removeFilter=removeFilter
+        filters=filters
+        activeFilters=activeFilters
+        isLoading=isLoading
+        modelType=model.type
+        light-font-color=true}}
     {{/if}}
   </main>
-
-{{else}}
-  {{filters-list
-    addFilter=addFilter
-    removeFilter=removeFilter
-    filters=filters
-    activeFilters=activeFilters
-    isLoading=isLoading
-    modelType=model.type
-    light-font-color=true}}
-{{/if}}
+</div>

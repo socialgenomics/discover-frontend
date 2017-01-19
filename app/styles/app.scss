@@ -8,8 +8,9 @@
 // @import "share-options-modal";
 
 //CSS REFACTOR
-@import 'shared/settings/settings.global';
 @import 'shared/settings/settings.color';
+@import 'shared/settings/settings.global';
+@import 'shared/settings/settings.layout';
 
 @import 'shared/tools/tools.mixins';
 
@@ -29,7 +30,7 @@
 @import 'shared/components/components.card';
 @import 'shared/components/components.divider';
 @import 'shared/components/components.images';
-
+@import 'shared/components/components.sidebar';
 
 @import 'shared/utilities/utilities.text-alignment';
 @import 'shared/utilities/utilities.color';
@@ -38,6 +39,8 @@
 @import 'shared/utilities/utilities.borders';
 @import 'shared/utilities/utilities.padding';
 @import 'shared/utilities/utilities.type-setting';
+@import 'shared/utilities/utilities.display';
+@import 'shared/utilities/utilities.position';
 
 // Custom
 @import 'custom/settings/settings.global';

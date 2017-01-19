@@ -1,13 +1,19 @@
 import Ember from 'ember';
 
-const { Component } = Ember;
+const { Component, set } = Ember;
 
 export default Component.extend({
   tagName: 'section',
-  classNames: ['metadata-panel'],
+  classNames: ['c-sidebar', 'u-pos-absolute', 'grid'],
   displayInfo: true,
   actions: {
-    showInfo() { this.set('displayInfo', true); },
-    showFilters() { this.set('displayInfo', false); }
+    showInfo() { set(this, 'displayInfo', true); },
+    showFilters() { set(this, 'displayInfo', false); }
+  },
+  didReceiveAttrs() {
+    this._super(...arguments);
+    if (this.isSearchPage) {
+      set(this, 'displayInfo', false);
+    }
   }
 });

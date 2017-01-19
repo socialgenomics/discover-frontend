@@ -6,8 +6,9 @@
 /* ==================================== */
 
 $global-border-radius:    4px !default;
-$global-transition:       all 300ms ease-in-out !default;
+$global-border-style:     1px solid $color-overlay !default;
 $global-box-shadow:       0 2px 3px 0 rgba(0, 0, 0, .16), 0 2px 5px 0 rgba(0, 0, 0, .12) !default;
+$global-transition:       all 300ms ease-in-out !default;
 
 // Font Family Variables
 /* ==================================== */

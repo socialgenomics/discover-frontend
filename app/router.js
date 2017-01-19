@@ -101,7 +101,7 @@ Ember.Route.reopen({
       Ember.$('body').addClass(cssClass);
       if (pagesWithSideNavigation.indexOf(cssClass) !== -1) {
         // Add the class here for all the pages with side navigation
-        Ember.$('body').addClass('has-sidenav');
+        Ember.$('body').addClass('has-sidebar');
       } else if (landingPage.indexOf(cssClass) !== -1) {
         // Add the landing page class to home (makes background white)
         // Home-page stays grey
@@ -113,7 +113,7 @@ Ember.Route.reopen({
   },
   deactivate: function() {
     Ember.$('body').removeClass(this.toCssClass());
-    Ember.$('body').removeClass('has-sidenav');
+    Ember.$('body').removeClass('has-sidebar');
     Ember.$('body').removeClass('landing-page');
   },
   toCssClass: function() {
