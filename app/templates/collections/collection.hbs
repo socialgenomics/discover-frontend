@@ -12,7 +12,7 @@
 <div class="grid-wrapper">
   {{#if isLoading}}
     {{partial 'loading'}}
-  {{else}} -->
+  {{else}}
     <h5 class="unfocus-grey-text">Search Results ({{ model.meta.total }})</h5>
     {{search-results-list results=model.datasets totalResults=model.meta.total}}
     {{#if (gt model.meta.total 0)}}

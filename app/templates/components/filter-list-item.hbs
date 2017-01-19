@@ -1,5 +1,4 @@
-<div class="u-tc-primary u-px2 u-mb1 u-rounded {{if active 'u-bc-overlay'}}"
-  {{action (if active 'removeFilter' 'addFilter') aggName bucket.key}}
+<div class="u-tc-primary u-px2 u-mb1 u-rounded {{if active 'u-bc-overlay'}}" {{action (if active 'removeFilter' 'addFilter') aggName bucket.key}}
 >
   <!-- {{#if (eq aggName "assay")}}
     <div class="label {{bucket.colour}}"></div>
