@@ -9,11 +9,9 @@
 .u-tc-red           { color: $color-primary-red;    }
 .u-tc-yellow        { color: $color-primary-yellow; }
 
-.t-light {
-  .u-tc-primary     { color: rgba(#000000, 0.87)    }
-  .u-tc-secondary   { color: rgba(#000000, 0.54)    }
-  .u-tc-tertiary    { color: rgba(#000000, 0.38)    }
-}
+.u-tc-primary     { color: rgba(#000000, 0.87)    }
+.u-tc-secondary   { color: rgba(#000000, 0.54)    }
+.u-tc-tertiary    { color: rgba(#000000, 0.38)    }
 
 .t-dark {
   .u-tc-primary     { color: rgba(#ffffff,    1)    }
@@ -29,21 +27,26 @@
 .u-bc-red         { background-color: $color-primary-red;   }
 .u-bc-yellow      { background-color: $color-primary-yellow;}
 .u-bc-blue        { background-color: $color-secondary-blue;}
+.u-bc-collection  { background-color: $color-collection;    }
+.u-bc-datasource  { background-color: $color-datasource;    }
 
 .u-bc-white       { background-color: $color-white;         }
 .u-bc-off-white   { background-color: $color-off-white;     }
 .u-bc-grey        { background-color: $color-mid-grey;      }
+.u-bc-overlay     { background-color: rgba(#000000, 0.1)    }
 
-.u-bc-pink        { background-color: $froly; }
-.u-bc-purple      { background-color: $amythest; }
-.u-bc-deep-purple { background-color: $lilac-bush; }
-.u-bc-indigo      { background-color: $sapphire; }
-.u-bc-light-blue  { background-color: $dodger-blue; }
-.u-bc-cyan        { background-color: $turquoise-blue; }
-.u-bc-green       { background-color: $fruit-salad; }
-.u-bc-light-green { background-color: $light-green; }
-.u-bc-lime        { background-color: $lime; }
-.u-bc-amber       { background-color: $amber; }
-.u-bc-orange      { background-color: $orange; }
-.u-bc-deep-orange { background-color: $deep-orange; }
-.u-bc-brown       { background-color: $brown; }
+.u-bc-light-bluegrey { background-color: $color-light-bluegrey;}
+
+.u-bc-pink        { background-color: $froly;               }
+.u-bc-purple      { background-color: $amythest;            }
+.u-bc-deep-purple { background-color: $lilac-bush;          }
+.u-bc-indigo      { background-color: $sapphire;            }
+.u-bc-light-blue  { background-color: $dodger-blue;         }
+.u-bc-cyan        { background-color: $turquoise-blue;      }
+.u-bc-green       { background-color: $fruit-salad;         }
+.u-bc-light-green { background-color: $light-green;         }
+.u-bc-lime        { background-color: $lime;                }
+.u-bc-amber       { background-color: $amber;               }
+.u-bc-orange      { background-color: $orange;              }
+.u-bc-deep-orange { background-color: $deep-orange;         }
+.u-bc-brown       { background-color: $brown;               }

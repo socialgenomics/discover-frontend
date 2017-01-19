@@ -23,13 +23,13 @@
 
   {{else}}
     <!-- Regular Dataset-->
-    <span class="descriptor">from</span>
+    <span class="fs0 fw-reg u-tc-tertiary">from</span>
     {{#if session.isAuthenticated }}
       {{#link-to 'datasources.source' model.datasource.id}}
         {{source-name-fallback model=model.datasource}}
       {{/link-to}}
     {{else}}
-      <span class="fake-link">{{source-name-fallback model=model.datasource}}</span>
+      <span class="u-tc-primary fw-bold">{{source-name-fallback model=model.datasource}}</span>
     {{/if}}
   {{/if}}
 
@@ -62,13 +62,13 @@
 
 {{else}}
   <!-- Regular Dataset-->
-  <span class="descriptor">from</span>
+  <span class="u-tc-tertiary">from</span>
   {{#if session.isAuthenticated }}
     {{#link-to 'datasources.source' model.datasourceId.id}}
       {{source-name-fallback model=model.datasourceId}}
     {{/link-to}}
   {{else}}
-    <span class="fake-link">{{source-name-fallback model=model.datasourceId}}</span>
+    <span class="u-tc-primary">{{source-name-fallback model=model.datasourceId}}</span>
   {{/if}}
 {{/if}}
 {{/if}}

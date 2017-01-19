@@ -7,13 +7,14 @@
   activeFilters=activeFilters
   isLoading=isLoading
   datasets=model.datasets
+  class="u-bc-collection t-dark"
 }}
 
-<div class="content push-right">
+<div class="grid-wrapper">
   {{#if isLoading}}
     {{partial 'loading'}}
   {{else}}
-    <h5 class="unfocus-grey-text">Search Results ({{ model.meta.total }})</h5>
+    <h5>Search Results ({{ model.meta.total }})</h5>
     {{search-results-list results=model.datasets totalResults=model.meta.total}}
     {{#if (gt model.meta.total 0)}}
       {{pagination-bar
