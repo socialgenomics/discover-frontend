@@ -1,0 +1,17 @@
+/* ==========================================================================
+   # Landing Page
+
+   Styles which are specific to the discover landing page
+
+   ========================================================================== */
+
+$navbar-height: 5vh;
+
+.c-landing-page {
+  margin-top: $navbar-height;
+  height: 100vh - $navbar-height;
+
+  .u-full-height {
+    height: inherit;
+  }
+}
