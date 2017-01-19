@@ -6,7 +6,8 @@ export default Component.extend({
   session: service(),
   favouritesService: service('favourites'),
 
-  tagName: 'a',
+  tagName: 'li',
+  classNames: ['o-list-inline__item'],
   isSubmitting: false,
   showCreateAccountModal: false,
 
