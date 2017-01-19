@@ -1,50 +1,48 @@
-<main id="profile" class="profile content">
-  <div class="row">
+<div class="grid-wrapper">
+  <main id="profile">
+    <div class="grid">
+      <div class="grid__col grid__col--12-of-12">
+        <section class="c-card u-p3">
+          <div class="u-ta-center">
+            <h1 class="fs4 u-mb1">{{model.user.displayName}}</h1>
+            <h4 class="fs">{{model.user_profile.workOrganisation}}</h4>
 
-    <section class="contain">
-      <div class="col m12 center">
-        <div class="card">
-          <div class="card-content">
-            <h1>{{model.user.displayName}}</h1>
-            <h4>{{model.user_profile.workOrganisation}}</h4>
             {{#if isOwnProfile}}{{#link-to "users.user_profile" class="edit-btn fa-2x sub-dark"}}{{fa-icon "pencil-square-o"}}{{/link-to}}{{/if}}
             <div class="profile-img">
-              <img src={{model.user_profile.avatar}}>
+              <img class="u-w3 u-mb1" src={{model.user_profile.avatar}}>
             </div>
             {{#if model.is_verified}}
-              <h4 class="verified">{{fa-icon "check-circle"}} Verified Account</h4>
+              <h4 class="u-tc-teal fs2">{{fa-icon "check-circle"}} Verified Account</h4>
             {{else}}
               {{#if isOwnProfile}}
-                <h4>{{#link-to 'users.trust' class="not-verified"}}{{fa-icon "envelope"}} Please verify your email{{/link-to}}</h4>
+              <h4>{{#link-to 'users.trust' class="u-tc-red"}}{{fa-icon "envelope"}} Please verify your email{{/link-to}}</h4>
               {{/if}}
             {{/if}}
-            <div class="divider"></div>
-            <div class="activity-stats">
-              <div class="activity-saved-data">
-                <span class="numb">{{numberOfFavourites}}</span>
-                <h5>Favourites</h5>
-              </div>
-              <div class="activity-uploads">
-                <span class="numb">{{model.registrations.length}}</span>
-                <h5>Registrations</h5>
-              </div>
-              <div class="activity-request">
-                <span class="numb">{{model.requests.length}}</span>
-                <h5>Requests</h5>
-              </div>
-              <div class="activity-comments">
-                <span class="numb">{{numberOfComments}}</span>
-                <h5>Comments</h5>
-              </div>
-              <span class="stretch"></span>
+          </div>
+
+          <div class="c-divider c-divider-light-bg"></div>
+          <div>
+            <div>
+              <span>{{numberOfFavourites}}</span>
+              <h5>Favourites</h5>
+            </div>
+            <div>
+              <span>{{model.registrations.length}}</span>
+              <h5>Registrations</h5>
+            </div>
+            <div>
+              <span>{{model.requests.length}}</span>
+              <h5>Requests</h5>
+            </div>
+            <div>
+              <span>{{numberOfComments}}</span>
+              <h5>Comments</h5>
             </div>
           </div>
-        </div>
-      </div>
-    </section>
+        </section>
 
-    <section class="contain">
-      <div class="col s12 m6 activity-card double-panel">
+        <section class="contain">
+          <div class="col s12 m6 activity-card double-panel">
 
         <!-- Favourites -->
         <div class="card favourited-data">
@@ -110,6 +108,8 @@
         </div>
       </div>
 
-    </section>
-  </div>
-</main>
+        </section>
+      </div>
+    </div>
+  </main>
+</div>
