@@ -1,7 +1,7 @@
 <!-- TODO when the data returned by the favourites query is the same structure as a dataset, this condition can be removed.  -->
 {{#if isFavourite}}
   {{#if isRequest}}
-    <span class="descriptor">Requested by </span>
+    <span class="fs0 fw-reg u-tc-tertiary">Requested by </span>
     {{#if session.isAuthenticated }}
       {{#link-to 'user' model.user.id}}
         {{model.user.firstname}} {{model.user.lastname}}
@@ -12,7 +12,7 @@
   {{else if (eq model.datasource.properties.short_name "REPOSITIVE")}}
     <!-- Registration -->
 
-    <span class="descriptor">Registered by </span>
+    <span class="fs0 fw-reg u-tc-tertiary">Registered by </span>
     {{#if session.isAuthenticated }}
       {{#link-to 'user' model.user.id class="user-name"}}
         {{model.user.firstname}} {{model.user.lastname}}
@@ -37,7 +37,7 @@
 
 {{#if isRequest}}
   {{#if model.userId.displayName}}
-    <span class="descriptor">Requested by </span>
+    <span class="fs0 fw-reg u-tc-tertiary">requested by </span>
     {{#if session.isAuthenticated }}
       {{#link-to 'user' model.userId.id}}
         {{model.userId.displayName}}
@@ -50,7 +50,7 @@
   <!-- Registration -->
 
   {{#if model.userId.displayName}}
-    <span class="descriptor">Registered by </span>
+    <span class="fs0 fw-reg u-tc-tertiary">registered by </span>
     {{#if session.isAuthenticated }}
       {{#link-to 'user' model.userId.id}}
         {{model.userId.displayName}}
@@ -62,7 +62,7 @@
 
 {{else}}
   <!-- Regular Dataset-->
-  <span class="u-tc-tertiary">from</span>
+  <span class="fs0 fw-reg u-tc-tertiary">from</span>
   {{#if session.isAuthenticated }}
     {{#link-to 'datasources.source' model.datasourceId.id}}
       {{source-name-fallback model=model.datasourceId}}
