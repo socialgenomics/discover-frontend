@@ -25,7 +25,7 @@
       {{else}}
         {{#link-to 'requests.detail' dataset.id classNames="data-title"}}
           <div data-balloon={{dataset.title}} data-balloon-pos="up" data-balloon-length="large">
-            <h4 class="data-title u-mb0">{{truncate dataset.title 70}}</h4>
+            <h4 class="u-mb0">{{truncate dataset.title 70}}</h4>
           </div>
         {{/link-to}}
       {{/if}}
@@ -44,9 +44,10 @@
       {{stats-list stats=dataset.stats statType="datasets"}}
     </div>
 
-  {{else}} <!-- It is a Dataset -->
+  {{else}}
+    <!-- It is a Dataset -->
     <!-- Card Header -->
-    <div class="u-bc-off-white u-p1 u-flex u-justify-between u-px2">
+    <div class="c-card-header u-bc-off-white u-flex u-items-center u-justify-between u-px2 u-py1 u-rounded-top">
       {{#if dataset.assay}}
         <ul class="o-list-inline o-list-flush-left u-mb0">
           {{assay-type assay=dataset}}
@@ -62,11 +63,11 @@
         }}
       </ul>
     </div>
-    <div class="u-p1">
+    <div class="u-p2">
       {{#if dataset.highlights.title}}
         {{#link-to 'datasets.detail' dataset.id classNames="data-title"}}
           <div data-balloon={{dataset.title}} data-balloon-pos="up" data-balloon-length="large">
-            <h4 class="fs2 fw-bold u-tc-primary c-card-title u-mb1 u-pl1">
+            <h4 class="fs2 fw-bold u-tc-primary c-card-title u-mb1">
               {{{truncate dataset.highlights.title 70}}}
             </h4>
           </div>
@@ -74,14 +75,16 @@
       {{else}}
         {{#link-to 'datasets.detail' dataset.id classNames="data-title"}}
           <div data-balloon={{dataset.title}} data-balloon-pos="up" data-balloon-length="large">
-            <h4 class="fw-bold fs2 u-tc-primary c-card-title u-mb1 u-pl1">
+            <h4 class="fs2 fw-bold u-tc-primary c-card-title u-mb1">
               {{truncate dataset.title 70}}
             </h4>
           </div>
         {{/link-to}}
       {{/if}}
-      {{from-label model=dataset searchRoute=searchRoute class="u-pl1 u-mb1"}}
-      <div class="c-card-description u-px1">
+
+      {{from-label model=dataset searchRoute=searchRoute class="u-mb1"}}
+
+      <div class="c-card-description">
         {{#if dataset.highlights.description}}
           {{{markdown-to-html markdown=dataset.highlights.description}}}
         {{else}}
@@ -89,8 +92,8 @@
         {{/if}}
       </div>
     </div>
-    <div class="">
-      {{stats-list stats=dataset.stats access=dataset.access statType="datasets"}}
-    </div>
+
+    {{stats-list stats=dataset.stats access=dataset.access statType="datasets"}}
+
   {{/if}}
 </div>

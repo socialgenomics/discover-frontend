@@ -10,8 +10,18 @@
   overflow-x: hidden;
 }
 
+.c-card-header {
+  height: $global-spacing-unit + $global-spacing-unit-small;
+}
+
 .c-card-description {
   height: ($global-line-height * 5) - ($global-line-height / 2);
   overflow-y: hidden;
   overflow-x: hidden;
+}
+
+.c-card-assay {
+  display: inline-block;
+  height: 10px;
+  border-radius: 2px;
 }
