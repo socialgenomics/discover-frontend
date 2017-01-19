@@ -1,4 +1,4 @@
-<div class="c-card dataset">
+<div class="c-card u-mb3">
   {{#if (eq type "request")}}
   <!-- Card Header -->
     <div class="u-bc-off-white">
@@ -48,15 +48,15 @@
 
   {{else}} <!-- It is a Dataset -->
     <!-- Card Header -->
-    <div class="u-bc-off-white u-p1">
+    <div class="u-bc-off-white u-p1 u-flex u-justify-between u-px2">
       {{#if dataset.assay}}
         <ul class="o-list-inline o-list-flush-left u-mb0">
           {{assay-type assay=dataset}}
-          {{assay-type assay=dataset}}
         </ul>
       {{/if}}
-      <ul class="o-list-inline o-list-flush-left u-mb0">
-        {{action-favourite model=dataset}}
+
+      <ul class="o-list-inline o-list-flush-left u-mb0 u-content-end">
+        {{action-favourite model=dataset class="u-mr1"}}
         {{action-share
           actionableId=dataset.id
           actionableType='dataset'
