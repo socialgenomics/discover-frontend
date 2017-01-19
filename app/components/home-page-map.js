@@ -3,6 +3,7 @@ import d3 from 'npm:d3';
 import topojson from 'npm:topojson';
 
 export default Ember.Component.extend({
+  classNames: ['.u-pos-absolute'],
   didInsertElement: function() {
     const width = this.$().innerWidth();
     const height = this.$().innerHeight() > 0 ? this.$().innerHeight() : 550;
