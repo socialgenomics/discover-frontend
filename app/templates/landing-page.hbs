@@ -1,32 +1,44 @@
-<div class="grid-wrapper">
-  <div class="grid">
+<div class="u-bc-white c-landing-page">
 
-    {{home-page-map}}
-    <div class="u-ta-center u-pos-relative">
-      <h1 class="fs4 fw-thin">Discover, share and collaborate on human genomic data</h1>
-    </div>
-    {{search-box search=(action 'search')}}
+  <div class="grid-wrapper u-py0 u-full-height">
+    <div class="grid u-full-height">
 
-    <div class="grid__col grid__col--1-of-3">
-      <div class="u-ta-center">
-        <h3><strong>100,100,000+</strong></h3>
-        <span>human genomic datasets</span>
+      {{home-page-map}}
+
+
+      <div class="u-flex u-flex-column u-justify-between u-pos-relative u-full-height">
+
+        <div class="u-ta-center">
+          <h1 class="fs4 fw-thin u-pt4">Discover, share and collaborate on human genomic data</h1>
+          {{search-box search=(action 'search')}}
+        </div>
+
+        <div class="u-mb5">
+
+          <div class="grid__col grid__col--1-of-3">
+            <div class="u-ta-center">
+              <h2 class="fs3 u-mb1"><strong>100,100,000+</strong></h2>
+              <span class="fs2">human genomic datasets</span>
+            </div>
+          </div>
+
+          <div class="grid__col grid__col--1-of-3">
+            <div class="u-ta-center">
+              <h2 class="fs3 u-mb1"><strong>1000+</strong></h2>
+              <span class="fs2">researchers & bioinformaticians</span>
+            </div>
+          </div>
+
+          <div class="grid__col grid__col--1-of-3">
+            <div class="u-ta-center">
+              <h2 class="fs3 u-mb1"><strong>35+</strong></h2>
+              <span class="fs2">data sources</span>
+            </div>
+          </div>
+
+        </div>
+
       </div>
     </div>
-
-    <div class="grid__col grid__col--1-of-3">
-      <div class="u-ta-center">
-        <h3><strong>100+</strong></h3>
-        <span>researchers & bioinformaticians</span>
-      </div>
-    </div>
-
-    <div class="grid__col grid__col--1-of-3">
-      <div class="u-ta-center">
-        <h3><strong>{{model.stats.datasources}}</strong></h3>
-        <span>different data sources</span>
-      </div>
-    </div>
-
   </div>
 </div>
