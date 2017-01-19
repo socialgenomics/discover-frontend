@@ -1,17 +1,11 @@
+<div class="grid-wrapper">
+  <div class="grid">
 {{sub-navigation active="profile"}}
-  <div class="row">
-    <div class="col m12 center-align">
-      <div class="card white no-margin darken-1">
-        <div class="card-content">
-          <h1>Edit Profile</h1>
-          <hr class="yellow">
-          <form class="row section">
-            <div class="col m12 center">
-              <div class="profile-img">
+    <div class="grid__col grid__col--3-of-3">
+      <div class="c-card u-p1 u-ta-center u-mb3">
+          <h1 class="fs4 u-ta-center">Edit Profile</h1>
                 <img src={{session.authenticatedUser.profile.avatar}}>
-              </div>
-            </div>
-            <div class="row">
+          <form>
               {{validated-input
                 type="text"
                 lbl="First Name"
@@ -19,7 +13,6 @@
                 errors=errors.firstname
                 placeholder="First Name"
                 formSubmitted=formSubmitted
-                class="col m6 offset-m3"
               }}
               {{validated-input
                 type="text"
@@ -28,7 +21,6 @@
                 errors=errors.lastname
                 placeholder="Last Name"
                 formSubmitted=formSubmitted
-                class="col m6 offset-m3"
               }}
               {{validated-input
                 type="text"
@@ -37,18 +29,15 @@
                 errors=errors.affiliation
                 placeholder="Affiliation"
                 formSubmitted=formSubmitted
-                class="col m6 offset-m3"
               }}
-            </div>
-            <div class="input-container col m6 offset-m3">
               {{#if isSavable}}
-                <button type="submit" class="btn teal white-text" {{action "save"}}>Save Changes</button>
+                <button type="submit" class="c-btn c-btn--primary" {{action "save"}}>Save Changes</button>
               {{else}}
-                <button type="button" class="btn disabled">Save Changes</button>
+	      <!-- TO DO : disabled button -->
+                <button type="button" class="c-btn c-btn">Save Changes</button>
               {{/if}}
-            </div>
           </form>
-        </div>
       </div>
     </div>
   </div>
+</div>
