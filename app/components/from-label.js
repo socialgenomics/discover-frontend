@@ -3,7 +3,7 @@ const { inject: { service }, Component, get } = Ember;
 
 export default Component.extend({
   tagName: 'h6',
-  classNames: ['fs0','fw-reg'],
+  classNames: ['u-fs0','u-fw-reg'],
   session: service(),
   click() {
     if (get(this, 'session.isAuthenticated') === false) {
