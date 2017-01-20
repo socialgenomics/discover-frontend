@@ -1,35 +1,46 @@
-{{outlet}}
-<div class="content">
-  <div class="row">
-    <div class="col m12">
+<div class="u-bc-white c-landing-page">
+  <div class="grid-wrapper u-p0 u-full-height u-pos-relative">
 
-      <div class="row no-margin">
-        <section class="map-search">
-          {{home-page-map}}
-          <div class="landing-title center-align">
-            <h1>Discover, share & collaborate on human genomic data</h1>
+    {{home-page-map}}
+
+    <div class="grid-wrapper u-pos-relative u-full-height">
+      <div class="grid u-full-height">
+        <div class="c-landing-page-inner u-flex u-flex-column u-justify-between u-full-height">
+
+          <div class="grid__col grid__col--3-of-3">
+            <div class="u-mb2 u-lg-mb5"></div>
+            <h1 class="fs4 fw-thin u-ta-center">Discover, share & collaborate on human genomic data</h1>
+            <div class="grid">
+              {{search-box search=(action 'search')}}
+            </div>
           </div>
-          {{search-box search=(action 'search')}}
-        </section>
+
+          <div class="u-mb5">
+            <div class="grid__col grid__col--1-of-3">
+              <div class="u-ta-center">
+                <h2 class="fs3 u-mb1"><strong>100,000,000+</strong></h2>
+                <span class="fs2">human genomic datasets</span>
+              </div>
+            </div>
+
+            <div class="grid__col grid__col--1-of-3">
+              <div class="u-ta-center">
+                <h2 class="fs3 u-mb1 u-ta-center"><strong>1000+</strong></h2>
+                <span class="fs2">researchers & bioinformaticians</span>
+              </div>
+            </div>
+
+            <div class="grid__col grid__col--1-of-3">
+              <div class="u-ta-center">
+                <h2 class="fs3 u-mb1"><strong>35+</strong></h2>
+                <span class="fs2">data sources</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
       </div>
-
-      <div class="row no-margin">
-        <div class="col m4 center">
-          <h3><strong>1,000,000+</strong></h3>
-          <span>human genomic datasets</span>
-        </div>
-        <div class="col m4 center">
-          <h3><strong>1000+</strong></h3>
-          <span>researchers & bioinformaticians</span>
-        </div>
-        <div class="col m4 center">
-          <h3><strong>35+</strong></h3>
-          <span>data sources</span>
-        </div>
-      </div>
-
-
-
     </div>
+
   </div>
 </div>

@@ -2,11 +2,12 @@
     DIVIDER
    ========================================================================== */
 
-.c-divider  {
+.c-divider {
   height: 1px;
   overflow: hidden;
   margin-bottom: $global-spacing-unit;
 }
 
 .c-divider-dark-bg { background-color: $color-mid-grey; }
+
 .c-divider-light-bg { background-color: $color-very-light-grey; }

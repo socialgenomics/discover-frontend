@@ -1,43 +1,38 @@
-<nav class="navbar" id="navbar">
-  <div class="navbar-wrapper">
+<div class="u-bc-off-white c-navbar-wrapper u-pos-relative u-px2">
+  <nav class="c-navbar u-flex u-justify-between u-items-center">
 
+    <!-- LOGO -->
     {{#unless isAuthenticated}}
       <a href="https://repositive.io">
-        <div class="navbar-logo valign-wrapper">
-          <img id="full-logo" class="responsive-img hide-on-small-only" src="/assets/images/logo-full-larger.png" alt="Repositive DNA logo">
-        </div>
+          <img src="/assets/images/logo-full-larger.png" alt="Repositive DNA logo">
       </a>
     {{else}}
       {{#link-to 'root'}}
-        <div class="navbar-logo valign-wrapper">
-          <img id="full-logo" class="responsive-img hide-on-small-only" src="/assets/images/logo-full-larger.png" alt="Repositive DNA logo">
+        <div class="c-navbar__site-logo">
+          <img src="/assets/images/logo-full-larger.png" alt="Repositive DNA logo">
         </div>
       {{/link-to}}
     {{/unless}}
 
+    <!-- SEARCH -->
     {{#if isAuthenticated}}
 
-      <div class="navbar-container">
-        <div class="navbar-search">
-          {{search-bar search=(route-action 'search')}}
+      <div class="u-flex u-items-center">
+        {{search-bar search=(route-action 'search')}}
+
+        <div class="c-navbar__nav-links u-ta-center u-border-right u-px2">
+          {{#link-to "datasets.request" class="u-tc-secondary"}}
+            {{fa-icon "clipboard"}}
+            <span class="fs1 u-px1">Request Data</span>
+          {{/link-to}}
         </div>
-        <div class="navbar-buttons">
-          <div class="navbar-button">
-            {{#active-link}}
-              {{#link-to "datasets.request" class="valign-wrapper"}}
-                {{fa-icon "clipboard"}}
-                <h6 class="uppercase">Request Data</h6>
-              {{/link-to}}
-            {{/active-link}}
-          </div>
-          <div class="navbar-button">
-            {{#active-link}}
-              {{#link-to "datasets.register" class="valign-wrapper"}}
-                {{fa-icon "file-text"}}
-                <h6 class="uppercase">Register Data</h6>
-              {{/link-to}}
-            {{/active-link}}
-          </div>
+
+
+        <div class="c-navbar__nav-links u-ta-center u-border-right u-px2">
+          {{#link-to "datasets.register" class="u-tc-secondary" }}
+            {{fa-icon "file-text"}}
+            <span class="fs1 u-px1">Register Data</span>
+          {{/link-to}}
         </div>
       </div>
 
@@ -78,5 +73,6 @@
           </div>
       </section>
     {{/if}}
-  </div>
-</nav>
+
+  </nav>
+</div>
