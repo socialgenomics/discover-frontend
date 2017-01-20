@@ -1,4 +1,4 @@
-<div class="c-card u-mb3">
+<div class="c-card">
   {{#if (eq type "request")}}
   <!-- Card Header -->
     <div class="u-bc-off-white">
@@ -41,7 +41,7 @@
       </div>
     </div>
     <div class="card-footer">
-      {{stats-list stats=dataset.stats statType="datasets"}}
+      {{stats-list stats=dataset.stats statType="datasets" class="u-pb2 u-pl2"}}
     </div>
 
   {{else}}
@@ -82,7 +82,7 @@
         {{/link-to}}
       {{/if}}
 
-      {{from-label model=dataset searchRoute=searchRoute class="u-mb1"}}
+      {{from-label model=dataset searchRoute=searchRoute}}
 
       <div class="c-card-description">
         {{#if dataset.highlights.description}}
@@ -93,7 +93,7 @@
       </div>
     </div>
 
-    {{stats-list stats=dataset.stats access=dataset.access statType="datasets"}}
+    {{stats-list stats=dataset.stats access=dataset.access statType="datasets" class="u-pb2 u-pl2"}}
 
   {{/if}}
 </div>

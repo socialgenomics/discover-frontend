@@ -16,7 +16,8 @@ dl, ol, ul,
 figure,
 hr,
 table,
-fieldset {
+fieldset,
+.c-card {
   margin-top: 0;
   margin-bottom: $global-spacing-unit;
 }
