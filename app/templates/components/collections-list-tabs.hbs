@@ -1,35 +1,19 @@
-<section class="content collections-tabs">
+<div class="c-card u-ta-center u-border-square">
+  <ul class="o-list-inline o-list-flush-left u-mb0 u-flex u-tc-primary">
 
-  <div class="card">
-    <ul class="tabs">
-      <li class="tab">
-        {{#if (eq active "collections")}}
-          {{#link-to "collections" class="active"}}
-            {{fa-icon "book"}}
-            Collections <span class="stats-text thin">{{stats.repositive_collections}}</span>
-          {{/link-to}}
-        {{else}}
-          {{#link-to "collections"}}
-            {{fa-icon "book"}}
-            Collections <span class="stats-text thin">{{stats.repositive_collections}}</span>
-          {{/link-to}}
-        {{/if}}
+    {{#link-to "collections" class="u-tc-primary u-flex-auto" classNameBindings='isDatasources:u-bc-off-white'}}
+      <li class="o-list-inline__item u-p1 fs3">
+        {{fa-icon "book"}}
+        Collections <span class="fw-med u-px1">{{stats.repositive_collections}}</span>
       </li>
+    {{/link-to}}
 
-      <li class="tab">
-        {{#if (eq active "datasources")}}
-          {{#link-to "datasources" class="active"}}
-            {{fa-icon "database"}}
-            Data Sources <span class="stats-text thin">{{stats.datasources}}</span>
-          {{/link-to}}
-        {{else}}
-          {{#link-to "datasources"}}
-            {{fa-icon "database"}}
-            Data Sources <span class="stats-text thin">{{stats.datasources}}</span>
-          {{/link-to}}
-        {{/if}}
+    {{#link-to "datasources" class="u-tc-primary u-flex-auto u-border-left" classNameBindings='isCollections:u-bc-off-white'}}
+      <li class="o-list-inline__item u-p1 fs3">
+        {{fa-icon "database"}}
+        Data Sources <span class="fw-med u-px1">{{stats.datasources}}</span>
       </li>
-    </ul>
-  </div>
+    {{/link-to}}
 
-</section>
+  </ul>
+</div>

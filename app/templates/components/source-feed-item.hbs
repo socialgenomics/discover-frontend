@@ -1,27 +1,22 @@
 {{#link-to 'datasources.source' source.id classNames="feed-item-component"}}
-  <main class="col m12">
-    <div class="card dataset card-comp">
-
-      <section class="card-type-section col m2">
-        {{fa-icon "database" class='color-light-gull-gray-text'}}
-        <p>Data Source</p>
+    <div class="c-card u-mb3 c-col-li-item">
+      <section class="grid__col grid__col--1-of-5 grid__col--am u-px3 u-py2 u-bc-light-bluegrey u-ta-center">
+        {{fa-icon "database" size=3 class='u-tc-secondary u-p1'}}
+        <p class="u-mb0">Data Source</p>
       </section>
 
-      <section class="card-user-section col m3">
-        <div class="data-title">
+      <section class="grid__col grid__col--1-of-5 grid__col--am u-px2 u-py1 u-ta-center">
           {{#if source.properties.logo}}
-            <img src={{source.properties.logo}} height="35px">
+            <img class="c-img--src-logo" src={{source.properties.logo}}>
           {{/if}}
-          <h4 class="data-title">{{source-name-fallback model=source}}</h4>
-        </div>
+          <p class="fs0 u-mb0 fw-bold">{{source-name-fallback model=source}}</p>
       </section>
 
-      <section class="card-content-section source-text col m7">
-        {{collection-summary-fallback
+      <section class="grid__col grid__col--3-of-5 grid__col--am u-ta-left u-py1 u-px2 u-border-left">
+        {{collection-summary-fallback class="u-mb0"
           summary=source.properties.summary
           description=source.description}}
       </section>
 
     </div>
-  </main>
 {{/link-to}}

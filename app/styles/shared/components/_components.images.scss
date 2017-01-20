@@ -18,6 +18,11 @@
   width: 120px;
 }
 
+.c-img--src-logo {
+  max-width: 100%;
+  max-height: 35px;
+}
+
 .c-img-grayscale {
   -webkit-filter: grayscale(100%);
   filter: grayscale(100%);

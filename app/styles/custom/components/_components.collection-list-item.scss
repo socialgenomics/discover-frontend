@@ -1,0 +1,13 @@
+/* ==========================================================================
+   # Collection list item
+   Styles for the collection and datasource lists
+   ========================================================================== */
+
+.c-col-li-item {
+  height: $global-line-height * 5;
+
+  p {
+    margin: 0;
+  }
+
+}
