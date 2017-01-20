@@ -54,7 +54,7 @@
               <div class="card-content">
                 {{#if favouritedData}}
                   {{#each favouritedData as |favourite|}}
-                    {{mini-dataset dataset=favourite type=favourite.type isFavourite=true}}
+                    {{activity-card-item dataset=favourite type=favourite.type isFavourite=true}}
                   {{/each}}
                 {{else}}
                   <p class="color-silver-chalice-text center-align">
@@ -75,7 +75,7 @@
               <div class="card-content">
                 {{#if model.requests}}
                   {{#each model.requests as |request|}}
-                    {{mini-dataset dataset=request type="request"}}
+                    {{activity-card-item dataset=request type="request"}}
                   {{/each}}
                 {{else}}
                   <p class="color-silver-chalice-text center-align">
@@ -98,7 +98,7 @@
               <div class="card-content">
                 {{#if model.registrations}}
                   {{#each model.registrations as |dataset|}}
-                    {{mini-dataset dataset=dataset type="registration"}}
+                    {{activity-card-item dataset=dataset type="registration"}}
                   {{/each}}
                 {{else}}
                   <p class="color-silver-chalice-text center-align">

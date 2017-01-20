@@ -1,6 +1,6 @@
 {{activity-card-header type=type}}
 <div>
   {{#each model as |dataset|}}
-    {{mini-dataset dataset=dataset type=type}}
+    {{activity-card-item dataset=dataset type=type}}
   {{/each}}
 </div>
