@@ -1,0 +1,13 @@
+{{#if (eq type "request")}}
+  {{#link-to 'datasets.request'}}
+    {{fa-icon "clipboard"}}
+    <h4>Requested Data</h4>
+  {{/link-to}}
+{{/if}}
+
+{{#if (eq type "registration")}}
+  {{#link-to 'datasets.register'}}
+    {{fa-icon "file-text"}}
+    <h4>Registered Data</h4>
+  {{/link-to}}
+{{/if}}

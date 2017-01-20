@@ -1,0 +1,14 @@
+{{activity-card-header type=type}}
+<p class="info-text">
+  {{#if (eq type "request")}}
+  Help our community by connecting them with the datasets they're looking for.
+  If you’re seeking datasets you can make a request too.
+  {{else if (eq type "registration")}}
+  These are datasets contributed by our community. You can easily register your dataset and make it visible for others.
+  {{/if}}
+</p>
+<div class="card-content">
+  {{#each model as |dataset|}}
+    {{mini-dataset dataset=dataset type=type}}
+  {{/each}}
+</div>

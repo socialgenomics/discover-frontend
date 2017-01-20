@@ -12,46 +12,10 @@
 
       <section>
         <div class="grid__col grid__col--1-of-2">
-          <!-- <h5 class="subtitles-left unfocus-grey-text">User Activity</h5> -->
-          <!-- data registrations -->
-          <div>
-            <div class="card activity-card registered-data">
-              <div class="card-header card-title">
-                {{#link-to 'datasets.register'}}
-                  {{fa-icon "file-text"}}
-                  <h4>Registered Data</h4>
-                {{/link-to}}
-              </div>
-              <p class="info-text">
-                These are datasets contributed by our community. You can easily register your dataset and make it visible for others.
-              </p>
-              <div class="card-content">
-                  {{#each registrationsSorted as |registration|}}
-                    {{mini-dataset dataset=registration}}
-                  {{/each}}
-              </div>
-            </div>
-          </div>
+          {{activity-card model=registrationsSorted type="registration"}}
         </div>
-        <!--data requests-->
         <div class="grid__col grid__col--1-of-2">
-          <div class="card activity-card requested-data">
-            <div class="card-header card-title">
-                {{#link-to 'datasets.request'}}
-                  {{fa-icon "clipboard"}}
-                  <h4>Requested Data</h4>
-                {{/link-to}}
-            </div>
-            <p class="info-text">
-              Help our community by connecting them with the datasets they're looking for.
-    If you’re seeking datasets you can make a request too.
-            </p>
-            <div class="card-content">
-              {{#each requestsSorted as |request|}}
-                {{mini-dataset dataset=request type="request"}}
-              {{/each}}
-            </div>
-          </div>
+          {{activity-card model=requestsSorted type="request"}}
         </div>
       </section>
     </main>
