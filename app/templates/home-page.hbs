@@ -4,7 +4,6 @@
       {{home-stats-updates datasetsNumber=datasetsNumber stats=model.stats collections=model.collections datasources=model.datasources}}
 
       <section>
-        <!-- <h5 class="subtitles-left unfocus-grey-text">Popular Datasets</h5> -->
         {{#each model.datasets as |dataset|}}
           {{dataset-card dataset=dataset}}
         {{/each}}

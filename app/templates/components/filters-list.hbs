@@ -6,9 +6,9 @@
   {{#each filters as |filter|}}
     <div class="section">
       {{#if (eq filter.displayName "Datasource")}}
-        <h4 class="u-mb1 u-pt2 u-tc-tertiary fs0">Data Source</h4>
+        <h4 class="u-mb1 u-pt2 u-tc-tertiary u-fs0">Data Source</h4>
       {{else}}
-        <h4 class="u-mb1 u-pt2 u-tc-tertiary fs0">{{ filter.displayName }}</h4>
+        <h4 class="u-mb1 u-pt2 u-tc-tertiary u-fs0">{{ filter.displayName }}</h4>
       {{/if}}
       {{#if isLoading}}
         <p>Loading new filters...</p>

@@ -8,7 +8,8 @@
 .u-tc-teal          { color: $color-primary-teal;   }
 .u-tc-red           { color: $color-primary-red;    }
 .u-tc-yellow        { color: $color-primary-yellow; }
-.u-tc-green         { color: $fruit-salad;    }
+.u-tc-green         { color: $fruit-salad;          }
+.u-tc-blue          { color: $color-secondary-blue; }
 
 .u-tc-primary     { color: rgba(#000000, 0.87)    }
 .u-tc-secondary   { color: rgba(#000000, 0.54)    }
@@ -57,6 +58,7 @@
 // Border Colors
 /* ==================================== */
 
-.u-border-color-teal  {  border-color: $color-primary-teal;  }
-.u-border-color-red  {  border-color: $color-primary-red;  }
-.u-border-color-yellow  {  border-color: $color-primary-yellow;  }
+.u-border-color-teal    { border-color: $color-primary-teal;       }
+.u-border-color-red     { border-color: $color-primary-red;        }
+.u-border-color-yellow  { border-color: $color-primary-yellow;     }
+.u-border-color-blue    { border-color: $color-secondary-blue; }

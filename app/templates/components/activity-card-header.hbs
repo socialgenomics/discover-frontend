@@ -1,13 +1,24 @@
 {{#if (eq type "request")}}
   {{#link-to 'datasets.request'}}
-    {{fa-icon "clipboard"}}
-    <h4>Requested Data</h4>
+    <ul class="o-list-inline o-list-flush-left u-mb0">
+      <li class="o-list-inline__item  u-mr1">{{fa-icon "clipboard" class="u-tc-blue"}}</li>
+      <li class="o-list-inline__item"><h4 class="u-mb0">Requested Data</h4></li>
+    </ul>
   {{/link-to}}
+  <p class="u-mb0">
+  Help our community by connecting them with the datasets they're looking for.
+  If you’re seeking datasets you can make a request too.
+  </p>
 {{/if}}
 
 {{#if (eq type "registration")}}
   {{#link-to 'datasets.register'}}
-    {{fa-icon "file-text"}}
-    <h4>Registered Data</h4>
+    <ul class="o-list-inline o-list-flush-left u-mb0">
+      <li class="o-list-inline__item u-mr1">{{fa-icon "file-text" class="u-tc-red"}}</li>
+      <li class="o-list-inline__item"><h4 class="u-mb0">Registered Data</h4></li>
+    </ul>
   {{/link-to}}
+  <p class="u-mb0">
+  These are datasets contributed by our community. You can easily register your dataset and make it visible for others.
+  </p>
 {{/if}}

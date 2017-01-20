@@ -4,7 +4,7 @@
       <div class="grid__col grid__col--12-of-12">
         <section class="c-card u-p3">
           <div class="u-ta-center">
-            <h1 class="fs4 u-mb1">{{model.user.displayName}}</h1>
+            <h1 class="u-fs4 u-mb1">{{model.user.displayName}}</h1>
             <h4>{{model.user_profile.workOrganisation}}</h4>
 
             {{#if isOwnProfile}}{{#link-to "users.user_profile" class="edit-btn fa-2x sub-dark"}}{{fa-icon "pencil-square-o"}}{{/link-to}}{{/if}}
@@ -12,7 +12,7 @@
               <img class="u-w3 u-mb1" src={{model.user_profile.avatar}}>
             </div>
             {{#if model.is_verified}}
-              <h4 class="u-tc-teal fs2">{{fa-icon "check-circle"}} Verified Account</h4>
+              <h4 class="u-tc-teal u-fs2">{{fa-icon "check-circle"}} Verified Account</h4>
             {{else}}
               {{#if isOwnProfile}}
               <h4>{{#link-to 'users.trust' class="u-tc-red"}}{{fa-icon "envelope"}} Please verify your email{{/link-to}}</h4>
@@ -21,22 +21,22 @@
           </div>
 
           <div class="c-divider c-divider-light-bg"></div>
-          
+
           <div class="grid o-list-inline">
             <div class="grid__col grid__col--3-of-12 u-ta-center">
-              <span class="o-list-inline__item fw-med fs3">{{numberOfFavourites}}</span>
+              <span class="o-list-inline__item fw-med u-fs3">{{numberOfFavourites}}</span>
               <h5 class="o-list-inline__item fw-thin">Favourites</h5>
             </div>
             <div class="grid__col grid__col--3-of-12 u-ta-center">
-              <span class="o-list-inline__item fw-med fs3">{{model.registrations.length}}</span>
+              <span class="o-list-inline__item fw-med u-fs3">{{model.registrations.length}}</span>
               <h5 class="o-list-inline__item fw-thin">Registrations</h5>
             </div>
             <div class="grid__col grid__col--3-of-12 u-ta-center">
-              <span class="o-list-inline__item fw-med fs3">{{model.requests.length}}</span>
+              <span class="o-list-inline__item fw-med u-fs3">{{model.requests.length}}</span>
               <h5 class="o-list-inline__item fw-thin">Requests</h5>
             </div>
             <div class="grid__col grid__col--3-of-12 u-ta-center">
-              <span class="o-list-inline__item fw-med fs3">{{numberOfComments}}</span>
+              <span class="o-list-inline__item fw-med u-fs3">{{numberOfComments}}</span>
               <h5 class="o-list-inline__item fw-thin">Comments</h5>
             </div>
           </div>
@@ -44,7 +44,7 @@
 
         <section class="contain">
           <div class="col s12 m6 activity-card double-panel">
-          
+
             <!-- Favourites -->
             <div class="card favourited-data">
               <div class="card-header card-title">
@@ -108,7 +108,7 @@
               </div>
             </div>
           </div>
-          
+
         </section>
       </div>
     </div>
