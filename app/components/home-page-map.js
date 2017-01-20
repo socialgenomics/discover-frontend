@@ -5,7 +5,7 @@ import topojson from 'npm:topojson';
 export default Ember.Component.extend({
   didInsertElement: function() {
     const width = this.$().innerWidth();
-    const height = this.$().innerHeight() > 0 ? this.$().innerHeight() : 550;
+    const height = this.$().innerHeight() > 0 ? this.$().innerHeight() : 650;
     const mapColour = '#E2E8EA';
     const datasourceColour = '#E97275';
     const datasetColour = '#39AFB5';
@@ -21,8 +21,8 @@ export default Ember.Component.extend({
     const g = svg.append('g');
 
     const mercator = d3.geoMercator()
-      .center([0, 50])
-      .scale(125);
+      .center([0, 60])
+      .scale(160);
 
     const path = d3.geoPath().projection(mercator);
     const points = d => mercator([d.geometry.coordinates[0], d.geometry.coordinates[1]]);
@@ -51,19 +51,24 @@ export default Ember.Component.extend({
           .getElementsByClassName('map-background')[0]
           .appendChild(frag);
 
-        circles.each(function (d, i) {
-          setTimeout(() => {
-            d3.select(this).raise();
-            d3.select(this).transition()
-              .attr('r', pointRadius * 2)
-              .ease(d3.easeElastic)
-              .duration(1000)
-              .transition()
-              .attr('r', pointRadius)
-              .ease(d3.easeLinear)
-              .duration(500)
-          }, i * ( Math.floor( Math.random() * ( 6000 - 500 + 1 ) + 500 ) ) );
-        });
+          /*
+           This amazing animation is a sleeping beauty
+           waiting for a kiss from the UI prince to be awaken again.
+              :-*
+           */
+        // circles.each(function (d, i) {
+        //   setTimeout(() => {
+        //     d3.select(this).raise();
+        //     d3.select(this).transition()
+        //       .attr('r', pointRadius * 2)
+        //       .ease(d3.easeElastic)
+        //       .duration(1000)
+        //       .transition()
+        //       .attr('r', pointRadius)
+        //       .ease(d3.easeLinear)
+        //       .duration(500)
+        //   }, i * ( Math.floor( Math.random() * ( 6000 - 500 + 1 ) + 500 ) ) );
+        // });
       });
     });
   }
