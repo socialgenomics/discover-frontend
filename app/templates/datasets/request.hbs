@@ -11,19 +11,31 @@
         <div class="grid">
           <div class="grid__col grid__col--6-of-12">
             <h4 class="u-tc-blue">How to make request?</h4>
-          <div>
-            <span class="u-tc-blue fs4">1</span>
-            <p> Fill in the request form with information about the data you are looking for.</p></div>
-          <div>
-            <span class="u-tc-blue fs4">2</span>
-            <p> Your request will be visible and searchable on REPOSITIVE.</p></div>
-          <div>
-            <span class="u-tc-blue fs4">3</span>
-            <p> This will help you to find the data you are looking for and initiate collaborations.</p></div>
+            <div class="grid">
+            <div class="grid__col grid__col--am grid__col--1-of-6 grid__col--s-1-of-3 grid__col--m-1-of-3 u-ta-right">
+              <span class="u-tc-blue fs4">1</span>
+            </div>
+            <div class="grid__col grid__col--am grid__col--5-of-6 grid__col--s-2-of-3 grid__col--m-2-of-3 u-mb1">
+              <p class="u-mb0 u-pr3 ">Fill in the request form with information about the data you are looking for.</p>
+            </div>
+
+            <div class="grid__col grid__col--am grid__col--1-of-6 grid__col--s-1-of-3 grid__col--m-1-of-3 u-ta-right">
+              <span class="u-tc-blue fs4">2</span>
+            </div>
+            <div class="grid__col grid__col--am grid__col--5-of-6 grid__col--s-2-of-3 grid__col--m-2-of-3 u-mb1">
+              <p class="u-mb0 u-pr3">Your request will be visible and searchable on REPOSITIVE.</p>
+            </div>
+
+            <div class="grid__col grid__col--am grid__col--1-of-6 grid__col--s-1-of-3 grid__col--m-1-of-3 u-ta-right">
+              <span class="u-tc-blue fs4">3</span>
+            </div>
+            <div class="grid__col grid__col--am grid__col--5-of-6 grid__col--s-2-of-3 grid__col--m-2-of-3 u-mb1">
+              <p class="u-mb0 u-pr3"> This will help you to find the data you are looking for and initiate collaborations.</p>
+            </div>
           </div>
         </div>
         <div class="grid__col grid__col--6-of-12">
-          <h4>Request form</h4>
+          <h4 class="u-tc-blue">Request form</h4>
           <form>
             {{validated-input
               type="text"
@@ -40,7 +52,7 @@
               action=addDataset
               textarea="true"
             }}
-            <div class="input-container center">
+            <div>
               {{async-button
                 class="btn bg-request white-text"
                 action=(action 'addRequest')
@@ -51,6 +63,7 @@
             </div>
           </form>
           </div>
+        </div>
         </div>
       </div>
     </div>
