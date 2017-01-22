@@ -7,8 +7,8 @@ export default Ember.Component.extend({
     addTag: function() {
       if (this.tag) {
         this.get('metrics').trackEvent({
-          category: 'dataset',
-          action: 'added tag',
+          category: 'discover_homeauth_datasetDetail_tag',
+          action: 'added_tag',
           label: this.tag
         });
         this.sendAction('addTag', this.tag);

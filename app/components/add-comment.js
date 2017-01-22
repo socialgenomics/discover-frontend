@@ -20,8 +20,8 @@ export default Ember.Component.extend({
       //temporary validation
       if (!isEmpty(this.get('comment'))) {
         this.get('metrics').trackEvent({
-          category: 'dataset',
-          action: 'comment',
+          category: 'discover_homeauth_datasetDetail_comment',
+          action: 'added comment',
           label: this.get('dataset.id')
         });
         this.attrs.addComment(this.comment);
