@@ -3,7 +3,7 @@ import QP from 'npm:../../query-parser';
 import colours from 'repositive/utils/colours';
 import ENV from 'repositive/config/environment';
 
-const { Mixin, inject: { service }, get, set } = Ember;
+const { Mixin, inject: { service }, get, set, computed } = Ember;
 
 export default Mixin.create({
   ajax: service(),
@@ -15,6 +15,14 @@ export default Mixin.create({
     page: { refreshModel: true },
     resultsPerPage: { refreshModel: true }
   },
+
+  QP: computed(function () {
+    return QP;
+  }),
+
+  getColour: computed(function () {
+    return colours.getColour;
+  }),
 
   actions: {
     loading(transition, route) {
@@ -44,15 +52,16 @@ export default Mixin.create({
   },
 
   getActiveFilters() {
-    const queryTree = QP.parseString(get(this, 'query'));
-    return QP.getFilters(queryTree).map(f => `${f.predicate}:${f.text}`);
+    const queryTree = get(this, 'QP').parseString(get(this, 'query'));
+
+    return get(this, 'QP').getFilters(queryTree).map(f => `${f.predicate}:${f.text}`);
   },
 
   makeRequest(params) {
     const limit = params.resultsPerPage || 9;
     const offset = (params.page - 1) * limit;
     const query = params.query || '';
-    const body = query === '' ? {} : QP.parseString(query);
+    const body = query === '' ? {} : get(this, 'QP').parseString(query);
 
     return get(this, 'ajax').request(
       ENV.APIRoutes['datasets.search'],
@@ -71,7 +80,7 @@ export default Mixin.create({
   */
   _updateQueryServiceValue(query) {
     if (query) {
-      get(this, 'queryService').setQueryString(QP.toBoolString(QP.parseString(query)));
+      get(this, 'queryService').setQueryString(get(this, 'QP').toBoolString(get(this, 'QP').parseString(query)));
     } else {
       get(this, 'queryService').setQueryString(null);
     }
@@ -106,7 +115,7 @@ export default Mixin.create({
         const buckets = aggs[filter].buckets;
 
         buckets.forEach(b => {
-          b.colour = colours.getColour(b.key);
+          b.colour = get(this, 'getColour')(b.key);
 
           return b;
         });
