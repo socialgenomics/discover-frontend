@@ -1,0 +1,17 @@
+.notification-margin {
+  .content {
+    margin-top: 5.5rem;
+  }
+}
+
+.landing-title {
+  //position: relative;
+  h1 {
+    font-weight: 400;
+    //font-size: 40px;
+    letter-spacing: .10rem;
+  }
+  z-index: 1000;
+  padding-top: 4rem;
+  padding-bottom: 1rem;
+}

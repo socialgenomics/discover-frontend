@@ -26,7 +26,44 @@ export default Route.extend(ApplicationRouteMixin, {
   model() {
     get(this, 'favouritesService').loadFavourites();
   },
-  queryAndTransition (dest, input, serializeTree, pageNumber) {
+
+  actions: {
+    search(queryString, pageNumber) {
+      const queryTree = QP.parseString(queryString);
+      const collectionPredicate = BT.filter(queryTree, (node) => {
+        return BX.isFilter(node) && node.predicate === 'collection';
+      });
+      const datasourcePredicate = BT.filter(queryTree, (node) => {
+        return BX.isFilter(node) && node.predicate === 'datasource';
+      });
+      this._conditionallyTransition(collectionPredicate, datasourcePredicate, queryString, pageNumber);
+      get(this, 'metrics').trackEvent({
+        category: 'search',
+        action: 'query',
+        label: queryString
+      });
+    },
+
+    toggleModal() {
+      this.controllerFor('application').toggleProperty('isShowingModal');
+    }
+  },
+
+  _conditionallyTransition(collectionPredicate, datasourcePredicate, queryString, pageNumber) {
+    if (collectionPredicate.length === 1 && get(this, 'controller.currentPath').includes('collection')) {
+      this._queryAndTransition('collections.collection', collectionPredicate[0], queryString, pageNumber);
+    } else if (datasourcePredicate.length === 1 && get(this, 'controller.currentPath').includes('datasource')) {
+      this._queryAndTransition('datasources.source', datasourcePredicate[0], queryString, pageNumber);
+    } else {
+      this.transitionTo('datasets.search', {
+        queryParams: {
+          query: queryString,
+          page: pageNumber || 1
+        }
+      });
+    }
+  },
+  _queryAndTransition(dest, input, serializeTree, pageNumber) {
     let query = {};
     if (isUUID.test(input.text)) {
       query = { 'where.id' : input.text };
@@ -46,40 +83,5 @@ export default Route.extend(ApplicationRouteMixin, {
         }
       });
     });
-  },
-  actions: {
-    search(queryString, pageNumber) {
-      const queryTree = QP.parseString(queryString);
-      if (queryTree && queryTree.isError) {
-        return this.transitionTo('datasets.search-error');
-      }
-      const collectionF = BT.filter(queryTree, (node, left, right) => {
-        return BX.isFilter(node) && node.predicate === 'collection';
-      });
-      const datasourceF = BT.filter(queryTree, (node, left, right) => {
-        return BX.isFilter(node) && node.predicate === 'datasource';
-      });
-      if (collectionF.length === 1) {
-        this.queryAndTransition('collections.collection', collectionF[0], queryString, pageNumber);
-      } else if (datasourceF.length === 1) {
-        this.queryAndTransition('datasources.source', datasourceF[0], queryString, pageNumber);
-      } else {
-        this.transitionTo('datasets.search', {
-          queryParams: {
-            query: queryString,
-            page: pageNumber || 1
-          }
-        });
-      }
-      get(this, 'metrics').trackEvent({
-        category: 'search',
-        action: 'query',
-        label: queryString
-      });
-    },
-
-    toggleModal() {
-      this.controllerFor('application').toggleProperty('isShowingModal');
-    }
   }
 });

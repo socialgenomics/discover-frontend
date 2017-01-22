@@ -2,39 +2,34 @@
 <div class="content">
   <div class="row">
     <div class="col m12">
+
       <div class="row no-margin">
-        <header class="col m12">
+        <section class="map-search">
+          {{home-page-map}}
           <div class="landing-title center-align">
-            <h1 class="ultra-thin">Search <strong>{{datasetsNumber}}</strong> datasets across <strong>{{model.stats.datasources}} different data sources.</strong></h1>
+            <h1>Discover, share & collaborate on human genomic data</h1>
           </div>
-          <div class="divider"></div>
-        </header>
-        <main>
-          <section class="col m6 center-align loop-image-ani margin-top margin-bottom">
-            <ul>
-              <li><p class="teal-text">Search Data</p><img src="/assets/images/landing-0.4.5-01.png" class="loop1 lizard-image-landing" alt="landing page lizard"></li>
-              <li><p class="teal-text">Use Filters</p><img src="/assets/images/landing-0.4.5-02.png" class="loop2 lizard-image-landing" alt="landing page lizard"></li>
-              <li><p class="teal-text">Make requests</p><img src="/assets/images/landing-0.4.5-04.png" class="loop4 lizard-image-landing" alt="landing page lizard"></li>
-              <li><p class="teal-text">Discuss with Others</p><img src="/assets/images/landing-0.4.5-03.png" class="loop3 lizard-image-landing" alt="landing page lizard"></li>
-            </ul>
-          </section>
-          <section class="col m6 margin-top margin-bottom">
-            <div class="landing-form">
-              <h3 class="center-align padding-top">Discover a better way of searching for genomic data</h3>
-              {{#link-to 'users.signup' invokeAction=(action 'trackCreateAccount' 'DISCOVER HOME')}}<button class="btn teal center-block margin-top">CREATE ACCOUNT</button>{{/link-to}}
-              <div class="or-div">
-                <span>ALREADY HAVE AN ACCOUNT?</span>
-              </div>
-              {{#link-to 'users.login'}}<button class="btn btn-light center-block margin-bottom no-margin-top">LOGIN</button>{{/link-to}}
-              <h3 class="center-align padding-top">Find out more about <a href="https://repositive.io" class="teal-text">repositive.io</a></h3>
-            </div>
-          </section>
-          <section class="col m12">
-            <div class="divider margin-top"></div>
-            <h3 class="center-align thin margin-top">Designed for researchers who use, share and collaborate on human genomic data.</h3>
-          </section>
-        </main>
+          {{search-box search=(action 'search')}}
+        </section>
       </div>
+
+      <div class="row no-margin">
+        <div class="col m4 center">
+          <h3><strong>1,000,000+</strong></h3>
+          <span>human genomic datasets</span>
+        </div>
+        <div class="col m4 center">
+          <h3><strong>1000+</strong></h3>
+          <span>researchers & bioinformaticians</span>
+        </div>
+        <div class="col m4 center">
+          <h3><strong>35+</strong></h3>
+          <span>data sources</span>
+        </div>
+      </div>
+
+
+
     </div>
   </div>
 </div>

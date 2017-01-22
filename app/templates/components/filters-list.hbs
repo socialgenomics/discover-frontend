@@ -1,26 +1,34 @@
 {{#unless light-font-color}}
   <h4 class="unfocus-grey-text">Filters</h4>
 {{/unless}}
-{{#each filters as |filter|}}
-  <div class="section">
-    {{#if (eq filter.displayName "Datasource")}}
-      <h4>Data Source</h4>
-    {{else}}
-      <h4>{{ filter.displayName }}</h4>
-    {{/if}}
-    {{#if isLoading}}
-      <p>Loading new filters...</p>
-    {{else}}
-      {{#each filter.buckets as |bucket|}}
-        {{filter-list-item
-          addFilter=addFilter
-          removeFilter=removeFilter
-          activeFilters=activeFilters
-          aggName=filter.name
-          bucket=bucket
-        }}
-      {{/each}}
-    {{/if}}
-    <div class="divider"></div>
-  </div>
-{{/each}}
+
+{{#unless isEmptyFilters}}
+  {{#each filters as |filter|}}
+    <div class="section">
+      {{#if (eq filter.displayName "Datasource")}}
+        <h4>Data Source</h4>
+      {{else}}
+        <h4>{{ filter.displayName }}</h4>
+      {{/if}}
+      {{#if isLoading}}
+        <p>Loading new filters...</p>
+      {{else}}
+        {{#each filter.buckets as |bucket|}}
+          {{filter-list-item
+            addFilter=addFilter
+            removeFilter=removeFilter
+            activeFilters=activeFilters
+            aggName=filter.name
+            bucket=bucket
+          }}
+        {{/each}}
+      {{/if}}
+      <div class="divider"></div>
+    </div>
+  {{/each}}
+{{else}}
+  <p>No filters available</p>
+{{/unless}}
+{{#unless session.isAuthenticated}}
+  {{open-search-filter-overlay}}
+{{/unless}}
