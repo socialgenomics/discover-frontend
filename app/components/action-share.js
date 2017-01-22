@@ -17,14 +17,14 @@ export default Component.extend({
     if (get(this, 'session.isAuthenticated')) {
       get(this, 'metrics').trackEvent({
         category: 'discover_homeauth_dataset',
-        action: 'share',
+        action: 'share_click',
         label: get(this, 'actionableId'),
         value: true
       });
     } else {
       get(this, 'metrics').trackEvent({
         category: 'discover_openpage_dataset',
-        action: 'share',
+        action: 'share_click',
         label: get(this, 'actionableId'),
         value: true
       });
