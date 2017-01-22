@@ -40,6 +40,13 @@ export default Controller.extend({
       tab.focus();
     },
 
+    trackLinkEvent() {
+      this.get('metrics').trackEvent({
+        category: 'discover_openpage_datasetBanner_searchNow',
+        action: 'link_clicked'
+      });
+    },
+
     addComment(text) {
       const userId = this.get('session.authenticatedUser');
       const dataset = this.get('dataset');
