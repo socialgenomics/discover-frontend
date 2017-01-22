@@ -32,7 +32,7 @@ export default Controller.extend({
     trackExit() {
       this.get('metrics').trackEvent({
         category: 'discover_homeauth_datasetDetail',
-        action: 'download button',
+        action: 'download_button',
         label: this.get('dataset.title')
       });
       console.log('download dataset');

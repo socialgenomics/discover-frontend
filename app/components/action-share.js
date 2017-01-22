@@ -14,12 +14,21 @@ export default Component.extend({
   shareOptionsModalConstraints: [{ to: 'window', pin: true }],
 
   click() {
-    get(this, 'metrics').trackEvent({
-      category: 'dataset',
-      action: 'share',
-      label: get(this, 'actionableId'),
-      value: true
-    });
+    if (get(this, 'session.isAuthenticated')) {
+      get(this, 'metrics').trackEvent({
+        category: 'discover_homeauth_dataset',
+        action: 'share',
+        label: get(this, 'actionableId'),
+        value: true
+      });
+    } else {
+      get(this, 'metrics').trackEvent({
+        category: 'discover_openpage_dataset',
+        action: 'share',
+        label: get(this, 'actionableId'),
+        value: true
+      });
+    }
     this.send('toggleShareOptionsModal');
   },
 

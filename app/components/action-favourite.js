@@ -23,12 +23,25 @@ export default Component.extend({
   },
 
   click() {
-    if (get(this, 'session.isAuthenticated') === false) {
-      this.send('toggleCreateAccountModal');
-      return;
-    }
     const currentModel = this.model; //can be request or dataset
     const favourite = get(this, 'favouritesService').getFavourite(currentModel.id);
+    if (get(this, 'session.isAuthenticated')) {
+      get(this, 'metrics').trackEvent({
+        category: 'discover_homeauth_dataset',
+        action: 'favourite',
+        label: currentModel.id,
+        value: true
+      });
+    } else {
+      this.send('toggleCreateAccountModal');
+      return;
+      get(this, 'metrics').trackEvent({
+        category: 'discover_openpage_dataset',
+        action: 'attempted favourite',
+        label: currentModel.id,
+        value: true
+      });
+    }
     if (!get(this, 'isSubmitting')) {
       if (favourite) {
         this._deleteFavourite(favourite);
@@ -63,12 +76,6 @@ export default Component.extend({
         get(this, 'favouritesService').pushFavourite(savedFavourite);
         set(this, 'isSubmitting', false);
         currentModel.incrementProperty('stats.favourite');
-        get(this, 'metrics').trackEvent({
-          category: 'dataset',
-          action: 'favourite',
-          label: currentModel.id,
-          value: true
-        });
       })
       .catch(Logger.error);
   },
@@ -82,7 +89,7 @@ export default Component.extend({
         currentModel.decrementProperty('stats.favourite');
         get(this, 'favouritesService').removeFavourite(deletedFavourite);
         get(this, 'metrics').trackEvent({
-          category: 'dataset',
+          category: 'discover_homeauth_dataset',
           action: 'favourite',
           label: currentModel.id,
           value: false
