@@ -31,10 +31,11 @@ export default Controller.extend({
   actions: {
     trackExit() {
       this.get('metrics').trackEvent({
-        category: 'dataset',
-        action: 'download',
+        category: 'discover_homeauth_datasetDetail',
+        action: 'download button',
         label: this.get('dataset.title')
       });
+      console.log('download dataset');
       let tab = window.open(this.get('dataset.url'), '_blank');
       tab.focus();
     },
