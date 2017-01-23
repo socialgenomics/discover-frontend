@@ -21,8 +21,8 @@ export default Ember.Component.extend({
     const g = svg.append('g');
 
     const mercator = d3.geoMercator()
-      .center([0, 30])
-      .scale(155);
+      .center([0, 50])
+      .scale(125);
 
     const path = d3.geoPath().projection(mercator);
     const points = d => mercator([d.geometry.coordinates[0], d.geometry.coordinates[1]]);
