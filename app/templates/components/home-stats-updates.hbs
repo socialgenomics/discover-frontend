@@ -1,34 +1,35 @@
 <div class="grid__col grid__col--3-of-3">
   {{dataset-number-stats datasetsNumber=datasetsNumber}}
 </div>
-<section class="featured-section center-align">
-  <div class="grid__col grid__col--1-of-2">
-    {{#link-to 'collections' invokeAction=(action 'trackUpdatesHeaders' 'collections')}}
-      <h3>
-        {{fa-icon "book"}}
-        Collections <span class="stats-text thin">{{stats.repositive_collections}}</span>
-      </h3>
-    {{/link-to}}
+<section>
+  <div class="c-card u-p2">
+    <div class="grid__col grid__col--1-of-2">
+      {{#link-to 'collections' invokeAction=(action 'trackUpdatesHeaders' 'collections')}}
+        <h3 class="fs3 u-ta-center u-tc-secondary u-border-bottom u-pb2">
+          {{fa-icon "book"}}
+          Collections <span>{{stats.repositive_collections}}</span>
+        </h3>
+      {{/link-to}}
 
-    {{#each (sort-by "updatedAt:desc" collections) as |collection index|}}
-      {{featured-list-item
-        model=collection
-        isNew=(eq index 0)
-        type='collection'
-      }}
-    {{/each}}
-  </div>
+      {{#each (sort-by "updatedAt:desc" collections) as |collection index|}}
+        {{featured-list-item
+          model=collection
+          isNew=(eq index 0)
+          type='collection'
+        }}
+      {{/each}}
+    </div>
+    <div class="grid__col grid__col--1-of-2">
+      {{#link-to 'datasources' invokeAction=(action 'trackUpdatesHeaders' 'datasources')}}
+        <h3 class="fs3 u-ta-center u-tc-secondary u-border-bottom u-pb2">
+          {{fa-icon "database"}}
+          Data Sources <span>{{stats.datasources}}</span>
+        </h3>
+      {{/link-to}}
 
-  <div class="grid__col grid__col--1-of-2">
-    {{#link-to 'datasources' invokeAction=(action 'trackUpdatesHeaders' 'datasources')}}
-      <h3>
-        {{fa-icon "database"}}
-        Data Sources <span class="stats-text thin">{{stats.datasources}}</span>
-      </h3>
-    {{/link-to}}
-
-    {{#each (sort-by "name" datasources) as |datasource|}}
-      {{featured-list-item model=datasource type='datasource'}}
-    {{/each}}
+      {{#each (sort-by "name" datasources) as |datasource|}}
+        {{featured-list-item model=datasource type='datasource'}}
+      {{/each}}
+    </div>
   </div>
 </section>
