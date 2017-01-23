@@ -10,11 +10,11 @@
       <span class="fake-link">{{model.user.firstname}} {{model.user.lastname}}</span>
     {{/if}}
   {{else if (eq model.datasource.properties.short_name "REPOSITIVE")}}
-    <!-- Registration -->
 
+    <!-- Registration -->
     <span class="u-fs0 u-fw-reg u-tc-tertiary">Registered by </span>
     {{#if session.isAuthenticated }}
-      {{#link-to 'user' model.user.id class="user-name"}}
+      {{#link-to 'user' model.user.id}}
         {{model.user.firstname}} {{model.user.lastname}}
       {{/link-to}}
     {{else}}
@@ -35,42 +35,42 @@
 
 {{else}} <!-- Not a favourite -->
 
-{{#if isRequest}}
-  {{#if model.userId.displayName}}
-    <span class="u-fs0 u-fw-reg u-tc-tertiary">requested by </span>
-    {{#if session.isAuthenticated }}
-      {{#link-to 'user' model.userId.id}}
-        {{model.userId.displayName}}
-      {{/link-to}}
-    {{else}}
-      <span class="fake-link">{{model.userId.displayName}}</span>
+  {{#if isRequest}}
+    {{#if model.userId.displayName}}
+      <span class="u-fs0 u-fw-reg u-tc-tertiary">requested by </span>
+      {{#if session.isAuthenticated }}
+        {{#link-to 'user' model.userId.id}}
+          {{model.userId.displayName}}
+        {{/link-to}}
+      {{else}}
+        <span class="fake-link">{{model.userId.displayName}}</span>
+      {{/if}}
     {{/if}}
-  {{/if}}
-{{else if (eq model.datasourceId.properties.short_name "REPOSITIVE")}}
-  <!-- Registration -->
+  {{else if (eq model.datasourceId.properties.short_name "REPOSITIVE")}}
 
-  {{#if model.userId.displayName}}
-    <span class="u-fs0 u-fw-reg u-tc-tertiary">registered by </span>
-    {{#if session.isAuthenticated }}
-      {{#link-to 'user' model.userId.id}}
-        {{model.userId.displayName}}
-      {{/link-to}}
-    {{else}}
-      <span class="fake-link">{{model.userId.displayName}}</span>
+    <!-- Registration -->
+    {{#if model.userId.displayName}}
+      <span class="u-fs0 u-fw-reg u-tc-tertiary">registered by </span>
+      {{#if session.isAuthenticated }}
+        {{#link-to 'user' model.userId.id}}
+          {{model.userId.displayName}}
+        {{/link-to}}
+      {{else}}
+        <span class="fake-link">{{model.userId.displayName}}</span>
+      {{/if}}
     {{/if}}
-  {{/if}}
 
-{{else}}
-  <!-- Regular Dataset-->
-  <span class="u-fs0 u-fw-reg u-tc-tertiary">from</span>
-  {{#if session.isAuthenticated }}
-    {{#link-to 'datasources.source' model.datasourceId.id}}
-      {{source-name-fallback model=model.datasourceId}}
-    {{/link-to}}
   {{else}}
-    <span class="u-tc-primary">{{source-name-fallback model=model.datasourceId}}</span>
+    <!-- Regular Dataset-->
+    <span class="u-fs0 u-fw-reg u-tc-tertiary">from</span>
+    {{#if session.isAuthenticated }}
+      {{#link-to 'datasources.source' model.datasourceId.id}}
+        {{source-name-fallback model=model.datasourceId}}
+      {{/link-to}}
+    {{else}}
+      <span class="u-tc-primary">{{source-name-fallback model=model.datasourceId}}</span>
+    {{/if}}
   {{/if}}
-{{/if}}
 {{/if}}
 
 {{#if showCreateAccountModal}}

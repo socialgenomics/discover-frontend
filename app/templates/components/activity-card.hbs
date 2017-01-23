@@ -2,5 +2,9 @@
 <div class="c-activity-card-body">
   {{#each model as |dataset|}}
     {{activity-card-item dataset=dataset type=type}}
+  {{else}}
+    <div class="u-flex u-justify-center u-items-center u-full-height">
+      <p class="u-p2 u-ta-center">{{emptyText}}</p>
+    </div>
   {{/each}}
 </div>
