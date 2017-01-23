@@ -9,18 +9,10 @@ describe('Integration: PaginationBarComponent', function() {
     integration: true
   });
 
-  it('renders', function() {
-    // Set any properties with this.set('myProperty', 'value');
-    // Handle any actions with this.on('myAction', function(val) { ... });
-
-    this.render(hbs`{{pagination-bar}}`);
-    expect(this.$()).to.have.length(1);
-  });
-
   it('adds class disabled to previous button on first page', function() {
     this.set('currentPageNumber', 1);
     this.render(hbs`{{pagination-bar currentPageNumber=currentPageNumber}}`);
-    expect(this.$('button').hasClass('disabled')).to.eql(true);
+    expect(this.$('.btn').attr('disabled'), true);
   });
 
   it('adds class disabled to next button when there are no pages left to load', function() {
@@ -29,6 +21,16 @@ describe('Integration: PaginationBarComponent', function() {
       totalPages: 5
     });
     this.render(hbs`{{pagination-bar currentPageNumber=currentPageNumber totalPages=totalPages}}`);
-    expect(this.$('.btn').hasClass('disabled')).to.eql(true);
+    expect(this.$('.btn').attr('disabled'), true);
   });
+
+  it('displays correct page data', function() {
+    this.setProperties({
+      currentPageNumber: 4,
+      totalPages: 7
+    });
+    this.render(hbs`{{pagination-bar currentPageNumber=currentPageNumber totalPages=totalPages}}`);
+    expect(this.$('.pagination-bar').find(this.$('p')[0]).text().trim()).to.eql('Total pages: 7');
+    expect(this.$('.pagination-bar').find(this.$('p')[1]).text().trim()).to.eql('Current page: 4');
+  })
 });
