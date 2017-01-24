@@ -1,5 +1,5 @@
 {{#if summary}}
-  {{markdown-to-html markdown=summary}}
+  {{markdown-to-html markdown= (truncate summary 100)}}
 {{else if description}}
-  {{markdown-to-html markdown=description}}
+  {{markdown-to-html markdown= (truncate description 100)}}
 {{/if}}
