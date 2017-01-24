@@ -26,6 +26,11 @@
   border-radius: 2px;
 }
 
+.c-activity-card-body {
+  height: 300px;
+  overflow-y: auto;
+}
+
 .c-card-detail-view {
   height: 80vh;
   overflow-y: scroll;

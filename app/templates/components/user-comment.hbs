@@ -1,9 +1,9 @@
 <div>
   {{#link-to 'user' user.id disabled=disabled invokeAction=(action 'toggleCreateAccountModal')}}
     <img src={{avatar}} class="u-w1" />
-    <span class="fs2">{{user.displayName}}</span>
+    <span class="u-fs2">{{user.displayName}}</span>
   {{/link-to}}
-    <span class="u-tc-tertiary fs0">{{moment-from-now date allowEmpty=true}}</span>
+    <span class="u-tc-tertiary u-fs0">{{moment-from-now date allowEmpty=true}}</span>
 
   <div class="u-pr3">
     <p class="u-line-break u-mb0">{{markdown-to-html markdown=text extensions='targetBlankLinks'}}</p>

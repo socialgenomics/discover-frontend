@@ -32,7 +32,7 @@
             </div>
 
             <div class="u-p2">
-              <h2 class="fs2 fw-med u-tc-primary u-mb1">{{dataset.title}}</h2>
+              <h2 class="u-fs2 u-fw-med u-tc-primary u-mb1">{{dataset.title}}</h2>
               {{#if dataset.description}}
                 <p class="markdown-text">{{markdown-to-html markdown=dataset.description}}</p>
               {{/if}}
@@ -43,7 +43,7 @@
               </div>
               {{#if session.isAuthenticated}}
                 {{add-tag addTag=(action 'addTag') class="add-btn"}}
-                <br><span class="fs0 u-tc-tertiary">Add tags to improve searching and browsing through data (<a {{action "toggleTagModal"}}>learn more</a>)</span>
+                <br><span class="u-fs0 u-tc-tertiary">Add tags to improve searching and browsing through data (<a {{action "toggleTagModal"}}>learn more</a>)</span>
               {{/if}}
             </div>
 
@@ -52,24 +52,24 @@
             <div class="u-px2 u-pb2">
               <ul class="o-list-flush-left">
                 {{#if dataset.userId}}
-                  <li class="fs0 u-tc-tertiary">
-                    Submitted by: {{#link-to 'user' dataset.userId.id }}<span class="fw-med fs1">{{dataset.userId.displayName}}</span>{{/link-to}}
+                  <li class="u-fs0 u-tc-tertiary">
+                    Submitted by: {{#link-to 'user' dataset.userId.id }}<span class="u-fw-med u-fs1">{{dataset.userId.displayName}}</span>{{/link-to}}
                   </li>
                 {{else}}
                   {{#if dataset.datasourceId.name}}
-                    <li class="fs0 u-tc-tertiary">
-                      Sourced from: {{#link-to 'datasources.source' dataset.datasourceId.id}}<span class="fw-med fs1">{{dataset.datasourceId.name}}</span>{{/link-to}}
+                    <li class="u-fs0 u-tc-tertiary">
+                      Sourced from: {{#link-to 'datasources.source' dataset.datasourceId.id}}<span class="u-fw-med u-fs1">{{dataset.datasourceId.name}}</span>{{/link-to}}
                     </li>
                   {{/if}}
                   {{#if dataset.accession}}
-                    <li class="fs0 u-tc-tertiary">
-                      Accession ID: <span class="fw-med fs1">{{dataset.externalId}}</span>
+                    <li class="u-fs0 u-tc-tertiary">
+                      Accession ID: <span class="u-fw-med u-fs1">{{dataset.externalId}}</span>
                     </li>
                   {{/if}}
                 {{/if}}
                 {{#if dataset.access}}
-                  <li class="fs0 u-tc-tertiary">
-                    Access type: {{#link-to 'help.searching-for-data' (query-params help="filters")}}<span class="fw-med fs1">{{dataset.access}}</span>{{/link-to}}
+                  <li class="u-fs0 u-tc-tertiary">
+                    Access type: {{#link-to 'help.searching-for-data' (query-params help="filters")}}<span class="u-fw-med u-fs1">{{dataset.access}}</span>{{/link-to}}
                   </li>
                 {{/if}}
               </ul>
@@ -88,7 +88,7 @@
 
           <div class="grid__col grid__col--5-of-12 u-border-left">
             <div class="c-card-header u-pos-relative u-bc-off-white u-flex u-items-center u-justify-center u-top-rounded">
-              <h4 class="u-mb0 fs2 fw-med u-tc-teal">Discussions</h4>
+              <h4 class="u-mb0 u-fs2 u-fw-med u-tc-teal">Discussions</h4>
             </div>
 
                 {{partial "datasets/tab-comments"}}
