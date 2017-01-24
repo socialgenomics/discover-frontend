@@ -1,9 +1,11 @@
 import Ember from 'ember';
 
-export default Ember.Component.extend({
+const  { Component, get } = Ember;
+
+export default Component.extend({
   actions: {
     trackUpdatesHeaders(header) {
-      this.get('metrics').trackEvent({
+      get(this, 'metrics').trackEvent({
         category: 'home-stats-updates',
         action: 'link clicked',
         label: header

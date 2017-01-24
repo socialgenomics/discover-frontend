@@ -1,7 +1,7 @@
 {{#if (eq type 'collection')}}
   {{#link-to 'collections.collection' model.id}}
     <div>
-      <h4 class="fs2 u-pb0 u-mb0">
+      <h4 class="u-fs2 u-pb0 u-mb0">
         {{model.name}}
         {{#if isNew}}
           {{is-new-label}}
@@ -14,23 +14,21 @@
     </div>
   {{/link-to}}
 {{else}}
-<div class="o-list-inline">
   {{#link-to 'datasources.source' model.id}}
     {{#if model.properties.logo}}
-      <div class="grid__col grid__col--2-of-6 o-list-inline__item">
-        <img src="{{model.properties.logo}}">
+      <div class="grid__col grid__col--2-of-6 u-pl0">
+        <img class="c-img--100" src="{{model.properties.logo}}">
       </div>
     {{else}}
-      <div class="grid__col grid__col--2-of-6 o-list-inline__item">
-        <h4 class="fs2 u-pb0 u-mb0">{{model.name}}</h4>
+      <div class="grid__col grid__col--2-of-6 u-pl0">
+        <h4 class="u-fs2 u-pb0 u-mb0">{{model.name}}</h4>
       </div>
     {{/if}}
-      <div class="grid__col grid__col--4-of-6 o-list-inline__item">
-    {{collection-summary-fallback
-      summary=model.properties.summary
-      description=model.description
-      }}
-    </div>
+      <div class="grid__col grid__col--4-of-6 u-pl0">
+        {{collection-summary-fallback
+          summary=model.properties.summary
+          description=model.description
+        }}
+      </div>
   {{/link-to}}
-  </div>
 {{/if}}
