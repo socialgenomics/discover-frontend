@@ -1,16 +1,15 @@
-<div class="comment">
-  <div class="comment-header">
-    {{#link-to 'user' user.id disabled=disabled invokeAction=(action 'toggleCreateAccountModal')}}
-      <div class="dp-wrapper">
-        <img src={{avatar}}>
-      </div>
-      <h4>{{user.displayName}}</h4>
-    {{/link-to}}
-    <span>{{moment-from-now date allowEmpty=true}}</span>
+<div>
+  {{#link-to 'user' user.id disabled=disabled class="media" invokeAction=(action 'toggleCreateAccountModal')}}
+    <img class="c-img-circle c-image-avatar" src={{avatar}}>
+    <div class="u-pl1">
+      <h4 class='fs2 u-tc-secondary u-mb0'>{{user.displayName}}</h4>
+      <span class="u-tc-tertiary fs1">{{moment-from-now date allowEmpty=true}}</span>
+    </div>
+  {{/link-to}}
+  <div>
+    <p class="u-text-break-word">{{markdown-to-html markdown=text extensions='targetBlankLinks'}}</p>
   </div>
-  <div class="comment-body">
-    <p class="markdown-text">{{markdown-to-html markdown=text extensions='targetBlankLinks'}}</p>
-  </div>
+  <div class="c-divider"></div>
 </div>
 
 {{#if showCreateAccountModal}}
