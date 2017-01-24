@@ -4,9 +4,9 @@
    ========================================================================== */
 
 .c-col-li-item {
-  height: $global-line-height * 5;
+  height: calc(#{$global-spacing-unit-large} * 5);
 
-  p {
+  .markdown-text > p {
     margin: 0;
   }
 
