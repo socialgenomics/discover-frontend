@@ -18,7 +18,6 @@ export default Route.extend(ApplicationRouteMixin, {
     // do not remove this initialization. It's required for the url generator service to work properly
     get(this, 'urlGenerator').initialize(this.router);
   },
-
   sessionAuthenticated() {
     this._super(...arguments);
     get(this, 'favouritesService').loadFavourites();
@@ -58,9 +57,9 @@ export default Route.extend(ApplicationRouteMixin, {
   },
 
   _conditionallyTransition(collectionPredicate, datasourcePredicate, queryString, pageNumber) {
-    if (collectionPredicate.length === 1 && get(this, 'controller.currentPath').includes('collection')) {
+    if (collectionPredicate.length === 1 && get(this, 'controller.currentPath').indexOf('collection') !== -1) {
       this._queryAndTransition('collections.collection', collectionPredicate[0], queryString, pageNumber);
-    } else if (datasourcePredicate.length === 1 && get(this, 'controller.currentPath').includes('datasource')) {
+    } else if (datasourcePredicate.length === 1 && get(this, 'controller.currentPath').indexOf('datasource') !== -1) {
       this._queryAndTransition('datasources.source', datasourcePredicate[0], queryString, pageNumber);
     } else {
       this.transitionTo('datasets.search', {
