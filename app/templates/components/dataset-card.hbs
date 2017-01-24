@@ -67,7 +67,7 @@
       {{#if dataset.highlights.title}}
         {{#link-to 'datasets.detail' dataset.id classNames="data-title"}}
           <div data-balloon={{dataset.title}} data-balloon-pos="up" data-balloon-length="large">
-            <h4 class="u-fs2 u-fw-bold u-tc-primary c-card-title u-mb1">
+            <h4 class="u-fs2 u-fw-med u-tc-primary c-card-title u-mb1">
               {{{truncate dataset.highlights.title 70}}}
             </h4>
           </div>
@@ -75,7 +75,7 @@
       {{else}}
         {{#link-to 'datasets.detail' dataset.id classNames="data-title"}}
           <div data-balloon={{dataset.title}} data-balloon-pos="up" data-balloon-length="large">
-            <h4 class="u-fs2 u-fw-bold u-tc-primary c-card-title u-mb1">
+            <h4 class="u-fs2 u-fw-med u-tc-primary c-card-title u-mb1">
               {{truncate dataset.title 70}}
             </h4>
           </div>

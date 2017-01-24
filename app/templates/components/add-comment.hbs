@@ -1,7 +1,4 @@
-
-<div class="dp-wrapper">
-  <img src={{avatar}}>
-</div>
+<img src={{avatar}} class="u-w1">
 <div class="input-field">
   {{validated-input
     type="textarea"
@@ -13,8 +10,8 @@
   }}
   {{#if isActive}}
     <div class="buttons">
-      <button {{action 'addComment'}} class="btn post-btn teal white-text">{{fa-icon "check"}}</button>
-      <a {{action 'cancel'}} class="cancel-btn">cancel</a>
+      <button {{action 'addComment'}} class="">{{fa-icon "check"}}</button>
+      <a {{action 'cancel'}} class="">cancel</a>
     </div>
   {{/if}}
 </div>
