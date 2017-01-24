@@ -1,6 +1,6 @@
 <!-- TODO when the data returned by the favourites query is the same structure as a dataset, this condition can be removed.  -->
 {{#if isFavourite}}
-  {{#if isRequest}}
+  {{#if (eq type "request")}}
     <span class="u-fs0 u-fw-reg u-tc-tertiary">Requested by </span>
     {{#if session.isAuthenticated }}
       {{#link-to 'user' model.user.id}}
@@ -35,7 +35,7 @@
 
 {{else}} <!-- Not a favourite -->
 
-  {{#if isRequest}}
+  {{#if (eq type "request")}}
     {{#if model.userId.displayName}}
       <span class="u-fs0 u-fw-reg u-tc-tertiary">requested by </span>
       {{#if session.isAuthenticated }}

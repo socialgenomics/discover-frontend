@@ -30,7 +30,7 @@
         {{/link-to}}
       {{/if}}
 
-      {{from-label model=dataset searchRoute=searchRoute isRequest=true}}
+      {{from-label model=dataset searchRoute=searchRoute type=type}}
 
       <div class="c-card-body">
         {{#if dataset.highlights.description}}
@@ -82,7 +82,7 @@
         {{/link-to}}
       {{/if}}
 
-      {{from-label model=dataset searchRoute=searchRoute}}
+      {{from-label model=dataset searchRoute=searchRoute type=type}}
 
       <div class="c-card-description">
         {{#if dataset.highlights.description}}

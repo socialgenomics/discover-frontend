@@ -4,12 +4,12 @@ const { Component, computed, get } = Ember;
 
 export default Component.extend({
   classNames: ['c-card'],
-  //computed property to assign placeholder text, based on type & if own profile
-  emptyText: computed('type', 'isOwnProfile', 'isFavourite', function() {
-    const type = get(this, 'type');
+  
+  emptyText: computed('group', 'isOwnProfile', function() {
+    const group = get(this, 'group');
     const isOwnProfile = get(this, 'isOwnProfile');
 
-    if (get(this, 'isFavourite')) {
+    if (group === 'favourite') {
       if (isOwnProfile) {
         return "You don't have any favourite datasets yet.";
       } else {
@@ -17,7 +17,7 @@ export default Component.extend({
       }
     }
 
-    if (type === 'request') {
+    if (group === 'request') {
       if (isOwnProfile) {
         return "You haven't requested any data from the community yet.";
       } else {
@@ -25,7 +25,7 @@ export default Component.extend({
       }
     }
 
-    if (type === 'registration') {
+    if (group === 'registration') {
       if (isOwnProfile) {
         return "You haven't registered any data yet.";
       } else {
