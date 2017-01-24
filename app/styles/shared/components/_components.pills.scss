@@ -1,0 +1,14 @@
+.c-pill {
+  background: $color-very-light-grey;
+  border-radius: $global-border-radius;
+  color: $color-dark-grey;
+  cursor: pointer;
+  display: inline-block;
+  font: inherit;
+  font-family: $font-stack-varela;
+  margin: 0;
+  padding: $global-spacing-unit-tiny $global-spacing-unit;
+  text-align: center;
+  transition: $global-transition;
+  vertical-align: baseline;
+}
