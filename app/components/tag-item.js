@@ -4,7 +4,7 @@ const { inject: { service }, Component, computed, get, Logger } = Ember;
 export default Component.extend({
   session: service(),
   tagName: 'span',
-  classNames: ['tag'],
+  classNames: ['c-pill', 'u-mb2', 'u-mr1'],
   belongsToUser: computed('session', function () {
     const currentUserId = get(this, 'session.session.authenticated.user.id');
     const tagUserId = get(this, 'tag.userId.id');

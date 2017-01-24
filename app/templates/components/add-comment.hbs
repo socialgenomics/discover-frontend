@@ -1,20 +1,20 @@
 
-<div class="dp-wrapper">
-  <img src={{avatar}}>
-</div>
-<div class="input-field">
-  {{validated-input
-    type="textarea"
-    value=comment
-    placeholder=placeholder
-    action="showButtons"
-    textarea="true"
-    disabled=disabled
-  }}
-  {{#if isActive}}
-    <div class="buttons">
-      <button {{action 'addComment'}} class="btn post-btn teal white-text">{{fa-icon "check"}}</button>
-      <a {{action 'cancel'}} class="cancel-btn">cancel</a>
-    </div>
-  {{/if}}
+<div class="media">
+  <img class="c-img-circle c-image-avatar" src={{avatar}}>
+  <div class="u-pl1">
+    {{validated-input
+      type="textarea"
+      value=comment
+      placeholder=placeholder
+      action="showButtons"
+      textarea="true"
+      disabled=disabled
+    }}
+    {{#if isActive}}
+      <div class="buttons">
+        <button {{action 'addComment'}} class="btn post-btn teal white-text">{{fa-icon "check"}}</button>
+        <a {{action 'cancel'}} class="cancel-btn">cancel</a>
+      </div>
+    {{/if}}
+  </div>
 </div>

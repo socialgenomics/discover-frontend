@@ -1,0 +1,40 @@
+//* ========================================================================
+//  TEXT
+// ======================================================================== */
+
+// Text Alignment
+/* ==================================== */
+
+.u-ta {
+  &--justify { text-align: justify; }
+  &--right   { text-align: right;   }
+  &--left    { text-align: left;    }
+  &--center  { text-align: center;  }
+}
+
+@media (min-width: $breakpoint-small) {
+  .u-ta--md {
+    &-justify { text-align: justify; }
+    &-right   { text-align: right;   }
+    &-left    { text-align: left;    }
+    &-center  { text-align: center;  }
+  }
+}
+
+@media (min-width: $breakpoint-medium) {
+  .u-ta--lg {
+    &-justify { text-align: justify; }
+    &-right   { text-align: right;   }
+    &-left    { text-align: left;    }
+    &-center  { text-align: center;  }
+  }
+}
+
+// Text Size & Weight
+/* ==================================== */
+
+.u-text-weight-thin { font-weight: 300; }
+
+// Text Wrapping
+/* ==================================== */
+.u-text-break-word { word-wrap: break-word; }
