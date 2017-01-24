@@ -1,6 +1,8 @@
 import Ember from 'ember';
 
-export default Ember.Component.extend({
+const { Component } = Ember;
+
+export default Component.extend({
   tagName: 'ul',
-  classNames: ['o-list-inline','o-list-flush-left','u-px2','u-pb2']
+  classNames: ['o-list-inline', 'o-list-flush-left', 'u-mb0']
 });

@@ -15,7 +15,7 @@ body {
   -webkit-font-smoothing: antialiased; // A bit opinionated: text is antialiased for more consistent rendering across Chrome & Safari
   -moz-osx-font-smoothing: grayscale;
   font-family: $font-stack-roboto;
-  @extend .fs1;
+  @extend .u-fs1;
 }
 
 // Text
