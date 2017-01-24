@@ -27,6 +27,20 @@
   .u-lg-mb5 { margin-bottom: $global-spacing-unit-huge;  }
 }
 
+.u-mt0 { margin-top: 0; }
+.u-mt1 { margin-top: $global-spacing-unit-tiny;  }
+.u-mt2 { margin-top: $global-spacing-unit-small; }
+.u-mt3 { margin-top: $global-spacing-unit;       }
+.u-mt4 { margin-top: $global-spacing-unit-large; }
+.u-mt5 { margin-top: $global-spacing-unit-huge;  }
+
+.u-ml0 { margin-left: 0; }
+.u-ml1 { margin-left: $global-spacing-unit-tiny;  }
+.u-ml2 { margin-left: $global-spacing-unit-small; }
+.u-ml3 { margin-left: $global-spacing-unit;       }
+.u-ml4 { margin-left: $global-spacing-unit-large; }
+.u-ml5 { margin-left: $global-spacing-unit-huge;  }
+
 .u-mr0 { margin-right: 0; }
 .u-mr1 { margin-right: $global-spacing-unit-tiny;  }
 .u-mr2 { margin-right: $global-spacing-unit-small; }
