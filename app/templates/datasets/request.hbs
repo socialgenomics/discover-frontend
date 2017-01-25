@@ -57,15 +57,13 @@
               action=addDataset
               textarea=true
             }}
-            <div>
-              {{async-button
-                class="btn bg-request white-text"
-                action=(action 'addRequest')
-                default="Submit Request"
-                pending="Submitting..."
-                disableWhen=isInvalid
-              }}
-            </div>
+            {{async-button
+              class="btn bg-request white-text"
+              action=(action 'addRequest')
+              default="Submit Request"
+              pending="Submitting..."
+              disableWhen=isInvalid
+            }}
           </form>
         </div>
       </div>
