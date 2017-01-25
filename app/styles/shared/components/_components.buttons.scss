@@ -32,6 +32,7 @@
   border-color: $color-primary-teal;
 }
 
+// When the disabled html attribute is on a button...
 .c-btn:disabled {
   background-color: $color-very-light-grey;
   color: $color-light-grey;
