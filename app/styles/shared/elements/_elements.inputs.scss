@@ -2,6 +2,19 @@
     BASE INPUT STYLING
    ========================================================================== */
 
-input {
+input, textarea {
+  border-radius: $global-border-radius;
+  border:        $global-border-style;
+  padding:       $global-spacing-unit-small;
+  outline:       none;
+  width:         100%;
+  font-size:     1rem;
+}
 
+input {
+  height: 50px;
+}
+
+textarea {
+  height: 100px;
 }
