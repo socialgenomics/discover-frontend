@@ -31,7 +31,7 @@
 @import 'shared/components/components.divider';
 @import 'shared/components/components.images';
 @import 'shared/components/components.sidebar';
-@import 'custom/components/components.navbar';
+@import 'shared/components/components.loading-spinner';
 
 @import 'shared/utilities/utilities.text-alignment';
 @import 'shared/utilities/utilities.borders';
@@ -49,3 +49,4 @@
 // Custom
 @import 'custom/settings/settings.global';
 @import 'custom/components/components.landing-page';
+@import 'custom/components/components.navbar';
