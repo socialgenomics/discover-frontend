@@ -11,27 +11,31 @@
    text-align: center;
    vertical-align: baseline;
    cursor: pointer;
-   border: solid 1px;
+   border: none;
    border-radius: $global-border-radius; // $global-border-radius
    font: inherit;
+   font-weight: 500;
+   font-size: 1rem;
    padding: $global-spacing-unit-tiny $global-spacing-unit;
    transition: $global-transition; // $global-transition
 }
 
 .c-btn--primary {
-  font-family: $font-stack-varela;
-  text-transform: uppercase;
   color: $color-white;
   background: $color-primary-teal; //$color-teal
   border-color: $color-primary-teal; //$
 }
 
 .c-btn--secondary {
-  font-family: $font-stack-varela;
-  text-transform: uppercase;
   color: $color-primary-teal;
   background-color: $color-white;
   border-color: $color-primary-teal;
+}
+
+.c-btn:disabled {
+  background-color: $color-very-light-grey;
+  color: $color-light-grey;
+  cursor: default;
 }
 
 .c-btn--shadow {
