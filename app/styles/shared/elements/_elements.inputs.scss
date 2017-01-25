@@ -5,11 +5,12 @@
 input, textarea {
   border-radius: $global-border-radius;
   border:        $global-border-style;
-  padding:       $global-spacing-unit-small;
-  outline:       none;
-  width:         100%;
-  font-size:     1rem;
   color:         inherit;
+  font-size:     1rem;
+  line-height:   inherit;
+  outline:       none;
+  padding:       $global-spacing-unit-small;
+  width:         100%;
 }
 
 input {
