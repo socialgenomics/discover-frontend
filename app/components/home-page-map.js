@@ -51,19 +51,22 @@ export default Ember.Component.extend({
           .getElementsByClassName('map-background')[0]
           .appendChild(frag);
 
-        circles.each(function (d, i) {
-          setTimeout(() => {
-            d3.select(this).raise();
-            d3.select(this).transition()
-              .attr('r', pointRadius * 2)
-              .ease(d3.easeElastic)
-              .duration(1000)
-              .transition()
-              .attr('r', pointRadius)
-              .ease(d3.easeLinear)
-              .duration(500)
-          }, i * ( Math.floor( Math.random() * ( 6000 - 500 + 1 ) + 500 ) ) );
-        });
+        /**
+         * Imagine a funny message here
+         */
+        // circles.each(function (d, i) {
+        //   setTimeout(() => {
+        //     d3.select(this).raise();
+        //     d3.select(this).transition()
+        //       .attr('r', pointRadius * 2)
+        //       .ease(d3.easeElastic)
+        //       .duration(1000)
+        //       .transition()
+        //       .attr('r', pointRadius)
+        //       .ease(d3.easeLinear)
+        //       .duration(500)
+        //   }, i * ( Math.floor( Math.random() * ( 6000 - 500 + 1 ) + 500 ) ) );
+        // });
       });
     });
   }
