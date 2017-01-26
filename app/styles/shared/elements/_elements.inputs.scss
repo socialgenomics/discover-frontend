@@ -6,7 +6,7 @@ input, textarea {
   border-radius: $global-border-radius;
   border: $global-border-style;
   color: inherit;
-  font-size: 1rem;
+  font-size: $global-font-size;
   line-height: inherit;
   outline: none;
   padding: $global-spacing-unit-small;
@@ -14,9 +14,9 @@ input, textarea {
 }
 
 input {
-  height: 50px;
+  height: $global-spacing-unit-large;
 }
 
 textarea {
-  height: 100px;
+  height: $global-spacing-unit-huge;
 }
