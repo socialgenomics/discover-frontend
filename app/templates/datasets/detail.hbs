@@ -44,7 +44,7 @@
                 {{/each}}
               </div>
               {{#if session.isAuthenticated}}
-                {{add-tag addTag=(action 'addTag') class="add-btn"}}
+                {{add-tag addTag=(action 'addTag')}}
                 <br><span class="u-fs0 u-tc-tertiary">Add tags to improve searching and browsing through data (<a {{action "toggleTagModal"}}>learn more</a>)</span>
               {{/if}}
             </div>
