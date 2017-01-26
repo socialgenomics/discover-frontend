@@ -4,10 +4,11 @@
    ========================================================================== */
 
 .c-col-li-item {
-  height: calc(#{$global-spacing-unit-large} * 5);
+  height: calc(#{$global-line-height} * 4);
 
-  .markdown-text > p {
-    margin: 0;
+  .no-margin-markdown {
+    & > p {
+      margin: 0;
+    }
   }
-
 }
