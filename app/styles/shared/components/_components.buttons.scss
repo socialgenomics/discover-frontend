@@ -12,24 +12,33 @@
    vertical-align: baseline;
    cursor: pointer;
    border: none;
-   border-radius: $global-border-radius; // $global-border-radius
+   border-radius: $global-border-radius - 2;
    font: inherit;
    font-weight: 500;
    font-size: 1rem;
-   padding: $global-spacing-unit-tiny $global-spacing-unit;
-   transition: $global-transition; // $global-transition
+   padding: $global-spacing-unit-small $global-spacing-unit-large;
+   transition: $global-transition;
 }
 
 .c-btn--primary {
   color: $color-white;
   background: $color-primary-teal; //$color-teal
-  border-color: $color-primary-teal; //$
 }
 
 .c-btn--secondary {
   color: $color-primary-teal;
   background-color: $color-white;
-  border-color: $color-primary-teal;
+  border:1px solid $color-primary-teal;
+}
+
+.c-btn--red {
+  color: $color-white;
+  background-color: $color-primary-red;
+}
+
+.c-btn--blue {
+  color: $color-white;
+  background-color: $color-secondary-blue;
 }
 
 // When the disabled html attribute is on a button...
@@ -37,6 +46,11 @@
   background-color: $color-very-light-grey;
   color: $color-light-grey;
   cursor: default;
+  box-shadow: none;
+  &:hover {
+    box-shadow: none;
+    transform: none;
+  }
 }
 
 .c-btn--shadow {
