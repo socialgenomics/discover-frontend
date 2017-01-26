@@ -3,13 +3,9 @@
    ========================================================================== */
 
 @media (max-width: $breakpoint-medium) {
-  .u-hide-on-sm-md {
-    display: none;
-  }
+  .u-hide-on-sm-md { display: none; }
 }
 
 @media (min-width: $breakpoint-medium) {
-  .u-hide-on-lg {
-    display: none;
-  }
+  .u-hide-on-lg { display: none; }
 }
