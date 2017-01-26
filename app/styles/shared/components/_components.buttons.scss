@@ -15,7 +15,7 @@
    border-radius: $global-border-radius - 2;
    font: inherit;
    font-weight: 500;
-   font-size: 1rem;
+   font-size: $global-font-size;
    padding: $global-spacing-unit-small $global-spacing-unit-large;
    transition: $global-transition;
 }
