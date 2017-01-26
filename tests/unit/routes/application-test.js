@@ -38,7 +38,7 @@ describe('Unit | Route | application', function() {
     const route = this.subject();
     const queryString = 'datasource:SRA';
     const trackingObj = {
-      category: 'search',
+      category: 'discover_openpage_searchbar',
       action: 'query',
       label: queryString
     };

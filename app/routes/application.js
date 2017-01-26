@@ -36,11 +36,19 @@ export default Route.extend(ApplicationRouteMixin, {
         return BX.isFilter(node) && node.predicate === 'datasource';
       });
       this._conditionallyTransition(collectionPredicate, datasourcePredicate, queryString, pageNumber);
-      get(this, 'metrics').trackEvent({
-        category: 'search',
-        action: 'query',
-        label: queryString
-      });
+      if (get(this, 'session.isAuthenticated')) {
+        get(this, 'metrics').trackEvent({
+          category: 'discover_homeauth_searchbar',
+          action: 'query',
+          label: queryString
+        });
+      } else {
+        get(this, 'metrics').trackEvent({
+          category: 'discover_openpage_searchbar',
+          action: 'query',
+          label: queryString
+        });
+      }
     },
 
     toggleModal() {

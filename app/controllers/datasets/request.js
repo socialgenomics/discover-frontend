@@ -64,7 +64,7 @@ export default Controller.extend(
       set(this, 'didRequest', true);
       this._addFlashMessage('Request created successfully.', 'success');
       this.transitionToRoute('requests.detail', id);
-      this._trackEvent('dataset', 'request', id);
+      this._trackEvent('discover_homeauth_datasetRequest', 'requested', id);
     },
 
     /**

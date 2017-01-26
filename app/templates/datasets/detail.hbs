@@ -1,7 +1,9 @@
 {{#unless session.isAuthenticated}}
   {{#full-page-notification customClassName='create-account-notification'}}
     <h3>Search through <strong>{{datasetsNumber}}</strong> human genomic datasets</h3>
-    {{#link-to 'root' class='btn waves-effect teal white-text'}}Search now{{/link-to}}
+    {{#link-to 'root' class='btn waves-effect teal white-text' invokeAction=(action 'trackLinkEvent')}}
+      Search now
+    {{/link-to}}
   {{/full-page-notification}}
 {{/unless}}
 

@@ -1,15 +1,26 @@
 import Ember from 'ember';
 
-export default Ember.Component.extend({
+const { Component, inject: { service }, $, get } = Ember;
+
+export default Component.extend({
+  session: service(),
   tagName: 'footer',
   classNames: ['platform-footer'],
   actions: {
     trackFooterLink(link) {
-      this.get('metrics').trackEvent({
-        category: 'footer',
-        action: 'link clicked',
-        label: link
-      });
+      if (get(this, 'session.isAuthenticated')) {
+        get(this, 'metrics').trackEvent({
+          category: 'discover_homeauth_footer',
+          action: 'link_clicked',
+          label: link
+        });
+      } else {
+        get(this, 'metrics').trackEvent({
+          category: 'discover_openpage_footer',
+          action: 'link_clicked',
+          label: link
+        });
+      }
     }
   }
 });

@@ -9,9 +9,8 @@ export default Component.extend({
   actions: {
     trackCreateAccount(route) {
       get(this, 'metrics').trackEvent({
-        category: route,
-        action: 'create account button',
-        label: 'clicked'
+        category: eventName,
+        action: 'button_clicked'
       });
     }
   }
