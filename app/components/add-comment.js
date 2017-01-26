@@ -1,8 +1,8 @@
 import Ember from 'ember';
 
-let { isEmpty } = Ember;
+const { Component, get, set, isEmpty } = Ember;
 
-export default Ember.Component.extend({
+export default Component.extend({
   isActive: false,
   isValid: false,
   classNames: 'write-comment',
@@ -10,19 +10,19 @@ export default Ember.Component.extend({
 
   actions: {
     showButtons: function() {
-      this.set('isActive', true);
+      set(this, 'isActive', true);
     },
     cancel: function() {
-      this.set('isActive', false);
-      this.set('comment', null);
+      set(this, 'isActive', false);
+      set(this, 'comment', null);
     },
     addComment: function() {
       //temporary validation
-      if (!isEmpty(this.get('comment'))) {
-        this.get('metrics').trackEvent({
+      if (!isEmpty(get(this, 'comment'))) {
+        get(this, 'metrics').trackEvent({
           category: 'discover_homeauth_datasetDetail_comment',
           action: 'added comment',
-          label: this.get('dataset.id')
+          label: get(this, 'dataset.id')
         });
         this.attrs.addComment(this.comment);
       }

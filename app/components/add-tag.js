@@ -1,19 +1,21 @@
 import Ember from 'ember';
 
-export default Ember.Component.extend({
+const { Component, get, set } = Ember;
+
+export default Component.extend({
   tag: null,
 
   actions: {
     addTag: function() {
       if (this.tag) {
-        this.get('metrics').trackEvent({
+        get(this, 'metrics').trackEvent({
           category: 'discover_homeauth_datasetDetail_tag',
           action: 'added_tag',
           label: this.tag
         });
         this.sendAction('addTag', this.tag);
       }
-      this.set('tag', null);
+      set(this, 'tag', null);
       this.toggleProperty('isOpen');
     },
 

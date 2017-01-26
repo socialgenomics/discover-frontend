@@ -9,13 +9,13 @@ export default Component.extend({
   actions: {
     trackFooterLink(link) {
       if (get(this, 'session.isAuthenticated')) {
-        this.get('metrics').trackEvent({
+        get(this, 'metrics').trackEvent({
           category: 'discover_homeauth_footer',
           action: 'link_clicked',
           label: link
         });
       } else {
-        this.get('metrics').trackEvent({
+        get(this, 'metrics').trackEvent({
           category: 'discover_openpage_footer',
           action: 'link_clicked',
           label: link

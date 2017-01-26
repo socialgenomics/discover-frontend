@@ -7,7 +7,7 @@ export default Component.extend({
 
   actions: {
     trackLinkEvent() {
-      this.get('metrics').trackEvent({
+      get(this, 'metrics').trackEvent({
         category: 'discover_openpage_searchFilters_createAccount',
         action: 'text_link_clicked'
       });

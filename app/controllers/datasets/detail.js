@@ -21,7 +21,7 @@ export default Controller.extend({
   }),
 
   datasetsNumber: computed('stats.datasets', function() {
-    return this.get('stats.datasets').toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    return get(this, 'stats.datasets').toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   }),
 
   datasetUrl: computed('type', 'dataset.id', function () {
@@ -30,28 +30,28 @@ export default Controller.extend({
 
   actions: {
     trackExit() {
-      this.get('metrics').trackEvent({
+      get(this, 'metrics').trackEvent({
         category: 'discover_homeauth_datasetDetail',
         action: 'download_button',
-        label: this.get('dataset.title')
+        label: get(this, 'dataset.title')
       });
       console.log('download dataset');
-      let tab = window.open(this.get('dataset.url'), '_blank');
+      let tab = window.open(get(this, 'dataset.url'), '_blank');
       tab.focus();
     },
 
     trackLinkEvent() {
-      this.get('metrics').trackEvent({
+      get(this, 'metrics').trackEvent({
         category: 'discover_openpage_datasetBanner_searchNow',
         action: 'link_clicked'
       });
     },
 
     addComment(text) {
-      const userId = this.get('session.authenticatedUser');
-      const dataset = this.get('dataset');
+      const userId = get(this, 'session.authenticatedUser');
+      const dataset = get(this, 'dataset');
       let comment = this.store.createRecord('action', {
-        actionableId: dataset.get('actionableId'),
+        actionableId: get(dataset, 'actionableId'),
         actionable_model: dataset.constructor.modelName,
         userId: userId,
         type: 'comment',
@@ -63,9 +63,9 @@ export default Controller.extend({
     },
 
     addTag(text) {
-      const userId = this.get('session.authenticatedUser');
-      const dataset = this.get('dataset');
-      const existingTags = this.get('tags');
+      const userId = get(this, 'session.authenticatedUser');
+      const dataset = get(this, 'dataset');
+      const existingTags = get(this, 'tags');
       // if the tag already exists
       if (existingTags.findBy('properties.text', text)) {
         this.flashMessages.add({
@@ -76,7 +76,7 @@ export default Controller.extend({
         });
       } else {
         const tag = this.store.createRecord('action', {
-          actionableId: dataset.get('actionableId'),
+          actionableId: get(dataset, 'actionableId'),
           actionable_model: dataset.constructor.modelName,
           userId: userId,
           type: 'tag',
