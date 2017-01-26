@@ -8,14 +8,13 @@ export default Component.extend({
   classNameBindings: ['light-font-color'],
   session: service(),
 
-  isEmptyFilters: computed('filters.@each.buckets', function () {
+  isEmptyFilters: computed('filters.[]', function () {
     const filters = get(this, 'filters');
 
     return filters && filters.length && filters.reduce((count, type) => count + type.buckets.length, 0) === 0;
   }),
   didReceiveAttrs() {
     this._super(...arguments);
-
     if (get(this, 'modelType') === 'datasource') {
       set(this, 'filters', get(this, 'filters').rejectBy('name', 'datasource'));
     }
