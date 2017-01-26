@@ -3,7 +3,7 @@ import Ember from 'ember';
 const { Component, get, inject: { service } } = Ember;
 
 export default Component.extend({
-  classNames: ['open-search-filter-overlay'],
+  classNames: ['c-filter-overlay', 'u-ta-center', 'u-py4'],
 
   actions: {
     trackLinkEvent() {
