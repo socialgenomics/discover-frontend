@@ -21,7 +21,7 @@ export default Component.extend({
     logout() {
       this.flashMessages.clearMessages();
       get(this, 'metrics').trackEvent({
-        category: 'auth',
+        category: 'discover_homeauth_navbar',
         action: 'logout',
         label: get(this, 'session.data.authenticatedUser.main_email')
       });

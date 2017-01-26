@@ -21,9 +21,9 @@ export default Mixin.create({
   },
 
   _incrementViewCounter(model, userId) {
-    if (model && userId) {
+    if (model) {
       this.store.createRecord('action', {
-        userId,
+        userId: userId || null,
         actionableId: get(model, 'actionableId'),
         type: 'view',
         actionable_model: model.constructor.modelName
