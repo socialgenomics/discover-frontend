@@ -11,21 +11,21 @@
             value=firstname
             errors=errors.firstname
             placeholder="First Name"
-            formSubmitted=formSubmitted
+            submit=(action 'save')
           }}
           {{validated-input
             type="text"
             value=lastname
             errors=errors.lastname
             placeholder="Last Name"
-            formSubmitted=formSubmitted
+            submit=(action 'save')
           }}
           {{validated-input
             type="text"
             value=affiliation
             errors=errors.affiliation
             placeholder="Affiliation"
-            formSubmitted=formSubmitted
+            submit=(action 'save')
           }}
           {{#if isSavable}}
             <button type="submit" class="c-btn c-btn-primary" {{action "save"}}>Save Changes</button>

@@ -16,7 +16,6 @@ export default Controller.extend(EmberValidations, FlashMessageMixin, {
   password: null,
   showPassword: false,
   loading: false,
-  formSubmitted: false,
   // number, capital letter and special character
   passwordPatterns: [/\d/, /[A-Z]/, /[!,@,#,$,%,^,&,*,?,_,~,-,(,)]/],
 
@@ -78,7 +77,7 @@ export default Controller.extend(EmberValidations, FlashMessageMixin, {
   actions: {
     signupAndAuthenticate: function() {
       if (!get(this, 'isDisabled')) {
-        setProperties(this, { 'formSubmitted': true, 'loading': true });
+        set(this, 'loading', true );
         const credentials = this._buildCredentials();
         /*
           Signup with repositive.

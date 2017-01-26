@@ -9,16 +9,19 @@ export default Component.extend({
   classNames: ['u-mb3'],
   classNameBindings: ['isActive:active'],
 
-  isValid: computed('hasBeenFocused', 'errors', 'formSubmitted', function() {
-    return (get(this, 'hasBeenFocused') || get(this, 'formSubmitted')) && isEmpty(get(this, 'errors'));
+  isValid: computed('hasBeenFocused', 'errors', function() {
+    return (get(this, 'hasBeenFocused')) && isEmpty(get(this, 'errors'));
   }),
 
-  isInvalid: computed('hasBeenFocused', 'errors', 'formSubmitted', function() {
-    return (get(this, 'hasBeenFocused') || get(this, 'formSubmitted')) && !isEmpty(get(this, 'errors'));
+  isInvalid: computed('hasBeenFocused', 'errors', function() {
+    return (get(this, 'hasBeenFocused')) && !isEmpty(get(this, 'errors'));
   }),
 
   actions: {
-    focusedIn() { set(this, 'isActive', true); },
+    focusedIn() {
+      set(this, 'isActive', true);
+      if (get(this, 'showCommentButtons')) { get(this, 'showCommentButtons')(); }
+    },
 
     focusedOut() {
       setProperties(this, {
@@ -27,7 +30,7 @@ export default Component.extend({
       });
     },
 
-    submitForm() { this.sendAction('submitForm'); },
+    submitForm() { get(this, 'submit')(); },
     toggleMarkdownModal() { this.toggleProperty('isShowingMarkdownModal'); }
   }
 });
