@@ -10,9 +10,9 @@
   height: -webkit-calc(100vh - #{$global-spacing-unit-large}); /* google, safari */
   height: -moz-calc(100vh - #{$global-spacing-unit-large}); /* firefox */
   min-height: 700px;
+}
 
-  .u-full-height {
-    height: inherit;
-    min-height: inherit;
-  }
+.u-full-height {
+  height: inherit;
+  min-height: inherit;
 }
