@@ -8,6 +8,7 @@
         type=type
         placeholder=placeholder
         disabled=disabled
+        class="u-textarea-resize-v"
       }}
     </div>
     {{#unless (or disabled noMarkdown)}}
@@ -26,10 +27,6 @@
   {{/if}}
 </div>
 <div class="lbl">{{lbl}}</div>
-
-{{#if (eq icon "fullname")}}{{fa-icon "user"}}{{/if}}
-{{#if (eq icon "password")}}{{fa-icon "lock"}}{{/if}}
-{{#if (eq icon "email")}}{{fa-icon "envelope"}}{{/if}}
 
 {{#if showInvalid}}
   <div class="errors">
