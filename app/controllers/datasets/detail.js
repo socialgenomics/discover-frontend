@@ -35,7 +35,6 @@ export default Controller.extend({
         action: 'download_button',
         label: get(this, 'dataset.title')
       });
-      console.log('download dataset');
       let tab = window.open(get(this, 'dataset.url'), '_blank');
       tab.focus();
     },
