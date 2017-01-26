@@ -9,7 +9,7 @@
     class="u-textarea-resize-v"
   }}
   {{#unless (or disabled noMarkdown)}}
-    <a class="u-fs0" {{action "toggleMarkdownModal"}}><span>How to format text with Markdown?</span></a>
+    <a class="u-fs0" {{action "toggleMarkdownModal"}}>How to format text with Markdown?</a>
   {{/unless}}
 {{else}}
   {{input
@@ -23,13 +23,13 @@
   }}
 {{/if}}
 
-{{#if showInvalid}}
-  <ul class="u-tc-red o-list-flush-left">
+{{#if isInvalid}}
+  <ul class="o-list-flush-left">
     {{#each errors as |error|}}
-      <li>{{error}}</li>
+      <li class="u-tc-red">{{error}}</li>
     {{/each}}
   </ul>
-{{else}}
+{{else if (and isActive (not isValid))}}
   <span>{{helpText}}</span>
 {{/if}}
 
