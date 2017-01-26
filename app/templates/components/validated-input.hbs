@@ -1,43 +1,36 @@
-<div class="input-field">
-  {{#if textarea}}
-    <div class="markdown-textarea">
-      {{textarea
-        value=value
-        focus-in="focusedIn"
-        focus-out="focusedOut"
-        type=type
-        placeholder=placeholder
-        disabled=disabled
-        class="u-textarea-resize-v"
-      }}
-    </div>
-    {{#unless (or disabled noMarkdown)}}
-      <a class="u-fs0" {{action "toggleMarkdownModal"}}><span>How to format text with Markdown?</span></a>
-    {{/unless}}
-  {{else}}
-    {{input
-      value=value
-      focus-in="focusedIn"
-      focus-out="focusedOut"
-      type=type
-      placeholder=placeholder
-      insert-newline='submitForm'
-      disabled=disabled
-    }}
-  {{/if}}
-</div>
-<div class="lbl">{{lbl}}</div>
+{{#if (eq type "textarea")}}
+  {{textarea
+    value=value
+    focus-in="focusedIn"
+    focus-out="focusedOut"
+    type=type
+    placeholder=placeholder
+    disabled=disabled
+    class="u-textarea-resize-v"
+  }}
+  {{#unless (or disabled noMarkdown)}}
+    <a class="u-fs0" {{action "toggleMarkdownModal"}}><span>How to format text with Markdown?</span></a>
+  {{/unless}}
+{{else}}
+  {{input
+    value=value
+    focus-in="focusedIn"
+    focus-out="focusedOut"
+    type=type
+    placeholder=placeholder
+    insert-newline='submitForm'
+    disabled=disabled
+  }}
+{{/if}}
 
 {{#if showInvalid}}
-  <div class="errors">
-    <ul class="text-invalid error-text">
-      {{#each errors as |error|}}
-        <li>{{error}}</li>
-      {{/each}}
-    </ul>
-  </div>
+  <ul class="u-tc-red o-list-flush-left">
+    {{#each errors as |error|}}
+      <li>{{error}}</li>
+    {{/each}}
+  </ul>
 {{else}}
-  <div class="input-helper">{{helpText}}</div>
+  <span>{{helpText}}</span>
 {{/if}}
 
 {{#if isShowingMarkdownModal}}
