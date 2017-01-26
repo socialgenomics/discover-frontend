@@ -1,0 +1,10 @@
+{{activity-card-header group=group isProfilePage=isProfilePage}}
+<div class="c-activity-card-body">
+  {{#each model as |dataset|}}
+    {{activity-card-item dataset=dataset isFavourite=isFavourite}}
+  {{else}}
+    <div class="u-flex u-justify-center u-items-center u-full-height">
+      <p class="u-p2 u-ta-center">{{emptyText}}</p>
+    </div>
+  {{/each}}
+</div>

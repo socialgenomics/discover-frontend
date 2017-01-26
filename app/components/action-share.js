@@ -5,7 +5,7 @@ const { Component, set, inject: { service }, get } = Ember;
 export default Component.extend({
   session: service(),
   tagName: 'li',
-  classNames: ['o-list-inline__item'],
+  classNames: ['o-list-inline__item','u-tc-secondary'],
   showShareOptionsModal: false,
   showShareEmailModal: false,
   showCreateAccountModal: false,

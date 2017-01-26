@@ -4,7 +4,7 @@
       <div class="grid__col grid__col--12-of-12">
         <section class="c-card u-p3">
           <div class="u-ta-center">
-            <h1 class="fs4 u-mb1">{{model.user.displayName}}</h1>
+            <h1 class="u-fs4 u-mb1">{{model.user.displayName}}</h1>
             <h4>{{model.user_profile.workOrganisation}}</h4>
 
             {{#if isOwnProfile}}{{#link-to "users.user_profile" class="edit-btn fa-2x sub-dark"}}{{fa-icon "pencil-square-o"}}{{/link-to}}{{/if}}
@@ -12,7 +12,7 @@
               <img class="u-w3 u-mb1" src={{model.user_profile.avatar}}>
             </div>
             {{#if model.is_verified}}
-              <h4 class="u-tc-teal fs2">{{fa-icon "check-circle"}} Verified Account</h4>
+              <h4 class="u-tc-teal u-fs2">{{fa-icon "check-circle"}} Verified Account</h4>
             {{else}}
               {{#if isOwnProfile}}
               <h4>{{#link-to 'users.trust' class="u-tc-red"}}{{fa-icon "envelope"}} Please verify your email{{/link-to}}</h4>
@@ -21,95 +21,54 @@
           </div>
 
           <div class="c-divider c-divider-light-bg"></div>
-          
+
           <div class="grid o-list-inline">
             <div class="grid__col grid__col--3-of-12 u-ta-center">
-              <span class="o-list-inline__item fw-med fs3">{{numberOfFavourites}}</span>
-              <h5 class="o-list-inline__item fw-thin">Favourites</h5>
+              <span class="o-list-inline__item u-fw-med u-fs3">{{numberOfFavourites}}</span>
+              <h5 class="o-list-inline__item u-fw-thin">Favourites</h5>
             </div>
             <div class="grid__col grid__col--3-of-12 u-ta-center">
-              <span class="o-list-inline__item fw-med fs3">{{model.registrations.length}}</span>
-              <h5 class="o-list-inline__item fw-thin">Registrations</h5>
+              <span class="o-list-inline__item u-fw-med u-fs3">{{model.registrations.length}}</span>
+              <h5 class="o-list-inline__item u-fw-thin">Registrations</h5>
             </div>
             <div class="grid__col grid__col--3-of-12 u-ta-center">
-              <span class="o-list-inline__item fw-med fs3">{{model.requests.length}}</span>
-              <h5 class="o-list-inline__item fw-thin">Requests</h5>
+              <span class="o-list-inline__item u-fw-med u-fs3">{{model.requests.length}}</span>
+              <h5 class="o-list-inline__item u-fw-thin">Requests</h5>
             </div>
             <div class="grid__col grid__col--3-of-12 u-ta-center">
-              <span class="o-list-inline__item fw-med fs3">{{numberOfComments}}</span>
-              <h5 class="o-list-inline__item fw-thin">Comments</h5>
+              <span class="o-list-inline__item u-fw-med u-fs3">{{numberOfComments}}</span>
+              <h5 class="o-list-inline__item u-fw-thin">Comments</h5>
             </div>
           </div>
         </section>
+      </div>
 
-        <section class="contain">
-          <div class="col s12 m6 activity-card double-panel">
-          
-            <!-- Favourites -->
-            <div class="card favourited-data">
-              <div class="card-header card-title">
-                {{fa-icon "star"}}
-                <h4>Favourites</h4>
-              </div>
-              <div class="card-content">
-                {{#if favouritedData}}
-                  {{#each favouritedData as |favourite|}}
-                    {{mini-dataset dataset=favourite type=favourite.type isFavourite=true}}
-                  {{/each}}
-                {{else}}
-                  <p class="color-silver-chalice-text center-align">
-                    {{if isOwnProfile "You don't have any favourites yet." "This user doesn't have any favourites yet."}}
-                  </p>
-                {{/if}}
-              </div>
-            </div>
+      <!-- Favourites -->
+      <div class="grid__col grid__col--6-of-12">
+        {{activity-card
+          model=favouritedData
+          group="favourite"
+          isFavourite=true
+          isProfilePage=true
+          isOwnProfile=isOwnProfile}}
+      </div>
 
-            <!--data requests-->
-            <div class="card requested-data">
-              <div class="card-header card-title">
-                {{#link-to 'datasets.request'}}
-                  {{fa-icon "clipboard"}}
-                  <h4>Requested Data</h4>
-                {{/link-to}}
-              </div>
-              <div class="card-content">
-                {{#if model.requests}}
-                  {{#each model.requests as |request|}}
-                    {{mini-dataset dataset=request type="request"}}
-                  {{/each}}
-                {{else}}
-                  <p class="color-silver-chalice-text center-align">
-                    {{if isOwnProfile "You have not requested any data from our community on REPOSITIVE." "This user has not made any requests for data from our community on REPOSITIVE."}}
-                  </p>
-                {{/if}}
-              </div>
-            </div>
-          </div>
+      <!-- Requests -->
+      <div class="grid__col grid__col--6-of-12">
+        {{activity-card
+          model=model.requests
+          group="request"
+          isProfilePage=true
+          isOwnProfile=isOwnProfile}}
+      </div>
 
-          <div class="col s12 m6 activity-card">
-            <!-- data registrations -->
-            <div class="card registered-data">
-              <div class="card-header card-title">
-                {{#link-to 'datasets.register'}}
-                  {{fa-icon "file-text"}}
-                  <h4>Registered Data</h4>
-                {{/link-to}}
-              </div>
-              <div class="card-content">
-                {{#if model.registrations}}
-                  {{#each model.registrations as |dataset|}}
-                    {{mini-dataset dataset=dataset type="registration"}}
-                  {{/each}}
-                {{else}}
-                  <p class="color-silver-chalice-text center-align">
-                    {{if isOwnProfile "You have not registered any data to REPOSITIVE." "This user has not registered any data to REPOSITIVE."}}
-                  </p>
-                {{/if}}
-              </div>
-            </div>
-          </div>
-          
-        </section>
+      <!-- Registrations -->
+      <div class="grid__col grid__col--6-of-12">
+        {{activity-card
+          model=model.registrations
+          group="registration"
+          isProfilePage=true
+          isOwnProfile=isOwnProfile}}
       </div>
     </div>
   </main>

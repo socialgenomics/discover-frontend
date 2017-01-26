@@ -1,7 +1,7 @@
 <!-- TODO when the data returned by the favourites query is the same structure as a dataset, this condition can be removed.  -->
 {{#if isFavourite}}
-  {{#if isRequest}}
-    <span class="fs0 fw-reg u-tc-tertiary">Requested by </span>
+  {{#if (eq type "request")}}
+    <span class="u-fs0 u-fw-reg u-tc-tertiary">Requested by </span>
     {{#if session.isAuthenticated }}
       {{#link-to 'user' model.user.id}}
         {{model.user.firstname}} {{model.user.lastname}}
@@ -10,11 +10,11 @@
       <span class="fake-link">{{model.user.firstname}} {{model.user.lastname}}</span>
     {{/if}}
   {{else if (eq model.datasource.properties.short_name "REPOSITIVE")}}
-    <!-- Registration -->
 
-    <span class="fs0 fw-reg u-tc-tertiary">Registered by </span>
+    <!-- Registration -->
+    <span class="u-fs0 u-fw-reg u-tc-tertiary">Registered by </span>
     {{#if session.isAuthenticated }}
-      {{#link-to 'user' model.user.id class="user-name"}}
+      {{#link-to 'user' model.user.id}}
         {{model.user.firstname}} {{model.user.lastname}}
       {{/link-to}}
     {{else}}
@@ -23,54 +23,54 @@
 
   {{else}}
     <!-- Regular Dataset-->
-    <span class="fs0 fw-reg u-tc-tertiary">from</span>
+    <span class="u-fs0 u-fw-reg u-tc-tertiary">from</span>
     {{#if session.isAuthenticated }}
       {{#link-to 'datasources.source' model.datasource.id}}
         {{source-name-fallback model=model.datasource}}
       {{/link-to}}
     {{else}}
-      <span class="u-tc-primary fw-bold">{{source-name-fallback model=model.datasource}}</span>
+      <span class="u-tc-primary u-fw-bold">{{source-name-fallback model=model.datasource}}</span>
     {{/if}}
   {{/if}}
 
 {{else}} <!-- Not a favourite -->
 
-{{#if isRequest}}
-  {{#if model.userId.displayName}}
-    <span class="fs0 fw-reg u-tc-tertiary">requested by </span>
-    {{#if session.isAuthenticated }}
-      {{#link-to 'user' model.userId.id}}
-        {{model.userId.displayName}}
-      {{/link-to}}
-    {{else}}
-      <span class="fake-link">{{model.userId.displayName}}</span>
+  {{#if (eq type "request")}}
+    {{#if model.userId.displayName}}
+      <span class="u-fs0 u-fw-reg u-tc-tertiary">requested by </span>
+      {{#if session.isAuthenticated }}
+        {{#link-to 'user' model.userId.id}}
+          {{model.userId.displayName}}
+        {{/link-to}}
+      {{else}}
+        <span class="fake-link">{{model.userId.displayName}}</span>
+      {{/if}}
     {{/if}}
-  {{/if}}
-{{else if (eq model.datasourceId.properties.short_name "REPOSITIVE")}}
-  <!-- Registration -->
+  {{else if (eq model.datasourceId.properties.short_name "REPOSITIVE")}}
 
-  {{#if model.userId.displayName}}
-    <span class="fs0 fw-reg u-tc-tertiary">registered by </span>
-    {{#if session.isAuthenticated }}
-      {{#link-to 'user' model.userId.id}}
-        {{model.userId.displayName}}
-      {{/link-to}}
-    {{else}}
-      <span class="fake-link">{{model.userId.displayName}}</span>
+    <!-- Registration -->
+    {{#if model.userId.displayName}}
+      <span class="u-fs0 u-fw-reg u-tc-tertiary">registered by </span>
+      {{#if session.isAuthenticated }}
+        {{#link-to 'user' model.userId.id}}
+          {{model.userId.displayName}}
+        {{/link-to}}
+      {{else}}
+        <span class="fake-link">{{model.userId.displayName}}</span>
+      {{/if}}
     {{/if}}
-  {{/if}}
 
-{{else}}
-  <!-- Regular Dataset-->
-  <span class="fs0 fw-reg u-tc-tertiary">from</span>
-  {{#if session.isAuthenticated }}
-    {{#link-to 'datasources.source' model.datasourceId.id}}
-      {{source-name-fallback model=model.datasourceId}}
-    {{/link-to}}
   {{else}}
-    <span class="u-tc-primary">{{source-name-fallback model=model.datasourceId}}</span>
+    <!-- Regular Dataset-->
+    <span class="u-fs0 u-fw-reg u-tc-tertiary">from</span>
+    {{#if session.isAuthenticated }}
+      {{#link-to 'datasources.source' model.datasourceId.id}}
+        {{source-name-fallback model=model.datasourceId}}
+      {{/link-to}}
+    {{else}}
+      <span class="u-tc-primary">{{source-name-fallback model=model.datasourceId}}</span>
+    {{/if}}
   {{/if}}
-{{/if}}
 {{/if}}
 
 {{#if showCreateAccountModal}}

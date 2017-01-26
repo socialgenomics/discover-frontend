@@ -1,3 +1,5 @@
+
+<!-- CSS Refactor: still need to account for Open Dataset styles -->
 {{#unless session.isAuthenticated}}
   {{#full-page-notification customClassName='create-account-notification'}}
     <h3>Search through <strong>{{datasetsNumber}}</strong> human genomic datasets</h3>
@@ -5,86 +7,106 @@
   {{/full-page-notification}}
 {{/unless}}
 
-<div class="row card dataset full-view {{unless session.isAuthenticated 'dataset-notification-margin' ''}}">
-  <div class="col l7 m6 s12 card-main-wrapper">
-    <div class="top-action card-header">
-      {{#if dataset.colour}}
-        {{assay-type assay=dataset}}
-      {{/if}}
-      <div class="actions-container valign-wrapper">
-        {{action-favourite model=dataset}}
-        {{action-share
-          actionableId=dataset.id
-          actionableType='dataset'
-          shareUrl=datasetUrl
-        }}
-      </div>
-    </div>
-    <div class="card-main-content">
-      <div class="dataset-main-info">
-        <h2>{{dataset.title}}</h2>
-        {{#if dataset.description}}
-          <p class="markdown-text">{{markdown-to-html markdown=dataset.description}}</p>
-        {{/if}}
+<div class="grid-wrapper">
+  <div class="grid">
+    <div class="grid__col grid__col--3-of-3">
+      <div class="c-card c-card-detail-view u-pos-relative {{unless session.isAuthenticated 'dataset-notification-margin' ''}}">
+      <div class="c-card-header u-w100 u-pos-absolute u-bc-off-white"></div>
+        <div class="grid">
+          <div class="grid__col grid__col--7-of-12 u-border-right">
 
-        <div class="tags">
-          {{#each tags as |tag|}}
-            {{tag-item tag=tag}}
-          {{/each}}
-          {{#if session.isAuthenticated}}
-            {{add-tag addTag=(action 'addTag') class="add-btn"}}
-            <br><span class="help-link">Please add tags to improve searching and browsing through data. <a class="help-button" {{action "toggleTagModal"}}>?</a></span>
-          {{/if}}
-        </div>
+            <div class="c-card-header u-pos-relative u-bc-off-white u-top-rounded u-flex u-justify-between u-items-center u-px2">
+              <div>
+                {{#if dataset.assay}}
+                  {{assay-type assay=dataset}}
+                {{/if}}
+              </div>
+              <ul class="o-list-inline o-list-flush-left u-mb0">
+                {{action-favourite model=dataset class="u-mr1"}}
+                {{action-share
+                  actionableId=dataset.id
+                  actionableType='dataset'
+                  shareUrl=shareUrl
+                }}
+              </ul>
+            </div>
 
-      </div>
-    </div>
-    <div class="row bottom-static dataset-more-info-section-wrapper">
-      <div class="dataset-more-info-section">
-        <div class="col m12">
-          <ul class="card-info-list left-align">
-            {{#if dataset.userId}}
-              <li class="card-info-attr">
-                Submitted by: {{#link-to 'user' dataset.userId.id }}<span>{{dataset.userId.displayName}}</span>{{/link-to}}
-              </li>
-            {{else}}
-              {{#if dataset.datasourceId.name}}
-                <li class="card-info-attr">
-                  Sourced from: {{#link-to 'datasources.source' dataset.datasourceId.id}}<span>{{dataset.datasourceId.name}}</span>{{/link-to}}
-                </li>
+            <div class="u-p2">
+              <h2 class="u-fs2 u-fw-med u-tc-primary u-mb1">{{dataset.title}}</h2>
+              {{#if dataset.description}}
+                <p class="markdown-text">{{markdown-to-html markdown=dataset.description}}</p>
               {{/if}}
-              {{#if dataset.accession}}
-                <li class="card-info-attr">
-                  Accession ID: <span>{{dataset.externalId}}</span>
-                </li>
+              <div class="u-py2 u-mb2">
+                {{#each tags as |tag|}}
+                  {{tag-item tag=tag}}
+                {{/each}}
+              </div>
+              {{#if session.isAuthenticated}}
+                {{add-tag addTag=(action 'addTag') class="add-btn"}}
+                <br><span class="u-fs0 u-tc-tertiary">Add tags to improve searching and browsing through data (<a {{action "toggleTagModal"}}>learn more</a>)</span>
               {{/if}}
-            {{/if}}
-            {{#if dataset.access}}
-              <li class="card-info-attr">
-                Access type: {{#link-to 'help.searching-for-data' (query-params help="filters")}}<span>{{dataset.access}}</span>{{/link-to}}
-              </li>
-            {{/if}}
-          </ul>
-        </div>
-        <div class="col m12 center">
-          {{#if dataset.url}}
-            <a target="_blank" {{action "trackExit"}} href="{{if session.isAuthenticated dataset.url ''}}" class="btn waves-effect teal white-text">{{#if (eq dataset.access 'Open')}}Access Data{{else}}Go To Dataset{{/if}}</a>
-          {{else}}
-            <a class="btn disabled white-text">{{#if (eq dataset.access 'Open')}}Access Data{{else}}Apply for Access{{/if}}</a>
-          {{/if}}
-        </div>
-      </div>
-      {{#unless session.isAuthenticated}}
-        {{create-account-call-to-action}}
-      {{/unless}}
-    </div>
-  </div>
+            </div>
 
-  <div class="col l5 m6 s12 card-side-wrapper">
-    <div class="card-header center-align teal-text">Discussions</div>
-    {{partial "datasets/tab-comments"}}
+            <div class="c-divider c-divider-light-bg u-mb2"></div>
+
+            <div class="u-px2 u-pb2">
+              <ul class="o-list-flush-left">
+                {{#if dataset.userId}}
+                  <li class="u-fs0 u-tc-tertiary">
+                    Submitted by: {{#link-to 'user' dataset.userId.id }}<span class="u-fw-med u-fs1">{{dataset.userId.displayName}}</span>{{/link-to}}
+                  </li>
+                {{else}}
+                  {{#if dataset.datasourceId.name}}
+                    <li class="u-fs0 u-tc-tertiary">
+                      Sourced from: {{#link-to 'datasources.source' dataset.datasourceId.id}}<span class="u-fw-med u-fs1">{{dataset.datasourceId.name}}</span>{{/link-to}}
+                    </li>
+                  {{/if}}
+                  {{#if dataset.accession}}
+                    <li class="u-fs0 u-tc-tertiary">
+                      Accession ID: <span class="u-fw-med u-fs1">{{dataset.externalId}}</span>
+                    </li>
+                  {{/if}}
+                {{/if}}
+                {{#if dataset.access}}
+                  <li class="u-fs0 u-tc-tertiary">
+                    Access type: {{#link-to 'help.searching-for-data' (query-params help="filters")}}<span class="u-fw-med u-fs1">{{dataset.access}}</span>{{/link-to}}
+                  </li>
+                {{/if}}
+              </ul>
+
+              <div class="u-ta-center">
+                {{#if dataset.url}}
+                  <a target="_blank" {{action "trackExit"}} href="{{if session.isAuthenticated dataset.url ''}}" class="c-btn c-btn--primary c-btn--shadow">{{#if (eq dataset.access 'Open')}}Access Data{{else}}Go To Dataset{{/if}}</a>
+                {{else}}
+                  <a class="c-btn c-btn--primary c-btn--shadow">{{#if (eq dataset.access 'Open')}}Access Data{{else}}Apply for Access{{/if}}</a>
+                {{/if}}
+              </div>
+
+            </div>
+
+          </div>
+
+          <div class="grid__col grid__col--5-of-12 u-border-left">
+            <div class="c-card-header u-pos-relative u-bc-off-white u-flex u-items-center u-justify-center u-top-rounded">
+              <h4 class="u-mb0 u-fs2 u-fw-med u-tc-teal">Discussions</h4>
+            </div>
+
+                {{partial "datasets/tab-comments"}}
+
+          </div>
+        </div>
+
+      </div>
+    </div>
   </div>
 </div>
+
+<!-- CSS Refactor: still need to account for Open Dataset styles -->
+{{#unless session.isAuthenticated}}
+  {{create-account-call-to-action}}
+{{/unless}}
+
+<!-- CSS Refactor: still need to style modals -->
 {{#if isShowingTagModal}}
   {{tag-modal action="toggleTagModal"}}
 {{/if}}

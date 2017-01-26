@@ -1,8 +1,8 @@
 {{#if isOpen}}
     <div class="input-field no-margin">
       {{focus-input value=tag type="text" enter="addTag" placeholder="Enter tag name" class="tag-input"}}
-      <button {{action "toggleInput"}} class="sub-dark tag-cancel-btn">Cancel</button>
+      <button {{action "toggleInput"}} class="u-border-none u-fs1 u-bc-white u-tc-secondary">Cancel</button>
     </div>
 {{else}}
-  <button {{action "toggleInput"}} class="tag-add-btn">Add new tag</button>
+  <button {{action "toggleInput"}} class="c-btn">Add new tag</button>
 {{/if}}

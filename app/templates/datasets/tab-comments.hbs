@@ -1,28 +1,27 @@
-<div class="card-side-content">
-  <div class="col s12">
-    {{add-comment
-      addComment=(action 'addComment')
-      avatar=(
-        if session.isAuthenticated
-          session.authenticatedUser.userProfile.avatar
-          '/assets/images/avatar/lizard.png'
-      )
-      placeholder=(
-        if session.isAuthenticated
-          'Share your thoughts or ask more questions about the data.'
-          'To join this discussion, create a free account.'
-      )
+<div class="u-pr3">
+
+  {{add-comment
+    addComment=(action 'addComment')
+    avatar=(
+      if session.isAuthenticated
+        session.authenticatedUser.userProfile.avatar
+        '/assets/images/avatar/lizard.png'
+    )
+    placeholder=(
+      if session.isAuthenticated
+        'Share your thoughts or ask more questions about the data.'
+        'To join this discussion, create a free account.'
+    )
+    disabled=(not session.isAuthenticated)
+  }}
+  {{#each commentsSorted as |comment|}}
+    {{user-comment
+      user=comment.userId
+      text=comment.properties.text
+      date=comment.createdAt
+      avatar=comment.userId.userProfile.avatar
       disabled=(not session.isAuthenticated)
     }}
-    {{#each commentsSorted as |comment|}}
-      {{user-comment
-        user=comment.userId
-        text=comment.properties.text
-        date=comment.createdAt
-        avatar=comment.userId.userProfile.avatar
-        disabled=(not session.isAuthenticated)
-      }}
-      <div class="divider"></div>
-    {{/each}}
-  </div>
+    <div class="c-divider c-divider-light-bg u-mb3"></div>
+  {{/each}}
 </div>
