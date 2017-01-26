@@ -1,9 +1,9 @@
-<p>Total pages: {{totalPages}}</p>
-<p>Current page: {{currentPageNumber}}</p>
+<p class="u-mb1 u-tc-primary">Total pages: {{totalPages}}</p>
+<p class="u-mb3 u-tc-primary">Current page: {{currentPageNumber}}</p>
 
-<button class="btn" disabled={{eq currentPageNumber 1}} {{action 'previousPage'}}>
+<button class="c-btn c-btn--primary c-btn--shadow" disabled={{eq currentPageNumber 1}} {{action 'previousPage'}}>
   Previous
 </button>
-<button class="btn" disabled={{gte currentPageNumber totalPages}} {{action 'nextPage'}}>
+<button class="c-btn c-btn--primary c-btn--shadow" disabled={{gte currentPageNumber totalPages}} {{action 'nextPage'}}>
   Next
 </button>

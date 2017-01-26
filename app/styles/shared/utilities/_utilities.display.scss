@@ -2,4 +2,8 @@
     #DISPLAY
    ========================================================================== */
 
-.u-disp-block { display: block; }
+.u-block        { display: block }
+.u-inline       { display: inline }
+.u-inline-block { display: inline-block }
+.u-table        { display: table }
+.u-table-cell   { display: table-cell }

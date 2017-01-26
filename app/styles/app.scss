@@ -1,11 +1,5 @@
 // All CSS imported from the styles app.
-// @import "../../../repositive-styles/app/styles/app"; //Used to import the styles from the submodule
-// @import "repositive-styles/app/styles/app"; //This is used to import the styles as a bower component.
-// @import "pod-styles";
-// @import "navbar";
-// @import "search";
-// @import "datasets-details";
-// @import "share-options-modal";
+// @import "pod-styles"; //This will be deleted
 
 //CSS REFACTOR
 @import 'shared/settings/settings.color';
@@ -33,6 +27,7 @@
 @import 'shared/components/components.divider';
 @import 'shared/components/components.images';
 @import 'shared/components/components.sidebar';
+@import 'shared/components/components.loading-spinner';
 
 @import 'shared/utilities/utilities.borders';
 @import 'shared/utilities/utilities.color';
@@ -49,5 +44,6 @@
 @import 'shared/utilities/utilities.type-setting';
 
 // Custom
-@import 'custom/components/components.landing-page';
 @import 'custom/settings/settings.global';
+@import 'custom/components/components.landing-page';
+@import 'custom/components/components.navbar';
