@@ -73,7 +73,7 @@ describe('DatasetsRequestController', function() {
     mockParams(controller);
     controller._createRequestSuccess(request);
 
-    expect(get(controller, '_trackEvent').calledWith('dataset', 'request', request.id)).to.eql(true);
+    expect(get(controller, '_trackEvent').calledWith('discover_homeauth_datasetRequest', 'requested', request.id)).to.eql(true);
   });
 
   it('_createRequestSuccess does transition', function () {

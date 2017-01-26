@@ -19,4 +19,11 @@ describe('Integration | Component | meta panel header', function() {
     this.render(hbs`{{meta-panel-header type=model.type}}`);
     expect(this.$('a.left-align')).to.have.length(0);
   });
+
+  it('renders collection header if it is a collection', function() {
+    this.set('model', { type: 'repositive_collection' });
+    this.render(hbs`{{meta-panel-header type=model.type}}`);
+    expect(this.$('i').hasClass('fa-book')).to.be.true;
+    expect(this.$('h5').text().trim()).to.eql('Collection');
+  });
 });

@@ -1,7 +1,3 @@
-<!-- {{#unless light-font-color}}
-  <h4 class="u-mb0">Filters</h4>
-{{/unless}} -->
-
 {{#unless isEmptyFilters}}
   {{#each filters as |filter|}}
     <div class="section">
@@ -11,7 +7,7 @@
         <h4 class="u-mb1 u-pt2 u-tc-tertiary u-fs0">{{ filter.displayName }}</h4>
       {{/if}}
       {{#if isLoading}}
-        <p>Loading new filters...</p>
+        <p class="loading-text">Loading new filters...</p>
       {{else}}
         {{#each filter.buckets as |bucket|}}
           {{filter-list-item
