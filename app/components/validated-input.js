@@ -31,9 +31,14 @@ export default Component.extend({
         'isActive': false
       });
     },
+
     togglePasswordVisibility() {
       this.toggleProperty('showPassword');
-      get(this,'showPassword') === true ? set(this, 'type', 'text') : set(this, 'type', 'password');
+      if (get(this, 'showPassword')) {
+        set(this, 'type', 'text');
+      } else {
+        set(this, 'type', 'password');
+      }
     },
 
     submitForm() { get(this, 'submit')(); },

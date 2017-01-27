@@ -13,7 +13,7 @@
   {{/unless}}
 {{else}}
   {{#if showPasswordButton}}
-    <a class="u-ta-right u-block"{{action 'togglePasswordVisibility'}}>{{#if showPassword}} Hide Password {{else}} Show Password {{/if}}</a>
+    <p class="u-ta-right u-mb0"><a {{action 'togglePasswordVisibility'}}>{{#if showPassword}} Hide Password {{else}} Show Password {{/if}}</a></p>
   {{/if}}
   {{input
     value=value

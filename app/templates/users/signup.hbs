@@ -37,15 +37,16 @@
         submit=(action 'signupAndAuthenticate')
       }}
 
-      <span>Password strength: <span class="{{strength}}">{{strength}}</span></span>
+      <p>Password strength: <span class="{{strength}}">{{strength}}</span></p>
+
       {{async-button
-        class="c-btn c-btn--primary c-btn--shadow"
+        class="c-btn c-btn--primary c-btn--shadow u-mb3"
         action=(action 'signupAndAuthenticate')
         default="Create Your Account"
         pending="Submitting..."
         disableWhen=isInvalid
       }}
-      <h6 class="center-align grey-text">By signing up you agree to our {{#link-to 'policies' class="link"}}Terms &amp; Privacy Policy.{{/link-to}} </h6>
+      <p>By signing up you agree to our {{#link-to 'policies' class="link"}}Terms &amp; Privacy Policy.{{/link-to}} </p>
     </form>
   </section>
 
