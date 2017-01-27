@@ -1,41 +1,36 @@
 import Ember from 'ember';
 
-const { Component, computed, get, setProperties, isEmpty } = Ember;
+const { Component, computed, get, setProperties, set, isEmpty } = Ember;
 
 export default Component.extend({
   errors: null,
   isActive: false,
   hasBeenFocused: false,
   classNames: ['u-mb3'],
-  classNameBindings: ['isActive:active', 'showValid:valid', 'showInvalid:invalid'],
+  classNameBindings: ['isActive:active'],
 
-  showValid: computed('hasBeenFocused', 'errors', 'formSubmitted', function() {
-    return (get(this, 'hasBeenFocused') || get(this, 'formSubmitted')) && isEmpty(get(this, 'errors'));
+  isValid: computed('hasBeenFocused', 'errors', function() {
+    return (get(this, 'hasBeenFocused')) && isEmpty(get(this, 'errors'));
   }),
 
-  showInvalid: computed('hasBeenFocused', 'errors', 'formSubmitted', function() {
-    return (get(this, 'hasBeenFocused') || get(this, 'formSubmitted')) && !isEmpty(get(this, 'errors'));
+  isInvalid: computed('hasBeenFocused', 'errors', function() {
+    return (get(this, 'hasBeenFocused')) && !isEmpty(get(this, 'errors'));
   }),
 
   actions: {
     focusedIn() {
-      setProperties(this, {
-        'defaultPlaceholder': get(this, 'placeholder'),
-        'placeholder': '',
-        'isActive': true
-      });
-      this.sendAction();
+      set(this, 'isActive', true);
+      if (get(this, 'showCommentButtons')) { get(this, 'showCommentButtons')(); }
     },
 
     focusedOut() {
       setProperties(this, {
-        'placeholder': get(this, 'defaultPlaceholder'),
         'hasBeenFocused': true,
         'isActive': false
       });
     },
 
-    submitForm() { this.sendAction('submitForm'); },
+    submitForm() { get(this, 'submit')(); },
     toggleMarkdownModal() { this.toggleProperty('isShowingMarkdownModal'); }
   }
 });

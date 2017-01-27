@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import EmberValidations from 'ember-validations';
-const { get, getProperties, computed, Controller, inject: { service }, set, setProperties, $ } = Ember;
+const { get, getProperties, computed, Controller, inject: { service }, set } = Ember;
 
 export default Controller.extend(
   EmberValidations,
@@ -10,7 +10,6 @@ export default Controller.extend(
     email: null,
     password: null,
     loading: false,
-    formSubmitted: false,
 
     validations: {
       email: {
@@ -42,13 +41,7 @@ export default Controller.extend(
     actions: {
       submitForm() {
         if (!get(this, 'isDisabled')) {
-          $('#login-form').find('input').trigger('change'); // fix for password manager bug
-
-          setProperties(this, {
-            loading: true,
-            formSubmitted: true
-          });
-
+          set(this, 'loading', true);
           get(this, 'session')
             .authenticate('authenticator:repositive', getProperties(this, 'email', 'password'))
             .then(this._displayMessage.bind(this))
@@ -81,4 +74,3 @@ export default Controller.extend(
     }
   }
 );
-
