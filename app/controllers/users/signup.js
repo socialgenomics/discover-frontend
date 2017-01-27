@@ -75,35 +75,36 @@ export default Controller.extend(EmberValidations, FlashMessageMixin, {
   }),
 
   actions: {
-    signupAndAuthenticate: function() {
+    signupAndAuthenticate() {
       if (!get(this, 'isDisabled')) {
         set(this, 'loading', true );
         const credentials = this._buildCredentials();
         /*
           Signup with repositive.
          */
-        get(this, 'ajax').request(ENV.APIRoutes[ENV['ember-simple-auth'].signupRoute], {
-          method: 'POST',
-          data: credentials
-        })
-          .then(resp => { // signup has suceeded, now login
-            return get(this, 'session').authenticate('authenticator:repositive', credentials);
-          })
-          .then(() => {
-            setProperties(this, {
-              'session.data.firstVisit': true,
-              'session.data.displayWelcomeMessage': false,
-              'loading': false
-            });
-          })
-          .catch(err => { // error with signup
-            set(this, 'loading', false);
-            this._displayMessage(err);
-          });
+        console.log("====SIGNED UP====");
+        // get(this, 'ajax').request(ENV.APIRoutes[ENV['ember-simple-auth'].signupRoute], {
+        //   method: 'POST',
+        //   data: credentials
+        // })
+        //   .then(resp => { // signup has suceeded, now login
+        //     return get(this, 'session').authenticate('authenticator:repositive', credentials);
+        //   })
+        //   .then(() => {
+        //     setProperties(this, {
+        //       'session.data.firstVisit': true,
+        //       'session.data.displayWelcomeMessage': false,
+        //       'loading': false
+        //     });
+        //   })
+        //   .catch(err => { // error with signup
+        //     set(this, 'loading', false);
+        //     this._displayMessage(err);
+        //   });
       }
     },
 
-    toggleCheckbox: function() {
+    toggleCheckbox() {
       this.toggleProperty('showPassword');
     }
   },
@@ -124,7 +125,7 @@ export default Controller.extend(EmberValidations, FlashMessageMixin, {
     }
   },
 
-  _getFirstAndLastNames: function(fullName) {
+  _getFirstAndLastNames(fullName) {
     const fullNameArray = fullName.split(' ');
     const firstname = fullNameArray.shift();
     const lastname = fullNameArray.join(' ') || '';
