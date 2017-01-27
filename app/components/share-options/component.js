@@ -72,11 +72,19 @@ export default Component.extend({
   },
 
   _trackClickEvent(action) {
-    get(this, 'metrics').trackEvent({
-      category: 'share modal',
-      action,
-      label: get(this, 'actionableId')
-    });
+    if (get(this, 'session.isAuthenticated')) {
+      get(this, 'metrics').trackEvent({
+        category: 'discover_homeauth_sharemodal',
+        action,
+        label: get(this, 'actionableId')
+      });
+    } else {
+      get(this, 'metrics').trackEvent({
+        category: 'discover_openpage_sharemodal',
+        action,
+        label: get(this, 'actionableId')
+      });
+    }
   },
 
   _createShareWindowUrl(channelOptions) {

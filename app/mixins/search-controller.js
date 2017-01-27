@@ -1,12 +1,9 @@
 import Ember from 'ember';
 import QP from 'npm:../../query-parser';
 
-const { Mixin, computed, inject: { service }, get, set } = Ember;
+const { Mixin, computed, get, set } = Ember;
 
 export default Mixin.create({
-  ajax: service(),
-  store: service(),
-
   queryParams: ['query', 'page', 'resultsPerPage'],
   query: null,
   page: 1,
@@ -16,10 +13,16 @@ export default Mixin.create({
     return Math.ceil(get(this, 'model.meta.total') / get(this, 'resultsPerPage'));
   }),
 
+  QP: computed(function () {
+    return QP;
+  }),
+
   activeFilters: computed('query', function () {
     if (get(this, 'query')) {
-      const queryTree = QP.parseString(get(this, 'query'));
-      return QP.getFilters(queryTree).map(filter => `${filter.predicate}:${filter.text}`);
+      const qp = get(this, 'QP');
+      const queryTree = qp.parseString(get(this, 'query'));
+
+      return qp.getFilters(queryTree).map(filter => `${filter.predicate}:${filter.text}`);
     }
     return [];
   }),
@@ -50,11 +53,16 @@ export default Mixin.create({
    * @private
    */
   _toggleFilter(action, predicate, text) {
-    let currentQueryTree = '';
-    if (get(this, 'query')) {
-      currentQueryTree = QP.parseString(get(this, 'query'));
-    }
-    const newQueryTree = QP[action](currentQueryTree, predicate, text);
-    set(this, 'query', QP.toBoolString(newQueryTree));
+    const qp = get(this, 'QP');
+    const query = get(this, 'query');
+    const currentQueryTree = query ? qp.parseString(query) : '';
+
+    set(
+      this,
+      'query',
+      qp.toBoolString(
+        qp[action](currentQueryTree, predicate, text)
+      )
+    );
   }
 });

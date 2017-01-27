@@ -3,7 +3,9 @@
 {{#unless session.isAuthenticated}}
   {{#full-page-notification customClassName='create-account-notification'}}
     <h3>Search through <strong>{{datasetsNumber}}</strong> human genomic datasets</h3>
-    {{#link-to 'root' class='btn waves-effect teal white-text'}}Search now{{/link-to}}
+    {{#link-to 'root' class='btn waves-effect teal white-text' invokeAction=(action 'trackLinkEvent')}}
+      Search now
+    {{/link-to}}
   {{/full-page-notification}}
 {{/unless}}
 
@@ -42,7 +44,7 @@
                 {{/each}}
               </div>
               {{#if session.isAuthenticated}}
-                {{add-tag addTag=(action 'addTag') class="add-btn"}}
+                {{add-tag addTag=(action 'addTag')}}
                 <br><span class="u-fs0 u-tc-tertiary">Add tags to improve searching and browsing through data (<a {{action "toggleTagModal"}}>learn more</a>)</span>
               {{/if}}
             </div>

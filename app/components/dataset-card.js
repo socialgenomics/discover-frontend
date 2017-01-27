@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import colours from '../utils/colours';
 
-const { Component, computed, inject: { service }, get, set, $ } = Ember;
+const { Component, computed, inject: { service }, get, set } = Ember;
 
 export default Component.extend({
   urlGenerator: service(),
@@ -15,11 +15,6 @@ export default Component.extend({
   didReceiveAttrs() {
     this._super(...arguments);
     this.setAssayColourForDataset();
-  },
-
-  didRender() {
-    this._super(...arguments);
-    $('.tooltipped').tooltip({ delay: 300 });
   },
 
   getAssayColourForDataset() {

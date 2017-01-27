@@ -1,0 +1,22 @@
+/* ==========================================================================
+    BASE INPUT STYLING
+   ========================================================================== */
+
+input, textarea {
+  border-radius: $global-border-radius;
+  border: $global-border-style;
+  color: inherit;
+  font-size: $global-font-size;
+  line-height: inherit;
+  outline: none;
+  padding: $global-spacing-unit-small;
+  width: 100%;
+}
+
+input {
+  height: $global-spacing-unit-large;
+}
+
+textarea {
+  height: $global-spacing-unit-huge;
+}

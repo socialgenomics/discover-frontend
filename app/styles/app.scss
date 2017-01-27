@@ -1,11 +1,5 @@
 // All CSS imported from the styles app.
-// @import "../../../repositive-styles/app/styles/app"; //Used to import the styles from the submodule
-// @import "repositive-styles/app/styles/app"; //This is used to import the styles as a bower component.
-// @import "pod-styles";
-// @import "navbar";
-// @import "search";
-// @import "datasets-details";
-// @import "share-options-modal";
+// @import "pod-styles"; //This will be deleted
 
 //CSS REFACTOR
 @import 'shared/settings/settings.color';
@@ -19,34 +13,38 @@
 
 @import 'shared/elements/elements.base';
 @import 'shared/elements/elements.images';
+@import 'shared/elements/elements.inputs';
 @import 'shared/elements/elements.shared';
 
 @import 'shared/objects/objects.grid-wrapper';
-@import 'shared/objects/objects.toast-grid';
-@import 'shared/objects/objects.spacing';
 @import 'shared/objects/objects.lists';
+@import 'shared/objects/objects.spacing';
+@import 'shared/objects/objects.toast-grid';
 
+@import 'custom/components/components.navbar';
 @import 'shared/components/components.buttons';
 @import 'shared/components/components.card';
 @import 'shared/components/components.divider';
 @import 'shared/components/components.images';
 @import 'shared/components/components.sidebar';
-@import 'custom/components/components.navbar';
+@import 'shared/components/components.loading-spinner';
 
-@import 'shared/utilities/utilities.text-alignment';
 @import 'shared/utilities/utilities.borders';
 @import 'shared/utilities/utilities.color';
-@import 'shared/utilities/utilities.media-queries';
-@import 'shared/utilities/utilities.margins';
-@import 'shared/utilities/utilities.padding';
-@import 'shared/utilities/utilities.type-setting';
 @import 'shared/utilities/utilities.display';
-@import 'shared/utilities/utilities.position';
 @import 'shared/utilities/utilities.flexbox';
 @import 'shared/utilities/utilities.images';
+@import 'shared/utilities/utilities.inputs';
+@import 'shared/utilities/utilities.margins';
+@import 'shared/utilities/utilities.media-queries';
+@import 'shared/utilities/utilities.padding';
+@import 'shared/utilities/utilities.position';
 @import 'shared/utilities/utilities.sizing';
+@import 'shared/utilities/utilities.text-alignment';
+@import 'shared/utilities/utilities.type-setting';
 
 // Custom
 @import 'custom/settings/settings.global';
 @import 'custom/components/components.landing-page';
 @import 'custom/components/components.collection-list-item';
+@import 'custom/components/components.navbar';

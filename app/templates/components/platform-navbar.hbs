@@ -20,7 +20,7 @@
       <div class="u-flex u-items-center">
         {{search-bar search=(route-action 'search')}}
 
-        <div class="c-navbar__nav-links u-ta-center u-border-right u-px2">
+        <div class="u-ta-center u-border-right u-px2">
           {{#link-to "datasets.request" class="u-tc-secondary"}}
             {{fa-icon "clipboard"}}
             <span class="u-fs1 u-px1">Request Data</span>
@@ -28,7 +28,7 @@
         </div>
 
 
-        <div class="c-navbar__nav-links u-ta-center u-border-right u-px2">
+        <div class="u-ta-center u-border-right u-px2">
           {{#link-to "datasets.register" class="u-tc-secondary" }}
             {{fa-icon "file-text"}}
             <span class="u-fs1 u-px1">Register Data</span>
@@ -50,9 +50,9 @@
           <div class="navbar-button">
             {{#active-link}}
               {{#if isRootRoute}}
-                {{#link-to 'users.signup' class="valign-wrapper primary-action" invokeAction=(action 'trackCreateAccount' 'DISCOVER NAV')}}CREATE ACCOUNT{{/link-to}}
+                {{#link-to 'users.signup' class="valign-wrapper primary-action" invokeAction=(action 'trackCreateAccount' 'discover_landingpage_navbar_createAccount')}}CREATE ACCOUNT{{/link-to}}
               {{else}}
-                {{#link-to 'users.signup' class="valign-wrapper primary-action" invokeAction=(action 'trackCreateAccount' 'OPENPAGE NAV')}}CREATE ACCOUNT{{/link-to}}
+                {{#link-to 'users.signup' class="valign-wrapper primary-action" invokeAction=(action 'trackCreateAccount' 'discover_openpage_navbar_createAccount')}}CREATE ACCOUNT{{/link-to}}
               {{/if}}
             {{/active-link}}
           </div>

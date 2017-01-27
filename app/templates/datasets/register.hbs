@@ -1,24 +1,27 @@
-<div id="register-form" class="grid-wrapper">
+<div class="grid-wrapper">
   <h5 class="u-fs2 u-tc-secondary">Register Data</h5>
   <div class="grid">
     <div class="grid__col grid__col--3-of-3">
       <div class="c-card u-p3">
-          <div class="u-ta-center u-mb4">
-            <h2 class="u-fs4 u-mb1">Got data to share?</h2>
-            <h4 class="u-fw-thin u-tc-secondary"><em>Make it visible for other researchers</em></h4>
-          </div>
+
+        <div class="u-ta-center u-mb4">
+          <h2 class="u-fs4 u-mb1">Got data to share?</h2>
+          <h4 class="u-fw-thin u-tc-secondary"><em>Make it visible for other researchers</em></h4>
+        </div>
+
         <div class="grid">
           <div class="grid__col grid__col--1-of-2">
             <h4 class="u-tc-red">How do I register a dataset?</h4>
+
             <div class="grid">
-            
+
               <div class="grid__col grid__col--am grid__col--1-of-6 grid__col--s-1-of-3 grid__col--m-1-of-3 u-ta-right">
                 <span class="u-tc-red u-fs4">1</span>
               </div>
               <div class="grid__col grid__col--am grid__col--5-of-6 grid__col--s-2-of-3 grid__col--m-2-of-3 u-mb1">
                 <p class="u-mb0 u-pr4">Fill in the simple registration form. Add a title, description and url link to the dataset.</p>
               </div>
-              
+
               <div class="grid__col grid__col--am grid__col--1-of-6 grid__col--s-1-of-3 grid__col--m-1-of-3 u-ta-right">
                 <span class="u-tc-red u-fs4">2</span>
               </div>
@@ -32,43 +35,41 @@
               <div class="grid__col grid__col--am grid__col--5-of-6 grid__col--s-2-of-3 grid__col--m-2-of-3 u-mb1">
                 <p class="u-mb0 u-pr4">By listing your dataset you can help improve research.</p>
               </div>
+            </div>
           </div>
-        </div>
 
-        <div class="grid__col grid__col--1-of-2">
-          <h4 class="u-tc-red">Registation form</h4>
-              <form>
-                {{validated-input
-                  type="text"
-                  value=title
-                  errors=errors.title
-                  placeholder="Add a title for your dataset."
-                  action=addDataset
-                }}
-                {{validated-input
-                  type="textarea"
-                  value=description
-                  errors=errors.description
-                  placeholder="A short description of the dataset. You can include assay type, platform used, tissue source, associated diseases and ethnicity of patients."
-                  action=addDataset
-                  textarea="true"
-                }}
-                {{validated-input
-                  type="url"
-                  value=url
-                  errors=errors.url
-                  placeholder="A link to the dataset if available"
-                  action=addDataset
-                }}
-              <div>
-                {{async-button
-                  class="btn bg-register white-text"
-                  action=(action 'addDataset')
-                  default="Register Dataset"
-                  pending="Submitting..."
-                  disableWhen=isInvalid
-                }}
-              </div>
+          <div class="grid__col grid__col--1-of-2">
+            <h4 class="u-tc-red">Registation form</h4>
+            <form>
+              {{validated-input
+                type="text"
+                value=title
+                errors=errors.title
+                placeholder="Add a title for your dataset."
+                action=addDataset
+              }}
+              {{validated-input
+                type="textarea"
+                value=description
+                errors=errors.description
+                placeholder="A short description of the dataset. You can include assay type, platform used, tissue source, associated diseases and ethnicity of patients."
+                action=addDataset
+                textarea=true
+              }}
+              {{validated-input
+                type="url"
+                value=url
+                errors=errors.url
+                placeholder="A link to the dataset if available"
+                action=addDataset
+              }}
+              {{async-button
+                class="c-btn c-btn--red c-btn--shadow"
+                action=(action 'addDataset')
+                default="Register Dataset"
+                pending="Submitting..."
+                disableWhen=isInvalid
+              }}
             </form>
           </div>
         </div>

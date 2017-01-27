@@ -1,38 +1,41 @@
 import Ember from 'ember';
 
-export default Ember.Component.extend({
+const { Component, computed, get, setProperties, isEmpty } = Ember;
+
+export default Component.extend({
   errors: null,
   isActive: false,
   hasBeenFocused: false,
-
-  showValid: function() {
-    return (this.get('hasBeenFocused') || this.get('formSubmitted')) && Ember.isEmpty(this.get('errors'));
-  }.property('hasBeenFocused', 'errors', 'formSubmitted'),
-
-  showInvalid: function() {
-    return (this.get('hasBeenFocused') || this.get('formSubmitted')) && !Ember.isEmpty(this.get('errors'));
-  }.property('hasBeenFocused', 'errors', 'formSubmitted'),
-
-  classNames: 'input-container',
+  classNames: ['u-mb3'],
   classNameBindings: ['isActive:active', 'showValid:valid', 'showInvalid:invalid'],
 
+  showValid: computed('hasBeenFocused', 'errors', 'formSubmitted', function() {
+    return (get(this, 'hasBeenFocused') || get(this, 'formSubmitted')) && isEmpty(get(this, 'errors'));
+  }),
+
+  showInvalid: computed('hasBeenFocused', 'errors', 'formSubmitted', function() {
+    return (get(this, 'hasBeenFocused') || get(this, 'formSubmitted')) && !isEmpty(get(this, 'errors'));
+  }),
+
   actions: {
-    toggleMarkdownModal: function() {
-      this.toggleProperty('isShowingMarkdownModal');
-    },
-    focusedIn: function() {
-      this.set('defaultPlaceholder', this.get('placeholder'));
-      this.set('placeholder', '');
-      this.set('isActive', true);
+    focusedIn() {
+      setProperties(this, {
+        'defaultPlaceholder': get(this, 'placeholder'),
+        'placeholder': '',
+        'isActive': true
+      });
       this.sendAction();
     },
-    focusedOut: function() {
-      this.set('hasBeenFocused', true);
-      this.set('placeholder', this.get('defaultPlaceholder'));
-      this.set('isActive', false);
+
+    focusedOut() {
+      setProperties(this, {
+        'placeholder': get(this, 'defaultPlaceholder'),
+        'hasBeenFocused': true,
+        'isActive': false
+      });
     },
-    submitForm: function() {
-      this.sendAction('submitForm');
-    }
+
+    submitForm() { this.sendAction('submitForm'); },
+    toggleMarkdownModal() { this.toggleProperty('isShowingMarkdownModal'); }
   }
 });
