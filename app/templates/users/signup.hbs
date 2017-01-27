@@ -27,18 +27,16 @@
         submit=(action 'signupAndAuthenticate')
       }}
       {{validated-input
-        type=type
+        type="password"
         value=password
         password=true
         errors=errors.password
         placeholder="Password"
         helpText="Must be at least 8 characters and include an uppercase letter or number."
-        showPassword=showPassword
+        showPasswordButton=true
         submit=(action 'signupAndAuthenticate')
       }}
 
-      <input type="checkbox" id="showPassword" onClick={{action 'toggleCheckbox'}} >
-      <label for="showPassword">Show password</label>
       <span>Password strength: <span class="{{strength}}">{{strength}}</span></span>
       {{async-button
         class="c-btn c-btn--primary c-btn--shadow"

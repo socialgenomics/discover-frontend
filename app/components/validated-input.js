@@ -6,8 +6,10 @@ export default Component.extend({
   errors: null,
   isActive: false,
   hasBeenFocused: false,
+  showPassword: false,
   classNames: ['u-mb3'],
   classNameBindings: ['isActive:active'],
+
 
   isValid: computed('hasBeenFocused', 'errors', function() {
     return (get(this, 'hasBeenFocused')) && isEmpty(get(this, 'errors'));
@@ -29,8 +31,13 @@ export default Component.extend({
         'isActive': false
       });
     },
+    togglePasswordVisibility() {
+      this.toggleProperty('showPassword');
+      get(this,'showPassword') === true ? set(this, 'type', 'text') : set(this, 'type', 'password');
+    },
 
     submitForm() { get(this, 'submit')(); },
+
     toggleMarkdownModal() { this.toggleProperty('isShowingMarkdownModal'); }
   }
 });

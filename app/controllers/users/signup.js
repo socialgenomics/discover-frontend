@@ -1,11 +1,10 @@
 import Ember from 'ember';
 import EmberValidations from 'ember-validations';
-import ENV from 'repositive/config/environment';
 import { validator } from 'ember-validations';
 import { isBadRequestError } from 'ember-ajax/errors';
 import FlashMessageMixin from 'repositive/mixins/flash-message-mixin';
 
-const{ assign, get, getProperties, set, setProperties, computed, Controller, inject: { service } } = Ember;
+const{ assign, get, getProperties, set, computed, Controller, inject: { service } } = Ember;
 
 export default Controller.extend(EmberValidations, FlashMessageMixin, {
   session: service(),
@@ -14,7 +13,6 @@ export default Controller.extend(EmberValidations, FlashMessageMixin, {
   fullName: null,
   email: null,
   password: null,
-  showPassword: false,
   loading: false,
   // number, capital letter and special character
   passwordPatterns: [/\d/, /[A-Z]/, /[!,@,#,$,%,^,&,*,?,_,~,-,(,)]/],
@@ -62,10 +60,6 @@ export default Controller.extend(EmberValidations, FlashMessageMixin, {
     return get(this, 'loading') || !get(this, 'isValid');
   }),
 
-  type: computed('showPassword', function() {
-    return get(this, 'showPassword') ? 'text' : 'password';
-  }),
-
   strength: computed('password', 'errors.password.length', function () {
     if ( get(this, 'errors.password.length') > 0) {
       return 'weak';
@@ -102,10 +96,6 @@ export default Controller.extend(EmberValidations, FlashMessageMixin, {
         //     this._displayMessage(err);
         //   });
       }
-    },
-
-    toggleCheckbox() {
-      this.toggleProperty('showPassword');
     }
   },
 

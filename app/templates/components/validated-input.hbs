@@ -12,6 +12,9 @@
     <a class="u-fs0" {{action "toggleMarkdownModal"}}>How to format text with Markdown?</a>
   {{/unless}}
 {{else}}
+  {{#if showPasswordButton}}
+    <a class="u-ta-right u-block"{{action 'togglePasswordVisibility'}}>{{#if showPassword}} Hide Password {{else}} Show Password {{/if}}</a>
+  {{/if}}
   {{input
     value=value
     focus-in="focusedIn"
