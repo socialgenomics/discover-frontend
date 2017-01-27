@@ -42,6 +42,12 @@ export default Component.extend({
         value: true
       });
       return;
+      get(this, 'metrics').trackEvent({
+        category: 'discover_openpage_dataset',
+        action: 'attempted favourite',
+        label: currentModel.id,
+        value: true
+      });
     }
     if (!get(this, 'isSubmitting')) {
       if (favourite) {
