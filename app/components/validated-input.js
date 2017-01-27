@@ -7,7 +7,7 @@ export default Component.extend({
   isActive: false,
   hasBeenFocused: false,
   showPassword: false,
-  classNames: ['u-mb3'],
+  classNames: ['c-validated-input'],
   classNameBindings: ['isActive:active'],
 
 
