@@ -1,12 +1,9 @@
 /* ==========================================================================
-   #OPEN SEARCH FILTER OVERLAY
+   #TRANSPARENT OVERLAY
    ========================================================================== */
-.c-filter-overlay {
+.c-overlay {
   position: absolute;
-  left: 0;
-  top: 0;
-  min-height: 100%;
-  width: $sidebar-width;
+  height: 100%;
+  width: 100%;
   background-color: transparentize($color-light-bluegrey, .1);
-  align-items: center;
 }
