@@ -1,36 +1,27 @@
 {{#link-to 'collections.collection' collection.id classNames="feed-item-component"}}
-  <main class="col m12">
-    <div class="card dataset card-comp">
+  <div class="c-card u-mb3 c-col-li-item">
+    <section class="grid__col grid__col--1-of-5 grid__col--am u-px3 u-py1 u-bc-light-bluegrey u-ta-center u-inherit-height">
+      <div class="u-inherit-height u-flex u-flex-column u-items-center u-justify-center">
+        {{fa-icon "database" size=3 class='u-tc-secondary u-p1'}}
+        <p class="u-mb0">Collection</p>
+      </div>
+    </section>
 
-      <section class="card-type-section col m2">
-        {{fa-icon "book" class="color-light-gull-gray-text"}}
-        <p>Collection</p>
-      </section>
+    <section class="grid__col grid__col--1-of-5 grid__col--am u-ta-center u-px2 u-py1 u-inherit-height">
+      <div class="u-inherit-height u-flex u-flex-column u-items-center u-justify-center">
+        <img src="/assets/images/favicon.ico" class="c-img--src-logo">
+        <p class="u-fs0 u-mb0 u-fw-bold u-p1">Repositive</p>
+      </div>
+    </section>
 
-      <section class="card-user-section col m3">
-        {{#if collection.userId.displayName}}
-          {{#link-to 'user' collection.userId.id}}
-            <img src={{collection.userId.userProfile.avatar}} width="35px" height="35px">
-            <p>{{collection.userId.displayName}}</p>
-          {{/link-to}}
-        {{else}}
-          <div class="">
-            <div class="round-img">
-              <img src="/assets/images/favicon.ico" class="data-icon">
-            </div>
-            <h4 class="data-title">Repositive</h4>
-          </div>
-        {{/if}}
-      </section>
-
-      <section class="card-content-section col m7">
-        {{#link-to 'collections.collection' collection.id classNames="data-title"}}
-          <h4 class="data-title">{{collection.name}}</h4>
+    <section class="grid__col grid__col--3-of-5 grid__col--am u-px2 u-inherit-height c-col-li-item__divider c-col-li-item__resp-text">
+      <div class="u-inherit-height u-flex u-flex-column u-justify-center u-py1">
+        {{#link-to 'collections.collection' collection.id}}
+          <h4 class="u-fs2 u-mb1">{{collection.name}}</h4>
         {{/link-to}}
-        {{collection-summary-fallback
-          summary=collection.properties.summary
-          description=collection.description}}
-      </section>
-    </div>
-  </main>
+        <p class="u-mb0">{{if collection.properties.summary collection.properties.summary collection.description}}</p>
+      </div>
+    </section>
+
+  </div>
 {{/link-to}}
