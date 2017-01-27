@@ -1,21 +1,27 @@
 {{#link-to 'datasources.source' source.id classNames="feed-item-component"}}
   <div class="c-card u-mb3 c-col-li-item">
-    <section class="grid__col grid__col--1-of-5 grid__col--am u-px3 u-py2 u-bc-light-bluegrey u-ta-center u-full-height">
-      {{fa-icon "database" size=3 class='u-tc-secondary u-p1'}}
-      <p class="u-mb0">Data Source</p>
+    <section class="grid__col grid__col--1-of-5 grid__col--am u-px3 u-py1 u-bc-light-bluegrey u-ta-center u-full-height">
+      <div class="u-full-height u-flex u-flex-column u-items-center u-justify-center">
+        {{fa-icon "database" size=3 class='u-tc-secondary u-p1'}}
+        <p class="u-mb0">Data Source</p>
+      </div>
     </section>
 
-    <section class="grid__col grid__col--1-of-5 grid__col--am u-px2 u-py1 u-ta-center u-border-right">
-      {{#if source.properties.logo}}
-        <img class="c-img--src-logo" src={{source.properties.logo}}>
-      {{/if}}
-      <p class="fs0 u-mb0 fw-bold">{{source-name-fallback model=source}}</p>
+    <section class="grid__col grid__col--1-of-5 grid__col--am u-ta-center u-px2 u-py1 u-full-height">
+      <div class="u-full-height u-flex u-flex-column u-items-center u-justify-center">
+        {{#if source.properties.logo}}
+          <img class="c-img--src-logo" src={{source.properties.logo}}>
+        {{/if}}
+        <p class="u-fs0 u-mb0 u-pt1 u-fw-bold">{{source-name-fallback model=source}}</p>
+      </div>
     </section>
 
-    <section class="grid__col grid__col--3-of-5 grid__col--am u-ta-left u-py1 u-px2">
-      {{collection-summary-fallback
-        summary=source.properties.summary
-        description=source.description}}
+    <section class="grid__col grid__col--3-of-5 grid__col--am u-px2 u-full-height c-col-li-item__divider c-col-li-item__resp-text">
+      <div class="u-full-height u-flex u-items-center">
+        {{collection-summary-fallback class=""
+                                      summary=source.properties.summary
+                                      description=source.description}}
+      </div>
     </section>
 
   </div>
