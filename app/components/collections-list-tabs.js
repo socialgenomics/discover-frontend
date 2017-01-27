@@ -1,7 +1,7 @@
 import Ember from 'ember';
-const { computed, get } = Ember;
+const { Component, computed, get } = Ember;
 
-export default Ember.Component.extend({
+export default Component.extend({
   isCollections: computed(function () {
     return get(this, 'active') === 'collections';
   }),
