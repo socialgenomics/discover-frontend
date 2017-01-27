@@ -1,0 +1,8 @@
+.c-call-to-action-banner {
+  background-color: mix($color-primary-teal, $color-white, 20);
+  left: 0;
+  position: fixed;
+  top: $global-spacing-unit-large;
+  width: 100vw;
+  z-index: 1;
+}

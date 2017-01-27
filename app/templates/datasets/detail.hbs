@@ -1,18 +1,13 @@
 
 <!-- CSS Refactor: still need to account for Open Dataset styles -->
 {{#unless session.isAuthenticated}}
-  {{#full-page-notification customClassName='create-account-notification'}}
-    <h3>Search through <strong>{{datasetsNumber}}</strong> human genomic datasets</h3>
-    {{#link-to 'root' class='btn waves-effect teal white-text' invokeAction=(action 'trackLinkEvent')}}
-      Search now
-    {{/link-to}}
-  {{/full-page-notification}}
+  {{full-page-notification trackLinkEvent=trackLinkEvent datasetsNumber=datasetsNumber}}
 {{/unless}}
 
 <div class="grid-wrapper">
   <div class="grid">
     <div class="grid__col grid__col--3-of-3">
-      <div class="c-card c-card-detail-view u-pos-relative {{unless session.isAuthenticated 'dataset-notification-margin' ''}}">
+      <div class="c-card c-card-detail-view u-pos-relative {{unless session.isAuthenticated 'u-mt5' ''}}">
       <div class="c-card-header u-w100 u-pos-absolute u-bc-off-white"></div>
         <div class="grid">
           <div class="grid__col grid__col--7-of-12 u-border-right">
