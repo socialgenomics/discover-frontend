@@ -1,17 +1,17 @@
-<div class="c-card u-ta-center u-border-square">
-  <ul class="o-list-inline o-list-flush-left u-mb0 u-flex u-tc-primary">
+<div class="c-card u-ta-center u-border-square u-mb0">
+  <ul class="o-list-inline o-list-flush-left u-flex u-tc-primary u-mb0">
 
     {{#link-to "collections" class="u-tc-primary u-flex-auto" classNameBindings='isDatasources:u-bc-off-white'}}
-      <li class="o-list-inline__item u-p1 fs3">
+      <li class="o-list-inline__item u-p1 u-fs3">
         {{fa-icon "book"}}
-        Collections <span class="fw-med u-px1">{{stats.repositive_collections}}</span>
+        Collections <span class="u-fw-med u-px1">{{stats.repositive_collections}}</span>
       </li>
     {{/link-to}}
 
     {{#link-to "datasources" class="u-tc-primary u-flex-auto u-border-left" classNameBindings='isCollections:u-bc-off-white'}}
-      <li class="o-list-inline__item u-p1 fs3">
+      <li class="o-list-inline__item u-p1 u-fs3">
         {{fa-icon "database"}}
-        Data Sources <span class="fw-med u-px1">{{stats.datasources}}</span>
+        Data Sources <span class="u-fw-med u-px1">{{stats.datasources}}</span>
       </li>
     {{/link-to}}
 
