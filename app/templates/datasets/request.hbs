@@ -1,39 +1,44 @@
-<div id="request-form" class="grid-wrapper">
+<div class="grid-wrapper">
   <h5 class="u-fs2 u-tc-secondary">Request Data</h5>
   <div class="grid">
     <div class="grid__col grid__col--12-of-12">
       <div class="c-card u-p3">
-      <div class="u-ta-center">
-        <h2 class="u-fs4 u-mb1">Can't find the data on REPOSITIVE?</h2>
-        <h4 class="u-fw-thin"><em>Ask our community for help.</em></h4>
-      </div>
-      <div>
-        <div class="grid">
-          <div class="grid__col grid__col--6-of-12">
-            <h4 class="u-tc-blue">How to make request?</h4>
-            <div class="grid">
-            <div class="grid__col grid__col--am grid__col--1-of-6 grid__col--s-1-of-3 grid__col--m-1-of-3 u-ta-right">
+        <div class="u-ta-center">
+          <h2 class="u-fs4 u-mb1">Can't find the data on REPOSITIVE?</h2>
+          <h4 class="u-fw-thin"><em>Ask our community for help.</em></h4>
+        </div>
+
+        <div class="grid__col grid__col--6-of-12">
+          <h4 class="u-tc-blue">How to make request?</h4>
+          <div class="grid">
+
+            <div class="grid__col grid__col--am grid__col--1-of-6 grid__col--s-1-of-3 grid__col--m-1-of-3 u-ta-left">
               <span class="u-tc-blue u-fs4">1</span>
             </div>
+
             <div class="grid__col grid__col--am grid__col--5-of-6 grid__col--s-2-of-3 grid__col--m-2-of-3 u-mb1">
               <p class="u-mb0 u-pr4 ">Fill in the request form with information about the data you are looking for.</p>
             </div>
 
-            <div class="grid__col grid__col--am grid__col--1-of-6 grid__col--s-1-of-3 grid__col--m-1-of-3 u-ta-right">
+            <div class="grid__col grid__col--am grid__col--1-of-6 grid__col--s-1-of-3 grid__col--m-1-of-3 u-ta-left">
               <span class="u-tc-blue u-fs4">2</span>
             </div>
+
             <div class="grid__col grid__col--am grid__col--5-of-6 grid__col--s-2-of-3 grid__col--m-2-of-3 u-mb1">
               <p class="u-mb0 u-pr4">Your request will be visible and searchable on REPOSITIVE.</p>
             </div>
 
-            <div class="grid__col grid__col--am grid__col--1-of-6 grid__col--s-1-of-3 grid__col--m-1-of-3 u-ta-right">
+            <div class="grid__col grid__col--am grid__col--1-of-6 grid__col--s-1-of-3 grid__col--m-1-of-3 u-ta-left">
               <span class="u-tc-blue u-fs4">3</span>
             </div>
+
             <div class="grid__col grid__col--am grid__col--5-of-6 grid__col--s-2-of-3 grid__col--m-2-of-3 u-mb1">
               <p class="u-mb0 u-pr4"> This will help you to find the data you are looking for and initiate collaborations.</p>
             </div>
+
           </div>
         </div>
+
         <div class="grid__col grid__col--6-of-12">
           <h4 class="u-tc-blue">Request form</h4>
           <form>
@@ -50,20 +55,16 @@
               errors=errors.description
               placeholder="Describe the dataset you're looking for. You can include ethnicity of patients, number of samples, assay type or associated diseases."
               action=addDataset
-              textarea="true"
+              textarea=true
             }}
-            <div>
-              {{async-button
-                class="btn bg-request white-text"
-                action=(action 'addRequest')
-                default="Submit Request"
-                pending="Submitting..."
-                disableWhen=isInvalid
-              }}
-            </div>
+            {{async-button
+              class="c-btn c-btn--blue c-btn--shadow"
+              action=(action 'addRequest')
+              default="Submit Request"
+              pending="Submitting..."
+              disableWhen=isInvalid
+            }}
           </form>
-          </div>
-        </div>
         </div>
       </div>
     </div>

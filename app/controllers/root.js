@@ -29,11 +29,10 @@ export default Controller.extend({
         class: 'fadeIn'
       });
     },
-    trackCreateAccount(route) {
+    trackCreateAccount(eventName) {
       get(this, 'metrics').trackEvent({
-        category: route,
-        action: 'create account button',
-        label: 'clicked'
+        category: eventName,
+        action: 'button clicked'
       });
     },
     search(serializedTree) {

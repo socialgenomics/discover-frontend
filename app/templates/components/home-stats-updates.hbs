@@ -1,12 +1,13 @@
 <div class="grid__col grid__col--3-of-3">
   {{dataset-number-stats datasetsNumber=datasetsNumber}}
 </div>
-<section class="featured-section center-align">
-  <div class="grid__col grid__col--1-of-2">
+
+<div class="grid__col grid__col--1-of-2">
+  <div class="c-card c-featured-card u-p2">
     {{#link-to 'collections' invokeAction=(action 'trackUpdatesHeaders' 'collections')}}
-      <h3>
+      <h3 class="u-fs3 u-ta-center u-tc-secondary u-border-bottom u-pb2 u-mb1">
         {{fa-icon "book"}}
-        Collections <span class="stats-text thin">{{stats.repositive_collections}}</span>
+        Collections <span>{{stats.repositive_collections}}</span>
       </h3>
     {{/link-to}}
 
@@ -18,12 +19,14 @@
       }}
     {{/each}}
   </div>
+</div>
 
-  <div class="grid__col grid__col--1-of-2">
+<div class="grid__col grid__col--1-of-2">
+  <div class="c-card c-featured-card u-p2">
     {{#link-to 'datasources' invokeAction=(action 'trackUpdatesHeaders' 'datasources')}}
-      <h3>
+      <h3 class="u-fs3 u-ta-center u-tc-secondary u-border-bottom u-pb2 u-mb1">
         {{fa-icon "database"}}
-        Data Sources <span class="stats-text thin">{{stats.datasources}}</span>
+        Data Sources <span>{{stats.datasources}}</span>
       </h3>
     {{/link-to}}
 
@@ -31,4 +34,4 @@
       {{featured-list-item model=datasource type='datasource'}}
     {{/each}}
   </div>
-</section>
+</div>

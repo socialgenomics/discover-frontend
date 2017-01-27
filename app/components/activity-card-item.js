@@ -11,7 +11,7 @@ export default Component.extend({
       type = model.constructor.modelName;
     }
     if (type === 'dataset' && get(model, 'user_id') !== null) {
-      type = "registration";
+      type = 'registration';
     }
     return type;
   })

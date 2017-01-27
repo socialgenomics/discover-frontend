@@ -81,7 +81,7 @@ export default Controller.extend(
 
       set(this, 'didRegister', true);
       this._addFlashMessage('Dataset successfully registered', 'success');
-      this._trackEvent('dataset', 'register', id);
+      this._trackEvent('discover_homeauth_datasetRegister', 'registered', id);
       this.transitionToRoute('datasets.detail', id);
     },
 

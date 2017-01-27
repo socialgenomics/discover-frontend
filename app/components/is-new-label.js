@@ -4,5 +4,5 @@ const { Component } = Ember;
 
 export default Component.extend({
   tagName: 'span',
-  classNames: ['red-text']
+  classNames: ['u-tc-red']
 });

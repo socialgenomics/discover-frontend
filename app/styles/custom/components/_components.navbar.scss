@@ -9,17 +9,12 @@
 
 .c-navbar {
   height: $global-spacing-unit-large;
-  font-family: $font-stack-varela;
 }
 
 .c-navbar__search-input {
   height: $global-spacing-unit-large;
   width: 300px;
   font-family: $font-stack-roboto;
-}
-
-.c-navbar__nav-links {
-  text-transform: uppercase;
 }
 
 .c-navbar__site-logo {
