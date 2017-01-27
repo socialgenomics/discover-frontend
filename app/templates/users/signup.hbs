@@ -1,6 +1,5 @@
 <div class="grid-wrapper">
   <section class="grid">
-
     <form class="grid__col grid__col--centered grid__col--6-of-12">
 
       <div class="u-flex u-justify-center u-mb3">
@@ -40,7 +39,7 @@
       <p>Password strength: <span class="{{strength}}">{{strength}}</span></p>
 
       {{async-button
-        class="c-btn c-btn--primary c-btn--shadow u-mb3"
+        class="c-btn c-btn--primary c-btn--shadow u-mb3 u-full-width"
         action=(action 'signupAndAuthenticate')
         default="Create Your Account"
         pending="Submitting..."
