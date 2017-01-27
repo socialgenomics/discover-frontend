@@ -46,8 +46,11 @@
 
             <div class="c-divider c-divider-light-bg u-mb2"></div>
 
-            <div class="u-px2 u-pb2">
-              <ul class="o-list-flush-left">
+            <div class="u-pb2 u-pos-relative">
+              {{#unless session.isAuthenticated}}
+                {{create-account-call-to-action}}
+              {{/unless}}
+              <ul class="u-px2 o-list-flush-left">
                 {{#if dataset.userId}}
                   <li class="u-fs0 u-tc-tertiary">
                     Submitted by: {{#link-to 'user' dataset.userId.id }}<span class="u-fw-med u-fs1">{{dataset.userId.displayName}}</span>{{/link-to}}
@@ -78,7 +81,6 @@
                   <a class="c-btn c-btn--primary c-btn--shadow">{{#if (eq dataset.access 'Open')}}Access Data{{else}}Apply for Access{{/if}}</a>
                 {{/if}}
               </div>
-
             </div>
 
           </div>
@@ -94,14 +96,11 @@
         </div>
 
       </div>
+
     </div>
   </div>
 </div>
 
-<!-- CSS Refactor: still need to account for Open Dataset styles -->
-{{#unless session.isAuthenticated}}
-  {{create-account-call-to-action}}
-{{/unless}}
 
 <!-- CSS Refactor: still need to style modals -->
 {{#if isShowingTagModal}}
