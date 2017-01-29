@@ -70,8 +70,6 @@ export default Route.extend(ApplicationRouteMixin, {
    */
   _getErrorRouteNameFromSearchQuery(searchQuery) {
     const patternMatch = searchQuery.match(/(collection|datasource):.*/) || [];
-    console.log(searchQuery);
-    console.log(searchQuery.match(/(collection|datasource):".*"/));
 
     return `${patternMatch[1] || 'dataset'}s.search-error`;
   },
