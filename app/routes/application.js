@@ -28,32 +28,52 @@ export default Route.extend(ApplicationRouteMixin, {
 
   actions: {
     search(queryString, pageNumber) {
-      const queryTree = QP.parseString(queryString);
-      const collectionPredicate = BT.filter(queryTree, (node) => {
-        return BX.isFilter(node) && node.predicate === 'collection';
-      });
-      const datasourcePredicate = BT.filter(queryTree, (node) => {
-        return BX.isFilter(node) && node.predicate === 'datasource';
-      });
-      this._conditionallyTransition(collectionPredicate, datasourcePredicate, queryString, pageNumber);
-      if (get(this, 'session.isAuthenticated')) {
-        get(this, 'metrics').trackEvent({
-          category: 'discover_homeauth_searchbar',
-          action: 'query',
-          label: queryString
+      try {
+        const queryTree = QP.parseString(queryString);
+        const collectionPredicate = BT.filter(queryTree, (node) => {
+          return BX.isFilter(node) && node.predicate === 'collection';
         });
-      } else {
-        get(this, 'metrics').trackEvent({
-          category: 'discover_openpage_searchbar',
-          action: 'query',
-          label: queryString
+        const datasourcePredicate = BT.filter(queryTree, (node) => {
+          return BX.isFilter(node) && node.predicate === 'datasource';
         });
+
+        this._conditionallyTransition(collectionPredicate, datasourcePredicate, queryString, pageNumber);
+
+        if (get(this, 'session.isAuthenticated')) {
+          get(this, 'metrics').trackEvent({
+            category: 'discover_homeauth_searchbar',
+            action: 'query',
+            label: queryString
+          });
+        } else {
+          get(this, 'metrics').trackEvent({
+            category: 'discover_openpage_searchbar',
+            action: 'query',
+            label: queryString
+          });
+        }
+      } catch(error) {
+        this.transitionTo(this._getErrorRouteNameFromSearchQuery(queryString));
       }
     },
 
     toggleModal() {
       this.controllerFor('application').toggleProperty('isShowingModal');
     }
+  },
+
+  /**
+   * @desc - returns search error route name from search query for collections, datasources or datasets
+   * @param {String} searchQuery
+   * @returns {string} - route name
+   * @private
+   */
+  _getErrorRouteNameFromSearchQuery(searchQuery) {
+    const patternMatch = searchQuery.match(/(collection|datasource):.*/) || [];
+    console.log(searchQuery);
+    console.log(searchQuery.match(/(collection|datasource):".*"/));
+
+    return `${patternMatch[1] || 'dataset'}s.search-error`;
   },
 
   _conditionallyTransition(collectionPredicate, datasourcePredicate, queryString, pageNumber) {
