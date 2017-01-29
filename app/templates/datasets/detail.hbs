@@ -4,10 +4,10 @@
   {{full-page-notification trackLinkEvent=trackLinkEvent datasetsNumber=datasetsNumber}}
 {{/unless}}
 
-<div class="grid-wrapper">
+<div class="grid-wrapper {{unless session.isAuthenticated 'u-pt5' ''}}">
   <div class="grid">
     <div class="grid__col grid__col--3-of-3">
-      <div class="c-card c-card-detail-view u-pos-relative {{unless session.isAuthenticated 'u-mt5' ''}}">
+      <div class="c-card c-card-detail-view u-pos-relative">
       <div class="c-card-header u-w100 u-pos-absolute u-bc-off-white"></div>
         <div class="grid">
           <div class="grid__col grid__col--7-of-12 u-border-right">
