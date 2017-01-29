@@ -47,7 +47,7 @@
       {{/unless}}
     </div>
       <section class="u-flex u-flex-row-reverse">
-          <div class="c-navbar__button navbar-button">
+          <div class="c-navbar__button u-px2">
             {{#active-link}}
               {{#if isRootRoute}}
                 {{#link-to 'users.signup' class="u-tc-primary valign-wrapper primary-action" invokeAction=(action 'trackCreateAccount' 'discover_landingpage_navbar_createAccount')}}CREATE ACCOUNT{{/link-to}}
@@ -56,17 +56,17 @@
               {{/if}}
             {{/active-link}}
           </div>
-          <div class="c-navbar__button button-divider">
+          <div class="c-navbar__button u-px2">
             {{#active-link}}
               {{#link-to 'users.login' class="u-tc-primary valign-wrapper"}}LOGIN{{/link-to}}
             {{/active-link}}
           </div>
-          <div class="c-navbar__button">
+          <div class="c-navbar__button u-px2">
             {{#active-link}}
               <a href="http://blog.repositive.io/" class="u-tc-primary valign-wrapper">BLOG</a>
             {{/active-link}}
           </div>
-          <div class="c-navbar__button">
+          <div class="c-navbar__button u-px2">
             {{#active-link}}
               <a href="http://repositive.io/about" class="u-tc-primary valign-wrapper">ABOUT</a>
             {{/active-link}}
