@@ -14,7 +14,7 @@
 {{else}}
   {{#if showPasswordButton}}
     <a class="c-show-pw-btn" {{action 'togglePasswordVisibility'}}>{{#if showPassword}} Hide Password {{else}} Show Password {{/if}}</a>
-    {{password-strength strength=passwordStrength}}
+    {{#if value}}{{password-strength strength=passwordStrength}}{{/if}}
   {{/if}}
   {{input
     value=value
