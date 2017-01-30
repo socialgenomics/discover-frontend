@@ -103,7 +103,7 @@ describe('UsersSignupController', function() {
       const controller = this.subject();
       set(controller, 'password', '');
 
-      expect(get(controller, 'strength')).to.be.equal('weak');
+      expect(get(controller, 'passwordStrength')).to.be.equal('weak');
     });
 
     it('should be equal "medium"', function () {
@@ -112,7 +112,7 @@ describe('UsersSignupController', function() {
 
       passwords.forEach(password => {
         set(controller, 'password', password);
-        expect(get(controller, 'strength')).to.be.equal('medium');
+        expect(get(controller, 'passwordStrength')).to.be.equal('medium');
       });
     });
 
@@ -122,7 +122,7 @@ describe('UsersSignupController', function() {
 
       passwords.forEach(password => {
         set(controller, 'password', password);
-        expect(get(controller, 'strength')).to.be.equal('strong');
+        expect(get(controller, 'passwordStrength')).to.be.equal('strong');
       });
     });
   });
@@ -133,7 +133,7 @@ describe('UsersSignupController', function() {
 
       set(controller, 'password', 'aaaaaaaa');
       expect(get(controller, 'errors.password.length')).to.be.equal(1);
-      expect(get(controller, 'errors.password')[0]).to.be.equal('Please enter a number or capital letter.');
+      expect(get(controller, 'errors.password')[0]).to.be.equal('Must include a number or capital letter.');
     });
 
     it('should not return error', function () {

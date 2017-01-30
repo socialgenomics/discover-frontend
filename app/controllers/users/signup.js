@@ -61,7 +61,7 @@ export default Controller.extend(EmberValidations, FlashMessageMixin, {
     return get(this, 'loading') || !get(this, 'isValid');
   }),
 
-  strength: computed('password', 'errors.password.length', function () {
+  passwordStrength: computed('password', 'errors.password.length', function () {
     if ( get(this, 'errors.password.length') > 0) {
       return 'weak';
     }
@@ -72,7 +72,7 @@ export default Controller.extend(EmberValidations, FlashMessageMixin, {
   actions: {
     signupAndAuthenticate() {
       if (!get(this, 'isDisabled')) {
-        set(this, 'loading', true );
+        set(this, 'loading', true);
         const credentials = this._buildCredentials();
         /*
           Signup with repositive.

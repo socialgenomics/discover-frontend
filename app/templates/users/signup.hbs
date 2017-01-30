@@ -33,9 +33,8 @@
         helpText="Minimum 8 characters. Must include an uppercase letter or number."
         showPasswordButton=true
         submit=(action 'signupAndAuthenticate')
+        passwordStrength=passwordStrength
       }}
-
-      <!-- <p>Password strength: <span class="{{strength}}">{{strength}}</span></p> -->
 
       {{async-button
         class="c-btn c-btn--primary c-btn--shadow u-fs3 u-mb1 u-full-width"
