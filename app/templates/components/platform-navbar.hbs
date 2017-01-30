@@ -8,7 +8,7 @@
       </a>
     {{else}}
       {{#link-to 'root'}}
-        <div class="c-navbar__site-logo">
+        <div class="c-navbar__site-logo u-mr1">
           <img src="/assets/images/logo-full-larger.png" class="c-navbar__site-logo" alt="Repositive DNA logo">
         </div>
       {{/link-to}}
@@ -17,10 +17,10 @@
     <!-- SEARCH -->
     {{#if isAuthenticated}}
 
-      <div class="u-flex u-items-center">
+      <div class="u-flex u-items-center u-content-center">
         {{search-bar search=(route-action 'search')}}
 
-        <div class="u-ta-center u-border-right u-px2">
+        <div class="u-flex-auto-2 u-ta-center u-border-right u-px2">
           {{#link-to "datasets.request" class="u-tc-secondary"}}
             {{fa-icon "clipboard"}}
             <span class="u-fs1 u-px1">Request Data</span>
@@ -28,7 +28,7 @@
         </div>
 
 
-        <div class="u-ta-center u-border-right u-px2">
+        <div class="u-flex-auto-2 u-ta-center u-border-right u-px2">
           {{#link-to "datasets.register" class="u-tc-secondary" }}
             {{fa-icon "file-text"}}
             <span class="u-fs1 u-px1">Register Data</span>

@@ -9,11 +9,12 @@
 
 .c-navbar {
   height: $global-spacing-unit-large;
+  overflow: hidden;
 }
 
 .c-navbar__search-input {
   height: $global-spacing-unit-large;
-  width: 300px;
+  width: 600px;
   font-family: $font-stack-roboto;
 }
 

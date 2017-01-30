@@ -4,6 +4,7 @@ const { Component, get, observer, inject: { service }, set } = Ember;
 
 export default Component.extend({
   queryService: service('query'),
+  classNames: ['u-flex-auto'],
 
   init() {
     this._super(...arguments);
