@@ -46,22 +46,21 @@
                 value=title
                 errors=errors.title
                 placeholder="Add a title for your dataset."
-                action=addDataset
+                submit=(action 'addDataset')
               }}
               {{validated-input
                 type="textarea"
                 value=description
                 errors=errors.description
                 placeholder="A short description of the dataset. You can include assay type, platform used, tissue source, associated diseases and ethnicity of patients."
-                action=addDataset
-                textarea=true
+                submit=(action 'addDataset')
               }}
               {{validated-input
                 type="url"
                 value=url
                 errors=errors.url
                 placeholder="A link to the dataset if available"
-                action=addDataset
+                submit=(action 'addDataset')
               }}
               {{async-button
                 class="c-btn c-btn--red c-btn--shadow"

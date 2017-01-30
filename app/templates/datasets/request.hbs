@@ -47,15 +47,14 @@
               value=title
               errors=errors.title
               placeholder="Name your request"
-              action=addDataset
+              submit=(action 'addRequest')
             }}
             {{validated-input
-              type="text"
+              type="textarea"
               value=description
               errors=errors.description
               placeholder="Describe the dataset you're looking for. You can include ethnicity of patients, number of samples, assay type or associated diseases."
-              action=addDataset
-              textarea=true
+              submit=(action 'addRequest')
             }}
             {{async-button
               class="c-btn c-btn--blue c-btn--shadow"
