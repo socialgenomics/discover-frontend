@@ -50,18 +50,6 @@ describe('UsersSignupController', function() {
     expect(get(controller, 'isDisabled')).to.eql(false);
   });
 
-  it('type is text when showPassword is true', function() {
-    const controller = this.subject();
-    set(controller, 'showPassword', true);
-    expect(get(controller, 'type')).to.eql('text');
-  });
-
-  it('type is password when showPassword is false', function() {
-    const controller = this.subject();
-    set(controller, 'showPassword', false);
-    expect(get(controller, 'type')).to.eql('password');
-  });
-
   it('_buildCredentials returns object with email, pw, first and lastname', function() {
     const controller = this.subject();
     setProperties(controller, {
