@@ -4,12 +4,12 @@
     <!-- LOGO -->
     {{#unless isAuthenticated}}
       <a href="https://repositive.io">
-          <img src="/assets/images/logo-full-larger.png" alt="Repositive DNA logo">
+          <img src="/assets/images/logo-full-larger.png" class="c-navbar__site-logo" alt="Repositive DNA logo">
       </a>
     {{else}}
       {{#link-to 'root'}}
         <div class="c-navbar__site-logo">
-          <img src="/assets/images/logo-full-larger.png" alt="Repositive DNA logo">
+          <img src="/assets/images/logo-full-larger.png" class="c-navbar__site-logo" alt="Repositive DNA logo">
         </div>
       {{/link-to}}
     {{/unless}}
@@ -46,29 +46,29 @@
         </div>
       {{/unless}}
     </div>
-      <section class="open-search-buttons push-right">
-          <div class="navbar-button">
+      <section class="u-fw-med u-full-height u-flex u-flex-row-reverse u-items-center">
+          <div class="c-navbar__button u-p2">
             {{#active-link}}
               {{#if isRootRoute}}
-                {{#link-to 'users.signup' class="valign-wrapper primary-action" invokeAction=(action 'trackCreateAccount' 'discover_landingpage_navbar_createAccount')}}CREATE ACCOUNT{{/link-to}}
+                {{#link-to 'users.signup' class="u-tc-teal" invokeAction=(action 'trackCreateAccount' 'discover_landingpage_navbar_createAccount')}}CREATE ACCOUNT{{/link-to}}
               {{else}}
-                {{#link-to 'users.signup' class="valign-wrapper primary-action" invokeAction=(action 'trackCreateAccount' 'discover_openpage_navbar_createAccount')}}CREATE ACCOUNT{{/link-to}}
+                {{#link-to 'users.signup' class="u-tc-teal" invokeAction=(action 'trackCreateAccount' 'discover_openpage_navbar_createAccount')}}CREATE ACCOUNT{{/link-to}}
               {{/if}}
             {{/active-link}}
           </div>
-          <div class="navbar-button button-divider">
+          <div class="c-navbar__button u-p2 c-divider-vertical">
             {{#active-link}}
-              {{#link-to 'users.login' class="valign-wrapper"}}LOGIN{{/link-to}}
+              {{#link-to 'users.login' class="u-tc-secondary"}}LOGIN{{/link-to}}
             {{/active-link}}
           </div>
-          <div class="navbar-button">
+          <div class="c-navbar__button u-p2">
             {{#active-link}}
-              <a href="http://blog.repositive.io/" class="valign-wrapper">BLOG</a>
+              <a href="http://blog.repositive.io/" class="u-tc-secondary">BLOG</a>
             {{/active-link}}
           </div>
-          <div class="navbar-button">
+          <div class="c-navbar__button u-p2">
             {{#active-link}}
-              <a href="http://repositive.io/about" class="valign-wrapper">ABOUT</a>
+              <a href="http://repositive.io/about" class="u-tc-secondary">ABOUT</a>
             {{/active-link}}
           </div>
       </section>
