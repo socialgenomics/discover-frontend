@@ -1,5 +1,5 @@
 <div class="u-bc-off-white c-navbar-wrapper u-pos-relative u-px2">
-  <nav class="c-navbar u-flex u-justify-between u-items-center">
+  <nav class="c-navbar u-full-height u-flex u-justify-between u-items-center">
 
     <!-- LOGO -->
     {{#unless isAuthenticated}}
@@ -20,7 +20,7 @@
       <div class="u-flex u-items-center u-content-center">
         {{search-bar search=(route-action 'search')}}
 
-        <div class="c-navbar__site-logo u-hide-on-sm-md u-flex-auto-2 u-ta-center u-border-right u-px2">
+        <div class="c-navbar__site-logo u-full-height u-hide-on-sm-md u-flex-auto-2 u-ta-center u-border-right u-p2">
           {{#link-to "datasets.request" class="u-tc-secondary"}}
             {{fa-icon "clipboard"}}
             <span class="u-fs1 u-px1">Request Data</span>
@@ -28,7 +28,7 @@
         </div>
 
 
-        <div class="c-navbar__site-logo u-hide-on-sm-md u-flex-auto-2 u-ta-center u-border-right u-px2">
+        <div class="c-navbar__site-logo u-full-height u-hide-on-sm-md u-flex-auto-2 u-ta-center u-border-right u-p2">
           {{#link-to "datasets.register" class="u-tc-secondary" }}
             {{fa-icon "file-text"}}
             <span class="u-fs1 u-px1">Register Data</span>
