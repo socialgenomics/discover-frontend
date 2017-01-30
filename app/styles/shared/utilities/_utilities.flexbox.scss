@@ -3,7 +3,8 @@
     - Adapted from: https://github.com/basscss/basscss/blob/master/modules/flexbox/index.css
    ========================================================================== */
 
-.u-flex { display: flex }
+.u-flex { display: flex; }
+.u-flex-inline { display: inline-flex; }
 
 // @media (min-width: $breakpoint-small) {
 //   .u-sm-flex { display: flex }

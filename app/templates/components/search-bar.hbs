@@ -1,8 +1,8 @@
-<form {{action "search" query on="submit"}} class="u-tc-secondary u-bc-white u-px2 u-border-left u-border-right u-fs2">
-    {{fa-icon "search"}}
+<form {{action "search" query on="submit"}} class="u-flex-inline u-items-center u-tc-secondary u-bc-white u-px2 u-border-left u-border-right u-fs2">
+    {{fa-icon "search" class="u-mr1"}}
     {{input
       type="text"
-      class="u-border-none u-pl1 c-navbar__search-input"
+      class="u-p0 u-border-none c-navbar__search-input"
       placeholder="title:cancer AND description:lung"
       value=query
       autofocus=true
