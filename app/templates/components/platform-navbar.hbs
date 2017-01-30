@@ -3,12 +3,12 @@
 
     <!-- LOGO -->
     {{#unless isAuthenticated}}
-      <a href="https://repositive.io" class="c-navbar__site-logo">
+      <a href="https://repositive.io" class="c-navbar__element">
         <img src="/assets/images/logo-full-larger.png" alt="Repositive DNA logo">
       </a>
     {{else}}
       {{#link-to 'root'}}
-        <div class="c-navbar__site-logo u-mr1">
+        <div class="c-navbar__element u-mr1">
           <img src="/assets/images/logo-full-larger.png" alt="Repositive DNA logo">
         </div>
       {{/link-to}}
@@ -20,7 +20,7 @@
       <div class="u-flex u-items-center u-content-center">
         {{search-bar search=(route-action 'search')}}
 
-        <div class="c-navbar__site-logo u-full-height u-hide-on-sm-md u-flex-auto-2 u-ta-center u-border-right u-p2">
+        <div class="c-navbar__element u-hide-on-sm-md u-ta-center u-border-right u-p2">
           {{#link-to "datasets.request" class="u-tc-secondary"}}
             {{fa-icon "clipboard"}}
             <span class="u-fs1 u-px1">Request Data</span>
@@ -28,7 +28,7 @@
         </div>
 
 
-        <div class="c-navbar__site-logo u-full-height u-hide-on-sm-md u-flex-auto-2 u-ta-center u-border-right u-p2">
+        <div class="c-navbar__element u-hide-on-sm-md u-ta-center u-border-right u-p2">
           {{#link-to "datasets.register" class="u-tc-secondary" }}
             {{fa-icon "file-text"}}
             <span class="u-fs1 u-px1">Register Data</span>
