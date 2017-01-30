@@ -1,10 +1,11 @@
 import Ember from 'ember';
 import EmberValidations from 'ember-validations';
+import ENV from 'repositive/config/environment';
 import { validator } from 'ember-validations';
 import { isBadRequestError } from 'ember-ajax/errors';
 import FlashMessageMixin from 'repositive/mixins/flash-message-mixin';
 
-const{ assign, get, getProperties, set, computed, Controller, inject: { service } } = Ember;
+const { assign, get, getProperties, set, setProperties, computed, Controller, inject: { service } } = Ember;
 
 export default Controller.extend(EmberValidations, FlashMessageMixin, {
   session: service(),
@@ -50,7 +51,7 @@ export default Controller.extend(EmberValidations, FlashMessageMixin, {
       },
       inline: validator(function() {
         if (get(this, '_getPasswordStrength')(get(this, 'password'), get(this, 'passwordPatterns')) === 0) {
-          return 'Please enter a number or capital letter.';
+          return 'Must include a number or capital letter.';
         }
       })
     }
@@ -76,25 +77,24 @@ export default Controller.extend(EmberValidations, FlashMessageMixin, {
         /*
           Signup with repositive.
          */
-        console.log("====SIGNED UP====");
-        // get(this, 'ajax').request(ENV.APIRoutes[ENV['ember-simple-auth'].signupRoute], {
-        //   method: 'POST',
-        //   data: credentials
-        // })
-        //   .then(resp => { // signup has suceeded, now login
-        //     return get(this, 'session').authenticate('authenticator:repositive', credentials);
-        //   })
-        //   .then(() => {
-        //     setProperties(this, {
-        //       'session.data.firstVisit': true,
-        //       'session.data.displayWelcomeMessage': false,
-        //       'loading': false
-        //     });
-        //   })
-        //   .catch(err => { // error with signup
-        //     set(this, 'loading', false);
-        //     this._displayMessage(err);
-        //   });
+        get(this, 'ajax').request(ENV.APIRoutes[ENV['ember-simple-auth'].signupRoute], {
+          method: 'POST',
+          data: credentials
+        })
+          .then(resp => { // signup has suceeded, now login
+            return get(this, 'session').authenticate('authenticator:repositive', credentials);
+          })
+          .then(() => {
+            setProperties(this, {
+              'session.data.firstVisit': true,
+              'session.data.displayWelcomeMessage': false,
+              'loading': false
+            });
+          })
+          .catch(err => { // error with signup
+            set(this, 'loading', false);
+            this._displayMessage(err);
+          });
       }
     }
   },

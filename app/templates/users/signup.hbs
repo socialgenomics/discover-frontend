@@ -14,7 +14,6 @@
         value=fullname
         errors=errors.fullname
         placeholder="Full Name"
-        helpText="You can change your name later in the settings."
         submit=(action 'signupAndAuthenticate')
       }}
       {{validated-input
@@ -22,11 +21,11 @@
         value=email
         errors=errors.email
         placeholder="Email"
-        helpText="You'll need to verify this later."
         submit=(action 'signupAndAuthenticate')
       }}
       {{validated-input
         type="password"
+        class="u-mb4"
         value=password
         password=true
         errors=errors.password
@@ -36,10 +35,10 @@
         submit=(action 'signupAndAuthenticate')
       }}
 
-      <p>Password strength: <span class="{{strength}}">{{strength}}</span></p>
+      <!-- <p>Password strength: <span class="{{strength}}">{{strength}}</span></p> -->
 
       {{async-button
-        class="c-btn c-btn--primary c-btn--shadow u-mb3 u-full-width"
+        class="c-btn c-btn--primary c-btn--shadow u-mb1 u-full-width"
         action=(action 'signupAndAuthenticate')
         default="Create Your Account"
         pending="Submitting..."

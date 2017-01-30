@@ -13,7 +13,7 @@
   {{/unless}}
 {{else}}
   {{#if showPasswordButton}}
-    <p class="u-ta-right u-mb0"><a {{action 'togglePasswordVisibility'}}>{{#if showPassword}} Hide Password {{else}} Show Password {{/if}}</a></p>
+    <a class="c-show-pw-btn" {{action 'togglePasswordVisibility'}}>{{#if showPassword}} Hide Password {{else}} Show Password {{/if}}</a>
   {{/if}}
   {{input
     value=value
@@ -29,11 +29,11 @@
 {{#if isInvalid}}
   <ul class="o-list-flush-left u-mb0">
     {{#each errors as |error|}}
-      <li class="u-tc-red">{{error}}</li>
+      <li class="u-tc-red c-validated-input-msg">{{error}}</li>
     {{/each}}
   </ul>
 {{else if (and isActive (not isValid))}}
-  <span>{{helpText}}</span>
+  <span class="u-tc-tertiary c-validated-input-msg">{{helpText}}</span>
 {{/if}}
 
 {{#if isShowingMarkdownModal}}
