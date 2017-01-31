@@ -16,7 +16,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     .then(values => {
       return {
         user: values[0],
-        settings: values[1].get('firstObject')
+        user_settings: values[1].get('firstObject')
       };
     }).catch(err => {
       Ember.Logger.error(err);
