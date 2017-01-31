@@ -30,11 +30,11 @@
 {{#if isInvalid}}
   <ul class="o-list-flush-left u-mb0">
     {{#each errors as |error|}}
-      <li class="u-tc-red c-validated-input-msg">{{error}}</li>
+      <li class="u-ta-left u-tc-red c-validated-input-msg">{{error}}</li>
     {{/each}}
   </ul>
 {{else if (and isActive (not isValid))}}
-  <span class="u-tc-tertiary c-validated-input-msg">{{helpText}}</span>
+  <p class="u-ta-left u-tc-tertiary c-validated-input-msg">{{helpText}}</p>
 {{/if}}
 
 {{#if isShowingMarkdownModal}}

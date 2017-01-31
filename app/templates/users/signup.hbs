@@ -1,59 +1,51 @@
-<div class="grid-wrapper">
+<div class="grid-wrapper u-ta-center">
   <section class="grid">
-    <form class="grid__col grid__col--centered grid__col--6-of-12">
+    <div class="grid__col grid__col--5-of-12 grid__col--m-2-of-3 grid__col--centered">
+      <form>
+        <div class="u-flex u-justify-center u-mb3">
+          <a class="u-pr2" {{ action 'thirdPartyAuth' 'google-oauth2' 'signup'}}><img class="u-w2" src="/assets/images/icons/social/googleplus.png"></a>
+          <a {{ action 'thirdPartyAuth' 'linked-in-oauth2' 'signup'}}><img class="u-w2" src="/assets/images/icons/social/linkedin.png"></a>
+        </div>
 
-      <div class="u-flex u-justify-center u-mb3">
-        <a class="u-pr2" {{ action 'thirdPartyAuth' 'google-oauth2' 'signup'}}><img class="u-w2" src="/assets/images/icons/social/googleplus.png"></a>
-        <a {{ action 'thirdPartyAuth' 'linked-in-oauth2' 'signup'}}><img class="u-w2" src="/assets/images/icons/social/linkedin.png"></a>
-      </div>
+        <div class="c-divider c-divider-light-bg"></div>
 
-      <div class="c-divider c-divider-light-bg"></div>
+        {{validated-input
+          type="Text"
+          value=fullname
+          errors=errors.fullname
+          placeholder="Full Name"
+          submit=(action 'signupAndAuthenticate')
+        }}
+        {{validated-input
+          type="email"
+          value=email
+          errors=errors.email
+          placeholder="Email"
+          submit=(action 'signupAndAuthenticate')
+        }}
+        {{validated-input
+          type="password"
+          class="u-mb4"
+          value=password
+          password=true
+          errors=errors.password
+          placeholder="Password"
+          helpText="Minimum 8 characters. Must include an uppercase letter or number."
+          showPasswordButton=true
+          submit=(action 'signupAndAuthenticate')
+          passwordStrength=passwordStrength
+        }}
 
-      {{validated-input
-        type="Text"
-        value=fullname
-        errors=errors.fullname
-        placeholder="Full Name"
-        submit=(action 'signupAndAuthenticate')
-      }}
-      {{validated-input
-        type="email"
-        value=email
-        errors=errors.email
-        placeholder="Email"
-        submit=(action 'signupAndAuthenticate')
-      }}
-      {{validated-input
-        type="password"
-        class="u-mb4"
-        value=password
-        password=true
-        errors=errors.password
-        placeholder="Password"
-        helpText="Minimum 8 characters. Must include an uppercase letter or number."
-        showPasswordButton=true
-        submit=(action 'signupAndAuthenticate')
-        passwordStrength=passwordStrength
-      }}
-
-      {{async-button
-        class="c-btn c-btn--primary c-btn--shadow u-fs3 u-mb1 u-full-width"
-        action=(action 'signupAndAuthenticate')
-        default="Create Your Account"
-        pending="Submitting..."
-        disableWhen=isInvalid
-      }}
-      <p>By signing up you agree to our {{#link-to 'policies' class="link"}}Terms &amp; Privacy Policy.{{/link-to}} </p>
-    </form>
-  </section>
-
-  <!-- <section class="row stick-to-bottom privacy-msg">
-   <div class="col m12 center">
-      <div class="divider"></div>
-      <h3>We care about your privacy</h3>
-      <p class="col m4 padding-sides">We advocate full adherence to patient consent.</p>
-      <p class="col m4 padding-sides">We don't sell and share any private data with 3rd party.</p>
-      <p class="col m4 padding-sides">We encourage responsible custodianship of genomic data.</p>
+        {{async-button
+          class="c-btn c-btn--primary c-btn--shadow u-fs3 u-mb1 u-full-width"
+          action=(action 'signupAndAuthenticate')
+          default="Create Your Account"
+          pending="Submitting..."
+          disableWhen=isInvalid
+        }}
+        <p class="u-ta-left">By signing up you agree to our {{#link-to 'policies' class="link"}}Terms &amp; Privacy Policy.{{/link-to}} </p>
+      </form>
     </div>
-  </section> -->
+  </section>
+  
 </div>
