@@ -34,7 +34,7 @@ export default Controller.extend(EmberValidations, FlashMessageMixin, {
       presence: {
         message: ''
       },
-      length: { minimum: 8, messages: { tooShort:' Must be at least 8 characters long.' } },
+      length: { minimum: 8, messages: { tooShort: ' Must be at least 8 characters long.' } },
       format: {
         with: /(?=.*\d)(?=.*[A-Z])/,
         message: 'Must include an uppercase letter and a number.'
