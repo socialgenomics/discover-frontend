@@ -1,0 +1,6 @@
+.c-modal {
+  box-shadow: 0 16px 28px 0 transparentize($color-black, .78),
+              0 25px 55px 0 transparentize($color-black, .79);
+}
+
+.c-modal--medium { width: 700px; }
