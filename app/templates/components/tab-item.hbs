@@ -1,1 +1,25 @@
-{{yield}}
+{{#link-to model.target class="u-flex-auto" classNameBindings='isActive'}}
+
+  <!--If there is a left icon-->
+  {{#if (eq model.iconPosition "left")}}
+    {{#if model.icon}}
+      {{fa-icon model.icon}}
+    {{/if}}
+  {{/if}}
+
+  <!--Title of Tab-->
+  {{model.title}}
+
+  <!--Stats-->
+  {{#if model.stats}}
+    <span class="u-fw-med u-px1">{{model.stats}}</span>
+  {{/if}}
+
+  <!--If there is a right icon-->
+  {{#if (eq model.iconPosition "right")}}
+    {{#if model.icon}}
+      {{fa-icon model.icon}}
+    {{/if}}
+  {{/if}}
+
+{{/link-to}}
