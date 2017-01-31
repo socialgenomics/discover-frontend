@@ -1,25 +1,26 @@
-{{#link-to model.target class="u-flex-auto" classNameBindings='isActive'}}
+{{#link-to target class="u-tc-primary"}}
+  <li class="o-list-inline__item u-p1 u-fs3">
 
-  <!--If there is a left icon-->
-  {{#if (eq model.iconPosition "left")}}
-    {{#if model.icon}}
-      {{fa-icon model.icon}}
+    <!--If there is a left icon-->
+    {{#if (eq iconPosition "left")}}
+      {{#if icon}}
+        {{fa-icon icon}}
+      {{/if}}
     {{/if}}
-  {{/if}}
 
-  <!--Title of Tab-->
-  {{model.title}}
+    <!--Title of Tab-->
+    {{title}}
 
-  <!--Stats-->
-  {{#if model.stats}}
-    <span class="u-fw-med u-px1">{{model.stats}}</span>
-  {{/if}}
-
-  <!--If there is a right icon-->
-  {{#if (eq model.iconPosition "right")}}
-    {{#if model.icon}}
-      {{fa-icon model.icon}}
+    <!--Stats-->
+    {{#if stats}}
+      <span class="u-fw-med u-px1">{{stats}}</span>
     {{/if}}
-  {{/if}}
 
+    <!--If there is a right icon-->
+    {{#if (eq iconPosition "right")}}
+      {{#if icon}}
+        {{fa-icon icon}}
+      {{/if}}
+    {{/if}}
+  </li>
 {{/link-to}}
