@@ -22,8 +22,8 @@
           errors=errors.password
           placeholder="Password"
           submit=(action 'submitForm')
+          resetPassword=(action 'resetPassword')
         }}
-        <h6><a {{action 'resetPassword'}}>Click here</a> to reset your password.</h6>
         {{async-button
           class="c-btn c-btn--primary c-btn--shadow u-fs3 u-mb1 u-full-width"
           action=(action 'submitForm')

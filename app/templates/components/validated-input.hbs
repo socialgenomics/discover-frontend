@@ -13,8 +13,10 @@
   {{/unless}}
 {{else}}
   {{#if showPasswordButton}}
-    <a class="c-show-pw-btn" {{action 'togglePasswordVisibility'}}>{{#if showPassword}} Hide Password {{else}} Show Password {{/if}}</a>
+    <a class="c-pw-text-btn" {{action 'togglePasswordVisibility'}}>{{#if showPassword}} Hide Password {{else}} Show Password {{/if}}</a>
     {{#if value}}{{password-strength strength=passwordStrength}}{{/if}}
+  {{else if resetPassword}}
+    <a class="c-pw-text-btn" {{action resetPassword}}>Reset Password</a>
   {{/if}}
   {{input
     value=value
