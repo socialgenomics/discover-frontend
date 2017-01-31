@@ -42,7 +42,7 @@ export default Controller.extend(
       submitForm() {
         if (!get(this, 'isDisabled')) {
           set(this, 'loading', true);
-          get(this, 'session')
+          return get(this, 'session')
             .authenticate('authenticator:repositive', getProperties(this, 'email', 'password'))
             .then(this._displayMessage.bind(this))
             .catch(this._displayMessage.bind(this));
@@ -56,7 +56,6 @@ export default Controller.extend(
 
     _displayMessage(resp) {
       set(this, 'loading', false);
-
       if (resp) {
         const message = get(resp, 'status_code') !== 400 ?
           get(resp, 'message') :

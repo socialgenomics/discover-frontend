@@ -7,7 +7,7 @@ export default Component.extend({
   isAuthenticated: computed.alias('session.isAuthenticated'),
 
   actions: {
-    trackCreateAccount(route) {
+    trackCreateAccount(eventName) {
       get(this, 'metrics').trackEvent({
         category: eventName,
         action: 'button_clicked'

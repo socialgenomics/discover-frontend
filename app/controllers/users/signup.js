@@ -77,11 +77,11 @@ export default Controller.extend(EmberValidations, FlashMessageMixin, {
         /*
           Signup with repositive.
          */
-        get(this, 'ajax').request(ENV.APIRoutes[ENV['ember-simple-auth'].signupRoute], {
+        return get(this, 'ajax').request(ENV.APIRoutes[ENV['ember-simple-auth'].signupRoute], {
           method: 'POST',
           data: credentials
         })
-          .then(resp => { // signup has suceeded, now login
+          .then(() => { // signup has suceeded, now login
             return get(this, 'session').authenticate('authenticator:repositive', credentials);
           })
           .then(() => {
