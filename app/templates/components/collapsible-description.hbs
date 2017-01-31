@@ -1,17 +1,17 @@
-<p class="markdown-text">
+<div class="">
   {{#if showFullDescription}}
     {{markdown-to-html markdown=description}}
   {{else}}
     {{markdown-to-html markdown=(truncate description 500)}}
   {{/if}}
-</p>
+</div>
 
 {{#unless (lt description.length 500)}}
-  <p class="read-more-btn" {{action "toggleDescription"}}>
+  <p class="u-tc-primary" {{action "toggleDescription"}}>
     {{#if showFullDescription}}
-      Show Less {{fa-icon "chevron-up"}}
+      Show less {{fa-icon "chevron-up"}}
     {{else}}
-      Read More {{fa-icon "chevron-down"}}
+      Read more {{fa-icon "chevron-down"}}
     {{/if}}
   </p>
 {{/unless}}
