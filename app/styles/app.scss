@@ -21,7 +21,6 @@
 @import 'shared/objects/objects.spacing';
 @import 'shared/objects/objects.toast-grid';
 
-@import 'custom/components/components.navbar';
 @import 'shared/components/components.buttons';
 @import 'shared/components/components.card';
 @import 'shared/components/components.divider';
@@ -42,6 +41,9 @@
 @import 'shared/utilities/utilities.sizing';
 @import 'shared/utilities/utilities.text-alignment';
 @import 'shared/utilities/utilities.type-setting';
+@import 'shared/utilities/utilities.zindexes';
+@import 'shared/utilities/utilities.cursors';
+@import 'shared/utilities/utilities.overflows';
 
 // Custom
 @import 'custom/settings/settings.global';
@@ -50,3 +52,4 @@
 @import 'custom/components/components.call-to-action-banner';
 @import 'custom/components/components.navbar';
 @import 'custom/components/components.overlay';
+@import 'custom/components/components.modals';
