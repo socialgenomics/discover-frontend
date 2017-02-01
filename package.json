@@ -34,6 +34,7 @@
     "dotenv": "^1.2.0",
     "ember-ajax": "2.5.2",
     "ember-async-button": "1.0.2",
+    "ember-basic-dropdown": "0.22.0",
     "ember-browserify": "^1.1.13",
     "ember-cli": "2.7.0",
     "ember-cli-active-link-wrapper": "0.0.4",
