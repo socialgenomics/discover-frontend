@@ -100,4 +100,38 @@ describe('Unit | Route | application', function() {
     route._conditionallyTransition([], [], queryString, 1);
     expect(route.transitionTo.calledWith(queryParams));
   });
+
+  describe('_getErrorRouteNameFromSearchQuery', function () {
+    it('should return collections search error route', function () {
+      const dataProvider = [
+        'collection:"dadasda" adadad',
+        'collection:"dadasda"adadad',
+        'collection:"dadasda";',
+        'dadad collection:"dadasda"',
+        'dadadcollection:"dadasda"'
+      ];
+
+      dataProvider.forEach(query => {
+        expect(this.subject()._getErrorRouteNameFromSearchQuery(query)).to.be.equal('collections.search-error');
+      });
+    });
+
+    it('should return datasources search error route', function () {
+      const dataProvider = [
+        'datasource:dadasda adadad',
+        'datasource:dadasdaadadad',
+        'datasource:dadasda;',
+        'dadad datasource:dadasda',
+        'dadaddatasource:dadasda'
+      ];
+
+      dataProvider.forEach(query => {
+        expect(this.subject()._getErrorRouteNameFromSearchQuery(query)).to.be.equal('datasources.search-error');
+      });
+    });
+
+    it('should return datasets search error route', function () {
+      expect(this.subject()._getErrorRouteNameFromSearchQuery('tests 123')).to.be.equal('datasets.search-error');
+    });
+  });
 });
