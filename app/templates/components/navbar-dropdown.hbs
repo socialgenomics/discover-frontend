@@ -1,14 +1,28 @@
 {{#basic-dropdown horizontalPosition="right" as |dropdown|}}
 
-  {{#dropdown.trigger onMouseEnter=(action "open") onMouseLeave=(action "close")}}
+  {{#dropdown.trigger}}
     <img src={{avatar}} class="u-w1">
     <span class="u-tc-primary u-fs1 u-px1">{{firstname}}</span>
   {{/dropdown.trigger}}
 
-  {{#dropdown.content onMouseEnter=(action "open") onMouseLeave=(action "close") class="c-card u-flex u-flex-column"}}
-    {{#link-to 'user' userId class='u-py2 u-pl2 u-pr4'}}Profile{{/link-to}}
-    {{#link-to 'users.user_profile' class='u-py2 u-pl2 u-pr4'}}Settings{{/link-to}}
-    {{#link-to 'help.searching-for-data' (query-params help=null) class='u-py2 u-pl2 u-pr4'}}Help{{/link-to}}
+  {{#dropdown.content class="c-card u-flex u-flex-column"}}
+
+    {{#link-to 'user' userId
+      invokeAction=(action 'close' dropdown)
+      class='u-py2 u-pl2 u-pr4'}} Profile {{/link-to}}
+
+    {{#link-to 'users.user_profile'
+      invokeAction=(action 'close' dropdown)
+      class='u-py2 u-pl2 u-pr4'}} Settings {{/link-to}}
+
+    {{#link-to 'help.searching-for-data' (query-params help=null)
+      invokeAction=(action 'close' dropdown)
+      class='u-py2 u-pl2 u-pr4'}} Help {{/link-to}}
+
+    {{#link-to 'policies' (query-params tab="web")
+      invokeAction=(action 'close' dropdown)
+      class='u-py2 u-pl2 u-pr4'}} Repositive Policy {{/link-to}}
+
     <a {{ action 'logout' }} class='u-py2 u-pl2 u-pr4'>Logout</a>
   {{/dropdown.content}}
 
