@@ -1,9 +1,13 @@
-<div class="grid-wrapper u-ta-center">
-  <h1 class="u-fs4 u-tc-secondary">Login</h1>
+<div class="grid-wrapper">
   <section class="grid">
+
+    <div class="grid__col grid__col--3-of-3 u-ta-center">
+      <h1 class="u-fs4 u-tc-secondary">Login</h1>
+    </div>
+
     <div class="grid__col grid__col--5-of-12 grid__col--m-2-of-3 grid__col--centered">
       <form>
-        <div class="u-flex u-justify-center u-mb3">
+        <div class="u-ta-center u-mb3">
           <a class="u-pr2" {{ action 'thirdPartyAuth' 'google-oauth2' 'login'}}>{{svg-jar "google" class="u-w2"}}</a>
           <a {{ action 'thirdPartyAuth' 'linked-in-oauth2' 'login'}}>{{svg-jar "linkedin" class="u-w2"}}</a>
         </div>
