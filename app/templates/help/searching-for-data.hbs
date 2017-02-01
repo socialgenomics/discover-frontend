@@ -1,35 +1,31 @@
-<div class="content">
-  <div class="row">
-    {{help-tabs tab="searching"}}
-    <div class="col m12">
-      <div class="card white no-margin darken-1">
-        <div class="card-content">
-          <div class="row margin-top">
-            <div class="col m4 help-menu">
-              <ol>
-                <li>{{#link-to 'help.searching-for-data' (query-params help="search-query")}}How do I search on Repositive?{{/link-to}}</li>
-                <li>{{#link-to 'help.searching-for-data' (query-params help="algorithm")}}How does the search algorithm work?{{/link-to}}</li>
-                <li>{{#link-to 'help.searching-for-data' (query-params help="effective")}}How can I build my search query to make it more effective?{{/link-to}}</li>
-                <li>{{#link-to 'help.searching-for-data' (query-params help="boolean")}}What boolean operators can I use?{{/link-to}}</li>
-                <li>{{#link-to 'help.searching-for-data' (query-params help="predicated")}}What predicated search terms can I use?{{/link-to}}</li>
-                <li>{{#link-to 'help.searching-for-data' (query-params help="filters")}}What do all those filters mean?{{/link-to}}</li>
-              </ol>
-            </div>
-            <div class="col m8 help-content">
-              <div class="markdown-text">
-                {{#if (not help)}}{{markdown-to-html markdown=(fr-markdown-file 'help/search/how-to-search')}}
-                {{else if (eq help "search-query")}}{{markdown-to-html markdown=(fr-markdown-file 'help/search/how-to-search')}}
-                {{else if (eq help "algorithm")}}{{markdown-to-html markdown=(fr-markdown-file 'help/search/search-algorithm')}}
-                {{else if (eq help "effective")}}{{markdown-to-html markdown=(fr-markdown-file 'help/search/effective-search')}}
-                {{else if (eq help "boolean")}}{{markdown-to-html markdown=(fr-markdown-file 'help/search/boolean')}}
-                {{else if (eq help "predicated")}}{{markdown-to-html markdown=(fr-markdown-file 'help/search/predicated')}}
-                {{else if (eq help "filters")}}{{markdown-to-html markdown=(fr-markdown-file 'help/search/filters')}}
-                {{/if}}
-              </div>
-              <div class="divider"></div>
-              {{more-help-btn}}
-            </div>
+<div class="grid-wrapper">
+  <div class="grid">
+    <div class="grid__col grid__col--1-of-1">
+      {{help-tabs tab="searching"}}
+      <div class="c-card u-rounded-bottom u-py3">
+        <div class="grid__col grid__col--1-of-3 u-py3 u-px2 u-fs2 u-fw-med u-tc-teal">
+          <ul class="o-list-flush-left u-px2">
+            <li class="u-p1 u-border-bottom">{{#link-to 'help.searching-for-data' (query-params help="search-query") class="u-tc-teal"}}How do I search on Repositive?{{/link-to}}</li>
+            <li class="u-p1 u-border-bottom">{{#link-to 'help.searching-for-data' (query-params help="algorithm") class="u-tc-teal"}}How does the search algorithm work?{{/link-to}}</li>
+            <li class="u-p1 u-border-bottom">{{#link-to 'help.searching-for-data' (query-params help="effective") class="u-tc-teal"}}How can I build my search query to make it more effective?{{/link-to}}</li>
+            <li class="u-p1 u-border-bottom">{{#link-to 'help.searching-for-data' (query-params help="boolean") class="u-tc-teal"}}What boolean operators can I use?{{/link-to}}</li>
+            <li class="u-p1 u-border-bottom">{{#link-to 'help.searching-for-data' (query-params help="predicated") class="u-tc-teal"}}What predicated search terms can I use?{{/link-to}}</li>
+            <li class="u-p1">{{#link-to 'help.searching-for-data' (query-params help="filters") class="u-tc-teal"}}What do all those filters mean?{{/link-to}}</li>
+          </ul>
+        </div>
+        <div class="grid__col grid__col--2-of-3 u-py1 u-px3 u-fs2 u-border-left">
+          <div class="c-help-text u-mb4">
+            {{#if (not help)}}{{markdown-to-html markdown=(fr-markdown-file 'help/search/how-to-search')}}
+            {{else if (eq help "search-query")}}{{markdown-to-html markdown=(fr-markdown-file 'help/search/how-to-search')}}
+            {{else if (eq help "algorithm")}}{{markdown-to-html markdown=(fr-markdown-file 'help/search/search-algorithm')}}
+            {{else if (eq help "effective")}}{{markdown-to-html markdown=(fr-markdown-file 'help/search/effective-search')}}
+            {{else if (eq help "boolean")}}{{markdown-to-html markdown=(fr-markdown-file 'help/search/boolean')}}
+            {{else if (eq help "predicated")}}{{markdown-to-html markdown=(fr-markdown-file 'help/search/predicated')}}
+            {{else if (eq help "filters")}}{{markdown-to-html markdown=(fr-markdown-file 'help/search/filters')}}
+            {{/if}}
           </div>
+          <div class="c-divider u-bc-grey"></div>
+          {{more-help-btn}}
         </div>
       </div>
     </div>
