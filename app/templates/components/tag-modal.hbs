@@ -1,23 +1,21 @@
-{{#modal-dialog
-    close="toggleTagModal"
-    targetAttachment="center"
-    translucentOverlay=true
-    destinationElementId=destinationElementId
+{{#repositive-modal
+  container-class='c-modal--small'
+  close=(action 'toggleTagModal')
 }}
-<div class="modal modal-fixed-footer">
-  <header class="modal-header">
-    <h4><span class="orange-text">{{fa-icon "tags"}}</span> Tags and Tagging</h4>
-    <span class="close-button large-text" {{action "toggleTagModal"}}>{{fa-icon "times"}}</span>
-  </header>
-  <main class="modal-content">
+  {{repositive-modal/header
+    icon='tags'
+    title='Tags and Tagging'
+    onClose=(action 'toggleTagModal')
+  }}
+  {{#repositive-modal/content}}
     <p>A tag is a keyword or label which categorises a dataset and enables it to appear with other similar
       datasets.
     </p>
     <p>Using the right tags makes it easier for others to find a dataset with related properties and allow
       browsing through similar data.
     </p>
-    <div class="divider"></div>
-    <h4 class="center-align">What makes a good tag?</h4>
+    <div class="c-divider c-divider-light-bg"></div>
+    <h4 class="u-ta-center u-tc-secondary">What makes a good tag?</h4>
     <p>Useful tags describe specific details about that dataset. Tags are microdata that you can use to
       further categorise your content. Unlike categories, tags are not heirachical and cannot have subtags.
     </p>
@@ -28,9 +26,8 @@
       can be more helpful.
     </p>
     <p>A dataset can contain an unlimited number of tags, so you can add as many as you need.</p>
-  </main>
-  <footer class="modal-footer">
-    <p>Read more on {{#link-to 'help.other'}}tagging.{{/link-to}}</p>
-  </footer>
-</div>
-{{/modal-dialog}}
+  {{/repositive-modal/content}}
+  {{#repositive-modal/footer}}
+    Read more on {{#link-to 'help.other'}}tagging.{{/link-to}}
+  {{/repositive-modal/footer}}
+{{/repositive-modal}}

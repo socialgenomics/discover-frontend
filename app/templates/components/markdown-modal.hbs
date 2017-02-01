@@ -1,15 +1,12 @@
-{{#modal-dialog
-    close="toggleMarkdownModal"
-    targetAttachment="center"
-    translucentOverlay=true
-    destinationElementId=destinationElementId
+{{#repositive-modal
+  container-class='c-modal--small'
+  close=(action 'toggleMarkdownModal')
 }}
-<div class="modal modal-fixed-footer">
-  <header class="modal-header">
-    <h4>Basic formatting rules with Markdown</h4>
-    <span class="close-button large-text" {{action "toggleMarkdownModal"}}>{{fa-icon "times"}}</span>
-  </header>
-  <main class="modal-content">
+  {{repositive-modal/header
+    title='Basic formatting rules with Markdown'
+    onClose=(action 'toggleMarkdownModal')
+  }}
+  {{#repositive-modal/content}}
     <p>Add a linebreak between paragraphs (press enter)</p>
     <p>To make text <em>Italic: </em>*italic*</p>
     <p>To make text <strong>Bold: </strong>**text**</p>
@@ -21,16 +18,16 @@
       <li>* list item 2</li>
     </ul>
     <p>To use different levels of headings, use: </p>
-      <ul>
-        <li># Heading One</li>
-        <li>## Heading Two</li>
-        <li>### Heading Three</li>
-      </ul>
+    <ul>
+      <li># Heading One</li>
+      <li>## Heading Two</li>
+      <li>### Heading Three</li>
+    </ul>
     <p>You can set <code>inline code</code> with: `inline code`</p>
     <p>All Markdown properties should be spaced with one line between them.</p>
-  </main>
-  <footer class="modal-footer">
-    <p>Read more on {{#link-to 'help.other' (query-params help="format")}}Markdown syntax documentation{{/link-to}}</p>
-  </footer>
-</div>
-{{/modal-dialog}}
+  {{/repositive-modal/content}}
+  {{#repositive-modal/footer}}
+    Read more on {{#link-to 'help.other' (query-params help="format")}}Markdown syntax documentation{{/link-to}}
+  {{/repositive-modal/footer}}
+{{/repositive-modal}}
+

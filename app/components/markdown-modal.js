@@ -5,8 +5,5 @@ export default Ember.Component.extend({
     toggleMarkdownModal: function() {
       this.sendAction();
     }
-  },
-  destinationElementId: function () {
-    return Ember.testing ? 'ember-testing' : undefined;
-  }.property()
+  }
 });
