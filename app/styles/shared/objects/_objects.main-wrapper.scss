@@ -5,7 +5,7 @@
 
 .o-main-wrapper {
   // large spacing unit === navbar height
-  min-height: 900px;
+  min-height: 800px;
   min-height: calc(100vh - #{$global-spacing-unit-large});
   min-height: -o-calc(100vh - #{$global-spacing-unit-large}); /* opera */
   min-height: -webkit-calc(100vh - #{$global-spacing-unit-large}); /* google, safari */
