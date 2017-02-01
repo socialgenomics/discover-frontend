@@ -9,12 +9,11 @@
 
 .c-navbar {
   height: $global-spacing-unit-large;
-  overflow: hidden;
 }
 
 .c-navbar__search-input {
   height: $global-spacing-unit-large;
-  width: 600px;
+  // width: 600px;
   font-family: $font-stack-roboto;
 }
 
@@ -24,4 +23,9 @@
 
 .c-navbar__button {
   list-style-type: none;
+}
+
+.c-navbar__center-block {
+  width: 960px;
+  margin-left: -$global-spacing-unit-large;
 }

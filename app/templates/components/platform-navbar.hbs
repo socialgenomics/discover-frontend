@@ -1,14 +1,14 @@
 <div class="u-bc-off-white c-navbar-wrapper u-pos-relative u-px2">
-  <nav class="c-navbar u-full-height u-flex u-justify-between u-items-center">
+  <nav class="c-navbar u-flex u-justify-between u-items-center">
 
     <!-- LOGO -->
     {{#unless isAuthenticated}}
-      <a href="https://repositive.io" class="c-navbar__element">
+      <a href="https://repositive.io" class="c-navbar__element u-mr2">
         <img src="/assets/images/logo-full-larger.png" alt="Repositive DNA logo">
       </a>
     {{else}}
       {{#link-to 'root'}}
-        <div class="c-navbar__element u-mr1">
+        <div class="c-navbar__element u-mr2">
           <img src="/assets/images/logo-full-larger.png" alt="Repositive DNA logo">
         </div>
       {{/link-to}}
@@ -17,23 +17,20 @@
     <!-- SEARCH -->
     {{#if isAuthenticated}}
 
-      <div class="u-flex u-items-center u-content-center">
-        {{search-bar search=(route-action 'search')}}
+      <div class="c-navbar__center-block u-flex u-items-stretch">
+        <div class="u-flex-grow-1">
+          {{search-bar search=(route-action 'search')}}
+        </div>
 
-        <div class="c-navbar__element u-hide-on-sm-md u-ta-center u-border-right u-p2">
-          {{#link-to "datasets.request" class="u-tc-secondary"}}
+        {{#link-to "datasets.request" class="u-flex u-items-center u-justify-center c-navbar__element u-tc-secondary u-border-right"}}
             {{fa-icon "clipboard"}}
-            <span class="u-fs1 u-px1">Request Data</span>
-          {{/link-to}}
-        </div>
+            <span class="u-fs1 u-pl1">Request Data</span>
+        {{/link-to}}
 
-
-        <div class="c-navbar__element u-hide-on-sm-md u-ta-center u-border-right u-p2">
-          {{#link-to "datasets.register" class="u-tc-secondary" }}
-            {{fa-icon "file-text"}}
-            <span class="u-fs1 u-px1">Register Data</span>
-          {{/link-to}}
-        </div>
+        {{#link-to "datasets.register" class="u-flex u-items-center u-justify-center c-navbar__element u-tc-secondary u-border-right"}}
+            {{fa-icon "clipboard"}}
+            <span class="u-fs1 u-pl1">Register Data</span>
+        {{/link-to}}
       </div>
 
       {{navbar-dropdown avatar=avatar firstname=firstname username=username userId=userId}}
