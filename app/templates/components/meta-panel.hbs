@@ -15,22 +15,16 @@
         {{/unless}}
       </div>
 
-      <!-- <div class="divider"></div> -->
-
-      {{#if (eq model.type 'repositive_collection')}}
-        {{stats-list stats=collectionStats statType="collection"}}
-      {{else}}
-        {{stats-list stats=collectionStats statType="datasource"}}
-      {{/if}}
-
+      <div class="u-mb3 u-ta-center u-tc-primary">
+        {{#if (eq model.type 'repositive_collection')}}
+          {{stats-list stats=collectionStats statType="collection"}}
+        {{else}}
+          {{stats-list stats=collectionStats statType="datasource"}}
+        {{/if}}
+      </div>
 
       {{#if model.description}}
         {{collapsible-description description=model.description}}
-      {{/if}}
-
-      {{#if model.image}}
-        <!-- <div class="divider"></div> -->
-        <img src="{{model.image}}" class="logo-img">
       {{/if}}
 
     {{else}}
