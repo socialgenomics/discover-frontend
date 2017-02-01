@@ -5,9 +5,9 @@
 
 .o-main-wrapper {
   // large spacing unit === navbar height
-  height: calc(100vh - #{$global-spacing-unit-large});
-  height: -o-calc(100vh - #{$global-spacing-unit-large}); /* opera */
-  height: -webkit-calc(100vh - #{$global-spacing-unit-large}); /* google, safari */
-  height: -moz-calc(100vh - #{$global-spacing-unit-large}); /* firefox */
-  min-height: 700px;
+  min-height: 900px;
+  min-height: calc(100vh - #{$global-spacing-unit-large});
+  min-height: -o-calc(100vh - #{$global-spacing-unit-large}); /* opera */
+  min-height: -webkit-calc(100vh - #{$global-spacing-unit-large}); /* google, safari */
+  min-height: -moz-calc(100vh - #{$global-spacing-unit-large}); /* firefox */
 }
