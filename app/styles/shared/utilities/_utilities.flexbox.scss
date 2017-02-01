@@ -3,7 +3,7 @@
     - Adapted from: https://github.com/basscss/basscss/blob/master/modules/flexbox/index.css
    ========================================================================== */
 
-.u-flex { display: flex }
+.u-flex { display: flex; }
 
 // @media (min-width: $breakpoint-small) {
 //   .u-sm-flex { display: flex }
@@ -17,10 +17,9 @@
 //   .u-lg-flex { display: flex }
 // }
 
-.u-flex-column  { flex-direction: column }
-.u-flex-row { flex-direction: row; }
+.u-flex-column      { flex-direction: column }
 .u-flex-row-reverse { flex-direction: row-reverse; }
-.u-flex-wrap    { flex-wrap: wrap }
+.u-flex-wrap        { flex-wrap: wrap }
 
 .u-items-start    { align-items: flex-start }
 .u-items-end      { align-items: flex-end }
@@ -53,6 +52,9 @@
   min-width: 0; /* 1 */
   min-height: 0; /* 1 */
 }
+
+.u-flex-grow-1 { flex-grow: 1 }
+
 .u-flex-none { flex: none }
 
 .u-order-0 { order: 0 }

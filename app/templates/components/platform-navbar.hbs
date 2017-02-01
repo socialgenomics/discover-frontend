@@ -3,13 +3,13 @@
 
     <!-- LOGO -->
     {{#unless isAuthenticated}}
-      <a href="https://repositive.io">
-          <img src="/assets/images/logo-full-larger.png" class="c-navbar__site-logo" alt="Repositive DNA logo">
+      <a href="https://repositive.io" class="c-navbar__element u-mr2">
+        <img src="/assets/images/logo-full-larger.png" alt="Repositive DNA logo">
       </a>
     {{else}}
       {{#link-to 'root'}}
-        <div class="c-navbar__site-logo">
-          <img src="/assets/images/logo-full-larger.png" class="c-navbar__site-logo" alt="Repositive DNA logo">
+        <div class="c-navbar__element u-mr2">
+          <img src="/assets/images/logo-full-larger.png" alt="Repositive DNA logo">
         </div>
       {{/link-to}}
     {{/unless}}
@@ -17,23 +17,20 @@
     <!-- SEARCH -->
     {{#if isAuthenticated}}
 
-      <div class="u-flex u-items-center">
-        {{search-bar search=(route-action 'search')}}
+      <div class="c-navbar__center-block u-flex u-items-stretch">
+        <div class="u-flex-grow-1">
+          {{search-bar search=(route-action 'search')}}
+        </div>
 
-        <div class="u-ta-center u-border-right u-px2">
-          {{#link-to "datasets.request" class="u-tc-secondary"}}
+        {{#link-to "datasets.request" class="u-flex u-items-center u-justify-center c-navbar__element u-tc-secondary u-border-right"}}
             {{fa-icon "clipboard"}}
-            <span class="u-fs1 u-px1">Request Data</span>
-          {{/link-to}}
-        </div>
+            <span class="u-fs1 u-pl1">Request Data</span>
+        {{/link-to}}
 
-
-        <div class="u-ta-center u-border-right u-px2">
-          {{#link-to "datasets.register" class="u-tc-secondary" }}
-            {{fa-icon "file-text"}}
-            <span class="u-fs1 u-px1">Register Data</span>
-          {{/link-to}}
-        </div>
+        {{#link-to "datasets.register" class="u-flex u-items-center u-justify-center c-navbar__element u-tc-secondary u-border-right"}}
+            {{fa-icon "clipboard"}}
+            <span class="u-fs1 u-pl1">Register Data</span>
+        {{/link-to}}
       </div>
 
       {{navbar-dropdown avatar=avatar firstname=firstname username=username userId=userId}}
@@ -56,7 +53,7 @@
               {{/if}}
             {{/active-link}}
           </div>
-          <div class="c-navbar__button u-p2 c-divider-vertical">
+          <div class="c-navbar__button u-p2 u-border-left">
             {{#active-link}}
               {{#link-to 'users.login' class="u-tc-secondary"}}LOGIN{{/link-to}}
             {{/active-link}}

@@ -13,14 +13,18 @@
 
 .c-navbar__search-input {
   height: $global-spacing-unit-large;
-  width: 300px;
   font-family: $font-stack-roboto;
 }
 
-.c-navbar__site-logo {
+.c-navbar__element {
   width: 140px;
 }
 
 .c-navbar__button {
   list-style-type: none;
+}
+
+.c-navbar__center-block {
+  width: 960px;
+  margin-left: -$global-spacing-unit-large;
 }
