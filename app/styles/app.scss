@@ -16,6 +16,7 @@
 @import 'shared/elements/elements.inputs';
 @import 'shared/elements/elements.shared';
 
+@import 'shared/objects/objects.main-wrapper';
 @import 'shared/objects/objects.grid-wrapper';
 @import 'shared/objects/objects.lists';
 @import 'shared/objects/objects.spacing';
@@ -28,6 +29,8 @@
 @import 'shared/components/components.images';
 @import 'shared/components/components.sidebar';
 @import 'shared/components/components.loading-spinner';
+@import 'shared/components/components.validated-input';
+@import 'shared/components/components.password-strength';
 
 @import 'shared/utilities/utilities.borders';
 @import 'shared/utilities/utilities.color';
@@ -45,7 +48,6 @@
 
 // Custom
 @import 'custom/settings/settings.global';
-@import 'custom/components/components.landing-page';
 @import 'custom/components/components.collection-list-item';
 @import 'custom/components/components.call-to-action-banner';
 @import 'custom/components/components.navbar';

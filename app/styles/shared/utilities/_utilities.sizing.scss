@@ -3,8 +3,20 @@
    ========================================================================== */
 
 .u-full-height { height: 100%; }
-.u-full-viewport-height { height: 100vh; }
+
+.u-viewport-height {
+  // large spacing unit === navbar height
+  min-height: 600px;
+  height: 800px;
+  height: calc(100vh - #{$global-spacing-unit-large});
+  height: -o-calc(100vh - #{$global-spacing-unit-large}); /* opera */
+  height: -webkit-calc(100vh - #{$global-spacing-unit-large}); /* google, safari */
+  height: -moz-calc(100vh - #{$global-spacing-unit-large}); /* firefox */
+}
+
 .u-inherit-height {
   height: inherit;
   min-height: inherit;
 }
+
+.u-full-width { width: 100%; }
