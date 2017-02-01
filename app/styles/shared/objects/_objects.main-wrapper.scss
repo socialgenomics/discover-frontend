@@ -3,7 +3,7 @@
    Styles which are specific to the discover landing page
    ========================================================================== */
 
-.c-landing-page {
+.o-main-wrapper {
   // large spacing unit === navbar height
   height: calc(100vh - #{$global-spacing-unit-large});
   height: -o-calc(100vh - #{$global-spacing-unit-large}); /* opera */
