@@ -19,40 +19,37 @@
 {{/if}}
 
 {{#if showShareEmailModal}}
-  {{#modal-dialog
+  {{#repositive-modal
+    container-class='c-modal--small'
     close=(action 'toggleShareEmailModal')
-    targetAttachment="center"
-    translucentOverlay=true
   }}
-    {{#repositive-modal/wrapper size='medium'}}
-      {{repositive-modal/header
-        icon='envelope'
-        alternateBackground=true
-        title='Share this dataset'
+    {{repositive-modal/header
+      icon='envelope'
+      title='Share this dataset'
+      onClose=(action 'toggleShareEmailModal')
+    }}
+    {{#repositive-modal/content}}
+      {{share-by-email-form
+        actionableId=actionableId
+        actionableType=actionableType
         onClose=(action 'toggleShareEmailModal')
       }}
-        {{share-by-email-form
-          actionableId=actionableId
-          actionableType=actionableType
-          onClose=(action 'toggleShareEmailModal')
-        }}
-    {{/repositive-modal/wrapper}}
-  {{/modal-dialog}}
+    {{/repositive-modal/content}}
+  {{/repositive-modal}}
 {{/if}}
 
 {{#if showCreateAccountModal}}
-  {{#modal-dialog
+  {{#repositive-modal
+    container-class='c-modal--small'
     close=(action 'toggleCreateAccountModal')
-    targetAttachment="center"
-    translucentOverlay=true
   }}
-    {{#repositive-modal/wrapper size='medium'}}
-      {{repositive-modal/header
-        icon='envelope'
-        title='Share via email'
-        onClose=(action 'toggleCreateAccountModal')
-      }}
+    {{repositive-modal/header
+      icon='envelope'
+      title='Share via email'
+      onClose=(action 'toggleCreateAccountModal')
+    }}
+    {{#repositive-modal/content}}
       {{create-account-modal-content text='To share this dataset via email you need to have an account.'}}
-    {{/repositive-modal/wrapper}}
-  {{/modal-dialog}}
+    {{/repositive-modal/content}}
+  {{/repositive-modal}}
 {{/if}}
