@@ -21,7 +21,7 @@ export default Controller.extend(EmberValidations, FlashMessageMixin, {
       },
       format: {
         with: /^([\w\-\.\+]+)@((?:[\w\-\.]+)(?:\.[a-zA-Z]{2,}))$/,
-        message: 'Must be a valid e-mail address'
+        message: 'Must be a valid e-mail address.'
       },
       server: true // must be last - known bug
     }
