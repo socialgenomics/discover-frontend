@@ -1,11 +1,13 @@
 import Ember from 'ember';
 
-export default Ember.Route.extend({
+const { Route, get, set } = Ember;
+
+export default Route.extend({
   resetKey: null,
-  model: function(params) {
-    this.set('resetKey', params.resetKey);
+  model(params) {
+    set(this, 'resetKey', params.resetKey);
   },
-  setupController: function(controller /* model */) {
-    controller.set('resetKey', this.get('resetKey'));
+  setupController(controller) {
+    set(controller, 'resetKey', get(this, 'resetKey'));
   }
 });

@@ -3,8 +3,10 @@
    ========================================================================== */
 
 .c-sidebar {
-  height: 100%;
+  min-height: 100%;
   width: $sidebar-width;
   // TODO refactor box shadow styles
   box-shadow: 2px 0 5px -1px rgba(0,0,0,0.2);
 }
+
+.c-sidebar-remove-filter { top: 3px; }

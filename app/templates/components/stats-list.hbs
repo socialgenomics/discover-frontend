@@ -1,5 +1,5 @@
 {{#if (eq access "Open")}}
-  <li class="o-list-inline__item u-mr1 u-border-right u-tc-green" data-balloon="Access Type" data-balloon-pos="down">
+  <li class="o-list-inline__item u-pr1 u-mr1 u-border-right u-tc-green" data-balloon="Access Type" data-balloon-pos="down">
     <i class="fa fa-globe"></i>
     <span class="u-px1">
       {{access}}
@@ -8,16 +8,16 @@
 {{/if}}
 
 {{#if (eq access "Restricted")}}
-  <li class="o-list-inline__item u-mr1 u-border-right u-tc-tertiary" data-balloon="Access Type" data-balloon-pos="down">
-    <i class="fa fa-lock u-tc-red"></i>
-    <span class="u-tc-red u-px1">
+  <li class="o-list-inline__item u-pr1 u-mr1 u-border-right u-tc-red" data-balloon="Access Type" data-balloon-pos="down">
+    <i class="fa fa-lock"></i>
+    <span class="u-px1">
       {{access}}
     </span>
   </li>
 {{/if}}
 
 {{#if (or (eq statType "collection") (eq statType "datasource"))}}
-  <li class="o-list-inline__item u-mr1 u-border-right u-tc-tertiary" data-balloon="Datasets" data-balloon-pos="down">
+  <li class="o-list-inline__item u-pr1 u-mr1 u-border-right" data-balloon="Datasets" data-balloon-pos="down">
     {{fa-icon "file-text"}}
     <span class="u-px1">
       {{#if stats.datasets}}
@@ -30,7 +30,7 @@
 {{/if}}
 
 {{#if (eq statType "collection")}}
-  <li class="o-list-inline__item u-mr1 u-border-right u-tc-tertiary" data-balloon="Sources" data-balloon-pos="down">
+  <li class="o-list-inline__item u-pr1 u-mr1 u-border-right" data-balloon="Sources" data-balloon-pos="down">
     {{fa-icon "database"}}
     <span class="u-px1">
       {{#if stats.datasources}}
@@ -43,7 +43,7 @@
 {{/if}}
 
 <!-- Each of these can be a stats-list-item -->
-<li class="o-list-inline__item u-mr1 u-border-right u-tc-tertiary" data-balloon="Views" data-balloon-pos="down">
+<li class="o-list-inline__item u-pr1 u-mr1 {{if (eq statType 'datasets')  'u-border-right'}}" data-balloon="Views" data-balloon-pos="down">
   {{fa-icon "eye"}}
   <span class="u-px1">
     {{#if stats.view}}
@@ -54,8 +54,9 @@
   </span>
 </li>
 
+
 {{#if (eq statType "datasets")}}
-  <li class="o-list-inline__item u-mr1 u-border-right u-tc-tertiary" data-balloon="Discussion" data-balloon-pos="down">
+  <li class="o-list-inline__item u-pr1 u-mr1 u-border-right" data-balloon="Discussion" data-balloon-pos="down">
     {{fa-icon "comments"}}
     <span class="u-px1">
       {{#if stats.comment}}
@@ -68,9 +69,9 @@
 {{/if}}
 
 <!-- {{#if (or (eq statType "collection") (eq statType "datasource"))}}
-  <li data-balloon="Shares" data-balloon-pos="down">
+  <li class="o-list-inline__item u-pr1 u-mr1 u-border-right" data-balloon="Shares" data-balloon-pos="down">
     {{fa-icon "share-alt"}}
-    <span>
+    <span class="u-px1">
       {{#if stats.share}}
         {{rough-estimate stats.share}}
       {{else}}
@@ -81,7 +82,7 @@
 {{/if}} -->
 
 {{#if (eq statType "datasets")}}
-  <li class="o-list-inline__item u-mr1 u-tc-tertiary" data-balloon="Favourites" data-balloon-pos="down">
+  <li class="o-list-inline__item" data-balloon="Favourites" data-balloon-pos="down">
     {{fa-icon "star"}}
     <span class="u-px1">
       {{#if stats.favourite}}

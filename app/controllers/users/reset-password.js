@@ -3,8 +3,7 @@ import EmberValidations from 'ember-validations';
 import ENV from 'repositive/config/environment';
 import FlashMessageMixin from 'repositive/mixins/flash-message-mixin';
 
-
-const { Controller, computed, observer, Logger, get, set, setProperties, inject: { service } } = Ember;
+const { Controller, computed, Logger, get, set, setProperties, inject: { service }, RSVP } = Ember;
 
 export default Controller.extend(EmberValidations, FlashMessageMixin, {
   ajax: service(),
@@ -13,14 +12,10 @@ export default Controller.extend(EmberValidations, FlashMessageMixin, {
   password1: null,
   password2: null,
   loading: false,
-  messages: [],
   passwordChanged: false,
 
-  isDisabled: computed('loading', 'isValid', function() {
-    return !get(this, 'isValid') || get(this, 'loading');
-  }),
-  clearMessages: observer('password1', 'password2', function() {
-    set(this, 'messages', []);
+  isDisabled: computed('loading', 'isValid', 'password1', 'password2', function() {
+    return !get(this, 'isValid') || get(this, 'loading') || get(this, 'password1') !== get(this, 'password2');
   }),
 
   validations: {
@@ -28,10 +23,10 @@ export default Controller.extend(EmberValidations, FlashMessageMixin, {
       presence: {
         message: ''
       },
-      length: { minimum: 8, messages: { tooShort: ' ' } },
+      length: { minimum: 8, messages: { tooShort: 'Must be at least 8 characters long.' } },
       format: {
         with: /(?=.*\d)(?=.*[A-Z])/,
-        message: 'Must be at least 8 characters and include an uppercase letter and a number.'
+        message: 'Must include an uppercase letter and a number.'
       },
       server: true
     },
@@ -39,29 +34,30 @@ export default Controller.extend(EmberValidations, FlashMessageMixin, {
       presence: {
         message: ''
       },
-      length: { minimum: 8, messages: { tooShort: ' ' } },
+      length: { minimum: 8, messages: { tooShort: ' Must be at least 8 characters long.' } },
       format: {
         with: /(?=.*\d)(?=.*[A-Z])/,
-        message: 'Must be at least 8 characters and include an uppercase letter and a number.'
+        message: 'Must include an uppercase letter and a number.'
       },
       server: true
     }
   },
   actions: {
-    submitForm: function() {
+    submitForm() {
       if (!get(this, 'isDisabled')) {
         set(this, 'loading', true);
         if (get(this, 'password1') !== get(this, 'password2')) {
-          this._addFlashMessage(`Passwords do not match.`, 'warning');
+          set(this, 'loading', false);
+          return RSVP.reject(this._addFlashMessage(`Passwords do not match.`, 'warning'));
         } else {
-          get(this, 'ajax').request(ENV.APIRoutes['reset-password'], {
+          return get(this, 'ajax').request(ENV.APIRoutes['reset-password'], {
             method: 'POST',
             data: {
               token: get(this, 'resetKey'),
               password: get(this, 'password1')
             }
           })
-            .then(resp => {
+            .then(() => {
               setProperties(this, {
                 loading: false,
                 passwordChanged: true
@@ -72,6 +68,8 @@ export default Controller.extend(EmberValidations, FlashMessageMixin, {
               Logger.error(err);
             });
         }
+      } else {
+        return RSVP.resolve();
       }
     }
   }
