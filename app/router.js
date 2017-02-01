@@ -63,12 +63,14 @@ Router.map(function() {
     this.route('source', {
       path: ':id'
     });
+    this.route('search-error');
   });
 
   this.route('collections', function() {
     this.route('collection', {
       path: ':id'
     });
+    this.route('search-error');
   });
 
   this.route('requests', { resetNamespace: true }, function() {
