@@ -182,8 +182,10 @@ $toast-pulls:   true !default;
 
   @media (max-width: $toast-breakpoint-medium) and (min-width: $toast-breakpoint-small) {
     &[class*="#{$toast-grid-column-namespace}--m-"] {
-      display: inline-block;
-      margin-right: -.24em;
+      // TOM EDIT: this selector seems unnecessary & is overriding display:block margin-right:auto of .grid__col--centered.
+      // Issue logged here: https://github.com/daneden/Toast/issues/53
+      // display: inline-block;
+      // margin-right: -.24em;
     }
 
     &.#{$toast-grid-column-namespace}--m-1-of-2 {
@@ -213,8 +215,10 @@ $toast-pulls:   true !default;
 
   @media (max-width: $toast-breakpoint-small) {
     &[class*="#{$toast-grid-column-namespace}--s-"] {
-      display: inline-block;
-      margin-right: -.24em;
+      // TOM EDIT: this selector seems unnecessary & is overriding display:block margin-right:auto of .grid__col--centered.
+      // Issue logged here: https://github.com/daneden/Toast/issues/53
+      // display: inline-block;
+      // margin-right: -.24em;
     }
 
     &.#{$toast-grid-column-namespace}--s-1-of-2 {

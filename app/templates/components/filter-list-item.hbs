@@ -1,13 +1,15 @@
-<div class="u-tc-primary u-px2 u-mb1 u-rounded {{if active 'u-bc-overlay'}}" {{action (if active 'removeFilter' 'addFilter') aggName bucket.key}}
->
-  <!-- {{#if (eq aggName "assay")}}
-    <div class="label {{bucket.colour}}"></div>
-  {{/if}} -->
+<div class="u-pos-relative u-flex u-justify-between u-tc-primary u-px1 u-mb1 u-rounded {{if active 'u-bc-overlay'}}" {{action (if active 'removeFilter' 'addFilter') aggName bucket.key}}>
 
-  <span>
-    {{bucket.key}} ({{bucket.doc_count}})
-    {{#if active}}
-      <span class="">{{fa-icon "times"}}</span>
+  <span class="u-flex u-cursor-pointer">
+    {{#if (eq aggName "assay")}}
+      <span>
+        <span class="c-card-assay u-px2 u-mr1 {{bucket.colour}}"></span>
+      </span>
     {{/if}}
+    <span class="u-self-center">{{bucket.key}} ({{bucket.doc_count}})</span>
   </span>
+
+  {{#if active}}
+    {{fa-icon "times" class="u-tc-tertiary u-cursor-pointer c-sidebar-remove-filter u-px1 u-pos-right0 u-pos-absolute"}}
+  {{/if}}
 </div>

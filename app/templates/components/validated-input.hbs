@@ -12,6 +12,12 @@
     <a class="u-fs0" {{action "toggleMarkdownModal"}}>How to format text with Markdown?</a>
   {{/unless}}
 {{else}}
+  {{#if showPasswordButton}}
+    <a class="c-pw-text-btn" {{action 'togglePasswordVisibility'}}>{{#if showPassword}} Hide Password {{else}} Show Password {{/if}}</a>
+    {{#if value}}{{password-strength strength=passwordStrength}}{{/if}}
+  {{else if resetPassword}}
+    <a class="c-pw-text-btn" {{action resetPassword}}>Reset Password</a>
+  {{/if}}
   {{input
     value=value
     focus-in="focusedIn"
@@ -24,13 +30,13 @@
 {{/if}}
 
 {{#if isInvalid}}
-  <ul class="o-list-flush-left">
+  <ul class="o-list-flush-left u-mb0 u-bc-white">
     {{#each errors as |error|}}
-      <li class="u-tc-red">{{error}}</li>
+      <li class="u-ta-left u-tc-red c-validated-input-msg">{{error}}</li>
     {{/each}}
   </ul>
-{{else if (and isActive (not isValid))}}
-  <span>{{helpText}}</span>
+{{else if (and helpText (and isActive (not isValid)))}}
+  <p class="u-ta-left u-tc-tertiary c-validated-input-msg">{{helpText}}</p>
 {{/if}}
 
 {{#if isShowingMarkdownModal}}
