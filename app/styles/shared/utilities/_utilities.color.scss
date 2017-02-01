@@ -53,7 +53,8 @@
 .u-bc-deep-orange { background-color: $deep-orange;         }
 .u-bc-brown       { background-color: $brown;               }
 
-.u-bc-overlay-grey { background-color: transparentize($color-light-bluegrey, .1); }
+.u-bc-overlay-light-bluegrey { background-color: transparentize($color-light-bluegrey, .1); }
+.u-bc-overlay-light-grey { background-color: transparentize($color-light-grey, .1); }
 .u-bc-overlay-white { background-color: transparentize($color-white, .1); }
 
 // Border Colors
