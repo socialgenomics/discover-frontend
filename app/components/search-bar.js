@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-const { Component, get, observer, inject: { service }, set } = Ember;
+const { Component, get, inject: { service }, set, computed } = Ember;
 
 export default Component.extend({
   queryService: service('query'),
@@ -11,9 +11,13 @@ export default Component.extend({
     set(this, 'query', queryService.getQueryString());
   },
 
-  setQuery: observer('queryService.queryString', function() {
-    const queryService = get(this, 'queryService');
-    set(this, 'query', queryService.getQueryString());
+  query: computed('queryService.queryString', {
+    get() {
+      return get(this, 'queryService').getQueryString();
+    },
+    set(key, value) {
+      return value;
+    }
   }),
 
   actions: {
