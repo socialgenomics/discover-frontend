@@ -7,9 +7,11 @@ export default Component.extend({
   isActive: false,
   hasBeenFocused: false,
   showPassword: false,
-  classNames: ['u-mb2', 'u-pos-relative', 'c-validated-input'],
-  classNameBindings: ['isActive:active'],
-
+  classNames: ['u-mb2', 'u-pos-relative'],
+  classNameBindings: ['isActive:active', 'isTextarea:c-validated-textarea:c-validated-input' ],
+  isTextarea: computed('type', function() {
+    return get(this, 'type') === 'textarea' ? true : false;
+  }),
   isValid: computed('hasBeenFocused', 'errors', function() {
     return (get(this, 'hasBeenFocused')) && isEmpty(get(this, 'errors'));
   }),
