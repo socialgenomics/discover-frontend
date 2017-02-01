@@ -5,7 +5,7 @@ const { Component, inject: { service }, get } = Ember;
 export default Component.extend({
   session: service(),
 
-  classNames: ['c-navbar__profile-dropdown', 'u-border-left', 'u-pl2'],
+  classNames: ['u-border-left', 'u-pl2'],
 
   actions: {
     close(dropdown) {
