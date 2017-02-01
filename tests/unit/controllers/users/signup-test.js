@@ -50,18 +50,6 @@ describe('UsersSignupController', function() {
     expect(get(controller, 'isDisabled')).to.eql(false);
   });
 
-  it('type is text when showPassword is true', function() {
-    const controller = this.subject();
-    set(controller, 'showPassword', true);
-    expect(get(controller, 'type')).to.eql('text');
-  });
-
-  it('type is password when showPassword is false', function() {
-    const controller = this.subject();
-    set(controller, 'showPassword', false);
-    expect(get(controller, 'type')).to.eql('password');
-  });
-
   it('_buildCredentials returns object with email, pw, first and lastname', function() {
     const controller = this.subject();
     setProperties(controller, {
@@ -103,7 +91,7 @@ describe('UsersSignupController', function() {
       const controller = this.subject();
       set(controller, 'password', '');
 
-      expect(get(controller, 'strength')).to.be.equal('weak');
+      expect(get(controller, 'passwordStrength')).to.be.equal('weak');
     });
 
     it('should be equal "medium"', function () {
@@ -112,7 +100,7 @@ describe('UsersSignupController', function() {
 
       passwords.forEach(password => {
         set(controller, 'password', password);
-        expect(get(controller, 'strength')).to.be.equal('medium');
+        expect(get(controller, 'passwordStrength')).to.be.equal('medium');
       });
     });
 
@@ -122,7 +110,7 @@ describe('UsersSignupController', function() {
 
       passwords.forEach(password => {
         set(controller, 'password', password);
-        expect(get(controller, 'strength')).to.be.equal('strong');
+        expect(get(controller, 'passwordStrength')).to.be.equal('strong');
       });
     });
   });
@@ -133,7 +121,7 @@ describe('UsersSignupController', function() {
 
       set(controller, 'password', 'aaaaaaaa');
       expect(get(controller, 'errors.password.length')).to.be.equal(1);
-      expect(get(controller, 'errors.password')[0]).to.be.equal('Please enter a number or capital letter.');
+      expect(get(controller, 'errors.password')[0]).to.be.equal('Must include a number or capital letter.');
     });
 
     it('should not return error', function () {

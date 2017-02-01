@@ -6,7 +6,8 @@ export default Component.extend({
   errors: null,
   isActive: false,
   hasBeenFocused: false,
-  classNames: ['u-mb3'],
+  showPassword: false,
+  classNames: ['u-mb2', 'u-pos-relative', 'c-validated-input'],
   classNameBindings: ['isActive:active'],
 
   isValid: computed('hasBeenFocused', 'errors', function() {
@@ -30,7 +31,17 @@ export default Component.extend({
       });
     },
 
+    togglePasswordVisibility() {
+      this.toggleProperty('showPassword');
+      if (get(this, 'showPassword')) {
+        set(this, 'type', 'text');
+      } else {
+        set(this, 'type', 'password');
+      }
+    },
+
     submitForm() { get(this, 'submit')(); },
+
     toggleMarkdownModal() { this.toggleProperty('isShowingMarkdownModal'); }
   }
 });

@@ -7,8 +7,8 @@
 <div class="grid-wrapper {{unless session.isAuthenticated 'u-pt5' ''}}">
   <div class="grid">
     <div class="grid__col grid__col--3-of-3">
-      <div class="c-card c-card-detail-view u-pos-relative">
-      <div class="c-card-header u-w100 u-pos-absolute u-bc-off-white"></div>
+      <div class="c-card c-card-detail-view u-pos-relative {{unless session.isAuthenticated 'dataset-notification-margin' ''}}">
+        <div class="c-card-header u-full-width u-pos-absolute u-bc-off-white"></div>
         <div class="grid">
           <div class="grid__col grid__col--7-of-12 u-border-right">
 
@@ -89,10 +89,9 @@
             <div class="c-card-header u-pos-relative u-bc-off-white u-flex u-items-center u-justify-center u-top-rounded">
               <h4 class="u-mb0 u-fs2 u-fw-med u-tc-teal">Discussions</h4>
             </div>
-
-                {{partial "datasets/tab-comments"}}
-
+            {{partial "datasets/tab-comments"}}
           </div>
+
         </div>
 
       </div>
