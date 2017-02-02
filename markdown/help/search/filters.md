@@ -1,4 +1,4 @@
-## What do all those filters mean?
+# What do all those filters mean?
 
 **Assay Type** describes the general molecular method used to process the samples for genomic analysis. For example: RNA-Seq or SNP-Array.  
 

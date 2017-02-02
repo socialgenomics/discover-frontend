@@ -13,7 +13,7 @@
     <div class="card-main-content">
   	  <div class="dataset-main-info">
         <h2>{{request.title}}</h2>
-        <p class="markdown-text">{{markdown-to-html markdown=request.description}}</p>
+        <p class="u-markdown-text">{{markdown-to-html markdown=request.description}}</p>
         <div class="tags">
           {{#each tags as |tag|}}
             {{tag-item tag=tag}}

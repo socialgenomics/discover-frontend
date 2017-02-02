@@ -1,4 +1,4 @@
-## What makes a good tag?
+# What makes a good tag?
 
 Useful tags describe specific details about that dataset. Tags are micro-data that you can use to micro-categorise your content. Unlike categories, tags are not hierarchical and cannot have subtags.   
 
