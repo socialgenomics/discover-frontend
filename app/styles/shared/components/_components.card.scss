@@ -31,9 +31,11 @@
   overflow-y: auto;
 }
 
-.c-card-detail-view {
+.c-card-detail-overflow {
+  min-height: 600px;
+  height: 650px;
   height: 80vh;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 .c-featured-card {

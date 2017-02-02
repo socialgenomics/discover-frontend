@@ -38,6 +38,7 @@
 @import 'shared/utilities/utilities.flexbox';
 @import 'shared/utilities/utilities.images';
 @import 'shared/utilities/utilities.inputs';
+@import 'shared/utilities/utilities.markdown-text';
 @import 'shared/utilities/utilities.margins';
 @import 'shared/utilities/utilities.media-queries';
 @import 'shared/utilities/utilities.padding';
@@ -52,7 +53,6 @@
 @import 'custom/components/components.call-to-action-banner';
 @import 'custom/components/components.navbar';
 @import 'custom/components/components.overlay';
-@import 'custom/components/components.help-text';
 
 // Addons
 @import 'ember-basic-dropdown';
