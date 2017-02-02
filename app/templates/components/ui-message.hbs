@@ -1,4 +1,5 @@
-{{yield}}
-<div class="ui-message {{flash.type}} animated {{flash.class}}">
-  {{flash.message}} <span class="close-button large-text" {{action "closeMessages"}}>{{fa-icon "times"}}</span>
+<div class="c-flash-message u-p2 u-fs3 u-ta-center c-flash-message--{{flash.type}}">
+  {{fa-icon icon}}
+  {{flash.message}}
+  <span class="c-flash-message-close" {{action "closeMessages"}}>{{fa-icon "times"}}</span>
 </div>

@@ -24,9 +24,7 @@ export default Controller.extend({
       this.flashMessages.add({
         message: 'Please check your email to verify your account',
         type: 'info',
-        timeout: 7000,
-        sticky: true,
-        class: 'fadeIn'
+        sticky: true
       });
     },
     trackCreateAccount(eventName) {

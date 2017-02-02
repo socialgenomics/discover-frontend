@@ -1,0 +1,22 @@
+.c-flash-message {
+  box-shadow: $global-box-shadow;
+}
+  .c-flash-message--success {
+    background-color: #edfaf1;
+    color: #2c683f;
+  }
+
+  .c-flash-message--warning {
+    background-color: #ffe3e3;
+    color: #921515;
+  }
+
+  .c-flash-message--info {
+    background-color: #fffdec;
+    color: #996e00;
+  }
+
+.c-flash-message-close {
+  position: absolute;
+  right: $global-spacing-unit;
+}

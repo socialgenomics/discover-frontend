@@ -12,9 +12,7 @@ export default Mixin.create({
   _addFlashMessage(message, type) {
     this.flashMessages.add({
       message,
-      type,
-      timeout: 7000,
-      class: 'fadeInOut'
+      type
     });
   }
 });

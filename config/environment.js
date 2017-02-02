@@ -87,9 +87,7 @@ module.exports = function(environment) {
       },
       flashMessageDefaults: {
         timeout: 5000,
-        extendedTimeout: 0,
         priority: 200,
-        showProgress: true,
         preventDuplicates: true
       },
       moment: {
