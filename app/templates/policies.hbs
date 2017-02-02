@@ -6,48 +6,36 @@
 
         {{tab-item
           title="Website Acceptable Use"
-          target="policies"
+          target="policies.web"
         }}
 
         {{tab-item
           title="Privacy Policy"
-          target="policies"
+          target="policies.privacy"
           class="u-border-left"
         }}
 
         {{tab-item
           title="Terms of Website Use"
-          target="policies"
+          target="policies.terms"
           class="u-border-left"
         }}
 
         {{tab-item
           title="Cookie Policy"
-          target="policies"
+          target="policies.cookie"
           class="u-border-left"
         }}
 
         {{tab-item
           title="Disclaimer"
-          target="policies"
+          target="policies.disclaimer"
           class="u-border-left"
         }}
 
       {{/tab-list}}
 
-      <div class="c-card u-border-square u-p4">
-        {{#if (eq tab "web")}}
-          {{partial "policies/tab-web"}}
-        {{else if (eq tab "privacy")}}
-          {{partial "policies/tab-privacy"}}
-        {{else if (eq tab "terms")}}
-          {{partial "policies/tab-terms"}}
-        {{else if (eq tab "cookie")}}
-          {{partial "policies/tab-cookie"}}
-        {{else}}
-          {{partial "policies/tab-disclaimer"}}
-        {{/if}}
-      </div>
+      {{outlet}}
 
     </div>
   </div>
