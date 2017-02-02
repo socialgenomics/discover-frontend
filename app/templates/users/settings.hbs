@@ -11,25 +11,26 @@
 
         <div class="u-pos-relative u-py4">
           <form action="#">
-            <div class="u-flex u-items-center u-px2">
-              <input class="u-mr3" id="notificationsMessage" type="checkbox" checked="checked" onclick="return false">
-              <label for="notificationsMessage" class="helper-text">Another user sends me a message.</label>
-            </div>
-
-            <div class="u-flex u-items-center u-px2">
-              <input class="u-mr3" id="notificationsComments" type="checkbox" onclick="return false">
-              <label for="notificationsComments" class="helper-text">Someone comments on a dataset I posted.</label>
-            </div>
-
-            <div class="u-flex u-items-center u-px2">
-              <input class="u-mr3" id="notificationsUpdates" type="checkbox" onclick="return false">
-              <label for="notificationsUpdates" class="helper-text">Tips and important updates about Repositive.</label>
-            </div>
-
-            <div class="u-flex u-items-center u-px2">
-              <input class="u-mr3" id="notificationsSuggestions" type="checkbox" onclick="return false">
-              <label for="notificationsSuggestions" class="helper-text">Suggestions for datasets based on my search history.</label>
-            </div>
+            {{check-box
+              label="Another user sends me a message."
+              checkID="notificationsMessage"
+              checked=true
+            }}
+            {{check-box
+              label="Someone comments on a dataset I posted."
+              checkID="notificationsComments"
+              checked=false
+            }}
+            {{check-box
+              label="Tips and important updates about Repositive."
+              checkID="notificationsUpdates"
+              checked=false
+            }}
+            {{check-box
+              label="Suggestions for datasets based on my search history."
+              checkID="notificationsSuggestions"
+              checked=false
+            }}
           </form>
 
           <div class="u-ta-center c-overlay u-bc-overlay-white u-pos-top0 u-pos-left0">
