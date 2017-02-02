@@ -5,7 +5,7 @@ const { Component, get, set, isEmpty } = Ember;
 export default Component.extend({
   isActive: false,
   isValid: false,
-  classNames: 'write-comment',
+  classNames: 'u-flex u-items-start',
   classNameBindings: ['isActive:active'],
 
   actions: {

@@ -1,4 +1,4 @@
-<img src={{avatar}} class="u-w1">
+<img src={{avatar}} class="u-w1 u-mr1">
 <div class="input-field">
   {{validated-input
     type="textarea"
@@ -8,8 +8,8 @@
     disabled=disabled
   }}
   {{#if isActive}}
-    <div class="buttons">
-      <button {{action 'addComment'}} class="">{{fa-icon "check"}}</button>
+    <div class="">
+      <button {{action 'addComment'}} class="c-btn c-btn--primary c-btn--shadow u-mr2">{{fa-icon "check"}}</button>
       <a {{action 'cancel'}} class="">cancel</a>
     </div>
   {{/if}}

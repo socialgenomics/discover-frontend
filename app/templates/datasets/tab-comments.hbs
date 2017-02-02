@@ -1,4 +1,4 @@
-<div class="u-pr3">
+<div class="u-py2">
 
   {{add-comment
     addComment=(action 'addComment')
@@ -22,6 +22,5 @@
       avatar=comment.userId.userProfile.avatar
       disabled=(not session.isAuthenticated)
     }}
-    <div class="c-divider c-divider-light-bg u-mb3"></div>
   {{/each}}
 </div>
