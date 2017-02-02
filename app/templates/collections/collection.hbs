@@ -10,11 +10,14 @@
   class="u-bc-collection t-dark"
 }}
 
-<div class="grid-wrapper">
+<div class="grid-wrapper grid-wrapper-stepped">
   {{#if isLoading}}
     {{partial 'loading'}}
   {{else}}
+    <h5 class="u-tc-secondary u-fs2">Search Results ({{model.meta.total}})</h5>
+
     {{search-results-list results=model.datasets totalResults=model.meta.total}}
+    
     {{#if (gt model.meta.total 0)}}
       {{pagination-bar
         totalPages=totalPages

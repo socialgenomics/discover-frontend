@@ -6,18 +6,25 @@
 /* ==================================== */
 
 .grid-wrapper {
-  max-width: 1008px;
   padding: $global-spacing-unit;
-  margin: 0 auto;
+  margin-left: auto;
+  margin-right: auto;
+  transition: margin-left 5s ease-in-out;
+}
+
+.grid-wrapper-stepped {
+  max-width: $breakpoint-small;
+  @media (  min-width: $breakpoint-medium ) { max-width: $breakpoint-medium; }
+  @media (  min-width: $breakpoint-large  ) { max-width: $breakpoint-large;  }
+}
+
+.grid-wrapper-fluid {
+  max-width: 1008px;
 }
 
 .has-sidebar {
   .grid-wrapper {
-    margin-left: $sidebar-width;
-
-    // TODO: change grid-wrapper width to variable
-    @media(min-width: $sidebar-width + $sidebar-width + 1008px) {
-      margin-left: auto;
-    }
+    @media (  min-width: $breakpoint-wide ) { margin-left: $meta-panel-width; }
+    @media (  min-width: $breakpoint-huge ) { margin-left: auto; }
   }
 }
