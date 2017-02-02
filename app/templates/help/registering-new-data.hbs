@@ -15,7 +15,7 @@
           </ul>
         </div>
         <div class="grid__col grid__col--2-of-3 u-py1 u-px3 u-fs2 u-border-left">
-          <div class="c-help-text u-mb4">
+          <div class="markdown-text u-mb4">
             {{#if (not help)}}{{markdown-to-html markdown=(fr-markdown-file 'help/registering/data-reg')}}
             {{else if (eq help "data-reg")}}{{markdown-to-html markdown=(fr-markdown-file 'help/registering/data-reg')}}
             {{else if (eq help "see-reg")}}{{markdown-to-html markdown=(fr-markdown-file 'help/registering/see-reg')}}

@@ -14,7 +14,7 @@
           </ul>
         </div>
         <div class="grid__col grid__col--2-of-3 u-py1 u-px3 u-fs2 u-border-left">
-          <div class="c-help-text u-mb4">
+          <div class="markdown-text u-mb4">
             {{#if (not help)}}{{markdown-to-html markdown=(fr-markdown-file 'help/search/how-to-search')}}
             {{else if (eq help "search-query")}}{{markdown-to-html markdown=(fr-markdown-file 'help/search/how-to-search')}}
             {{else if (eq help "algorithm")}}{{markdown-to-html markdown=(fr-markdown-file 'help/search/search-algorithm')}}
