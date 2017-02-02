@@ -13,8 +13,8 @@
               <li class="u-p1">{{#link-to 'help.your-account' (query-params help="profile") class="u-tc-teal"}}Can I control who can see my profile?{{/link-to}}</li>
             </ul>
           </div>
-          <div class="grid__col grid__col--2-of-3 u-full-min-height u-px3 u-mb3 u-fs2 u-border-left">
-            <div class="u-markdown-text u-mb3">
+          <div class="grid__col grid__col--2-of-3 u-full-min-height u-mb3 u-fs2 u-border-left">
+            <div class="u-markdown-text u-mb3 u-px3">
               {{#if (not help)}}{{markdown-to-html markdown=(fr-markdown-file 'help/account/access')}}
               {{else if (eq help "access")}}{{markdown-to-html markdown=(fr-markdown-file 'help/account/access')}}
               {{else if (eq help "personalise")}}{{markdown-to-html markdown=(fr-markdown-file 'help/account/personalise')}}
