@@ -5,7 +5,7 @@
   filters=model.aggs
   activeFilters=activeFilters
   isLoading=isLoading
-  class="u-bc-i-cant-believe-its-not-white"
+  class="u-bc-i-cant-believe-its-not-white u-py2"
   isSearchPage=true
 }}
 
@@ -19,14 +19,13 @@
   }}
 {{/if}} -->
 
-<div class="grid-wrapper">
+<div class="grid-wrapper grid-wrapper-stepped">
   {{#if isLoading}}
     {{partial 'loading'}}
   {{else}}
-    <!-- <h5>Search Results ({{model.meta.total}})</h5> -->
+    <h5 class="u-tc-secondary u-fs2">Search Results ({{model.meta.total}})</h5>
 
     {{search-results-list results=model.datasets totalResults=model.meta.total}}
-
 
     {{#if (gt model.meta.total 0)}}
       {{pagination-bar

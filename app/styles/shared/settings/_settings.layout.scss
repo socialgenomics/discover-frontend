@@ -2,4 +2,22 @@
     #LAYOUT SETTINGS
    ======================================================================== */
 
-   $sidebar-width   : 320px;
+// Grid, Structural Component Widths & Media
+/* ==================================== */
+
+// Structural Components
+$meta-panel-width   : 320px;
+$data-card-width    : 304px;
+
+// Grid Widths & Breakpoints
+/* ==================================== */
+
+// Gutter Width (used in _objects.toast-grid)
+$grid-gutter-width  : $global-line-height !default;
+
+// Grid-Wrapper
+$breakpoint-small   : $data-card-width        + (2 * $grid-gutter-width);
+$breakpoint-medium  : (2 * $data-card-width)  + (3 * $grid-gutter-width);
+$breakpoint-large   : (3 * $data-card-width)  + (4 * $grid-gutter-width);
+$breakpoint-wide    : $breakpoint-large       + $meta-panel-width;
+$breakpoint-huge    : $breakpoint-large       + (2 * $meta-panel-width);

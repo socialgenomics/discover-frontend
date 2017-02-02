@@ -21,16 +21,6 @@ $font-stack-roboto:       'Roboto', sans-serif ;
 $global-font-size:        16px !default;
 $global-line-height:      24px !default; // line-height converted to relative value later (see _elements.text)
 
-// Grid & Media
-/* ==================================== */
-
-// Gutter Width (used in _objects.toast-grid)
-$gutter-width: $global-line-height !default;
-
-// Breakpoints
-$breakpoint-medium: 780px !default;
-$breakpoint-small: 480px !default;
-
 // Spacing Units
 /* ==================================== */
 

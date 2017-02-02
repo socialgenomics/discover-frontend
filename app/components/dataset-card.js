@@ -5,7 +5,7 @@ const { Component, computed, inject: { service }, get, set } = Ember;
 
 export default Component.extend({
   urlGenerator: service(),
-  classNames: ['grid__col', 'grid__col--1-of-3'],
+  classNames: ['grid__col', 'grid__col--1-of-3', 'grid__col--m-1-of-2'],
   shareUrl: computed('type', 'dataset.id', function () {
     const route = get(this, 'type') === 'request' ? 'requests.detail' : 'datasets.detail';
 

@@ -4,9 +4,14 @@
 
 .c-sidebar {
   min-height: 100%;
-  width: $sidebar-width;
-  // TODO refactor box shadow styles
+  width: $meta-panel-width;
   box-shadow: 2px 0 5px -1px rgba(0,0,0,0.2);
+  transition: transform 0.5s ease-in-out;
+  transform: translateX(-$meta-panel-width);
+  will-change: transform;
+  @media ( min-width: $breakpoint-wide ) {
+    transform: translate(0);
+  }
 }
 
 .c-sidebar-remove-filter { top: 3px; }
