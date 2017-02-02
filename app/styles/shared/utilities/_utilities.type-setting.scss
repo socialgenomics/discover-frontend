@@ -4,11 +4,11 @@
 
  // Font Sizes
  /* ==================================== */
-.u-fs0 { font-size: 0.75rem;  }
-.u-fs1 { font-size: 0.875rem; }
-.u-fs2 { font-size: 1rem;     }
-.u-fs3 { font-size: 1.25rem;  }
-.u-fs4 { font-size: 2.5rem;   }
+.u-fs0 { font-size: $global-font-size-very-small;   }
+.u-fs1 { font-size: $global-font-size-small;        }
+.u-fs2 { font-size: $global-font-size-regular;      }
+.u-fs3 { font-size: $global-font-size-large;        }
+.u-fs4 { font-size: $global-font-size-very-large;   }
 
  // Font Weights
  /* ==================================== */

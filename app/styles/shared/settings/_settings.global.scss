@@ -21,6 +21,13 @@ $font-stack-roboto:       'Roboto', sans-serif ;
 $global-font-size:        16px !default;
 $global-line-height:      24px !default; // line-height converted to relative value later (see _elements.text)
 
+// Font sizes
+$global-font-size-very-small: 0.75rem;
+$global-font-size-small: 0.85rem;
+$global-font-size-regular: 1rem;
+$global-font-size-large: 1.25rem;
+$global-font-size-very-large: 2.5rem;
+
 // Grid & Media
 /* ==================================== */
 
