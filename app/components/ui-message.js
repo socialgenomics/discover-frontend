@@ -1,13 +1,18 @@
 import Ember from 'ember';
 
-export default Ember.Component.extend({
-  session: Ember.inject.service(),
+const { computed, Component, inject: { service }, get, set } = Ember;
 
+export default Component.extend({
+  session: service(),
+  icon: computed('flash.type', function() {
+    if (get(this, 'flash.type') === 'success') { return 'check-circle-o'; }
+    if (get(this, 'flash.type') === 'warning') { return 'exclamation-circle '; }
+    if (get(this, 'flash.type') === 'info') { return 'lightbulb-o'; }
+  }),
   actions: {
-    closeMessages: function() {
-      Ember.get(this, 'flashMessages').clearMessages();
-      this.get('session').set('data.displayWelcomeMessage', false);
+    closeMessages() {
+      get(this, 'flashMessages').clearMessages();
+      set(this, 'session.data.displayWelcomeMessage', false);
     }
   }
-
 });
