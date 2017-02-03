@@ -1,4 +1,4 @@
-## What information should I include in my registration?
+# What information should I include in my registration?
 
 Include as much useful, detailed information as possible. The title should be concise and to-the-point, clearly and briefly explaining what data you are listing. Then add a description of your data and what the data has been or could be used for. This can include items such as:
 

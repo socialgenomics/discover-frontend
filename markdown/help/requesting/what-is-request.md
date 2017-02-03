@@ -1,4 +1,4 @@
-## What is a data request?
+# What is a data request?
 
 If you searched for data on Repositive but did not find what you were looking for you can ask other users by making a request.  
 

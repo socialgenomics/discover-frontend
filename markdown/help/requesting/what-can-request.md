@@ -1,4 +1,4 @@
-## What data can I request? 
+# What data can I request? 
 
 Our platform is focused only on human genomic data. Please do not request genomic data for plants or animals.
 

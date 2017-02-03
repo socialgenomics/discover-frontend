@@ -1,4 +1,4 @@
-## Can I personalise my notifications?
+# Can I personalise my notifications?
 
 To personalise your notifications fill in the following [form](https://repositive.typeform.com/to/iIqfdU).
 
