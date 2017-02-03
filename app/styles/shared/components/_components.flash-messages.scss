@@ -1,19 +1,33 @@
 @keyframes slideInDown {
   from {
-    transform: translate3d(0, -100%, 0);
-    visibility: visible;
+    transform: translateY(-100%);
   }
 
   to {
-    transform: translate3d(0, 0, 0);
+    transform: translateY(0%);
+  }
+}
+
+@keyframes slideOutUp {
+  from {
+    transform: translateY(0%);
+  }
+
+  to {
+    transform: translateY(-100%);
   }
 }
 
 .c-flash-message {
   box-shadow: $global-box-shadow;
-  animation-name: slideInDown;
-  animation-duration: 1s;
+  animation-duration: 0.5s;
   animation-fill-mode: both;
+  animation-timing-function: ease-in-out;
+  animation-name: slideInDown;
+
+  &.exiting {
+    animation-name: slideOutUp;
+  }
 }
   .c-flash-message--success {
     background-color: $ottoman;
