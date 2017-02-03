@@ -16,18 +16,18 @@
   animation-fill-mode: both;
 }
   .c-flash-message--success {
-    background-color: #edfaf1;
-    color: #2c683f;
+    background-color: $ottoman;
+    color: $killarney;
   }
 
   .c-flash-message--warning {
-    background-color: #ffe3e3;
-    color: #921515;
+    background-color: $pippin;
+    color: $tamarillio;
   }
 
   .c-flash-message--info {
-    background-color: #fffdec;
-    color: #996e00;
+    background-color: $apricot-white;
+    color: $chelsea-gem;
   }
 
 .c-flash-message-close {
