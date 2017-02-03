@@ -1,4 +1,4 @@
-## What data can I register?
+# What data can I register?
 
 There are three types of data you can register on Repositive:
 

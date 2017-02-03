@@ -1,4 +1,4 @@
-## What predicated search terms can I use?
+# What predicated search terms can I use?
 
 Predicated searches allow you to specify which metadata field you want the search to be performed in. Currently on Repositive you can predicate with:
 

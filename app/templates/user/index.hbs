@@ -1,4 +1,4 @@
-<div class="grid-wrapper">
+<div class="grid-wrapper grid-wrapper-stepped">
   <main id="profile">
     <div class="grid">
       <div class="grid__col grid__col--12-of-12">
@@ -7,7 +7,7 @@
             <h1 class="u-fs4 u-mb1">{{model.user.displayName}}</h1>
             <h4>{{model.user_profile.workOrganisation}}</h4>
 
-            {{#if isOwnProfile}}{{#link-to "users.user_profile" class="edit-btn fa-2x sub-dark"}}{{fa-icon "pencil-square-o"}}{{/link-to}}{{/if}}
+            {{#if isOwnProfile}}{{#link-to "users.profile" class="edit-btn fa-2x sub-dark"}}{{fa-icon "pencil-square-o"}}{{/link-to}}{{/if}}
             <div class="profile-img">
               <img class="u-w3 u-mb1" src={{model.user_profile.avatar}}>
             </div>
