@@ -1,19 +1,20 @@
-<div class="c-card u-ta-center u-border-square u-mb0">
-  <ul class="o-list-inline o-list-flush-left u-flex u-tc-primary u-mb0">
+{{#tab-list class="u-fs3"}}
 
-    {{#link-to "collections" class="u-tc-primary u-flex-auto" classNameBindings='isDatasources:u-bc-off-white'}}
-      <li class="o-list-inline__item u-p1 u-fs3">
-        {{fa-icon "book"}}
-        Collections <span class="u-fw-med u-px1">{{stats.repositive_collections}}</span>
-      </li>
-    {{/link-to}}
+  {{tab-item
+    iconPosition="left"
+    icon="book"
+    title="Collections"
+    target="collections"
+    stats=stats.repositive_collections
+  }}
 
-    {{#link-to "datasources" class="u-tc-primary u-flex-auto u-border-left" classNameBindings='isCollections:u-bc-off-white'}}
-      <li class="o-list-inline__item u-p1 u-fs3">
-        {{fa-icon "database"}}
-        Data Sources <span class="u-fw-med u-px1">{{stats.datasources}}</span>
-      </li>
-    {{/link-to}}
+  {{tab-item
+    iconPosition="left"
+    icon="database"
+    title="Data Sources"
+    target="datasources"
+    stats=stats.datasources
+    class="u-border-left"
+  }}
 
-  </ul>
-</div>
+{{/tab-list}}

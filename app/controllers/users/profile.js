@@ -49,18 +49,14 @@ export default Ember.Controller.extend(
         .then(() => {
           this.flashMessages.add({
             message: 'Your profile has been updated.',
-            type: 'success',
-            timeout: 7000,
-            class: 'fadeInOut'
+            type: 'success'
           });
         })
         .catch((err) => {
           Ember.Logger.error(err);
           this.flashMessages.add({
             message: 'Sorry. There was a problem saving your changes.',
-            type: 'warning',
-            timeout: 7000,
-            class: 'fadeInOut'
+            type: 'warning'
           });
         });
       }

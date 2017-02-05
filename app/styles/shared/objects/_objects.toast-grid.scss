@@ -36,11 +36,11 @@ $toast-grid-column-namespace: "grid__col" !default;
 $toast-col-groups:  (2, 3, 5, 6, 12) !default;
 
 // Gutter width
-$toast-gutter-width: $gutter-width;
+$toast-gutter-width: $grid-gutter-width;
 
 // Breakpoints
-$toast-breakpoint-medium:   $breakpoint-medium;
-$toast-breakpoint-small:    $breakpoint-small;
+$toast-breakpoint-large:   $breakpoint-large;
+$toast-breakpoint-medium:  $breakpoint-medium;
 
 // Pushes and pulls
 $toast-pushes:  true !default;
@@ -173,19 +173,17 @@ $toast-pulls:   true !default;
   padding-left: $toast-gutter-width;
   vertical-align: top;
 
-  @media (max-width: $toast-breakpoint-medium) {
+  @media (max-width: $toast-breakpoint-large) {
     display: block;
     margin-left: 0;
     margin-right: 0;
     width: auto;
   }
 
-  @media (max-width: $toast-breakpoint-medium) and (min-width: $toast-breakpoint-small) {
+  @media (max-width: $toast-breakpoint-large) and (min-width: $toast-breakpoint-medium) {
     &[class*="#{$toast-grid-column-namespace}--m-"] {
-      // TOM EDIT: this selector seems unnecessary & is overriding display:block margin-right:auto of .grid__col--centered.
-      // Issue logged here: https://github.com/daneden/Toast/issues/53
-      // display: inline-block;
-      // margin-right: -.24em;
+      display: inline-block;
+      margin-right: -.24em;
     }
 
     &.#{$toast-grid-column-namespace}--m-1-of-2 {
@@ -213,12 +211,10 @@ $toast-pulls:   true !default;
     }
   }
 
-  @media (max-width: $toast-breakpoint-small) {
+  @media (max-width: $toast-breakpoint-medium) {
     &[class*="#{$toast-grid-column-namespace}--s-"] {
-      // TOM EDIT: this selector seems unnecessary & is overriding display:block margin-right:auto of .grid__col--centered.
-      // Issue logged here: https://github.com/daneden/Toast/issues/53
-      // display: inline-block;
-      // margin-right: -.24em;
+      display: inline-block;
+      margin-right: -.24em;
     }
 
     &.#{$toast-grid-column-namespace}--s-1-of-2 {
@@ -249,9 +245,9 @@ $toast-pulls:   true !default;
 
 // Centers the column in the grid and clears the row of all other columns
 .#{$toast-grid-column-namespace}--centered {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+  display: block !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
 }
 
 

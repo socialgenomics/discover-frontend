@@ -1,0 +1,50 @@
+@keyframes slideInDown {
+  from {
+    transform: translateY(-100%);
+  }
+
+  to {
+    transform: translateY(0%);
+  }
+}
+
+@keyframes slideOutUp {
+  from {
+    transform: translateY(0%);
+  }
+
+  to {
+    transform: translateY(-100%);
+  }
+}
+
+.c-flash-message {
+  box-shadow: $global-box-shadow;
+  animation-duration: 0.5s;
+  animation-fill-mode: both;
+  animation-timing-function: ease-in-out;
+  animation-name: slideInDown;
+
+  &.exiting {
+    animation-name: slideOutUp;
+  }
+}
+  .c-flash-message--success {
+    background-color: $ottoman;
+    color: $killarney;
+  }
+
+  .c-flash-message--warning {
+    background-color: $pippin;
+    color: $tamarillio;
+  }
+
+  .c-flash-message--info {
+    background-color: $apricot-white;
+    color: $chelsea-gem;
+  }
+
+.c-flash-message-close {
+  position: absolute;
+  right: $global-spacing-unit;
+}

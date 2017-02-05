@@ -62,9 +62,7 @@ export default Controller.extend({
       if (existingTags.findBy('properties.text', text)) {
         this.flashMessages.add({
           message: 'The tag: ' + text + ' already exists.',
-          type: 'warning',
-          timeout: 7000,
-          class: 'fadeInOut'
+          type: 'warning'
         });
       } else {
         const tag = this.store.createRecord('action', {
