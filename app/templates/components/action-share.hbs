@@ -1,26 +1,26 @@
 {{fa-icon "share-alt"}}
 
 {{#if showShareOptionsModal}}
-  {{#tether-dialog
+  {{#repositive-modal
+    container-class='c-modal--small u-z1'
     close=(action 'toggleShareOptionsModal')
     target=(concat '#' elementId)
     targetAttachment='bottom left'
     attachment='top left'
-    translucentOverlay=false
-    container-class='share-options-modal'
     constraints=shareOptionsModalConstraints
+    hasOverlay=false
   }}
     {{share-options
       shareUrl=shareUrl
       actionableId=actionableId
       onEnvelopeClick=(action (if session.isAuthenticated 'toggleShareEmailModal' 'toggleCreateAccountModal'))
     }}
-  {{/tether-dialog}}
+  {{/repositive-modal}}
 {{/if}}
 
 {{#if showShareEmailModal}}
   {{#repositive-modal
-    container-class='c-modal--small'
+    container-class='c-modal--small u-z5'
     close=(action 'toggleShareEmailModal')
   }}
     {{repositive-modal/header
@@ -40,7 +40,7 @@
 
 {{#if showCreateAccountModal}}
   {{#repositive-modal
-    container-class='c-modal--small'
+    container-class='c-modal--small u-z5'
     close=(action 'toggleCreateAccountModal')
   }}
     {{repositive-modal/header
