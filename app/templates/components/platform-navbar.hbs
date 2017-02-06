@@ -1,14 +1,14 @@
-<div class="u-bc-off-white c-navbar-wrapper u-pos-fixed u-pos-top0 u-full-width u-px2">
+<div class="u-bc-off-white c-navbar-wrapper u-pos-fixed u-pos-top0 u-full-width">
   <nav class="c-navbar u-flex u-justify-between u-items-center">
 
     <!-- LOGO -->
     {{#unless isAuthenticated}}
-      <a href="https://repositive.io" class="c-navbar__element u-mr2">
+      <a href="https://repositive.io" class="c-navbar__element u-mr2 u-pl2">
         <img src="/assets/images/logo-full-larger.png" alt="Repositive DNA logo">
       </a>
     {{else}}
       {{#link-to 'root'}}
-        <div class="c-navbar__element u-mr2">
+        <div class="c-navbar__element u-mr2 u-pl2">
           <img src="/assets/images/logo-full-larger.png" alt="Repositive DNA logo">
         </div>
       {{/link-to}}
@@ -43,7 +43,7 @@
           </div>
         {{/unless}}
       </div>
-      <section class="u-fw-med u-flex u-self-stretch u-items-center">
+      <section class="u-fw-med u-flex u-self-stretch u-items-center u-px2">
         <div>
           <a href="http://repositive.io/about" class="u-tc-secondary u-px2 u-fs1">ABOUT</a>
         </div>
