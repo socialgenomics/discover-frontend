@@ -35,7 +35,7 @@ describe('SearchControllerMixin', function() {
     it('should set default values fall all query params', function () {
       expect(get(subject, 'page')).to.be.equal(1);
       expect(get(subject, 'query')).to.be.null;
-      expect(get(subject, 'resultsPerPage')).to.be.equal(9);
+      expect(get(subject, 'resultsPerPage')).to.be.equal(6);
     });
   });
 
