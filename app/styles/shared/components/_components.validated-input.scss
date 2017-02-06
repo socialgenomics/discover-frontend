@@ -1,5 +1,19 @@
-.c-validated-input {
-  height: 65px;
+.c-validated-input.invalid{
+  input, textarea {
+    border-color: $color-primary-red;
+  }
+}
+
+.c-validated-input-label {
+  font-size: $global-font-size-regular;
+  text-align: left;
+  padding-left: 3px;
+  transition: $global-transition;
+}
+
+.c-validated-input-msg-container {
+  padding-top: 3px;
+  height: 35px;
 }
 
 .c-validated-input-msg {
@@ -9,6 +23,6 @@
 
 .c-pw-text-btn {
   position: absolute;
-  right: 5px;
-  top: -20px;
+  right: 4px;
+  top: 3px;
 }

@@ -7,6 +7,7 @@
         <img src={{session.authenticatedUser.profile.avatar}}>
         <form>
           {{validated-input
+            label="First Name"
             type="text"
             value=firstname
             errors=errors.firstname
@@ -14,6 +15,7 @@
             submit=(action 'save')
           }}
           {{validated-input
+            label="Last Name"
             type="text"
             value=lastname
             errors=errors.lastname
@@ -21,6 +23,7 @@
             submit=(action 'save')
           }}
           {{validated-input
+            label="Affiliation"
             type="text"
             value=affiliation
             errors=errors.affiliation

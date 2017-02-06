@@ -15,6 +15,7 @@
         <div class="c-divider c-divider-light-bg"></div>
 
         {{validated-input
+          label="Full Name"
           type="Text"
           value=fullname
           errors=errors.fullname
@@ -22,6 +23,7 @@
           submit=(action 'signupAndAuthenticate')
         }}
         {{validated-input
+          label="Email"
           type="email"
           value=email
           errors=errors.email
@@ -29,8 +31,9 @@
           submit=(action 'signupAndAuthenticate')
         }}
         {{validated-input
+          label="Password"
           type="password"
-          class="u-mb4"
+          class="u-mb3"
           value=password
           password=true
           errors=errors.password
