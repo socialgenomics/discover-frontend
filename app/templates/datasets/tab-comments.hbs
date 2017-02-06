@@ -1,26 +1,23 @@
-<div class="u-py2">
-
-  {{add-comment
-    addComment=(action 'addComment')
-    avatar=(
-      if session.isAuthenticated
-        session.authenticatedUser.userProfile.avatar
-        '/assets/images/avatar/lizard.png'
-    )
-    placeholder=(
-      if session.isAuthenticated
-        'Share your thoughts or ask more questions about the data.'
-        'To join this discussion, create a free account.'
-    )
+{{add-comment
+  addComment=(action 'addComment')
+  avatar=(
+    if session.isAuthenticated
+      session.authenticatedUser.userProfile.avatar
+      '/assets/images/avatar/lizard.png'
+  )
+  placeholder=(
+    if session.isAuthenticated
+      'Share your thoughts or ask more questions about the data.'
+      'To join this discussion, create a free account.'
+  )
+  disabled=(not session.isAuthenticated)
+}}
+{{#each commentsSorted as |comment|}}
+  {{user-comment
+    user=comment.userId
+    text=comment.properties.text
+    date=comment.createdAt
+    avatar=comment.userId.userProfile.avatar
     disabled=(not session.isAuthenticated)
   }}
-  {{#each commentsSorted as |comment|}}
-    {{user-comment
-      user=comment.userId
-      text=comment.properties.text
-      date=comment.createdAt
-      avatar=comment.userId.userProfile.avatar
-      disabled=(not session.isAuthenticated)
-    }}
-  {{/each}}
-</div>
+{{/each}}
