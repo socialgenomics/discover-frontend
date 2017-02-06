@@ -30,7 +30,7 @@ describe('Integration: PaginationBarComponent', function() {
       totalPages: 7
     });
     this.render(hbs`{{pagination-bar currentPageNumber=currentPageNumber totalPages=totalPages}}`);
-    expect(this.$('.pagination-bar').find(this.$('p')[0]).text().trim()).to.eql('Total pages: 7');
-    expect(this.$('.pagination-bar').find(this.$('p')[1]).text().trim()).to.eql('Current page: 4');
-  })
+    expect(this.$().find(this.$('p')[0]).text().trim()).to.eql('Total pages: 7');
+    expect(this.$().find(this.$('p')[1]).text().trim()).to.eql('Current page: 4');
+  });
 });

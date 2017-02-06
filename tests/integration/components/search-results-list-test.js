@@ -9,10 +9,10 @@ describe('Integration: SearchResultsListComponent', function() {
     integration: true
   });
 
-  it('Displays message when there are no results.', function() {
-    const message = `Sorry, there are no matching datasets. You can make request to ask our community for help.`;
+  it('Renders no-results template when there are no results', function() {
+    const message = `Sorry, there are no matching datasets.`;
     this.set('totalResults', 0);
     this.render(hbs`{{search-results-list totalResults=totalResults}}`);
-    expect(this.$('h3').text().trim()).to.eql(message);
+    expect(this.$().find(this.$('p')[0]).text().trim()).to.eql(message);
   });
 });

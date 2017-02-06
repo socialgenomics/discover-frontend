@@ -7,8 +7,7 @@ export default Component.extend({
     trackUpdatesHeaders(header) {
       get(this, 'metrics').trackEvent({
         category: 'discover_homeauth_homestats',
-        action: header + '_link_clicked',
-        label: header
+        action: header + '_link_clicked'
       });
     }
   }

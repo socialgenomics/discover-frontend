@@ -7,7 +7,7 @@ export default Mixin.create({
   queryParams: ['query', 'page', 'resultsPerPage'],
   query: null,
   page: 1,
-  resultsPerPage: 9,
+  resultsPerPage: 6,
 
   totalPages: computed('model.meta.total', 'resultsPerPage', function () {
     return Math.ceil(get(this, 'model.meta.total') / get(this, 'resultsPerPage'));
