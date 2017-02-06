@@ -11,12 +11,12 @@ describe('Integration | Component | meta panel tabs', function() {
   it('When displayInfo is true, info tab is active', function() {
     this.set('displayInfo', true);
     this.render(hbs`{{meta-panel-tabs displayInfo=displayInfo}}`);
-    expect(this.$('.active-tab').text().trim()).to.eql('More Information');
+    expect(this.$('.u-border-bottom').text().trim()).to.eql('More Information');
   });
 
   it('When displayInfo is false, filters tab is active', function() {
     this.set('displayInfo', false);
     this.render(hbs`{{meta-panel-tabs displayInfo=displayInfo}}`);
-    expect(this.$('.active-tab').text().trim()).to.eql('Filters');
+    expect(this.$('.u-border-bottom').text().trim()).to.eql('Filters');
   });
 });
