@@ -33,7 +33,7 @@
               action=(action 'save')
               default="Save Changes"
               pending="Saving..."
-              disableWhen=isInvalid
+              disableWhen=(not isSavable)
               reset=true
             }}
           </form>
