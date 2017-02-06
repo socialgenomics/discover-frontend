@@ -76,9 +76,9 @@
 
               <div class="u-ta-center">
                 {{#if dataset.url}}
-                  <a target="_blank" {{action "trackExit"}} href="{{if session.isAuthenticated dataset.url ''}}" class="c-btn c-btn--primary c-btn--shadow">{{#if (eq dataset.access 'Open')}}Access Data{{else}}Go To Dataset{{/if}}</a>
+                  <a target="_blank" {{action "trackExit"}} href="{{if session.isAuthenticated dataset.url ''}}" class="c-btn c-btn-primary">{{#if (eq dataset.access 'Open')}}Access Data{{else}}Go To Dataset{{/if}}</a>
                 {{else}}
-                  <a class="c-btn c-btn--primary c-btn--shadow">{{#if (eq dataset.access 'Open')}}Access Data{{else}}Apply for Access{{/if}}</a>
+                  <a class="c-btn c-btn-primary">{{#if (eq dataset.access 'Open')}}Access Data{{else}}Apply for Access{{/if}}</a>
                 {{/if}}
               </div>
             </div>

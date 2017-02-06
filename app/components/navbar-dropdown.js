@@ -3,7 +3,7 @@ import Ember from 'ember';
 const { Component, inject: { service }, get } = Ember;
 
 export default Component.extend({
-  classNames: ['u-flex', 'u-self-stretch', 'u-items-center', 'u-justify-center', 'u-border-left', 'u-pl2'],
+  classNames: ['u-flex','u-self-stretch','u-items-center','u-justify-center','u-border-left','u-pl2','u-hv-bc-off-white'],
   session: service(),
   actions: {
     close(dropdown) {
