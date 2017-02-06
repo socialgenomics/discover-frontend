@@ -1,12 +1,14 @@
-.c-validated-input.invalid{
-  input, textarea {
-    border-color: $color-primary-red;
-  }
+.c-validated-input {
+  text-align: left;
 }
+  .c-validated-input.invalid{
+    input, textarea {
+      border-color: $color-primary-red;
+    }
+  }
 
 .c-validated-input-label {
   font-size: $global-font-size-regular;
-  text-align: left;
   padding-left: 3px;
   transition: $global-transition;
 }
