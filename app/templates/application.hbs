@@ -6,9 +6,11 @@
   isRootRoute=isRootRoute
 }}
 <main class="u-pos-relative o-main-wrapper">
-  {{#each flashMessages.queue as |flash|}}
-    {{ui-message flash=flash}}
-  {{/each}}
+  <div class="u-pos-fixed u-full-width">
+    {{#each flashMessages.queue as |flash|}}
+      {{ui-message flash=flash}}
+    {{/each}}
+  </div>
   {{md-modal-container}}
   {{outlet}}
 </main>

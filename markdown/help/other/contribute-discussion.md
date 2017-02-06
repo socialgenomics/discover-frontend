@@ -1,4 +1,4 @@
-## How can I contribute to a discussion?
+# How can I contribute to a discussion?
 
 Feel free to start a discussion on any dataset. You would start a discussion if:
 
