@@ -12,7 +12,6 @@ Router.map(function() {
   this.route('root', {
     path: '/'
   });
-  this.route('policies');
   this.route('beta-signup-form', {
     path: '/survey'
   });
@@ -59,12 +58,14 @@ Router.map(function() {
     this.route('source', {
       path: ':id'
     });
+    this.route('search-error');
   });
 
   this.route('collections', function() {
     this.route('collection', {
       path: ':id'
     });
+    this.route('search-error');
   });
 
   this.route('requests', { resetNamespace: true }, function() {
@@ -79,6 +80,14 @@ Router.map(function() {
     this.route('registering-new-data');
     this.route('your-account');
     this.route('other');
+  });
+
+  this.route('policies', { resetNamespace: true }, function() {
+    this.route('web');
+    this.route('privacy');
+    this.route('terms');
+    this.route('cookie');
+    this.route('disclaimer');
   });
 
   this.route('404', {

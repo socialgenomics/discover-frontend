@@ -48,7 +48,10 @@ export default Mixin.create({
   },
 
   resetController(controller, isExiting) {
-    if (isExiting) { controller.set('query', ''); }
+    if (isExiting) {
+      controller.set('query', '');
+      this._updateQueryServiceValue();
+    }
   },
 
   getActiveFilters() {
@@ -58,7 +61,7 @@ export default Mixin.create({
   },
 
   makeRequest(params) {
-    const limit = params.resultsPerPage || 9;
+    const limit = params.resultsPerPage || 6;
     const offset = (params.page - 1) * limit;
     const query = params.query || '';
     const body = query === '' ? {} : get(this, 'QP').parseString(query);
@@ -75,7 +78,7 @@ export default Mixin.create({
 
   /**
   * @desc Update queryService query value
-  * @param {String} query - The new query value
+  * @param {String?} query - The new query value
   * @private
   */
   _updateQueryServiceValue(query) {

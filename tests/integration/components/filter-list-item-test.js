@@ -20,7 +20,7 @@ describe('Integration: FilterListItemComponent', function() {
       activeFilters: ['access:Open']
     });
     this.render(hbs`{{filter-list-item bucket=bucket aggName=aggName activeFilters=activeFilters}}`);
-    expect(this.$('span').text().trim()).to.eql('Abc (8)');
+    expect(this.$('span.u-self-center').text().trim()).to.eql('Abc (8)');
   });
 
   it('If filter is assay, render colour, filter name and count.', function() {
@@ -34,7 +34,7 @@ describe('Integration: FilterListItemComponent', function() {
       activeFilters: ['access:Open']
     });
     this.render(hbs`{{filter-list-item bucket=bucket aggName=aggName activeFilters=activeFilters}}`);
-    expect(this.$('span').text().trim()).to.eql('Assay Abc (10)');
-    expect(this.$('div.label').hasClass('indigo')).to.be.true;
+    expect(this.$('span.u-self-center').text().trim()).to.eql('Assay Abc (10)');
+    expect(this.$('span.c-card-assay').hasClass('indigo')).to.be.true;
   });
 });
