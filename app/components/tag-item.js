@@ -19,9 +19,7 @@ export default Component.extend({
       .then(() => {
         get(this, 'flashMessages').add({
           message: 'Tag successfully deleted.',
-          type: 'success',
-          timeout: 7000,
-          class: 'fadeInOut'
+          type: 'success'
         });
       })
       .catch(Logger.error);
