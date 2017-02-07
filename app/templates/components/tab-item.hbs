@@ -1,5 +1,5 @@
-{{#link-to target class="u-tc-primary"}}
-  <li class="o-list-inline__item u-p1">
+{{#link-to target class="u-tc-secondary u-fs2 "}}
+  <li class="u-p1 {{unless active 'u-hv-bc-off-white'}}">
 
     <!--If there is a left icon-->
     {{#if (eq iconPosition "left")}}
@@ -9,7 +9,7 @@
     {{/if}}
 
     <!--Title of Tab-->
-    {{title}}
+    <span class="u-px1 u-fw-reg">{{title}}</span>
 
     <!--Stats-->
     {{#if stats}}

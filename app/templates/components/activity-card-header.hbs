@@ -2,11 +2,11 @@
   {{#link-to 'datasets.request'}}
     <ul class="o-list-inline o-list-flush-left u-mb0">
       <li class="o-list-inline__item  u-mr1">{{fa-icon "clipboard" class="u-tc-blue"}}</li>
-      <li class="o-list-inline__item"><h4 class="u-mb1">Requested Data</h4></li>
+      <li class="o-list-inline__item"><h4 class="u-mb0 u-fs2 u-tc-blue">Requested Data</h4></li>
     </ul>
   {{/link-to}}
   {{#unless isProfilePage}}
-    <p class="u-mb0">
+    <p class="u-mb0 u-pt1">
     Help our community by connecting them with the datasets they're looking for.
     If you’re seeking datasets you can make a request too.
     </p>
@@ -17,11 +17,11 @@
   {{#link-to 'datasets.register'}}
     <ul class="o-list-inline o-list-flush-left u-mb0">
       <li class="o-list-inline__item u-mr1">{{fa-icon "file-text" class="u-tc-red"}}</li>
-      <li class="o-list-inline__item"><h4 class="u-mb1">Registered Data</h4></li>
+      <li class="o-list-inline__item"><h4 class="u-mb0 u-fs2 u-tc-red">Registered Data</h4></li>
     </ul>
   {{/link-to}}
   {{#unless isProfilePage}}
-    <p class="u-mb0">
+    <p class="u-mb0 u-pt1">
     These are datasets contributed by our community. You can easily register your dataset and make it visible for others.
     </p>
   {{/unless}}
@@ -29,10 +29,8 @@
 
 
 {{#if (eq group "favourite")}}
-  {{#link-to 'datasets.register'}}
-    <ul class="o-list-inline o-list-flush-left u-mb0">
-      <li class="o-list-inline__item u-mr1">{{fa-icon "star" class="u-tc-yellow"}}</li>
-      <li class="o-list-inline__item"><h4 class="u-mb1">Favourites</h4></li>
-    </ul>
-  {{/link-to}}
+  <ul class="o-list-inline o-list-flush-left u-mb0">
+    <li class="o-list-inline__item u-mr1">{{fa-icon "star" class="u-tc-yellow"}}</li>
+    <li class="o-list-inline__item"><h4 class="u-mb1 u-fs2 u-tc-yellow">Favourites</h4></li>
+  </ul>
 {{/if}}
