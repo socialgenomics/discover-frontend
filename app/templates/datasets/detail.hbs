@@ -10,16 +10,15 @@
       <div class="c-card c-card-detail-overflow {{unless session.isAuthenticated 'dataset-notification-margin' ''}}">
         <div class="grid grid--no-gutter u-full-height">
 
-          <!-- Card Body -->
+          <!-- dataset -->
           <div class="grid__col grid__col--7-of-12 u-pos-relative u-full-height">
-
             <!-- header -->
             <header class="c-card-header u-bc-off-white u-flex u-justify-between u-items-center u-px2">
-              <div>
+              <ul class="o-list-inline o-list-flush-left u-mb0">
                 {{#if dataset.assay}}
                   {{assay-type assay=dataset}}
                 {{/if}}
-              </div>
+              </ul>
 
               <ul class="o-list-inline o-list-flush-left u-mb0">
                 {{action-favourite model=dataset class="u-mr1"}}
@@ -40,19 +39,21 @@
               {{/if}}
 
               <!-- tags -->
-              <div class="u-py2 u-mb2">
+              <div class="u-pt2 u-pb1">
                 {{#each tags as |tag|}}
                   {{tag-item tag=tag}}
                 {{/each}}
               </div>
               {{#if session.isAuthenticated}}
+              <div class="u-pl3">
                 {{add-tag addTag=(action 'addTag')}}
-                <span class="u-fs0 u-tc-tertiary">Add tags to improve searching and browsing through data. <a {{action "toggleTagModal"}}>Learn more</a></span>
+              </div>
+              <span class="u-fs0 u-tc-tertiary">Add tags to improve searching and browsing through data. <a {{action "toggleTagModal"}}>Learn more</a></span>
               {{/if}}
             </div>
 
             <!-- footer -->
-            <div class="u-pos-absolute u-full-width u-pos-bottom0 u-p2 u-border-top">
+            <div class="u-pos-absolute u-full-width u-pos-bottom0 u-bc-white u-p2 u-border-top">
 
               {{#unless session.isAuthenticated}}
                 {{create-account-call-to-action}}
