@@ -8,56 +8,66 @@
 .c-btn {
    display: inline-block;
    margin: 0;
+   padding: $global-spacing-unit-small $global-spacing-unit-large;
    text-align: center;
    vertical-align: baseline;
    cursor: pointer;
-   border: none;
+   border-width: 1px;
+   border-style: solid;
    border-radius: $global-border-radius;
-   font: inherit;
-   font-weight: 500;
    font-size: $global-font-size;
-   padding: $global-spacing-unit-small $global-spacing-unit-large;
+   font-family: $font-stack-roboto;
    transition: $global-transition;
+   @extend .u-fs2;
+   @extend .u-fw-med;
 }
 
-.c-btn--primary {
+// only styles enabled buttons
+.c-btn-primary:not([disabled]) {
   color: $color-white;
-  background: $color-primary-teal; //$color-teal
+  background: $color-primary-teal;
+  border-color: $color-primary-teal;
+  @extend .u-hv-bc-teal;
 }
 
-.c-btn--secondary {
+// only styles enabled buttons
+.c-btn-secondary:not([disabled]) {
   color: $color-primary-teal;
   background-color: $color-white;
-  border:1px solid $color-primary-teal;
+  border-color: $color-primary-teal;
+  @extend .u-hv-bc-white;
 }
 
-.c-btn--red {
-  color: $color-white;
-  background-color: $color-primary-red;
-}
-
-.c-btn--blue {
-  color: $color-white;
-  background-color: $color-secondary-blue;
-}
-
-// When the disabled html attribute is on a button...
 .c-btn:disabled {
   background-color: $color-very-light-grey;
+  border-color: $color-very-light-grey;
   color: $color-light-grey;
   cursor: default;
-  box-shadow: none;
-  &:hover {
-    box-shadow: none;
-    transform: none;
-  }
 }
 
-.c-btn--shadow {
-  box-shadow: 0 8px 3px -5px rgba(0, 0, 0, 0.14);
-
+.c-btn-text-primary {
+  color: $color-primary-teal;
+  background-color: $color-white;
+  border: none;
+  cursor: pointer;
+  font-family: $font-stack-roboto;
+  padding: 0;
+  @extend .u-fw-med;
+  @extend .u-fs2;
   &:hover {
-    box-shadow: 0 20px 8px -15px rgba(0, 0, 0, 0.10);
-    transform: translateY(-1px);
+    text-decoration: underline;
+  }
+}
+.c-btn-text-secondary {
+  @extend .u-tc-secondary;
+  background-color: $color-white;
+  border: none;
+  cursor: pointer;
+  font-family: $font-stack-roboto;
+  padding: 0;
+  @extend .u-fw-reg;
+  @extend .u-fs1;
+  &:hover {
+    text-decoration: underline;
   }
 }

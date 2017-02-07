@@ -1,8 +1,14 @@
-{{#if isOpen}}
-    <div class="input-field no-margin">
-      {{focus-input value=tag type="text" enter="addTag" placeholder="Enter tag name" class="tag-input"}}
-      <button {{action "toggleInput"}} class="u-border-none u-fs1 u-bc-white u-tc-secondary">Cancel</button>
+<div class="grid u-pb1">
+  {{#if isOpen}}
+    <div class="grid__col grid__col--1-of-2 grid__col--am u-pr1">
+      {{focus-input value=tag type="text" enter="addTag" placeholder="Enter tag name"}}
     </div>
-{{else}}
-  <button {{action "toggleInput"}} class="c-btn c-btn--secondary">Add new tag</button>
-{{/if}}
+    <div class="grid__col grid__col--1-of-2 grid__col--am">
+      <button {{action "toggleInput"}} class="c-btn-text-secondary u-py2">Cancel</button>
+    </div>
+  {{else}}
+    <div class="grid__col grid__col--3-of-3">
+      <button {{action "toggleInput"}} class="c-btn c-btn-secondary u-px2 u-py1">Add new tag</button>
+    </div>
+  {{/if}}
+</div>

@@ -1,11 +1,15 @@
+<div class="grid__col grid__col--3-of-3">
+
+
 {{#unless isSearchPage}}
-  {{meta-panel-header type=model.type}}
-  {{meta-panel-tabs showInfo=(action 'showInfo') showFilters=(action 'showFilters') displayInfo=displayInfo}}
+  <div class="grid grid--no-gutter">
+    {{meta-panel-header type=model.type}}
+    {{meta-panel-tabs showInfo=(action 'showInfo') showFilters=(action 'showFilters') displayInfo=displayInfo}}
+  </div>
 {{/unless}}
 
-<div class="grid__col grid__col--3-of-3">
-  <main class="u-px3">
 
+  <main class="u-px3">
     {{#if displayInfo}}
 
       <div class="u-mb3">
