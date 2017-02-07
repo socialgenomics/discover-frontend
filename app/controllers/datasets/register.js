@@ -29,7 +29,7 @@ export default Controller.extend(
         format: {
           with: /[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/,
           allowBlank: true,
-          message: 'must be a valid url'
+          message: 'Must be a valid url.'
         }
       }
     },
