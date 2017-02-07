@@ -39,6 +39,13 @@ export default Controller.extend({
       tab.focus();
     },
 
+    trackLinkEvent() {
+      get(this, 'metrics').trackEvent({
+        category: 'discover_openpage_datasetBanner_searchNow',
+        action: 'link_clicked'
+      });
+    },
+
     addComment(text) {
       const userId = get(this, 'session.authenticatedUser');
       const dataset = get(this, 'dataset');
@@ -62,9 +69,7 @@ export default Controller.extend({
       if (existingTags.findBy('properties.text', text)) {
         this.flashMessages.add({
           message: 'The tag: ' + text + ' already exists.',
-          type: 'warning',
-          timeout: 7000,
-          class: 'fadeInOut'
+          type: 'warning'
         });
       } else {
         const tag = this.store.createRecord('action', {

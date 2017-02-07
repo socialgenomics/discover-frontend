@@ -64,9 +64,7 @@ export default Controller.extend(
         if (message) {
           this.flashMessages.add({
             message,
-            type: 'warning',
-            timeout: 7000,
-            class: 'fadeIn'
+            type: 'warning'
           });
         }
       }

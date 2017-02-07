@@ -13,14 +13,14 @@ describe('Integration: CollectionSummaryFallbackComponent', function() {
     const summary = 'The quick brown fox.';
     this.set('summary', summary);
     this.render(hbs`{{collection-summary-fallback summary=summary}}`);
-    expect(this.$('.markdown-text').text().trim()).to.eql(summary);
+    expect(this.$('.no-margin-markdown').text().trim()).to.eql(summary);
   });
 
   it('renders the description when there is no summary', function() {
     const description = 'Jumps over the lazy dog.';
     this.set('description', description);
     this.render(hbs`{{collection-summary-fallback description=description}}`);
-    expect(this.$('.markdown-text').text().trim()).to.eql(description);
+    expect(this.$('.no-margin-markdown').text().trim()).to.eql(description);
   });
 
   it('renders the summary when summary and description are present', function() {
@@ -28,7 +28,7 @@ describe('Integration: CollectionSummaryFallbackComponent', function() {
     const summary = 'The quick brown fox.';
     this.setProperties({ description, summary });
     this.render(hbs`{{collection-summary-fallback summary=summary description=description}}`);
-    expect(this.$('.markdown-text').text().trim()).to.eql(summary);
+    expect(this.$('.no-margin-markdown').text().trim()).to.eql(summary);
   });
 
   it('renders the description when summary is empty', function() {
@@ -36,6 +36,6 @@ describe('Integration: CollectionSummaryFallbackComponent', function() {
     const summary = '';
     this.setProperties({ description, summary });
     this.render(hbs`{{collection-summary-fallback summary=summary description=description}}`);
-    expect(this.$('.markdown-text').text().trim()).to.eql(description);
+    expect(this.$('.no-margin-markdown').text().trim()).to.eql(description);
   });
 });
