@@ -9,7 +9,7 @@
     class="u-textarea-resize-v"
   }}
   {{#unless (or disabled noMarkdown)}}
-    <a class="u-fs0" {{action "toggleMarkdownModal"}}>How do I format text with Markdown?</a>
+    {{#link-to 'help.other' (query-params help="format") class="u-fs0"}}How do I format text with Markdown?{{/link-to}}
   {{/unless}}
 {{else}}
   {{#if showPasswordButton}}
@@ -37,8 +37,4 @@
   </ul>
 {{else if (and helpText (and isActive (not isValid)))}}
   <p class="u-ta-left u-tc-tertiary c-validated-input-msg">{{helpText}}</p>
-{{/if}}
-
-{{#if isShowingMarkdownModal}}
-  {{markdown-modal action="toggleMarkdownModal"}}
 {{/if}}
