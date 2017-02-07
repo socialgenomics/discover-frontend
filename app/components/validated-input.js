@@ -40,8 +40,6 @@ export default Component.extend({
       }
     },
 
-    submitForm() { get(this, 'submit')(); },
-
-    toggleMarkdownModal() { this.toggleProperty('isShowingMarkdownModal'); }
+    submitForm() { get(this, 'submit')(); }
   }
 });
