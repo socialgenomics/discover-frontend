@@ -47,14 +47,16 @@
   {{else}}
     <!-- It is a Dataset -->
     <!-- Card Header -->
-    <div class="c-card-header u-bc-off-white u-flex u-items-center u-justify-between u-px2 u-py1 u-rounded-top">
-      {{#if dataset.assay}}
-        <ul class="o-list-inline o-list-flush-left u-mb0">
-          {{assay-type assay=dataset}}
-        </ul>
-      {{/if}}
 
-      <ul class="o-list-inline o-list-flush-left u-mb0 u-content-end">
+    <!-- header -->
+    <header class="c-card-header u-bc-off-white u-flex u-justify-between u-items-center u-px2">
+      <ul class="o-list-inline o-list-flush-left u-mb0">
+        {{#if dataset.assay}}
+          {{assay-type assay=dataset}}
+        {{/if}}
+      </ul>
+
+      <ul class="o-list-inline o-list-flush-left u-mb0">
         {{action-favourite model=dataset class="u-mr1"}}
         {{action-share
           actionableId=dataset.id
@@ -62,7 +64,8 @@
           shareUrl=shareUrl
         }}
       </ul>
-    </div>
+    </header>
+
     <div class="u-p2">
       {{#if dataset.highlights.title}}
         {{#link-to 'datasets.detail' dataset.id classNames="data-title"}}
