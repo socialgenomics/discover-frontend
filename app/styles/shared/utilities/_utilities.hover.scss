@@ -23,4 +23,4 @@
 .u-hv-bc-off-white  { @include hv-bc-darken($color-off-white,      10); }
 .u-hv-bc-grey       { @include hv-bc-darken($color-mid-grey,       10); }
 
-.u-hv-tc-yellow     { &:hover { @extend .u-tc-yellow; }}
+.u-hv-tc-to-yellow  { &:hover { @extend .u-tc-yellow; }}
