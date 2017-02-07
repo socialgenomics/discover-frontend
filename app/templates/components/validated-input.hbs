@@ -1,3 +1,9 @@
+{{#unless showCommentButtons}}
+  <label for="{{elementId}}" class="c-validated-input-label u-tc-secondary">
+    {{label}}
+  </label>
+{{/unless}}
+
 {{#if (eq type "textarea")}}
   {{textarea
     value=value
@@ -29,12 +35,18 @@
   }}
 {{/if}}
 
-{{#if isInvalid}}
-  <ul class="o-list-flush-left u-mb0 u-bc-white">
-    {{#each errors as |error|}}
-      <li class="u-ta-left u-tc-red c-validated-input-msg">{{error}}</li>
-    {{/each}}
-  </ul>
-{{else if (and helpText (and isActive (not isValid)))}}
-  <p class="u-ta-left u-tc-tertiary c-validated-input-msg">{{helpText}}</p>
+<div class="c-validated-input-msg-container">
+  {{#if isInvalid}}
+    <ul class="o-list-flush-left u-mb0">
+      {{#each errors as |error|}}
+        <li class="u-ta-left u-tc-red c-validated-input-msg">{{error}}</li>
+      {{/each}}
+    </ul>
+  {{else if (and helpText (and isActive (not isValid)))}}
+    <p class="u-ta-left u-tc-tertiary c-validated-input-msg">{{helpText}}</p>
+  {{/if}}
+</div>
+
+{{#if isShowingMarkdownModal}}
+  {{markdown-modal action="toggleMarkdownModal"}}
 {{/if}}
