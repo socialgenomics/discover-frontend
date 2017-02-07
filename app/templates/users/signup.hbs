@@ -15,26 +15,29 @@
         <div class="c-divider c-divider-light-bg"></div>
 
         {{validated-input
+          label="Full Name"
           type="Text"
           value=fullname
           errors=errors.fullname
-          placeholder="Full Name"
+          placeholder="e.g. Christina Luckasson"
           submit=(action 'signupAndAuthenticate')
         }}
         {{validated-input
+          label="Email"
           type="email"
           value=email
           errors=errors.email
-          placeholder="Email"
+          placeholder="e.g. christina@stthomashospital.com"
           submit=(action 'signupAndAuthenticate')
         }}
         {{validated-input
+          label="Password"
           type="password"
-          class="u-mb4"
+          class="u-mb3"
           value=password
           password=true
           errors=errors.password
-          placeholder="Password"
+          placeholder="e.g. •••••••••"
           helpText="Minimum 8 characters. Must include an uppercase letter or number."
           showPasswordButton=true
           submit=(action 'signupAndAuthenticate')

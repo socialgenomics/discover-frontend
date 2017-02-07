@@ -15,17 +15,19 @@
         <div class="c-divider c-divider-light-bg"></div>
 
         {{validated-input
+          label="Email"
           type="email"
           value=email
           errors=errors.email
-          placeholder="Email"
+          placeholder="e.g. christina@stthomashospital.com"
           submit=(action 'submitForm')
         }}
         {{validated-input
+          label="Password"
           type="password"
           value=password
           errors=errors.password
-          placeholder="Password"
+          placeholder="e.g. •••••••••"
           submit=(action 'submitForm')
           resetPassword=(action 'resetPassword')
         }}
