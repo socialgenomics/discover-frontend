@@ -21,18 +21,13 @@ export default Component.extend({
   actions: {
     focusedIn() {
       set(this, 'isActive', true);
-      setProperties(this, {
-        'originalPlaceholder': get(this, 'placeholder'),
-        'placeholder': ''
-      });
       if (get(this, 'showCommentButtons')) { get(this, 'showCommentButtons')(); }
     },
 
     focusedOut() {
       setProperties(this, {
         'hasBeenFocused': true,
-        'isActive': false,
-        'placeholder': get(this, 'originalPlaceholder')
+        'isActive': false
       });
     },
 
