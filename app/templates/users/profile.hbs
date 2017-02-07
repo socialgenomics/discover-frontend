@@ -9,24 +9,27 @@
             <img src={{session.authenticatedUser.profile.avatar}} class="u-w3 u-mb2">
             <form>
               {{validated-input
+                label="First Name"
                 type="text"
                 value=firstname
                 errors=errors.firstname
-                placeholder="First Name"
+                placeholder="e.g. Christina"
                 submit=(action 'save')
               }}
               {{validated-input
+                label="Last Name"
                 type="text"
                 value=lastname
                 errors=errors.lastname
-                placeholder="Last Name"
+                placeholder="e.g. Luckasson"
                 submit=(action 'save')
               }}
               {{validated-input
+                label="Affiliation"
                 type="text"
                 value=affiliation
                 errors=errors.affiliation
-                placeholder="Affiliation"
+                placeholder="e.g. Bioinformatician at XYZ Institute"
                 submit=(action 'save')
               }}
               {{#if isSavable}}

@@ -7,12 +7,8 @@ export default Component.extend({
   isActive: false,
   hasBeenFocused: false,
   showPassword: false,
-  classNames: ['u-mb2', 'u-pos-relative'],
-  classNameBindings: ['isActive:active', 'isTextarea:c-validated-textarea:c-validated-input'],
-
-  isTextarea: computed('type', function() {
-    return get(this, 'type') === 'textarea' ? true : false;
-  }),
+  classNames: ['c-validated-input', 'u-pos-relative'],
+  classNameBindings: ['isActive:active', 'isInvalid:invalid'],
 
   isValid: computed('hasBeenFocused', 'errors', function() {
     return (get(this, 'hasBeenFocused')) && isEmpty(get(this, 'errors'));
@@ -44,8 +40,6 @@ export default Component.extend({
       }
     },
 
-    submitForm() { get(this, 'submit')(); },
-
-    toggleMarkdownModal() { this.toggleProperty('isShowingMarkdownModal'); }
+    submitForm() { get(this, 'submit')(); }
   }
 });

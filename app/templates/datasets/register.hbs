@@ -41,6 +41,7 @@
             <h4 class="u-tc-red">Registation form</h4>
             <form>
               {{validated-input
+                label="Dataset Title"
                 type="text"
                 value=title
                 errors=errors.title
@@ -48,6 +49,7 @@
                 submit=(action 'addDataset')
               }}
               {{validated-input
+                label="Dataset Description"
                 type="textarea"
                 value=description
                 errors=errors.description
@@ -55,6 +57,7 @@
                 submit=(action 'addDataset')
               }}
               {{validated-input
+                label="Dataset URL"
                 type="url"
                 value=url
                 errors=errors.url

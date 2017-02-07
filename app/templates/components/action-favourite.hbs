@@ -2,12 +2,16 @@
   {{fa-icon "circle-o-notch" pulse=true}}
 {{else}}
   {{#if isHovered}}
-    {{fa-icon "star-o" class="starred"}}
+    {{#if isStarred}}
+      {{fa-icon "star" class="u-fw-bold u-tc-yellow"}}
+    {{else}}
+      {{fa-icon "star-o" class="u-fw-bold u-tc-yellow"}}
+    {{/if}}
   {{else}}
     {{#if isStarred}}
-      {{fa-icon "star" class="starred"}}
+      {{fa-icon "star" class="u-fw-bold u-tc-yellow"}}
     {{else}}
-      {{fa-icon "star-o"}}
+      {{fa-icon "star-o" class="u-fw-bold"}}
     {{/if}}
   {{/if}}
 {{/if}}
