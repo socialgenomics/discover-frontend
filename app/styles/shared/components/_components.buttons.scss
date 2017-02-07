@@ -53,7 +53,10 @@
   font-family: $font-stack-roboto;
   padding: 0;
   @extend .u-fw-med;
-  @extend .u-fs2
+  @extend .u-fs2;
+  &:hover {
+    text-decoration: underline;
+  }
 }
 .c-btn-text-secondary {
   @extend .u-tc-secondary;
@@ -63,5 +66,8 @@
   font-family: $font-stack-roboto;
   padding: 0;
   @extend .u-fw-reg;
-  @extend .u-fs1
+  @extend .u-fs1;
+  &:hover {
+    text-decoration: underline;
+  }
 }
