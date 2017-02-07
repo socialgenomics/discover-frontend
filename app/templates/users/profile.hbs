@@ -11,7 +11,7 @@
             type="text"
             value=firstname
             errors=errors.firstname
-            placeholder="First Name"
+            placeholder="e.g. Sedrick"
             submit=(action 'save')
           }}
           {{validated-input
@@ -19,7 +19,7 @@
             type="text"
             value=lastname
             errors=errors.lastname
-            placeholder="Last Name"
+            placeholder="e.g. Medrick"
             submit=(action 'save')
           }}
           {{validated-input
@@ -27,7 +27,7 @@
             type="text"
             value=affiliation
             errors=errors.affiliation
-            placeholder="Affiliation"
+            placeholder="e.g. Bioinformatician at XYZ Institute"
             submit=(action 'save')
           }}
           {{#if isSavable}}
