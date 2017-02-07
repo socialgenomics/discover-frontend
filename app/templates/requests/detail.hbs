@@ -1,13 +1,25 @@
-<div class="grid-wrapper grid-wrapper-stepped {{unless session.isAuthenticated 'u-pt5' ''}}">
-  <div class="grid">
-    <div class="grid__col grid__col--3-of-3">
-      <div class="c-card c-card-detail-overflow u-pos-relative {{unless session.isAuthenticated 'dataset-notification-margin' ''}}">
-        <div class="c-card-header u-full-width u-pos-absolute u-bc-off-white"></div>
-        <div class="grid u-full-height">
-          <div class="grid__col grid__col--7-of-12">
 
-            <div class="c-card-header u-pos-relative u-bc-off-white u-top-rounded u-flex u-justify-between u-items-center u-px2">
-              <div></div>
+
+<!-- CSS Refactor: still need to account for Open Dataset styles -->
+{{#unless session.isAuthenticated}}
+  {{#full-page-notification}}
+    <h3 class="u-mr3 u-mb2 u-tc-secondary">Search through <strong class="u-pl1 u-pr1 u-fs4">{{datasetsNumber}}</strong> human genomic datasets</h3>
+    {{#link-to 'root' class='c-btn c-btn--primary c-btn--shadow' invokeAction=(action 'trackLinkEvent')}}
+      Search now
+    {{/link-to}}
+  {{/full-page-notification}}
+{{/unless}}
+
+<div class="grid-wrapper grid-wrapper-stepped {{unless session.isAuthenticated 'u-pt5' ''}}">
+  <div class="grid grid--no-gutter">
+    <div class="grid__col grid__col--3-of-3">
+      <div class="c-card c-card-detail-overflow {{unless session.isAuthenticated 'dataset-notification-margin' ''}}">
+        <div class="grid grid--no-gutter u-full-height">
+
+          <!-- dataset -->
+          <div class="grid__col grid__col--7-of-12 u-pos-relative u-full-height">
+            <!-- header -->
+            <header class="c-card-header u-bc-off-white u-flex u-justify-end u-items-center u-px2">
               <ul class="o-list-inline o-list-flush-left u-mb0">
                 {{action-favourite model=request class="u-mr1"}}
                 {{action-share
@@ -16,53 +28,70 @@
                   shareUrl=requestUrl
                 }}
               </ul>
-            </div>
+            </header>
 
+            <!-- body -->
             <div class="u-p2">
+              <!-- heading/description -->
               <h2 class="u-fs2 u-fw-med u-tc-primary u-mb1">{{request.title}}</h2>
               {{#if request.description}}
-                <p class="u-markdown-text">{{markdown-to-html markdown=request.description}}</p>
+                <p class="u-markdown-text u-fs1">{{markdown-to-html markdown=request.description}}</p>
               {{/if}}
-              <div class="u-py2 u-mb2">
+
+              <!-- tags -->
+              <div class="u-pt2 u-pb1">
                 {{#each tags as |tag|}}
                   {{tag-item tag=tag}}
                 {{/each}}
               </div>
               {{#if session.isAuthenticated}}
+              <div class="u-pl3">
                 {{add-tag addTag=(action 'addTag')}}
-                <br><span class="u-fs0 u-tc-tertiary">Add tags to improve searching and browsing through data (<a {{action "toggleTagModal"}}>learn more</a>)</span>
+              </div>
+              <span class="u-fs0 u-tc-tertiary">Add tags to improve searching and browsing through data. <a {{action "toggleTagModal"}}>Learn more</a></span>
               {{/if}}
             </div>
 
-            <div class="c-divider c-divider-light-bg u-mb2"></div>
+            <!-- footer -->
+            <div class="u-pos-absolute u-full-width u-pos-bottom0 u-bc-white u-p2 u-border-top">
 
-            <div class="u-px2 u-pb2 u-pos-relative">
-              <ul class="o-list-flush-left">
+              {{#unless session.isAuthenticated}}
+                {{create-account-call-to-action}}
+              {{/unless}}
+              <ul class="o-list-flush-left u-mb0">
                 {{#if request.userId}}
-                  <li class="u-fs0 u-tc-tertiary">Submitted by: {{#link-to 'user' request.usesId.id }}<span class="u-fw-med u-fs1">{{request.userId.displayName}}</span>{{/link-to}}</li>
+                  <li class="u-fs0 u-tc-tertiary">Submitted by: {{#link-to 'user' request.usesId.id class="u-tc-secondary" }}<span class="u-fw-med u-fs1 u-tc-secondary">{{request.userId.displayName}}</span>{{/link-to}}</li>
                 {{/if}}
-
                 {{#if request.createdAt}}
                   <li class="u-fs0 u-tc-tertiary">Requested on: <span class="u-fw-med u-fs1 u-tc-secondary">{{moment-format request.createdAt}}</span></li>
                 {{/if}}
               </ul>
             </div>
           </div>
-          <div class="grid__col grid__col--5-of-12 u-full-min-height u-border-left">
-            <div class="c-card-header u-pos-relative u-bc-off-white u-flex u-items-center u-justify-center u-top-rounded">
-              <h4 class="u-mb0 u-fs2 u-fw-med u-tc-teal">Discussions</h4>
+
+          <!-- Discussion  -->
+          <div class="grid__col grid__col--5-of-12 u-full-height">
+            <div class="u-border-left u-full-min-height">
+
+              <!-- header -->
+              <header class="c-card-header u-bc-off-white u-px2 u-flex u-items-center u-justify-center">
+                <h4 class="u-mb0 u-fs2 u-fw-med u-tc-primary">Discussions</h4>
+              </header>
+
+              <!-- body -->
+              <div class="u-p2">
+                {{partial "datasets/tab-comments"}}
+              </div>
+
             </div>
-            {{partial "datasets/tab-comments"}}
           </div>
-
-
         </div>
       </div>
     </div>
   </div>
 </div>
 
-
+<!-- CSS Refactor: still need to style modals -->
 {{#if isShowingTagModal}}
   {{tag-modal action="toggleTagModal"}}
 {{/if}}
