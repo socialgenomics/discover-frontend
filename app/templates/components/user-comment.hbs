@@ -1,14 +1,20 @@
-<div>
-  {{#link-to 'user' user.id disabled=disabled invokeAction=(action 'toggleCreateAccountModal')}}
-    <img src={{avatar}} class="u-w1" />
-    <span class="u-fs2">{{user.displayName}}</span>
-  {{/link-to}}
-    <span class="u-tc-tertiary u-fs0">{{moment-from-now date allowEmpty=true}}</span>
 
-  <div class="u-pr3">
-    <p class="u-line-break u-mb0">{{markdown-to-html markdown=text extensions='targetBlankLinks'}}</p>
+<!-- User Info / Timestamp -->
+<div class="u-flex u-items-start u-mb1 u-pt3 u-border-top">
+  {{#link-to 'user' user.id disabled=disabled invokeAction=(action 'toggleCreateAccountModal')}}
+    <img src={{avatar}} class="u-w1 u-mr1 u-circle" />
+  {{/link-to}}
+  <div>
+    {{#link-to 'user' user.id disabled=disabled invokeAction=(action 'toggleCreateAccountModal')}}
+      <h4 class="u-fs2 u-tc-primary u-mb0">{{user.displayName}}</h4>
+    {{/link-to}}
+    <span class="u-tc-tertiary u-fs0">{{moment-from-now date allowEmpty=true}}</span>
   </div>
 </div>
+
+<!-- Comment -->
+<p class="u-word-break u-mb0">{{markdown-to-html markdown=text extensions='targetBlankLinks'}}</p>
+
 
 {{#if showCreateAccountModal}}
   {{! "container-class" is a temporary solution, changes in ember modal dialog required }}

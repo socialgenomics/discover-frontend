@@ -2,19 +2,18 @@
   <div class="grid">
     <div class="grid__col grid__col--3-of-3">
       {{profile-tabs}}
-      <div class="c-card u-rounded-bottom u-p1 u-ta-center">
+      <div class="c-card u-rounded-bottom u-py3 u-ta-center">
         <div>
           <h1 class="u-fs4 ">Trust & Verification</h1>
           {{#if model.is_verified}}
             <h4 class="u-tc-teal u-fs2">{{fa-icon "check-circle"}} Your account is verified.</h4>
             <div class="c-divider c-divider-light-bg"></div>
 
-            <h4 class="u-fs2 ">{{fa-icon "envelope"}} {{model.main_credential.email}}</h4>
+            <h4 class="u-fs2 u-mb0">{{fa-icon "envelope"}} {{model.main_credential.email}}</h4>
           {{else}}
             <h4 class="u-tc-red u-fs2">Please verify your email.</h4>
             <div class="c-divider c-divider-light-bg"></div>
-
-            <h4 class="u-fs2">{{fa-icon "envelope"}} {{model.main_credential.email}}</h4>
+            <h4 class="u-fs2 u-tc-secondary">{{fa-icon "envelope"}} {{model.main_credential.email}}</h4>
             <button class="c-btn c-btn-primary" type="submit" {{action "resendVerifyEmail"}}>Resend Verification Email</button>
           {{/if}}
         </div>

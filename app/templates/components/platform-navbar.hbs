@@ -1,14 +1,14 @@
-<div class="u-bc-off-white c-navbar-wrapper u-pos-fixed u-pos-top0 u-full-width u-px2">
+<div class="u-bc-off-white c-navbar-wrapper u-pos-fixed u-pos-top0 u-full-width">
   <nav class="c-navbar u-flex u-justify-between u-items-center">
 
     <!-- LOGO -->
     {{#unless isAuthenticated}}
-      <a href="https://repositive.io" class="c-navbar__element u-mr2">
+      <a href="https://repositive.io" class="c-navbar__element u-mr2 u-pl2">
         <img src="/assets/images/logo-full-larger.png" alt="Repositive DNA logo">
       </a>
     {{else}}
       {{#link-to 'root'}}
-        <div class="c-navbar__element u-mr2">
+        <div class="c-navbar__element u-mr2 u-pl2">
           <img src="/assets/images/logo-full-larger.png" alt="Repositive DNA logo">
         </div>
       {{/link-to}}
@@ -22,12 +22,12 @@
           {{search-bar search=(route-action 'search')}}
         </div>
 
-        {{#link-to "datasets.request" class="u-flex u-items-center u-justify-center c-navbar__element u-tc-secondary u-border-right"}}
+        {{#link-to "datasets.request" class="u-flex u-items-center u-justify-center c-navbar__element u-tc-secondary u-border-right u-hv-bc-off-white"}}
             {{fa-icon "clipboard"}}
             <span class="u-fs1 u-pl1">Request Data</span>
         {{/link-to}}
 
-        {{#link-to "datasets.register" class="u-flex u-items-center u-justify-center c-navbar__element u-tc-secondary u-border-right"}}
+        {{#link-to "datasets.register" class="u-flex u-items-center u-justify-center c-navbar__element u-tc-secondary u-border-right u-hv-bc-off-white"}}
             {{fa-icon "clipboard"}}
             <span class="u-fs1 u-pl1">Register Data</span>
         {{/link-to}}
@@ -44,7 +44,7 @@
           </div>
         {{/unless}}
       </div>
-      <section class="u-fw-med u-flex u-self-stretch u-items-center">
+      <section class="u-fw-med u-flex u-self-stretch u-items-center u-px2">
         <div>
           <a href="http://repositive.io/about" class="u-tc-secondary u-px2 u-fs1">ABOUT</a>
         </div>
@@ -61,7 +61,7 @@
           {{#link-to 'users.signup' class="u-tc-teal u-fs1" invokeAction=(action 'trackCreateAccount' 'discover_openpage_navbar_createAccount')}}CREATE ACCOUNT{{/link-to}}
         {{/if}}
       </section>
-      
+
     {{/if}}
 
   </nav>

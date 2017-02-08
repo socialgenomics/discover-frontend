@@ -64,7 +64,6 @@
     "ember-cli-mocha": "0.13.1",
     "ember-cli-moment-shim": "2.2.1",
     "ember-cli-release": "0.2.9",
-    "ember-cli-rollbar": "^0.2.6",
     "ember-cli-sass": "^5.2.1",
     "ember-cli-showdown": "2.7.2",
     "ember-cli-sri": "^2.1.0",

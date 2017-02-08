@@ -33,4 +33,14 @@ describe('Integration: PaginationBarComponent', function() {
     expect(this.$().find(this.$('p')[0]).text().trim()).to.eql('Total pages: 7');
     expect(this.$().find(this.$('p')[1]).text().trim()).to.eql('Current page: 4');
   });
+
+  it('displays correct page data', function() {
+    this.setProperties({
+      currentPageNumber: 4,
+      totalPages: 7
+    });
+    this.render(hbs`{{pagination-bar currentPageNumber=currentPageNumber totalPages=totalPages}}`);
+    expect(this.$().find(this.$('p')[0]).text().trim()).to.eql('Total pages: 7');
+    expect(this.$().find(this.$('p')[1]).text().trim()).to.eql('Current page: 4');
+  });
 });
