@@ -55,6 +55,7 @@ export default Ember.Component.extend({
         * This amazing animation is a sleeping beauty
         * waiting for a kiss from the UI prince to be awaken again.
         */
+
         // circles.each(function (d, i) {
         //   setTimeout(() => {
         //     d3.select(this).raise();
