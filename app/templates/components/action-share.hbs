@@ -2,7 +2,7 @@
 
 {{#if showShareOptionsModal}}
   {{#repositive-modal
-    container-class='c-modal--small u-z1'
+    container-class='u-z1'
     close=(action 'toggleShareOptionsModal')
     target=(concat '#' elementId)
     targetAttachment='bottom left'
@@ -20,7 +20,7 @@
 
 {{#if showShareEmailModal}}
   {{#repositive-modal
-    container-class='c-modal--small u-z5'
+    container-class='u-z5'
     close=(action 'toggleShareEmailModal')
   }}
     {{repositive-modal/header
@@ -40,7 +40,7 @@
 
 {{#if showCreateAccountModal}}
   {{#repositive-modal
-    container-class='c-modal--small u-z5'
+    container-class='u-z5'
     close=(action 'toggleCreateAccountModal')
   }}
     {{repositive-modal/header

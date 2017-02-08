@@ -4,8 +4,8 @@
   {{fa-icon 'envelope' size=2 class='u-tc-yellow u-px3 u-py2 u-cursor-pointer' click=(action 'onEnvelopeClick')}}
 </div>
 
-<div class="u-flex u-pl2">
-  <p class="u-border u-p1">{{shareUrl}}</p>
+<div class="u-flex u-pl2 u-pb2">
+  <p class="u-p1 u-border u-mr2 u-mb0 u-overflow-hidden c-share-modal__copy-link">{{shareUrl}}</p>
   {{#copy-button
     class=copyButtonClasses
     clipboardText=shareUrl
@@ -23,7 +23,3 @@
     {{/if}}
   {{/copy-button}}
 </div>
-
-{{#if copyFailed}}
-  <div class="copy-failed-tooltip">You can select and copy the link manually.</div>
-{{/if}}
