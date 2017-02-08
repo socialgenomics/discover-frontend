@@ -10,9 +10,7 @@
   "scripts": {
     "setup": "npm i && bower install --allow-root && npm rebuild node-sass",
     "postinstall": "bower install",
-    "start": "ember server --watcher=polling --proxy=https://api-dev.repositive.io",
     "startStaging": "ember server --watcher=polling --proxy=https://api-staging.repositive.io",
-    "startLocal": "ember server --proxy=http://localhost:3000",
     "startDocker": "ember server --watcher=polling --proxy=$BACKEND_SERVER",
     "build": "ember build",
     "test": "ember test",
@@ -37,7 +35,6 @@
     "ember-basic-dropdown": "0.22.0",
     "ember-browserify": "^1.1.13",
     "ember-cli": "2.7.0",
-    "ember-cli-active-link-wrapper": "0.0.4",
     "ember-cli-app-version": "^1.0.0",
     "ember-cli-babel": "^5.1.6",
     "ember-cli-chai": "0.3.1",
