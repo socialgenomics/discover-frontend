@@ -64,7 +64,6 @@ export default Route.extend({
           return this.store.push(this.store.normalize('request', requestObj));
         });
         return [...datasets, ...requests];
-
       }).catch(Logger.error);
   }
 });
