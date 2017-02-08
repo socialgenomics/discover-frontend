@@ -1,17 +1,17 @@
 {
   "name": "repositive",
   "dependencies": {
-    "ember": "2.7.0",
+    "chai": "~2.3.0",
     "crypto-js": "^3.1.6",
     "ember-cli-shims": "~0.1.1",
     "ember-load-initializers": "0.1.7",
-    "jquery": "2.1.4",
-    "sinonjs": "^1.17.1",
-    "font-awesome": "~4.5.0",
-    "mocha": "~2.2.4",
-    "chai": "~2.3.0",
     "ember-mocha-adapter": "~0.3.1",
-    "urijs": "^1.18.3",
-    "showdown": "^1.6.4"
+    "ember": "2.7.0",
+    "font-awesome": "~4.5.0",
+    "jquery": "2.1.4",
+    "mocha": "~2.2.4",
+    "showdown": "^1.6.4",
+    "sinonjs": "^1.17.1",
+    "urijs": "^1.18.3"
   }
 }
