@@ -1,15 +1,18 @@
-<div class="grid__col grid__col--3-of-3">
+<div class="grid__col grid__col--3-of-3 u-pos-relative">
 
 
 {{#unless isSearchPage}}
-  <div class="grid grid--no-gutter">
+  <div class="grid grid--no-gutter u-pos-relative">
     {{meta-panel-header type=model.type}}
     {{meta-panel-tabs showInfo=(action 'showInfo') showFilters=(action 'showFilters') displayInfo=displayInfo}}
   </div>
 {{/unless}}
 
 
-  <main class="u-px3">
+  <main class="u-px3 {{if isSearchPage 'u-py2'}}">
+    <div class="c-sidebar-toggle u-pos-absolute u-pos-top0 u-pos-right0 u-py2 u-px1 {{if isSearchPage 'u-bc-off-white u-border'}} {{if (eq model.type 'repositive_collection') 'u-bc-collection-overlay'}} {{if (eq model.type 'datasource') 'u-bc-datasource-overlay'}}">
+      <a class="u-tc-secondary u-fw-med u-p2" {{action 'toggleMetaPanelVisibility'}}>{{#if metaPanelHidden}} <span class="u-tc-primary u-mr1">View filters</span> {{fa-icon 'chevron-right class="u-pl3"'}} {{else}} {{fa-icon 'times'}} {{/if}}</a>
+    </div>
     {{#if displayInfo}}
 
       <div class="u-mb3">
