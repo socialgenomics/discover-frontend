@@ -1,13 +1,13 @@
 {{#basic-dropdown  horizontalPosition="right" as |dropdown|}}
 
-  {{#dropdown.trigger class="u-outline-none"}}
-    <div class="u-hide-on-sm-md">
+  {{#dropdown.trigger class="u-outline-none u-cursor-pointer u-px2"}}
+    <div class="u-hide-on-sm-md u-flex u-items-center">
       <img src={{avatar}} class="u-w1">
       <span class="u-tc-primary u-fs1 u-px1">{{firstname}}</span>
     </div>
 
     <div class="u-hide-on-lg">
-      {{fa-icon 'bars' class='u-tc-secondary u-px1' }}
+      {{fa-icon 'bars' class='u-tc-secondary u-px1 grid__col--am' }}
     </div>
   {{/dropdown.trigger}}
 
