@@ -3,8 +3,9 @@ import Ember from 'ember';
 const { Component } = Ember;
 
 export default Component.extend({
-  init(){
+  init() {
     this._super(...arguments);
+    /* jshint ignore:start */ // jscs:disable
     var qs, js, q, s, d = document,
       gi = d.getElementById,
       ce = d.createElement,
@@ -18,7 +19,7 @@ export default Component.extend({
       q = gt.call(d, 'script')[0];
       q.parentNode.insertBefore(js, q);
     }
-
+    /* jshint ignore:end */ // jscs:enable
   },
 
   didRender() {
