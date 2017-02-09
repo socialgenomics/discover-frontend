@@ -2,7 +2,7 @@ import Ember from 'ember';
 import { isVerified } from './users/trust';
 import ENV from 'repositive/config/environment';
 
-const { inject: { service }, Route, RSVP, get, set, Logger } = Ember;
+const { inject: { service }, Route, RSVP, get, Logger } = Ember;
 
 export default Route.extend({
   ajax: service(),
@@ -57,16 +57,13 @@ export default Route.extend({
       requests: ajax.request(ENV.APIRoutes['favourite-requests'].replace('{user_id}', userIdOfProfile), { method: 'GET' })
     })
       .then(data => {
-        return [
-          ...data.datasets.map(dataset => this._setModelType(dataset, 'dataset')),
-          ...data.requests.map(request => this._setModelType(request, 'request'))
-        ];
-      })
-      .catch(Logger.error);
-  },
-
-  _setModelType(model, modelType) {
-    set(model, 'type', modelType);
-    return model;
+        const datasets = data.datasets.map(datasetObj => {
+          return this.store.push(this.store.normalize('dataset', datasetObj));
+        });
+        const requests = data.requests.map(requestObj => {
+          return this.store.push(this.store.normalize('request', requestObj));
+        });
+        return [...datasets, ...requests];
+      }).catch(Logger.error);
   }
 });
