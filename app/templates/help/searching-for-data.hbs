@@ -15,7 +15,7 @@
             </ul>
           </div>
           <div class="grid__col grid__col--2-of-3 u-full-min-height u-mb3 u-fs2 u-border-left">
-            <div class="u-markdown-text u-mb3 u-px3">
+            <div class="markdown-experiment u-mb3 u-px3">
               {{#if (not help)}}{{markdown-to-html markdown=(fr-markdown-file 'help/search/how-to-search')}}
               {{else if (eq help "search-query")}}{{markdown-to-html markdown=(fr-markdown-file 'help/search/how-to-search')}}
               {{else if (eq help "algorithm")}}{{markdown-to-html markdown=(fr-markdown-file 'help/search/search-algorithm')}}

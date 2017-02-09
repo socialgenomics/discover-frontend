@@ -6,14 +6,38 @@
 /* ==================================== */
 
 .u-markdown-text {
-  h1, h2, h3 {
-    text-align: center;
-    @extend .u-fw-med;
-  }
-  h1 {  font-size: $global-font-size-large;  }
-  h2 {  font-size: $global-font-size-regular; }
-  h3 {  font-size: $global-font-size-regular; }
+  // h1, h2, h3 {
+  //   text-align: center;
+  //   @extend .u-fw-med;
+  // }
+  // h1 {  font-size: $global-font-size-large;  }
+  // h2 {  font-size: $global-font-size-regular; }
+  // h3 {  font-size: $global-font-size-regular; }
   ul     { @extend .o-list-bullet; }
   strong { @extend .u-fw-med; }
   pre    { overflow-x: scroll; }
+}
+
+
+.markdown-experiment {
+  // Size
+
+  // Color
+  h1, h2, h3, h4, h5, h6, a { @extend .u-tc-primary; }
+  ul, p, strong { @extend .u-tc-secondary; }
+  code { @extend .u-tc-teal; }
+
+  // Weight
+  strong { @extend .u-fw-med; }
+
+  // Decoration
+  a   { text-decoration: underline; }
+  ul  { @extend .o-list-bullet; }
+
+
+
+  p { @extend .u-tc-secondary; }
+
+
+
 }

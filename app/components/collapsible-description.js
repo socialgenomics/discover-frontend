@@ -4,7 +4,6 @@ const { Component, computed, get } = Ember;
 
 export default Component.extend({
   tagName: 'section',
-  classNames: ['truncate'],
   showFullDescription: false,
   truncateDescription: computed('description', function() {
     if (get(this, 'description')) {
@@ -12,7 +11,7 @@ export default Component.extend({
     }
   }),
   actions: {
-    toggleDescription() {
+    toggleDescriptionLength() {
       this.toggleProperty('showFullDescription');
     }
   }
