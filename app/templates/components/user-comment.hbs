@@ -17,19 +17,18 @@
 
 
 {{#if showCreateAccountModal}}
-  {{#modal-dialog
-    close=(action 'toggleCreateAccountModal')
-    targetAttachment="center"
-    translucentOverlay=true
-  }}
-    {{#repositive-modal/wrapper size='medium'}}
+  {{! "container-class" is a temporary solution, changes in ember modal dialog required }}
+    {{#repositive-modal
+      container-class='c-modal--medium u-z5'
+      close=(action 'toggleCreateAccountModal')
+    }}
       {{repositive-modal/header
         image=avatar
-        alternateBackground=true
         title=(concat 'View ' user.firstname '\'s profile')
         onClose=(action 'toggleCreateAccountModal')
       }}
-      {{create-account-modal-content text="To see another user's profile, create an account."}}
-    {{/repositive-modal/wrapper}}
-  {{/modal-dialog}}
+      {{#repositive-modal/content}}
+        {{create-account-modal-content text='To see another user\'s profile, create an account.'}}
+      {{/repositive-modal/content}}
+    {{/repositive-modal}}
 {{/if}}

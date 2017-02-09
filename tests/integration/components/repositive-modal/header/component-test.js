@@ -36,14 +36,14 @@ describe('Integration: RepositiveModalHeaderComponent', function() {
     actionSpyHelper(this);
 
     this.render(hbs`{{repositive-modal/header onClose=(action 'closeAction')}}`);
-    expect(this.$('.modal-header').hasClass('alternate-background')).to.eql(false);
+    expect(this.$('.c-modal-header').hasClass('alternate-background')).to.eql(false);
   });
 
   it('renders header with alternative background', function () {
     actionSpyHelper(this);
 
     this.render(hbs`{{repositive-modal/header alternateBackground=true onClose=(action 'closeAction')}}`);
-    expect(this.$('.modal-header').hasClass('alternate-background')).to.eql(true);
+    expect(this.$('.c-modal-header').hasClass('alternate-background')).to.eql(true);
   });
 
   it('renders header with icon', function() {
@@ -75,7 +75,7 @@ describe('Integration: RepositiveModalHeaderComponent', function() {
     const actionSpy = actionSpyHelper(this);
 
     this.render(hbs`{{repositive-modal/header onClose=(action 'closeAction')}}`);
-    this.$('.close-button').click();
+    this.$('.c-modal-btn-close').click();
 
     expect(actionSpy.called).to.eql(true);
   });

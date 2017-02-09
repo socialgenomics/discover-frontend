@@ -3,6 +3,6 @@
 	{{else}}
 		{{#link-to 'datasets.detail' dataset.id}}<h5 class="u-mb1 u-fs2 u-fw-med u-tc-primary" alt="dataset title">{{truncate dataset.title 55}}</h5>{{/link-to}}
 	{{/if}}
-	{{from-label model=dataset isFavourite=isFavourite type=type}}
+	{{from-label model=dataset type=type}}
 
-	{{stats-list stats=dataset.stats statType="datasets" class="u-tc-tertiary"}}
+	{{stats-list access=dataset.access stats=dataset.stats statType="datasets" class="u-tc-tertiary"}}

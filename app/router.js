@@ -12,7 +12,7 @@ Router.map(function() {
   this.route('root', {
     path: '/'
   });
-  this.route('beta-signup-form', {
+  this.route('signup-survey', {
     path: '/survey'
   });
 
