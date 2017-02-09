@@ -32,7 +32,7 @@
 
       {{from-label model=dataset type=type}}
 
-      <div class="c-card-body">
+      <div class="c-card-description">
         {{#if dataset.highlights.description}}
           {{{markdown-to-html markdown=dataset.highlights.description}}}
         {{else}}
@@ -47,8 +47,6 @@
   {{else}}
     <!-- It is a Dataset -->
     <!-- Card Header -->
-
-    <!-- header -->
     <header class="c-card-header u-bc-off-white u-flex u-justify-between u-items-center u-px2">
       <ul class="o-list-inline o-list-flush-left u-mb0">
         {{#if dataset.assay}}
