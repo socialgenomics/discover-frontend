@@ -12,16 +12,13 @@
         <img src="/assets/images/repositive-logo.png" alt="Repositive DNA logo">
       </a>
     {{else}}
-      {{#link-to 'root'}}
-        <!-- desktop logo -->
-        <div class="u-hide-on-sm-md c-navbar__element u-mr2 u-pl2">
-          <img src="/assets/images/logo-full-larger.png" alt="Repositive DNA logo">
-        </div>
-
-        <!-- mobile logo -->
-        <div class="u-hide-on-lg u-w1 u-mr2 u-pl2">
-          <img src="/assets/images/repositive-logo.png" alt="Repositive DNA logo">
-        </div>
+      <!-- desktop logo -->
+      {{#link-to 'root' class="u-hide-on-sm-md c-navbar__element u-mr2 u-pl2"}}
+        <img src="/assets/images/logo-full-larger.png" alt="Repositive DNA logo">
+      {{/link-to}}
+      <!-- mobile logo -->
+      {{#link-to 'root' class="u-hide-on-lg u-w1 u-mr2 u-pl2"}}
+        <img src="/assets/images/repositive-logo.png" alt="Repositive DNA logo">
       {{/link-to}}
     {{/unless}}
 
@@ -48,32 +45,27 @@
 
     {{else}}
 
-      <div class="{{unless isRootRoute 'navbar-container' '' }}">
+      <div class="c-navbar__center-block u-flex u-items-stretch">
         {{#unless isRootRoute}}
-          <div class="navbar-search">
+          <div class="u-flex-grow-1">
             {{search-bar search=(route-action 'search')}}
           </div>
         {{/unless}}
-      </div>
-      <section class="u-fw-med u-flex u-self-stretch u-items-center u-px2">
-        <div>
-          <a href="http://repositive.io/about" class="u-tc-secondary u-px2 u-fs1">ABOUT</a>
-        </div>
-        <div>
-          <a href="http://blog.repositive.io/" class="u-tc-secondary u-px2 u-fs1">BLOG</a>
-        </div>
-        <div class="u-self-stretch u-flex u-items-center u-border-left">
-          {{#link-to 'users.login' class="u-tc-secondary u-px2 u-fs1"}}LOGIN{{/link-to}}
-        </div>
 
-        {{#if isRootRoute}}
-          {{#link-to 'users.signup' class="u-tc-teal u-fs1" invokeAction=(action 'trackCreateAccount' 'discover_landingpage_navbar_createAccount')}}CREATE ACCOUNT{{/link-to}}
-        {{else}}
-          {{#link-to 'users.signup' class="u-tc-teal u-fs1" invokeAction=(action 'trackCreateAccount' 'discover_openpage_navbar_createAccount')}}CREATE ACCOUNT{{/link-to}}
-        {{/if}}
-      </section>
+        <div class="u-flex">
+          <a href="http://repositive.io/about" class="u-hide-on-sm-md u-flex u-items-center u-justify-center c-navbar__element u-tc-secondary u-hv-bc-off-white">About</a>
+          <a href="http://blog.repositive.io/" class="u-hide-on-sm-md u-flex u-items-center u-justify-center c-navbar__element u-border-right u-tc-secondary u-hv-bc-off-white">Blog</a>
+          {{#link-to 'users.login' class="u-hide-on-sm-md u-flex u-items-center u-justify-center c-navbar__element u-tc-secondary u-hv-bc-off-white"}}Login{{/link-to}}
+          {{#if isRootRoute}}
+            {{#link-to 'users.signup' class="u-hide-on-sm-md u-flex u-items-center u-justify-center c-navbar__element u-tc-teal u-hv-bc-off-white" invokeAction=(action 'trackCreateAccount' 'discover_landingpage_navbar_createAccount')}}Create Account{{/link-to}}
+          {{else}}
+            {{#link-to 'users.signup' class="u-hide-on-sm-md u-flex u-items-center u-justify-center c-navbar__element u-tc-teal u-hv-bc-off-white" invokeAction=(action 'trackCreateAccount' 'discover_openpage_navbar_createAccount')}}Create Account{{/link-to}}
+          {{/if}}
+        </div>
+      </div>
+      {{navbar-dropdown trackCreateAccount=(action 'trackCreateAccount')}}
+
 
     {{/if}}
-
   </nav>
 </div>

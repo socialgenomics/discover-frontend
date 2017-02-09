@@ -9,6 +9,10 @@ export default Component.extend({
     close(dropdown) {
       dropdown.actions.close();
     },
+    closeAndTrack(dropdown, trackingLabel) {
+      dropdown.actions.close();
+      get(this, 'trackCreateAccount')(trackingLabel);
+    },
 
     logout() {
       this.flashMessages.clearMessages();
