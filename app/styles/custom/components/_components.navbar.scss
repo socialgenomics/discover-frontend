@@ -4,16 +4,11 @@
 
 .c-navbar-wrapper {
   box-shadow: $global-box-shadow;
-  z-index: 1;
+  z-index: 11;
 }
 
 .c-navbar {
   height: $global-spacing-unit-large;
-}
-
-.c-navbar__search-input {
-  height: $global-spacing-unit-large;
-  font-family: $font-stack-roboto;
 }
 
 .c-navbar__element {
@@ -22,5 +17,4 @@
 
 .c-navbar__center-block {
   width: 960px;
-  margin-left: -$global-spacing-unit-large;
 }

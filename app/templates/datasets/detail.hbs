@@ -10,19 +10,21 @@
 {{/unless}}
 
 <div class="grid-wrapper grid-wrapper-stepped {{unless session.isAuthenticated 'u-pt5' ''}}">
-  <div class="grid">
+  <div class="grid grid--no-gutter">
     <div class="grid__col grid__col--3-of-3">
-      <div class="c-card c-card-detail-overflow u-pos-relative {{unless session.isAuthenticated 'dataset-notification-margin' ''}}">
-        <div class="c-card-header u-full-width u-pos-absolute u-bc-off-white"></div>
-        <div class="grid">
-          <div class="grid__col grid__col--7-of-12 u-border-right">
+      <div class="c-card c-card-detail-overflow {{unless session.isAuthenticated 'dataset-notification-margin' ''}}">
+        <div class="grid grid--no-gutter u-full-height">
 
-            <div class="c-card-header u-pos-relative u-bc-off-white u-top-rounded u-flex u-justify-between u-items-center u-px2">
-              <div>
+          <!-- dataset -->
+          <div class="grid__col grid__col--7-of-12 u-pos-relative u-full-height">
+            <!-- header -->
+            <header class="c-card-header u-bc-off-white u-flex u-justify-between u-items-center u-px2">
+              <ul class="o-list-inline o-list-flush-left u-mb0">
                 {{#if dataset.assay}}
                   {{assay-type assay=dataset}}
                 {{/if}}
-              </div>
+              </ul>
+
               <ul class="o-list-inline o-list-flush-left u-mb0">
                 {{action-favourite model=dataset class="u-mr1"}}
                 {{action-share
@@ -31,80 +33,89 @@
                   shareUrl=shareUrl
                 }}
               </ul>
-            </div>
+            </header>
 
+            <!-- body -->
             <div class="u-p2">
+              <!-- heading/description -->
               <h2 class="u-fs2 u-fw-med u-tc-primary u-mb1">{{dataset.title}}</h2>
               {{#if dataset.description}}
-                <p class="u-markdown-text">{{markdown-to-html markdown=dataset.description}}</p>
+                <p class="u-markdown-text u-fs1">{{markdown-to-html markdown=dataset.description}}</p>
               {{/if}}
-              <div class="u-py2 u-mb2">
+
+              <!-- tags -->
+              <div class="u-pt2 u-pb1">
                 {{#each tags as |tag|}}
                   {{tag-item tag=tag}}
                 {{/each}}
               </div>
               {{#if session.isAuthenticated}}
+              <div class="u-pl3">
                 {{add-tag addTag=(action 'addTag')}}
-                <br><span class="u-fs0 u-tc-tertiary">Add tags to improve searching and browsing through data (<a {{action "toggleTagModal"}}>learn more</a>)</span>
+              </div>
+              <span class="u-fs0 u-tc-tertiary">Add tags to improve searching and browsing through data. <a {{action "toggleTagModal"}}>Learn more</a></span>
               {{/if}}
             </div>
 
-            <div class="c-divider c-divider-light-bg u-mb2"></div>
+            <!-- footer -->
+            <div class="u-pos-absolute u-full-width u-pos-bottom0 u-bc-white u-p2 u-border-top">
 
-            <div class="u-pb2 u-pos-relative">
               {{#unless session.isAuthenticated}}
                 {{create-account-call-to-action}}
               {{/unless}}
-              <ul class="u-px2 o-list-flush-left">
+              <ul class="o-list-flush-left u-mb2">
                 {{#if dataset.userId}}
                   <li class="u-fs0 u-tc-tertiary">
-                    Submitted by: {{#link-to 'user' dataset.userId.id }}<span class="u-fw-med u-fs1">{{dataset.userId.displayName}}</span>{{/link-to}}
+                    Submitted by: {{#link-to 'user' dataset.userId.id }}<span class="u-fw-med u-fs1 u-tc-secondary">{{dataset.userId.displayName}}</span>{{/link-to}}
                   </li>
                 {{else}}
                   {{#if dataset.datasourceId.name}}
                     <li class="u-fs0 u-tc-tertiary">
-                      Sourced from: {{#link-to 'datasources.source' dataset.datasourceId.id}}<span class="u-fw-med u-fs1">{{dataset.datasourceId.name}}</span>{{/link-to}}
+                      Sourced from: {{#link-to 'datasources.source' dataset.datasourceId.id}}<span class="u-fw-med u-fs1 u-tc-secondary">{{dataset.datasourceId.name}}</span>{{/link-to}}
                     </li>
                   {{/if}}
                   {{#if dataset.accession}}
                     <li class="u-fs0 u-tc-tertiary">
-                      Accession ID: <span class="u-fw-med u-fs1">{{dataset.externalId}}</span>
+                      Accession ID: <span class="u-fw-med u-fs1 u-tc-secondary">{{dataset.externalId}}</span>
                     </li>
                   {{/if}}
                 {{/if}}
                 {{#if dataset.access}}
                   <li class="u-fs0 u-tc-tertiary">
-                    Access type: {{#link-to 'help.searching-for-data' (query-params help="filters")}}<span class="u-fw-med u-fs1">{{dataset.access}}</span>{{/link-to}}
+                    Access type: {{#link-to 'help.searching-for-data' (query-params help="filters")}}<span class="u-fw-med u-fs1 u-tc-secondary">{{dataset.access}}</span>{{/link-to}}
                   </li>
                 {{/if}}
               </ul>
 
-              <div class="u-ta-center">
-                {{#if dataset.url}}
-                  <a target="_blank" {{action "trackExit"}} href="{{if session.isAuthenticated dataset.url ''}}" class="c-btn c-btn--primary c-btn--shadow">{{#if (eq dataset.access 'Open')}}Access Data{{else}}Go To Dataset{{/if}}</a>
-                {{else}}
-                  <a class="c-btn c-btn--primary c-btn--shadow">{{#if (eq dataset.access 'Open')}}Access Data{{else}}Apply for Access{{/if}}</a>
-                {{/if}}
+              {{#if dataset.url}}
+                <a target="_blank" {{action "trackExit"}} href="{{if session.isAuthenticated dataset.url ''}}" class="c-btn c-btn-primary">{{#if (eq dataset.access 'Open')}}Access Data{{else}}Go To Dataset{{/if}}</a>
+              {{else}}
+                <a class="c-btn c-btn-primary">{{#if (eq dataset.access 'Open')}}Access Data{{else}}Apply for Access{{/if}}</a>
+              {{/if}}
+            </div>
+          </div>
+
+          <!-- Discussion  -->
+          <div class="grid__col grid__col--5-of-12 u-full-height">
+            <div class="u-border-left u-full-min-height">
+
+              <!-- header -->
+              <header class="c-card-header u-bc-off-white u-px2 u-flex u-items-center u-justify-center">
+                <h4 class="u-mb0 u-fs2 u-fw-med u-tc-primary">Discussions</h4>
+              </header>
+
+              <!-- body -->
+              <div class="u-p2">
+                {{partial "datasets/tab-comments"}}
               </div>
+
             </div>
-
           </div>
-
-          <div class="grid__col grid__col--5-of-12 u-border-left">
-            <div class="c-card-header u-pos-relative u-bc-off-white u-flex u-items-center u-justify-center u-top-rounded">
-              <h4 class="u-mb0 u-fs2 u-fw-med u-tc-teal">Discussions</h4>
-            </div>
-            {{partial "datasets/tab-comments"}}
-          </div>
-
         </div>
-
       </div>
-
     </div>
   </div>
 </div>
-
 
 <!-- CSS Refactor: still need to style modals -->
 {{#if isShowingTagModal}}

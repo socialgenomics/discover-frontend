@@ -5,7 +5,7 @@
   filters=model.aggs
   activeFilters=activeFilters
   isLoading=isLoading
-  class="u-bc-i-cant-believe-its-not-white u-py2"
+  class="u-bc-i-cant-believe-its-not-white"
   isSearchPage=true
 }}
 
@@ -23,7 +23,7 @@
   {{#if isLoading}}
     {{partial 'loading'}}
   {{else}}
-    <h5 class="u-tc-secondary u-fs2">Search Results ({{model.meta.total}})</h5>
+    <h5 class="u-tc-secondary u-fs2 u-ta-right">Search Results ({{model.meta.total}})</h5>
 
     {{search-results-list results=model.datasets totalResults=model.meta.total}}
 

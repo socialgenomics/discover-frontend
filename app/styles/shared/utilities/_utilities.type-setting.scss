@@ -12,14 +12,17 @@
 
  // Font Weights
  /* ==================================== */
-.u-fw-thin  { font-weight: 300;  }
-.u-fw-reg   { font-weight: 400;  }
-.u-fw-med   { font-weight: 500;  }
-.u-fw-bold  { font-weight: 700;  }
+ // !important tags here required for Font Awesome inheritance
+ // You always want these applied when declared
+.u-fw-thin  { font-weight: 300 !important; }
+.u-fw-reg   { font-weight: 400 !important; }
+.u-fw-med   { font-weight: 500 !important; }
+.u-fw-bold  { font-weight: 700 !important; }
 
  // Type Setting Helpers
  /* ==================================== */
 .u-line-break   { word-break: break-all; }
+.u-line-keep     { word-break: keep-all; }
 
 // Type Decorations
 /* ==================================== */
