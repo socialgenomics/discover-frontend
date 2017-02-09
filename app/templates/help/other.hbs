@@ -14,7 +14,7 @@
             </ul>
           </div>
           <div class="grid__col grid__col--2-of-3 u-full-min-height u-mb3 u-fs2 u-border-left">
-            <div class="u-markdown-text u-mb3 u-px3">
+            <div class="u-markdown-formatting u-mb3 u-px3">
               {{#if (not help)}}{{markdown-to-html markdown=(fr-markdown-file 'help/other/why-tag')}}
               {{else if (eq help "why-tag")}}{{markdown-to-html markdown=(fr-markdown-file 'help/other/why-tag')}}
               {{else if (eq help "incorrect-tag")}}{{markdown-to-html markdown=(fr-markdown-file 'help/other/incorrect-tag')}}
