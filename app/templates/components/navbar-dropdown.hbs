@@ -1,11 +1,25 @@
 {{#basic-dropdown  horizontalPosition="right" as |dropdown|}}
 
   {{#dropdown.trigger class="u-outline-none"}}
-    <img src={{avatar}} class="u-w1">
-    <span class="u-tc-primary u-fs1 u-px1">{{firstname}}</span>
+    <div class="u-hide-on-sm-md">
+      <img src={{avatar}} class="u-w1">
+      <span class="u-tc-primary u-fs1 u-px1">{{firstname}}</span>
+    </div>
+
+    <div class="u-hide-on-lg">
+      {{fa-icon 'bars' class='u-tc-secondary u-px1' }}
+    </div>
   {{/dropdown.trigger}}
 
   {{#dropdown.content class="c-card u-flex u-flex-column"}}
+
+    {{#link-to 'datasets.register'
+      invokeAction=(action 'close' dropdown)
+      class='u-hide-on-lg u-py2 u-pl2 u-pr4 u-hv-bc-white'}} Register Data {{/link-to}}
+
+    {{#link-to 'datasets.request'
+      invokeAction=(action 'close' dropdown)
+      class='u-hide-on-lg u-py2 u-pl2 u-pr4 u-hv-bc-white'}} Request Data {{/link-to}}
 
     {{#link-to 'user' userId
       invokeAction=(action 'close' dropdown)
