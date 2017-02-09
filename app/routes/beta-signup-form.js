@@ -1,21 +1,21 @@
 import Ember from 'ember';
 
-export default Ember.Route.extend({
-  session: Ember.inject.service(),
+const { Route, inject: { service }, get, set } = Ember;
+export default Route.extend({
+  session: service(),
 
-  beforeModel: function(transition) {
-    this.get('session').set('data.firstVisit', false);
-    console.log('First visit is ' + this.get('session.data.firstVisit'));
-    if (this.get('session.data.firstVisit', false)) {
+  beforeModel() {
+    set(this, 'session.data.firstVisit', false);
+    if (get(this, 'session.data.firstVisit')) {
       this.transitionTo('root');
     }
   },
 
-  model: function() {
-    let user = this.get('session.session.content.authenticated.user');
+  model() {
+    const user = get(this, 'session.session.content.authenticated.user');
     return {
-      cred: user.credentials[0],
-      name: user.firstname + ' ' + user.lastname
+      cred: get(user, 'credentials')[0],
+      name: get(user, 'firstname') + ' ' + get(user, 'lastname')
     };
   }
 });
