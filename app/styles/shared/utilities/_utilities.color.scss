@@ -34,6 +34,8 @@
 .u-bc-blue        { background-color: $color-secondary-blue;}
 .u-bc-collection  { background-color: $color-collection;    }
 .u-bc-datasource  { background-color: $color-datasource;    }
+.u-bc-collection-overlay { background-color: darken($color-collection, 4.5);}
+.u-bc-datasource-overlay { background-color: darken($color-datasource, 4.5);}
 
 .u-bc-white       { background-color: $color-white;         }
 .u-bc-i-cant-believe-its-not-white { background-color: $color-i-cant-believe-its-not-white;}

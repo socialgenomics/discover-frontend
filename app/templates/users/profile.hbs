@@ -32,11 +32,15 @@
                 placeholder="e.g. Bioinformatician at XYZ Institute"
                 submit=(action 'save')
               }}
-              {{#if isSavable}}
-                <button type="submit" class="c-btn c-btn-primary" {{action "save"}}>Save Changes</button>
-              {{else}}
-                <button type="button" class="c-btn c-btn-disabled">Save Changes</button>
-              {{/if}}
+
+              {{async-button
+                class="c-btn c-btn-primary"
+                action=(action 'save')
+                default="Save Changes"
+                pending="Saving..."
+                disableWhen=(not isSavable)
+                reset=true
+              }}
             </form>
           </div>
         </div>
