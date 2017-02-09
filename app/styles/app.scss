@@ -1,7 +1,4 @@
-// All CSS imported from the styles app.
-// @import "pod-styles"; //This will be deleted
-
-//CSS REFACTOR
+@import 'custom/settings/settings.global';
 @import 'shared/settings/settings.color';
 @import 'shared/settings/settings.global';
 @import 'shared/settings/settings.layout';
@@ -16,23 +13,26 @@
 @import 'shared/elements/elements.inputs';
 @import 'shared/elements/elements.shared';
 
-@import 'shared/objects/objects.main-wrapper';
 @import 'shared/objects/objects.grid-wrapper';
 @import 'shared/objects/objects.lists';
+@import 'shared/objects/objects.main-wrapper';
 @import 'shared/objects/objects.spacing';
 @import 'shared/objects/objects.toast-grid';
 
-@import 'custom/components/components.navbar';
 @import 'shared/components/components.balloons';
 @import 'shared/components/components.buttons';
+@import 'custom/components/components.call-to-action-banner';
 @import 'shared/components/components.card';
+@import 'custom/components/components.collection-list-item';
 @import 'shared/components/components.divider';
-@import 'shared/components/components.images';
-@import 'shared/components/components.sidebar';
-@import 'shared/components/components.loading-spinner';
-@import 'shared/components/components.validated-input';
-@import 'shared/components/components.password-strength';
 @import 'shared/components/components.flash-messages';
+@import 'shared/components/components.images';
+@import 'shared/components/components.loading-spinner';
+@import 'custom/components/components.navbar';
+@import 'custom/components/components.overlay';
+@import 'shared/components/components.password-strength';
+@import 'shared/components/components.sidebar';
+@import 'shared/components/components.validated-input';
 
 @import 'shared/utilities/utilities.borders';
 @import 'shared/utilities/utilities.color';
@@ -41,8 +41,8 @@
 @import 'shared/utilities/utilities.hover';
 @import 'shared/utilities/utilities.images';
 @import 'shared/utilities/utilities.inputs';
-@import 'shared/utilities/utilities.markdown-text';
 @import 'shared/utilities/utilities.margins';
+@import 'shared/utilities/utilities.markdown-text';
 @import 'shared/utilities/utilities.media-queries';
 @import 'shared/utilities/utilities.padding';
 @import 'shared/utilities/utilities.position';
@@ -50,14 +50,6 @@
 @import 'shared/utilities/utilities.text-alignment';
 @import 'shared/utilities/utilities.type-setting';
 @import 'shared/utilities/utilities.zindexes';
-
-
-// Custom
-@import 'custom/settings/settings.global';
-@import 'custom/components/components.collection-list-item';
-@import 'custom/components/components.call-to-action-banner';
-@import 'custom/components/components.navbar';
-@import 'custom/components/components.overlay';
 
 // Addons
 @import 'ember-basic-dropdown';
