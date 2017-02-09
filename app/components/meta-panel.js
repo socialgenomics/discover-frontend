@@ -1,8 +1,10 @@
 import Ember from 'ember';
 
-const { Component, set } = Ember;
+const { Component, set, inject: { service } } = Ember;
 
 export default Component.extend({
+  session: service(),
+
   tagName: 'section',
   classNameBindings: ['metaPanelHidden:is-hidden'],
   classNames: ['c-sidebar', 'u-pos-absolute', 'grid'],
