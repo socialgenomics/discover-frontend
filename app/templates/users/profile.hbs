@@ -31,16 +31,16 @@
                 errors=errors.affiliation
                 placeholder="e.g. Bioinformatician at XYZ Institute"
                 submit=(action 'save')
-              }}     
-              
+              }}
+
               {{async-button
-                class="c-btn c-btn-primary u-fs3 u-mb1 u-full-width"
+                class="c-btn c-btn-primary"
                 action=(action 'save')
                 default="Save Changes"
                 pending="Saving..."
                 disableWhen=(not isSavable)
                 reset=true
-              }}                           
+              }}
             </form>
           </div>
         </div>
