@@ -13,9 +13,9 @@ export default Route.extend(FlashMessageMixin, {
     const isAuthenticated = get(this, 'session.isAuthenticated');
     return isAuthenticated ? !isVerified : false;
   }),
-  beforeModel: function() {
+  beforeModel() {
     if (get(this, 'isFirstLogin')) {
-      this.transitionTo('beta-signup-form')
+      this.transitionTo('signup-survey')
         .then(() => {
           // Don't display the 'verify email' message if user signed up with third party auth
           if (!get(this, 'session.data.thirdPartySignup')) {
@@ -28,7 +28,7 @@ export default Route.extend(FlashMessageMixin, {
     }
   },
 
-  model: function() {
+  model() {
     set(this, 'session.data.isRootRoute', true);
     const ajax = get(this, 'ajax');
     if (get(this, 'session.isAuthenticated')) {
