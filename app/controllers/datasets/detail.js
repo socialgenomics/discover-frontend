@@ -30,13 +30,21 @@ export default Controller.extend({
 
   actions: {
     trackExit() {
+      const userId = get(this, 'session.authenticatedUser');
+      const dataset = get(this, 'dataset');
+      this.store.createRecord('action', {
+        actionableId: get(dataset, 'actionableId'),
+        actionable_model: dataset.constructor.modelName,
+        userId: userId,
+        type: 'access'
+      }).save().catch(Logger.error);
+
       get(this, 'metrics').trackEvent({
         category: 'discover_homeauth_datasetDetail',
         action: 'download_button',
         label: get(this, 'dataset.title')
       });
-      let tab = window.open(get(this, 'dataset.url'), '_blank');
-      tab.focus();
+      window.open(get(this, 'dataset.url'), '_blank').focus();
     },
 
     trackLinkEvent() {
@@ -49,7 +57,7 @@ export default Controller.extend({
     addComment(text) {
       const userId = get(this, 'session.authenticatedUser');
       const dataset = get(this, 'dataset');
-      let comment = this.store.createRecord('action', {
+      this.store.createRecord('action', {
         actionableId: get(dataset, 'actionableId'),
         actionable_model: dataset.constructor.modelName,
         userId: userId,
@@ -57,8 +65,7 @@ export default Controller.extend({
         properties: {
           text: text
         }
-      });
-      comment.save().catch(Logger.error);
+      }).save().catch(Logger.error);
     },
 
     addTag(text) {
