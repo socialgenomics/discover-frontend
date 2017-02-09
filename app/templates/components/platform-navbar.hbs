@@ -44,27 +44,28 @@
       {{navbar-dropdown avatar=avatar firstname=firstname username=username userId=userId}}
 
     {{else}}
+      {{#unless isRootRoute}}
 
-      <div class="c-navbar__center-block u-flex u-items-stretch">
-        {{#unless isRootRoute}}
+        <div class="c-navbar__center-block u-flex u-items-stretch">
           <div class="u-flex-grow-1">
             {{search-bar search=(route-action 'search')}}
           </div>
-        {{/unless}}
+        </div>
 
-        <div class="u-flex">
-          <a href="http://repositive.io/about" class="u-hide-on-sm-md u-flex u-items-center u-justify-center c-navbar__element u-tc-secondary u-hv-bc-off-white">About</a>
-          <a href="http://blog.repositive.io/" class="u-hide-on-sm-md u-flex u-items-center u-justify-center c-navbar__element u-border-right u-tc-secondary u-hv-bc-off-white">Blog</a>
-          {{#link-to 'users.login' class="u-hide-on-sm-md u-flex u-items-center u-justify-center c-navbar__element u-tc-secondary u-hv-bc-off-white"}}Login{{/link-to}}
+      {{/unless}}
+
+        <div class="u-flex u-items-center">
+          <a href="http://repositive.io/about" class="u-hide-on-sm-md u-ta-center c-navbar__element u-tc-secondary u-hv-bc-off-white">About</a>
+          <a href="http://blog.repositive.io/" class="u-hide-on-sm-md u-ta-center c-navbar__element u-border-right u-tc-secondary u-hv-bc-off-white">Blog</a>
+          {{#link-to 'users.login' class="u-hide-on-sm-md u-ta-center c-navbar__element u-tc-secondary u-hv-bc-off-white"}}Login{{/link-to}}
           {{#if isRootRoute}}
-            {{#link-to 'users.signup' class="u-hide-on-sm-md u-flex u-items-center u-justify-center c-navbar__element u-tc-teal u-hv-bc-off-white" invokeAction=(action 'trackCreateAccount' 'discover_landingpage_navbar_createAccount')}}Create Account{{/link-to}}
+            {{#link-to 'users.signup' class="u-hide-on-sm-md u-ta-center c-navbar__element u-tc-teal u-hv-bc-off-white" invokeAction=(action 'trackCreateAccount' 'discover_landingpage_navbar_createAccount')}}Create Account{{/link-to}}
           {{else}}
-            {{#link-to 'users.signup' class="u-hide-on-sm-md u-flex u-items-center u-justify-center c-navbar__element u-tc-teal u-hv-bc-off-white" invokeAction=(action 'trackCreateAccount' 'discover_openpage_navbar_createAccount')}}Create Account{{/link-to}}
+            {{#link-to 'users.signup' class="u-hide-on-sm-md u-ta-center c-navbar__element u-tc-teal u-hv-bc-off-white" invokeAction=(action 'trackCreateAccount' 'discover_openpage_navbar_createAccount')}}Create Account{{/link-to}}
           {{/if}}
         </div>
-      </div>
-      {{navbar-dropdown trackCreateAccount=(action 'trackCreateAccount')}}
 
+      {{navbar-dropdown trackCreateAccount=(action 'trackCreateAccount')}}
 
     {{/if}}
   </nav>
