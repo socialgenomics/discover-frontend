@@ -92,7 +92,8 @@ module.exports = function(environment) {
         preventDuplicates: true
       },
       showdown: {
-        simplifiedAutoLink: true
+        simplifiedAutoLink: true,
+        literalMidWordUnderscores: true
       },
       moment: {
         includeTimezone: 'all',

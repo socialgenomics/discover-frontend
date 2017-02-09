@@ -18,7 +18,7 @@
             </ul>
           </div>
           <div class="grid__col grid__col--2-of-3 u-full-min-height u-mb3 u-fs2 u-border-left">
-            <div class="markdown-experiment u-mb3 u-px3">
+            <div class="u-markdown-formatting u-mb3 u-px3">
               {{#if (not help)}}{{markdown-to-html markdown=(fr-markdown-file 'help/requesting/what-is-request')}}
               {{else if (eq help "what-is")}}{{markdown-to-html markdown=(fr-markdown-file 'help/requesting/what-is-request')}}
               {{else if (eq help "what-can")}}{{markdown-to-html markdown=(fr-markdown-file 'help/requesting/what-can-request')}}
