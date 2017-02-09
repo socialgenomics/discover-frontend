@@ -7,7 +7,7 @@
 </div>
 
 {{#if truncateDescription}}
-  <p class="u-tc-primary" {{action "toggleDescriptionLength"}}>
+  <p class="u-tc-primary u-cursor-pointer" {{action "toggleDescription"}}>
     {{#if showFullDescription}}
       Show Less {{fa-icon "chevron-up"}}
     {{else}}
