@@ -1,8 +1,12 @@
 import Ember from 'ember';
 import ResetScrollMixin from 'repositive/mixins/reset-scroll';
 
-export default Ember.Route.extend(ResetScrollMixin, {
-  beforeModel() {
-    this.transitionTo('policies.web');
+const { Route, get } = Ember;
+
+export default Route.extend(ResetScrollMixin, {
+  beforeModel(transition) {
+    if (get(transition, 'targetName').split('.').length === 1) {
+      this.transitionTo('policies.web');
+    }
   }
 });
