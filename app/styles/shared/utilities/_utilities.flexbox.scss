@@ -53,12 +53,12 @@
   min-height: 0; /* 1 */
 }
 
-.u-flex-grow-1 { flex-grow: 1 }
+.u-grow-1       { flex-grow: 1; }
+.u-shrink-none  { flex-shrink: 0; }
+.u-flex-none    { flex: none; }
 
-.u-flex-none { flex: none }
-
-.u-order-0 { order: 0 }
-.u-order-1 { order: 1 }
-.u-order-2 { order: 2 }
-.u-order-3 { order: 3 }
-.u-order-last { order: 99999 }
+.u-order-0 { order: 0; }
+.u-order-1 { order: 1; }
+.u-order-2 { order: 2; }
+.u-order-3 { order: 3; }
+.u-order-last { order: 99999; }

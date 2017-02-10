@@ -4,20 +4,20 @@
     <!-- LOGO -->
     {{#unless isAuthenticated}}
       <!-- desktop logo -->
-      <a href="https://repositive.io" class="u-hide-on-sm-md c-navbar__element u-mr2 u-pl2">
+      <a href="https://repositive.io" class="u-hide-on-sm-md c-navbar__element u-mr3 u-pl2 u-shrink-none">
         <img src="/assets/images/logo-full-larger.png" alt="Repositive DNA logo">
       </a>
       <!-- mobile logo -->
-      <a href="https://repositive.io" class="u-hide-on-lg u-w1 u-mr2 u-pl2">
+      <a href="https://repositive.io" class="u-hide-on-lg u-w1 u-mr2 u-pl2 u-shrink-none">
         <img src="/assets/images/repositive-logo.png" alt="Repositive DNA logo">
       </a>
     {{else}}
       <!-- desktop logo -->
-      {{#link-to 'root' class="u-hide-on-sm-md c-navbar__element u-mr2 u-pl2"}}
+      {{#link-to 'root' class="u-hide-on-sm-md c-navbar__element u-mr2 u-pl2 u-shrink-none"}}
         <img src="/assets/images/logo-full-larger.png" alt="Repositive DNA logo">
       {{/link-to}}
       <!-- mobile logo -->
-      {{#link-to 'root' class="u-hide-on-lg u-w1 u-mr2 u-pl2"}}
+      {{#link-to 'root' class="u-hide-on-lg u-w1 u-mr2 u-pl2 u-shrink-none"}}
         <img src="/assets/images/repositive-logo.png" alt="Repositive DNA logo">
       {{/link-to}}
     {{/unless}}
@@ -26,7 +26,7 @@
     {{#if isAuthenticated}}
 
       <div class="c-navbar__center-block u-flex u-items-stretch">
-        <div class="u-flex-grow-1">
+        <div class="u-grow-1">
           {{search-bar search=(route-action 'search')}}
         </div>
 
@@ -46,26 +46,28 @@
     {{else}}
       {{#unless isRootRoute}}
 
-        <div class="c-navbar__center-block u-flex u-items-stretch">
-          <div class="u-flex-grow-1">
+        <div class="c-navbar__center-block u-pl3 u-mr3 u-flex u-items-stretch">
+          <div class="u-grow-1">
             {{search-bar search=(route-action 'search')}}
           </div>
         </div>
 
       {{/unless}}
 
-        <div class="u-flex u-items-center">
-          <a href="http://repositive.io/about" class="u-hide-on-sm-md u-ta-center c-navbar__element u-tc-secondary u-hv-bc-off-white">About</a>
-          <a href="http://blog.repositive.io/" class="u-hide-on-sm-md u-ta-center c-navbar__element u-border-right u-tc-secondary u-hv-bc-off-white">Blog</a>
-          {{#link-to 'users.login' class="u-hide-on-sm-md u-ta-center c-navbar__element u-tc-secondary u-hv-bc-off-white"}}Login{{/link-to}}
+        <div class="u-hide-on-sm-md u-self-stretch u-flex u-pr2">
+          <a href="http://repositive.io/about" class="u-flex u-items-center u-px2 u-ta-center u-tc-secondary u-hv-bc-off-white">About</a>
+          <a href="http://blog.repositive.io/" class="u-flex u-items-center u-px2 u-ta-center u-border-right u-tc-secondary u-hv-bc-off-white">Blog</a>
+          {{#link-to 'users.login' class="u-flex u-items-center u-px2 u-ta-center u-tc-secondary u-hv-bc-off-white"}}Login{{/link-to}}
           {{#if isRootRoute}}
-            {{#link-to 'users.signup' class="u-hide-on-sm-md u-ta-center c-navbar__element u-tc-teal u-hv-bc-off-white" invokeAction=(action 'trackCreateAccount' 'discover_landingpage_navbar_createAccount')}}Create Account{{/link-to}}
+            {{#link-to 'users.signup' class="u-flex u-items-center u-px2 u-ta-center u-tc-teal u-fw-med u-hv-bc-off-white" invokeAction=(action 'trackCreateAccount' 'discover_landingpage_navbar_createAccount')}}Create Account{{/link-to}}
           {{else}}
-            {{#link-to 'users.signup' class="u-hide-on-sm-md u-ta-center c-navbar__element u-tc-teal u-hv-bc-off-white" invokeAction=(action 'trackCreateAccount' 'discover_openpage_navbar_createAccount')}}Create Account{{/link-to}}
+            {{#link-to 'users.signup' class="u-flex u-items-center u-px2 u-ta-center u-tc-teal u-fw-med u-hv-bc-off-white" invokeAction=(action 'trackCreateAccount' 'discover_openpage_navbar_createAccount')}}Create Account{{/link-to}}
           {{/if}}
         </div>
 
-      {{navbar-dropdown trackCreateAccount=(action 'trackCreateAccount')}}
+        <div class="u-hide-on-lg u-self-stretch u-flex">
+          {{navbar-dropdown trackCreateAccount=(action 'trackCreateAccount')}}
+        </div>
 
     {{/if}}
   </nav>
