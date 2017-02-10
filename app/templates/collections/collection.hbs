@@ -6,7 +6,6 @@
   filters=model.aggs
   activeFilters=activeFilters
   isLoading=isLoading
-  metaPanelHidden=metaPanelHidden
   datasets=model.datasets
   class="u-bc-collection t-dark"
 }}
@@ -15,7 +14,6 @@
   {{#if isLoading}}
     {{partial 'loading'}}
   {{else}}
-
     <h5 class="u-tc-secondary u-fs2 u-ta-right">Search Results ({{model.meta.total}})</h5>
 
     {{search-results-list results=model.datasets totalResults=model.meta.total}}
