@@ -9,16 +9,6 @@
   isSearchPage=true
 }}
 
-<!-- {{#if (gt model.meta.total 0)}}
-  {{filters-list
-    addFilter=(action 'addFilter')
-    removeFilter=(action 'removeFilter')
-    filters=model.aggs
-    activeFilters=activeFilters
-    isLoading=isLoading
-  }}
-{{/if}} -->
-
 <div class="grid-wrapper grid-wrapper-stepped">
   {{#if isLoading}}
     {{partial 'loading'}}

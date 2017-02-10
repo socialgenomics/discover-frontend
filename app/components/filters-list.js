@@ -1,10 +1,9 @@
 import Ember from 'ember';
 
-const { Component, get, set, computed, inject: { service } } = Ember;
+const { Component, get, set, computed } = Ember;
 
 export default Component.extend({
   tagName: 'nav',
-  session: service(),
 
   isEmptyFilters: computed('filters.[]', function () {
     const filters = get(this, 'filters');
