@@ -1,15 +1,13 @@
-<div class="search-container">
-  <div class="open-search">
-    <form {{action search query on='submit'}}>
-      {{fa-icon "search"}}
-      {{input
-        type="text"
-        class="unfocus-grey-text"
-        placeholder="title:cancer AND description:lung"
-        value=query
-        autofocus=true
-      }}
-      <button class="btn">Search</button>
-    </form>
-  </div>
-</div>
+<form class="u-flex u-bc-white u-border u-border-fat u-rounded u-border-color-teal" {{action search query on='submit'}}>
+  <label class="u-flex-auto u-flex u-items-center">
+    <span class="u-cursor-text">{{fa-icon "search" class='u-px2 u-tc-secondary'}}</span>
+    {{input
+      type="text"
+      class="u-pr1 u-pl0 u-mr0 u-border-none"
+      placeholder="title:cancer AND description:lung"
+      value=query
+      autofocus=true
+    }}
+  </label>
+  <button class="c-btn c-btn-primary u-border-square u-self-stretch">Search</button>
+</form>

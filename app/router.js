@@ -12,20 +12,15 @@ Router.map(function() {
   this.route('root', {
     path: '/'
   });
-  this.route('policies');
-  this.route('beta-signup-form', {
+  this.route('signup-survey', {
     path: '/survey'
   });
 
   this.route('users', { resetNamespace: true }, function() {
     this.route('signup');
     this.route('login');
-    this.route('user_settings', {
-      path: '/settings'
-    });
-    this.route('user_profile', {
-      path: '/profile'
-    });
+    this.route('settings');
+    this.route('profile');
     this.route('trust');
     this.route('verify', {
       path: '/verify/:verificationId'
@@ -87,6 +82,14 @@ Router.map(function() {
     this.route('other');
   });
 
+  this.route('policies', { resetNamespace: true }, function() {
+    this.route('web');
+    this.route('privacy');
+    this.route('terms');
+    this.route('cookie');
+    this.route('disclaimer');
+  });
+
   this.route('404', {
     path: '/*path'
   });
@@ -103,7 +106,7 @@ Ember.Route.reopen({
       Ember.$('body').addClass(cssClass);
       if (pagesWithSideNavigation.indexOf(cssClass) !== -1) {
         // Add the class here for all the pages with side navigation
-        Ember.$('body').addClass('has-sidenav');
+        Ember.$('body').addClass('has-sidebar');
       } else if (landingPage.indexOf(cssClass) !== -1) {
         // Add the landing page class to home (makes background white)
         // Home-page stays grey
@@ -115,7 +118,7 @@ Ember.Route.reopen({
   },
   deactivate: function() {
     Ember.$('body').removeClass(this.toCssClass());
-    Ember.$('body').removeClass('has-sidenav');
+    Ember.$('body').removeClass('has-sidebar');
     Ember.$('body').removeClass('landing-page');
   },
   toCssClass: function() {

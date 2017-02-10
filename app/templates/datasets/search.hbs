@@ -1,19 +1,19 @@
-{{#if (gt model.meta.total 0)}}
-  {{filters-list
-    addFilter=(action 'addFilter')
-    removeFilter=(action 'removeFilter')
-    filters=model.aggs
-    activeFilters=activeFilters
-    isLoading=isLoading
-    light-font-color=false
-  }}
-{{/if}}
+{{meta-panel
+  addFilter=(action 'addFilter')
+  removeFilter=(action 'removeFilter')
+  model=model
+  filters=model.aggs
+  activeFilters=activeFilters
+  isLoading=isLoading
+  class="u-bc-i-cant-believe-its-not-white"
+  isSearchPage=true
+}}
 
-<div class="content right">
+<div class="grid-wrapper grid-wrapper-stepped">
   {{#if isLoading}}
     {{partial 'loading'}}
   {{else}}
-    <h5 class="unfocus-grey-text">Search Results ({{model.meta.total}})</h5>
+    <h5 class="u-tc-secondary u-fs2 u-ta-right">Search Results ({{model.meta.total}})</h5>
 
     {{search-results-list results=model.datasets totalResults=model.meta.total}}
 

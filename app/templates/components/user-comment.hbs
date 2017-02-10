@@ -1,32 +1,34 @@
-<div class="comment">
-  <div class="comment-header">
+
+<!-- User Info / Timestamp -->
+<div class="u-flex u-items-start u-mb1 u-pt3 u-border-top">
+  {{#link-to 'user' user.id disabled=disabled invokeAction=(action 'toggleCreateAccountModal')}}
+    <img src={{avatar}} class="u-w1 u-mr1 u-circle" />
+  {{/link-to}}
+  <div>
     {{#link-to 'user' user.id disabled=disabled invokeAction=(action 'toggleCreateAccountModal')}}
-      <div class="dp-wrapper">
-        <img src={{avatar}}>
-      </div>
-      <h4>{{user.displayName}}</h4>
+      <h4 class="u-fs2 u-tc-primary u-mb0">{{user.displayName}}</h4>
     {{/link-to}}
-    <span>{{moment-from-now date allowEmpty=true}}</span>
-  </div>
-  <div class="comment-body">
-    <p class="markdown-text">{{markdown-to-html markdown=text extensions='targetBlankLinks'}}</p>
+    <span class="u-tc-tertiary u-fs0">{{moment-from-now date allowEmpty=true}}</span>
   </div>
 </div>
 
+<!-- Comment -->
+<p class="u-markdown-formatting u-mb0">{{markdown-to-html markdown=text extensions='targetBlankLinks'}}</p>
+
+
 {{#if showCreateAccountModal}}
-  {{#modal-dialog
-    close=(action 'toggleCreateAccountModal')
-    targetAttachment="center"
-    translucentOverlay=true
-  }}
-    {{#repositive-modal/wrapper size='medium'}}
+  {{! "container-class" is a temporary solution, changes in ember modal dialog required }}
+    {{#repositive-modal
+      container-class='c-modal--medium u-z5'
+      close=(action 'toggleCreateAccountModal')
+    }}
       {{repositive-modal/header
         image=avatar
-        alternateBackground=true
         title=(concat 'View ' user.firstname '\'s profile')
         onClose=(action 'toggleCreateAccountModal')
       }}
-      {{create-account-modal-content text="To see another user's profile, create an account."}}
-    {{/repositive-modal/wrapper}}
-  {{/modal-dialog}}
+      {{#repositive-modal/content}}
+        {{create-account-modal-content text='To see another user\'s profile, create an account.'}}
+      {{/repositive-modal/content}}
+    {{/repositive-modal}}
 {{/if}}

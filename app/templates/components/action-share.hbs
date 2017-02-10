@@ -1,58 +1,55 @@
-{{fa-icon "share-alt"}}
+{{fa-icon "share-alt" class="u-hv-tc-to-yellow"}}
 
 {{#if showShareOptionsModal}}
-  {{#tether-dialog
+  {{#repositive-modal
+    container-class='u-z1'
     close=(action 'toggleShareOptionsModal')
     target=(concat '#' elementId)
     targetAttachment='bottom left'
     attachment='top left'
-    translucentOverlay=false
-    container-class='share-options-modal'
     constraints=shareOptionsModalConstraints
+    hasOverlay=false
   }}
     {{share-options
       shareUrl=shareUrl
       actionableId=actionableId
       onEnvelopeClick=(action (if session.isAuthenticated 'toggleShareEmailModal' 'toggleCreateAccountModal'))
     }}
-  {{/tether-dialog}}
+  {{/repositive-modal}}
 {{/if}}
 
 {{#if showShareEmailModal}}
-  {{#modal-dialog
+  {{#repositive-modal
+    container-class='u-z5'
     close=(action 'toggleShareEmailModal')
-    targetAttachment="center"
-    translucentOverlay=true
   }}
-    {{#repositive-modal/wrapper size='medium'}}
-      {{repositive-modal/header
-        icon='envelope'
-        alternateBackground=true
-        title='Share this dataset'
+    {{repositive-modal/header
+      icon='envelope'
+      title='Share this dataset'
+      onClose=(action 'toggleShareEmailModal')
+    }}
+    {{#repositive-modal/content}}
+      {{share-by-email-form
+        actionableId=actionableId
+        actionableType=actionableType
         onClose=(action 'toggleShareEmailModal')
       }}
-        {{share-by-email-form
-          actionableId=actionableId
-          actionableType=actionableType
-          onClose=(action 'toggleShareEmailModal')
-        }}
-    {{/repositive-modal/wrapper}}
-  {{/modal-dialog}}
+    {{/repositive-modal/content}}
+  {{/repositive-modal}}
 {{/if}}
 
 {{#if showCreateAccountModal}}
-  {{#modal-dialog
+  {{#repositive-modal
+    container-class='u-z5'
     close=(action 'toggleCreateAccountModal')
-    targetAttachment="center"
-    translucentOverlay=true
   }}
-    {{#repositive-modal/wrapper size='medium'}}
-      {{repositive-modal/header
-        icon='envelope'
-        title='Share via email'
-        onClose=(action 'toggleCreateAccountModal')
-      }}
+    {{repositive-modal/header
+      icon='envelope'
+      title='Share via email'
+      onClose=(action 'toggleCreateAccountModal')
+    }}
+    {{#repositive-modal/content}}
       {{create-account-modal-content text='To share this dataset via email you need to have an account.'}}
-    {{/repositive-modal/wrapper}}
-  {{/modal-dialog}}
+    {{/repositive-modal/content}}
+  {{/repositive-modal}}
 {{/if}}

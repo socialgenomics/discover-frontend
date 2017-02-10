@@ -1,0 +1,6 @@
+.u-z0 { box-shadow: none; }
+.u-z1 { box-shadow: 0 2px 4px 0 transparentize($color-black, .7) }
+.u-z5 {
+  box-shadow: 0 16px 28px 0 transparentize($color-black, .78),
+  0 25px 55px 0 transparentize($color-black, .79);
+}

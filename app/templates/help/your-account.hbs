@@ -1,32 +1,30 @@
-<div class="content">
-  <div class="row">
-    {{help-tabs tab="account"}}
-    <div class="col m12">
-      <div class="card white no-margin darken-1">
-        <div class="card-content">
-          <div class="row margin-top">
-            <div class="col m4 help-menu">
-              <ol>
-                <li>{{#link-to 'help.your-account' (query-params help="access")}}How can I access my account?{{/link-to}}</li>
-                <li>{{#link-to 'help.your-account' (query-params help="personalise")}}Can I personalise my notifications?{{/link-to}}</li>
-                <li>{{#link-to 'help.your-account' (query-params help="change-cred")}}How can I change my credentials?{{/link-to}}</li>
-                <li>{{#link-to 'help.your-account' (query-params help="change-pw")}}How can I change my password?{{/link-to}}</li>
-                <li>{{#link-to 'help.your-account' (query-params help="profile")}}Can I control who can see my profile?{{/link-to}}</li>
-              </ol>
+<div class="grid-wrapper grid-wrapper-stepped">
+  <div class="grid">
+    <div class="grid__col grid__col--3-of-3">
+      {{help-tabs tab="requesting"}}
+      <div class="c-card c-card-detail-overflow u-rounded-bottom u-py3">
+        <div class="grid u-full-height">
+          <div class="grid__col grid__col--1-of-3 u-fs2 u-fw-med">
+            <ul class="o-list-flush-left u-px3">
+              <li class="u-p1">{{#link-to 'help.your-account' (query-params help="access") class="u-tc-teal"}}How can I access my account?{{/link-to}}</li>
+              <li class="u-p1">{{#link-to 'help.your-account' (query-params help="personalise") class="u-tc-teal"}}Can I personalise my notifications?{{/link-to}}</li>
+              <li class="u-p1">{{#link-to 'help.your-account' (query-params help="change-cred") class="u-tc-teal"}}How can I change my credentials?{{/link-to}}</li>
+              <li class="u-p1">{{#link-to 'help.your-account' (query-params help="change-pw") class="u-tc-teal"}}How can I change my password?{{/link-to}}</li>
+              <li class="u-p1">{{#link-to 'help.your-account' (query-params help="profile") class="u-tc-teal"}}Can I control who can see my profile?{{/link-to}}</li>
+            </ul>
+          </div>
+          <div class="grid__col grid__col--2-of-3 u-full-min-height u-mb3 u-fs2 u-border-left">
+            <div class="u-markdown-formatting u-mb3 u-px3">
+              {{#if (not help)}}{{markdown-to-html markdown=(fr-markdown-file 'help/account/access')}}
+              {{else if (eq help "access")}}{{markdown-to-html markdown=(fr-markdown-file 'help/account/access')}}
+              {{else if (eq help "personalise")}}{{markdown-to-html markdown=(fr-markdown-file 'help/account/personalise')}}
+              {{else if (eq help "change-cred")}}{{markdown-to-html markdown=(fr-markdown-file 'help/account/change-cred')}}
+              {{else if (eq help "change-pw")}}{{markdown-to-html markdown=(fr-markdown-file 'help/account/change-pw')}}
+              {{else if (eq help "profile")}}{{markdown-to-html markdown=(fr-markdown-file 'help/account/profile')}}
+              {{/if}}
+              <div class="c-divider c-divider-light-bg"></div>
             </div>
-            <div class="col m8 help-content">
-              <div class="markdown-text">
-                {{#if (not help)}}{{markdown-to-html markdown=(fr-markdown-file 'help/account/access')}}
-                {{else if (eq help "access")}}{{markdown-to-html markdown=(fr-markdown-file 'help/account/access')}}
-                {{else if (eq help "personalise")}}{{markdown-to-html markdown=(fr-markdown-file 'help/account/personalise')}}
-                {{else if (eq help "change-cred")}}{{markdown-to-html markdown=(fr-markdown-file 'help/account/change-cred')}}
-                {{else if (eq help "change-pw")}}{{markdown-to-html markdown=(fr-markdown-file 'help/account/change-pw')}}
-                {{else if (eq help "profile")}}{{markdown-to-html markdown=(fr-markdown-file 'help/account/profile')}}
-                {{/if}}
-              </div>
-              <div class="divider"></div>
-              {{more-help-btn}}
-            </div>
+            {{more-help-btn}}
           </div>
         </div>
       </div>

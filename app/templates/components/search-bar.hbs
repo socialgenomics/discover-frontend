@@ -1,10 +1,12 @@
-<form {{action "search" query on='submit'}}>
-    {{fa-icon "search"}}
+<form class="u-flex u-bc-white u-border-left u-border-right" {{action search query on='submit'}}>
+  <label class="u-flex-auto u-flex u-items-center">
+    <span class="u-cursor-text">{{fa-icon "search" class='u-px2 u-tc-secondary'}}</span>
     {{input
       type="text"
-      class="unfocus-grey-text"
+      class="u-pr1 u-pl0 u-border-none"
       placeholder="title:cancer AND description:lung"
       value=query
       autofocus=true
     }}
+  </label>
 </form>

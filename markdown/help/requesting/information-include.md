@@ -1,4 +1,4 @@
-## What information should I include in my request?
+# What information should I include in my request?
 
 Include as much useful, detailed information as possible. The title should be concise and to-the-point, clearly and briefly explaining what you are looking for. Then add a description of your research question and what you want to do with the data. This can include things like:
 
@@ -16,8 +16,11 @@ Also think about adding tags to make your data more 'searchable' Link to "What m
 
 Example:
 
-    Title: RNA-seq of paired breast cancer samples with and without BRCA1 mutations
+**Title:**
+RNA-seq of paired breast cancer samples with and without BRCA1 mutations
 
-    Description: For a comparative study, I already have a similar dataset for microarray expression, but I would like to redo the analysis for RNA-seq and investigate the differences. I need at least 5 paired/matched (tumor and blood/non-tumor) samples. Ideally I would like samples from Chinese females aged 40 – 65. I am happy to share the data I have and form a collaboration with someone who has the data I need.  
+**Description:**
+For a comparative study, I already have a similar dataset for microarray expression, but I would like to redo the analysis for RNA-seq and investigate the differences. I need at least 5 paired/matched (tumor and blood/non-tumor) samples. Ideally I would like samples from Chinese females aged 40 – 65. I am happy to share the data I have and form a collaboration with someone who has the data I need.  
 
-    Tags: 'breast cancer' 'Chinese' 'RNA-Seq' 'paired'
+**Tags:**
+`breast cancer` `Chinese` `RNA-Seq` `paired`

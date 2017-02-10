@@ -1,4 +1,11 @@
 import Ember from 'ember';
 
-export default Ember.Route.extend({
+const { Route, get } = Ember;
+
+export default Route.extend({
+  beforeModel(transition) {
+    if (get(transition, 'targetName').split('.')[1] === 'index') {
+      this.transitionTo('help.searching-for-data');
+    }
+  }
 });

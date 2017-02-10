@@ -5,7 +5,7 @@ import { validator } from 'ember-validations';
 import { isBadRequestError } from 'ember-ajax/errors';
 import FlashMessageMixin from 'repositive/mixins/flash-message-mixin';
 
-const{ assign, get, getProperties, set, setProperties, computed, Controller, inject: { service } } = Ember;
+const { assign, get, getProperties, set, setProperties, computed, Controller, inject: { service } } = Ember;
 
 export default Controller.extend(EmberValidations, FlashMessageMixin, {
   session: service(),
@@ -14,9 +14,7 @@ export default Controller.extend(EmberValidations, FlashMessageMixin, {
   fullName: null,
   email: null,
   password: null,
-  showPassword: false,
   loading: false,
-  formSubmitted: false,
   // number, capital letter and special character
   passwordPatterns: [/\d/, /[A-Z]/, /[!,@,#,$,%,^,&,*,?,_,~,-,(,)]/],
 
@@ -53,7 +51,7 @@ export default Controller.extend(EmberValidations, FlashMessageMixin, {
       },
       inline: validator(function() {
         if (get(this, '_getPasswordStrength')(get(this, 'password'), get(this, 'passwordPatterns')) === 0) {
-          return 'Please enter a number or capital letter.';
+          return 'Must include a number or capital letter.';
         }
       })
     }
@@ -63,11 +61,7 @@ export default Controller.extend(EmberValidations, FlashMessageMixin, {
     return get(this, 'loading') || !get(this, 'isValid');
   }),
 
-  type: computed('showPassword', function() {
-    return get(this, 'showPassword') ? 'text' : 'password';
-  }),
-
-  strength: computed('password', 'errors.password.length', function () {
+  passwordStrength: computed('password', 'errors.password.length', function () {
     if ( get(this, 'errors.password.length') > 0) {
       return 'weak';
     }
@@ -76,18 +70,18 @@ export default Controller.extend(EmberValidations, FlashMessageMixin, {
   }),
 
   actions: {
-    signupAndAuthenticate: function() {
+    signupAndAuthenticate() {
       if (!get(this, 'isDisabled')) {
-        setProperties(this, { 'formSubmitted': true, 'loading': true });
+        set(this, 'loading', true);
         const credentials = this._buildCredentials();
         /*
           Signup with repositive.
          */
-        get(this, 'ajax').request(ENV.APIRoutes[ENV['ember-simple-auth'].signupRoute], {
+        return get(this, 'ajax').request(ENV.APIRoutes[ENV['ember-simple-auth'].signupRoute], {
           method: 'POST',
           data: credentials
         })
-          .then(resp => { // signup has suceeded, now login
+          .then(() => { // signup has suceeded, now login
             return get(this, 'session').authenticate('authenticator:repositive', credentials);
           })
           .then(() => {
@@ -102,10 +96,6 @@ export default Controller.extend(EmberValidations, FlashMessageMixin, {
             this._displayMessage(err);
           });
       }
-    },
-
-    toggleCheckbox: function() {
-      this.toggleProperty('showPassword');
     }
   },
 
@@ -125,7 +115,7 @@ export default Controller.extend(EmberValidations, FlashMessageMixin, {
     }
   },
 
-  _getFirstAndLastNames: function(fullName) {
+  _getFirstAndLastNames(fullName) {
     const fullNameArray = fullName.split(' ');
     const firstname = fullNameArray.shift();
     const lastname = fullNameArray.join(' ') || '';

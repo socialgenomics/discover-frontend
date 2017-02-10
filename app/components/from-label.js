@@ -1,9 +1,10 @@
 import Ember from 'ember';
+
 const { inject: { service }, Component, get } = Ember;
 
 export default Component.extend({
   tagName: 'h6',
-  classNames: ['from-label'],
+  classNames: ['u-fs0', 'u-fw-reg', 'u-mb1'],
   session: service(),
   click() {
     if (get(this, 'session.isAuthenticated') === false) {

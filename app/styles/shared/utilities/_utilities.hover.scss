@@ -1,0 +1,26 @@
+/* ==========================================================================
+    #HOVER EFFECTS
+   ========================================================================== */
+
+@mixin hv-bc-darken ($bc-color, $percent) {
+  &:hover {
+    background-color: darken($bc-color, $percent);
+  }
+}
+
+
+.u-hv-bc-darken5    { &:hover { background-color: rgba($color-black, 0.05); }}
+.u-hv-bc-darken10   { &:hover { background-color: rgba($color-black, 0.1 ); }}
+
+.u-hv-bc-teal       { @include hv-bc-darken($color-primary-teal,   10); }
+.u-hv-bc-red        { @include hv-bc-darken($color-primary-red,    10); }
+.u-hv-bc-yellow     { @include hv-bc-darken($color-primary-yellow, 10); }
+.u-hv-bc-blue       { @include hv-bc-darken($color-secondary-blue, 10); }
+.u-hv-bc-collection { @include hv-bc-darken($color-collection,     10); }
+.u-hv-bc-datasource { @include hv-bc-darken($color-datasource,     10); }
+
+.u-hv-bc-white      { @include hv-bc-darken($color-white,          5 ); }
+.u-hv-bc-off-white  { @include hv-bc-darken($color-off-white,      10); }
+.u-hv-bc-grey       { @include hv-bc-darken($color-mid-grey,       10); }
+
+.u-hv-tc-to-yellow  { &:hover { @extend .u-tc-yellow; }}

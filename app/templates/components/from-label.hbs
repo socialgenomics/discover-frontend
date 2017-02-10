@@ -1,77 +1,49 @@
-<!-- TODO when the data returned by the favourites query is the same structure as a dataset, this condition can be removed.  -->
-{{#if isFavourite}}
-  {{#if isRequest}}
-    <span class="descriptor">Requested by </span>
-    {{#if session.isAuthenticated }}
-      {{#link-to 'user' model.user.id}}
-        {{model.user.firstname}} {{model.user.lastname}}
-      {{/link-to}}
-    {{else}}
-      <span class="fake-link">{{model.user.firstname}} {{model.user.lastname}}</span>
-    {{/if}}
-  {{else if (eq model.datasource.properties.short_name "REPOSITIVE")}}
-    <!-- Registration -->
+ {{#if (eq type "request")}}
 
-    <span class="descriptor">Registered by </span>
-    {{#if session.isAuthenticated }}
-      {{#link-to 'user' model.user.id class="user-name"}}
-        {{model.user.firstname}} {{model.user.lastname}}
-      {{/link-to}}
-    {{else}}
-      <span class="fake-link">{{model.user.firstname}} {{model.user.lastname}}</span>
-    {{/if}}
-
-  {{else}}
-    <!-- Regular Dataset-->
-    <span class="descriptor">from</span>
-    {{#if session.isAuthenticated }}
-      {{#link-to 'datasources.source' model.datasource.id}}
-        {{source-name-fallback model=model.datasource}}
-      {{/link-to}}
-    {{else}}
-      <span class="fake-link">{{source-name-fallback model=model.datasource}}</span>
-    {{/if}}
-  {{/if}}
-
-{{else}} <!-- Not a favourite -->
-
-{{#if isRequest}}
   {{#if model.userId.displayName}}
-    <span class="descriptor">Requested by </span>
+    <span class="u-fs0 u-fw-reg u-tc-tertiary u-cursor-default">requested by </span>
     {{#if session.isAuthenticated }}
       {{#link-to 'user' model.userId.id}}
         {{model.userId.displayName}}
       {{/link-to}}
     {{else}}
-      <span class="fake-link">{{model.userId.displayName}}</span>
+      <span>{{model.userId.displayName}}</span>
     {{/if}}
   {{/if}}
+
+<!-- Old registration -->
 {{else if (eq model.datasourceId.properties.short_name "REPOSITIVE")}}
-  <!-- Registration -->
 
   {{#if model.userId.displayName}}
-    <span class="descriptor">Registered by </span>
+    <span class="u-fs0 u-fw-reg u-tc-tertiary u-cursor-default">registered by </span>
     {{#if session.isAuthenticated }}
       {{#link-to 'user' model.userId.id}}
         {{model.userId.displayName}}
       {{/link-to}}
     {{else}}
-      <span class="fake-link">{{model.userId.displayName}}</span>
+      <span>{{model.userId.displayName}}</span>
     {{/if}}
   {{/if}}
 
-{{else}}
-  <!-- Regular Dataset-->
-  <span class="descriptor">from</span>
+{{else}} <!-- Registration or Dataset -->
+
+  <span class="u-fs0 u-fw-reg u-tc-tertiary u-cursor-default">from</span>
   {{#if session.isAuthenticated }}
-    {{#link-to 'datasources.source' model.datasourceId.id}}
-      {{source-name-fallback model=model.datasourceId}}
-    {{/link-to}}
+    {{#if (eq model.datasourceId.type 'personal_repository')}} <!-- Registration -->
+      {{#link-to 'collections.collection' model.datasourceId.id}}
+        {{source-name-fallback model=model.datasourceId}}
+      {{/link-to}}
+    {{else}} <!-- Dataset -->
+      {{#link-to 'datasources.source' model.datasourceId.id}}
+        {{source-name-fallback model=model.datasourceId}}
+      {{/link-to}}
+    {{/if}}
   {{else}}
-    <span class="fake-link">{{source-name-fallback model=model.datasourceId}}</span>
+    <span class="u-tc-primary">{{source-name-fallback model=model.datasourceId}}</span>
   {{/if}}
+
 {{/if}}
-{{/if}}
+
 
 {{#if showCreateAccountModal}}
   {{#modal-dialog

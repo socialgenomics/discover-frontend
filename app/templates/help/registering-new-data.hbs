@@ -1,36 +1,34 @@
-<div class="content">
-  <div class="row">
-    {{help-tabs tab="registering"}}
-    <div class="col m12">
-      <div class="card white no-margin darken-1">
-        <div class="card-content">
-          <div class="row margin-top">
-            <div class="col m4 help-menu">
-              <ol>
-                <li>{{#link-to 'help.registering-new-data' (query-params help="data-reg")}}What data can I register?{{/link-to}}</li>
-                <li>{{#link-to 'help.registering-new-data' (query-params help="see-reg")}}Who can see my registration?{{/link-to}}</li>
-                <li>{{#link-to 'help.registering-new-data' (query-params help="include-reg")}}What information should I include in my registration?{{/link-to}}</li>
-                <li>{{#link-to 'help.registering-new-data' (query-params help="store-raw")}}Do you store the raw data alongside the metadata I register?{{/link-to}}</li>
-                <li>{{#link-to 'help.registering-new-data' (query-params help="view-reg")}}How do I know who has viewed my data registration?{{/link-to}}</li>
-                <li>{{#link-to 'help.registering-new-data' (query-params help="add-meta")}}Can I add more metadata and description later?{{/link-to}}</li>
-                <li>{{#link-to 'help.registering-new-data' (query-params help="access-reg")}}Can I choose who has access to my data?{{/link-to}}</li>
-              </ol>
+<div class="grid-wrapper grid-wrapper-stepped">
+  <div class="grid">
+    <div class="grid__col grid__col--3-of-3">
+      {{help-tabs tab="requesting"}}
+      <div class="c-card c-card-detail-overflow u-rounded-bottom u-py3">
+        <div class="grid u-full-height">
+          <div class="grid__col grid__col--1-of-3 u-fs2 u-fw-med">
+            <ul class="o-list-flush-left u-px3">
+              <li class="u-p1">{{#link-to 'help.registering-new-data' (query-params help="data-reg") class="u-tc-teal"}}What data can I register?{{/link-to}}</li>
+              <li class="u-p1">{{#link-to 'help.registering-new-data' (query-params help="see-reg") class="u-tc-teal"}}Who can see my registration?{{/link-to}}</li>
+              <li class="u-p1">{{#link-to 'help.registering-new-data' (query-params help="include-reg") class="u-tc-teal"}}What information should I include in my registration?{{/link-to}}</li>
+              <li class="u-p1">{{#link-to 'help.registering-new-data' (query-params help="store-raw") class="u-tc-teal"}}Do you store the raw data alongside the metadata I register?{{/link-to}}</li>
+              <li class="u-p1">{{#link-to 'help.registering-new-data' (query-params help="view-reg") class="u-tc-teal"}}How do I know who has viewed my data registration?{{/link-to}}</li>
+              <li class="u-p1">{{#link-to 'help.registering-new-data' (query-params help="add-meta") class="u-tc-teal"}}Can I add more metadata and description later?{{/link-to}}</li>
+              <li class="u-p1">{{#link-to 'help.registering-new-data' (query-params help="access-reg") class="u-tc-teal"}}Can I choose who has access to my data?{{/link-to}}</li>
+            </ul>
+          </div>
+          <div class="grid__col grid__col--2-of-3 u-full-min-height u-mb3 u-fs2 u-border-left">
+            <div class="u-markdown-formatting u-mb3 u-px3">
+              {{#if (not help)}}{{markdown-to-html markdown=(fr-markdown-file 'help/registering/data-reg')}}
+              {{else if (eq help "data-reg")}}{{markdown-to-html markdown=(fr-markdown-file 'help/registering/data-reg')}}
+              {{else if (eq help "see-reg")}}{{markdown-to-html markdown=(fr-markdown-file 'help/registering/see-reg')}}
+              {{else if (eq help "include-reg")}}{{markdown-to-html markdown=(fr-markdown-file 'help/registering/include-reg')}}
+              {{else if (eq help "store-raw")}}{{markdown-to-html markdown=(fr-markdown-file 'help/registering/store-raw')}}
+              {{else if (eq help "view-reg")}}{{markdown-to-html markdown=(fr-markdown-file 'help/registering/view-reg')}}
+              {{else if (eq help "add-meta")}}{{markdown-to-html markdown=(fr-markdown-file 'help/registering/add-meta')}}
+              {{else if (eq help "access-reg")}}{{markdown-to-html markdown=(fr-markdown-file 'help/registering/access-reg')}}
+              {{/if}}
+              <div class="c-divider c-divider-light-bg"></div>
             </div>
-            <div class="col m8 help-content">
-              <div class="markdown-text">
-                {{#if (not help)}}{{markdown-to-html markdown=(fr-markdown-file 'help/registering/data-reg')}}
-                {{else if (eq help "data-reg")}}{{markdown-to-html markdown=(fr-markdown-file 'help/registering/data-reg')}}
-                {{else if (eq help "see-reg")}}{{markdown-to-html markdown=(fr-markdown-file 'help/registering/see-reg')}}
-                {{else if (eq help "include-reg")}}{{markdown-to-html markdown=(fr-markdown-file 'help/registering/include-reg')}}
-                {{else if (eq help "store-raw")}}{{markdown-to-html markdown=(fr-markdown-file 'help/registering/store-raw')}}
-                {{else if (eq help "view-reg")}}{{markdown-to-html markdown=(fr-markdown-file 'help/registering/view-reg')}}
-                {{else if (eq help "add-meta")}}{{markdown-to-html markdown=(fr-markdown-file 'help/registering/add-meta')}}
-                {{else if (eq help "access-reg")}}{{markdown-to-html markdown=(fr-markdown-file 'help/registering/access-reg')}}
-                {{/if}}
-              </div>
-              <div class="divider"></div>
-              {{more-help-btn}}
-            </div>
+            {{more-help-btn}}
           </div>
         </div>
       </div>

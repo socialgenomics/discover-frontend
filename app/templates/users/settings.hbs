@@ -1,0 +1,44 @@
+<div class="grid-wrapper grid-wrapper-stepped">
+  <div class="grid">
+    <div class="grid__col grid__col--3-of-3">
+      {{profile-tabs}}
+
+      <div class="c-card u-rounded-bottom u-p1">
+        <div class="u-ta-center">
+          <h1 class="u-fs4">Notifications</h1>
+          <h3 class="u-fs3 u-tc-tertiary"><em>We are working on this feature. Stay tuned!</em></h3>
+        </div>
+
+        <div class="u-pos-relative u-py4">
+          <form action="#">
+            {{check-box
+              label="Another user sends me a message."
+              checkID="notificationsMessage"
+              checked=true
+            }}
+            {{check-box
+              label="Someone comments on a dataset I posted."
+              checkID="notificationsComments"
+              checked=false
+            }}
+            {{check-box
+              label="Tips and important updates about Repositive."
+              checkID="notificationsUpdates"
+              checked=false
+            }}
+            {{check-box
+              label="Suggestions for datasets based on my search history."
+              checkID="notificationsSuggestions"
+              checked=false
+            }}
+          </form>
+
+          <div class="u-ta-center u-pos-absolute u-full-height u-full-width u-bc-overlay-white u-pos-top0 u-pos-left0">
+            <img class="u-w4" src="/assets/images/lizard-working-hard.png">
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

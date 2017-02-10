@@ -1,0 +1,29 @@
+/* ==========================================================================
+    #TYPE SETTING
+   ========================================================================== */
+
+ // Font Sizes
+ /* ==================================== */
+.u-fs0 { font-size: $global-font-size-tiny;   }
+.u-fs1 { font-size: $global-font-size-small;  }
+.u-fs2 { font-size: $global-font-size-regular;}
+.u-fs3 { font-size: $global-font-size-large;  }
+.u-fs4 { font-size: $global-font-size-huge;   }
+
+ // Font Weights
+ /* ==================================== */
+ // !important tags here required for Font Awesome inheritance
+ // You always want these applied when declared
+.u-fw-thin  { font-weight: 300 !important; }
+.u-fw-reg   { font-weight: 400 !important; }
+.u-fw-med   { font-weight: 500 !important; }
+.u-fw-bold  { font-weight: 700 !important; }
+
+ // Type Setting Helpers
+ /* ==================================== */
+.u-line-break   { word-break: break-all; }
+.u-line-keep     { word-break: keep-all; }
+
+// Type Decorations
+/* ==================================== */
+.u-td-underline { text-decoration: underline; }

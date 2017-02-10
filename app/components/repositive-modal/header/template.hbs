@@ -1,10 +1,18 @@
-<h4>
-  {{#if icon}}
-    <span class="modal-icon">{{fa-icon icon}}</span>
-  {{/if}}
-  {{#if image}}
-    <img width={{imgSize}} height={{imgSize}} src={{image}} />
-  {{/if}}
-  {{title}}
-</h4>
-<span class="close-button large-text" {{action this.attrs.onClose}}>{{fa-icon "times"}}</span>
+<div class="u-flex u-items-center u-justify-between u-tc-secondary u-py1">
+  <div class="u-px2"></div>
+
+  <div class="u-flex u-items-center">
+    {{#if icon}}
+      <span class="u-fs2 u-py1 u-tc-tertiary">{{fa-icon icon}}</span>
+    {{/if}}
+
+    {{#if image}}
+      <img class="u-w1" src={{image}} />
+    {{/if}}
+
+    <h4 class="u-fs2 u-tc-secondary u-px2 u-mb0 u-cursor-default">{{title}}</h4>
+  </div>
+
+  <span class="c-modal-btn-close u-tc-tertiary u-cursor-pointer u-fs2" {{action this.attrs.onClose}}> {{fa-icon "times"}} </span>
+
+</div>

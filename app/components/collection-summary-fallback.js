@@ -3,6 +3,6 @@ import Ember from 'ember';
 const { Component } = Ember;
 
 export default Component.extend({
-  tagName: 'p',
-  classNames: ['markdown-text']
+  tagName: 'span',
+  classNames: ['mb-0']
 });

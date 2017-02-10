@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import EmberValidations from 'ember-validations';
-const { get, getProperties, computed, Controller, inject: { service }, set, setProperties, $ } = Ember;
+const { get, getProperties, computed, Controller, inject: { service }, set } = Ember;
 
 export default Controller.extend(
   EmberValidations,
@@ -10,7 +10,6 @@ export default Controller.extend(
     email: null,
     password: null,
     loading: false,
-    formSubmitted: false,
 
     validations: {
       email: {
@@ -19,7 +18,7 @@ export default Controller.extend(
         },
         format: {
           with: /^([\w\-\.\+]+)@((?:[\w\-\.]+)(?:\.[a-zA-Z]{2,}))$/,
-          message: 'Must be a valid e-mail address'
+          message: 'Must be a valid e-mail address.'
         },
         server: true // must be last - unknown bug
       },
@@ -42,14 +41,8 @@ export default Controller.extend(
     actions: {
       submitForm() {
         if (!get(this, 'isDisabled')) {
-          $('#login-form').find('input').trigger('change'); // fix for password manager bug
-
-          setProperties(this, {
-            loading: true,
-            formSubmitted: true
-          });
-
-          get(this, 'session')
+          set(this, 'loading', true);
+          return get(this, 'session')
             .authenticate('authenticator:repositive', getProperties(this, 'email', 'password'))
             .then(this._displayMessage.bind(this))
             .catch(this._displayMessage.bind(this));
@@ -63,7 +56,6 @@ export default Controller.extend(
 
     _displayMessage(resp) {
       set(this, 'loading', false);
-
       if (resp) {
         const message = get(resp, 'status_code') !== 400 ?
           get(resp, 'message') :
@@ -72,13 +64,10 @@ export default Controller.extend(
         if (message) {
           this.flashMessages.add({
             message,
-            type: 'warning',
-            timeout: 7000,
-            class: 'fadeIn'
+            type: 'warning'
           });
         }
       }
     }
   }
 );
-

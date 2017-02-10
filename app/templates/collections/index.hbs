@@ -1,11 +1,14 @@
-{{collections-list-tabs stats=model.stats}}
+<div class="grid-wrapper grid-wrapper-stepped">
+  <div class="grid">
+    <div class="grid__col grid__col--11-of-12 grid__col--centered">
 
-<main class="card no-margin">
-  <div class="card-content">
-    <div class="row">
-      {{#each (sort-by "name" model.collections) as |collection|}}
-        {{collection-feed-item collection=collection}}
-      {{/each}}
+      {{collections-list-tabs stats=model.stats active='collections'}}
+
+      <div class="c-card u-border-square u-p4">
+        {{#each (sort-by "name" model.collections) as |collection|}}
+          {{collection-feed-item collection=collection}}
+        {{/each}}
+      </div>
     </div>
   </div>
-</main>
+</div>

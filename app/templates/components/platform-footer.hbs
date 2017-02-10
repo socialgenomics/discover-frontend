@@ -1,9 +1,0 @@
-<div class="center-align">
-  <ul class="list-inline">
-    <li><a href="http://repositive.io/about" target="_blank" class="grey-text" {{action 'trackFooterLink' 'about' preventDefault=false}}>ABOUT</a></li>
-    <li><a href="http://repositive.io/team" target="_blank" class="grey-text" {{action 'trackFooterLink' 'team' preventDefault=false}}>TEAM</a></li>
-    <li>{{#link-to 'help.searching-for-data' (query-params help=null) invokeAction=(action 'trackFooterLink' 'help')}}HELP{{/link-to}}</li>
-    <li>{{#link-to 'policies' (query-params tab="web") class='grey-text' invokeAction=(action 'trackFooterLink' 'policies')}}REPOSITIVE POLICY{{/link-to}}</li>
-    <li>{{#link-to 'policies' (query-params tab="cookie") class='grey-text' invokeAction=(action 'trackFooterLink' 'cookies')}}USE OF COOKIES{{/link-to}}</li>
-  </ul>
-</div>

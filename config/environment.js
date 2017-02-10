@@ -87,10 +87,13 @@ module.exports = function(environment) {
       },
       flashMessageDefaults: {
         timeout: 5000,
-        extendedTimeout: 0,
+        extendedTimeout: 1000,
         priority: 200,
-        showProgress: true,
         preventDuplicates: true
+      },
+      showdown: {
+        simplifiedAutoLink: true,
+        literalMidWordUnderscores: true
       },
       moment: {
         includeTimezone: 'all',
@@ -113,7 +116,7 @@ module.exports = function(environment) {
         'default-src': "'none'",
         'font-src': "'self' data: fonts.gstatic.com https://js.intercomcdn.com/fonts/",
         'style-src': "'self' 'unsafe-inline' fonts.googleapis.com",
-        'script-src': "'self' 'unsafe-inline' http://docker-vm:49152 http://www.google-analytics.com/analytics.js https://d37gvrvc0wt4s1.cloudfront.net/js/v1.8/rollbar.min.js https://s3-eu-west-1.amazonaws.com/share.typeform.com/widget.js https://s3-eu-west-1.amazonaws.com/share.typeform.com/widget.js https://widget.intercom.io https://js.intercomcdn.com",
+        'script-src': "'self' 'unsafe-inline' http://docker-vm:49152 http://www.google-analytics.com/analytics.js https://s3-eu-west-1.amazonaws.com/share.typeform.com/widget.js https://s3-eu-west-1.amazonaws.com/share.typeform.com/widget.js https://widget.intercom.io https://js.intercomcdn.com",
         'connect-src': "'self' 'unsafe-inline' ws://docker-vm:49152 https://api-ping.intercom.io https://nexus-websocket-a.intercom.io https://nexus-websocket-b.intercom.io wss://nexus-websocket-a.intercom.io wss://nexus-websocket-b.intercom.io https://api-iam.intercom.io",
         'img-src': "'self' data: http://www.google-analytics.com https://www.gravatar.com http://i2.wp.com/dg2kcfbxc77v1.cloudfront.net http://i0.wp.com/dg2kcfbxc77v1.cloudfront.net/assets https://js.intercomcdn.com https://static.intercomassets.com/ https://dg2kcfbxc77v1.cloudfront.net/ https://s3.amazonaws.com/datasource-logos/",
         'media-src': "'self'",
@@ -165,12 +168,7 @@ module.exports = function(environment) {
             code: 'vMBxljpAIEgLPliAJkMNKmjhaeDjmMhc'
           }
         }
-      ],
-      rollbar: {
-        // enabled only on online servers
-        enabled: ['local-development', 'test'].indexOf(environment) === -1,
-        accessToken: '96bd2d6a6d5d400aa904f399e88768ce'
-      }
+      ]
     };
 
     if (environment === 'local-development') {
@@ -191,12 +189,6 @@ module.exports = function(environment) {
       ENV.APP.LOG_VIEW_LOOKUPS = false;
 
       ENV.APP.rootElement = '#ember-testing';
-    }
-
-    if (environment === 'development') {
-      ENV.APP.INSPECTLET_WID = 1989736952;
-      ENV.torii.providers['google-oauth2'].redirectUri = 'https://discover-dev.repositive.io';
-      ENV.torii.providers['linked-in-oauth2'].redirectUri = 'https://discover-dev.repositive.io';
     }
 
     if (environment === 'staging') {

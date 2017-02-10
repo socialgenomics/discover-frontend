@@ -3,7 +3,7 @@ import Ember from 'ember';
 const { Component, get } = Ember;
 
 export default Component.extend({
-  classNames: ['create-account-call-to-action'],
+  classNames: ['u-pos-absolute', 'u-full-width', 'u-full-height', 'u-bc-overlay-white', 'u-flex', 'u-justify-center', 'u-pt3'],
 
   actions: {
     trackLinkEvent() {

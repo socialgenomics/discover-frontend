@@ -1,10 +1,9 @@
 import Ember from 'ember';
 
-const { Component, get, inject: { service } } = Ember;
+const { Component, get } = Ember;
 
 export default Component.extend({
-  classNames: ['open-search-filter-overlay'],
-
+  classNames: ['u-pos-absolute', 'u-full-width', 'u-full-height', 'u-bc-overlay-light-bluegrey', 'u-ta-center', 'u-py5', 'u-pos-top0', 'u-pos-left0'],
   actions: {
     trackLinkEvent() {
       get(this, 'metrics').trackEvent({

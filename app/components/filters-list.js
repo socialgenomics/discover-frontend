@@ -1,12 +1,9 @@
 import Ember from 'ember';
 
-const { Component, get, set, computed, inject: { service } } = Ember;
+const { Component, get, set, computed } = Ember;
 
 export default Component.extend({
   tagName: 'nav',
-  classNames: ['side-nav filters-list'],
-  classNameBindings: ['light-font-color'],
-  session: service(),
 
   isEmptyFilters: computed('filters.[]', function () {
     const filters = get(this, 'filters');

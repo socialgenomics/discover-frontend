@@ -1,23 +1,19 @@
 import Ember from 'ember';
 
-const { Component, inject: { service }, $, get } = Ember;
+const { Component, inject: { service }, get } = Ember;
 
 export default Component.extend({
+  classNames: ['u-flex', 'u-self-stretch', 'u-shrink-none', 'u-items-center', 'u-justify-center', 'u-border-left', 'u-hv-bc-off-white'],
   session: service(),
-  didRender() {
-    this._super(...arguments);
-    //dropdown initialization
-    $('.dropdown-button').dropdown({
-      inDuration: 500,
-      outDuration: 225,
-      constrain_width: false, // Does not change width of dropdown to that of the activator
-      hover: false, // Activate on click
-      alignment: 'right', // Aligns dropdown to left or right edge (works with constrain_width)
-      gutter: 0, // Spacing from edge
-      belowOrigin: true // Displays dropdown below the button
-    });
-  },
   actions: {
+    close(dropdown) {
+      dropdown.actions.close();
+    },
+    closeAndTrack(dropdown, trackingLabel) {
+      dropdown.actions.close();
+      get(this, 'trackCreateAccount')(trackingLabel);
+    },
+
     logout() {
       this.flashMessages.clearMessages();
       get(this, 'metrics').trackEvent({

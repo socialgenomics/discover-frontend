@@ -1,0 +1,39 @@
+/* ==========================================================================
+   IMAGES
+   ========================================================================== */
+
+.c-img-circle {
+  border-radius: 100%;
+}
+
+.c-img--unit {
+  width: 24px;
+}
+
+.c-img--100 {
+  width: 100px;
+}
+
+.c-img--120 {
+  width: 120px;
+}
+
+.c-img--src-logo {
+  max-width: 100%;
+  max-height: 35px;
+}
+
+.c-img-grayscale {
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
+}
+
+.c-img-color {
+  -webkit-filter: grayscale(0%);
+  filter: grayscale(0%);
+}
+
+.c-img-color-on-hover:hover {
+  transition: $global-transition;
+  @extend .c-img-color;
+}

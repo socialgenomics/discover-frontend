@@ -3,20 +3,15 @@ import EmberValidations from 'ember-validations';
 import ENV from 'repositive/config/environment';
 import FlashMessageMixin from 'repositive/mixins/flash-message-mixin';
 
-const { Controller, computed, observer, Logger, get, set, inject: { service } } = Ember;
+const { Controller, computed, Logger, get, set, inject: { service } } = Ember;
 
 export default Controller.extend(EmberValidations, FlashMessageMixin, {
   ajax: service(),
 
   email: null,
   loading: false,
-  messages: [],
   isDisabled: computed('loading', 'isValid', function() {
     return !get(this, 'isValid') || get(this, 'loading');
-  }),
-
-  clearMessages: observer('email', function() {
-    set(this, 'messages', []);
   }),
 
   validations: {
@@ -26,18 +21,17 @@ export default Controller.extend(EmberValidations, FlashMessageMixin, {
       },
       format: {
         with: /^([\w\-\.\+]+)@((?:[\w\-\.]+)(?:\.[a-zA-Z]{2,}))$/,
-        message: 'Must be a valid e-mail address'
+        message: 'Must be a valid e-mail address.'
       },
       server: true // must be last - known bug
     }
   },
   actions: {
-    submitForm: function() {
+    submitForm() {
       if (!get(this, 'isDisabled')) {
-        this.flashMessages.clearMessages();
         set(this, 'loading', true);
-        get(this, 'ajax').request(ENV.APIRoutes['reset-password'] + `/${get(this, 'email')}`, { method: 'GET' })
-          .then(resp => {
+        return get(this, 'ajax').request(ENV.APIRoutes['reset-password'] + `/${get(this, 'email')}`, { method: 'GET' })
+          .then(() => {
             set(this, 'loading', false);
             this._addFlashMessage(`We have sent an email to ${get(this, 'email')}.`, 'success');
           })

@@ -5,10 +5,12 @@
   userId=session.authenticatedUser.id
   isRootRoute=isRootRoute
 }}
-<main class="container">
-  {{#each flashMessages.queue as |flash|}}
-    {{ui-message flash=flash}}
-  {{/each}}
+<main class="u-pos-relative o-main-wrapper">
+  <div class="u-pos-fixed u-full-width u-zindex-flash-message">
+    {{#each flashMessages.queue as |flash|}}
+      {{ui-message flash=flash}}
+    {{/each}}
+  </div>
   {{md-modal-container}}
   {{outlet}}
 </main>
@@ -16,5 +18,3 @@
 {{#if isShowingModal}}
   {{unfinished-modal toggleModal=(route-action 'toggleModal')}}
 {{/if}}
-
-{{platform-footer}}

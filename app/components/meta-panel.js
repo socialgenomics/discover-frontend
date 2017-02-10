@@ -1,13 +1,24 @@
 import Ember from 'ember';
 
-const { Component } = Ember;
+const { Component, set, inject: { service } } = Ember;
 
 export default Component.extend({
+  session: service(),
+
   tagName: 'section',
-  classNames: ['metadata-panel'],
+  classNameBindings: ['metaPanelHidden:is-hidden'],
+  classNames: ['c-sidebar', 'u-pos-absolute', 'grid'],
   displayInfo: true,
+  metaPanelHidden: true,
   actions: {
-    showInfo() { this.set('displayInfo', true); },
-    showFilters() { this.set('displayInfo', false); }
+    showInfo() { set(this, 'displayInfo', true); },
+    showFilters() { set(this, 'displayInfo', false); },
+    toggleMetaPanelVisibility() { this.toggleProperty('metaPanelHidden'); }
+  },
+  didReceiveAttrs() {
+    this._super(...arguments);
+    if (this.isSearchPage) {
+      set(this, 'displayInfo', false);
+    }
   }
 });

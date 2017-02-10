@@ -6,7 +6,8 @@ export default Component.extend({
   session: service(),
   favouritesService: service('favourites'),
 
-  tagName: 'a',
+  tagName: 'li',
+  classNames: ['o-list-inline__item', 'u-tc-secondary', 'u-cursor-pointer'],
   isSubmitting: false,
   showCreateAccountModal: false,
 
@@ -21,8 +22,10 @@ export default Component.extend({
   mouseLeave() {
     set(this, 'isHovered', false);
   },
-
   click() {
+    this.touchEnd();
+  },
+  touchEnd() {
     const currentModel = this.model; //can be request or dataset
     const favourite = get(this, 'favouritesService').getFavourite(currentModel.id);
     if (get(this, 'session.isAuthenticated')) {
@@ -34,13 +37,13 @@ export default Component.extend({
       });
     } else {
       this.send('toggleCreateAccountModal');
-      return;
       get(this, 'metrics').trackEvent({
         category: 'discover_openpage_dataset',
         action: 'attempted favourite',
         label: currentModel.id,
         value: true
       });
+      return;
     }
     if (!get(this, 'isSubmitting')) {
       if (favourite) {

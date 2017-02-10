@@ -1,54 +1,46 @@
-<div class="container-login">
-  <h1 class="center-align margin-bottom">Login</h1>
-  <form {{action "submitForm" on="submit"}} id="login-form" class="margin-top">
-    <div class="row">
-      <div class="col m12 s12 center-align">
-        <ul class="list-inline">
-          <li><a {{ action 'thirdPartyAuth' 'google-oauth2' 'login'}}><img class="social-media-icon btn-floating" src="/assets/images/icons/social/googleplus.png"></a></li>
-          <li><a {{ action 'thirdPartyAuth' 'linked-in-oauth2' 'login'}}><img class="social-media-icon btn-floating" src="/assets/images/icons/social/linkedin.png"></a></li>
-        </ul>
-      </div>
+<div class="grid-wrapper grid-wrapper-stepped">
+  <section class="grid">
+
+    <div class="grid__col grid__col--3-of-3 u-ta-center">
+      <h1 class="u-fs4 u-tc-secondary">Login</h1>
     </div>
-    <div class="or-div">
-      <span>
-        OR
-      </span>
+
+    <div class="grid__col grid__col--5-of-12 grid__col--m-2-of-3 grid__col--centered">
+      <form>
+        <div class="u-ta-center u-mb3">
+          <a class="u-pr2" {{ action 'thirdPartyAuth' 'google-oauth2' 'login'}}>{{svg-jar "google" class="u-w2"}}</a>
+          <a {{ action 'thirdPartyAuth' 'linked-in-oauth2' 'login'}}>{{svg-jar "linkedin" class="u-w2"}}</a>
+        </div>
+
+        <div class="c-divider c-divider-light-bg"></div>
+
+        {{validated-input
+          label="Email"
+          type="email"
+          value=email
+          errors=errors.email
+          placeholder="e.g. christina@stthomashospital.com"
+          submit=(action 'submitForm')
+        }}
+        {{validated-input
+          label="Password"
+          type="password"
+          value=password
+          errors=errors.password
+          placeholder="e.g. •••••••••"
+          submit=(action 'submitForm')
+          resetPassword=(action 'resetPassword')
+        }}
+        {{async-button
+          class="c-btn c-btn-primary u-fs3 u-mb1 u-full-width"
+          action=(action 'submitForm')
+          default="Login"
+          pending="Logging in..."
+          disableWhen=isInvalid
+          reset=true
+        }}
+        <p class="u-ta-left">New to Repositive? {{#link-to 'users.signup'}}Create your account.{{/link-to}}</p>
+      </form>
     </div>
-    {{#each messages as |message|}}
-      <div class="message error">{{message}}</div>
-    {{/each}}
-    {{validated-input
-      type="email"
-      value=email
-      lbl="Email"
-      errors=errors.email
-      placeholder="Email"
-      formSubmitted=formSubmitted
-      class="col m6 offset-m3"
-      icon="email"
-    }}
-    {{validated-input
-      type="password"
-      value=password
-      lbl="Password"
-      errors=errors.password
-      placeholder="Password"
-      formSubmitted=formSubmitted
-      class="col m6 offset-m3"
-      icon="password"
-    }}
-    <h6><a {{action 'resetPassword'}} class="link" style="cursor:pointer">Click here</a> to reset your password.</h6>
-    <div class="input-container">
-      {{#if loading}}
-        {{#full-width-button class="disabled"}}Logging in...{{/full-width-button}}
-      {{else if isDisabled}}
-        {{#full-width-button class="disabled"}}LOGIN{{/full-width-button}}
-      {{else}}
-        {{#full-width-button class="teal" type="submit"}}LOGIN{{/full-width-button}}
-      {{/if}}
-    </div>
-    {{message-queue}}
-    <div class="divider"></div>
-    <h6>New to Repositive? {{#link-to 'users.signup'}}Create your account.{{/link-to}}</h6>
-  </form>
+  </section>
 </div>

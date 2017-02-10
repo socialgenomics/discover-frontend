@@ -1,0 +1,31 @@
+/* ==========================================================================
+   # Collection list item
+   Styles for the collection and datasource lists
+   ========================================================================== */
+
+.c-col-li-item {
+  min-height: calc(#{$global-line-height} * 4);
+
+  .no-margin-markdown {
+    & > p {
+      margin: 0;
+    }
+  }
+}
+
+.c-col-li-item__divider {
+  border-left: $global-border-style;
+
+  @media (max-width: $breakpoint-medium) {
+    border-left: none;
+    border-top: $global-border-style;
+  }
+}
+
+.c-col-li-item__resp-text {
+  text-align: left;
+
+  @media (max-width: $breakpoint-medium) {
+    text-align: center;
+  }
+}

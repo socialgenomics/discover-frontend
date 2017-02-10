@@ -4,22 +4,23 @@
   <h2 class="success-message">Oops, something didn’t work! <br> Your email has not been sent.</h2>
 {{else}}
   {{validated-input
+    label="Email"
     type="text"
     value=emailAddress
     errors=errors.emailAddress
-    placeholder="Email"
+    placeholder="Who do you want to send this to?"
   }}
   {{validated-input
+    label="Message"
     type='textarea'
     value=customMessage
-    placeholder='Include personal message with this dataset.'
-    textarea="true"
+    placeholder='Include a personal message with this dataset.'
     noMarkdown= true
   }}
 {{/if}}
 <button
   type="submit"
-  class="btn waves-effect {{unless submitDisabled 'teal white-text'}}"
+  class="c-btn c-btn-disabled {{unless submitDisabled 'c-btn-primary'}}"
   disabled={{submitDisabled}}
 >
   {{submitButtonLabel}}

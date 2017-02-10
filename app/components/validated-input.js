@@ -1,38 +1,45 @@
 import Ember from 'ember';
 
-export default Ember.Component.extend({
+const { Component, computed, get, setProperties, set, isEmpty } = Ember;
+
+export default Component.extend({
   errors: null,
   isActive: false,
   hasBeenFocused: false,
+  showPassword: false,
+  classNames: ['c-validated-input', 'u-pos-relative'],
+  classNameBindings: ['isActive:active', 'isInvalid:invalid'],
 
-  showValid: function() {
-    return (this.get('hasBeenFocused') || this.get('formSubmitted')) && Ember.isEmpty(this.get('errors'));
-  }.property('hasBeenFocused', 'errors', 'formSubmitted'),
+  isValid: computed('hasBeenFocused', 'errors', function() {
+    return (get(this, 'hasBeenFocused')) && isEmpty(get(this, 'errors'));
+  }),
 
-  showInvalid: function() {
-    return (this.get('hasBeenFocused') || this.get('formSubmitted')) && !Ember.isEmpty(this.get('errors'));
-  }.property('hasBeenFocused', 'errors', 'formSubmitted'),
-
-  classNames: 'input-container',
-  classNameBindings: ['isActive:active', 'showValid:valid', 'showInvalid:invalid'],
+  isInvalid: computed('hasBeenFocused', 'errors', function() {
+    return (get(this, 'hasBeenFocused')) && !isEmpty(get(this, 'errors'));
+  }),
 
   actions: {
-    toggleMarkdownModal: function() {
-      this.toggleProperty('isShowingMarkdownModal');
+    focusedIn() {
+      set(this, 'isActive', true);
+      if (get(this, 'showCommentButtons')) { get(this, 'showCommentButtons')(); }
     },
-    focusedIn: function() {
-      this.set('defaultPlaceholder', this.get('placeholder'));
-      this.set('placeholder', '');
-      this.set('isActive', true);
-      this.sendAction();
+
+    focusedOut() {
+      setProperties(this, {
+        'hasBeenFocused': true,
+        'isActive': false
+      });
     },
-    focusedOut: function() {
-      this.set('hasBeenFocused', true);
-      this.set('placeholder', this.get('defaultPlaceholder'));
-      this.set('isActive', false);
+
+    togglePasswordVisibility() {
+      this.toggleProperty('showPassword');
+      if (get(this, 'showPassword')) {
+        set(this, 'type', 'text');
+      } else {
+        set(this, 'type', 'password');
+      }
     },
-    submitForm: function() {
-      this.sendAction('submitForm');
-    }
+
+    submitForm() { get(this, 'submit')(); }
   }
 });

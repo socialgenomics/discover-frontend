@@ -1,47 +1,51 @@
-<div class="input-field">
-  {{#if textarea}}
-    <div class="markdown-textarea">
-      {{textarea
-        value=value
-        focus-in="focusedIn"
-        focus-out="focusedOut"
-        type=type
-        placeholder=placeholder
-        disabled=disabled
-      }}
-    </div>
-    {{#unless (or disabled noMarkdown)}}
-      <a class="help-link" {{action "toggleMarkdownModal"}}><span>How to format text with Markdown?</span></a>
-    {{/unless}}
-  {{else}}
-    {{input
-      value=value
-      focus-in="focusedIn"
-      focus-out="focusedOut"
-      type=type
-      placeholder=placeholder
-      insert-newline='submitForm'
-      disabled=disabled
-    }}
+{{#unless showCommentButtons}}
+  <label for="{{elementId}}" class="c-validated-input-label u-tc-secondary">
+    {{label}}
+  </label>
+{{/unless}}
+
+{{#if (eq type "textarea")}}
+  {{textarea
+    value=value
+    focus-in="focusedIn"
+    focus-out="focusedOut"
+    type=type
+    placeholder=placeholder
+    disabled=disabled
+    class="u-textarea-resize-v"
+  }}
+  {{#unless (or disabled noMarkdown)}}
+    {{#link-to 'help.other' (query-params help="format") class="u-fs0"}}How do I format text with Markdown?{{/link-to}}
+  {{/unless}}
+{{else}}
+  {{#if showPasswordButton}}
+    <a class="c-pw-text-btn" {{action 'togglePasswordVisibility'}}>{{#if showPassword}} Hide Password {{else}} Show Password {{/if}}</a>
+    {{#if value}}{{password-strength strength=passwordStrength}}{{/if}}
+  {{else if resetPassword}}
+    <a class="c-pw-text-btn" {{action resetPassword}}>Reset Password</a>
   {{/if}}
-</div>
-<div class="lbl">{{lbl}}</div>
+  {{input
+    value=value
+    focus-in="focusedIn"
+    focus-out="focusedOut"
+    type=type
+    placeholder=placeholder
+    insert-newline='submitForm'
+    disabled=disabled
+  }}
+{{/if}}
 
-{{#if (eq icon "fullname")}}{{fa-icon "user"}}{{/if}}
-{{#if (eq icon "password")}}{{fa-icon "lock"}}{{/if}}
-{{#if (eq icon "email")}}{{fa-icon "envelope"}}{{/if}}
-
-{{#if showInvalid}}
-  <div class="errors">
-    <ul class="text-invalid error-text">
+<div class="c-validated-input-msg-container">
+  {{#if isInvalid}}
+    <ul class="o-list-flush-left u-mb0">
       {{#each errors as |error|}}
-        <li>{{error}}</li>
+        <li class="u-ta-left u-tc-red c-validated-input-msg">{{error}}</li>
       {{/each}}
     </ul>
-  </div>
-{{else}}
-  <div class="input-helper">{{helpText}}</div>
-{{/if}}
+  {{else if (and helpText (and isActive (not isValid)))}}
+    <p class="u-ta-left u-tc-tertiary c-validated-input-msg">{{helpText}}</p>
+  {{/if}}
+</div>
 
 {{#if isShowingMarkdownModal}}
   {{markdown-modal action="toggleMarkdownModal"}}

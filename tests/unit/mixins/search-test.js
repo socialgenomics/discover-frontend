@@ -170,8 +170,7 @@ describe('Unit | Mixin | search', function() {
     it('should use default limit', function () {
       mixinObjInstance[method]({ page });
 
-      expect(
-        JSON.parse(get(mixinObjInstance, 'ajax.request').args[0][1].data).limit).to.be.equal(6);
+      expect(JSON.parse(get(mixinObjInstance, 'ajax.request').args[0][1].data).limit).to.be.equal(6);
     });
 
     it('should use custom limit', function () {

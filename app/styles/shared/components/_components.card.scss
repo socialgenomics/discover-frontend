@@ -1,0 +1,44 @@
+.c-card {
+  border-radius: $global-border-radius;
+  background-color: $color-white;
+  box-shadow: $global-box-shadow;
+}
+
+.c-card-title {
+  height: ($global-line-height * 2);
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
+
+.c-card-header {
+  height: $global-spacing-unit + $global-spacing-unit-small;
+}
+
+.c-card-description {
+  height: 105px;
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
+
+.c-card-assay {
+  display: inline-block;
+  height: 10px;
+  border-radius: 2px;
+}
+
+.c-activity-card-body {
+  height: 300px;
+  overflow-y: auto;
+}
+
+.c-card-detail-overflow {
+  min-height: 600px;
+  height: 650px;
+  height: 80vh;
+  overflow-y: auto;
+}
+
+.c-featured-card {
+  height: 350px;
+  overflow-y: auto;
+}

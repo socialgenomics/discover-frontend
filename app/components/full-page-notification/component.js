@@ -3,5 +3,5 @@ import Ember from 'ember';
 const { Component } = Ember;
 
 export default Component.extend({
-  classNameBindings: ['customClassName']
+  classNames: ['c-call-to-action-banner']
 });

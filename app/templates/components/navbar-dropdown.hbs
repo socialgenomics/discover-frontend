@@ -1,21 +1,63 @@
-{{yield}}
-<div class="navbar-dropdown">
-  <div class="navbar-button">
-    <a class='dropdown-button valign-wrapper' data-beloworigin="true" data-activates='profile-drop'>
-      <div class="dp-wrapper">
-        <img src={{avatar}}>
-      </div>
-      <h5 class="firstname">{{firstname}}</h5>
-    </a>
-  </div>
+{{#basic-dropdown  horizontalPosition="right" as |dropdown|}}
 
-  <ul id='profile-drop' class='dropdown-content'>
-    <li>{{#link-to 'user' userId}}PROFILE{{/link-to}}</li>
-    <div class="divider"></div>
-    <li>{{#link-to 'users.user_profile'}}SETTINGS{{/link-to}}</li>
-    <div class="divider"></div>
-    <li>{{#link-to 'help.searching-for-data' (query-params help=null)}}HELP{{/link-to}}</li>
-    <div class="divider"></div>
-    <li><a {{ action 'logout' }}>LOGOUT</a></li>
-  </ul>
-</div>
+  {{#dropdown.trigger class="u-outline-none u-cursor-pointer u-px2"}}
+    {{#if session.isAuthenticated}}
+      <div class="u-hide-on-sm-md">
+        <img src={{avatar}} class="u-w1">
+        <span class="u-tc-primary u-fs1 u-px1">{{firstname}}</span>
+      </div>
+    {{/if}}
+
+    <div class="u-hide-on-lg">
+      {{fa-icon 'bars' class='u-tc-secondary u-px1 grid__col--am' }}
+    </div>
+  {{/dropdown.trigger}}
+
+  {{#dropdown.content class="c-card u-flex u-flex-column"}}
+    {{#if session.isAuthenticated}}
+      {{#link-to 'datasets.register'
+        invokeAction=(action 'close' dropdown)
+        class='u-hide-on-lg u-py2 u-pl2 u-pr4 u-hv-bc-white'}} Register Data {{/link-to}}
+
+      {{#link-to 'datasets.request'
+        invokeAction=(action 'close' dropdown)
+        class='u-hide-on-lg u-py2 u-pl2 u-pr4 u-hv-bc-white'}} Request Data {{/link-to}}
+
+      {{#link-to 'user' userId
+        invokeAction=(action 'close' dropdown)
+        class='u-py2 u-pl2 u-pr4 u-hv-bc-white'}} Profile {{/link-to}}
+
+      {{#link-to 'users.profile'
+        invokeAction=(action 'close' dropdown)
+        class='u-py2 u-pl2 u-pr4 u-hv-bc-white'}} Settings {{/link-to}}
+
+      {{#link-to 'help.searching-for-data'
+        invokeAction=(action 'close' dropdown)
+        class='u-py2 u-pl2 u-pr4 u-hv-bc-white'}} Help {{/link-to}}
+
+      {{#link-to 'policies.web'
+        invokeAction=(action 'close' dropdown)
+        class='u-py2 u-pl2 u-pr4 u-hv-bc-white'}} Repositive Policy {{/link-to}}
+
+      <a {{ action 'logout' }} class='u-py2 u-pl2 u-pr4 u-hv-bc-white'>Logout</a>
+
+    {{else}}
+      <!-- Not Logged In -->
+      <a href="http://repositive.io/about" class='u-hide-on-lg u-py2 u-pl2 u-pr4 u-hv-bc-white'>About</a>
+      <a href="http://blog.repositive.io/" class='u-hide-on-lg u-py2 u-pl2 u-pr4 u-hv-bc-white'>Blog</a>
+      {{#link-to 'users.login'
+        invokeAction=(action 'close' dropdown)
+        class='u-py2 u-pl2 u-pr4 u-hv-bc-white'}}Login{{/link-to}}
+      {{#if isRootRoute}}
+        {{#link-to 'users.signup'
+          invokeAction=(action 'closeAndTrack' dropdown 'discover_landingpage_navbar_createAccount')
+          class='u-py2 u-pl2 u-pr4 u-hv-bc-white'}}Create Account{{/link-to}}
+      {{else}}
+        {{#link-to 'users.signup'
+          invokeAction=(action 'closeAndTrack' dropdown 'discover_openpage_navbar_createAccount')
+          class='u-py2 u-pl2 u-pr4 u-hv-bc-white'}}Create Account{{/link-to}}
+      {{/if}}
+    {{/if}}
+  {{/dropdown.content}}
+
+{{/basic-dropdown}}
