@@ -5,14 +5,14 @@
       <div class="assay-container">
         <div class="request">Request</div>
       </div>
-      <div class="actions-container valign-wrapper">
-        {{action-favourite model=dataset}}
+      <ul class="o-list-inline o-list-flush-left u-mb0">
+        {{action-favourite model=dataset class="u-mr2"}}
         {{action-share
           actionableId=dataset.id
           actionableType='dataset'
           shareUrl=shareUrl
         }}
-      </div>
+      </ul>
     </div>
 
     <div class="u-p1">
@@ -55,7 +55,7 @@
       </ul>
 
       <ul class="o-list-inline o-list-flush-left u-mb0">
-        {{action-favourite model=dataset class="u-mr1"}}
+        {{action-favourite model=dataset class="u-mr2"}}
         {{action-share
           actionableId=dataset.id
           actionableType='dataset'

@@ -13,7 +13,7 @@ export default Component.extend({
   // modal constraints prevents share options modal from bleeding out of the edge of browser window
   shareOptionsModalConstraints: [{ to: 'window', pin: true }],
 
-  click() {
+  touchEnd() {
     if (get(this, 'session.isAuthenticated')) {
       get(this, 'metrics').trackEvent({
         category: 'discover_homeauth_dataset',
@@ -30,6 +30,10 @@ export default Component.extend({
       });
     }
     this.send('toggleShareOptionsModal');
+  },
+
+  click() {
+    this.touchEnd();
   },
 
   actions: {

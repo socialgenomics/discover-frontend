@@ -6,15 +6,14 @@
         {{fa-icon "clipboard"}}
         {{#if dataset.createdAt}}<p>{{moment-from-now dataset.createdAt hideSuffix=true}} ago</p>{{/if}}
       </div>
-      <div class="actions-container valign-wrapper">
-        {{action-favourite dataset=dataset}}
-        <span class="grey-text">{{dataset.favourite}}</span>
+      <ul class="o-list-inline o-list-flush-left u-mb0">
+        {{action-favourite dataset=dataset class="u-mr1"}}
         {{action-share
           actionableId=dataset.id
           actionableType='dataset'
           shareUrl=datasetUrl
         }}
-      </div>
+      </ul>
     </header>
 
     <div class="card-body">
