@@ -5,15 +5,43 @@
 // Markdown Formatting
 /* ==================================== */
 
-.u-markdown-text {
-  h1, h2, h3 {
-    text-align: center;
-    @extend .u-fw-med;
-  }
-  h1 {  font-size: $global-font-size-large;  }
-  h2 {  font-size: $global-font-size-regular; }
-  h3 {  font-size: $global-font-size-regular; }
-  ul     { @extend .o-list-bullet; }
+.u-markdown-formatting {
+  // Font Size
+  h1        { @extend .u-fs3; }
+  h2, h3    { @extend .u-fs2; }
+  code      { @extend .u-fs1; }
+
+  // Color
+  h1, h2, h3, h4, h5, h6, pre { @extend .u-tc-primary; }
+  ul, a, strong { @extend .u-tc-secondary; }
+
+  // State
+  a:hover { @extend .u-tc-primary; }
+
+  // Weight
   strong { @extend .u-fw-med; }
-  pre    { overflow-x: scroll; }
+
+  // Other Decoration
+  a   {
+    text-decoration: underline;
+    // wrap long urls
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+  }
+
+  ul   { @extend .o-list-bullet; }
+  code {
+    @extend .u-bc-off-white;
+    @extend .u-rounded;
+    @extend .u-px1;
+    padding-top: 3px;
+    padding-bottom: 3px;
+  }
+  pre {
+    white-space: pre-wrap;
+    white-space: -moz-pre-wrap;
+    white-space: -pre-wrap;
+    white-space: -o-pre-wrap;
+    word-wrap: break-word;
+  }
 }

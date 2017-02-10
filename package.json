@@ -1,6 +1,6 @@
 {
   "name": "repositive",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "Frontend app for repositive.io",
   "private": true,
   "directories": {
@@ -11,6 +11,7 @@
     "setup": "npm i && bower install --allow-root && npm rebuild node-sass",
     "postinstall": "bower install",
     "startStaging": "ember server --watcher=polling --proxy=https://api-staging.repositive.io",
+    "startStagingOnNewMac": "ember server --watcher=polling --proxy=https://api-staging.repositive.io --live-reload-port 49153",
     "startDocker": "ember server --watcher=polling --proxy=$BACKEND_SERVER",
     "build": "ember build",
     "test": "ember test",

@@ -1,6 +1,6 @@
 {{#basic-dropdown  horizontalPosition="right" as |dropdown|}}
 
-  {{#dropdown.trigger class="u-outline-none"}}
+  {{#dropdown.trigger class="u-outline-none u-cursor-pointer u-px2"}}
     {{#if session.isAuthenticated}}
       <div class="u-hide-on-sm-md">
         <img src={{avatar}} class="u-w1">
@@ -9,7 +9,7 @@
     {{/if}}
 
     <div class="u-hide-on-lg">
-      {{fa-icon 'bars' class='u-tc-secondary u-px1' }}
+      {{fa-icon 'bars' class='u-tc-secondary u-px1 grid__col--am' }}
     </div>
   {{/dropdown.trigger}}
 

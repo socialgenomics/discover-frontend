@@ -1,12 +1,13 @@
-<div class="">
+<div class="u-markdown-formatting">
   {{#if showFullDescription}}
     {{markdown-to-html markdown=description}}
   {{else}}
     {{markdown-to-html markdown=(truncate description 500)}}
   {{/if}}
 </div>
+
 {{#if truncateDescription}}
-  <p class="u-tc-primary" {{action "toggleDescription"}}>
+  <p class="u-tc-primary u-cursor-pointer" {{action "toggleDescriptionLength"}}>
     {{#if showFullDescription}}
       Show Less {{fa-icon "chevron-up"}}
     {{else}}

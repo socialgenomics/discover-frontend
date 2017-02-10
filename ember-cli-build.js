@@ -71,7 +71,6 @@ module.exports = function(defaults) {
   // along with the exports of each module as its value.
 
   app.import('bower_components/crypto-js/crypto-js.js');
-  app.import('vendor/typeform.js');
   app.import('bower_components/urijs/src/URI.js');
 
   return app.toTree();

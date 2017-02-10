@@ -91,6 +91,10 @@ module.exports = function(environment) {
         priority: 200,
         preventDuplicates: true
       },
+      showdown: {
+        simplifiedAutoLink: true,
+        literalMidWordUnderscores: true
+      },
       moment: {
         includeTimezone: 'all',
         outputFormat: 'L',

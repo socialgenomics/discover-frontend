@@ -1,7 +1,7 @@
-{{#if (eq type "request")}}
+ {{#if (eq type "request")}}
 
   {{#if model.userId.displayName}}
-    <span class="u-fs0 u-fw-reg u-tc-tertiary">requested by </span>
+    <span class="u-fs0 u-fw-reg u-tc-tertiary u-cursor-default">requested by </span>
     {{#if session.isAuthenticated }}
       {{#link-to 'user' model.userId.id}}
         {{model.userId.displayName}}
@@ -15,7 +15,7 @@
 {{else if (eq model.datasourceId.properties.short_name "REPOSITIVE")}}
 
   {{#if model.userId.displayName}}
-    <span class="u-fs0 u-fw-reg u-tc-tertiary">registered by </span>
+    <span class="u-fs0 u-fw-reg u-tc-tertiary u-cursor-default">registered by </span>
     {{#if session.isAuthenticated }}
       {{#link-to 'user' model.userId.id}}
         {{model.userId.displayName}}
@@ -27,7 +27,7 @@
 
 {{else}} <!-- Registration or Dataset -->
 
-  <span class="u-fs0 u-fw-reg u-tc-tertiary">from</span>
+  <span class="u-fs0 u-fw-reg u-tc-tertiary u-cursor-default">from</span>
   {{#if session.isAuthenticated }}
     {{#if (eq model.datasourceId.type 'personal_repository')}} <!-- Registration -->
       {{#link-to 'collections.collection' model.datasourceId.id}}

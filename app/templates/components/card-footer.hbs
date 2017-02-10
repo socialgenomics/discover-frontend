@@ -1,23 +1,23 @@
 <footer class="card-footer">
-  <ul class="color-silver-chalice-text">
+  <ul>
     {{#if model.access}}
       {{#if (eq model.access "open")}}
-        <li class="access-icons">
+        <li>
           <i
             class="fa fa-globe color-fruit-salad-text"
             title="Public"></i>
-          <span class="color-fruit-salad-text">
+          <span class="color-fruit-salad-text u-cursor-default">
             {{model.access}}
           </span>
         </li>
         {{/if}}
 
         {{#if (eq model.access "restricted")}}
-        <li class="access-icons">
+        <li>
           <i
-            class="fa fa-lock color-red-error-text"
+            class="fa fa-lock"
             title="Access application needed"></i>
-          <span class="color-red-error-text">
+          <span class="u-cursor-default">
             {{model.access}}
           </span>
         </li>

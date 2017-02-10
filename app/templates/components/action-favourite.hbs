@@ -17,18 +17,18 @@
 {{/if}}
 
 {{#if showCreateAccountModal}}
-  {{#modal-dialog
+  {{! "container-class" is a temporary solution, changes in ember modal dialog required }}
+  {{#repositive-modal
+    container-class='c-modal--medium u-z5'
     close=(action 'toggleCreateAccountModal')
-    targetAttachment="center"
-    translucentOverlay=true
   }}
-    {{#repositive-modal/wrapper size='medium'}}
-      {{repositive-modal/header
-        icon='star'
-        title='Add to favourites'
-        onClose=(action 'toggleCreateAccountModal')
-      }}
+    {{repositive-modal/header
+      icon='star'
+      title='Add to favourites'
+      onClose=(action 'toggleCreateAccountModal')
+    }}
+    {{#repositive-modal/content}}
       {{create-account-modal-content text='To add this dataset to your favourites you need to have an account.'}}
-    {{/repositive-modal/wrapper}}
-  {{/modal-dialog}}
+    {{/repositive-modal/content}}
+  {{/repositive-modal}}
 {{/if}}
