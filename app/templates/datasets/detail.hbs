@@ -2,14 +2,20 @@
 <!-- CSS Refactor: still need to account for Open Dataset styles -->
 {{#unless session.isAuthenticated}}
   {{#full-page-notification}}
-    <h3 class="u-mr3 u-mb2 u-tc-secondary">Search through <strong class="u-pl1 u-pr1 u-fs4">{{datasetsNumber}}</strong> human genomic datasets</h3>
-    {{#link-to 'root' class='c-btn c-btn--primary c-btn--shadow' invokeAction=(action 'trackLinkEvent')}}
-      Search now
-    {{/link-to}}
+    <div class="grid-wrapper grid-wrapper-fluid u-ta-center">
+      <div class="grid__col grid__col--2-of-3 grid__col--m-2-of-3 grid__col--am">
+        <h3 class="u-mb2 u-fw-reg u-tc-secondary">Search through <strong class="u-fs4">{{datasetsNumber}}</strong> human genomic datasets</h3>
+      </div>
+      <div class="grid__col grid__col--1-of-3 grid__col--m-1-of-3 grid__col--am">
+        {{#link-to 'root' class='c-btn c-btn-primary' invokeAction=(action 'trackLinkEvent')}}
+          Search now
+        {{/link-to}}
+      </div>
+    </div>
   {{/full-page-notification}}
 {{/unless}}
 
-<div class="grid-wrapper grid-wrapper-stepped {{unless session.isAuthenticated 'u-pt5' ''}}">
+<div class="grid-wrapper grid-wrapper-stepped">
   <div class="grid grid--no-gutter">
     <div class="grid__col grid__col--3-of-3">
       <div class="c-card c-card-detail-overflow {{unless session.isAuthenticated 'dataset-notification-margin' ''}}">

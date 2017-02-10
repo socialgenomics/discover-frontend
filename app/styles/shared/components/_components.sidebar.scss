@@ -21,6 +21,7 @@
 }
 
 .c-sidebar-toggle {
+  z-index: 1;
   right: -$global-spacing-unit-small;
   top: $global-spacing-unit-small;
   @media ( min-width: $breakpoint-wide ) {

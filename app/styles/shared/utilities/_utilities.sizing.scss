@@ -7,7 +7,7 @@
 
 .u-viewport-height {
   // large spacing unit === navbar height
-  min-height: 650px;
+  min-height: 700px;
   height: 800px;
   height: calc(100vh - #{$global-spacing-unit-large});
   height: -o-calc(100vh - #{$global-spacing-unit-large}); /* opera */

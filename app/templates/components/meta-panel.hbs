@@ -44,5 +44,10 @@
         modelType=model.type
         }}
     {{/if}}
+
   </main>
 </div>
+
+{{#unless session.isAuthenticated}}
+  {{open-search-filter-overlay}}
+{{/unless}}
