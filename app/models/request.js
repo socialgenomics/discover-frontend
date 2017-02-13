@@ -7,6 +7,7 @@ export default Model.extend({
   createdAt: attr('isodate'),
   description: attr('string'),
   stats: attr('object'),
+  subscribableId: belongsTo('subscribable', { inverse: 'request' }),
   title: attr('string'),
   updatedAt: attr('isodate'),
   userId: belongsTo('user')
