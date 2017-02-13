@@ -29,7 +29,7 @@ deployment:
       - docker push registry.repositive.io:5000/discover
       - mkdir rancher && cd rancher
       - rancher --env 1a7 --access-key $ACCESS_STA --secret-key $SECRET_STA export discover-app
-      - rancher-compose --access-key $ACCESS_STA --secret-key $SECRET_STA -p discover-app up --force-upgrade -c -d discover
+      - rancher-compose -f discover-app/docker-compose.yml --access-key $ACCESS_STA --secret-key $SECRET_STA -p discover-app up --force-upgrade -c -d discover
 
   deployment:
     tag: /.*/
