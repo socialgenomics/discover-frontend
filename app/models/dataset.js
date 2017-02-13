@@ -3,24 +3,26 @@ import Model from 'ember-data/model';
 import attr from 'ember-data/attr';
 import { belongsTo, hasMany } from 'ember-data/relationships';
 
+const { computed } = Ember;
+
 export default Model.extend({
-  userId: belongsTo('user'),
-  title: attr('string'),
-  description: attr('string'),
-  url: attr('string'),
-  tech: attr('string'),
-  assay: attr('string'),
   access: attr('string'),
-  collections: hasMany('collection', { inverse: 'datasets' }),
-  datasourceId: belongsTo('collection', { inverse: 'owns' }),
-  actionableId: belongsTo('actionable', { inverse: 'dataset' }),
-  highlights: belongsTo('highlight'),
-  createdAt: attr('isodate'),
-  updatedAt: attr('isodate'),
-  stats: attr('object'),
-  externalId: attr('string'),
-  accession: Ember.computed('externalId', function() {
+  accession: computed('externalId', function() {
     return this.get('externalId');
   }),
-  colour: attr('string')
+  actionableId: belongsTo('actionable', { inverse: 'dataset' }),
+  assay: attr('string'),
+  collections: hasMany('collection', { inverse: 'datasets' }),
+  colour: attr('string'),
+  createdAt: attr('isodate'),
+  datasourceId: belongsTo('collection', { inverse: 'owns' }),
+  description: attr('string'),
+  externalId: attr('string'),
+  highlights: belongsTo('highlight'),
+  stats: attr('object'),
+  tech: attr('string'),
+  title: attr('string'),
+  updatedAt: attr('isodate'),
+  url: attr('string'),
+  userId: belongsTo('user')
 });

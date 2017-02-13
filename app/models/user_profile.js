@@ -6,8 +6,8 @@ export default Model.extend({
   avatar: attr('string'),
   educationDegree: attr('string'),
   educationUniversiry: attr('string'),
-  workRole: attr('string'),
-  workOrganisation: attr('string'),
   interests: attr('string'),
-  userId: belongsTo('user')
+  userId: belongsTo('user'),
+  workOrganisation: attr('string'),
+  workRole: attr('string')
 });
