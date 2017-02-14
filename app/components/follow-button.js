@@ -1,12 +1,14 @@
 import Ember from 'ember';
 
-const { Component, computed, get, inject: { service } } = Ember;
+const { Component, computed, get, inject: { service }, Logger, set } = Ember;
 
 export default Component.extend({
   tagName: 'button',
   classNames: ['c-follow-btn'],
   classNameBindings: ['isFollowing:c-follow-btn-active:c-follow-btn-default'],
+
   session: service(),
+  store: service(),
 
   isFollowing: computed('subscription', function() {
     return get(this, 'subscription') ? get(this, 'subscription.active') : false;
@@ -23,5 +25,39 @@ export default Component.extend({
     } else {
       return null;
     }
-  })
+  }),
+
+  click() {
+    set(this, 'loading', true);
+    const subscription = get(this, 'subscription');
+    if (subscription) {
+      subscription.toggleProperty('active');
+      subscription.save()
+        .then(() => {
+          set(this, 'loading', false);
+        })
+        .catch(err => {
+          set(this, 'loading', false);
+          Logger.error(err);
+        });
+    } else {
+      this._createSubscription()
+        .then(() => {
+          set(this, 'loading', false);
+        }).catch(err => {
+          set(this, 'loading', false);
+          Logger.error(err);
+        });
+    }
+  },
+
+  _createSubscription() {
+    return get(this, 'store').createRecord('subscription', {
+      active: true,
+      subscribableId: get(this, 'subscribable'),
+      subscribableModel: get(this, 'subscribableModel'),
+      userId: get(this, 'session.authenticatedUser')
+    }).save();
+  }
+
 });

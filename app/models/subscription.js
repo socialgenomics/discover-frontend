@@ -6,7 +6,7 @@ export default DS.Model.extend({
   active: attr('bool'),
   createdAt: attr('isodate'),
   notifcations: hasMany('notification'),
-  subscribable_model: attr('string'),
+  subscribableModel: attr('string'),
   subscribableId: belongsTo('subscribable'),
   userId: belongsTo('user')
 });
