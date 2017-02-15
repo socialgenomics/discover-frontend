@@ -71,5 +71,4 @@ describe('Integration | Component | follow button', function() {
     this.render(hbs`{{follow-button subscribable=subscribable session=session}}`);
     expect(this.$().text().trim()).to.eql('Follow');
   });
-
 });
