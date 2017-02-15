@@ -4,8 +4,8 @@ const { Component, computed, get, inject: { service }, Logger, set } = Ember;
 
 export default Component.extend({
   tagName: 'button',
-  classNames: ['c-follow-btn'],
-  classNameBindings: ['isFollowing:c-follow-btn-active:c-follow-btn-default'],
+  // classNames: ['c-follow-btn'],
+  classNameBindings: ['isFollowing:c-follow-btn-active:c-follow-btn'],
 
   session: service(),
   store: service(),

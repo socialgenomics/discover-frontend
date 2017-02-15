@@ -30,20 +30,22 @@
                   {{assay-type assay=dataset}}
                 {{/if}}
               </ul>
-
-              <ul class="o-list-inline o-list-flush-left u-mb0">
-                {{action-favourite model=dataset class="u-mr2"}}
-                {{action-share
-                  actionableId=dataset.id
-                  actionableType='dataset'
-                  shareUrl=datasetUrl
-                }}
-              </ul>
+              <div class="u-flex u-items-center">
+                {{follow-button}}
+                <ul class="o-list-inline u-pl2 u-mb0">
+                  {{action-favourite model=dataset class="u-mr2"}}
+                  {{action-share
+                    actionableId=dataset.id
+                    actionableType='dataset'
+                    shareUrl=datasetUrl
+                  }}
+                </ul>
+              </div>
             </header>
 
             <!-- body -->
             <!-- TODO hack fix to stop text overflow on mobile. Needs redesigning. -->
-            <div class="u-p2" style="max-height: 70%; overflow: scroll;">              
+            <div class="u-p2" style="max-height: 70%; overflow: scroll;">
               <!-- heading/description -->
               <h2 class="u-fs2 u-fw-med u-tc-primary u-mb1">{{dataset.title}}</h2>
               {{#if dataset.description}}

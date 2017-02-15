@@ -1,0 +1,24 @@
+.c-follow-btn {
+  display: inline-block;
+  padding: $global-spacing-unit-tiny $global-spacing-unit-small;
+  text-align: center;
+  vertical-align: baseline;
+  cursor: pointer;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: $global-border-radius;
+  font-family: $font-stack-roboto;
+  transition: $global-transition;
+  background-color: transparent;
+  outline: none;
+  @extend .u-fs0;
+  @extend .u-fw-med;
+  @extend .u-tc-secondary;
+  @extend .u-hv-bc-darken10;
+}
+
+.c-follow-btn-active {
+  @extend .c-follow-btn;
+  border-color: $color-primary-teal;
+  color: $color-primary-teal;
+}
