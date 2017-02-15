@@ -4,6 +4,6 @@ import { belongsTo } from 'ember-data/relationships';
 
 export default Model.extend({
   dataset: belongsTo('dataset'),
-  title: attr('string'),
-  description: attr('string')
+  description: attr('string'),
+  title: attr('string')
 });
