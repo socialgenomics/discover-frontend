@@ -1,0 +1,15 @@
+{{#basic-dropdown as |dropdown|}}
+  {{#dropdown.trigger class="u-outline-none u-cursor-pointer u-p2"}}
+    {{fa-icon 'bell'}}
+  {{/dropdown.trigger}}
+
+  {{#dropdown.content class="c-card u-flex u-flex-column"}}
+    {{#if notifications}}
+      {{#each notifications as |notification|}}
+        {{notification.context.summary}}
+      {{/each}}
+    {{else}}
+      <p class="abc123 u-p4 u-mb0">You're up to date.</p>
+    {{/if}}
+  {{/dropdown.content}}
+{{/basic-dropdown}}

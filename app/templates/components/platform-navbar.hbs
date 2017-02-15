@@ -53,7 +53,7 @@
         </div>
 
       {{/unless}}
-
+        {{navbar-notifier}}
         <div class="u-hide-on-sm-md u-self-stretch u-flex u-pr2">
           <a href="http://repositive.io/about" class="u-flex u-items-center u-px2 u-ta-center u-tc-secondary u-hv-bc-off-white">About</a>
           <a href="http://blog.repositive.io/" class="u-flex u-items-center u-px2 u-ta-center u-border-right u-tc-secondary u-hv-bc-off-white">Blog</a>
@@ -64,7 +64,7 @@
             {{#link-to 'users.signup' class="u-flex u-items-center u-px2 u-ta-center u-tc-teal u-fw-med u-hv-bc-off-white" invokeAction=(action 'trackCreateAccount' 'discover_openpage_navbar_createAccount')}}Create Account{{/link-to}}
           {{/if}}
         </div>
-
+        
         <div class="u-hide-on-lg u-self-stretch u-flex">
           {{navbar-dropdown trackCreateAccount=(action 'trackCreateAccount')}}
         </div>
