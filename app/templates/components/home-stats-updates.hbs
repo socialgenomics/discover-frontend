@@ -3,9 +3,9 @@
 </div>
 
 <div class="grid__col grid__col--1-of-2">
-  <div class="c-card c-featured-card u-p2">
+  <div class="c-card c-featured-card">
     {{#link-to 'collections' invokeAction=(action 'trackUpdatesHeaders' 'collections')}}
-      <h3 class="u-fs3 u-ta-center u-tc-secondary u-border-bottom u-pb2 u-mb1">
+      <h3 class="u-fs3 u-ta-center u-tc-secondary u-border-bottom u-py1 u-mb1">
         {{fa-icon "book"}}
         Collections <span>{{stats.repositive_collections}}</span>
       </h3>
@@ -22,9 +22,9 @@
 </div>
 
 <div class="grid__col grid__col--1-of-2">
-  <div class="c-card c-featured-card u-p2">
+  <div class="c-card c-featured-card">
     {{#link-to 'datasources' invokeAction=(action 'trackUpdatesHeaders' 'datasources')}}
-      <h3 class="u-fs3 u-ta-center u-tc-secondary u-border-bottom u-pb2 u-mb1">
+      <h3 class="u-fs3 u-ta-center u-tc-secondary u-border-bottom u-py1 u-mb1">
         {{fa-icon "database"}}
         Data Sources <span>{{stats.datasources}}</span>
       </h3>
