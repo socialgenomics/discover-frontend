@@ -14,9 +14,10 @@ export default Mixin.create(ActionableMixin, {
     const modelId = params.id;
     return RSVP.hash({
       actionable: this._peekOrCreate(this.store, 'actionable', modelId),
-      subscibable: this._peekOrCreate(this.store, 'subscribable', modelId),
+      subscribable: this._peekOrCreate(this.store, 'subscribable', modelId),
       comments: this._getComments(modelId),
       tags: this._getTags(modelId),
+      subscriptions: this._getSubscriptions(modelId),
       model: this.store.findRecord(modelType, modelId)
     })
       .then(data => {

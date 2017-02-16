@@ -13,6 +13,12 @@ export default Mixin.create({
     });
   },
 
+  _getSubscriptions(subscribableId) {
+    return this.store.query('subscription', {
+      'where.subscribable_id': subscribableId
+    });
+  },
+
   _getTags(actionableId) {
     return this.store.query('action', {
       'where.actionable_id': actionableId,
