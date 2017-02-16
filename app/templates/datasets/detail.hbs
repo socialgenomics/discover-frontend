@@ -31,7 +31,7 @@
                 {{/if}}
               </ul>
               <div class="u-flex u-items-center">
-                {{follow-button subscribable=subscriable}}
+                {{follow-button subscribable=dataset.subscribableId model=dataset}}
                 <ul class="o-list-inline u-pl2 u-mb0">
                   {{action-favourite model=dataset class="u-mr2"}}
                   {{action-share

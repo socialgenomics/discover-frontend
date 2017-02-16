@@ -52,10 +52,12 @@ export default Component.extend({
   },
 
   _createSubscription() {
+    const currentModel = get(this, 'model'); //can be request or dataset
+    const subscribable = get(this, 'store').peekRecord('subscribable', currentModel.id);
     return get(this, 'store').createRecord('subscription', {
       active: true,
-      subscribableId: get(this, 'subscribable'),
-      subscribableModel: get(this, 'subscribableModel'),
+      subscribableId: subscribable,
+      subscribableModel: currentModel.constructor.modelName,
       userId: get(this, 'session.authenticatedUser')
     }).save();
   }
