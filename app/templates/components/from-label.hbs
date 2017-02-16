@@ -39,25 +39,24 @@
       {{/link-to}}
     {{/if}}
   {{else}}
-    <span class="u-tc-primary">{{source-name-fallback model=model.datasourceId}}</span>
+    <span class="u-tc-primary u-cursor-pointer">{{source-name-fallback model=model.datasourceId}}</span>
   {{/if}}
 
 {{/if}}
 
 
 {{#if showCreateAccountModal}}
-  {{#modal-dialog
+  {{#repositive-modal
+    container-class='c-modal--medium u-z5'
     close=(action 'toggleCreateAccountModal')
-    targetAttachment="center"
-    translucentOverlay=true
   }}
-    {{#repositive-modal/wrapper size='medium'}}
-      {{repositive-modal/header
-        icon='database'
-        title='See data source'
-        onClose=(action 'toggleCreateAccountModal')
-      }}
+    {{repositive-modal/header
+      icon='database'
+      title='See Data Source'
+      onClose=(action 'toggleCreateAccountModal')
+    }}
+    {{#repositive-modal/content}}
       {{create-account-modal-content text='To browse through this data source you need to have an account.'}}
-    {{/repositive-modal/wrapper}}
-  {{/modal-dialog}}
+    {{/repositive-modal/content}}
+  {{/repositive-modal}}
 {{/if}}
