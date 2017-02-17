@@ -1,2 +1,13 @@
-{{notification.context.summary}}
-<span>{{moment-from-now notification.createdAt}}</span>
+<div class="grid">
+  <div class="grid__col grid__col--1-of-5 u-ta-center">
+    <img class="u-w1 u-mr1 u-circle" src={{notification.context.user_img}} alt="">
+    <p class="u-fs0 u-tc-tertiary u-mb0">{{moment-from-now notification.createdAt}}</p>
+  </div>
+  <div class="grid__col grid__col--4-of-5">
+    {{#if (eq notification.context.action 'comment') }}
+      <span>{{notification.context.userName}}</span>
+      <span class="u-tc-tertiary u-fs0">commented on</span>
+      <p>{{notification.context.summary}}</p>
+    {{/if}}
+  </div>
+</div>
