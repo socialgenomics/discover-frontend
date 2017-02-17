@@ -12,7 +12,8 @@ export default Component.extend({
 
   notifications: computed('notificationsService', 'session', function() {
     if (get(this, 'session.isAuthenticated')) {
-      return get(this, 'notificationsService.getNotifications')(get(this, 'session.authenticatedUser.id'));
+      const notificationsService = get(this, 'notificationsService');
+      notificationsService.getNotifications(get(this, 'session.session.authenticated.user.id'));
     }
   }),
 
