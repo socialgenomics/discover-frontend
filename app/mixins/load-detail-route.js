@@ -7,6 +7,7 @@ const { Mixin, get, RSVP, inject: { service }, setProperties } = Ember;
 
 export default Mixin.create(ActionableMixin, SubscribableMixin, {
   ajax: service(),
+  session: service(),
 
   _getStats() {
     return get(this, 'ajax').request(ENV.APIRoutes['stats'], { method: 'GET' });
@@ -19,7 +20,6 @@ export default Mixin.create(ActionableMixin, SubscribableMixin, {
       subscribable: this._peekOrCreate(this.store, 'subscribable', modelId),
       comments: this._getComments(modelId),
       tags: this._getTags(modelId),
-      subscriptions: this._getSubscriptions(modelId),
       model: this.store.findRecord(modelType, modelId)
     })
       .then(data => {
@@ -31,11 +31,15 @@ export default Mixin.create(ActionableMixin, SubscribableMixin, {
           'actionableId': data.actionable,
           'subscribableId': data.subscribable
         });
-        return RSVP.hash({
+        const hashObj = {
           model,
           tags: data.tags,
           userProfiles: commenterIds.map(id => this.store.query('userProfile', id))
-        });
+        };
+        if (get(this, 'session.isAuthenticated')) {
+          hashObj['subscriptions'] = this._getSubscriptions(modelId);
+        }
+        return RSVP.hash(hashObj);
       });
   }
 });

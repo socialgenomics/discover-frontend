@@ -10,6 +10,8 @@ export default Component.extend({
   session: service(),
   store: service(),
 
+  showCreateAccountModal: false,
+
   isFollowing: computed('subscription.active', function() {
     return get(this, 'subscription') ? get(this, 'subscription.active') : false;
   }),
@@ -38,37 +40,46 @@ export default Component.extend({
   mouseLeave() { set(this, 'isHovering', false);  },
 
   click() {
-    if (!get(this, 'isLoading')) {
-      set(this, 'isLoading', true);
-      const subscription = get(this, 'subscription');
-      if (subscription) {
-        subscription.toggleProperty('active');
-        subscription.save()
-          .then((savedSubscription) => {
-            setProperties(this, {
-              'subscription': savedSubscription,
-              'isLoading': false
+    if (get(this, 'session.isAuthenticated')) {
+      if (!get(this, 'isLoading')) {
+        set(this, 'isLoading', true);
+        const subscription = get(this, 'subscription');
+        if (subscription) {
+          subscription.toggleProperty('active');
+          subscription.save()
+            .then((savedSubscription) => {
+              setProperties(this, {
+                'subscription': savedSubscription,
+                'isLoading': false
+              });
+            })
+            .catch(err => {
+              set(this, 'isLoading', false);
+              Logger.error(err);
             });
-          })
-          .catch(err => {
-            set(this, 'isLoading', false);
-            Logger.error(err);
-          });
-      } else {
-        this._createSubscription()
-          .then((savedSubscription) => {
-            setProperties(this, {
-              'subscription': savedSubscription,
-              'isLoading': false
+        } else {
+          this._createSubscription()
+            .then((savedSubscription) => {
+              setProperties(this, {
+                'subscription': savedSubscription,
+                'isLoading': false
+              });
+            }).catch(err => {
+              set(this, 'isLoading', false);
+              Logger.error(err);
             });
-          }).catch(err => {
-            set(this, 'isLoading', false);
-            Logger.error(err);
-          });
+        }
       }
+    } else {
+      this.send('toggleCreateAccountModal');
     }
   },
 
+  actions: {
+    toggleCreateAccountModal() {
+      this.toggleProperty('showCreateAccountModal');
+    }
+  },
   _createSubscription() {
     const currentModel = get(this, 'model'); //can be request or dataset
     return get(this, 'store').createRecord('subscription', {
