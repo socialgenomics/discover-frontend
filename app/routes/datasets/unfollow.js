@@ -2,7 +2,7 @@ import Ember from 'ember';
 import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
 import FlashMessageMixin from 'repositive/mixins/flash-message-mixin';
 
-const { Route, Logger } = Ember;
+const { Route } = Ember;
 
 export default Route.extend(AuthenticatedRouteMixin, FlashMessageMixin, {
   beforeModel() {
