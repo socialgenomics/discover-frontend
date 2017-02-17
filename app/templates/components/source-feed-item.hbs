@@ -1,5 +1,5 @@
 {{#link-to 'datasources.source' source.id classNames="feed-item-component"}}
-  <div class="c-card u-mb3 c-col-li-item">
+  <div class="c-card u-mb3 c-col-li-item u-hv-bc-white">
     <section class="grid__col grid__col--1-of-5 grid__col--am u-px3 u-py1 u-bc-light-bluegrey u-ta-center u-inherit-height">
       <div class="u-inherit-height u-flex u-flex-column u-items-center u-justify-center">
         {{fa-icon "database" size=3 class='u-tc-secondary u-p1'}}
@@ -19,8 +19,9 @@
     <section class="grid__col grid__col--3-of-5 grid__col--am u-px2 u-inherit-height c-col-li-item__divider c-col-li-item__resp-text">
       <div class="u-inherit-height u-flex u-items-center">
         {{collection-summary-fallback class=""
-                                      summary=source.properties.summary
-                                      description=source.description}}
+          summary=source.properties.summary
+          description=source.description
+        }}
       </div>
     </section>
 
