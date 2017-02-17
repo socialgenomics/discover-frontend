@@ -16,7 +16,7 @@ export default JSONSerializer.extend(DS.EmbeddedRecordsMixin, {
   },
   keyForRelationship: function(key, kind, method)  {
     if (method === 'serialize') {
-      if (key === 'actionableId') {
+      if (key === 'actionableId' || key === 'subscribableId') {
         return 'id';
       }
       //check that last 2 chars of key are not "Id" first
