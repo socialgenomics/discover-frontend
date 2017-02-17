@@ -5,12 +5,6 @@
 
 .c-col-li-item {
   min-height: calc(#{$global-line-height} * 4);
-
-  .no-margin-markdown {
-    & > p {
-      margin: 0;
-    }
-  }
 }
 
 .c-col-li-item__divider {

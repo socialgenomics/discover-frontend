@@ -19,7 +19,7 @@
 .u-hv-bc-collection { @include hv-bc-darken($color-collection,     10); }
 .u-hv-bc-datasource { @include hv-bc-darken($color-datasource,     10); }
 
-.u-hv-bc-white      { @include hv-bc-darken($color-white,          5 ); }
+.u-hv-bc-white      { @include hv-bc-darken($color-white,          3 ); }
 .u-hv-bc-off-white  { @include hv-bc-darken($color-off-white,      10); }
 .u-hv-bc-grey       { @include hv-bc-darken($color-mid-grey,       10); }
 
