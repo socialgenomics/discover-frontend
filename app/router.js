@@ -52,6 +52,7 @@ Router.map(function() {
     this.route('register');
     this.route('request');
     this.route('search-error');
+    this.route('unfollow');
   });
 
   this.route('datasources', function() {
