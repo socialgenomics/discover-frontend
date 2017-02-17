@@ -1,37 +1,44 @@
 <div class="grid__col grid__col--3-of-3">
   {{dataset-number-stats datasetsNumber=datasetsNumber}}
-</div>
 
-<div class="grid__col grid__col--1-of-2">
-  <div class="c-card c-featured-card">
-    {{#link-to 'collections' invokeAction=(action 'trackUpdatesHeaders' 'collections')}}
-      <h3 class="u-fs3 u-ta-center u-tc-secondary u-border-bottom u-py1 u-mb1">
-        {{fa-icon "book"}}
-        Collections <span>{{stats.repositive_collections}}</span>
-      </h3>
-    {{/link-to}}
+  <div class="c-card">
+    <div class="grid grid--no-gutter">
+      <div class="grid__col grid__col--1-of-2">
 
-    {{#each (sort-by "updatedAt:desc" collections) as |collection index|}}
-      {{featured-list-item
-        model=collection
-        isNew=(eq index 0)
-        type='collection'
-      }}
-    {{/each}}
+        {{#link-to 'collections' invokeAction=(action 'trackUpdatesHeaders' 'collections')}}
+          <h3 class="u-fs3 u-ta-center u-tc-secondary u-border-bottom u-border-top u-py1 u-mb0">
+            {{fa-icon "book"}}
+            Collections <span>{{stats.repositive_collections}}</span>
+          </h3>
+        {{/link-to}}
+
+        <ul class="o-list-flush-left u-mb0">
+          {{#each (sort-by "updatedAt:desc" collections) as |collection index|}}
+            {{featured-list-item
+              model=collection
+              isNew=(eq index 0)
+              type='collection'
+            }}
+          {{/each}}
+        </ul>
+
+      </div>
+      <div class="grid__col grid__col--1-of-2 u-border-left">
+
+        {{#link-to 'datasources' invokeAction=(action 'trackUpdatesHeaders' 'datasources')}}
+          <h3 class="u-fs3 u-ta-center u-tc-secondary u-border-bottom u-border-top u-py1 u-mb0">
+            {{fa-icon "database"}}
+            Data Sources <span>{{stats.datasources}}</span>
+          </h3>
+        {{/link-to}}
+        <ul class="o-list-flush-left u-mb0">
+          {{#each (sort-by "name" datasources) as |datasource|}}
+            {{featured-list-item model=datasource type='datasource'}}
+          {{/each}}
+        </ul>
+
+      </div>
+    </div>
   </div>
-</div>
 
-<div class="grid__col grid__col--1-of-2">
-  <div class="c-card c-featured-card">
-    {{#link-to 'datasources' invokeAction=(action 'trackUpdatesHeaders' 'datasources')}}
-      <h3 class="u-fs3 u-ta-center u-tc-secondary u-border-bottom u-py1 u-mb1">
-        {{fa-icon "database"}}
-        Data Sources <span>{{stats.datasources}}</span>
-      </h3>
-    {{/link-to}}
-
-    {{#each (sort-by "name" datasources) as |datasource|}}
-      {{featured-list-item model=datasource type='datasource'}}
-    {{/each}}
-  </div>
 </div>
