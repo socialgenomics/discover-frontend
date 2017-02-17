@@ -4,9 +4,45 @@
       <div class="c-card u-border-square u-p4 u-ta-center">
 
         <header>
-          <h2>Please tell us why you don't want to follow this dataset anymore.</h2>
+          <h2 class="u-tc-secondary">Please tell us why you don't want to follow this dataset anymore.</h2>
         </header>
-        
+
+        <div class="grid__col grid__col--4-of-12 grid__col--m-2-of-3 grid__col--centered">
+          <form>
+            <div class="u-mb3">
+              {{#radio-button
+                  value="not relevant"
+                  groupValue=reason
+                  radioId="not-relevant"}}
+                  It's not relevant.
+              {{/radio-button}}
+
+              {{#radio-button
+                  value="in-app"
+                  groupValue=reason
+                  radioId="in-app"}}
+                  I would prefer in-app notifications only.
+              {{/radio-button}}
+
+              {{#radio-button
+                  value="don't like"
+                  groupValue=reason
+                  radioId="dont-like"}}
+                  I don't like this type of notification.
+              {{/radio-button}}
+            </div>
+
+            {{async-button
+              class="c-btn c-btn-primary u-fs3 u-mb1"
+              default="Submit"
+              pending="Submitting..."
+              action=(action 'submitForm')
+              disableWhen=isInvalid
+              reset=true
+            }}
+          </form>
+        </div>
+
       </div>
     </div>
   </div>
