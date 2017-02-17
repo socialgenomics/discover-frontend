@@ -13,7 +13,7 @@ export default Service.extend({
       'order[0][1]': 'DESC'
     })
       .then(notifications => {
-        console.log(notifications);
+        return notifications;
       }).catch(Logger.error);
   }
 });
