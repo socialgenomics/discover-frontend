@@ -13,7 +13,7 @@ export default Component.extend({
         userName: 'Dan Fair',
         user_img: 'https://dg2kcfbxc77v1.cloudfront.net/assets/images/avatar/frog-1ee2413df3627d1724a7f26ff7f9fc3a.png',
         action: 'comment',
-        summary: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'
+        subscribableTitle: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'
       },
       createdAt: new Date().toISOString()
     }

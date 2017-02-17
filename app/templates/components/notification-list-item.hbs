@@ -4,10 +4,18 @@
     <p class="u-fs0 u-tc-tertiary u-mb0">{{moment-from-now notification.createdAt}}</p>
   </div>
   <div class="grid__col grid__col--4-of-5">
-    {{#if (eq notification.context.action 'comment') }}
       <span>{{notification.context.userName}}</span>
-      <span class="u-tc-tertiary u-fs0">commented on</span>
-      <p>{{notification.context.summary}}</p>
-    {{/if}}
+      <span class="u-tc-tertiary u-fs0">
+        {{#if (eq notification.context.action 'comment') }}
+          commented on
+        {{else if (eq notification.context.action 'tag')}}
+          added a tag to
+        {{else if (eq notification.context.action 'share')}}
+          shared
+        {{else if (eq notification.context.action 'favourite')}}
+          favourited
+        {{/if}}
+      </span>
+      <p>{{notification.context.subscribableTitle}}</p>
   </div>
 </div>
