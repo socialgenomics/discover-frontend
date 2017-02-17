@@ -10,7 +10,8 @@ describe('Integration | Component | follow button', function() {
     integration: true
   });
 
-  it('text is unfollow when subscription is active', function() {
+
+  it('text is following when subscription is active', function() {
     const currentUserId = 'user1';
     const subscription = Ember.Object.create({
       id: 'dataset1',
@@ -31,6 +32,32 @@ describe('Integration | Component | follow button', function() {
       })
     });
     this.render(hbs`{{follow-button subscribable=subscribable session=session}}`);
+    expect(this.$().text().trim()).to.eql('Following');
+  });
+
+
+  it('text is unfollow when subscription is active and isHovering', function() {
+    const currentUserId = 'user1';
+    const subscription = Ember.Object.create({
+      id: 'dataset1',
+      subscribable_model: 'dataset',
+      active: true,
+      userId: {
+        id: currentUserId
+      }
+    });
+    this.setProperties({
+      'subscribable': Ember.Object.create({
+        subscriptions: [subscription]
+      }),
+      'session': Ember.Object.create({
+        authenticatedUser: {
+          id: currentUserId
+        }
+      }),
+      'isHovering': true
+    });
+    this.render(hbs`{{follow-button subscribable=subscribable session=session isHovering=isHovering}}`);
     expect(this.$().text().trim()).to.eql('Unfollow');
   });
 

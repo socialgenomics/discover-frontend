@@ -1,5 +1,11 @@
-{{#if isFollowing}}
-  Unfollow
+{{#if isLoading}}
+  {{fa-icon "circle-o-notch" pulse=true size=1}}
+{{else if isFollowing}}
+  {{#if isUnfollow}}
+    Unfollow
+  {{else}}
+    Following
+  {{/if}}
 {{else}}
   Follow
 {{/if}}

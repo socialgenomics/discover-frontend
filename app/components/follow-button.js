@@ -4,7 +4,8 @@ const { Component, computed, get, inject: { service }, Logger, set, setPropertie
 
 export default Component.extend({
   tagName: 'button',
-  classNameBindings: ['isFollowing:c-follow-btn-active:c-follow-btn'],
+  classNames: ['c-follow-btn'],
+  classNameBindings: ['isFollowing:c-follow-btn-following:c-follow-btn-default', 'isUnfollow:c-follow-btn-unfollow'],
 
   session: service(),
   store: service(),
@@ -12,6 +13,8 @@ export default Component.extend({
   isFollowing: computed('subscription.active', function() {
     return get(this, 'subscription') ? get(this, 'subscription.active') : false;
   }),
+
+  isUnfollow: computed.and('isFollowing', 'isHovering'),
 
   subscription: computed('subscribable', 'session', {
     get() {
@@ -31,33 +34,38 @@ export default Component.extend({
     }
   }),
 
+  mouseEnter() { set(this, 'isHovering', true); },
+  mouseLeave() { set(this, 'isHovering', false);  },
+
   click() {
-    set(this, 'loading', true);
-    const subscription = get(this, 'subscription');
-    if (subscription) {
-      subscription.toggleProperty('active');
-      subscription.save()
-        .then((savedSubscription) => {
-          setProperties(this, {
-            'subscription': savedSubscription,
-            'loading': false
+    if (!get(this, 'isLoading')) {
+      set(this, 'isLoading', true);
+      const subscription = get(this, 'subscription');
+      if (subscription) {
+        subscription.toggleProperty('active');
+        subscription.save()
+          .then((savedSubscription) => {
+            setProperties(this, {
+              'subscription': savedSubscription,
+              'isLoading': false
+            });
+          })
+          .catch(err => {
+            set(this, 'isLoading', false);
+            Logger.error(err);
           });
-        })
-        .catch(err => {
-          set(this, 'loading', false);
-          Logger.error(err);
-        });
-    } else {
-      this._createSubscription()
-        .then((savedSubscription) => {
-          setProperties(this, {
-            'subscription': savedSubscription,
-            'loading': false
+      } else {
+        this._createSubscription()
+          .then((savedSubscription) => {
+            setProperties(this, {
+              'subscription': savedSubscription,
+              'isLoading': false
+            });
+          }).catch(err => {
+            set(this, 'isLoading', false);
+            Logger.error(err);
           });
-        }).catch(err => {
-          set(this, 'loading', false);
-          Logger.error(err);
-        });
+      }
     }
   },
 
