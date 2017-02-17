@@ -16,7 +16,9 @@ describe('Integration | Component | follow button', function() {
       id: 'dataset1',
       subscribable_model: 'dataset',
       active: true,
-      userId: currentUserId
+      userId: {
+        id: currentUserId
+      }
     });
     this.setProperties({
       'subscribable': Ember.Object.create({
@@ -39,7 +41,9 @@ describe('Integration | Component | follow button', function() {
       id: 'dataset1',
       subscribable_model: 'dataset',
       active: false,
-      userId: currentUserId
+      userId: {
+        id: currentUserId
+      }
     });
     this.setProperties({
       'subscribable': Ember.Object.create({
