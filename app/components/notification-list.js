@@ -9,7 +9,8 @@ export default Component.extend({
       status: 'unread',
       context: {
         summary: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'
-      }
+      },
+      createdAt: new Date().toISOString()
     }
   ]
 });

@@ -1,6 +1,6 @@
 {{#if notifications}}
   {{#each notifications as |notification|}}
-    {{notification.context.summary}}
+    {{notification-list-item notification=notification}}
   {{/each}}
 {{else}}
   <div class="u-ta-center">
