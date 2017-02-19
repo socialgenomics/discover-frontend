@@ -12,7 +12,7 @@
                 label="First Name"
                 type="text"
                 value=firstname
-                errors=errors.firstname
+                errors=validations.attrs.firstname.messages
                 placeholder="e.g. Christina"
                 submit=(action 'save')
               }}
@@ -20,7 +20,7 @@
                 label="Last Name"
                 type="text"
                 value=lastname
-                errors=errors.lastname
+                errors=validations.attrs.lastname.messages
                 placeholder="e.g. Luckasson"
                 submit=(action 'save')
               }}
@@ -28,7 +28,6 @@
                 label="Affiliation"
                 type="text"
                 value=affiliation
-                errors=errors.affiliation
                 placeholder="e.g. Bioinformatician at XYZ Institute"
                 submit=(action 'save')
               }}
