@@ -10,6 +10,8 @@ export default Component.extend({
   session: service(),
   store: service(),
 
+  showCreateAccountModal: false,
+
   isFollowing: computed('subscription.active', function() {
     return get(this, 'subscription') ? get(this, 'subscription.active') : false;
   }),
@@ -38,34 +40,22 @@ export default Component.extend({
   mouseLeave() { set(this, 'isHovering', false);  },
 
   click() {
-    if (!get(this, 'isLoading')) {
+    if (!get(this, 'session.isAuthenticated')) {
+      return this.send('toggleCreateAccountModal');
+    } else if (!get(this, 'isLoading')) {
       set(this, 'isLoading', true);
       const subscription = get(this, 'subscription');
       if (subscription) {
-        subscription.toggleProperty('active');
-        subscription.save()
-          .then((savedSubscription) => {
-            setProperties(this, {
-              'subscription': savedSubscription,
-              'isLoading': false
-            });
-          })
-          .catch(err => {
-            set(this, 'isLoading', false);
-            Logger.error(err);
-          });
+        this._toggleSubscriptionState(subscription);
       } else {
-        this._createSubscription()
-          .then((savedSubscription) => {
-            setProperties(this, {
-              'subscription': savedSubscription,
-              'isLoading': false
-            });
-          }).catch(err => {
-            set(this, 'isLoading', false);
-            Logger.error(err);
-          });
+        this._createSubscription();
       }
+    }
+  },
+
+  actions: {
+    toggleCreateAccountModal() {
+      this.toggleProperty('showCreateAccountModal');
     }
   },
 
@@ -76,7 +66,30 @@ export default Component.extend({
       subscribableId: get(this, 'subscribable'),
       subscribableModel: currentModel.constructor.modelName,
       userId: get(this, 'session.authenticatedUser')
-    }).save();
-  }
+    }).save()
+      .then(savedSubscription => {
+        setProperties(this, {
+          'subscription': savedSubscription,
+          'isLoading': false
+        });
+      }).catch(err => {
+        set(this, 'isLoading', false);
+        Logger.error(err);
+      });
+  },
 
+  _toggleSubscriptionState(subscription) {
+    subscription.toggleProperty('active');
+    subscription.save()
+      .then(savedSubscription => {
+        setProperties(this, {
+          'subscription': savedSubscription,
+          'isLoading': false
+        });
+      })
+      .catch(err => {
+        set(this, 'isLoading', false);
+        Logger.error(err);
+      });
+  }
 });
