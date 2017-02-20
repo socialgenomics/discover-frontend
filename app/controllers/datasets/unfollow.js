@@ -6,7 +6,7 @@ export default Controller.extend({
 
   actions: {
     submitForm() {
-      this.transitionToRoute('root')
+      return this.transitionToRoute('root')
       .then(() => {
         this.flashMessages.add({
           message: 'Thank you for your feedback.',

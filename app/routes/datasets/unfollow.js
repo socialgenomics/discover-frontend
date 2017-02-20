@@ -8,7 +8,7 @@ export default Route.extend(AuthenticatedRouteMixin, FlashMessageMixin, {
   session: service(),
 
   model(params) {
-    const userId = get(this, 'session.authenticatedUser');
+    const userId = get(this, 'session.authenticatedUser.id');
     return this.store.query('subscription', {
       'where.user_id': userId,
     })
