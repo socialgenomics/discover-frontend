@@ -40,38 +40,16 @@ export default Component.extend({
   mouseLeave() { set(this, 'isHovering', false);  },
 
   click() {
-    if (get(this, 'session.isAuthenticated')) {
-      if (!get(this, 'isLoading')) {
-        set(this, 'isLoading', true);
-        const subscription = get(this, 'subscription');
-        if (subscription) {
-          subscription.toggleProperty('active');
-          subscription.save()
-            .then((savedSubscription) => {
-              setProperties(this, {
-                'subscription': savedSubscription,
-                'isLoading': false
-              });
-            })
-            .catch(err => {
-              set(this, 'isLoading', false);
-              Logger.error(err);
-            });
-        } else {
-          this._createSubscription()
-            .then((savedSubscription) => {
-              setProperties(this, {
-                'subscription': savedSubscription,
-                'isLoading': false
-              });
-            }).catch(err => {
-              set(this, 'isLoading', false);
-              Logger.error(err);
-            });
-        }
+    if (!get(this, 'session.isAuthenticated')) {
+      return this.send('toggleCreateAccountModal');
+    } else if (!get(this, 'isLoading')) {
+      set(this, 'isLoading', true);
+      const subscription = get(this, 'subscription');
+      if (subscription) {
+        this._toggleSubscriptionState(subscription);
+      } else {
+        this._createSubscription();
       }
-    } else {
-      this.send('toggleCreateAccountModal');
     }
   },
 
@@ -80,6 +58,7 @@ export default Component.extend({
       this.toggleProperty('showCreateAccountModal');
     }
   },
+
   _createSubscription() {
     const currentModel = get(this, 'model'); //can be request or dataset
     return get(this, 'store').createRecord('subscription', {
@@ -87,7 +66,30 @@ export default Component.extend({
       subscribableId: get(this, 'subscribable'),
       subscribableModel: currentModel.constructor.modelName,
       userId: get(this, 'session.authenticatedUser')
-    }).save();
-  }
+    }).save()
+      .then(savedSubscription => {
+        setProperties(this, {
+          'subscription': savedSubscription,
+          'isLoading': false
+        });
+      }).catch(err => {
+        set(this, 'isLoading', false);
+        Logger.error(err);
+      });
+  },
 
+  _toggleSubscriptionState(subscription) {
+    subscription.toggleProperty('active');
+    subscription.save()
+      .then(savedSubscription => {
+        setProperties(this, {
+          'subscription': savedSubscription,
+          'isLoading': false
+        });
+      })
+      .catch(err => {
+        set(this, 'isLoading', false);
+        Logger.error(err);
+      });
+  }
 });
