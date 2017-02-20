@@ -11,6 +11,7 @@ export default Route.extend(AuthenticatedRouteMixin, FlashMessageMixin, {
     const userId = get(this, 'session.authenticatedUser.id');
     return this.store.query('subscription', {
       'where.user_id': userId,
+      'where.subscribable_id': params.id
     })
     .then(() => {
       return set(this, 'subscription.active', false)
