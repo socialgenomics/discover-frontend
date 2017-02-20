@@ -2,10 +2,20 @@ import Ember from 'ember';
 import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
 import FlashMessageMixin from 'repositive/mixins/flash-message-mixin';
 
-const { Route } = Ember;
+const { inject: { service }, Route, get, set, RSVP, Logger } = Ember;
 
 export default Route.extend(AuthenticatedRouteMixin, FlashMessageMixin, {
-  beforeModel() {
-    return this._addFlashMessage('You have successfully unfollowed this dataset.', 'success');
+  session: service(),
+
+  model(params) {
+    const userId = get(this, 'session.authenticatedUser');
+    return this.store.query('subscription', {
+      'where.user_id': userId,
+    })
+    .then(() => {
+      return set(this, 'subscription.active', false)
+      .then(this._addFlashMessage('You have successfully unfollowed this dataset.', 'success'));
+    })
+    .catch(Logger.error);
   }
 });
