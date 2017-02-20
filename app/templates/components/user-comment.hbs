@@ -1,20 +1,21 @@
 
 <!-- User Info / Timestamp -->
 <div class="u-flex u-items-start u-mb1 u-pt3 u-border-top">
-  {{#link-to 'user' user.id disabled=disabled invokeAction=(action 'toggleCreateAccountModal')}}
-    <img src={{avatar}} class="u-w1 u-mr1 u-circle" />
+  {{#link-to 'user' comment.userId.id disabled=disabled invokeAction=(action 'toggleCreateAccountModal')}}
+    <img class="u-w1 u-mr1 u-circle" src={{comment.userId.userProfile.avatar}} />
   {{/link-to}}
   <div>
-    {{#link-to 'user' user.id disabled=disabled invokeAction=(action 'toggleCreateAccountModal')}}
-      <h4 class="u-fs2 u-tc-primary u-mb0">{{user.displayName}}</h4>
+    {{#link-to 'user' comment.userId.id disabled=disabled invokeAction=(action 'toggleCreateAccountModal')}}
+      <h4 class="u-fs2 u-tc-primary u-mb0">{{comment.userId.displayName}}</h4>
     {{/link-to}}
-    <span class="u-tc-tertiary u-fs0">{{moment-from-now date allowEmpty=true}}</span>
+    <span class="u-tc-tertiary u-fs0">{{moment-from-now comment.createdAt allowEmpty=true}}</span>
   </div>
 </div>
 
 <!-- Comment -->
-<p class="u-markdown-formatting u-mb0">{{markdown-to-html markdown=text extensions='targetBlankLinks'}}</p>
+<p class="u-markdown-formatting u-mb0">{{markdown-to-html markdown=comment.properties.text extensions='targetBlankLinks'}}</p>
 
+{{#if canEdit}}EDIT / DELETE{{/if}}
 
 {{#if showCreateAccountModal}}
   {{! "container-class" is a temporary solution, changes in ember modal dialog required }}
@@ -23,8 +24,8 @@
       close=(action 'toggleCreateAccountModal')
     }}
       {{repositive-modal/header
-        image=avatar
-        title=(concat 'View ' user.firstname '\'s profile')
+        image=comment.userId.userProfile.avatar
+        title=(concat 'View ' comment.userId.firstname '\'s profile')
         onClose=(action 'toggleCreateAccountModal')
       }}
       {{#repositive-modal/content}}
