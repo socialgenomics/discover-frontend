@@ -8,6 +8,6 @@ export default Component.extend({
   didReceiveAttrs() {
     this._super(...arguments);
     const notification = get(this, 'notification');
-    debugger;
+    // debugger;
   }
 });

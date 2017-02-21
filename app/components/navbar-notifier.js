@@ -26,13 +26,12 @@ export default Component.extend({
       'order[0][1]': 'DESC'
     })
       .then(notifications => {
-        //construct hashObj
-        const action = store.peekRecord('action', '27a21a60-0058-41c7-9f5f-f607729241d1');
+        // const action = store.peekRecord('action', '27a21a60-0058-41c7-9f5f-f607729241d1');
         const notificationsArray = notifications.map(notification => {
-          setProperties(notification, {
-            'properties.action': action,
-            'properties.type': 'action'
-          });
+          // setProperties(notification, {
+          //   'properties.action': action,
+          //   'properties.type': 'action'
+          // });
           this._getRelatedData(notification);
           return notification;
         });
@@ -47,26 +46,23 @@ export default Component.extend({
     const store = get(this, 'store');
     return RSVP.hash({
       subscription: store.findRecord('subscription', get(notification, 'subscriptionId.id')),
-      action: store.findRecord('action', get(notification, 'properties.action.id'))
+      action: store.findRecord('action', get(notification, 'properties.action_id'))
     })
       .then(data => {
+        set(notification, 'properties.action', get(data, 'action'));
         return RSVP.hash({
-          datasetOrRequest: store.findRecord('dataset', get(data, 'subscription.subscribableId.id')),
-          user: store.findRecord('user', get(data, 'action.userId.id')),
-          subscription: data.subscription,
-          action: data.action
+          datasetOrRequest: store.findRecord(get(data, 'subscription.subscribableModel'), get(data, 'subscription.subscribableId.id')),
+          user: store.findRecord('user', get(notification, 'properties.action.userId.id'))
         });
       })
       .then(data => {
-
-        debugger;
+        const modelKey = `subscriptionId.subscribableId.${get(notification, 'subscriptionId.subscribableModel')}`;
+        set(notification, modelKey, get(data, 'datasetOrRequest'));
         return data;
-      }).catch(Logger.error)
+      }).catch(Logger.error);
   },
 
   actions: {
-    close(dropdown) {
-      dropdown.actions.close();
-    }
+    close(dropdown) { dropdown.actions.close(); }
   }
 });
