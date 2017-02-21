@@ -1,21 +1,21 @@
 <div class="grid">
   <div class="grid__col grid__col--1-of-5 u-ta-center">
-    <img class="u-w1 u-mr1 u-circle" src={{notification.context.user_img}} alt="">
+    <img class="u-w1 u-mr1 u-circle" src={{notification.properties.action.userId.userProfile.avatar}} alt="">
     <p class="u-fs0 u-tc-tertiary u-mb0">{{moment-from-now notification.createdAt}}</p>
   </div>
   <div class="grid__col grid__col--4-of-5">
-      <span>{{notification.context.userName}}</span>
+      <span>{{notification.properties.action.userId.displayName}}</span>
       <span class="u-tc-tertiary u-fs0">
-        {{#if (eq notification.context.action 'comment') }}
+        {{#if (eq notification.properties.action.type 'comment') }}
           commented on
-        {{else if (eq notification.context.action 'tag')}}
+        {{else if (eq notification.properties.action.type 'tag')}}
           added a tag to
-        {{else if (eq notification.context.action 'share')}}
+        {{else if (eq notification.properties.action.type 'share')}}
           shared
-        {{else if (eq notification.context.action 'favourite')}}
+        {{else if (eq notification.properties.action.type 'favourite')}}
           favourited
         {{/if}}
       </span>
-      <p>{{notification.context.subscribableTitle}}</p>
+      <p>{{notification.subscriptionId.subscribableId.dataset.title}}</p>
   </div>
 </div>
