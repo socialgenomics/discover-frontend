@@ -1,0 +1,27 @@
+{{#if isLoading}}
+  {{fa-icon "circle-o-notch" pulse=true size=1}}
+{{else if isFollowing}}
+  {{#if isUnfollow}}
+    Unfollow
+  {{else}}
+    Following
+  {{/if}}
+{{else}}
+  Follow
+{{/if}}
+
+{{#if showCreateAccountModal}}
+  {{! "container-class" is a temporary solution, changes in ember modal dialog required }}
+  {{#repositive-modal
+    container-class='c-modal--medium u-z5'
+    close=(action 'toggleCreateAccountModal')
+  }}
+    {{repositive-modal/header
+      title='Follow datasets'
+      onClose=(action 'toggleCreateAccountModal')
+    }}
+    {{#repositive-modal/content}}
+      {{create-account-modal-content text='To receive updates on this dataset, please create an account.'}}
+    {{/repositive-modal/content}}
+  {{/repositive-modal}}
+{{/if}}

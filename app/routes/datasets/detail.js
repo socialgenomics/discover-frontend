@@ -13,7 +13,7 @@ export default Route.extend(ResetScrollMixin, LoadDetailRouteMixin, {
         return RSVP.hash({
           dataset: data.model,
           stats: get(this, 'session.isAuthenticated') === false ? this._getStats() : null,
-          tags: this._getTags(params.id)
+          tags: data.tags
         })
           .then(hash => {
             let keywords = [];
