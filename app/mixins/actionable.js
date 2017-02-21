@@ -32,7 +32,7 @@ export default Mixin.create({
     }
   },
 
-  _peekOrCreate(store, id) {
-    return store.peekRecord('actionable', id) || store.createRecord('actionable', { id });
+  _peekOrCreate(store, modelType, id) {
+    return store.peekRecord(modelType, id) || store.createRecord(modelType, { id });
   }
 });
