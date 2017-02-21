@@ -16,6 +16,10 @@
           favourited
         {{/if}}
       </span>
-      <p>{{notification.subscriptionId.subscribableId.dataset.title}}</p>
+      {{#if notification.subscriptionId.subscribableId.dataset}}
+        <p>{{notification.subscriptionId.subscribableId.dataset.title}}</p>
+      {{else if notification.subscriptionId.subscribableId.request}}
+        <p>{{notification.subscriptionId.subscribableId.request.title}}</p>
+      {{/if}}
   </div>
 </div>
