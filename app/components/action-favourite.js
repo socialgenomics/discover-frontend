@@ -15,16 +15,10 @@ export default Component.extend({
     return isPresent(get(this, 'favouritesService').getFavourite(get(this, 'model.id')));
   }),
 
-  mouseEnter() {
-    set(this, 'isHovered', true);
-  },
+  mouseEnter() { set(this, 'isHovered', true); },
+  mouseLeave() { set(this, 'isHovered', false); },
+  click() { this.touchEnd(); },
 
-  mouseLeave() {
-    set(this, 'isHovered', false);
-  },
-  click() {
-    this.touchEnd();
-  },
   touchEnd() {
     const currentModel = this.model; //can be request or dataset
     const favourite = get(this, 'favouritesService').getFavourite(currentModel.id);

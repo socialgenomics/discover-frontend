@@ -20,14 +20,17 @@
           <div class="grid__col grid__col--7-of-12 u-pos-relative u-full-height">
             <!-- header -->
             <header class="c-card-header u-bc-off-white u-flex u-justify-end u-items-center u-px2">
-              <ul class="o-list-inline o-list-flush-left u-mb0">
-                {{action-favourite model=request class="u-mr2"}}
-                {{action-share
-                  actionableId=request.id
-                  actionableType='request'
-                  shareUrl=requestUrl
-                }}
-              </ul>
+              <div class="u-flex u-items-center">
+                {{follow-button subscribable=request.subscribableId model=request}}
+                <ul class="o-list-inline u-pl2 u-mb0">
+                  {{action-favourite model=request class="u-mr2"}}
+                  {{action-share
+                    actionableId=request.id
+                    actionableType='request'
+                    shareUrl=requestUrl
+                  }}
+                </ul>
+              </div>
             </header>
 
             <!-- body -->

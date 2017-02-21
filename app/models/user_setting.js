@@ -4,9 +4,9 @@ import { belongsTo } from 'ember-data/relationships';
 
 export default Model.extend({
   isPublic: attr('boolean'),
-  notificationInbox: attr('boolean'),
   notificationComment: attr('boolean'),
-  notificationUpdate: attr('boolean'),
+  notificationInbox: attr('boolean'),
   notificationSuggestion: attr('boolean'),
+  notificationUpdate: attr('boolean'),
   userId: belongsTo('user')
 });

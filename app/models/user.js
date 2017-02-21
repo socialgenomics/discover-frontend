@@ -2,19 +2,12 @@ import Model from 'ember-data/model';
 import attr from 'ember-data/attr';
 import { belongsTo, hasMany } from 'ember-data/relationships';
 import Ember from 'ember';
+
 const { computed, isPresent, get } = Ember;
 
 export default Model.extend({
-  username: attr('string'),
-  firstname: attr('string'),
-  lastname: attr('string'),
-  credentials: hasMany('credentials'),
-  userProfile: belongsTo('userProfile'),
-  userSetting: belongsTo('userSetting'),
   createdAt: attr('isodate'),
-  updatedAt: attr('isodate'),
-  isCurrentUser: attr('boolean', { defaultValue: false }), // checks the current authenticated user
-  isEmailValidated: attr('boolean', { defaultValue: false }), // checks if email has been validated
+  credentials: hasMany('credentials'),
   displayName: computed('username', 'firstname', 'lastname', function() {
     if (isPresent(get(this, 'firstname')) || isPresent(get(this, 'lastname'))) {
       const firstName = get(this, 'firstname') || '';
@@ -23,5 +16,13 @@ export default Model.extend({
     } else {
       return 'User' + get(this, 'username');
     }
-  })
+  }),
+  firstname: attr('string'),
+  isCurrentUser: attr('boolean', { defaultValue: false }), // checks the current authenticated user
+  isEmailValidated: attr('boolean', { defaultValue: false }), // checks if email has been validated
+  lastname: attr('string'),
+  updatedAt: attr('isodate'),
+  username: attr('string'),
+  userProfile: belongsTo('userProfile'),
+  userSetting: belongsTo('userSetting')
 });

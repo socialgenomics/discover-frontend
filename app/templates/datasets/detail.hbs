@@ -30,15 +30,17 @@
                   {{assay-type assay=dataset}}
                 {{/if}}
               </ul>
-
-              <ul class="o-list-inline o-list-flush-left u-mb0">
-                {{action-favourite model=dataset class="u-mr2"}}
-                {{action-share
-                  actionableId=dataset.id
-                  actionableType='dataset'
-                  shareUrl=datasetUrl
-                }}
-              </ul>
+              <div class="u-flex u-items-center">
+                {{follow-button subscribable=dataset.subscribableId model=dataset}}
+                <ul class="o-list-inline u-pl2 u-mb0">
+                  {{action-favourite model=dataset class="u-mr2"}}
+                  {{action-share
+                    actionableId=dataset.id
+                    actionableType='dataset'
+                    shareUrl=datasetUrl
+                  }}
+                </ul>
+              </div>
             </header>
 
             <!-- body -->
