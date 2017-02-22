@@ -1,31 +1,31 @@
 import Ember from 'ember';
-import EmberValidations from 'ember-validations';
 import ENV from 'repositive/config/environment';
 import FlashMessageMixin from 'repositive/mixins/flash-message-mixin';
+import { validator, buildValidations } from 'ember-cp-validations';
 
 const { Controller, computed, Logger, get, set, inject: { service } } = Ember;
+const Validations = buildValidations({
+  email: [
+    validator('presence', {
+      presence: true,
+      message: 'Please provide email address.'
+    }),
+    validator('format', {
+      regex: /^([\w\-\.\+]+)@((?:[\w\-\.]+)(?:\.[a-zA-Z]{2,}))$/,
+      message: 'Must be a valid email address.'
+    })
+  ]
+});
 
-export default Controller.extend(EmberValidations, FlashMessageMixin, {
+export default Controller.extend(Validations, FlashMessageMixin, {
   ajax: service(),
 
   email: null,
   loading: false,
-  isDisabled: computed('loading', 'isValid', function() {
-    return !get(this, 'isValid') || get(this, 'loading');
-  }),
 
-  validations: {
-    email: {
-      presence: {
-        message: ' '
-      },
-      format: {
-        with: /^([\w\-\.\+]+)@((?:[\w\-\.]+)(?:\.[a-zA-Z]{2,}))$/,
-        message: 'Must be a valid e-mail address.'
-      },
-      server: true // must be last - known bug
-    }
-  },
+  isInvalid: computed.not('validations.isValid'),
+  isDisabled: computed.or('loading', 'isInvalid'),
+
   actions: {
     submitForm() {
       if (!get(this, 'isDisabled')) {

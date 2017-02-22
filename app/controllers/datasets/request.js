@@ -1,13 +1,23 @@
 import Ember from 'ember';
-import EmberValidations from 'ember-validations';
 import FlashMessageMixin from 'repositive/mixins/flash-message-mixin';
 import TrackEventsMixin from 'repositive/mixins/track-events-mixin';
+import { validator, buildValidations } from 'ember-cp-validations';
 
 const { Controller, computed, inject: { service }, get, getProperties, set, Logger } = Ember;
 const validationErrorMessage = 'This field can\'t be blank.';
+const Validations = buildValidations({
+  title: validator('presence', {
+    presence: true,
+    message: validationErrorMessage
+  }),
+  description: validator('presence', {
+    presence: true,
+    message: validationErrorMessage
+  })
+});
 
 export default Controller.extend(
-  EmberValidations,
+  Validations,
   FlashMessageMixin,
   TrackEventsMixin,
   {
@@ -18,20 +28,11 @@ export default Controller.extend(
     didRequest: false,
     loading: false,
 
-    validations: {
-      title: {
-        presence: { message: validationErrorMessage }
-      },
-      description: {
-        presence: { message: validationErrorMessage }
-      }
-    },
-
-    isInvalid: computed.not('isValid'),
+    isInvalid: computed.not('validations.isValid'),
 
     actions: {
       addRequest: function() {
-        if (get(this, 'isValid')) {
+        if (get(this, 'validations.isValid')) {
           this._createRequest().then(this._createRequestSuccess.bind(this))
           .catch(this._createRequestError.bind(this));
         }

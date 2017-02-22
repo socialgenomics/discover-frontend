@@ -1,10 +1,22 @@
 import Ember from 'ember';
-import EmberValidations from 'ember-validations';
 import ENV from 'repositive/config/environment';
+import { validator, buildValidations } from 'ember-cp-validations';
 
 const { Component, computed, get, inject: { service }, set, setProperties } = Ember;
+const Validations = buildValidations({
+  emailAddress: [
+    validator('presence', {
+      presence: true,
+      message: 'Please provide email address.'
+    }),
+    validator('format', {
+      regex: /^([\w\-\.\+]+)@((?:[\w\-\.]+)(?:\.[a-zA-Z]{2,}))$/,
+      message: 'Must be a valid email address.'
+    })
+  ]
+});
 
-export default Component.extend(EmberValidations, {
+export default Component.extend(Validations, {
   ajax: service(),
 
   tagName: 'form',
@@ -16,19 +28,8 @@ export default Component.extend(EmberValidations, {
   sendError: false,
   isLoading: false,
 
-  validations: {
-    emailAddress: {
-      presence: { message: 'Please provide email address.' },
-      format: {
-        with: /^([\w\-\.\+]+)@((?:[\w\-\.]+)(?:\.[a-zA-Z]{2,}))$/,
-        allowBlank: false,
-        message: 'Must be a valid email address.'
-      }
-    }
-  },
-
-  submitDisabled: computed('isLoading', 'errors.emailAddress.length', function() {
-    return get(this, 'isLoading') || get(this, 'errors.emailAddress.length') !== 0;
+  submitDisabled: computed('isLoading', 'validations.isValid', function() {
+    return get(this, 'isLoading') || get(this, 'validations.isValid') === false;
   }),
 
   submitButtonLabel: computed('isLoading', 'sendSuccess', 'sendError', function () {

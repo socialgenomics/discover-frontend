@@ -8,7 +8,8 @@ const { setProperties, get, set } = Ember;
 
 describe('ShareByEmailFormComponent', function() {
   setupComponentTest('share-by-email-form', {
-    unit: true
+    unit: true,
+    needs: ['validator:presence', 'validator:format']
   });
 
   it('submitDisabled returns correct value', function() {
@@ -16,30 +17,30 @@ describe('ShareByEmailFormComponent', function() {
     const dataProvider = [
       {
         isLoading: true,
-        errorsLength: 1,
+        emailAddress: '',
         disabled: true
       },
       {
         isLoading: false,
-        errorsLength: 1,
+        emailAddress: '',
         disabled: true
 
       },
       {
         isLoading: true,
-        errorsLength: 0,
+        emailAddress: 'aaa@aaa.aa',
         disabled: true
       },
       {
         isLoading: false,
-        errorsLength: 0,
+        emailAddress: 'aaa@aaa.aa',
         disabled: false
       }
     ];
 
     dataProvider.forEach(testCase => {
       set(component, 'isLoading', testCase.isLoading);
-      set(component, 'errors.emailAddress.length', testCase.errorsLength);
+      set(component, 'emailAddress', testCase.emailAddress);
 
       expect(get(component, 'submitDisabled')).to.eql(testCase.disabled);
     });
