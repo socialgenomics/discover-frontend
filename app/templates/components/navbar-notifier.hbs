@@ -4,6 +4,11 @@
   {{/dropdown.trigger}}
 
   {{#dropdown.content class="c-card u-flex u-flex-column"}}
-    {{notification-list notifications=notifications close=(action 'close') dropdown=dropdown}}
+    {{notification-list
+      notifications=notifications
+      dropdown=dropdown
+      close=(action 'close')
+      reloadNotifications=(action 'reloadNotifications')
+    }}
   {{/dropdown.content}}
 {{/basic-dropdown}}

@@ -21,6 +21,7 @@ export default Component.extend({
     const store = get(this, 'store');
     return store.query('notification', {
       'where.user_id': userId,
+      'where.status': 'unseen',
       'order[0][0]': 'created_at',
       'order[0][1]': 'DESC'
     })
@@ -48,14 +49,17 @@ export default Component.extend({
           user: store.findRecord('user', get(notification, 'properties.action.userId.id'))
         });
       })
-      .then(data => {
-        const modelKey = `subscriptionId.subscribableId.${get(notification, 'subscriptionId.subscribableModel')}`;
-        set(notification, modelKey, get(data, 'datasetOrRequest'));
-        return data;
-      }).catch(Logger.error);
+        .then(data => {
+          const modelKey = `subscriptionId.subscribableId.${get(notification, 'subscriptionId.subscribableModel')}`;
+          set(notification, modelKey, get(data, 'datasetOrRequest'));
+          return data;
+        }).catch(Logger.error);
   },
 
   actions: {
-    close(dropdown) { dropdown.actions.close(); }
+    close(dropdown) { dropdown.actions.close(); },
+    reloadNotifications() {
+      this._getNotifications(get(this, 'session.session.authenticated.user.id'));
+    }
   }
 });
