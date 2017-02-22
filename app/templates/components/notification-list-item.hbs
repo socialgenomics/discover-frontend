@@ -1,27 +1,24 @@
-<div class="grid">
-  <div class="grid__col grid__col--2-of-6 u-ta-center">
-    <img class="u-w1 u-mr1 u-circle" src={{notification.properties.action.userId.userProfile.avatar}} alt="">
-    <p class="u-fs0 u-tc-tertiary u-mb0">{{moment-from-now notification.createdAt}}</p>
-  </div>
-  <div class="grid__col grid__col--4-of-6">
-      <span>{{notification.properties.action.userId.displayName}}</span>
-      <span class="u-tc-tertiary u-fs0">
-        {{#if (eq notification.properties.action.type 'comment') }}
-          commented on
-        {{else if (eq notification.properties.action.type 'tag')}}
-          added a tag to
-        {{else if (eq notification.properties.action.type 'share')}}
-          shared
-        {{else if (eq notification.properties.action.type 'favourite')}}
-          favourited
-        {{/if}}
-      </span>
+<div class="c-notification-img-date-container u-ta-center u-mr2">
+  <img class="u-w1 u-mr1 u-circle" src={{notification.properties.action.userId.userProfile.avatar}} alt="">
+  <p class="u-fs0 u-tc-tertiary u-mb0">{{moment-from-now notification.createdAt}}</p>
+</div>
+<div class="u-flex-auto c-notification-body">
+  <span>{{notification.properties.action.userId.displayName}}</span>
+  <span class="u-tc-tertiary u-fs0">
+    {{#if (eq notification.properties.action.type 'comment') }}
+      commented on
+    {{else if (eq notification.properties.action.type 'tag')}}
+      added a tag to
+    {{else if (eq notification.properties.action.type 'share')}}
+      shared
+    {{else if (eq notification.properties.action.type 'favourite')}}
+      favourited
+    {{/if}}
+  </span>
 
-      {{#if notification.subscriptionId.subscribableId.dataset}}
-        <p class="u-mb0">{{notification.subscriptionId.subscribableId.dataset.title}}</p>
-      {{else if notification.subscriptionId.subscribableId.request}}
-        <p class="u-mb0">{{notification.subscriptionId.subscribableId.request.title}}</p>
-      {{/if}}
-
-  </div>
+  {{#if notification.subscriptionId.subscribableId.dataset}}
+    <p class="u-mb0">{{truncate notification.subscriptionId.subscribableId.dataset.title 70}}</p>
+  {{else if notification.subscriptionId.subscribableId.request}}
+    <p class="u-mb0">{{truncate notification.subscriptionId.subscribableId.request.title 70}}</p>
+  {{/if}}
 </div>

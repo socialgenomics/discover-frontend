@@ -4,7 +4,7 @@ const { Component, get, set } = Ember;
 
 export default Component.extend({
   tagName: 'li',
-  classNames: ['u-p2', 'u-border-bottom', 'u-hv-bc-white', 'u-cursor-pointer'],
+  classNames: ['u-p2', 'u-pr3', 'u-flex', 'u-items-center', 'u-border-bottom', 'u-hv-bc-white', 'u-cursor-pointer'],
 
   click() { this.touchEnd(); },
   touchEnd() {
@@ -15,5 +15,4 @@ export default Component.extend({
     set(notification, 'status', 'seen');
     notification.save();
   }
-
 });
