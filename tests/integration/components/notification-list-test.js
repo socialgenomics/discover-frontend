@@ -8,17 +8,8 @@ describe('Integration | Component | notification list', function() {
     integration: true
   });
 
-  it('renders', function() {
-    // Set any properties with this.set('myProperty', 'value');
-    // Handle any actions with this.on('myAction', function(val) { ... });
-    // Template block usage:
-    // this.render(hbs`
-    //   {{#notification-list}}
-    //     template content
-    //   {{/notification-list}}
-    // `);
-
-    this.render(hbs`{{notification-list}}`);
-    expect(this.$()).to.have.length(1);
+  it('if there are no notifcations a message is displayed', function() {
+    this.render(hbs`{{notification-list notifications=[]}}`);
+    expect(this.$().text().trim()).to.eql(`You\'re up to date.`);
   });
 });
