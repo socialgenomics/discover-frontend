@@ -1,6 +1,6 @@
 {{#if notifications}}
   {{#each notifications as |notification|}}
-    {{notification-list-item notification=notification}}
+    {{notification-list-item notification=notification transitionToSubscribable=(route-action 'transitionToSubscribable')}}
   {{/each}}
 {{else}}
   <div class="u-ta-center">

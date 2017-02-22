@@ -18,17 +18,9 @@
       </span>
 
       {{#if notification.subscriptionId.subscribableId.dataset}}
-
-        {{#link-to 'datasets.detail' notification.subscriptionId.subscribableId.dataset.id}}
-          {{notification.subscriptionId.subscribableId.dataset.title}}
-        {{/link-to}}
-
+        {{notification.subscriptionId.subscribableId.dataset.title}}
       {{else if notification.subscriptionId.subscribableId.request}}
-
-        {{#link-to 'requests.detail' notification.subscriptionId.subscribableId.request.id}}
-          {{notification.subscriptionId.subscribableId.request.title}}
-        {{/link-to}}
-
+        {{notification.subscriptionId.subscribableId.request.title}}
       {{/if}}
 
   </div>
