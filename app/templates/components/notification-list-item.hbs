@@ -1,9 +1,9 @@
 <div class="grid">
-  <div class="grid__col grid__col--1-of-5 u-ta-center">
+  <div class="grid__col grid__col--2-of-6 u-ta-center">
     <img class="u-w1 u-mr1 u-circle" src={{notification.properties.action.userId.userProfile.avatar}} alt="">
     <p class="u-fs0 u-tc-tertiary u-mb0">{{moment-from-now notification.createdAt}}</p>
   </div>
-  <div class="grid__col grid__col--4-of-5">
+  <div class="grid__col grid__col--4-of-6">
       <span>{{notification.properties.action.userId.displayName}}</span>
       <span class="u-tc-tertiary u-fs0">
         {{#if (eq notification.properties.action.type 'comment') }}
@@ -18,9 +18,9 @@
       </span>
 
       {{#if notification.subscriptionId.subscribableId.dataset}}
-        {{notification.subscriptionId.subscribableId.dataset.title}}
+        <p class="u-mb0">{{notification.subscriptionId.subscribableId.dataset.title}}</p>
       {{else if notification.subscriptionId.subscribableId.request}}
-        {{notification.subscriptionId.subscribableId.request.title}}
+        <p class="u-mb0">{{notification.subscriptionId.subscribableId.request.title}}</p>
       {{/if}}
 
   </div>
