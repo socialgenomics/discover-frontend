@@ -45,7 +45,7 @@
               label="Request Title"
               type="text"
               value=title
-              errors=errors.title
+              errors=validations.attrs.title.messages
               placeholder="Name your request"
               submit=(action 'addRequest')
             }}
@@ -53,7 +53,7 @@
               label="Request Description"
               type="textarea"
               value=description
-              errors=errors.description
+              errors=validations.attrs.description.messages
               placeholder="Describe the dataset you're looking for. You can include ethnicity of patients, number of samples, assay type or associated diseases."
               submit=(action 'addRequest')
             }}

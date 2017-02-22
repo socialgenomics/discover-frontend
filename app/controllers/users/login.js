@@ -1,9 +1,32 @@
 import Ember from 'ember';
-import EmberValidations from 'ember-validations';
+import { validator, buildValidations } from 'ember-cp-validations';
+
 const { get, getProperties, computed, Controller, inject: { service }, set } = Ember;
+const Validations = buildValidations({
+  email: [
+    validator('presence', {
+      presence: true,
+      message: 'Please provide email address.'
+    }),
+    validator('format', {
+      regex: /^([\w\-\.\+]+)@((?:[\w\-\.]+)(?:\.[a-zA-Z]{2,}))$/,
+      message: 'Must be a valid email address.'
+    })
+  ],
+  password: [
+    validator('presence', {
+      presence: true,
+      message: 'Please provide password.'
+    }),
+    validator('length', {
+      min: 8,
+      message: 'Must be at least 8 characters.'
+    })
+  ]
+});
 
 export default Controller.extend(
-  EmberValidations,
+  Validations,
   {
     session: service(),
 
@@ -11,32 +34,8 @@ export default Controller.extend(
     password: null,
     loading: false,
 
-    validations: {
-      email: {
-        presence: {
-          message: ' '
-        },
-        format: {
-          with: /^([\w\-\.\+]+)@((?:[\w\-\.]+)(?:\.[a-zA-Z]{2,}))$/,
-          message: 'Must be a valid e-mail address.'
-        },
-        server: true // must be last - unknown bug
-      },
-      password: {
-        presence: {
-          message: ' '
-        },
-        length: {
-          minimum: 8,
-          messages: { tooShort: 'Must be at least 8 characters.' }
-        },
-        server: true // must be last - unknown bug
-      }
-    },
-
-    isDisabled: computed('loading', 'isValid', function() {
-      return get(this, 'loading') || !get(this, 'isValid');
-    }),
+    isInvalid: computed.not('validations.isValid'),
+    isDisabled: computed.or('loading', 'isInvalid'),
 
     actions: {
       submitForm() {
