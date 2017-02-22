@@ -14,5 +14,6 @@ export default Component.extend({
     get(this, 'transitionToSubscribable')(subscribableModel, subscribableId);
     set(notification, 'status', 'seen');
     notification.save();
+    get(this, 'close')(get(this, 'dropdown'));
   }
 });
