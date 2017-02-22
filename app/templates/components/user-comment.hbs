@@ -1,21 +1,42 @@
-
 <!-- User Info / Timestamp -->
-<div class="u-flex u-items-start u-mb1 u-pt3 u-border-top">
+<div class="u-flex u-items-start u-justify-between u-mb1 u-pt3 u-border-top">
   {{#link-to 'user' comment.userId.id disabled=disabled invokeAction=(action 'toggleCreateAccountModal')}}
     <img class="u-w1 u-mr1 u-circle" src={{comment.userId.userProfile.avatar}} />
   {{/link-to}}
-  <div>
+  <div class="u-grow-1">
     {{#link-to 'user' comment.userId.id disabled=disabled invokeAction=(action 'toggleCreateAccountModal')}}
-      <h4 class="u-fs2 u-tc-primary u-mb0">{{comment.userId.displayName}}</h4>
+      <h4 class="u-fs2 u-tc-primary u-inline-block u-mb0">{{comment.userId.displayName}}</h4>
     {{/link-to}}
-    <span class="u-tc-tertiary u-fs0">{{moment-from-now comment.createdAt allowEmpty=true}}</span>
+    <span class="u-tc-tertiary u-block u-fs0">{{moment-from-now comment.createdAt allowEmpty=true}}</span>
   </div>
+  {{#if (and canEdit (not inEditMode))}}
+    {{fa-icon 'pencil' size=2 class='u-tc-tertiary u-hv-tc-secondary u-transform-flip u-cursor-pointer' click=(action 'enterEditMode')}}
+  {{/if}}
 </div>
 
 <!-- Comment -->
-<p class="u-markdown-formatting u-mb0">{{markdown-to-html markdown=comment.properties.text extensions='targetBlankLinks'}}</p>
-
-{{#if canEdit}}EDIT / DELETE{{/if}}
+{{#unless inEditMode}}
+  <p class="u-markdown-formatting u-mb0">{{markdown-to-html markdown=comment.properties.text extensions='targetBlankLinks'}}</p>
+{{else}}
+  <form class="u-mb3">
+    {{validated-input
+      type="textarea"
+      value=text
+      noMarkdown=true
+      noLabel=true
+      submit=(action 'save')
+      errors=validations.attrs.text.messages
+    }}
+    {{async-button
+      class="c-btn c-btn-primary u-px2 u-py1 u-mr2"
+      action=(action 'save')
+      default="Comment"
+      pending="Saving..."
+      disableWhen=(not validations.isValid)
+    }}
+    <button class="c-btn c-btn-text-secondary" {{action 'cancelEditMode'}}>Cancel</button>
+  </form>
+{{/unless}}
 
 {{#if showCreateAccountModal}}
   {{! "container-class" is a temporary solution, changes in ember modal dialog required }}
