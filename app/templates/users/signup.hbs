@@ -18,7 +18,7 @@
           label="Full Name"
           type="Text"
           value=fullname
-          errors=errors.fullname
+          errors=validations.attrs.fullname.messages
           placeholder="e.g. Christina Luckasson"
           submit=(action 'signupAndAuthenticate')
         }}
@@ -26,7 +26,7 @@
           label="Email"
           type="email"
           value=email
-          errors=errors.email
+          errors=validations.attrs.email.messages
           placeholder="e.g. christina@stthomashospital.com"
           submit=(action 'signupAndAuthenticate')
         }}
@@ -36,7 +36,7 @@
           class="u-mb3"
           value=password
           password=true
-          errors=errors.password
+          errors=validations.attrs.password.messages
           placeholder="e.g. •••••••••"
           helpText="Minimum 8 characters. Must include an uppercase letter or number."
           showPasswordButton=true

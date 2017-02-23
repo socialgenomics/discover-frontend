@@ -22,7 +22,9 @@ describe('DatasetsRegisterController', function() {
     needs: [
       'service:session',
       'service:metrics',
-      'ember-metrics@metrics-adapter:google-analytics'
+      'ember-metrics@metrics-adapter:google-analytics',
+      'validator:presence',
+      'validator:format'
     ]
   });
 

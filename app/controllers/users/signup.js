@@ -1,13 +1,60 @@
 import Ember from 'ember';
-import EmberValidations from 'ember-validations';
 import ENV from 'repositive/config/environment';
-import { validator } from 'ember-validations';
 import { isBadRequestError } from 'ember-ajax/errors';
 import FlashMessageMixin from 'repositive/mixins/flash-message-mixin';
+import { validator, buildValidations } from 'ember-cp-validations';
 
 const { assign, get, getProperties, set, setProperties, computed, Controller, inject: { service } } = Ember;
+const passwordPatterns = [/\d/, /[A-Z]/, /[!,@,#,$,%,^,&,*,?,_,~,-,(,)]/];
+const Validations = buildValidations({
+  fullname: [
+    validator('presence', {
+      presence: true,
+      message: 'Can\'t be blank.'
+    }),
+    validator('format', {
+      regex: /^((?!@).)*$/,
+      message: 'Please enter your full name.'
+    })
+  ],
+  email: [
+    validator('presence', {
+      presence: true,
+      message: 'Please provide email address.'
+    }),
+    validator('format', {
+      regex: /^([\w\-\.\+]+)@((?:[\w\-\.]+)(?:\.[a-zA-Z]{2,}))$/,
+      message: 'Must be a valid email address.'
+    })
+  ],
+  password: [
+    validator('presence', {
+      presence: true,
+      message: 'Please provide password.'
+    }),
+    validator('length', {
+      min: 8,
+      message: 'Must be at least 8 characters.'
+    }),
+    validator(
+      function(value) {
+        return getPasswordStrength(value, passwordPatterns) !== 0 ? true : 'Must include a number or capital letter.';
+      }
+    )
+  ]
+});
 
-export default Controller.extend(EmberValidations, FlashMessageMixin, {
+/**
+ * @desc Checks password strength. Each pattern match gets +1 to strength
+ * @param {String} password
+ * @param {Array<RegEx>} patterns
+ * @private
+ */
+function getPasswordStrength(password, patterns) {
+  return patterns.reduce((acc, pattern) => acc + Number(pattern.test(password)), 0);
+}
+
+export default Controller.extend(Validations, FlashMessageMixin, {
   session: service(),
   ajax: service(),
 
@@ -16,53 +63,13 @@ export default Controller.extend(EmberValidations, FlashMessageMixin, {
   password: null,
   loading: false,
   // number, capital letter and special character
-  passwordPatterns: [/\d/, /[A-Z]/, /[!,@,#,$,%,^,&,*,?,_,~,-,(,)]/],
+  passwordPatterns,
 
-  validations: {
-    fullname: {
-      presence: {
-        message: 'Can\'t be blank.'
-      },
-      inline: validator(function() {
-        let fn = get(this, 'fullname');
-        if (/@/.test(fn)) {
-          return 'Please enter your full name.';
-        }
-      })
-    },
+  isInvalid: computed.not('validations.isValid'),
+  isDisabled: computed.or('loading', 'isInvalid'),
 
-    email: {
-      presence: {
-        message: ''
-      },
-      format: {
-        with: /^([\w\-\.\+]+)@((?:[\w\-\.]+)(?:\.[a-zA-Z]{2,}))$/,
-        message: 'Must be a valid e-mail address.'
-      },
-      server: true
-    },
-
-    password: {
-      length: {
-        minimum: 8,
-        messages: {
-          tooShort: 'Must be at least 8 characters long.'
-        }
-      },
-      inline: validator(function() {
-        if (get(this, '_getPasswordStrength')(get(this, 'password'), get(this, 'passwordPatterns')) === 0) {
-          return 'Must include a number or capital letter.';
-        }
-      })
-    }
-  },
-
-  isDisabled: computed('loading', 'isValid', function() {
-    return get(this, 'loading') || !get(this, 'isValid');
-  }),
-
-  passwordStrength: computed('password', 'errors.password.length', function () {
-    if ( get(this, 'errors.password.length') > 0) {
+  passwordStrength: computed('password', 'validations.attrs.password.isValid', function () {
+    if ( get(this, 'validations.attrs.password.isValid') === false) {
       return 'weak';
     }
 
@@ -119,16 +126,9 @@ export default Controller.extend(EmberValidations, FlashMessageMixin, {
     const fullNameArray = fullName.split(' ');
     const firstname = fullNameArray.shift();
     const lastname = fullNameArray.join(' ') || '';
+
     return { firstname, lastname };
   },
 
-  /**
-   * @desc Checks password strength. Each pattern match gets +1 to strength
-   * @param {String} password
-   * @param {Array<RegEx>} patterns
-   * @private
-   */
-  _getPasswordStrength(password, patterns) {
-    return patterns.reduce((acc, pattern) => acc + Number(pattern.test(password)), 0);
-  }
+  _getPasswordStrength: getPasswordStrength
 });

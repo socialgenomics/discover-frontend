@@ -10,7 +10,7 @@
 
 
   <main class="u-px3 {{if isSearchPage 'u-py2'}}">
-    <div class="c-sidebar-toggle u-pos-absolute u-pos-top0 u-pos-right0 u-py2 u-px1 {{if isSearchPage 'u-bc-off-white u-hv-bc-off-white u-border'}} {{if (eq model.type 'repositive_collection') 'u-bc-collection-overlay u-hv-bc-collection'}} {{if (eq model.type 'datasource') 'u-bc-datasource-overlay u-hv-bc-datasource'}}">
+    <div class="c-sidebar-toggle u-pos-absolute u-pos-top0 u-pos-right0 u-py2 u-px1 {{if isSearchPage 'u-bc-off-white u-hv-bc-off-white u-border'}} {{if (or model.userId (eq model.type 'repositive_collection')) 'u-bc-collection-overlay u-hv-bc-collection'}} {{if (eq model.type 'datasource') 'u-bc-datasource-overlay u-hv-bc-datasource'}}">
       <a class="u-tc-secondary u-fw-med u-p2" {{action 'toggleMetaPanelVisibility'}}>{{#if metaPanelHidden}} <span class="u-tc-primary u-mr1">View filters</span> {{fa-icon 'chevron-right class="u-pl3"'}} {{else}} {{fa-icon 'times'}} {{/if}}</a>
     </div>
     {{#if displayInfo}}
