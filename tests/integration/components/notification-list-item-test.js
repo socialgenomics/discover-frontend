@@ -1,8 +1,10 @@
+/* jshint expr:true */
 import Ember from 'ember';
 import { expect } from 'chai';
 import { describe, it } from 'mocha';
 import { setupComponentTest } from 'ember-mocha';
 import hbs from 'htmlbars-inline-precompile';
+import sinon from 'sinon';
 
 describe('Integration | Component | notification list item', function() {
   setupComponentTest('notification-list-item', {
@@ -25,7 +27,9 @@ describe('Integration | Component | notification list item', function() {
         }
       },
       subscriptionId: {
-        subscribableId: {},
+        subscribableId: {
+          id: 'someId'
+        },
         subscribableModel: 'dataset'
       }
     });
@@ -71,5 +75,55 @@ describe('Integration | Component | notification list item', function() {
     this.set('notification.subscriptionId.subscribableId.request', { title: 'Request Title' });
     this.render(hbs`{{notification-list-item notification=notification}}`);
     expect(this.$('.c-notification-body p').text().trim()).to.eql('Request Title');
+  });
+
+  // Actions tests
+
+  it(`when notification is clicked, status is set to seen`, function() {
+    this.set('notification', buildNotificationObj());
+    this.setProperties({
+      'transitionToSubscribable': sinon.stub(),
+      'close': sinon.stub(),
+      'notification.save': sinon.stub().returns({ 'then': sinon.stub() })
+    });
+    this.render(hbs`{{notification-list-item
+      notification=notification
+      close=close
+      transitionToSubscribable=transitionToSubscribable}}`);
+    this.$('>').click();
+    expect(this.get('notification.status')).to.eql('seen');
+  });
+
+  it(`when notification is clicked, transitionToSubscribable is called with correct args`, function() {
+    this.set('notification', buildNotificationObj());
+    this.setProperties({
+      'transitionToSubscribable': sinon.spy(),
+      'close': sinon.stub(),
+      'notification.save': sinon.stub().returns({ 'then': sinon.stub() })
+    });
+    this.render(hbs`{{notification-list-item
+      notification=notification
+      close=close
+      transitionToSubscribable=transitionToSubscribable}}`);
+    this.$('>').click();
+    expect(this.get('transitionToSubscribable').calledWith('dataset', 'someId')).to.be.true;
+  });
+
+  it(`when notification is clicked, close is called with the dropdown`, function() {
+    this.set('notification', buildNotificationObj());
+    this.setProperties({
+      'transitionToSubscribable': sinon.stub(),
+      'close': sinon.spy(),
+      'notification.save': sinon.stub().returns({ 'then': sinon.stub() }),
+      'dropdown': {}
+    });
+    this.render(hbs`{{notification-list-item
+      notification=notification
+      close=close
+      transitionToSubscribable=transitionToSubscribable
+      dropdown=dropdown
+    }}`);
+    this.$('>').click();
+    expect(this.get('close').calledWith({})).to.be.true;
   });
 });
