@@ -31,9 +31,13 @@
   overflow-y: auto;
 }
 
-.c-card-detail-overflow {
+.c-card-detail {
   min-height: 600px;
   height: 650px;
   height: 80vh;
+}
+
+.c-card-detail-overflow {
   overflow-y: auto;
+  max-height: 75vh;
 }
