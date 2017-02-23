@@ -13,7 +13,7 @@
 <div class="grid-wrapper grid-wrapper-stepped {{unless session.isAuthenticated 'u-pt5' ''}}">
   <div class="grid grid--no-gutter">
     <div class="grid__col grid__col--3-of-3">
-      <div class="c-card c-card-detail-overflow {{unless session.isAuthenticated 'dataset-notification-margin' ''}}">
+      <div class="c-card c-card-detail {{unless session.isAuthenticated 'dataset-notification-margin' ''}}">
         <div class="grid grid--no-gutter u-full-height">
 
           <!-- dataset -->
@@ -83,7 +83,7 @@
               </header>
 
               <!-- body -->
-              <div class="u-p2">
+              <div class="u-p2 c-card-detail-overflow">
                 {{partial "datasets/tab-comments"}}
               </div>
 
