@@ -25,14 +25,13 @@ export default Mixin.create(ActionableMixin, SubscribableMixin, {
     })
       .then(data => {
         const model = data.model;
-        const colour = colours.getColour(data.model.id);
         const commenterIds = data.comments.content
           .map(action => get(action, 'record.userId.id'))
           .uniq(); //removes duplicates
         setProperties(model, {
           'actionableId': data.actionable,
           'subscribableId': data.subscribable,
-          'colour': colours.getColour(colour)
+          'colour': colours.getColour(get(model, 'assay'))
         });
         const hashObj = {
           model,
