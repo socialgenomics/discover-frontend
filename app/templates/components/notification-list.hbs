@@ -1,0 +1,16 @@
+{{#if notifications}}
+  {{#each notifications as |notification|}}
+    {{notification-list-item
+      notification=notification
+      dropdown=dropdown
+      close=(action close)
+      reloadNotifications=(action reloadNotifications)
+      transitionToSubscribable=(route-action 'transitionToSubscribable')
+    }}
+  {{/each}}
+{{else}}
+  <div class="u-ta-center">
+    {{fa-icon 'bell' class="u-pt4 u-tc-tertiary"}}
+    <p class="abc123 u-px4 u-pb4 u-mb0">You're up to date.</p>
+  </div>
+{{/if}}

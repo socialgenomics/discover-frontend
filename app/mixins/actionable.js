@@ -30,9 +30,5 @@ export default Mixin.create({
       })
       .save().catch(Logger.error);
     }
-  },
-
-  _peekOrCreate(store, modelType, id) {
-    return store.peekRecord(modelType, id) || store.createRecord(modelType, { id });
   }
 });

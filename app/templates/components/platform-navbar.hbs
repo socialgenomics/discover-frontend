@@ -40,9 +40,10 @@
             <span class="u-fs1 u-pl1">Request Data</span>
         {{/link-to}}
       </div>
-
-      {{navbar-dropdown avatar=avatar firstname=firstname username=username userId=userId}}
-
+      <div class="u-flex u-self-stretch">
+        {{navbar-notifier}}
+        {{navbar-dropdown avatar=avatar firstname=firstname username=username userId=userId}}
+      </div>
     {{else}}
       {{#unless isRootRoute}}
 
@@ -53,7 +54,6 @@
         </div>
 
       {{/unless}}
-
         <div class="u-hide-on-sm-md u-self-stretch u-flex u-pr2 u-shrink-none">
           <a href="http://repositive.io/about" class="u-flex u-items-center u-px2 u-ta-center u-tc-secondary u-hv-bc-off-white">About</a>
           <a href="http://blog.repositive.io/" class="u-flex u-items-center u-px2 u-ta-center u-border-right u-tc-secondary u-hv-bc-off-white">Blog</a>
