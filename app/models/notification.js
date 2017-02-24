@@ -3,7 +3,9 @@ import attr from 'ember-data/attr';
 import { belongsTo } from 'ember-data/relationships';
 
 export default DS.Model.extend({
-  subscriptionId: belongsTo('subscription'),
+  properties: attr('object'),
   status: attr('string'),
-  context: attr('object')
+  subscriptionId: belongsTo('subscription'),
+  userId: belongsTo('user'),
+  createdAt: attr('isodate')
 });
