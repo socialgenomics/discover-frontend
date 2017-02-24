@@ -29,7 +29,7 @@ export function model(params) {
   const collectionId = params.id;
   const queryString = params.query;
   return RSVP.hash({
-    actionable: this._peekOrCreate(store, 'actionable', collectionId),
+    actionable: store.findRecord('actionable', collectionId),
     collection: store.findRecord('collection', collectionId),
     collectionStats: get(this, 'ajax').request(ENV.APIRoutes['collection-stats'].replace('{collection_id}', collectionId), { method: 'GET' })
   })
