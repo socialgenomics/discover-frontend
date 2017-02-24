@@ -11,7 +11,10 @@ describe('UsersSignupController', function() {
   setupTest('controller:users/signup', {
     needs: [
       'service:session',
-      'service:metrics'
+      'service:metrics',
+      'validator:presence',
+      'validator:length',
+      'validator:format'
     ]
   });
 
@@ -25,29 +28,29 @@ describe('UsersSignupController', function() {
 
   it('isDisabled is true when the form is invalid', function() {
     const controller = this.subject();
-    setProperties(controller, {
-      'isValid': false,
-      'loading': false
-    });
-    expect(get(controller, 'isDisabled')).to.eql(true);
+    expect(get(controller, 'isDisabled')).to.be.equal(true);
   });
 
   it('isDisabled is true when in loading state', function() {
     const controller = this.subject();
     setProperties(controller, {
-      'isValid': true,
-      'loading': true
+      fullname: 'aaaaaa',
+      email: 'aaa@aa.aa',
+      password: 'aaaaaaa1',
+      loading: true
     });
-    expect(get(controller, 'isDisabled')).to.eql(true);
+    expect(get(controller, 'isDisabled')).to.be.equal(true);
   });
 
   it('isDisabled is false when form is valid', function() {
     const controller = this.subject();
     setProperties(controller, {
-      'isValid': true,
-      'loading': false
+      fullname: 'aaaaaa',
+      email: 'aaa@aa.aa',
+      password: 'a@34567A',
+      loading: false
     });
-    expect(get(controller, 'isDisabled')).to.eql(false);
+    expect(get(controller, 'isDisabled')).to.be.equal(false);
   });
 
   it('_buildCredentials returns object with email, pw, first and lastname', function() {
@@ -60,10 +63,10 @@ describe('UsersSignupController', function() {
 
     const credentials = controller._buildCredentials();
 
-    expect(credentials.firstname).to.eql('Test');
-    expect(credentials.lastname).to.eql('Name');
-    expect(credentials.email).to.eql('testemail@example.com');
-    expect(credentials.password).to.eql('Abcdefghi');
+    expect(credentials.firstname).to.be.equal('Test');
+    expect(credentials.lastname).to.be.equal('Name');
+    expect(credentials.email).to.be.equal('testemail@example.com');
+    expect(credentials.password).to.be.equal('Abcdefghi');
   });
 
   describe('_getPasswordStrength', function() {
@@ -120,8 +123,9 @@ describe('UsersSignupController', function() {
       const controller = this.subject();
 
       set(controller, 'password', 'aaaaaaaa');
-      expect(get(controller, 'errors.password.length')).to.be.equal(1);
-      expect(get(controller, 'errors.password')[0]).to.be.equal('Must include a number or capital letter.');
+      expect(get(controller, 'validations.attrs.password.isValid')).to.be.false;
+      expect(get(controller, 'validations.attrs.password.messages')[0])
+        .to.be.equal('Must include a number or capital letter.');
     });
 
     it('should not return error', function () {
@@ -130,7 +134,7 @@ describe('UsersSignupController', function() {
 
       passwords.forEach(password => {
         set(controller, 'password', password);
-        expect(get(controller, 'errors.password.length')).to.be.equal(0);
+        expect(get(controller, 'validations.attrs.password.isValid')).to.be.true;
       });
     });
   });
