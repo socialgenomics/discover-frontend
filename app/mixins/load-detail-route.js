@@ -16,23 +16,28 @@ export default Mixin.create(ActionableMixin, SubscribableMixin, {
 
   _getModelData(params, modelType) {
     const modelId = params.id;
-    return RSVP.hash({
-      actionable: this._peekOrCreate(this.store, 'actionable', modelId),
-      subscribable: this._peekOrCreate(this.store, 'subscribable', modelId),
+    const initialDataHash = {
       comments: this._getComments(modelId),
       tags: this._getTags(modelId),
       model: this.store.findRecord(modelType, modelId)
-    })
+    };
+    if (get(this, 'session.isAuthenticated')) {
+      initialDataHash['actionable'] = this.store.findRecord('actionable', modelId);
+      initialDataHash['subscribable'] = this.store.findRecord('subscribable', modelId);
+    }
+    return RSVP.hash(initialDataHash)
       .then(data => {
         const model = data.model;
         const commenterIds = data.comments.content
           .map(action => get(action, 'record.userId.id'))
           .uniq(); //removes duplicates
-        setProperties(model, {
-          'actionableId': data.actionable,
-          'subscribableId': data.subscribable,
-          'colour': colours.getColour(get(model, 'assay'))
-        });
+        set(model, 'colour', colours.getColour(get(model, 'assay')));
+        if (get(this, 'session.isAuthenticated')) {
+          setProperties(model, {
+            'actionableId': data.actionable,
+            'subscribableId': data.subscribable
+          });
+        }
         const hashObj = {
           model,
           tags: data.tags,
