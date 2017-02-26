@@ -1,19 +1,20 @@
 import Ember from 'ember';
 import CheckEditPermissionsMixin from 'repositive/mixins/check-edit-permissions-mixin';
-import FlashMessageMixin from 'repositive/mixins/flash-message-mixin';
+import EditModeMixin from 'repositive/mixins/edit-mode-mixin';
 import Validations from 'repositive/validations/dataset';
 
 const { Controller, computed, inject: { service }, Logger, get, set, setProperties } = Ember;
 
 export default Controller.extend(
-  FlashMessageMixin,
+  EditModeMixin,
   Validations,
   CheckEditPermissionsMixin,
   {
     session: service(),
     urlGenerator: service(),
 
-    inEditMode: false,
+    editablePropertyKeys: ['title', 'description', 'url'],
+
 
     dataset: computed.alias('model.dataset'),
     stats: computed.alias('model.stats'),
@@ -21,6 +22,8 @@ export default Controller.extend(
     tags: computed.filterBy('dataset.actionableId.actions', 'type', 'tag'),
 
     checkEditPermissionsModel: computed.oneWay('dataset'),
+
+    // copy of editable Properties
     title: computed.oneWay('dataset.title'),
     description: computed.oneWay('dataset.description'),
     url: computed.oneWay('dataset.url'),
@@ -109,43 +112,13 @@ export default Controller.extend(
         this.toggleProperty('isShowingTagModal');
       },
 
-      enterEditMode() {
-        set(this, 'inEditMode', true);
-      },
-
       cancelEditMode() {
-        setProperties(this, {
-          inEditMode: false,
-          title: get(this, 'dataset.title'),
-          description: get(this, 'dataset.description'),
-          url: get(this, 'dataset.url')
-        });
+        this.resetModuleStateOnCancel('dataset', get(this, 'editablePropertyKeys'));
       },
 
       save() {
-        const dataset = get(this, 'dataset');
-
-        setProperties(dataset, {
-          title: get(this, 'title'),
-          description: get(this, 'description'),
-          url: get(this, 'url')
-        });
-        dataset
-          .save()
-          .then(this._onEditSuccess.bind(this))
-          .catch(this._onEditError.bind(this));
+        this.saveChanges(get(this, 'dataset'), get(this, 'editablePropertyKeys'));
       }
-    },
-
-    _onEditSuccess() {
-      set(this, 'inEditMode', false);
-      this._addFlashMessage('Your request has benn updated.', 'success');
-    },
-
-    _onEditError() {
-      get(this, 'request').rollbackAttributes();
-      set(this, 'inEditMode', false);
-      this._addFlashMessage('There was problem with updating you request.', 'warning');
     }
   }
 );

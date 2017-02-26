@@ -1,25 +1,27 @@
 import Ember from 'ember';
 import CheckEditPermissionsMixin from 'repositive/mixins/check-edit-permissions-mixin';
-import FlashMessageMixin from 'repositive/mixins/flash-message-mixin';
+import EditModeMixin from 'repositive/mixins/edit-mode-mixin';
 import Validations from 'repositive/validations/request';
 
 const { Controller, computed, inject: { service }, Logger, get, set, setProperties } = Ember;
 
 export default Controller.extend(
-  FlashMessageMixin,
+  EditModeMixin,
   Validations,
   CheckEditPermissionsMixin,
   {
     session: service(),
     urlGenerator: service(),
 
-    inEditMode: false,
+    editablePropertyKeys: ['title', 'description'],
 
     request: computed.alias('model.request'),
     comments: computed.filterBy('request.actionableId.actions', 'type', 'comment'),
     tags: computed.filterBy('request.actionableId.actions', 'type', 'tag'),
 
     checkEditPermissionsModel: computed.oneWay('request'),
+
+    // copy of editable Properties
     title: computed.oneWay('request.title'),
     description: computed.oneWay('request.description'),
 
@@ -80,41 +82,13 @@ export default Controller.extend(
         this.toggleProperty('isShowingTagModal');
       },
 
-      enterEditMode() {
-        set(this, 'inEditMode', true);
-      },
-
       cancelEditMode() {
-        setProperties(this, {
-          inEditMode: false,
-          title: get(this, 'request.title'),
-          description: get(this, 'request.description')
-        });
+        this.resetModuleStateOnCancel('request', get(this, 'editablePropertyKeys'));
       },
 
       save() {
-        const request = get(this, 'request');
-
-        setProperties(request, {
-          'title': get(this, 'title'),
-          'description': get(this, 'description')
-        });
-        request
-          .save()
-          .then(this._onEditSuccess.bind(this))
-          .catch(this._onEditError.bind(this));
+        this.saveChanges(get(this, 'request'), get(this, 'editablePropertyKeys'));
       }
-    },
-
-    _onEditSuccess() {
-      set(this, 'inEditMode', false);
-      this._addFlashMessage('Your request has benn updated.', 'success');
-    },
-
-    _onEditError() {
-      get(this, 'request').rollbackAttributes();
-      set(this, 'inEditMode', false);
-      this._addFlashMessage('There was problem with updating you request.', 'warning');
     }
   }
 );
