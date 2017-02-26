@@ -3,7 +3,7 @@ import CheckEditPermissionsMixin from 'repositive/mixins/check-edit-permissions-
 import EditModeMixin from 'repositive/mixins/edit-mode-mixin';
 import Validations from 'repositive/validations/comment';
 
-const { Component, computed: { oneWay }, get, set, setProperties } = Ember;
+const { Component, computed: { oneWay }, get, set } = Ember;
 
 export default Component.extend(
   CheckEditPermissionsMixin,

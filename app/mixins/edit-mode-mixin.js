@@ -21,7 +21,7 @@ export default Mixin.create(
      * @param {Array} keys
      */
     resetModuleStateOnCancel(modelName, keys) {
-      const data = Object.assign({ inEditMode: false }, this._createDataModel(keys, modelName ));
+      const data = Ember.merge({ inEditMode: false }, this._createDataModel(keys, modelName));
 
       setProperties(this, data);
     },
@@ -42,6 +42,7 @@ export default Mixin.create(
      * @todo: extracted from saveChanges just for comment model as it has different data model
      *        and general _createDataModel doesn't work. Would be nice to change comments data
      *        model so it's fat as other DS models we use for editing
+     * @todo: add tests - solve issues with testing promises
      */
     persistChanges(model) {
       model
@@ -68,13 +69,13 @@ export default Mixin.create(
 
     _onEditSuccess() {
       set(this, 'inEditMode', false);
-      this._addFlashMessage('Your request has been updated.', 'success');
+      this._addFlashMessage('Your changes has been saved.', 'success');
     },
 
     _onEditError(model) {
       model.rollbackAttributes();
       set(this, 'inEditMode', false);
-      this._addFlashMessage('There was problem with updating you request.', 'warning');
+      this._addFlashMessage('There was problem with saving you changes.', 'warning');
     }
   }
 );

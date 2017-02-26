@@ -15,7 +15,6 @@ export default Controller.extend(
 
     editablePropertyKeys: ['title', 'description', 'url'],
 
-
     dataset: computed.alias('model.dataset'),
     stats: computed.alias('model.stats'),
     comments: computed.filterBy('dataset.actionableId.actions', 'type', 'comment'),
