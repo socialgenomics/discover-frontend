@@ -10,7 +10,7 @@
     <span class="u-tc-tertiary u-block u-fs0">{{moment-from-now comment.createdAt allowEmpty=true}}</span>
   </div>
   {{#if (and canEdit (not inEditMode))}}
-    {{fa-icon 'pencil' size=2 class='u-tc-tertiary u-hv-tc-secondary u-transform-flip u-cursor-pointer' click=(action 'enterEditMode')}}
+    {{fa-icon 'pencil' size=1 class='u-tc-tertiary u-hv-tc-secondary u-transform-flip u-cursor-pointer' click=(action 'enterEditMode')}}
   {{/if}}
 </div>
 
