@@ -1,24 +1,9 @@
 import Ember from 'ember';
 import CheckEditPermissionsMixin from 'repositive/mixins/check-edit-permissions-mixin';
 import FlashMessageMixin from 'repositive/mixins/flash-message-mixin';
-import { validator, buildValidations } from 'ember-cp-validations';
+import Validations from 'repositive/validations/dataset';
 
 const { Controller, computed, inject: { service }, Logger, get, set, setProperties } = Ember;
-const Validations = buildValidations({
-  title: validator('presence', {
-    presence: true,
-    message: 'This field can\'t be blank.'
-  }),
-  description: validator('presence', {
-    presence: true,
-    message: 'This field can\'t be blank.'
-  }),
-  url: validator('format', {
-    regex: /[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/,
-    allowBlank: true,
-    message: 'Must be a valid url.'
-  })
-});
 
 export default Controller.extend(
   FlashMessageMixin,

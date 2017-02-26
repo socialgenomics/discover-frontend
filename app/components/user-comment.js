@@ -1,15 +1,9 @@
 import Ember from 'ember';
 import CheckEditPermissionsMixin from 'repositive/mixins/check-edit-permissions-mixin';
 import FlashMessageMixin from 'repositive/mixins/flash-message-mixin';
-import { validator, buildValidations } from 'ember-cp-validations';
+import Validations from 'repositive/validations/comment';
 
 const { Component, computed: { oneWay }, get, set, setProperties } = Ember;
-const Validations = buildValidations({
-  text: validator('presence', {
-    presence: true,
-    message: 'This field can\'t be blank.'
-  })
-});
 
 export default Component.extend(
   CheckEditPermissionsMixin,
