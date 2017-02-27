@@ -8,45 +8,7 @@
         </header>
 
         <div class="grid__col grid__col--4-of-12 grid__col--m-2-of-3 grid__col--centered">
-          <form>
-            <div class="u-mb3">
-              {{#radio-button
-                value="notRelevant"
-                groupValue=reason
-                radioClass="u-mr2 u-inherit-height u-0-width u-px2"
-                classNames="u-block u-mb1 u-ta-left"
-                changed="enableSubmit"}}
-                It's not relevant.
-              {{/radio-button}}
-
-              {{#radio-button
-                value="inApp"
-                groupValue=reason
-                radioClass="u-mr2 u-inherit-height u-0-width u-px2"
-                classNames="u-block u-mb1 u-ta-left"
-                changed="enableSubmit"}}
-                I would prefer in-app notifications only.
-              {{/radio-button}}
-
-              {{#radio-button
-                value="doNotLike"
-                groupValue=reason
-                radioClass="u-mr2 u-inherit-height u-0-width u-px2"
-                classNames="u-block u-mb1 u-ta-left"
-                changed="enableSubmit"}}
-                I don't like this type of notification.
-              {{/radio-button}}
-            </div>
-
-            {{async-button
-              class="c-btn c-btn-primary u-fs3 u-mb1"
-              default="Submit"
-              pending="Submitting..."
-              action=(action 'submitForm')
-              reset=true
-              disableWhen=isInvalid
-            }}
-          </form>
+          {{unfollow-form}}
         </div>
 
       </div>
