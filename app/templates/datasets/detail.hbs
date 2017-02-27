@@ -1,4 +1,3 @@
-
 <!-- CSS Refactor: still need to account for Open Dataset styles -->
 {{#unless session.isAuthenticated}}
   {{#full-page-notification}}
@@ -105,8 +104,8 @@
           </div>
 
           <!-- Discussion  -->
-          <div class="grid__col grid__col--5-of-12 u-full-height">
-            <div class="u-border-left u-full-min-height">
+          <div class="c-card-detail-discussion grid__col grid__col--5-of-12 u-full-height">
+            <div class="u-border-left u-border-right u-full-min-height">
 
               <!-- header -->
               <header class="c-card-header u-bc-off-white u-px2 u-flex u-items-center u-justify-center">
@@ -114,7 +113,7 @@
               </header>
 
               <!-- body -->
-              <div class="u-p2 c-card-detail-overflow">
+              <div class="u-p2">
                 {{partial "datasets/tab-comments"}}
               </div>
 

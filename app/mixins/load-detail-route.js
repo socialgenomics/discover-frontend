@@ -4,7 +4,7 @@ import ActionableMixin from 'repositive/mixins/actionable';
 import SubscribableMixin from 'repositive/mixins/subscribable';
 import colours from 'repositive/utils/colours';
 
-const { Mixin, get, RSVP, inject: { service }, setProperties } = Ember;
+const { Mixin, get, set, RSVP, inject: { service }, setProperties } = Ember;
 
 export default Mixin.create(ActionableMixin, SubscribableMixin, {
   ajax: service(),
