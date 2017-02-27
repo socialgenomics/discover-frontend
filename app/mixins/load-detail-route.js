@@ -18,12 +18,14 @@ export default Mixin.create(ActionableMixin, SubscribableMixin, {
     const initialDataHash = {
       comments: this._getComments(modelId),
       tags: this._getTags(modelId),
-      model: this.store.findRecord(modelType, modelId)
+      model: this.store.findRecord(modelType, modelId),
+      actionable: this._peekOrCreate(this.store, 'actionable', modelId),
+      subscribable: this._peekOrCreate(this.store, 'subscribable', modelId)
     };
-    if (get(this, 'session.isAuthenticated')) {
-      initialDataHash['actionable'] = this.store.findRecord('actionable', modelId);
-      initialDataHash['subscribable'] = this.store.findRecord('subscribable', modelId);
-    }
+    // if (get(this, 'session.isAuthenticated')) {
+    //   initialDataHash['actionable'] = this.store.findRecord('actionable', modelId);
+    //   initialDataHash['subscribable'] = this.store.findRecord('subscribable', modelId);
+    // }
     return RSVP.hash(initialDataHash)
       .then(data => {
         const model = data.model;
@@ -42,7 +44,7 @@ export default Mixin.create(ActionableMixin, SubscribableMixin, {
           userProfiles: commenterIds.map(id => this.store.query('userProfile', id))
         };
         if (get(this, 'session.isAuthenticated')) {
-          hashObj['subscriptions'] = this._getSubscriptions(modelId);
+          hashObj['subscriptions'] = this._getSubscriptions(modelId, get(this, 'session.authenticatedUser.id'));
         }
         return RSVP.hash(hashObj);
       });
