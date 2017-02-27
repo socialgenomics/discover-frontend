@@ -35,19 +35,16 @@
   min-height: 600px;
   height: 650px;
   height: 80vh;
-  border-right: 0;
+
+  @media (max-width: $breakpoint-large) {
+    overflow-y: auto;
+  }
 }
 
 .c-card-detail-discussion {
   overflow-y: auto;
-}
 
-@media (max-width: $breakpoint-large) {
-  .c-card-detail {
-    overflow-y: auto;
-  }
-
-  .c-card-detail-discussion {
+  @media (max-width: $breakpoint-large) {
     overflow-y: visible;
   }
 }
