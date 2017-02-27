@@ -13,7 +13,8 @@ export default Component.extend({
 
     submitForm() {
       if (!get(this, 'isInvalid')) {
-        return this.sendAction('submitUnfollowForm')
+        // Need to fix route transition
+        return this.transitionTo('root')
         .then(() => {
           this.flashMessages.add({
             message: 'Thank you for your feedback.',

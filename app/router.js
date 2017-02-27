@@ -75,6 +75,9 @@ Router.map(function() {
     this.route('detail', {
       path: ':id'
     });
+    this.route('unfollow', {
+      path: 'unfollow/:id'
+    });
   });
 
   this.route('help', { resetNamespace: true }, function() {
