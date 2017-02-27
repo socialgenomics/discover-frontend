@@ -19,5 +19,11 @@ export default Route.extend(AuthenticatedRouteMixin, FlashMessageMixin, {
       })
         .then(this._addFlashMessage('You have successfully unfollowed this dataset.', 'success'))
         .catch(Logger.error);
+  },
+
+  actions: {
+    transitionToRoot() {
+      this.transitionTo('root');
+    }
   }
 });

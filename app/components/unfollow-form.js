@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-const { Component, Logger, computed, get, set } = Ember;
+const { Component, Logger, get, set } = Ember;
 
 export default Component.extend({
   tagName: 'form',
@@ -13,10 +13,9 @@ export default Component.extend({
 
     submitForm() {
       if (!get(this, 'isInvalid')) {
-        // Need to fix route transition
-        return this.transitionTo('root')
+        return get(this, 'transitionToRoot')
         .then(() => {
-          this.flashMessages.add({
+          return get(this, 'flashMessages').add({
             message: 'Thank you for your feedback.',
             type: 'success'
           });
