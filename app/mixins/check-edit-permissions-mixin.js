@@ -5,7 +5,7 @@ const { computed, get, inject: { service }, Mixin } = Ember;
 export default Mixin.create({
   session: service(),
 
-  canEdit: computed('session.authenticatedUser', function () {
+  canEdit: computed('session.authenticatedUser', 'checkEditPermissionsModel', function () {
     return get(this, 'session.authenticatedUser.id') === get(this, 'checkEditPermissionsModel.userId.id');
   })
 });
