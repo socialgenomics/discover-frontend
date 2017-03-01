@@ -2,6 +2,7 @@ import Ember from 'ember';
 import ENV from 'repositive/config/environment';
 import ActionableMixin from 'repositive/mixins/actionable';
 import SubscribableMixin from 'repositive/mixins/subscribable';
+import peekOrCreate from '../utils/peekOrCreate';
 
 const { Mixin, get, RSVP, inject: { service }, setProperties } = Ember;
 
@@ -19,8 +20,8 @@ export default Mixin.create(ActionableMixin, SubscribableMixin, {
       comments: this._getComments(modelId),
       tags: this._getTags(modelId),
       model: this.store.findRecord(modelType, modelId),
-      actionable: this._peekOrCreate(this.store, 'actionable', modelId),
-      subscribable: this._peekOrCreate(this.store, 'subscribable', modelId)
+      actionable: peekOrCreate(this.store, 'actionable', modelId),
+      subscribable: peekOrCreate(this.store, 'subscribable', modelId)
     })
       .then(data => {
         const model = data.model;
