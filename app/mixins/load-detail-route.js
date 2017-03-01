@@ -19,21 +19,17 @@ export default Mixin.create(ActionableMixin, SubscribableMixin, {
     return RSVP.hash({
       comments: this._getComments(modelId),
       tags: this._getTags(modelId),
-      model: this.store.findRecord(modelType, modelId),
-      actionable: peekOrCreate(this.store, 'actionable', modelId),
-      subscribable: peekOrCreate(this.store, 'subscribable', modelId)
+      model: this.store.findRecord(modelType, modelId)
     })
       .then(data => {
         const model = data.model;
         const commenterIds = data.comments.content
           .map(action => get(action, 'record.userId.id'))
           .uniq(); //removes duplicates
-        if (get(this, 'session.isAuthenticated')) {
-          setProperties(model, {
-            'actionableId': data.actionable,
-            'subscribableId': data.subscribable
-          });
-        }
+        setProperties(model, {
+          'actionableId': peekOrCreate(this.store, 'actionable', modelId),
+          'subscribableId': peekOrCreate(this.store, 'subscribable', modelId)
+        });
         const hashObj = {
           model,
           tags: data.tags,

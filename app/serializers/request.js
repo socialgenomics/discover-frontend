@@ -8,7 +8,7 @@ export default JSONSerializer.extend({
     json.user_id = snapshot.belongsTo('userId').id;
     return json;
   },
-  
+
   keyForRelationship: function (key, kind, method) {
     if (method === 'serialize') {
       if (key === 'actionableId' || key === 'subscribableId') {
