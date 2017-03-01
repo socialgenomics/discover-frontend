@@ -8,10 +8,7 @@ export default JSONSerializer.extend({
 
 export function keyForRelationship(key, kind, method) {
   if (method === 'serialize') {
-    if (key === 'actionableId' || key === 'subscribableId') {
-      return 'id';
-    }
-    normalizeKeyName(key);
+    return normalizeKeyName(key);
   } else {
     return Ember.String.underscore(key).toLowerCase();
   }
@@ -21,7 +18,7 @@ export function keyForAttribute(attr, method) {
   return Ember.String.underscore(attr).toLowerCase();
 }
 
-function normalizeKeyName(key) {
+export function normalizeKeyName(key) {
   if (key.slice(-2).toLowerCase() !== 'id' ) {
     return `${key}_id`;
   } else {
