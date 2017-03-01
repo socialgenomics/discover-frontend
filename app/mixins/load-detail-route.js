@@ -2,7 +2,6 @@ import Ember from 'ember';
 import ENV from 'repositive/config/environment';
 import ActionableMixin from 'repositive/mixins/actionable';
 import SubscribableMixin from 'repositive/mixins/subscribable';
-import peekOrCreate from '../utils/peekOrCreate';
 
 const { Mixin, get, RSVP, inject: { service }, setProperties } = Ember;
 
@@ -19,7 +18,9 @@ export default Mixin.create(ActionableMixin, SubscribableMixin, {
     return RSVP.hash({
       comments: this._getComments(modelId),
       tags: this._getTags(modelId),
-      model: this.store.findRecord(modelType, modelId)
+      model: this.store.findRecord(modelType, modelId),
+      actionable: this.store.findRecord('actionable', modelId),
+      subscribable: this.store.findRecord('subscribable', modelId)
     })
       .then(data => {
         const model = data.model;
@@ -27,8 +28,8 @@ export default Mixin.create(ActionableMixin, SubscribableMixin, {
           .map(action => get(action, 'record.userId.id'))
           .uniq(); //removes duplicates
         setProperties(model, {
-          'actionableId': peekOrCreate(this.store, 'actionable', modelId),
-          'subscribableId': peekOrCreate(this.store, 'subscribable', modelId)
+          'actionableId': data.actionable,
+          'subscribableId': data.subscribable
         });
         const hashObj = {
           model,

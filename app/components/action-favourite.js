@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import peekOrCreate from '../utils/peekOrCreate';
 
 const { inject: { service }, Component, computed, isPresent, Logger, get, set } = Ember;
 
@@ -61,19 +60,21 @@ export default Component.extend({
     const store = get(this, 'store');
 
     set(this, 'isSubmitting', true);
-
-    store.createRecord('action', {
-      actionableId: peekOrCreate(store, 'actionable', currentModel.id),
-      userId: get(this, 'session.authenticatedUser'),
-      type: 'favourite',
-      actionable_model: currentModel.constructor.modelName
-    }).save()
-      .then(savedFavourite => {
-        get(this, 'favouritesService').pushFavourite(savedFavourite);
-        set(this, 'isSubmitting', false);
-        currentModel.incrementProperty('stats.favourite');
-      })
-      .catch(Logger.error);
+    store.findRecord('actionable', currentModel.id)
+      .then(actionable => {
+        store.createRecord('action', {
+          actionableId: actionable,
+          userId: get(this, 'session.authenticatedUser'),
+          type: 'favourite',
+          actionable_model: currentModel.constructor.modelName
+        })
+          .save()
+          .then(savedFavourite => {
+            get(this, 'favouritesService').pushFavourite(savedFavourite);
+            set(this, 'isSubmitting', false);
+            currentModel.incrementProperty('stats.favourite');
+          });
+      }).catch(Logger.error);
   },
 
   _deleteFavourite(favourite) {
