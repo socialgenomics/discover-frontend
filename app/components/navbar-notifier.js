@@ -22,7 +22,6 @@ export default Component.extend({
     return store.query('notification', {
       'where.user_id': userId,
       'where.properties.target.app': true,
-      'where.status': 'unseen',
       'include[0].model': 'subscription',
       'order[0][0]': 'created_at',
       'order[0][1]': 'DESC'

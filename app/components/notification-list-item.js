@@ -14,7 +14,7 @@ export default Component.extend({
     const subscribableModel = get(notification, 'subscriptionId.subscribableModel');
     const subscribableId = get(notification, 'subscriptionId.subscribableId.id');
     get(this, 'transitionToSubscribable')(subscribableModel, subscribableId);
-    set(notification, 'status', 'seen');
+    set(notification, 'status', 'read');
     get(this, 'close')(get(this, 'dropdown'));
     notification.save().then(() => {
       get(this, 'reloadNotifications')();
