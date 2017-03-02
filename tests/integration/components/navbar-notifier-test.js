@@ -5,13 +5,7 @@ import { setupComponentTest } from 'ember-mocha';
 import hbs from 'htmlbars-inline-precompile';
 
 function getNotificationObj() {
-  return {
-    id: '1',
-    status: 'unseen',
-    context: {
-      summary: 'You smell.'
-    }
-  };
+  return { status: 'unseen' };
 }
 
 describe('Integration | Component | navbar notifier', function() {
