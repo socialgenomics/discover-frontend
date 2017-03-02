@@ -21,7 +21,10 @@ export default Route.extend(ResetScrollMixin, LoadDetailRouteMixin, FlashMessage
         })
           .then(this.transitionTo('root'))
           .then(this._addFlashMessage('You have successfully unfollowed this dataset.', 'success'))
-          .catch(Logger.error);
+          .catch(error => {
+            Logger.error(error);
+            this._addFlashMessage('There was a problem unfollowing this dataset, please try again.', 'warning');
+          });
     }
     return this._getModelData(params, 'dataset')
       .then(data => {

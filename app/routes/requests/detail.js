@@ -21,7 +21,10 @@ export default Route.extend(AuthenticatedRouteMixin, LoadDetailRouteMixin, Flash
         })
           .then(this.transitionTo('root'))
           .then(this._addFlashMessage('You have successfully unfollowed this request.', 'success'))
-          .catch(Logger.error);
+          .catch(error => {
+            Logger.error(error);
+            this._addFlashMessage('There was a problem unfollowing this request, please try again.', 'warning');
+          });
     }
     return this._getModelData(params, 'request')
     .then(data => {
