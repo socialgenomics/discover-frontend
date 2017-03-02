@@ -16,8 +16,6 @@
   {{else}}
     <h5 class="u-tc-secondary u-fs2 u-ta-right">Search Results ({{model.meta.total}})</h5>
 
-    {{search-results-list results=model.datasets totalResults=model.meta.total}}
-
     {{#if (gt model.meta.total 0)}}
       {{pagination-bar
         totalPages=totalPages
@@ -26,5 +24,7 @@
         previousPage=(action 'previousPage')
        }}
     {{/if}}
+
+    {{search-results-list results=model.datasets totalResults=model.meta.total}}
   {{/if}}
 </div>
