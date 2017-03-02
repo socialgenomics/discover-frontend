@@ -46,7 +46,7 @@ describe('Unit | Component | user comment', function() {
         setupState(component);
         component[method]();
 
-        expect(spy.calledWith('Your comment has benn uploaded.', 'success')).to.be.true;
+        expect(spy.calledWith('Your comment has been updated.', 'success')).to.be.true;
       });
     });
 
@@ -81,7 +81,7 @@ describe('Unit | Component | user comment', function() {
         setupState(component);
         component[method]();
 
-        expect(spy.calledWith('There was problem with updating you comment.', 'warning')).to.be.true;
+        expect(spy.calledWith('There was problem while updating your comment.', 'warning')).to.be.true;
       });
     });
   });
