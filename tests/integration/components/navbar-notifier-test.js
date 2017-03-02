@@ -3,7 +3,6 @@ import { expect } from 'chai';
 import { describe, it } from 'mocha';
 import { setupComponentTest } from 'ember-mocha';
 import hbs from 'htmlbars-inline-precompile';
-import { clickTrigger } from '../../helpers/ember-basic-dropdown';
 
 function getNotificationObj() {
   return {

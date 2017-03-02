@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-const { Component, computed, inject: { service }, get, Logger, set, RSVP } = Ember;
+const { Component, computed, inject: { service }, get, getWithDefault, Logger, set, RSVP, isEmpty } = Ember;
 
 export default Component.extend({
   session: service(),
@@ -8,7 +8,11 @@ export default Component.extend({
 
   classNames: ['u-flex', 'u-self-stretch', 'u-shrink-none', 'u-items-center', 'u-justify-center', 'u-hv-bc-off-white'],
   classNameBindings: ['hasUnseenNotifications:u-tc-red:u-tc-secondary'],
-  hasUnseenNotifications: computed.filterBy('notifications', 'status', 'unseen'),
+  hasUnseenNotifications: computed('notifications.@each.status', function() {
+    const unseenNotifications = getWithDefault(this, 'notifications', []).filterBy('status', 'seen');
+    return !isEmpty(unseenNotifications);
+  }),
+
   didReceiveAttrs() {
     this._super(...arguments);
     if (get(this, 'session.isAuthenticated')) {
@@ -58,6 +62,14 @@ export default Component.extend({
 
   actions: {
     close(dropdown) { dropdown.actions.close(); },
+    setNotificationsToSeen() {
+      get(this, 'notifications')
+        .filterBy('status', 'unseen')
+        .map(notification => {
+          set(notification, 'status', 'seen');
+          return notification.save();
+        });
+    },
     reloadNotifications() {
       this._getNotifications(get(this, 'session.session.authenticated.user.id'));
     }

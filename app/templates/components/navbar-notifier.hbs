@@ -1,5 +1,5 @@
 {{#basic-dropdown verticalPosition=below as |dropdown|}}
-  {{#dropdown.trigger class="u-outline-none u-cursor-pointer u-p2"}}
+  {{#dropdown.trigger onMouseDown=(action 'setNotificationsToSeen') onTouchEnd=(action 'setNotificationsToSeen') class="u-outline-none u-cursor-pointer u-p2"}}
     {{fa-icon 'bell'}}
   {{/dropdown.trigger}}
 
