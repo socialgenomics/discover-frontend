@@ -7,5 +7,6 @@ Predicate terms filter search results to match a specified metadata field and va
 * collection: "collection name"
 * datasource: "data source name"
 * assay: "assay type"
+* tag: "tag name"
 
 You can apply multiple predicate filters to a single search query. For example, searching `title:"breast cancer" description:"Chinese" datasource:SRA` would show all results that have the words "breast cancer" in the title, "Chinese" in the description and are sourced from the SRA data source.
