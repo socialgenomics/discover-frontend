@@ -7,9 +7,8 @@ export default Component.extend({
   store: service(),
 
   classNames: ['u-flex', 'u-self-stretch', 'u-shrink-none', 'u-items-center', 'u-justify-center', 'u-hv-bc-off-white'],
-  classNameBindings: ['hasNotifications:u-tc-red:u-tc-secondary'],
-  hasNotifications: computed.notEmpty('notifications'),
-
+  classNameBindings: ['hasUnseenNotifications:u-tc-red:u-tc-secondary'],
+  hasUnseenNotifications: computed.filterBy('notifications', 'status', 'unseen'),
   didReceiveAttrs() {
     this._super(...arguments);
     if (get(this, 'session.isAuthenticated')) {
