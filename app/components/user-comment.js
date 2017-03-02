@@ -51,12 +51,12 @@ export default Component.extend(
 
     _onEditSuccess() {
       set(this, 'inEditMode', false);
-      this._addFlashMessage('Your comment has benn uploaded.', 'success');
+      this._addFlashMessage('Your comment has been updated.', 'success');
     },
     _onEditError() {
       get(this, 'comment').rollbackAttributes();
       set(this, 'inEditMode', false);
-      this._addFlashMessage('There was problem with updating you comment.', 'warning');
+      this._addFlashMessage('There was problem while updating your comment.', 'warning');
     }
   }
 );
