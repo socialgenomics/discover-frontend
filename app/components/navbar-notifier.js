@@ -9,7 +9,7 @@ export default Component.extend({
   classNames: ['u-flex', 'u-self-stretch', 'u-shrink-none', 'u-items-center', 'u-justify-center', 'u-hv-bc-off-white'],
   classNameBindings: ['hasUnseenNotifications:u-tc-red:u-tc-secondary'],
   hasUnseenNotifications: computed('notifications.@each.status', function() {
-    const unseenNotifications = getWithDefault(this, 'notifications', []).filterBy('status', 'seen');
+    const unseenNotifications = getWithDefault(this, 'notifications', []).filterBy('status', 'unseen');
     return !isEmpty(unseenNotifications);
   }),
 
