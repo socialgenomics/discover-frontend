@@ -1,14 +1,18 @@
 import Ember from 'ember';
+import CheckEditPermissionsMixin from 'repositive/mixins/check-edit-permissions-mixin';
 
 const { Controller, computed, inject: { service }, Logger, get } = Ember;
 
-export default Controller.extend({
+export default Controller.extend(CheckEditPermissionsMixin, {
   session: service(),
   urlGenerator: service(),
 
   request: computed.alias('model.request'),
   comments: computed.filterBy('request.actionableId.actions', 'type', 'comment'),
   tags: computed.filterBy('request.actionableId.actions', 'type', 'tag'),
+
+  checkEditPermissionsModel: computed.oneWay('request'),
+
   commentsSorted: computed.sort('comments', (itemA, itemB) => {
     if (itemA.get('createdAt') < itemB.get('createdAt')) {
       return 1;
