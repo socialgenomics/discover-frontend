@@ -1,13 +1,28 @@
 import Ember from 'ember';
 import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
 import LoadDetailRouteMixin from 'repositive/mixins/load-detail-route';
+import FlashMessageMixin from 'repositive/mixins/flash-message-mixin';
 
-const { inject: { service }, Logger, Route, RSVP, get } = Ember;
+const { inject: { service }, Logger, Route, RSVP, get, set } = Ember;
 
-export default Route.extend(AuthenticatedRouteMixin, LoadDetailRouteMixin, {
+export default Route.extend(AuthenticatedRouteMixin, LoadDetailRouteMixin, FlashMessageMixin, {
   session: service(),
 
-  model(params) {
+  model(params, transition) {
+    if (transition.queryParams.unfollow) {
+      const userId = get(this, 'session.authenticatedUser.id');
+      return this.store.query('subscription', {
+        'where.user_id': userId,
+        'where.subscribable_id': params.id
+      })
+        .then(subscription => {
+          set(subscription, 'active', false);
+          return subscription.save();
+        })
+          .then(this.transitionTo('root'))
+          .then(this._addFlashMessage('You have successfully unfollowed this request.', 'success'))
+          .catch(Logger.error);
+    }
     return this._getModelData(params, 'request')
     .then(data => {
       return RSVP.hash({
