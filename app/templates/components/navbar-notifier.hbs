@@ -4,16 +4,14 @@
   {{/dropdown.trigger}}
 
   {{#dropdown.content class="c-card u-flex u-flex-column"}}
-    {{#if isLoading}}
-      <span>loading...</span>
-    {{else}}
-      {{notification-list
-        notifications=notifications
-        dropdown=dropdown
-        close=(action 'close')
-        reloadNotifications=(action 'reloadNotifications')
-      }}
-    {{/if}}
+
+    {{notification-list
+      notifications=notifications
+      dropdown=dropdown
+      close=(action 'close')
+      reloadNotifications=(action 'reloadNotifications')
+      isLoading=isLoading
+    }}
 
   {{/dropdown.content}}
 {{/basic-dropdown}}

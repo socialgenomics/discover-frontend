@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-const { Component, computed, inject: { service }, get, getWithDefault, Logger, set, RSVP, isEmpty } = Ember;
+const { Component, computed, inject: { service }, get, getWithDefault, Logger, set, setProperties, RSVP, isEmpty } = Ember;
 
 export default Component.extend({
   session: service(),
@@ -27,6 +27,7 @@ export default Component.extend({
       'where.user_id': userId,
       'where.properties.target.app': true,
       'include[0].model': 'subscription',
+      'include[1].model': 'action',
       'order[0][0]': 'created_at',
       'order[0][1]': 'DESC'
     })
@@ -35,8 +36,10 @@ export default Component.extend({
           return this._getRelatedData(notification);
         }))
           .then(notifications => {
-            set(this, 'notifications', notifications);
-            set(this, 'isLoading', false);
+            setProperties(this, {
+              'notifications': notifications,
+              'isLoading': false
+            });
             return notifications;
           });
       })
