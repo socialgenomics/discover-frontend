@@ -52,6 +52,8 @@
                 <p class="u-markdown-formatting u-fs1">{{markdown-to-html markdown=dataset.description}}</p>
               {{/if}}
 
+              {{#if canEdit}}EDIT / DELETE{{/if}}
+
               <!-- tags -->
               <div class="u-pt2 u-pb1">
                 {{#each tags as |tag|}}
