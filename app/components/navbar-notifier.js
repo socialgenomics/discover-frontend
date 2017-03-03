@@ -22,6 +22,7 @@ export default Component.extend({
 
   _getNotifications(userId) {
     const store = get(this, 'store');
+    set(this, 'isLoading', true);
     return store.query('notification', {
       'where.user_id': userId,
       'where.properties.target.app': true,
@@ -30,14 +31,19 @@ export default Component.extend({
       'order[0][1]': 'DESC'
     })
       .then(notifications => {
-        const notificationsArray = notifications.map(notification => {
-          this._getRelatedData(notification);
-          return notification;
-        });
-
-        set(this, 'notifications', notificationsArray);
-        return notificationsArray;
-      }).catch(Logger.error);
+        return RSVP.all(notifications.map(notification => {
+          return this._getRelatedData(notification);
+        }))
+          .then(notifications => {
+            set(this, 'notifications', notifications);
+            set(this, 'isLoading', false);
+            return notifications;
+          });
+      })
+      .catch(error => {
+        set(this, 'isLoading', false);
+        Logger.error(error);
+      });
   },
 
   _getRelatedData(notification) {
@@ -56,20 +62,48 @@ export default Component.extend({
         .then(data => {
           const modelKey = `subscriptionId.subscribableId.${get(notification, 'subscriptionId.subscribableModel')}`;
           set(notification, modelKey, get(data, 'datasetOrRequest'));
-          return data;
-        }).catch(Logger.error);
+          return notification;
+        })
+        .catch(Logger.error);
+  },
+
+  _peekAndSetAction(notification) {
+    const store = get(this, 'store');
+    const action = store.peekRecord('action', get(notification, 'properties.action_id'));
+    set(notification, 'properties.action', action);
+    return notification;
+  },
+
+  _setNotificationsToSeen() {
+    return get(this, 'notifications')
+      .filterBy('status', 'unseen')
+      .map(notification => {
+        set(notification, 'status', 'seen');
+        return notification;
+      });
   },
 
   actions: {
-    close(dropdown) { dropdown.actions.close(); },
-    setNotificationsToSeen() {
-      get(this, 'notifications')
-        .filterBy('status', 'unseen')
-        .map(notification => {
-          set(notification, 'status', 'seen');
-          return notification.save();
-        });
+    close(dropdown) {
+      dropdown.actions.close();
     },
+
+    handleTriggerEvent() {
+      if (get(this, 'hasUnseenNotifications')){
+        set(this, 'isLoading', true);
+        return RSVP.all(this._setNotificationsToSeen().map(notification => {
+          return notification.save()
+            .then(notification => {
+              return this._peekAndSetAction(notification);
+            });
+        }))
+          .catch(Logger.error)
+          .finally(() => {
+            set(this, 'isLoading', false);
+          });
+      }
+    },
+
     reloadNotifications() {
       this._getNotifications(get(this, 'session.session.authenticated.user.id'));
     }
