@@ -89,7 +89,7 @@ export default Component.extend({
     },
 
     handleTriggerEvent() {
-      if (get(this, 'hasUnseenNotifications')){
+      if (get(this, 'hasUnseenNotifications')) {
         set(this, 'isLoading', true);
         return RSVP.all(this._setNotificationsToSeen().map(notification => {
           return notification.save()
