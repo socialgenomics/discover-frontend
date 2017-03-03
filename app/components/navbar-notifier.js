@@ -93,14 +93,10 @@ export default Component.extend({
         set(this, 'isLoading', true);
         return RSVP.all(this._setNotificationsToSeen().map(notification => {
           return notification.save()
-            .then(notification => {
-              return this._peekAndSetAction(notification);
-            });
+            .then(notification => this._peekAndSetAction(notification));
         }))
           .catch(Logger.error)
-          .finally(() => {
-            set(this, 'isLoading', false);
-          });
+          .finally(() => { set(this, 'isLoading', false); });
       }
     },
 
