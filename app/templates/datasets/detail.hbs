@@ -1,4 +1,3 @@
-
 <!-- CSS Refactor: still need to account for Open Dataset styles -->
 {{#unless session.isAuthenticated}}
   {{#full-page-notification}}
@@ -18,165 +17,14 @@
 <div class="grid-wrapper grid-wrapper-stepped">
   <div class="grid grid--no-gutter">
     <div class="grid__col grid__col--3-of-3">
-      <div class="c-card c-card-detail-overflow {{unless session.isAuthenticated 'dataset-notification-margin' ''}}">
-        {{#unless inEditMode}}
-          <div class="grid grid--no-gutter u-full-height">
-
-            <!-- dataset -->
-            <div class="grid__col grid__col--7-of-12 u-pos-relative u-full-height">
-              <!-- header -->
-              <header class="c-card-header u-bc-off-white u-flex u-justify-between u-items-center u-px2">
-                <ul class="o-list-inline o-list-flush-left u-mb0">
-                  {{#if dataset.assay}}
-                    {{assay-type assay=dataset}}
-                  {{/if}}
-                </ul>
-                <div class="u-flex u-items-center">
-                  {{follow-button subscribable=dataset.subscribableId model=dataset}}
-                  <ul class="o-list-inline u-pl2 u-mb0">
-                    {{action-favourite model=dataset class="u-mr2"}}
-                    {{action-share
-                      actionableId=dataset.id
-                      actionableType='dataset'
-                      shareUrl=datasetUrl
-                    }}
-                  </ul>
-                </div>
-              </header>
-
-              <!-- body -->
-              <!-- TODO hack fix to stop text overflow on mobile. Needs redesigning. -->
-              <div class="u-p2" style="max-height: 70%; overflow: scroll;">
-                <!-- heading/description -->
-                <div class="u-flex u-content-around">
-                  <h2 class="u-fs2 u-fw-med u-tc-primary u-mb1 u-grow-1">{{dataset.title}}</h2>
-                  {{#if canEdit}}
-                    {{fa-icon 'pencil' size=1 class='u-tc-tertiary u-hv-tc-secondary  u-cursor-pointer' click=(action 'enterEditMode')}}
-                  {{/if}}
-                </div>
-                {{#if dataset.description}}
-                  <p class="u-markdown-formatting u-fs1">{{markdown-to-html markdown=dataset.description}}</p>
-                {{/if}}
-                <!-- tags -->
-                <div class="u-pt2 u-pb1">
-                  {{#each tags as |tag|}}
-                    {{tag-item tag=tag}}
-                  {{/each}}
-                </div>
-                {{#if session.isAuthenticated}}
-                  <div class="u-pl3">
-                    {{add-tag addTag=(action 'addTag')}}
-                  </div>
-                  <span class="u-fs0 u-tc-tertiary">Add tags to improve searching and browsing through data. {{#link-to 'help.other'}}Learn more{{/link-to}}</span>
-                {{/if}}
-              </div>
-
-              <!-- footer -->
-              <div class="u-pos-absolute u-full-width u-pos-bottom0 u-bc-white u-p2 u-border-top">
-
-                {{#unless session.isAuthenticated}}
-                  {{create-account-call-to-action}}
-                {{/unless}}
-                <ul class="o-list-flush-left u-mb2">
-                  {{#if dataset.userId}}
-                    <li class="u-fs0 u-tc-tertiary">
-                      Submitted by: {{#link-to 'user' dataset.userId.id }}<span class="u-fw-med u-fs1 u-tc-secondary">{{dataset.userId.displayName}}</span>{{/link-to}}
-                    </li>
-                  {{else}}
-                    {{#if dataset.datasourceId.name}}
-                      <li class="u-fs0 u-tc-tertiary">
-                        Sourced from: {{#link-to 'datasources.source' dataset.datasourceId.id}}<span class="u-fw-med u-fs1 u-tc-secondary">{{dataset.datasourceId.name}}</span>{{/link-to}}
-                      </li>
-                    {{/if}}
-                    {{#if dataset.accession}}
-                      <li class="u-fs0 u-tc-tertiary">
-                        Accession ID: <span class="u-fw-med u-fs1 u-tc-secondary">{{dataset.externalId}}</span>
-                      </li>
-                    {{/if}}
-                  {{/if}}
-                  {{#if dataset.access}}
-                    <li class="u-fs0 u-tc-tertiary">
-                      Access type: {{#link-to 'help.searching-for-data' (query-params help="filters")}}<span class="u-fw-med u-fs1 u-tc-secondary">{{dataset.access}}</span>{{/link-to}}
-                    </li>
-                  {{/if}}
-                </ul>
-
-                {{#if dataset.url}}
-                  <a target="_blank" {{action "trackExit"}} href="{{if session.isAuthenticated dataset.url ''}}" class="c-btn c-btn-primary">{{#if (eq dataset.access 'Open')}}Access Data{{else}}Go To Dataset{{/if}}</a>
-                {{else}}
-                  <a class="c-btn c-btn-primary">{{#if (eq dataset.access 'Open')}}Access Data{{else}}Apply for Access{{/if}}</a>
-                {{/if}}
-              </div>
-            </div>
-
-            <!-- Discussion  -->
-            <div class="grid__col grid__col--5-of-12 u-full-height">
-              <div class="u-border-left u-full-min-height">
-
-                <!-- header -->
-                <header class="c-card-header u-bc-off-white u-px2 u-flex u-items-center u-justify-center">
-                  <h4 class="u-mb0 u-fs2 u-fw-med u-tc-primary">Discussions</h4>
-                </header>
-
-                <!-- body -->
-                <div class="u-p2">
-                  {{partial "datasets/tab-comments"}}
-                </div>
-
-              </div>
-            </div>
-          </div>
-        {{else}}
-          <header class="c-card-header u-bc-grey t-dark u-flex u-justify-center u-items-center u-px2 u-mb2">
-            {{fa-icon 'pencil' size=1 class="u-mr2 u-tc-primary"}}
-            <span class="u-tc-primary u-td-uppercase">Edit Dataset</span>
-          </header>
-          <div class="grid grid--no-gutter">
-            <div class="grid__col grid__col--8-of-12 grid__col--push-2-of-12">
-              <form class="u-px2">
-                {{validated-input
-                  label="Title"
-                  type="text"
-                  value=title
-                  submit=(action 'save')
-                  errors=validations.attrs.title.messages
-                }}
-                {{validated-input
-                  label="Description"
-                  type="textarea"
-                  value=description
-                  noMarkdown=true
-                  submit=(action 'save')
-                  errors=validations.attrs.description.messages
-                }}
-                {{validated-input
-                  label="URL"
-                  value=url
-                  submit=(action 'save')
-                  errors=validations.attrs.url.messages
-                }}
-                <div class="u-flex u-justify-center u-items-center u-pt4">
-                  {{async-button
-                    action=(action 'save')
-                    class="c-btn c-btn-primary u-px3 u-py1 u-mr2 u-td-uppercase"
-                    default="Save Changes"
-                    pending="Saving..."
-                    disableWhen=(not validations.isValid)
-                  }}
-                  <button class="c-btn c-btn-text-secondary" {{action 'cancelEditMode'}}>Cancel</button>
-                </div>
-              </form>
-            </div>
-          </div>
-        {{/unless}}
-      </div>
+      {{dataset-page
+        model=dataset
+        commentsSorted=commentsSorted
+        tags=tags
+        editableProperties=datasetEditableProperties
+      }}
     </div>
   </div>
 </div>
-
-<!-- CSS Refactor: still need to style modals -->
-{{#if isShowingTagModal}}
-  {{tag-modal action="toggleTagModal"}}
-{{/if}}
 
 {{{ model.schema }}}
