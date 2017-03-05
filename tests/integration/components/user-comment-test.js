@@ -68,7 +68,7 @@ describe('Integration | Component | user comment', function() {
   });
 
   describe('edit mode', function () {
-    it('should have comment and cancel buttons', function () {
+    it('should have save and cancel buttons', function () {
       setupState(this);
 
       this.render(hbs`{{user-comment comment=comment canEdit=true inEditMode=true}}`);
@@ -78,7 +78,7 @@ describe('Integration | Component | user comment', function() {
 
       expect(commentButton).to.have.length(1);
       expect(cancelButton).to.have.length(1);
-      expect(commentButton.text().trim()).to.be.equal('Comment');
+      expect(commentButton.text().trim()).to.be.equal('Save');
       expect(cancelButton.text().trim()).to.be.equal('Cancel');
     });
 
