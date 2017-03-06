@@ -4,7 +4,14 @@
   {{fa-icon "chevron-left"}} Prev
 </a>
 
-<p class="u-tc-secondary u-mr2">{{currentPageNumber}} of {{totalPages}}</p>
+<p class="u-mr1">{{currentPageNumber}}</p>
+
+{{pagination-number-button page=4 currentPageNumber=currentPageNumber thisPage=thisPage}}
+{{pagination-number-button page=5 currentPageNumber=currentPageNumber thisPage=thisPage}}
+{{pagination-number-button page=6 currentPageNumber=currentPageNumber thisPage=thisPage}}
+
+<p class="u-tc-secondary u-mr2"> of {{totalPages}}</p>
+
 
 <a {{action 'nextPage'}} class="u-tc-secondary {{if noNextPage 'u-hide-display'}}">
   Next {{fa-icon "chevron-right"}}

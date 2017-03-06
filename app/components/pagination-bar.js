@@ -15,6 +15,7 @@ export default Component.extend({
 
   actions: {
     nextPage() { get(this, 'nextPage')(); },
-    previousPage() { get(this, 'previousPage')(); }
+    previousPage() { get(this, 'previousPage')(); },
+    thisPage() { get(this, 'thisPage')(); }
   }
 });

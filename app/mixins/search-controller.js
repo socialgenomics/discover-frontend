@@ -36,6 +36,10 @@ export default Mixin.create({
       this.decrementProperty('page');
     },
 
+    thisPage(page) {
+      set(this, 'page', page);
+    },
+
     addFilter(predicate, text) {
       this._toggleFilter('addFilter', predicate, text);
     },
