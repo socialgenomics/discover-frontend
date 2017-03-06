@@ -5,9 +5,11 @@
     {{fa-icon "chevron-left"}} Prev
   </a>
 
-  {{#each pages as |page|}}
-    {{pagination-number-button page=page currentPageNumber=currentPageNumber thisPage=thisPage}}
-  {{/each}}
+  <div class="u-inherit-disp u-mr1">
+    {{#each pages as |page|}}
+      {{pagination-number-button page=page currentPageNumber=currentPageNumber thisPage=thisPage}}
+    {{/each}}
+  </div>
 
   <p class="u-tc-secondary u-mr2"> of {{totalPages}}</p>
 
