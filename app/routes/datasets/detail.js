@@ -7,7 +7,8 @@ const { inject: { service }, Logger, Route, RSVP, get } = Ember;
 export default Route.extend(ResetScrollMixin, LoadDetailRouteMixin, {
   session: service(),
 
-  model(params) {
+  model(params, transition) {
+    this._checkIfShouldUnfollow(params, transition, 'dataset');
     return this._getModelData(params, 'dataset')
       .then(data => {
         return RSVP.hash({
