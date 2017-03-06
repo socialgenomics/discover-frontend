@@ -149,7 +149,7 @@
             value=(mut (get this prop.key))
             submit=(action 'save')
             errors=(v-get this prop.key 'messages')
-            type=(if prop.multiline 'textarea' 'test')
+            type=(if prop.multiline 'textarea' 'text')
             noMarkdown=true
           }}
         {{/each}}

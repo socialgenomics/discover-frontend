@@ -103,7 +103,7 @@ describe('Unit | Mixin | edit mode mixin', function() {
     it('should call flash message with correct params', function () {
       mixinObjInstance[method]();
 
-      expect(spy.calledWith('Your changes has been saved.', 'success')).to.be.true;
+      expect(spy.calledWith('Your changes have been saved.', 'success')).to.be.true;
     });
   });
 
@@ -131,7 +131,7 @@ describe('Unit | Mixin | edit mode mixin', function() {
     it('should call flash message with correct params', function () {
       mixinObjInstance[method](modelMock);
 
-      expect(spy.calledWith('There was problem with saving you changes.', 'warning')).to.be.true;
+      expect(spy.calledWith('There was a problem while saving your changes.', 'warning')).to.be.true;
     });
   });
 });

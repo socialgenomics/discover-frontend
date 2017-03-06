@@ -6,6 +6,9 @@ export default Mixin.create({
   session: service(),
 
   canEdit: computed('session.authenticatedUser', 'checkEditPermissionsModel', function () {
-    return get(this, 'session.authenticatedUser.id') === get(this, 'checkEditPermissionsModel.userId.id');
+    const userId = get(this, 'session.authenticatedUser.id');
+    const authorId = get(this, 'checkEditPermissionsModel.userId.id');
+
+    return userId !== undefined && authorId !== undefined && userId === authorId;
   })
 });

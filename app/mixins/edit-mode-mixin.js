@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import FlashMessageMixin from './flash-message-mixin';
 
-const { get, Mixin, set, setProperties } = Ember;
+const { get, merge, Mixin, set, setProperties } = Ember;
 
 
 export default Mixin.create(
@@ -21,7 +21,7 @@ export default Mixin.create(
      * @param {Array} keys
      */
     resetModuleStateOnCancel(modelName, keys) {
-      const data = Ember.merge({ inEditMode: false }, this._createDataModel(keys, modelName));
+      const data = merge({ inEditMode: false }, this._createDataModel(keys, modelName));
 
       setProperties(this, data);
     },
@@ -69,13 +69,13 @@ export default Mixin.create(
 
     _onEditSuccess() {
       set(this, 'inEditMode', false);
-      this._addFlashMessage('Your changes has been saved.', 'success');
+      this._addFlashMessage('Your changes have been saved.', 'success');
     },
 
     _onEditError(model) {
       model.rollbackAttributes();
       set(this, 'inEditMode', false);
-      this._addFlashMessage('There was problem with saving you changes.', 'warning');
+      this._addFlashMessage('There was a problem while saving your changes.', 'warning');
     }
   }
 );
