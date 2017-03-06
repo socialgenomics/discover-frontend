@@ -3,7 +3,7 @@ import Ember from 'ember';
 const { Component, get, computed } = Ember;
 
 export default Component.extend({
-  classNames: ['u-mb2', 'u-flex', 'u-justify-center'],
+  classNames: ['u-pt3', 'u-mb2', 'u-flex', 'u-justify-center', 'u-flex-wrap'],
 
   noPrevPage: computed('currentPageNumber', function() {
     if (get(this, 'currentPageNumber') === 1) { return true; }
