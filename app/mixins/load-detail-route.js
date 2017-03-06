@@ -2,10 +2,11 @@ import Ember from 'ember';
 import ENV from 'repositive/config/environment';
 import ActionableMixin from 'repositive/mixins/actionable';
 import SubscribableMixin from 'repositive/mixins/subscribable';
+import FlashMessageMixin from 'repositive/mixins/flash-message-mixin';
 
-const { Mixin, get, RSVP, inject: { service }, setProperties } = Ember;
+const { Mixin, get, RSVP, inject: { service }, setProperties, set, Logger } = Ember;
 
-export default Mixin.create(ActionableMixin, SubscribableMixin, {
+export default Mixin.create(ActionableMixin, SubscribableMixin, FlashMessageMixin, {
   ajax: service(),
   session: service(),
 
@@ -41,5 +42,21 @@ export default Mixin.create(ActionableMixin, SubscribableMixin, {
         }
         return RSVP.hash(hashObj);
       });
+  },
+
+  _checkIfShouldUnfollow(params, transition, modelName) {
+    if (transition.queryParams.unfollow) {
+      this._getSubscriptions(params.id, get(this, 'session.session.authenticated.user.id'))
+        .then(subscriptions => {
+          const subscription = subscriptions.get('firstObject');
+          set(subscription, 'active', false);
+          return subscription.save();
+        })
+          .then(this._addFlashMessage(`You have successfully unfollowed this ${modelName}.`, 'success'))
+          .catch(error => {
+            Logger.error(error);
+            this._addFlashMessage(`There was a problem unfollowing this ${modelName}, please try again.`, 'warning');
+          });
+    }
   }
 });
