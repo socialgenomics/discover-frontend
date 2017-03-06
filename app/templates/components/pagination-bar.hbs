@@ -1,18 +1,15 @@
 <p class="u-fw-bold u-mr2 u-mb1">Results: {{results}}</p>
 
 <div class="u-flex u-flex-wrap">
-  <a {{action 'previousPage'}} class="u-tc-secondary {{if noPrevPage 'u-hide-display'}} u-mr2">
+  <a {{action 'previousPage'}} class="u-tc-secondary {{if noPrevPage 'u-hide-display'}} u-mr1">
     {{fa-icon "chevron-left"}} Prev
   </a>
 
-  <p class="u-mr1">{{currentPageNumber}}</p>
-
-  {{pagination-number-button page=4 currentPageNumber=currentPageNumber thisPage=thisPage}}
-  {{pagination-number-button page=5 currentPageNumber=currentPageNumber thisPage=thisPage}}
-  {{pagination-number-button page=6 currentPageNumber=currentPageNumber thisPage=thisPage}}
+  {{#each pages as |page|}}
+    {{pagination-number-button page=page currentPageNumber=currentPageNumber thisPage=thisPage}}
+  {{/each}}
 
   <p class="u-tc-secondary u-mr2"> of {{totalPages}}</p>
-
 
   <a {{action 'nextPage'}} class="u-tc-secondary {{if noNextPage 'u-hide-display'}}">
     Next {{fa-icon "chevron-right"}}

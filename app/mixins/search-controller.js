@@ -7,6 +7,7 @@ export default Mixin.create({
   queryParams: ['query', 'page', 'resultsPerPage'],
   query: null,
   page: 1,
+  pages: [1, 2, 3, 4, 5],
   resultsPerPage: 6,
 
   totalPages: computed('model.meta.total', 'resultsPerPage', function () {
