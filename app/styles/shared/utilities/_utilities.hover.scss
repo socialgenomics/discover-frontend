@@ -8,7 +8,7 @@
   }
 }
 
-
+// background color hover effects
 .u-hv-bc-darken5    { &:hover { background-color: rgba($color-black, 0.05); }}
 .u-hv-bc-darken10   { &:hover { background-color: rgba($color-black, 0.1 ); }}
 
@@ -23,4 +23,8 @@
 .u-hv-bc-off-white  { @include hv-bc-darken($color-off-white,      10); }
 .u-hv-bc-grey       { @include hv-bc-darken($color-mid-grey,       10); }
 
+// text color hover effects
 .u-hv-tc-to-yellow  { &:hover { @extend .u-tc-yellow; }}
+.u-hv-tc-secondary { &:hover { @extend .u-tc-secondary; }}
+
+

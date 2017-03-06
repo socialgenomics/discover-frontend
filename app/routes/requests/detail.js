@@ -27,12 +27,12 @@ export default Route.extend(AuthenticatedRouteMixin, LoadDetailRouteMixin, Flash
           });
     }
     return this._getModelData(params, 'request')
-    .then(data => {
-      return RSVP.hash({
-        request: data.model
-      });
-    })
-    .catch(Logger.error);
+      .then(data => {
+        return RSVP.hash({
+          request: data.model
+        });
+      })
+      .catch(Logger.error);
   },
 
   afterModel(model) {

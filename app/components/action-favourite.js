@@ -1,4 +1,5 @@
 import Ember from 'ember';
+
 const { inject: { service }, Component, computed, isPresent, Logger, get, set } = Ember;
 
 export default Component.extend({
@@ -59,22 +60,21 @@ export default Component.extend({
     const store = get(this, 'store');
 
     set(this, 'isSubmitting', true);
-
     store.findRecord('actionable', currentModel.id)
       .then(actionable => {
-        return store.createRecord('action', {
+        store.createRecord('action', {
           actionableId: actionable,
           userId: get(this, 'session.authenticatedUser'),
           type: 'favourite',
           actionable_model: currentModel.constructor.modelName
-        }).save();
-      })
-      .then(savedFavourite => {
-        get(this, 'favouritesService').pushFavourite(savedFavourite);
-        set(this, 'isSubmitting', false);
-        currentModel.incrementProperty('stats.favourite');
-      })
-      .catch(Logger.error);
+        })
+          .save()
+          .then(savedFavourite => {
+            get(this, 'favouritesService').pushFavourite(savedFavourite);
+            set(this, 'isSubmitting', false);
+            currentModel.incrementProperty('stats.favourite');
+          });
+      }).catch(Logger.error);
   },
 
   _deleteFavourite(favourite) {

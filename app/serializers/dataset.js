@@ -1,6 +1,7 @@
+import Ember from 'ember';
 import JSONSerializer from 'ember-data/serializers/json';
 import DS from 'ember-data';
-import Ember from 'ember';
+import { keyForAttribute, normalizeKeyName } from './application';
 
 export default JSONSerializer.extend(DS.EmbeddedRecordsMixin, {
   attrs: {
@@ -14,24 +15,17 @@ export default JSONSerializer.extend(DS.EmbeddedRecordsMixin, {
     delete json.externalId;
     return json;
   },
-  keyForRelationship: function(key, kind, method)  {
+
+  keyForRelationship: function (key, kind, method) {
     if (method === 'serialize') {
       if (key === 'actionableId' || key === 'subscribableId') {
         return 'id';
       }
-      //check that last 2 chars of key are not "Id" first
-      const lastTwoCharsOfKey = key.slice(-2).toLowerCase();
-      if (lastTwoCharsOfKey !== 'id' ) {
-        return `${key}_id`;
-      } else {
-        return key.slice(0, -2) + '_id';
-      }
+      normalizeKeyName(key);
     } else {
       return Ember.String.underscore(key).toLowerCase();
     }
   },
 
-  keyForAttribute: function(attr, method) {
-    return Ember.String.underscore(attr).toLowerCase();
-  }
+  keyForAttribute: keyForAttribute
 });

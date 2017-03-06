@@ -3,3 +3,10 @@
   max-width: 240px;
   overflow-wrap: break-word;
 }
+.c-notification-list {
+  max-height: calc(90vh - #{$global-spacing-unit-large});
+  max-height: -o-calc(90vh - #{$global-spacing-unit-large}); /* opera */
+  max-height: -webkit-calc(90vh - #{$global-spacing-unit-large}); /* google, safari */
+  max-height: -moz-calc(90vh - #{$global-spacing-unit-large}); /* firefox */
+  overflow-y: auto;
+}
