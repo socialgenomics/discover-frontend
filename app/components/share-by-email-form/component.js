@@ -20,6 +20,7 @@ export default Component.extend(Validations, {
   ajax: service(),
 
   tagName: 'form',
+  classNames: ['u-ta-center'],
   emailAddress: '',
   customMessage: '',
   actionableId: null,
