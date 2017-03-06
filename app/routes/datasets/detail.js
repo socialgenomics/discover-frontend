@@ -1,13 +1,31 @@
 import Ember from 'ember';
 import ResetScrollMixin from 'repositive/mixins/reset-scroll';
 import LoadDetailRouteMixin from 'repositive/mixins/load-detail-route';
+import FlashMessageMixin from 'repositive/mixins/flash-message-mixin';
 
-const { inject: { service }, Logger, Route, RSVP, get } = Ember;
+const { inject: { service }, Logger, Route, RSVP, get, set } = Ember;
 
-export default Route.extend(ResetScrollMixin, LoadDetailRouteMixin, {
+export default Route.extend(ResetScrollMixin, LoadDetailRouteMixin, FlashMessageMixin, {
   session: service(),
 
-  model(params) {
+  model(params, transition) {
+    if (transition.queryParams.unfollow) {
+      const userId = get(this, 'session.authenticatedUser.id');
+      return this.store.query('subscription', {
+        'where.user_id': userId,
+        'where.subscribable_id': params.id
+      })
+        .then(subscription => {
+          set(subscription, 'active', false);
+          return subscription.save();
+        })
+          .then(this.transitionTo('root'))
+          .then(this._addFlashMessage('You have successfully unfollowed this dataset.', 'success'))
+          .catch(error => {
+            Logger.error(error);
+            this._addFlashMessage('There was a problem unfollowing this dataset, please try again.', 'warning');
+          });
+    }
     return this._getModelData(params, 'dataset')
       .then(data => {
         return RSVP.hash({
@@ -37,7 +55,7 @@ export default Route.extend(ResetScrollMixin, LoadDetailRouteMixin, {
               stats: hash.stats,
               schema: schema
             });
-          });
+          })
       })
       .catch(Logger.error);
   },
