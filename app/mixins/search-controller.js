@@ -7,8 +7,16 @@ export default Mixin.create({
   queryParams: ['query', 'page', 'resultsPerPage'],
   query: null,
   page: 1,
-  pages: [1, 2, 3, 4, 5],
   resultsPerPage: 6,
+  pageNumbers: [1, 2, 3, 4, 5],
+
+  pages: computed('page', function() {
+    if (get(this, 'page') % 5 === 0) {
+      console.log('5');
+      return this._updatePagesList(get(this, 'pageNumbers'));
+    }
+    return get(this, 'pageNumbers');
+  }),
 
   totalPages: computed('model.meta.total', 'resultsPerPage', function () {
     return Math.ceil(get(this, 'model.meta.total') / get(this, 'resultsPerPage'));
@@ -48,6 +56,13 @@ export default Mixin.create({
     removeFilter(predicate, text) {
       this._toggleFilter('removeFilter', predicate, text);
     }
+  },
+
+  /**
+  * @param {array} pages - the list of page numbers.
+  */
+  _updatePagesList(pages) {
+    return pages.map(arrayElement => arrayElement + 4);
   },
 
   /**
