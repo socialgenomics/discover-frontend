@@ -1,4 +1,4 @@
-{{#unless showCommentButtons}}
+{{#unless (or showCommentButtons noLabel)}}
   <label for="{{elementId}}" class="c-validated-input-label u-tc-secondary">
     {{label}}
   </label>

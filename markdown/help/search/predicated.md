@@ -1,12 +1,12 @@
 # What predicated search terms can I use?
 
-Predicated searches allow you to specify which metadata field you want the search to be performed in. Currently on Repositive you can predicate with:
+Predicate terms filter search results to match a specified metadata field and value. For example, searching for datasource:SRA will return all results from the SRA data source. Repositive currently supports the following predicate terms:
 
-* Title `title:`
-* Description `description:`
+* title: "terms included in the title"
+* description: "terms included in the description"
+* collection: "collection name"
+* datasource: "data source name"
+* assay: "assay type"
+* tag: "tag name"
 
-For instance: `title: breast cancer` will show you results that have the word 'breast cancer' in the title.  
-
-And 'title: breast cancer description: female Chinese' will show you results that have the words 'breast cancer' in the title and 'female Chinese' in the description.  
-
-You can use booleans as well to exclude/include other search words: `title: cancer NOT description: breast`.
+You can apply multiple predicate filters to a single search query. For example, searching `title:"breast cancer" description:"Chinese" datasource:SRA` would show all results that have the words "breast cancer" in the title, "Chinese" in the description and are sourced from the SRA data source.

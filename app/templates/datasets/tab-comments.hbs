@@ -14,10 +14,7 @@
 }}
 {{#each commentsSorted as |comment|}}
   {{user-comment
-    user=comment.userId
-    text=comment.properties.text
-    date=comment.createdAt
-    avatar=comment.userId.userProfile.avatar
+    comment=comment
     disabled=(not session.isAuthenticated)
   }}
 {{/each}}
