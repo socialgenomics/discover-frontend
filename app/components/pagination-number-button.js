@@ -6,11 +6,7 @@ export default Component.extend({
   tagName: 'p',
   classNames: [''],
 
-  isActive: computed('currentPageNumber', function() {
-    if (get(this, 'page') === get(this, 'currentPageNumber')) {
-      return true;
-    }
-  }),
+  isActive: computed.equal(get(this, 'page'), get(this, 'currentPageNumber')),
 
   actions: {
     thisPage(page) {
