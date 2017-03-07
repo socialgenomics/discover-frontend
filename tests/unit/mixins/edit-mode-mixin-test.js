@@ -71,6 +71,39 @@ describe('Unit | Mixin | edit mode mixin', function() {
     });
   });
 
+  describe('persistChanges', function () {
+    const method = this.title;
+
+    beforeEach(function () {
+      setProperties(mixinObjInstance, {
+        _onEditSuccess: sinon.spy(),
+        _onEditError: sinon.spy()
+      });
+    });
+
+    it('should call _onEditSuccess on success', function (done) {
+      const model = { save() { return Ember.RSVP.resolve(); } };
+
+      mixinObjInstance[method](model);
+
+      setTimeout(() => {
+        expect(mixinObjInstance._onEditSuccess.called).to.be.true;
+        done();
+      }, 0);
+    });
+
+    it('should call _onEditError on fail', function (done) {
+      const model = { save() { return Ember.RSVP.reject(); } };
+
+      mixinObjInstance[method](model);
+
+      setTimeout(() => {
+        expect(mixinObjInstance._onEditError.calledWith(model)).to.be.true;
+        done();
+      }, 0);
+    });
+  });
+
   describe('_createDataModel', function () {
     const method = this.title;
 
