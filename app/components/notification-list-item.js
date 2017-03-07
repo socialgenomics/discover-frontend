@@ -5,9 +5,9 @@ const { Component, computed, get, set } = Ember;
 export default Component.extend({
   tagName: 'li',
   classNames: ['u-p2', 'u-pr3', 'u-flex', 'u-items-center', 'u-border-bottom', 'u-hv-bc-white', 'u-cursor-pointer', 'u-pos-relative'],
-  isAction: computed('notification', function() {
-    return get(this, 'notification.properties.type') === 'action' ? true : false;
-  }),
+
+  isAction: computed.equal('notification.properties.type', 'action'),
+
   click() { this.touchEnd(); },
   touchEnd() {
     const notification = get(this, 'notification');
@@ -16,8 +16,6 @@ export default Component.extend({
     get(this, 'transitionToSubscribable')(subscribableModel, subscribableId);
     set(notification, 'status', 'read');
     get(this, 'close')(get(this, 'dropdown'));
-    notification.save().then(() => {
-      get(this, 'reloadNotifications')();
-    });
+    notification.save().then(() => { get(this, 'reloadNotifications')(); });
   }
 });

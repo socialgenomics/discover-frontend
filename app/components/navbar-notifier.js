@@ -20,6 +20,28 @@ export default Component.extend({
     }
   },
 
+  actions: {
+    close(dropdown) {
+      dropdown.actions.close();
+    },
+
+    handleTriggerEvent() {
+      if (get(this, 'hasUnseenNotifications')) {
+        set(this, 'isLoading', true);
+        return RSVP.all(this._setNotificationsToSeen().map(notification => {
+          return notification.save()
+            .then(notification => this._peekAndSetAction(notification));
+        }))
+          .catch(Logger.error)
+          .finally(() => { set(this, 'isLoading', false); });
+      }
+    },
+
+    reloadNotifications() {
+      this._getNotifications(get(this, 'session.session.authenticated.user.id'));
+    }
+  },
+
   _getNotifications(userId) {
     const store = get(this, 'store');
     set(this, 'isLoading', true);
@@ -64,11 +86,7 @@ export default Component.extend({
           user: store.findRecord('user', get(notification, 'properties.action.userId.id'))
         });
       })
-        .then(data => {
-          const modelKey = `subscriptionId.subscribableId.${get(notification, 'subscriptionId.subscribableModel')}`;
-          set(notification, modelKey, get(data, 'datasetOrRequest'));
-          return notification;
-        })
+        .then(data => this._setModelOnNotification(notification, get(data, 'datasetOrRequest')))
         .catch(Logger.error);
   },
 
@@ -95,25 +113,9 @@ export default Component.extend({
       });
   },
 
-  actions: {
-    close(dropdown) {
-      dropdown.actions.close();
-    },
-
-    handleTriggerEvent() {
-      if (get(this, 'hasUnseenNotifications')) {
-        set(this, 'isLoading', true);
-        return RSVP.all(this._setNotificationsToSeen().map(notification => {
-          return notification.save()
-            .then(notification => this._peekAndSetAction(notification));
-        }))
-          .catch(Logger.error)
-          .finally(() => { set(this, 'isLoading', false); });
-      }
-    },
-
-    reloadNotifications() {
-      this._getNotifications(get(this, 'session.session.authenticated.user.id'));
-    }
+  _setModelOnNotification(notification, model) {
+    const modelKey = `subscriptionId.subscribableId.${get(notification, 'subscriptionId.subscribableModel')}`;
+    set(notification, modelKey, model);
+    return notification;
   }
 });
