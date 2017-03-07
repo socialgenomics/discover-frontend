@@ -58,7 +58,6 @@ export default Component.extend({
 
   _getRelatedData(notification, subscription) {
     const store = get(this, 'store');
-    //check if the action exists.
     return this._getActionAndDataset(notification, subscription, store)
       .then(data => {
         set(notification, 'properties.action', get(data, 'action'));
