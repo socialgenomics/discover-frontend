@@ -1,25 +1,23 @@
 import Ember from 'ember';
 import CheckEditPermissionsMixin from 'repositive/mixins/check-edit-permissions-mixin';
-import FlashMessageMixin from 'repositive/mixins/flash-message-mixin';
-import { validator, buildValidations } from 'ember-cp-validations';
+import EditModeMixin from 'repositive/mixins/edit-mode-mixin';
+import Validations from 'repositive/validations/comment';
 
-const { Component, computed: { oneWay }, get, set, setProperties } = Ember;
-const Validations = buildValidations({
-  text: validator('presence', {
-    presence: true,
-    message: 'This field can\'t be blank.'
-  })
-});
+const { Component, computed: { oneWay }, get, set } = Ember;
 
 export default Component.extend(
   CheckEditPermissionsMixin,
-  FlashMessageMixin,
+  EditModeMixin,
   Validations,
   {
     showCreateAccountModal: false,
     inEditMode: false,
 
+    editablePropertyKeys: ['text'],
+
     checkEditPermissionsModel: oneWay('comment'),
+
+    // copy of editable Properties
     text: oneWay('comment.properties.text'),
 
     actions: {
@@ -27,36 +25,16 @@ export default Component.extend(
         this.toggleProperty('showCreateAccountModal');
       },
 
-      enterEditMode() {
-        set(this, 'inEditMode', true);
-      },
-
       cancelEditMode() {
-        setProperties(this, {
-          inEditMode: false,
-          text: get(this, 'comment.properties.text')
-        });
+        this.resetModuleStateOnCancel('comment.properties', get(this, 'editablePropertyKeys'));
       },
 
       save() {
         const comment = get(this, 'comment');
 
         set(comment, 'properties.text', get(this, 'text'));
-        comment
-          .save()
-          .then(this._onEditSuccess.bind(this))
-          .catch(this._onEditError.bind(this));
+        this.persistChanges(comment);
       }
-    },
-
-    _onEditSuccess() {
-      set(this, 'inEditMode', false);
-      this._addFlashMessage('Your comment has been updated.', 'success');
-    },
-    _onEditError() {
-      get(this, 'comment').rollbackAttributes();
-      set(this, 'inEditMode', false);
-      this._addFlashMessage('There was problem while updating your comment.', 'warning');
     }
   }
 );

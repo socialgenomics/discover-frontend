@@ -1,5 +1,3 @@
-
-
 <!-- CSS Refactor: still need to account for Open Dataset styles -->
 {{#unless session.isAuthenticated}}
   {{#full-page-notification}}
@@ -13,91 +11,12 @@
 <div class="grid-wrapper grid-wrapper-stepped {{unless session.isAuthenticated 'u-pt5' ''}}">
   <div class="grid grid--no-gutter">
     <div class="grid__col grid__col--3-of-3">
-      <div class="c-card c-card-detail-overflow {{unless session.isAuthenticated 'dataset-notification-margin' ''}}">
-        <div class="grid grid--no-gutter u-full-height">
-
-          <!-- dataset -->
-          <div class="grid__col grid__col--7-of-12 u-pos-relative u-full-height">
-            <!-- header -->
-            <header class="c-card-header u-bc-off-white u-flex u-justify-end u-items-center u-px2">
-              <div class="u-flex u-items-center">
-                {{follow-button subscribable=request.subscribableId model=request}}
-                <ul class="o-list-inline u-pl2 u-mb0">
-                  {{action-favourite model=request class="u-mr2"}}
-                  {{action-share
-                    actionableId=request.id
-                    actionableType='request'
-                    shareUrl=requestUrl
-                  }}
-                </ul>
-              </div>
-            </header>
-
-            <!-- body -->
-            <!-- TODO hack fix to stop text overflow on mobile. Needs redesigning. -->
-            <div class="u-p2" style="max-height: 80%; overflow: scroll;">
-              <!-- heading/description -->
-              <h2 class="u-fs2 u-fw-med u-tc-primary u-mb1">{{request.title}}</h2>
-              {{#if request.description}}
-                <p class="u-markdown-formatting u-fs1">{{markdown-to-html markdown=request.description}}</p>
-              {{/if}}
-
-              {{#if canEdit}}EDIT / DELETE{{/if}}
-
-              <!-- tags -->
-              <div class="u-pt2 u-pb1">
-                {{#each tags as |tag|}}
-                  {{tag-item tag=tag}}
-                {{/each}}
-              </div>
-              {{#if session.isAuthenticated}}
-              <div class="u-pl3">
-                {{add-tag addTag=(action 'addTag')}}
-              </div>
-              <span class="u-fs0 u-tc-tertiary">Add tags to improve searching and browsing through data. <a {{action "toggleTagModal"}}>Learn more</a></span>
-              {{/if}}
-            </div>
-
-            <!-- footer -->
-            <div class="u-pos-absolute u-full-width u-pos-bottom0 u-bc-white u-p2 u-border-top">
-
-              {{#unless session.isAuthenticated}}
-                {{create-account-call-to-action}}
-              {{/unless}}
-              <ul class="o-list-flush-left u-mb0">
-                {{#if request.userId}}
-                  <li class="u-fs0 u-tc-tertiary">Submitted by: {{#link-to 'user' request.usesId.id class="u-tc-secondary" }}<span class="u-fw-med u-fs1 u-tc-secondary">{{request.userId.displayName}}</span>{{/link-to}}</li>
-                {{/if}}
-                {{#if request.createdAt}}
-                  <li class="u-fs0 u-tc-tertiary">Requested on: <span class="u-fw-med u-fs1 u-tc-secondary">{{moment-format request.createdAt}}</span></li>
-                {{/if}}
-              </ul>
-            </div>
-          </div>
-
-          <!-- Discussion  -->
-          <div class="grid__col grid__col--5-of-12 u-full-height">
-            <div class="u-border-left u-full-min-height">
-
-              <!-- header -->
-              <header class="c-card-header u-bc-off-white u-px2 u-flex u-items-center u-justify-center">
-                <h4 class="u-mb0 u-fs2 u-fw-med u-tc-primary">Discussions</h4>
-              </header>
-
-              <!-- body -->
-              <div class="u-p2">
-                {{partial "datasets/tab-comments"}}
-              </div>
-
-            </div>
-          </div>
-        </div>
-      </div>
+      {{dataset-page
+        model=request
+        commentsSorted=commentsSorted
+        tags=tags
+        editableProperties=requestEditableProperties
+      }}
     </div>
   </div>
 </div>
-
-<!-- CSS Refactor: still need to style modals -->
-{{#if isShowingTagModal}}
-  {{tag-modal action="toggleTagModal"}}
-{{/if}}
