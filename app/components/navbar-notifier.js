@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-const { Component, computed, inject: { service }, get, Logger, set, setProperties, RSVP, isEmpty } = Ember;
+const { Component, computed, inject: { service }, get, getWithDefault, Logger, set, setProperties, RSVP, isEmpty } = Ember;
 
 export default Component.extend({
   session: service(),
@@ -9,9 +9,7 @@ export default Component.extend({
   classNames: ['u-flex', 'u-self-stretch', 'u-shrink-none', 'u-items-center', 'u-justify-center', 'u-hv-bc-off-white'],
   classNameBindings: ['hasUnseenNotifications:u-tc-red:u-tc-secondary'],
   hasUnseenNotifications: computed('notifications.@each.status', function() {
-    const notifications = get(this, 'notifications');
-    const unseenNotifications = notifications ? notifications.filterBy('status', 'unseen') : [];
-    // const unseenNotifications = getWithDefault(this, 'notifications', []).filterBy('status', 'unseen');
+    const unseenNotifications = getWithDefault(this, 'notifications', []).filterBy('status', 'unseen');
     return !isEmpty(unseenNotifications);
   }),
 

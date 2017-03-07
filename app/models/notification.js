@@ -3,10 +3,10 @@ import attr from 'ember-data/attr';
 import { belongsTo } from 'ember-data/relationships';
 
 export default DS.Model.extend({
+  createdAt: attr('isodate'),
   properties: attr('object'),
   status: attr('string'),
-  subscriptionId: belongsTo('subscription'),
   subscription: attr('object'),
-  userId: belongsTo('user'),
-  createdAt: attr('isodate')
+  subscriptionId: belongsTo('subscription'),
+  userId: belongsTo('user')
 });

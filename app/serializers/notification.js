@@ -3,7 +3,7 @@ import { keyForRelationship, keyForAttribute} from './application';
 
 export default JSONSerializer.extend({
   serialize: function(snapshot, options) {
-    let json =  snapshot._attributes;
+    const json =  snapshot._attributes;
     json.user_id = snapshot.belongsTo('userId').id;
     delete json.properties.action;
     delete json.subscription;
