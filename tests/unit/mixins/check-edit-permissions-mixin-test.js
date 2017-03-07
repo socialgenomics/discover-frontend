@@ -8,7 +8,7 @@ describe('Unit | Mixin | check edit permissions mixin', function() {
   const { set, get, Service, getOwner } = Ember;
   const id = '123';
   const altId = '456';
-  const authenticatedUser = { id };
+  const authenticatedUser = {};
   const sessionServiceStub = Service.extend({ authenticatedUser });
 
   let mixinObjInstance;
@@ -26,6 +26,7 @@ describe('Unit | Mixin | check edit permissions mixin', function() {
   });
 
   beforeEach(function () {
+    authenticatedUser.id = id;
     mixinObjInstance = this.subject();
   });
 
@@ -48,8 +49,13 @@ describe('Unit | Mixin | check edit permissions mixin', function() {
       });
 
       it('returns false if user is not logged in', function () {
-        authenticatedUser.id = altId;
+        authenticatedUser.id = undefined;
         set(mixinObjInstance, 'checkEditPermissionsModel', createModel(id));
+        expect(get(mixinObjInstance, prop)).to.be.false;
+      });
+
+      it('returns false if model was added by repositive', function () {
+        set(mixinObjInstance, 'checkEditPermissionsModel', createModel());
         expect(get(mixinObjInstance, prop)).to.be.false;
       });
     });
