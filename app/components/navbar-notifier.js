@@ -8,6 +8,7 @@ export default Component.extend({
 
   classNames: ['u-flex', 'u-self-stretch', 'u-shrink-none', 'u-items-center', 'u-justify-center', 'u-hv-bc-off-white'],
   classNameBindings: ['hasUnseenNotifications:u-tc-red:u-tc-secondary'],
+
   hasUnseenNotifications: computed('notifications.@each.status', function() {
     const unseenNotifications = getWithDefault(this, 'notifications', []).filterBy('status', 'unseen');
     return !isEmpty(unseenNotifications);
@@ -21,19 +22,19 @@ export default Component.extend({
   },
 
   actions: {
-    close(dropdown) {
-      dropdown.actions.close();
-    },
+    close(dropdown) { dropdown.actions.close(); },
 
     handleTriggerEvent() {
       if (get(this, 'hasUnseenNotifications')) {
         set(this, 'isLoading', true);
-        return RSVP.all(this._setNotificationsToSeen().map(notification => {
-          return notification.save()
-            .then(notification => this._peekAndSetAction(notification));
-        }))
-          .catch(Logger.error)
-          .finally(() => { set(this, 'isLoading', false); });
+        return RSVP.all(
+          this._setNotificationsToSeen(get(this, 'notifications'))
+            .map(notification => {
+              return notification.save().then(notification => this._peekAndSetAction(notification));
+            })
+        )
+        .catch(Logger.error)
+        .finally(() => { set(this, 'isLoading', false); });
       }
     },
 
@@ -104,8 +105,8 @@ export default Component.extend({
     return notification;
   },
 
-  _setNotificationsToSeen() {
-    return get(this, 'notifications')
+  _setNotificationsToSeen(notifications) {
+    return notifications
       .filterBy('status', 'unseen')
       .map(notification => {
         set(notification, 'status', 'seen');
