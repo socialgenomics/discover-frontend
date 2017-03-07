@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-const { Component, computed, inject: { service }, get, getWithDefault, Logger, set, setProperties, RSVP, isEmpty } = Ember;
+const { Component, computed, inject: { service }, get, Logger, set, setProperties, RSVP, isEmpty } = Ember;
 
 export default Component.extend({
   session: service(),
@@ -9,7 +9,9 @@ export default Component.extend({
   classNames: ['u-flex', 'u-self-stretch', 'u-shrink-none', 'u-items-center', 'u-justify-center', 'u-hv-bc-off-white'],
   classNameBindings: ['hasUnseenNotifications:u-tc-red:u-tc-secondary'],
   hasUnseenNotifications: computed('notifications.@each.status', function() {
-    const unseenNotifications = getWithDefault(this, 'notifications', []).filterBy('status', 'unseen');
+    const notifications = get(this, 'notifications');
+    const unseenNotifications = notifications ? notifications.filterBy('status', 'unseen') : [];
+    // const unseenNotifications = getWithDefault(this, 'notifications', []).filterBy('status', 'unseen');
     return !isEmpty(unseenNotifications);
   }),
 
@@ -27,17 +29,22 @@ export default Component.extend({
       'where.user_id': userId,
       'where.properties.target.app': true,
       'include[0].model': 'subscription',
-      'include[1].model': 'action',
       'order[0][0]': 'created_at',
       'order[0][1]': 'DESC'
     })
       .then(notifications => {
         return RSVP.all(notifications.map(notification => {
-          return this._getRelatedData(notification);
+          const subscription = get(notification, 'subscription');
+          store.push(store.normalize('subscription', subscription));
+          if (get(notification, 'properties.type') === 'action') {
+            return this._getRelatedData(notification, subscription);
+          } else {
+            return notification;
+          }
         }))
           .then(notifications => {
             setProperties(this, {
-              'notifications': notifications,
+              'notifications': notifications.reject(notification => notification ? false : true),
               'isLoading': false
             });
             return notifications;
@@ -49,16 +56,14 @@ export default Component.extend({
       });
   },
 
-  _getRelatedData(notification) {
+  _getRelatedData(notification, subscription) {
     const store = get(this, 'store');
-    return RSVP.hash({
-      subscription: store.findRecord('subscription', get(notification, 'subscriptionId.id')),
-      action: store.findRecord('action', get(notification, 'properties.action_id'))
-    })
+    //check if the action exists.
+    return this._getActionAndDataset(notification, subscription, store)
       .then(data => {
         set(notification, 'properties.action', get(data, 'action'));
         return RSVP.hash({
-          datasetOrRequest: store.findRecord(get(data, 'subscription.subscribableModel'), get(data, 'subscription.subscribableId.id')),
+          datasetOrRequest: data.datasetOrRequest,
           user: store.findRecord('user', get(notification, 'properties.action.userId.id'))
         });
       })
@@ -68,6 +73,13 @@ export default Component.extend({
           return notification;
         })
         .catch(Logger.error);
+  },
+
+  _getActionAndDataset(notification, subscription, store) {
+    return RSVP.hash({
+      action: store.findRecord('action', get(notification, 'properties.action_id')),
+      datasetOrRequest: store.findRecord(get(subscription, 'subscribable_model'), get(subscription, 'subscribable_id'))
+    });
   },
 
   _peekAndSetAction(notification) {

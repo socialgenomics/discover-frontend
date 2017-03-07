@@ -6,6 +6,7 @@ export default DS.Model.extend({
   properties: attr('object'),
   status: attr('string'),
   subscriptionId: belongsTo('subscription'),
+  subscription: attr('object'),
   userId: belongsTo('user'),
   createdAt: attr('isodate')
 });
