@@ -2,7 +2,7 @@ import Ember from 'ember';
 import ENV from 'repositive/config/environment';
 import { validator, buildValidations } from 'ember-cp-validations';
 
-const { Component, computed, get, inject: { service }, set, setProperties } = Ember;
+const { Component, computed, get, inject: { service }, set, setProperties, Logger } = Ember;
 const Validations = buildValidations({
   emailAddress: [
     validator('presence', {
@@ -18,6 +18,7 @@ const Validations = buildValidations({
 
 export default Component.extend(Validations, {
   ajax: service(),
+  store: service(),
 
   tagName: 'form',
   emailAddress: '',
@@ -61,6 +62,8 @@ export default Component.extend(Validations, {
   },
 
   _onSendSuccess() {
+    const currentUser = get(this, 'currentUser');
+    if (currentUser) { this._createShareAction(currentUser); }
     setProperties(this, {
       sendSuccess: true,
       isLoading: false
@@ -87,5 +90,19 @@ export default Component.extend(Validations, {
         }
       }
     );
+  },
+
+  _createShareAction(currentUser) {
+    const store = get(this, 'store');
+    store.findRecord('actionable', get(this, 'actionableId'))
+      .then(actionable => {
+        return store.createRecord('action', {
+          actionableId: actionable,
+          userId: currentUser,
+          type: 'share',
+          actionable_model: get(this, 'actionableType')
+        }).save();
+      })
+        .catch(Logger.error);
   }
 });
