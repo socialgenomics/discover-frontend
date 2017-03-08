@@ -13,7 +13,7 @@ export function initialize() {
     return [{
       type: 'lang',
       filter: function(text, converter, options) {
-        return sanitizeHtml(text, { allowedAttributes: { a: ['href']} });
+        return sanitizeHtml(text, { allowedAttributes: { a: ['href'] } });
       }
     }];
   });
