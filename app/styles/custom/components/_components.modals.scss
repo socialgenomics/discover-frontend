@@ -1,5 +1,11 @@
-.c-modal--small { width: 560px; }
-.c-modal--medium { width: 700px; }
+.c-modal--small {
+  max-width: 90%;
+  width: 560px;
+}
+.c-modal--medium {
+  max-width: 90%;
+  width: 700px;
+}
 
 .c-share-modal__copy-link {
   width: 120px;
