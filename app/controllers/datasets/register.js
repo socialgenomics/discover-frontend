@@ -1,25 +1,9 @@
 import Ember from 'ember';
 import FlashMessageMixin from 'repositive/mixins/flash-message-mixin';
 import TrackEventsMixin from 'repositive/mixins/track-events-mixin';
-import { validator, buildValidations } from 'ember-cp-validations';
+import Validations from 'repositive/validations/dataset';
 
 const { Controller, computed, get, getProperties, set, inject: { service }, Logger } = Ember;
-const Validations = buildValidations({
-  title: validator('presence', {
-    presence: true,
-    message: 'This field can\'t be blank.'
-  }),
-  description: validator('presence', {
-    presence: true,
-    message: 'This field can\'t be blank.'
-  }),
-  url: validator('format', {
-    regex: /[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/,
-    allowBlank: true,
-    message: 'Must be a valid url.'
-  })
-});
-
 
 export default Controller.extend(
   Validations,
