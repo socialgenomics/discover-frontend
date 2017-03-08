@@ -11,9 +11,9 @@ export function initialize() {
 
   showdown.extension('sanitize', function() {
     return [{
-      type: 'html',
+      type: 'lang',
       filter: function(text, converter, options) {
-        return sanitizeHtml(text);
+        return sanitizeHtml(text, { allowedAttributes: { a: ['href']} });
       }
     }];
   });
