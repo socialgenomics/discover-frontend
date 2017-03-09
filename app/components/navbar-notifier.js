@@ -1,14 +1,18 @@
 import Ember from 'ember';
 
-const { Component, computed, inject: { service }, get, Logger, set, RSVP } = Ember;
+const { Component, computed, inject: { service }, get, getWithDefault, Logger, set, setProperties, RSVP, isEmpty } = Ember;
 
 export default Component.extend({
   session: service(),
   store: service(),
 
   classNames: ['u-flex', 'u-self-stretch', 'u-shrink-none', 'u-items-center', 'u-justify-center', 'u-hv-bc-off-white'],
-  classNameBindings: ['hasNotifications:u-tc-red:u-tc-secondary'],
-  hasNotifications: computed.notEmpty('notifications'),
+  classNameBindings: ['hasUnseenNotifications:u-tc-red:u-tc-secondary'],
+
+  hasUnseenNotifications: computed('notifications.@each.status', function() {
+    const unseenNotifications = getWithDefault(this, 'notifications', []).filterBy('status', 'unseen');
+    return !isEmpty(unseenNotifications);
+  }),
 
   didReceiveAttrs() {
     this._super(...arguments);
@@ -17,51 +21,102 @@ export default Component.extend({
     }
   },
 
+  actions: {
+    close(dropdown) { dropdown.actions.close(); },
+
+    handleTriggerEvent() {
+      if (get(this, 'hasUnseenNotifications')) {
+        set(this, 'isLoading', true);
+        return RSVP.all(
+          this._setNotificationsToSeen(get(this, 'notifications'))
+            .map(notification => {
+              return notification.save().then(notification => this._peekAndSetAction(notification));
+            })
+        )
+        .catch(Logger.error)
+        .finally(() => { set(this, 'isLoading', false); });
+      }
+    },
+
+    reloadNotifications() {
+      this._getNotifications(get(this, 'session.session.authenticated.user.id'));
+    }
+  },
+
   _getNotifications(userId) {
     const store = get(this, 'store');
+    set(this, 'isLoading', true);
     return store.query('notification', {
       'where.user_id': userId,
       'where.properties.target.app': true,
-      'where.status': 'unseen',
       'include[0].model': 'subscription',
       'order[0][0]': 'created_at',
       'order[0][1]': 'DESC'
     })
       .then(notifications => {
-        const notificationsArray = notifications.map(notification => {
-          this._getRelatedData(notification);
-          return notification;
-        });
-
-        set(this, 'notifications', notificationsArray);
-        return notificationsArray;
-      }).catch(Logger.error);
+        return RSVP.all(notifications.map(notification => {
+          const subscription = get(notification, 'subscription');
+          store.push(store.normalize('subscription', subscription));
+          if (get(notification, 'properties.type') === 'action') {
+            return this._getRelatedData(notification, subscription);
+          } else {
+            return notification;
+          }
+        }))
+          .then(notifications => {
+            setProperties(this, {
+              'notifications': notifications.reject(notification => notification ? false : true),
+              'isLoading': false
+            });
+            return notifications;
+          });
+      })
+      .catch(error => {
+        set(this, 'isLoading', false);
+        Logger.error(error);
+      });
   },
 
-  _getRelatedData(notification) {
+  _getRelatedData(notification, subscription) {
     const store = get(this, 'store');
-    return RSVP.hash({
-      subscription: store.findRecord('subscription', get(notification, 'subscriptionId.id')),
-      action: store.findRecord('action', get(notification, 'properties.action_id'))
-    })
+    return this._getActionAndDataset(notification, subscription, store)
       .then(data => {
         set(notification, 'properties.action', get(data, 'action'));
         return RSVP.hash({
-          datasetOrRequest: store.findRecord(get(data, 'subscription.subscribableModel'), get(data, 'subscription.subscribableId.id')),
+          datasetOrRequest: data.datasetOrRequest,
           user: store.findRecord('user', get(notification, 'properties.action.userId.id'))
         });
       })
-        .then(data => {
-          const modelKey = `subscriptionId.subscribableId.${get(notification, 'subscriptionId.subscribableModel')}`;
-          set(notification, modelKey, get(data, 'datasetOrRequest'));
-          return data;
-        }).catch(Logger.error);
+        .then(data => this._setModelOnNotification(notification, get(data, 'datasetOrRequest')))
+        .catch(Logger.error);
   },
 
-  actions: {
-    close(dropdown) { dropdown.actions.close(); },
-    reloadNotifications() {
-      this._getNotifications(get(this, 'session.session.authenticated.user.id'));
-    }
+  _getActionAndDataset(notification, subscription, store) {
+    return RSVP.hash({
+      action: store.findRecord('action', get(notification, 'properties.action_id')),
+      datasetOrRequest: store.findRecord(get(subscription, 'subscribable_model'), get(subscription, 'subscribable_id'))
+    });
+  },
+
+  _peekAndSetAction(notification) {
+    const store = get(this, 'store');
+    const action = store.peekRecord('action', get(notification, 'properties.action_id'));
+    set(notification, 'properties.action', action);
+    return notification;
+  },
+
+  _setNotificationsToSeen(notifications) {
+    return notifications
+      .filterBy('status', 'unseen')
+      .map(notification => {
+        set(notification, 'status', 'seen');
+        return notification;
+      });
+  },
+
+  _setModelOnNotification(notification, model) {
+    const modelKey = `subscriptionId.subscribableId.${get(notification, 'subscriptionId.subscribableModel')}`;
+    set(notification, modelKey, model);
+    return notification;
   }
 });

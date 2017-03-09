@@ -62,19 +62,19 @@ export default Component.extend({
     set(this, 'isSubmitting', true);
     store.findRecord('actionable', currentModel.id)
       .then(actionable => {
-        store.createRecord('action', {
+        return store.createRecord('action', {
           actionableId: actionable,
           userId: get(this, 'session.authenticatedUser'),
           type: 'favourite',
           actionable_model: currentModel.constructor.modelName
+        }).save();
+      })
+        .then(savedFavourite => {
+          get(this, 'favouritesService').pushFavourite(savedFavourite);
+          set(this, 'isSubmitting', false);
+          currentModel.incrementProperty('stats.favourite');
         })
-          .save()
-          .then(savedFavourite => {
-            get(this, 'favouritesService').pushFavourite(savedFavourite);
-            set(this, 'isSubmitting', false);
-            currentModel.incrementProperty('stats.favourite');
-          });
-      }).catch(Logger.error);
+        .catch(Logger.error);
   },
 
   _deleteFavourite(favourite) {

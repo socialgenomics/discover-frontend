@@ -1,16 +1,22 @@
-{{#if notifications}}
-  {{#each notifications as |notification|}}
-    {{notification-list-item
-      notification=notification
-      dropdown=dropdown
-      close=(action close)
-      reloadNotifications=(action reloadNotifications)
-      transitionToSubscribable=(route-action 'transitionToSubscribable')
-    }}
-  {{/each}}
-{{else}}
+{{#if isLoading}}
   <div class="u-ta-center">
-    {{fa-icon 'bell' class="u-pt4 u-tc-tertiary"}}
-    <p class="abc123 u-px4 u-pb4 u-mb0">You're up to date.</p>
+    <p class="u-p4 u-mb0">{{fa-icon "circle-o-notch" class="u-tc-tertiary" pulse=true}}</p>
   </div>
+{{else}}
+  {{#if notifications}}
+    {{#each notifications as |notification|}}
+      {{notification-list-item
+        notification=notification
+        dropdown=dropdown
+        close=(action close)
+        reloadNotifications=(action reloadNotifications)
+        transitionToSubscribable=(route-action 'transitionToSubscribable')
+      }}
+    {{/each}}
+  {{else}}
+    <div class="u-ta-center">
+      {{fa-icon 'bell' class="u-pt4 u-tc-tertiary"}}
+      <p class="u-px4 u-pb4 u-mb0">You're up to date.</p>
+    </div>
+  {{/if}}
 {{/if}}

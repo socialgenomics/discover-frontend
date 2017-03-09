@@ -37,7 +37,7 @@
           {{/if}}
         </div>
         {{#if model.description}}
-          <p class="u-markdown-formatting u-fs1">{{markdown-to-html markdown=model.description}}</p>
+          <p class="u-markdown-formatting u-fs1">{{markdown-to-html markdown=model.description extensions='targetBlankLinks sanitize'}}</p>
         {{/if}}
         <!-- tags -->
         <div class="u-pt2 u-pb1">
@@ -119,7 +119,7 @@
     </div>
 
     <!-- Discussion  -->
-    <div class="grid__col grid__col--5-of-12 u-full-height">
+    <div class="c-card-detail-discussion grid__col grid__col--5-of-12 u-full-height">
       <div class="u-border-left u-full-min-height">
 
         <!-- header -->

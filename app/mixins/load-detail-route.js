@@ -2,6 +2,7 @@ import Ember from 'ember';
 import ENV from 'repositive/config/environment';
 import ActionableMixin from 'repositive/mixins/actionable';
 import SubscribableMixin from 'repositive/mixins/subscribable';
+import colours from 'repositive/utils/colours';
 import FlashMessageMixin from 'repositive/mixins/flash-message-mixin';
 
 const { Mixin, get, RSVP, inject: { service }, setProperties, set, Logger } = Ember;
@@ -30,7 +31,8 @@ export default Mixin.create(ActionableMixin, SubscribableMixin, FlashMessageMixi
           .uniq(); //removes duplicates
         setProperties(model, {
           'actionableId': data.actionable,
-          'subscribableId': data.subscribable
+          'subscribableId': data.subscribable,
+          'colour': colours.getColour(get(model, 'assay'))
         });
         const hashObj = {
           model,

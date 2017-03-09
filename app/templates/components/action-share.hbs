@@ -20,7 +20,7 @@
 
 {{#if showShareEmailModal}}
   {{#repositive-modal
-    container-class='u-z5'
+    container-class='c-modal--medium u-z5'
     close=(action 'toggleShareEmailModal')
   }}
     {{repositive-modal/header
@@ -32,6 +32,7 @@
       {{share-by-email-form
         actionableId=actionableId
         actionableType=actionableType
+        currentUser=session.authenticatedUser
         onClose=(action 'toggleShareEmailModal')
       }}
     {{/repositive-modal/content}}
@@ -40,7 +41,7 @@
 
 {{#if showCreateAccountModal}}
   {{#repositive-modal
-    container-class='u-z5'
+    container-class='c-modal--medium u-z5'
     close=(action 'toggleCreateAccountModal')
   }}
     {{repositive-modal/header
