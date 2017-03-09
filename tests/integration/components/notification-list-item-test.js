@@ -79,7 +79,7 @@ describe('Integration | Component | notification list item', function() {
 
   // Actions tests
 
-  it(`when notification is clicked, status is set to seen`, function() {
+  it(`when notification is clicked, status is set to read`, function() {
     this.set('notification', buildNotificationObj());
     this.setProperties({
       'transitionToSubscribable': sinon.stub(),
@@ -91,7 +91,7 @@ describe('Integration | Component | notification list item', function() {
       close=close
       transitionToSubscribable=transitionToSubscribable}}`);
     this.$('>').click();
-    expect(this.get('notification.status')).to.eql('seen');
+    expect(this.get('notification.status')).to.eql('read');
   });
 
   it(`when notification is clicked, transitionToSubscribable is called with correct args`, function() {
