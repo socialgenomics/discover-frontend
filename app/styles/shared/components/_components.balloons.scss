@@ -97,7 +97,7 @@ button[data-balloon] {
         padding: .5em 1em;
         position: absolute;
         white-space: nowrap;
-        z-index: 10;
+        z-index: 10000000;
     }
 
     &:before {

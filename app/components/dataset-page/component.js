@@ -16,7 +16,7 @@ export default Component.extend(
     urlGenerator: service(),
     store: service(),
 
-    classNames: ['c-card c-card-detail-overflow'],
+    classNames: ['c-card c-card-detail'],
     classNameBindings: ['session.isAuthenticated:dataset-notification-margin'],
 
     editablePropertyKeys: computed.mapBy('editableProperties', 'key'),
