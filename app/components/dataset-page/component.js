@@ -1,6 +1,8 @@
 import Ember from 'ember';
 import CheckEditPermissionsMixin from 'repositive/mixins/check-edit-permissions-mixin';
 import EditModeMixin from 'repositive/mixins/edit-mode-mixin';
+import SubscribableMixin from 'repositive/mixins/subscribable';
+
 // TODO figure out how to lazy inject mixins or find other solution.
 // Right now it will work cause dataset validation has URL as optional and request doesn't have URL at all
 import Validations from 'repositive/validations/dataset';
@@ -11,6 +13,7 @@ export default Component.extend(
   EditModeMixin,
   Validations,
   CheckEditPermissionsMixin,
+  SubscribableMixin,
   {
     session: service(),
     urlGenerator: service(),
@@ -56,9 +59,11 @@ export default Component.extend(
       },
 
       addComment(text) {
-        get(this, 'store')
+        const store = get(this, 'store');
+        store
           .createRecord('action', this._createNewRecordData('comment', { properties: { text } }))
           .save()
+          .then(() => { this._reloadSubscriptions(store); })
           .catch(Logger.error);
       },
 
@@ -98,6 +103,22 @@ export default Component.extend(
       };
 
       return merge(commonProps, customProps);
+    },
+
+    /**
+     * @desc re-fetch subscriptions to update the follow-button
+     * @param {Object} store
+     * @private
+     */
+    _reloadSubscriptions(store) {
+      const existingSubscription = store.peekAll('subscription').filter(subscription => {
+        const userIdMatches = get(subscription, 'userId.id') === get(this, 'userId.id');
+        const subscribableIdMatches = get(subscription, 'subscribableId.id') === get(this, 'model.id');
+        return userIdMatches && subscribableIdMatches;
+      });
+      if (existingSubscription.length === 0) {
+        this._getSubscriptions(store, get(this, 'model.id'), get(this, 'userId.id'));
+      }
     }
   }
 );
