@@ -12,9 +12,7 @@ export function initialize() {
   showdown.extension('sanitize', function() {
     return [{
       type: 'lang',
-      filter: function(text, converter, options) {
-        return sanitizeHtml(text, { allowedAttributes: { a: ['href'] } });
-      }
+      filter: text => sanitizeHtml(text)
     }];
   });
 }
