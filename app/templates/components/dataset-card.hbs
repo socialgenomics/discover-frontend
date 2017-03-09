@@ -34,9 +34,9 @@
 
       <div class="c-card-description u-markdown-formatting">
         {{#if dataset.highlights.description}}
-          {{{markdown-to-html markdown=dataset.highlights.description}}}
+          {{{markdown-to-html markdown=dataset.highlights.description extensions='targetBlankLinks sanitize'}}}
         {{else}}
-          {{markdown-to-html markdown=dataset.description}}
+          {{markdown-to-html markdown=dataset.description extensions='targetBlankLinks sanitize'}}
         {{/if}}
       </div>
     </div>
@@ -87,9 +87,9 @@
 
       <div class="c-card-description u-markdown-formatting">
         {{#if dataset.highlights.description}}
-          {{{markdown-to-html markdown=dataset.highlights.description}}}
+          {{{markdown-to-html markdown=dataset.highlights.description extensions='targetBlankLinks sanitize'}}}
         {{else}}
-          {{markdown-to-html markdown=dataset.description}}
+          {{markdown-to-html markdown=dataset.description extensions='targetBlankLinks sanitize'}}
         {{/if}}
       </div>
     </div>
