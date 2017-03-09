@@ -12,6 +12,7 @@ export default Route.extend(ResetScrollMixin, LoadDetailRouteMixin, {
     return this._getModelData(params, 'dataset')
       .then(data => {
         return RSVP.hash({
+          attributes: this._getAttributes(params.id),
           dataset: data.model,
           stats: get(this, 'session.isAuthenticated') === false ? this._getStats() : null,
           tags: data.tags

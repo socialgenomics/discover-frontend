@@ -19,6 +19,7 @@ export default Model.extend({
   description: attr('string'),
   externalId: attr('string'),
   highlights: belongsTo('highlight'),
+  properties: attr('object'),
   stats: attr('object'),
   subscribableId: belongsTo('subscribable', { inverse: 'dataset' }),
   tech: attr('string'),
