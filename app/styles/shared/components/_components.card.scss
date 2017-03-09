@@ -31,9 +31,20 @@
   overflow-y: auto;
 }
 
-.c-card-detail-overflow {
+.c-card-detail {
   min-height: 600px;
   height: 650px;
   height: 80vh;
+
+  @media (max-width: $breakpoint-large) {
+    overflow-y: auto;
+  }
+}
+
+.c-card-detail-discussion {
   overflow-y: auto;
+
+  @media (max-width: $breakpoint-large) {
+    overflow-y: visible;
+  }
 }
