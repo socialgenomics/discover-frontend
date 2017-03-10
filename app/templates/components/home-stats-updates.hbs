@@ -15,8 +15,8 @@
         <ul class="o-list-flush-left u-mb0">
           {{#each (sort-by "updatedAt:desc" collections) as |collection index|}}
             {{featured-list-item
+              isNewest=(eq index 0)
               model=collection
-              isNew=(eq index 0)
               type='collection'
             }}
           {{/each}}
@@ -32,8 +32,11 @@
           </h3>
         {{/link-to}}
         <ul class="o-list-flush-left u-mb0">
-          {{#each (sort-by "name" datasources) as |datasource|}}
-            {{featured-list-item model=datasource type='datasource'}}
+          {{#each (sort-by "updatedAt:desc" datasources) as |datasource index|}}
+            {{featured-list-item
+              isNewest=(eq index 0)
+              model=datasource
+              type='datasource'}}
           {{/each}}
         </ul>
 

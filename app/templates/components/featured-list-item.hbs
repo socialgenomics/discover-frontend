@@ -3,7 +3,7 @@
     <div class="grid__col grid__col--1-of-3 u-pr3">
       <h4 class="u-fs2 u-mb0 u-tc-primary u-pos-relative">
         {{model.name}}
-        {{#if isNew}}
+        {{#if isNewest}}
           {{is-new-label}}
         {{/if}}
       </h4>
@@ -20,10 +20,18 @@
     {{#if model.properties.logo}}
       <div class="grid__col grid__col--2-of-6 u-pr3">
         <img class="c-img--100" src="{{model.properties.logo}}">
+        {{#if isNewest}}
+          {{is-new-label updatedAt=model.updatedAt}}
+        {{/if}}
       </div>
     {{else}}
       <div class="grid__col grid__col--2-of-6">
-        <h4 class="u-fs2 u-pb0 u-mb0">{{model.name}}</h4>
+        <h4 class="u-fs2 u-tc-primary u-pb0 u-mb0">
+          {{model.name}}
+          {{#if isNewest}}
+            {{is-new-label updatedAt=model.updatedAt}}
+          {{/if}}
+        </h4>
       </div>
     {{/if}}
     <div class="grid__col grid__col--4-of-6 featured-list-summary">
