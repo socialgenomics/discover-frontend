@@ -64,5 +64,8 @@ export default Mixin.create({
         qp[action](currentQueryTree, predicate, text)
       )
     );
+
+    // reset current page number each time we change query
+    set(this, 'page', 1);
   }
 });

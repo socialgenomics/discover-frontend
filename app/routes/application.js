@@ -57,9 +57,6 @@ export default Route.extend(ApplicationRouteMixin, {
       }
     },
 
-    toggleModal() {
-      this.controllerFor('application').toggleProperty('isShowingModal');
-    },
     //Used by notification-list-item
     transitionToSubscribable(subscribableModel, subscribableId) {
       this.transitionTo(`${subscribableModel}s.detail`, subscribableId);
