@@ -1,11 +1,9 @@
 import Ember from 'ember';
 import moment from 'moment';
 
-const { Component, computed, inject: { service }, get } = Ember;
+const { Component, computed, get } = Ember;
 
 export default Component.extend({
-  moment: service(),
-
   tagName: 'span',
   classNames: ['u-tc-red', 'u-fs0'],
 
