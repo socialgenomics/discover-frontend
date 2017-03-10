@@ -83,7 +83,9 @@ export default Component.extend(
       },
 
       save() {
-        this.saveChanges(get(this, 'model'), get(this, 'editablePropertyKeys'));
+        if (get(this, 'validations.isValid')) {
+          this.saveChanges(get(this, 'model'), get(this, 'editablePropertyKeys'));
+        }
       }
     },
 

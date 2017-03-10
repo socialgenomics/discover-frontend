@@ -32,7 +32,7 @@
         <div class="u-flex u-content-around">
           <h2 class="u-fs2 u-fw-med u-tc-primary u-mb1 u-grow-1">{{model.title}}</h2>
           {{#if canEdit}}
-            {{fa-icon 'pencil' size=1 class='u-tc-tertiary u-hv-tc-secondary  u-cursor-pointer'
+            {{fa-icon 'pencil' class='u-tc-tertiary u-hv-tc-secondary  u-cursor-pointer u-fs2'
                       click=(action 'enterEditMode')}}
           {{/if}}
         </div>
@@ -137,8 +137,8 @@
   </div>
 {{else}}
   <header class="c-card-header u-bc-grey t-dark u-flex u-justify-center u-items-center u-px2 u-mb2">
-    {{fa-icon 'pencil' size=1 class="u-mr2 u-tc-primary"}}
-    <span class="u-tc-primary">Edit {{capitalize modelName}}</span>
+    {{fa-icon 'pencil' class="u-mr2 u-tc-primary u-fs2"}}
+    <span class="u-tc-primary u-fw-med u-fs2">Edit {{capitalize modelName}}</span>
   </header>
   <div class="grid grid--no-gutter">
     <div class="grid__col grid__col--8-of-12 grid__col--push-2-of-12">
@@ -153,10 +153,10 @@
             noMarkdown=true
           }}
         {{/each}}
-        <div class="u-flex u-justify-center u-items-center u-pt4">
+        <div class="u-flex u-justify-center">
           {{async-button
             action=(action 'save')
-            class="c-btn c-btn-primary u-px3 u-py1 u-mr2"
+            class="c-btn c-btn-primary u-mr2"
             default="Save Changes"
             pending="Saving..."
             disableWhen=(not validations.isValid)
