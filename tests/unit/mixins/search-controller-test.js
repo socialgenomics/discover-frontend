@@ -106,6 +106,13 @@ describe('SearchControllerMixin', function() {
             expect(get(subject, 'QP').toBoolString.calledWith(action)).to.be.true;
           });
         });
+
+        it('should reset page to 1', function () {
+          set(subject, 'page', 5);
+          subject[method](addAction, 'a', 'a');
+
+          expect(get(subject, 'page')).to.be.equal(1);
+        });
       });
     });
   });
