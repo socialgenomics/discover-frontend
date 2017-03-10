@@ -1,1 +1,6 @@
-There are no attributes yet.
+{{#each-in groups as |group attrs|}}
+  {{group}}
+  {{#each attrs as |attr|}}
+    {{attr.value}}
+  {{/each}}
+{{/each-in}}
