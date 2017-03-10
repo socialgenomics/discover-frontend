@@ -18,7 +18,7 @@ export default Component.extend({
 
   isUnfollow: computed.and('isFollowing', 'isHovering'),
 
-  subscription: computed('subscribable', 'session', {
+  subscription: computed('subscribable.subscriptions', 'session', {
     get() {
       const subscriptions = get(this, 'subscribable.subscriptions') || false;
       if (subscriptions) {
