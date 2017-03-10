@@ -4,7 +4,7 @@ import { setupComponentTest } from 'ember-mocha';
 import hbs from 'htmlbars-inline-precompile';
 
 describe('Integration | Component | attributes list', function() {
-  setupComponentTest('attributes-list', {
+  setupComponentTest('attribute-list', {
     integration: true
   });
 
@@ -13,12 +13,12 @@ describe('Integration | Component | attributes list', function() {
     // Handle any actions with this.on('myAction', function(val) { ... });
     // Template block usage:
     // this.render(hbs`
-    //   {{#attributes-list}}
+    //   {{#attribute-list}}
     //     template content
-    //   {{/attributes-list}}
+    //   {{/attribute-list}}
     // `);
 
-    this.render(hbs`{{attributes-list}}`);
+    this.render(hbs`{{attribute-list}}`);
     expect(this.$()).to.have.length(1);
   });
 });
