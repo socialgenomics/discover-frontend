@@ -36,7 +36,7 @@ export default Mixin.create({
       this.decrementProperty('page');
     },
 
-    thisPage(page) {
+    goToPage(page) {
       set(this, 'page', page);
     },
 

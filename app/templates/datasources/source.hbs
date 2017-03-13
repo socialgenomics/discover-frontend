@@ -18,12 +18,10 @@
       {{pagination-bar
         totalPages=totalPages
         currentPageNumber=page
-        page=page
-        pages=pages
         results=model.meta.total
         nextPage=(action 'nextPage')
         previousPage=(action 'previousPage')
-        thisPage=(action 'thisPage')
+        goToPage=(action 'goToPage')
       }}
     {{/if}}
 
