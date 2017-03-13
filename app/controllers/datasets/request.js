@@ -7,7 +7,7 @@ import presenceValidator from 'repositive/validations/presenceValidator';
 const { Controller, computed, inject: { service }, get, getProperties, set, Logger } = Ember;
 const Validations = buildValidations({
   title: presenceValidator(),
-  description: presenceValidator(),
+  description: presenceValidator()
 });
 
 export default Controller.extend(

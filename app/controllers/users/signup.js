@@ -27,7 +27,7 @@ const Validations = buildValidations({
     lengthValidator(lengths.password),
     validator(
       function(value) {
-        return getPasswordStrength(value, passwordPatterns) !== 0 ? true : errorMessages.invalidPassword;
+        return getPasswordStrength(value, passwordPatterns) !== 0 ? true : 'Must include a number or capital letter.';
       }
     )
   ]
