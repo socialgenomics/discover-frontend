@@ -1,6 +1,14 @@
 {{#each-in groups as |group attrs|}}
-  {{group}}
-  {{#each attrs as |attr|}}
-    {{attr.value}}
-  {{/each}}
+  <div class="grid__col  u-mb1 grid__col--1-of-3 grid__col--m-1-of-3 grid__col--s-1-of-3">
+    <h3 class="u-fw-reg u-fs2 u-mb0 u-tc-tertiary">{{group}}</h3>
+  </div>
+  <div class="grid__col  grid__col--2-of-3 grid__col--m-2-of-3 grid__col--s-2-of-3">
+    {{#each attrs as |attr|}}
+      {{attribute-list-item attribute=attr}}
+    {{/each}}
+
+    <span class="u-flex u-justify-between u-tc-tertiary u-hv-tc-secondary u-cursor-pointer">Add {{group}}
+      {{fa-icon 'plus-circle' class='u-fs2' click=(action 'addValueToAttribute')}}
+    </span>
+  </div>
 {{/each-in}}

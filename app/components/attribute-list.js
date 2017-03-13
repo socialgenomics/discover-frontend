@@ -45,5 +45,11 @@ export default Component.extend({
       'Technology': attributes.filterBy('key', 'Technology'),
       'Pubmed ID': attributes.filterBy('key', 'Pubmed ID')
     };
-  })
+  }),
+
+  actions: {
+    addValueToAttribute(attribute, value) {
+      console.log("Will add value to attr.");
+    }
+  }
 });
