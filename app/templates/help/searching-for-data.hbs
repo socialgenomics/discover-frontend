@@ -6,12 +6,12 @@
         <div class="grid u-full-height">
           <div class="grid__col grid__col--1-of-3 u-fs2 u-fw-med">
             <ul class="o-list-flush-left u-px3">
-              <li class="u-p1">{{#link-to 'help.searching-for-data' (query-params help="search-query") class="u-tc-teal"}}How do I search on Repositive?{{/link-to}}</li>
-              <li class="u-p1">{{#link-to 'help.searching-for-data' (query-params help="algorithm") class="u-tc-teal"}}How does the search algorithm work?{{/link-to}}</li>
-              <li class="u-p1">{{#link-to 'help.searching-for-data' (query-params help="effective") class="u-tc-teal"}}How can I build my search query to make it more effective?{{/link-to}}</li>
-              <li class="u-p1">{{#link-to 'help.searching-for-data' (query-params help="boolean") class="u-tc-teal"}}What boolean operators can I use?{{/link-to}}</li>
-              <li class="u-p1">{{#link-to 'help.searching-for-data' (query-params help="predicated") class="u-tc-teal"}}What predicated search terms can I use?{{/link-to}}</li>
-              <li class="u-p1">{{#link-to 'help.searching-for-data' (query-params help="filters") class="u-tc-teal"}}What do all those filters mean?{{/link-to}}</li>
+              {{help-docs-link link="help.searching-for-data" query="search-query" text="How do I search on Repositive?"}}
+              {{help-docs-link link="help.searching-for-data" query="algorithm" text="How does the search algorithm work?"}}
+              {{help-docs-link link="help.searching-for-data" query="effective" text="How can I build my search query to make it more effective?"}}
+              {{help-docs-link link="help.searching-for-data" query="boolean" text="What boolean operators can I use?"}}
+              {{help-docs-link link="help.searching-for-data" query="predicated" text="What predicated search terms can I use?"}}
+              {{help-docs-link link="help.searching-for-data" query="filters" text="What do all those filters mean?"}}
             </ul>
           </div>
           <div class="grid__col grid__col--2-of-3 u-full-min-height u-mb3 u-fs2 u-border-left">
