@@ -9,8 +9,8 @@ export default Component.extend({
   isActive: computed.equal(get(this, 'page'), get(this, 'currentPageNumber')),
 
   actions: {
-    thisPage(page) {
-      this.sendAction('thisPage', get(this, 'page'));
+    goToPage(page) {
+      this.sendAction('goToPage', get(this, 'page'));
     }
   }
 });
