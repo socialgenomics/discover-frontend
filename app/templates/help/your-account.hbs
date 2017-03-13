@@ -6,11 +6,11 @@
         <div class="grid u-full-height">
           <div class="grid__col grid__col--1-of-3 u-fs2 u-fw-med">
             <ul class="o-list-flush-left u-px3">
-              <li class="u-p1">{{#link-to 'help.your-account' (query-params help="access") class="u-tc-teal"}}How can I access my account?{{/link-to}}</li>
-              <li class="u-p1">{{#link-to 'help.your-account' (query-params help="personalise") class="u-tc-teal"}}Can I personalise my notifications?{{/link-to}}</li>
-              <li class="u-p1">{{#link-to 'help.your-account' (query-params help="change-cred") class="u-tc-teal"}}How can I change my credentials?{{/link-to}}</li>
-              <li class="u-p1">{{#link-to 'help.your-account' (query-params help="change-pw") class="u-tc-teal"}}How can I change my password?{{/link-to}}</li>
-              <li class="u-p1">{{#link-to 'help.your-account' (query-params help="profile") class="u-tc-teal"}}Can I control who can see my profile?{{/link-to}}</li>
+              {{help-docs-link link="help.your-account" query="access" text="How can I access my account?"}}
+              {{help-docs-link link="help.your-account" query="personalise" text="Can I personalise my notifications?"}}
+              {{help-docs-link link="help.your-account" query="change-cred" text="How can I change my credentials?"}}
+              {{help-docs-link link="help.your-account" query="change-pw" text="How can I change my password?"}}
+              {{help-docs-link link="help.your-account" query="profile" text="Can I control who can see my profile?"}}
             </ul>
           </div>
           <div class="grid__col grid__col--2-of-3 u-full-min-height u-mb3 u-fs2 u-border-left">

@@ -6,15 +6,15 @@
         <div class="grid u-full-height">
           <div class="grid__col grid__col--1-of-3 u-fs2 u-fw-med">
             <ul class="o-list-flush-left u-px3">
-              <li class="u-py1">{{#link-to 'help.requesting-data' (query-params help="what-is") class="u-tc-teal"}}What is a data request?{{/link-to}}</li>
-              <li class="u-py1">{{#link-to 'help.requesting-data' (query-params help="what-can") class="u-tc-teal"}}What data can I request?{{/link-to}}</li>
-              <li class="u-py1">{{#link-to 'help.requesting-data' (query-params help="who-can-see") class="u-tc-teal"}}Who can see my request?{{/link-to}}</li>
-              <li class="u-py1">{{#link-to 'help.requesting-data' (query-params help="information-include") class="u-tc-teal"}}What information should I include in my request?{{/link-to}}</li>
-              <li class="u-py1">{{#link-to 'help.requesting-data' (query-params help="add-meta-later") class="u-tc-teal"}}Can I add more metadata and description later?{{/link-to}}</li>
-              <li class="u-py1">{{#link-to 'help.requesting-data' (query-params help="no-response") class="u-tc-teal"}}I don't have any responses to my request.{{/link-to}}</li>
-              <li class="u-py1">{{#link-to 'help.requesting-data' (query-params help="incorrect-response") class="u-tc-teal"}}The response to my request is not what I am looking for.{{/link-to}}</li>
-              <li class="u-py1">{{#link-to 'help.requesting-data' (query-params help="how-long") class="u-tc-teal"}}How long will my request be live for?{{/link-to}}</li>
-              <li class="u-py1">{{#link-to 'help.requesting-data' (query-params help="fulfil-request") class="u-tc-teal"}}I know where the requested data are. How can I respond to the request?{{/link-to}}</li>
+              {{help-docs-link link="help.requesting-data" query="what-is" text="What is a data request?"}}
+              {{help-docs-link link="help.requesting-data" query="what-can" text="What data can I request?"}}
+              {{help-docs-link link="help.requesting-data" query="who-can-see" text="Who can see my request?"}}
+              {{help-docs-link link="help.requesting-data" query="information-include" text="What information should I include in my request?"}}
+              {{help-docs-link link="help.requesting-data" query="add-meta-later" text="Can I add more metadata and description later?"}}
+              {{help-docs-link link="help.requesting-data" query="no-response" text="I don't have any responses to my request."}}
+              {{help-docs-link link="help.requesting-data" query="incorrect-response" text="The response to my request is not what I am looking for."}}
+              {{help-docs-link link="help.requesting-data" query="how-long" text="How long will my request be live for?"}}
+              {{help-docs-link link="help.requesting-data" query="fulfil-request" text="I know where the requested data are. How can I respond to the request?"}}
             </ul>
           </div>
           <div class="grid__col grid__col--2-of-3 u-full-min-height u-mb3 u-fs2 u-border-left">

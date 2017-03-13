@@ -6,13 +6,13 @@
         <div class="grid u-full-height">
           <div class="grid__col grid__col--1-of-3 u-fs2 u-fw-med">
             <ul class="o-list-flush-left u-px3">
-              <li class="u-p1">{{#link-to 'help.registering-new-data' (query-params help="data-reg") class="u-tc-teal"}}What data can I register?{{/link-to}}</li>
-              <li class="u-p1">{{#link-to 'help.registering-new-data' (query-params help="see-reg") class="u-tc-teal"}}Who can see my registration?{{/link-to}}</li>
-              <li class="u-p1">{{#link-to 'help.registering-new-data' (query-params help="include-reg") class="u-tc-teal"}}What information should I include in my registration?{{/link-to}}</li>
-              <li class="u-p1">{{#link-to 'help.registering-new-data' (query-params help="store-raw") class="u-tc-teal"}}Do you store the raw data alongside the metadata I register?{{/link-to}}</li>
-              <li class="u-p1">{{#link-to 'help.registering-new-data' (query-params help="view-reg") class="u-tc-teal"}}How do I know who has viewed my data registration?{{/link-to}}</li>
-              <li class="u-p1">{{#link-to 'help.registering-new-data' (query-params help="add-meta") class="u-tc-teal"}}Can I add more metadata and description later?{{/link-to}}</li>
-              <li class="u-p1">{{#link-to 'help.registering-new-data' (query-params help="access-reg") class="u-tc-teal"}}Can I choose who has access to my data?{{/link-to}}</li>
+              {{help-docs-link link="help.registering-new-data" query="data-reg" text="What data can I register?"}}
+              {{help-docs-link link="help.registering-new-data" query="see-reg" text="Who can see my registration?"}}
+              {{help-docs-link link="help.registering-new-data" query="include-reg" text="What information should I include in my registration?"}}
+              {{help-docs-link link="help.registering-new-data" query="store-raw" text="Do you store the raw data alongside the metadata I register?"}}
+              {{help-docs-link link="help.registering-new-data" query="view-reg" text="How do I know who has viewed my data registration?"}}
+              {{help-docs-link link="help.registering-new-data" query="add-meta" text="Can I add more metadata and description later?"}}
+              {{help-docs-link link="help.registering-new-data" query="access-reg" text="Can I choose who has access to my data?"}}
             </ul>
           </div>
           <div class="grid__col grid__col--2-of-3 u-full-min-height u-mb3 u-fs2 u-border-left">

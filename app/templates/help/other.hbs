@@ -6,11 +6,11 @@
         <div class="grid u-full-height">
           <div class="grid__col grid__col--1-of-3 u-fs2 u-fw-med">
             <ul class="o-list-flush-left u-px3">
-              <li class="u-p1">{{#link-to 'help.other' (query-params help="why-tag") class="u-tc-teal"}}Why should I tag a dataset?{{/link-to}}</li>
-              <li class="u-p1">{{#link-to 'help.other' (query-params help="incorrect-tag") class="u-tc-teal"}}What should I do if a previous tag is incorrect?{{/link-to}}</li>
-              <li class="u-p1">{{#link-to 'help.other' (query-params help="contribute-discussion") class="u-tc-teal"}}How can I contribute to a discussion?{{/link-to}}</li>
-              <li class="u-p1">{{#link-to 'help.other' (query-params help="good-tag") class="u-tc-teal"}}What makes a good tag?{{/link-to}}</li>
-              <li class="u-p1">{{#link-to 'help.other' (query-params help="format") class="u-tc-teal"}}How can I format my descriptions and discussions?{{/link-to}}</li>
+              {{help-docs-link link="help.other" query="why-tag" text="Why should I tag a dataset?"}}
+              {{help-docs-link link="help.other" query="incorrect-tag" text="What should I do if a previous tag is incorrect?"}}
+              {{help-docs-link link="help.other" query="contribute-discussion" text="How can I contribute to a discussion?"}}
+              {{help-docs-link link="help.other" query="good-tag" text="What makes a good tag?"}}
+              {{help-docs-link link="help.other" query="format" text="How can I format my descriptions and discussions??"}}
             </ul>
           </div>
           <div class="grid__col grid__col--2-of-3 u-full-min-height u-mb3 u-fs2 u-border-left">
