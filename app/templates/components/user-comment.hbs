@@ -16,7 +16,7 @@
 
 <!-- Comment -->
 {{#unless inEditMode}}
-  <p class="u-markdown-formatting u-mb0">{{markdown-to-html markdown=comment.properties.text extensions='targetBlankLinks'}}</p>
+  <p class="u-markdown-formatting u-mb0">{{markdown-to-html markdown=comment.properties.text extensions='targetBlankLinks sanitize'}}</p>
 {{else}}
   <form class="u-mb3">
     {{validated-input

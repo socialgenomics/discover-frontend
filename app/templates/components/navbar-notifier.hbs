@@ -1,14 +1,17 @@
 {{#basic-dropdown verticalPosition=below as |dropdown|}}
-  {{#dropdown.trigger class="u-outline-none u-cursor-pointer u-p2"}}
+  {{#dropdown.trigger onMouseDown=(action 'handleTriggerEvent') onTouchEnd=(action 'handleTriggerEvent') class="u-outline-none u-cursor-pointer u-p2"}}
     {{fa-icon 'bell'}}
   {{/dropdown.trigger}}
 
   {{#dropdown.content class="c-card u-flex u-flex-column"}}
+
     {{notification-list
       notifications=notifications
       dropdown=dropdown
       close=(action 'close')
       reloadNotifications=(action 'reloadNotifications')
+      isLoading=isLoading
     }}
+
   {{/dropdown.content}}
 {{/basic-dropdown}}

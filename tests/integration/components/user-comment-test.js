@@ -68,7 +68,7 @@ describe('Integration | Component | user comment', function() {
   });
 
   describe('edit mode', function () {
-    it('should have Save and cancel buttons', function () {
+    it('should have save and cancel buttons', function () {
       setupState(this);
 
       this.render(hbs`{{user-comment comment=comment canEdit=true inEditMode=true}}`);

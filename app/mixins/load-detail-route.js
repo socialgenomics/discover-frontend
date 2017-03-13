@@ -2,6 +2,7 @@ import Ember from 'ember';
 import ENV from 'repositive/config/environment';
 import ActionableMixin from 'repositive/mixins/actionable';
 import SubscribableMixin from 'repositive/mixins/subscribable';
+import colours from 'repositive/utils/colours';
 import FlashMessageMixin from 'repositive/mixins/flash-message-mixin';
 
 const { Mixin, get, RSVP, inject: { service }, setProperties, set, Logger } = Ember;
@@ -30,7 +31,8 @@ export default Mixin.create(ActionableMixin, SubscribableMixin, FlashMessageMixi
           .uniq(); //removes duplicates
         setProperties(model, {
           'actionableId': data.actionable,
-          'subscribableId': data.subscribable
+          'subscribableId': data.subscribable,
+          'colour': colours.getColour(get(model, 'assay'))
         });
         const hashObj = {
           model,
@@ -38,7 +40,7 @@ export default Mixin.create(ActionableMixin, SubscribableMixin, FlashMessageMixi
           userProfiles: commenterIds.map(id => this.store.query('userProfile', id))
         };
         if (get(this, 'session.isAuthenticated')) {
-          hashObj['subscriptions'] = this._getSubscriptions(modelId, get(this, 'session.authenticatedUser.id'));
+          hashObj['subscriptions'] = this._getSubscriptions(this.store, modelId, get(this, 'session.authenticatedUser.id'));
         }
         return RSVP.hash(hashObj);
       });
@@ -46,7 +48,7 @@ export default Mixin.create(ActionableMixin, SubscribableMixin, FlashMessageMixi
 
   _checkIfShouldUnfollow(params, transition, modelName) {
     if (transition.queryParams.unfollow) {
-      this._getSubscriptions(params.id, get(this, 'session.session.authenticated.user.id'))
+      this._getSubscriptions(this.store, params.id, get(this, 'session.session.authenticated.user.id'))
         .then(subscriptions => {
           const subscription = subscriptions.get('firstObject');
           set(subscription, 'active', false);
