@@ -12,7 +12,7 @@
     "postinstall": "bower install",
     "startStaging": "ember server --watcher=polling --proxy=https://api-staging.repositive.io",
     "startStagingOnNewMac": "ember server --watcher=polling --proxy=https://api-staging.repositive.io --live-reload-port 49153",
-    "startDocker": "ember server --watcher=polling --proxy=$BACKEND_SERVER",
+    "startDocker": "ember server --watcher=polling --proxy=http://localhost:3000",
     "build": "ember build",
     "test": "ember test",
     "security": "snyk test"

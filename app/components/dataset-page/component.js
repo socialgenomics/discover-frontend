@@ -5,9 +5,16 @@ import SubscribableMixin from 'repositive/mixins/subscribable';
 
 // TODO figure out how to lazy inject mixins or find other solution.
 // Right now it will work cause dataset validation has URL as optional and request doesn't have URL at all
-import Validations from 'repositive/validations/dataset';
+import { buildValidations } from 'ember-cp-validations';
+import urlFormatValidator from 'repositive/validations/urlFormatValidator';
+import presenceValidator from 'repositive/validations/presenceValidator';
 
 const { Component, computed, inject: { service }, get, Logger, set, merge } = Ember;
+const Validations = buildValidations({
+  title: presenceValidator(),
+  description: presenceValidator(),
+  url: urlFormatValidator()
+});
 
 export default Component.extend(
   EditModeMixin,

@@ -1,8 +1,17 @@
 import Ember from 'ember';
 import ENV from 'repositive/config/environment';
-import Validations from 'repositive/validations/emailAddress';
+import { buildValidations } from 'ember-cp-validations';
+import presenceValidator from 'repositive/validations/presenceValidator';
+import emailFormatValidator from 'repositive/validations/emailFormatValidator';
+import { errorMessages } from 'repositive/validations/validations-config';
 
 const { Component, computed, get, inject: { service }, set, setProperties, Logger } = Ember;
+const Validations = buildValidations({
+  emailAddress: [
+    presenceValidator(errorMessages.blankEmail),
+    emailFormatValidator()
+  ]
+});
 
 export default Component.extend(Validations, {
   ajax: service(),

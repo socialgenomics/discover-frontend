@@ -1,9 +1,14 @@
 import Ember from 'ember';
 import FlashMessageMixin from 'repositive/mixins/flash-message-mixin';
 import TrackEventsMixin from 'repositive/mixins/track-events-mixin';
-import Validations from 'repositive/validations/request';
+import { buildValidations } from 'ember-cp-validations';
+import presenceValidator from 'repositive/validations/presenceValidator';
 
 const { Controller, computed, inject: { service }, get, getProperties, set, Logger } = Ember;
+const Validations = buildValidations({
+  title: presenceValidator(),
+  description: presenceValidator(),
+});
 
 export default Controller.extend(
   Validations,
