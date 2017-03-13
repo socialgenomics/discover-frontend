@@ -1,8 +1,8 @@
 import Ember from 'ember';
-const { Component } = Ember;
+const { Component, set } = Ember;
 
 export default Component.extend({
   tagName: 'li',
   classNameBindings: ['active:u-fw-bold'],
-  classNames: ['u-fw-reg', 'u-p1', 'u-hv-bc-darken5'],
+  classNames: ['u-p1', 'u-hv-bc-darken5']
 });
