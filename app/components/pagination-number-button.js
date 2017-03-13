@@ -6,7 +6,7 @@ export default Component.extend({
   tagName: 'p',
   classNames: [''],
 
-  isActive: computed.equal(get(this, 'page'), get(this, 'currentPageNumber')),
+  isActive: computed.equal('page', 'currentPageNumber'),
 
   actions: {
     goToPage(page) {
