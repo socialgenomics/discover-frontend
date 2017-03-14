@@ -10,6 +10,7 @@ export default Component.extend({
       key: 'Assay',
       value: 'RNA-seq',
       userId: {
+        id: '1',
         displayName: 'Testy McTestface'
       }
     },
@@ -17,6 +18,7 @@ export default Component.extend({
       key: 'Assay',
       value: 'WGS',
       userId: {
+        id: '2',
         displayName: 'Boris McNorris'
       }
     },
@@ -24,6 +26,7 @@ export default Component.extend({
       key: 'Samples',
       value: '24',
       userId: {
+        id:'3',
         displayName: 'Doris In A Forest'
       }
     },
@@ -31,6 +34,7 @@ export default Component.extend({
       key: 'Technology',
       value: 'ZX Spectrum',
       userId: {
+        id: '2',
         displayName: 'Boris McNorris'
       }
     }
