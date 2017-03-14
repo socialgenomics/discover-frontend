@@ -1,16 +1,15 @@
 import Ember from 'ember';
 
-const { inject: { service }, Component, computed, Logger, get, set } = Ember;
+const { Component, computed, get } = Ember;
 
 export default Component.extend({
   tagName: 'p',
-  classNames: [''],
 
-  isActive: computed.equal('page', 'currentPageNumber'),
+  isActive: computed('page', 'currentPageNumber', function() {
+    return get(this, 'page') === get(this, 'currentPageNumber');
+  }),
 
   actions: {
-    goToPage(page) {
-      this.sendAction('goToPage', get(this, 'page'));
-    }
+    goToPage(page) { get(this, 'goToPage')(page); }
   }
 });
