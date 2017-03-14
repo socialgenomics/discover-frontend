@@ -8,7 +8,6 @@ export default Mixin.create({
   query: null,
   page: 1,
   resultsPerPage: 6,
-  resultsOptions: [6, 15, 30, 90],
 
   totalPages: computed('model.meta.total', 'resultsPerPage', function () {
     return Math.ceil(get(this, 'model.meta.total') / get(this, 'resultsPerPage'));

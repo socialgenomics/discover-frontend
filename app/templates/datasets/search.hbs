@@ -13,14 +13,7 @@
   {{#if isLoading}}
     {{partial 'loading'}}
   {{else}}
-   <div class="u-ta-right u-mb3">
-      <label for="results">Datasets per Page: </label>
-      <select onchange={{action "selectResults" value="target.value"}} id="results">
-        {{#each resultsOptions as |results|}}
-          <option value={{results}} selected={{eq resultsPerPage results}}>{{results}}</option>
-        {{/each}}
-      </select>
-    </div>
+    {{results-select resultsOption=resultsOptions resultsPerPage=resultsPerPage selectResults=(action 'selectResults')}}
 
     {{search-results-list results=model.datasets totalResults=model.meta.total}}
 

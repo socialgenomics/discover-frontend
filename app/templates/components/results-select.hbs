@@ -1,0 +1,7 @@
+<label for="results">Datasets per Page: </label>
+
+<select onchange={{action "selectResults" value="target.value"}} id="results">
+  {{#each resultsOptions as |results|}}
+    <option value={{results}} selected={{eq resultsPerPage results}}>{{results}}</option>
+  {{/each}}
+</select>
