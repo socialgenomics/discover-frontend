@@ -26,7 +26,7 @@ export default Component.extend({
       key: 'Samples',
       value: '24',
       userId: {
-        id:'3',
+        id: '3',
         displayName: 'Doris In A Forest'
       }
     },
@@ -49,11 +49,5 @@ export default Component.extend({
       'Technology': attributes.filterBy('key', 'Technology'),
       'Pubmed ID': attributes.filterBy('key', 'Pubmed ID')
     };
-  }),
-
-  actions: {
-    addValueToAttribute(attribute, value) {
-      console.log("Will add value to attr.");
-    }
-  }
+  })
 });
