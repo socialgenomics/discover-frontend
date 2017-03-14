@@ -4,7 +4,6 @@ const { Component, computed, get } = Ember;
 
 export default Component.extend({
   keys: ['Assay', 'Samples', 'Tissue', 'Technology', 'Pubmed ID'],
-
   attributes: [
     {
       key: 'Assay',
@@ -39,6 +38,32 @@ export default Component.extend({
       }
     }
   ],
+
+  //Target structure of attr object
+  // {
+  //   key:
+  //   value:
+  //   actionId: ?
+  //   userId: ?
+  // }
+
+  //Get actions
+    //Convert attr actions to common object
+    //Convert dataset attrs to common object
+      //Merge these into one array.
+
+
+  // Structure of data from dataset
+  attributesFromDataset: {
+    assay: [
+      'WGS',
+      'RNA-Seq'
+    ],
+    samples: ['23'],
+    tissue: ['heart'],
+    technology: ['ZX Spectrum'],
+    pubmed: ['123']
+  },
 
   groups: computed('attributes', 'keys', function() {
     const attributes = get(this, 'attributes');
