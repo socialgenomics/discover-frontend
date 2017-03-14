@@ -5,10 +5,12 @@ const { Component, get, computed } = Ember;
 export default Component.extend({
   classNames: ['u-pt3', 'u-mb2', 'u-flex', 'u-justify-center', 'u-flex-wrap'],
 
+  page: '',
+
   pageNumbers: [1, 2, 3, 4, 5],
 
   pages: computed('page', function() {
-    if (get(this, 'page') % 5 === 0) {
+    if (get(this, 'page') % get(this, 'page') === 0) {
       return this._updatePageNumberList(get(this, 'pageNumbers'));
     }
     return get(this, 'pageNumbers');
@@ -30,6 +32,10 @@ export default Component.extend({
   * @param {array} pages - the list of page numbers.
   */
   _updatePageNumberList(pageNumbers) {
-    return pageNumbers.map(arrayElement => arrayElement + 4);
-  },
+    if (get(this, 'page') > 2) {
+      return pageNumbers.map(page => page + get(this, 'page') - 3);
+    } else {
+      return pageNumbers.map(page => page);
+    }
+  }
 });

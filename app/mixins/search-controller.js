@@ -6,9 +6,9 @@ const { Mixin, computed, get, set } = Ember;
 export default Mixin.create({
   queryParams: ['query', 'page', 'resultsPerPage'],
   query: null,
-  page: 1,
   resultsPerPage: 6,
-
+  page: 1,
+  
   totalPages: computed('model.meta.total', 'resultsPerPage', function () {
     return Math.ceil(get(this, 'model.meta.total') / get(this, 'resultsPerPage'));
   }),
