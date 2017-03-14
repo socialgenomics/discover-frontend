@@ -13,7 +13,14 @@
   {{#if isLoading}}
     {{partial 'loading'}}
   {{else}}
-    <h5 class="u-tc-secondary u-fs2 u-ta-right">Search Results ({{model.meta.total}})</h5>
+   <div class="u-ta-right u-mb3">
+      <label for="results">Datasets per Page: </label>
+      <select onchange={{action "selectResults" value="target.value"}} id="results">
+        {{#each resultsOptions as |results|}}
+          <option value={{results}} selected={{eq resultsPerPage results}}>{{results}}</option>
+        {{/each}}
+      </select>
+    </div>
 
     {{search-results-list results=model.datasets totalResults=model.meta.total}}
 
