@@ -29,7 +29,7 @@ describe('Integration: PaginationBarComponent', function() {
       currentPageNumber: 4
     });
     this.render(hbs`{{pagination-bar currentPageNumber=currentPageNumber}}`);
-    expect(this.$().find(this.$('p')[1]).text().trim()).to.eql('4');
+    expect(this.$().find(this.$('p')[4]).text().trim()).to.eql('4');
   });
 
   it('displays correct total page amount', function() {
@@ -37,6 +37,6 @@ describe('Integration: PaginationBarComponent', function() {
       totalPages: 7
     });
     this.render(hbs`{{pagination-bar totalPages=totalPages}}`);
-    expect(this.$().find(this.$('.u-tc-secondary.u-mr2')[1]).text().trim()).to.eql('of 7');
+    expect(this.$('.u-flex').find(this.$('.u-tc-secondary.u-mr2')).text().trim()).to.eql('of 7');
   });
 });
