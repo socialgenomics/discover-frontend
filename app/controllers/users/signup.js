@@ -11,13 +11,7 @@ import { errorMessages, lengths } from 'repositive/validations/validations-confi
 const { assign, get, getProperties, set, setProperties, computed, Controller, inject: { service } } = Ember;
 const passwordPatterns = [/\d/, /[A-Z]/, /[!,@,#,$,%,^,&,*,?,_,~,-,(,)]/];
 const Validations = buildValidations({
-  fullname: [
-    presenceValidator(),
-    validator('format', {
-      regex: /^((?!@).)*$/,
-      message: 'Please enter your full name.'
-    })
-  ],
+  fullname: presenceValidator(),
   email: [
     presenceValidator(errorMessages.blankEmail),
     emailFormatValidator()
