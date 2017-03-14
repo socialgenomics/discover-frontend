@@ -48,10 +48,9 @@ export default Component.extend({
   // }
 
   //Get actions
-    //Convert attr actions to common object
-    //Convert dataset attrs to common object
-      //Merge these into one array.
-
+  //Convert attr actions to common object
+  //Convert dataset attrs to common object
+  //Merge these into one array.
 
   // Structure of data from dataset
   attributesFromDataset: {
