@@ -10,10 +10,7 @@ export default Component.extend({
   pageNumbers: [1, 2, 3, 4, 5],
 
   pages: computed('page', function() {
-    if (get(this, 'page') % get(this, 'page') === 0) {
-      return this._updatePageNumberList(get(this, 'pageNumbers'));
-    }
-    return get(this, 'pageNumbers');
+    return this._updatePageNumberList(get(this, 'pageNumbers'));
   }),
 
   noPrevPage: computed.equal('currentPageNumber', 1),
