@@ -59,16 +59,18 @@ export default Component.extend(
       },
 
       addAttribute(key, value) {
-        debugger;
-        // const store = get(this, 'store');
-        // const props = {
-        //   key: key,
-        //   value: value
-        // };
-        // store
-        //   .createRecord('action', this._createNewRecordData('attribute', { properties: props }))
-        //   .save()
-        //   .catch(Logger.error);
+        const store = get(this, 'store');
+        const props = {
+          key: key,
+          value: value
+        };
+        store
+          .createRecord('action', this._createNewRecordData('attribute', { properties: props }))
+          .save()
+          .then(action => {
+            debugger;
+          })
+          .catch(Logger.error);
       },
 
       addComment(text) {
