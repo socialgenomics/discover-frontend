@@ -6,12 +6,12 @@ import moment from 'moment';
 
 describe('newLabelHelper', function() {
   it('returns nothing for a date not within default days', function() {
-    const result = newLabel(new Date('December 17, 1995'));
+    const result = newLabel([new Date('December 17, 1995')]);
     expect(result).to.be.undefined;
   });
 
-  it('should render new when no days are specified and date is within default days', function() {
-    const result = newLabel(moment(new Date()).subtract(14, 'days'));
+  it('should return new when no days are specified and date is within default days', function() {
+    const result = newLabel([moment(new Date()).subtract(14, 'days')]);
     expect(result.string).to.eql('<span class="u-tc-red u-fs0"> NEW </span>');
   });
 
