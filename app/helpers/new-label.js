@@ -1,7 +1,8 @@
 import Ember from 'ember';
 import moment from 'moment';
-//Using destructuring fails tests so I had to do it the ES5 way.
+
 export function newLabel(params) {
+  //Using destructuring fails tests so I had to do it the ES5 way.
   let date, days;
   if (Array.isArray(params)) {
     date = params[0];
