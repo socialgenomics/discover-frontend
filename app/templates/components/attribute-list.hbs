@@ -6,6 +6,12 @@
     {{#each attrs as |attr|}}
       {{attribute-list-item attribute=attr}}
     {{/each}}
-    {{add-attribute addAttribute=addAttribute group=group}}
+    {{#if (eq openInput group)}}
+      {{add-attribute addAttribute=addAttribute group=group}}
+    {{else}}
+      <span class="u-flex u-justify-between u-tc-tertiary u-hv-tc-secondary u-cursor-pointer">
+        Add {{group}} {{fa-icon 'plus-circle' class='u-fs2' click=(action 'openAttrInput' group)}}
+      </span>
+    {{/if}}
   </div>
 {{/each-in}}

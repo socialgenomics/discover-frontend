@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-const { Component, computed, get } = Ember;
+const { Component, computed, get, set } = Ember;
 
 export default Component.extend({
   keys: ['Assay', 'Samples', 'Tissue', 'Technology', 'Pubmed ID'],
@@ -64,7 +64,7 @@ export default Component.extend({
     pubmed: ['123']
   },
 
-  groups: computed('attributes', 'keys', function() {
+  groups: computed('attributes', function() {
     const attributes = get(this, 'attributes');
     return {
       'Assay': attributes.filterBy('key', 'Assay'),
@@ -73,5 +73,8 @@ export default Component.extend({
       'Technology': attributes.filterBy('key', 'Technology'),
       'Pubmed ID': attributes.filterBy('key', 'Pubmed ID')
     };
-  })
+  }),
+  actions: {
+    setOpenInput(key) { set(this, 'openInput', key); }
+  }
 });
