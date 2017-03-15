@@ -3,45 +3,6 @@ import Ember from 'ember';
 const { Component, computed, get, set } = Ember;
 
 export default Component.extend({
-
-  // attributes: [
-  //   {
-  //     key: 'Assay',
-  //     value: 'RNA-seq',
-  //     userId: {
-  //       id: '1',
-  //       displayName: 'Testy McTestface'
-  //     }
-  //   },
-  //   {
-  //     key: 'Assay',
-  //     value: 'WGS',
-  //     userId: {
-  //       id: '2',
-  //       displayName: 'Boris McNorris'
-  //     }
-  //   },
-  //   {
-  //     key: 'Samples',
-  //     value: '24',
-  //     userId: {
-  //       id: '3',
-  //       displayName: 'Doris In A Forest'
-  //     }
-  //   },
-  //   {
-  //     key: 'Technology',
-  //     value: 'ZX Spectrum',
-  //     userId: {
-  //       id: '2',
-  //       displayName: 'Boris McNorris'
-  //     }
-  //   }
-  // ],
-
-  //Convert dataset attrs to common object
-  //Merge these into one array.
-
   // Structure of data from dataset
   attributesFromDataset: {
     assay: [
@@ -51,7 +12,7 @@ export default Component.extend({
     samples: ['23'],
     tissue: ['heart'],
     technology: ['ZX Spectrum'],
-    pubmed: ['123']
+    pmid: ['123']
   },
 
   userGeneratedAttributes: computed('attributeActions', function() {
@@ -70,16 +31,21 @@ export default Component.extend({
     }, []);
   }),
 
-  // groups: computed('attributes', function() {
-  //   const attributes = get(this, 'attributes');
-  //   return {
-  //     'Assay': attributes.filterBy('key', 'Assay'),
-  //     'Sample': attributes.filterBy('key', 'Sample'),
-  //     'Tissue': attributes.filterBy('key', 'Tissue'),
-  //     'Technology': attributes.filterBy('key', 'Technology'),
-  //     'Pubmed ID': attributes.filterBy('key', 'Pubmed ID')
-  //   };
-  // }),
+  mergedObjects: computed('userGeneratedAttributes', 'datasetAttributes', function() {
+    return [].concat(get(this, 'userGeneratedAttributes'), get(this, 'datasetAttributes'));
+  }),
+
+  groups: computed('mergedObjects', function() {
+    const attributes = get(this, 'mergedObjects');
+    const toReturn = {
+      'Assay': attributes.filterBy('key', 'assay'),
+      'Samples': attributes.filterBy('key', 'samples'),
+      'Tissue': attributes.filterBy('key', 'tissue'),
+      'Technology': attributes.filterBy('key', 'technology'),
+      'Pubmed ID': attributes.filterBy('key', 'pmid')
+    };
+    return toReturn;
+  }),
 
   actions: {
     setOpenInput(key) { set(this, 'openInput', key); }

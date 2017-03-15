@@ -60,16 +60,9 @@ export default Component.extend(
 
       addAttribute(key, value) {
         const store = get(this, 'store');
-        const props = {
-          key: key,
-          value: value
-        };
         store
-          .createRecord('action', this._createNewRecordData('attribute', { properties: props }))
+          .createRecord('action', this._createNewRecordData('attribute', { properties: { key, value }}))
           .save()
-          .then(action => {
-            debugger;
-          })
           .catch(Logger.error);
       },
 
