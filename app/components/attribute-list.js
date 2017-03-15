@@ -4,6 +4,12 @@ const { Component, computed, get, set } = Ember;
 
 export default Component.extend({
   keys: ['Assay', 'Samples', 'Tissue', 'Technology', 'Pubmed ID'],
+
+  didReceiveAttrs() {
+    this._super(...arguments);
+    // debugger;
+  },
+
   attributes: [
     {
       key: 'Assay',

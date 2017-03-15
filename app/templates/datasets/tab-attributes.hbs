@@ -1,1 +1,3 @@
-{{attribute-list addAttribute=(action 'addAttribute')}}
+{{attribute-list
+    addAttribute=(action 'addAttribute')
+    attributeActions=(filter-by "type" "attribute" model.actionableId.actions)}}
