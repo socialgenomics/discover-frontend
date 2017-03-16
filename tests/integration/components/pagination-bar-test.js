@@ -29,7 +29,7 @@ describe('Integration: PaginationBarComponent', function() {
       currentPageNumber: 4
     });
     this.render(hbs`{{pagination-bar currentPageNumber=currentPageNumber}}`);
-    expect(this.$().find(this.$('p')[3]).text().trim()).to.eql('4');
+    expect(this.$('.u-inherit-disp').find(this.$('a')[3]).text().trim()).to.eql('4');
   });
 
   it('displays correct total page amount', function() {

@@ -29,7 +29,7 @@ export default Component.extend({
   _updatePageNumberList(pageNumbers, currentPageNumber, totalPages) {
     let popValue = 0;
 
-    if (currentPageNumber === totalPages) { popValue = 5;; } // End of array - don't allow > totalPages
+    if (currentPageNumber === totalPages) { popValue = 5; } // End of array - don't allow > totalPages
     else if (currentPageNumber === totalPages - 1) { popValue = 4; } // Penultimate array item
     else if (currentPageNumber > 2) { popValue = 3; } // Begninning of array - don't allow 0 and below
     else { popValue = 1; } // Default page numbers
