@@ -1,7 +1,7 @@
-<label for="results">Datasets per Page: </label>
+<label class="u-mr1" for="results">Items per Page: </label>
 
-<select onchange={{action "selectResults" value="target.value"}} id="results">
+<select class="u-bc-white u-px3 u-py1 u-tc-secondary u-fs2" onchange={{action "selectResults" value="target.value"}} id="results">
   {{#each resultsOptions as |results|}}
-    <option value={{results}} selected={{eq resultsPerPage results}}>{{results}}</option>
+    <option class="u-bc-white" value={{results}} selected={{eq resultsPerPage results}}>{{results}}</option>
   {{/each}}
 </select>
