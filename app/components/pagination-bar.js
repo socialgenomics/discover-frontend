@@ -27,13 +27,13 @@ export default Component.extend({
   * @param {array} pages - the list of page numbers.
   */
   _updatePageNumberList(pageNumbers, currentPageNumber, totalPages) {
-    const popValue = 0;
+    let popValue = 0;
 
-    if (currentPageNumber === totalPages) { set(this, 'popValue', 5); } // End of array - don't allow > totalPages
-    else if (currentPageNumber === totalPages - 1) { set(this, 'popValue', 4); } // Penultimate array item
-    else if (currentPageNumber > 2) { set(this, 'popValue', 3); } // Begninning of array - don't allow 0 and below
-    else { set(this, 'popValue', 1); } // Default page numbers
+    if (currentPageNumber === totalPages) { popValue = 5;; } // End of array - don't allow > totalPages
+    else if (currentPageNumber === totalPages - 1) { popValue = 4; } // Penultimate array item
+    else if (currentPageNumber > 2) { popValue = 3; } // Begninning of array - don't allow 0 and below
+    else { popValue = 1; } // Default page numbers
 
-    return pageNumbers.map(page => page + currentPageNumber - get(this, 'popValue'));
+    return pageNumbers.map(page => page + currentPageNumber - popValue);
   }
 });

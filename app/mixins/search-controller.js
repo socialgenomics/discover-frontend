@@ -37,7 +37,9 @@ export default Mixin.create({
     },
 
     goToPage(page) {
-      set(this, 'page', page);
+      if (page <= get(this, 'totalPages')) {
+        set(this, 'page', page);
+      }
     },
 
     addFilter(predicate, text) {
