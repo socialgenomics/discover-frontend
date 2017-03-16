@@ -46,6 +46,10 @@ export default Mixin.create({
 
     selectResults(resultsPerPage) {
       set(this, 'resultsPerPage', resultsPerPage);
+      get(this, 'metrics').trackEvent({
+        category: 'search_resultsPerPage',
+        action: resultsPerPage
+      });
     }
   },
 
