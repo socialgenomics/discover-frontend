@@ -61,7 +61,7 @@ export default Component.extend(
       addAttribute(key, value) {
         const store = get(this, 'store');
         store
-          .createRecord('action', this._createNewRecordData('attribute', { properties: { key, value }}))
+          .createRecord('action', this._createNewRecordData('attribute', { properties: { key, value } }))
           .save()
           .catch(Logger.error);
       },

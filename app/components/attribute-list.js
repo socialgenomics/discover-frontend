@@ -16,13 +16,11 @@ export default Component.extend({
   },
 
   userGeneratedAttributes: computed('attributeActions', function() {
-    return get(this, 'attributeActions')
-      .map(attribute => this._convertActionToCommonObj(attribute));
+    return get(this, 'attributeActions').map(this._convertActionToCommonObj);
   }),
 
   datasetAttributes: computed('attributesFromDataset', function() {
     const attributesFromDataset = get(this, 'attributesFromDataset');
-
     return Object.keys(attributesFromDataset).reduce((attrObjects, key) => {
       attributesFromDataset[key].map(value => {
         attrObjects.push({ key, value });
@@ -37,14 +35,12 @@ export default Component.extend({
 
   groups: computed('mergedObjects', function() {
     const attributes = get(this, 'mergedObjects');
-    const toReturn = {
-      'Assay': attributes.filterBy('key', 'assay'),
-      'Samples': attributes.filterBy('key', 'samples'),
-      'Tissue': attributes.filterBy('key', 'tissue'),
-      'Technology': attributes.filterBy('key', 'technology'),
-      'Pubmed ID': attributes.filterBy('key', 'pmid')
-    };
-    return toReturn;
+    const keys = ['assay', 'samples', 'tissue', 'technology', 'pmid'];
+
+    return keys.reduce((keyHash, key) => {
+      keyHash[key] = attributes.filterBy('key', key);
+      return keyHash;
+    }, {});
   }),
 
   actions: {
@@ -58,5 +54,5 @@ export default Component.extend({
       actionId: get(attribute, 'id'),
       userId: get(attribute, 'userId.id')
     };
-  },
+  }
 });
