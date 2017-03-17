@@ -49,7 +49,8 @@ export default Component.extend({
   }),
 
   actions: {
-    setOpenInput(key) { set(this, 'openInput', key); }
+    setOpenInput(key) { set(this, 'openInput', key); },
+    closeInput() { set(this, 'openInput', null); }
   },
 
   /**

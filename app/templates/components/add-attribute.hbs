@@ -1,7 +1,8 @@
 {{input placeholder="Add an attribute" value=attributeValue}}
 {{async-button
-  class="c-btn c-btn-primary"
+  class="c-btn c-btn-primary u-mr2"
   action=(action 'addAttribute')
   default="Add"
   pending="..."
 }}
+<button class="c-btn c-btn-text-secondary" {{action 'cancel'}}>Cancel</button>
