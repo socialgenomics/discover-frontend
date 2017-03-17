@@ -3,7 +3,7 @@ import Ember from 'ember';
 const { Component, computed, get, set } = Ember;
 
 export default Component.extend({
-  // Structure of data from dataset
+  // MOCK DATASET ATTRIBUTES DATA
   attributesFromDataset: {
     assay: [
       'WGS',
@@ -33,6 +33,11 @@ export default Component.extend({
     return [].concat(get(this, 'userGeneratedAttributes'), get(this, 'datasetAttributes'));
   }),
 
+  /**
+   * @desc dataset and user added attributes sorted by key
+   * @param {Array} list of objs
+   * @returns {Object} hash of keys each with a list of elements
+   */
   groups: computed('mergedObjects', function() {
     const attributes = get(this, 'mergedObjects');
     const keys = ['assay', 'samples', 'tissue', 'technology', 'pmid'];
@@ -47,6 +52,12 @@ export default Component.extend({
     setOpenInput(key) { set(this, 'openInput', key); }
   },
 
+  /**
+   * @desc convert action of type attribute into a common attribute obj
+   * @param {Object} attribute
+   * @returns {Object} common attribute object
+   * @private
+   */
   _convertActionToCommonObj(attribute) {
     return {
       key: get(attribute, 'properties.key'),
