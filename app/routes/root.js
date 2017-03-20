@@ -38,7 +38,7 @@ export default Route.extend(FlashMessageMixin, {
         requests: this.store.query('request', { 'order[0][0]': 'updated_at', 'order[0][1]': 'DESC' }),
         registered: this.store.query('dataset', { 'where.user_id.$ne': 'null', 'order[0][0]': 'updated_at', 'order[0][1]': 'DESC' }),
         collections: this.store.query('collection', { 'where.type': 'repositive_collection', 'order[0][0]': 'updated_at', 'order[0][1]': 'DESC', 'limit': '3' }),
-        datasources: ajax.request(ENV.APIRoutes['datasources'] + '?limit=3', { method: 'GET' })
+        datasources: this.store.query('collection', { 'where.type': 'datasource', 'order[0][0]': 'updated_at', 'order[0][1]': 'DESC', 'limit': '3' })
       })
         .then(data => {
           //Normalize and push trending datasets
