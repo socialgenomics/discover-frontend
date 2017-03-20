@@ -4,7 +4,7 @@ import ENV from 'repositive/config/environment';
 
 const { RSVP, inject: { service }, get } = Ember;
 
-export function handleError(ctx) {
+export function handleError() {
   return function(err) {
     if (err.jqXHR !== undefined) {
       return RSVP.reject(err.jqXHR.responseJSON);
@@ -14,7 +14,7 @@ export function handleError(ctx) {
   };
 }
 
-export function resolveWithResp(ctx) {
+export function resolveWithResp() {
   return function(resp) {
     return resp;
   };

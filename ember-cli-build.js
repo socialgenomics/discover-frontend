@@ -1,3 +1,5 @@
+/* eslint-env node */
+
 var path = require('path');
 var EmberApp = require('ember-cli/lib/broccoli/ember-app');
 var jsStringEscape = require('js-string-escape');

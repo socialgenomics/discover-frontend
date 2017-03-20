@@ -19,9 +19,15 @@ function doQuery(data, queryString) {
       return queryString;
     }
   }
-  const type = get(data.collection, 'type') === 'datasource' ? 'datasource' : 'collection';
+  const type = _getType(get(data, 'collection.type'));
   const predicateToAppend = `${type}:${short_name || normalisedName}`;
   return queryString ? `${predicateToAppend} ${queryString}` : `${predicateToAppend}`;
+}
+
+function _getType(type) {
+  if (type === 'datasource') { return 'datasource' }
+  else if (type === 'personal_repository') { return 'personal_repository' }
+  else { return 'collection' }
 }
 
 export function model(params) {
@@ -36,6 +42,7 @@ export function model(params) {
     .then(data => {
       const updatedQuery = doQuery(data, queryString);
       set(params, 'query', updatedQuery);
+      debugger;
       return this.makeRequest(params)
       .then(m => {
         const model = assign(data, m);
