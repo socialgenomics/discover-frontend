@@ -14,7 +14,7 @@ export default Component.extend({
   noPrevPage: computed.equal('currentPageNumber', 1),
 
   noNextPage: computed('currentPageNumber', 'totalPages', function() {
-    if (get(this, 'currentPageNumber') >= get(this, 'totalPages')) { return true; }
+    return get(this, 'currentPageNumber') >= get(this, 'totalPages');
   }),
 
   actions: {
@@ -27,12 +27,11 @@ export default Component.extend({
   * @param {array} pages - the list of page numbers.
   */
   _updatePageNumberList(pageNumbers, currentPageNumber, totalPages) {
-    let popValue = 0;
+    let popValue = 1;
 
+    if (currentPageNumber > 2) { popValue = 3; }
+    if (currentPageNumber === totalPages - 1) { popValue = 4; } // Penultimate array item
     if (currentPageNumber === totalPages) { popValue = 5; } // End of array - don't allow > totalPages
-    else if (currentPageNumber === totalPages - 1) { popValue = 4; } // Penultimate array item
-    else if (currentPageNumber > 2) { popValue = 3; } // Begninning of array - don't allow 0 and below
-    else { popValue = 1; } // Default page numbers
 
     return pageNumbers.map(page => page + currentPageNumber - popValue);
   }
