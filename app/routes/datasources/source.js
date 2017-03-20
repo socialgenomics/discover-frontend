@@ -25,8 +25,9 @@ function doQuery(data, queryString) {
 }
 
 function _getType(type) {
-  if (type === 'datasource') { return 'datasource' } else
-  if (type === 'personal_repository') { return 'personal_repository' } else { return 'collection' }
+  if (type === 'datasource' || type === 'personal_repository') {
+    return 'datasource';
+  } else { return 'collection' }
 }
 
 export function model(params) {
@@ -41,14 +42,13 @@ export function model(params) {
     .then(data => {
       const updatedQuery = doQuery(data, queryString);
       set(params, 'query', updatedQuery);
-      debugger;
       return this.makeRequest(params)
-      .then(m => {
-        const model = assign(data, m);
-        set(model, 'collection.actionableId', model.actionable);
-        this._updateQueryServiceValue(params.query);
-        return model;
-      });
+        .then(m => {
+          const model = assign(data, m);
+          set(model, 'collection.actionableId', model.actionable);
+          this._updateQueryServiceValue(params.query);
+          return model;
+        });
     }).catch(Logger.error);
 }
 
