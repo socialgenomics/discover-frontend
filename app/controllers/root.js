@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-const { Controller, inject: { service }, get, set, computed } = Ember;
+const { Controller, inject: { service }, get, computed } = Ember;
 
 export default Controller.extend({
   session: service(),

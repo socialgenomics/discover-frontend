@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { describe, it } from 'mocha';
+import { describe, it, beforeEach } from 'mocha';
 import { setupTest } from 'ember-mocha';
 import Ember from 'ember';
 import CheckEditPermissionsMixinMixin from 'repositive/mixins/check-edit-permissions-mixin';

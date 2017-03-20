@@ -1,6 +1,7 @@
+/* eslint-disable */
 import Ember from 'ember';
 
-const { Component } = Ember;
+const { Component, Logger } = Ember;
 
 export default Component.extend({
   init() {
@@ -23,12 +24,11 @@ export default Component.extend({
   },
 
   didRender() {
-    console.debug('Initializing typeform');
     try {
       // run typeform code
       new window.Typeform.Widget();
     } catch (e) {
-      console.error('Error running type form code', e);
+      Logger.error('Error running type form code', e);
     }
   }
 });

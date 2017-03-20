@@ -25,9 +25,8 @@ function doQuery(data, queryString) {
 }
 
 function _getType(type) {
-  if (type === 'datasource') { return 'datasource' }
-  else if (type === 'personal_repository') { return 'personal_repository' }
-  else { return 'collection' }
+  if (type === 'datasource') { return 'datasource' } else
+  if (type === 'personal_repository') { return 'personal_repository' } else { return 'collection' }
 }
 
 export function model(params) {
