@@ -4,6 +4,7 @@ const { Controller, inject: { service }, get, computed } = Ember;
 
 export default Controller.extend({
   session: service(),
+
   loading: false,
   isRootRoute: computed.alias('session.data.isRootRoute'),
   firstVisit: computed.alias('session.data.firstVisit'),
