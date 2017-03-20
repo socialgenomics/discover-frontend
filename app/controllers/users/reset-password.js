@@ -1,37 +1,23 @@
 import Ember from 'ember';
 import ENV from 'repositive/config/environment';
 import FlashMessageMixin from 'repositive/mixins/flash-message-mixin';
-import { validator, buildValidations } from 'ember-cp-validations';
+import { buildValidations } from 'ember-cp-validations';
+import presenceValidator from 'repositive/validations/presenceValidator';
+import lengthValidator from 'repositive/validations/lengthValidator';
+import passwordFormatValidator from 'repositive/validations/passwordFormatValidator';
+import { errorMessages, lengths } from 'repositive/validations/validations-config';
 
 const { Controller, computed, Logger, get, set, setProperties, inject: { service }, RSVP } = Ember;
 const Validations = buildValidations({
   password1: [
-    validator('presence', {
-      presence: true,
-      message: 'Please provide new password.'
-    }),
-    validator('length', {
-      min: 8,
-      message: 'Must be at least 8 characters.'
-    }),
-    validator('format', {
-      regex: /(?=.*\d)(?=.*[A-Z])/,
-      message: 'Must include an uppercase letter and a number.'
-    })
+    presenceValidator(errorMessages.newPassword),
+    lengthValidator(lengths.password),
+    passwordFormatValidator()
   ],
   password2: [
-    validator('presence', {
-      presence: true,
-      message: 'Please provide matching password.'
-    }),
-    validator('length', {
-      min: 8,
-      message: 'Must be at least 8 characters.'
-    }),
-    validator('format', {
-      regex: /(?=.*\d)(?=.*[A-Z])/,
-      message: 'Must include an uppercase letter and a number.'
-    })
+    presenceValidator(errorMessages.matchingPassword),
+    lengthValidator(lengths.password),
+    passwordFormatValidator()
   ]
 });
 
