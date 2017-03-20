@@ -1,16 +1,11 @@
 import Ember from 'ember';
-import { validator, buildValidations } from 'ember-cp-validations';
+import { buildValidations } from 'ember-cp-validations';
+import presenceValidator from 'repositive/validations/presenceValidator';
 
 const { Controller, computed, inject: { service }, get, Logger } = Ember;
 const Validations = buildValidations({
-  firstname: validator('presence', {
-    presence: true,
-    message: 'Can\'t be blank.'
-  }),
-  lastname: validator('presence', {
-    presence: true,
-    message: 'Can\'t be blank.'
-  })
+  firstname: presenceValidator(),
+  lastname: presenceValidator()
 });
 
 export default Controller.extend(
