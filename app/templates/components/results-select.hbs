@@ -1,7 +1,11 @@
 <label class="u-mr1" for="results">Items per Page: </label>
 
-<select class="u-bc-white u-px3 u-py1 u-tc-secondary u-fs2" onchange={{action "selectResults" value="target.value"}} id="results">
-  {{#each resultsOptions as |results|}}
-    <option class="u-bc-white" value={{results}} selected={{eq resultsPerPage results}}>{{results}}</option>
-  {{/each}}
-</select>
+{{#power-select
+  classNames="u-px3 u-py1 u-tc-secondary u-fs2"
+  options=resultsOptions
+  selected=resultsPerPage
+  searchEnabled=false
+  onchange=(action "selectResults")
+  as |results|}}
+  {{results}}
+{{/power-select}}

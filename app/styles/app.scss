@@ -26,6 +26,7 @@
 @import 'custom/components/components.modals';
 @import 'custom/components/components.navbar';
 @import 'custom/components/components.notifications';
+@import 'custom/components/components.power-select';
 @import 'shared/components/components.balloons';
 @import 'shared/components/components.buttons';
 @import 'shared/components/components.card';
@@ -59,3 +60,4 @@
 
 // Addons
 @import 'ember-basic-dropdown';
+@import "ember-power-select";

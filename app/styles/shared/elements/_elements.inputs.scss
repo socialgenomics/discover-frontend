@@ -13,14 +13,6 @@ input, textarea {
   width: 100%;
 }
 
-select {
-  border-radius: $global-border-radius;
-  border: $global-border-style;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-}
-
 input {
   height: $global-spacing-unit-large;
 }

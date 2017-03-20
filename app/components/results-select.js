@@ -3,7 +3,7 @@ import Ember from 'ember';
 const { Component, set, get } = Ember;
 
 export default Component.extend({
-  classNames: ['u-ta-right', 'u-mb3'],
+  classNames: ['u-flex', 'u-justify-end', 'u-items-center', 'u-mb3'],
 
   resultsOptions: [6, 15, 30, 90],
 

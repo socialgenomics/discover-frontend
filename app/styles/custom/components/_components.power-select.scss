@@ -1,0 +1,20 @@
+.ember-power-select-trigger,
+.ember-power-select-dropdown {
+  color: $color-mid-grey !important;
+  border: $global-border-style !important;
+  border-radius: 2px !important;
+  font-size: $global-font-size;
+  outline: none;
+  width: 50px;
+}
+
+.ember-power-select-option {
+  &[aria-selected="true"] {
+    background: inherit !important;
+  }
+
+  &[aria-current="true"] {
+    color: inherit !important;
+    background: $color-very-light-grey !important;
+  }
+}
