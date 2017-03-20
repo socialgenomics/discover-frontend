@@ -1,18 +1,15 @@
 import Ember from 'ember';
 import ENV from 'repositive/config/environment';
-import { validator, buildValidations } from 'ember-cp-validations';
+import { buildValidations } from 'ember-cp-validations';
+import presenceValidator from 'repositive/validations/presenceValidator';
+import emailFormatValidator from 'repositive/validations/emailFormatValidator';
+import { errorMessages } from 'repositive/validations/validations-config';
 
 const { Component, computed, get, inject: { service }, set, setProperties, Logger } = Ember;
 const Validations = buildValidations({
   emailAddress: [
-    validator('presence', {
-      presence: true,
-      message: 'Please provide email address.'
-    }),
-    validator('format', {
-      regex: /^([\w\-\.\+]+)@((?:[\w\-\.]+)(?:\.[a-zA-Z]{2,}))$/,
-      message: 'Must be a valid email address.'
-    })
+    presenceValidator(errorMessages.blankEmail),
+    emailFormatValidator()
   ]
 });
 
