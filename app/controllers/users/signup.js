@@ -3,39 +3,22 @@ import ENV from 'repositive/config/environment';
 import { isBadRequestError } from 'ember-ajax/errors';
 import FlashMessageMixin from 'repositive/mixins/flash-message-mixin';
 import { validator, buildValidations } from 'ember-cp-validations';
+import presenceValidator from 'repositive/validations/presenceValidator';
+import emailFormatValidator from 'repositive/validations/emailFormatValidator';
+import lengthValidator from 'repositive/validations/lengthValidator';
+import { errorMessages, lengths } from 'repositive/validations/validations-config';
 
 const { assign, get, getProperties, set, setProperties, computed, Controller, inject: { service } } = Ember;
 const passwordPatterns = [/\d/, /[A-Z]/, /[!,@,#,$,%,^,&,*,?,_,~,-,(,)]/];
 const Validations = buildValidations({
-  fullname: [
-    validator('presence', {
-      presence: true,
-      message: 'Can\'t be blank.'
-    }),
-    validator('format', {
-      regex: /^((?!@).)*$/,
-      message: 'Please enter your full name.'
-    })
-  ],
+  fullname: presenceValidator(),
   email: [
-    validator('presence', {
-      presence: true,
-      message: 'Please provide email address.'
-    }),
-    validator('format', {
-      regex: /^([\w\-\.\+]+)@((?:[\w\-\.]+)(?:\.[a-zA-Z]{2,}))$/,
-      message: 'Must be a valid email address.'
-    })
+    presenceValidator(errorMessages.blankEmail),
+    emailFormatValidator()
   ],
   password: [
-    validator('presence', {
-      presence: true,
-      message: 'Please provide password.'
-    }),
-    validator('length', {
-      min: 8,
-      message: 'Must be at least 8 characters.'
-    }),
+    presenceValidator(errorMessages.blankPassword),
+    lengthValidator(lengths.password),
     validator(
       function(value) {
         return getPasswordStrength(value, passwordPatterns) !== 0 ? true : 'Must include a number or capital letter.';
