@@ -58,6 +58,14 @@ export default Component.extend(
         window.open(get(this, 'model.url'), '_blank').focus();
       },
 
+      addAttribute(key, value) {
+        const store = get(this, 'store');
+        store
+          .createRecord('action', this._createNewRecordData('attribute', { properties: { key, value } }))
+          .save()
+          .catch(Logger.error);
+      },
+
       addComment(text) {
         const store = get(this, 'store');
         store

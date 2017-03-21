@@ -1,0 +1,22 @@
+{{#each-in groups as |group attrs|}}
+  <div class="u-mb2">
+    <div class="grid__col  u-mb1 grid__col--1-of-3 grid__col--m-1-of-3 grid__col--s-1-of-3">
+      <h3 class="u-fw-reg u-fs2 u-mb0 u-tc-tertiary">
+        {{#if (eq group 'pmid')}} Pubmed ID {{else}} {{capitalize group}} {{/if}}
+      </h3>
+    </div>
+    <div class="grid__col grid__col--2-of-3 grid__col--m-2-of-3 grid__col--s-2-of-3">
+      {{#each attrs as |attr|}}
+        {{attribute-list-item attribute=attr}}
+      {{/each}}
+      {{#if (eq openInput group)}}
+        {{add-attribute addAttribute=addAttribute closeInput=(action 'closeInput') group=group}}
+      {{else}}
+        <span {{action 'setOpenInput' group}} class="u-flex u-justify-between u-items-center u-tc-tertiary u-hv-tc-secondary u-cursor-pointer">
+          Add {{#if (eq group 'pmid')}} Pubmed ID {{else}} {{capitalize group}} {{/if}}
+          {{fa-icon 'plus-square-o' class='u-fs2'}}
+        </span>
+      {{/if}}
+    </div>
+  </div>
+{{/each-in}}
