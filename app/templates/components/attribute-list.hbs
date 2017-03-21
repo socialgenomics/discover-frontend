@@ -12,9 +12,9 @@
       {{#if (eq openInput group)}}
         {{add-attribute addAttribute=addAttribute closeInput=(action 'closeInput') group=group}}
       {{else}}
-        <span {{action 'setOpenInput' group}} class="u-flex u-justify-between u-tc-tertiary u-hv-tc-secondary u-cursor-pointer">
+        <span {{action 'setOpenInput' group}} class="u-flex u-justify-between u-items-center u-tc-tertiary u-hv-tc-secondary u-cursor-pointer">
           Add {{#if (eq group 'pmid')}} Pubmed ID {{else}} {{capitalize group}} {{/if}}
-          {{fa-icon 'plus-circle' class='u-fs2'}}
+          {{fa-icon 'plus-square-o' class='u-fs2'}}
         </span>
       {{/if}}
     </div>
