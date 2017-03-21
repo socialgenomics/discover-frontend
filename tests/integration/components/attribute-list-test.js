@@ -98,8 +98,31 @@ describe('Integration | Component | attributes list', function() {
       this.render(hbs`{{attribute-list attributeActions=attributeActions}}`);
       this.$('span').click();
       expect(this.$('input').attr('placeholder')).to.eql('Add an attribute');
+      expect(this.$('input').val()).to.be.empty;
       expect(this.$('button').first().text().trim()).to.eql('Add');
       expect(this.$('button:eq(1)').text().trim()).to.eql('Cancel');
+    });
+
+    describe('cancel', function() {
+      beforeEach(function() {
+        this.set('attributeActions', [getMockAttributeAction()]);
+        this.render(hbs`{{attribute-list attributeActions=attributeActions}}`);
+        this.$('span').click();
+      });
+
+      it('closes the form', function() {
+        expect(this.$('button:eq(1)').text().trim()).to.eql('Cancel');
+        this.$('button:eq(1)').click();
+        expect(this.$('button:eq(1)').text().trim()).to.be.empty;
+      });
+
+      it('input state is reset', function() {
+        this.$('input').val('Should disappear');
+        expect(this.$('input').val()).to.eql('Should disappear');
+        this.$('button:eq(1)').click(); //cancel
+        this.$('span').click();
+        expect(this.$('input').val()).to.be.empty;
+      });
     });
   });
 });
