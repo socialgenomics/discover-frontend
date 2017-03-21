@@ -25,17 +25,13 @@ describe('Integration: PaginationBarComponent', function() {
   });
 
   it('displays correct page number', function() {
-    this.setProperties({
-      currentPageNumber: 4
-    });
+    this.set('currentPageNumber', 4);
     this.render(hbs`{{pagination-bar currentPageNumber=currentPageNumber}}`);
     expect(this.$('.u-inherit-disp').find(this.$('a')[3]).text().trim()).to.eql('4');
   });
 
   it('displays correct total page amount', function() {
-    this.setProperties({
-      totalPages: 7
-    });
+    this.set('totalPages', 7);
     this.render(hbs`{{pagination-bar totalPages=totalPages}}`);
     expect(this.$('.u-flex').find(this.$('.u-tc-secondary.u-mr2')).text().trim()).to.eql('of 7');
   });
