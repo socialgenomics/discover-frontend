@@ -3,34 +3,24 @@ import Ember from 'ember';
 const { Component, computed, get, set } = Ember;
 
 export default Component.extend({
-  // MOCK DATASET ATTRIBUTES DATA
-  attributesFromDataset: {
-    assay: [
-      'WGS',
-      'RNA-Seq'
-    ],
-    samples: ['23'],
-    tissue: ['heart'],
-    technology: ['ZX Spectrum'],
-    pmid: ['123']
-  },
-
   userGeneratedAttributes: computed('attributeActions', function() {
     return get(this, 'attributeActions').map(this._convertActionToCommonObj);
   }),
 
   datasetAttributes: computed('attributesFromDataset', function() {
     const attributesFromDataset = get(this, 'attributesFromDataset');
-    return Object.keys(attributesFromDataset).reduce((attrObjects, key) => {
-      attributesFromDataset[key].map(value => {
-        attrObjects.push({ key, value });
-      });
-      return attrObjects;
-    }, []);
+    if (attributesFromDataset) {
+      return Object.keys(attributesFromDataset).reduce((attrObjects, key) => {
+        return [
+          ...attrObjects,
+          ...attributesFromDataset[key].map(value => { return { key, value }; })
+        ];
+      }, []);
+    } else { return []; }
   }),
 
   mergedObjects: computed('userGeneratedAttributes', 'datasetAttributes', function() {
-    return [].concat(get(this, 'userGeneratedAttributes'), get(this, 'datasetAttributes'));
+    return [...get(this, 'userGeneratedAttributes'), ...get(this, 'datasetAttributes')];
   }),
 
   /**
