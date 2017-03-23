@@ -13,9 +13,14 @@ describe('Integration | Component | add attribute', function() {
       this.setProperties({
         'addAttribute': sinon.spy(),
         'closeInput': sinon.spy(),
-        'group': 'assay'
+        'group': 'assay',
+        'attributesForKey': [{ value: '123' }]
       })
-      this.render(hbs`{{add-attribute addAttribute=addAttribute closeInput=closeInput group=group}}`);
+      this.render(hbs`{{add-attribute
+        addAttribute=addAttribute
+        attributesForKey=attributesForKey
+        closeInput=closeInput
+        group=group}}`);
     });
 
     describe('addAttribute', function() {

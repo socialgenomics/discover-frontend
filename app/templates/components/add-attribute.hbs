@@ -4,12 +4,14 @@
   placeholder="Add an attribute"
   type="text"
   value=attributeValue
+  submit=(action 'addAttribute')
 }}
 {{async-button
   class="c-btn c-btn-primary u-mr2"
   action=(action 'addAttribute')
   default="Add"
-  disableWhen=(not validations.isValid)
+  disableWhen=(or isNotUnique (not validations.isValid))
   pending="..."
 }}
+
 <button class="c-btn c-btn-text-secondary" {{action 'cancel'}}>Cancel</button>
