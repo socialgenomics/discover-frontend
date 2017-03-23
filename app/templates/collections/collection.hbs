@@ -15,18 +15,21 @@
     {{partial 'loading'}}
   {{else}}
     {{#if (gt model.meta.total 0)}}
+    <div class="u-flex u-justify-between">
+      <p class="u-flex u-items-center u-fw-bold u-mr2 u-mb0">Results: {{model.meta.total}}</p>
+
       {{pagination-bar
         totalPages=totalPages
         currentPageNumber=page
-        results=model.meta.total
         nextPage=(action 'nextPage')
         previousPage=(action 'previousPage')
         goToPage=(action 'goToPage')
        }}
+
+       {{results-select resultsOption=resultsOptions resultsPerPage=resultsPerPage selectResults=(action 'selectResults')}}
+     </div>
     {{/if}}
     
-    {{results-select resultsOption=resultsOptions resultsPerPage=resultsPerPage selectResults=(action 'selectResults')}}
-
     {{search-results-list results=model.datasets totalResults=model.meta.total}}
   {{/if}}
 </div>
