@@ -1,0 +1,17 @@
+{{#link-to 'user' user.id}}
+  <img class="u-circle u-w1-5 u-mr1" src="{{user.userProfile.avatar}}" />
+{{/link-to}}
+
+<div class="u-inline-block u-pos-absolute">
+  {{#link-to 'user' user.id}}
+    <h4 class="u-mb0 u-fs2 u-tc-primary">{{user.displayName}}</h4>
+  {{/link-to}}
+
+  {{#if user.userProfile.workOrganisation}}
+    <p class="u-mb0 u-fs1">{{user.userProfile.workOrganisation}}</p>
+  {{else}}
+    {{#if session.authenticatedUser}}
+      {{#link-to 'users.profile' classNames="u-tc-secondary u-td-underline"}}Add your affiliation{{/link-to}}
+    {{/if}}
+  {{/if}}
+</div>
