@@ -8,7 +8,7 @@
   {{/link-to}}
 
   {{#if user.userProfile.workOrganisation}}
-    <p class="u-mb0 u-fs1">{{user.userProfile.workOrganisation}}</p>
+    <p class="u-mb0 u-fs1">{{truncate user.userProfile.workOrganisation 55}}</p>
   {{else}}
     {{#if currentUser}}
       {{#link-to 'users.profile' classNames="u-tc-secondary u-td-underline"}}Add your affiliation{{/link-to}}
