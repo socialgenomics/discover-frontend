@@ -10,7 +10,7 @@
   {{#if user.userProfile.workOrganisation}}
     <p class="u-mb0 u-fs1">{{user.userProfile.workOrganisation}}</p>
   {{else}}
-    {{#if session.authenticatedUser}}
+    {{#if currentUser}}
       {{#link-to 'users.profile' classNames="u-tc-secondary u-td-underline"}}Add your affiliation{{/link-to}}
     {{/if}}
   {{/if}}
