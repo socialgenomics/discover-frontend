@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-const { inject: { service }, Component, get, computed, Logger } = Ember;
+const { inject: { service }, Component, get, computed, Logger, RSVP } = Ember;
 
 export default Component.extend({
   store: service(),
@@ -11,14 +11,16 @@ export default Component.extend({
   uniqContributors: computed.uniq('contributorList'),
 
   contributors: computed('uniqContributors', function() {
-    const contr = get(this, 'uniqContributors').toString();
+    const id = get(this, 'uniqContributors');
 
-    return this._getContributors(contr);
+    return this._getContributors(id);
   }),
 
-  _getContributors(contrId) {
+  _getContributors(id) {
     const store = get(this, 'store');
 
-    return store.findRecord('user', contrId);
-  },
+    return store.query('user', {
+      'where.id': id,
+    });
+  }
 });
