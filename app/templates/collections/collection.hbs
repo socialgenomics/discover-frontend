@@ -14,17 +14,19 @@
   {{#if isLoading}}
     {{partial 'loading'}}
   {{else}}
-    {{results-select resultsOption=resultsOptions resultsPerPage=resultsPerPage selectResults=(action 'selectResults')}}
-
-    {{search-results-list results=model.datasets totalResults=model.meta.total}}
-
     {{#if (gt model.meta.total 0)}}
       {{pagination-bar
         totalPages=totalPages
         currentPageNumber=page
+        results=model.meta.total
         nextPage=(action 'nextPage')
         previousPage=(action 'previousPage')
+        goToPage=(action 'goToPage')
        }}
     {{/if}}
+    
+    {{results-select resultsOption=resultsOptions resultsPerPage=resultsPerPage selectResults=(action 'selectResults')}}
+
+    {{search-results-list results=model.datasets totalResults=model.meta.total}}
   {{/if}}
 </div>
