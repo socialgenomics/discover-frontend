@@ -10,7 +10,12 @@
         {{attribute-list-item attribute=attr}}
       {{/each}}
       {{#if (eq openInput group)}}
-        {{add-attribute addAttribute=addAttribute closeInput=(action 'closeInput') group=group}}
+        {{add-attribute
+          addAttribute=addAttribute
+          closeInput=(action 'closeInput')
+          group=group
+          attributesForKey=attrs
+        }}
       {{else}}
         <span {{action 'setOpenInput' group}} class="u-flex u-justify-between u-items-center u-tc-tertiary u-hv-tc-secondary u-cursor-pointer">
           Add {{#if (eq group 'pmid')}} Pubmed ID {{else}} {{capitalize group}} {{/if}}

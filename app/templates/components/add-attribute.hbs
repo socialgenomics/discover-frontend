@@ -1,8 +1,17 @@
-{{input placeholder="Add an attribute" value=attributeValue}}
+{{validated-input
+  errors=validations.attrs.attributeValue.messages
+  noLabel=true
+  placeholder="Add an attribute"
+  type="text"
+  value=attributeValue
+  submit=(action 'add')
+}}
 {{async-button
   class="c-btn c-btn-primary u-mr2"
-  action=(action 'addAttribute')
+  action=(action 'add')
   default="Add"
+  disableWhen=(or isNotUnique (not validations.isValid))
   pending="..."
 }}
+
 <button class="c-btn c-btn-text-secondary" {{action 'cancel'}}>Cancel</button>
