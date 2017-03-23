@@ -16,7 +16,7 @@ export default Component.extend(Validations, {
   }),
 
   actions: {
-    addAttribute() {
+    add() {
       if (get(this, 'validations.isValid') && !get(this, 'isNotUnique')) {
         get(this, 'addAttribute')(get(this, 'group'), get(this, 'attributeValue'));
         get(this, 'closeInput')();

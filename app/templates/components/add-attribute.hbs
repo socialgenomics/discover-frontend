@@ -4,11 +4,11 @@
   placeholder="Add an attribute"
   type="text"
   value=attributeValue
-  submit=(action 'addAttribute')
+  submit=(action 'add')
 }}
 {{async-button
   class="c-btn c-btn-primary u-mr2"
-  action=(action 'addAttribute')
+  action=(action 'add')
   default="Add"
   disableWhen=(or isNotUnique (not validations.isValid))
   pending="..."
