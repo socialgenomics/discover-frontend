@@ -1,7 +1,7 @@
-<p class="u-fw-bold u-mr2 u-mb1">Results: {{results}}</p>
+<p class="u-fw-bold u-mr2 u-mb0">Results: {{results}}</p>
 
 <div class="u-flex u-flex-wrap">
-  <a {{action 'previousPage'}} class="u-tc-secondary {{if noPrevPage 'u-hide-display'}} u-mr1">
+  <a {{action 'previousPage'}} class="u-tc-secondary u-px1 u-hv-bc-off-white {{if noPrevPage 'u-hide-display'}} u-mr1">
     {{fa-icon 'chevron-left'}} Prev
   </a>
 
@@ -11,9 +11,9 @@
     {{/each}}
   </div>
 
-  <p class="u-tc-secondary u-mr2"> of {{totalPages}}</p>
+  <p class="u-tc-secondary u-mr2  u-mb0"> of {{totalPages}}</p>
 
-  <a {{action 'nextPage'}} class="u-tc-secondary {{if noNextPage 'u-hide-display'}}">
+  <a {{action 'nextPage'}} class="u-tc-secondary u-px1 u-hv-bc-off-white {{if noNextPage 'u-hide-display'}}">
     Next {{fa-icon 'chevron-right'}}
   </a>
 </div>

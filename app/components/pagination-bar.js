@@ -3,7 +3,7 @@ import Ember from 'ember';
 const { Component, get, set, computed } = Ember;
 
 export default Component.extend({
-  classNames: ['u-pt3', 'u-mb2', 'u-flex', 'u-justify-center', 'u-flex-wrap'],
+  classNames: ['u-pt3', 'u-mb3', 'u-flex', 'u-justify-center', 'u-flex-wrap'],
 
   pageNumbers: [1, 2, 3, 4, 5],
 
