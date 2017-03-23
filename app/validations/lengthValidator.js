@@ -1,9 +1,9 @@
 import { errorMessages } from './validations-config';
 import { validator } from 'ember-cp-validations';
 
-export default function emailFormatValidator(length) {
+export default function lengthValidator(length, type) {
   return validator('length', {
-    min: length,
-    message: errorMessages.minLength.replace('$1', length)
+    [type]: length,
+    message: errorMessages[`${type}Length`].replace('$1', length)
   });
 }

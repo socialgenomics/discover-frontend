@@ -3,7 +3,7 @@ import { validator, buildValidations } from 'ember-cp-validations';
 import presenceValidator from 'repositive/validations/presenceValidator';
 import emailFormatValidator from 'repositive/validations/emailFormatValidator';
 import lengthValidator from 'repositive/validations/lengthValidator';
-import { errorMessages, lengths } from 'repositive/validations/validations-config';
+import { errorMessages, lengths, lengthTypes } from 'repositive/validations/validations-config';
 
 const { get, getProperties, computed, Controller, inject: { service }, set } = Ember;
 const Validations = buildValidations({
@@ -13,7 +13,7 @@ const Validations = buildValidations({
   ],
   password: [
     presenceValidator(errorMessages.blankPassword),
-    lengthValidator(lengths.password)
+    lengthValidator(lengths.password, lengthTypes.min)
   ]
 });
 
