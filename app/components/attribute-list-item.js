@@ -4,7 +4,7 @@ import presenceValidator from 'repositive/validations/presenceValidator';
 import CheckEditPermissionsMixin from 'repositive/mixins/check-edit-permissions-mixin';
 import EditModeMixin from 'repositive/mixins/edit-mode-mixin';
 
-const { Component, computed, get, set, inject: { service } } = Ember;
+const { Component, computed, get, set, inject: { service }, Logger } = Ember;
 
 const Validations = buildValidations({
   value: presenceValidator('You must enter a value.')
@@ -39,6 +39,15 @@ export default Component.extend(
           set(attribute, 'value', get(this, 'value'));
           return this.persistChanges(attrAction);
         }
+      },
+
+      deleteAttr() {
+        const attribute = get(this, 'attribute');
+        const attrAction = get(this, 'store')
+          .peekRecord('action', get(attribute, 'actionId'));
+        return attrAction.destroyRecord()
+          .then(this._addFlashMessage('Attribute successfully deleted.', 'success'))
+          .catch(Logger.error)
       }
     }
   }
