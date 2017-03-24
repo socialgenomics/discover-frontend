@@ -9,6 +9,7 @@ const Validations = buildValidations({
 });
 
 export default Component.extend(Validations, {
+  tagName: 'form',
   isNotUnique: computed('attributesForKey', 'attributeValue', function() {
     const attrInput = (get(this, 'attributeValue') || '').toLowerCase();
     return get(this, 'attributesForKey')
