@@ -20,7 +20,7 @@ export default Component.extend({
     const store = get(this, 'store');
 
     return store.query('user', {
-      'where.id': id,
+      'where.id': id
     });
   }
 });

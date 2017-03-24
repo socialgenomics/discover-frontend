@@ -2,7 +2,7 @@
 
 {{#if contributors}}
   {{#each contributors as |contributor|}}
-    {{user-preview user=contributor type="contributor"}}
+    {{user-preview context="contributor" user=contributor disabled=(not session.isAuthenticated)}}
   {{/each}}
 {{else}}
   <p>No one has contributed to this {{modelName}} yet. Be the first.</p>
