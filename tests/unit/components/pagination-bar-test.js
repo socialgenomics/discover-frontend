@@ -57,5 +57,19 @@ describe('Unit | Component | pagination bar', function() {
         props.currentPageNumber,
         props.totalPages).toString()).to.eql('11,12,13,14,15');
     });
+
+    it('should only display positive numbers', function () {
+      const component = this.subject();
+
+      setProperties(props, {
+        currentPageNumber: 1,
+        totalPages: 2
+      });
+
+      expect(component._updatePageNumberList(
+        props.pageNumbers,
+        props.currentPageNumber,
+        props.totalPages).toString()).to.eql('1,2');
+    });
   });
 });
