@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-const { Component, get, set, computed } = Ember;
+const { Component, get, computed } = Ember;
 
 export default Component.extend({
   classNames: ['u-pt3', 'u-mb3', 'u-flex', 'u-justify-center', 'u-flex-wrap'],

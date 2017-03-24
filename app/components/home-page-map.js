@@ -38,7 +38,7 @@ export default Ember.Component.extend({
       d3.json('assets/points.json', function (error, topology) {
         const color = d3.scaleOrdinal().domain(['datasource', 'dataset'])
           .range([d3.rgb(datasourceColour), d3.rgb(datasetColour)]);
-        const circles = svg.selectAll('circle')
+        svg.selectAll('circle')
           .data(topology.features)
           .enter()
           .append('circle')

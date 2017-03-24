@@ -1,5 +1,5 @@
 /* jshint expr:true */
-
+/* eslint-disable */
 import { expect } from 'chai';
 import {
   describe,
