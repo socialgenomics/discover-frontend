@@ -7,6 +7,7 @@ export default Component.extend({
   classNames: ['c-help-link', 'u-p1', 'u-hv-bc-darken5'],
 
   isActive: computed('query', function() {
-    return ('?help=' + get(this, 'query') === window.location.search);
+    const queryLink = '?help=' + get(this, 'query');
+    return (window.location.search === queryLink);
   })
 });

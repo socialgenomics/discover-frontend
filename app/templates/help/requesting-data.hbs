@@ -6,15 +6,9 @@
         <div class="grid grid--no-gutter u-full-height">
           <div class="grid__col grid__col--1-of-3 u-fs2 u-fw-med">
             <ul class="o-list-flush-left u-px3">
-              {{help-docs-link link="help.requesting-data" query="what-is" text="What is a data request?"}}
-              {{help-docs-link link="help.requesting-data" query="what-can" text="What data can I request?"}}
-              {{help-docs-link link="help.requesting-data" query="who-can-see" text="Who can see my request?"}}
-              {{help-docs-link link="help.requesting-data" query="information-include" text="What information should I include in my request?"}}
-              {{help-docs-link link="help.requesting-data" query="add-meta-later" text="Can I add more metadata and description later?"}}
-              {{help-docs-link link="help.requesting-data" query="no-response" text="I don't have any responses to my request."}}
-              {{help-docs-link link="help.requesting-data" query="incorrect-response" text="The response to my request is not what I am looking for."}}
-              {{help-docs-link link="help.requesting-data" query="how-long" text="How long will my request be live for?"}}
-              {{help-docs-link link="help.requesting-data" query="fulfil-request" text="I know where the requested data are. How can I respond to the request?"}}
+              {{#each helpLinkData as |data|}}
+                {{help-docs-link link=helpLink query=data.query text=data.text}}
+              {{/each}}
             </ul>
           </div>
           <div class="grid__col grid__col--2-of-3 u-full-min-height u-mb3 u-fs2 u-border-left">

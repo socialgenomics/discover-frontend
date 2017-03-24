@@ -6,13 +6,9 @@
         <div class="grid grid--no-gutter u-full-height">
           <div class="grid__col grid__col--1-of-3 u-fs2 u-fw-med">
             <ul class="o-list-flush-left u-px3">
-              {{help-docs-link link="help.registering-new-data" query="data-reg" text="What data can I register?"}}
-              {{help-docs-link link="help.registering-new-data" query="see-reg" text="Who can see my registration?"}}
-              {{help-docs-link link="help.registering-new-data" query="include-reg" text="What information should I include in my registration?"}}
-              {{help-docs-link link="help.registering-new-data" query="store-raw" text="Do you store the raw data alongside the metadata I register?"}}
-              {{help-docs-link link="help.registering-new-data" query="view-reg" text="How do I know who has viewed my data registration?"}}
-              {{help-docs-link link="help.registering-new-data" query="add-meta" text="Can I add more metadata and description later?"}}
-              {{help-docs-link link="help.registering-new-data" query="access-reg" text="Can I choose who has access to my data?"}}
+              {{#each helpLinkData as |data|}}
+                {{help-docs-link link=helpLink query=data.query text=data.text}}
+              {{/each}}
             </ul>
           </div>
           <div class="grid__col grid__col--2-of-3 u-full-min-height u-mb3 u-fs2 u-border-left">

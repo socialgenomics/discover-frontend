@@ -6,12 +6,9 @@
         <div class="grid grid--no-gutter u-full-height">
           <div class="grid__col grid__col--1-of-3 u-fs2 u-fw-med">
             <ul class="o-list-flush-left u-px3">
-              {{help-docs-link link="help.searching-for-data" query="search-query" text="How do I search on Repositive?"}}
-              {{help-docs-link link="help.searching-for-data" query="algorithm" text="How does the search algorithm work?"}}
-              {{help-docs-link link="help.searching-for-data" query="effective" text="How can I build my search query to make it more effective?"}}
-              {{help-docs-link link="help.searching-for-data" query="boolean" text="What boolean operators can I use?"}}
-              {{help-docs-link link="help.searching-for-data" query="predicated" text="What predicated search terms can I use?"}}
-              {{help-docs-link link="help.searching-for-data" query="filters" text="What do all those filters mean?"}}
+              {{#each helpLinkData as |data|}}
+                {{help-docs-link link=helpLink query=data.query text=data.text}}
+              {{/each}}
             </ul>
           </div>
           <div class="grid__col grid__col--2-of-3 u-full-min-height u-mb3 u-fs2 u-border-left">

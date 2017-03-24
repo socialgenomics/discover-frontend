@@ -6,11 +6,9 @@
         <div class="grid grid--no-gutter u-full-height">
           <div class="grid__col grid__col--1-of-3 u-fs2 u-fw-med">
             <ul class="o-list-flush-left u-px3">
-              {{help-docs-link link="help.your-account" query="access" text="How can I access my account?"}}
-              {{help-docs-link link="help.your-account" query="personalise" text="Can I personalise my notifications?"}}
-              {{help-docs-link link="help.your-account" query="change-cred" text="How can I change my credentials?"}}
-              {{help-docs-link link="help.your-account" query="change-pw" text="How can I change my password?"}}
-              {{help-docs-link link="help.your-account" query="profile" text="Can I control who can see my profile?"}}
+              {{#each helpLinkData as |data|}}
+                {{help-docs-link link=helpLink query=data.query text=data.text}}
+              {{/each}}
             </ul>
           </div>
           <div class="grid__col grid__col--2-of-3 u-full-min-height u-mb3 u-fs2 u-border-left">
