@@ -1,7 +1,7 @@
 version: '3'
 services:
   discover:
-    image: registry.repositive.io:5000/discover:3.2.0
+    image: registry.repositive.io:5000/discover:v3.2.0
     networks:
       - traefik
     deploy:
@@ -13,9 +13,9 @@ services:
       replicas: 2
       placement:
         constraints:
-          - node.labels.role==functional
+          - node.labels.functional==true
 
 networks:
   traefik:
     external:
-      name: systems_traefik
+      name: sys_traefik
