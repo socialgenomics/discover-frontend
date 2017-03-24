@@ -1,8 +1,8 @@
 .ember-power-select-trigger,
 .ember-power-select-dropdown {
-  color: $color-mid-grey !important;
-  border: $global-border-style !important;
-  border-radius: 2px !important;
+  color: $color-mid-grey;
+  border: $global-border-style;
+  border-radius: 2px;
   font-size: $global-font-size;
   outline: none;
   cursor: pointer;
@@ -17,15 +17,15 @@
 
 .ember-power-select-trigger,
 .ember-power-select-option {
-  padding: 0 12px;
+  padding: 0 10px;
 
   &[aria-selected="true"] {
-    background: inherit !important;
+    background: inherit;
   }
 
   &[aria-current="true"] {
-    color: inherit !important;
-    background: $color-very-light-grey !important;
+    color: inherit;
+    background: $color-very-light-grey;
   }
 }
 
