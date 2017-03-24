@@ -20,7 +20,6 @@
           value=email
           errors=validations.attrs.email.messages
           placeholder="e.g. christina@stthomashospital.com"
-          submit=(action 'submitForm')
         }}
         {{validated-input
           label="Password"
@@ -28,7 +27,6 @@
           value=password
           errors=validations.attrs.password.messages
           placeholder="e.g. •••••••••"
-          submit=(action 'submitForm')
           resetPassword=(action 'resetPassword')
         }}
         {{async-button

@@ -14,7 +14,6 @@
                 value=firstname
                 errors=validations.attrs.firstname.messages
                 placeholder="e.g. Christina"
-                submit=(action 'save')
               }}
               {{validated-input
                 label="Last Name"
@@ -22,14 +21,12 @@
                 value=lastname
                 errors=validations.attrs.lastname.messages
                 placeholder="e.g. Luckasson"
-                submit=(action 'save')
               }}
               {{validated-input
                 label="Affiliation"
                 type="text"
                 value=affiliation
                 placeholder="e.g. Bioinformatician at XYZ Institute"
-                submit=(action 'save')
               }}
 
               {{async-button
