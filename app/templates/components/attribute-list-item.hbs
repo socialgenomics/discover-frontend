@@ -1,8 +1,10 @@
 {{#unless inEditMode}}
-  <p class="u-fs2 u-mb1">{{attribute.value}}</p>
-  {{#if canEdit}}
-    {{fa-icon 'pencil' class='u-tc-tertiary u-hv-tc-secondary u-cursor-pointer u-fs2' click=(action 'enterEditMode')}}
-  {{/if}}
+  <div class="u-flex u-justify-between">
+    <p class="u-fs2 u-mb1">{{attribute.value}}</p>
+    {{#if canEdit}}
+      {{fa-icon 'pencil' class='u-tc-tertiary u-hv-tc-secondary u-cursor-pointer u-fs2' click=(action 'enterEditMode')}}
+    {{/if}}
+  </div>
 {{else}}
   <form class="u-mb0">
     {{validated-input
