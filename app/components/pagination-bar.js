@@ -32,7 +32,8 @@ export default Component.extend({
     if (currentPageNumber > 2) { popValue = 3; }
     if (currentPageNumber === totalPages - 1) { popValue = 4; } // Penultimate array item
     if (currentPageNumber === totalPages) { popValue = 5; } // End of array - don't allow > totalPages
-
-    return pageNumbers.map(page => page + currentPageNumber - popValue);
+    return pageNumbers
+      .map(page => page + currentPageNumber - popValue)
+      .filter(num => num > 0);
   }
 });
