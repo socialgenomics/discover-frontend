@@ -6,7 +6,7 @@
     {{/if}}
   </div>
 {{else}}
-  <form class="u-mb0">
+  <form>
     {{validated-input
       errors=validations.attrs.attributeValue.messages
       noLabel=true
@@ -14,7 +14,7 @@
       value=value
     }}
     {{async-button
-      class="c-btn c-btn-primary u-mr2"
+      class="c-btn c-btn-primary u-mr2 u-mb1"
       action=(action 'save')
       default="Save"
       disableWhen=(or isNotUnique (not validations.isValid))
