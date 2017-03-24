@@ -3,7 +3,7 @@ import QP from 'npm:../../query-parser';
 import colours from 'repositive/utils/colours';
 import ENV from 'repositive/config/environment';
 
-const { Mixin, inject: { service }, get, set, computed } = Ember;
+const { Mixin, inject: { service }, get, set, setProperties, computed } = Ember;
 
 export default Mixin.create({
   ajax: service(),
@@ -49,7 +49,10 @@ export default Mixin.create({
 
   resetController(controller, isExiting) {
     if (isExiting) {
-      controller.set('query', '');
+      setProperties(controller, {
+        'page': 1,
+        'query': ''
+      })
       this._updateQueryServiceValue();
     }
   },
