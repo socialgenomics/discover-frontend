@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { describe, it } from 'mocha';
+import { describe, it, beforeEach } from 'mocha';
 import { setupTest } from 'ember-mocha';
 import Ember from 'ember';
 import sinon from 'sinon';
@@ -217,8 +217,6 @@ describe('Unit | Mixin | search', function() {
     });
 
     it('should set query service value to null', function () {
-      const QP = get(mixinObjInstance, 'QP');
-
       mixinObjInstance[method]();
 
       expect(get(mixinObjInstance, 'queryService').setQueryString.calledWith(null)).to.be.true;

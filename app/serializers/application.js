@@ -14,7 +14,7 @@ export function keyForRelationship(key, kind, method) {
   }
 }
 
-export function keyForAttribute(attr, method) {
+export function keyForAttribute(attr) {
   return Ember.String.underscore(attr).toLowerCase();
 }
 
