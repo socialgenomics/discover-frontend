@@ -5,10 +5,20 @@
   border-radius: 2px !important;
   font-size: $global-font-size;
   outline: none;
+  cursor: pointer;
   width: 50px;
+  position: relative;
 }
 
+.ember-power-select-options {
+  margin: 0;
+  padding: 0;
+}
+
+.ember-power-select-trigger,
 .ember-power-select-option {
+  padding: 0 12px;
+
   &[aria-selected="true"] {
     background: inherit !important;
   }
@@ -17,4 +27,22 @@
     color: inherit !important;
     background: $color-very-light-grey !important;
   }
+}
+
+.ember-power-select-status-icon {
+  position: absolute;
+  display: inline-block;
+  width: 0;
+  height: 0;
+  top: 0;
+  bottom: 0;
+  right: 5px;
+  margin: auto;
+  border-style: solid;
+  border-width: 7px 4px 0 4px;
+  border-color: #aaaaaa transparent transparent transparent;
+}
+
+.ember-basic-dropdown-trigger[aria-expanded="true"] .ember-power-select-status-icon {
+  transform: rotate(180deg);
 }
