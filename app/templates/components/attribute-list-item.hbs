@@ -4,19 +4,21 @@
     {{fa-icon 'pencil' class='u-tc-tertiary u-hv-tc-secondary u-cursor-pointer u-fs2' click=(action 'enterEditMode')}}
   {{/if}}
 {{else}}
-  {{validated-input
-    errors=validations.attrs.attributeValue.messages
-    noLabel=true
-    type="text"
-    value=value
-    submit=(action 'save')
-  }}
-  {{async-button
-    class="c-btn c-btn-primary u-mr2"
-    action=(action 'save')
-    default="Save"
-    disableWhen=(or isNotUnique (not validations.isValid))
-    pending="Saving"
-  }}
-  <button class="c-btn c-btn-text-secondary" {{action 'cancelEditMode'}}>Cancel</button>
+  <form class="u-mb0">
+    {{validated-input
+      errors=validations.attrs.attributeValue.messages
+      noLabel=true
+      type="text"
+      value=value
+      submit=(action 'save')
+    }}
+    {{async-button
+      class="c-btn c-btn-primary u-mr2"
+      action=(action 'save')
+      default="Save"
+      disableWhen=(or isNotUnique (not validations.isValid))
+      pending="Saving..."
+    }}
+    <button class="c-btn c-btn-text-secondary" {{action 'cancelEditMode'}}>Cancel</button>
+  </form>
 {{/unless}}

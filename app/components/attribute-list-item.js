@@ -27,16 +27,18 @@ export default Component.extend(
     }),
     actions: {
       cancelEditMode() {
-        this.resetModuleStateOnCancel('attribute.value', get(this, 'editablePropertyKeys'));
+        this.resetModuleStateOnCancel('attribute', get(this, 'editablePropertyKeys'));
       },
 
       save() {
-        const store = get(this, 'store');
-        const attribute = get(this, 'attribute');
-        const attrAction = store.peekRecord('action', get(attribute, 'actionId'));
-        set(attrAction, 'properties.value', get(this, 'value'));
-        set(attribute, 'value', get(this, 'value'));
-        this.persistChanges(attrAction);
+        if (get(this, 'validations.isValid') && !get(this, 'isNotUnique')) {
+          const attribute = get(this, 'attribute');
+          const attrAction = get(this, 'store')
+            .peekRecord('action', get(attribute, 'actionId'));
+          set(attrAction, 'properties.value', get(this, 'value'));
+          set(attribute, 'value', get(this, 'value'));
+          return this.persistChanges(attrAction);
+        }
       }
     }
   }
