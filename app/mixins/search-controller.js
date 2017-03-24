@@ -50,7 +50,7 @@ export default Mixin.create({
       this._toggleFilter('removeFilter', predicate, text);
     },
 
-    selectResults(resultsPerPage) {
+    setResultsPerPage(resultsPerPage) {
       set(this, 'resultsPerPage', resultsPerPage);
       get(this, 'metrics').trackEvent({
         category: 'search_resultsPerPage',

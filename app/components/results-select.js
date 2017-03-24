@@ -8,6 +8,6 @@ export default Component.extend({
   resultsOptions: [6, 15, 30, 90],
 
   actions: {
-    selectResults(resultsPerPage) { get(this, 'selectResults')(resultsPerPage); }
+    setResultsPerPage(resultsPerPage) { get(this, 'setResultsPerPage')(resultsPerPage); }
   }
 });

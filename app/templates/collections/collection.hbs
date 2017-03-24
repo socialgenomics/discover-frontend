@@ -26,10 +26,10 @@
         goToPage=(action 'goToPage')
        }}
 
-       {{results-select resultsOption=resultsOptions resultsPerPage=resultsPerPage selectResults=(action 'selectResults')}}
+       {{results-select resultsOption=resultsOptions resultsPerPage=resultsPerPage setResultsPerPage=(action 'setResultsPerPage')}}
      </div>
     {{/if}}
-    
+
     {{search-results-list results=model.datasets totalResults=model.meta.total}}
   {{/if}}
 </div>
