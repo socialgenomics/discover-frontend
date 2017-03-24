@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import { validator, buildValidations } from 'ember-cp-validations';
+import { buildValidations } from 'ember-cp-validations';
 import presenceValidator from 'repositive/validations/presenceValidator';
 import emailFormatValidator from 'repositive/validations/emailFormatValidator';
 import lengthValidator from 'repositive/validations/lengthValidator';
