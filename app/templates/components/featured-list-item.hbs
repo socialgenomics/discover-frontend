@@ -1,12 +1,8 @@
 {{#if (eq type 'collection')}}
   {{#link-to 'collections.collection' model.id}}
     <div class="grid__col grid__col--1-of-3 u-pr3">
-      <h4 class="u-fs2 u-mb0 u-tc-primary u-pos-relative">
-        {{model.name}}
-        {{#if isNewest}}
-          {{new-label model.updatedAt 50}}
-        {{/if}}
-      </h4>
+      <h4 class="u-fs2 u-mb0 u-tc-primary u-pos-relative">{{model.name}}</h4>
+      {{#if isNewest}} {{new-label model.updatedAt 50}} {{/if}}
     </div>
     <div class="grid__col grid__col--2-of-3">
       {{collection-summary-fallback
@@ -20,18 +16,12 @@
     {{#if model.properties.logo}}
       <div class="grid__col grid__col--2-of-6 u-pr3">
         <img class="c-img--100" src="{{model.properties.logo}}">
-        {{#if isNewest}}
-          {{new-label model.updatedAt}}
-        {{/if}}
+        {{#if isNewest}} {{new-label model.updatedAt}} {{/if}}
       </div>
     {{else}}
       <div class="grid__col grid__col--2-of-6">
-        <h4 class="u-fs2 u-tc-primary u-pb0 u-mb0">
-          {{model.name}}
-          {{#if isNewest}}
-            {{new-label model.updatedAt}}
-          {{/if}}
-        </h4>
+        <h4 class="u-fs2 u-tc-primary u-pb0 u-mb0">{{model.name}}</h4>
+        {{#if isNewest}} {{new-label model.updatedAt}} {{/if}}
       </div>
     {{/if}}
     <div class="grid__col grid__col--4-of-6 featured-list-summary">
