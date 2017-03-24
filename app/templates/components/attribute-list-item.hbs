@@ -16,7 +16,7 @@
     action=(action 'save')
     default="Save"
     disableWhen=(or isNotUnique (not validations.isValid))
-    pending="..."
+    pending="Saving"
   }}
   <button class="c-btn c-btn-text-secondary" {{action 'cancelEditMode'}}>Cancel</button>
 {{/unless}}

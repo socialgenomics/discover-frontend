@@ -4,7 +4,7 @@ import presenceValidator from 'repositive/validations/presenceValidator';
 import CheckEditPermissionsMixin from 'repositive/mixins/check-edit-permissions-mixin';
 import EditModeMixin from 'repositive/mixins/edit-mode-mixin';
 
-const { Component, computed, get, set } = Ember;
+const { Component, computed, get, set, inject: { service } } = Ember;
 
 const Validations = buildValidations({
   value: presenceValidator('You must enter a value.')
@@ -15,6 +15,8 @@ export default Component.extend(
   EditModeMixin,
   Validations,
   {
+    store: service(),
+
     value: computed.oneWay('attribute.value'),
     editablePropertyKeys: ['value'],
     checkEditPermissionsModel: computed.oneWay('attribute'),
@@ -29,9 +31,12 @@ export default Component.extend(
       },
 
       save() {
+        const store = get(this, 'store');
         const attribute = get(this, 'attribute');
+        const attrAction = store.peekRecord('action', get(attribute, 'actionId'));
+        set(attrAction, 'properties.value', get(this, 'value'));
         set(attribute, 'value', get(this, 'value'));
-        this.persistChanges(attribute);
+        this.persistChanges(attrAction);
       }
     }
   }
