@@ -52,7 +52,7 @@ describe('Integration | Component | attributes list', function() {
       this.render(hbs`{{attribute-list
         attributeActions=attributeActions
         attributesFromDataset=attributesFromDataset}}`);
-      expect(this.$('p').first().text().trim()).to.be.empty;
+      expect(this.$('p.u-fs2').first().text().trim()).to.be.empty;
     });
 
     it('renders list of user attrs when there are no dataset attrs', function() {
