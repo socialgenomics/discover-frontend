@@ -2,7 +2,7 @@ import Ember from 'ember';
 import { buildValidations } from 'ember-cp-validations';
 import presenceValidator from 'repositive/validations/presenceValidator';
 
-const { Component, get, set, computed } = Ember;
+const { Component, get, computed } = Ember;
 
 const Validations = buildValidations({
   attributeValue: presenceValidator('You must enter a value.')
