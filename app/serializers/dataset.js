@@ -7,7 +7,7 @@ export default JSONSerializer.extend(DS.EmbeddedRecordsMixin, {
   attrs: {
     highlights: { embedded: 'always' }
   },
-  serialize: function(snapshot, options) {
+  serialize: function(snapshot) {
     let json =  snapshot._attributes;
     json.user_id = snapshot.belongsTo('userId').id;
     json.datasource_id = snapshot.belongsTo('datasourceId').id;
