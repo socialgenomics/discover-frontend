@@ -1,7 +1,7 @@
 version: '3'
 services:
   discover:
-    image: registry.repositive.io:5000/discover
+    image: registry.repositive.io:5000/discover:${TAG}
     networks:
       - traefik
     deploy:
