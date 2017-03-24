@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { describe } from 'mocha';
 import { setupTest } from 'ember-mocha';
 import Ember from 'ember';

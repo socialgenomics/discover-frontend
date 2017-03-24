@@ -7,7 +7,6 @@
     "ember-load-initializers": "0.1.7",
     "ember-mocha-adapter": "~0.3.1",
     "ember": "2.7.0",
-    "font-awesome": "~4.5.0",
     "jquery": "2.1.4",
     "mocha": "~2.2.4",
     "showdown": "^1.6.4",

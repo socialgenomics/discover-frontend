@@ -1,11 +1,11 @@
 import { expect } from 'chai';
-import { describe, it } from 'mocha';
+import { describe, it, beforeEach } from 'mocha';
 import { setupComponentTest } from 'ember-mocha';
 import hbs from 'htmlbars-inline-precompile';
 import Ember from 'ember';
 import targetBlankLinks from 'repositive/initializers/register-showdown-extensions';
 
-const { setProperties, get } = Ember;
+const { setProperties } = Ember;
 const id = 'id';
 
 describe('Integration | Component | user comment', function() {
@@ -13,7 +13,7 @@ describe('Integration | Component | user comment', function() {
     integration: true
   });
 
-  before(function () {
+  beforeEach(function () {
     // manually initialize targetBlankLinks showdown extension used for markdown-to-html
     // initializers are not called in text env
     targetBlankLinks.initialize();

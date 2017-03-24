@@ -29,15 +29,9 @@
 
   <span class="u-fs0 u-fw-reg u-tc-tertiary u-cursor-default">from</span>
   {{#if session.isAuthenticated }}
-    {{#if (eq model.datasourceId.type 'personal_repository')}} <!-- Registration -->
-      {{#link-to 'collections.collection' model.datasourceId.id}}
-        {{source-name-fallback model=model.datasourceId}}
-      {{/link-to}}
-    {{else}} <!-- Dataset -->
-      {{#link-to 'datasources.source' model.datasourceId.id}}
-        {{source-name-fallback model=model.datasourceId}}
-      {{/link-to}}
-    {{/if}}
+    {{#link-to 'datasources.source' model.datasourceId.id}}
+      {{source-name-fallback model=model.datasourceId}}
+    {{/link-to}}
   {{else}}
     <span class="u-tc-primary u-cursor-pointer">{{source-name-fallback model=model.datasourceId}}</span>
   {{/if}}

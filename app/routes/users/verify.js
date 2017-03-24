@@ -32,7 +32,7 @@ export default Route.extend(FlashMessageMixin, {
           });
           this.transitionTo('user', get(this, 'session.authenticatedUser.id'));
         } else {
-          console.warn('session.authenticatedUser is undefined but session.isAuthenticated "true"');
+          Logger.warn('session.authenticatedUser is undefined but session.isAuthenticated "true"');
           this.transitionTo('users.login');
         }
       } else {
