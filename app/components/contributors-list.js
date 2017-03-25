@@ -7,20 +7,18 @@ export default Component.extend({
 
   classNames: ['u-border-top'],
 
-  contributorList: computed.mapBy('userAttrs', 'userId'),
-  uniqContributors: computed.uniq('contributorList'),
-
-  contributors: computed('uniqContributors', function() {
-    const id = get(this, 'uniqContributors');
-
-    return this._getContributors(id);
+  contributorIds: computed.mapBy('userAttrs', 'userId'),
+  uniqContributorIds: computed.uniq('contributorIds'),
+  contributors: computed('uniqContributorIds', function() {
+    return this._fetchUserData(get(this, 'uniqContributorIds'));
   }),
 
-  _getContributors(id) {
+  _fetchUserData(userIds) {
     const store = get(this, 'store');
-
-    return store.query('user', {
-      'where.id': id
-    });
+    return RSVP.all(
+      userIds.reduce((queries, userId) => {
+        return [...queries, ...[store.findRecord('user', userId)]];
+      }, [])
+    ).catch(Logger.error)
   }
 });
