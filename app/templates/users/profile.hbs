@@ -3,71 +3,17 @@
     <div class="grid__col grid__col--3-of-3">
       {{profile-tabs}}
       <div class="c-card u-rounded-bottom u-py3 u-px2">
-        <img src={{session.authenticatedUser.profile.avatar}} class="u-w3 u-mb2 u-circle">
+        <img class="u-w3 u-mb2 u-circle" src={{user.userProfile.avatar}}>
 
         {{#user-profile-section title='More about yourself'}}
-              <form>
-                {{user-profile-details user=user}}
-                {{validated-input
-                  label="Short Bio (max 250 characters)"
-                  type="textarea"
-                  value=''
-                  placeholder="Tell us a bit more what are you working on."
-                  noMarkdown=true
-                  submit=(action 'save')
-                }}
-                {{validated-input
-                  label="First Name"
-                  type="text"
-                  value=firstname
-                  errors=validations.attrs.firstname.messages
-                  placeholder="e.g. Christina"
-                  submit=(action 'save')
-                }}
-                {{validated-input
-                  label="Last Name"
-                  type="text"
-                  value=lastname
-                  errors=validations.attrs.lastname.messages
-                  placeholder="e.g. Luckasson"
-                  submit=(action 'save')
-                }}
-                {{validated-input
-                  label="Affiliation"
-                  type="text"
-                  value=affiliation
-                  placeholder="e.g. Bioinformatician at XYZ Institute"
-                  submit=(action 'save')
-                }}
+          {{user-profile-details userProfileData=userProfileData userId=user.id}}
+        {{/user-profile-section}}
+        {{#user-profile-section title='Emails and password'}}
 
-                {{validated-input
-                  label="Job Role"
-                  type="text"
-                  value=''
-                  placeholder="e.g. Postdoctoral Researcher"
-                  submit=(action 'save')
-                }}
+        {{/user-profile-section}}
 
-                {{validated-input
-                  label="Location"
-                  type="text"
-                  value=''
-                  placeholder="e.g. Cambridge, UK"
-                  submit=(action 'save')
-                }}
 
-                {{async-button
-                  class="c-btn c-btn-primary"
-                  action=(action 'save')
-                  default="Save Changes"
-                  pending="Saving..."
-                  disableWhen=(not isSavable)
-                  reset=true
-                }}
-              </form>
-            {{/user-profile-section}}
-
-      </div>
+  </div>
     </div>
   </div>
 </div>

@@ -26,9 +26,7 @@ export default Mixin.create(ActionableMixin, SubscribableMixin, FlashMessageMixi
     })
       .then(data => {
         const model = data.model;
-        const commenterIds = data.comments.content
-          .map(action => get(action, 'record.userId.id'))
-          .uniq(); //removes duplicates
+
         setProperties(model, {
           'actionableId': data.actionable,
           'subscribableId': data.subscribable,
@@ -36,8 +34,7 @@ export default Mixin.create(ActionableMixin, SubscribableMixin, FlashMessageMixi
         });
         const hashObj = {
           model,
-          tags: data.tags,
-          userProfiles: commenterIds.map(id => this.store.query('userProfile', id))
+          tags: data.tags
         };
         if (get(this, 'session.isAuthenticated')) {
           hashObj['subscriptions'] = this._getSubscriptions(this.store, modelId, get(this, 'session.authenticatedUser.id'));

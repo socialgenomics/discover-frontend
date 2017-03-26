@@ -21,7 +21,7 @@ export const lengths = {
   password: 8,
   textFieldShort: 50,
   description: 250,
-  textFieldLong: 150,
+  textFieldLong: 150
 };
 
 export const lengthTypes = { min: 'min', max: 'max' };
