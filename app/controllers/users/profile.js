@@ -13,6 +13,7 @@ export default Controller.extend(
   {
     session: service(),
 
+    user: computed.alias('session.authenticatedUser'),
     firstname: computed.alias('session.authenticatedUser.firstname'),
     lastname: computed.alias('session.authenticatedUser.lastname'),
     affiliation: computed.alias('session.authenticatedUser.userProfile.workOrganisation'),

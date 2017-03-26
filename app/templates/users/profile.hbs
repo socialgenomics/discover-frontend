@@ -7,6 +7,7 @@
 
         {{#user-profile-section title='More about yourself'}}
               <form>
+                {{user-profile-details user=user}}
                 {{validated-input
                   label="Short Bio (max 250 characters)"
                   type="textarea"

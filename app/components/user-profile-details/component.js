@@ -1,8 +1,8 @@
-import Ember from 'ember';
-import { buildValidations } from 'ember-cp-validations';
-import presenceValidator from 'repositive/validations/presenceValidator';
-import lengthValidator from 'repositive/validations/lengthValidator';
-import { lengths, lengthTypes } from 'repositive/validations/validations-config';
+import Ember from "ember";
+import {buildValidations} from "ember-cp-validations";
+import presenceValidator from "repositive/validations/presenceValidator";
+import lengthValidator from "repositive/validations/lengthValidator";
+import {lengths, lengthTypes} from "repositive/validations/validations-config";
 
 const { Component, get, set } = Ember;
 const Validations = buildValidations({
@@ -28,6 +28,8 @@ export default Component.extend(Validations, {
 
   init() {
     this._super(...arguments);
+
+    console.log(get(this, 'user'));
 
     set(this, 'userAttributes', [
       {
@@ -63,5 +65,9 @@ export default Component.extend(Validations, {
         value: ''
       }
     ]);
+  },
+
+  actions: {
+    save() {}
   }
 });
