@@ -7,6 +7,7 @@ import lengthValidator from 'repositive/validations/lengthValidator';
 import passwordFormatValidator from 'repositive/validations/passwordFormatValidator';
 import { errorMessages, lengths, lengthType } from 'repositive/validations/validations-config';
 
+
 const { Controller, computed, Logger, get, set, setProperties, inject: { service }, RSVP } = Ember;
 const Validations = buildValidations({
   password1: [

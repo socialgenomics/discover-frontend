@@ -11,6 +11,7 @@ export default BaseAdapter.extend({
     return 'intercom';
   },
   /* jshint ignore:start */
+  /* eslint-disable */
   init() {
     (function() {
       var w = window;
@@ -46,6 +47,7 @@ export default BaseAdapter.extend({
     })();
   },
   /* jshint ignore:end */
+  /* eslint-enable */
 
   identify(options = {}) {
     const config = copy(get(this, 'config'));
