@@ -8,11 +8,13 @@ export default Component.extend({
   classNames: ['u-border-top'],
   didReceiveAttrs() {
     this._super(...arguments);
-    const uniqueContributorIds = get(this, 'userAttrs')
-      .mapBy('userId')
-      .uniq();
-    this._fetchUserData(uniqueContributorIds)
-      .then(contributors => set(this, 'contributors', contributors))
+    if (get(this, 'userAttrs')) {
+      const uniqueContributorIds = get(this, 'userAttrs')
+        .mapBy('userId')
+        .uniq();
+      this._fetchUserData(uniqueContributorIds)
+        .then(contributors => set(this, 'contributors', contributors))
+    }
   },
 
   _fetchUserData(userIds) {
