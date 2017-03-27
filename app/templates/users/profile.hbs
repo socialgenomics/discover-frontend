@@ -3,11 +3,14 @@
     <div class="grid__col grid__col--3-of-3">
       {{profile-tabs}}
       <div class="c-card u-rounded-bottom u-py3 u-px2">
-        <img class="u-w3 u-mb2 u-circle" src={{user.userProfile.avatar}}>
+        <div class="u-ta-center">
+          <img class="u-w3 u-mb2 u-circle" src={{user.profile.avatar}}>
+        </div>
 
         {{#user-profile-section title='More about yourself'}}
           {{user-profile-details userProfileData=userProfileData userId=user.id}}
         {{/user-profile-section}}
+        {{!--
         {{#user-profile-section title='Emails and password'}}
 
         {{/user-profile-section}}
@@ -15,6 +18,7 @@
         {{#user-profile-section title='External accounts'}}
 
         {{/user-profile-section}}
+        --}}
 
 
   </div>

@@ -6,7 +6,7 @@ import { lengths, lengthTypes } from 'repositive/validations/validations-config'
 
 const { Component, inject: { service }, Logger, set, get } = Ember;
 const Validations = buildValidations({
-  [createUserAttrKey('userProfile.bio')]: [
+  [createUserAttrKey('profile.bio')]: [
     lengthValidator(lengths.description, lengthTypes.max)
   ],
   [createUserAttrKey('firstname')]: [
@@ -17,9 +17,9 @@ const Validations = buildValidations({
     presenceValidator(),
     lengthValidator(lengths.textFieldShort, lengthTypes.max)
   ],
-  [createUserAttrKey('userProfile.work_organisation')]: lengthValidator(lengths.textFieldLong, lengthTypes.max),
-  [createUserAttrKey('userProfile.work_role')]: lengthValidator(lengths.textFieldLong, lengthTypes.max),
-  [createUserAttrKey('userProfile.location')]: lengthValidator(lengths.textFieldLong, lengthTypes.max)
+  [createUserAttrKey('profile.work_organisation')]: lengthValidator(lengths.textFieldLong, lengthTypes.max),
+  [createUserAttrKey('profile.work_role')]: lengthValidator(lengths.textFieldLong, lengthTypes.max),
+  [createUserAttrKey('profile.location')]: lengthValidator(lengths.textFieldLong, lengthTypes.max)
 });
 
 /**
@@ -42,7 +42,7 @@ export default Component.extend(Validations, {
         label: 'Short Bio (max 250 characters)',
         multiline: true,
         placeholder: 'Tell us a bit more what are you working on.',
-        userAttributeKey: this._createUserAttrKey('userProfile.bio')
+        userAttributeKey: this._createUserAttrKey('profile.bio')
       },
       {
         label: 'First Name',
@@ -57,17 +57,17 @@ export default Component.extend(Validations, {
       {
         label: 'Affiliation',
         placeholder: 'e.g. Bioinformatician at XYZ Institute',
-        userAttributeKey: this._createUserAttrKey('userProfile.work_organisation')
+        userAttributeKey: this._createUserAttrKey('profile.work_organisation')
       },
       {
         label: 'Job Role',
         placeholder: 'e.g. Postdoctoral Researcher',
-        userAttributeKey: this._createUserAttrKey('userProfile.work_role')
+        userAttributeKey: this._createUserAttrKey('profile.work_role')
       },
       {
         label: 'Location',
         placeholder: 'e.g. Cambridge, UK',
-        userAttributeKey: this._createUserAttrKey('userProfile.location')
+        userAttributeKey: this._createUserAttrKey('profile.location')
       }
     ]);
   },
@@ -82,7 +82,7 @@ export default Component.extend(Validations, {
       return userModel
         .save()
         .then(this._onSaveSuccess.bind(this))
-        .catch(this._onSendError.bind(this, userModel));
+        .catch(this._onSaveError.bind(this, userModel));
     }
   },
 

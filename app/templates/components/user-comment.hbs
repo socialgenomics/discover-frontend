@@ -1,7 +1,7 @@
 <!-- User Info / Timestamp -->
 <div class="u-flex u-items-start u-justify-between u-mb1 u-pt3 u-border-top">
   {{#link-to 'user' comment.userId.id disabled=disabled invokeAction=(action 'toggleCreateAccountModal')}}
-    <img class="u-w1 u-mr1 u-circle" src={{comment.userId.userProfile.avatar}} />
+    <img class="u-w1 u-mr1 u-circle" src={{comment.userId.profile.avatar}} />
   {{/link-to}}
   <div class="u-grow-1">
     {{#link-to 'user' comment.userId.id disabled=disabled invokeAction=(action 'toggleCreateAccountModal')}}
@@ -45,7 +45,7 @@
       close=(action 'toggleCreateAccountModal')
     }}
       {{repositive-modal/header
-        image=comment.userId.userProfile.avatar
+        image=comment.userId.profile.avatar
         title=(concat 'View ' comment.userId.firstname '\'s profile')
         onClose=(action 'toggleCreateAccountModal')
       }}

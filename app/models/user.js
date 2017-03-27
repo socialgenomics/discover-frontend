@@ -23,6 +23,6 @@ export default Model.extend({
   lastname: attr('string'),
   updatedAt: attr('isodate'),
   username: attr('string'),
-  userProfile: attr('object'),
+  profile: attr('object'),
   userSetting: belongsTo('userSetting')
 });
