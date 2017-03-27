@@ -108,7 +108,7 @@ describe('Integration | Component | attributes list', function() {
         expect(this.$('.t-add-trigger:eq(1)').text().trim()).to.eql('Add Samples');
       });
 
-      it('should not be visible the attribute has a value', function() {
+      it('should not be visible if the attribute has a value', function() {
         this.setProperties({
           'attributeActions': [],
           'attributesFromDataset': {
