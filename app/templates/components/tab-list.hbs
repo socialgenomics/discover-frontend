@@ -1,5 +1,7 @@
 <div class="c-card u-ta-center u-border-square u-mb0">
   <ul class="o-list-flush-left u-flex u-tc-primary u-mb0">
-    {{yield}}
+    {{#each tabs as |tab|}}
+      {{tab-item title=tab.title target=tab.target queryParams=tab.queryParams}}
+    {{/each}}
   </ul>
 </div>
