@@ -1,17 +1,19 @@
 import Ember from 'ember';
 
-const { inject: { service }, Component, get, computed, Logger, RSVP } = Ember;
+const { inject: { service }, Component, get, set, computed, Logger, RSVP } = Ember;
 
 export default Component.extend({
   store: service(),
 
   classNames: ['u-border-top'],
-
-  contributorIds: computed.mapBy('userAttrs', 'userId'),
-  uniqContributorIds: computed.uniq('contributorIds'),
-  contributors: computed('uniqContributorIds', function() {
-    return this._fetchUserData(get(this, 'uniqContributorIds'));
-  }),
+  didReceiveAttrs() {
+    this._super(...arguments);
+    const uniqueContributorIds = get(this, 'userAttrs')
+      .mapBy('userId')
+      .uniq();
+    this._fetchUserData(uniqueContributorIds)
+      .then(contributors => set(this, 'contributors', contributors))
+  },
 
   _fetchUserData(userIds) {
     const store = get(this, 'store');
