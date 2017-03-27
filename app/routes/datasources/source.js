@@ -19,9 +19,15 @@ function doQuery(data, queryString) {
       return queryString;
     }
   }
-  const type = get(data.collection, 'type') === 'datasource' ? 'datasource' : 'collection';
+  const type = _getType(get(data, 'collection.type'));
   const predicateToAppend = `${type}:${short_name || normalisedName}`;
   return queryString ? `${predicateToAppend} ${queryString}` : `${predicateToAppend}`;
+}
+
+function _getType(type) {
+  if (type === 'datasource' || type === 'personal_repository') {
+    return 'datasource';
+  } else { return 'collection' }
 }
 
 export function model(params) {
@@ -37,12 +43,12 @@ export function model(params) {
       const updatedQuery = doQuery(data, queryString);
       set(params, 'query', updatedQuery);
       return this.makeRequest(params)
-      .then(m => {
-        const model = assign(data, m);
-        set(model, 'collection.actionableId', model.actionable);
-        this._updateQueryServiceValue(params.query);
-        return model;
-      });
+        .then(m => {
+          const model = assign(data, m);
+          set(model, 'collection.actionableId', model.actionable);
+          this._updateQueryServiceValue(params.query);
+          return model;
+        });
     }).catch(Logger.error);
 }
 

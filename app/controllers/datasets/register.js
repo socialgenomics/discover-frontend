@@ -1,9 +1,16 @@
 import Ember from 'ember';
 import FlashMessageMixin from 'repositive/mixins/flash-message-mixin';
 import TrackEventsMixin from 'repositive/mixins/track-events-mixin';
-import Validations from 'repositive/validations/dataset';
+import { buildValidations } from 'ember-cp-validations';
+import urlFormatValidator from 'repositive/validations/urlFormatValidator';
+import presenceValidator from 'repositive/validations/presenceValidator';
 
 const { Controller, computed, get, getProperties, set, inject: { service }, Logger } = Ember;
+const Validations = buildValidations({
+  title: presenceValidator(),
+  description: presenceValidator(),
+  url: urlFormatValidator()
+});
 
 export default Controller.extend(
   Validations,

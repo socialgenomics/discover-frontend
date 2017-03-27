@@ -1,27 +1,19 @@
 import Ember from 'ember';
-import { validator, buildValidations } from 'ember-cp-validations';
+import { buildValidations } from 'ember-cp-validations';
+import presenceValidator from 'repositive/validations/presenceValidator';
+import emailFormatValidator from 'repositive/validations/emailFormatValidator';
+import lengthValidator from 'repositive/validations/lengthValidator';
+import { errorMessages, lengths } from 'repositive/validations/validations-config';
 
 const { get, getProperties, computed, Controller, inject: { service }, set } = Ember;
 const Validations = buildValidations({
   email: [
-    validator('presence', {
-      presence: true,
-      message: 'Please provide email address.'
-    }),
-    validator('format', {
-      regex: /^([\w\-\.\+]+)@((?:[\w\-\.]+)(?:\.[a-zA-Z]{2,}))$/,
-      message: 'Must be a valid email address.'
-    })
+    presenceValidator(errorMessages.blankEmail),
+    emailFormatValidator()
   ],
   password: [
-    validator('presence', {
-      presence: true,
-      message: 'Please provide password.'
-    }),
-    validator('length', {
-      min: 8,
-      message: 'Must be at least 8 characters.'
-    })
+    presenceValidator(errorMessages.blankPassword),
+    lengthValidator(lengths.password)
   ]
 });
 

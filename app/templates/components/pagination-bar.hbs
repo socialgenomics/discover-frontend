@@ -1,9 +1,19 @@
-<p class="u-mb1 u-tc-primary">Total pages: {{totalPages}}</p>
-<p class="u-mb3 u-tc-primary">Current page: {{currentPageNumber}}</p>
+<p class="u-fw-bold u-mr2 u-mb0">Results: {{results}}</p>
 
-<button class="c-btn c-btn-primary u-mb1" disabled={{eq currentPageNumber 1}} {{action 'previousPage'}}>
-  Previous
-</button>
-<button class="c-btn c-btn-primary" disabled={{gte currentPageNumber totalPages}} {{action 'nextPage'}}>
-  Next
-</button>
+<div class="u-flex u-flex-wrap">
+  <a {{action 'previousPage'}} class="u-tc-secondary u-px1 u-hv-bc-off-white {{if noPrevPage 'u-hide-display'}} u-mr1">
+    {{fa-icon 'chevron-left'}} Prev
+  </a>
+
+  <div class="u-inherit-disp u-mr1">
+    {{#each pages as |page|}}
+      {{pagination-number-button page=page currentPageNumber=currentPageNumber goToPage=goToPage}}
+    {{/each}}
+  </div>
+
+  <p class="u-tc-secondary u-mr2  u-mb0"> of {{totalPages}}</p>
+
+  <a {{action 'nextPage'}} class="u-tc-secondary u-px1 u-hv-bc-off-white {{if noNextPage 'u-hide-display'}}">
+    Next {{fa-icon 'chevron-right'}}
+  </a>
+</div>
