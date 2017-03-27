@@ -3,22 +3,37 @@ import { describe, it } from 'mocha';
 import { setupComponentTest } from 'ember-mocha';
 import hbs from 'htmlbars-inline-precompile';
 
+const getContributors = () => {
+  return {
+    id: '1',
+    displayName: 'Liz',
+    userProfile: {
+      workOrganisation: 'Developer'
+    }
+  };
+};
+
 describe('Integration | Component | contributors list', function() {
   setupComponentTest('contributors-list', {
     integration: true
   });
 
-  it('renders', function() {
-    // Set any properties with this.set('myProperty', 'value');
-    // Handle any actions with this.on('myAction', function(val) { ... });
-    // Template block usage:
-    // this.render(hbs`
-    //   {{#contributors-list}}
-    //     template content
-    //   {{/contributors-list}}
-    // `);
+  it('renders a list of contributors as user-preview components', function() {
+    this.setProperties({
+      'contributors': [getContributors()],
+      'modelName': 'dataset'
+    });
+    this.render(hbs`{{contributors-list contributors=contributors modelName=modelName}}`);
+    expect(this.$('h4.u-tc-primary').text().trim()).to.eql('Liz');
+    expect(this.$('p.u-fs1').text().trim()).to.eql('Developer');
+  });
 
-    this.render(hbs`{{contributors-list}}`);
-    expect(this.$()).to.have.length(1);
+  it('renders an empty list when there are no contributors', function() {
+    this.setProperties({
+      'contributors': [],
+      'modelName': 'dataset'
+    });
+    this.render(hbs`{{contributors-list contributors=contributors modelName=modelName}}`);
+    expect(this.$('p').text().trim()).to.eql('No one has contributed to this dataset yet. Be the first.');
   });
 });
