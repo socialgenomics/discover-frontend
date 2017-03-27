@@ -5,7 +5,7 @@ const { Component, get } = Ember;
 export default Component.extend({
   classNames: ['u-flex', 'u-justify-end', 'u-items-center'],
 
-  resultsOptions: [6, 15, 30, 90],
+  resultsOptions: [6, 18, 30, 90],
 
   actions: {
     setResultsPerPage(resultsPerPage) { get(this, 'setResultsPerPage')(resultsPerPage); }
