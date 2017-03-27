@@ -30,3 +30,5 @@ deployment:
       - docker build -t registry.repositive.io:5000/discover:$CIRCLE_TAG .
       - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS registry.repositive.io:5000
       - docker push registry.repositive.io:5000/discover:$CIRCLE_TAG
+      - curl -u $DEPLOYMENT_USER:$DEPLOYMENT_PASS -T "deploy.production.yml" "https://deployment.repositive.io/deploy?stack=fn&version=$CIRCLE_TAG"
+
