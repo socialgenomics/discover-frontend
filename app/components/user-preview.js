@@ -4,7 +4,7 @@ const { inject: { service }, Component, get, computed } = Ember;
 
 export default Component.extend({
   session: service(),
-  classNames: ['u-pos-relative', 'u-mb1', 'u-py2', 'u-pl1', 'u-hv-bc-darken5'],
+  classNames: ['u-pos-relative', 'u-mb1'],
 
   showCreateAccountModal: false,
 

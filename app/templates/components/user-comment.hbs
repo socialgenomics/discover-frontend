@@ -3,7 +3,7 @@
 <!-- Comment -->
 {{#unless inEditMode}}
   <div class="u-flex u-items-start u-justify-between">
-    <p class="u-markdown-formatting u-mb0 u-pl4">{{markdown-to-html markdown=comment.properties.text extensions='targetBlankLinks sanitize'}}</p>
+    <p class="u-markdown-formatting u-mb0 u-pl2">{{markdown-to-html markdown=comment.properties.text extensions='targetBlankLinks sanitize'}}</p>
     {{#if (and canEdit (not inEditMode))}}
       {{fa-icon 'pencil' class='u-tc-tertiary u-hv-tc-secondary u-cursor-pointer u-fs2 u-pr2' click=(action 'enterEditMode')}}
     {{/if}}
