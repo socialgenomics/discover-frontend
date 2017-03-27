@@ -17,9 +17,11 @@
           attributesForKey=attrs
         }}
       {{else}}
-        <span {{action 'setOpenInput' group}} class="u-flex u-justify-between u-items-center u-td-underline u-tc-tertiary u-hv-tc-secondary u-cursor-pointer">
-          Add {{#if (eq group 'pmid')}} Pubmed ID {{else}} {{capitalize group}} {{/if}}
-        </span>
+        {{#unless (and (contains group singleValueAttrs) (gt attrs.length 0))}}
+          <span {{action 'setOpenInput' group}} class="t-add-trigger u-flex u-justify-between u-items-center u-td-underline u-tc-tertiary u-hv-tc-secondary u-cursor-pointer">
+            Add {{#if (eq group 'pmid')}} Pubmed ID {{else}}{{capitalize group}}{{/if}}
+          </span>
+        {{/unless}}
       {{/if}}
     </div>
   </div>

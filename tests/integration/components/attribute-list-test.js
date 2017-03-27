@@ -31,6 +31,7 @@ describe('Integration | Component | attributes list', function() {
     integration: true
   });
 
+
   describe('Attribute keys', function() {
     it('renders a list of keys', function() {
       this.set('attributeActions', [getMockAttributeAction()]);
@@ -42,6 +43,7 @@ describe('Integration | Component | attributes list', function() {
       expect(this.$('h3').last().text().trim()).to.eql('Pubmed ID');
     });
   });
+
 
   describe('Attribute values', function() {
     it('renders an empty list when there are no attributes', function() {
@@ -92,11 +94,56 @@ describe('Integration | Component | attributes list', function() {
     });
   });
 
+
+  describe('Add attribute trigger', function() {
+    describe('trigger for attribute which can only have 1 value', function() {
+      it('should be visible if the attribute has no value', function() {
+        this.setProperties({
+          'attributeActions': [],
+          'attributesFromDataset': {}
+        });
+        this.render(hbs`{{attribute-list
+          attributeActions=attributeActions
+          attributesFromDataset=attributesFromDataset}}`);
+        expect(this.$('.t-add-trigger:eq(1)').text().trim()).to.eql('Add Samples');
+      });
+
+      it('should not be visible if the attribute has a value', function() {
+        this.setProperties({
+          'attributeActions': [],
+          'attributesFromDataset': {
+            samples: ['23']
+          }
+        });
+        this.render(hbs`{{attribute-list
+          attributeActions=attributeActions
+          attributesFromDataset=attributesFromDataset}}`);
+        expect(this.$('.t-add-trigger:eq(1)').text().trim()).to.eql('Add Tissue');
+      });
+    });
+
+    describe('trigger for attribute which can have multiple values', function() {
+      it('should be visible regardless of current values', function() {
+        this.setProperties({
+          'attributeActions': [getMockAttributeAction()],
+          'attributesFromDataset': {
+            assay: ['123', '456']
+          }
+        });
+        this.render(hbs`{{attribute-list
+          attributeActions=attributeActions
+          attributesFromDataset=attributesFromDataset}}`);
+        expect(this.$('.t-add-trigger:eq(0)').text().trim()).to.eql('Add Assay');
+      });
+    });
+  });
+
+
   describe('actions', function() {
     it('clicking add attribute opens input form', function() {
       this.set('attributeActions', [getMockAttributeAction()]);
       this.render(hbs`{{attribute-list attributeActions=attributeActions}}`);
-      this.$('span').click();
+      this.$('.t-add-trigger').click();
       expect(this.$('input').attr('placeholder')).to.eql('Add an attribute');
       expect(this.$('input').val()).to.be.empty;
       expect(this.$('button').first().text().trim()).to.eql('Add');
@@ -107,7 +154,7 @@ describe('Integration | Component | attributes list', function() {
       beforeEach(function() {
         this.set('attributeActions', [getMockAttributeAction()]);
         this.render(hbs`{{attribute-list attributeActions=attributeActions}}`);
-        this.$('span').click();
+        this.$('.t-add-trigger').click();
       });
 
       it('closes the form', function() {
@@ -120,7 +167,7 @@ describe('Integration | Component | attributes list', function() {
         this.$('input').val('Should disappear');
         expect(this.$('input').val()).to.eql('Should disappear');
         this.$('button:eq(1)').click(); //cancel
-        this.$('span').click();
+        this.$('.t-add-trigger').click();
         expect(this.$('input').val()).to.be.empty;
       });
     });
