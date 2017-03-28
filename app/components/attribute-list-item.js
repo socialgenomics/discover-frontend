@@ -25,6 +25,7 @@ export default Component.extend(
       return get(this, 'attributesForKey')
         .any(attr => attr.value.toLowerCase() === attrInput);
     }),
+
     actions: {
       cancelEditMode() {
         this.resetModuleStateOnCancel('attribute', get(this, 'editablePropertyKeys'));
@@ -57,8 +58,10 @@ export default Component.extend(
           action: 'pubmedId',
           label: url
         });
-        window.open(url, '_blank').focus();
+        this._openLinkInNewTab(url);
       }
-    }
+    },
+
+    _openLinkInNewTab(url) { window.open(url, '_blank').focus(); }
   }
 );
