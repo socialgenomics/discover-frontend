@@ -48,6 +48,16 @@ export default Component.extend(
         return attrAction.destroyRecord()
           .then(this._addFlashMessage('Attribute successfully deleted.', 'success'))
           .catch(Logger.error)
+      },
+
+      trackPubmedClick() {
+        const url = `https://www.ncbi.nlm.nih.gov/pubmed/${get(this, 'attribute.value')}`
+        get(this, 'metrics').trackEvent({
+          category: 'discover_homeauth_datasetDetail',
+          action: 'pubmedId',
+          label: url
+        });
+        window.open(url, '_blank').focus();
       }
     }
   }
