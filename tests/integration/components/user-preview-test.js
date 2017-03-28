@@ -40,7 +40,7 @@ describe('Integration | Component | user preview', function() {
 
   it('render the timestamp for comments context, if there is one', function() {
     this.set('timestamp', 'Fri Mar 24 2017 12:19:42 GMT+0000 (GMT)');
-    
+
     this.render(hbs`{{user-preview timestamp=timestamp}}`);
     expect(this.$('span.u-tc-tertiary').text().trim()).to.eql('3 days ago');
   })

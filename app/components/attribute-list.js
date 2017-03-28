@@ -3,6 +3,8 @@ import Ember from 'ember';
 const { Component, computed, get, set } = Ember;
 
 export default Component.extend({
+  singleValueAttrs: ['samples', 'pmid'],
+
   userGeneratedAttributes: computed('attributeActions', function() {
     return get(this, 'attributeActions').map(this._convertActionToCommonObj);
   }),
