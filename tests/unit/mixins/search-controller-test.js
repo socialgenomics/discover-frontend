@@ -1,10 +1,11 @@
 import { expect } from 'chai';
-import { describe, it } from 'mocha';
+import { describe, it, beforeEach } from 'mocha';
 import Ember from 'ember';
 import SearchControllerMixin from 'repositive/mixins/search-controller';
+import sinon from 'sinon';
 
 describe('SearchControllerMixin', function() {
-  const { get, getProperties, set, setProperties } = Ember;
+  const { get, set } = Ember;
   const SearchControllerObject = Ember.Object.extend(SearchControllerMixin);
   const parseStringVal = { lorem: 'ipsum' };
   const getFiltersVal = [{ predicate: 'a', text: 'A' }, { predicate: 'b', text: 'B' }, { predicate: 'c', text: 'C' }];

@@ -1,3 +1,4 @@
+/* eslint-disable */
 import sanitizeHtml from 'npm:sanitize-html';
 
 export function initialize() {

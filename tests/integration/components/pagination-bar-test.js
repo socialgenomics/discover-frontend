@@ -12,7 +12,7 @@ describe('Integration: PaginationBarComponent', function() {
   it('adds class disabled to previous button on first page', function() {
     this.set('currentPageNumber', 1);
     this.render(hbs`{{pagination-bar currentPageNumber=currentPageNumber}}`);
-    expect(this.$('.btn').attr('disabled'), true);
+    expect(this.$('a').hasClass('u-hide-display')).to.be.true;
   });
 
   it('adds class disabled to next button when there are no pages left to load', function() {
@@ -21,26 +21,18 @@ describe('Integration: PaginationBarComponent', function() {
       totalPages: 5
     });
     this.render(hbs`{{pagination-bar currentPageNumber=currentPageNumber totalPages=totalPages}}`);
-    expect(this.$('.btn').attr('disabled'), true);
+    expect(this.$('a').hasClass('u-hide-display')).to.be.true;
   });
 
-  it('displays correct page data', function() {
-    this.setProperties({
-      currentPageNumber: 4,
-      totalPages: 7
-    });
-    this.render(hbs`{{pagination-bar currentPageNumber=currentPageNumber totalPages=totalPages}}`);
-    expect(this.$().find(this.$('p')[0]).text().trim()).to.eql('Total pages: 7');
-    expect(this.$().find(this.$('p')[1]).text().trim()).to.eql('Current page: 4');
+  it('displays correct page number', function() {
+    this.set('currentPageNumber', 4);
+    this.render(hbs`{{pagination-bar currentPageNumber=currentPageNumber}}`);
+    expect(this.$('.u-inherit-disp').find(this.$('a')[3]).text().trim()).to.eql('4');
   });
 
-  it('displays correct page data', function() {
-    this.setProperties({
-      currentPageNumber: 4,
-      totalPages: 7
-    });
-    this.render(hbs`{{pagination-bar currentPageNumber=currentPageNumber totalPages=totalPages}}`);
-    expect(this.$().find(this.$('p')[0]).text().trim()).to.eql('Total pages: 7');
-    expect(this.$().find(this.$('p')[1]).text().trim()).to.eql('Current page: 4');
+  it('displays correct total page amount', function() {
+    this.set('totalPages', 7);
+    this.render(hbs`{{pagination-bar totalPages=totalPages}}`);
+    expect(this.$('.u-flex').find(this.$('.u-tc-secondary.u-mr2')).text().trim()).to.eql('of 7');
   });
 });

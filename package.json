@@ -1,6 +1,6 @@
 {
   "name": "repositive",
-  "version": "3.2.0",
+  "version": "3.2.3",
   "description": "Frontend app for repositive.io",
   "private": true,
   "directories": {
@@ -42,7 +42,7 @@
     "ember-cli-clipboard": "0.4.1",
     "ember-cli-content-security-policy": "0.5.0",
     "ember-cli-dependency-checker": "^1.2.0",
-    "ember-cli-eslint": "1.2.1",
+    "ember-cli-eslint": "^3.0.0",
     "ember-cli-favicon": "1.0.0-beta.4",
     "ember-cli-flash": "1.4.1",
     "ember-cli-focus-input": "^1.0.0",
@@ -64,6 +64,7 @@
     "ember-data": "2.7.0",
     "ember-disable-proxy-controllers": "^1.0.1",
     "ember-export-application-global": "1.0.5",
+    "ember-font-awesome": "3.0.5",
     "ember-fr-markdown-file": "0.0.0",
     "ember-link-action": "0.0.35",
     "ember-metrics": "0.5.3",

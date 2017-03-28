@@ -9,7 +9,7 @@ export default BaseAdapter.extend({
   toStringExtension() {
     return 'survicate';
   },
-
+  /* eslint-disable */
   init(options = {}) {
     const config = copy(get(this, 'config'));
     const { code } = config || {};
@@ -26,13 +26,6 @@ export default BaseAdapter.extend({
       var e = document.getElementsByTagName('script')[0];
       e.parentNode.insertBefore(s, e);
     })(window);
-  },
-
-  willDestroy() {
-    //todo implement it
-  },
-
-  identify(options = {}) {
-    // TODO implement user tracking
   }
+  /* eslint-enable */
 });
