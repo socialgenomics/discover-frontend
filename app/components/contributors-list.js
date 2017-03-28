@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-const { inject: { service }, Component, get, set, computed, Logger, RSVP } = Ember;
+const { inject: { service }, Component, get, set, Logger, RSVP } = Ember;
 
 export default Component.extend({
   store: service(),
