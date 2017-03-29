@@ -7,7 +7,7 @@ export const errorMessages = {
   matchingPassword: 'Please provide matching password.',
   invalidEmail: 'Must be a valid email address.',
   minLength: 'Must be at least $1 characters.',
-  maxLength: 'Must be at least $1 characters.',
+  maxLength: 'Must be less than $1 characters.',
   invalidPassword: 'Must include an uppercase letter and a number.'
 };
 
