@@ -1,7 +1,7 @@
 <div class="grid-wrapper grid-wrapper-stepped">
   <div class="grid grid--no-gutter">
     <div class="grid__col grid__col--3-of-3">
-      {{help-tabs tab="requesting"}}
+      {{help-tabs}}
       <div class="c-card c-card-detail-overflow u-rounded-bottom u-py3">
         <div class="grid grid--no-gutter u-full-height">
           <div class="grid__col grid__col--1-of-3 u-fs2 u-fw-med">
@@ -12,11 +12,7 @@
             </ul>
           </div>
           <div class="grid__col grid__col--2-of-3 u-full-min-height u-mb3 u-fs2 u-border-left">
-            <div class="u-markdown-formatting u-mb3 u-px3">
-              {{markdown-to-html markdown=(fr-markdown-file currentPage)}}
-              <div class="c-divider c-divider-light-bg"></div>
-            </div>
-            {{more-help-btn}}
+            {{help-markdown filePath=currentPage}}
           </div>
         </div>
       </div>

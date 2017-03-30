@@ -12,11 +12,7 @@
             </ul>
           </div>
           <div class="grid__col grid__col--2-of-3 u-full-min-height u-mb3 u-fs2 u-border-left">
-            <div class="u-markdown-formatting u-mb3 u-px3">
-              {{markdown-to-html markdown=(fr-markdown-file currentPage)}}
-              <div class="c-divider c-divider-light-bg"></div>
-            </div>
-            {{more-help-btn}}
+            {{help-markdown filePath=currentPage}}
           </div>
         </div>
       </div>
