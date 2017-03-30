@@ -13,14 +13,7 @@
           </div>
           <div class="grid__col grid__col--2-of-3 u-full-min-height u-mb3 u-fs2 u-border-left">
             <div class="u-markdown-formatting u-mb3 u-px3">
-              {{#if (not help)}}{{markdown-to-html markdown=(fr-markdown-file 'help/search/how-to-search')}}
-              {{else if (eq help "search-query")}}{{markdown-to-html markdown=(fr-markdown-file 'help/search/how-to-search')}}
-              {{else if (eq help "algorithm")}}{{markdown-to-html markdown=(fr-markdown-file 'help/search/search-algorithm')}}
-              {{else if (eq help "effective")}}{{markdown-to-html markdown=(fr-markdown-file 'help/search/effective-search')}}
-              {{else if (eq help "boolean")}}{{markdown-to-html markdown=(fr-markdown-file 'help/search/boolean')}}
-              {{else if (eq help "predicated")}}{{markdown-to-html markdown=(fr-markdown-file 'help/search/predicated')}}
-              {{else if (eq help "filters")}}{{markdown-to-html markdown=(fr-markdown-file 'help/search/filters')}}
-              {{/if}}
+              {{markdown-to-html markdown=(fr-markdown-file currentPage)}}
               <div class="c-divider c-divider-light-bg"></div>
             </div>
             {{more-help-btn}}

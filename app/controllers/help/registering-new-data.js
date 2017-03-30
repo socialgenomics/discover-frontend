@@ -3,9 +3,8 @@ import Ember from 'ember';
 const { Controller } = Ember;
 
 export default Controller.extend({
-  queryParams: ['help'],
-  help: null,
   helpLink: 'help.registering-new-data',
+  currentPage: window.location.pathname,
 
   helpLinkData: [
     { query: 'data-reg', text: 'What data can I register?' },

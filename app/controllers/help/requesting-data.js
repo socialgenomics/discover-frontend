@@ -3,13 +3,12 @@ import Ember from 'ember';
 const { Controller } = Ember;
 
 export default Controller.extend({
-  queryParams: ['help'],
-  help: null,
   helpLink: 'help.requesting-data',
+  currentPage: window.location.pathname,
 
   helpLinkData: [
-    { query: 'what-is', text: 'What is a data request?' },
-    { query: 'what-can', text: 'What data can I request?' },
+    { query: 'what-is-request', text: 'What is a data request?' },
+    { query: 'what-can-request', text: 'What data can I request?' },
     { query: 'who-can-see', text: 'Who can see my request?' },
     { query: 'information-include', text: 'What information should I include in my request?' },
     { query: 'add-meta-later', text: 'Can I add more metadata and description later?' },

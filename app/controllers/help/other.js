@@ -3,9 +3,8 @@ import Ember from 'ember';
 const { Controller } = Ember;
 
 export default Controller.extend({
-  queryParams: ['help'],
-  help: null,
   helpLink: 'help.other',
+  currentPage: window.location.pathname,
 
   helpLinkData: [
     { query: 'why-tag', text: 'Why should I tag a dataset?' },
