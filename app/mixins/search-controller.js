@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import QP from 'npm:../../query-parser';
 
-const { Mixin, computed, get, set } = Ember;
+const { Mixin, computed, get, set, setProperties } = Ember;
 
 export default Mixin.create({
   queryParams: ['query', 'page', 'resultsPerPage'],
@@ -52,7 +52,10 @@ export default Mixin.create({
     },
 
     setResultsPerPage(resultsPerPage) {
-      set(this, 'resultsPerPage', resultsPerPage);
+      setProperties(this, {
+        'resultsPerPage': resultsPerPage,
+        'page': 1
+      });
       get(this, 'metrics').trackEvent({
         category: 'search_resultsPerPage',
         action: resultsPerPage
