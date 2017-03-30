@@ -33,6 +33,6 @@ describe('Integration: PaginationBarComponent', function() {
   it('displays correct total page amount', function() {
     this.set('totalPages', 7);
     this.render(hbs`{{pagination-bar totalPages=totalPages}}`);
-    expect(this.$('.u-flex').find(this.$('.u-tc-secondary.u-mr2')).text().trim()).to.eql('of 7');
+    expect(this.$('.u-flex').find(this.$('.u-tc-secondary.u-mb0')).text().trim()).to.eql('of 7');
   });
 });
