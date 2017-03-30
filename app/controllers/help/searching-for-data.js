@@ -4,7 +4,6 @@ const { Controller } = Ember;
 
 export default Controller.extend({
   helpLink: 'help.searching-for-data',
-  currentPage: window.location.pathname,
 
   helpLinkData: [
     { query: 'search-query', text: 'How do I search on Repositive?' },

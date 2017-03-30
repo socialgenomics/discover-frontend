@@ -4,7 +4,6 @@ const { Controller } = Ember;
 
 export default Controller.extend({
   helpLink: 'help.your-account',
-  currentPage: window.location.pathname,
 
   helpLinkData: [
     { query: 'access', text: 'How can I access my account?' },

@@ -4,7 +4,6 @@ const { Controller } = Ember;
 
 export default Controller.extend({
   helpLink: 'help.registering-new-data',
-  currentPage: window.location.pathname,
 
   helpLinkData: [
     { query: 'data-reg', text: 'What data can I register?' },

@@ -4,7 +4,6 @@ const { Controller } = Ember;
 
 export default Controller.extend({
   helpLink: 'help.requesting-data',
-  currentPage: window.location.pathname,
 
   helpLinkData: [
     { query: 'what-is-request', text: 'What is a data request?' },
