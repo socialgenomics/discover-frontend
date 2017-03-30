@@ -2,8 +2,10 @@
     #IMAGES
    ========================================================================== */
 
-.u-w1 { width: 1.5 * $global-spacing-unit;  }
-.u-w1-5 { width: 2 * $global-spacing-unit;  }
-.u-w2 { width: 2.5 * $global-spacing-unit;  }
-.u-w3 { width: 5 * $global-spacing-unit;    }
-.u-w4 { width: 7.5 * $global-spacing-unit;  }
+.u-img {
+  &-tiny { width: 1.5 * $global-spacing-unit;  }
+  &-small { width: 2 * $global-spacing-unit;  }
+  &-med { width: 2.5 * $global-spacing-unit;  }
+  &-large { width: 5 * $global-spacing-unit;    }
+  &-huge { width: 7.5 * $global-spacing-unit;  }
+}
