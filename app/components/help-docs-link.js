@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-const { Component, get, computed } = Ember;
+const { Component } = Ember;
 
 export default Component.extend({
   tagName: 'li',
