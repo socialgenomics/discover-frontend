@@ -3,7 +3,12 @@ import Ember from 'ember';
 const { Route, get } = Ember;
 
 export default Route.extend({
-  beforeModel(transition) {
-    this.controllerFor('help.your-account').set('currentPage', window.location.pathname);
+  model(params) {
+    const helpPageLink = '/help/your-account/' + params.query;
+    return helpPageLink;
+  },
+
+  setupController(controller, model) {
+    return controller.set('currentPage', model);
   }
 });
