@@ -1,0 +1,18 @@
+{{#file-upload
+  class='u-pos-relative u-w3 u-h3 u-circle'
+  name="photos"
+  accept="image/*"
+  multiple=false
+  onfileadd=(action "uploadImage")
+}}
+  <img class="u-pos-absolute u-pos-top0 u-pos-left0  u-pos-bottom0 u-pos-right0 u-circle" src={{avatarImg}}>
+
+  {{!-- upload overlay  --}}
+  <span class="u-cursor-pointer u-flex u-justify-center u-items-center u-pos-relative u-w3 u-h3 u-circle
+    c-avatar-upload__hover {{if uploading 'u-bc-dark-overlay' 'u-hv-bc-darken40'}}">
+    <span class="u-zindex-1 u-tc-white u-fs2 u-fw-med {{unless uploading 'u-hide-display'}}
+      c-avatar-upload__hover__text">
+      {{if uploading 'Uploading...' 'Edit photo'}}
+    </span>
+  </span>
+{{/file-upload}}
