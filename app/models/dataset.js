@@ -13,7 +13,6 @@ export default Model.extend({
   actionableId: belongsTo('actionable', { inverse: 'dataset' }),
   assay: attr('string'),
   collections: hasMany('collection', { inverse: 'datasets' }),
-  colour: attr('string'),
   createdAt: attr('isodate'),
   datasourceId: belongsTo('collection', { inverse: 'owns' }),
   description: attr('string'),

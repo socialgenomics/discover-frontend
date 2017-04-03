@@ -1,6 +1,13 @@
 import Ember from 'ember';
+import colours from '../utils/colours';
 
-export default Ember.Component.extend({
+const { Component, computed, get } = Ember;
+
+export default Component.extend({
   tagName: 'li',
-  classNames: ['o-list-inline__item']
+  classNames: ['o-list-inline__item'],
+
+  colour: computed('assay', function() {
+    return colours.getColour(get(this, 'assay'));
+  })
 });

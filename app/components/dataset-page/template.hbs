@@ -7,8 +7,12 @@
       <header class="c-card-header u-bc-off-white u-flex u-justify-between u-items-center u-px2">
 
         <ul class="o-list-inline o-list-flush-left u-mb0">
-          {{#if model.assay}}
-            {{assay-type assay=model}}
+          {{#if model.properties.attributes.assay}}
+            {{#each model.properties.attributes.assay as |assay|}}
+              {{assay-type assay=assay}}
+            {{/each}}
+          {{else}}
+            {{assay-type assay=model.assay}}
           {{/if}}
         </ul>
 

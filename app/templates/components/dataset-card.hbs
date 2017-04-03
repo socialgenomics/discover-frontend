@@ -49,8 +49,12 @@
     <!-- Card Header -->
     <header class="c-card-header u-bc-off-white u-flex u-justify-between u-items-center u-px2">
       <ul class="o-list-inline o-list-flush-left u-mb0">
-        {{#if dataset.assay}}
-          {{assay-type assay=dataset}}
+        {{#if dataset.properties.attributes.assay}}
+          {{#each dataset.properties.attributes.assay as |assay|}}
+            {{assay-type assay=assay}}
+          {{/each}}
+        {{else if dataset.assay}}
+          {{assay-type assay=dataset.assay}}
         {{/if}}
       </ul>
 
