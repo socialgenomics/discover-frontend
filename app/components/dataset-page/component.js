@@ -43,6 +43,13 @@ export default Component.extend(
       return get(this, 'urlGenerator').generateUrl(`${get(this, 'modelName')}s.detail`, get(this, 'model.id'));
     }),
 
+    assaysToDisplay: computed('model.assay', 'model.properties.attributes.assay', function() {
+      const assaysFromDataset = get(this, 'model.assay');
+      const assaysFromProps = get(this, 'model.properties.attributes.assay');
+      if (assaysFromProps) { return assaysFromProps; }
+      if (assaysFromDataset) { return assaysFromDataset.split(','); }
+    }),
+
     init() {
       this._super(...arguments);
 
