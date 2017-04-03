@@ -1,13 +1,22 @@
 {{#unless inEditMode}}
   <div class="u-flex u-justify-between">
-    <p class="u-fs2 u-mb1 u-line-break">{{attribute.value}}</p>
+    {{#if (eq attribute.key 'pmid')}}
+      <a target="_blank"
+        href="https://www.ncbi.nlm.nih.gov/pubmed/{{attribute.value}}"
+        class="u-fs2 u-tc-secondary u-hv-tc-primary u-td-underline"
+        {{action 'trackPubmedClick'}}
+        >
+        {{attribute.value}}
+      </a>
+    {{else}}
+      <p class="u-fs2 u-mb1 u-line-break">{{attribute.value}}</p>
+    {{/if}}
     {{#if canEdit}}
       <div>
       {{fa-icon 'pencil' class='u-tc-tertiary u-hv-tc-secondary u-cursor-pointer u-fs2 u-mr1' click=(action 'enterEditMode')}}
       {{fa-icon 'trash-o' class='u-tc-tertiary u-hv-tc-secondary u-cursor-pointer u-fs2' click=(action 'deleteAttr')}}
       </div>
     {{/if}}
-
   </div>
 {{else}}
   <form>
