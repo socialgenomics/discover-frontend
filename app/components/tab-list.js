@@ -1,4 +1,7 @@
 import Ember from 'ember';
 
-export default Ember.Component.extend({
+const { Component } = Ember;
+
+export default Component.extend({
+  classNames: ['u-ta-center', 'u-border-square', 'u-mb0']
 });

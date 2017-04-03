@@ -101,7 +101,9 @@ export default Component.extend(
         if (get(this, 'validations.isValid')) {
           this.saveChanges(get(this, 'model'), get(this, 'editablePropertyKeys'));
         }
-      }
+      },
+
+      setActiveTab(tab) { set(this, 'activeTab', tab); }
     },
 
     /**
