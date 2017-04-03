@@ -122,14 +122,14 @@
     <div class="c-card-detail-discussion grid__col grid__col--5-of-12 u-full-height">
       <div class="u-border-left u-full-min-height">
         {{#unless isRequest}}
-          {{#tab-list}}
+          {{#tab-list class='u-mb2'}}
             <li
               {{action 'setActiveTab' 'attributes'}}
-              class="u-cursor-pointer u-flex-auto u-p1 u-fs2 u-fw-med {{if (eq activeTab 'attributes') 'u-bc-white' 'u-bc-off-white u-hv-bc-off-white'}}">
+              class="u-cursor-pointer u-tc-secondary u-flex-auto u-p1 u-fs2 u-fw-med {{if (eq activeTab 'attributes') 'u-bc-white' 'u-bc-off-white u-hv-bc-off-white'}}">
               Attributes</li>
             <li
               {{action 'setActiveTab' 'discussion'}}
-              class="u-cursor-pointer u-flex-auto u-p1 u-fs2 u-fw-med {{if (eq activeTab 'discussion') 'u-bc-white' 'u-bc-off-white u-hv-bc-off-white'}}">
+              class="u-cursor-pointer u-tc-secondary u-flex-auto u-p1 u-fs2 u-fw-med {{if (eq activeTab 'discussion') 'u-bc-white' 'u-bc-off-white u-hv-bc-off-white'}}">
               Discussion</li>
           {{/tab-list}}
           <div class="u-p2">
