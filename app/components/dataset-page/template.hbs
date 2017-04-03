@@ -125,11 +125,11 @@
           {{#tab-list}}
             <li
               {{action 'setActiveTab' 'attributes'}}
-              class="u-flex-auto u-p1 u-fs2 u-fw-med {{if (eq activeTab 'attributes') 'u-bc-white' 'u-bc-off-white'}}">
+              class="u-cursor-pointer u-flex-auto u-p1 u-fs2 u-fw-med {{if (eq activeTab 'attributes') 'u-bc-white' 'u-bc-off-white u-hv-bc-off-white'}}">
               Attributes</li>
             <li
               {{action 'setActiveTab' 'discussion'}}
-              class="u-flex-auto u-p1 u-fs2 u-fw-med {{if (eq activeTab 'discussion') 'u-bc-white' 'u-bc-off-white'}}">
+              class="u-cursor-pointer u-flex-auto u-p1 u-fs2 u-fw-med {{if (eq activeTab 'discussion') 'u-bc-white' 'u-bc-off-white u-hv-bc-off-white'}}">
               Discussion</li>
           {{/tab-list}}
           <div class="u-p2">
