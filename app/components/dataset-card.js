@@ -9,11 +9,5 @@ export default Component.extend({
     const route = get(this, 'type') === 'request' ? 'requests.detail' : 'datasets.detail';
 
     return get(this, 'urlGenerator').generateUrl(route, get(this, 'dataset.id'));
-  }),
-  assaysToDisplay: computed('dataset.assay', 'dataset.properties.attributes.assay', function() {
-    const assaysFromDataset = get(this, 'dataset.assay');
-    const assaysFromProps = get(this, 'dataset.properties.attributes.assay');
-    if (assaysFromProps) { return assaysFromProps; }
-    if (assaysFromDataset) { return assaysFromDataset.split(','); }
   })
 });

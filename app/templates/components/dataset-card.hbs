@@ -48,13 +48,7 @@
     <!-- It is a Dataset -->
     <!-- Card Header -->
     <header class="c-card-header u-bc-off-white u-flex u-justify-between u-items-center u-px2">
-      <ul class="o-list-inline o-list-flush-left u-mb0">
-        {{#if assaysToDisplay}}
-          {{#each assaysToDisplay as |assay|}}
-            {{assay-type assay=assay}}
-          {{/each}}
-        {{/if}}
-      </ul>
+      {{assay-list datasetAssays=dataset.assay propertiesAssays=dataset.properties.attributes.assay}}
 
       <ul class="o-list-inline o-list-flush-left u-mb0">
         {{action-favourite model=dataset class="u-mr2"}}

@@ -5,14 +5,7 @@
     <div class="grid__col grid__col--7-of-12 u-pos-relative u-full-height">
       <!-- header -->
       <header class="c-card-header u-bc-off-white u-flex u-justify-between u-items-center u-px2">
-
-        <ul class="o-list-inline o-list-flush-left u-mb0">
-          {{#if assaysToDisplay}}
-            {{#each assaysToDisplay as |assay|}}
-              {{assay-type assay=assay}}
-            {{/each}}
-          {{/if}}
-        </ul>
+        {{assay-list datasetAssays=model.assay propertiesAssays=model.properties.attributes.assay}}
 
         <div class="u-flex u-items-center">
           {{follow-button subscribable=model.subscribableId model=model}}
