@@ -132,23 +132,24 @@
               class="u-flex-auto u-p1 u-fs2 u-fw-med {{if (eq activeTab 'discussion') 'u-bc-white' 'u-bc-off-white'}}">
               Discussion</li>
           {{/tab-list}}
-
-          <!-- Attributes body -->
           <div class="u-p2">
-            {{partial "datasets/tab-attributes"}}
+            {{#if (eq activeTab 'attributes')}}
+              {{partial "datasets/tab-attributes"}}
+            {{else}}
+              {{partial "datasets/tab-comments"}}
+            {{/if}}
+          </div>
+        {{else}}
+          <!-- Discussions header -->
+          <header class="c-card-header u-bc-off-white u-px2 u-flex u-items-center u-justify-center">
+            <h4 class="u-mb0 u-fs2 u-fw-med u-tc-primary">Discussions</h4>
+          </header>
+
+          <!-- Discussions body -->
+          <div class="u-p2">
+            {{partial "datasets/tab-comments"}}
           </div>
         {{/unless}}
-
-        <!-- Discussions header -->
-        <header class="c-card-header u-bc-off-white u-px2 u-flex u-items-center u-justify-center">
-          <h4 class="u-mb0 u-fs2 u-fw-med u-tc-primary">Discussions</h4>
-        </header>
-
-        <!-- Discussions body -->
-        <div class="u-p2">
-          {{partial "datasets/tab-comments"}}
-        </div>
-
       </div>
     </div>
   </div>
