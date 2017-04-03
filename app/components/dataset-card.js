@@ -1,7 +1,6 @@
 import Ember from 'ember';
-// import colours from '../utils/colours';
 
-const { Component, computed, inject: { service }, get, set } = Ember;
+const { Component, computed, inject: { service }, get } = Ember;
 
 export default Component.extend({
   urlGenerator: service(),
@@ -10,31 +9,5 @@ export default Component.extend({
     const route = get(this, 'type') === 'request' ? 'requests.detail' : 'datasets.detail';
 
     return get(this, 'urlGenerator').generateUrl(route, get(this, 'dataset.id'));
-  }),
-
-  didReceiveAttrs() {
-    this._super(...arguments);
-    // this.setAssayColourForDataset();
-  }
-
-  // getAssayColourForDataset() {
-  //   let assay;
-  //   const dataset = get(this, 'dataset');
-  //   if (dataset) {
-  //     assay = get(dataset, 'assay');
-  //     if (!assay) {
-  //       assay = 'Not Available';
-  //     }
-  //   }
-  //   return colours.getColour(assay);
-  // },
-
-  // setAssayColourForDataset() {
-  //   if (get(this, 'dataset')) {
-  //     const colour = this.getAssayColourForDataset();
-  //     if (colour) {
-  //       set(this, 'dataset.colour', colour);
-  //     }
-  //   }
-  // }
+  })
 });
