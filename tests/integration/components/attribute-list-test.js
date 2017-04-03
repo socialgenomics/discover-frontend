@@ -54,7 +54,7 @@ describe('Integration | Component | attributes list', function() {
       this.render(hbs`{{attribute-list
         attributeActions=attributeActions
         attributesFromDataset=attributesFromDataset}}`);
-      expect(this.$('p.u-fs2').first().text().trim()).to.be.empty;
+      expect(this.$('p.t-attr-item-text').first().text().trim()).to.be.empty;
     });
 
     it('renders list of user attrs when there are no dataset attrs', function() {
@@ -65,7 +65,7 @@ describe('Integration | Component | attributes list', function() {
       this.render(hbs`{{attribute-list
         attributeActions=attributeActions
         attributesFromDataset=attributesFromDataset}}`);
-      expect(this.$('p').first().text().trim()).to.eql('ABC');
+      expect(this.$('p.t-attr-item-text').first().text().trim()).to.eql('ABC');
     });
 
     it('renders list of dataset attrs when there are no user attrs', function() {
@@ -76,8 +76,8 @@ describe('Integration | Component | attributes list', function() {
       this.render(hbs`{{attribute-list
         attributeActions=attributeActions
         attributesFromDataset=attributesFromDataset}}`);
-      expect(this.$('p').first().text().trim()).to.eql('DEF');
-      expect(this.$('p:eq(1)').text().trim()).to.eql('XYZ');
+      expect(this.$('p.t-attr-item-text').first().text().trim()).to.eql('DEF');
+      expect(this.$('p.t-attr-item-text:eq(1)').text().trim()).to.eql('XYZ');
     });
 
     it('renders a list of dataset attrs and user added attrs', function() {
@@ -88,9 +88,9 @@ describe('Integration | Component | attributes list', function() {
       this.render(hbs`{{attribute-list
         attributeActions=attributeActions
         attributesFromDataset=attributesFromDataset}}`);
-      expect(this.$('p').first().text().trim()).to.eql('ABC');
-      expect(this.$('p:eq(1)').text().trim()).to.eql('DEF');
-      expect(this.$('p:eq(2)').text().trim()).to.eql('XYZ');
+      expect(this.$('p.t-attr-item-text').first().text().trim()).to.eql('ABC');
+      expect(this.$('p.t-attr-item-text:eq(1)').text().trim()).to.eql('DEF');
+      expect(this.$('p.t-attr-item-text:eq(2)').text().trim()).to.eql('XYZ');
     });
   });
 
