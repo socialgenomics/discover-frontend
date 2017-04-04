@@ -10,5 +10,13 @@ export default Component.extend({
 
     return get(this, 'urlGenerator').generateUrl(route, get(this, 'dataset.id'));
   }),
-  hasAssays: computed.or('dataset.assay', 'dataset.properties.attributes.assay')
+  hasAssays: computed.or('dataset.assay', 'dataset.properties.attributes.assay'),
+  assaysToDisplay: computed('dataset.assay', 'dataset.properties.attributes.assay', 'dataset.userAssays', function() {
+    const assaysFromDataset = get(this, 'dataset.assay');
+    const assaysFromProps = get(this, 'dataset.properties.attributes.assay');
+    const assaysFromUsers = get(this, 'dataset.userAssays') || [];
+    if (assaysFromProps) { return [...assaysFromProps, ...assaysFromUsers]; }
+    if (assaysFromDataset) { return [...assaysFromDataset.split(','), ...assaysFromUsers]; }
+    return assaysFromUsers;
+  })
 });

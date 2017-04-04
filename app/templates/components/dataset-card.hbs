@@ -49,7 +49,7 @@
     <!-- Card Header -->
     <header class="c-card-header u-bc-off-white u-flex {{if hasAssays 'u-justify-between' 'u-justify-end'}} u-items-center u-px2">
       {{#if hasAssays}}
-        {{assay-list datasetAssays=dataset.assay propertiesAssays=dataset.properties.attributes.assay}}
+        {{assay-list assays=assaysToDisplay}}
       {{/if}}
       <ul class="u-flex o-list-flush-left u-pl2 u-mb0">
         {{action-favourite model=dataset class="u-mr2"}}

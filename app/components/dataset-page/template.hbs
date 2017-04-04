@@ -6,11 +6,7 @@
       <!-- header -->
       <header class="c-card-header u-bc-off-white u-flex {{if hasAssays 'u-justify-between' 'u-justify-end'}} u-items-center u-px2">
         {{#if hasAssays}}
-          {{assay-list
-            datasetAssays=model.assay
-            propertiesAssays=model.properties.attributes.assay
-            userAssays=model.userAssays
-          }}
+          {{assay-list assays=assays}}
         {{/if}}
         <div class="u-pl1 u-flex u-items-center">
           {{follow-button subscribable=model.subscribableId model=model}}
@@ -32,8 +28,8 @@
         <div class="u-flex u-content-around">
           <h2 class="u-fs2 u-fw-med u-tc-primary u-mb1 u-grow-1">{{model.title}}</h2>
           {{#if canEdit}}
-            {{fa-icon 'pencil' class='u-tc-tertiary u-hv-tc-secondary  u-cursor-pointer u-fs2'
-                      click=(action 'enterEditMode')}}
+            {{fa-icon 'pencil' class='u-tc-tertiary u-hv-tc-secondary u-cursor-pointer u-fs2'
+                click=(action 'enterEditMode')}}
           {{/if}}
         </div>
         {{#if model.description}}

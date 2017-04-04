@@ -39,6 +39,16 @@ export default Component.extend(
         return true;
       } else { return false; }
     }),
+
+    assaysToDisplay: computed('model.assay', 'model.properties.attributes.assay', 'model.userAssays', function() {
+      const assaysFromDataset = get(this, 'model.assay');
+      const assaysFromProps = get(this, 'model.properties.attributes.assay');
+      const assaysFromUsers = get(this, 'model.userAssays') || [];
+      if (assaysFromProps) { return [...assaysFromProps, ...assaysFromUsers]; }
+      if (assaysFromDataset) { return [...assaysFromDataset.split(','), ...assaysFromUsers]; }
+      return assaysFromUsers;
+    }),
+
     modelName: computed('model', function () {
       return get(this, 'model').constructor.modelName;
     }),
