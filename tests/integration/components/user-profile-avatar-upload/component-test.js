@@ -41,34 +41,62 @@ describe('Integration | Component | user profile avatar upload', function() {
       expect($overlay.hasClass('u-hv-bc-darken40')).to.be.equal(true);
       expect($overlay.hasClass('u-bc-dark-overlay')).to.be.equal(false);
     });
+
+    it('should not show error messages', function () {
+      this.setProperties({ avatarImg, reloadUserModel });
+      this.render(hbs`{{user-profile-avatar-upload avatarImg=avatarImg reloadUserModel=reloadUserModel}}`);
+
+      expect(this.$('p.u-tc-red').text().trim()).to.be.equal('');
+    });
   });
 
   describe('uploading state', function () {
-    it('should  show text over avatar', function () {
-      this.setProperties({ avatarImg, reloadUserModel, uploading: true });
-      this.render(hbs`{{user-profile-avatar-upload avatarImg=avatarImg reloadUserModel=reloadUserModel uploading=uploading}}`);
+    it('should show spinner', function () {
+      this.setProperties({ avatarImg, reloadUserModel });
+      this.render(hbs`{{user-profile-avatar-upload avatarImg=avatarImg reloadUserModel=reloadUserModel uploading=true}}`);
 
-      const $hoverText = this.$(overlayTextSelector);
-
-      expect($hoverText.is(':visible')).to.be.equal(true);
-      expect($hoverText.hasClass('u-hide-display')).to.be.equal(false);
+      expect(this.$('.fa-refresh').length).to.be.equal(1);
     });
 
-    it('should have correct text in overlay', function () {
-      this.setProperties({ avatarImg, reloadUserModel, uploading: true });
-      this.render(hbs`{{user-profile-avatar-upload avatarImg=avatarImg reloadUserModel=reloadUserModel uploading=uploading}}`);
+    it('should not show error messages', function () {
+      this.setProperties({ avatarImg, reloadUserModel });
+      this.render(hbs`{{user-profile-avatar-upload avatarImg=avatarImg reloadUserModel=reloadUserModel uploading=true}}`);
 
-      expect(this.$(overlayTextSelector).text().trim()).to.be.equal('Uploading...');
+      expect(this.$('p.u-tc-red').text().trim()).to.be.equal('');
+    });
+  });
+
+  describe('upload failed', function () {
+    it('should show error indicator', function () {
+      this.setProperties({ avatarImg, reloadUserModel });
+      this.render(hbs`{{user-profile-avatar-upload avatarImg=avatarImg reloadUserModel=reloadUserModel uploadFailed=true}}`);
+
+      expect(this.$('.fa-times').length).to.be.equal(1);
+      expect(this.$('.error-state').text().trim()).to.be.equal('Upload failed');
     });
 
-    it('should show  color overlay', function () {
-      this.setProperties({ avatarImg, reloadUserModel, uploading: true });
-      this.render(hbs`{{user-profile-avatar-upload avatarImg=avatarImg reloadUserModel=reloadUserModel uploading=uploading}}`);
+    it('should  show error messages', function () {
+      this.setProperties({ avatarImg, reloadUserModel });
+      this.render(hbs`{{user-profile-avatar-upload avatarImg=avatarImg reloadUserModel=reloadUserModel uploadFailed=true}}`);
 
-      const $overlay = this.$(overlaySelector);
+      expect(this.$('p.u-tc-red').text().trim()).to.be.equal('Same issues has occurred.Please try again later.');
+    });
+  });
 
-      expect($overlay.hasClass('u-hv-bc-darken40')).to.be.equal(false);
-      expect($overlay.hasClass('u-bc-dark-overlay')).to.be.equal(true);
+  describe('reload model failed', function () {
+    it('should show error indicator', function () {
+      this.setProperties({ avatarImg, reloadUserModel });
+      this.render(hbs`{{user-profile-avatar-upload avatarImg=avatarImg reloadUserModel=reloadUserModel reloadFailed=true}}`);
+
+      expect(this.$('.fa-check').length).to.be.equal(1);
+      expect(this.$('.error-state').text().trim()).to.be.equal('Image uploaded');
+    });
+
+    it('should  show error messages', function () {
+      this.setProperties({ avatarImg, reloadUserModel });
+      this.render(hbs`{{user-profile-avatar-upload avatarImg=avatarImg reloadUserModel=reloadUserModel reloadFailed=true}}`);
+
+      expect(this.$('p.u-tc-red').text().trim()).to.be.equal('Same issues has occurred.Your photo will be displayed soon.');
     });
   });
 });

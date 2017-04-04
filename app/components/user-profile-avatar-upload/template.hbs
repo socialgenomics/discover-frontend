@@ -15,10 +15,10 @@
     <span class="u-flex u-flex-column u-justify-center u-items-center u-w3 u-h3 u-circle u-border u-bc-white u-cursor-pointer">
       {{#if uploadFailed}}
         {{fa-icon "times" size=2 class="u-tc-tertiary"}}
-        <span class="u-tc-tertiary">Upload failed</span>
+        <span class="error-state u-tc-tertiary">Upload failed</span>
       {{else if reloadFailed}}
         {{fa-icon "check" size=2 class="u-tc-tertiary"}}
-        <span class="u-tc-tertiary">Image uploaded</span>
+        <span class="error-state u-tc-tertiary">Image uploaded</span>
       {{else}}
         {{fa-icon "refresh" size=2 class="u-tc-tertiary u-animation-spin"}}
       {{/if}}
