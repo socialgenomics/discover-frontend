@@ -51,7 +51,7 @@
       {{#if (or dataset.assay dataset.properties.attributes.assay)}}
         {{assay-list datasetAssays=dataset.assay propertiesAssays=dataset.properties.attributes.assay}}
       {{/if}}
-      <ul class="o-list-inline o-list-flush-left u-mb0">
+      <ul class="u-flex o-list-flush-left u-pl2 u-mb0">
         {{action-favourite model=dataset class="u-mr2"}}
         {{action-share
           actionableId=dataset.id
