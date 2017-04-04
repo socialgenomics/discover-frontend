@@ -6,7 +6,11 @@
       <!-- header -->
       <header class="c-card-header u-bc-off-white u-flex {{if hasAssays 'u-justify-between' 'u-justify-end'}} u-items-center u-px2">
         {{#if hasAssays}}
-          {{assay-list datasetAssays=model.assay propertiesAssays=model.properties.attributes.assay}}
+          {{assay-list
+            datasetAssays=model.assay
+            propertiesAssays=model.properties.attributes.assay
+            userAssays=model.userAssays
+          }}
         {{/if}}
         <div class="u-pl1 u-flex u-items-center">
           {{follow-button subscribable=model.subscribableId model=model}}
