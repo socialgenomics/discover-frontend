@@ -9,5 +9,6 @@ export default Component.extend({
     const route = get(this, 'type') === 'request' ? 'requests.detail' : 'datasets.detail';
 
     return get(this, 'urlGenerator').generateUrl(route, get(this, 'dataset.id'));
-  })
+  }),
+  hasAssays: computed.or('dataset.assay', 'dataset.properties.attributes.assay')
 });

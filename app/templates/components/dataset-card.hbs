@@ -47,8 +47,8 @@
   {{else}}
     <!-- It is a Dataset -->
     <!-- Card Header -->
-    <header class="c-card-header u-bc-off-white u-flex u-justify-between u-items-center u-px2">
-      {{#if (or dataset.assay dataset.properties.attributes.assay)}}
+    <header class="c-card-header u-bc-off-white u-flex {{if hasAssays 'u-justify-between' 'u-justify-end'}} u-items-center u-px2">
+      {{#if hasAssays}}
         {{assay-list datasetAssays=dataset.assay propertiesAssays=dataset.properties.attributes.assay}}
       {{/if}}
       <ul class="u-flex o-list-flush-left u-pl2 u-mb0">
