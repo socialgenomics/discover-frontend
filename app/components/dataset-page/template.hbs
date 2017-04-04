@@ -5,8 +5,9 @@
     <div class="grid__col grid__col--7-of-12 u-pos-relative u-full-height">
       <!-- header -->
       <header class="c-card-header u-bc-off-white u-flex u-justify-between u-items-center u-px2">
-        {{assay-list datasetAssays=model.assay propertiesAssays=model.properties.attributes.assay}}
-
+        {{#if (or model.assay model.properties.attributes.assay)}}
+          {{assay-list datasetAssays=model.assay propertiesAssays=model.properties.attributes.assay}}
+        {{/if}}
         <div class="u-flex u-items-center">
           {{follow-button subscribable=model.subscribableId model=model}}
           <ul class="o-list-inline u-pl2 u-mb0">

@@ -48,8 +48,9 @@
     <!-- It is a Dataset -->
     <!-- Card Header -->
     <header class="c-card-header u-bc-off-white u-flex u-justify-between u-items-center u-px2">
-      {{assay-list datasetAssays=dataset.assay propertiesAssays=dataset.properties.attributes.assay}}
-
+      {{#if (or dataset.assay dataset.properties.attributes.assay)}}
+        {{assay-list datasetAssays=dataset.assay propertiesAssays=dataset.properties.attributes.assay}}
+      {{/if}}
       <ul class="o-list-inline o-list-flush-left u-mb0">
         {{action-favourite model=dataset class="u-mr2"}}
         {{action-share

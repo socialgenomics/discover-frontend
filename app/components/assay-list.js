@@ -10,5 +10,6 @@ export default Component.extend({
     const assaysFromProps = get(this, 'propertiesAssays');
     if (assaysFromProps) { return assaysFromProps; }
     if (assaysFromDataset) { return assaysFromDataset.split(','); }
+    return [];
   })
 });
