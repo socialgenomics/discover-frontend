@@ -1,12 +1,14 @@
 import Ember from 'ember';
 
-const { Component, computed, inject: { service }, get, Logger, set } = Ember;
+const { Component, computed, inject: { service }, get, Logger, set, setProperties } = Ember;
 
 export default Component.extend({
   session: service(),
 
-  classNames: ['u-flex u-justify-center u-mb2 c-avatar-upload'],
+  classNames: ['u-flex u-flex-column u-items-center u-justify-center u-mb2 c-avatar-upload'],
   uploading: false,
+  uploadFailed: false,
+  reloadFailed: false,
 
   headers: computed('session.session.content.authenticated.token', function () {
     const authToken = get(this, 'session.session.content.authenticated.token');
@@ -31,17 +33,26 @@ export default Component.extend({
    * @private
    */
   _resetUploadingState() {
-    set(this, 'uploading', false);
+    setProperties(this, {
+      uploading: false,
+      uploadFailed: false,
+      reloadFailed: false
+    });
   },
 
   /**
    * @desc file upload error handler
    * @param {Object} error - error response
    * @private
-   * @todo: We should add some error state in the UI
    */
   _handleUploadErrors(error) {
-    this._resetUploadingState();
+    // TODO: need to improve error detection
+    if (error.statusCode !== 200) {
+      set(this, 'uploadFailed', true);
+    } else {
+      set(this, 'reloadFailed', true);
+    }
+
     Logger.error(error);
   }
 });
