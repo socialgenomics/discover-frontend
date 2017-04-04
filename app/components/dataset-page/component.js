@@ -34,7 +34,9 @@ export default Component.extend(
     checkEditPermissionsModel: computed.oneWay('model'),
     userId: computed.alias('session.authenticatedUser'),
     isRequest: computed.equal('modelName', 'request'),
-
+    hasAssays: computed('model.assay', 'model.properties.attributes.assay', function(){
+      return (get(this, 'model.assay') || get(this, 'model.properties.attributes.assay')) ? true: false;
+    }),
     modelName: computed('model', function () {
       return get(this, 'model').constructor.modelName;
     }),

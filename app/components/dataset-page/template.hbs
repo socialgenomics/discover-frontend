@@ -4,8 +4,8 @@
     <!-- dataset -->
     <div class="grid__col grid__col--7-of-12 u-pos-relative u-full-height">
       <!-- header -->
-      <header class="c-card-header u-bc-off-white u-flex u-justify-between u-items-center u-px2">
-        {{#if (or model.assay model.properties.attributes.assay)}}
+      <header class="c-card-header u-bc-off-white u-flex {{if hasAssays 'u-justify-between' 'u-justify-end'}} u-items-center u-px2">
+        {{#if hasAssays}}
           {{assay-list datasetAssays=model.assay propertiesAssays=model.properties.attributes.assay}}
         {{/if}}
         <div class="u-pl1 u-flex u-items-center">
