@@ -16,6 +16,15 @@ const Validations = buildValidations({
   url: urlFormatValidator()
 });
 
+export function mergeAssays(model) {
+  const assaysFromDataset = get(model, 'assay');
+  const assaysFromProps = get(model, 'properties.attributes.assay');
+  const assaysFromUsers = get(model, 'userAssays') || [];
+  if (assaysFromProps) { return [...assaysFromProps, ...assaysFromUsers]; }
+  if (assaysFromDataset) { return [...assaysFromDataset.split(','), ...assaysFromUsers]; }
+  return assaysFromUsers;
+}
+
 export default Component.extend(
   EditModeMixin,
   Validations,
@@ -34,6 +43,15 @@ export default Component.extend(
     checkEditPermissionsModel: computed.oneWay('model'),
     userId: computed.alias('session.authenticatedUser'),
     isRequest: computed.equal('modelName', 'request'),
+    hasAssays: computed('model.assay', 'model.properties.attributes.assay', 'model.userAssays', function() {
+      if (get(this, 'model.assay') || get(this, 'model.properties.attributes.assay') || get(this, 'model.userAssays')) {
+        return true;
+      } else { return false; }
+    }),
+
+    assaysToDisplay: computed('model.assay', 'model.properties.attributes.assay', 'model.userAssays', function() {
+      return mergeAssays(get(this, 'model'));
+    }),
 
     modelName: computed('model', function () {
       return get(this, 'model').constructor.modelName;

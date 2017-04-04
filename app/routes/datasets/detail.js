@@ -2,7 +2,7 @@ import Ember from 'ember';
 import ResetScrollMixin from 'repositive/mixins/reset-scroll';
 import LoadDetailRouteMixin from 'repositive/mixins/load-detail-route';
 
-const { inject: { service }, Logger, Route, RSVP, get } = Ember;
+const { inject: { service }, Logger, Route, RSVP, get, set } = Ember;
 
 export default Route.extend(ResetScrollMixin, LoadDetailRouteMixin, {
   session: service(),
@@ -22,7 +22,10 @@ export default Route.extend(ResetScrollMixin, LoadDetailRouteMixin, {
             hash.tags.forEach(t => keywords.push(get(t, 'properties').text));
 
             const dataset = hash.dataset;
-
+            const userAssays = hash.attributes
+              .filterBy('properties.key', 'assay')
+              .mapBy('properties.value');
+            set(dataset, 'userAssays', userAssays);
             // Building schema.org JSON-LD
             const schemaObject = {
               '@context': 'http://schema.org/',
