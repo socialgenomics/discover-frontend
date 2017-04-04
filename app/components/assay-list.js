@@ -3,7 +3,7 @@ import Ember from 'ember';
 const { Component, computed, get } = Ember;
 
 export default Component.extend({
-  classNames: ['c-assay-list', 'u-flex', 'o-list-flush-left', 'u-mb0', 'u-overflow-auto'],
+  classNames: ['u-flex', 'o-list-flush-left', 'u-mb0'],
   tagName: 'ul',
   assaysToDisplay: computed('datasetAssays', 'propertiesAssays', function() {
     const assaysFromDataset = get(this, 'datasetAssays');

@@ -1,3 +1,3 @@
-{{#each assaysToDisplay as |assay|}}
+{{#each (take 4 assaysToDisplay) as |assay|}}
   {{assay-type assay=assay}}
 {{/each}}
