@@ -17,6 +17,8 @@
         shared
       {{else if (eq notification.properties.action.type 'favourite')}}
         favourited
+      {{else if (eq notification.properties.action.type 'attribute')}}
+        added an attribute to
       {{/if}}
     </span>
 
