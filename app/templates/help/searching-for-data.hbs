@@ -6,8 +6,8 @@
         <div class="grid grid--no-gutter u-full-height">
           <div class="grid__col grid__col--1-of-3 u-fs2 u-fw-med">
             <ul class="o-list-flush-left u-px3">
-              {{#each helpLinkData as |data|}}
-                {{help-docs-link link=helpLink query=data.query text=data.text}}
+              {{#each helpData.searching as |data|}}
+                {{help-docs-link link=data.link query=data.query text=data.text}}
               {{/each}}
             </ul>
           </div>
