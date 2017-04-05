@@ -4,8 +4,7 @@ const { Route } = Ember;
 
 export default Route.extend({
   model(params) {
-    const helpPageLink = '/help/registering-new-data/' + params.query;
-    return helpPageLink;
+    return '/help/registering-new-data/' + params.query;
   },
 
   setupController(controller, model) {

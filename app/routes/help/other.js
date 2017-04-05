@@ -4,8 +4,7 @@ const { Route } = Ember;
 
 export default Route.extend({
   model(params) {
-    const helpPageLink = '/help/other/' + params.query;
-    return helpPageLink;
+    return '/help/other/' + params.query;
   },
 
   setupController(controller, model) {
