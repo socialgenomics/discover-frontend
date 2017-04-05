@@ -33,12 +33,6 @@ module.exports = function(defaults) {
     sourcemaps: { enabled: !isProductionLikeBuild },
     minifyCSS: { enabled: isProductionLikeBuild },
     minifyJS: { enabled: isProductionLikeBuild },
-    jscsOptions: {
-      configPath: '.jscsrc',
-      enabled: true,
-      esnext: true,
-      disableTestGenerator: process.env.CI ? true : false
-    },
     babel: {
       sourceMaps: 'inline',
       optional: ['es7.decorators']
