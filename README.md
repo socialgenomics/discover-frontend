@@ -9,8 +9,7 @@ You will need the following things properly installed on your computer.
 * [Bower](http://bower.io/)
 * [Ember CLI](http://www.ember-cli.com/)
 * [PhantomJS](http://phantomjs.org/)
-* We recommend you use jscs and hshint plugins in your editor.
- * [atom editor](https://atom.io/) - That way you can get the benefits of [code style linter](https://atom.io/packages/linter-jscs) and [jshint linter](https://atom.io/packages/linter-jshint). See [this article](http://blog.yld.io/2015/04/15/using-jscs-and-jscs-fixer-for-atom/).
+* We recommend you use [eslint](https://atom.io/packages/linter-eslint) plugin in your editor.
 
 ## Installation
 
