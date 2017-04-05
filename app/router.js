@@ -23,13 +23,13 @@ Router.map(function() {
     this.route('profile');
     this.route('trust');
     this.route('verify', {
-      path: '/verify/:verificationId'
+      path: '/verify/:verification_id'
     });
     this.route('resend-password', {
       path: '/reset-password'
     });
     this.route('reset-password', {
-      path: '/reset-password/:resetKey'
+      path: '/reset-password/:reset_key'
     });
   });
 

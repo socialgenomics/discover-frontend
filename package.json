@@ -78,6 +78,7 @@
     "ember-truth-helpers": "1.2.0",
     "ember-watson": "^0.7.0",
     "eslint-config-ember": "0.0.5",
+    "eslint-plugin-ember": "^3.1.2",
     "onchange": "^2.0.0",
     "phantomjs-prebuilt": "^2.1.14",
     "ramda": "^0.22.1",
