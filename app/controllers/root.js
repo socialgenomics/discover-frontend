@@ -13,10 +13,10 @@ export default Controller.extend({
   sortUpdatedAt: ['updatedAt:desc'],
   requestsSorted: computed.sort('model.requests', 'sortUpdatedAt'),
   registrationsSorted: computed.sort('model.registered', 'sortUpdatedAt'),
-  datasetsNumber: computed('model.stats.datasets', function() {
-    const x = this.get('model.stats.datasets');
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-  }),
+  // datasetsNumber: computed('model.stats.datasets', function() {
+  //   const x = this.get('model.stats.datasets');
+  //   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  // }),
 
   actions : {
     // user clicks button on welcome page to enter site, displays welcome flash message
