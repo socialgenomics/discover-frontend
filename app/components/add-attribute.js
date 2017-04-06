@@ -1,24 +1,26 @@
 import Ember from 'ember';
 import { buildValidations } from 'ember-cp-validations';
 import presenceValidator from 'repositive/validations/presenceValidator';
+import { isUniqueString } from '../utils/arrays';
 
 const { Component, get, computed } = Ember;
 
 const Validations = buildValidations({
-  attributeValue: presenceValidator('You must enter a value.')
+  attributeValue: presenceValidator()
 });
 
 export default Component.extend(Validations, {
   tagName: 'form',
-  isNotUnique: computed('attributesForKey', 'attributeValue', function() {
-    const attrInput = (get(this, 'attributeValue') || '').toLowerCase();
-    return get(this, 'attributesForKey')
-      .any(attr => attr.value.toLowerCase() === attrInput);
+  isUnique: computed('attributesForKey', 'attributeValue', function() {
+    return isUniqueString(
+      get(this, 'attributesForKey').mapBy('value'),
+      get(this, 'attributeValue') || ''
+    );
   }),
 
   actions: {
     add() {
-      if (get(this, 'validations.isValid') && !get(this, 'isNotUnique')) {
+      if (get(this, 'validations.isValid') && get(this, 'isUnique')) {
         get(this, 'addAttribute')(get(this, 'group'), get(this, 'attributeValue'));
         get(this, 'closeInput')();
       }

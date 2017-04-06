@@ -3,11 +3,13 @@ import { buildValidations } from 'ember-cp-validations';
 import presenceValidator from 'repositive/validations/presenceValidator';
 import CheckEditPermissionsMixin from 'repositive/mixins/check-edit-permissions-mixin';
 import EditModeMixin from 'repositive/mixins/edit-mode-mixin';
+import { isUniqueString } from '../utils/arrays';
+import { openLinkInNewTab } from '../utils/links';
 
 const { Component, computed, get, set, inject: { service }, Logger } = Ember;
 
 const Validations = buildValidations({
-  value: presenceValidator('You must enter a value.')
+  value: presenceValidator()
 });
 
 export default Component.extend(
@@ -20,10 +22,11 @@ export default Component.extend(
     value: computed.oneWay('attribute.value'),
     editablePropertyKeys: ['value'],
     checkEditPermissionsModel: computed.oneWay('attribute'),
-    isNotUnique: computed('attributesForKey', 'value', function() {
-      const attrInput = (get(this, 'value') || '').toLowerCase();
-      return get(this, 'attributesForKey')
-        .any(attr => attr.value.toLowerCase() === attrInput);
+    isUnique: computed('attributesForKey', 'value', function() {
+      return isUniqueString(
+        get(this, 'attributesForKey').mapBy('value'),
+        get(this, 'value') || ''
+      );
     }),
 
     actions: {
@@ -32,7 +35,7 @@ export default Component.extend(
       },
 
       save() {
-        if (get(this, 'validations.isValid') && !get(this, 'isNotUnique')) {
+        if (get(this, 'validations.isValid') && get(this, 'isUnique')) {
           const attribute = get(this, 'attribute');
           const attrAction = get(this, 'store')
             .peekRecord('action', get(attribute, 'actionId'));
@@ -58,10 +61,8 @@ export default Component.extend(
           action: 'pubmedId',
           label: url
         });
-        this._openLinkInNewTab(url);
+        openLinkInNewTab(url);
       }
-    },
-
-    _openLinkInNewTab(url) { window.open(url, '_blank').focus(); }
+    }
   }
 );

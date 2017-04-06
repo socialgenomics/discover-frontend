@@ -15,3 +15,28 @@ export function shuffle(array) {
 
   return array;
 }
+
+/**
+ * Does this value exist in this enumerable.
+ * @public
+ * @param {Array} list list of items to check
+ * @param {?} value the value you're checking for
+ * @return {Boolean} whether the item is in the list or not
+ */
+export function isUnique(list, value) {
+  return list.every(item => item !== value);
+}
+
+/**
+ * Converts string to lowercase and passes the to isUnique
+ * @public
+ * @param {Array} list list of items to check
+ * @param {?} value the value you're checking for
+ * @return {Boolean} whether the item is in the list or not
+ */
+export function isUniqueString(list, value) {
+  return isUnique(
+    list.map(item => item.toLowerCase()),
+    value.toLowerCase()
+  )
+}
