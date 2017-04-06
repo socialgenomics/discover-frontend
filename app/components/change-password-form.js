@@ -9,6 +9,7 @@ const { Component, get, computed } = Ember;
 
 const Validations = buildValidations({
   oldPassword: [
+    presenceValidator(errorMessages.blankPassword),
     lengthValidator(lengths.password, lengthTypes.min),
     passwordFormatValidator()
   ],
