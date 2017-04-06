@@ -5,9 +5,13 @@ import lengthValidator from 'repositive/validations/lengthValidator';
 import passwordFormatValidator from 'repositive/validations/passwordFormatValidator';
 import { errorMessages, lengths, lengthTypes } from 'repositive/validations/validations-config';
 
-const { Component, get, set, computed } = Ember;
+const { Component, get, computed } = Ember;
 
 const Validations = buildValidations({
+  oldPassword: [
+    lengthValidator(lengths.password, lengthTypes.min),
+    passwordFormatValidator()
+  ],
   password1: [
     presenceValidator(errorMessages.newPassword),
     lengthValidator(lengths.password, lengthTypes.min),
@@ -24,12 +28,13 @@ export default Component.extend(Validations, {
   tagName: 'form',
 
   resetKey: null,
+  oldPassword: null,
   password1: null,
   password2: null,
   loading: false,
   passwordChanged: false,
 
-  isDisabled: computed('loading', 'validations.isValid', 'password1', 'password2', function() {
+  isDisabled: computed('loading', 'validations.isValid', 'oldPassword', 'password1', 'password2', function() {
     return !get(this, 'validations.isValid') || get(this, 'loading') ||
       get(this, 'password1') !== get(this, 'password2');
   }),

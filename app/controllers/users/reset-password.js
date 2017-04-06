@@ -2,7 +2,7 @@ import Ember from 'ember';
 import ENV from 'repositive/config/environment';
 import FlashMessageMixin from 'repositive/mixins/flash-message-mixin';
 
-const { Controller, computed, Logger, get, set, setProperties, inject: { service }, RSVP } = Ember;
+const { Controller, Logger, get, set, setProperties, inject: { service }, RSVP } = Ember;
 
 export default Controller.extend(FlashMessageMixin, {
   ajax: service(),
