@@ -25,11 +25,6 @@ export default Component.extend({
     return [...get(this, 'userGeneratedAttributes'), ...get(this, 'datasetAttributes')];
   }),
 
-  /**
-   * @desc dataset and user added attributes sorted by key
-   * @param {Array} list of objs
-   * @returns {Object} hash of keys each with a list of elements
-   */
   groups: computed('mergedObjects', function() {
     const attributes = get(this, 'mergedObjects');
     const keys = ['assay', 'samples', 'tissue', 'technology', 'pmid'];

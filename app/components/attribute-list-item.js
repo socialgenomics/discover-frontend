@@ -51,7 +51,10 @@ export default Component.extend(
           .peekRecord('action', get(attribute, 'actionId'));
         return attrAction.destroyRecord()
           .then(this._addFlashMessage('Attribute successfully deleted.', 'success'))
-          .catch(Logger.error)
+          .catch(error => {
+            this._addFlashMessage('Something went wrong when deleting your attribute.', 'warning')
+            Logger.error(error);
+          });
       },
 
       trackPubmedClick() {
