@@ -10,16 +10,17 @@
           {{user-profile-details userProfileData=userProfileData userId=user.id}}
         {{/user-profile-section}}
 
-        {{!--
         {{#user-profile-section title='Emails and password'}}
-
+          {{#link-to 'users.resend-password' class="c-btn c-btn-secondary"}}
+            Change Password
+          {{/link-to}}
         {{/user-profile-section}}
 
+        {{!--
         {{#user-profile-section title='External accounts'}}
 
         {{/user-profile-section}}
         --}}
-
 
   </div>
     </div>
