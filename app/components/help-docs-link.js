@@ -3,5 +3,6 @@ import Ember from 'ember';
 const { Component } = Ember;
 
 export default Component.extend({
-  classNames: ['u-fs2']
+  tagName: 'li',
+  classNames: ['c-help-link']
 });

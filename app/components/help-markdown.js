@@ -3,5 +3,5 @@ import Ember from 'ember';
 const { Component } = Ember;
 
 export default Component.extend({
-  classNames: ['u-fs2']
+  classNames: ['u-markdown-formatting', 'u-mb3', 'u-px3']
 });
