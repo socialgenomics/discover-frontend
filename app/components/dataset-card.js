@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import { mergeAssays } from './dataset-page/component';
+import { mergeAssays } from '../routes/datasets/detail';
 
 const { Component, computed, inject: { service }, get } = Ember;
 
@@ -12,7 +12,7 @@ export default Component.extend({
     return get(this, 'urlGenerator').generateUrl(route, get(this, 'dataset.id'));
   }),
   hasAssays: computed.or('dataset.assay', 'dataset.properties.attributes.assay'),
-  assaysToDisplay: computed('dataset.assay', 'dataset.properties.attributes.assay', 'dataset.userAssays', function() {
+  assaysToDisplay: computed('dataset.assay', 'dataset.properties.attributes.assay', function() {
     return mergeAssays(get(this, 'dataset'));
   })
 });

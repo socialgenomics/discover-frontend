@@ -1,9 +1,11 @@
 import Ember from 'ember';
 
-const { Component, computed, get, set } = Ember;
+const { inject: { service }, Component, computed, get, set } = Ember;
 
 export default Component.extend({
+  session: service(),
   singleValueAttrs: ['samples', 'pmid'],
+
 
   groups: computed('attributes', function() {
     const attributes = get(this, 'attributes') || [];

@@ -4,9 +4,9 @@
     <!-- dataset -->
     <div class="grid__col grid__col--7-of-12 u-pos-relative u-full-height">
       <!-- header -->
-      <header class="c-card-header u-bc-off-white u-flex {{if hasAssays 'u-justify-between' 'u-justify-end'}} u-items-center u-px2">
-        {{#if hasAssays}}
-          {{assay-list assays=assaysToDisplay}}
+      <header class="c-card-header u-bc-off-white u-flex {{if model.mergedAssays 'u-justify-between' 'u-justify-end'}} u-items-center u-px2">
+        {{#if model.mergedAssays}}
+          {{assay-list assays=model.mergedAssays}}
         {{/if}}
         <div class="u-pl1 u-flex u-items-center">
           {{follow-button subscribable=model.subscribableId model=model}}

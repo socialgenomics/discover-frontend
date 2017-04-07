@@ -4,6 +4,14 @@ import LoadDetailRouteMixin from 'repositive/mixins/load-detail-route';
 
 const { inject: { service }, Logger, Route, RSVP, get, set } = Ember;
 
+export function mergeAssays(model, assaysFromUsers = []) {
+  const assaysFromDataset = get(model, 'assay');
+  const assaysFromProps = get(model, 'properties.attributes.assay');
+  if (assaysFromProps) { return [...assaysFromProps, ...assaysFromUsers]; }
+  if (assaysFromDataset) { return [...assaysFromDataset.split(','), ...assaysFromUsers]; }
+  return assaysFromUsers;
+}
+
 export default Route.extend(ResetScrollMixin, LoadDetailRouteMixin, {
   session: service(),
 
@@ -24,10 +32,10 @@ export default Route.extend(ResetScrollMixin, LoadDetailRouteMixin, {
           const userAssays = hash.attributes
             .filterBy('properties.key', 'assay')
             .mapBy('properties.value');
-          set(dataset, 'userAssays', userAssays); // Can remove this
           const userIds = hash.attributes
             .mapBy('userId.id')
             .uniq();
+          set(dataset, 'mergedAssays', mergeAssays(dataset, userAssays));
           return RSVP.hash({
             dataset: dataset,
             contributors: this._fetchUserData(userIds),

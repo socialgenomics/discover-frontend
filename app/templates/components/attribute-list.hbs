@@ -6,22 +6,24 @@
       </h3>
     </div>
     <div class="grid__col grid__col--2-of-3 grid__col--m-2-of-3 grid__col--s-2-of-3">
-      {{#each attrs as |attr|}}
+      {{#each (sort-by "value" attrs) as |attr|}}
         {{attribute-list-item attribute=attr attributesForKey=attrs}}
       {{/each}}
-      {{#if (eq openInput group)}}
-        {{add-attribute
-          addAttribute=addAttribute
-          closeInput=(action 'closeInput')
-          group=group
-          attributesForKey=attrs
-        }}
-      {{else}}
-        {{#unless (and (contains group singleValueAttrs) (gt attrs.length 0))}}
-          <span {{action 'setOpenInput' group}} class="t-add-trigger u-flex u-justify-between u-items-center u-td-underline u-tc-tertiary u-hv-tc-secondary u-cursor-pointer">
-            Add {{#if (eq group 'pmid')}} Pubmed ID {{else}}{{capitalize group}}{{/if}}
-          </span>
-        {{/unless}}
+      {{#if session.isAuthenticated}}
+        {{#if (eq openInput group)}}
+          {{add-attribute
+            addAttribute=addAttribute
+            closeInput=(action 'closeInput')
+            group=group
+            attributesForKey=attrs
+          }}
+        {{else}}
+          {{#unless (and (contains group singleValueAttrs) (gt attrs.length 0))}}
+            <span {{action 'setOpenInput' group}} class="t-add-trigger u-flex u-justify-between u-items-center u-td-underline u-tc-tertiary u-hv-tc-secondary u-cursor-pointer">
+              Add {{#if (eq group 'pmid')}} Pubmed ID {{else}}{{capitalize group}}{{/if}}
+            </span>
+          {{/unless}}
+        {{/if}}
       {{/if}}
     </div>
   </div>
