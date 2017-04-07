@@ -4,8 +4,8 @@ const { inject: { service }, Component, computed, get, set } = Ember;
 
 export default Component.extend({
   session: service(),
+  
   singleValueAttrs: ['samples'],
-
 
   groups: computed('attributes', function() {
     const attributes = get(this, 'attributes') || [];

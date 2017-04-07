@@ -13,8 +13,6 @@ export default Component.extend({
   }),
 
   actions: {
-    toggleCreateAccountModal() {
-      this.toggleProperty('showCreateAccountModal');
-    }
+    toggleCreateAccountModal() { this.toggleProperty('showCreateAccountModal'); }
   }
 });
