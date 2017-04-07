@@ -75,6 +75,18 @@ describe('Integration | Component | attributes list', function() {
         expect(this.$('.t-add-trigger:eq(0)').text().trim()).to.eql('Add Assay');
       });
     });
+
+    describe('if unauthenticated', function() {
+      beforeEach(function() {
+        this.set('session.isAuthenticated', false);
+        this.set('attributes', getMockAttributes());
+        this.render(hbs`{{attribute-list session=session attributes=attributes}}`);
+      })
+
+      it('should not display add attribute triggers', function() {
+        expect(this.$('.t-add-trigger').text().trim()).to.be.empty;
+      });
+    });
   });
 
   describe('actions', function() {
