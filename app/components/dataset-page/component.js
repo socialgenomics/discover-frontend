@@ -26,7 +26,7 @@ export default Component.extend(
     urlGenerator: service(),
     store: service(),
 
-    activeTab: 'attributes',
+    activeTab: 'metadata',
     classNames: ['c-card c-card-detail'],
     classNameBindings: ['session.isAuthenticated:dataset-notification-margin'],
 

@@ -122,15 +122,15 @@
             {{tab-list-action-item
                 setActiveTab=(action 'setActiveTab')
                 activeTab=activeTab
-                tabName='attributes'}}
+                tabName='metadata'}}
             {{tab-list-action-item
                 setActiveTab=(action 'setActiveTab')
                 activeTab=activeTab
                 tabName='discussion'}}
           {{/tab-list}}
           <div class="u-p2">
-            {{#if (eq activeTab 'attributes')}}
-              {{partial "datasets/tab-attributes"}}
+            {{#if (eq activeTab 'metadata')}}
+              {{partial "datasets/tab-metadata"}}
             {{else}}
               {{partial "datasets/tab-comments"}}
             {{/if}}
