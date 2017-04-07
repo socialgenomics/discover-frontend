@@ -16,35 +16,22 @@ export default Route.extend(ResetScrollMixin, LoadDetailRouteMixin, {
           dataset: data.model,
           stats: get(this, 'session.isAuthenticated') === false ? this._getStats() : null,
           tags: data.tags
-        })
-          .then(hash => {
-            let keywords = [];
-            hash.tags.forEach(t => keywords.push(get(t, 'properties').text));
-
-            const dataset = hash.dataset;
-            const userAssays = hash.attributes
-              .filterBy('properties.key', 'assay')
-              .mapBy('properties.value');
-            set(dataset, 'userAssays', userAssays);
-            // Building schema.org JSON-LD
-            const schemaObject = {
-              '@context': 'http://schema.org/',
-              '@type': 'Dataset',
-              name: get(dataset, 'title'),
-              description: get(dataset, 'description'),
-              url: get(dataset, 'url'),
-              keywords: keywords
-            };
-            const schema = `<script type="application/ld+json">${JSON.stringify(schemaObject, 0, 2)}</script>`;
-
-            return RSVP.hash({
-              dataset: dataset,
-              stats: hash.stats,
-              schema: schema
-            });
-          });
+        });
       })
-      .catch(Logger.error);
+        .then(hash => {
+          const keywords = hash.tags.mapBy('properties.text');
+          const dataset = hash.dataset;
+          const userAssays = hash.attributes
+            .filterBy('properties.key', 'assay')
+            .mapBy('properties.value');
+          set(dataset, 'userAssays', userAssays); // Can remove this
+          return RSVP.hash({
+            dataset: dataset,
+            stats: hash.stats,
+            schema: this._buildSchemaObj(dataset, keywords)
+          });
+        })
+        .catch(Logger.error);
   },
 
   afterModel(model) {
@@ -56,5 +43,17 @@ export default Route.extend(ResetScrollMixin, LoadDetailRouteMixin, {
       get(this, 'metrics').trackPage();
       return true;
     }
+  },
+
+  _buildSchemaObj(dataset, keywords) {
+    const schemaObject = {
+      '@context': 'http://schema.org/',
+      '@type': 'Dataset',
+      name: get(dataset, 'title'),
+      description: get(dataset, 'description'),
+      url: get(dataset, 'url'),
+      keywords: keywords
+    };
+    return `<script type="application/ld+json">${JSON.stringify(schemaObject, 0, 2)}</script>`;
   }
 });
