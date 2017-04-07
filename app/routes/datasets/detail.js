@@ -25,8 +25,12 @@ export default Route.extend(ResetScrollMixin, LoadDetailRouteMixin, {
             .filterBy('properties.key', 'assay')
             .mapBy('properties.value');
           set(dataset, 'userAssays', userAssays); // Can remove this
+          const userIds = hash.attributes
+            .mapBy('userId.id')
+            .uniq();
           return RSVP.hash({
             dataset: dataset,
+            contributors: this._fetchUserData(userIds),
             stats: hash.stats,
             schema: this._buildSchemaObj(dataset, keywords)
           });
@@ -55,5 +59,13 @@ export default Route.extend(ResetScrollMixin, LoadDetailRouteMixin, {
       keywords: keywords
     };
     return `<script type="application/ld+json">${JSON.stringify(schemaObject, 0, 2)}</script>`;
+  },
+
+  _fetchUserData(userIds) {
+    return RSVP.all(
+      userIds.reduce((queries, userId) => {
+        return [...queries, ...[this.store.findRecord('user', userId)]];
+      }, [])
+    ).catch(Logger.error);
   }
 });

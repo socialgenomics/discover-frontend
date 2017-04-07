@@ -35,6 +35,15 @@ export default Controller.extend({
     return this._mergeAttributes(actionAttrs, datasetAttrs);
   }),
 
+  // contributors: computed('attributes', function() {
+  //   const userIds = get(this, 'attributes')
+  //     .mapBy('userId')
+  //     .uniq();
+  //   const toReturn = this._fetchUserData(userIds);
+  //   debugger;
+  //   return toReturn;
+  // }),
+
   actions: {
     trackLinkEvent() {
       get(this, 'metrics').trackEvent({
@@ -69,4 +78,14 @@ export default Controller.extend({
       }, []);
     } else { return []; }
   }
+
+  // _fetchUserData(userIds) {
+  //   // const store = get(this, 'store');
+  //   return RSVP.all(
+  //     userIds.reduce((queries, userId) => {
+  //       return [...queries, ...[this.store.findRecord('user', userId)]];
+  //     }, [])
+  //   ).then(users => users)
+  //   .catch(Logger.error);
+  // }
 });
