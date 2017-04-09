@@ -75,7 +75,7 @@ describe('Integration | Component | user profile avatar upload', function() {
       expect(this.$('.error-state').text().trim()).to.be.equal('Upload failed');
     });
 
-    it('should  show error messages', function () {
+    it('should show error messages', function () {
       this.setProperties({ avatarImg, reloadUserModel });
       this.render(hbs`{{user-profile-avatar-upload avatarImg=avatarImg reloadUserModel=reloadUserModel uploadFailed=true}}`);
 
