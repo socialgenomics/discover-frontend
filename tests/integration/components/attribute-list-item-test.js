@@ -19,8 +19,9 @@ describe('Integration | Component | attribute list item', function() {
     });
 
     it('the pubmedid should be rendered as a link', function() {
-      expect(this.$('a').text().trim()).to.eql('123');
-      expect(this.$('a').attr('href')).to.eql('https://www.ncbi.nlm.nih.gov/pubmed/123');
+      const $pmidurl = this.$('a');
+      expect($pmidurl.text().trim()).to.eql('123');
+      expect($pmidurl.attr('href')).to.eql('https://www.ncbi.nlm.nih.gov/pubmed/123');
     });
   });
 });
