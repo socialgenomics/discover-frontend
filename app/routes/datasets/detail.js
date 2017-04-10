@@ -2,7 +2,7 @@ import Ember from 'ember';
 import ResetScrollMixin from 'repositive/mixins/reset-scroll';
 import LoadDetailRouteMixin from 'repositive/mixins/load-detail-route';
 
-const { inject: { service }, Logger, Route, RSVP, get, set } = Ember;
+const { inject: { service }, Logger, Route, RSVP, get } = Ember;
 
 export function mergeAssays(model, assaysFromUsers = []) {
   const assaysFromDataset = get(model, 'assay');
@@ -29,14 +29,11 @@ export default Route.extend(ResetScrollMixin, LoadDetailRouteMixin, {
         .then(hash => {
           const keywords = hash.tags.mapBy('properties.text');
           const dataset = hash.dataset;
-          const userAssays = hash.attributes
-            .filterBy('properties.key', 'assay')
-            .mapBy('properties.value');
           const userIds = hash.attributes
             .mapBy('userId.id')
             .uniq();
-          set(dataset, 'mergedAssays', mergeAssays(dataset, userAssays));
           return RSVP.hash({
+            attributes: hash.attributes,
             dataset: dataset,
             contributors: this._fetchUserData(userIds),
             stats: hash.stats,

@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import { mergeAssays } from '../../routes/datasets/detail';
 
 const { Controller, computed, inject: { service }, get, getWithDefault } = Ember;
 
@@ -34,6 +35,18 @@ export default Controller.extend({
     const actionAttrs = getWithDefault(this, 'dataset.actionableId.actions', []).filterBy('type', 'attribute');
     return this._mergeAttributes(actionAttrs, datasetAttrs);
   }),
+
+  assaysToDisplay: computed(
+    'dataset.properties.attributes',
+    'dataset.assay',
+    'dataset.actionableId.actions.[]',
+    function() {
+      const userAssays = getWithDefault(this, 'dataset.actionableId.actions', [])
+        .filterBy('properties.key', 'assay')
+        .mapBy('properties.value');
+      return mergeAssays(get(this, 'dataset'), userAssays);
+    }
+  ),
 
   actions: {
     trackLinkEvent() {

@@ -8,7 +8,6 @@ import SubscribableMixin from 'repositive/mixins/subscribable';
 import { buildValidations } from 'ember-cp-validations';
 import urlFormatValidator from 'repositive/validations/urlFormatValidator';
 import presenceValidator from 'repositive/validations/presenceValidator';
-import { mergeAssays } from '../../routes/datasets/detail';
 
 const { Component, computed, inject: { service }, get, Logger, set, merge } = Ember;
 const Validations = buildValidations({
@@ -73,10 +72,9 @@ export default Component.extend(
           .createRecord('action', this._createNewRecordData('attribute', { properties: { key, value } }))
           .save()
           .then(() => this._reloadSubscriptions(store))
-          .then(() => {
-            this._reloadAssays();
-            this._reloadContributors();
-          })
+          // .then(() => {
+          //   this._reloadContributors();
+          // })
           .catch(Logger.error);
       },
 
@@ -145,16 +143,6 @@ export default Component.extend(
       if (existingSubscription.length === 0) {
         this._getSubscriptions(store, get(this, 'model.id'), get(this, 'userId.id'));
       }
-    },
-    //TODO remove this method as it should not be needed when data handling is done correctly.
-    _reloadAssays() {
-      const dataset = get(this, 'model');
-      const userAssays = get(this, 'store').peekAll('action')
-        .filterBy('type', 'attribute')
-        .filterBy('actionableId.id', dataset.id)
-        .filterBy('properties.key', 'assay')
-        .mapBy('properties.value');
-      set(dataset, 'mergedAssays', mergeAssays(dataset, userAssays));
     },
     //TODO remove this method as it should not be needed when data handling is done correctly.
     _reloadContributors() {
