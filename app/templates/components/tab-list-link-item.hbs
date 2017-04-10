@@ -1,26 +1,18 @@
 {{#if query}}
   {{#link-to target query class="u-tc-secondary u-fs2"}}
     <li class="u-p1 {{unless active 'u-hv-bc-off-white'}}">
-      <!--If there is a left icon-->
       {{#if (and icon (eq iconPosition "left"))}}{{fa-icon icon}}{{/if}}
-      <!--Title of Tab-->
       <span class="u-px1 u-fw-reg">{{title}}</span>
-      <!--Stats-->
       {{#if stats}}<span class="u-fw-med u-px1">{{stats}}</span>{{/if}}
-      <!--If there is a right icon-->
       {{#if (and icon (eq iconPosition "right"))}}{{fa-icon icon}}{{/if}}
     </li>
   {{/link-to}}
 {{else}}
   {{#link-to target class="u-tc-secondary u-fs2"}}
   <li class="u-p1 {{unless active 'u-hv-bc-off-white'}}">
-    <!--If there is a left icon-->
     {{#if (and icon (eq iconPosition "left"))}}{{fa-icon icon}}{{/if}}
-    <!--Title of Tab-->
     <span class="u-px1 u-fw-reg">{{title}}</span>
-    <!--Stats-->
     {{#if stats}}<span class="u-fw-med u-px1">{{stats}}</span>{{/if}}
-    <!--If there is a right icon-->
     {{#if (and icon (eq iconPosition "right"))}}{{fa-icon icon}}{{/if}}
   </li>
   {{/link-to}}
