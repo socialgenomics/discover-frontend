@@ -71,7 +71,7 @@ export default Component.extend(
         store
           .createRecord('action', this._createNewRecordData('attribute', { properties: { key, value } }))
           .save()
-          .then(() => { this._reloadSubscriptions(store); })
+          .then(() => this._reloadSubscriptions(store))
           .catch(Logger.error);
       },
 
