@@ -75,11 +75,11 @@ Router.map(function() {
   });
 
   this.route('help', { resetNamespace: true }, function() {
-    this.route('searching-for-data');
-    this.route('requesting-data');
-    this.route('registering-new-data');
-    this.route('your-account');
-    this.route('other');
+    this.route('searching-for-data', { path: '/searching-for-data/:query' });
+    this.route('requesting-data', { path: '/requesting-data/:query' });
+    this.route('registering-new-data', { path: '/registering-new-data/:query' });
+    this.route('your-account', { path: '/your-account/:query' });
+    this.route('other', { path: '/other/:query' });
   });
 
   this.route('policies', { resetNamespace: true }, function() {
