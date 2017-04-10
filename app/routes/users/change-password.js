@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
 
-const { Route, get, computed, inject: { service } } = Ember;
+const { Route, get, inject: { service } } = Ember;
 
 export function isVerified(credentials) {
   return credentials.reduce((acc, curr) => acc || get(curr, 'verified'), false);
