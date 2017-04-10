@@ -3,17 +3,14 @@
     <div class="grid__col grid__col--3-of-3">
       {{profile-tabs}}
       <div class="c-card u-rounded-bottom u-py3 u-px2">
-
-        {{user-profile-avatar-upload avatarImg=user.profile.avatar  reloadUserModel=(route-action 'reloadModel')}}
+        {{user-profile-avatar-upload avatarImg=user.profile.avatar reloadUserModel=(route-action 'reloadModel')}}
 
         {{#user-profile-section title='More about yourself'}}
           {{user-profile-details userProfileData=userProfileData userId=user.id}}
         {{/user-profile-section}}
 
         {{#user-profile-section title='Emails and password'}}
-          {{#link-to 'users.change-password' class="c-btn c-btn-secondary"}}
-            Change Password
-          {{/link-to}}
+          {{user-profile-email-password}}
         {{/user-profile-section}}
 
         {{!--
