@@ -1,10 +1,19 @@
 <label class="u-mr1 u-tc-secondary" for="results">Items per Page: </label>
 
-{{#power-select
-  options=resultsOptions
-  selected=resultsPerPage
-  searchEnabled=false
-  onchange=(action "setResultsPerPage")
-  as |results|}}
-  {{results}}
-{{/power-select}}
+{{#basic-dropdown verticalPosition=below horizontalPosition="left" as |dropdown|}}
+  {{#dropdown.trigger class="c-select-trigger u-outline-none u-px2"}}
+    {{resultsPerPage}}
+    <span class="c-select-icon"></span>
+  {{/dropdown.trigger}}
+
+  {{#dropdown.content}}
+    <ul class="c-select-dropdown c-select-options">
+      {{#each resultsOptions as |option|}}
+        <li class="c-select-option" {{action 'setResultsPerPage' dropdown option}}>
+          {{option}}
+        </li>
+      {{/each}}
+    </ul>
+  {{/dropdown.content}}
+
+{{/basic-dropdown}}
