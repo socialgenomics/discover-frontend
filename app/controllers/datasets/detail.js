@@ -31,7 +31,7 @@ export default Controller.extend({
 
   attributes: computed('dataset.properties.attributes', 'dataset.actionableId.actions', function() {
     const datasetAttrs = getWithDefault(this, 'dataset.properties.attributes', {});
-    const actionAttrs = get(this, 'dataset.actionableId.actions').filterBy('type', 'attribute');
+    const actionAttrs = getWithDefault(this, 'dataset.actionableId.actions', []).filterBy('type', 'attribute');
     return this._mergeAttributes(actionAttrs, datasetAttrs);
   }),
 
