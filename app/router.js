@@ -31,6 +31,7 @@ Router.map(function() {
     this.route('reset-password', {
       path: '/reset-password/:resetKey'
     });
+    this.route('change-password');
   });
 
   this.route('user', {

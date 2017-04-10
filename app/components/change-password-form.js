@@ -1,11 +1,13 @@
 import Ember from 'ember';
+import ENV from 'repositive/config/environment';
+import FlashMessageMixin from 'repositive/mixins/flash-message-mixin';
 import { buildValidations } from 'ember-cp-validations';
 import presenceValidator from 'repositive/validations/presenceValidator';
 import lengthValidator from 'repositive/validations/lengthValidator';
 import passwordFormatValidator from 'repositive/validations/passwordFormatValidator';
 import { errorMessages, lengths, lengthTypes } from 'repositive/validations/validations-config';
 
-const { Component, get, computed } = Ember;
+const { Component, Logger, computed, get, set, setProperties, inject: { service }, RSVP } = Ember;
 
 const Validations = buildValidations({
   oldPassword: [
@@ -25,7 +27,9 @@ const Validations = buildValidations({
   ]
 });
 
-export default Component.extend(Validations, {
+export default Component.extend(Validations, FlashMessageMixin, {
+  ajax: service(),
+
   tagName: 'form',
 
   resetKey: null,
@@ -42,7 +46,36 @@ export default Component.extend(Validations, {
 
   actions: {
     submitForm() {
-      this.sendAction('submitForm');
+      if (!get(this, 'isDisabled')) {
+        set(this, 'loading', true);
+        if (get(this, 'password1') !== get(this, 'password2')) {
+          set(this, 'loading', false);
+          return RSVP.reject(this._addFlashMessage(`Passwords do not match.`, 'warning'));
+        } else {
+          return get(this, 'ajax').request(ENV.APIRoutes['change-password'], {
+            method: 'POST',
+            data: {
+              password: get(this, 'password1')
+            }
+          })
+            .then(() => {
+              setProperties(this, {
+                loading: false,
+                passwordChanged: true
+              })
+              .then(() => {
+                this._addFlashMessage('Password successfully changed', 'success');
+                this.transitionToRoute('users.profile');
+              })
+            })
+            .catch(err => {
+              set(this, 'loading', false);
+              Logger.error(err);
+            });
+        }
+      } else {
+        return RSVP.resolve();
+      }
     }
   }
 });
