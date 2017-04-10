@@ -61,7 +61,6 @@ module.exports = function(environment) {
           'favourite-datasets' : '/favourites/{user_id}/dataset',
           'favourite-requests' : '/favourites/{user_id}/request',
           'users.profiles': '/users/{id}/profile',
-          'change-password': '/auth/password-change',
           'reset-password': '/auth/password-reset',
           'verify-email': '/auth/verify',
           'verify-email-resend': '/auth/verify/resend',

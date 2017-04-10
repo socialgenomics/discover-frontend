@@ -7,7 +7,7 @@ import lengthValidator from 'repositive/validations/lengthValidator';
 import passwordFormatValidator from 'repositive/validations/passwordFormatValidator';
 import { errorMessages, lengths, lengthTypes } from 'repositive/validations/validations-config';
 
-const { Component, Logger, computed, get, set, setProperties, inject: { service }, RSVP } = Ember;
+const { Component, Logger, computed, get, set, inject: { service }, RSVP } = Ember;
 
 const Validations = buildValidations({
   oldPassword: [
@@ -29,6 +29,7 @@ const Validations = buildValidations({
 
 export default Component.extend(Validations, FlashMessageMixin, {
   ajax: service(),
+  session: service(),
 
   tagName: 'form',
 
@@ -37,7 +38,6 @@ export default Component.extend(Validations, FlashMessageMixin, {
   password1: null,
   password2: null,
   loading: false,
-  passwordChanged: false,
 
   isDisabled: computed('loading', 'validations.isValid', 'oldPassword', 'password1', 'password2', function() {
     return !get(this, 'validations.isValid') || get(this, 'loading') ||
@@ -48,31 +48,44 @@ export default Component.extend(Validations, FlashMessageMixin, {
     submitForm() {
       if (!get(this, 'isDisabled')) {
         set(this, 'loading', true);
-        if (get(this, 'password1') !== get(this, 'password2')) {
-          set(this, 'loading', false);
-          return RSVP.reject(this._addFlashMessage(`Passwords do not match.`, 'warning'));
-        } else {
-          return get(this, 'ajax').request(ENV.APIRoutes['change-password'], {
-            method: 'POST',
-            data: {
-              password: get(this, 'password1')
-            }
+
+        // Run the Login request to access the auth token for password change
+        return get(this, 'ajax').raw(ENV.APIRoutes['users.login'], {
+          method: 'POST',
+          contentType: 'application/json',
+          data: JSON.stringify({
+            email: get(this, 'email'),
+            password: get(this, 'oldPassword')
           })
+        })
+        .then((resp) => {
+          if (get(this, 'password1') !== get(this, 'password2')) {
+            set(this, 'loading', false);
+            return RSVP.reject(this._addFlashMessage(`Passwords do not match.`, 'warning'));
+          } else {
+            // Change the password
+            return get(this, 'ajax').request(ENV.APIRoutes['reset-password'], {
+              method: 'POST',
+              data: {
+                token: resp.response.token,
+                password: get(this, 'password1')
+              }
+            })
             .then(() => {
-              setProperties(this, {
-                loading: false,
-                passwordChanged: true
-              })
-              .then(() => {
-                this._addFlashMessage('Password successfully changed', 'success');
-                this.transitionToRoute('users.profile');
-              })
+              set(this, 'loading', false)
+              this._addFlashMessage('Password successfully changed', 'success');
+              get(this, 'transitionToProfile')();
             })
             .catch(err => {
               set(this, 'loading', false);
               Logger.error(err);
             });
-        }
+          }
+        })
+        .catch(err => {
+          this._addFlashMessage(`Old password is incorrect.`, 'warning');
+          Logger.error(err);
+        })
       } else {
         return RSVP.resolve();
       }
