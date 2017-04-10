@@ -36,7 +36,7 @@ export default Route.extend(FlashMessageMixin, {
           this.transitionTo('users.login');
         }
       } else {
-        this.transitionTo('root');
+        this.transitionTo('users.profile');
       }
       this._showMessages(resp);
     })
