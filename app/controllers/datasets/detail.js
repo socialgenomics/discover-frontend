@@ -44,7 +44,7 @@ export default Controller.extend({
     }
   },
 
-  _mergeAttributes(attributeActions, attributesFromDataset) {
+  _mergeAttributes(attributeActions = [], attributesFromDataset) {
     const actionAttrs = attributeActions.map(this._convertActionToCommonObj);
     const datasetAttrs = this._convertDatasetAttrsToCommonObjList(attributesFromDataset);
     return [...datasetAttrs, ...actionAttrs];
