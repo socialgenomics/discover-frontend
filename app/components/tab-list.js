@@ -3,5 +3,5 @@ import Ember from 'ember';
 const { Component } = Ember;
 
 export default Component.extend({
-  classNames: ['u-fs2']
+  classNames: ['u-ta-center', 'u-border-square', 'u-mb0']
 });

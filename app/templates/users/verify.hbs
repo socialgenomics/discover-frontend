@@ -3,11 +3,11 @@
     <div class="grid__col grid__col--3-of-3 u-flex u-items-center u-flex-column">
       {{#if isEmailValidated}}
         <h1 class="u-fs4 u-tc-secondary">Your account is now verified.</h1>
-        <img src="/assets/images/happy.png" class="u-mb3 u-w4" alt="happy lizard">
+        <img src="/assets/images/happy.png" class="u-mb3 u-img-huge" alt="happy lizard">
         {{#link-to 'user' currentUser.id class="c-btn c-btn-primary u-fs3"}}Visit your Profile{{/link-to}}
       {{else}}
         <h1 class="u-fs4 u-tc-secondary">The verification link has expired.</h1>
-        <img src="/assets/images/liz-time-out.png" class="u-mb3 u-w4" alt="Time Out lizard">
+        <img src="/assets/images/liz-time-out.png" class="u-mb3 u-img-huge" alt="Time Out lizard">
         <button class="c-btn c-btn-primary u-fs3" {{action "resendVerifyEmail"}}>Resend Verification Email</button>
       {{/if}}
     </div>

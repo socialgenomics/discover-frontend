@@ -47,7 +47,6 @@
               value=title
               errors=validations.attrs.title.messages
               placeholder="Name your request"
-              submit=(action 'addRequest')
             }}
             {{validated-input
               label="Request Description"
@@ -55,7 +54,6 @@
               value=description
               errors=validations.attrs.description.messages
               placeholder="Describe the dataset you're looking for. You can include ethnicity of patients, number of samples, assay type or associated diseases."
-              submit=(action 'addRequest')
             }}
             {{async-button
               class="c-btn c-btn-primary"

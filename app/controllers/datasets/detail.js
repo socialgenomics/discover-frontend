@@ -1,6 +1,7 @@
 import Ember from 'ember';
+import { mergeAssays } from '../../routes/datasets/detail';
 
-const { Controller, computed, inject: { service }, get } = Ember;
+const { Controller, computed, inject: { service }, get, getWithDefault } = Ember;
 
 export default Controller.extend({
   session: service(),
@@ -29,6 +30,29 @@ export default Controller.extend({
     return get(this, 'stats.datasets').toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   }),
 
+  attributes: computed('dataset.properties.attributes', 'dataset.actionableId.actions', function() {
+    const datasetAttrs = getWithDefault(this, 'dataset.properties.attributes', {});
+    const actionAttrs = getWithDefault(this, 'dataset.actionableId.actions', []).filterBy('type', 'attribute');
+    return this._mergeAttributes(actionAttrs, datasetAttrs);
+  }),
+
+  assaysToDisplay: computed('dataset', 'dataset.actionableId.actions.[]', function() {
+    const userAssays = getWithDefault(this, 'dataset.actionableId.actions', [])
+      .filterBy('properties.key', 'assay')
+      .mapBy('properties.value');
+    return mergeAssays(get(this, 'dataset'), userAssays);
+  }),
+
+  contributors: computed('dataset.actionableId.actions.[]', function() {
+    const contributorIds = this.store.peekAll('action')
+      .filterBy('type', 'attribute')
+      .filterBy('actionableId.id', get(this, 'dataset.id'))
+      .mapBy('userId.id')
+      .uniq();
+    return this.store.peekAll('user')
+      .filter(user => contributorIds.includes(user.id));
+  }),
+
   actions: {
     trackLinkEvent() {
       get(this, 'metrics').trackEvent({
@@ -36,5 +60,31 @@ export default Controller.extend({
         action: 'link_clicked'
       });
     }
+  },
+
+  _mergeAttributes(attributeActions = [], attributesFromDataset) {
+    const actionAttrs = attributeActions.map(this._convertActionToCommonObj);
+    const datasetAttrs = this._convertDatasetAttrsToCommonObjList(attributesFromDataset);
+    return [...datasetAttrs, ...actionAttrs];
+  },
+
+  _convertActionToCommonObj(attribute) {
+    return {
+      key: get(attribute, 'properties.key'),
+      value: get(attribute, 'properties.value'),
+      actionId: get(attribute, 'id'),
+      userId: get(attribute, 'userId.id')
+    };
+  },
+
+  _convertDatasetAttrsToCommonObjList(attributesFromDataset) {
+    if (attributesFromDataset) {
+      return Object.keys(attributesFromDataset).reduce((attrObjects, key) => {
+        return [
+          ...attrObjects,
+          ...attributesFromDataset[key].map(value => { return { key, value }; })
+        ];
+      }, []);
+    } else { return []; }
   }
 });
