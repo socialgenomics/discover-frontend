@@ -30,6 +30,7 @@ describe('Integration | Component | attributes list', function() {
     it('renders a list of keys', function() {
       this.set('attributes', getMockAttributes());
       this.render(hbs`{{attribute-list session=session attributes=attributes}}`);
+      const self = this;
       this.$('h3').each(function(i) {
         expect(self.$(this).text().trim()).to.eql(keysAsDisplayed[i]);
       })
