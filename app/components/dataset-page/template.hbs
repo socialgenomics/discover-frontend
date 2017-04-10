@@ -5,7 +5,7 @@
     <div class="grid__col grid__col--7-of-12 u-pos-relative u-full-height">
       <!-- header -->
       <header class="c-card-header u-bc-off-white u-flex {{if assaysToDisplay 'u-justify-between' 'u-justify-end'}} u-items-center u-px2">
-        {{#if assays}}
+        {{#if assaysToDisplay}}
           {{assay-list assays=assaysToDisplay}}
         {{/if}}
         <div class="u-pl1 u-flex u-items-center">

@@ -36,17 +36,22 @@ export default Controller.extend({
     return this._mergeAttributes(actionAttrs, datasetAttrs);
   }),
 
-  assaysToDisplay: computed(
-    'dataset.properties.attributes',
-    'dataset.assay',
-    'dataset.actionableId.actions.[]',
-    function() {
-      const userAssays = getWithDefault(this, 'dataset.actionableId.actions', [])
-        .filterBy('properties.key', 'assay')
-        .mapBy('properties.value');
-      return mergeAssays(get(this, 'dataset'), userAssays);
-    }
-  ),
+  assaysToDisplay: computed('dataset', 'dataset.actionableId.actions.[]', function() {
+    const userAssays = getWithDefault(this, 'dataset.actionableId.actions', [])
+      .filterBy('properties.key', 'assay')
+      .mapBy('properties.value');
+    return mergeAssays(get(this, 'dataset'), userAssays);
+  }),
+
+  contributors: computed('dataset.actionableId.actions.[]', function() {
+    const contributorIds = this.store.peekAll('action')
+      .filterBy('type', 'attribute')
+      .filterBy('actionableId.id', get(this, 'dataset.id'))
+      .mapBy('userId.id')
+      .uniq();
+    return this.store.peekAll('user')
+      .filter(user => contributorIds.includes(user.id));
+  }),
 
   actions: {
     trackLinkEvent() {
