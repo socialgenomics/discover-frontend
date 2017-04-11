@@ -11,6 +11,10 @@ export function mainCredential(credentials) {
   return credentials.filter((c) => get(c, 'primary'))[0];
 }
 
+export function allCredentials(credentials) {
+  return credentials;
+}
+
 export default Route.extend(AuthenticatedRouteMixin, {
   session: service(),
 
@@ -24,7 +28,8 @@ export default Route.extend(AuthenticatedRouteMixin, {
       }).then((credentials) => {
         return {
           is_verified: isVerified(credentials),
-          main_credential: mainCredential(credentials)
+          main_credential: mainCredential(credentials),
+          all_credentials: allCredentials(credentials)
         };
       })
     });

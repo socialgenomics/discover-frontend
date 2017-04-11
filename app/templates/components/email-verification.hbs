@@ -15,7 +15,7 @@
     <div class="u-flex u-items-end">
       {{async-button
         class="c-btn c-btn-primary"
-        action=(action 'resendVerifyEmail')
+        action=(action 'saveNewCredential')
         default="Save"
         pending="Saving..."
         disableWhen=isDisabled
@@ -38,5 +38,11 @@
   <div class="u-flex u-mb3">
     <p class="u-mb0 u-mr1">{{credential.main_credential.email}}</p>
     <a class="u-tc-secondary u-td-underline" {{action 'addCredential'}}>Add New Credential</a>
+  </div>
+  <div>
+    <p class="u-mb0 u-fs2">Secondary Emails</p>
+    {{#each credential.all_credentials as |credential|}}
+      <p>{{credential.email}}</p>
+    {{/each}}
   </div>
 {{/if}}

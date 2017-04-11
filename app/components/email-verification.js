@@ -39,6 +39,7 @@ export function verifyEmail() {
 export default Component.extend(FlashMessageMixin, Validations, {
   session: service(),
   ajax: service(),
+  store: service(),
 
   classNames: ['u-mb2'],
 
@@ -61,8 +62,58 @@ export default Component.extend(FlashMessageMixin, Validations, {
   actions: {
     resendVerifyEmail: verifyEmail,
 
+    saveNewCredential() {
+      const email = get(this, 'credential.main_credential.email');
+      const newEmail = get(this, 'newEmail');
+
+      if (newEmail === email && get(this, 'credential.is_verified')) {
+        set(this, 'addingCredential', false);
+        this._addFlashMessage('This credential is already associated with this account.', 'success');
+      } else {
+        set(this, 'loading', true);
+        return get(this, 'store').query('credential', {
+          'where.user_id': get(this, 'session.data.authenticated.user.id')
+        })
+          .then(credentials => {
+            get(this, 'store').createRecord('credential', {
+              userId: get(this, 'session.authenticatedUser'),
+              email: newEmail,
+              primary: false,
+              provider: 'email',
+              verified: false
+            }).save()
+              .then(this._onSaveSuccess.bind(this))
+              .catch(this._onSaveError.bind(this, credentials));
+          })
+          .catch(error => {
+            set(this, 'loading', false);
+            Logger.error(error);
+          });
+      }
+    },
+
     addCredential() {
       set(this, 'addingCredential', true);
     }
+  },
+
+  /**
+   * @desc save success handler
+   * @private
+   */
+  _onSaveSuccess() {
+    this._showFlashMessage('success', 'Your credential has been added to your account.')
+  },
+
+  /**
+   * @desc save error handler
+   * @param {Ember.DS.Model} userModel
+   * @param {Error} error
+   * @private
+   */
+  _onSaveError(model, error) {
+    model.rollbackAttributes();
+    Logger.error(error);
+    this._showFlashMessage('warning', 'Sorry. There was a problem saving your changes.');
   }
 });
