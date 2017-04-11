@@ -30,7 +30,7 @@
       class="c-btn c-btn-primary u-mr2 u-mb1"
       action=(action 'save')
       default="Save"
-      disableWhen=(or (not isUnique) (not validations.isValid))
+      disableWhen=(not isValid)
       pending="Saving..."
     }}
     <button class="c-btn c-btn-text-secondary" {{action 'cancelEditMode'}}>Cancel</button>

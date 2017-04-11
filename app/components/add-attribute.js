@@ -18,7 +18,7 @@ export default Component.extend(Validations, {
     );
   }),
   isNumber: computed.match('attributeValue', /^\d+$/),
-  isValid: computed('attributeValue', 'group', 'validations.isValid', 'isNumber', function() {
+  isValid: computed('group', 'validations.isValid', 'isNumber', function() {
     const validAndUnique = get(this, 'validations.isValid') && get(this, 'isUnique');
     if (get(this, 'group') === 'pmid') {
       return validAndUnique && get(this, 'isNumber');
