@@ -17,19 +17,25 @@ const Validations = buildValidations({
 
 export function verifyEmail() {
   const email = get(this, 'credential.main_credential.email');
-  setProperties(this, {
-    'sentEmail': true,
-    'loading': true,
-    'addingCredential': false
-  });
-  get(this, 'ajax').request(ENV.APIRoutes['verify-email-resend'] + `/${email}`, { method: 'GET' })
-    .then(() => {
-      this._addFlashMessage('We have sent a verification email to your inbox', 'success');
-    })
-    .catch((err) => {
-      Logger.error(err);
-      this._addFlashMessage('Sorry, we couldn\'t send you the link. Please try again later.', 'warning');
+  const newEmail = get(this, 'newEmail');
+
+  if (newEmail === email && get(this, 'credential.is_verified')) {
+    set(this, 'addingCredential', false);
+    this._addFlashMessage('This email has already been verified.', 'success');
+  } else {
+    setProperties(this, {
+      'sentEmail': true,
+      'loading': true
     });
+    get(this, 'ajax').request(ENV.APIRoutes['verify-email-resend'] + `/${newEmail}`, { method: 'GET' })
+      .then(() => {
+        this._addFlashMessage('We have sent a verification email to your inbox', 'success');
+      })
+      .catch((err) => {
+        Logger.error(err);
+        this._addFlashMessage('Sorry, we couldn\'t send you the link. Please try again later.', 'warning');
+      });
+  }
 }
 
 export default Component.extend(FlashMessageMixin, Validations, {
@@ -39,6 +45,10 @@ export default Component.extend(FlashMessageMixin, Validations, {
   loading: false,
   sentEmail: false,
   addingCredential: false,
+
+  newEmail: computed('credential.main_credential.email', function() {
+    return get(this, 'credential.main_credential.email');
+  }),
 
   isInvalid: computed.not('validations.isValid'),
   isDisabled: computed.or('loading', 'isInvalid'),
