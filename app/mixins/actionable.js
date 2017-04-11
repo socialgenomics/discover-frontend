@@ -20,6 +20,13 @@ export default Mixin.create({
     });
   },
 
+  _getAttributes(actionableId) {
+    return this.store.query('action', {
+      'where.actionable_id': actionableId,
+      'where.type': 'attribute'
+    });
+  },
+
   _incrementViewCounter(model, userId) {
     if (model) {
       this.store.createRecord('action', {
