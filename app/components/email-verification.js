@@ -9,7 +9,7 @@ import { errorMessages } from 'repositive/validations/validations-config';
 const { Component, get, set, setProperties, computed, Logger, inject: { service } } = Ember;
 
 const Validations = buildValidations({
-  email: [
+  newEmail: [
     presenceValidator(errorMessages.blankEmail),
     emailFormatValidator()
   ]
@@ -50,8 +50,13 @@ export default Component.extend(FlashMessageMixin, Validations, {
     return get(this, 'credential.main_credential.email');
   }),
 
+  isNotChanged: true,
   isInvalid: computed.not('validations.isValid'),
-  isDisabled: computed.or('loading', 'isInvalid'),
+  isDisabled: computed.or('isNotChanged', 'isInvalid'),
+
+  keyUp() {
+    if (get(this, 'credential.main_credential.email') != get(this, 'newEmail')) { set(this, 'isNotChanged', false); }
+  },
 
   actions: {
     resendVerifyEmail: verifyEmail,
