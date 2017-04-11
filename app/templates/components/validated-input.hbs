@@ -35,17 +35,19 @@
   }}
 {{/if}}
 
-<div class="c-validated-input-msg-container">
-  {{#if isInvalid}}
-    <ul class="o-list-flush-left u-mb0">
-      {{#each errors as |error|}}
-        <li class="u-ta-left u-tc-red c-validated-input-msg">{{error}}</li>
-      {{/each}}
-    </ul>
-  {{else if (and helpText (and isActive (not isValid)))}}
-    <p class="u-ta-left u-tc-tertiary c-validated-input-msg">{{helpText}}</p>
-  {{/if}}
-</div>
+{{#unless noMsgContainer}}
+  <div class="c-validated-input-msg-container">
+    {{#if isInvalid}}
+      <ul class="o-list-flush-left u-mb0">
+        {{#each errors as |error|}}
+          <li class="u-ta-left u-tc-red c-validated-input-msg">{{error}}</li>
+        {{/each}}
+      </ul>
+    {{else if (and helpText (and isActive (not isValid)))}}
+      <p class="u-ta-left u-tc-tertiary c-validated-input-msg">{{helpText}}</p>
+    {{/if}}
+  </div>
+{{/unless}}
 
 {{#if isShowingMarkdownModal}}
   {{markdown-modal action="toggleMarkdownModal"}}

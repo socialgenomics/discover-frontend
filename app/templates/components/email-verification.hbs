@@ -1,5 +1,5 @@
 {{#if addingCredential}}
-  <div class="u-flex">
+  <div class="u-flex u-py1">
     <div class="u-mr1">
       {{validated-input
         label='Email Address'
@@ -8,12 +8,13 @@
         errors=validations.attrs.email.messages
         placeholder='e.g. liz@repositive.io'
         noMarkdown=true
+        noMsgContainer=true
       }}
     </div>
 
-    <div class="u-flex u-items-center u-py1">
+    <div class="u-flex u-items-end">
       {{async-button
-        class="c-btn c-btn-primary u-mb2"
+        class="c-btn c-btn-primary"
         action=(action 'resendVerifyEmail')
         default="Save"
         pending="Saving..."

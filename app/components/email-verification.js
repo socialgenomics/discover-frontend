@@ -23,12 +23,10 @@ export function verifyEmail() {
     set(this, 'addingCredential', false);
     this._addFlashMessage('This email has already been verified.', 'success');
   } else {
-    setProperties(this, {
-      'sentEmail': true,
-      'loading': true
-    });
+    set(this, 'loading', true);
     get(this, 'ajax').request(ENV.APIRoutes['verify-email-resend'] + `/${newEmail}`, { method: 'GET' })
       .then(() => {
+        set(this, 'sentEmail', true);
         this._addFlashMessage('We have sent a verification email to your inbox', 'success');
       })
       .catch((err) => {
@@ -41,6 +39,8 @@ export function verifyEmail() {
 export default Component.extend(FlashMessageMixin, Validations, {
   session: service(),
   ajax: service(),
+
+  classNames: ['u-mb2'],
 
   loading: false,
   sentEmail: false,
