@@ -6,7 +6,7 @@ import presenceValidator from 'repositive/validations/presenceValidator';
 import emailFormatValidator from 'repositive/validations/emailFormatValidator';
 import { errorMessages } from 'repositive/validations/validations-config';
 
-const { Component, get, set, setProperties, computed, Logger, inject: { service } } = Ember;
+const { Component, get, set, computed, Logger, inject: { service } } = Ember;
 
 const Validations = buildValidations({
   newEmail: [
