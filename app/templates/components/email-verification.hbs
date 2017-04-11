@@ -1,0 +1,41 @@
+{{#if addingCredential}}
+  <div class="u-flex">
+    <div class="u-mr1">
+      {{validated-input
+        value=newEmail
+        type='email'
+        label='Email Address'
+        errors=validations.attrs.email.messages
+        placeholder='e.g. liz@repositive.io'
+        noMarkdown=true
+        submit=(action 'resendVerifyEmail')
+      }}
+    </div>
+
+    <div class="u-flex u-items-center u-py1">
+      {{async-button
+        class="c-btn c-btn-primary u-mb2"
+        default="Save"
+        pending="Saving..."
+        action=(action 'resendVerifyEmail')
+        disableWhen=isDisabled
+        reset=true
+      }}
+    </div>
+  </div>
+  {{#if sentEmail}}
+    <div class="u-flex u-mb2">
+      <p class="u-tc-red u-mb0 u-mr1">Your email hasn't been verified.</p>
+      <a class="u-tc-secondary u-td-underline" {{action 'resendVerifyEmail'}}>Resend Verification Email.</a>
+    </div>
+  {{/if}}
+{{else}}
+  <div class="u-flex u-items-center u-justify-between u-mb1">
+    <p class="u-mb0 u-fs2">Primary Email</p>
+    <p class="u-tc-teal u-fw-med u-mb0 u-fs2">Your email is verified.</p>
+  </div>
+  <div class="u-flex u-mb3">
+    <p class="u-mb0 u-mr1">{{credential.main_credential.email}}</p>
+    <a class="u-tc-secondary u-td-underline" {{action 'addCredential'}}>Add New Credential</a>
+  </div>
+{{/if}}
