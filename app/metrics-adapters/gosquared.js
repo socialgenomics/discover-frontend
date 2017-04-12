@@ -49,16 +49,16 @@ export default BaseAdapter.extend({
   },
 
   trackEvent(options = {}) {
-    let { category, action, label, value } = options;
-    let actionName = category + ' ' + action;
+    const { category, action, label, value } = options;
+    const actionName = category + ' ' + action;
     window._gs('event', actionName, {
       label: label,
       value: value
     });
   },
 
-  trackPage(options={}) {
-    let { path, title } = options;
+  trackPage(options = {}) {
+    const { path, title } = options;
     window._gs('track', path, title);
   },
 

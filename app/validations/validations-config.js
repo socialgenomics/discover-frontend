@@ -12,11 +12,10 @@ export const errorMessages = {
 
 export const patterns = {
   url: /[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/,
-  email:  /^([\w\-\.\+]+)@((?:[\w\-\.]+)(?:\.[a-zA-Z]{2,}))$/,
+  email: /^([\w\-\.\+]+)@((?:[\w\-\.]+)(?:\.[a-zA-Z]{2,}))$/,
   password: /(?=.*\d)(?=.*[A-Z])/
 };
 
 export const lengths = {
   password: 8
 };
-
