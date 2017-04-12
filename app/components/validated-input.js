@@ -38,8 +38,6 @@ export default Component.extend({
       } else {
         set(this, 'type', 'password');
       }
-    },
-
-    submitForm() { get(this, 'submit')(); }
+    }
   }
 });
