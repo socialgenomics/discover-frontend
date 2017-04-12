@@ -3,6 +3,7 @@ export const errorMessages = {
   invalidUrl: 'Must be a valid url.',
   blankEmail: 'Please provide email address',
   blankPassword: 'Please provide password.',
+  duplicateEntry: 'This value already exists.',
   newPassword: 'Please provide new password.',
   matchingPassword: 'Please provide matching password.',
   invalidEmail: 'Must be a valid email address.',
@@ -14,7 +15,7 @@ export const errorMessages = {
 
 export const patterns = {
   url: /[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/,
-  email:  /^([\w\-\.\+]+)@((?:[\w\-\.]+)(?:\.[a-zA-Z]{2,}))$/,
+  email: /^([\w\-\.\+]+)@((?:[\w\-\.]+)(?:\.[a-zA-Z]{2,}))$/,
   password: /(?=.*\d)(?=.*[A-Z])/,
   twitter: /^@(\w){1,15}$/
 };

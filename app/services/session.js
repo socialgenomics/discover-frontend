@@ -30,7 +30,7 @@ export default SessionService.extend({
           get(this, 'metrics').identify('GoogleAnalytics', {
             distinctId: get(this, userId)
           });
-        } catch(e) {
+        } catch (e) {
           //adapters can be disabled on some env. so we will have an error
         }
 

@@ -18,7 +18,7 @@ export default Controller.extend({
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   }),
 
-  actions : {
+  actions: {
     // user clicks button on welcome page to enter site, displays welcome flash message
     enterSite: function() {
       // this.get('session').set('data.firstVisit', false);

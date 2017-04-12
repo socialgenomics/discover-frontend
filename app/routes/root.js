@@ -63,11 +63,10 @@ export default Route.extend(FlashMessageMixin, {
         });
     }
   },
-
-  deactivateWeclomeMesssage: function() {
+  deactivate() {
     setProperties(this, {
       'session.data.firstVisit': false,
       'session.data.isRootRoute': false
     });
-  }.on('deactivate')
+  }
 });

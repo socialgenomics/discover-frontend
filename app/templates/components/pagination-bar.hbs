@@ -1,19 +1,17 @@
-<p class="u-fw-bold u-mr2 u-mb0">Results: {{results}}</p>
-
 <div class="u-flex u-flex-wrap">
-  <a {{action 'previousPage'}} class="u-tc-secondary u-px1 u-hv-bc-off-white {{if noPrevPage 'u-hide-display'}} u-mr1">
+  <a {{action 'previousPage'}} class="u-tc-secondary u-px1 u-rounded u-hv-bc-off-white {{if noPrevPage 'u-hide-display'}}">
     {{fa-icon 'chevron-left'}} Prev
   </a>
 
-  <div class="u-inherit-disp u-mr1">
+  <div class="u-hide-on-sm-md u-inherit-disp">
     {{#each pages as |page|}}
       {{pagination-number-button page=page currentPageNumber=currentPageNumber goToPage=goToPage}}
     {{/each}}
   </div>
 
-  <p class="u-tc-secondary u-mr2  u-mb0"> of {{totalPages}}</p>
+  <p class="u-tc-secondary u-px1 u-mb0"><span class="u-hide-on-lg">Page {{currentPageNumber}} </span>of {{totalPages}}</p>
 
-  <a {{action 'nextPage'}} class="u-tc-secondary u-px1 u-hv-bc-off-white {{if noNextPage 'u-hide-display'}}">
+  <a {{action 'nextPage'}} class="u-tc-secondary u-px1 u-rounded u-hv-bc-off-white {{if noNextPage 'u-hide-display'}}">
     Next {{fa-icon 'chevron-right'}}
   </a>
 </div>

@@ -1,13 +1,14 @@
 import Ember from 'ember';
 import QP from 'npm:../../query-parser';
 
-const { Mixin, computed, get, set } = Ember;
+const { Mixin, computed, get, set, setProperties } = Ember;
 
 export default Mixin.create({
   queryParams: ['query', 'page', 'resultsPerPage'],
   query: null,
-  resultsPerPage: 6,
   page: 1,
+  resultsPerPage: 6,
+  resultsOptions: [6, 18, 30, 90],
 
   totalPages: computed('model.meta.total', 'resultsPerPage', function () {
     return Math.ceil(get(this, 'model.meta.total') / get(this, 'resultsPerPage'));
@@ -48,6 +49,17 @@ export default Mixin.create({
 
     removeFilter(predicate, text) {
       this._toggleFilter('removeFilter', predicate, text);
+    },
+
+    setResultsPerPage(resultsPerPage) {
+      setProperties(this, {
+        'resultsPerPage': resultsPerPage,
+        'page': 1
+      });
+      get(this, 'metrics').trackEvent({
+        category: 'search_resultsPerPage',
+        action: resultsPerPage
+      });
     }
   },
 
