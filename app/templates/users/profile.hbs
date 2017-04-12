@@ -18,11 +18,12 @@
         {{#user-profile-section title='Emails and password'}}
 
         {{/user-profile-section}}
+        --}}
 
         {{#user-profile-section title='External accounts'}}
-
+          {{user-profile-external-accounts userProfileData=userProfileData userId=user.id}}
         {{/user-profile-section}}
-        --}}
+
 
 
   </div>
