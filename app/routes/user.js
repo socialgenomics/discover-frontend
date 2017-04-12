@@ -15,7 +15,7 @@ export default Route.extend({
       .then(user => {
         const userId = get(user, 'id');
         // TODO: The majority of this info can be cached and retrieved from the same session instead of doing unnecesary calls.
-        return new RSVP.hash({
+        return RSVP.hash({
           user: user,
           registrations: this.store.query('dataset', { 'where.user_id': userId }),
           requests: this.store.query('request', { 'where.user_id': userId }),
@@ -25,12 +25,7 @@ export default Route.extend({
         });
       })
       .then(values => {
-        const numberOfComments = values.user_comments.get('content').length;
-        this.controllerFor('user.index').setProperties({
-          favouritedData: values.favourited_data,
-          numberOfComments: numberOfComments,
-          numberOfFavourites: values.favourited_data.length
-        });
+        this.controllerFor('user.index').set('favouritedData', values.favourited_data);
         return {
           user: values.user,
           registrations: values.registrations,

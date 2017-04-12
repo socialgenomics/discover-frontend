@@ -15,30 +15,9 @@
               <h4 class="u-tc-teal u-fs2">{{fa-icon "check-circle"}} Verified Account</h4>
             {{else}}
               {{#if isOwnProfile}}
-              <h4>{{#link-to 'users.trust' class="u-tc-red"}}{{fa-icon "envelope"}} Please verify your email{{/link-to}}</h4>
+                <h4>{{#link-to 'users.trust' class="u-tc-red"}}{{fa-icon "envelope"}} Please verify your email{{/link-to}}</h4>
               {{/if}}
             {{/if}}
-          </div>
-
-          <div class="c-divider c-divider-light-bg"></div>
-
-          <div class="grid o-list-inline">
-            <div class="grid__col grid__col--3-of-12 u-ta-center">
-              <span class="o-list-inline__item u-fw-med u-fs3">{{numberOfFavourites}}</span>
-              <h5 class="o-list-inline__item u-fw-thin u-mb1">Favourites</h5>
-            </div>
-            <div class="grid__col grid__col--3-of-12 u-ta-center">
-              <span class="o-list-inline__item u-fw-med u-fs3">{{model.registrations.length}}</span>
-              <h5 class="o-list-inline__item u-fw-thin u-mb1">Registrations</h5>
-            </div>
-            <div class="grid__col grid__col--3-of-12 u-ta-center">
-              <span class="o-list-inline__item u-fw-med u-fs3">{{model.requests.length}}</span>
-              <h5 class="o-list-inline__item u-fw-thin u-mb1">Requests</h5>
-            </div>
-            <div class="grid__col grid__col--3-of-12 u-ta-center">
-              <span class="o-list-inline__item u-fw-med u-fs3">{{numberOfComments}}</span>
-              <h5 class="o-list-inline__item u-fw-thin u-mb1">Comments</h5>
-            </div>
           </div>
         </section>
       </div>
