@@ -64,7 +64,7 @@ export default Mixin.create({
   },
 
   makeRequest(params) {
-    const limit = params.resultsPerPage || 6;
+    const limit = params.resultsPerPage > 90 ? 90 : params.resultsPerPage || 6;
     const offset = (params.page - 1) * limit;
     const query = params.query || '';
     const body = query === '' ? {} : get(this, 'QP').parseString(query);
