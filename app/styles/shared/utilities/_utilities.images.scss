@@ -2,10 +2,8 @@
     #IMAGES
    ========================================================================== */
 
-.u-img {
-  &-tiny { width: 1.5 * $global-spacing-unit;  }
-  &-small { width: 2 * $global-spacing-unit;  }
-  &-med { width: 2.5 * $global-spacing-unit;  }
-  &-large { width: 5 * $global-spacing-unit;    }
-  &-huge { width: 7.5 * $global-spacing-unit;  }
-}
+.u-img-tiny  { width: 1.5 * $global-spacing-unit; }
+.u-img-small { width: 2 * $global-spacing-unit;   }
+.u-img-med   { width: 2.5 * $global-spacing-unit; }
+.u-img-large { width: 5 * $global-spacing-unit;   }
+.u-img-huge  { width: 7.5 * $global-spacing-unit; }
