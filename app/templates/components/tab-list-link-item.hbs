@@ -1,0 +1,19 @@
+{{#if query}}
+  {{#link-to target query class="u-tc-secondary u-fs2"}}
+    <li class="u-p1 {{unless active 'u-hv-bc-off-white'}}">
+      {{#if (and icon (eq iconPosition "left"))}}{{fa-icon icon}}{{/if}}
+      <span class="u-px1 u-fw-reg">{{title}}</span>
+      {{#if stats}}<span class="u-fw-med u-px1">{{stats}}</span>{{/if}}
+      {{#if (and icon (eq iconPosition "right"))}}{{fa-icon icon}}{{/if}}
+    </li>
+  {{/link-to}}
+{{else}}
+  {{#link-to target class="u-tc-secondary u-fs2"}}
+  <li class="u-p1 {{unless active 'u-hv-bc-off-white'}}">
+    {{#if (and icon (eq iconPosition "left"))}}{{fa-icon icon}}{{/if}}
+    <span class="u-px1 u-fw-reg">{{title}}</span>
+    {{#if stats}}<span class="u-fw-med u-px1">{{stats}}</span>{{/if}}
+    {{#if (and icon (eq iconPosition "right"))}}{{fa-icon icon}}{{/if}}
+  </li>
+  {{/link-to}}
+{{/if}}

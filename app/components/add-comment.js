@@ -16,7 +16,7 @@ export default Component.extend({
       set(this, 'isActive', false);
       set(this, 'comment', null);
     },
-    addComment: function() {
+    addComment() {
       //temporary validation
       if (!isEmpty(get(this, 'comment'))) {
         get(this, 'metrics').trackEvent({
@@ -24,7 +24,7 @@ export default Component.extend({
           action: 'added comment',
           label: get(this, 'dataset.id')
         });
-        this.attrs.addComment(this.comment);
+        get(this, 'addComment')(this.comment);
       }
       this.send('cancel');
     }

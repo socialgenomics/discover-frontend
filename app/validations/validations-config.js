@@ -3,6 +3,7 @@ export const errorMessages = {
   invalidUrl: 'Must be a valid url.',
   blankEmail: 'Please provide email address',
   blankPassword: 'Please provide password.',
+  duplicateEntry: 'This value already exists.',
   newPassword: 'Please provide new password.',
   matchingPassword: 'Please provide matching password.',
   invalidEmail: 'Must be a valid email address.',
@@ -19,4 +20,3 @@ export const patterns = {
 export const lengths = {
   password: 8
 };
-
