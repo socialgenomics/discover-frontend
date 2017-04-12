@@ -1,12 +1,7 @@
 /* eslint-env node */
-
-var path = require('path');
 var EmberApp = require('ember-cli/lib/broccoli/ember-app');
-var jsStringEscape = require('js-string-escape');
-
 var environment = EmberApp.env();
 var appConf = require('./config/app/' + environment + '.json');
-
 var isProductionLikeBuild = ['development', 'production', 'staging'].indexOf(environment) > -1;
 
 module.exports = function(defaults) {
@@ -38,24 +33,11 @@ module.exports = function(defaults) {
     sourcemaps: { enabled: !isProductionLikeBuild },
     minifyCSS: { enabled: isProductionLikeBuild },
     minifyJS: { enabled: isProductionLikeBuild },
-    jscsOptions: {
-      configPath: '.jscsrc',
-      enabled: true,
-      esnext: true,
-      disableTestGenerator: process.env.CI ? true : false
-    },
     babel: {
       sourceMaps: 'inline',
       optional: ['es7.decorators']
     },
-    // Disable JSHint
-    'ember-cli-mocha': {
-      useLintTree: false
-    },
-    // Use ESLint
-    // eslint: {
-    //   testGenerator: eslintTestGenerator
-    // },
+
     "parser": "babel-eslint"
   });
 
@@ -77,32 +59,3 @@ module.exports = function(defaults) {
 
   return app.toTree();
 };
-
-
-// ESLint Mocha test generator
-// TODO: Inprocess of changing this for Mocha setup
-// function eslintTestGenerator(relativePath, errors) {
-//   var pass = !errors || errors.length === 0;
-//   return "import { expect } from 'chai';\n"+
-//     "import { describeModule, it } from 'ember-mocha';\n"+
-//     "describeModule('ESLint - " + path.dirname(relativePath) + "');\n"+
-//     "it('" + relativePath + " should pass ESLint', function(expect) {\n" +
-//     "  expect(" + pass + ", '" + relativePath + " should pass ESLint." +
-//     jsStringEscape("\n" + render(errors)) + "').to.be.ok;\n" +
-//   "});\n";
-// }
-// //     "module('ESLint - " + path.dirname(relativePath) + "');\n" +
-// //     "it('" + relativePath + " should pass ESLint', function(assert) {\n" +
-// //     "  assert.ok(" + pass + ", '" + relativePath + " should pass ESLint." +
-//
-//
-//
-//
-//
-// function render(errors) {
-//   if (!errors) { return ''; }
-//   return errors.map(function(error) {
-//     return error.line + ':' + error.column + ' ' +
-//     ' - ' + error.message + ' (' + error.ruleId +')';
-//   }).join('\n');
-// }
