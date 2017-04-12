@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import SessionService from 'ember-simple-auth/services/session';
 
-const { inject: { service }, get, set, setProperties, observer } = Ember;
+const { inject: { service }, get, set, setProperties, observer, Logger, RSVP } = Ember;
 
 export default SessionService.extend({
   store: service(),
@@ -34,7 +34,7 @@ export default SessionService.extend({
           //adapters can be disabled on some env. so we will have an error
         }
 
-        return Ember.RSVP.all([
+        return RSVP.all([
           get(this, 'store').findRecord('user', userId),
           get(this, 'store').query('credential', { 'where.user_id': userId, 'where.primary': true }),
           get(this, 'store').findRecord('user_setting', settingsId)
@@ -53,7 +53,7 @@ export default SessionService.extend({
 
           set(this, 'authenticatedUser', user);
         })
-        .catch(Ember.Logger.error);
+        .catch(Logger.error);
       }
     }
   })

@@ -1,8 +1,9 @@
 import Ember from 'ember';
+import FlashMessageMixin from 'repositive/mixins/flash-message-mixin';
 
 const { Component, inject: { service }, Logger, get, set, setProperties } = Ember;
 
-export default Component.extend({
+export default Component.extend(FlashMessageMixin, {
   store: service(),
 
   isOpen: false,
@@ -68,7 +69,7 @@ export default Component.extend({
    * @private
    */
   _onSaveSuccess() {
-    this._showFlashMessage('success', 'Your interests have been updated.');
+    this._addFlashMessage('Your interests have been updated.', 'success');
   },
 
   /**
@@ -81,16 +82,6 @@ export default Component.extend({
     userModel.rollbackAttributes();
     set(this, 'editInterests', get(userModel, 'profile.interests'));
     Logger.error(error);
-    this._showFlashMessage('warning', 'Sorry. There was a problem with updating your interests.');
-  },
-
-  /**
-   * @desc adds flash message
-   * @param {String} type
-   * @param {String} message
-   * @private
-   */
-  _showFlashMessage(type, message) {
-    this.flashMessages.add({ message, type });
+    this._addFlashMessage('Sorry. There was a problem with updating your interests.', 'warning');
   }
 });

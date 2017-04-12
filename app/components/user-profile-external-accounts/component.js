@@ -6,6 +6,7 @@ import { buildValidations } from 'ember-cp-validations';
 import urlFormatValidatoru from 'repositive/validations/urlFormatValidator';
 import { errorMessages, patterns } from 'repositive/validations/validations-config';
 import { validator } from 'ember-cp-validations';
+import FlashMessageMixin from 'repositive/mixins/flash-message-mixin';
 
 const { Component, inject: { service }, Logger, set, get } = Ember;
 const Validations = buildValidations({
@@ -29,7 +30,7 @@ function createUserAttrKey(key) {
   return `userProfileData.${key}`;
 }
 
-export default Component.extend(Validations, {
+export default Component.extend(Validations, FlashMessageMixin, {
   store: service(),
 
   init() {
@@ -79,7 +80,7 @@ export default Component.extend(Validations, {
    * @private
    */
   _onSaveSuccess() {
-    this._showFlashMessage('success', 'Your external accounts have been updated.')
+    this._addFlashMessage('Your external accounts have been updated.', 'success');
   },
 
   /**
@@ -91,17 +92,7 @@ export default Component.extend(Validations, {
   _onSaveError(userModel, error) {
     userModel.rollbackAttributes();
     Logger.error(error);
-    this._showFlashMessage('warning', 'Sorry. There was a problem saving your changes.');
-  },
-
-  /**
-   * @desc adds flash message
-   * @param {String} type
-   * @param {String} message
-   * @private
-   */
-  _showFlashMessage(type, message) {
-    this.flashMessages.add({ message, type });
+    this._addFlashMessage('Sorry. There was a problem saving your changes.', 'warning');
   },
 
   /**
