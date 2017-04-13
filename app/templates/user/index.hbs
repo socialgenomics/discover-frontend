@@ -5,11 +5,11 @@
         <section class="c-card u-p2">
           <div class="u-ta-center u-pos-relative">
             <h1 class="u-fs4 u-mb1">{{model.user.displayName}}</h1>
-            <h4>{{model.user.profile.workOrganisation}}</h4>
+            <h4>{{model.user.profile.work_organisation}}</h4>
 
             {{#if isOwnProfile}}{{#link-to "users.profile" class="fa-2x u-pos-absolute u-pos-right0 u-pos-top0 u-tc-secondary"}}{{fa-icon "pencil-square-o"}}{{/link-to}}{{/if}}
             <div class="profile-img">
-              <img class="u-w3 u-mb1 u-circle" src={{model.user.profile.avatar}}>
+              <img class="u-w4 u-mb1 u-circle" src={{model.user.profile.avatar}}>
             </div>
             {{#if model.is_verified}}
               <h4 class="u-tc-teal u-fs2">{{fa-icon "check-circle"}} Verified Account</h4>
