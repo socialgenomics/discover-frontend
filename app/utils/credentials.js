@@ -10,6 +10,6 @@ export function isVerified(credentials) {
   return credentials.reduce((acc, curr) => acc || get(curr, 'verified'), false);
 }
 
-export function allCredentials(credentials) {
-  return credentials;
+export function secondaryCredentials(credentials) {
+  return credentials.filterBy('primary', false);
 }

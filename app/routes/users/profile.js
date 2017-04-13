@@ -18,7 +18,7 @@ export default Route.extend(AuthenticatedRouteMixin, {
         return {
           is_verified: creds.isVerified(credentials),
           main_credential: creds.mainCredential(credentials),
-          all_credentials: creds.allCredentials(credentials)
+          secondary_credentials: creds.secondaryCredentials(credentials)
         };
       })
     });
