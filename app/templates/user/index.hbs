@@ -14,7 +14,7 @@
           </div>
 
           {{#if isOwnProfile}}
-            {{#link-to "users.profile" class="u-pos-absolute u-pos-right0 u-pos-top0 "}}
+            {{#link-to "users.profile" class="u-pos-absolute u-pos-right0 u-pos-top0"}}
               {{fa-icon "pencil" class="u-tc-tertiary u-hv-tc-secondary u-fs3"}}
             {{/link-to}}
           {{/if}}
@@ -27,11 +27,18 @@
             {{/if}}
           {{/if}}
 
-          {{#text-with-icon icon="calendar-o"}}
-            Joined {{moment-format user.createdAt 'MMMM YYYY'}}
-          {{/text-with-icon}}
-          {{#if user.profile.location}}
-            {{text-with-icon text=user.profile.location icon='map-marker'}}
+          <div class="u-mb3">
+            {{#text-with-icon icon='calendar-o' class="u-mb1"}}
+              Joined {{moment-format user.createdAt 'MMMM YYYY'}}
+            {{/text-with-icon}}
+            {{#if user.profile.location}}
+              {{text-with-icon text=user.profile.location icon='map-marker' class="u-mb1"}}
+            {{/if}}
+          </div>
+
+          {{#if user.profile.bio}}
+            <h3 class="u-fs1 u-fw-reg u-tc-tertiary u-mb1">BIO</h3>
+            <p class="u-tc-secondary u-hyphens-auto">{{user.profile.bio}}</p>
           {{/if}}
 
         </div>
