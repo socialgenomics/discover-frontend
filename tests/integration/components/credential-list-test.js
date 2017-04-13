@@ -12,7 +12,7 @@ describe('Integration | Component | credential list', function() {
     this.setProperties({
       'credential': {
         main_credential: {
-          email: 'liz@repositive.io',
+          email: 'liz@repositive.io'
         }
       }
     });
@@ -24,7 +24,7 @@ describe('Integration | Component | credential list', function() {
     this.setProperties({
       'credential': {
         secondary_credentials: {
-          email: 'liz@repositive.io',
+          email: 'liz@repositive.io'
         }
       }
     });
