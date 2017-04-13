@@ -14,8 +14,8 @@ describe('Integration | Component | user preview', function() {
     this.setProperties({
       'user': {
         displayName: 'Liz',
-        userProfile: {
-          workOrganisation: 'Developer'
+        profile: {
+          work_organisation: 'Repositive'
         }
       }
     });
@@ -23,14 +23,14 @@ describe('Integration | Component | user preview', function() {
     this.render(hbs`{{user-preview user=user}}`);
     expect(this.$('h4').text().trim()).to.eql('Liz');
     expect(this.$('img')).to.exist;
-    expect(this.$('p.u-fs1').text().trim()).to.eql('Developer');
+    expect(this.$('p.u-fs1').text().trim()).to.eql('Repositive');
   });
 
   it('renders the add affiliation message if empty', function() {
     this.setProperties({
       'user': {
-        userProfile: {
-          workOrganisation: ''
+        profile: {
+          work_organisation: ''
         }
       }
     });
