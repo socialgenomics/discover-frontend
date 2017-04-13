@@ -1,0 +1,36 @@
+{{#link-to 'user' user.id disabled=(not session.isAuthenticated) invokeAction=(action 'toggleCreateAccountModal') classNames="u-hv-bc-darken5 u-block u-py2 u-pl1"}}
+  <img class="u-circle u-img-small u-mr1" src="{{user.userProfile.avatar}}" />
+
+  <div class="u-inline-block {{if user.userProfile.workOrganisation 'u-pos-absolute'}} {{if currentUser 'u-pos-absolute'}}">
+    <h4 class="u-flex u-items-center u-mb0 u-fs2 u-tc-primary">
+      {{user.displayName}}
+      {{#if timestamp}}
+        <span class="u-tc-tertiary u-pl1 u-fs0 u-fw-reg">{{moment-from-now timestamp allowEmpty=true}}</span>
+      {{/if}}
+    </h4>
+
+    {{#if user.userProfile.workOrganisation}}
+      <p class="u-mb0 u-fs1">{{truncate user.userProfile.workOrganisation 55}}</p>
+    {{else}}
+      {{#if currentUser}}
+        {{#link-to 'users.profile' classNames="u-tc-secondary u-td-underline"}}Add your affiliation{{/link-to}}
+      {{/if}}
+    {{/if}}
+  </div>
+{{/link-to}}
+
+{{#if showCreateAccountModal}}
+  {{! "container-class" is a temporary solution, changes in ember modal dialog required }}
+  {{#repositive-modal
+    container-class='c-modal--medium u-z5'
+    close=(action 'toggleCreateAccountModal')
+  }}
+    {{repositive-modal/header
+      title='View User Profiles'
+      onClose=(action 'toggleCreateAccountModal')
+    }}
+    {{#repositive-modal/content}}
+      {{create-account-modal-content text="To view this user's profile, please create an account."}}
+    {{/repositive-modal/content}}
+  {{/repositive-modal}}
+{{/if}}

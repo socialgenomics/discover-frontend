@@ -10,7 +10,6 @@ export default BaseAdapter.extend({
   toStringExtension() {
     return 'intercom';
   },
-  /* jshint ignore:start */
   /* eslint-disable */
   init() {
     (function() {
@@ -46,7 +45,6 @@ export default BaseAdapter.extend({
       }
     })();
   },
-  /* jshint ignore:end */
   /* eslint-enable */
 
   identify(options = {}) {

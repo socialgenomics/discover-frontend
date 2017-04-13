@@ -26,6 +26,7 @@ export default Component.extend(
     urlGenerator: service(),
     store: service(),
 
+    activeTab: 'metadata',
     classNames: ['c-card c-card-detail'],
     classNameBindings: ['session.isAuthenticated:dataset-notification-margin'],
 
@@ -65,6 +66,15 @@ export default Component.extend(
         window.open(get(this, 'model.url'), '_blank').focus();
       },
 
+      addAttribute(key, value) {
+        const store = get(this, 'store');
+        store
+          .createRecord('action', this._createNewRecordData('attribute', { properties: { key, value } }))
+          .save()
+          .then(() => this._reloadSubscriptions(store))
+          .catch(Logger.error);
+      },
+
       addComment(text) {
         const store = get(this, 'store');
         store
@@ -93,7 +103,9 @@ export default Component.extend(
         if (get(this, 'validations.isValid')) {
           this.saveChanges(get(this, 'model'), get(this, 'editablePropertyKeys'));
         }
-      }
+      },
+
+      setActiveTab(tab) { set(this, 'activeTab', tab); }
     },
 
     /**

@@ -1,0 +1,43 @@
+.c-select-trigger,
+.c-select-dropdown {
+  color: $color-mid-grey;
+  border: $global-border-style;
+  border-radius: $global-border-radius;
+  font-size: $global-font-size;
+  outline: none;
+  cursor: pointer;
+  width: 50px;
+  position: relative;
+}
+
+.c-select-options {
+  @extend .u-p0;
+  margin: 0;
+}
+
+.c-select-option {
+  @extend .u-px2;
+
+  &:hover {
+    color: inherit;
+    background: $color-very-light-grey;
+  }
+}
+
+.c-select-icon {
+  @extend .u-0-width;
+  height: 0;
+  position: absolute;
+  display: inline-block;
+  top: 0;
+  bottom: 0;
+  right: 5px;
+  margin: auto;
+  border-style: solid;
+  border-width: 7px 4px 0 4px;
+  border-color: $color-mid-grey transparent transparent transparent;
+}
+
+.c-select-trigger[aria-expanded="true"] .c-select-icon {
+  transform: rotate(180deg);
+}

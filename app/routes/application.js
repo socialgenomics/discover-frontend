@@ -52,7 +52,7 @@ export default Route.extend(ApplicationRouteMixin, {
             label: queryString
           });
         }
-      } catch(error) {
+      } catch (error) {
         this.transitionTo(this._getErrorRouteNameFromSearchQuery(queryString));
       }
     },
@@ -97,12 +97,12 @@ export default Route.extend(ApplicationRouteMixin, {
   _queryAndTransition(dest, input, serializeTree, pageNumber) {
     let query = {};
     if (isUUID.test(input.text)) {
-      query = { 'where.id' : input.text };
+      query = { 'where.id': input.text };
     } else {
       query = {
-        'where[$or][0][name]' : input.text,
-        'where[$or][1][properties][short_name]' : input.text,
-        'where[$or][2][properties][short_name]' : input.text.toUpperCase()
+        'where[$or][0][name]': input.text,
+        'where[$or][1][properties][short_name]': input.text,
+        'where[$or][2][properties][short_name]': input.text.toUpperCase()
       };
     }
     this.store.query('collection', query).then(collection => {

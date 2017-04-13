@@ -6,7 +6,6 @@ export default Component.extend({
   init() {
     this._super(...arguments);
     /* eslint-disable */
-    // jscs:disable
     var qs, js, q, s, d = document,
       gi = d.getElementById,
       ce = d.createElement,
@@ -20,7 +19,6 @@ export default Component.extend({
       q = gt.call(d, 'script')[0];
       q.parentNode.insertBefore(js, q);
     }
-    // jscs:enable
     /* eslint-enable */
   },
 

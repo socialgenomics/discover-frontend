@@ -75,11 +75,11 @@ describe('Integration | Component | user profile avatar upload', function() {
       expect(this.$('.error-state').text().trim()).to.be.equal('Upload failed');
     });
 
-    it('should  show error messages', function () {
+    it('should show error messages', function () {
       this.setProperties({ avatarImg, reloadUserModel });
       this.render(hbs`{{user-profile-avatar-upload avatarImg=avatarImg reloadUserModel=reloadUserModel uploadFailed=true}}`);
 
-      expect(this.$('p.u-tc-red').text().trim()).to.be.equal('Same issues has occurred.Please try again later.');
+      expect(this.$('p.u-tc-red').text().trim()).to.be.equal('Something went wrong while uploading your image.Please try again later.');
     });
   });
 
@@ -96,7 +96,7 @@ describe('Integration | Component | user profile avatar upload', function() {
       this.setProperties({ avatarImg, reloadUserModel });
       this.render(hbs`{{user-profile-avatar-upload avatarImg=avatarImg reloadUserModel=reloadUserModel reloadFailed=true}}`);
 
-      expect(this.$('p.u-tc-red').text().trim()).to.be.equal('Same issues has occurred.Your photo will be displayed soon.');
+      expect(this.$('p.u-tc-red').text().trim()).to.be.equal('Something went wrong while uploading your image.Your avatar will be displayed soon.');
     });
   });
 });

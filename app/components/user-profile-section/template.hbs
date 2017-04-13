@@ -1,8 +1,10 @@
 <section class="grid">
   <div class="grid__col grid__col--3-of-12 u-pl4">
-    <h2 class="u-fs1 u-tc-tertiary u-border-bottom u-pb1">{{title}}</h2>
+    {{#if title}}
+      <h2 class="u-fs1 u-tc-tertiary u-border-bottom u-pb1">{{title}}</h2>
+    {{/if}}
   </div>
   <div class="grid__col grid__col--6-of-12">
-    <div class="u-pt4">{{yield}}</div>
+    <div class="{{if title 'u-pt4'}}">{{yield}}</div>
   </div>
 </section>

@@ -15,7 +15,6 @@ export default BaseAdapter.extend({
     const config = copy(get(this, 'config'));
     const { token } = config;
 
-    /* jshint ignore:start */
     ! function(g, s, q, r, d) {
       r = g[r] = g[r] || function() {
         (r.q = r.q || []).push(
@@ -27,7 +26,6 @@ export default BaseAdapter.extend({
       q.parentNode.
       insertBefore(d, q);
     }(window, document, 'script', '_gs');
-    /* jshint ignore:end */
 
     window._gs(token); // site token, setting to false disables automatic tracking
     window._gs('set', 'trackLocal', false); // set to true for testing
@@ -51,16 +49,16 @@ export default BaseAdapter.extend({
   },
 
   trackEvent(options = {}) {
-    let { category, action, label, value } = options;
-    let actionName = category + ' ' + action;
+    const { category, action, label, value } = options;
+    const actionName = category + ' ' + action;
     window._gs('event', actionName, {
       label: label,
       value: value
     });
   },
 
-  trackPage(options={}) {
-    let { path, title } = options;
+  trackPage(options = {}) {
+    const { path, title } = options;
     window._gs('track', path, title);
   },
 
