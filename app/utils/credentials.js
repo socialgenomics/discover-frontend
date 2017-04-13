@@ -1,3 +1,5 @@
+import Ember from 'ember';
+
 const { get } = Ember;
 
 export function mainCredential(credentials) {

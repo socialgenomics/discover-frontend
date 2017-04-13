@@ -15,36 +15,69 @@ const Validations = buildValidations({
   ]
 });
 
-export function verifyEmail() {
-  const email = get(this, 'credential.main_credential.email');
-  const newEmail = get(this, 'newEmail');
+export default Component.extend(FlashMessageMixin, Validations, {
+  session: service(),
+  ajax: service(),
+  store: service(),
 
-  if (newEmail === email && get(this, 'credential.is_verified')) {
-    set(this, 'addingCredential', false);
-    this._addFlashMessage('This email has already been verified.', 'success');
-  } else {
-    set(this, 'loading', true);
-    get(this, 'ajax').request(ENV.APIRoutes['verify-email-resend'] + `/${newEmail}`, { method: 'GET' })
-      .then(() => {
-        set(this, 'sentEmail', true);
-        this._addFlashMessage('We have sent a verification email to your inbox', 'success');
-      })
-      .catch((err) => {
-        Logger.error(err);
-        this._addFlashMessage('Sorry, we couldn\'t send you the link. Please try again later.', 'warning');
-      });
-  }
-}
+  classNames: ['u-mb3'],
 
-export function saveCredential() {
-  const email = get(this, 'credential.main_credential.email');
-  const newEmail = get(this, 'newEmail');
+  loading: false,
+  sentEmail: false,
 
-  if (newEmail === email && get(this, 'credential.is_verified')) {
-    set(this, 'addingCredential', false);
-    this._addFlashMessage('This credential is already associated with this account.', 'success');
-  } else {
-    set(this, 'loading', true);
+  newEmail: computed('credential.main_credential.email', function() {
+    return get(this, 'credential.main_credential.email');
+  }),
+
+  isNotChanged: true,
+  isInvalid: computed.not('validations.isValid'),
+  isDisabled: computed.or('isNotChanged', 'isInvalid'),
+
+  keyUp() {
+    if (get(this, 'credential.main_credential.email') !== get(this, 'newEmail')) { set(this, 'isNotChanged', false); }
+  },
+
+  actions: {
+    resendVerifyEmail(email, newEmail) {
+      if (newEmail === email && get(this, 'credential.is_verified')) {
+        set(this, 'addingCredential', false);
+        this._addFlashMessage('This email has already been verified.', 'success');
+      } else {
+        set(this, 'loading', true);
+        get(this, 'ajax').request(ENV.APIRoutes['verify-email-resend'] + `/${newEmail}`, { method: 'GET' })
+          .then(() => {
+            set(this, 'sentEmail', true);
+            this._addFlashMessage('We have sent a verification email to your inbox', 'success');
+          })
+          .catch((err) => {
+            Logger.error(err);
+            this._addFlashMessage('Sorry, we couldn\'t send you the link. Please try again later.', 'warning');
+          });
+      }
+    },
+
+    saveNewCredential() {
+      const email = get(this, 'credential.main_credential.email');
+      const newEmail = get(this, 'newEmail');
+
+      if (newEmail === email && get(this, 'credential.is_verified')) {
+        set(this, 'addingCredential', false);
+        this._addFlashMessage('This credential is already associated with this account.', 'success');
+      } else {
+        set(this, 'loading', true);
+        this._saveCredential(newEmail);
+      }
+    },
+
+    cancel() { set(this, 'addingCredential', false); }
+  },
+
+  /**
+   * @desc create a new credential record for the user
+   * @param {*} newEmail
+   * @private
+   */
+  _saveCredential(newEmail) {
     return get(this, 'store').query('credential', {
       'where.user_id': get(this, 'session.data.authenticated.user.id')
     })
@@ -63,39 +96,6 @@ export function saveCredential() {
         set(this, 'loading', false);
         Logger.error(error);
       });
-  }
-}
-
-export default Component.extend(FlashMessageMixin, Validations, {
-  session: service(),
-  ajax: service(),
-  store: service(),
-
-  classNames: ['u-mb3'],
-
-  loading: false,
-  sentEmail: false,
-  addingCredential: false,
-
-  newEmail: computed('credential.main_credential.email', function() {
-    return get(this, 'credential.main_credential.email');
-  }),
-
-  isNotChanged: true,
-  isInvalid: computed.not('validations.isValid'),
-  isDisabled: computed.or('isNotChanged', 'isInvalid'),
-
-  keyUp() {
-    if (get(this, 'credential.main_credential.email') != get(this, 'newEmail')) { set(this, 'isNotChanged', false); }
-  },
-
-  actions: {
-    resendVerifyEmail: verifyEmail,
-    saveNewCredential: saveCredential,
-
-    addCredential() {
-      set(this, 'addingCredential', true);
-    }
   },
 
   /**
