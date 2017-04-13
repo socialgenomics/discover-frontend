@@ -8,7 +8,7 @@ import confirmationValidator from 'repositive/validations/confirmationValidator'
 import passwordFormatValidator from 'repositive/validations/passwordFormatValidator';
 import { errorMessages, lengths, lengthTypes } from 'repositive/validations/validations-config';
 
-const { Component, Logger, computed, get, set, inject: { service }, RSVP } = Ember;
+const { Component, Logger, computed, get, set, inject: { service } } = Ember;
 
 const Validations = buildValidations({
   oldPassword: [
