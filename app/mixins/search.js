@@ -68,7 +68,6 @@ export default Mixin.create({
     const offset = (params.page - 1) * limit;
     const query = params.query || '';
     const body = query === '' ? {} : get(this, 'QP').parseString(query);
-
     return get(this, 'ajax').request(
       ENV.APIRoutes['datasets.search'],
       {
@@ -114,26 +113,16 @@ export default Mixin.create({
    * @private
    */
   _normalizeFilters(aggs) {
-    const filters = [];
-
-    for (const filter in aggs) {
-      if (aggs.hasOwnProperty(filter)) {
-        const buckets = aggs[filter].buckets;
-
-        buckets.forEach(b => {
-          b.colour = get(this, 'getColour')(b.key);
-
-          return b;
-        });
-
-        filters.push({
-          name: filter,
-          displayName: filter.capitalize(),
-          buckets: buckets
-        });
-      }
-    }
-
-    return filters;
+    return Object.keys(aggs).reduce((filters, filter) => {
+      const buckets = aggs[filter].buckets;
+      buckets.map(bucket => {
+        set(bucket, 'colour', get(this, 'getColour')(bucket.key));
+      });
+      return [...filters, ...[{
+        name: filter,
+        displayName: filter.capitalize(),
+        buckets: buckets
+      }]]
+    }, []);
   }
 });
