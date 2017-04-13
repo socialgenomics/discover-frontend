@@ -36,12 +36,42 @@ export function verifyEmail() {
   }
 }
 
+export function saveCredential() {
+  const email = get(this, 'credential.main_credential.email');
+  const newEmail = get(this, 'newEmail');
+
+  if (newEmail === email && get(this, 'credential.is_verified')) {
+    set(this, 'addingCredential', false);
+    this._addFlashMessage('This credential is already associated with this account.', 'success');
+  } else {
+    set(this, 'loading', true);
+    return get(this, 'store').query('credential', {
+      'where.user_id': get(this, 'session.data.authenticated.user.id')
+    })
+      .then(credentials => {
+        get(this, 'store').createRecord('credential', {
+          userId: get(this, 'session.authenticatedUser'),
+          email: newEmail,
+          primary: false,
+          provider: 'email',
+          verified: false
+        }).save()
+          .then(this._onSaveSuccess.bind(this))
+          .catch(this._onSaveError.bind(this, credentials));
+      })
+      .catch(error => {
+        set(this, 'loading', false);
+        Logger.error(error);
+      });
+  }
+}
+
 export default Component.extend(FlashMessageMixin, Validations, {
   session: service(),
   ajax: service(),
   store: service(),
 
-  classNames: ['u-mb2'],
+  classNames: ['u-mb3'],
 
   loading: false,
   sentEmail: false,
@@ -61,36 +91,7 @@ export default Component.extend(FlashMessageMixin, Validations, {
 
   actions: {
     resendVerifyEmail: verifyEmail,
-
-    saveNewCredential() {
-      const email = get(this, 'credential.main_credential.email');
-      const newEmail = get(this, 'newEmail');
-
-      if (newEmail === email && get(this, 'credential.is_verified')) {
-        set(this, 'addingCredential', false);
-        this._addFlashMessage('This credential is already associated with this account.', 'success');
-      } else {
-        set(this, 'loading', true);
-        return get(this, 'store').query('credential', {
-          'where.user_id': get(this, 'session.data.authenticated.user.id')
-        })
-          .then(credentials => {
-            get(this, 'store').createRecord('credential', {
-              userId: get(this, 'session.authenticatedUser'),
-              email: newEmail,
-              primary: false,
-              provider: 'email',
-              verified: false
-            }).save()
-              .then(this._onSaveSuccess.bind(this))
-              .catch(this._onSaveError.bind(this, credentials));
-          })
-          .catch(error => {
-            set(this, 'loading', false);
-            Logger.error(error);
-          });
-      }
-    },
+    saveNewCredential: saveCredential,
 
     addCredential() {
       set(this, 'addingCredential', true);
@@ -102,7 +103,8 @@ export default Component.extend(FlashMessageMixin, Validations, {
    * @private
    */
   _onSaveSuccess() {
-    this._showFlashMessage('success', 'Your credential has been added to your account.')
+    this._showFlashMessage('success', 'Your credential has been added to your account.');
+    set(this, 'addingCredential', false);
   },
 
   /**
@@ -115,5 +117,15 @@ export default Component.extend(FlashMessageMixin, Validations, {
     model.rollbackAttributes();
     Logger.error(error);
     this._showFlashMessage('warning', 'Sorry. There was a problem saving your changes.');
+  },
+
+  /**
+   * @desc adds flash message
+   * @param {String} type
+   * @param {String} message
+   * @private
+   */
+  _showFlashMessage(type, message) {
+    this.flashMessages.add({ message, type });
   }
 });

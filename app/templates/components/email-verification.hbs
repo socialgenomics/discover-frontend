@@ -4,7 +4,7 @@
       {{validated-input
         label='Email Address'
         value=newEmail
-        submit=(action 'resendVerifyEmail')
+        submit=(action 'saveNewCredential')
         errors=validations.attrs.email.messages
         placeholder='e.g. liz@repositive.io'
         noMarkdown=true
@@ -37,12 +37,12 @@
   </div>
   <div class="u-flex u-mb3">
     <p class="u-mb0 u-mr1">{{credential.main_credential.email}}</p>
-    <a class="u-tc-secondary u-td-underline" {{action 'addCredential'}}>Add New Credential</a>
   </div>
   <div>
     <p class="u-mb0 u-fs2">Secondary Emails</p>
     {{#each credential.all_credentials as |credential|}}
-      <p>{{credential.email}}</p>
+      <p class="u-mb0">{{credential.email}}</p>
     {{/each}}
+    <a class="u-tc-secondary u-td-underline" {{action 'addCredential'}}>Add New Credential</a>
   </div>
 {{/if}}
