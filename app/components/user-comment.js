@@ -12,7 +12,8 @@ export default Component.extend(
   EditModeMixin,
   Validations,
   {
-    showCreateAccountModal: false,
+    classNames: ['u-border-top'],
+
     inEditMode: false,
 
     editablePropertyKeys: ['text'],
@@ -23,10 +24,6 @@ export default Component.extend(
     text: oneWay('comment.properties.text'),
 
     actions: {
-      toggleCreateAccountModal() {
-        this.toggleProperty('showCreateAccountModal');
-      },
-
       cancelEditMode() {
         this.resetModuleStateOnCancel('comment.properties', get(this, 'editablePropertyKeys'));
       },

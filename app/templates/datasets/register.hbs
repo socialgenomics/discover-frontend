@@ -46,7 +46,6 @@
                 value=title
                 errors=validations.attrs.title.messages
                 placeholder="Add a title for your dataset."
-                submit=(action 'addDataset')
               }}
               {{validated-input
                 label="Dataset Description"
@@ -54,7 +53,6 @@
                 value=description
                 errors=validations.attrs.description.messages
                 placeholder="A short description of the dataset. You can include assay type, platform used, tissue source, associated diseases and ethnicity of patients."
-                submit=(action 'addDataset')
               }}
               {{validated-input
                 label="Dataset URL"
@@ -62,7 +60,6 @@
                 value=url
                 errors=validations.attrs.url.messages
                 placeholder="A link to the dataset if available"
-                submit=(action 'addDataset')
               }}
               {{async-button
                 class="c-btn c-btn-primary"

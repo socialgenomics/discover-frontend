@@ -8,8 +8,8 @@
     <div class="grid__col grid__col--5-of-12 grid__col--m-2-of-3 grid__col--centered">
       <form>
         <div class="u-ta-center u-mb3">
-          <a class="u-pr2" {{ action 'thirdPartyAuth' 'google-oauth2' 'signup'}}>{{svg-jar "google" class="u-w2"}}</a>
-          <a {{ action 'thirdPartyAuth' 'linked-in-oauth2' 'signup'}}>{{svg-jar "linkedin" class="u-w2"}}</a>
+          <a class="u-pr2" {{ action 'thirdPartyAuth' 'google-oauth2' 'signup'}}>{{svg-jar "google" class="u-w3"}}</a>
+          <a {{ action 'thirdPartyAuth' 'linked-in-oauth2' 'signup'}}>{{svg-jar "linkedin" class="u-w3"}}</a>
         </div>
 
         <div class="c-divider c-divider-light-bg"></div>
@@ -20,7 +20,6 @@
           value=fullname
           errors=validations.attrs.fullname.messages
           placeholder="e.g. Christina Luckasson"
-          submit=(action 'signupAndAuthenticate')
         }}
         {{validated-input
           label="Email"
@@ -28,7 +27,6 @@
           value=email
           errors=validations.attrs.email.messages
           placeholder="e.g. christina@stthomashospital.com"
-          submit=(action 'signupAndAuthenticate')
         }}
         {{validated-input
           label="Password"
@@ -40,7 +38,6 @@
           placeholder="e.g. •••••••••"
           helpText="Minimum 8 characters. Must include an uppercase letter or number."
           showPasswordButton=true
-          submit=(action 'signupAndAuthenticate')
           passwordStrength=passwordStrength
         }}
         {{async-button
