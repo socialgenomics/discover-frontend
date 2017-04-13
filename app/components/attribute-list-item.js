@@ -31,7 +31,7 @@ export default Component.extend(
     isNumber: computed.match('value', /^\d+$/),
     isValid: computed('group', 'validations.isValid', 'isNumber', function() {
       const validAndUnique = get(this, 'validations.isValid') && get(this, 'isUnique');
-      if (get(this, 'group') === 'pmid') {
+      if (get(this, 'group') === 'pmid' || get(this, 'group') === 'samples') {
         return validAndUnique && get(this, 'isNumber');
       }
       return validAndUnique;

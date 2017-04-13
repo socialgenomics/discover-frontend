@@ -3,7 +3,7 @@
     {{#if (eq attribute.key 'pmid')}}
       <a target="_blank"
         href="https://www.ncbi.nlm.nih.gov/pubmed/{{attribute.value}}"
-        class="u-fs2 u-tc-secondary u-hv-tc-primary u-td-underline"
+        class="u-fs2 u-tc-secondary u-hv-tc-primary u-td-underline u-line-break"
         {{action 'trackPubmedClick'}}
         >
         {{attribute.value}}
