@@ -1,48 +1,56 @@
-<div class="grid-wrapper grid-wrapper-stepped">
-  <main id="profile">
-    <div class="grid">
-      <div class="grid__col grid__col--s-3-of-3 grid__col--m-1-of-3 grid__col--1-of-3">
-        <section class="c-card u-p2">
-          <div class="u-ta-center u-pos-relative">
-            <h1 class="u-fs4 u-mb1">{{model.user.displayName}}</h1>
-            <h4>{{model.user.profile.workOrganisation}}</h4>
-
-            {{#if isOwnProfile}}{{#link-to "users.profile" class="fa-2x u-pos-absolute u-pos-right0 u-pos-top0 u-tc-secondary"}}{{fa-icon "pencil-square-o"}}{{/link-to}}{{/if}}
+<div class="grid-wrapper grid-wrapper-fluid">
+  <div class="grid">
+    <div class="grid__col grid__col--1-of-3">
+      <section class="c-card u-p2 u-full-width">
+        <div class="u-pos-relative">
+          <div class="u-ta-center">
             <div class="profile-img">
               <img class="u-w3 u-mb1 u-circle" src={{model.user.profile.avatar}}>
             </div>
-            {{#if model.is_verified}}
-              <h4 class="u-tc-teal u-fs2">{{fa-icon "check-circle"}} Verified Account</h4>
-            {{else}}
-              {{#if isOwnProfile}}
-                <h4>{{#link-to 'users.trust' class="u-tc-red"}}{{fa-icon "envelope"}} Please verify your email{{/link-to}}</h4>
-              {{/if}}
-            {{/if}}
+            <h1 class="u-fs3 u-mb1">{{model.user.displayName}}</h1>
+            <h4>{{model.user.profile.workOrganisation}}</h4>
           </div>
-        </section>
-      </div>
-      <div class="grid__col grid__col--s-3-of-3 grid__col--m-2-of-3 grid__col--2-of-3">
-        <!-- Favourites -->
-        {{activity-card
-          model=favouritedData
-          group="favourite"
-          isProfilePage=true
-          isOwnProfile=isOwnProfile}}
+          {{#if isOwnProfile}}
+            {{#link-to "users.profile" class="u-pos-absolute u-pos-right0 u-pos-top0 "}}
+              {{fa-icon "pencil" class="u-tc-tertiary u-hv-tc-secondary u-fs3"}}
+            {{/link-to}}
+          {{/if}}
 
-        <!-- Requests -->
-        {{activity-card
-          model=model.requests
-          group="request"
-          isProfilePage=true
-          isOwnProfile=isOwnProfile}}
-
-        <!-- Registrations -->
-        {{activity-card
-          model=model.registrations
-          group="registration"
-          isProfilePage=true
-          isOwnProfile=isOwnProfile}}
-      </div>
+          {{#if model.is_verified}}
+            <h4 class="u-ta-center u-tc-teal u-fs2">{{fa-icon "check-circle"}} Verified Account</h4>
+          {{else}}
+            {{#if isOwnProfile}}
+              <h4 class="u-ta-center">{{#link-to 'users.trust' class="u-tc-red"}}{{fa-icon "envelope"}} Please verify your email{{/link-to}}</h4>
+            {{/if}}
+          {{/if}}
+          <p>
+            {{fa-icon "calendar-o" class="u-tc-tertiary u-hv-tc-secondary u-fs2 u-mr1"}}
+            Joined {{moment-format model.user.createdAt 'MMMM YYYY'}}
+          </p>
+        </div>
+      </section>
     </div>
-  </main>
+    <div class="grid__col grid__col--2-of-3">
+      <!-- Favourites -->
+      {{activity-card
+        model=favouritedData
+        group="favourite"
+        isProfilePage=true
+        isOwnProfile=isOwnProfile}}
+
+      <!-- Requests -->
+      {{activity-card
+        model=model.requests
+        group="request"
+        isProfilePage=true
+        isOwnProfile=isOwnProfile}}
+
+      <!-- Registrations -->
+      {{activity-card
+        model=model.registrations
+        group="registration"
+        isProfilePage=true
+        isOwnProfile=isOwnProfile}}
+    </div>
+  </div>
 </div>
