@@ -10,7 +10,7 @@ export function mainCredential(credentials) {
 export default Route.extend(AuthenticatedRouteMixin, {
   session: service(),
 
-  model: function() {
+  model() {
     const userId = get(this, 'session.session.authenticated.user.id');
     return this.store.query('credential', { 'where.user_id': userId }).then((credentials) => {
       return {
