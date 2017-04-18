@@ -7,7 +7,7 @@
     </div>
     <div class="grid__col grid__col--2-of-3 grid__col--m-2-of-3 grid__col--s-2-of-3">
       {{#each (sort-by "value" attrs) as |attr|}}
-        {{attribute-list-item attribute=attr attributesForKey=attrs}}
+        {{attribute-list-item attribute=attr group=group attributesForKey=attrs}}
       {{/each}}
       {{#if session.isAuthenticated}}
         {{#if (eq openInput group)}}

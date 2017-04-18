@@ -17,10 +17,18 @@ export default Component.extend(Validations, {
       get(this, 'attributeValue') || ''
     );
   }),
+  isNumber: computed.match('attributeValue', /^\d+$/),
+  isValid: computed('group', 'validations.isValid', 'isNumber', function() {
+    const validAndUnique = get(this, 'validations.isValid') && get(this, 'isUnique');
+    if (get(this, 'group') === 'pmid' || get(this, 'group') === 'samples') {
+      return validAndUnique && get(this, 'isNumber');
+    }
+    return validAndUnique;
+  }),
 
   actions: {
     add() {
-      if (get(this, 'validations.isValid') && get(this, 'isUnique')) {
+      if (get(this, 'isValid')) {
         get(this, 'addAttribute')(get(this, 'group'), get(this, 'attributeValue'));
         get(this, 'closeInput')();
       }

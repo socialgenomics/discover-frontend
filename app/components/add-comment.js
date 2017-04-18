@@ -1,12 +1,15 @@
 import Ember from 'ember';
 
-const { Component, get, set, isEmpty } = Ember;
+const { Component, get, set, isEmpty, computed, inject: { service } } = Ember;
 
 export default Component.extend({
+  session: service(),
+
   isActive: false,
   isValid: false,
   classNames: 'u-flex u-items-start',
   classNameBindings: ['isActive:active'],
+  allowComment: computed.and('isActive', 'session.isAuthenticated'),
 
   actions: {
     showButtons: function() {
@@ -18,7 +21,7 @@ export default Component.extend({
     },
     addComment() {
       //temporary validation
-      if (!isEmpty(get(this, 'comment'))) {
+      if (!isEmpty(get(this, 'comment')) && get(this, 'allowComment')) {
         get(this, 'metrics').trackEvent({
           category: 'discover_homeauth_datasetDetail_comment',
           action: 'added comment',
