@@ -1,59 +1,10 @@
 <div class="grid-wrapper grid-wrapper-fluid">
   <div class="grid">
     <div class="grid__col grid__col--1-of-3 grid__col--m-1-of-2">
-      <section class="c-card u-p2 u-full-width">
-        <div class="u-pos-relative">
-
-          <div class="u-ta-center">
-            <div class="profile-img">
-              <img class="u-w4 u-mb1 u-circle" src={{user.profile.avatar}}>
-            </div>
-            <h1 class="u-fs3 u-tc-primary u-mb1 u-fw-reg">{{user.displayName}}</h1>
-            <h2 class="u-fs2 u-tc-secondary u-mb0 u-fw-reg">{{user.profile.work_organisation}}</h2>
-            <h3 class="u-fs1 u-tc-secondary u-fw-reg">{{user.profile.work_role}}</h3>
-          </div>
-
-          {{#if isOwnProfile}}
-            {{#link-to "users.profile" class="u-pos-absolute u-pos-right0 u-pos-top0"}}
-              {{fa-icon "pencil" class="u-tc-tertiary u-hv-tc-secondary u-fs3"}}
-            {{/link-to}}
-          {{/if}}
-
-          {{#if model.is_verified}}
-            <h4 class="u-ta-center u-tc-teal u-fs2">{{fa-icon "check-circle"}} Verified Account</h4>
-          {{else}}
-            {{#if isOwnProfile}}
-              <h4 class="u-ta-center">{{#link-to 'users.trust' class="u-tc-red"}}{{fa-icon "envelope"}} Please verify your email{{/link-to}}</h4>
-            {{/if}}
-          {{/if}}
-
-          <div class="u-mb3">
-            {{#text-with-icon icon='calendar-o' class="u-mb1"}}
-              Joined {{moment-format user.createdAt 'MMMM YYYY'}}
-            {{/text-with-icon}}
-            {{#if user.profile.location}}
-              {{text-with-icon text=user.profile.location icon='map-marker' class="u-mb1"}}
-            {{/if}}
-          </div>
-
-          {{#if user.profile.bio}}
-            <h3 class="u-fs1 u-fw-reg u-tc-tertiary u-mb1">BIO</h3>
-            <p class="u-tc-secondary u-hyphens-auto">{{user.profile.bio}}</p>
-          {{/if}}
-
-          {{#if model.external_accs}}
-            <h3 class="u-fs1 u-fw-reg u-tc-tertiary u-mb1">CONNECTED ACCOUNTS</h3>
-            {{#each model.external_accs as |account|}}
-              {{account-link account=user.profile.linkedIn accountName="LinkedIn"}}
-              {{account-link account=user.profile.googlePlus accountName="Google"}}
-              {{account-link account=user.profile.twitter accountName="Twitter"}}
-              {{account-link account=user.profile.orcid accountName="Orcid"}}
-              {{account-link account=user.profile.researchGate accountName="ResearchGate"}}
-            {{/each}}
-          {{/if}}
-
-        </div>
-      </section>
+      {{user-profile-info
+        user=user
+        isOwnProfile=isOwnProfile
+        isVerified=model.is_verified}}
     </div>
     <div class="grid__col grid__col--2-of-3 grid__col--m-1-of-2">
       <!-- Favourites -->
