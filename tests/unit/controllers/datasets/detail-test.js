@@ -52,7 +52,7 @@ describe('Unit | Controller | datasets/detail', function() {
       });
     });
 
-    describe('when only dataset attributes and action attributes are supplied', function() {
+    describe('when dataset attributes and action attributes are supplied', function() {
       it('should return a list of merged attributes', function() {
         const controller = this.subject();
         const result = controller._mergeAttributes(attributeActions, attributesFromDataset);
@@ -79,10 +79,10 @@ describe('Unit | Controller | datasets/detail', function() {
       const controller = this.subject();
       const result = controller._convertDatasetAttrsToCommonObjList(attributesFromDataset);
       expect(result.length).to.eql(3);
-
       expect(result[2].key).to.eql('tissue');
       expect(result[2].value).to.eql('heart');
     });
+
     it('should return an empty array if an empty object is supplied', function() {
       const controller = this.subject();
       const result = controller._convertDatasetAttrsToCommonObjList({});
