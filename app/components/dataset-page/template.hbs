@@ -26,7 +26,7 @@
       <div class="u-p2" style="max-height: 70%; overflow: scroll;">
         <!-- heading/description -->
         <div class="u-flex u-content-around">
-          <h2 class="u-fs2 u-fw-med u-tc-primary u-mb1 u-grow-1">{{model.title}}</h2>
+          <h2 class="u-fs2 u-fw-med u-tc-primary u-mb1 u-grow-1 u-hyphens-auto">{{model.title}}</h2>
           {{#if canEdit}}
             {{fa-icon 'pencil' class='u-tc-tertiary u-hv-tc-secondary u-cursor-pointer u-fs2'
                 click=(action 'enterEditMode')}}
