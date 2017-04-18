@@ -70,4 +70,40 @@ describe('Integration | Component | user profile info', function() {
       });
     });
   });
+
+  describe('when the profile does not belong to the current user', function() {
+    beforeEach(function() {
+      this.setProperties({
+        'isOwnProfile': false,
+        'user': user,
+        'isVerified': true
+      });
+      this.render(hbs`{{user-profile-info
+        isOwnProfile=isOwnProfile
+        user=user
+        isVerified=isVerified}}`);
+    });
+
+    it('edit profile icon is not displayed', function() {
+      expect(this.$('i').hasClass('fa-pencil')).to.be.false;
+    });
+  });
+
+  describe('regardless of current user', function() {
+    beforeEach(function() {
+      this.setProperties({
+        'isOwnProfile': false,
+        'user': user,
+        'isVerified': true
+      });
+      this.render(hbs`{{user-profile-info
+        isOwnProfile=isOwnProfile
+        user=user
+        isVerified=isVerified}}`);
+    });
+
+    it('should display the date the user joined', function() {
+      expect(this.$('.c-text-with-icon').eq(0).text().trim()).to.eql('Joined December 1995');
+    });
+  });
 });
