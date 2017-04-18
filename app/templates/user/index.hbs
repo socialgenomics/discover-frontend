@@ -41,6 +41,14 @@
             <p class="u-tc-secondary u-hyphens-auto">{{user.profile.bio}}</p>
           {{/if}}
 
+          {{#if model.external_accs}}
+            <h3 class="u-fs1 u-fw-reg u-tc-tertiary u-mb1">CONNECTED ACCOUNTS</h3>
+            {{#each model.external_accs as |account|}}
+              {{account-link account=user.profile.linkedIn accountName="LinkedIn"}}
+              {{account-link account=user.profile.googlePlus accountName="Google"}}
+            {{/each}}
+          {{/if}}
+
         </div>
       </section>
     </div>
