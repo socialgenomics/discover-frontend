@@ -8,7 +8,10 @@ export default Component.extend({
   }),
 
   accountLink: computed('account', function() {
-    if (get(this, 'account').charAt(0) === '@') return 'https://twitter.com/' + get(this, 'account');
-    else return get(this, 'account');
+    if (get(this, 'account').charAt(0) === '@') {
+      return 'https://twitter.com/' + get(this, 'account');
+    } else {
+      return get(this, 'account');
+    }
   })
 });

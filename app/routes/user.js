@@ -20,7 +20,6 @@ export default Route.extend({
           registrations: this.store.query('dataset', { 'where.user_id': userId }),
           requests: this.store.query('request', { 'where.user_id': userId }),
           user_credential: this.store.query('credential', { 'where.user_id': userId }),
-          external_accounts: this.store.query('credential', { 'where.user_id': userId, 'where.provider': 'email'}), // TODO: change to query for third party accs
           favourited_data: this._getFavouritedData(params.id),
           user_comments: this.store.query('action', { 'where.user_id': userId, 'where.type': 'comment' })
         });
@@ -31,7 +30,6 @@ export default Route.extend({
           user: values.user,
           registrations: values.registrations,
           requests: values.requests,
-          external_accs: values.external_accounts,
           is_verified: isVerified(values.user_credential)
         };
       })
