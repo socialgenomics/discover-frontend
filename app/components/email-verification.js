@@ -103,7 +103,7 @@ export default Component.extend(FlashMessageMixin, Validations, {
    * @private
    */
   _onSaveSuccess() {
-    this._showFlashMessage('success', 'Your credential has been added to your account.');
+    this._addFlashMessage('Your credential has been added to your account.', 'success')
     set(this, 'addingCredential', false);
   },
 
@@ -116,16 +116,6 @@ export default Component.extend(FlashMessageMixin, Validations, {
   _onSaveError(model, error) {
     model.rollbackAttributes();
     Logger.error(error);
-    this._showFlashMessage('warning', 'Sorry. There was a problem saving your changes.');
-  },
-
-  /**
-   * @desc adds flash message
-   * @param {String} type
-   * @param {String} message
-   * @private
-   */
-  _showFlashMessage(type, message) {
-    this.flashMessages.add({ message, type });
+    this._addFlashMessage('Sorry. There was a problem saving your changes.', 'warning')
   }
 });
