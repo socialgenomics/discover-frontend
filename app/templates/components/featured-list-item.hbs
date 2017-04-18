@@ -15,8 +15,10 @@
   {{#link-to 'datasources.source' model.id}}
     {{#if model.properties.logo}}
       <div class="grid__col grid__col--2-of-6 u-pr3">
-        <img class="c-img--100" src="{{model.properties.logo}}">
-        {{#if isNewest}} {{new-label model.updatedAt}} {{/if}}
+        <div class="u-flex u-items-center u-flex-column">
+          <img class="u-my2 u-h3" src="{{model.properties.logo}}">
+          {{#if isNewest}}<div class="u-self-start">{{new-label model.updatedAt}}</div>{{/if}}
+        </div>
       </div>
     {{else}}
       <div class="grid__col grid__col--2-of-6">
