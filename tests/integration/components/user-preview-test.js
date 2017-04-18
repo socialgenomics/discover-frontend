@@ -30,7 +30,7 @@ describe('Integration | Component | user preview', function() {
     });
   });
   describe('user has work role or organisation', function() {
-    it('displays work role and if only work role', function() {
+    it('displays work role if only work role', function() {
       this.setProperties({
         'user': {
           profile: { work_role: 'Developer' }
@@ -40,7 +40,7 @@ describe('Integration | Component | user preview', function() {
       expect(this.$('p.u-fs1').text()).to.eql('Developer');
     });
 
-    it('displays work role and if only work role', function() {
+    it('displays work organisation if only work organisation', function() {
       this.setProperties({
         'user': {
           profile: { work_organisation: 'Repositive' }

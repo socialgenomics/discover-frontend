@@ -28,6 +28,14 @@ export default Component.extend(
         get(this, 'value') || ''
       );
     }),
+    isNumber: computed.match('value', /^\d+$/),
+    isValid: computed('group', 'validations.isValid', 'isNumber', function() {
+      const validAndUnique = get(this, 'validations.isValid') && get(this, 'isUnique');
+      if (get(this, 'group') === 'pmid' || get(this, 'group') === 'samples') {
+        return validAndUnique && get(this, 'isNumber');
+      }
+      return validAndUnique;
+    }),
 
     actions: {
       cancelEditMode() {
@@ -35,7 +43,7 @@ export default Component.extend(
       },
 
       save() {
-        if (get(this, 'validations.isValid') && get(this, 'isUnique')) {
+        if (get(this, 'isValid')) {
           const attribute = get(this, 'attribute');
           const attrAction = get(this, 'store')
             .peekRecord('action', get(attribute, 'actionId'));
