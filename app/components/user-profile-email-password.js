@@ -6,7 +6,7 @@ export default Component.extend({
   addingCredential: false,
 
   actions: {
-    addCredential() {
+    toggleAddCredentialInput() {
       set(this, 'addingCredential', true);
     }
   }

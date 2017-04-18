@@ -7,8 +7,8 @@ export default Component.extend(FlashMessageMixin, {
   store: service(),
 
   actions: {
-    addCredential() {
-      this.sendAction('addCredential')
+    toggleAddCredentialInput() {
+      get(this, 'toggleAddCredentialInput')()
     },
 
     makePrimary(email) {
