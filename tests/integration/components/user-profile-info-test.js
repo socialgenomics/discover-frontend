@@ -62,5 +62,12 @@ describe('Integration | Component | user profile info', function() {
         expect(this.$('a').eq(1).text().trim()).to.eql('Add your job role');
       });
     });
+
+    describe('user has no bio', function() {
+      it('renders link to edit profile', function() {
+        this.set('user.profile.bio', null);
+        expect(this.$('a').eq(3).text().trim()).to.eql('Add your bio');
+      });
+    });
   });
 });

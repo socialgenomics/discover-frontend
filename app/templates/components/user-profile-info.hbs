@@ -44,5 +44,8 @@
   {{#if user.profile.bio}}
     <h3 class="u-fs1 u-fw-reg u-tc-tertiary u-mb1">BIO</h3>
     <p class="u-tc-secondary u-hyphens-auto">{{user.profile.bio}}</p>
+  {{else if isOwnProfile}}
+    <h3 class="u-fs1 u-fw-reg u-tc-tertiary u-mb1">BIO</h3>
+    {{#link-to "users.profile" class="u-block u-mb3 u-tc-tertiary u-td-underline u-hv-tc-secondary"}}Add your bio{{/link-to}}
   {{/if}}
 </div>
