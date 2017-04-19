@@ -7,11 +7,13 @@ describe('Integration | Component | user profile external accounts', function() 
   const userId = 'userId';
   const userProfileData = {
     profile: {
-      googlePlus: 'http://googlePlus.com',
-      linkedIn: 'http://linkedIn.com',
-      twitter: '@foobar',
-      researchGate: 'http://researchGate.com',
-      orcid: 'http://orcid.com'
+      accounts: {
+        googlePlus: 'http://googlePlus.com',
+        linkedIn: 'http://linkedIn.com',
+        twitter: '@foobar',
+        researchGate: 'http://researchGate.com',
+        orcid: 'http://orcid.com'  
+      }
     }
   };
 
@@ -50,10 +52,10 @@ describe('Integration | Component | user profile external accounts', function() 
 
     const $formItems = this.$('input');
 
-    expect($formItems.eq(0).val().trim()).to.be.equal(userProfileData.profile.googlePlus);
-    expect($formItems.eq(1).val().trim()).to.be.equal(userProfileData.profile.linkedIn);
-    expect($formItems.eq(2).val().trim()).to.be.equal(userProfileData.profile.twitter);
-    expect($formItems.eq(3).val().trim()).to.be.equal(userProfileData.profile.researchGate);
-    expect($formItems.eq(4).val().trim()).to.be.equal(userProfileData.profile.orcid);
+    expect($formItems.eq(0).val().trim()).to.be.equal(userProfileData.profile.accounts.googlePlus);
+    expect($formItems.eq(1).val().trim()).to.be.equal(userProfileData.profile.accounts.linkedIn);
+    expect($formItems.eq(2).val().trim()).to.be.equal(userProfileData.profile.accounts.twitter);
+    expect($formItems.eq(3).val().trim()).to.be.equal(userProfileData.profile.accounts.researchGate);
+    expect($formItems.eq(4).val().trim()).to.be.equal(userProfileData.profile.accounts.orcid);
   });
 });

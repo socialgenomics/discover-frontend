@@ -3,18 +3,18 @@
 
 import Ember from 'ember';
 import { buildValidations } from 'ember-cp-validations';
-import urlFormatValidatoru from 'repositive/validations/urlFormatValidator';
+import urlFormatValidator from 'repositive/validations/urlFormatValidator';
 import { errorMessages, patterns } from 'repositive/validations/validations-config';
 import { validator } from 'ember-cp-validations';
 import FlashMessageMixin from 'repositive/mixins/flash-message-mixin';
 
 const { Component, inject: { service }, Logger, set, get } = Ember;
 const Validations = buildValidations({
-  [createUserAttrKey('profile.googlePlus')]: urlFormatValidatoru(),
-  [createUserAttrKey('profile.linkedIn')]: urlFormatValidatoru(),
-  [createUserAttrKey('profile.researchGate')]: urlFormatValidatoru(),
-  [createUserAttrKey('profile.orcid')]: urlFormatValidatoru(),
-  [createUserAttrKey('profile.twitter')]: validator('format', {
+  [createUserAttrKey('profile.accounts.googlePlus')]: urlFormatValidator(),
+  [createUserAttrKey('profile.accounts.linkedIn')]: urlFormatValidator(),
+  [createUserAttrKey('profile.accounts.researchGate')]: urlFormatValidator(),
+  [createUserAttrKey('profile.accounts.orcid')]: urlFormatValidator(),
+  [createUserAttrKey('profile.accounts.twitter')]: validator('format', {
     regex: patterns.twitter,
     allowBlank: true,
     message: errorMessages.invalidTwitterHandle
@@ -35,27 +35,30 @@ export default Component.extend(Validations, FlashMessageMixin, {
 
   init() {
     this._super(...arguments);
+    if (!get(this, 'userProfileData.profile.accounts')) {
+      set(this, 'userProfileData.profile.accounts', {});
+    }
 
     set(this, 'userAttributes', [
       {
         label: 'Google+',
-        userAttributeKey: this._createUserAttrKey('profile.googlePlus')
+        userAttributeKey: this._createUserAttrKey('profile.accounts.googlePlus')
       },
       {
         label: 'LinkedIn',
-        userAttributeKey: this._createUserAttrKey('profile.linkedIn')
+        userAttributeKey: this._createUserAttrKey('profile.accounts.linkedIn')
       },
       {
         label: 'Twitter',
-        userAttributeKey: this._createUserAttrKey('profile.twitter')
+        userAttributeKey: this._createUserAttrKey('profile.accounts.twitter')
       },
       {
         label: 'Research Gate',
-        userAttributeKey: this._createUserAttrKey('profile.researchGate')
+        userAttributeKey: this._createUserAttrKey('profile.accounts.researchGate')
       },
       {
         label: 'ORCID',
-        userAttributeKey: this._createUserAttrKey('profile.orcid')
+        userAttributeKey: this._createUserAttrKey('profile.accounts.orcid')
       }
     ]);
   },
@@ -66,7 +69,6 @@ export default Component.extend(Validations, FlashMessageMixin, {
       const userProfileData = get(this, 'userProfileData');
 
       Object.keys(userProfileData).forEach(attr => set(userModel, attr, userProfileData[attr]));
-
       return userModel
         .save()
         .then(this._onSaveSuccess.bind(this))
