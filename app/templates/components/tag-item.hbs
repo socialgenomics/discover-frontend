@@ -1,6 +1,10 @@
-{{#link-to 'datasets.search' (query-params query=tagQuery) class="u-tc-secondary u-hyphens-auto"}}
-  {{tagText}}
-{{/link-to}}
+{{#if (eq type 'tag')}}
+  {{#link-to 'datasets.search' (query-params query=tagQuery) class="u-tc-secondary u-hyphens-auto"}}
+    {{tagText}}
+  {{/link-to}}
+{{else}}
+  <span class="u-tc-secondary u-hyphens-auto">{{tagText}}</span>
+{{/if}}
 {{#if belongsToUser}}
   <span {{action 'delete'}} class="u-hv-tc-red u-cursor-pointer u-tc-secondary u-p1">{{fa-icon "fa-times"}}</span>
 {{/if}}
