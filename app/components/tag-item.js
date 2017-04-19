@@ -7,27 +7,27 @@ export default Component.extend(FlashMessageMixin, {
   session: service(),
 
   tagName: 'span',
-  classNames: ['u-p1', 'u-bc-off-white', 'u-mr1', 'u-mb1', 'u-rounded', 'u-border', 'u-hv-bc-off-white', 'u-inline-block'],
+  classNames: ['t-tag-item', 'u-p1', 'u-bc-off-white', 'u-mr1', 'u-mb1', 'u-rounded', 'u-border', 'u-hv-bc-off-white', 'u-inline-block'],
 
   belongsToUser: computed('session', function () {
     const currentUserId = get(this, 'session.session.authenticated.user.id');
-    const tagUserId = get(this, 'tag.userId.id');
+    const tagUserId = get(this, 'userId');
     return tagUserId === currentUserId;
   }),
 
   tagQuery: computed('tagText', function() {
-    return `tag:"${get(this, 'tagText')}"`;
+    return `${get(this, 'type')}:"${get(this, 'tagText')}"`;
   }),
 
   actions: {
-    deleteTag() {
+    delete() {
       const tag = get(this, 'tag');
       if (tag) {
         tag.destroyRecord()
           .then(this._handleDeleteSuccess.bind(this))
           .catch(this._handleDeleteError.bind(this));
       } else {
-        get(this, 'deleteTag')(get(this, 'tagText'));
+        get(this, 'delete')(get(this, 'tagText'));
       }
     }
   },

@@ -3,12 +3,12 @@
   {{#if editInterests.length}}
   <div>
     {{#each editInterests as |interest|}}
-      <span class="interest-pill u-p1 u-bc-off-white u-mr1 u-mb1 u-rounded u-border u-hv-bc-off-white u-inline-block">
-        {{interest}}
-        <span class="u-tc-secondary" {{action "removeInterest" interest}}>
-          {{fa-icon "fa-times"}}
-        </span>
-      </span>
+      {{tag-item
+        type='interest'
+        tagText=interest
+        userId=userId
+        delete=(action 'removeInterest')
+      }}
     {{/each}}
   </div>
   {{/if}}
