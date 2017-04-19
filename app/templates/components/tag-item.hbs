@@ -1,5 +1,5 @@
 {{#link-to 'datasets.search' (query-params query=tagQuery) class="u-tc-secondary u-line-keep"}}
-  {{tag.properties.text}}
+  {{tagText}}
 {{/link-to}}
 {{#if belongsToUser}}
   <span {{action 'deleteTag' tag}} class="u-tc-secondary">{{fa-icon "fa-times"}}</span>

@@ -15,15 +15,20 @@ export default Component.extend(FlashMessageMixin, {
     return tagUserId === currentUserId;
   }),
 
-  tagQuery: computed('tag.properties.text', function() {
-    return `tag:"${get(this, 'tag.properties.text')}"`;
+  tagQuery: computed('tagText', function() {
+    return `tag:"${get(this, 'tagText')}"`;
   }),
 
   actions: {
-    deleteTag(tag) {
-      tag.destroyRecord()
-        .then(this._handleDeleteSuccess.bind(this))
-        .catch(this._handleDeleteError.bind(this));
+    deleteTag(tagText) {
+      const tag = get(this, 'tag');
+      if (tag) {
+        tag.destroyRecord()
+          .then(this._handleDeleteSuccess.bind(this))
+          .catch(this._handleDeleteError.bind(this));
+      } else {
+        get(this, 'deleteTag')(tagText);
+      }
     }
   },
   _handleDeleteSuccess() {

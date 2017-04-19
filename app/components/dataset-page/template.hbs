@@ -35,11 +35,14 @@
         {{#if model.description}}
           <p class="u-markdown-formatting u-fs1">{{markdown-to-html markdown=model.description extensions='targetBlankLinks sanitize'}}</p>
         {{/if}}
-        
+
         {{#if tags}}
           <div class="u-pt2 u-pb1">
             {{#each tags as |tag|}}
-              {{tag-item tag=tag}}
+              {{tag-item
+                tag=tag
+                tagText=tag.properties.text
+              }}
             {{/each}}
           </div>
         {{/if}}
