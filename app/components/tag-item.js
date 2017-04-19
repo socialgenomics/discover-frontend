@@ -8,7 +8,7 @@ export default Component.extend(FlashMessageMixin, {
 
   classNames: ['t-tag-item', 'u-p1', 'u-bc-off-white', 'u-mr1', 'u-mb1', 'u-rounded', 'u-border', 'u-hv-bc-off-white', 'u-inline-block'],
 
-  belongsToUser: computed('session', function () {
+  belongsToUser: computed('session', 'userId', function () {
     const currentUserId = get(this, 'session.session.authenticated.user.id');
     const tagUserId = get(this, 'userId');
     return tagUserId === currentUserId;
