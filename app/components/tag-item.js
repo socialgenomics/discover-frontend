@@ -6,7 +6,6 @@ const { inject: { service }, Component, computed, get, Logger } = Ember;
 export default Component.extend(FlashMessageMixin, {
   session: service(),
 
-  tagName: 'span',
   classNames: ['t-tag-item', 'u-p1', 'u-bc-off-white', 'u-mr1', 'u-mb1', 'u-rounded', 'u-border', 'u-hv-bc-off-white', 'u-inline-block'],
 
   belongsToUser: computed('session', function () {
@@ -31,9 +30,11 @@ export default Component.extend(FlashMessageMixin, {
       }
     }
   },
+
   _handleDeleteSuccess() {
     this._addFlashMessage('Tag successfully deleted.', 'success');
   },
+
   _handleDeleteError(error) {
     this._addFlashMessage('Something went wrong while deleting your tag. Please try again later.', 'warning');
     Logger.error(error)
