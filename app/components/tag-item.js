@@ -20,14 +20,14 @@ export default Component.extend(FlashMessageMixin, {
   }),
 
   actions: {
-    deleteTag(tagText) {
+    deleteTag() {
       const tag = get(this, 'tag');
       if (tag) {
         tag.destroyRecord()
           .then(this._handleDeleteSuccess.bind(this))
           .catch(this._handleDeleteError.bind(this));
       } else {
-        get(this, 'deleteTag')(tagText);
+        get(this, 'deleteTag')(get(this, 'tagText'));
       }
     }
   },
