@@ -12,7 +12,7 @@ describe('Integration | Component | user profile external accounts', function() 
         linkedIn: 'http://linkedIn.com',
         twitter: '@foobar',
         researchGate: 'http://researchGate.com',
-        orcid: 'http://orcid.com'  
+        orcid: 'http://orcid.com'
       }
     }
   };
