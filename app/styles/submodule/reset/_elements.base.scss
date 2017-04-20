@@ -1,0 +1,113 @@
+/* ==========================================================================
+    BASE ELEMENT STYLING
+   ========================================================================== */
+
+// TODO: review & split up this document
+
+html {
+  font-size: ($global-font-size / 16px) * 1em;
+  line-height: $global-line-height / $global-font-size;
+  overflow-y: scroll;
+  min-height: 100%;
+  color: $color-dark-grey;
+}
+
+
+body {
+  -webkit-font-smoothing: antialiased; // A bit opinionated: text is antialiased for more consistent rendering across Chrome & Safari
+  -moz-osx-font-smoothing: grayscale;
+  font-family: $font-stack-roboto;
+  @extend .u-fs1;
+}
+
+// Text
+/* ==================================== */
+/*
+  * h1 - h6 reset in favour of a component-based approach (see _components.type_setting.scss)
+  * > see article: http://csswizardry.com/2016/02/managing-typography-on-large-apps/
+*/
+
+h1, h2, h3, h4, h5, h6 {
+  font-size: 1.25rem;
+  font-weight: 500;
+  @extend .u-tc-primary;
+}
+
+p {
+	font-size: inherit;
+  @extend .u-tc-secondary;
+}
+
+a {
+  text-decoration: none;
+  color: $color-secondary-blue;
+  cursor: pointer;
+}
+
+// remove mobile styling on iOS mobile devices
+a[href^="tel"]{
+    color:inherit;
+    text-decoration:none;
+}
+
+// remove list-style as default
+// to apply bullet points, use o-list-bullet
+ul {
+  list-style: none;
+  color: inherit;
+}
+
+input {
+  font-family: inherit;
+  color: inherit;
+}
+
+input, textarea {
+  border-radius: $global-border-radius;
+  border: $global-border-style;
+  color: inherit;
+  font-size: $global-font-size;
+  line-height: inherit;
+  outline: none;
+  padding: $global-spacing-unit-small;
+  width: 100%;
+}
+
+input {
+  height: $global-spacing-unit-large;
+}
+
+textarea {
+  height: $global-spacing-unit-huge;
+}
+
+input[type="checkbox"] {
+  height: $global-spacing-unit-small;
+}
+
+
+// Declare margins in the same direction
+/* ==================================== */
+/*
+ * helps maintain vertical rhythm
+ * avoids margin collapsing
+ * see csswizardry.com/2012/06/single-direction-margin-declarations
+*/
+
+h1, h2, h3, h4, h5, h6,
+blockquote, p, pre,
+dl, ol, ul,
+figure,
+hr,
+table,
+fieldset,
+.c-card {
+  margin-top: 0;
+  margin-bottom: $global-spacing-unit;
+}
+
+
+// Ensures consistent indentation on lists
+dd, ol, ul {
+  margin-left: $global-spacing-unit;
+}
