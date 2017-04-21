@@ -18,6 +18,7 @@
 @import 'shared/objects/objects.spacing';
 @import 'shared/objects/objects.toast-grid';
 
+@import 'custom/components/components.avatar-upload';
 @import 'custom/components/components.call-to-action-banner';
 @import 'custom/components/components.collection-list-item';
 @import 'custom/components/components.follow-button';
@@ -26,6 +27,7 @@
 @import 'custom/components/components.navbar';
 @import 'custom/components/components.notifications';
 @import 'custom/components/components.select';
+@import 'custom/components/components.user-profile-section';
 @import 'shared/components/components.balloons';
 @import 'shared/components/components.buttons';
 @import 'shared/components/components.card';
@@ -37,6 +39,7 @@
 @import 'shared/components/components.sidebar';
 @import 'shared/components/components.validated-input';
 
+@import 'shared/utilities/utilities.animations';
 @import 'shared/utilities/utilities.borders';
 @import 'shared/utilities/utilities.color';
 @import 'shared/utilities/utilities.cursors';

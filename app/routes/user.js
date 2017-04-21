@@ -17,7 +17,6 @@ export default Route.extend({
         // TODO: The majority of this info can be cached and retrieved from the same session instead of doing unnecesary calls.
         return new RSVP.hash({
           user: user,
-          user_profile: this.store.query('userProfile', { 'where.user_id': userId }),
           registrations: this.store.query('dataset', { 'where.user_id': userId }),
           requests: this.store.query('request', { 'where.user_id': userId }),
           user_credential: this.store.query('credential', { 'where.user_id': userId }),
@@ -34,7 +33,6 @@ export default Route.extend({
         });
         return {
           user: values.user,
-          user_profile: values.user_profile.get('firstObject'),
           registrations: values.registrations,
           requests: values.requests,
           is_verified: isVerified(values.user_credential)

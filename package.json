@@ -64,6 +64,7 @@
     "ember-data": "2.7.0",
     "ember-disable-proxy-controllers": "^1.0.1",
     "ember-export-application-global": "1.0.5",
+    "ember-file-upload": "2.0.0-beta.36",
     "ember-font-awesome": "3.0.5",
     "ember-fr-markdown-file": "0.0.0",
     "ember-link-action": "0.0.35",

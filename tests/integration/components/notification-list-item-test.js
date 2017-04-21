@@ -19,7 +19,7 @@ describe('Integration | Component | notification list item', function() {
           type: 'comment',
           userId: {
             displayName: 'Cat Dog',
-            userProfile: {
+            profile: {
               avatar: 'www.example.com/pic'
             }
           }

@@ -1,0 +1,32 @@
+{{#file-upload
+  class='u-pos-relative u-w4 u-h4 u-circle u-mb1'
+  name="photos"
+  accept="image/*"
+  multiple=false
+  onfileadd=(action "uploadImage")
+}}
+  {{# unless (or uploading uploadFailed reloadFailed)}}
+    <img class="u-pos-absolute u-pos-top0 u-pos-left0  u-pos-bottom0 u-pos-right0 u-circle" src={{avatarImg}}>
+    <span class="u-cursor-pointer u-flex u-justify-center u-items-center u-pos-relative u-w4 u-h4 u-circle
+      c-avatar-upload__hover u-hv-bc-darken40">
+      <span class="u-zindex-1 u-tc-white u-fs2 u-fw-med u-hide-display c-avatar-upload__hover__text">Edit photo</span>
+    </span>
+  {{else}}
+    <span class="u-flex u-flex-column u-justify-center u-items-center u-w3 u-h3 u-circle u-border u-bc-white u-cursor-pointer">
+      {{#if uploadFailed}}
+        {{fa-icon "times" size=2 class="u-tc-tertiary"}}
+        <span class="error-state u-tc-tertiary">Upload failed</span>
+      {{else if reloadFailed}}
+        {{fa-icon "check" size=2 class="u-tc-tertiary"}}
+        <span class="error-state u-tc-tertiary">Image uploaded</span>
+      {{else}}
+        {{fa-icon "refresh" size=2 class="u-tc-tertiary u-animation-spin"}}
+      {{/if}}
+    </span>
+  {{/unless}}
+{{/file-upload}}
+
+<p class="u-tc-red u-ta-center">
+  {{#if uploadFailed}}Something went wrong while uploading your image.<br>Please try again later.{{/if}}
+  {{#if reloadFailed}}Something went wrong while uploading your image.<br>Your avatar will be displayed soon.{{/if}}
+</p>
