@@ -2,10 +2,6 @@
     #POSITION & Z-INDICES
    ========================================================================== */
 
-/*
-  POSITION
-*/
-
 .static   { position: static; }
 .relative { position: relative; }
 .absolute { position: absolute; }
@@ -13,7 +9,6 @@
 
 /*
   'PINNED' POSITION
-
     Base:
       -0 suffix = pin to a given aspect
 
@@ -31,7 +26,6 @@
 
 /*
   Z-INDICES
-
     Base:
       z = z-index
 
