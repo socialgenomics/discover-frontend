@@ -2,13 +2,18 @@
     #POSITION & Z-INDICES
    ========================================================================== */
 
+/*
+  POSITION
+*/
+
 .static   { position: static; }
 .relative { position: relative; }
 .absolute { position: absolute; }
 .fixed    { position: fixed; }
 
 /*
-  Pinned Position Syntax
+  'PINNED' POSITION
+
     Base:
       -0 suffix = pin to a given aspect
 
@@ -25,7 +30,8 @@
 .left-0   { left: 0; }
 
 /*
-  Z-Index Syntax:
+  Z-INDICES
+
     Base:
       z = z-index
 
