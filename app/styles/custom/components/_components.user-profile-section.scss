@@ -2,7 +2,7 @@
 // TODO: remove once we have support for utility classes per breakpoint in CSS lib
 // https://github.com/repositive/report-issues/issues/755
 
-.user-profile-section-header {
+.c-user-profile-section-header {
   padding-top: $global-spacing-unit-large;
 
   @media (min-width: $breakpoint-medium) {
@@ -10,7 +10,7 @@
   }
 }
 
-.user-profile-section-wrapper--drop {
+.c-user-profile-section-wrapper--drop {
   @media (min-width: $breakpoint-medium) {
     padding-top: $global-spacing-unit-large;
   }
