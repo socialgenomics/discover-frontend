@@ -1,0 +1,26 @@
+/* ========================================================================
+    #SPACING
+   ======================================================================== */
+
+/*
+  Spacing Units
+*/
+
+$global-spacing-unit:   24px !default;
+
+$spacing-factor-tiny:   0.25  !default;
+$spacing-factor-small:  0.5   !default;
+$spacing-factor-medium: 1     !default;
+$spacing-factor-large:  2     !default;
+$spacing-factor-huge:   4     !default;
+
+/*
+  Do not edit this block - this calculates the spacing units based on
+  factors defined above
+*/
+
+$spacing-unit-tiny:     round($global-spacing-unit * $spacing-factor-tiny);
+$spacing-unit-small:    round($global-spacing-unit * $spacing-factor-small);
+$spacing-unit-medium:   round($global-spacing-unit * $spacing-factor-medium);
+$spacing-unit-large:    round($global-spacing-unit * $spacing-factor-large);
+$spacing-unit-huge:     round($global-spacing-unit * $spacing-factor-huge);
