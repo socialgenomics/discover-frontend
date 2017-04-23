@@ -5,13 +5,13 @@
 .c-user-profile-section-header {
   padding-top: $global-spacing-unit-large;
 
-  @media (min-width: $breakpoint-medium) {
+  @media (min-width: $breakpoint-large) {
     padding: 0 0 0 $global-spacing-unit-large;
   }
 }
 
 .c-user-profile-section-wrapper--drop {
-  @media (min-width: $breakpoint-medium) {
+  @media (min-width: $breakpoint-large) {
     padding-top: $global-spacing-unit-large;
   }
 }
