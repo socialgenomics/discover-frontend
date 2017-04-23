@@ -39,19 +39,23 @@ export default Component.extend(Validations, FlashMessageMixin, {
     set(this, 'userAttributes', [
       {
         label: 'Google+',
-        userAttributeKey: this._createUserAttrKey('profile.googlePlus')
+        userAttributeKey: this._createUserAttrKey('profile.googlePlus'),
+        placeholder: 'https://plus.google.com/112233445566778899000'
       },
       {
         label: 'LinkedIn',
-        userAttributeKey: this._createUserAttrKey('profile.linkedIn')
+        userAttributeKey: this._createUserAttrKey('profile.linkedIn'),
+        placeholder: 'http://www.linkedin.com/in/christinaLuckasson'
       },
       {
         label: 'Twitter',
-        userAttributeKey: this._createUserAttrKey('profile.twitter')
+        userAttributeKey: this._createUserAttrKey('profile.twitter'),
+        placeholder: '@christinaLuckasson'
       },
       {
         label: 'Research Gate',
-        userAttributeKey: this._createUserAttrKey('profile.researchGate')
+        userAttributeKey: this._createUserAttrKey('profile.researchGate'),
+        placeholder: 'https://www.researchgate.net/profile/Christina_Luckasson'
       },
       {
         label: 'ORCID',
