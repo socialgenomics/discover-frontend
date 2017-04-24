@@ -9,15 +9,15 @@
 .table-cell   { display: table-cell; }
 
 /*
-  HIDE:
-    Base:
-      hide = applies display: none;
+  HIDE
+  Base:
+    hide = applies display: none;
 
-    Modifiers:
-      -s = on small viewport widths
-      -m = on medium viewport widths
-      -l = on large viewport widths
-      -w = on wide viewport widths
+  Modifiers:
+   -s = on small viewport widths
+   -m = on medium viewport widths
+   -l = on large viewport widths
+   -w = on wide viewport widths
 */
 
 .hide { display: none !important; }

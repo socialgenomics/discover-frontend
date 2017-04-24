@@ -3,13 +3,16 @@
    ========================================================================== */
 
 /*
-  NOTE: Adapted from: https://github.com/basscss/basscss/blob/master/modules/flexbox/index.css
+  Docs:
+    Adapted from: https://github.com/basscss/basscss/blob/master/modules/flexbox/index.css
 */
 
 .flex { display: flex; }
 
 /*
-  Direction & Wrapping
+  DIRECTION & WRAPPING
+  Docs:
+    Use on container
 */
 
 .flex-column      { flex-direction: column; }
@@ -17,7 +20,9 @@
 .flex-wrap        { flex-wrap: wrap; }
 
 /*
-  Alignment (use on container)
+  ALIGNMENT
+  Docs:
+    Use on container
 */
 
 .justify-start   { justify-content: flex-start; }
@@ -33,7 +38,9 @@
 .items-stretch  { align-items: stretch; }
 
 /*
-  Alignment (use on child elements)
+  ALIGNMENT
+  Docs:
+    Use on child elements
 */
 
 .content-start   { align-content: flex-start; }
@@ -50,7 +57,9 @@
 .self-stretch  { align-self: stretch; }
 
 /*
- Others Helpers (use on child elements)
+  OTHER HELPERS
+  Docs:
+    Use on child elements
 */
 
 .flex-grow { flex-grow: 1; }

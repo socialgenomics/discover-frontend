@@ -9,14 +9,14 @@
 
 /*
   'PINNED' POSITION
-    Base:
-      -0 suffix = pin to a given aspect
+  Base:
+   -0 suffix = pin to a given aspect
 
-    Modifiers:
-      top
-      right
-      bottom
-      left
+  Modifiers:
+    top
+    right
+    bottom
+    left
 */
 
 .top-0    { top: 0; }
@@ -26,17 +26,17 @@
 
 /*
   Z-INDICES
-    Base:
-      z = z-index
+  Base:
+    z = z-index
 
-    Modifiers:
-      0 = bottom
-      1 = below
-      2 = level
-      3 = above
-      4 = near
-      5 = top
-      6 = everest
+  Modifiers:
+    0 = bottom
+    1 = below
+    2 = level
+    3 = above
+    4 = near
+    5 = top
+    6 = everest
 */
 
 .z0 { z-index: -10; }
