@@ -61,4 +61,13 @@
     <h3 class="u-fs1 u-fw-reg u-tc-tertiary u-mb1">INTERESTS</h3>
     {{#link-to "users.profile" class="u-block u-mb3 u-tc-tertiary u-td-underline u-hv-tc-secondary"}}Add your interests{{/link-to}}
   {{/if}}
+  
+  {{#if user.profile.accounts}}
+    <h3 class="u-fs1 u-fw-reg u-tc-tertiary u-mb1">CONNECTED ACCOUNTS</h3>
+    {{account-link account=user.profile.accounts.linkedIn accountName="LinkedIn"}}
+    {{account-link account=user.profile.accounts.googlePlus accountName="Google"}}
+    {{account-link account=user.profile.accounts.twitter accountName="Twitter"}}
+    {{account-link account=user.profile.accounts.orcid accountName="Orcid"}}
+    {{account-link account=user.profile.accounts.researchGate accountName="ResearchGate"}}
+  {{/if}}
 </div>
