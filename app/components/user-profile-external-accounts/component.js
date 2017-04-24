@@ -3,17 +3,17 @@
 
 import Ember from 'ember';
 import { buildValidations } from 'ember-cp-validations';
-import urlFormatValidatoru from 'repositive/validations/urlFormatValidator';
+import urlFormatValidator from 'repositive/validations/urlFormatValidator';
 import { errorMessages, patterns } from 'repositive/validations/validations-config';
 import { validator } from 'ember-cp-validations';
 import FlashMessageMixin from 'repositive/mixins/flash-message-mixin';
 
 const { Component, inject: { service }, Logger, set, get } = Ember;
 const Validations = buildValidations({
-  [createUserAttrKey('profile.googlePlus')]: urlFormatValidatoru(),
-  [createUserAttrKey('profile.linkedIn')]: urlFormatValidatoru(),
-  [createUserAttrKey('profile.researchGate')]: urlFormatValidatoru(),
-  [createUserAttrKey('profile.orcid')]: urlFormatValidatoru(),
+  [createUserAttrKey('profile.googlePlus')]: urlFormatValidator(),
+  [createUserAttrKey('profile.linkedIn')]: urlFormatValidator(),
+  [createUserAttrKey('profile.researchGate')]: urlFormatValidator(),
+  [createUserAttrKey('profile.orcid')]: urlFormatValidator(),
   [createUserAttrKey('profile.twitter')]: validator('format', {
     regex: patterns.twitter,
     allowBlank: true,
@@ -39,23 +39,28 @@ export default Component.extend(Validations, FlashMessageMixin, {
     set(this, 'userAttributes', [
       {
         label: 'Google+',
-        userAttributeKey: this._createUserAttrKey('profile.googlePlus')
+        userAttributeKey: this._createUserAttrKey('profile.googlePlus'),
+        placeholder: 'https://plus.google.com/112233445566778899000'
       },
       {
         label: 'LinkedIn',
-        userAttributeKey: this._createUserAttrKey('profile.linkedIn')
+        userAttributeKey: this._createUserAttrKey('profile.linkedIn'),
+        placeholder: 'http://www.linkedin.com/in/christinaLuckasson'
       },
       {
         label: 'Twitter',
-        userAttributeKey: this._createUserAttrKey('profile.twitter')
+        userAttributeKey: this._createUserAttrKey('profile.twitter'),
+        placeholder: '@christinaLuckasson'
       },
       {
         label: 'Research Gate',
-        userAttributeKey: this._createUserAttrKey('profile.researchGate')
+        userAttributeKey: this._createUserAttrKey('profile.researchGate'),
+        placeholder: 'https://www.researchgate.net/profile/Christina_Luckasson'
       },
       {
         label: 'ORCID',
-        userAttributeKey: this._createUserAttrKey('profile.orcid')
+        userAttributeKey: this._createUserAttrKey('profile.orcid'),
+        placeholder: 'https://orcid.org/0000-0000-0000-0000'
       }
     ]);
   },
