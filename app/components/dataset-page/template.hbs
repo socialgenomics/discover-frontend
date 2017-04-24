@@ -35,12 +35,20 @@
         {{#if model.description}}
           <p class="u-markdown-formatting u-fs1">{{markdown-to-html markdown=model.description extensions='targetBlankLinks sanitize'}}</p>
         {{/if}}
-        <!-- tags -->
-        <div class="u-pt2 u-pb1">
-          {{#each tags as |tag|}}
-            {{tag-item tag=tag}}
-          {{/each}}
-        </div>
+
+        {{#if tags}}
+          <div class="u-pt2 u-pb1">
+            {{#each tags as |tag|}}
+              {{tag-item
+                tag=tag
+                tagText=tag.properties.text
+                type='tag'
+                userId=tag.userId.id
+              }}
+            {{/each}}
+          </div>
+        {{/if}}
+
         {{#if session.isAuthenticated}}
           <div class="u-pl3">
             {{add-tag addTag=(action 'addTag')}}

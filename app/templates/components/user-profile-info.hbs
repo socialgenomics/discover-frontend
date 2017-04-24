@@ -49,6 +49,19 @@
     {{#link-to "users.profile" class="u-block u-mb3 u-tc-tertiary u-td-underline u-hv-tc-secondary"}}Add your bio{{/link-to}}
   {{/if}}
 
+  {{#if user.profile.interests}}
+    <h3 class="u-fs1 u-fw-reg u-tc-tertiary u-mb1">INTERESTS</h3>
+    {{#each user.profile.interests as |interest|}}
+      {{tag-item
+        type='interest'
+        tagText=interest
+      }}
+    {{/each}}
+  {{else if isOwnProfile}}
+    <h3 class="u-fs1 u-fw-reg u-tc-tertiary u-mb1">INTERESTS</h3>
+    {{#link-to "users.profile" class="u-block u-mb3 u-tc-tertiary u-td-underline u-hv-tc-secondary"}}Add your interests{{/link-to}}
+  {{/if}}
+  
   {{#if user.profile.accounts}}
     <h3 class="u-fs1 u-fw-reg u-tc-tertiary u-mb1">CONNECTED ACCOUNTS</h3>
     {{account-link account=user.profile.accounts.linkedIn accountName="LinkedIn"}}
