@@ -19,9 +19,10 @@ export default Route.extend({
           user: user,
           registrations: this.store.query('dataset', { 'where.user_id': userId }),
           requests: this.store.query('request', { 'where.user_id': userId }),
+          discussions: this.store.query('action', { 'where.user_id': userId, 'where.type': 'comment' }),
+          contributions: this.store.query('action', { 'where.user_id': userId, 'where.type': 'attribute' }),
           user_credential: this.store.query('credential', { 'where.user_id': userId }),
-          favourited_data: this._getFavouritedData(params.id),
-          user_comments: this.store.query('action', { 'where.user_id': userId, 'where.type': 'comment' })
+          favourited_data: this._getFavouritedData(params.id)
         });
       })
       .then(values => {
@@ -30,6 +31,8 @@ export default Route.extend({
           user: values.user,
           registrations: values.registrations,
           requests: values.requests,
+          discussions: values.discussions,
+          contributions: values.contributions,
           is_verified: isVerified(values.user_credential)
         };
       })
