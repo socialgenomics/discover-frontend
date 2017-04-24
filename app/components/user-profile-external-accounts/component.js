@@ -3,17 +3,17 @@
 
 import Ember from 'ember';
 import { buildValidations } from 'ember-cp-validations';
-import urlFormatValidatoru from 'repositive/validations/urlFormatValidator';
+import urlFormatValidator from 'repositive/validations/urlFormatValidator';
 import { errorMessages, patterns } from 'repositive/validations/validations-config';
 import { validator } from 'ember-cp-validations';
 import FlashMessageMixin from 'repositive/mixins/flash-message-mixin';
 
 const { Component, inject: { service }, Logger, set, get } = Ember;
 const Validations = buildValidations({
-  [createUserAttrKey('profile.googlePlus')]: urlFormatValidatoru(),
-  [createUserAttrKey('profile.linkedIn')]: urlFormatValidatoru(),
-  [createUserAttrKey('profile.researchGate')]: urlFormatValidatoru(),
-  [createUserAttrKey('profile.orcid')]: urlFormatValidatoru(),
+  [createUserAttrKey('profile.googlePlus')]: urlFormatValidator(),
+  [createUserAttrKey('profile.linkedIn')]: urlFormatValidator(),
+  [createUserAttrKey('profile.researchGate')]: urlFormatValidator(),
+  [createUserAttrKey('profile.orcid')]: urlFormatValidator(),
   [createUserAttrKey('profile.twitter')]: validator('format', {
     regex: patterns.twitter,
     allowBlank: true,
@@ -59,7 +59,8 @@ export default Component.extend(Validations, FlashMessageMixin, {
       },
       {
         label: 'ORCID',
-        userAttributeKey: this._createUserAttrKey('profile.orcid')
+        userAttributeKey: this._createUserAttrKey('profile.orcid'),
+        placeholder: 'https://orcid.org/0000-0000-0000-0000'
       }
     ]);
   },
