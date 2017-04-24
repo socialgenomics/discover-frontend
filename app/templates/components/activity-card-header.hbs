@@ -34,3 +34,17 @@
     <li class="o-list-inline__item"><h4 class="u-mb0 u-fs2 u-tc-yellow">Favourites {{#if isProfilePage}}({{count}}){{/if}}</h4></li>
   </ul>
 {{/if}}
+
+{{#if (eq group "contribution")}}
+  <ul class="o-list-inline o-list-flush-left u-mb0">
+    <li class="o-list-inline__item u-mr1">{{fa-icon "gift" class="u-tc-teal"}}</li>
+    <li class="o-list-inline__item"><h4 class="u-mb0 u-fs2 u-tc-teal">Contributions {{#if isProfilePage}}({{count}}){{/if}}</h4></li>
+  </ul>
+{{/if}}
+
+{{#if (eq group "discussion")}}
+  <ul class="o-list-inline o-list-flush-left u-mb0">
+    <li class="o-list-inline__item u-mr1">{{fa-icon "comments" class="u-tc-secondary"}}</li>
+    <li class="o-list-inline__item"><h4 class="u-mb0 u-fs2 u-tc-secondary">Discussions {{#if isProfilePage}}({{count}}){{/if}}</h4></li>
+  </ul>
+{{/if}}
