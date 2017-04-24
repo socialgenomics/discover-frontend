@@ -24,3 +24,7 @@ textarea {
 input[type="checkbox"] {
   height: $global-spacing-unit-small;
 }
+
+input::placeholder, textarea::placeholder {
+  @extend .u-tc-tertiary;
+}
