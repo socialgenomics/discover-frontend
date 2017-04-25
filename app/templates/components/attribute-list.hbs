@@ -9,24 +9,37 @@
       {{#each (sort-by "value" attrs) as |attr|}}
         {{attribute-list-item attribute=attr group=group attributesForKey=attrs}}
       {{/each}}
-      {{#if session.isAuthenticated}}
-        {{#if (eq openInput group)}}
-          {{add-attribute
-            addAttribute=addAttribute
-            closeInput=(action 'closeInput')
-            group=group
-            attributesForKey=attrs
-          }}
-        {{else}}
-          {{#unless (and (contains group singleValueAttrs) (gt attrs.length 0))}}
-            <span {{action 'setOpenInput' group}} class="t-add-trigger u-flex u-justify-between u-items-center u-td-underline u-tc-tertiary u-hv-tc-secondary u-cursor-pointer">
-              Add {{#if (eq group 'pmid')}} Pubmed ID {{else}}{{capitalize group}}{{/if}}
-            </span>
-          {{/unless}}
-        {{/if}}
+      {{#if (eq openInput group)}}
+        {{add-attribute
+          addAttribute=addAttribute
+          closeInput=(action 'closeInput')
+          group=group
+          attributesForKey=attrs
+        }}
+      {{else}}
+        {{#unless (and (contains group singleValueAttrs) (gt attrs.length 0))}}
+          <span {{action 'handleAddClick' group}} class="t-add-trigger u-flex u-justify-between u-items-center u-td-underline u-tc-tertiary u-hv-tc-secondary u-cursor-pointer">
+            Add {{#if (eq group 'pmid')}} Pubmed ID {{else}}{{capitalize group}}{{/if}}
+          </span>
+        {{/unless}}
       {{/if}}
     </div>
   </div>
 {{/each-in}}
 
 {{contributors-list contributors=contributors modelName=modelName}}
+
+{{#if showCreateAccountModal}}
+  {{#repositive-modal
+    container-class='c-modal--medium u-z5'
+    close=(action 'toggleCreateAccountModal')
+  }}
+    {{repositive-modal/header
+      title='Add Metadata'
+      onClose=(action 'toggleCreateAccountModal')
+    }}
+    {{#repositive-modal/content}}
+      {{create-account-modal-content text='To add metadata to this dataset, please create an account.'}}
+    {{/repositive-modal/content}}
+  {{/repositive-modal}}
+{{/if}}
