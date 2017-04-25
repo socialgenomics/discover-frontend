@@ -25,6 +25,14 @@ export default Component.extend(Validations, {
     }
     return validAndUnique;
   }),
+  placeholder: computed('group', function() {
+    const attrKey = get(this, 'group').toLowerCase();
+    if (attrKey === 'assay') { return 'e.g. RNA-Seq'}
+    if (attrKey === 'samples') { return 'e.g. 15'}
+    if (attrKey === 'tissue') { return 'e.g. Blood'}
+    if (attrKey === 'technology') { return 'e.g. Illumina HiSeq 2000'}
+    if (attrKey === 'pmid') { return 'e.g. 24355041'}
+  }),
 
   actions: {
     add() {
