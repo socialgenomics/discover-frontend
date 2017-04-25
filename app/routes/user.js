@@ -31,8 +31,8 @@ export default Route.extend({
           user: values.user,
           registrations: values.registrations,
           requests: values.requests,
-          discussions: values.discussions,
-          contributions: values.contributions,
+          discussions: this.store.query('dataset', { 'where.id': values.discussions.id }),
+          contributions: this.store.query('dataset', { 'where.id': values.contributions.id }),
           is_verified: isVerified(values.user_credential)
         };
       })
