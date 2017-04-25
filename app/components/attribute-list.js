@@ -18,7 +18,16 @@ export default Component.extend({
   }),
 
   actions: {
-    setOpenInput(key) { set(this, 'openInput', key); },
-    closeInput() { set(this, 'openInput', null); }
+    closeInput() { set(this, 'openInput', null); },
+    handleAddClick(group) {
+      get(this, 'session.isAuthenticated') ?
+        set(this, 'openInput', group) : this.send('toggleCreateAccountModal');
+    },
+    toggleCreateAccountModal() {
+      this._toggleCreateAccountModal()
+    }
+  },
+  _toggleCreateAccountModal() {
+    this.toggleProperty('showCreateAccountModal');
   }
 });
