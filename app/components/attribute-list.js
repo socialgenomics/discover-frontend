@@ -18,11 +18,10 @@ export default Component.extend({
   }),
 
   actions: {
-    setOpenInput(key) { set(this, 'openInput', key); }, //can change to regular func
     closeInput() { set(this, 'openInput', null); },
     handleAddClick(group) {
       get(this, 'session.isAuthenticated') ?
-        this.send('setOpenInput', group) : this.send('toggleCreateAccountModal');
+        set(this, 'openInput', group) : this.send('toggleCreateAccountModal');
     },
     toggleCreateAccountModal() {
       this.toggleProperty('showCreateAccountModal');
