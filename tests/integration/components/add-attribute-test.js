@@ -8,6 +8,15 @@ describe('Integration | Component | add attribute', function() {
   setupComponentTest('add-attribute', {
     integration: true
   });
+
+  describe('placeholder text', function() {
+    it('should display the correct placeholder based on the attribute key', function() {
+      this.set('group', 'assay');
+      this.render(hbs`{{add-attribute group=group}}`);
+      expect(this.$('input').attr('placeholder')).to.eql('e.g. RNA-Seq')
+    });
+  });
+
   describe('actions', function() {
     beforeEach(function () {
       this.setProperties({
