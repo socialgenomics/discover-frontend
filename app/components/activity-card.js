@@ -32,5 +32,21 @@ export default Component.extend({
         return `This user hasn't registered any data yet.`;
       }
     }
+
+    if (group === 'contribution') {
+      if (isOwnProfile) {
+        return `You haven't added any tags or metadata to a dataset yet.`;
+      } else {
+        return `This user hasn't added any tags or metadata to a dataset yet.`;
+      }
+    }
+
+    if (group === 'discussion') {
+      if (isOwnProfile) {
+        return `You haven't taken part in any discussions yet.`;
+      } else {
+        return `This user hasn't taken part in any discussions yet.`;
+      }
+    }
   })
 });
