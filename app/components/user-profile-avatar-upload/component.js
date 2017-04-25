@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import ENV from 'repositive/config/environment';
 
 const { Component, computed, inject: { service }, get, Logger, set, setProperties } = Ember;
 
@@ -21,7 +22,7 @@ export default Component.extend({
       set(this, 'uploading', true);
 
       file
-        .upload('/avatar', { headers: get(this, 'headers') })
+        .upload(ENV.APIRoutes['avatar'], { headers: get(this, 'headers') })
         .then(() => get(this, 'reloadModel')())
         .then(this._resetUploadingState.bind(this))
         .catch(this._handleUploadErrors.bind(this));
