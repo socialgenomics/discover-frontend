@@ -8,20 +8,32 @@
 
 @import "settings/spacing"; // DONE!
 @import "settings/layout-and-breakpoints"; // DONE!
+@import "settings/misc-ui";
+@import "settings/typography"; // DONE!
 
 @import "reset/normalize"; // DONE!
 @import "reset/box-sizing"; // DONE!
 
+@import "utilities/color";
+@import "utilities/cursor"; // DONE!
 @import "utilities/display"; // DONE!
 @import "utilities/flex"; // DONE!
+@import "utilities/font-styles"; // DONE!
 @import "utilities/margin"; // DONE!
 @import "utilities/overflow"; // DONE!
 @import "utilities/padding"; // DONE!
 @import "utilities/position"; // DONE!
+@import "utilities/type-setting";
 
 @import "components/list";
 @import "components/grid-wrapper"; // DONE!
 @import "components/grid"; // DONE!
 
 
+
 // custom components
+
+// DO NEXT
+
+// SHARED ONLY - color settings variables
+// SHARED ONLY - typography
