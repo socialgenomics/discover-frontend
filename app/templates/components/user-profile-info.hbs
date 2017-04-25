@@ -42,26 +42,34 @@
   </div>
 
   {{#if user.profile.bio}}
-    <h3 class="u-fs1 u-fw-reg u-tc-tertiary u-mb1">BIO</h3>
-    <p class="u-tc-secondary u-hyphens-auto">{{user.profile.bio}}</p>
+    <div class="u-mb3">
+      <h3 class="u-fs1 u-fw-reg u-tc-tertiary u-mb1">BIO</h3>
+      <p class="u-tc-secondary u-hyphens-auto">{{user.profile.bio}}</p>
+    </div>
   {{else if isOwnProfile}}
-    <h3 class="u-fs1 u-fw-reg u-tc-tertiary u-mb1">BIO</h3>
-    {{#link-to "users.profile" class="u-block u-mb3 u-tc-tertiary u-td-underline u-hv-tc-secondary"}}Add your bio{{/link-to}}
+    <div class="u-mb3">
+      <h3 class="u-fs1 u-fw-reg u-tc-tertiary u-mb1">BIO</h3>
+      {{#link-to "users.profile" class="u-block u-tc-tertiary u-td-underline u-hv-tc-secondary"}}Add your bio{{/link-to}}
+    </div>
   {{/if}}
 
   {{#if user.profile.interests}}
-    <h3 class="u-fs1 u-fw-reg u-tc-tertiary u-mb1">INTERESTS</h3>
-    {{#each user.profile.interests as |interest|}}
-      {{tag-item
-        type='interest'
-        tagText=interest
-      }}
-    {{/each}}
+    <div class="u-mb3">
+      <h3 class="u-fs1 u-fw-reg u-tc-tertiary u-mb1">INTERESTS</h3>
+      {{#each user.profile.interests as |interest|}}
+        {{tag-item
+          type='interest'
+          tagText=interest
+        }}
+      {{/each}}
+    </div>
   {{else if isOwnProfile}}
-    <h3 class="u-fs1 u-fw-reg u-tc-tertiary u-mb1">INTERESTS</h3>
-    {{#link-to "users.profile" class="u-block u-mb3 u-tc-tertiary u-td-underline u-hv-tc-secondary"}}Add your interests{{/link-to}}
+    <div class="u-mb3">
+      <h3 class="u-fs1 u-fw-reg u-tc-tertiary u-mb1">INTERESTS</h3>
+      {{#link-to "users.profile" class="u-block u-tc-tertiary u-td-underline u-hv-tc-secondary"}}Add your interests{{/link-to}}
+    </div>
   {{/if}}
-  
+
   {{#if user.profile.accounts}}
     <h3 class="u-fs1 u-fw-reg u-tc-tertiary u-mb1">CONNECTED ACCOUNTS</h3>
     {{account-link account=user.profile.accounts.linkedIn accountName="LinkedIn"}}
