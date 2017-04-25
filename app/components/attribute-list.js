@@ -24,7 +24,10 @@ export default Component.extend({
         set(this, 'openInput', group) : this.send('toggleCreateAccountModal');
     },
     toggleCreateAccountModal() {
-      this.toggleProperty('showCreateAccountModal');
+      this._toggleCreateAccountModal()
     }
+  },
+  _toggleCreateAccountModal() {
+    this.toggleProperty('showCreateAccountModal');
   }
 });
