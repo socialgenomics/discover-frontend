@@ -26,13 +26,16 @@ export default Route.extend({
         });
       })
       .then(values => {
+        const discussionIds = values.discussions.mapBy('actionableId.id').uniq();
+        const contributionIds = values.contributions.mapBy('actionableId.id').uniq();
+
         this.controllerFor('user.index').set('favouritedData', values.favourited_data);
         return {
           user: values.user,
           registrations: values.registrations,
           requests: values.requests,
-          discussions: this.store.query('dataset', { 'where.id': values.discussions.id }),
-          contributions: this.store.query('dataset', { 'where.id': values.contributions.id }),
+          discussions: this.store.query('dataset', { 'where.id': discussionIds }),
+          contributions: this.store.query('dataset', { 'where.id': contributionIds }),
           is_verified: isVerified(values.user_credential)
         };
       })
