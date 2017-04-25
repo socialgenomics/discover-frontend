@@ -78,24 +78,16 @@ export default Component.extend(FlashMessageMixin, Validations, {
    * @private
    */
   _saveCredential(newEmail) {
-    return get(this, 'store').query('credential', {
-      'where.user_id': get(this, 'session.data.authenticated.user.id')
+    get(this, 'store').createRecord('credential', {
+      userId: get(this, 'session.authenticatedUser'),
+      email: newEmail,
+      primary: false,
+      provider: 'email',
+      verified: false
     })
-      .then(credentials => {
-        get(this, 'store').createRecord('credential', {
-          userId: get(this, 'session.authenticatedUser'),
-          email: newEmail,
-          primary: false,
-          provider: 'email',
-          verified: false
-        }).save()
-          .then(this._onSaveSuccess.bind(this))
-          .catch(this._onSaveError.bind(this, credentials));
-      })
-      .catch(error => {
-        set(this, 'loading', false);
-        Logger.error(error);
-      });
+      .save()
+      .then(this._onSaveSuccess.bind(this))
+      .catch(this._onSaveError.bind(this));
   },
 
   /**

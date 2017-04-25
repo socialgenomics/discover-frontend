@@ -24,7 +24,7 @@ export default Component.extend(FlashMessageMixin, {
     deleteCredential(credential) {
       credential.destroyRecord()
       .then(() => {
-        this._addFlashMessage('The credential ' + credential.email + 'has been deleted successfully.', 'success');
+        this._addFlashMessage('The credential has been deleted successfully.', 'success');
       })
       .catch(Logger.error);
     }

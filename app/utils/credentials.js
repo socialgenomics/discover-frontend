@@ -11,5 +11,5 @@ export function isVerified(credentials) {
 }
 
 export function secondaryCredentials(credentials) {
-  return credentials.filterBy('primary', false);
+  return credentials.rejectBy('primary',  true);
 }
