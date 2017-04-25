@@ -108,7 +108,6 @@ describe('Integration | Component | attributes list', function() {
       });
 
       it('clicking add attribute opens input form', function() {
-        expect(this.$('input').attr('placeholder')).to.eql('Add an attribute');
         expect(this.$('input').val()).to.be.empty;
         expect(this.$('button').first().text().trim()).to.eql('Add');
         expect(this.$('button:eq(1)').text().trim()).to.eql('Cancel');
