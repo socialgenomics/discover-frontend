@@ -13,3 +13,8 @@
 .u-h3 { height: 2.5 * $global-spacing-unit;  }
 .u-h4 { height: 5 * $global-spacing-unit;    }
 .u-h5 { height: 7.5 * $global-spacing-unit;  }
+
+.u-filter-fade-grey {
+  -webkit-filter: grayscale(100%) opacity(.6); /* Safari 6.0 - 9.0 */
+  filter: grayscale(100%) opacity(.6);
+}

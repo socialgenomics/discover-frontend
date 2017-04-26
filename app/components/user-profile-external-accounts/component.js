@@ -43,27 +43,27 @@ export default Component.extend(Validations, FlashMessageMixin, {
       {
         label: 'Google+',
         userAttributeKey: this._createUserAttrKey('profile.accounts.googlePlus'),
-        placeholder: 'https://plus.google.com/112233445566778899000'
+        placeholder: 'e.g. https://plus.google.com/112233445566778899000'
       },
       {
         label: 'LinkedIn',
         userAttributeKey: this._createUserAttrKey('profile.accounts.linkedIn'),
-        placeholder: 'http://www.linkedin.com/in/christinaLuckasson'
+        placeholder: 'e.g. http://www.linkedin.com/in/christinaLuckasson'
       },
       {
         label: 'Twitter',
         userAttributeKey: this._createUserAttrKey('profile.accounts.twitter'),
-        placeholder: '@christinaLuckasson'
+        placeholder: 'e.g. @christinaLuckasson'
       },
       {
         label: 'Research Gate',
         userAttributeKey: this._createUserAttrKey('profile.accounts.researchGate'),
-        placeholder: 'https://www.researchgate.net/profile/Christina_Luckasson'
+        placeholder: 'e.g. https://www.researchgate.net/profile/Christina_Luckasson'
       },
       {
         label: 'ORCID',
         userAttributeKey: this._createUserAttrKey('profile.accounts.orcid'),
-        placeholder: 'https://orcid.org/0000-0000-0000-0000'
+        placeholder: 'e.g. https://orcid.org/0000-0000-0000-0000'
       }
     ]);
   },
