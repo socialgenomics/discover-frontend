@@ -34,6 +34,6 @@ describe('Integration | Component | contributors list', function() {
       'modelName': 'dataset'
     });
     this.render(hbs`{{contributors-list contributors=contributors modelName=modelName}}`);
-    expect(this.$('p').text().trim()).to.eql('No one has contributed to this dataset yet. Be the first.');
+    expect(this.$('p').text().trim()).to.eql('Please login or create an account to contribute to this dataset.');
   });
 });
