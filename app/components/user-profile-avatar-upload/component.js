@@ -23,7 +23,7 @@ export default Component.extend({
 
       avatar
         .upload(ENV.APIRoutes['avatar'], { headers: get(this, 'headers'), fileKey: 'avatar' })
-        .then(() => get(this, 'reloadModel')())
+        .then(() => get(this, 'reloadUserModel')())
         .then(this._resetUploadingState.bind(this))
         .catch(this._handleUploadErrors.bind(this));
     }
