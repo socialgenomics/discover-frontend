@@ -93,6 +93,7 @@ Router.map(function() {
   this.route('404', {
     path: '/*path'
   });
+  this.mount('engineTest');
 });
 
 let pagesWithSideNavigation = ['datasets-search', 'datasources-source', 'collections-collection'];
