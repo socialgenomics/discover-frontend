@@ -18,11 +18,11 @@ export default Component.extend({
   }),
 
   actions: {
-    uploadImage(file) {
+    uploadImage(avatar) {
       set(this, 'uploading', true);
 
-      file
-        .upload(ENV.APIRoutes['avatar'], { headers: get(this, 'headers') })
+      avatar
+        .upload(ENV.APIRoutes['avatar'], { headers: get(this, 'headers'), fileKey: 'avatar' })
         .then(() => get(this, 'reloadModel')())
         .then(this._resetUploadingState.bind(this))
         .catch(this._handleUploadErrors.bind(this));
