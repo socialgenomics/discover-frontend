@@ -3,6 +3,34 @@
    ========================================================================== */
 
 /*
+  Can't find what you're looking for? Also see utilities/_type-setting.scss
+*/
+
+/*
+  FONT COLORS
+  Base:
+    tc = text-color
+
+  Modifiers:
+   -primary
+   -secondary
+   -tertiary
+
+    Dark-Theme:
+      Nesting in a .t-dark parent will output white color text
+*/
+
+.tc-primary   { color: $primary-opacity-black; }
+.tc-secondary { color: $secondary-opacity-black; }
+.tc-tertiary  { color: $tertiary-opacity-black; }
+
+.t-dark {
+  .tc-primary   { color: $primary-opacity-white; }
+  .tc-secondary { color: $secondary-opacity-white; }
+  .tc-tertiary  { color: $tertiary-opacity-white; }
+}
+
+/*
   FONT-SIZE
   Base:
     fs = font-size
@@ -15,8 +43,6 @@
     4 = x-large
 */
 
- // Font Sizes
- /* ==================================== */
 .fs0 { font-size: $font-size-tiny; }
 .fs1 { font-size: $font-size-small; }
 .fs2 { font-size: $font-size-regular; }
