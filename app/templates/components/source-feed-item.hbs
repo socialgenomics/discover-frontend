@@ -1,22 +1,22 @@
 {{#link-to 'datasources.source' source.id classNames="feed-item-component"}}
-  <div class="c-card u-mb3 c-col-li-item u-hv-bc-white">
-    <section class="grid__col grid__col--1-of-5 grid__col--am u-px3 u-py1 u-bc-light-bluegrey u-ta-center u-inherit-height">
+  <div class="c-card mb4 c-col-li-item u-hv-bc-white">
+    <section class="grid__col grid__col--1-of-5 grid__col--am px4 py2 u-bc-light-bluegrey u-ta-center u-inherit-height">
       <div class="u-inherit-height u-flex u-flex-column u-items-center u-justify-center">
-        {{fa-icon "database" size=2 class='u-tc-tertiary u-p1'}}
-        <p class="u-mb0">Data Source</p>
+        {{fa-icon "database" size=2 class='u-tc-tertiary p2'}}
+        <p class="mb0">Data Source</p>
       </div>
     </section>
 
-    <section class="grid__col grid__col--1-of-5 grid__col--am u-ta-center u-px2 u-py1 u-inherit-height">
+    <section class="grid__col grid__col--1-of-5 grid__col--am u-ta-center px3 py2 u-inherit-height">
       <div class="u-inherit-height u-flex u-flex-column u-items-center u-justify-center">
         {{#if source.properties.logo}}
           <img class="c-img--src-logo" src={{source.properties.logo}}>
         {{/if}}
-        <p class="u-fs0 u-mb0 u-pt1 u-fw-bold">{{source-name-fallback model=source}}</p>
+        <p class="u-fs0 mb0 pt2 u-fw-bold">{{source-name-fallback model=source}}</p>
       </div>
     </section>
 
-    <section class="grid__col grid__col--3-of-5 grid__col--am u-px2 u-inherit-height c-col-li-item__divider c-col-li-item__resp-text">
+    <section class="grid__col grid__col--3-of-5 grid__col--am px3 u-inherit-height c-col-li-item__divider c-col-li-item__resp-text">
       <div class="u-inherit-height u-flex u-items-center">
         {{collection-summary-fallback class=""
           summary=source.properties.summary

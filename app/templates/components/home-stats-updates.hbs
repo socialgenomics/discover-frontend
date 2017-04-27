@@ -6,13 +6,13 @@
       <div class="grid__col grid__col--1-of-2">
 
         {{#link-to 'collections' invokeAction=(action 'trackUpdatesHeaders' 'collections')}}
-          <h3 class="u-fs3 u-ta-center u-tc-secondary u-border-bottom u-border-top u-py1 u-mb0">
+          <h3 class="u-fs3 u-ta-center u-tc-secondary u-border-bottom u-border-top py2 mb0">
             {{fa-icon "book"}}
             Collections <span>{{stats.repositive_collections}}</span>
           </h3>
         {{/link-to}}
 
-        <ul class="o-list-flush-left u-mb0">
+        <ul class="o-list-flush-left mb0">
           {{#each (sort-by "updatedAt:desc" collections) as |collection index|}}
             {{featured-list-item
               isNewest=(eq index 0)
@@ -26,12 +26,12 @@
       <div class="grid__col grid__col--1-of-2 u-border-left">
 
         {{#link-to 'datasources' invokeAction=(action 'trackUpdatesHeaders' 'datasources')}}
-          <h3 class="u-fs3 u-ta-center u-tc-secondary u-border-bottom u-border-top u-py1 u-mb0">
+          <h3 class="u-fs3 u-ta-center u-tc-secondary u-border-bottom u-border-top py2 mb0">
             {{fa-icon "database"}}
             Data Sources <span>{{stats.datasources}}</span>
           </h3>
         {{/link-to}}
-        <ul class="o-list-flush-left u-mb0">
+        <ul class="o-list-flush-left mb0">
           {{#each (sort-by "updatedAt:desc" datasources) as |datasource index|}}
             {{featured-list-item
               isNewest=(eq index 0)

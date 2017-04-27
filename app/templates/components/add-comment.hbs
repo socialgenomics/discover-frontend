@@ -1,4 +1,4 @@
-<img src={{avatar}} class="u-w1 u-mr1 u-circle" />
+<img src={{avatar}} class="u-w1 m2 u-circle" />
 <div class="u-grow-1">
   {{validated-input
     type="textarea"
@@ -8,8 +8,8 @@
     disabled=disabled
   }}
   {{#if allowComment}}
-    <div class="u-mb2">
-      <button {{action 'addComment'}} class="c-btn c-btn-primary u-mr2">Comment</button>
+    <div class="mb3">
+      <button {{action 'addComment'}} class="c-btn c-btn-primary m3">Comment</button>
       <a {{action 'cancel'}} class="c-btn-text-secondary">Cancel</a>
     </div>
   {{/if}}

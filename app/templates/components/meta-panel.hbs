@@ -9,20 +9,20 @@
 {{/unless}}
 
 
-  <main class="u-px3 {{if isSearchPage 'u-py2'}}">
-    <div class="c-sidebar-toggle u-pos-absolute u-pos-top0 u-pos-right0 u-py2 u-px1 {{if isSearchPage 'u-bc-off-white u-hv-bc-off-white u-border'}} {{if (or model.userId (eq model.type 'repositive_collection')) 'u-bc-collection-overlay u-hv-bc-collection'}} {{if (eq model.type 'datasource') 'u-bc-datasource-overlay u-hv-bc-datasource'}}">
-      <a class="u-tc-secondary u-fw-med u-p2" {{action 'toggleMetaPanelVisibility'}}>{{#if metaPanelHidden}} <span class="u-tc-primary u-mr1">View filters</span> {{fa-icon 'chevron-right class="u-pl3"'}} {{else}} {{fa-icon 'times'}} {{/if}}</a>
+  <main class="px4 {{if isSearchPage 'py3'}}">
+    <div class="c-sidebar-toggle u-pos-absolute u-pos-top0 u-pos-right0 py3 px2 {{if isSearchPage 'u-bc-off-white u-hv-bc-off-white u-border'}} {{if (or model.userId (eq model.type 'repositive_collection')) 'u-bc-collection-overlay u-hv-bc-collection'}} {{if (eq model.type 'datasource') 'u-bc-datasource-overlay u-hv-bc-datasource'}}">
+      <a class="u-tc-secondary u-fw-med p3" {{action 'toggleMetaPanelVisibility'}}>{{#if metaPanelHidden}} <span class="u-tc-primary m2">View filters</span> {{fa-icon 'chevron-right class="pl4"'}} {{else}} {{fa-icon 'times'}} {{/if}}</a>
     </div>
     {{#if displayInfo}}
 
-      <div class="u-mb3">
-        <h3 class="u-tc-primary u-ta-center u-mb1">{{source-name-fallback model=model}}</h3>
+      <div class="mb4">
+        <h3 class="u-tc-primary u-ta-center mb2">{{source-name-fallback model=model}}</h3>
         {{#unless (eq model.type 'datasource')}}
           {{collection-created-by user=model.userId type=model.type}}
         {{/unless}}
       </div>
 
-      <div class="u-mb3 u-ta-center u-tc-primary">
+      <div class="mb4 u-ta-center u-tc-primary">
         {{#if (eq model.type 'repositive_collection')}}
           {{stats-list stats=collectionStats statType="collection"}}
         {{else}}

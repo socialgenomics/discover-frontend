@@ -3,7 +3,7 @@
     <div class="grid__col grid__col--11-of-12 grid__col--centered">
 
       {{collections-list-tabs stats=model.stats active='datasources'}}
-      <div class="c-card u-border-square u-p4">
+      <div class="c-card u-border-square p5">
         {{#each (sort-by "name" model.datasources) as |source|}}
           {{source-feed-item source=source}}
         {{/each}}

@@ -15,8 +15,8 @@
     {{partial 'loading'}}
   {{else}}
     {{#if (gt model.meta.total 0)}}
-      <div class="u-flex u-justify-between u-pt4 u-pb3">
-        <p class="u-flex u-items-center u-fw-med u-mb0">Results: {{model.meta.total}}</p>
+      <div class="u-flex u-justify-between pt5 pb4">
+        <p class="u-flex u-items-center u-fw-med mb0">Results: {{model.meta.total}}</p>
 
         {{results-select resultsOptions=resultsOptions resultsPerPage=resultsPerPage setResultsPerPage=(action 'setResultsPerPage')}}
       </div>

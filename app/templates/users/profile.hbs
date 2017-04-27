@@ -2,11 +2,11 @@
   <div class="grid">
     <div class="grid__col grid__col--3-of-3">
       {{profile-tabs}}
-      <div class="c-card u-rounded-bottom u-py3 u-px2 u-ta-center">
+      <div class="c-card u-rounded-bottom py4 px3 u-ta-center">
         <div class="grid">
           <div class="grid__col grid__col--1-of-2 grid__col--m-2-of-3 grid__col--centered">
             <h1 class="u-fs4">Edit Profile</h1>
-            <img src={{session.authenticatedUser.profile.avatar}} class="u-w4 u-mb2 u-circle">
+            <img src={{session.authenticatedUser.profile.avatar}} class="u-w4 mb3 u-circle">
             <form>
               {{validated-input
                 label="First Name"

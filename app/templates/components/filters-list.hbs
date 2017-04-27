@@ -2,9 +2,9 @@
   {{#each filters as |filter|}}
     <div class="section">
       {{#if (eq filter.displayName "Datasource")}}
-        <h4 class="u-mb1 u-pt2 u-tc-tertiary u-fs0">Data Source</h4>
+        <h4 class="mb2 pt3 u-tc-tertiary u-fs0">Data Source</h4>
       {{else}}
-        <h4 class="u-mb1 u-pt2 u-tc-tertiary u-fs0">{{ filter.displayName }}</h4>
+        <h4 class="mb2 pt3 u-tc-tertiary u-fs0">{{ filter.displayName }}</h4>
       {{/if}}
       {{#if isLoading}}
         <p class="loading-text">Loading new filters...</p>
@@ -22,5 +22,5 @@
     </div>
   {{/each}}
 {{else}}
-  <p class="u-pt1">No filters available</p>
+  <p class="pt2">No filters available</p>
 {{/unless}}

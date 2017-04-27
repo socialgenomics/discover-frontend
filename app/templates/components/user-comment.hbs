@@ -3,13 +3,13 @@
 <!-- Comment -->
 {{#unless inEditMode}}
   <div class="u-flex u-items-start u-justify-between">
-    <p class="u-markdown-formatting u-mb0 u-pl2">{{markdown-to-html markdown=comment.properties.text extensions='targetBlankLinks sanitize'}}</p>
+    <p class="u-markdown-formatting mb0 pl3">{{markdown-to-html markdown=comment.properties.text extensions='targetBlankLinks sanitize'}}</p>
     {{#if (and canEdit (not inEditMode))}}
-      {{fa-icon 'pencil' class='u-tc-tertiary u-hv-tc-secondary u-cursor-pointer u-fs2 u-pr2' click=(action 'enterEditMode')}}
+      {{fa-icon 'pencil' class='u-tc-tertiary u-hv-tc-secondary u-cursor-pointer u-fs2 pr3' click=(action 'enterEditMode')}}
     {{/if}}
   </div>
 {{else}}
-  <form class="u-mb3">
+  <form class="mb4">
     {{validated-input
       type="textarea"
       value=text
@@ -18,7 +18,7 @@
       errors=validations.attrs.text.messages
     }}
     {{async-button
-      class="c-btn c-btn-primary u-px2 u-py1 u-mr2"
+      class="c-btn c-btn-primary px3 py2 m3"
       action=(action 'save')
       default="Save"
       pending="Saving..."
