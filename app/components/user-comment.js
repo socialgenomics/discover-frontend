@@ -2,10 +2,11 @@ import Ember from 'ember';
 import CheckEditPermissionsMixin from 'repositive/mixins/check-edit-permissions-mixin';
 import EditModeMixin from 'repositive/mixins/edit-mode-mixin';
 import { buildValidations } from 'ember-cp-validations';
+import emptyValidator from 'repositive/validations/emptyValidator';
 import presenceValidator from 'repositive/validations/presenceValidator';
 
 const { Component, computed: { oneWay }, get, set } = Ember;
-const Validations = buildValidations({ text: presenceValidator() });
+const Validations = buildValidations({ text: emptyValidator() });
 
 export default Component.extend(
   CheckEditPermissionsMixin,

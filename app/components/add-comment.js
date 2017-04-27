@@ -4,9 +4,7 @@ import emptyValidator from 'repositive/validations/emptyValidator';
 
 const { Component, get, set, isEmpty, computed, inject: { service } } = Ember;
 
-const Validations = buildValidations({
-  comment: emptyValidator()
-});
+const Validations = buildValidations({ comment: emptyValidator() });
 
 export default Component.extend(Validations, {
   session: service(),

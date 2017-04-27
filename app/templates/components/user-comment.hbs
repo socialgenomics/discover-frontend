@@ -11,11 +11,11 @@
 {{else}}
   <form class="u-mb3">
     {{validated-input
+      errors=validations.attrs.text.messages
       type="textarea"
       value=text
       noMarkdown=true
       noLabel=true
-      errors=validations.attrs.text.messages
     }}
     {{async-button
       class="c-btn c-btn-primary u-px2 u-py1 u-mr2"
