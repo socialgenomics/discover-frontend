@@ -1,5 +1,5 @@
 {{#link-to 'user' user.id disabled=(not session.isAuthenticated) invokeAction=(action 'toggleCreateAccountModal') classNames="u-hv-bc-darken5 u-block u-py2 u-pl1"}}
-  <div class="u-pos-relative u-inline-block">
+  <div class="u-pos-relative u-inline-block u-mr2">
     <img class="u-circle u-w2 u-mr1" src="{{user.profile.avatar}}" />
     {{reputation-total}}
   </div>

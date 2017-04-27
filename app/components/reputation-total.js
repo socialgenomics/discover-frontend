@@ -6,7 +6,7 @@ export default Component.extend({
   //takes reputation object
   //renders the total of the value in the reputation object
   //depending on the total, the color will change
-  classNames: ['c-reputation-total c-reputation-total-small u-ta-center u-p1 u-circle u-fs0 u-tc-secondary u-pos-absolute u-border u-border-color-white'],
+  classNames: ['c-reputation-total c-reputation-total-small u-ta-center u-fs0 u-tc-secondary u-pos-absolute u-border u-border-color-white'],
   classNameBindings: ['backgroundColour'],
   tagName: 'span',
 
@@ -14,7 +14,7 @@ export default Component.extend({
     quality: 0,
     verification: 5,
     ownership: 4,
-    contribution: 1
+    contribution: 0
   },
   //this can be move to the user model
   total: computed('reputation', function() {

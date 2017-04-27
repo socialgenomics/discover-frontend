@@ -1,9 +1,13 @@
 .c-reputation-total {
-  right: -6px;
-  bottom: -6px;
+  right: -8px;
+  bottom: -8px;
+  border-radius: 8px;
 }
 
 .c-reputation-total-small {
-  width: 30px;
-  height: 30px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-left: 3px;
+  padding-right: 3px;
+  min-width: $global-spacing-unit;
 }
