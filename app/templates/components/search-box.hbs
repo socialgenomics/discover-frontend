@@ -1,13 +1,13 @@
-<form class="u-flex u-bc-white u-border u-border-fat u-rounded u-border-color-teal" {{action search query on='submit'}}>
+<form class="u-flex u-bc-white border border-fat rounded u-border-color-teal" {{action search query on='submit'}}>
   <label class="u-flex-auto u-flex u-items-center">
     <span class="u-cursor-text">{{fa-icon "search" class='px3 u-tc-secondary'}}</span>
     {{input
       type="text"
-      class="pr2 pl0 mr0 u-border-none"
+      class="pr2 pl0 mr0 border-none"
       placeholder="title:cancer AND description:lung"
       value=query
       autofocus=true
     }}
   </label>
-  <button class="c-btn c-btn-primary u-border-square u-self-stretch">Search</button>
+  <button class="c-btn c-btn-primary square u-self-stretch">Search</button>
 </form>

@@ -14,7 +14,7 @@
 @import "submodule/utilities/padding";  // DONE!
 @import "submodule/utilities/position";
 
-
+@import "custom/utilities/border";
 
 @import "submodule/components/grid-wrapper";
 @import "submodule/components/grid";
@@ -61,7 +61,7 @@
 // @import 'shared/objects/objects.spacing';
 // @import 'shared/objects/objects.toast-grid';
 
-@import 'shared/utilities/utilities.borders';
+// @import 'shared/utilities/utilities.borders';
 @import 'shared/utilities/utilities.color';
 @import 'shared/utilities/utilities.cursors';
 @import 'shared/utilities/utilities.display';

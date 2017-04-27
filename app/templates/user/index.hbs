@@ -9,7 +9,7 @@
 
             {{#if isOwnProfile}}{{#link-to "users.profile" class="fa-2x absolute right-0 top-0 u-tc-secondary"}}{{fa-icon "pencil-square-o"}}{{/link-to}}{{/if}}
             <div class="profile-img">
-              <img class="u-w4 mb2 u-circle" src={{model.user_profile.avatar}}>
+              <img class="u-w4 mb2 circle" src={{model.user_profile.avatar}}>
             </div>
             {{#if model.is_verified}}
               <h4 class="u-tc-teal u-fs2">{{fa-icon "check-circle"}} Verified Account</h4>

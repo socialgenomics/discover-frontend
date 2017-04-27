@@ -12,7 +12,7 @@ export default Component.extend(
   EditModeMixin,
   Validations,
   {
-    classNames: ['u-border-top'],
+    classNames: ['border-top'],
 
     inEditMode: false,
 

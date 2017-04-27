@@ -6,7 +6,7 @@
       <div class="grid__col grid__col--1-of-2">
 
         {{#link-to 'collections' invokeAction=(action 'trackUpdatesHeaders' 'collections')}}
-          <h3 class="u-fs3 u-ta-center u-tc-secondary u-border-bottom u-border-top py2 mb0">
+          <h3 class="u-fs3 u-ta-center u-tc-secondary border-bottom border-top py2 mb0">
             {{fa-icon "book"}}
             Collections <span>{{stats.repositive_collections}}</span>
           </h3>
@@ -23,10 +23,10 @@
         </ul>
 
       </div>
-      <div class="grid__col grid__col--1-of-2 u-border-left">
+      <div class="grid__col grid__col--1-of-2 border-left">
 
         {{#link-to 'datasources' invokeAction=(action 'trackUpdatesHeaders' 'datasources')}}
-          <h3 class="u-fs3 u-ta-center u-tc-secondary u-border-bottom u-border-top py2 mb0">
+          <h3 class="u-fs3 u-ta-center u-tc-secondary border-bottom border-top py2 mb0">
             {{fa-icon "database"}}
             Data Sources <span>{{stats.datasources}}</span>
           </h3>

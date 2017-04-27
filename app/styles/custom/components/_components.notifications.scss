@@ -11,7 +11,7 @@
   overflow-y: auto;
 }
 .c-notification-unread-marker {
-  @extend .u-circle;
+  @extend .circle;
   @extend .u-bc-red;
   padding: 4px;
   position: absolute;

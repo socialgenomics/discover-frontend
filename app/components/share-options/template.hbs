@@ -1,11 +1,11 @@
 <div class="py3">
-  {{fa-icon 'twitter' size=2 class='u-tc-twitter-blue px4 py3 u-border-right u-cursor-pointer' click=(action 'share' 'twitter')}}
-  {{fa-icon 'linkedin' size=2 class='u-tc-linkedin-blue px4 py3 u-border-right u-cursor-pointer' click=(action 'share' 'linkedin')}}
+  {{fa-icon 'twitter' size=2 class='u-tc-twitter-blue px4 py3 border-right u-cursor-pointer' click=(action 'share' 'twitter')}}
+  {{fa-icon 'linkedin' size=2 class='u-tc-linkedin-blue px4 py3 border-right u-cursor-pointer' click=(action 'share' 'linkedin')}}
   {{fa-icon 'envelope' size=2 class='u-tc-yellow px4 py3 u-cursor-pointer' click=(action 'onEnvelopeClick')}}
 </div>
 
 <div class="u-flex pl3 pb3">
-  <p class="p2 u-border m3 mb0 u-overflow-hidden c-share-modal__copy-link">{{shareUrl}}</p>
+  <p class="p2 border m3 mb0 u-overflow-hidden c-share-modal__copy-link">{{shareUrl}}</p>
   {{#copy-button
     class=copyButtonClasses
     clipboardText=shareUrl

@@ -1,9 +1,9 @@
 {{#basic-dropdown  verticalPosition=below horizontalPosition="right" as |dropdown|}}
 
-  {{#dropdown.trigger class="u-outline-none u-cursor-pointer px3"}}
+  {{#dropdown.trigger class="outline-none u-cursor-pointer px3"}}
     {{#if session.isAuthenticated}}
       <div class="u-hide-on-sm-md">
-        <img src={{avatar}} class="u-w1 u-circle">
+        <img src={{avatar}} class="u-w1 circle">
         <span class="u-tc-primary u-fs1 px2">{{firstname}}</span>
       </div>
     {{/if}}
