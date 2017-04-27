@@ -39,21 +39,7 @@ export default Component.extend(FlashMessageMixin, Validations, {
 
   actions: {
     resendVerifyEmail(email, newEmail) {
-      if (newEmail === email && get(this, 'credential.is_verified')) {
-        set(this, 'addingCredential', false);
-        this._addFlashMessage('This email has already been verified.', 'success');
-      } else {
-        set(this, 'loading', true);
-        get(this, 'ajax').request(ENV.APIRoutes['verify-email-resend'] + `/${newEmail}`, { method: 'GET' })
-          .then(() => {
-            set(this, 'sentEmail', true);
-            this._addFlashMessage('We have sent a verification email to your inbox', 'success');
-          })
-          .catch((err) => {
-            Logger.error(err);
-            this._addFlashMessage('Sorry, we couldn\'t send you the link. Please try again later.', 'warning');
-          });
-      }
+      this._sendVerificationEmail(email, newEmail);
     },
 
     saveNewCredential() {
@@ -65,7 +51,7 @@ export default Component.extend(FlashMessageMixin, Validations, {
         this._addFlashMessage('This credential is already associated with this account.', 'success');
       } else {
         set(this, 'loading', true);
-        this._saveCredential(newEmail);
+        this._saveCredential(email, newEmail);
       }
     },
 
@@ -77,7 +63,7 @@ export default Component.extend(FlashMessageMixin, Validations, {
    * @param {*} newEmail
    * @private
    */
-  _saveCredential(newEmail) {
+  _saveCredential(email, newEmail) {
     get(this, 'store').createRecord('credential', {
       userId: get(this, 'session.authenticatedUser'),
       email: newEmail,
@@ -86,8 +72,29 @@ export default Component.extend(FlashMessageMixin, Validations, {
       verified: false
     })
       .save()
-      .then(this._onSaveSuccess.bind(this))
+      .then(() => {
+        this._sendVerificationEmail(email, newEmail)
+        .then(this._onSaveSuccess.bind(this))
+      })
       .catch(this._onSaveError.bind(this));
+  },
+
+  _sendVerificationEmail(email, newEmail) {
+    if (newEmail === email && get(this, 'credential.is_verified')) {
+      set(this, 'addingCredential', false);
+      this._addFlashMessage('This email has already been verified.', 'success');
+    } else {
+      set(this, 'loading', true);
+      get(this, 'ajax').request(ENV.APIRoutes['verify-email-resend'] + `/${newEmail}`, { method: 'GET' })
+        .then(() => {
+          set(this, 'sentEmail', true);
+          this._addFlashMessage('We have sent a verification email to your inbox', 'success');
+        })
+        .catch((err) => {
+          Logger.error(err);
+          this._addFlashMessage('Sorry, we couldn\'t send you the link. Please try again later.', 'warning');
+        });
+    }
   },
 
   /**
@@ -96,7 +103,8 @@ export default Component.extend(FlashMessageMixin, Validations, {
    */
   _onSaveSuccess() {
     this._addFlashMessage('Your credential has been added to your account.', 'success')
-    set(this, 'addingCredential', false);
+    set(this, 'sentEmail', true)
+    set(this, 'loading', false);
   },
 
   /**

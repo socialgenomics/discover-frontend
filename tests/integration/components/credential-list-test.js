@@ -19,16 +19,4 @@ describe('Integration | Component | credential list', function() {
     this.render(hbs`{{credential-list credential=credential}}`);
     expect(this.$().find(this.$('p.u-mb0.u-fs2')[0]).text().trim()).to.eql('liz@repositive.io');
   });
-
-  it('renders the secondary emails list when they are present', function() {
-    this.setProperties({
-      'credential': {
-        secondary_credentials: {
-          email: 'liz@repositive.io'
-        }
-      }
-    });
-    this.render(hbs`{{credential-list credential=credential}}`);
-    expect(this.$().find(this.$('.u-py2 p.u-mb0')[0]).text().trim()).to.eql('Secondary Emails');
-  });
 });
