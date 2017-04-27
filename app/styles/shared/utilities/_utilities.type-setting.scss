@@ -21,9 +21,9 @@
 
  // Type Setting Helpers
  /* ==================================== */
-.u-line-break   { word-break: break-all; }
+.u-line-break    { word-break: break-all; }
 .u-line-keep     { word-break: keep-all; }
-
+.u-hyphens-auto  { hyphens: auto; }
 // Type Decorations
 /* ==================================== */
 .u-td-underline { text-decoration: underline; }
