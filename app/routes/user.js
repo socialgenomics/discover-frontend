@@ -15,26 +15,27 @@ export default Route.extend({
       .then(user => {
         const userId = get(user, 'id');
         // TODO: The majority of this info can be cached and retrieved from the same session instead of doing unnecesary calls.
-        return new RSVP.hash({
+        return RSVP.hash({
           user: user,
           registrations: this.store.query('dataset', { 'where.user_id': userId }),
           requests: this.store.query('request', { 'where.user_id': userId }),
+          discussions: this.store.query('action', { 'where.user_id': userId, 'where.type': 'comment' }),
+          contributions: this.store.query('action', { 'where.user_id': userId, 'where.type': 'attribute' }),
           user_credential: this.store.query('credential', { 'where.user_id': userId }),
-          favourited_data: this._getFavouritedData(params.id),
-          user_comments: this.store.query('action', { 'where.user_id': userId, 'where.type': 'comment' })
+          favourited_data: this._getFavouritedData(params.id)
         });
       })
       .then(values => {
-        const numberOfComments = values.user_comments.get('content').length;
-        this.controllerFor('user.index').setProperties({
-          favouritedData: values.favourited_data,
-          numberOfComments: numberOfComments,
-          numberOfFavourites: values.favourited_data.length
-        });
+        const discussionIds = values.discussions.mapBy('actionableId.id').uniq();
+        const contributionIds = values.contributions.mapBy('actionableId.id').uniq();
+
+        this.controllerFor('user.index').set('favouritedData', values.favourited_data);
         return {
           user: values.user,
           registrations: values.registrations,
           requests: values.requests,
+          discussions: this.store.query('dataset', { 'where.id': discussionIds }),
+          contributions: this.store.query('dataset', { 'where.id': contributionIds }),
           is_verified: isVerified(values.user_credential)
         };
       })
