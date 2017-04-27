@@ -4,7 +4,7 @@ import EditModeMixin from 'repositive/mixins/edit-mode-mixin';
 import { buildValidations } from 'ember-cp-validations';
 import presenceValidator from 'repositive/validations/presenceValidator';
 
-const { Component, computed: { oneWay }, get, set } = Ember;
+const { Component, computed: { oneWay }, get, set, Logger } = Ember;
 const Validations = buildValidations({ text: presenceValidator() });
 
 export default Component.extend(
@@ -33,6 +33,17 @@ export default Component.extend(
 
         set(comment, 'properties.text', get(this, 'text'));
         this.persistChanges(comment);
+      },
+
+      deleteComment(comment) {
+        comment.destroyRecord()
+        .then(() => {
+          get(this, 'flashMessages').add({
+            message: 'Comment successfully deleted.',
+            type: 'success'
+          });
+        })
+        .catch(Logger.error);
       }
     }
   }
