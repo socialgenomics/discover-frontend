@@ -1,7 +1,7 @@
 {{#link-to 'user' user.id disabled=(not session.isAuthenticated) invokeAction=(action 'toggleCreateAccountModal') classNames="u-hv-bc-darken5 u-block py3 pl2"}}
   <img class="u-circle u-w2 m2" src="{{user.userProfile.avatar}}" />
 
-  <div class="u-inline-block {{if user.userProfile.workOrganisation 'u-pos-absolute'}} {{if currentUser 'u-pos-absolute'}}">
+  <div class="u-inline-block {{if user.userProfile.workOrganisation 'absolute'}} {{if currentUser 'absolute'}}">
     <h4 class="u-flex u-items-center mb0 u-fs2 u-tc-primary">
       {{user.displayName}}
       {{#if timestamp}}

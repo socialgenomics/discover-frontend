@@ -1,8 +1,8 @@
-<div class="grid__col grid__col--3-of-3 u-pos-relative">
+<div class="grid__col grid__col--3-of-3 relative">
 
 
 {{#unless isSearchPage}}
-  <div class="grid grid--no-gutter u-pos-relative">
+  <div class="grid grid--no-gutter relative">
     {{meta-panel-header type=model.type}}
     {{meta-panel-tabs showInfo=(action 'showInfo') showFilters=(action 'showFilters') displayInfo=displayInfo}}
   </div>
@@ -10,7 +10,7 @@
 
 
   <main class="px4 {{if isSearchPage 'py3'}}">
-    <div class="c-sidebar-toggle u-pos-absolute u-pos-top0 u-pos-right0 py3 px2 {{if isSearchPage 'u-bc-off-white u-hv-bc-off-white u-border'}} {{if (or model.userId (eq model.type 'repositive_collection')) 'u-bc-collection-overlay u-hv-bc-collection'}} {{if (eq model.type 'datasource') 'u-bc-datasource-overlay u-hv-bc-datasource'}}">
+    <div class="c-sidebar-toggle absolute top-0 right-0 py3 px2 {{if isSearchPage 'u-bc-off-white u-hv-bc-off-white u-border'}} {{if (or model.userId (eq model.type 'repositive_collection')) 'u-bc-collection-overlay u-hv-bc-collection'}} {{if (eq model.type 'datasource') 'u-bc-datasource-overlay u-hv-bc-datasource'}}">
       <a class="u-tc-secondary u-fw-med p3" {{action 'toggleMetaPanelVisibility'}}>{{#if metaPanelHidden}} <span class="u-tc-primary m2">View filters</span> {{fa-icon 'chevron-right class="pl4"'}} {{else}} {{fa-icon 'times'}} {{/if}}</a>
     </div>
     {{#if displayInfo}}

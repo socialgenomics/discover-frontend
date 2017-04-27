@@ -1,7 +1,7 @@
 {{#if (eq type 'collection')}}
   {{#link-to 'collections.collection' model.id}}
     <div class="grid__col grid__col--1-of-3 pr4">
-      <h4 class="u-fs2 mb0 u-tc-primary u-pos-relative">{{model.name}}</h4>
+      <h4 class="u-fs2 mb0 u-tc-primary relative">{{model.name}}</h4>
       {{#if isNewest}} {{new-label model.updatedAt 50}} {{/if}}
     </div>
     <div class="grid__col grid__col--2-of-3">

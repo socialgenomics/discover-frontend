@@ -3,11 +3,11 @@
     <div class="grid">
       <div class="grid__col grid__col--12-of-12">
         <section class="c-card p3">
-          <div class="u-ta-center u-pos-relative">
+          <div class="u-ta-center relative">
             <h1 class="u-fs4 mb2">{{model.user.displayName}}</h1>
             <h4>{{model.user_profile.workOrganisation}}</h4>
 
-            {{#if isOwnProfile}}{{#link-to "users.profile" class="fa-2x u-pos-absolute u-pos-right0 u-pos-top0 u-tc-secondary"}}{{fa-icon "pencil-square-o"}}{{/link-to}}{{/if}}
+            {{#if isOwnProfile}}{{#link-to "users.profile" class="fa-2x absolute right-0 top-0 u-tc-secondary"}}{{fa-icon "pencil-square-o"}}{{/link-to}}{{/if}}
             <div class="profile-img">
               <img class="u-w4 mb2 u-circle" src={{model.user_profile.avatar}}>
             </div>

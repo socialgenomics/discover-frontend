@@ -1,4 +1,4 @@
-<div class="u-pos-relative u-flex u-justify-between u-tc-primary px2 mb2 u-rounded {{unless active 'u-hv-bc-darken10 u-cursor-pointer'}} {{if active 'u-bc-overlay'}}" {{action (if active 'removeFilter' 'addFilter') aggName bucket.key}}>
+<div class="relative u-flex u-justify-between u-tc-primary px2 mb2 u-rounded {{unless active 'u-hv-bc-darken10 u-cursor-pointer'}} {{if active 'u-bc-overlay'}}" {{action (if active 'removeFilter' 'addFilter') aggName bucket.key}}>
 
   <span class="u-flex">
     {{#if (eq aggName "assay")}}
@@ -10,6 +10,6 @@
   </span>
 
   {{#if active}}
-    {{fa-icon "times" class="u-tc-tertiary u-cursor-pointer c-sidebar-remove-filter px2 u-pos-right0 u-pos-absolute"}}
+    {{fa-icon "times" class="u-tc-tertiary u-cursor-pointer c-sidebar-remove-filter px2 right-0 absolute"}}
   {{/if}}
 </div>

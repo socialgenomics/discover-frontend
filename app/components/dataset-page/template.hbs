@@ -2,7 +2,7 @@
   <div class="grid grid--no-gutter u-full-height">
 
     <!-- dataset -->
-    <div class="grid__col grid__col--7-of-12 u-pos-relative u-full-height">
+    <div class="grid__col grid__col--7-of-12 relative u-full-height">
       <!-- header -->
       <header class="c-card-header u-bc-off-white u-flex {{if assaysToDisplay 'u-justify-between' 'u-justify-end'}} u-items-center px3">
         {{#if assaysToDisplay}}
@@ -52,7 +52,7 @@
       </div>
 
       <!-- footer -->
-      <div class="u-pos-absolute u-full-width u-pos-bottom0 u-bc-white p3 u-border-top">
+      <div class="absolute u-full-width bottom-0 u-bc-white p3 u-border-top">
 
         {{#unless session.isAuthenticated}}
           {{create-account-call-to-action}}

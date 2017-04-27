@@ -1,8 +1,8 @@
 .c-select-trigger,
 .c-select-dropdown {
   color: $color-mid-grey;
-  border: $global-border-style;
-  border-radius: $global-border-radius;
+  border: $border-width solid $border-color;
+  border-radius: $border-radius;
   font-size: $global-font-size;
   outline: none;
   cursor: pointer;

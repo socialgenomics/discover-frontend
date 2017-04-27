@@ -13,7 +13,7 @@
   z-index: 5;
   will-change: transform;
   &.is-hidden {
-    transform: translateX(-$meta-panel-width + $global-spacing-unit);
+    transform: translateX(-$sidebar-width + $spacing-unit-large);
     @media ( min-width: $breakpoint-wide ) {
       transform: translate(0);
     }
@@ -22,8 +22,8 @@
 
 .c-sidebar-toggle {
   z-index: 1;
-  right: -$global-spacing-unit-small;
-  top: $global-spacing-unit-small;
+  right: -$spacing-unit-medium;
+  top: $spacing-unit-medium;
   @media ( min-width: $breakpoint-wide ) {
     display: none;
   }
