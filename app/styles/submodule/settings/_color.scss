@@ -37,7 +37,7 @@ $primary-opacity-white   : rgba($color-white, 1);
 $secondary-opacity-white : rgba($color-white, 0.7);
 $tertiary-opacity-white  : rgba($color-white, 0.5);
 
-$color-overlay: rgba($color-black, 0.1);
+$color-overlay: rgba($color-black, 0.12);
 
 /*
   BRAND COLORS
@@ -72,3 +72,10 @@ $color-error:       $tamarillio;
 
 $color-info-bg:     $apricot-white;
 $color-warning:     $chelsea-gem;
+
+/*
+  SOCIAL MEDIA COLORS
+*/
+
+$color-linkedin : #0086bd;
+$color-twitter  : #55acee;

@@ -3,32 +3,10 @@
    ========================================================================== */
 
 /*
-  Can't find what you're looking for? Also see utilities/_type-setting.scss
+  Can't find what you're looking for?
+    For text-alignment & decoration see utilities/_type-setting.scss
+    For font colors see utilities/_color.scss
 */
-
-/*
-  FONT COLORS
-  Base:
-    fc = (font-)color
-
-  Modifiers:
-   -primary
-   -secondary
-   -tertiary
-
-    Dark-Theme:
-      Nesting in a .theme-dark parent will output white color text
-*/
-
-.fc-primary   { color: $primary-opacity-black; }
-.fc-secondary { color: $secondary-opacity-black; }
-.fc-tertiary  { color: $tertiary-opacity-black; }
-
-.theme-dark {
-  .fc-primary   { color: $primary-opacity-white; }
-  .fc-secondary { color: $secondary-opacity-white; }
-  .fc-tertiary  { color: $tertiary-opacity-white; }
-}
 
 /*
   FONT-SIZE
