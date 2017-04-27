@@ -6,7 +6,7 @@ import presenceValidator from 'repositive/validations/presenceValidator';
 import emailFormatValidator from 'repositive/validations/emailFormatValidator';
 import { errorMessages } from 'repositive/validations/validations-config';
 
-const { Component, get, set, computed, Logger, inject: { service } } = Ember;
+const { Component, get, set, setProperties, computed, Logger, inject: { service } } = Ember;
 
 const Validations = buildValidations({
   newEmail: [
@@ -79,6 +79,12 @@ export default Component.extend(FlashMessageMixin, Validations, {
       .catch(this._onSaveError.bind(this));
   },
 
+  /**
+  * @desc send the verification email to the new address
+  * @param {*} email
+  * @param {*} newEmail
+  * @private
+  */
   _sendVerificationEmail(email, newEmail) {
     if (newEmail === email && get(this, 'credential.is_verified')) {
       set(this, 'addingCredential', false);
@@ -103,8 +109,10 @@ export default Component.extend(FlashMessageMixin, Validations, {
    */
   _onSaveSuccess() {
     this._addFlashMessage('Your credential has been added to your account.', 'success')
-    set(this, 'sentEmail', true)
-    set(this, 'loading', false);
+    setProperties(this, {
+      'sentEmail': true,
+      'loading': false
+    });
   },
 
   /**
