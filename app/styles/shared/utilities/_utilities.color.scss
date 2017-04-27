@@ -33,8 +33,12 @@
 .u-bc-red         { background-color: $color-primary-red;   }
 .u-bc-yellow      { background-color: $color-primary-yellow;}
 .u-bc-blue        { background-color: $color-secondary-blue;}
-.u-bc-collection  { background-color: $color-collection;    }
-.u-bc-datasource  { background-color: $color-datasource;    }
+
+.u-bc-light-teal   { background-color: $color-light-teal;    }
+.u-bc-light-yellow { background-color: $color-light-yellow;  }
+
+.u-bc-collection   { background-color: $color-collection;    }
+.u-bc-datasource   { background-color: $color-datasource;    }
 .u-bc-collection-overlay { background-color: darken($color-collection, 4.5);}
 .u-bc-datasource-overlay { background-color: darken($color-datasource, 4.5);}
 
@@ -42,6 +46,7 @@
 .u-bc-i-cant-believe-its-not-white { background-color: $color-i-cant-believe-its-not-white;}
 .u-bc-off-white   { background-color: $color-off-white;     }
 .u-bc-grey        { background-color: $color-mid-grey;      }
+.u-bc-very-light-grey { background-color: $color-very-light-grey; }
 .u-bc-overlay     { background-color: rgba(#000000, 0.1)    }
 .u-bc-dark-overlay { background-color: rgba(#000000, 0.4)    }
 
