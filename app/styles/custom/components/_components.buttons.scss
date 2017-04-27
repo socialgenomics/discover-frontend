@@ -8,14 +8,14 @@
 .c-btn {
    display: inline-block;
    margin: 0;
-   padding: $global-spacing-unit-small $global-spacing-unit-large;
+   padding: $spacing-unit-medium $spacing-unit-x-large;
    text-align: center;
    vertical-align: baseline;
    cursor: pointer;
    border-width: 1px;
    border-style: solid;
-   border-radius: $global-border-radius;
-   font-family: $font-stack-roboto;
+   border-radius: $border-radius;
+   font-family: $primary-font-stack;
    transition: $global-transition;
    @extend .u-fs2;
    @extend .u-fw-med;
