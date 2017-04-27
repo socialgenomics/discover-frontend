@@ -5,9 +5,11 @@
 }
 
 .c-reputation-total-small {
-  padding-top: 2px;
-  padding-bottom: 2px;
-  padding-left: 3px;
-  padding-right: 3px;
+  padding: 2px 4px 2px 4px;
   min-width: $global-spacing-unit;
+}
+
+.c-reputation-total-large {
+  padding: 4px 6px 4px 6px;
+  min-width: $global-spacing-unit-large - 10;
 }
