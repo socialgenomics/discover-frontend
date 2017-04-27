@@ -24,7 +24,7 @@
 {{#if sentEmail}}
   <div class="u-flex">
     <p class="u-tc-red u-mb0 u-mr1">Your email hasn't been verified yet.</p>
-    <a class="u-tc-secondary u-td-underline" {{action 'resendVerifyEmail' 'credential.main_credential.email' 'newEmail'}}>Resend Verification Email.</a>
+    <a class="u-tc-secondary u-td-underline" {{action 'resendVerifyEmail' 'credential.main_credential.email' newEmail}}>Resend Verification Email.</a>
   </div>
   <p class="u-fs1 u-fw-reg u-tc-tertiary">We'll keep using your old email address ({{credential.main_credential.email}}) until your new address is verified.</p>
 {{else}}
