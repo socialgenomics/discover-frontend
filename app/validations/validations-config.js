@@ -10,8 +10,7 @@ export const errorMessages = {
   minLength: 'Must be at least $1 characters.',
   maxLength: 'Must be less than $1 characters.',
   invalidPassword: 'Must include an uppercase letter and a number.',
-  invalidTwitterHandle: 'Must be a valid twitter handle',
-  confirmPassword: 'Passwords do not match'
+  invalidTwitterHandle: 'Must be a valid twitter handle'
 };
 
 export const patterns = {

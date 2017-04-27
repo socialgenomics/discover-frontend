@@ -1,9 +1,18 @@
 <h4 class="u-pt1 u-mb0 u-fs2 u-fw-med u-tc-tertiary">Contributors</h4>
 
 {{#if contributors}}
+
   {{#each contributors as |contributor|}}
     {{user-preview user=contributor}}
   {{/each}}
-{{else}}
-  <p class="u-fs2 u-tc-tertiary">No one has contributed to this {{modelName}} yet. Be the first.</p>
+
+{{/if}}
+
+{{#if canBeAContributor}}
+  <div class="u-py2 u-pl1 u-flex">
+    <img class="u-filter-fade-grey u-circle u-inline u-w2 u-h2 u-mr1" src="{{session.authenticatedUser.profile.avatar}}" />
+    <p class="u-fs2 u-tc-tertiary u-inline">Become a contributor by adding metadata to help categorise this {{modelName}}.</p>
+  </div>
+{{else if (not session.isAuthenticated)}}
+  <p class="u-fs2 u-tc-tertiary">Please login or create an account to contribute to this {{modelName}}.</p>
 {{/if}}

@@ -1,9 +1,9 @@
 {{#file-upload
-  class='u-pos-relative u-w4 u-h4 u-circle u-mb1'
-  name="photos"
-  accept="image/*"
+  name="avatar"
+  accept="image/svg, image/png, image/jpg"
   multiple=false
   onfileadd=(action "uploadImage")
+  class='u-pos-relative u-w4 u-h4 u-circle u-mb1'
 }}
   {{# unless (or uploading uploadFailed reloadFailed)}}
     <img class="u-pos-absolute u-pos-top0 u-pos-left0  u-pos-bottom0 u-pos-right0 u-circle" src={{avatarImg}}>
@@ -12,7 +12,7 @@
       <span class="u-zindex-1 u-tc-white u-fs2 u-fw-med u-hide-display c-avatar-upload__hover__text">Edit photo</span>
     </span>
   {{else}}
-    <span class="u-flex u-flex-column u-justify-center u-items-center u-w3 u-h3 u-circle u-border u-bc-white u-cursor-pointer">
+    <span class="u-flex u-flex-column u-justify-center u-items-center u-w4 u-h4 u-circle u-border u-bc-white u-cursor-pointer">
       {{#if uploadFailed}}
         {{fa-icon "times" size=2 class="u-tc-tertiary"}}
         <span class="error-state u-tc-tertiary">Upload failed</span>
