@@ -9,7 +9,7 @@
 /*
   FONT COLORS
   Base:
-    tc = text-color
+    fc = (font-)color
 
   Modifiers:
    -primary
@@ -17,17 +17,17 @@
    -tertiary
 
     Dark-Theme:
-      Nesting in a .t-dark parent will output white color text
+      Nesting in a .theme-dark parent will output white color text
 */
 
-.tc-primary   { color: $primary-opacity-black; }
-.tc-secondary { color: $secondary-opacity-black; }
-.tc-tertiary  { color: $tertiary-opacity-black; }
+.fc-primary   { color: $primary-opacity-black; }
+.fc-secondary { color: $secondary-opacity-black; }
+.fc-tertiary  { color: $tertiary-opacity-black; }
 
-.t-dark {
-  .tc-primary   { color: $primary-opacity-white; }
-  .tc-secondary { color: $secondary-opacity-white; }
-  .tc-tertiary  { color: $tertiary-opacity-white; }
+.theme-dark {
+  .fc-primary   { color: $primary-opacity-white; }
+  .fc-secondary { color: $secondary-opacity-white; }
+  .fc-tertiary  { color: $tertiary-opacity-white; }
 }
 
 /*

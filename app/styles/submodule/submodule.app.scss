@@ -8,6 +8,7 @@
 
 @import "settings/spacing"; // DONE!
 @import "settings/layout-and-breakpoints"; // DONE!
+@import "settings/color"; // DONE!
 @import "settings/misc-ui";
 @import "settings/typography"; // DONE!
 
@@ -15,7 +16,8 @@
 @import "reset/box-sizing"; // DONE!
 @import "reset/custom-reset"; // DONE! (for now, needs review in future)
 
-@import "utilities/color";
+// @import "utilities/color";
+@import "utilities/border"; // DONE!
 @import "utilities/cursor"; // DONE!
 @import "utilities/display"; // DONE!
 @import "utilities/flex"; // DONE!
