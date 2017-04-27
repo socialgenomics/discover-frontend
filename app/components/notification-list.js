@@ -4,5 +4,5 @@ const { Component } = Ember;
 
 export default Component.extend({
   tagName: 'ul',
-  classNames: ['c-notification-list', 'o-list-flush-left', 'u-mb0']
+  classNames: ['c-notification-list', 'o-list-flush-left', 'mb0']
 });

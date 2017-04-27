@@ -3,7 +3,7 @@ import Ember from 'ember';
 const { Component, get, observer, inject: { service }, set } = Ember;
 
 export default Component.extend({
-  classNames: ['grid__col', 'grid__col--2-of-3', 'grid__col--centered', 'u-py4'],
+  classNames: ['grid__col', 'grid__col--2-of-3', 'grid__col--centered', 'py5'],
   queryService: service('query'),
 
   init() {

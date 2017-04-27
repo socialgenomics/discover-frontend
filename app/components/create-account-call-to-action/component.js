@@ -4,7 +4,7 @@ const { Component, get } = Ember;
 
 export default Component.extend({
   classNames: ['u-pos-absolute', 'u-pos-left0', 'u-pos-right0', 'u-pos-top0', 'u-pos-bottom0', 'u-bc-overlay-white',
-    'u-flex', 'u-justify-center', 'u-content-center', 'u-px2', 'u-ta-center'],
+    'u-flex', 'u-justify-center', 'u-content-center', 'px3', 'u-ta-center'],
 
   actions: {
     trackLinkEvent() {

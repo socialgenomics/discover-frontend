@@ -3,7 +3,7 @@ import Ember from 'ember';
 const { Component, get } = Ember;
 
 export default Component.extend({
-  classNames: ['u-pos-absolute', 'u-full-width', 'u-full-height', 'u-bc-overlay-light-bluegrey', 'u-ta-center', 'u-py5', 'u-pos-top0', 'u-pos-left0'],
+  classNames: ['u-pos-absolute', 'u-full-width', 'u-full-height', 'u-bc-overlay-light-bluegrey', 'u-ta-center', 'py5', 'u-pos-top0', 'u-pos-left0'],
   actions: {
     trackLinkEvent() {
       get(this, 'metrics').trackEvent({
