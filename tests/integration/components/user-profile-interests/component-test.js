@@ -21,19 +21,11 @@ describe('Integration | Component | user profile interests', function() {
 
   describe('interests list', function () {
     it('should render interests', function () {
-      const $interest = this.$('.interest-pill');
-
-
+      const $interest = this.$('.t-tag-item');
 
       expect($interest).to.have.length(interests.length);
       expect($interest.eq(0).text().trim()).to.be.equal(interests[0]);
       expect($interest.eq(1).text().trim()).to.be.equal(interests[1]);
-    });
-
-    it('should have remove icon for each interest', function () {
-      const $removeIcon = this.$('.interest-pill .fa-times');
-
-      expect($removeIcon).to.have.length(interests.length);
     });
   });
 
