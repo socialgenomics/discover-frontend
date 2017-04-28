@@ -13,7 +13,7 @@ export default Component.extend({
     ownership: 2,
     contribution: 0
   },
-  //this can be move to the user model
+  //this can be moved to the user model
   total: computed('reputation', function() {
     const reputation = get(this, 'reputation');
     return Object.keys(reputation)
