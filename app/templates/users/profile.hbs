@@ -3,10 +3,10 @@
     <div class="grid__col grid__col--3-of-3">
       {{profile-tabs}}
       <div class="c-card u-rounded-bottom u-py3 u-px2">
-        {{user-profile-avatar-upload avatarImg=user.profile.avatar  reloadUserModel=(route-action 'reloadModel')}}
+        {{user-profile-avatar-upload avatarImg=user.profile.avatar reloadUserModel=(route-action 'reloadModel')}}
 
         {{#user-profile-section}}
-          {{user-profile-interests userId=user.id interests=user.profile.interests}}
+          {{user-profile-interests userId=user.id interests=user.profile.interests reloadUserModel=(route-action 'reloadModel')}}
         {{/user-profile-section}}
 
         {{#user-profile-section title='More about yourself'}}
