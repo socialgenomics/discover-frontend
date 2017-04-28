@@ -1,5 +1,6 @@
 export const errorMessages = {
   blankField: 'This field can\'t be blank.',
+  emptyField: 'This field cannot contain blank space.',
   invalidUrl: 'Must be a valid url.',
   blankEmail: 'Please provide email address',
   blankPassword: 'Please provide password.',
