@@ -35,8 +35,8 @@ export default Route.extend(FlashMessageMixin, {
       return RSVP.hash({
         stats: ajax.request(ENV.APIRoutes['stats'], { method: 'GET' }),
         datasets: ajax.request(ENV.APIRoutes['datasets.trending'], { method: 'GET' }),
-        requests: this.store.query('request', { 'order[0][0]': 'updated_at', 'order[0][1]': 'DESC' }),
-        registered: this.store.query('dataset', { 'where.user_id.$ne': 'null', 'order[0][0]': 'updated_at', 'order[0][1]': 'DESC' }),
+        requests: this.store.query('request', { 'order[0][0]': 'created_at', 'order[0][1]': 'DESC' }),
+        registered: this.store.query('dataset', { 'where.user_id.$ne': 'null', 'order[0][0]': 'created_at', 'order[0][1]': 'DESC' }),
         collections: this.store.query('collection', { 'where.type': 'repositive_collection', 'order[0][0]': 'updated_at', 'order[0][1]': 'DESC', 'limit': '3' }),
         datasources: this.store.query('collection', { 'where.type': 'datasource', 'order[0][0]': 'updated_at', 'order[0][1]': 'DESC', 'limit': '3' })
       })
