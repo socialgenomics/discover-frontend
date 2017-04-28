@@ -1,15 +1,21 @@
 import Ember from 'ember';
+import { buildValidations } from 'ember-cp-validations';
+import emptyValidator from 'repositive/validations/emptyValidator';
 
 const { Component, get, set, isEmpty, computed, inject: { service } } = Ember;
 
-export default Component.extend({
+const Validations = buildValidations({ comment: emptyValidator() });
+
+export default Component.extend(Validations, {
   session: service(),
 
   isActive: false,
-  isValid: false,
+  isValid: computed('validations.isValid', function() {
+    return get(this, 'validations.isValid');
+  }),
   classNames: 'u-flex u-items-start',
   classNameBindings: ['isActive:active'],
-  allowComment: computed.and('isActive', 'session.isAuthenticated'),
+  allowComment: computed.and('isActive', 'session.isAuthenticated', 'isValid'),
 
   actions: {
     showButtons: function() {

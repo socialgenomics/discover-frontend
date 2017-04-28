@@ -1,6 +1,7 @@
 <img src={{avatar}} class="u-w1 u-mr1 u-circle" />
 <div class="u-grow-1">
   {{validated-input
+    errors=validations.attrs.comment.messages
     type="textarea"
     value=comment
     placeholder=placeholder

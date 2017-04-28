@@ -5,17 +5,20 @@
   <div class="u-flex u-items-start u-justify-between">
     <p class="u-markdown-formatting u-mb0 u-pl2">{{markdown-to-html markdown=comment.properties.text extensions='targetBlankLinks sanitize'}}</p>
     {{#if (and canEdit (not inEditMode))}}
-      {{fa-icon 'pencil' class='u-tc-tertiary u-hv-tc-secondary u-cursor-pointer u-fs2 u-pr2' click=(action 'enterEditMode')}}
+      <div>
+        {{fa-icon 'pencil' class='u-tc-tertiary u-hv-tc-secondary u-cursor-pointer u-fs2 u-pr1' click=(action 'enterEditMode')}}
+        {{fa-icon 'trash' class='u-tc-tertiary u-hv-tc-secondary u-cursor-pointer u-fs2 u-pr1' click=(action 'deleteComment' comment)}}
+      </div>
     {{/if}}
   </div>
 {{else}}
   <form class="u-mb3">
     {{validated-input
+      errors=validations.attrs.text.messages
       type="textarea"
       value=text
       noMarkdown=true
       noLabel=true
-      errors=validations.attrs.text.messages
     }}
     {{async-button
       class="c-btn c-btn-primary u-px2 u-py1 u-mr2"
