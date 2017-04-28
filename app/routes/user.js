@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import { isVerified } from './users/profile';
+import { isVerified } from 'repositive/utils/credentials';
 import ENV from 'repositive/config/environment';
 
 const { inject: { service }, Route, RSVP, get, Logger } = Ember;
