@@ -3,17 +3,14 @@ import Ember from 'ember';
 const { Component, computed, get } = Ember;
 
 export default Component.extend({
-  //takes reputation object
-  //renders the total of the value in the reputation object
-  //depending on the total, the color will change
   classNames: ['c-reputation-total u-ta-center u-tc-secondary u-pos-absolute u-border u-border-color-white'],
   classNameBindings: ['backgroundColour'],
   tagName: 'span',
 
   reputation: {
-    quality: 0,
-    verification: 0,
-    ownership: 1230,
+    quality: 1,
+    verification: 4,
+    ownership: 2,
     contribution: 0
   },
   //this can be move to the user model
