@@ -6,7 +6,7 @@
         {{user-profile-avatar-upload avatarImg=user.profile.avatar reloadUserModel=(route-action 'reloadModel')}}
 
         {{#user-profile-section}}
-          {{user-profile-interests userId=user.id interests=user.profile.interests reloadUserModel=(route-action 'reloadModel')}}
+          {{user-profile-interests userId=user.id interests=user.profile.interests}}
         {{/user-profile-section}}
 
         {{#user-profile-section title='More about yourself'}}
