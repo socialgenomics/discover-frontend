@@ -24,7 +24,7 @@ describe('Unit | Component | reputation total', function() {
       expect(this.subject().get('total')).to.eql(0);
     });
 
-    it('calculate correct total for all zeroes', function() {
+    it('calculate correct total regular numbers', function() {
       this.subject().setProperties({
         'reputation.quality': 10,
         'reputation.verification': 9,
