@@ -24,7 +24,7 @@ describe('Unit | Component | reputation total', function() {
       expect(this.subject().get('total')).to.eql(0);
     });
 
-    it('calculate correct total regular numbers', function() {
+    it('calculate correct total for regular numbers', function() {
       this.subject().setProperties({
         'reputation.quality': 10,
         'reputation.verification': 9,
@@ -35,7 +35,7 @@ describe('Unit | Component | reputation total', function() {
     });
   })
   describe('backgroundColour', function() {
-    it('return grey class when the total is zero', function() {
+    it('returns grey class when the total is zero', function() {
       const component = this.subject();
       component.set('total', 0);
       expect(component.get('backgroundColour')).to.eql('u-bc-very-light-grey');
