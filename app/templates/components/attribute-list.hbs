@@ -1,7 +1,7 @@
 {{#each-in groups as |group attrs|}}
   <div class="mb3">
     <div class="grid__col  mb2 grid__col--1-of-3 grid__col--m-1-of-3 grid__col--s-1-of-3">
-      <h3 class="u-fw-reg u-fs2 mb0 u-tc-tertiary">
+      <h3 class="u-fw-reg fs2 mb0 fc-tertiary">
         {{#if (eq group 'pmid')}} Pubmed ID {{else}} {{capitalize group}} {{/if}}
       </h3>
     </div>
@@ -19,7 +19,7 @@
           }}
         {{else}}
           {{#unless (and (contains group singleValueAttrs) (gt attrs.length 0))}}
-            <span {{action 'setOpenInput' group}} class="t-add-trigger u-flex u-justify-between u-items-center u-td-underline u-tc-tertiary u-hv-tc-secondary u-cursor-pointer">
+            <span {{action 'setOpenInput' group}} class="t-add-trigger u-flex u-justify-between u-items-center u-td-underline fc-tertiary u-hv-tc-secondary cursor-pointer">
               Add {{#if (eq group 'pmid')}} Pubmed ID {{else}}{{capitalize group}}{{/if}}
             </span>
           {{/unless}}

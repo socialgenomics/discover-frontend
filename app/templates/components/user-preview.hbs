@@ -1,19 +1,19 @@
 {{#link-to 'user' user.id disabled=(not session.isAuthenticated) invokeAction=(action 'toggleCreateAccountModal') classNames="u-hv-bc-darken5 u-block py3 pl2"}}
-  <img class="circle u-w2 m2" src="{{user.userProfile.avatar}}" />
+  <img class="circle u-w2 mr2" src="{{user.userProfile.avatar}}" />
 
   <div class="u-inline-block {{if user.userProfile.workOrganisation 'absolute'}} {{if currentUser 'absolute'}}">
-    <h4 class="u-flex u-items-center mb0 u-fs2 u-tc-primary">
+    <h4 class="u-flex u-items-center mb0 fs2 fc-primary">
       {{user.displayName}}
       {{#if timestamp}}
-        <span class="u-tc-tertiary pl2 u-fs0 u-fw-reg">{{moment-from-now timestamp allowEmpty=true}}</span>
+        <span class="fc-tertiary pl2 fs0 u-fw-reg">{{moment-from-now timestamp allowEmpty=true}}</span>
       {{/if}}
     </h4>
 
     {{#if user.userProfile.workOrganisation}}
-      <p class="mb0 u-fs1">{{truncate user.userProfile.workOrganisation 55}}</p>
+      <p class="mb0 fs1">{{truncate user.userProfile.workOrganisation 55}}</p>
     {{else}}
       {{#if currentUser}}
-        {{#link-to 'users.profile' classNames="u-tc-secondary u-td-underline"}}Add your affiliation{{/link-to}}
+        {{#link-to 'users.profile' classNames="fc-secondary u-td-underline"}}Add your affiliation{{/link-to}}
       {{/if}}
     {{/if}}
   </div>

@@ -1,9 +1,9 @@
-<h4 class="pt2 mb0 u-fs2 u-fw-med u-tc-tertiary">Contributors</h4>
+<h4 class="pt2 mb0 fs2 u-fw-med fc-tertiary">Contributors</h4>
 
 {{#if contributors}}
   {{#each contributors as |contributor|}}
     {{user-preview user=contributor}}
   {{/each}}
 {{else}}
-  <p class="u-fs2 u-tc-tertiary">No one has contributed to this {{modelName}} yet. Be the first.</p>
+  <p class="fs2 fc-tertiary">No one has contributed to this {{modelName}} yet. Be the first.</p>
 {{/if}}

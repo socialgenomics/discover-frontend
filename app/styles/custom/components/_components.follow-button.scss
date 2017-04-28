@@ -8,15 +8,15 @@
   border-width: 1px;
   border-style: solid;
   border-radius: $border-radius;
-  font-family: $font-stack-roboto;
+  font-family: $primary-font-stack;
   transition: $global-transition;
   background-color: transparent;
   outline: none;
-  @extend .u-fs0;
-  @extend .u-fw-med;
+  @extend .fs0;
+  @extend .fw-med;
 }
 .c-follow-btn-default {
-  @extend .u-tc-secondary;
+  @extend .fc-secondary;
   @extend .u-hv-bc-darken10;
 }
 

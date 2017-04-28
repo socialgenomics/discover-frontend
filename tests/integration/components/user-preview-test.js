@@ -23,7 +23,7 @@ describe('Integration | Component | user preview', function() {
     this.render(hbs`{{user-preview user=user}}`);
     expect(this.$('h4').text().trim()).to.eql('Liz');
     expect(this.$('img')).to.exist;
-    expect(this.$('p.u-fs1').text().trim()).to.eql('Developer');
+    expect(this.$('p.fs1').text().trim()).to.eql('Developer');
   });
 
   it('renders the add affiliation message if empty', function() {
@@ -43,6 +43,6 @@ describe('Integration | Component | user preview', function() {
     this.set('timestamp', moment(new Date()).subtract(7, 'days'));
 
     this.render(hbs`{{user-preview timestamp=timestamp}}`);
-    expect(this.$('span.u-tc-tertiary').text().trim()).to.eql('7 days ago');
+    expect(this.$('span.fc-tertiary').text().trim()).to.eql('7 days ago');
   })
 });

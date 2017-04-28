@@ -4,7 +4,7 @@ import moment from 'moment';
 export function newLabel([date, days = 14]) {
   const timeSince = moment(new Date()).diff(moment(date), 'days');
   if (timeSince <= days) {
-    return Ember.String.htmlSafe(`<span class="u-tc-red u-fw-bold u-fs0"> NEW </span>`);
+    return Ember.String.htmlSafe(`<span class="fc-red u-fw-bold fs0"> NEW </span>`);
   }
 }
 

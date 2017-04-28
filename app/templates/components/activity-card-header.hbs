@@ -1,8 +1,8 @@
 {{#if (eq group "request")}}
   {{#link-to 'datasets.request'}}
     <ul class="o-list-inline o-list-flush-left mb0">
-      <li class="o-list-inline__item  m2">{{fa-icon "clipboard" class="u-tc-blue"}}</li>
-      <li class="o-list-inline__item"><h4 class="mb0 u-fs2 u-tc-blue">Requested Data</h4></li>
+      <li class="o-list-inline__item  mr2">{{fa-icon "clipboard" class="fc-blue"}}</li>
+      <li class="o-list-inline__item"><h4 class="mb0 fs2 fc-blue">Requested Data</h4></li>
     </ul>
   {{/link-to}}
   {{#unless isProfilePage}}
@@ -16,8 +16,8 @@
 {{#if (eq group "registration")}}
   {{#link-to 'datasets.register'}}
     <ul class="o-list-inline o-list-flush-left mb0">
-      <li class="o-list-inline__item m2">{{fa-icon "file-text" class="u-tc-red"}}</li>
-      <li class="o-list-inline__item"><h4 class="mb0 u-fs2 u-tc-red">Registered Data</h4></li>
+      <li class="o-list-inline__item mr2">{{fa-icon "file-text" class="fc-red"}}</li>
+      <li class="o-list-inline__item"><h4 class="mb0 fs2 fc-red">Registered Data</h4></li>
     </ul>
   {{/link-to}}
   {{#unless isProfilePage}}
@@ -30,7 +30,7 @@
 
 {{#if (eq group "favourite")}}
   <ul class="o-list-inline o-list-flush-left mb0">
-    <li class="o-list-inline__item m2">{{fa-icon "star" class="u-tc-yellow"}}</li>
-    <li class="o-list-inline__item"><h4 class="mb0 u-fs2 u-tc-yellow">Favourites</h4></li>
+    <li class="o-list-inline__item mr2">{{fa-icon "star" class="fc-yellow"}}</li>
+    <li class="o-list-inline__item"><h4 class="mb0 fs2 fc-yellow">Favourites</h4></li>
   </ul>
 {{/if}}

@@ -4,7 +4,7 @@ const { Component, computed, get, set } = Ember;
 
 export default Component.extend({
   tagName: 'li',
-  classNames: ['p3', 'pr4', 'u-flex', 'u-items-center', 'border-bottom', 'u-hv-bc-white', 'u-cursor-pointer', 'relative'],
+  classNames: ['p3', 'pr4', 'u-flex', 'u-items-center', 'border-bottom', 'u-hv-bc-white', 'cursor-pointer', 'relative'],
 
   isAction: computed.equal('notification.properties.type', 'action'),
 

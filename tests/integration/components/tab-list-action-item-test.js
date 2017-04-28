@@ -12,7 +12,7 @@ describe('Integration | Component | tab list action item', function() {
   describe('tab is active', function() {
     it('it should have an active class', function() {
       this.render(hbs`{{tab-list-action-item activeTab='abc' tabName='abc'}}`);
-      expect(this.$('li').hasClass('u-bc-white')).to.be.true;
+      expect(this.$('li').hasClass('bc-white')).to.be.true;
     });
   })
 
@@ -27,11 +27,11 @@ describe('Integration | Component | tab list action item', function() {
     });
 
     it('background should be off-white', function() {
-      expect(this.$('li').hasClass('u-bc-off-white')).to.be.true;
+      expect(this.$('li').hasClass('bc-very-light-grey')).to.be.true;
     });
 
     it('should have a hover effect', function() {
-      expect(this.$('li').hasClass('u-hv-bc-off-white')).to.be.true;
+      expect(this.$('li').hasClass('u-hv-bc-very-light-grey')).to.be.true;
     });
 
     it('on click, the setActiveTab function is called with the tabName', function() {

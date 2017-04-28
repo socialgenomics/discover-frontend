@@ -1,5 +1,5 @@
 <div class="u-flex u-flex-wrap">
-  <a {{action 'previousPage'}} class="u-tc-secondary px2 rounded u-hv-bc-off-white {{if noPrevPage 'u-hide-display'}}">
+  <a {{action 'previousPage'}} class="fc-secondary px2 rounded u-hv-bc-very-light-grey {{if noPrevPage 'u-hide-display'}}">
     {{fa-icon 'chevron-left'}} Prev
   </a>
 
@@ -9,9 +9,9 @@
     {{/each}}
   </div>
 
-  <p class="u-tc-secondary px2 mb0"><span class="u-hide-on-lg">Page {{currentPageNumber}} </span>of {{totalPages}}</p>
+  <p class="fc-secondary px2 mb0"><span class="u-hide-on-lg">Page {{currentPageNumber}} </span>of {{totalPages}}</p>
 
-  <a {{action 'nextPage'}} class="u-tc-secondary px2 rounded u-hv-bc-off-white {{if noNextPage 'u-hide-display'}}">
+  <a {{action 'nextPage'}} class="fc-secondary px2 rounded u-hv-bc-very-light-grey {{if noNextPage 'u-hide-display'}}">
     Next {{fa-icon 'chevron-right'}}
   </a>
 </div>

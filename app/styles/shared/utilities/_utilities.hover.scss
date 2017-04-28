@@ -24,6 +24,6 @@
 .u-hv-bc-grey       { @include hv-bc-darken($color-mid-grey,       10); }
 
 // text color hover effects
-.u-hv-tc-to-yellow  { &:hover { @extend .u-tc-yellow; }}
-.u-hv-tc-secondary { &:hover { @extend .u-tc-secondary; }}
-.u-hv-tc-primary { &:hover { @extend .u-tc-primary; }}
+.u-hv-tc-to-yellow  { &:hover { @extend .fc-yellow; }}
+.u-hv-tc-secondary { &:hover { @extend .fc-secondary; }}
+.u-hv-tc-primary { &:hover { @extend .fc-primary; }}

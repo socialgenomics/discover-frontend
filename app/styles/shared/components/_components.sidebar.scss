@@ -22,8 +22,6 @@
 
 .c-sidebar-toggle {
   z-index: 1;
-  right: -$spacing-unit-medium;
-  top: $spacing-unit-medium;
   @media ( min-width: $breakpoint-wide ) {
     display: none;
   }

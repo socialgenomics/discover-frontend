@@ -1,6 +1,6 @@
 {{#if isLoading}}
-  <div class="u-ta-center">
-    <p class="p5 mb0">{{fa-icon "circle-o-notch" class="u-tc-tertiary" pulse=true}}</p>
+  <div class="ta-center">
+    <p class="p5 mb0">{{fa-icon "circle-o-notch" class="fc-tertiary" pulse=true}}</p>
   </div>
 {{else}}
   {{#if notifications}}
@@ -14,8 +14,8 @@
       }}
     {{/each}}
   {{else}}
-    <div class="u-ta-center">
-      {{fa-icon 'bell' class="pt5 u-tc-tertiary"}}
+    <div class="ta-center">
+      {{fa-icon 'bell' class="pt5 fc-tertiary"}}
       <p class="px5 pb5 mb0">You're up to date.</p>
     </div>
   {{/if}}

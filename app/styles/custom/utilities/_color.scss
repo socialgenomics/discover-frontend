@@ -20,9 +20,9 @@
   UI COMPONENTS
 */
 
-.bc-collection { $color-collection; }
-.bc-datasource { $color-datasource; }
-.bc-light-bluegrey { $color-light-bluegrey; }
+.bc-collection { background-color: $color-collection; }
+.bc-datasource { background-color: $color-datasource; }
+.bc-light-bluegrey { background-color: $color-light-bluegrey; }
 
 
 .u-bc-overlay-light-bluegrey { background-color: transparentize($color-light-bluegrey, .1); }

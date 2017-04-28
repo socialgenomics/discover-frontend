@@ -4,7 +4,7 @@ const { Component, computed, get } = Ember;
 
 export default Component.extend({
   classNames: ['border-bottom', 'border-fat', 'p3'],
-  classNameBindings: ['isRegistration:u-border-color-red', 'isRequest:u-border-color-blue', 'isFavourite:u-border-color-yellow'],
+  classNameBindings: ['isRegistration:border-red', 'isRequest:border-blue', 'isFavourite:border-yellow'],
   isRequest: computed('group', function() {
     if (get(this, 'group') === 'request') { return true; }
   }),

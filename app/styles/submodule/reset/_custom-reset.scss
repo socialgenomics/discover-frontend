@@ -6,7 +6,7 @@
 
 html {
   font-size: ($global-font-size / 16px) * 1em;
-  line-height: $global-line-height;
+  line-height: $global-line-height / $global-font-size;
   overflow-y: scroll;
   min-height: 100%;
   color: $color-dark-grey;

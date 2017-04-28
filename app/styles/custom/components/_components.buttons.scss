@@ -17,8 +17,8 @@
    border-radius: $border-radius;
    font-family: $primary-font-stack;
    transition: $global-transition;
-   @extend .u-fs2;
-   @extend .u-fw-med;
+   @extend .fs2;
+   @extend .fw-med;
 }
 
 // only styles enabled buttons
@@ -26,7 +26,7 @@
   color: $color-white;
   background: $color-primary-teal;
   border-color: $color-primary-teal;
-  @extend .u-hv-bc-teal;
+  // @extend .u-hv-bc-teal;
 }
 
 // only styles enabled buttons
@@ -34,7 +34,7 @@
   color: $color-primary-teal;
   background-color: $color-white;
   border-color: $color-primary-teal;
-  @extend .u-hv-bc-white;
+  // @extend .u-hv-bc-white;
 }
 
 .c-btn:disabled {
@@ -49,23 +49,23 @@
   background-color: $color-white;
   border: none;
   cursor: pointer;
-  font-family: $font-stack-roboto;
+  font-family: $primary-font-stack;
   padding: 0;
-  @extend .u-fw-med;
-  @extend .u-fs2;
+  @extend .fw-med;
+  @extend .fs2;
   &:hover {
     text-decoration: underline;
   }
 }
 .c-btn-text-secondary {
-  @extend .u-tc-secondary;
+  @extend .fc-secondary;
   background-color: $color-white;
   border: none;
   cursor: pointer;
-  font-family: $font-stack-roboto;
+  font-family: $primary-font-stack;
   padding: 0;
-  @extend .u-fw-reg;
-  @extend .u-fs1;
+  @extend .fw-reg;
+  @extend .fs1;
   &:hover {
     text-decoration: underline;
   }
@@ -73,6 +73,6 @@
 
 .c-help-link {
   .active {
-    @extend .u-fw-bold;
+    @extend .fw-bold;
   }
 }

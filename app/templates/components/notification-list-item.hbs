@@ -2,13 +2,13 @@
   {{#if (eq notification.status 'seen')}}
     <span class="c-notification-unread-marker"></span>
   {{/if}}
-  <div class="c-notification-img-date-container u-ta-center m3">
-    <img class="u-w1 m2 circle" src={{notification.properties.action.userId.userProfile.avatar}} alt="user avatar">
-    <p class="u-fs0 u-tc-tertiary mb0">{{moment-from-now notification.createdAt}}</p>
+  <div class="c-notification-img-date-container ta-center m3">
+    <img class="u-w1 mr2 circle" src={{notification.properties.action.userId.userProfile.avatar}} alt="user avatar">
+    <p class="fs0 fc-tertiary mb0">{{moment-from-now notification.createdAt}}</p>
   </div>
   <div class="u-flex-auto c-notification-body">
     <span>{{notification.properties.action.userId.displayName}}</span>
-    <span class="u-tc-tertiary u-fs0">
+    <span class="fc-tertiary fs0">
       {{#if (eq notification.properties.action.type 'comment') }}
         commented on
       {{else if (eq notification.properties.action.type 'tag')}}
