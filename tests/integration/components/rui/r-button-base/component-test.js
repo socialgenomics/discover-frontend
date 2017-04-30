@@ -1,0 +1,24 @@
+import { expect } from 'chai';
+import { describe, it } from 'mocha';
+import { setupComponentTest } from 'ember-mocha';
+import hbs from 'htmlbars-inline-precompile';
+
+describe('Integration | Component | rui/r button base', function() {
+  setupComponentTest('rui/r-button-base', {
+    integration: true
+  });
+
+  it('renders', function() {
+    // Set any properties with this.set('myProperty', 'value');
+    // Handle any actions with this.on('myAction', function(val) { ... });
+    // Template block usage:
+    // this.render(hbs`
+    //   {{#rui/r-button-base}}
+    //     template content
+    //   {{/rui/r-button-base}}
+    // `);
+
+    this.render(hbs`{{rui/r-button-base}}`);
+    expect(this.$()).to.have.length(1);
+  });
+});

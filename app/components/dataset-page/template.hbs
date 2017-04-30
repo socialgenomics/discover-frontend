@@ -110,14 +110,13 @@
         </ul>
 
         {{#if model.url}}
-          <a
+          {{rui/r-link-button
+            clickHandler=(action "trackExit")
+            href=(if session.isAuthenticated model.url '')
+            label=(if (eq model.access "Open") "Access Data" "Go To Dataset")
+            primary=true
             target="_blank"
-            href="{{if session.isAuthenticated model.url ''}}"
-            class="c-btn c-btn-primary"
-            {{action "trackExit"}}
-          >
-            {{#if (eq model.access 'Open')}}Access Data{{else}}Go To Dataset{{/if}}
-          </a>
+          }}
         {{/if}}
       </div>
     </div>
@@ -182,7 +181,7 @@
             pending="Saving..."
             disableWhen=(not validations.isValid)
           }}
-          <button class="c-btn c-btn-text-secondary" {{action 'cancelEditMode'}}>Cancel</button>
+          {{rui/r-button-flat label="Cancel" clickHandler=(action "cancelEditMode")}}
         </div>
       </form>
     </div>
