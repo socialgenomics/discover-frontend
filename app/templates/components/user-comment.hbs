@@ -2,7 +2,7 @@
 
 <!-- Comment -->
 {{#unless inEditMode}}
-  <div class="u-flex u-items-start u-justify-between">
+  <div class="flex items-start justify-between">
     <p class="u-markdown-formatting mb0 pl3">{{markdown-to-html markdown=comment.properties.text extensions='targetBlankLinks sanitize'}}</p>
     {{#if (and canEdit (not inEditMode))}}
       {{fa-icon 'pencil' class='fc-tertiary u-hv-tc-secondary cursor-pointer fs2 pr3' click=(action 'enterEditMode')}}

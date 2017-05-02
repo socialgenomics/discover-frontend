@@ -4,7 +4,7 @@ const { Component, computed, get } = Ember;
 
 export default Component.extend({
   tagName: 'li',
-  classNames: ['cursor-pointer', 'fc-secondary', 'u-flex-auto', 'p2', 'fs2', 'u-fw-med'],
+  classNames: ['cursor-pointer', 'fc-secondary', 'flex-grow', 'p2', 'fs2', 'fw-med'],
   classNameBindings: ['isActive:bc-white:bc-very-light-grey', 'isActive:bc-white:u-hv-bc-very-light-grey'],
 
   isActive: computed('tabName', 'activeTab', function() {

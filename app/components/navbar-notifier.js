@@ -6,7 +6,7 @@ export default Component.extend({
   session: service(),
   store: service(),
 
-  classNames: ['u-flex', 'u-self-stretch', 'u-shrink-none', 'u-items-center', 'u-justify-center', 'u-hv-bc-very-light-grey'],
+  classNames: ['flex', 'self-stretch', 'flex-shrink-none', 'items-center', 'justify-center', 'u-hv-bc-very-light-grey'],
   classNameBindings: ['hasUnseenNotifications:fc-red:fc-secondary'],
 
   hasUnseenNotifications: computed('notifications.@each.status', function() {

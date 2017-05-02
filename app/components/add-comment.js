@@ -7,7 +7,7 @@ export default Component.extend({
 
   isActive: false,
   isValid: false,
-  classNames: 'u-flex u-items-start',
+  classNames: 'flex items-start',
   classNameBindings: ['isActive:active'],
   allowComment: computed.and('isActive', 'session.isAuthenticated'),
 

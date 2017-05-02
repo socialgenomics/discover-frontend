@@ -12,7 +12,7 @@
 }
 .c-notification-unread-marker {
   @extend .circle;
-  @extend .u-bc-red;
+  @extend .bc-color-primary-red;
   padding: 4px;
   position: absolute;
   top: $spacing-unit-medium;

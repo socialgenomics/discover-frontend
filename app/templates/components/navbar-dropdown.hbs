@@ -13,7 +13,7 @@
     </div>
   {{/dropdown.trigger}}
 
-  {{#dropdown.content class="c-card u-flex u-flex-column"}}
+  {{#dropdown.content class="c-card flex flex-column"}}
     {{#if session.isAuthenticated}}
       {{#link-to 'datasets.register'
         invokeAction=(action 'close' dropdown)

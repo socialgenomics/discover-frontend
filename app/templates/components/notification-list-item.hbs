@@ -6,7 +6,7 @@
     <img class="u-w1 mr2 circle" src={{notification.properties.action.userId.userProfile.avatar}} alt="user avatar">
     <p class="fs0 fc-tertiary mb0">{{moment-from-now notification.createdAt}}</p>
   </div>
-  <div class="u-flex-auto c-notification-body">
+  <div class="flex-grow c-notification-body">
     <span>{{notification.properties.action.userId.displayName}}</span>
     <span class="fc-tertiary fs0">
       {{#if (eq notification.properties.action.type 'comment') }}

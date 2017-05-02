@@ -7,7 +7,7 @@
   activeFilters=activeFilters
   isLoading=isLoading
   datasets=model.datasets
-  class="bc-datasource t-dark"
+  class="bc-datasource theme-dark"
 }}
 
 <div class="grid-wrapper grid-wrapper-stepped">
@@ -15,8 +15,8 @@
     {{partial 'loading'}}
   {{else}}
     {{#if (gt model.meta.total 0)}}
-      <div class="u-flex u-justify-between pt5 pb4">
-        <p class="u-flex u-items-center u-fw-med mb0">Results: {{model.meta.total}}</p>
+      <div class="flex justify-between pt5 pb4">
+        <p class="flex items-center fw-med mb0">Results: {{model.meta.total}}</p>
 
         {{results-select resultsOptions=resultsOptions resultsPerPage=resultsPerPage setResultsPerPage=(action 'setResultsPerPage')}}
       </div>

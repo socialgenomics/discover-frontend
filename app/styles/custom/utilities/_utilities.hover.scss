@@ -21,6 +21,7 @@
 
 .u-hv-bc-white      { @include hv-bc-darken($color-white,          3 ); }
 .u-hv-bc-off-white  { @include hv-bc-darken($color-off-white,      10); }
+.u-hv-bc-very-light-grey  { @include hv-bc-darken($color-very-light-grey,      5); }
 .u-hv-bc-grey       { @include hv-bc-darken($color-mid-grey,       10); }
 
 // text color hover effects

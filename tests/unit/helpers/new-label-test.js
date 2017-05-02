@@ -20,12 +20,12 @@ describe('newLabelHelper', function() {
   describe('date is within days', function() {
     it('returns new when no days are specified', function() {
       const result = newLabel([moment(new Date()).subtract(14, 'days')]);
-      expect(result.string).to.eql('<span class="fc-red u-fw-bold fs0"> NEW </span>');
+      expect(result.string).to.eql('<span class="fc-red fw-bold fs0"> NEW </span>');
     });
 
     it('returns new when the date is within the days specified', function() {
       const result = newLabel([moment(new Date()).subtract(19, 'days'), 20]);
-      expect(result.string).to.eql('<span class="fc-red u-fw-bold fs0"> NEW </span>');
+      expect(result.string).to.eql('<span class="fc-red fw-bold fs0"> NEW </span>');
     });
   })
 });

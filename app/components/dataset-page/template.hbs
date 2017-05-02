@@ -4,13 +4,13 @@
     <!-- dataset -->
     <div class="grid__col grid__col--7-of-12 relative u-full-height">
       <!-- header -->
-      <header class="c-card-header bc-very-light-grey u-flex {{if assaysToDisplay 'u-justify-between' 'u-justify-end'}} u-items-center px3">
+      <header class="c-card-header bc-very-light-grey flex {{if assaysToDisplay 'justify-between' 'justify-end'}} items-center px3">
         {{#if assaysToDisplay}}
           {{assay-list assays=assaysToDisplay}}
         {{/if}}
-        <div class="pl2 u-flex u-items-center">
+        <div class="pl2 flex items-center">
           {{follow-button subscribable=model.subscribableId model=model}}
-          <ul class="u-flex o-list-flush-left pl3 mb0">
+          <ul class="flex o-list-flush-left pl3 mb0">
             {{action-favourite model=model class="mr3"}}
             {{action-share
               actionableId=model.id
@@ -25,8 +25,8 @@
       <!-- TODO hack fix to stop text overflow on mobile. Needs redesigning. -->
       <div class="p3" style="max-height: 70%; overflow: scroll;">
         <!-- heading/description -->
-        <div class="u-flex u-content-around">
-          <h2 class="fs2 u-fw-med fc-primary mb2 u-grow-1 u-hyphens-auto">{{model.title}}</h2>
+        <div class="flex content-around">
+          <h2 class="fs2 fw-med fc-primary mb2 flex-grow u-hyphens-auto">{{model.title}}</h2>
           {{#if canEdit}}
             {{fa-icon 'pencil' class='fc-tertiary u-hv-tc-secondary cursor-pointer fs2'
                 click=(action 'enterEditMode')}}
@@ -63,7 +63,7 @@
             <li class="fs0 fc-tertiary">
               Submitted by:
               {{#link-to 'user' model.userId.id }}
-                <span class="u-fw-med fs1 fc-secondary">{{model.userId.displayName}}</span>
+                <span class="fw-med fs1 fc-secondary">{{model.userId.displayName}}</span>
               {{/link-to}}
             </li>
           {{else}}
@@ -71,7 +71,7 @@
               <li class="fs0 fc-tertiary">
                 Sourced from:
                 {{#link-to 'datasources.source' model.datasourceId.id}}
-                  <span class="u-fw-med fs1 fc-secondary">{{model.datasourceId.name}}</span>
+                  <span class="fw-med fs1 fc-secondary">{{model.datasourceId.name}}</span>
                 {{/link-to}}
               </li>
             {{/if}}
@@ -79,7 +79,7 @@
             {{!-- TODO: should we remove this? I don't see this property in a model --}}
             {{#if model.accession}}
               <li class="fs0 fc-tertiary">
-                Accession ID: <span class="u-fw-med fs1 fc-secondary">{{model.externalId}}</span>
+                Accession ID: <span class="fw-med fs1 fc-secondary">{{model.externalId}}</span>
               </li>
             {{/if}}
           {{/if}}
@@ -87,7 +87,7 @@
           {{#if (and isRequest model.createdAt )}}
             <li class="fs0 fc-tertiary">
               Requested on:
-              <span class="u-fw-med fs1 fc-secondary">{{moment-format model.createdAt}}</span>
+              <span class="fw-med fs1 fc-secondary">{{moment-format model.createdAt}}</span>
             </li>
           {{/if}}
 
@@ -95,7 +95,7 @@
             <li class="fs0 fc-tertiary">
               Access type:
               {{#link-to 'help.searching-for-data' (query-params help="filters")}}
-                <span class="u-fw-med fs1 fc-secondary">{{model.access}}</span>
+                <span class="fw-med fs1 fc-secondary">{{model.access}}</span>
               {{/link-to}}
             </li>
           {{/if}}
@@ -137,8 +137,8 @@
           </div>
         {{else}}
           <!-- Discussions header -->
-          <header class="c-card-header bc-very-light-grey px3 u-flex u-items-center u-justify-center">
-            <h4 class="mb0 fs2 u-fw-med fc-primary">Discussions</h4>
+          <header class="c-card-header bc-very-light-grey px3 flex items-center justify-center">
+            <h4 class="mb0 fs2 fw-med fc-primary">Discussions</h4>
           </header>
 
           <!-- Discussions body -->
@@ -150,9 +150,9 @@
     </div>
   </div>
 {{else}}
-  <header class="c-card-header bc-grey t-dark u-flex u-justify-center u-items-center px3 mb3">
-    {{fa-icon 'pencil' class="m3 fc-primary fs2"}}
-    <span class="fc-primary u-fw-med fs2">Edit {{capitalize modelName}}</span>
+  <header class="c-card-header bc-grey theme-dark flex justify-center items-center px3 mb3">
+    {{fa-icon 'pencil' class="mr3 fc-primary fs2"}}
+    <span class="fc-primary fw-med fs2">Edit {{capitalize modelName}}</span>
   </header>
   <div class="grid grid--no-gutter">
     <div class="grid__col grid__col--8-of-12 grid__col--push-2-of-12">
@@ -166,7 +166,7 @@
             noMarkdown=true
           }}
         {{/each}}
-        <div class="u-flex u-justify-center">
+        <div class="flex justify-center">
           {{async-button
             action=(action 'save')
             class="c-btn c-btn-primary m3"

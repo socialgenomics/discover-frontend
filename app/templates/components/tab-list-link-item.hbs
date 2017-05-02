@@ -2,8 +2,8 @@
   {{#link-to target query class="fc-secondary fs2"}}
     <li class="p2 {{unless active 'u-hv-bc-very-light-grey'}}">
       {{#if (and icon (eq iconPosition "left"))}}{{fa-icon icon}}{{/if}}
-      <span class="px2 u-fw-reg">{{title}}</span>
-      {{#if stats}}<span class="u-fw-med px2">{{stats}}</span>{{/if}}
+      <span class="px2 fw-reg">{{title}}</span>
+      {{#if stats}}<span class="fw-med px2">{{stats}}</span>{{/if}}
       {{#if (and icon (eq iconPosition "right"))}}{{fa-icon icon}}{{/if}}
     </li>
   {{/link-to}}
@@ -11,8 +11,8 @@
   {{#link-to target class="fc-secondary fs2"}}
   <li class="p2 {{unless active 'u-hv-bc-very-light-grey'}}">
     {{#if (and icon (eq iconPosition "left"))}}{{fa-icon icon}}{{/if}}
-    <span class="px2 u-fw-reg">{{title}}</span>
-    {{#if stats}}<span class="u-fw-med px2">{{stats}}</span>{{/if}}
+    <span class="px2 fw-reg">{{title}}</span>
+    {{#if stats}}<span class="fw-med px2">{{stats}}</span>{{/if}}
     {{#if (and icon (eq iconPosition "right"))}}{{fa-icon icon}}{{/if}}
   </li>
   {{/link-to}}

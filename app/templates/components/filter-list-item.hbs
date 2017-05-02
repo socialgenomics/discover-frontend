@@ -1,12 +1,12 @@
-<div class="relative u-flex u-justify-between fc-primary px2 mb2 rounded {{unless active 'u-hv-bc-darken10 cursor-pointer'}} {{if active 'bc-overlay'}}" {{action (if active 'removeFilter' 'addFilter') aggName bucket.key}}>
+<div class="relative flex justify-between fc-primary px2 mb2 rounded {{unless active 'u-hv-bc-darken10 cursor-pointer'}} {{if active 'bc-overlay'}}" {{action (if active 'removeFilter' 'addFilter') aggName bucket.key}}>
 
-  <span class="u-flex">
+  <span class="flex">
     {{#if (eq aggName "assay")}}
       <span>
         <span class="c-card-assay px3 mr2 {{bucket.colour}}"></span>
       </span>
     {{/if}}
-    <span class="u-self-center {{if active 'cursor-default'}}">{{bucket.key}} ({{bucket.doc_count}})</span>
+    <span class="self-center {{if active 'cursor-default'}}">{{bucket.key}} ({{bucket.doc_count}})</span>
   </span>
 
   {{#if active}}

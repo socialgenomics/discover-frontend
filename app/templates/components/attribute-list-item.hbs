@@ -1,5 +1,5 @@
 {{#unless inEditMode}}
-  <div class="u-flex u-justify-between">
+  <div class="flex justify-between">
     {{#if (eq attribute.key 'pmid')}}
       <a target="_blank"
         href="https://www.ncbi.nlm.nih.gov/pubmed/{{attribute.value}}"
@@ -27,7 +27,7 @@
       value=value
     }}
     {{async-button
-      class="c-btn c-btn-primary m3 mb2"
+      class="c-btn c-btn-primary mr3 mb2"
       action=(action 'save')
       default="Save"
       disableWhen=(not isValid)

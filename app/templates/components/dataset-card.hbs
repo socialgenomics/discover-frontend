@@ -47,11 +47,11 @@
   {{else}}
     <!-- It is a Dataset -->
     <!-- Card Header -->
-    <header class="c-card-header bc-very-light-grey u-flex {{if hasAssays 'u-justify-between' 'u-justify-end'}} u-items-center px3">
+    <header class="c-card-header bc-very-light-grey flex {{if hasAssays 'justify-between' 'justify-end'}} items-center px3">
       {{#if hasAssays}}
         {{assay-list assays=assaysToDisplay}}
       {{/if}}
-      <ul class="u-flex o-list-flush-left pl3 mb0">
+      <ul class="flex o-list-flush-left pl3 mb0">
         {{action-favourite model=dataset class="mr3"}}
         {{action-share
           actionableId=dataset.id
@@ -65,7 +65,7 @@
       {{#if dataset.highlights.title}}
         {{#link-to 'datasets.detail' dataset.id classNames="data-title"}}
           <div data-balloon={{dataset.title}} data-balloon-pos="up" data-balloon-length="large">
-            <h4 class="fs2 u-fw-med fc-primary c-card-title mb2">
+            <h4 class="fs2 fw-med fc-primary c-card-title mb2">
               {{{truncate dataset.highlights.title 70}}}
             </h4>
           </div>
@@ -73,7 +73,7 @@
       {{else}}
         {{#link-to 'datasets.detail' dataset.id classNames="data-title"}}
           <div data-balloon={{dataset.title}} data-balloon-pos="up" data-balloon-length="large">
-            <h4 class="fs2 u-fw-med fc-primary c-card-title mb2">
+            <h4 class="fs2 fw-med fc-primary c-card-title mb2">
               {{truncate dataset.title 70}}
             </h4>
           </div>

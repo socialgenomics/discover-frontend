@@ -4,8 +4,8 @@
   {{fa-icon 'envelope' size=2 class='fc-yellow px4 py3 cursor-pointer' click=(action 'onEnvelopeClick')}}
 </div>
 
-<div class="u-flex pl3 pb3">
-  <p class="p2 border m3 mb0 u-overflow-hidden c-share-modal__copy-link">{{shareUrl}}</p>
+<div class="flex pl3 pb3">
+  <p class="p2 border mr3 mb0 overflow-hidden c-share-modal__copy-link">{{shareUrl}}</p>
   {{#copy-button
     class=copyButtonClasses
     clipboardText=shareUrl

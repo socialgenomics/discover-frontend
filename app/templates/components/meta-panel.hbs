@@ -11,7 +11,7 @@
 
   <main class="px4 {{if isSearchPage 'py3'}}">
     <div class="c-sidebar-toggle absolute top-0 right-0 py3 px2 {{if isSearchPage 'bc-very-light-grey u-hv-bc-very-light-grey border'}} {{if (or model.userId (eq model.type 'repositive_collection')) 'bc-collection-overlay u-hv-bc-collection'}} {{if (eq model.type 'datasource') 'bc-datasource-overlay u-hv-bc-datasource'}}">
-      <a class="fc-secondary u-fw-med p3" {{action 'toggleMetaPanelVisibility'}}>{{#if metaPanelHidden}} <span class="fc-primary mr2">View filters</span> {{fa-icon 'chevron-right class="pl4"'}} {{else}} {{fa-icon 'times'}} {{/if}}</a>
+      <a class="fc-secondary fw-med p3" {{action 'toggleMetaPanelVisibility'}}>{{#if metaPanelHidden}} <span class="fc-primary mr2">View filters</span> {{fa-icon 'chevron-right class="pl4"'}} {{else}} {{fa-icon 'times'}} {{/if}}</a>
     </div>
     {{#if displayInfo}}
 

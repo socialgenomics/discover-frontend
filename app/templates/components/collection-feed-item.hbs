@@ -1,21 +1,21 @@
 {{#link-to 'collections.collection' collection.id classNames="feed-item-component"}}
   <div class="c-card mb4 c-col-li-item u-hv-bc-white">
     <section class="grid__col grid__col--1-of-5 grid__col--am px4 py2 bc-light-bluegrey ta-center u-inherit-height">
-      <div class="u-inherit-height u-flex u-flex-column u-items-center u-justify-center">
+      <div class="u-inherit-height flex flex-column items-center justify-center">
         {{fa-icon "book" size=2 class='fc-tertiary p2'}}
         <p class="mb0">Collection</p>
       </div>
     </section>
 
     <section class="grid__col grid__col--1-of-5 grid__col--am ta-center px3 py2 u-inherit-height">
-      <div class="u-inherit-height u-flex u-flex-column u-items-center u-justify-center">
+      <div class="u-inherit-height flex flex-column items-center justify-center">
         <img src="/assets/images/favicon.ico" class="c-img--src-logo">
-        <p class="fs0 mb0 u-fw-bold p2">Repositive</p>
+        <p class="fs0 mb0 fw-bold p2">Repositive</p>
       </div>
     </section>
 
     <section class="grid__col grid__col--3-of-5 grid__col--am px3 u-inherit-height c-col-li-item__divider c-col-li-item__resp-text">
-      <div class="u-inherit-height u-flex u-flex-column u-justify-center py2">
+      <div class="u-inherit-height flex flex-column justify-center py2">
         {{#link-to 'collections.collection' collection.id}}
           <h4 class="fs2 mb2">{{collection.name}}</h4>
         {{/link-to}}

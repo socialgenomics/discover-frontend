@@ -1,10 +1,10 @@
-<div class="px4 u-flex u-items-center relative u-justify-center">
+<div class="px4 flex items-center relative justify-center">
   {{#if (eq type 'datasource')}}
     {{panel-back-button route='datasources'}}
   {{else if (eq type 'repositive_collection')}}
     {{panel-back-button route='collections'}}
   {{/if}}
-  <div class="u-flex u-items-center fc-secondary fs1">
+  <div class="flex items-center fc-secondary fs1">
     {{#if (eq type 'repositive_collection')}}
       {{fa-icon "book" class="pr2"}}
       <h5 class="fs1 fc-secondary py3 mb0">Collection</h5>
