@@ -37,44 +37,6 @@ export default Route.extend({
     }
   },
 
-  _getDiscussionsAndContributions(profileData) {
-    const requestDiscussionIds = profileData.discussions
-      .filterBy('actionable_model', 'request')
-      .mapBy('actionableId.id')
-      .uniq();
-    const datasetDiscussionIds = profileData.discussions
-      .filterBy('actionable_model', 'dataset')
-      .mapBy('actionableId.id')
-      .uniq();
-    const datasetContributionIds = profileData.contributions
-      .filterBy('actionable_model', 'dataset')
-      .mapBy('actionableId.id')
-      .uniq();
-    return RSVP.hash({
-      profileData,
-      datasetContributions: this.store.query('dataset', { 'where.id': datasetContributionIds, limit: 50}),
-      datasetDiscussions: this.store.query('dataset', { 'where.id': datasetDiscussionIds, limit: 50}),
-      requestDiscussions: this.store.query('request', { 'where.id': requestDiscussionIds, limit: 50})
-    })
-  },
-
-  _getFavouritedData(userIdOfProfile) {
-    const ajax = get(this, 'ajax');
-    return RSVP.hash({
-      datasets: ajax.request(ENV.APIRoutes['favourite-datasets'].replace('{user_id}', userIdOfProfile), { method: 'GET' }),
-      requests: ajax.request(ENV.APIRoutes['favourite-requests'].replace('{user_id}', userIdOfProfile), { method: 'GET' })
-    })
-      .then(data => {
-        const datasets = data.datasets.map(datasetObj => {
-          return this.store.push(this.store.normalize('dataset', datasetObj));
-        });
-        const requests = data.requests.map(requestObj => {
-          return this.store.push(this.store.normalize('request', requestObj));
-        });
-        return [...datasets, ...requests];
-      }).catch(Logger.error);
-  },
-
   _getProfileData(user, params) {
     const userId = get(user, 'id');
     return RSVP.hash({
@@ -108,5 +70,47 @@ export default Route.extend({
       user_credential: this.store.query('credential', { 'where.user_id': userId }),
       favourited_data: this._getFavouritedData(params.id)
     });
+  },
+
+  _getDiscussionsAndContributions(profileData) {
+    return RSVP.hash({
+      profileData,
+      datasetContributions: this.store.query('dataset', {
+        'where.id': this._getUniqueIds(profileData.contributions, 'dataset'),
+        limit: 50
+      }),
+      datasetDiscussions: this.store.query('dataset', {
+        'where.id': this._getUniqueIds(profileData.discussions, 'dataset'),
+        limit: 50
+      }),
+      requestDiscussions: this.store.query('request', {
+        'where.id': this._getUniqueIds(profileData.discussions, 'request'),
+        limit: 50
+      })
+    })
+  },
+
+  _getUniqueIds(arrayOfObjs, modelType) {
+    return arrayOfObjs
+      .filterBy('actionable_model', modelType)
+      .mapBy('actionableId.id')
+      .uniq();
+  },
+
+  _getFavouritedData(userIdOfProfile) {
+    const ajax = get(this, 'ajax');
+    return RSVP.hash({
+      datasets: ajax.request(ENV.APIRoutes['favourite-datasets'].replace('{user_id}', userIdOfProfile), { method: 'GET' }),
+      requests: ajax.request(ENV.APIRoutes['favourite-requests'].replace('{user_id}', userIdOfProfile), { method: 'GET' })
+    })
+      .then(data => {
+        const datasets = data.datasets.map(datasetObj => {
+          return this.store.push(this.store.normalize('dataset', datasetObj));
+        });
+        const requests = data.requests.map(requestObj => {
+          return this.store.push(this.store.normalize('request', requestObj));
+        });
+        return [...datasets, ...requests];
+      }).catch(Logger.error);
   }
 });
