@@ -1,9 +1,9 @@
 <div class="flex flex-wrap">
-  <a {{action 'previousPage'}} class="fc-secondary px2 rounded u-hv-bc-very-light-grey {{if noPrevPage 'u-hide-display'}}">
+  <a {{action 'previousPage'}} class="fc-secondary px2 rounded u-hv-bc-very-light-grey {{if noPrevPage 'hide'}}">
     {{fa-icon 'chevron-left'}} Prev
   </a>
 
-  <div class="hide-s hide-m u-inherit-disp">
+  <div class="hide-s hide-m">
     {{#each pages as |page|}}
       {{pagination-number-button page=page currentPageNumber=currentPageNumber goToPage=goToPage}}
     {{/each}}
@@ -11,7 +11,7 @@
 
   <p class="fc-secondary px2 mb0"><span class="hide-l hide-w">Page {{currentPageNumber}} </span>of {{totalPages}}</p>
 
-  <a {{action 'nextPage'}} class="fc-secondary px2 rounded u-hv-bc-very-light-grey {{if noNextPage 'u-hide-display'}}">
+  <a {{action 'nextPage'}} class="fc-secondary px2 rounded u-hv-bc-very-light-grey {{if noNextPage 'hide'}}">
     Next {{fa-icon 'chevron-right'}}
   </a>
 </div>

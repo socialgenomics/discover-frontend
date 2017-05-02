@@ -11,7 +11,7 @@ describe('Integration: PaginationBarComponent', function() {
   it('adds class disabled to previous button on first page', function() {
     this.set('currentPageNumber', 1);
     this.render(hbs`{{pagination-bar currentPageNumber=currentPageNumber}}`);
-    expect(this.$('a').hasClass('u-hide-display')).to.be.true;
+    expect(this.$('a').hasClass('hide')).to.be.true;
   });
 
   it('adds class disabled to next button when there are no pages left to load', function() {
@@ -20,7 +20,7 @@ describe('Integration: PaginationBarComponent', function() {
       totalPages: 5
     });
     this.render(hbs`{{pagination-bar currentPageNumber=currentPageNumber totalPages=totalPages}}`);
-    expect(this.$('a').hasClass('u-hide-display')).to.be.true;
+    expect(this.$('a').hasClass('hide')).to.be.true;
   });
 
   it('displays correct page number', function() {
