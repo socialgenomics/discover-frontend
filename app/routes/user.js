@@ -12,43 +12,53 @@ export default Route.extend({
   model: function(params) {
     if (get(this, 'session.session.isAuthenticated')) {
       return this.store.findRecord('user', params.id)
-      .then(user => {
-        const userId = get(user, 'id');
-        // TODO: The majority of this info can be cached and retrieved from the same session instead of doing unnecesary calls.
-        return RSVP.hash({
-          user: user,
-          registrations: this.store.query('dataset', { 'where.user_id': userId, 'order[0][0]': 'created_at', 'order[0][1]': 'DESC' }),
-          requests: this.store.query('request', { 'where.user_id': userId, 'order[0][0]': 'created_at', 'order[0][1]': 'DESC' }),
-          discussions: this.store.query('action', { 'where.user_id': userId, 'where.type': 'comment' }),
-          contributions: this.store.query('action', { 'where.user_id': userId, 'where.type': 'attribute' }),
-          user_credential: this.store.query('credential', { 'where.user_id': userId }),
-          favourited_data: this._getFavouritedData(params.id)
+        .then(user => this._getProfileData(user, params))
+        .then(this._getDiscussionsAndContributions.bind(this))
+        .then(values => {
+          this.controllerFor('user.index').set('favouritedData', values.profileData.favourited_data);
+          const discussions = [...values.datasetDiscussions.toArray(), ...values.requestDiscussions.toArray()];
+          return {
+            user: values.profileData.user,
+            registrations: values.profileData.registrations,
+            requests: values.profileData.requests,
+            discussions,
+            contributions: values.datasetContributions,
+            is_verified: isVerified(values.profileData.user_credential)
+          };
+        })
+        .catch(err => {
+          Logger.error(err);
+          if (err.errors[0].status === 500) {
+            throw err;
+          }
         });
-      })
-      .then(values => {
-        const discussionIds = values.discussions.mapBy('actionableId.id').uniq();
-        const contributionIds = values.contributions.mapBy('actionableId.id').uniq();
-
-        this.controllerFor('user.index').set('favouritedData', values.favourited_data);
-        return {
-          user: values.user,
-          registrations: values.registrations,
-          requests: values.requests,
-          discussions: this.store.query('dataset', { 'where.id': discussionIds }),
-          contributions: this.store.query('dataset', { 'where.id': contributionIds }),
-          is_verified: isVerified(values.user_credential)
-        };
-      })
-      .catch(err => {
-        Logger.error(err);
-        if (err.errors[0].status === 500) {
-          throw err;
-        }
-      });
     } else {
       this.transitionTo('/');
     }
   },
+
+  _getDiscussionsAndContributions(profileData) {
+    debugger;
+    const requestDiscussionIds = profileData.discussions
+      .filterBy('actionable_model', 'request')
+      .mapBy('actionableId.id')
+      .uniq();
+    const datasetDiscussionIds = profileData.discussions
+      .filterBy('actionable_model', 'dataset')
+      .mapBy('actionableId.id')
+      .uniq();
+    const datasetContributionIds = profileData.contributions
+      .filterBy('actionable_model', 'datset')
+      .mapBy('actionableId.id')
+      .uniq();
+    return RSVP.hash({
+      profileData,
+      datasetContributions: this.store.query('dataset', { 'where.id': datasetContributionIds, limit: 50}),
+      datasetDiscussions: this.store.query('dataset', { 'where.id': datasetDiscussionIds, limit: 50}),
+      requestDiscussions: this.store.query('request', { 'where.id': requestDiscussionIds, limit: 50})
+    })
+  },
+
   _getFavouritedData(userIdOfProfile) {
     const ajax = get(this, 'ajax');
     return RSVP.hash({
@@ -64,5 +74,40 @@ export default Route.extend({
         });
         return [...datasets, ...requests];
       }).catch(Logger.error);
+  },
+
+  _getProfileData(user, params) {
+    const userId = get(user, 'id');
+    return RSVP.hash({
+      user: user,
+      registrations: this.store.query('dataset', {
+        'where.user_id': userId,
+        'order[0][0]': 'created_at',
+        'order[0][1]': 'DESC',
+        'limit': 50
+      }),
+      requests: this.store.query('request', {
+        'where.user_id': userId,
+        'order[0][0]': 'created_at',
+        'order[0][1]': 'DESC',
+        'limit': 50
+      }),
+      discussions: this.store.query('action', {
+        'where.user_id': userId,
+        'where.type': 'comment',
+        'order[0][0]': 'created_at',
+        'order[0][1]': 'DESC',
+        'limit': 50
+      }),
+      contributions: this.store.query('action', {
+        'where.user_id': userId,
+        'where.type': 'attribute',
+        'order[0][0]': 'created_at',
+        'order[0][1]': 'DESC',
+        'limit': 50
+      }),
+      user_credential: this.store.query('credential', { 'where.user_id': userId }),
+      favourited_data: this._getFavouritedData(params.id)
+    });
   }
 });
