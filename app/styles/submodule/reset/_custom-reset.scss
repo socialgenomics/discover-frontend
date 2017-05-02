@@ -79,6 +79,7 @@ input {
 
 textarea {
   height: $spacing-unit-x-large + $spacing-unit-x-large;
+  font-family: $primary-font-stack;
 }
 
 input[type="checkbox"] {

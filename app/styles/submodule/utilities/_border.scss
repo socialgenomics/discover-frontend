@@ -13,7 +13,7 @@
   BORDER RADII
 */
 
-.square  { border-radius: none; }
+.square  { border-radius: 0; }
 .circle  { border-radius: 100%; }
 
 .rounded        { border-radius: $border-radius; }

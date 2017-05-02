@@ -2,13 +2,13 @@
 
   {{#dropdown.trigger class="outline-none cursor-pointer px3"}}
     {{#if session.isAuthenticated}}
-      <div class="u-hide-on-sm-md">
+      <div class="hide-s hide-m">
         <img src={{avatar}} class="u-w1 circle">
         <span class="fc-primary fs1 px2">{{firstname}}</span>
       </div>
     {{/if}}
 
-    <div class="u-hide-on-lg">
+    <div class="hide-l hide-w">
       {{fa-icon 'bars' class='fc-secondary px2 grid__col--am' }}
     </div>
   {{/dropdown.trigger}}
@@ -17,11 +17,11 @@
     {{#if session.isAuthenticated}}
       {{#link-to 'datasets.register'
         invokeAction=(action 'close' dropdown)
-        class='u-hide-on-lg py3 pl3 pr5 u-hv-bc-white fc-secondary'}} Register Data {{/link-to}}
+        class='hide-l hide-w py3 pl3 pr5 u-hv-bc-white fc-secondary'}} Register Data {{/link-to}}
 
       {{#link-to 'datasets.request'
         invokeAction=(action 'close' dropdown)
-        class='u-hide-on-lg py3 pl3 pr5 u-hv-bc-white fc-secondary'}} Request Data {{/link-to}}
+        class='hide-l hide-w py3 pl3 pr5 u-hv-bc-white fc-secondary'}} Request Data {{/link-to}}
 
       {{#link-to 'user' userId
         invokeAction=(action 'close' dropdown)
@@ -43,8 +43,8 @@
 
     {{else}}
       <!-- Not Logged In -->
-      <a href="http://repositive.io/about" class='u-hide-on-lg py3 pl3 pr5 u-hv-bc-white'>About</a>
-      <a href="http://blog.repositive.io/" class='u-hide-on-lg py3 pl3 pr5 u-hv-bc-white'>Blog</a>
+      <a href="http://repositive.io/about" class='hide-l hide-w py3 pl3 pr5 u-hv-bc-white'>About</a>
+      <a href="http://blog.repositive.io/" class='hide-l hide-w py3 pl3 pr5 u-hv-bc-white'>Blog</a>
       {{#link-to 'users.login'
         invokeAction=(action 'close' dropdown)
         class='py3 pl3 pr5 u-hv-bc-white'}}Login{{/link-to}}

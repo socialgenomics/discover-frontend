@@ -4,20 +4,20 @@
     <!-- LOGO -->
     {{#unless isAuthenticated}}
       <!-- desktop logo -->
-      <a href="https://repositive.io" class="u-hide-on-sm-md c-navbar__element mr4 pl3 flex-shrink-none">
+      <a href="https://repositive.io" class="hide-s hide-m c-navbar__element mr4 pl3 flex-shrink-none">
         <img src="/assets/images/logo-full-larger.png" alt="Repositive DNA logo">
       </a>
       <!-- mobile logo -->
-      <a href="https://repositive.io" class="u-hide-on-lg u-w1 mr3 pl3 flex-shrink-none">
+      <a href="https://repositive.io" class="hide-l hide-w u-w1 mr3 pl3 flex-shrink-none">
         <img src="/assets/images/repositive-logo.png" alt="Repositive DNA logo">
       </a>
     {{else}}
       <!-- desktop logo -->
-      {{#link-to 'root' class="u-hide-on-sm-md c-navbar__element mr3 pl3 flex-shrink-none"}}
+      {{#link-to 'root' class="hide-s hide-m c-navbar__element mr3 pl3 flex-shrink-none"}}
         <img src="/assets/images/logo-full-larger.png" alt="Repositive DNA logo">
       {{/link-to}}
       <!-- mobile logo -->
-      {{#link-to 'root' class="u-hide-on-lg u-w1 mr3 pl3 flex-shrink-none"}}
+      {{#link-to 'root' class="hide-l hide-w u-w1 mr3 pl3 flex-shrink-none"}}
         <img src="/assets/images/repositive-logo.png" alt="Repositive DNA logo">
       {{/link-to}}
     {{/unless}}
@@ -30,12 +30,12 @@
           {{search-bar search=(route-action 'search')}}
         </div>
 
-        {{#link-to "datasets.register" class="u-hide-on-sm-md flex items-center justify-center c-navbar__element fc-secondary border-right u-hv-bc-very-light-grey"}}
+        {{#link-to "datasets.register" class="hide-s hide-m flex items-center justify-center c-navbar__element fc-secondary border-right u-hv-bc-very-light-grey"}}
             {{fa-icon "file-text"}}
             <span class="fs1 pl2">Register Data</span>
         {{/link-to}}
 
-        {{#link-to "datasets.request" class="u-hide-on-sm-md flex items-center justify-center c-navbar__element fc-secondary border-right u-hv-bc-very-light-grey"}}
+        {{#link-to "datasets.request" class="hide-s hide-m flex items-center justify-center c-navbar__element fc-secondary border-right u-hv-bc-very-light-grey"}}
             {{fa-icon "clipboard"}}
             <span class="fs1 pl2">Request Data</span>
         {{/link-to}}
@@ -54,7 +54,7 @@
         </div>
 
       {{/unless}}
-        <div class="u-hide-on-sm-md self-stretch flex pr3 flex-shrink-none">
+        <div class="hide-s hide-m self-stretch flex pr3 flex-shrink-none">
           <a href="http://repositive.io/about" class="flex items-center px3 ta-center fc-secondary u-hv-bc-very-light-grey">About</a>
           <a href="http://blog.repositive.io/" class="flex items-center px3 ta-center border-right fc-secondary u-hv-bc-very-light-grey">Blog</a>
           {{#link-to 'users.login' class="flex items-center px3 ta-center fc-secondary u-hv-bc-very-light-grey"}}Login{{/link-to}}
@@ -65,7 +65,7 @@
           {{/if}}
         </div>
 
-        <div class="u-hide-on-lg self-stretch flex">
+        <div class="hide-l hide-w self-stretch flex">
           {{navbar-dropdown trackCreateAccount=(action 'trackCreateAccount')}}
         </div>
 
