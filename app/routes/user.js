@@ -38,7 +38,6 @@ export default Route.extend({
   },
 
   _getDiscussionsAndContributions(profileData) {
-    debugger;
     const requestDiscussionIds = profileData.discussions
       .filterBy('actionable_model', 'request')
       .mapBy('actionableId.id')
@@ -48,7 +47,7 @@ export default Route.extend({
       .mapBy('actionableId.id')
       .uniq();
     const datasetContributionIds = profileData.contributions
-      .filterBy('actionable_model', 'datset')
+      .filterBy('actionable_model', 'dataset')
       .mapBy('actionableId.id')
       .uniq();
     return RSVP.hash({
