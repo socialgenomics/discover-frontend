@@ -1,5 +1,5 @@
 {{#link-to 'user' user.id disabled=(not session.isAuthenticated) invokeAction=(action 'toggleCreateAccountModal') classNames="u-hv-bc-darken5 u-block u-py2 u-pl1"}}
-  <img class="u-circle u-w2 u-mr1" src="{{user.profile.avatar}}" />
+  <img class="u-circle u-w2 u-mr1" src="{{user.profile.avatar}}" onError="this.onerror=null;this.src='/assets/images/avatar/dog.png';" />
 
   <div class="u-inline-block {{if user.profile.work_organisation 'u-pos-absolute'}} {{if currentUser 'u-pos-absolute'}}">
     <h4 class="u-flex u-items-center u-mb0 u-fs2 u-tc-primary">
