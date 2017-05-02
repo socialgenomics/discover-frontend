@@ -3,13 +3,13 @@
     {{#if (eq attribute.key 'pmid')}}
       <a target="_blank"
         href="https://www.ncbi.nlm.nih.gov/pubmed/{{attribute.value}}"
-        class="fs2 fc-secondary u-hv-tc-primary u-td-underline u-line-break"
+        class="fs2 fc-secondary u-hv-tc-primary td-underline text-line-break"
         {{action 'trackPubmedClick'}}
         >
         {{attribute.value}}
       </a>
     {{else}}
-      <p class="t-attr-item-text fs2 mb2 u-line-break">{{attribute.value}}</p>
+      <p class="t-attr-item-text fs2 mb2 text-line-break">{{attribute.value}}</p>
     {{/if}}
     {{#if canEdit}}
       <div>

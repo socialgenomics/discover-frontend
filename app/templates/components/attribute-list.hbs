@@ -19,7 +19,7 @@
           }}
         {{else}}
           {{#unless (and (contains group singleValueAttrs) (gt attrs.length 0))}}
-            <span {{action 'setOpenInput' group}} class="t-add-trigger flex justify-between items-center u-td-underline fc-tertiary u-hv-tc-secondary cursor-pointer">
+            <span {{action 'setOpenInput' group}} class="t-add-trigger flex justify-between items-center td-underline fc-tertiary u-hv-tc-secondary cursor-pointer">
               Add {{#if (eq group 'pmid')}} Pubmed ID {{else}}{{capitalize group}}{{/if}}
             </span>
           {{/unless}}

@@ -50,19 +50,13 @@
 @import "custom/utilities/border"; //DONE!
 @import "custom/utilities/color";
 @import 'custom/utilities/utilities.hover';
+@import 'custom/utilities/utilities.sizing';
+@import 'custom/utilities/utilities.markdown-text';
+@import 'custom/utilities/utilities.inputs';
 
-
-// @import 'shared/utilities/utilities.display';
-@import 'shared/utilities/utilities.elevation';
-
-
-@import 'shared/utilities/utilities.images';
-@import 'shared/utilities/utilities.inputs';
-// @import 'shared/utilities/utilities.markdown-text';
-// @import 'shared/utilities/utilities.media-queries';
-@import 'shared/utilities/utilities.sizing';
-// @import 'shared/utilities/utilities.text-alignment';
-@import 'shared/utilities/utilities.zindexes';
+@import 'custom/utilities/utilities.elevation';
+@import 'custom/utilities/utilities.images';
+@import 'custom/utilities/utilities.zindexes';
 
 // Addons
 @import 'ember-basic-dropdown';
