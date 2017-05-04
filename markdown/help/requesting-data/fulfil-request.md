@@ -4,4 +4,4 @@ If the data are not indexed in our database you can register them first (link ho
 
 If the data is indexed in REPOSITIVE then copy the link and paste to the discussion of the request to which you are responding.
 
-We are currently working on improving this feature. If you have any ideas you can [let us know](users@repositive.io).
+We are currently working on improving this feature. If you have any ideas you can [let us know](mailto:users@repositive.io).
