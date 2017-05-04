@@ -2,7 +2,7 @@
   <div class="u-ta-center">
     <div class="u-pos-relative u-inline-block u-mb2">
       <img class="u-w4 u-mb1 u-circle" src={{user.profile.avatar}} onError="this.onerror=null;this.src='/assets/images/avatar/dog.png';"/>
-      {{reputation-total class="c-reputation-total-large u-fs2"}}
+      {{reputation-total total=user.reputationTotal class="c-reputation-total-large u-fs2"}}
     </div>
     <h1 class="u-fs3 u-tc-primary u-mb1 u-fw-reg u-hyphens-auto">{{user.displayName}}</h1>
 

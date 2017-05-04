@@ -25,5 +25,10 @@ export default Model.extend({
     } else {
       return 'User' + get(this, 'username');
     }
+  }),
+  reputationTotal: computed('reputation', function() {
+    const reputation = get(this, 'reputation');
+    return Object.keys(reputation)
+      .reduce((sum, key) => sum + reputation[key], 0)
   })
 });
