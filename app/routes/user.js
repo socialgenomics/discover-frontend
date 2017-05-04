@@ -2,7 +2,7 @@ import Ember from 'ember';
 import { isVerified } from './users/trust';
 import ENV from 'repositive/config/environment';
 
-const { inject: { service }, Route, RSVP, get, Logger } = Ember;
+const { inject: { service }, Route, RSVP, get, Logger, isEmpty } = Ember;
 
 export default Route.extend({
   ajax: service(),
@@ -56,15 +56,11 @@ export default Route.extend({
       discussions: this.store.query('action', {
         'where.user_id': userId,
         'where.type': 'comment',
-        'order[0][0]': 'created_at',
-        'order[0][1]': 'DESC',
         'limit': 50
       }),
       contributions: this.store.query('action', {
         'where.user_id': userId,
         'where.type': 'attribute',
-        'order[0][0]': 'created_at',
-        'order[0][1]': 'DESC',
         'limit': 50
       }),
       user_credential: this.store.query('credential', { 'where.user_id': userId }),
@@ -73,21 +69,19 @@ export default Route.extend({
   },
 
   _getDiscussionsAndContributions(profileData) {
-    return RSVP.hash({
-      profileData,
-      datasetContributions: this.store.query('dataset', {
-        'where.id': this._getUniqueIds(profileData.contributions, 'dataset'),
-        limit: 50
-      }),
-      datasetDiscussions: this.store.query('dataset', {
-        'where.id': this._getUniqueIds(profileData.discussions, 'dataset'),
-        limit: 50
-      }),
-      requestDiscussions: this.store.query('request', {
-        'where.id': this._getUniqueIds(profileData.discussions, 'request'),
-        limit: 50
-      })
-    })
+    const datasetContributionIds = this._getUniqueIds(profileData.contributions, 'dataset');
+    const datasetDiscussionIds = this._getUniqueIds(profileData.discussions, 'dataset');
+    const requestDiscussionIds = this._getUniqueIds(profileData.discussions, 'request');
+
+    const datasetContributions = isEmpty(datasetContributionIds) ? [] : this._createQuery(datasetContributionIds, 'dataset');
+    const datasetDiscussions = isEmpty(datasetDiscussionIds) ? [] : this._createQuery(datasetDiscussionIds, 'dataset');
+    const requestDiscussions = isEmpty(requestDiscussionIds) ? [] : this._createQuery(requestDiscussionIds, 'request');
+
+    return RSVP.hash({ profileData, datasetContributions, datasetDiscussions, requestDiscussions });
+  },
+
+  _createQuery(ids, modelType) {
+    return this.store.query(modelType, { 'where.id': ids, limit: 50 });
   },
 
   _getUniqueIds(arrayOfObjs, modelType) {
