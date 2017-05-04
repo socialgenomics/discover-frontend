@@ -1,7 +1,7 @@
 <div class="u-pos-relative">
   <div class="u-ta-center">
     <div class="profile-img">
-      <img class="u-w4 u-mb1 u-circle" src={{user.profile.avatar}}>
+      <img class="u-w4 u-mb1 u-circle" src={{user.profile.avatar}} onError="this.onerror=null;this.src='/assets/images/avatar/dog.png';">
     </div>
     <h1 class="u-fs3 u-tc-primary u-mb1 u-fw-reg u-hyphens-auto">{{user.displayName}}</h1>
 

@@ -10,7 +10,7 @@
 
 {{#if canBeAContributor}}
   <div class="u-py2 u-pl1 u-flex">
-    <img class="u-filter-fade-grey u-circle u-inline u-w2 u-h2 u-mr1" src="{{session.authenticatedUser.profile.avatar}}" />
+    <img class="u-filter-fade-grey u-circle u-inline u-w2 u-h2 u-mr1" src="{{session.authenticatedUser.profile.avatar}}" onError="this.onerror=null;this.src='/assets/images/avatar/dog.png';"/>
     <p class="u-fs2 u-tc-tertiary u-inline">Become a contributor by adding metadata to help categorise this {{modelName}}.</p>
   </div>
 {{else if (not session.isAuthenticated)}}
