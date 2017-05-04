@@ -26,7 +26,7 @@
   color: $color-white;
   background: $color-primary-teal;
   border-color: $color-primary-teal;
-  // @extend .u-hv-bc-teal;
+  @extend .u-hv-bc-teal;
 }
 
 // only styles enabled buttons
@@ -34,7 +34,7 @@
   color: $color-primary-teal;
   background-color: $color-white;
   border-color: $color-primary-teal;
-  // @extend .u-hv-bc-white;
+  @extend .u-hv-bc-white;
 }
 
 .c-btn:disabled {

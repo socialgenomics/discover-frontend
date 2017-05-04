@@ -1,5 +1,5 @@
 {{#link-to 'user' user.id disabled=(not session.isAuthenticated) invokeAction=(action 'toggleCreateAccountModal') classNames="u-hv-bc-darken5 block py3 pl2"}}
-  <img class="circle u-w2 mr2" src="{{user.userProfile.avatar}}" />
+  <img class="circle icon-large mr2" src="{{user.userProfile.avatar}}" />
 
   <div class="inline-block {{if user.userProfile.workOrganisation 'absolute'}} {{if currentUser 'absolute'}}">
     <h4 class="flex items-center mb0 fs2 fc-primary">
