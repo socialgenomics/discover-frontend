@@ -36,7 +36,7 @@ describe('Integration | Component | user preview', function() {
     });
 
     this.render(hbs`{{user-preview user=user}}`);
-    expect(this.$('a.u-td-underline').text().trim()).to.eql('Add your affiliation');
+    expect(this.$('a.td-underline').text().trim()).to.eql('Add your affiliation');
   });
 
   it('render the timestamp for comments context, if there is one', function() {
