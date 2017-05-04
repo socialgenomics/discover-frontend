@@ -65,7 +65,6 @@ export default Component.extend(FlashMessageMixin, Validations, {
 
     userModel
       .save()
-      .then(() => get(this, 'reloadUserModel')())
       .then(this._onSaveSuccess.bind(this))
       .catch(this._onSaveError.bind(this, userModel));
   },
