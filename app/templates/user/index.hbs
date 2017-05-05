@@ -1,74 +1,47 @@
-<div class="grid-wrapper grid-wrapper-stepped">
-  <main id="profile">
-    <div class="grid">
-      <div class="grid__col grid__col--12-of-12">
-        <section class="c-card p3">
-          <div class="ta-center relative">
-            <h1 class="fs4 mb2">{{model.user.displayName}}</h1>
-            <h4>{{model.user_profile.workOrganisation}}</h4>
-
-            {{#if isOwnProfile}}{{#link-to "users.profile" class="fa-2x absolute right-0 top-0 fc-secondary"}}{{fa-icon "pencil-square-o"}}{{/link-to}}{{/if}}
-            <div class="profile-img">
-              <img class="icon-x-large mb2 circle" src={{model.user_profile.avatar}}>
-            </div>
-            {{#if model.is_verified}}
-              <h4 class="fc-teal fs2">{{fa-icon "check-circle"}} Verified Account</h4>
-            {{else}}
-              {{#if isOwnProfile}}
-              <h4>{{#link-to 'users.trust' class="fc-red"}}{{fa-icon "envelope"}} Please verify your email{{/link-to}}</h4>
-              {{/if}}
-            {{/if}}
-          </div>
-
-          <div class="c-divider c-divider-light-bg"></div>
-
-          <div class="grid o-list-inline">
-            <div class="grid__col grid__col--3-of-12 ta-center">
-              <span class="o-list-inline__item fw-med fs3">{{numberOfFavourites}}</span>
-              <h5 class="o-list-inline__item fw-thin mb2">Favourites</h5>
-            </div>
-            <div class="grid__col grid__col--3-of-12 ta-center">
-              <span class="o-list-inline__item fw-med fs3">{{model.registrations.length}}</span>
-              <h5 class="o-list-inline__item fw-thin mb2">Registrations</h5>
-            </div>
-            <div class="grid__col grid__col--3-of-12 ta-center">
-              <span class="o-list-inline__item fw-med fs3">{{model.requests.length}}</span>
-              <h5 class="o-list-inline__item fw-thin mb2">Requests</h5>
-            </div>
-            <div class="grid__col grid__col--3-of-12 ta-center">
-              <span class="o-list-inline__item fw-med fs3">{{numberOfComments}}</span>
-              <h5 class="o-list-inline__item fw-thin mb2">Comments</h5>
-            </div>
-          </div>
-        </section>
-      </div>
+<div class="grid-wrapper grid-wrapper-fluid">
+  <div class="grid">
+    <div class="grid__col grid__col--1-of-3 grid__col--m-1-of-2">
+      {{user-profile-info
+        user=user
+        isOwnProfile=isOwnProfile
+        isVerified=model.is_verified}}
+    </div>
+    <div class="grid__col grid__col--2-of-3 grid__col--m-1-of-2">
 
       <!-- Favourites -->
-      <div class="grid__col grid__col--6-of-12">
-        {{activity-card
-          model=favouritedData
-          group="favourite"
-          isProfilePage=true
-          isOwnProfile=isOwnProfile}}
-      </div>
+      {{activity-card
+        model=favouritedData
+        group="favourite"
+        isProfilePage=true
+        isOwnProfile=isOwnProfile}}
 
       <!-- Requests -->
-      <div class="grid__col grid__col--6-of-12">
-        {{activity-card
-          model=model.requests
-          group="request"
-          isProfilePage=true
-          isOwnProfile=isOwnProfile}}
-      </div>
+      {{activity-card
+        model=model.requests
+        group="request"
+        isProfilePage=true
+        isOwnProfile=isOwnProfile}}
 
       <!-- Registrations -->
-      <div class="grid__col grid__col--6-of-12">
-        {{activity-card
-          model=model.registrations
-          group="registration"
-          isProfilePage=true
-          isOwnProfile=isOwnProfile}}
-      </div>
+      {{activity-card
+        model=model.registrations
+        group="registration"
+        isProfilePage=true
+        isOwnProfile=isOwnProfile}}
+
+      <!-- Contributions -->
+      {{activity-card
+        model=model.contributions
+        group="contribution"
+        isProfilePage=true
+        isOwnProfile=isOwnProfile}}
+
+      <!-- Discussions -->
+      {{activity-card
+        model=model.discussions
+        group="discussion"
+        isProfilePage=true
+        isOwnProfile=isOwnProfile}}
     </div>
-  </main>
+  </div>
 </div>

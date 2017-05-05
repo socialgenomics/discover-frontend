@@ -1,0 +1,38 @@
+{{#file-upload
+  name="avatar"
+  accept="image/svg, image/png, image/jpg"
+  multiple=false
+  onfileadd=(action "uploadImage")
+  class="c-avatar-upload__wrapper block mb2 circle border icon-x-large cursor-pointer"
+}}
+  {{# unless (or uploading uploadFailed reloadFailed)}}
+
+    <div class="c-avatar-upload__image-wrapper relative circle overflow-hidden fw-med fs2 ta-center" data-text="Edit photo">
+      <img src="{{avatarImg}}" />
+    </div>
+
+  {{else}}
+    {{#if uploadFailed}}
+      <div class="u-full-height fc-tertiary flex items-center justify-center error-state">
+        {{fa-icon "times" size=2}}
+        <span>Upload failed</span>
+      </div>
+
+    {{else if reloadFailed}}
+      <div class="u-full-height fc-tertiary flex items-center justify-center error-state">
+        {{fa-icon "check" size=2}}
+        <span>Image uploaded</span>
+      </div>
+
+    {{else}}
+      <div class="u-full-height fc-tertiary flex items-center justify-center error-state">
+        {{fa-icon "refresh" size=2 class="fc-tertiary animation-spin"}}
+      </div>
+    {{/if}}
+  {{/unless}}
+{{/file-upload}}
+
+<p class="fc-red ta-center">
+  {{#if uploadFailed}}Something went wrong while uploading your image.<br>Please try again later.{{/if}}
+  {{#if reloadFailed}}Something went wrong while uploading your image.<br>Your avatar will be displayed soon.{{/if}}
+</p>

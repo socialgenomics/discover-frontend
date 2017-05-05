@@ -6,7 +6,7 @@ import { validator, buildValidations } from 'ember-cp-validations';
 import presenceValidator from 'repositive/validations/presenceValidator';
 import emailFormatValidator from 'repositive/validations/emailFormatValidator';
 import lengthValidator from 'repositive/validations/lengthValidator';
-import { errorMessages, lengths } from 'repositive/validations/validations-config';
+import { errorMessages, lengths, lengthTypes } from 'repositive/validations/validations-config';
 
 const { assign, get, getProperties, set, setProperties, computed, Controller, inject: { service } } = Ember;
 const passwordPatterns = [/\d/, /[A-Z]/, /[!,@,#,$,%,^,&,*,?,_,~,-,(,)]/];
@@ -18,7 +18,7 @@ const Validations = buildValidations({
   ],
   password: [
     presenceValidator(errorMessages.blankPassword),
-    lengthValidator(lengths.password),
+    lengthValidator(lengths.password, lengthTypes.min),
     validator(
       function(value) {
         return getPasswordStrength(value, passwordPatterns) !== 0 ? true : 'Must include a number or capital letter.';

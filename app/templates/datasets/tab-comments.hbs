@@ -2,7 +2,7 @@
   addComment=(action 'addComment')
   avatar=(
     if session.isAuthenticated
-      session.authenticatedUser.userProfile.avatar
+      session.authenticatedUser.profile.avatar
       '/assets/images/avatar/lizard.png'
   )
   placeholder=(

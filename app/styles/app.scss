@@ -8,7 +8,7 @@
 
 @import "submodule/reset/box-sizing";
 @import "submodule/reset/normalize";
-@import "submodule/reset/custom-reset"; //DONE!
+@import "submodule/reset/custom-reset";
 
 @import 'custom/objects/objects.main-wrapper';
 
@@ -26,6 +26,7 @@
 @import 'custom/components/components.password-strength';
 @import 'custom/components/components.sidebar';
 @import 'custom/components/components.validated-input';
+@import 'custom/components/components.avatar-upload';
 @import 'custom/components/components.call-to-action-banner';
 @import 'custom/components/components.featured-list';
 @import 'custom/components/components.modals';
@@ -34,9 +35,10 @@
 @import 'custom/components/components.collection-list-item';
 @import 'custom/components/components.follow-button';
 @import 'custom/components/components.notifications';
+@import 'custom/components/components.text-with-icon';
+@import 'custom/components/components.user-profile-section';
 
-
-@import "submodule/utilities/border"; // DONE!
+@import "submodule/utilities/border";
 @import "submodule/utilities/color";
 @import "submodule/utilities/cursor"; // DONE!
 @import "submodule/utilities/display";
@@ -50,10 +52,12 @@
 @import "submodule/utilities/type-setting";
 @import "custom/utilities/border"; //DONE!
 @import "custom/utilities/color";
+@import 'custom/utilities/utilities.animation';
 @import 'custom/utilities/utilities.hover';
 @import 'custom/utilities/utilities.sizing';
 @import 'custom/utilities/utilities.markdown-text';
 @import 'custom/utilities/utilities.inputs';
+@import 'custom/utilities/utilities.images';
 @import 'custom/utilities/utilities.elevation';
 @import 'custom/utilities/utilities.zindexes';
 

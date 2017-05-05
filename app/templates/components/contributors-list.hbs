@@ -1,9 +1,18 @@
 <h4 class="pt2 mb0 fs2 fw-med fc-tertiary">Contributors</h4>
 
 {{#if contributors}}
+
   {{#each contributors as |contributor|}}
     {{user-preview user=contributor}}
   {{/each}}
-{{else}}
-  <p class="fs2 fc-tertiary">No one has contributed to this {{modelName}} yet. Be the first.</p>
+
+{{/if}}
+
+{{#if canBeAContributor}}
+  <div class="py3 pl2 flex">
+    <img class="filter-fade-grey circle icon-large mr2" src="{{session.authenticatedUser.profile.avatar}}" onError="this.onerror=null;this.src='/assets/images/avatar/dog.png';"/>
+    <p class="fs2 fc-tertiary">Become a contributor by adding metadata to help categorise this {{modelName}}.</p>
+  </div>
+{{else if (not session.isAuthenticated)}}
+  <p class="fs2 fc-tertiary">Please login or create an account to contribute to this {{modelName}}.</p>
 {{/if}}

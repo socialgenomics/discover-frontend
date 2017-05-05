@@ -1,0 +1,24 @@
+<label class="c-validated-input-label fc-secondary u-pb1 u-block">Add your research interest</label>
+<div>
+  {{#if editInterests.length}}
+  <div>
+    {{#each editInterests as |interest|}}
+      {{tag-item
+        type='interest'
+        tagText=interest
+        userId=userId
+        delete=(action 'removeInterest')
+      }}
+    {{/each}}
+  </div>
+  {{/if}}
+  <div class="u-pb1 flex">
+    {{#if isOpen}}
+      {{focus-input class="u-mr2" value=newInterest type="text" enter="addInterest" placeholder="Add your research interest"}}
+      <button {{action "hideInput"}} class="c-btn-text-secondary u-py2">Cancel</button>
+    {{else}}
+      <button {{action "showInput"}} class="c-btn c-btn-secondary u-px2 u-py1">Add Interest</button>
+    {{/if}}
+  </div>
+  <span class="fc-secondary">eg. RNA-seq</span>
+</div>

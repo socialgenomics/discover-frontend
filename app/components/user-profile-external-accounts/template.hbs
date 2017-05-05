@@ -1,0 +1,21 @@
+{{#each userAttributes as |attribute|}}
+  {{validated-input
+    label=attribute.label
+    value=(mut (get this attribute.userAttributeKey))
+    submit=(action 'save')
+    errors=(v-get this attribute.userAttributeKey 'messages')
+    type=(if attribute.multiline 'textarea' 'text')
+    placeholder=attribute.placeholder
+    noMarkdown=true
+  }}
+{{/each}}
+<div class="ta-center">
+  {{async-button
+    class="c-btn c-btn-primary"
+    action=(action 'save')
+    default="Save Changes"
+    pending="Saving..."
+    disableWhen=(not validations.isValid)
+    reset=true
+  }}
+</div>

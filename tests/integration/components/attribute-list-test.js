@@ -2,6 +2,7 @@ import { expect } from 'chai';
 import { beforeEach, describe, it } from 'mocha';
 import { setupComponentTest } from 'ember-mocha';
 import hbs from 'htmlbars-inline-precompile';
+import sinon from 'sinon';
 
 const values = ['ABC', '2', 'heart', 'Illumia X', '123'];
 const keys = ['assay', 'samples', 'tissue', 'technology', 'pmid'];
@@ -76,49 +77,58 @@ describe('Integration | Component | attributes list', function() {
         expect(this.$('.t-add-trigger:eq(0)').text().trim()).to.eql('Add Assay');
       });
     });
-
-    describe('if unauthenticated', function() {
-      beforeEach(function() {
-        this.set('session.isAuthenticated', false);
-        this.set('attributes', getMockAttributes());
-        this.render(hbs`{{attribute-list session=session attributes=attributes}}`);
-      })
-
-      it('should not display add attribute triggers', function() {
-        expect(this.$('.t-add-trigger').text().trim()).to.be.empty;
-      });
-    });
   });
 
   describe('actions', function() {
     beforeEach(function() {
       this.set('attributes', getMockAttributes());
-      this.render(hbs`{{attribute-list session=session attributes=attributes}}`);
-      this.$('.t-add-trigger').click();
     });
 
-    it('clicking add attribute opens input form', function() {
-      expect(this.$('input').attr('placeholder')).to.eql('Add an attribute');
-      expect(this.$('input').val()).to.be.empty;
-      expect(this.$('button').first().text().trim()).to.eql('Add');
-      expect(this.$('button:eq(1)').text().trim()).to.eql('Cancel');
+    describe('if unauthenticated', function() {
+      beforeEach(function() {
+        this.setProperties({
+          'session.isAuthenticated': false,
+          '_toggleCreateAccountModal': sinon.spy()
+        })
+        this.render(hbs`{{attribute-list session=session _toggleCreateAccountModal=_toggleCreateAccountModal attributes=attributes}}`);
+        this.$('.t-add-trigger').click();
+      })
+
+      it('clicking add attribute does not open a form', function() {
+        const $buttons = this.$('button');
+        expect($buttons.eq(0).text().trim()).to.eql('');
+        expect($buttons.eq(1).text().trim()).to.eql('');
+      });
     });
 
-    describe('cancel', function() {
-      it('closes the form', function() {
-        const $cancelButton = this.$('button:eq(1)');
-        expect($cancelButton.text().trim()).to.eql('Cancel');
-        $cancelButton.click();
-        expect(this.$('button:eq(1)').text().trim()).to.be.empty;
+    describe('if authenticated', function() {
+      beforeEach(function() {
+        this.render(hbs`{{attribute-list session=session attributes=attributes}}`);
+        this.$('.t-add-trigger').click();
       });
 
-      it('input state is reset', function() {
-        const $attrInput = this.$('input');
-        $attrInput.val('Should disappear');
-        expect($attrInput.val()).to.eql('Should disappear');
-        this.$('button:eq(1)').click(); //cancel
-        this.$('.t-add-trigger').click();
+      it('clicking add attribute opens input form', function() {
         expect(this.$('input').val()).to.be.empty;
+        expect(this.$('button').first().text().trim()).to.eql('Add');
+        expect(this.$('button:eq(1)').text().trim()).to.eql('Cancel');
+      });
+
+      describe('cancel', function() {
+        it('closes the form', function() {
+          const $cancelButton = this.$('button:eq(1)');
+          expect($cancelButton.text().trim()).to.eql('Cancel');
+          $cancelButton.click();
+          expect(this.$('button:eq(1)').text().trim()).to.be.empty;
+        });
+
+        it('input state is reset', function() {
+          const $attrInput = this.$('input');
+          $attrInput.val('Should disappear');
+          expect($attrInput.val()).to.eql('Should disappear');
+          this.$('button:eq(1)').click(); //cancel
+          this.$('.t-add-trigger').click();
+          expect(this.$('input').val()).to.be.empty;
+        });
       });
     });
   });

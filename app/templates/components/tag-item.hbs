@@ -1,6 +1,10 @@
-{{#link-to 'datasets.search' (query-params query=tagQuery) class="fc-secondary text-line-keep"}}
-  {{tag.properties.text}}
-{{/link-to}}
+{{#if (eq type 'tag')}}
+  {{#link-to 'datasets.search' (query-params query=tagQuery) class="fc-secondary text-line-keep"}}
+    {{tagText}}
+  {{/link-to}}
+{{else}}
+  <span class="fc-secondary text-line-keep">{{tagText}}</span>
+{{/if}}
 {{#if belongsToUser}}
-  <span {{action 'deleteTag' tag}} class="fc-secondary">{{fa-icon "fa-times"}}</span>
+  <span {{action 'delete'}} class="t-tag-item-delete u-hv-tc-red cursor-pointer fc-tertiary p2">{{fa-icon "fa-times"}}</span>
 {{/if}}

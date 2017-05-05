@@ -2,44 +2,28 @@
   <div class="grid">
     <div class="grid__col grid__col--3-of-3">
       {{profile-tabs}}
-      <div class="c-card rounded-bottom py4 px3 ta-center">
-        <div class="grid">
-          <div class="grid__col grid__col--1-of-2 grid__col--m-2-of-3 grid__col--centered">
-            <h1 class="fs4">Edit Profile</h1>
-            <img src={{session.authenticatedUser.profile.avatar}} class="icon-x-large mb3 circle">
-            <form>
-              {{validated-input
-                label="First Name"
-                type="text"
-                value=firstname
-                errors=validations.attrs.firstname.messages
-                placeholder="e.g. Christina"
-              }}
-              {{validated-input
-                label="Last Name"
-                type="text"
-                value=lastname
-                errors=validations.attrs.lastname.messages
-                placeholder="e.g. Luckasson"
-              }}
-              {{validated-input
-                label="Affiliation"
-                type="text"
-                value=affiliation
-                placeholder="e.g. Bioinformatician at XYZ Institute"
-              }}
 
-              {{async-button
-                class="c-btn c-btn-primary"
-                action=(action 'save')
-                default="Save Changes"
-                pending="Saving..."
-                disableWhen=(not isSavable)
-                reset=true
-              }}
-            </form>
-          </div>
-        </div>
+      <div class="c-card rounded-bottom py4 px3">
+        {{user-profile-avatar-upload avatarImg=user.profile.avatar reloadUserModel=(route-action 'reloadModel')}}
+
+
+        {{#user-profile-section}}
+          {{user-profile-interests userId=user.id interests=user.profile.interests}}
+        {{/user-profile-section}}
+
+        {{#user-profile-section title='More about yourself'}}
+          {{user-profile-details userProfileData=userProfileData userId=user.id}}
+        {{/user-profile-section}}
+
+        {{!--
+        {{#user-profile-section title='Emails and password'}}
+
+        {{/user-profile-section}}
+        --}}
+
+        {{#user-profile-section title='External accounts'}}
+          {{user-profile-external-accounts userProfileData=userProfileData userId=user.id}}
+        {{/user-profile-section}}
       </div>
     </div>
   </div>

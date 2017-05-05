@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 15.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="595px" height="842px" viewBox="678 0 595 842" enable-background="new 678 0 595 842" xml:space="preserve">
+<title>A4</title>
+<desc>Created with Sketch.</desc>
+<g id="UX-with-Sathya">
+	<g id="A4">
+		<g id="orcid_128x128" transform="translate(51.000000, 127.000000)">
+			<g id="Mask">
+			</g>
+			<defs>
+				<filter id="Adobe_OpacityMaskFilter" filterUnits="userSpaceOnUse" x="-51" y="-42.5" width="592.501" height="592.501">
+					<feColorMatrix  type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0"/>
+				</filter>
+			</defs>
+			<mask maskUnits="userSpaceOnUse" x="-51" y="-42.5" width="592.501" height="592.501" id="mask-2">
+				<g filter="url(#Adobe_OpacityMaskFilter)">
+					<circle id="path-1" fill="#FFFFFF" cx="236.789" cy="245.285" r="253.929"/>
+				</g>
+			</mask>
+			<g transform="matrix(1 0 0 1 0 0)" mask="url(#mask-2)" enable-background="new    ">
+				
+					<image overflow="visible" width="128" height="128" xlink:href="608285A4.jpg"  transform="matrix(4.6289 0 0 4.6289 -50.9998 -42.5)">
+				</image>
+			</g>
+		</g>
+	</g>
+</g>
+<circle fill="#A6CE39" enable-background="new    " cx="975.5" cy="370.5" r="254"/>
+<path fill="#FFFFFF" enable-background="new    " d="M870.162,190.751c-13.065,0-23.758,10.698-23.758,23.76
+	c0,13.069,10.692,23.771,23.758,23.771c13.061,0,23.771-10.702,23.771-23.771C893.933,201.449,883.223,190.751,870.162,190.751z
+	 M852.036,267.026v252.268h36.242V267.026H852.036z M938.831,267.026v252.268h98.364c83.244,0,133.901-61.405,133.901-126.135
+	c0-59.551-41.053-126.133-134.252-126.133H938.831z M975.073,299.585h55.85c70.639,0,102.832,42.894,102.832,93.574
+	c0,31.072-18.884,93.589-100.988,93.589h-57.693V299.585z"/>
+</svg>

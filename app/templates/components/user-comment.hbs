@@ -5,17 +5,20 @@
   <div class="flex items-start justify-between">
     <p class="u-markdown-formatting mb0 pl3">{{markdown-to-html markdown=comment.properties.text extensions='targetBlankLinks sanitize'}}</p>
     {{#if (and canEdit (not inEditMode))}}
-      {{fa-icon 'pencil' class='fc-tertiary u-hv-tc-secondary cursor-pointer fs2 pr3' click=(action 'enterEditMode')}}
+      <div>
+        {{fa-icon 'pencil' class='fc-tertiary u-hv-tc-secondary cursor-pointer fs2 pr2' click=(action 'enterEditMode')}}
+        {{fa-icon 'trash' class='fc-tertiary u-hv-tc-secondary cursor-pointer fs2 pr2' click=(action 'deleteComment' comment)}}
+      </div>
     {{/if}}
   </div>
 {{else}}
   <form class="mb4">
     {{validated-input
+      errors=validations.attrs.text.messages
       type="textarea"
       value=text
       noMarkdown=true
       noLabel=true
-      errors=validations.attrs.text.messages
     }}
     {{async-button
       class="c-btn c-btn-primary px3 py2 m3"
@@ -35,7 +38,7 @@
       close=(action 'toggleCreateAccountModal')
     }}
       {{repositive-modal/header
-        image=comment.userId.userProfile.avatar
+        image=comment.userId.profile.avatar
         title=(concat 'View ' comment.userId.firstname '\'s profile')
         onClose=(action 'toggleCreateAccountModal')
       }}

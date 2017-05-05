@@ -3,7 +3,9 @@
     <span class="c-notification-unread-marker"></span>
   {{/if}}
   <div class="c-notification-img-date-container ta-center m3">
-    <img class="icon-medium mr2 circle" src={{notification.properties.action.userId.userProfile.avatar}} alt="user avatar">
+    <img class="icon-medium mr2 circle"
+      src={{notification.properties.action.userId.profile.avatar}}
+      onError="this.onerror=null;this.src='/assets/images/avatar/dog.png';" alt="user avatar">
     <p class="fs0 fc-tertiary mb0">{{moment-from-now notification.createdAt}}</p>
   </div>
   <div class="flex-grow c-notification-body">
