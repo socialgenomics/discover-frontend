@@ -8,15 +8,17 @@ describe('Integration | Component | reputation total', function() {
     integration: true
   });
   describe('element style', function() {
-    it('renders the element with the correct colour class', function() {
-      this.set('reputation', {
-        quality: 0,
-        verification: 0,
-        ownership: 0,
-        contribution: 0
-      })
-      this.render(hbs`{{reputation-total reputation=reputation}}`);
+    it('renders grey wehn 0', function() {
+      this.render(hbs`{{reputation-total total=0}}`);
       expect(this.$('span').hasClass('u-bc-very-light-grey')).to.be.true;
+    });
+    it('renders yellow when between 1 and 10', function() {
+      this.render(hbs`{{reputation-total total=6}}`);
+      expect(this.$('span').hasClass('u-bc-light-yellow')).to.be.true;
+    });
+    it('renders teal when greater than 10', function() {
+      this.render(hbs`{{reputation-total total=11}}`);
+      expect(this.$('span').hasClass('u-bc-light-teal')).to.be.true;
     });
   });
 });
