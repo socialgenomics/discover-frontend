@@ -6,7 +6,7 @@ import presenceValidator from 'repositive/validations/presenceValidator';
 import emailFormatValidator from 'repositive/validations/emailFormatValidator';
 import { errorMessages } from 'repositive/validations/validations-config';
 
-const { Component, get, set, setProperties, computed, Logger, inject: { service } } = Ember;
+const { Component, get, set, computed, Logger, inject: { service } } = Ember;
 
 const Validations = buildValidations({
   newEmail: [
@@ -38,10 +38,6 @@ export default Component.extend(FlashMessageMixin, Validations, {
   },
 
   actions: {
-    resendVerifyEmail(email, newEmail) {
-      this._sendVerificationEmail(email, newEmail);
-    },
-
     saveNewCredential() {
       const email = get(this, 'credential.main_credential.email');
       const newEmail = get(this, 'newEmail');
@@ -51,7 +47,7 @@ export default Component.extend(FlashMessageMixin, Validations, {
         this._addFlashMessage('This credential is already associated with this account.', 'success');
       } else {
         set(this, 'loading', true);
-        this._saveCredential(email, newEmail);
+        return this._saveCredential(email, newEmail);
       }
     },
 
@@ -60,11 +56,11 @@ export default Component.extend(FlashMessageMixin, Validations, {
 
   /**
    * @desc create a new credential record for the user
-   * @param {*} newEmail
+   * @param {string} newEmail
    * @private
    */
   _saveCredential(email, newEmail) {
-    get(this, 'store').createRecord('credential', {
+    return get(this, 'store').createRecord('credential', {
       userId: get(this, 'session.authenticatedUser'),
       email: newEmail,
       primary: false,
@@ -72,35 +68,29 @@ export default Component.extend(FlashMessageMixin, Validations, {
       verified: false
     })
       .save()
-      .then(() => {
-        this._sendVerificationEmail(email, newEmail)
-        .then(this._onSaveSuccess.bind(this))
-      })
-      .catch(this._onSaveError.bind(this));
+      .then(() => this._sendVerificationEmail(email, newEmail))
+      .then(this._onSaveSuccess.bind(this))
+      .catch(this._onSaveError.bind(this))
+      .finally(set(this, 'loading', false));
   },
 
   /**
   * @desc send the verification email to the new address
-  * @param {*} email
-  * @param {*} newEmail
+  * @param {string} email
+  * @param {string} newEmail
   * @private
   */
   _sendVerificationEmail(email, newEmail) {
-    if (newEmail === email && get(this, 'credential.is_verified')) {
-      set(this, 'addingCredential', false);
-      this._addFlashMessage('This email has already been verified.', 'success');
-    } else {
-      set(this, 'loading', true);
-      get(this, 'ajax').request(ENV.APIRoutes['verify-email-resend'] + `/${newEmail}`, { method: 'GET' })
-        .then(() => {
-          set(this, 'sentEmail', true);
-          this._addFlashMessage('We have sent a verification email to your inbox', 'success');
-        })
-        .catch((err) => {
-          Logger.error(err);
-          this._addFlashMessage('Sorry, we couldn\'t send you the link. Please try again later.', 'warning');
-        });
-    }
+    get(this, 'ajax')
+      .request(ENV.APIRoutes['verify-email-resend'] + `/${newEmail}`, { method: 'GET' })
+      .then(() => {
+        set(this, 'sentEmail', true);
+        this._addFlashMessage('We have sent a verification email to your inbox', 'success');
+      })
+      .catch((err) => {
+        Logger.error(err);
+        this._addFlashMessage('Sorry, we couldn\'t send you the link. Please try again later.', 'warning');
+      });
   },
 
   /**
@@ -109,10 +99,7 @@ export default Component.extend(FlashMessageMixin, Validations, {
    */
   _onSaveSuccess() {
     this._addFlashMessage('Your credential has been added to your account.', 'success')
-    setProperties(this, {
-      'sentEmail': true,
-      'loading': false
-    });
+    set(this, 'sentEmail', true);
   },
 
   /**
