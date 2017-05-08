@@ -48,15 +48,15 @@ export default Component.extend(Validations, FlashMessageMixin, {
   actions: {
     submitForm() {
       set(this, 'loading', true);
-      this._sendLoginRequest(get(this, 'email'), get(this, 'oldPassword'))
-      .then((resp) => {
-        this._sendPasswordRequest(resp.response.token, get(this, 'password1'))
-      })
-      .catch(err => {
-        set(this, 'loading', false);
-        this._addFlashMessage(`Old password is incorrect.`, 'warning');
-        Logger.error(err);
-      });
+      return this._sendLoginRequest(get(this, 'email'), get(this, 'oldPassword'))
+        .then((resp) => {
+          this._sendPasswordRequest(resp.response.token, get(this, 'password1'))
+        })
+        .catch(err => {
+          this._addFlashMessage(`Old password is incorrect.`, 'warning');
+          Logger.error(err);
+        })
+        .finally(set(this, 'loading', false));
     }
   },
 
@@ -93,9 +93,6 @@ export default Component.extend(Validations, FlashMessageMixin, {
       this._addFlashMessage('Password successfully changed', 'success');
       get(this, 'transitionToProfile')();
     })
-    .catch(err => {
-      set(this, 'loading', false);
-      Logger.error(err);
-    })
+    .catch(Logger.error)
   }
 });
