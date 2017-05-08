@@ -1,9 +1,12 @@
 import Ember from 'ember';
 import FlashMessageMixin from 'repositive/mixins/flash-message-mixin';
+import { buildValidations } from 'ember-cp-validations';
+import emptyValidator from 'repositive/validations/emptyValidator';
 
 const { Component, inject: { service }, Logger, get, set, setProperties } = Ember;
+const Validations = buildValidations({ newInterest: emptyValidator() });
 
-export default Component.extend(FlashMessageMixin, {
+export default Component.extend(FlashMessageMixin, Validations, {
   store: service(),
 
   isOpen: false,
@@ -29,7 +32,9 @@ export default Component.extend(FlashMessageMixin, {
      * @param {String} name
      */
     addInterest(name) {
-      this._saveChanges(get(this, 'editInterests').addObject(name));
+      if (get(this, 'validations.isValid')) {
+        this._saveChanges(get(this, 'editInterests').addObject(name));
+      }
     },
 
     /**

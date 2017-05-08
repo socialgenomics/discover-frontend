@@ -1,13 +1,17 @@
 import Ember from 'ember';
+import { buildValidations } from 'ember-cp-validations';
+import emptyValidator from 'repositive/validations/emptyValidator';
 
 const { Component, get, set } = Ember;
 
-export default Component.extend({
+const Validations = buildValidations({ tag: emptyValidator() });
+
+export default Component.extend(Validations, {
   tag: null,
 
   actions: {
     addTag: function() {
-      if (this.tag) {
+      if (get(this, 'validations.isValid')) {
         get(this, 'metrics').trackEvent({
           category: 'discover_homeauth_datasetDetail_tag',
           action: 'added_tag',

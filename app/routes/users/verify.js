@@ -14,7 +14,7 @@ export default Route.extend(FlashMessageMixin, {
     // return a promise.. this pauses the page rendering until the promise is resolved or rejected
     // loding page is shown whilst the promise in unresolved
     // error page is shown if the promise is rejected
-    get(this, 'ajax').request(ENV.APIRoutes['verify-email'] + '/' + params.verificationId, { method: 'GET' })
+    get(this, 'ajax').request(ENV.APIRoutes['verify-email'] + '/' + params.verification_id, { method: 'GET' })
     .then(resp => {
       /**
       * Backend validated the email address - transitionTo the profile without

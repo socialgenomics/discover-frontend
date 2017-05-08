@@ -6,7 +6,7 @@
   class='u-pos-relative u-w4 u-h4 u-circle u-mb1'
 }}
   {{# unless (or uploading uploadFailed reloadFailed)}}
-    <img class="u-pos-absolute u-pos-top0 u-pos-left0  u-pos-bottom0 u-pos-right0 u-circle" src={{avatarImg}}>
+    <img class="u-pos-absolute u-pos-top0 u-pos-left0  u-pos-bottom0 u-pos-right0 u-circle" src={{avatarImg}} onError="this.onerror=null;this.src='/assets/images/avatar/dog.png';">
     <span class="u-cursor-pointer u-flex u-justify-center u-items-center u-pos-relative u-w4 u-h4 u-circle
       c-avatar-upload__hover u-hv-bc-darken40">
       <span class="u-zindex-1 u-tc-white u-fs2 u-fw-med u-hide-display c-avatar-upload__hover__text">Edit photo</span>

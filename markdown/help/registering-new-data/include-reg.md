@@ -14,4 +14,4 @@ Include as much useful, detailed information as possible. The title should be co
 
 * Who you are willing to share the data with.
 
-Also think about adding tags to make your [data more 'searchable'](/help/other?help=good-tag).
+Also think about adding tags to make your [data more 'searchable'](/help/other/good-tag).
