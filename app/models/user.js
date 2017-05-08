@@ -3,7 +3,7 @@ import attr from 'ember-data/attr';
 import { belongsTo, hasMany } from 'ember-data/relationships';
 import Ember from 'ember';
 
-const { computed, isPresent, get } = Ember;
+const { computed, isPresent, get, getWithDefault } = Ember;
 
 export default Model.extend({
   createdAt: attr('isodate'),
@@ -27,7 +27,7 @@ export default Model.extend({
     }
   }),
   reputationTotal: computed('reputation', function() {
-    const reputation = get(this, 'reputation');
+    const reputation = getWithDefault(this, 'reputation', {});
     return Object.keys(reputation)
       .reduce((sum, key) => sum + reputation[key], 0)
   })
