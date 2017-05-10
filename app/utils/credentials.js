@@ -13,3 +13,8 @@ export function isVerified(credentials) {
 export function secondaryCredentials(credentials) {
   return credentials.rejectBy('primary',  true);
 }
+
+export function getLatestSecondaryCredential(credentials) {
+  return get(secondaryCredentials(credentials)
+    .sortBy('updatedAt'), 'lastObject');
+}
