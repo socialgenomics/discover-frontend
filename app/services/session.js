@@ -8,6 +8,7 @@ export default SessionService.extend({
   metrics: service(),
 
   setAuthenticatedUser: observer('data.authenticated.user', function() {
+    debugger;
     if (get(this, 'isAuthenticated')) {
       const userData = get(this, 'data.authenticated.user');
 
@@ -15,24 +16,9 @@ export default SessionService.extend({
         // force logout
         this.invalidate();
       } else {
-        let userId = userData.id;
-        let settingsId = userData.user_setting.id;
-
-        get(this,  'metrics').identify({
-          email: userData.credentials[0].email,
-          firstname: userData.firstname,
-          lastname: userData.lastname,
-          username: userData.username | userData.id,
-          id: userData.id
-        });
-
-        try {
-          get(this, 'metrics').identify('GoogleAnalytics', {
-            distinctId: get(this, userId)
-          });
-        } catch (e) {
-          //adapters can be disabled on some env. so we will have an error
-        }
+        const userId = userData.id;
+        const settingsId = userData.user_setting.id;
+        this._identifyUser(userData);
 
         return RSVP.all([
           get(this, 'store').findRecord('user', userId),
@@ -56,6 +42,23 @@ export default SessionService.extend({
         .catch(Logger.error);
       }
     }
-  })
-});
+  }),
 
+  _identifyUser(userData) {
+    get(this,  'metrics').identify({
+      email: userData.credentials[0].email,
+      firstname: userData.firstname,
+      lastname: userData.lastname,
+      username: userData.username | userData.id,
+      id: userData.id
+    });
+
+    try {
+      get(this, 'metrics').identify('GoogleAnalytics', {
+        distinctId: get(this, userData.id)
+      });
+    } catch (e) {
+      //adapters can be disabled on some env. so we will have an error
+    }
+  }
+});

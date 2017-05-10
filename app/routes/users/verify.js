@@ -3,7 +3,7 @@ import ENV from 'repositive/config/environment';
 import { getLatestSecondaryCredential } from 'repositive/utils/credentials';
 import FlashMessageMixin from 'repositive/mixins/flash-message-mixin';
 
-const { inject: { service }, get, setProperties, RSVP, Logger, Route } = Ember;
+const { inject: { service }, get, set, setProperties, RSVP, Logger, Route } = Ember;
 
 function verifyEmail(credentials) {
   const email = get(getLatestSecondaryCredential(credentials), 'email');
@@ -26,6 +26,9 @@ export default Route.extend(FlashMessageMixin, {
     // error page is shown if the promise is rejected
     get(this, 'ajax').request(ENV.APIRoutes['verify-email'] + '/' + params.verification_id, { method: 'GET' })
       .then(resp => {
+        //updated the session token
+        set(this, 'session.session.content.authenticated.token', params.verification_id)
+
         debugger;
         return RSVP.hash({
           verificationResp: resp,
@@ -58,7 +61,7 @@ export default Route.extend(FlashMessageMixin, {
         }
         this._showMessages(resp);
       })
-      .catch((err)=> {
+      .catch(err => {
         Logger.error(err);
         RSVP.resolve(); // fulfills the promise - this causes ember to render the template
       });

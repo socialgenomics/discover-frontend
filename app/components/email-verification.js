@@ -60,17 +60,19 @@ export default Component.extend(FlashMessageMixin, Validations, {
    * @private
    */
   _saveCredential(email, newEmail) {
-    return get(this, 'store').createRecord('credential', {
+    const credential = get(this, 'store').createRecord('credential', {
       userId: get(this, 'session.authenticatedUser'),
       email: newEmail,
       primary: false,
       provider: 'email',
       verified: false
     })
+
+    return credential
       .save()
       .then(() => this._sendVerificationEmail(email, newEmail))
       .then(this._onSaveSuccess.bind(this))
-      .catch(this._onSaveError.bind(this))
+      .catch(this._onSaveError.bind(this, credential))
       .finally(set(this, 'loading', false));
   },
 
