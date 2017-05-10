@@ -25,21 +25,21 @@ export default SessionService.extend({
           get(this, 'store').query('credential', { 'where.user_id': userId, 'where.primary': true }),
           get(this, 'store').findRecord('user_setting', settingsId)
         ])
-        .then(data => {
-          const user = data[0];
-          const credentials = data[1].content;
+          .then(data => {
+            const user = data[0];
+            const credentials = data[1].content;
 
-          setProperties(user, {
-            email: credentials[0].email,
-            isEmailValidated: userData.isEmailValidated,
-            isCurrentUser: true
-          });
+            setProperties(user, {
+              email: credentials[0].email,
+              isEmailValidated: userData.isEmailValidated,
+              isCurrentUser: true
+            });
 
-          user.save();
+            user.save();
 
-          set(this, 'authenticatedUser', user);
-        })
-        .catch(Logger.error);
+            set(this, 'authenticatedUser', user);
+          })
+          .catch(Logger.error);
       }
     }
   }),
@@ -55,7 +55,7 @@ export default SessionService.extend({
 
     try {
       get(this, 'metrics').identify('GoogleAnalytics', {
-        distinctId: get(this, userData.id)
+        distinctId: userData.id
       });
     } catch (e) {
       //adapters can be disabled on some env. so we will have an error

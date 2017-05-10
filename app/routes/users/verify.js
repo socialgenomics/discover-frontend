@@ -32,7 +32,7 @@ export default Route.extend(FlashMessageMixin, {
         debugger;
         return RSVP.hash({
           verificationResp: resp,
-          makePrimaryResp: get(this, 'ajax').request(ENV.APIRoutes['make-primary'] + '/' + params.verification_id, { method: 'GET' })
+          makePrimaryResp: get(this, 'ajax').request(ENV.APIRoutes['make-primary'], { method: 'GET' })
         });
       })
       .then(resp => {
