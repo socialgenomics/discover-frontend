@@ -5,6 +5,7 @@
 {{/unless}}
 
 {{#if (eq type "textarea")}}
+
   {{textarea
     value=value
     focus-in="focusedIn"
@@ -14,10 +15,13 @@
     disabled=disabled
     class="u-textarea-resize-v"
   }}
+
   {{#unless (or disabled noMarkdown)}}
     {{#link-to 'help.other' 'format' class="u-fs0"}}How do I format text with Markdown?{{/link-to}}
   {{/unless}}
+
 {{else}}
+
   {{#if showPasswordButton}}
     <a class="c-pw-text-btn" {{action 'togglePasswordVisibility'}}>{{#if showPassword}} Hide Password {{else}} Show Password {{/if}}</a>
     {{#if value}}{{password-strength strength=passwordStrength}}{{/if}}
@@ -32,6 +36,7 @@
     placeholder=placeholder
     disabled=disabled
   }}
+
 {{/if}}
 
 {{#unless noMsgContainer}}
