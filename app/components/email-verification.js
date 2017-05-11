@@ -7,7 +7,7 @@ import emailFormatValidator from 'repositive/validations/emailFormatValidator';
 import { errorMessages } from 'repositive/validations/validations-config';
 import { getLatestSecondaryCredential } from 'repositive/utils/credentials';
 
-const { Component, get, getWithDefault, set, computed, Logger, inject: { service } } = Ember;
+const { Component, get, set, computed, Logger, inject: { service } } = Ember;
 
 const Validations = buildValidations({
   newEmail: [
@@ -33,6 +33,7 @@ export default Component.extend(FlashMessageMixin, Validations, {
   }),
 
   pendingCredential: computed('credentials.secondary_credentials.[]', function() {
+    debugger;
     const secondaryCredentials = get(this, 'credentials.secondary_credentials');
     const latestSecondaryCred = getLatestSecondaryCredential(secondaryCredentials);
     if (!get(latestSecondaryCred, 'verified')) {
@@ -55,10 +56,10 @@ export default Component.extend(FlashMessageMixin, Validations, {
         this._addFlashMessage('This credential is already associated with this account.', 'success');
       } else {
         set(this, 'loading', true);
-        return this._saveCredential(email, newEmail);
+        return this._saveCredential(newEmail);
       }
     },
-
+    sendVerificationEmail(newEmail) { return this._sendVerificationEmail(newEmail); },
     cancel() { set(this, 'addingCredential', false); }
   },
 
@@ -67,29 +68,28 @@ export default Component.extend(FlashMessageMixin, Validations, {
    * @param {string} newEmail
    * @private
    */
-  _saveCredential(email, newEmail) {
+  _saveCredential(newEmail) {
     const credential = get(this, 'store').createRecord('credential', {
-      userId: get(this, 'session.authenticatedUser'),
       email: newEmail,
       primary: false,
       provider: 'email',
+      userId: get(this, 'session.authenticatedUser'),
       verified: false
     })
 
     return credential
       .save()
-      .then(() => this._sendVerificationEmail(email, newEmail))
+      .then(() => this._sendVerificationEmail(newEmail))
       .catch(this._onSaveError.bind(this, credential))
       .finally(set(this, 'loading', false));
   },
 
   /**
   * @desc send the verification email to the new address
-  * @param {string} email
   * @param {string} newEmail
   * @private
   */
-  _sendVerificationEmail(email, newEmail) {
+  _sendVerificationEmail(newEmail) {
     get(this, 'ajax')
       .request(ENV.APIRoutes['verify-email-resend'] + `/${newEmail}`, { method: 'GET' })
       .then(this._onSendSuccess.bind(this))
