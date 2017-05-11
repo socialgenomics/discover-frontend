@@ -1,4 +1,4 @@
-<div class="u-flex u-py1">
+<form class="u-flex u-py1">
   <div class="u-mr1">
     {{validated-input
       label='Email Address'
@@ -20,13 +20,13 @@
       reset=true
     }}
   </div>
-</div>
+</form>
 {{#if sentEmail}}
   <div class="u-flex">
     <p class="u-tc-red u-mb0 u-mr1">We sent an email to {{newEmail}}.</p>
     <a class="u-tc-secondary u-td-underline" {{action 'saveNewCredential'}}>Resend Verification Email.</a>
   </div>
-  <p class="u-fs1 u-fw-reg u-tc-tertiary">We'll keep using your old email address ({{credential.main_credential.email}}) until you verify your new one.</p>
+  <p class="u-fs1 u-fw-reg u-tc-tertiary">We'll keep using your old email address ({{credentials.main_credential.email}}) until you verify your new one.</p>
 {{else}}
   <a class="u-tc-secondary u-td-underline" {{action 'cancel'}}>Cancel</a>
 {{/if}}

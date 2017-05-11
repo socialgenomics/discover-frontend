@@ -28,20 +28,20 @@ export default Component.extend(FlashMessageMixin, Validations, {
   isNotChanged: true,
   isInvalid: computed.not('validations.isValid'),
   isDisabled: computed.or('isNotChanged', 'isInvalid'),
-  newEmail: computed('credential.main_credential.email', function() {
-    return get(this, 'credential.main_credential.email');
+  newEmail: computed('credentials.main_credential.email', function() {
+    return get(this, 'credentials.main_credential.email');
   }),
 
   keyUp() {
-    if (get(this, 'credential.main_credential.email') !== get(this, 'newEmail')) { set(this, 'isNotChanged', false); }
+    if (get(this, 'credentials.main_credential.email') !== get(this, 'newEmail')) { set(this, 'isNotChanged', false); }
   },
 
   actions: {
     saveNewCredential() {
-      const email = get(this, 'credential.main_credential.email');
+      const email = get(this, 'credentials.main_credential.email');
       const newEmail = get(this, 'newEmail');
 
-      if (newEmail === email && get(this, 'credential.is_verified')) {
+      if (newEmail === email && get(this, 'credentials.is_verified')) {
         set(this, 'addingCredential', false);
         this._addFlashMessage('This credential is already associated with this account.', 'success');
       } else {

@@ -12,7 +12,7 @@ export default Route.extend(AuthenticatedRouteMixin, {
   model() {
     return RSVP.hash({
       user: this.store.findRecord('user', get(this, 'userId')),
-      credential: this.store.query('credential', {
+      credentials: this.store.query('credential', {
         'where.user_id': get(this, 'userId')
       })
         .then(credentials => {
