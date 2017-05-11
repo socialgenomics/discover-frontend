@@ -25,13 +25,12 @@ export default Component.extend(FlashMessageMixin, Validations, {
   loading: false,
   sentEmail: false,
 
-  newEmail: computed('credential.main_credential.email', function() {
-    return get(this, 'credential.main_credential.email');
-  }),
-
   isNotChanged: true,
   isInvalid: computed.not('validations.isValid'),
   isDisabled: computed.or('isNotChanged', 'isInvalid'),
+  newEmail: computed('credential.main_credential.email', function() {
+    return get(this, 'credential.main_credential.email');
+  }),
 
   keyUp() {
     if (get(this, 'credential.main_credential.email') !== get(this, 'newEmail')) { set(this, 'isNotChanged', false); }
@@ -71,7 +70,6 @@ export default Component.extend(FlashMessageMixin, Validations, {
     return credential
       .save()
       .then(() => this._sendVerificationEmail(email, newEmail))
-      .then(this._onSaveSuccess.bind(this))
       .catch(this._onSaveError.bind(this, credential))
       .finally(set(this, 'loading', false));
   },
@@ -85,23 +83,26 @@ export default Component.extend(FlashMessageMixin, Validations, {
   _sendVerificationEmail(email, newEmail) {
     get(this, 'ajax')
       .request(ENV.APIRoutes['verify-email-resend'] + `/${newEmail}`, { method: 'GET' })
-      .then(() => {
-        set(this, 'sentEmail', true);
-        this._addFlashMessage('We have sent a verification email to your inbox', 'success');
-      })
-      .catch((err) => {
-        Logger.error(err);
-        this._addFlashMessage('Sorry, we couldn\'t send you the link. Please try again later.', 'warning');
-      });
+      .then(this._onSendSuccess.bind(this))
+      .catch(this._onSendError.bind(this));
   },
 
   /**
-   * @desc save success handler
+   * @desc send success handler
    * @private
    */
-  _onSaveSuccess() {
-    this._addFlashMessage('Your credential has been added to your account.', 'success')
+  _onSendSuccess() {
+    this._addFlashMessage('We have sent a verification email to your inbox', 'success');
     set(this, 'sentEmail', true);
+  },
+
+  /**
+   * @desc send error handler
+   * @private
+   */
+  _onSendError(err) {
+    Logger.error(err);
+    this._addFlashMessage('Sorry, we couldn\'t send you the link. Please try again later.', 'warning');
   },
 
   /**
@@ -113,6 +114,6 @@ export default Component.extend(FlashMessageMixin, Validations, {
   _onSaveError(model, error) {
     model.rollbackAttributes();
     Logger.error(error);
-    this._addFlashMessage('Sorry. There was a problem saving your changes.', 'warning')
+    this._addFlashMessage('Sorry. There was a problem saving your new email. Please try again later.', 'warning')
   }
 });
