@@ -10,13 +10,13 @@ describe('Integration | Component | credential list', function() {
 
   it('renders a primary email when it is present', function() {
     this.setProperties({
-      'credential': {
+      'credentials': {
         main_credential: {
           email: 'liz@repositive.io'
         }
       }
     });
-    this.render(hbs`{{credential-list credential=credential}}`);
+    this.render(hbs`{{credential-list credentials=credentials}}`);
     expect(this.$().find(this.$('p.u-mb0.u-fs2')[0]).text().trim()).to.eql('liz@repositive.io');
   });
 });
