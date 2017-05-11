@@ -29,14 +29,14 @@ export default Route.extend(FlashMessageMixin, {
         //updated the session token
         set(this, 'session.session.content.authenticated.token', params.verification_id)
 
-        debugger;
+        // debugger;
         return RSVP.hash({
           verificationResp: resp,
           makePrimaryResp: get(this, 'ajax').request(ENV.APIRoutes['make-primary'], { method: 'GET' })
         });
       })
       .then(resp => {
-        debugger;
+        // debugger;
         /**
         * Backend validated the email address - transitionTo the profile without
         * rendering the current page (i.e do not resolve the promise before transitioning).

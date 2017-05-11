@@ -5,8 +5,9 @@ import { buildValidations } from 'ember-cp-validations';
 import presenceValidator from 'repositive/validations/presenceValidator';
 import emailFormatValidator from 'repositive/validations/emailFormatValidator';
 import { errorMessages } from 'repositive/validations/validations-config';
+import { getLatestSecondaryCredential } from 'repositive/utils/credentials';
 
-const { Component, get, set, computed, Logger, inject: { service } } = Ember;
+const { Component, get, getWithDefault, set, computed, Logger, inject: { service } } = Ember;
 
 const Validations = buildValidations({
   newEmail: [
@@ -23,13 +24,21 @@ export default Component.extend(FlashMessageMixin, Validations, {
   classNames: ['u-mb3'],
 
   loading: false,
-  sentEmail: false,
-
   isNotChanged: true,
+
   isInvalid: computed.not('validations.isValid'),
   isDisabled: computed.or('isNotChanged', 'isInvalid'),
   newEmail: computed('credentials.main_credential.email', function() {
     return get(this, 'credentials.main_credential.email');
+  }),
+
+  pendingCredential: computed('credentials.secondary_credentials.[]', function() {
+    const secondaryCredentials = get(this, 'credentials.secondary_credentials');
+    const latestSecondaryCred = getLatestSecondaryCredential(secondaryCredentials);
+    if (!get(latestSecondaryCred, 'verified')) {
+      return latestSecondaryCred;
+    }
+    return false;
   }),
 
   keyUp() {
@@ -93,7 +102,6 @@ export default Component.extend(FlashMessageMixin, Validations, {
    */
   _onSendSuccess() {
     this._addFlashMessage('We have sent a verification email to your inbox', 'success');
-    set(this, 'sentEmail', true);
   },
 
   /**

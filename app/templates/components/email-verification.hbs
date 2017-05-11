@@ -21,9 +21,9 @@
     }}
   </div>
 </form>
-{{#if sentEmail}}
+{{#if pendingCredential}}
   <div class="u-flex">
-    <p class="u-tc-red u-mb0 u-mr1">We sent an email to {{newEmail}}.</p>
+    <p class="u-tc-red u-mb0 u-mr1">We sent an email to {{pendingCredential.email}}.</p>
     <a class="u-tc-secondary u-td-underline" {{action 'saveNewCredential'}}>Resend Verification Email.</a>
   </div>
   <p class="u-fs1 u-fw-reg u-tc-tertiary">We'll keep using your old email address ({{credentials.main_credential.email}}) until you verify your new one.</p>
