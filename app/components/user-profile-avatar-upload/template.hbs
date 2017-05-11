@@ -7,27 +7,27 @@
 }}
   {{# unless (or uploading uploadFailed reloadFailed)}}
 
-    <div class="c-avatar-upload__image-wrapper relative circle overflow-hidden fw-med fs2 ta-center" data-text="Edit photo">
+    <span class="c-avatar-upload__image-wrapper block relative circle overflow-hidden fw-med fs2 ta-center" data-text="Edit photo">
       <img src="{{avatarImg}}" />
-    </div>
+    </span>
 
   {{else}}
     {{#if uploadFailed}}
-      <div class="u-full-height fc-tertiary flex items-center justify-center error-state">
+      <span class="u-full-height fc-tertiary flex items-center justify-center error-state">
         {{fa-icon "times" size=2}}
         <span>Upload failed</span>
-      </div>
+      </span>
 
     {{else if reloadFailed}}
-      <div class="u-full-height fc-tertiary flex items-center justify-center error-state">
+      <span class="u-full-height fc-tertiary flex items-center justify-center error-state">
         {{fa-icon "check" size=2}}
         <span>Image uploaded</span>
-      </div>
+      </span>
 
     {{else}}
-      <div class="u-full-height fc-tertiary flex items-center justify-center error-state">
+      <span class="u-full-height fc-tertiary flex items-center justify-center error-state">
         {{fa-icon "refresh" size=2 class="fc-tertiary animation-spin"}}
-      </div>
+      </span>
     {{/if}}
   {{/unless}}
 {{/file-upload}}
