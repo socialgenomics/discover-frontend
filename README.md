@@ -56,5 +56,5 @@ Whenever a PR is merged into master, the new build of master is deployed to [sta
 ### Deploying to Production
 1. Because you can't directly push changes to master, you must first make a new branch.
 2. Within the new branch, update the version number with `npm version <major | minor | patch>`
-3. Push with tags: `git push --tags`
+3. Push with tags: `git push && git push --tags`
 4. Create a PR to merge the upgrade branch into master.
