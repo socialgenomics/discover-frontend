@@ -26,17 +26,17 @@ export default Route.extend(FlashMessageMixin, {
     // error page is shown if the promise is rejected
     get(this, 'ajax').request(ENV.APIRoutes['verify-email'] + '/' + params.verification_id, { method: 'GET' })
       .then(resp => {
-        //updated the session token
+        //update the session token
         set(this, 'session.session.content.authenticated.token', params.verification_id)
 
-        // debugger;
+        debugger;
         return RSVP.hash({
           verificationResp: resp,
           makePrimaryResp: get(this, 'ajax').request(ENV.APIRoutes['make-primary'], { method: 'GET' })
         });
       })
       .then(resp => {
-        // debugger;
+        debugger;
         /**
         * Backend validated the email address - transitionTo the profile without
         * rendering the current page (i.e do not resolve the promise before transitioning).
@@ -59,7 +59,7 @@ export default Route.extend(FlashMessageMixin, {
         } else {
           this.transitionTo('users.profile');
         }
-        this._showMessages(resp);
+        this._showMessages(resp.verificationResp);
       })
       .catch(err => {
         Logger.error(err);
