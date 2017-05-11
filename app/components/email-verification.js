@@ -33,7 +33,6 @@ export default Component.extend(FlashMessageMixin, Validations, {
   }),
 
   pendingCredential: computed('credentials.secondary_credentials.[]', function() {
-    debugger;
     const secondaryCredentials = get(this, 'credentials.secondary_credentials');
     const latestSecondaryCred = getLatestSecondaryCredential(secondaryCredentials);
     if (!get(latestSecondaryCred, 'verified')) {
@@ -79,7 +78,10 @@ export default Component.extend(FlashMessageMixin, Validations, {
 
     return credential
       .save()
-      .then(() => this._sendVerificationEmail(newEmail))
+      .then(newCred => {
+        get(this, 'credentials.secondary_credentials').addObject(newCred);
+        return this._sendVerificationEmail(newEmail);
+      })
       .catch(this._onSaveError.bind(this, credential))
       .finally(set(this, 'loading', false));
   },
