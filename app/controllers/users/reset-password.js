@@ -25,7 +25,7 @@ const Validations = buildValidations({
 export default Controller.extend(Validations, FlashMessageMixin, {
   ajax: service(),
 
-  resetKey: null,
+  reset_key: null,
   password1: null,
   password2: null,
   loading: false,
@@ -47,7 +47,7 @@ export default Controller.extend(Validations, FlashMessageMixin, {
           return get(this, 'ajax').request(ENV.APIRoutes['reset-password'], {
             method: 'POST',
             data: {
-              token: get(this, 'resetKey'),
+              token: get(this, 'reset_key'),
               password: get(this, 'password1')
             }
           })
