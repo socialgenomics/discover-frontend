@@ -53,8 +53,8 @@
           <div class="pl4">
             {{add-tag addTag=(action 'addTag')}}
           </div>
-          <span class="fs0 fc-tertiary">
-            Add tags to improve searching and browsing through data. {{#link-to 'help.other'}}Learn more{{/link-to}}
+          <span class="fs0 tc-tertiary">
+            Add tags to improve searching and browsing through data. {{#link-to 'help.other' 'why-tag'}}Learn more{{/link-to}}
           </span>
         {{/if}}
       </div>
@@ -102,7 +102,7 @@
           {{#if model.access}}
             <li class="fs0 fc-tertiary">
               Access type:
-              {{#link-to 'help.searching-for-data' (query-params help="filters")}}
+              {{#link-to 'help.searching-for-data' 'filters'}}
                 <span class="fw-med fs1 fc-secondary">{{model.access}}</span>
               {{/link-to}}
             </li>

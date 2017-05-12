@@ -29,3 +29,16 @@
 .bc-overlay-light-bluegrey { background-color: transparentize($color-light-bluegrey, .1); }
 .bc-overlay-light-grey { background-color: transparentize($color-light-grey, .1); }
 .bc-overlay-white { background-color: transparentize($color-white, .1); }
+
+/*
+  REPUTATION COLOURS
+*/
+
+.bc-light-teal { background-color: $color-light-teal; }
+.bc-light-yellow { background-color: $color-light-yellow; }
+
+/*
+  BORDER COLOR
+*/
+
+.border-white   { border-color: $white; }
