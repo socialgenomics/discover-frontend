@@ -19,7 +19,7 @@ describe('Integration | Component | user profile avatar upload', function() {
 
       const $imageWrapper = this.$('.c-avatar-upload__image-wrapper');
 
-      expect($imageWrapper.attr('class')).to.eql('Edit photo'));
+      expect($imageWrapper.attr('class')).to.eql('Edit photo');
     });
 
     it('should not show error messages', function () {
