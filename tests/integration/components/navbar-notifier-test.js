@@ -28,6 +28,6 @@ describe('Integration | Component | navbar notifier', function() {
   it('bell is grey when there are no notifications', function() {
     this.set('notifications', []);
     this.render(hbs`{{navbar-notifier notifications=notifications}}`);
-    expect(this.$('div').hasClass('u-fc-secondary')).to.be.true;
+    expect(this.$('div').hasClass('fc-secondary')).to.be.true;
   });
 });
