@@ -14,7 +14,7 @@
             <h4 class="u-tc-red u-fs2">Please verify your email.</h4>
             <div class="c-divider c-divider-light-bg"></div>
             <h4 class="u-fs2 u-tc-secondary">{{fa-icon "envelope"}} {{model.main_credential.email}}</h4>
-            {{rui/r-button type="primary" size="big" clickHandler=(route-action "resendVerifyEmail") label="Resend Verification Email"}}
+            {{rui/r-button variant="primary" size="big" clickHandler=(route-action "resendVerifyEmail") label="Resend Verification Email"}}
           {{/if}}
         </div>
       </div>

@@ -42,7 +42,7 @@ describe('Integration | Component | user profile interests', function() {
 
     it('should disappear after clicking the cancel button', function () {
       this.$('.c-btn-secondary').click();
-      this.$('.c-btn-text-secondary').click();
+      this.$('.c-btn-cancel').click();
 
       expect(this.$('.ember-text-field')).to.have.length(0);
     });

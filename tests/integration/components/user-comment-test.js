@@ -74,7 +74,7 @@ describe('Integration | Component | user comment', function() {
       this.render(hbs`{{user-comment comment=comment canEdit=true inEditMode=true}}`);
 
       const commentButton = this.$('button.c-btn-primary');
-      const cancelButton = this.$('button.c-btn-text-secondary');
+      const cancelButton = this.$('button.c-btn-cancel');
 
       expect(commentButton).to.have.length(1);
       expect(cancelButton).to.have.length(1);
@@ -87,7 +87,7 @@ describe('Integration | Component | user comment', function() {
         setupState(this);
 
         this.render(hbs`{{user-comment comment=comment canEdit=true inEditMode=true}}`);
-        this.$('button.c-btn-text-secondary').click();
+        this.$('button.c-btn-cancel').click();
 
         expect(this.$('p.u-markdown-formatting')).to.have.length(1);
         expect(this.$('form .c-validated-input')).to.have.length(0);

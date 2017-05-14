@@ -6,7 +6,7 @@
         <img src="/assets/images/happy.png" class="u-mb3 u-w5" alt="happy lizard">
         {{#link-to 'user' currentUser.id}}
           {{rui/r-button
-            type="primary"
+            variant="primary"
             size="big"
             label="Visit your Profile"
           }}
@@ -15,7 +15,7 @@
         <h1 class="u-fs4 u-tc-secondary">The verification link has expired.</h1>
         <img src="/assets/images/liz-time-out.png" class="u-mb3 u-w5" alt="Time Out lizard">
         {{rui/r-button
-          type="primary"
+          variant="primary"
           size="big"
           label="Resend Verification Email"
           clickHandler=(route-action "resendVerifyEmail")

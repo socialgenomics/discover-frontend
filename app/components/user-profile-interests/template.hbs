@@ -15,7 +15,7 @@
   <div class="u-pb1 u-flex">
     {{#if isOpen}}
       {{focus-input class="u-mr2" value=newInterest type="text" enter="addInterest" placeholder="Add your research interest"}}
-      {{rui/r-button type="cancel" label="Cancel" clickHandler=(action "hideInput")}}
+      {{rui/r-button variant="cancel" label="Cancel" clickHandler=(action "hideInput")}}
 
     {{else}}
       {{rui/r-button label="Add Interest" clickHandler=(action "showInput")}}

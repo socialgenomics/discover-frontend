@@ -10,8 +10,9 @@
   }}
 {{/each}}
 <div class="u-ta-center">
-  {{async-button
-    class="c-btn c-btn-primary"
+  {{rui/r-async-button
+    size="big"
+    variant="primary"
     action=(action 'save')
     default="Save Changes"
     pending="Saving..."
