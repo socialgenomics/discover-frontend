@@ -12,4 +12,5 @@
   disableWhen=(not isValid)
   pending="Adding..."
 }}
-<button class="c-btn c-btn-text-secondary" {{action 'cancel'}}>Cancel</button>
+{{rui/r-button type="cancel" label="Cancel" clickHandler=(action "cancel")}}
+

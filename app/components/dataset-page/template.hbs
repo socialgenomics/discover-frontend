@@ -114,7 +114,8 @@
             clickHandler=(action "trackExit")
             href=(if session.isAuthenticated model.url '')
             label=(if (eq model.access "Open") "Access Data" "Go To Dataset")
-            primary=true
+            type="primary"
+            size="big"
             target="_blank"
           }}
         {{/if}}
@@ -181,7 +182,7 @@
             pending="Saving..."
             disableWhen=(not validations.isValid)
           }}
-          {{rui/r-button-flat label="Cancel" clickHandler=(action "cancelEditMode")}}
+          {{rui/r-button type="cancel" label="Cancel" clickHandler=(action "cancelEditMode")}}
         </div>
       </form>
     </div>

@@ -15,9 +15,10 @@
   <div class="u-pb1 u-flex">
     {{#if isOpen}}
       {{focus-input class="u-mr2" value=newInterest type="text" enter="addInterest" placeholder="Add your research interest"}}
-      <button {{action "hideInput"}} class="c-btn-text-secondary u-py2">Cancel</button>
+      {{rui/r-button type="cancel" label="Cancel" clickHandler=(action "hideInput")}}
+
     {{else}}
-      <button {{action "showInput"}} class="c-btn c-btn-secondary u-px2 u-py1">Add Interest</button>
+      {{rui/r-button label="Add Interest" clickHandler=(action "showInput")}}
     {{/if}}
   </div>
   <span class="u-tc-secondary">eg. RNA-seq</span>

@@ -33,6 +33,6 @@
       disableWhen=(not isValid)
       pending="Saving..."
     }}
-    <button class="c-btn c-btn-text-secondary" {{action 'cancelEditMode'}}>Cancel</button>
+    {{rui/r-button type="cancel" label="Cancel" clickHandler=(action "cancelEditMode")}}
   </form>
 {{/unless}}

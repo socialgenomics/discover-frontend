@@ -18,10 +18,5 @@
     noMarkdown= true
   }}
 {{/if}}
-<button
-  type="submit"
-  class="c-btn c-btn-disabled {{unless submitDisabled 'c-btn-primary'}}"
-  disabled={{submitDisabled}}
->
-  {{submitButtonLabel}}
-</button>
+{{! TODO: try using async button on new CSS loading state }}
+{{rui/r-button type="primary" size="big" disabled=submitDisabled label=submitButtonLabel}}

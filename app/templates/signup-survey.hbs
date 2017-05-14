@@ -12,7 +12,9 @@
         <main>{{typeform-markup name=model.name email=model.cred.email}}</main>
       </div>
       <div class="u-ta-right">
-        {{#link-to 'root'}}<button class="c-btn c-btn-primary u-mb3">Skip</button>{{/link-to}}
+        {{#link-to 'root'}}
+          {{rui/r-button type="primary" size="big" label="Skip"}}
+        {{/link-to}}
       </div>
     </div>
   </div>
