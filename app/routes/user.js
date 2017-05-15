@@ -2,7 +2,7 @@ import Ember from 'ember';
 import { isVerified } from './users/trust';
 import ENV from 'repositive/config/environment';
 
-const { inject: { service }, Route, RSVP, get, Logger } = Ember;
+const { inject: { service }, Route, RSVP, get, Logger, isEmpty } = Ember;
 
 export default Route.extend({
   ajax: service(),
@@ -12,43 +12,85 @@ export default Route.extend({
   model: function(params) {
     if (get(this, 'session.session.isAuthenticated')) {
       return this.store.findRecord('user', params.id)
-      .then(user => {
-        const userId = get(user, 'id');
-        // TODO: The majority of this info can be cached and retrieved from the same session instead of doing unnecesary calls.
-        return RSVP.hash({
-          user: user,
-          registrations: this.store.query('dataset', { 'where.user_id': userId, 'order[0][0]': 'created_at', 'order[0][1]': 'DESC' }),
-          requests: this.store.query('request', { 'where.user_id': userId, 'order[0][0]': 'created_at', 'order[0][1]': 'DESC' }),
-          discussions: this.store.query('action', { 'where.user_id': userId, 'where.type': 'comment' }),
-          contributions: this.store.query('action', { 'where.user_id': userId, 'where.type': 'attribute' }),
-          user_credential: this.store.query('credential', { 'where.user_id': userId }),
-          favourited_data: this._getFavouritedData(params.id)
+        .then(user => this._getProfileData(user, params))
+        .then(this._getDiscussionsAndContributions.bind(this))
+        .then(values => {
+          this.controllerFor('user.index').set('favouritedData', values.profileData.favourited_data);
+          const discussions = [...values.datasetDiscussions.toArray(), ...values.requestDiscussions.toArray()];
+          return {
+            user: values.profileData.user,
+            registrations: values.profileData.registrations,
+            requests: values.profileData.requests,
+            discussions,
+            contributions: values.datasetContributions,
+            is_verified: isVerified(values.profileData.user_credential)
+          };
+        })
+        .catch(err => {
+          Logger.error(err);
+          if (err.errors[0].status === 500) {
+            throw err;
+          }
         });
-      })
-      .then(values => {
-        const discussionIds = values.discussions.mapBy('actionableId.id').uniq();
-        const contributionIds = values.contributions.mapBy('actionableId.id').uniq();
-
-        this.controllerFor('user.index').set('favouritedData', values.favourited_data);
-        return {
-          user: values.user,
-          registrations: values.registrations,
-          requests: values.requests,
-          discussions: this.store.query('dataset', { 'where.id': discussionIds }),
-          contributions: this.store.query('dataset', { 'where.id': contributionIds }),
-          is_verified: isVerified(values.user_credential)
-        };
-      })
-      .catch(err => {
-        Logger.error(err);
-        if (err.errors[0].status === 500) {
-          throw err;
-        }
-      });
     } else {
       this.transitionTo('/');
     }
   },
+
+  _getProfileData(user, params) {
+    const userId = get(user, 'id');
+    return RSVP.hash({
+      user: user,
+      registrations: this.store.query('dataset', {
+        'where.user_id': userId,
+        'order[0][0]': 'created_at',
+        'order[0][1]': 'DESC',
+        'limit': 50
+      }),
+      requests: this.store.query('request', {
+        'where.user_id': userId,
+        'order[0][0]': 'created_at',
+        'order[0][1]': 'DESC',
+        'limit': 50
+      }),
+      discussions: this.store.query('action', {
+        'where.user_id': userId,
+        'where.type': 'comment',
+        'limit': 50
+      }),
+      contributions: this.store.query('action', {
+        'where.user_id': userId,
+        'where.type': 'attribute',
+        'limit': 50
+      }),
+      user_credential: this.store.query('credential', { 'where.user_id': userId }),
+      favourited_data: this._getFavouritedData(params.id)
+    });
+  },
+
+  _getDiscussionsAndContributions(profileData) {
+    const datasetContributionIds = this._getUniqueIds(profileData.contributions, 'dataset');
+    const datasetDiscussionIds = this._getUniqueIds(profileData.discussions, 'dataset');
+    const requestDiscussionIds = this._getUniqueIds(profileData.discussions, 'request');
+
+    const datasetContributions = isEmpty(datasetContributionIds) ? [] : this._createQuery(datasetContributionIds, 'dataset');
+    const datasetDiscussions = isEmpty(datasetDiscussionIds) ? [] : this._createQuery(datasetDiscussionIds, 'dataset');
+    const requestDiscussions = isEmpty(requestDiscussionIds) ? [] : this._createQuery(requestDiscussionIds, 'request');
+
+    return RSVP.hash({ profileData, datasetContributions, datasetDiscussions, requestDiscussions });
+  },
+
+  _createQuery(ids, modelType) {
+    return this.store.query(modelType, { 'where.id': ids, limit: 50 });
+  },
+
+  _getUniqueIds(arrayOfObjs, modelType) {
+    return arrayOfObjs
+      .filterBy('actionable_model', modelType)
+      .mapBy('actionableId.id')
+      .uniq();
+  },
+
   _getFavouritedData(userIdOfProfile) {
     const ajax = get(this, 'ajax');
     return RSVP.hash({
