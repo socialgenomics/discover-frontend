@@ -76,9 +76,7 @@ export default Component.extend(Validations, FlashMessageMixin, {
     save() {
       const userModel = get(this, 'store').peekRecord('user', get(this, 'userId'));
       const userProfileData = get(this, 'userProfileData');
-      debugger;
       Object.keys(userProfileData).forEach(attr => set(userModel, attr, userProfileData[attr]));
-      debugger;
       return userModel
         .save()
         .then(this._onSaveSuccess.bind(this))
