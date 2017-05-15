@@ -61,7 +61,6 @@ describe('Integration | Component | add attribute', function() {
 
     describe('cancel', function() {
       it('calls passed in addAttribute function with correct args', function() {
-        console.log(this.$('button.c-btn-cancel'));
         // this.$('button.c-btn-cancel').click();
         expect(this.get('closeInput').calledOnce).to.be.true;
       });
