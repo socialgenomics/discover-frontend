@@ -1,3 +1,5 @@
+import { getRandomInt } from 'repositive/utils/numbers';
+
 /**
  * Randomize array element order in-place.
  * Using Durstenfeld shuffle algorithm.
@@ -39,4 +41,14 @@ export function isUniqueString(list, value) {
     list.map(item => item.toLowerCase()),
     value.toLowerCase()
   )
+}
+
+/**
+ * @desc returns a random element from the array
+ * @param {Array} choices
+ * @returns {?}
+ * @public
+ */
+export function getRandomElement(list) {
+  return list[getRandomInt(0, list.length)];
 }
