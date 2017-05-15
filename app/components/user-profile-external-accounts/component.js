@@ -8,7 +8,7 @@ import { errorMessages, patterns } from 'repositive/validations/validations-conf
 import { validator } from 'ember-cp-validations';
 import FlashMessageMixin from 'repositive/mixins/flash-message-mixin';
 
-const { Component, inject: { service }, Logger, set, get } = Ember;
+const { Component, inject: { service }, Logger, set, get, isEmpty } = Ember;
 const Validations = buildValidations({
   [createUserAttrKey('profile.accounts.googlePlus')]: urlFormatValidator(),
   [createUserAttrKey('profile.accounts.linkedIn')]: urlFormatValidator(),
@@ -35,9 +35,6 @@ export default Component.extend(Validations, FlashMessageMixin, {
 
   init() {
     this._super(...arguments);
-    if (!get(this, 'userProfileData.profile.accounts')) {
-      set(this, 'userProfileData.profile.accounts', {});
-    }
 
     set(this, 'userAttributes', [
       {
@@ -68,12 +65,20 @@ export default Component.extend(Validations, FlashMessageMixin, {
     ]);
   },
 
+  didReceiveAttrs() {
+    this._super(...arguments);
+    if (isEmpty(get(this, 'userProfileData.profile.accounts'))) {
+      set(this, 'userProfileData.profile.accounts', {});
+    }
+  },
+
   actions: {
     save() {
       const userModel = get(this, 'store').peekRecord('user', get(this, 'userId'));
       const userProfileData = get(this, 'userProfileData');
-
+      debugger;
       Object.keys(userProfileData).forEach(attr => set(userModel, attr, userProfileData[attr]));
+      debugger;
       return userModel
         .save()
         .then(this._onSaveSuccess.bind(this))
