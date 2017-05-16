@@ -19,27 +19,18 @@ export default Controller.extend({
   }),
 
   actions: {
-    // user clicks button on welcome page to enter site, displays welcome flash message
     enterSite: function() {
-      // this.get('session').set('data.firstVisit', false);
       this.flashMessages.add({
         message: 'Please check your email to verify your account',
         type: 'info',
         sticky: true
       });
     },
+
     trackCreateAccount(eventName) {
       get(this, 'metrics').trackEvent({
         category: eventName,
         action: 'button clicked'
-      });
-    },
-    search(serializedTree) {
-      this.transitionToRoute('datasets.search', {
-        queryParams: {
-          query: serializedTree,
-          page: 1
-        }
       });
     }
   }
