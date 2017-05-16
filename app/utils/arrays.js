@@ -1,8 +1,7 @@
 import { getRandomInt } from 'repositive/utils/numbers';
 
 /**
- * Randomize array element order in-place.
- * Using Durstenfeld shuffle algorithm.
+ * @desc Randomize array element order, using Durstenfeld shuffle algorithm.
  * @public
  * @param {Array} Array to be shuffled
  * @return {Array} Shuffled array.
@@ -19,7 +18,7 @@ export function shuffle(array) {
 }
 
 /**
- * Does this value exist in this enumerable.
+ * @desc Does this value exist in this enumerable.
  * @public
  * @param {Array} list list of items to check
  * @param {?} value the value you're checking for
@@ -30,7 +29,7 @@ export function isUnique(list, value) {
 }
 
 /**
- * Converts string to lowercase and passes the to isUnique
+ * @desc Converts string to lowercase and passes the to isUnique
  * @public
  * @param {Array} list list of items to check
  * @param {String} value the value you're checking for
