@@ -8,7 +8,6 @@ export default SessionService.extend({
   metrics: service(),
 
   setAuthenticatedUser: observer('data.authenticated.user', function() {
-    // debugger;
     if (get(this, 'isAuthenticated')) {
       const userData = get(this, 'data.authenticated.user');
 

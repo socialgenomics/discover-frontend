@@ -6,6 +6,7 @@ export default Controller.extend({
   session: service(),
 
   loading: false,
+
   isRootRoute: computed.alias('session.data.isRootRoute'),
   firstVisit: computed.alias('session.data.firstVisit'),
   displayWelcomeMessage: computed.alias('session.data.displayWelcomeMessage'),
@@ -14,7 +15,7 @@ export default Controller.extend({
   requestsSorted: computed.sort('model.requests', 'sortUpdatedAt'),
   registrationsSorted: computed.sort('model.registered', 'sortUpdatedAt'),
   datasetsNumber: computed('model.stats.datasets', function() {
-    const x = this.get('model.stats.datasets');
+    const x = get(this, 'model.stats.datasets');
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   }),
 
