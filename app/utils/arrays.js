@@ -49,5 +49,5 @@ export function isUniqueString(list, value) {
  * @public
  */
 export function getRandomElement(list) {
-  return list[getRandomInt(0, list.length)];
+  return list[getRandomInt(0, list.length - 1)];
 }
