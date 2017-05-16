@@ -7,13 +7,16 @@ const { inject: { service }, computed, Route, RSVP, get, set, Logger, setPropert
 export default Route.extend(FlashMessageMixin, {
   session: service(),
   ajax: service(),
+
   isFirstLogin: computed.and('session.data.firstVisit', 'session.isAuthenticated'),
   displayWelcomeMessage: computed('session.session.content.authenticated.user.credentials.firstObject.verified', 'session.isAuthenticated', function() {
     const isVerified = get(this, 'session.session.content.authenticated.user.credentials.firstObject.verified');
     const isAuthenticated = get(this, 'session.isAuthenticated');
     return isAuthenticated ? !isVerified : false;
   }),
+
   beforeModel() {
+    debugger;
     if (get(this, 'isFirstLogin')) {
       this.transitionTo('signup-survey')
         .then(() => {

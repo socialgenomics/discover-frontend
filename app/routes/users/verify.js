@@ -30,7 +30,7 @@ export default Route.extend(FlashMessageMixin, {
             'session.authenticatedUser.isEmailValidated': true,
             'session.data.displayWelcomeMessage': false
           });
-          this.transitionTo('user', get(this, 'session.authenticatedUser.id'));
+          // this.transitionTo('user', get(this, 'session.authenticatedUser.id'));
         } else {
           Logger.warn('session.authenticatedUser is undefined but session.isAuthenticated "true"');
           this.transitionTo('users.login');
@@ -40,7 +40,7 @@ export default Route.extend(FlashMessageMixin, {
       }
       this._showMessages(resp);
     })
-    .catch((err)=> {
+    .catch(err => {
       Logger.error(err);
       RSVP.resolve(); // fulfills the promise - this causes ember to render the template
     });
@@ -52,7 +52,7 @@ export default Route.extend(FlashMessageMixin, {
 
   _showMessages: function(content) {
     if (content.message === 'success') {
-      this._addFlashMessage('Your credential is now validated', 'success');
+      this._addFlashMessage('Your email has been verified.', 'success');
     } else {
       this._addFlashMessage('An unexpected error occurred', 'warning');
     }
