@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import { getRandomElement } from 'repositive/utils/arrays'
-const { Component, get, inject: { service }, set, computed } = Ember;
+const { Component, get, inject: { service }, setProperties, computed } = Ember;
 
 export default Component.extend({
   queryService: service('query'),
@@ -17,8 +17,10 @@ export default Component.extend({
   init() {
     this._super(...arguments);
     const queryService = get(this, 'queryService');
-    set(this, 'query', queryService.getQueryString());
-    set(this, 'placeholder', this._getRandomSearchPlaceholder());
+    setProperties(this, {
+      'query': queryService.getQueryString(),
+      'placeholder': this._getSearchPlaceholder(get(this, 'placeholderValues'))
+    });
   },
 
 
@@ -42,7 +44,7 @@ export default Component.extend({
    * @returns {String}
    * @private
    */
-  _getRandomSearchPlaceholder() {
-    return getRandomElement(get(this, 'placeholderValues'));
+  _getSearchPlaceholder(placeholderList) {
+    return getRandomElement(placeholderList);
   }
 });

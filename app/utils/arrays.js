@@ -33,7 +33,7 @@ export function isUnique(list, value) {
  * Converts string to lowercase and passes the to isUnique
  * @public
  * @param {Array} list list of items to check
- * @param {?} value the value you're checking for
+ * @param {String} value the value you're checking for
  * @return {Boolean} whether the item is in the list or not
  */
 export function isUniqueString(list, value) {
