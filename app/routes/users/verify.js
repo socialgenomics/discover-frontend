@@ -30,7 +30,6 @@ export default Route.extend(FlashMessageMixin, {
             'session.authenticatedUser.isEmailValidated': true,
             'session.data.displayWelcomeMessage': false
           });
-          // this.transitionTo('user', get(this, 'session.authenticatedUser.id'));
         } else {
           Logger.warn('session.authenticatedUser is undefined but session.isAuthenticated "true"');
           this.transitionTo('users.login');
