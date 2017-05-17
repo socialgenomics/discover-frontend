@@ -11,5 +11,5 @@ services:
       - .:/opt
       - ~/.ssh:/root/.ssh
     environment:
-      #BACKEND_SERVER: http://localhost:3000
-      BACKEND_SERVER: https://api-staging.repositive.io
+      BACKEND_SERVER: http://localhost:3000
+      # BACKEND_SERVER: https://api-staging.repositive.io
