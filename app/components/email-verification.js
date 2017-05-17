@@ -51,8 +51,8 @@ export default Component.extend(FlashMessageMixin, Validations, VerificationMixi
       const newEmail = get(this, 'newEmail');
 
       if (newEmail === email && get(this, 'credentials.is_verified')) {
-        set(this, 'addingCredential', false);
         this._addFlashMessage('This credential is already associated with this account.', 'success');
+        this.send('cancel');
       } else {
         set(this, 'loading', true);
         return this._saveCredential(newEmail);
@@ -61,7 +61,7 @@ export default Component.extend(FlashMessageMixin, Validations, VerificationMixi
     sendVerificationEmail(newEmail) {
       return this.sendVerificationEmail(newEmail, get(this, 'ajax'));
     },
-    cancel() { set(this, 'addingCredential', false); }
+    cancel() { get(this, 'toggleAddCredentialInput')(); }
   },
 
   /**

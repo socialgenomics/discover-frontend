@@ -27,6 +27,5 @@
     <a class="u-tc-secondary u-td-underline" {{action 'sendVerificationEmail' pendingCredential.email}}>Resend Verification Email.</a>
   </div>
   <p class="u-fs1 u-fw-reg u-tc-tertiary">We'll keep using your old email address ({{credentials.main_credential.email}}) until you verify your new one.</p>
-{{else}}
-  <a class="u-tc-secondary u-td-underline" {{action 'cancel'}}>Cancel</a>
 {{/if}}
+<a class="u-tc-secondary u-td-underline" {{action 'cancel'}}>Cancel</a>

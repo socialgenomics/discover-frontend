@@ -1,13 +1,11 @@
 import Ember from 'ember';
 
-const { Component, set } = Ember;
+const { Component } = Ember;
 
 export default Component.extend({
   addingCredential: false,
 
   actions: {
-    toggleAddCredentialInput() {
-      set(this, 'addingCredential', true);
-    }
+    toggleAddCredentialInput() { this.toggleProperty('addingCredential'); }
   }
 });
