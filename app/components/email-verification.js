@@ -1,13 +1,13 @@
 import Ember from 'ember';
-import ENV from 'repositive/config/environment';
 import FlashMessageMixin from 'repositive/mixins/flash-message-mixin';
+import VerificationMixin from 'repositive/mixins/verification';
 import { buildValidations } from 'ember-cp-validations';
 import presenceValidator from 'repositive/validations/presenceValidator';
 import emailFormatValidator from 'repositive/validations/emailFormatValidator';
 import { errorMessages } from 'repositive/validations/validations-config';
 import { getLatestSecondaryCredential } from 'repositive/utils/credentials';
 
-const { Component, get, set, computed, Logger, inject: { service } } = Ember;
+const { Component, get, set, computed, Logger, inject: { service }, isEmpty } = Ember;
 
 const Validations = buildValidations({
   newEmail: [
@@ -16,24 +16,24 @@ const Validations = buildValidations({
   ]
 });
 
-export default Component.extend(FlashMessageMixin, Validations, {
-  session: service(),
+export default Component.extend(FlashMessageMixin, Validations, VerificationMixin, {
   ajax: service(),
+  session: service(),
   store: service(),
 
   classNames: ['u-mb3'],
 
   loading: false,
-  isNotChanged: true,
 
   isInvalid: computed.not('validations.isValid'),
-  isDisabled: computed.or('isNotChanged', 'isInvalid'),
+  isDisabled: computed.or('isEmailUnchanged', 'isInvalid'),
   newEmail: computed('credentials.main_credential.email', function() {
     return get(this, 'credentials.main_credential.email');
   }),
 
   pendingCredential: computed('credentials.secondary_credentials.[]', function() {
     const secondaryCredentials = get(this, 'credentials.secondary_credentials');
+    if (isEmpty(secondaryCredentials)) { return false; }
     const latestSecondaryCred = getLatestSecondaryCredential(secondaryCredentials);
     if (!get(latestSecondaryCred, 'verified')) {
       return latestSecondaryCred;
@@ -41,9 +41,12 @@ export default Component.extend(FlashMessageMixin, Validations, {
     return false;
   }),
 
-  keyUp() {
-    if (get(this, 'credentials.main_credential.email') !== get(this, 'newEmail')) { set(this, 'isNotChanged', false); }
-  },
+
+  isEmailUnchanged: computed('credentials.main_credential.email', 'newEmail', function() {
+    const currentEmail = get(this, 'credentials.main_credential.email');
+    const newEmail = get(this, 'newEmail');
+    return currentEmail === newEmail;
+  }),
 
   actions: {
     saveNewCredential() {
@@ -58,7 +61,9 @@ export default Component.extend(FlashMessageMixin, Validations, {
         return this._saveCredential(newEmail);
       }
     },
-    sendVerificationEmail(newEmail) { return this._sendVerificationEmail(newEmail); },
+    sendVerificationEmail(newEmail) {
+      return this.sendVerificationEmail(newEmail, get(this, 'ajax'));
+    },
     cancel() { set(this, 'addingCredential', false); }
   },
 
@@ -74,7 +79,7 @@ export default Component.extend(FlashMessageMixin, Validations, {
       provider: 'email',
       userId: get(this, 'session.authenticatedUser'),
       verified: false
-    })
+    });
 
     return credential
       .save()
@@ -84,35 +89,6 @@ export default Component.extend(FlashMessageMixin, Validations, {
       })
       .catch(this._onSaveError.bind(this, credential))
       .finally(set(this, 'loading', false));
-  },
-
-  /**
-  * @desc send the verification email to the new address
-  * @param {string} newEmail
-  * @private
-  */
-  _sendVerificationEmail(newEmail) {
-    get(this, 'ajax')
-      .request(ENV.APIRoutes['verify-email-resend'] + `/${newEmail}`, { method: 'GET' })
-      .then(this._onSendSuccess.bind(this))
-      .catch(this._onSendError.bind(this));
-  },
-
-  /**
-   * @desc send success handler
-   * @private
-   */
-  _onSendSuccess() {
-    this._addFlashMessage('We have sent a verification email to your inbox', 'success');
-  },
-
-  /**
-   * @desc send error handler
-   * @private
-   */
-  _onSendError(err) {
-    Logger.error(err);
-    this._addFlashMessage('Sorry, we couldn\'t send you the link. Please try again later.', 'warning');
   },
 
   /**

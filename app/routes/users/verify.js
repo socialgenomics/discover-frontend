@@ -2,20 +2,18 @@ import Ember from 'ember';
 import ENV from 'repositive/config/environment';
 import { getLatestSecondaryCredential } from 'repositive/utils/credentials';
 import FlashMessageMixin from 'repositive/mixins/flash-message-mixin';
+import VerificationMixin from 'repositive/mixins/verification';
 
 const { inject: { service }, get, set, setProperties, RSVP, Logger, Route } = Ember;
 
-function verifyEmail(credentials) {
-  const email = get(getLatestSecondaryCredential(credentials), 'email');
-  get(this, 'ajax').request(ENV.APIRoutes['verify-email-resend'] + `/${email}`, { method: 'GET' })
-    .then(() => this._addFlashMessage('We have sent a verification email to your inbox', 'success'))
-    .catch(err => {
-      Logger.error(err);
-      this._addFlashMessage('Sorry, we couldn\'t send you the link. Please try again later.', 'warning');
-    });
-}
+/**
+* @desc send the verification email to the new address
+* @param {string} newEmail
+* @public
+*/
 
-export default Route.extend(FlashMessageMixin, {
+
+export default Route.extend(FlashMessageMixin, VerificationMixin, {
   ajax: service(),
   session: service(),
   verificationId: null,
@@ -72,7 +70,10 @@ export default Route.extend(FlashMessageMixin, {
       this.store.query('credential', {
         'where.user_id': get(this, 'session.authenticatedUser.id')
       })
-        .then(verifyEmail.bind(this))
+        .then(credentials => {
+          const email = get(getLatestSecondaryCredential(credentials), 'email');
+          return this.sendVerificationEmail(email);
+        })
         .catch(Logger.error)
     }
   },
