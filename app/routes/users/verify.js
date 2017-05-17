@@ -72,7 +72,7 @@ export default Route.extend(FlashMessageMixin, VerificationMixin, {
       })
         .then(credentials => {
           const email = get(getLatestSecondaryCredential(credentials), 'email');
-          return this.sendVerificationEmail(email);
+          return this._sendVerificationEmail(email);
         })
         .catch(Logger.error)
     }

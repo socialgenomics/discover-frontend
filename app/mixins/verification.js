@@ -7,7 +7,12 @@ const { get, Mixin, inject: { service }, Logger } = Ember;
 export default Mixin.create(FlashMessageMixin, {
   ajax: service(),
 
-  sendVerificationEmail(email) {
+  /**
+   * @desc Makes call to send verification email to the email param
+   * @param email
+   * @private
+   */
+  _sendVerificationEmail(email) {
     return get(this, 'ajax')
       .request(ENV.APIRoutes['verify-email-resend'] + `/${email}`, { method: 'GET' })
       .then(this._onSendSuccess.bind(this))
