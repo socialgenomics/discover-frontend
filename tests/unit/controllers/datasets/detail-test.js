@@ -109,5 +109,17 @@ describe('Unit | Controller | datasets/detail', function() {
       expect(result[0].key).to.eql('assay');
       expect(result[0].value).to.eql('123');
     });
+
+    it('should reject all empty pmids', function() {
+      const controller = this.subject();
+      const dataset = {
+        properties: { attributes: { pmid: [null, 123] } }
+      }
+      controller.set('model', { dataset });
+      const result = controller.get('attributes');
+      expect(result.length).to.eql(1);
+      expect(result[0].key).to.eql('pmid');
+      expect(result[0].value).to.eql(123);
+    });
   });
 });
