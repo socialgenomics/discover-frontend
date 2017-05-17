@@ -27,10 +27,14 @@ export default Component.extend(FlashMessageMixin, Validations, VerificationMixi
 
   isInvalid: computed.not('validations.isValid'),
   isDisabled: computed.or('isEmailUnchanged', 'isInvalid'),
+  isEmailUnchanged: computed('credentials.main_credential.email', 'newEmail', function() {
+    const currentEmail = get(this, 'credentials.main_credential.email');
+    const newEmail = get(this, 'newEmail');
+    return currentEmail === newEmail;
+  }),
   newEmail: computed('credentials.main_credential.email', function() {
     return get(this, 'credentials.main_credential.email');
   }),
-
   pendingCredential: computed('credentials.secondary_credentials.[]', function() {
     const secondaryCredentials = get(this, 'credentials.secondary_credentials');
     if (isEmpty(secondaryCredentials)) { return false; }
@@ -39,13 +43,6 @@ export default Component.extend(FlashMessageMixin, Validations, VerificationMixi
       return latestSecondaryCred;
     }
     return false;
-  }),
-
-
-  isEmailUnchanged: computed('credentials.main_credential.email', 'newEmail', function() {
-    const currentEmail = get(this, 'credentials.main_credential.email');
-    const newEmail = get(this, 'newEmail');
-    return currentEmail === newEmail;
   }),
 
   actions: {

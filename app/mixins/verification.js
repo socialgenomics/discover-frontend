@@ -1,9 +1,10 @@
 import Ember from 'ember';
 import ENV from 'repositive/config/environment';
+import FlashMessageMixin from './flash-message-mixin';
 
 const { get, Mixin, inject: { service }, Logger } = Ember;
 
-export default Mixin.create({
+export default Mixin.create(FlashMessageMixin, {
   ajax: service(),
 
   sendVerificationEmail(email) {
