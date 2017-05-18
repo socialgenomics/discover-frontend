@@ -13,17 +13,13 @@ export default Route.extend(FlashMessageMixin, VerificationMixin, {
   model(params) {
     get(this, 'ajax').request(ENV.APIRoutes['verify-email'] + '/' + params.verification_id, { method: 'GET' })
       .then(resp => {
-        debugger;
-        // set(this, 'session.session.content.authenticated.token', params.verification_id);
         set(this, 'session.session.content.authenticated.token', resp.token);
-        debugger;
         return RSVP.hash({
           verificationResp: resp,
           makePrimaryResp: get(this, 'ajax').request(ENV.APIRoutes['make-primary'], { method: 'GET' })
         });
       })
       .then(resp => {
-        debugger;
         if (get(this, 'session.isAuthenticated')) {
           if (get(this, 'session.authenticatedUser')) {
             setProperties(this, {
@@ -42,7 +38,7 @@ export default Route.extend(FlashMessageMixin, VerificationMixin, {
       })
       .catch(err => {
         Logger.error(err);
-        set(this, 'timeout_error', true);
+        set(this, 'controller.timeout_error', true);
         RSVP.resolve(); // fulfills the promise - this causes ember to render the template
       });
   },
