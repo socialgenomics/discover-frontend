@@ -1,17 +1,10 @@
 import Ember from 'ember';
 import ENV from 'repositive/config/environment';
-import { getLatestSecondaryCredential } from 'repositive/utils/credentials';
+import { getLatestSecondaryCredential, mainCredential } from 'repositive/utils/credentials';
 import FlashMessageMixin from 'repositive/mixins/flash-message-mixin';
 import VerificationMixin from 'repositive/mixins/verification';
 
 const { inject: { service }, get, set, setProperties, RSVP, Logger, Route } = Ember;
-
-/**
-* @desc send the verification email to the new address
-* @param {string} newEmail
-* @public
-*/
-
 
 export default Route.extend(FlashMessageMixin, VerificationMixin, {
   ajax: service(),
@@ -25,16 +18,18 @@ export default Route.extend(FlashMessageMixin, VerificationMixin, {
     get(this, 'ajax').request(ENV.APIRoutes['verify-email'] + '/' + params.verification_id, { method: 'GET' })
       .then(resp => {
         //update the session token
-        set(this, 'session.session.content.authenticated.token', params.verification_id)
+        debugger;
+        //BE CAREFUL WITH THIS
+        set(this, 'session.session.content.authenticated.token', params.verification_id);
 
-        // debugger;
+        debugger;
         return RSVP.hash({
           verificationResp: resp,
           makePrimaryResp: get(this, 'ajax').request(ENV.APIRoutes['make-primary'], { method: 'GET' })
         });
       })
       .then(resp => {
-        // debugger;
+        debugger;
         /**
         * Backend validated the email address - transitionTo the profile without
         * rendering the current page (i.e do not resolve the promise before transitioning).
@@ -71,8 +66,14 @@ export default Route.extend(FlashMessageMixin, VerificationMixin, {
         'where.user_id': get(this, 'session.authenticatedUser.id')
       })
         .then(credentials => {
-          const email = get(getLatestSecondaryCredential(credentials), 'email');
-          return this._sendVerificationEmail(email);
+          const latestSecondaryCredential = getLatestSecondaryCredential(credentials);
+          if (latestSecondaryCredential) {
+            const email = get(latestSecondaryCredential, 'email');
+            return this._sendVerificationEmail(email);
+          } else {
+            const email = get(mainCredential(credentials), 'email');
+            return this._sendVerificationEmail(email);
+          }
         })
         .catch(Logger.error)
     }

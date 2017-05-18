@@ -8,39 +8,40 @@ export default SessionService.extend({
   metrics: service(),
 
   setAuthenticatedUser: observer('data.authenticated.user', function() {
-    // debugger;
-    if (get(this, 'isAuthenticated')) {
-      const userData = get(this, 'data.authenticated.user');
+    const userData = get(this, 'data.authenticated.user');
 
+    debugger;
+
+    if (get(this, 'isAuthenticated')) {
       if (!userData) {
         // force logout
-        this.invalidate();
-      } else {
-        const userId = userData.id;
-        const settingsId = userData.user_setting.id;
-        this._identifyUser(userData);
-
-        return RSVP.all([
-          get(this, 'store').findRecord('user', userId),
-          get(this, 'store').query('credential', { 'where.user_id': userId, 'where.primary': true }),
-          get(this, 'store').findRecord('user_setting', settingsId)
-        ])
-          .then(data => {
-            const user = data[0];
-            const credentials = data[1].content;
-
-            setProperties(user, {
-              email: credentials[0].email,
-              isEmailValidated: userData.isEmailValidated,
-              isCurrentUser: true
-            });
-
-            user.save();
-
-            set(this, 'authenticatedUser', user);
-          })
-          .catch(Logger.error);
+        return this.invalidate();
       }
+      const userId = userData.id;
+      const settingsId = userData.user_setting.id;
+      const store = get(this, 'store');
+
+      this._identifyUser(userData);
+
+      return RSVP.hash({
+        'user': store.findRecord('user', userId),
+        'credential': store.query('credential', { 'where.user_id': userId, 'where.primary': true }),
+        'user_settings': store.findRecord('user_setting', settingsId)
+      })
+        .then(data => {
+          const user = data.user;
+          const credentials = data.credential.content;
+
+          setProperties(user, {
+            email: credentials[0].email,
+            isEmailValidated: userData.isEmailValidated // move to verify route
+          });
+
+          user.save();
+
+          set(this, 'authenticatedUser', user);
+        })
+        .catch(Logger.error);
     }
   }),
 
