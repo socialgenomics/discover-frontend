@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import { mergeAssays } from '../../routes/datasets/detail';
 
-const { Controller, computed, inject: { service }, get, getWithDefault } = Ember;
+const { Controller, computed, inject: { service }, get, getWithDefault, isEmpty } = Ember;
 
 export default Controller.extend({
   session: service(),
@@ -33,7 +33,8 @@ export default Controller.extend({
   attributes: computed('dataset.properties.attributes', 'dataset.actionableId.actions', function() {
     const datasetAttrs = getWithDefault(this, 'dataset.properties.attributes', {});
     const actionAttrs = getWithDefault(this, 'dataset.actionableId.actions', []).filterBy('type', 'attribute');
-    return this._mergeAttributes(actionAttrs, datasetAttrs);
+    return this._mergeAttributes(actionAttrs, datasetAttrs)
+      .reject(attr =>  attr.key === 'pmid' && isEmpty(attr.value));
   }),
 
   assaysToDisplay: computed('dataset', 'dataset.actionableId.actions.[]', function() {
@@ -80,9 +81,11 @@ export default Controller.extend({
   _convertDatasetAttrsToCommonObjList(attributesFromDataset) {
     if (attributesFromDataset) {
       return Object.keys(attributesFromDataset).reduce((attrObjects, key) => {
+        const keyValue = attributesFromDataset[key];
+        if (isEmpty(keyValue) || 'pmid' in keyValue) { return attrObjects; }
         return [
           ...attrObjects,
-          ...attributesFromDataset[key].map(value => { return { key, value }; })
+          ...keyValue.map(value => { return { key, value }; })
         ];
       }, []);
     } else { return []; }
