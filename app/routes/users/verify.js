@@ -41,6 +41,9 @@ export default Route.extend(FlashMessageMixin, {
     })
     .catch(err => {
       Logger.error(err);
+      setProperties(this, {
+        timeout_error: true
+      });
       RSVP.resolve(); // fulfills the promise - this causes ember to render the template
     });
   },
