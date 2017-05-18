@@ -81,9 +81,11 @@ export default Controller.extend({
   _convertDatasetAttrsToCommonObjList(attributesFromDataset) {
     if (attributesFromDataset) {
       return Object.keys(attributesFromDataset).reduce((attrObjects, key) => {
+        const keyValue = attributesFromDataset[key];
+        if (isEmpty(keyValue) || 'pmid' in keyValue) { return attrObjects; }
         return [
           ...attrObjects,
-          ...attributesFromDataset[key].map(value => { return { key, value }; })
+          ...keyValue.map(value => { return { key, value }; })
         ];
       }, []);
     } else { return []; }
