@@ -5,9 +5,8 @@ import { buildValidations } from 'ember-cp-validations';
 import presenceValidator from 'repositive/validations/presenceValidator';
 import emailFormatValidator from 'repositive/validations/emailFormatValidator';
 import { errorMessages } from 'repositive/validations/validations-config';
-import { getLatestSecondaryCredential } from 'repositive/utils/credentials';
 
-const { Component, get, set, computed, Logger, inject: { service }, isEmpty } = Ember;
+const { Component, get, set, computed, Logger, inject: { service } } = Ember;
 
 const Validations = buildValidations({
   newEmail: [
@@ -34,20 +33,6 @@ export default Component.extend(FlashMessageMixin, Validations, VerificationMixi
   }),
   newEmail: computed('credentials.main_credential.email', function() {
     return get(this, 'credentials.main_credential.email');
-  }),
-
-  mainCredentialNotVerified: computed('credentials.main_credential', function() {
-    return !get(this, 'credentials.main_credential.verified');
-  }),
-
-  pendingCredential: computed('credentials.secondary_credentials.[]', function() {
-    const secondaryCredentials = get(this, 'credentials.secondary_credentials');
-    if (isEmpty(secondaryCredentials)) { return false; }
-    const latestSecondaryCred = getLatestSecondaryCredential(secondaryCredentials);
-    if (!get(latestSecondaryCred, 'verified')) {
-      return latestSecondaryCred;
-    }
-    return false;
   }),
 
   actions: {
