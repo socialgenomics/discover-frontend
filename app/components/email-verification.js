@@ -35,6 +35,11 @@ export default Component.extend(FlashMessageMixin, Validations, VerificationMixi
   newEmail: computed('credentials.main_credential.email', function() {
     return get(this, 'credentials.main_credential.email');
   }),
+
+  mainCredentialNotVerified: computed('credentials.main_credential', function() {
+    return !get(this, 'credentials.main_credential.verified');
+  }),
+
   pendingCredential: computed('credentials.secondary_credentials.[]', function() {
     const secondaryCredentials = get(this, 'credentials.secondary_credentials');
     if (isEmpty(secondaryCredentials)) { return false; }
@@ -59,7 +64,7 @@ export default Component.extend(FlashMessageMixin, Validations, VerificationMixi
       }
     },
     sendVerificationEmail(newEmail) {
-      return this.sendVerificationEmail(newEmail, get(this, 'ajax'));
+      return this._sendVerificationEmail(newEmail, get(this, 'ajax'));
     },
     cancel() { get(this, 'toggleAddCredentialInput')(); }
   },

@@ -3,6 +3,7 @@
     {{validated-input
       label='Email Address'
       value=newEmail
+      type='email'
       errors=validations.attrs.email.messages
       placeholder='e.g. liz@repositive.io'
       noMarkdown=true
@@ -21,11 +22,22 @@
     }}
   </div>
 </form>
-{{#if pendingCredential}}
+
+{{#if mainCredentialNotVerified}}
+
+  <div class="u-flex">
+    <p class="u-tc-red u-mb0 u-mr1">We sent you an email to {{credentials.main_credential.email}}. Didn't receive one?</p>
+    <a class="u-tc-secondary u-td-underline" {{action 'sendVerificationEmail' credentials.main_credential.email}}>Resend Verification Email.</a>
+  </div>
+
+{{else if pendingCredential}}
+
   <div class="u-flex">
     <p class="u-tc-red u-mb0 u-mr1">We sent an email to {{pendingCredential.email}}.</p>
     <a class="u-tc-secondary u-td-underline" {{action 'sendVerificationEmail' pendingCredential.email}}>Resend Verification Email.</a>
   </div>
   <p class="u-fs1 u-fw-reg u-tc-tertiary">We'll keep using your old email address ({{credentials.main_credential.email}}) until you verify your new one.</p>
+
 {{/if}}
+
 <a class="u-tc-secondary u-td-underline" {{action 'cancel'}}>Cancel</a>
