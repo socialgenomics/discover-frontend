@@ -3,7 +3,7 @@ import Ember from 'ember';
 const { Mixin, get, set } = Ember;
 
 export default Mixin.create({
-  classNames: ['c-btn'],
+  classNames: ['c-btn', 'u-cursor-pointer', 'u-inline-block', 'u-rounded', 'u-pos-relative', 'u-fw-med'],
   classNameBindings: [
     // types
     'primary:c-btn-primary',
@@ -14,8 +14,10 @@ export default Mixin.create({
     'loading:c-btn-loading',
 
     // sizes
-    'small:u-px2',
-    'small:u-py1'
+    'big:c-btn-large',
+    'small:c-btn-small'
+
+
   ],
 
   options: {
