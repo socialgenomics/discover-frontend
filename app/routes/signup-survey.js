@@ -7,9 +7,6 @@ export default Route.extend({
 
   beforeModel() {
     set(this, 'session.data.firstVisit', false);
-    if (get(this, 'session.data.firstVisit')) {
-      this.transitionTo('root');
-    }
   },
 
   model() {
