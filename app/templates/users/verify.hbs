@@ -2,16 +2,23 @@
   <section class="grid">
     <div class="grid__col grid__col--3-of-3 u-flex u-items-center u-flex-column">
       {{#if session.authenticatedUser.isEmailValidated}}
+
         <h1 class="u-fs4 u-tc-secondary">Your account is now verified.</h1>
         <img src="/assets/images/happy.png" class="u-mb3 u-w5" alt="happy lizard">
         {{#link-to 'user' session.authenticatedUser.id class="c-btn c-btn-primary"}}Visit your profile{{/link-to}}
+
       {{else if timeout_error}}
+
         <h1 class="u-fs4 u-tc-secondary">The verification link has expired.</h1>
         <img src="/assets/images/liz-time-out.png" class="u-mb3 u-w5" alt="Time Out lizard">
         <button class="c-btn c-btn-primary" {{action "resendVerifyEmail"}}>Resend Verification Email</button>
+
       {{else}}
+
         {{partial 'loading'}}
+
       {{/if}}
+
     </div>
   </section>
 </div>

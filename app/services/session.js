@@ -10,8 +10,6 @@ export default SessionService.extend({
   setAuthenticatedUser: observer('data.authenticated.user', function() {
     const userData = get(this, 'data.authenticated.user');
 
-    debugger;
-
     if (get(this, 'isAuthenticated')) {
       if (!userData) {
         // force logout

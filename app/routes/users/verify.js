@@ -4,7 +4,7 @@ import { getLatestSecondaryCredential, mainCredential } from 'repositive/utils/c
 import FlashMessageMixin from 'repositive/mixins/flash-message-mixin';
 import VerificationMixin from 'repositive/mixins/verification';
 
-const { inject: { service }, get, set, setProperties, RSVP, Logger, Route } = Ember;
+const { inject: { service }, get, set, setProperties, Logger, Route } = Ember;
 
 export default Route.extend(FlashMessageMixin, VerificationMixin, {
   ajax: service(),
@@ -14,12 +14,9 @@ export default Route.extend(FlashMessageMixin, VerificationMixin, {
     get(this, 'ajax').request(ENV.APIRoutes['verify-email'] + '/' + params.verification_id, { method: 'GET' })
       .then(resp => {
         set(this, 'session.session.content.authenticated.token', resp.token);
-        return RSVP.hash({
-          verificationResp: resp,
-          makePrimaryResp: get(this, 'ajax').request(ENV.APIRoutes['make-primary'], { method: 'GET' })
-        });
+        return get(this, 'ajax').request(ENV.APIRoutes['make-primary'], { method: 'GET' });
       })
-      .then(resp => {
+      .then(() => {
         if (get(this, 'session.isAuthenticated')) {
           if (get(this, 'session.authenticatedUser')) {
             setProperties(this, {
@@ -34,12 +31,10 @@ export default Route.extend(FlashMessageMixin, VerificationMixin, {
         } else {
           this.transitionTo('root');
         }
-        this._showMessages(resp.verificationResp);
       })
       .catch(err => {
         Logger.error(err);
         set(this, 'controller.timeout_error', true);
-        RSVP.resolve(); // fulfills the promise - this causes ember to render the template
       });
   },
 
@@ -59,14 +54,6 @@ export default Route.extend(FlashMessageMixin, VerificationMixin, {
           }
         })
         .catch(Logger.error)
-    }
-  },
-
-  _showMessages(content) {
-    if (content.message === 'success') {
-      this._addFlashMessage('Your email has been verified.', 'success');
-    } else {
-      this._addFlashMessage('An unexpected error occurred', 'warning');
     }
   }
 });
