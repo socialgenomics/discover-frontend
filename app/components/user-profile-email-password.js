@@ -12,11 +12,13 @@ export default Component.extend({
 
   pendingCredential: computed('credentials.secondary_credentials.[]', function() {
     const secondaryCredentials = get(this, 'credentials.secondary_credentials');
+
     if (isEmpty(secondaryCredentials)) { return false; }
+
     const latestSecondaryCred = getLatestSecondaryCredential(secondaryCredentials);
-    if (!get(latestSecondaryCred, 'verified')) {
-      return latestSecondaryCred;
-    }
+
+    if (!get(latestSecondaryCred, 'verified')) { return latestSecondaryCred; }
+
     return false;
   }),
 

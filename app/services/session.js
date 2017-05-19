@@ -16,7 +16,6 @@ export default SessionService.extend({
         return this.invalidate();
       }
       const userId = userData.id;
-      const settingsId = userData.user_setting.id;
       const store = get(this, 'store');
 
       this._identifyUser(userData);
@@ -24,15 +23,13 @@ export default SessionService.extend({
       return RSVP.hash({
         'user': store.findRecord('user', userId),
         'credential': store.query('credential', { 'where.user_id': userId, 'where.primary': true }),
-        'user_settings': store.findRecord('user_setting', settingsId)
+        'user_settings': store.findRecord('user_setting', userData.user_setting.id)
       })
         .then(data => {
           const user = data.user;
-          const credentials = data.credential.content;
-
           setProperties(user, {
-            email: credentials[0].email,
-            isEmailValidated: userData.isEmailValidated // move to verify route
+            email: get(data, 'credential.firstObject.email'),
+            isEmailValidated: userData.isEmailValidated //TODO move to verify route
           });
 
           user.save();
