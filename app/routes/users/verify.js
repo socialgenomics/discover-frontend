@@ -3,14 +3,14 @@ import ENV from 'repositive/config/environment';
 import {verifyEmail} from './trust';
 import FlashMessageMixin from 'repositive/mixins/flash-message-mixin';
 
-const { inject: { service }, get, setProperties, RSVP, Logger, Route } = Ember;
+const { inject: { service }, get, setProperties, set, RSVP, Logger, Route } = Ember;
 
 export default Route.extend(FlashMessageMixin, {
   ajax: service(),
   session: service(),
   verificationId: null,
 
-  model: function(params) {
+  model(params) {
     // return a promise.. this pauses the page rendering until the promise is resolved or rejected
     // loding page is shown whilst the promise in unresolved
     // error page is shown if the promise is rejected
@@ -30,18 +30,19 @@ export default Route.extend(FlashMessageMixin, {
             'session.authenticatedUser.isEmailValidated': true,
             'session.data.displayWelcomeMessage': false
           });
-          this.transitionTo('user', get(this, 'session.authenticatedUser.id'));
         } else {
           Logger.warn('session.authenticatedUser is undefined but session.isAuthenticated "true"');
           this.transitionTo('users.login');
+          set(this, 'session.data.displayWelcomeMessage', false);
         }
       } else {
         this.transitionTo('root');
       }
       this._showMessages(resp);
     })
-    .catch((err)=> {
+    .catch(err => {
       Logger.error(err);
+      set(this, 'timeout_error', true);
       RSVP.resolve(); // fulfills the promise - this causes ember to render the template
     });
   },
@@ -50,9 +51,9 @@ export default Route.extend(FlashMessageMixin, {
     resendVerifyEmail: verifyEmail
   },
 
-  _showMessages: function(content) {
+  _showMessages(content) {
     if (content.message === 'success') {
-      this._addFlashMessage('Your credential is now validated', 'success');
+      this._addFlashMessage('Your email has been verified.', 'success');
     } else {
       this._addFlashMessage('An unexpected error occurred', 'warning');
     }
