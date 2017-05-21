@@ -19,7 +19,9 @@ describe('Unit | Mixin | RUI / r-button-mixin', function() {
 
   describe('properties', function () {
     it('should have correct classNames set', function () {
-      expect(get(subject, 'classNames')).to.be.eql(['c-btn']);
+      expect(get(subject, 'classNames')).to.be.eql([
+        'c-btn', 'u-cursor-pointer', 'u-inline-block', 'u-rounded', 'u-pos-relative', 'u-fw-med'
+      ]);
     });
 
     it('should have correct classNameBindings set', function () {
@@ -33,8 +35,8 @@ describe('Unit | Mixin | RUI / r-button-mixin', function() {
         'loading:c-btn-loading',
 
         // sizes
-        'small:u-px2',
-        'small:u-py1'
+        'big:c-btn-large',
+        'small:c-btn-small'
       ]);
     });
 

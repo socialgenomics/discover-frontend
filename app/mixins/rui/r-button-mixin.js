@@ -16,8 +16,6 @@ export default Mixin.create({
     // sizes
     'big:c-btn-large',
     'small:c-btn-small'
-
-
   ],
 
   options: {
