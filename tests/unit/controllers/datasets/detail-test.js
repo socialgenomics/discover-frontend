@@ -88,6 +88,24 @@ describe('Unit | Controller | datasets/detail', function() {
       const result = controller._convertDatasetAttrsToCommonObjList({});
       expect(result).to.eql([]);
     });
+
+    it('should reject all null pmids', function() {
+      const controller = this.subject();
+      const attrsFromDataset = {
+        'pmid': null
+      }
+      const result = controller._convertDatasetAttrsToCommonObjList(attrsFromDataset);
+      expect(result).to.eql([]);
+    });
+
+    it('should reject malformed pmids', function() {
+      const controller = this.subject();
+      const attrsFromDataset = {
+        'pmid': { 'pmid': "1231" }
+      }
+      const result = controller._convertDatasetAttrsToCommonObjList(attrsFromDataset);
+      expect(result).to.eql([]);
+    });
   });
 
   describe('attributes', function() {
@@ -108,6 +126,18 @@ describe('Unit | Controller | datasets/detail', function() {
       expect(result.length).to.eql(3);
       expect(result[0].key).to.eql('assay');
       expect(result[0].value).to.eql('123');
+    });
+
+    it('should reject all null values in pmid array', function() {
+      const controller = this.subject();
+      const dataset = {
+        properties: { attributes: { pmid: [null, 123] } }
+      }
+      controller.set('model', { dataset });
+      const result = controller.get('attributes');
+      expect(result.length).to.eql(1);
+      expect(result[0].key).to.eql('pmid');
+      expect(result[0].value).to.eql(123);
     });
   });
 });
