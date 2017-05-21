@@ -17,15 +17,12 @@ export default Component.extend({
     return get(this, 'currentPageNumber') >= get(this, 'totalPages');
   }),
 
-  actions: {
-    nextPage() { get(this, 'nextPage')(); },
-    previousPage() { get(this, 'previousPage')(); },
-    goToPage() { get(this, 'goToPage')(); }
-  },
-
   /**
-  * @param {array} pages - the list of page numbers.
-  */
+   * @param {Array} pageNumbers
+   * @param {Number} currentPageNumber
+   * @param {Number} totalPages
+   * @returns {Array} pages - the list of page numbers.
+   */
   _updatePageNumberList(pageNumbers, currentPageNumber, totalPages) {
     let popValue = 1;
 
