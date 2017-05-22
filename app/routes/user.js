@@ -152,11 +152,6 @@ export default Route.extend({
         "@type": "Place",
         "name": get(user, 'profile.location')
       },
-      // "owns": [
-      //   "https://discover-staging.repositive.io/datasets/aaadefa4-06bc-49ce-af44-3e2b0d16c2c1",
-      //   "https://discover-staging.repositive.io/datasets/0c019ec5-7237-46f6-99de-5f19c761983a",
-      //   "https://discover-staging.repositive.io/datasets/d6c07424-4751-4623-a8c8-8dbfa6e4ecf3"
-      // ],
       "description": get(user, 'profile.bio'),
       "interest": get(user, 'profile.interests'),
       "sameAs": []
