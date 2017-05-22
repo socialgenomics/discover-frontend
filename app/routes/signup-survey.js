@@ -23,8 +23,7 @@ export default Route.extend({
 
   _incrementResearchGateCounter() {
     // Tracking script for Research Gate
-    const axel = Math.random() + "";
-    const a = axel * 10000000000000;
+    const a = Math.random() * 10000000000000;
     get(this, 'ajax')
       .raw(`https://pubads.g.doubleclick.net/activity;xsp=251559;ord=1;num=${a}?`, {
         'method': 'GET'
