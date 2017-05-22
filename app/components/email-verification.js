@@ -48,9 +48,6 @@ export default Component.extend(FlashMessageMixin, Validations, VerificationMixi
         return this._saveCredential(newEmail);
       }
     },
-    sendVerificationEmail(newEmail) {
-      return this._sendVerificationEmail(newEmail, get(this, 'ajax'));
-    },
     cancel() { get(this, 'toggleAddCredentialInput')(); }
   },
 

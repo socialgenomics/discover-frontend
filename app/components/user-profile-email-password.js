@@ -1,9 +1,10 @@
 import Ember from 'ember';
+import VerificationMixin from 'repositive/mixins/verification';
 import { getLatestSecondaryCredential } from 'repositive/utils/credentials';
 
 const { Component, computed, get, isEmpty } = Ember;
 
-export default Component.extend({
+export default Component.extend(VerificationMixin, {
   addingCredential: false,
 
   mainCredentialNotVerified: computed('credentials.main_credential', function() {
@@ -23,6 +24,9 @@ export default Component.extend({
   }),
 
   actions: {
-    toggleAddCredentialInput() { this.toggleProperty('addingCredential'); }
+    toggleAddCredentialInput() { this.toggleProperty('addingCredential'); },
+    sendVerificationEmail(newEmail) {
+      return this._sendVerificationEmail(newEmail, get(this, 'ajax'));
+    }
   }
 });
