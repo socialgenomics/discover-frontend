@@ -6,7 +6,7 @@ export default Component.extend({
   errors: null,
   isActive: false,
   hasBeenFocused: false,
-  showPassword: false,
+  isPasswordShown: false,
   classNames: ['c-validated-input', 'relative'],
   classNameBindings: ['isActive:active', 'isInvalid:invalid'],
 
@@ -16,6 +16,11 @@ export default Component.extend({
 
   isInvalid: computed('hasBeenFocused', 'errors', function() {
     return (get(this, 'hasBeenFocused')) && !isEmpty(get(this, 'errors'));
+  }),
+
+  inputType: computed('isPasswordShown', 'type', function() {
+    if (get(this, 'type')) { return get(this, 'type'); }
+    return get(this, 'isPasswordShown') ? 'text' : 'password';
   }),
 
   actions: {
@@ -32,12 +37,7 @@ export default Component.extend({
     },
 
     togglePasswordVisibility() {
-      this.toggleProperty('showPassword');
-      if (get(this, 'showPassword')) {
-        set(this, 'type', 'text');
-      } else {
-        set(this, 'type', 'password');
-      }
+      this.toggleProperty('isPasswordShown');
     }
   }
 });

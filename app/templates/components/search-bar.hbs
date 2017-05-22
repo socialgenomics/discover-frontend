@@ -3,10 +3,13 @@
     <span class="cursor-text">{{fa-icon "search" class='px3 fc-secondary'}}</span>
     {{input
       type="text"
-      class="pr2 pl0 border-none"
-      placeholder="title:cancer AND description:lung"
+      class="pr2 pl0 mr0 border-none"
+      placeholder=placeholder
       value=query
       autofocus=true
     }}
   </label>
+  {{#if hasSubmitButton}}
+    <button class="c-btn c-btn-primary u-border-square u-self-stretch">Search</button>
+  {{/if}}
 </form>

@@ -24,10 +24,9 @@
 
     <!-- SEARCH -->
     {{#if isAuthenticated}}
-
       <div class="c-navbar__center-block flex items-stretch">
         <div class="flex-grow">
-          {{search-bar search=(route-action 'search')}}
+          {{search-bar search=(route-action 'search') class="border-left border-right"}}
         </div>
 
         {{#link-to "datasets.register" class="hide-s hide-m flex items-center justify-center c-navbar__element fc-secondary border-right u-hv-bc-very-light-grey"}}
@@ -46,10 +45,9 @@
       </div>
     {{else}}
       {{#unless isRootRoute}}
-
         <div class="c-navbar__center-block pl4 mr4 flex items-stretch">
           <div class="flex-grow">
-            {{search-bar search=(route-action 'search')}}
+            {{search-bar search=(route-action 'search') class="border-left border-right"}}
           </div>
         </div>
 

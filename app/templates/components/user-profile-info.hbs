@@ -71,7 +71,7 @@
     </div>
   {{/if}}
 
-  {{#if user.profile.accounts}}
+  {{#if hasAccounts}}
     <h3 class="fs1 fw-reg fc-tertiary mb2">CONNECTED ACCOUNTS</h3>
     {{account-link account=user.profile.accounts.linkedIn accountName="LinkedIn"}}
     {{account-link account=user.profile.accounts.googlePlus accountName="Google"}}
