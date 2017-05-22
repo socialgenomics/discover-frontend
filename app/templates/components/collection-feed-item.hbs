@@ -1,25 +1,25 @@
 {{#link-to 'collections.collection' collection.id classNames="feed-item-component"}}
-  <div class="c-card u-mb3 c-col-li-item u-hv-bc-white">
-    <section class="grid__col grid__col--1-of-5 grid__col--am u-px3 u-py1 u-bc-light-bluegrey u-ta-center u-inherit-height">
-      <div class="u-inherit-height u-flex u-flex-column u-items-center u-justify-center">
-        {{fa-icon "book" size=2 class='u-tc-tertiary u-p1'}}
-        <p class="u-mb0">Collection</p>
+  <div class="c-card mb4 c-col-li-item u-hv-bc-white">
+    <section class="grid__col grid__col--1-of-5 grid__col--am px4 py2 bc-light-bluegrey ta-center u-inherit-height">
+      <div class="u-inherit-height flex flex-column items-center justify-center">
+        {{fa-icon "book" size=2 class='fc-tertiary p2'}}
+        <p class="mb0">Collection</p>
       </div>
     </section>
 
-    <section class="grid__col grid__col--1-of-5 grid__col--am u-ta-center u-px2 u-py1 u-inherit-height">
-      <div class="u-inherit-height u-flex u-flex-column u-items-center u-justify-center">
+    <section class="grid__col grid__col--1-of-5 grid__col--am ta-center px3 py2 u-inherit-height">
+      <div class="u-inherit-height flex flex-column items-center justify-center">
         <img src="/assets/images/favicon.ico" class="c-img--src-logo">
-        <p class="u-fs0 u-mb0 u-fw-bold u-p1">Repositive</p>
+        <p class="fs0 mb0 fw-bold p2">Repositive</p>
       </div>
     </section>
 
-    <section class="grid__col grid__col--3-of-5 grid__col--am u-px2 u-inherit-height c-col-li-item__divider c-col-li-item__resp-text">
-      <div class="u-inherit-height u-flex u-flex-column u-justify-center u-py1">
+    <section class="grid__col grid__col--3-of-5 grid__col--am px3 u-inherit-height c-col-li-item__divider c-col-li-item__resp-text">
+      <div class="u-inherit-height flex flex-column justify-center py2">
         {{#link-to 'collections.collection' collection.id}}
-          <h4 class="u-fs2 u-mb1">{{collection.name}}</h4>
+          <h4 class="fs2 mb2">{{collection.name}}</h4>
         {{/link-to}}
-        <p class="u-mb0">{{if collection.properties.summary collection.properties.summary collection.description}}</p>
+        <p class="mb0">{{if collection.properties.summary collection.properties.summary collection.description}}</p>
       </div>
     </section>
 

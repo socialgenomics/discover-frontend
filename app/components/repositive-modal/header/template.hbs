@@ -1,18 +1,18 @@
-<div class="u-flex u-items-center u-justify-between u-tc-secondary u-py1">
-  <div class="u-px2"></div>
+<div class="flex items-center justify-between fc-secondary py2">
+  <div class="px3"></div>
 
-  <div class="u-flex u-items-center">
+  <div class="flex items-center">
     {{#if icon}}
-      <span class="u-fs2 u-py1 u-tc-tertiary">{{fa-icon icon}}</span>
+      <span class="fs2 py2 fc-tertiary">{{fa-icon icon}}</span>
     {{/if}}
 
     {{#if image}}
-      <img class="u-w1" src={{image}} />
+      <img class="icon-medium" src={{image}} />
     {{/if}}
 
-    <h4 class="u-fs2 u-tc-secondary u-px2 u-mb0 u-cursor-default">{{title}}</h4>
+    <h4 class="fs2 fc-secondary px3 mb0 cursor-default">{{title}}</h4>
   </div>
 
-  <span class="c-modal-btn-close u-tc-tertiary u-cursor-pointer u-fs2" {{action this.attrs.onClose}}> {{fa-icon "times"}} </span>
+  <span class="c-modal-btn-close fc-tertiary cursor-pointer fs2" {{action this.attrs.onClose}}> {{fa-icon "times"}} </span>
 
 </div>

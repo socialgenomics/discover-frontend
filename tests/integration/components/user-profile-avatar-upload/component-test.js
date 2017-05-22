@@ -7,46 +7,26 @@ import sinon from 'sinon';
 describe('Integration | Component | user profile avatar upload', function() {
   const avatarImg = 'foo.jpg';
   const reloadUserModel = () => sinon.spy();
-  const overlayTextSelector = '.c-avatar-upload__hover__text';
-  const overlaySelector = '.c-avatar-upload__hover';
 
   setupComponentTest('user-profile-avatar-upload', {
     integration: true
   });
 
   describe('default state', function () {
-    it('should not show text over avatar', function () {
+    it('image wrapper should have correct text as data-attr', function () {
       this.setProperties({ avatarImg, reloadUserModel });
       this.render(hbs`{{user-profile-avatar-upload avatarImg=avatarImg reloadUserModel=reloadUserModel}}`);
 
-      const $hoverText = this.$(overlayTextSelector);
+      const $imageWrapper = this.$('.c-avatar-upload__image-wrapper');
 
-      expect($hoverText.is(':hidden')).to.be.equal(true);
-      expect($hoverText.hasClass('u-hide-display')).to.be.equal(true);
-    });
-
-    it('should have correct text in overlay', function () {
-      this.setProperties({ avatarImg, reloadUserModel });
-      this.render(hbs`{{user-profile-avatar-upload avatarImg=avatarImg reloadUserModel=reloadUserModel}}`);
-
-      expect(this.$(overlayTextSelector).text().trim()).to.be.equal('Edit photo');
-    });
-
-    it('should not show color overlay', function () {
-      this.setProperties({ avatarImg, reloadUserModel });
-      this.render(hbs`{{user-profile-avatar-upload avatarImg=avatarImg reloadUserModel=reloadUserModel}}`);
-
-      const $overlay = this.$(overlaySelector);
-
-      expect($overlay.hasClass('u-hv-bc-darken40')).to.be.equal(true);
-      expect($overlay.hasClass('u-bc-dark-overlay')).to.be.equal(false);
+      expect($imageWrapper.attr('data-text')).to.eql('Edit photo');
     });
 
     it('should not show error messages', function () {
       this.setProperties({ avatarImg, reloadUserModel });
       this.render(hbs`{{user-profile-avatar-upload avatarImg=avatarImg reloadUserModel=reloadUserModel}}`);
 
-      expect(this.$('p.u-tc-red').text().trim()).to.be.equal('');
+      expect(this.$('p.fc-red').text().trim()).to.be.equal('');
     });
   });
 
@@ -62,7 +42,7 @@ describe('Integration | Component | user profile avatar upload', function() {
       this.setProperties({ avatarImg, reloadUserModel });
       this.render(hbs`{{user-profile-avatar-upload avatarImg=avatarImg reloadUserModel=reloadUserModel uploading=true}}`);
 
-      expect(this.$('p.u-tc-red').text().trim()).to.be.equal('');
+      expect(this.$('p.fc-red').text().trim()).to.be.equal('');
     });
   });
 
@@ -79,7 +59,7 @@ describe('Integration | Component | user profile avatar upload', function() {
       this.setProperties({ avatarImg, reloadUserModel });
       this.render(hbs`{{user-profile-avatar-upload avatarImg=avatarImg reloadUserModel=reloadUserModel uploadFailed=true}}`);
 
-      expect(this.$('p.u-tc-red').text().trim()).to.be.equal('Something went wrong while uploading your image.Please try again later.');
+      expect(this.$('p.fc-red').text().trim()).to.be.equal('Something went wrong while uploading your image.Please try again later.');
     });
   });
 
@@ -96,7 +76,7 @@ describe('Integration | Component | user profile avatar upload', function() {
       this.setProperties({ avatarImg, reloadUserModel });
       this.render(hbs`{{user-profile-avatar-upload avatarImg=avatarImg reloadUserModel=reloadUserModel reloadFailed=true}}`);
 
-      expect(this.$('p.u-tc-red').text().trim()).to.be.equal('Something went wrong while uploading your image.Your avatar will be displayed soon.');
+      expect(this.$('p.fc-red').text().trim()).to.be.equal('Something went wrong while uploading your image.Your avatar will be displayed soon.');
     });
   });
 });

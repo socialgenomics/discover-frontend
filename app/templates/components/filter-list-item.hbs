@@ -1,15 +1,15 @@
-<div class="u-pos-relative u-flex u-justify-between u-tc-primary u-px1 u-mb1 u-rounded {{unless active 'u-hv-bc-darken10 u-cursor-pointer'}} {{if active 'u-bc-overlay'}}" {{action (if active 'removeFilter' 'addFilter') aggName bucket.key}}>
+<div class="relative flex justify-between fc-primary px2 mb2 rounded {{unless active 'u-hv-bc-darken10 cursor-pointer'}} {{if active 'bc-overlay'}}" {{action (if active 'removeFilter' 'addFilter') aggName bucket.key}}>
 
-  <span class="u-flex">
+  <span class="flex">
     {{#if (eq aggName "assay")}}
       <span>
-        <span class="c-card-assay u-px2 u-mr1 {{bucket.colour}}"></span>
+        <span class="c-card-assay px3 mr2 {{bucket.colour}}"></span>
       </span>
     {{/if}}
-    <span class="u-self-center {{if active 'u-cursor-default'}}">{{bucket.key}} ({{bucket.doc_count}})</span>
+    <span class="self-center {{if active 'cursor-default'}}">{{bucket.key}} ({{bucket.doc_count}})</span>
   </span>
 
   {{#if active}}
-    {{fa-icon "times" class="u-tc-tertiary u-cursor-pointer c-sidebar-remove-filter u-px1 u-pos-right0 u-pos-absolute"}}
+    {{fa-icon "times" class="fc-tertiary cursor-pointer c-sidebar-remove-filter px2 right-0 absolute"}}
   {{/if}}
 </div>

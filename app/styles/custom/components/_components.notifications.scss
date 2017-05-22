@@ -4,16 +4,16 @@
   overflow-wrap: break-word;
 }
 .c-notification-list {
-  max-height: calc(90vh - #{$global-spacing-unit-large});
-  max-height: -o-calc(90vh - #{$global-spacing-unit-large}); /* opera */
-  max-height: -webkit-calc(90vh - #{$global-spacing-unit-large}); /* google, safari */
-  max-height: -moz-calc(90vh - #{$global-spacing-unit-large}); /* firefox */
+  max-height: calc(90vh - #{$spacing-unit-x-large});
+  max-height: -o-calc(90vh - #{$spacing-unit-x-large}); /* opera */
+  max-height: -webkit-calc(90vh - #{$spacing-unit-x-large}); /* google, safari */
+  max-height: -moz-calc(90vh - #{$spacing-unit-x-large}); /* firefox */
   overflow-y: auto;
 }
 .c-notification-unread-marker {
-  @extend .u-circle;
-  @extend .u-bc-red;
+  @extend .circle;
+  @extend .bc-primary-red;
   padding: 4px;
   position: absolute;
-  top: $global-spacing-unit-small;
+  top: $spacing-unit-medium;
 }

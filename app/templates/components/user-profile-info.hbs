@@ -1,62 +1,62 @@
-<div class="u-pos-relative">
-  <div class="u-ta-center">
-    <div class="u-pos-relative u-inline-block u-mb2">
-      <img class="u-w4 u-mb1 u-circle" src={{user.profile.avatar}} onError="this.onerror=null;this.src='/assets/images/avatar/dog.png';"/>
-      {{reputation-total total=user.reputationTotal class="c-reputation-total-large u-fs2"}}
+<div class="relative">
+  <div class="ta-center">
+    <div class="relative inline-block mb2">
+      <img class="icon-x-large mb2 circle" src={{user.profile.avatar}} onError="this.onerror=null;this.src='/assets/images/avatar/dog.png';">
+      {{reputation-total total=user.reputationTotal class="c-reputation-total-large fs2"}}
     </div>
-    <h1 class="u-fs3 u-tc-primary u-mb1 u-fw-reg u-hyphens-auto">{{user.displayName}}</h1>
+    <h1 class="fs3 fc-primary mb2 fw-reg u-hyphens-auto">{{user.displayName}}</h1>
 
     {{#if user.profile.work_organisation}}
-      <h2 class="u-fs2 u-tc-secondary u-mb0 u-fw-reg">{{user.profile.work_organisation}}</h2>
+      <h2 class="fs2 fc-secondary mb0 fw-reg">{{user.profile.work_organisation}}</h2>
     {{else if isOwnProfile}}
-      {{#link-to "users.profile" class="u-block u-mb1 u-tc-tertiary u-td-underline u-hv-tc-secondary"}}Add where you work{{/link-to}}
+      {{#link-to "users.profile" class="block mb2 fc-tertiary td-underline u-hv-tc-secondary"}}Add where you work{{/link-to}}
     {{/if}}
 
     {{#if user.profile.work_role}}
-      <h3 class="u-fs1 u-tc-secondary u-fw-reg">{{user.profile.work_role}}</h3>
+      <h3 class="fs1 fc-secondary fw-reg">{{user.profile.work_role}}</h3>
     {{else if isOwnProfile}}
-      {{#link-to "users.profile" class="u-block u-mb3 u-tc-tertiary u-td-underline u-hv-tc-secondary"}}Add your job role{{/link-to}}
+      {{#link-to "users.profile" class="block mb3 fc-tertiary td-underline u-hv-tc-secondary"}}Add your job role{{/link-to}}
     {{/if}}
   </div>
 
   {{#if isOwnProfile}}
-    {{#link-to "users.profile" class="u-pos-absolute u-pos-right0 u-pos-top0"}}
-      {{fa-icon "pencil" class="u-tc-tertiary u-hv-tc-secondary u-fs3"}}
+    {{#link-to "users.profile" class="absolute right-0 top-0"}}
+      {{fa-icon "pencil" class="fc-tertiary u-hv-tc-secondary fs3"}}
     {{/link-to}}
   {{/if}}
 
   {{#if isVerified}}
-    <h4 class="u-ta-center u-tc-teal u-fs2">{{fa-icon "check-circle"}} Verified Account</h4>
+    <h4 class="ta-center fc-teal fs2">{{fa-icon "check-circle" class="mr2"}}Verified Account</h4>
   {{else}}
     {{#if isOwnProfile}}
-      <h4 class="u-ta-center">{{#link-to 'users.trust' class="u-tc-red"}}{{fa-icon "envelope"}} Please verify your email{{/link-to}}</h4>
+      <h4 class="ta-center">{{#link-to 'users.profile' class="fc-red"}}{{fa-icon "envelope"}}Please verify your email{{/link-to}}</h4>
     {{/if}}
   {{/if}}
 
-  <div class="u-mb3">
-    {{#text-with-icon icon='calendar-o' class="u-mb1"}}
+  <div class="mb4">
+    {{#text-with-icon icon='calendar-o' class="mb1"}}
       Joined {{moment-format user.createdAt 'MMMM YYYY'}}
     {{/text-with-icon}}
     {{#if user.profile.location}}
-      {{text-with-icon text=user.profile.location icon='map-marker' class="u-mb1"}}
+      {{text-with-icon text=user.profile.location icon='map-marker' class="mb1"}}
     {{/if}}
   </div>
 
   {{#if user.profile.bio}}
-    <div class="u-mb3">
-      <h3 class="u-fs1 u-fw-reg u-tc-tertiary u-mb1">BIO</h3>
-      <p class="u-tc-secondary u-hyphens-auto">{{user.profile.bio}}</p>
+    <div class="mb4">
+      <h3 class="fs1 fw-reg fc-tertiary mb2">BIO</h3>
+      <p class="fc-secondary u-hyphens-auto">{{user.profile.bio}}</p>
     </div>
   {{else if isOwnProfile}}
-    <div class="u-mb3">
-      <h3 class="u-fs1 u-fw-reg u-tc-tertiary u-mb1">BIO</h3>
-      {{#link-to "users.profile" class="u-block u-tc-tertiary u-td-underline u-hv-tc-secondary"}}Add your bio{{/link-to}}
+    <div class="mb4">
+      <h3 class="fs1 fw-reg fc-tertiary mb2">BIO</h3>
+      {{#link-to "users.profile" class="block fc-tertiary td-underline u-hv-tc-secondary"}}Add your bio{{/link-to}}
     </div>
   {{/if}}
 
   {{#if user.profile.interests}}
-    <div class="u-mb3">
-      <h3 class="u-fs1 u-fw-reg u-tc-tertiary u-mb1">INTERESTS</h3>
+    <div class="mb4">
+      <h3 class="fs1 fw-reg fc-tertiary mb2">INTERESTS</h3>
       {{#each user.profile.interests as |interest|}}
         {{tag-item
           type='interest'
@@ -65,14 +65,14 @@
       {{/each}}
     </div>
   {{else if isOwnProfile}}
-    <div class="u-mb3">
-      <h3 class="u-fs1 u-fw-reg u-tc-tertiary u-mb1">INTERESTS</h3>
-      {{#link-to "users.profile" class="u-block u-tc-tertiary u-td-underline u-hv-tc-secondary"}}Add your interests{{/link-to}}
+    <div class="mb4">
+      <h3 class="fs1 fw-reg fc-tertiary mb2">INTERESTS</h3>
+      {{#link-to "users.profile" class="block fc-tertiary td-underline u-hv-tc-secondary"}}Add your interests{{/link-to}}
     </div>
   {{/if}}
 
   {{#if hasAccounts}}
-    <h3 class="u-fs1 u-fw-reg u-tc-tertiary u-mb1">CONNECTED ACCOUNTS</h3>
+    <h3 class="fs1 fw-reg fc-tertiary mb2">CONNECTED ACCOUNTS</h3>
     {{account-link account=user.profile.accounts.linkedIn accountName="LinkedIn"}}
     {{account-link account=user.profile.accounts.googlePlus accountName="Google"}}
     {{account-link account=user.profile.accounts.twitter accountName="Twitter"}}
