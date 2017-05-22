@@ -5,9 +5,7 @@ const { inject: { service }, Component, computed, get, Logger } = Ember;
 
 export default Component.extend(FlashMessageMixin, {
   session: service(),
-
-  classNames: ['t-tag-item', 'u-p1', 'u-bc-off-white', 'u-mr1', 'u-mb1', 'u-rounded', 'u-border', 'u-hv-bc-off-white', 'u-inline-block'],
-
+  classNames: ['t-tag-item', 'p2', 'bc-very-light-grey', 'mr2', 'mb2', 'rounded', 'border', 'u-hv-bc-very-light-grey', 'inline-block'],
   belongsToUser: computed('session', 'userId', function () {
     const currentUserId = get(this, 'session.session.authenticated.user.id');
     const tagUserId = get(this, 'userId');

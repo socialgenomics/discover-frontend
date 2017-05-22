@@ -1,0 +1,13 @@
+/* ==========================================================================
+    DIVIDER
+   ========================================================================== */
+
+.c-divider {
+  height: 1px;
+  overflow: hidden;
+  margin-bottom: $spacing-unit-large;
+}
+
+.c-divider-dark-bg { background-color: $color-mid-grey; }
+
+.c-divider-light-bg { background-color: $color-very-light-grey; }

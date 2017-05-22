@@ -1,12 +1,12 @@
 {{#if (eq group "request")}}
   {{#link-to 'datasets.request'}}
-    <ul class="o-list-inline o-list-flush-left u-mb0">
-      <li class="o-list-inline__item  u-mr1">{{fa-icon "clipboard" class="u-tc-blue"}}</li>
-      <li class="o-list-inline__item"><h4 class="u-mb0 u-fs2 u-tc-blue">Requested Data {{#if isProfilePage}}({{count}}){{/if}}</h4></li>
+    <ul class="o-list-inline o-list-flush-left mb0">
+      <li class="o-list-inline__item  mr2">{{fa-icon "clipboard" class="fc-blue"}}</li>
+      <li class="o-list-inline__item"><h4 class="mb0 fs2 fc-blue">Requested Data {{#if isProfilePage}}({{count}}){{/if}}</h4></li>
     </ul>
   {{/link-to}}
   {{#unless isProfilePage}}
-    <p class="u-mb0 u-pt1">
+    <p class="mb0 pt2">
     Help our community by connecting them with the datasets they're looking for.
     If you’re seeking datasets you can make a request too.
     </p>
@@ -15,13 +15,13 @@
 
 {{#if (eq group "registration")}}
   {{#link-to 'datasets.register'}}
-    <ul class="o-list-inline o-list-flush-left u-mb0">
-      <li class="o-list-inline__item u-mr1">{{fa-icon "file-text" class="u-tc-red"}}</li>
-      <li class="o-list-inline__item"><h4 class="u-mb0 u-fs2 u-tc-red">Registered Data {{#if isProfilePage}}({{count}}){{/if}}</h4></li>
+    <ul class="o-list-inline o-list-flush-left mb0">
+      <li class="o-list-inline__item mr2">{{fa-icon "file-text" class="fc-red"}}</li>
+      <li class="o-list-inline__item"><h4 class="mb0 fs2 fc-red">Registered Data {{#if isProfilePage}}({{count}}){{/if}}</h4></li>
     </ul>
   {{/link-to}}
   {{#unless isProfilePage}}
-    <p class="u-mb0 u-pt1">
+    <p class="mb0 pt2">
     These are datasets contributed by our community. You can easily register your dataset and make it visible for others.
     </p>
   {{/unless}}
@@ -29,22 +29,22 @@
 
 
 {{#if (eq group "favourite")}}
-  <ul class="o-list-inline o-list-flush-left u-mb0">
-    <li class="o-list-inline__item u-mr1">{{fa-icon "star" class="u-tc-yellow"}}</li>
-    <li class="o-list-inline__item"><h4 class="u-mb0 u-fs2 u-tc-yellow">Favourites {{#if isProfilePage}}({{count}}){{/if}}</h4></li>
+  <ul class="o-list-inline o-list-flush-left mb0">
+    <li class="o-list-inline__item mr2">{{fa-icon "star" class="fc-yellow"}}</li>
+    <li class="o-list-inline__item"><h4 class="mb0 fs2 fc-yellow">Favourites {{#if isProfilePage}}({{count}}){{/if}}</h4></li>
   </ul>
 {{/if}}
 
 {{#if (eq group "contribution")}}
-  <ul class="o-list-inline o-list-flush-left u-mb0">
-    <li class="o-list-inline__item u-mr1">{{fa-icon "gift" class="u-tc-teal"}}</li>
-    <li class="o-list-inline__item"><h4 class="u-mb0 u-fs2 u-tc-teal">Contributions {{#if isProfilePage}}({{count}}){{/if}}</h4></li>
+  <ul class="o-list-inline o-list-flush-left mb0">
+    <li class="o-list-inline__item mr2">{{fa-icon "gift" class="fc-teal"}}</li>
+    <li class="o-list-inline__item"><h4 class="mb0 fs2 fc-teal">Contributions {{#if isProfilePage}}({{count}}){{/if}}</h4></li>
   </ul>
 {{/if}}
 
 {{#if (eq group "discussion")}}
-  <ul class="o-list-inline o-list-flush-left u-mb0">
-    <li class="o-list-inline__item u-mr1">{{fa-icon "comments" class="u-tc-secondary"}}</li>
-    <li class="o-list-inline__item"><h4 class="u-mb0 u-fs2 u-tc-secondary">Discussions {{#if isProfilePage}}({{count}}){{/if}}</h4></li>
+  <ul class="o-list-inline o-list-flush-left mb0">
+    <li class="o-list-inline__item mr2">{{fa-icon "comments" class="fc-secondary"}}</li>
+    <li class="o-list-inline__item"><h4 class="mb0 fs2 fc-secondary">Discussions {{#if isProfilePage}}({{count}}){{/if}}</h4></li>
   </ul>
 {{/if}}

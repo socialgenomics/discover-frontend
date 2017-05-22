@@ -20,7 +20,7 @@ export default Component.extend(FlashMessageMixin, Validations, VerificationMixi
   session: service(),
   store: service(),
 
-  classNames: ['u-mb3'],
+  classNames: ['mb4'],
 
   loading: false,
 

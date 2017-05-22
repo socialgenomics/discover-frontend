@@ -1,5 +1,5 @@
-<form class="u-flex u-py1">
-  <div class="u-mr1">
+<form class="flex py2">
+  <div class="mr2">
     {{validated-input
       label='Email Address'
       value=newEmail
@@ -11,7 +11,7 @@
     }}
   </div>
 
-  <div class="u-flex u-items-end">
+  <div class="flex items-end">
     {{async-button
       class="c-btn c-btn-primary"
       action=(action 'saveNewCredential')
@@ -23,4 +23,4 @@
   </div>
 </form>
 
-<a class="u-tc-secondary u-td-underline" {{action 'cancel'}}>Cancel</a>
+<a class="fc-secondary td-underline" {{action 'cancel'}}>Cancel</a>

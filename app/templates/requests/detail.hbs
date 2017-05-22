@@ -1,14 +1,14 @@
 <!-- CSS Refactor: still need to account for Open Dataset styles -->
 {{#unless session.isAuthenticated}}
   {{#full-page-notification}}
-    <h3 class="u-mr3 u-mb2 u-tc-secondary">Search through <strong class="u-pl1 u-pr1 u-fs4">{{datasetsNumber}}</strong> human genomic datasets</h3>
+    <h3 class="mr4 mb3 fc-secondary">Search through <strong class="pl2 pr2 fs4">{{datasetsNumber}}</strong> human genomic datasets</h3>
     {{#link-to 'root' class='c-btn c-btn--primary c-btn--shadow' invokeAction=(action 'trackLinkEvent')}}
       Search now
     {{/link-to}}
   {{/full-page-notification}}
 {{/unless}}
 
-<div class="grid-wrapper grid-wrapper-stepped {{unless session.isAuthenticated 'u-pt5' ''}}">
+<div class="grid-wrapper grid-wrapper-stepped {{unless session.isAuthenticated 'pt5' ''}}">
   <div class="grid grid--no-gutter">
     <div class="grid__col grid__col--3-of-3">
       {{dataset-page

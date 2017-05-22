@@ -3,7 +3,7 @@ import Ember from 'ember';
 const { Component, get } = Ember;
 
 export default Component.extend({
-  classNames: ['u-mb3'],
+  classNames: ['mb4'],
 
   actions: {
     toggleAddCredentialInput() {

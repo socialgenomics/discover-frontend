@@ -1,67 +1,89 @@
-@import 'shared/settings/settings.color';
-@import 'shared/settings/settings.global';
-@import 'shared/settings/settings.layout';
+/* ==========================================================================
+    #IMPORT SHEET
+   ========================================================================== */
 
-@import 'shared/tools/tools.mixins';
+/*
+  SETTINGS
+*/
 
-@import 'shared/generic/generic.box-sizing';
-@import 'shared/generic/generic.normalize';
+@import "submodule/settings/color";
+@import "submodule/settings/spacing";
+@import "submodule/settings/layout-and-breakpoints";
+@import "submodule/settings/misc-ui";
+@import "submodule/settings/typography";
+  /* Custom */
+  @import "custom/settings/color";
 
-@import 'shared/elements/elements.base';
-@import 'shared/elements/elements.images';
-@import 'shared/elements/elements.inputs';
-@import 'shared/elements/elements.shared';
+/*
+  RESET STYLES
+*/
 
-@import 'shared/objects/objects.grid-wrapper';
-@import 'shared/objects/objects.lists';
-@import 'shared/objects/objects.main-wrapper';
-@import 'shared/objects/objects.spacing';
-@import 'shared/objects/objects.toast-grid';
+@import "submodule/reset/box-sizing";
+@import "submodule/reset/normalize";
+@import "submodule/reset/custom-reset";
 
-@import 'custom/components/components.avatar-upload';
-@import 'custom/components/components.call-to-action-banner';
-@import 'custom/components/components.collection-list-item';
-@import 'custom/components/components.follow-button';
-@import 'custom/components/components.featured-list';
-@import 'custom/components/components.modals';
-@import 'custom/components/components.navbar';
-@import 'custom/components/components.notifications';
-@import 'custom/components/components.select';
-@import 'custom/components/components.reputation-total';
-@import 'custom/components/components.text-with-icon';
-@import 'custom/components/components.user-profile-section';
+/*
+  COMPONENT STYLES
+*/
 
-@import 'shared/components/components.balloons';
-@import 'shared/components/components.buttons';
-@import 'shared/components/components.card';
-@import 'shared/components/components.divider';
-@import 'shared/components/components.flash-messages';
-@import 'shared/components/components.images';
-@import 'shared/components/components.loading-spinner';
-@import 'shared/components/components.password-strength';
-@import 'shared/components/components.sidebar';
-@import 'shared/components/components.validated-input';
+@import 'submodule/components/balloons';
+@import "submodule/components/grid-wrapper";
+@import "submodule/components/grid";
+@import "submodule/components/list";
+  /* Custom */
+  @import 'custom/components/components.avatar-upload';
+  @import 'custom/components/components.buttons';
+  @import 'custom/components/components.call-to-action-banner';
+  @import 'custom/components/components.card';
+  @import 'custom/components/components.collection-list-item';
+  @import 'custom/components/components.divider';
+  @import 'custom/components/components.featured-list';
+  @import 'custom/components/components.flash-messages';
+  @import 'custom/components/components.follow-button';
+  @import 'custom/components/components.images';
+  @import 'custom/components/components.loading-spinner';
+  @import 'custom/components/components.main-wrapper';
+  @import 'custom/components/components.modals';
+  @import 'custom/components/components.navbar';
+  @import 'custom/components/components.notifications';
+  @import 'custom/components/components.password-strength';
+  @import 'custom/components/components.reputation-total';
+  @import 'custom/components/components.select';
+  @import 'custom/components/components.sidebar';
+  @import 'custom/components/components.text-with-icon';
+  @import 'custom/components/components.user-profile-section';
+  @import 'custom/components/components.validated-input';
 
-@import 'shared/utilities/utilities.animations';
-@import 'shared/utilities/utilities.borders';
-@import 'shared/utilities/utilities.color';
-@import 'shared/utilities/utilities.cursors';
-@import 'shared/utilities/utilities.display';
-@import 'shared/utilities/utilities.elevation';
-@import 'shared/utilities/utilities.flexbox';
-@import 'shared/utilities/utilities.hover';
-@import 'shared/utilities/utilities.images';
-@import 'shared/utilities/utilities.inputs';
-@import 'shared/utilities/utilities.margins';
-@import 'shared/utilities/utilities.markdown-text';
-@import 'shared/utilities/utilities.media-queries';
-@import 'shared/utilities/utilities.overflows';
-@import 'shared/utilities/utilities.padding';
-@import 'shared/utilities/utilities.position';
-@import 'shared/utilities/utilities.sizing';
-@import 'shared/utilities/utilities.text-alignment';
-@import 'shared/utilities/utilities.type-setting';
-@import 'shared/utilities/utilities.zindexes';
+/*
+  UTILITIES
+*/
 
-// Addons
+@import "submodule/utilities/border";
+@import "submodule/utilities/color";
+@import "submodule/utilities/cursor";
+@import "submodule/utilities/display";
+@import "submodule/utilities/flex";
+@import "submodule/utilities/font-styles";
+@import "submodule/utilities/icon";
+@import "submodule/utilities/margin";
+@import "submodule/utilities/overflow";
+@import "submodule/utilities/padding";
+@import "submodule/utilities/position";
+@import "submodule/utilities/type-setting";
+  /* Custom */
+  @import 'custom/utilities/utilities.animation';
+  @import "custom/utilities/border";
+  @import "custom/utilities/color";
+  @import 'custom/utilities/utilities.elevation';
+  @import 'custom/utilities/utilities.hover';
+  @import 'custom/utilities/utilities.images';
+  @import 'custom/utilities/utilities.inputs';
+  @import 'custom/utilities/utilities.markdown-text';
+  @import 'custom/utilities/utilities.sizing';
+  @import 'custom/utilities/utilities.zindexes';
+
+/*
+  ADD-ONs
+*/
+
 @import 'ember-basic-dropdown';

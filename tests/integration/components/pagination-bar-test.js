@@ -11,7 +11,7 @@ describe('Integration: PaginationBarComponent', function() {
   it('adds class disabled to previous button on first page', function() {
     this.set('currentPageNumber', 1);
     this.render(hbs`{{pagination-bar currentPageNumber=currentPageNumber}}`);
-    expect(this.$('a').hasClass('u-hide-display')).to.be.true;
+    expect(this.$('a').hasClass('hide')).to.be.true;
   });
 
   it('adds class disabled to next button when there are no pages left to load', function() {
@@ -20,13 +20,13 @@ describe('Integration: PaginationBarComponent', function() {
       totalPages: 5
     });
     this.render(hbs`{{pagination-bar currentPageNumber=currentPageNumber totalPages=totalPages}}`);
-    expect(this.$('a').hasClass('u-hide-display')).to.be.true;
+    expect(this.$('a').hasClass('hide')).to.be.true;
   });
 
   it('displays correct page number', function() {
     this.set('currentPageNumber', 4);
     this.render(hbs`{{pagination-bar currentPageNumber=currentPageNumber}}`);
-    expect(this.$('.u-inherit-disp').find(this.$('a')[3]).text().trim()).to.eql('4');
+    expect(this.$('.hide-s').find(this.$('a')[3]).text().trim()).to.eql('4');
   });
 
   it('displays correct total page amount', function() {
@@ -35,6 +35,6 @@ describe('Integration: PaginationBarComponent', function() {
       totalPages: 7
     });
     this.render(hbs`{{pagination-bar currentPageNumber=currentPageNumber totalPages=totalPages}}`);
-    expect(this.$('.u-flex').find(this.$('.u-tc-secondary.u-mb0')).text().trim()).to.eql('Page 4 of 7');
+    expect(this.$('.flex').find(this.$('.fc-secondary.mb0')).text().trim()).to.eql('Page 4 of 7');
   });
 });

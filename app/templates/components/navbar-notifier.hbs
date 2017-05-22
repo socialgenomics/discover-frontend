@@ -1,9 +1,9 @@
 {{#basic-dropdown verticalPosition=below as |dropdown|}}
-  {{#dropdown.trigger onMouseDown=(action 'handleTriggerEvent') onTouchEnd=(action 'handleTriggerEvent') class="u-outline-none u-cursor-pointer u-p2"}}
+  {{#dropdown.trigger onMouseDown=(action 'handleTriggerEvent') onTouchEnd=(action 'handleTriggerEvent') class="outline-none cursor-pointer p3"}}
     {{fa-icon 'bell'}}
   {{/dropdown.trigger}}
 
-  {{#dropdown.content class="c-card u-flex u-flex-column"}}
+  {{#dropdown.content class="c-card flex flex-column"}}
 
     {{notification-list
       notifications=notifications
