@@ -32,6 +32,7 @@
 .fc-yellow { color: $color-primary-yellow; }
 .fc-blue   { color: $color-secondary-blue; }
 .fc-green  { color: $fruit-salad; }
+.fc-white  { color: $primary-opacity-white; }
 
 /*
   BACKGROUND COLORS
@@ -56,10 +57,10 @@
   BRAND COLORS
 */
 
-.bc-color-primary-teal   { background-color: $color-primary-teal; }
-.bc-color-primary-red    { background-color: $color-primary-red; }
-.bc-color-primary-yellow { background-color: $color-primary-yellow; }
-.bc-color-primary-blue   { background-color: $color-secondary-blue; }
+.bc-primary-teal   { background-color: $color-primary-teal; }
+.bc-primary-red    { background-color: $color-primary-red; }
+.bc-primary-yellow { background-color: $color-primary-yellow; }
+.bc-primary-blue   { background-color: $color-secondary-blue; }
 
 /*
   BORDER COLOR
