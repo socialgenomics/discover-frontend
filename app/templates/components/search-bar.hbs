@@ -1,4 +1,4 @@
-<form class="flex bc-white border-left border-right" {{action search query on='submit'}}>
+<form class="flex bc-white" {{action search query on='submit'}}>
   <label class="flex-grow flex items-center">
     <span class="cursor-text">{{fa-icon "search" class='px3 fc-secondary'}}</span>
     {{input
@@ -10,6 +10,6 @@
     }}
   </label>
   {{#if hasSubmitButton}}
-    <button class="c-btn c-btn-primary u-border-square u-self-stretch">Search</button>
+    <button class="c-btn c-btn-primary square self-stretch">Search</button>
   {{/if}}
 </form>
