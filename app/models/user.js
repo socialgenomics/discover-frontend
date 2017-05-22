@@ -9,8 +9,7 @@ export default Model.extend({
   createdAt: attr('isodate'),
   credentials: hasMany('credentials'),
   firstname: attr('string'),
-  isCurrentUser: attr('boolean', { defaultValue: false }), // checks the current authenticated user
-  isEmailValidated: attr('boolean', { defaultValue: false }), // checks if email has been validated
+  isEmailValidated: attr('boolean', { defaultValue: false }),
   lastname: attr('string'),
   profile: attr('object'),
   reputation: attr('object'),

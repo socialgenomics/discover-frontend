@@ -29,7 +29,7 @@
     <h4 class="ta-center fc-teal fs2">{{fa-icon "check-circle" class="mr2"}}Verified Account</h4>
   {{else}}
     {{#if isOwnProfile}}
-      <h4 class="ta-center fc-red fs2">{{#link-to 'users.trust' class="fc-red"}}{{fa-icon "envelope" class="mr2"}}Please verify your email{{/link-to}}</h4>
+      <h4 class="ta-center">{{#link-to 'users.profile' class="fc-red"}}{{fa-icon "envelope"}}Please verify your email{{/link-to}}</h4>
     {{/if}}
   {{/if}}
 

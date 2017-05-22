@@ -8,45 +8,28 @@ export default SessionService.extend({
   metrics: service(),
 
   setAuthenticatedUser: observer('data.authenticated.user', function() {
-    if (get(this, 'isAuthenticated')) {
-      const userData = get(this, 'data.authenticated.user');
+    const userData = get(this, 'data.authenticated.user');
 
+    if (get(this, 'isAuthenticated')) {
       if (!userData) {
         // force logout
-        this.invalidate();
-      } else {
-        let userId = userData.id;
-        let settingsId = userData.user_setting.id;
+        return this.invalidate();
+      }
+      const userId = userData.id;
+      const store = get(this, 'store');
 
-        get(this,  'metrics').identify({
-          email: userData.credentials[0].email,
-          firstname: userData.firstname,
-          lastname: userData.lastname,
-          username: userData.username | userData.id,
-          id: userData.id
-        });
+      this._identifyUser(userData);
 
-        try {
-          get(this, 'metrics').identify('GoogleAnalytics', {
-            distinctId: get(this, userId)
-          });
-        } catch (e) {
-          //adapters can be disabled on some env. so we will have an error
-        }
-
-        return RSVP.all([
-          get(this, 'store').findRecord('user', userId),
-          get(this, 'store').query('credential', { 'where.user_id': userId, 'where.primary': true }),
-          get(this, 'store').findRecord('user_setting', settingsId)
-        ])
+      return RSVP.hash({
+        'user': store.findRecord('user', userId),
+        'credential': store.query('credential', { 'where.user_id': userId, 'where.primary': true }),
+        'user_settings': store.findRecord('user_setting', userData.user_setting.id)
+      })
         .then(data => {
-          const user = data[0];
-          const credentials = data[1].content;
-
+          const user = data.user;
           setProperties(user, {
-            email: credentials[0].email,
-            isEmailValidated: userData.isEmailValidated,
-            isCurrentUser: true
+            email: get(data, 'credential.firstObject.email'),
+            isEmailValidated: userData.isEmailValidated //TODO move to verify route
           });
 
           user.save();
@@ -54,7 +37,25 @@ export default SessionService.extend({
           set(this, 'authenticatedUser', user);
         })
         .catch(Logger.error);
-      }
     }
-  })
+  }),
+
+  _identifyUser(userData) {
+    get(this,  'metrics').identify({
+      email: userData.credentials[0].email,
+      firstname: userData.firstname,
+      lastname: userData.lastname,
+      username: userData.username | userData.id,
+      id: userData.id
+    });
+
+    try {
+      get(this, 'metrics').identify('GoogleAnalytics', {
+        distinctId: userData.id
+      });
+    } catch (e) {
+      //adapters can be disabled on some env. so we will have an error
+      Logger.warn(e);
+    }
+  }
 });
