@@ -86,6 +86,10 @@ input[type="checkbox"] {
   height: $spacing-unit-medium;
 }
 
+input::placeholder, textarea::placeholder {
+  @extend .fc-tertiary;
+}
+
 
 // Declare margins in the same direction
 /* ==================================== */
