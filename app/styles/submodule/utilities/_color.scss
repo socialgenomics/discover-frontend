@@ -30,7 +30,7 @@
 .fc-teal   { color: $color-primary-teal; }
 .fc-red    { color: $color-primary-red; }
 .fc-yellow { color: $color-primary-yellow; }
-.fc-blue   { color: $color-secondary-blue; }
+.fc-blue   { color: $color-primary-blue; }
 .fc-green  { color: $fruit-salad; }
 .fc-white  { color: $primary-opacity-white; }
 
@@ -60,7 +60,7 @@
 .bc-primary-teal   { background-color: $color-primary-teal; }
 .bc-primary-red    { background-color: $color-primary-red; }
 .bc-primary-yellow { background-color: $color-primary-yellow; }
-.bc-primary-blue   { background-color: $color-secondary-blue; }
+.bc-primary-blue   { background-color: $color-primary-blue; }
 
 /*
   BORDER COLOR
@@ -69,7 +69,7 @@
 .border-teal   { border-color: $color-primary-teal; }
 .border-red    { border-color: $color-primary-red; }
 .border-yellow { border-color: $color-primary-yellow; }
-.border-blue   { border-color: $color-secondary-blue; }
+.border-blue   { border-color: $color-primary-blue; }
 .border-grey   { border-color: $secondary-opacity-black; }
 
 /*
