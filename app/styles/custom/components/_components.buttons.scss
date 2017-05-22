@@ -9,24 +9,24 @@
 .c-btn {
   border-style: solid;
   border-width: 1px;
-  font-family: $font-stack-roboto;
+  font-family: $primary-font-stack;
   margin: 0;
   transition: $global-transition;
   vertical-align: baseline;
 }
 
 .c-btn-large {
-  font-size: $global-font-size-regular;
-  height: $global-spacing-unit-large;
-  padding-left: $global-spacing-unit;
-  padding-right: $global-spacing-unit;
+  font-size: $font-size-regular;
+  height: $spacing-unit-x-large;
+  padding-left: $spacing-unit-large;
+  padding-right: $spacing-unit-large;
 }
 
 .c-btn-small {
-  font-size: $global-font-size-small;
+  font-size: $font-size-small;
   height: 36px;
-  padding-left: $global-spacing-unit-small;
-  padding-right: $global-spacing-unit-small;
+  padding-left: $spacing-unit-medium;
+  padding-right: $spacing-unit-medium;
 }
 
 .c-btn-primary {
@@ -51,7 +51,7 @@
 
 .c-btn-small {}
 
-.c-btn-loading {
+.c-btn-loading {}
 
 .c-help-link {
   .active {
