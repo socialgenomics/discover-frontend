@@ -2,7 +2,7 @@
   {{#if (eq notification.status 'seen')}}
     <span class="c-notification-unread-marker"></span>
   {{/if}}
-  <div class="c-notification-img-date-container ta-center m3">
+  <div class="c-notification-img-date-container ta-center mr3">
     <img class="icon-medium mr2 circle"
       src={{notification.properties.action.userId.profile.avatar}}
       onError="this.onerror=null;this.src='/assets/images/avatar/dog.png';" alt="user avatar">
