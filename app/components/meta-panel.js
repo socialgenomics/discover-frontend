@@ -7,7 +7,7 @@ export default Component.extend({
 
   tagName: 'section',
   classNameBindings: ['metaPanelHidden:is-hidden'],
-  classNames: ['c-sidebar', 'u-pos-absolute', 'grid'],
+  classNames: ['c-sidebar', 'absolute', 'grid'],
   displayInfo: true,
   metaPanelHidden: true,
   actions: {

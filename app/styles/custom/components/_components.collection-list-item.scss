@@ -8,11 +8,11 @@
 }
 
 .c-col-li-item__divider {
-  border-left: $global-border-style;
+  border-left: $border-width solid $border-color;
 
   @media (max-width: $breakpoint-medium) {
     border-left: none;
-    border-top: $global-border-style;
+    border-top: $border-width solid $border-color;
   }
 }
 

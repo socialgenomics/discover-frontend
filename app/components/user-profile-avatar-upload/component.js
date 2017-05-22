@@ -6,7 +6,7 @@ const { Component, computed, inject: { service }, get, Logger, set, setPropertie
 export default Component.extend({
   session: service(),
 
-  classNames: ['u-flex u-flex-column u-items-center u-justify-center u-mb2 c-avatar-upload'],
+  classNames: ['mb2'],
   uploading: false,
   uploadFailed: false,
   reloadFailed: false,

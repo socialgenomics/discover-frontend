@@ -2,17 +2,17 @@
 
 <!-- Comment -->
 {{#unless inEditMode}}
-  <div class="u-flex u-items-start u-justify-between">
-    <p class="u-markdown-formatting u-mb0 u-pl2">{{markdown-to-html markdown=comment.properties.text extensions='targetBlankLinks sanitize'}}</p>
+  <div class="flex items-start justify-between">
+    <p class="u-markdown-formatting mb0 pl3">{{markdown-to-html markdown=comment.properties.text extensions='targetBlankLinks sanitize'}}</p>
     {{#if (and canEdit (not inEditMode))}}
       <div>
-        {{fa-icon 'pencil' class='u-tc-tertiary u-hv-tc-secondary u-cursor-pointer u-fs2 u-pr1' click=(action 'enterEditMode')}}
-        {{fa-icon 'trash' class='u-tc-tertiary u-hv-tc-secondary u-cursor-pointer u-fs2 u-pr1' click=(action 'deleteComment' comment)}}
+        {{fa-icon 'pencil' class='fc-tertiary u-hv-tc-secondary cursor-pointer fs2 pr2' click=(action 'enterEditMode')}}
+        {{fa-icon 'trash' class='fc-tertiary u-hv-tc-secondary cursor-pointer fs2 pr2' click=(action 'deleteComment' comment)}}
       </div>
     {{/if}}
   </div>
 {{else}}
-  <form class="u-mb3">
+  <form class="mb4">
     {{validated-input
       errors=validations.attrs.text.messages
       type="textarea"
@@ -21,7 +21,7 @@
       noLabel=true
     }}
     {{async-button
-      class="c-btn c-btn-primary u-px2 u-py1 u-mr2"
+      class="c-btn c-btn-primary px3 py2 mr3"
       action=(action 'save')
       default="Save"
       pending="Saving..."

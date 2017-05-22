@@ -1,18 +1,18 @@
 {{#if query}}
-  {{#link-to target query class="u-tc-secondary u-fs2"}}
-    <li class="u-p1 {{unless active 'u-hv-bc-off-white'}}">
+  {{#link-to target query class="fc-secondary fs2"}}
+    <li class="p2 {{unless active 'u-hv-bc-very-light-grey'}}">
       {{#if (and icon (eq iconPosition "left"))}}{{fa-icon icon}}{{/if}}
-      <span class="u-px1 u-fw-reg">{{title}}</span>
-      {{#if stats}}<span class="u-fw-med u-px1">{{stats}}</span>{{/if}}
+      <span class="px2 fw-reg">{{title}}</span>
+      {{#if stats}}<span class="fw-med px2">{{stats}}</span>{{/if}}
       {{#if (and icon (eq iconPosition "right"))}}{{fa-icon icon}}{{/if}}
     </li>
   {{/link-to}}
 {{else}}
-  {{#link-to target class="u-tc-secondary u-fs2"}}
-  <li class="u-p1 {{unless active 'u-hv-bc-off-white'}}">
+  {{#link-to target class="fc-secondary fs2"}}
+  <li class="p2 {{unless active 'u-hv-bc-very-light-grey'}}">
     {{#if (and icon (eq iconPosition "left"))}}{{fa-icon icon}}{{/if}}
-    <span class="u-px1 u-fw-reg">{{title}}</span>
-    {{#if stats}}<span class="u-fw-med u-px1">{{stats}}</span>{{/if}}
+    <span class="px2 fw-reg">{{title}}</span>
+    {{#if stats}}<span class="fw-med px2">{{stats}}</span>{{/if}}
     {{#if (and icon (eq iconPosition "right"))}}{{fa-icon icon}}{{/if}}
   </li>
   {{/link-to}}

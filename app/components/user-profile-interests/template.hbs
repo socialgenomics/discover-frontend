@@ -1,5 +1,5 @@
-<label class="c-validated-input-label u-tc-secondary u-pb1 u-block">Add your research interest</label>
-<div>
+<label class="c-validated-input-label fc-secondary mb3 u-block">Add your research interest</label>
+<div class="py3">
   {{#if editInterests.length}}
   <div>
     {{#each editInterests as |interest|}}
@@ -12,14 +12,13 @@
     {{/each}}
   </div>
   {{/if}}
-  <div class="u-pb1 u-flex">
+  <div class="py3 flex">
     {{#if isOpen}}
-      {{focus-input class="u-mr2" value=newInterest type="text" enter="addInterest" placeholder="Add your research interest"}}
+      {{focus-input class="mr2" value=newInterest type="text" enter="addInterest" placeholder="Add your research interest"}}
       {{rui/r-button variant="cancel" label="Cancel" clickHandler=(action "hideInput")}}
-
     {{else}}
       {{rui/r-button label="Add Interest" clickHandler=(action "showInput")}}
     {{/if}}
   </div>
-  <span class="u-tc-secondary">eg. RNA-seq</span>
+  <span class="fc-secondary">eg. RNA-seq</span>
 </div>

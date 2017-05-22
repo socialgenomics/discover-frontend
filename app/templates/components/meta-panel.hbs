@@ -1,28 +1,28 @@
-<div class="grid__col grid__col--3-of-3 u-pos-relative">
+<div class="grid__col grid__col--3-of-3 relative">
 
 
 {{#unless isSearchPage}}
-  <div class="grid grid--no-gutter u-pos-relative">
+  <div class="grid grid--no-gutter relative">
     {{meta-panel-header type=model.type}}
     {{meta-panel-tabs showInfo=(action 'showInfo') showFilters=(action 'showFilters') displayInfo=displayInfo}}
   </div>
 {{/unless}}
 
 
-  <main class="u-px3 {{if isSearchPage 'u-py2'}}">
-    <div class="c-sidebar-toggle u-pos-absolute u-pos-top0 u-pos-right0 u-py2 u-px1 {{if isSearchPage 'u-bc-off-white u-hv-bc-off-white u-border'}} {{if (or model.userId (eq model.type 'repositive_collection')) 'u-bc-collection-overlay u-hv-bc-collection'}} {{if (eq model.type 'datasource') 'u-bc-datasource-overlay u-hv-bc-datasource'}}">
-      <a class="u-tc-secondary u-fw-med u-p2" {{action 'toggleMetaPanelVisibility'}}>{{#if metaPanelHidden}} <span class="u-tc-primary u-mr1">View filters</span> {{fa-icon 'chevron-right class="u-pl3"'}} {{else}} {{fa-icon 'times'}} {{/if}}</a>
+  <main class="px4 {{if isSearchPage 'py3'}}">
+    <div class="c-sidebar-toggle absolute top-0 right-0 py3 px2 {{if isSearchPage 'bc-very-light-grey u-hv-bc-very-light-grey border'}} {{if (or model.userId (eq model.type 'repositive_collection')) 'bc-collection-overlay u-hv-bc-collection'}} {{if (eq model.type 'datasource') 'bc-datasource-overlay u-hv-bc-datasource'}}">
+      <a class="fc-secondary fw-med p3" {{action 'toggleMetaPanelVisibility'}}>{{#if metaPanelHidden}} <span class="fc-primary mr2">View filters</span> {{fa-icon 'chevron-right class="pl4"'}} {{else}} {{fa-icon 'times'}} {{/if}}</a>
     </div>
     {{#if displayInfo}}
 
-      <div class="u-mb3">
-        <h3 class="u-tc-primary u-ta-center u-mb1">{{source-name-fallback model=model}}</h3>
+      <div class="mb4">
+        <h3 class="fc-primary ta-center mb2">{{source-name-fallback model=model}}</h3>
         {{#unless (eq model.type 'datasource')}}
           {{collection-created-by user=model.userId type=model.type}}
         {{/unless}}
       </div>
 
-      <div class="u-mb3 u-ta-center u-tc-primary">
+      <div class="mb4 ta-center fc-primary">
         {{#if (eq model.type 'repositive_collection')}}
           {{stats-list stats=collectionStats statType="collection"}}
         {{else}}

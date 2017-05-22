@@ -2,15 +2,15 @@
   {{#if (eq notification.status 'seen')}}
     <span class="c-notification-unread-marker"></span>
   {{/if}}
-  <div class="c-notification-img-date-container u-ta-center u-mr2">
-    <img class="u-w1 u-mr1 u-circle"
+  <div class="c-notification-img-date-container ta-center mr3">
+    <img class="icon-medium mr2 circle"
       src={{notification.properties.action.userId.profile.avatar}}
       onError="this.onerror=null;this.src='/assets/images/avatar/dog.png';" alt="user avatar">
-    <p class="u-fs0 u-tc-tertiary u-mb0">{{moment-from-now notification.createdAt}}</p>
+    <p class="fs0 fc-tertiary mb0">{{moment-from-now notification.createdAt}}</p>
   </div>
-  <div class="u-flex-auto c-notification-body">
+  <div class="flex-grow c-notification-body">
     <span>{{notification.properties.action.userId.displayName}}</span>
-    <span class="u-tc-tertiary u-fs0">
+    <span class="fc-tertiary fs0">
       {{#if (eq notification.properties.action.type 'comment') }}
         commented on
       {{else if (eq notification.properties.action.type 'tag')}}
@@ -24,7 +24,7 @@
       {{/if}}
     </span>
 
-    <p class="u-mb0">
+    <p class="mb0">
       {{#if notification.subscriptionId.subscribableId.dataset}}
         {{truncate notification.subscriptionId.subscribableId.dataset.title 70}}
       {{else if notification.subscriptionId.subscribableId.request}}

@@ -1,5 +1,5 @@
-<img src={{avatar}} class="u-w1 u-mr1 u-circle" />
-<div class="u-grow-1">
+<img src={{avatar}} class="icon-medium mr2 circle" />
+<div class="flex-grow">
   {{validated-input
     type="textarea"
     value=comment
@@ -8,7 +8,7 @@
     disabled=disabled
   }}
   {{#if allowComment}}
-    <div class="u-mb2">
+    <div class="mb3">
       {{rui/r-button variant="primary" size="big" label="Comment" clickHandler=(action "addComment")}}
       {{rui/r-button variant="cancel" size="big" label="Cancel" clickHandler=(action "cancel")}}
     </div>

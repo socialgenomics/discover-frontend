@@ -2,16 +2,16 @@
   <div class="grid grid--no-gutter u-full-height">
 
     <!-- dataset -->
-    <div class="grid__col grid__col--7-of-12 u-pos-relative u-full-height">
+    <div class="grid__col grid__col--7-of-12 relative u-full-height">
       <!-- header -->
-      <header class="c-card-header u-bc-off-white u-flex {{if assaysToDisplay 'u-justify-between' 'u-justify-end'}} u-items-center u-px2">
+      <header class="c-card-header bc-very-light-grey flex {{if assaysToDisplay 'justify-between' 'justify-end'}} items-center px3">
         {{#if assaysToDisplay}}
           {{assay-list assays=assaysToDisplay}}
         {{/if}}
-        <div class="u-pl1 u-flex u-items-center">
+        <div class="pl2 flex items-center">
           {{follow-button subscribable=model.subscribableId model=model}}
-          <ul class="u-flex o-list-flush-left u-pl2 u-mb0">
-            {{action-favourite model=model class="u-mr2"}}
+          <ul class="flex o-list-flush-left pl3 mb0">
+            {{action-favourite model=model class="mr3"}}
             {{action-share
               actionableId=model.id
               actionableType=modelName
@@ -23,21 +23,21 @@
 
       <!-- body -->
       <!-- TODO hack fix to stop text overflow on mobile. Needs redesigning. -->
-      <div class="u-p2" style="max-height: 70%; overflow: scroll;">
+      <div class="p3" style="max-height: 70%; overflow: scroll;">
         <!-- heading/description -->
-        <div class="u-flex u-content-around">
-          <h2 class="u-fs2 u-fw-med u-tc-primary u-mb1 u-grow-1 u-hyphens-auto">{{model.title}}</h2>
+        <div class="flex content-around">
+          <h2 class="fs2 fw-med fc-primary mb2 flex-grow u-hyphens-auto">{{model.title}}</h2>
           {{#if canEdit}}
-            {{fa-icon 'pencil' class='u-tc-tertiary u-hv-tc-secondary u-cursor-pointer u-fs2'
+            {{fa-icon 'pencil' class='fc-tertiary u-hv-tc-secondary cursor-pointer fs2'
                 click=(action 'enterEditMode')}}
           {{/if}}
         </div>
         {{#if model.description}}
-          <p class="u-markdown-formatting u-fs1">{{markdown-to-html markdown=model.description extensions='targetBlankLinks sanitize'}}</p>
+          <p class="u-markdown-formatting fs1">{{markdown-to-html markdown=model.description extensions='targetBlankLinks sanitize'}}</p>
         {{/if}}
 
         {{#if tags}}
-          <div class="u-pt2 u-pb1">
+          <div class="pt3 pb2">
             {{#each tags as |tag|}}
               {{tag-item
                 tag=tag
@@ -50,60 +50,60 @@
         {{/if}}
 
         {{#if session.isAuthenticated}}
-          <div class="u-pl3">
+          <div class="pl4">
             {{add-tag addTag=(action 'addTag')}}
           </div>
-          <span class="u-fs0 u-tc-tertiary">
+          <span class="fs0 fc-tertiary">
             Add tags to improve searching and browsing through data. {{#link-to 'help.other' 'why-tag'}}Learn more{{/link-to}}
           </span>
         {{/if}}
       </div>
 
       <!-- footer -->
-      <div class="u-pos-absolute u-full-width u-pos-bottom0 u-bc-white u-p2 u-border-top">
+      <div class="absolute u-full-width bottom-0 bc-white p3 border-top">
 
         {{#unless session.isAuthenticated}}
           {{create-account-call-to-action}}
         {{/unless}}
 
-        <ul class="o-list-flush-left u-mb2">
+        <ul class="o-list-flush-left mb3">
           {{#if model.userId}}
-            <li class="u-fs0 u-tc-tertiary">
+            <li class="fs0 fc-tertiary">
               Submitted by:
               {{#link-to 'user' model.userId.id }}
-                <span class="u-fw-med u-fs1 u-tc-secondary">{{model.userId.displayName}}</span>
+                <span class="fw-med fs1 fc-secondary">{{model.userId.displayName}}</span>
               {{/link-to}}
             </li>
           {{else}}
             {{#if model.datasourceId.name}}
-              <li class="u-fs0 u-tc-tertiary">
+              <li class="fs0 fc-tertiary">
                 Sourced from:
                 {{#link-to 'datasources.source' model.datasourceId.id}}
-                  <span class="u-fw-med u-fs1 u-tc-secondary">{{model.datasourceId.name}}</span>
+                  <span class="fw-med fs1 fc-secondary">{{model.datasourceId.name}}</span>
                 {{/link-to}}
               </li>
             {{/if}}
 
             {{!-- TODO: should we remove this? I don't see this property in a model --}}
             {{#if model.accession}}
-              <li class="u-fs0 u-tc-tertiary">
-                Accession ID: <span class="u-fw-med u-fs1 u-tc-secondary">{{model.externalId}}</span>
+              <li class="fs0 fc-tertiary">
+                Accession ID: <span class="fw-med fs1 fc-secondary">{{model.externalId}}</span>
               </li>
             {{/if}}
           {{/if}}
 
           {{#if (and isRequest model.createdAt )}}
-            <li class="u-fs0 u-tc-tertiary">
+            <li class="fs0 fc-tertiary">
               Requested on:
-              <span class="u-fw-med u-fs1 u-tc-secondary">{{moment-format model.createdAt}}</span>
+              <span class="fw-med fs1 fc-secondary">{{moment-format model.createdAt}}</span>
             </li>
           {{/if}}
 
           {{#if model.access}}
-            <li class="u-fs0 u-tc-tertiary">
+            <li class="fs0 fc-tertiary">
               Access type:
               {{#link-to 'help.searching-for-data' 'filters'}}
-                <span class="u-fw-med u-fs1 u-tc-secondary">{{model.access}}</span>
+                <span class="fw-med fs1 fc-secondary">{{model.access}}</span>
               {{/link-to}}
             </li>
           {{/if}}
@@ -124,9 +124,9 @@
 
     <!-- Attributes / Discussion  -->
     <div class="c-card-detail-discussion grid__col grid__col--5-of-12 u-full-height">
-      <div class="u-border-left u-full-min-height">
+      <div class="border-left u-full-min-height">
         {{#unless isRequest}}
-          {{#tab-list class='u-mb2'}}
+          {{#tab-list class='mb3'}}
             {{tab-list-action-item
                 setActiveTab=(action 'setActiveTab')
                 activeTab=activeTab
@@ -136,7 +136,7 @@
                 activeTab=activeTab
                 tabName='discussion'}}
           {{/tab-list}}
-          <div class="u-p2">
+          <div class="p3">
             {{#if (eq activeTab 'metadata')}}
               {{partial "datasets/tab-metadata"}}
             {{else}}
@@ -145,12 +145,12 @@
           </div>
         {{else}}
           <!-- Discussions header -->
-          <header class="c-card-header u-bc-off-white u-px2 u-flex u-items-center u-justify-center">
-            <h4 class="u-mb0 u-fs2 u-fw-med u-tc-primary">Discussions</h4>
+          <header class="c-card-header bc-very-light-grey px3 flex items-center justify-center">
+            <h4 class="mb0 fs2 fw-med fc-primary">Discussions</h4>
           </header>
 
           <!-- Discussions body -->
-          <div class="u-p2">
+          <div class="p3">
             {{partial "datasets/tab-comments"}}
           </div>
         {{/unless}}
@@ -158,13 +158,13 @@
     </div>
   </div>
 {{else}}
-  <header class="c-card-header u-bc-grey t-dark u-flex u-justify-center u-items-center u-px2 u-mb2">
-    {{fa-icon 'pencil' class="u-mr2 u-tc-primary u-fs2"}}
-    <span class="u-tc-primary u-fw-med u-fs2">Edit {{capitalize modelName}}</span>
+  <header class="c-card-header bc-grey theme-dark flex justify-center items-center px3 mb3">
+    {{fa-icon 'pencil' class="mr3 fc-primary fs2"}}
+    <span class="fc-primary fw-med fs2">Edit {{capitalize modelName}}</span>
   </header>
   <div class="grid grid--no-gutter">
     <div class="grid__col grid__col--8-of-12 grid__col--push-2-of-12">
-      <form class="u-px2">
+      <form class="px3">
         {{#each editableProperties as |prop|}}
           {{validated-input
             label=(capitalize prop.key)
@@ -174,10 +174,10 @@
             noMarkdown=true
           }}
         {{/each}}
-        <div class="u-flex u-justify-center">
+        <div class="flex justify-center">
           {{async-button
             action=(action 'save')
-            class="c-btn c-btn-primary u-mr2"
+            class="c-btn c-btn-primary mr4"
             default="Save Changes"
             pending="Saving..."
             disableWhen=(not validations.isValid)

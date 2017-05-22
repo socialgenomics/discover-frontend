@@ -1,0 +1,53 @@
+/* ========================================================================
+    #COLOR - CUSTOM UTILITIES
+   ======================================================================== */
+
+/*
+  ASSAY COLORS
+  TODO: some selectors below duplicate core utility styles
+*/
+
+.bc-pink        { background-color: $froly;               }
+.bc-purple      { background-color: $amythest;            }
+.bc-deep-purple { background-color: $lilac-bush;          }
+.bc-indigo      { background-color: $sapphire;            }
+.bc-light-blue  { background-color: $dodger-blue;         }
+.bc-cyan        { background-color: $turquoise-blue;      }
+.bc-green       { background-color: $fruit-salad;         }
+.bc-light-green { background-color: $light-green;         }
+.bc-lime        { background-color: $lime;                }
+.bc-amber       { background-color: $amber;               }
+.bc-orange      { background-color: $orange;              }
+.bc-deep-orange { background-color: $deep-orange;         }
+.bc-brown       { background-color: $brown;               }
+.bc-red         { background-color: $color-primary-red;   }
+.bc-teal        { background-color: $color-primary-teal;  }
+.bc-yellow      { background-color: $color-primary-yellow;}
+.bc-blue        { background-color: $color-primary-blue;  }
+.bc-grey        { background-color: $color-mid-grey;      }
+
+/*
+  UI COMPONENTS
+*/
+
+.bc-collection { background-color: $color-collection; }
+.bc-datasource { background-color: $color-datasource; }
+.bc-light-bluegrey { background-color: $color-light-bluegrey; }
+
+
+.bc-overlay-light-bluegrey { background-color: transparentize($color-light-bluegrey, .1); }
+.bc-overlay-light-grey { background-color: transparentize($color-light-grey, .1); }
+.bc-overlay-white { background-color: transparentize($color-white, .1); }
+
+/*
+  REPUTATION COLOURS
+*/
+
+.bc-light-teal { background-color: $color-light-teal; }
+.bc-light-yellow { background-color: $color-light-yellow; }
+
+/*
+  BORDER COLOR
+*/
+
+.border-white   { border-color: $white; }

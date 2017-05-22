@@ -4,5 +4,5 @@ const { Component } = Ember;
 
 export default Component.extend({
   tagName: 'main',
-  classNames: ['u-p3']
+  classNames: ['p4']
 });

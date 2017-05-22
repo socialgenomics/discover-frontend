@@ -3,15 +3,15 @@
 // https://github.com/repositive/report-issues/issues/755
 
 .c-user-profile-section-header {
-  padding-top: $global-spacing-unit-large;
+  padding-top: $spacing-unit-large;
 
   @media (min-width: $breakpoint-large) {
-    padding: 0 0 0 $global-spacing-unit-large;
+    padding: 0 0 0 $spacing-unit-large;
   }
 }
 
 .c-user-profile-section-wrapper--drop {
   @media (min-width: $breakpoint-large) {
-    padding-top: $global-spacing-unit-large;
+    padding-top: $spacing-unit-large;
   }
 }
