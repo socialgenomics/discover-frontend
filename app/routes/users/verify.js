@@ -14,7 +14,7 @@ export default Route.extend(FlashMessageMixin, VerificationMixin, {
     get(this, 'ajax').request(ENV.APIRoutes['verify-email'] + '/' + params.verification_id, { method: 'GET' })
       .then(resp => {
         set(this, 'session.session.content.authenticated.token', resp.token);
-        return get(this, 'ajax').request(ENV.APIRoutes['make-primary'], { method: 'GET' });
+        return this._makeCurrentEmailPrimary();
       })
       .then(() => {
         if (get(this, 'session.isAuthenticated')) {
