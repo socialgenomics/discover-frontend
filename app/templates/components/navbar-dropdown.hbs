@@ -1,61 +1,61 @@
 {{#basic-dropdown  verticalPosition=below horizontalPosition="right" as |dropdown|}}
 
-  {{#dropdown.trigger class="u-outline-none u-cursor-pointer u-px2"}}
+  {{#dropdown.trigger class="outline-none cursor-pointer px3"}}
     {{#if session.isAuthenticated}}
-      <div class="u-hide-on-sm-md">
-        <img src={{avatar}} onError="this.onerror=null;this.src='/assets/images/avatar/dog.png';" class="u-w1 u-circle">
-        <span class="u-tc-primary u-fs1 u-px1">{{firstname}}</span>
+      <div class="hide-s hide-m">
+        <img src={{avatar}} onError="this.onerror=null;this.src='/assets/images/avatar/dog.png';" class="icon-medium circle">
+        <span class="fc-primary fs1 px2">{{firstname}}</span>
       </div>
     {{/if}}
 
-    <div class="u-hide-on-lg">
-      {{fa-icon 'bars' class='u-tc-secondary u-px1 grid__col--am' }}
+    <div class="hide-l hide-w">
+      {{fa-icon 'bars' class='fc-secondary px2 grid__col--am' }}
     </div>
   {{/dropdown.trigger}}
 
-  {{#dropdown.content class="c-card u-flex u-flex-column"}}
+  {{#dropdown.content class="c-card flex flex-column"}}
     {{#if session.isAuthenticated}}
       {{#link-to 'datasets.register'
         invokeAction=(action 'close' dropdown)
-        class='u-hide-on-lg u-py2 u-pl2 u-pr4 u-hv-bc-white u-tc-secondary'}} Register Data {{/link-to}}
+        class='hide-l hide-w py3 pl3 pr5 u-hv-bc-white fc-secondary'}} Register Data {{/link-to}}
 
       {{#link-to 'datasets.request'
         invokeAction=(action 'close' dropdown)
-        class='u-hide-on-lg u-py2 u-pl2 u-pr4 u-hv-bc-white u-tc-secondary'}} Request Data {{/link-to}}
+        class='hide-l hide-w py3 pl3 pr5 u-hv-bc-white fc-secondary'}} Request Data {{/link-to}}
 
       {{#link-to 'user' userId
         invokeAction=(action 'close' dropdown)
-        class='u-py2 u-pl2 u-pr4 u-hv-bc-white u-tc-secondary'}} Profile {{/link-to}}
+        class='py3 pl3 pr5 u-hv-bc-white fc-secondary'}} Profile {{/link-to}}
 
       {{#link-to 'users.profile'
         invokeAction=(action 'close' dropdown)
-        class='u-py2 u-pl2 u-pr4 u-hv-bc-white u-tc-secondary'}} Settings {{/link-to}}
+        class='py3 pl3 pr5 u-hv-bc-white fc-secondary'}} Settings {{/link-to}}
 
       {{#link-to 'help.searching-for-data' 'search-query'
         invokeAction=(action 'close' dropdown)
-        class='u-py2 u-pl2 u-pr4 u-hv-bc-white u-tc-secondary'}} Help {{/link-to}}
+        class='py3 pl3 pr5 u-hv-bc-white fc-secondary'}} Help {{/link-to}}
 
       {{#link-to 'policies.web'
         invokeAction=(action 'close' dropdown)
-        class='u-py2 u-pl2 u-pr4 u-hv-bc-white u-tc-secondary'}} Repositive Policy {{/link-to}}
+        class='py3 pl3 pr5 u-hv-bc-white fc-secondary'}} Repositive Policy {{/link-to}}
 
-      <a {{ action 'logout' }} class='u-py2 u-pl2 u-pr4 u-hv-bc-white u-tc-secondary'>Logout</a>
+      <a {{ action 'logout' }} class='py3 pl3 pr5 u-hv-bc-white fc-secondary'>Logout</a>
 
     {{else}}
       <!-- Not Logged In -->
-      <a href="http://repositive.io/about" class='u-hide-on-lg u-py2 u-pl2 u-pr4 u-hv-bc-white'>About</a>
-      <a href="http://blog.repositive.io/" class='u-hide-on-lg u-py2 u-pl2 u-pr4 u-hv-bc-white'>Blog</a>
+      <a href="http://repositive.io/about" class='hide-l hide-w py3 pl3 pr5 u-hv-bc-white'>About</a>
+      <a href="http://blog.repositive.io/" class='hide-l hide-w py3 pl3 pr5 u-hv-bc-white'>Blog</a>
       {{#link-to 'users.login'
         invokeAction=(action 'close' dropdown)
-        class='u-py2 u-pl2 u-pr4 u-hv-bc-white'}}Login{{/link-to}}
+        class='py3 pl3 pr5 u-hv-bc-white'}}Login{{/link-to}}
       {{#if isRootRoute}}
         {{#link-to 'users.signup'
           invokeAction=(action 'closeAndTrack' dropdown 'discover_landingpage_navbar_createAccount')
-          class='u-py2 u-pl2 u-pr4 u-hv-bc-white'}}Create Account{{/link-to}}
+          class='py3 pl3 pr5 u-hv-bc-white'}}Create Account{{/link-to}}
       {{else}}
         {{#link-to 'users.signup'
           invokeAction=(action 'closeAndTrack' dropdown 'discover_openpage_navbar_createAccount')
-          class='u-py2 u-pl2 u-pr4 u-hv-bc-white'}}Create Account{{/link-to}}
+          class='py3 pl3 pr5 u-hv-bc-white'}}Create Account{{/link-to}}
       {{/if}}
     {{/if}}
   {{/dropdown.content}}

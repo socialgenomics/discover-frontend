@@ -14,8 +14,8 @@ describe('Integration | Component | account link', function() {
       accountName: 'Google'
     });
     this.render(hbs`{{account-link account=account accountName=accountName}}`);
-    expect(this.$('a.u-flex p.u-tc-secondary').text().trim()).to.eql('Google');
-    expect(this.$('a.u-flex svg')).to.have.length(1);
+    expect(this.$('a.flex p.fc-secondary').text().trim()).to.eql('Google');
+    expect(this.$('a.flex svg')).to.have.length(1);
   });
 
   it('renders correct account link for twitter', function() {
@@ -24,7 +24,7 @@ describe('Integration | Component | account link', function() {
       accountName: 'Twitter'
     });
     this.render(hbs`{{account-link account=account accountName=accountName}}`);
-    const $accountLink = this.$('a.u-flex');
+    const $accountLink = this.$('a.flex');
     expect($accountLink.attr('href')).to.eql('https://twitter.com/@repositiveio');
   });
 });

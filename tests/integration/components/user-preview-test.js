@@ -23,7 +23,7 @@ describe('Integration | Component | user preview', function() {
       this.render(hbs`{{user-preview user=user}}`);
       expect(this.$('h4').text().trim()).to.eql('Liz');
       expect(this.$('img')).to.exist;
-      const $infoLine = this.$('p.u-fs1');
+      const $infoLine = this.$('p.fs1');
       expect($infoLine.eq(0).text()).to.eql('Developer');
       expect($infoLine.eq(1).text()).to.eql('at');
       expect($infoLine.eq(2).text()).to.eql('Repositive');
@@ -37,7 +37,7 @@ describe('Integration | Component | user preview', function() {
         }
       });
       this.render(hbs`{{user-preview user=user}}`);
-      expect(this.$('p.u-fs1').text()).to.eql('Developer');
+      expect(this.$('p.fs1').text()).to.eql('Developer');
     });
 
     it('displays work organisation if only work organisation', function() {
@@ -47,7 +47,7 @@ describe('Integration | Component | user preview', function() {
         }
       });
       this.render(hbs`{{user-preview user=user}}`);
-      expect(this.$('p.u-fs1').text()).to.eql('Repositive');
+      expect(this.$('p.fs1').text()).to.eql('Repositive');
     });
   });
 
@@ -62,13 +62,13 @@ describe('Integration | Component | user preview', function() {
     });
 
     this.render(hbs`{{user-preview user=user}}`);
-    expect(this.$('a.u-td-underline').text().trim()).to.eql('Add your affiliation');
+    expect(this.$('a.td-underline').text().trim()).to.eql('Add your affiliation');
   });
 
   it('render the timestamp for comments context, if there is one', function() {
     this.set('timestamp', moment(new Date()).subtract(7, 'days'));
 
     this.render(hbs`{{user-preview timestamp=timestamp}}`);
-    expect(this.$('span.u-tc-tertiary').text().trim()).to.eql('7 days ago');
+    expect(this.$('span.fc-tertiary').text().trim()).to.eql('7 days ago');
   })
 });

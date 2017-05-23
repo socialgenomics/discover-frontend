@@ -17,6 +17,6 @@ describe('Integration | Component | credential list', function() {
       }
     });
     this.render(hbs`{{credential-list credentials=credentials}}`);
-    expect(this.$().find(this.$('p.u-mb0.u-fs2')[0]).text().trim()).to.eql('liz@repositive.io');
+    expect(this.$().find(this.$('p.mb0.fs2')[0]).text().trim()).to.eql('liz@repositive.io');
   });
 });
