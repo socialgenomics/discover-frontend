@@ -13,8 +13,7 @@ const { Component, Logger, computed, get, set, inject: { service } } = Ember;
 const Validations = buildValidations({
   oldPassword: [
     presenceValidator(errorMessages.blankPassword),
-    lengthValidator(lengths.password, lengthTypes.min),
-    passwordFormatValidator()
+    lengthValidator(lengths.password, lengthTypes.min)
   ],
   password1: [
     presenceValidator(errorMessages.newPassword),
