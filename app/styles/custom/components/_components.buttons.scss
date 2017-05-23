@@ -2,25 +2,26 @@
    #BUTTONS
    ========================================================================== */
 
-// Button
-/* ==================================== */
-
+/*
+  BASE BUTTON STYLE
+*/
 
 .c-btn {
+  border-color: $color-overlay;
+  border-radius: $border-radius;
   border-style: solid;
   border-width: 1px;
+  cursor: pointer;
+  display: inline-block;
   font-family: $primary-font-stack;
-  margin: 0;
-  transition: $global-transition;
-  vertical-align: baseline;
+  font-weight: $font-weight-medium;
+  position: relative;
+  transition: all 0.15s ease-in-out;
 }
 
-.c-btn-large {
-  font-size: $font-size-regular;
-  height: $spacing-unit-x-large;
-  padding-left: $spacing-unit-large;
-  padding-right: $spacing-unit-large;
-}
+/*
+  SIZE VARIANTS
+*/
 
 .c-btn-small {
   font-size: $font-size-small;
@@ -28,38 +29,105 @@
   padding-left: $spacing-unit-medium;
   padding-right: $spacing-unit-medium;
 }
+a.c-btn-small { line-height: 36px; }
+
+.c-btn-large {
+  font-size: $font-size-regular;
+  height: $spacing-unit-x-large;
+  padding-left: $spacing-unit-large;
+  padding-right: $spacing-unit-large;
+}
+a.c-btn-large { line-height: $spacing-unit-x-large; }
+
+/*
+  TYPE / COLOR VARIANTS
+*/
 
 .c-btn-primary {
   background-color: $color-primary-teal;
   border-color: $color-primary-teal;
-  color: $color-white;
-}
+  color: $primary-opacity-white;
 
-.c-btn-primary:hover {
-  background-color: darken($color-primary-teal, 15);
+  &:hover {
+    background-color: darken($color-primary-teal, 10);
+    border-color: darken($color-primary-teal, 10);
+  }
 }
 
 .c-btn-secondary {
   background-color: transparent;
-  border-color: rgba(0, 0, 0, 0.3);
-  color: rgba(0, 0, 0, 0.77);
-}
+  border-color: $tertiary-opacity-black;
+  color: $primary-opacity-black;
 
-.c-btn-cancel {}
-.c-btn:disabled {}
-
-
-.c-btn-small {}
-
-.c-btn-loading {}
-
-.c-help-link {
-  .active {
-    @extend .fw-bold;
+  &:hover {
+    background-color: $color-very-light-grey;
   }
 }
 
+.c-btn-cancel {
+  background-color: $color-off-white;
+  border-color: $color-overlay;
+  color: $primary-opacity-black;
+}
 
+/*
+  STATES
+*/
+
+// .c-btn {
+//   border-style: solid;
+//   border-width: 1px;
+//   font-family: $primary-font-stack;
+//   margin: 0;
+//   transition: $global-transition;
+//   vertical-align: baseline;
+// }
+//
+// .c-btn-large {
+//   font-size: $font-size-regular;
+//   height: $spacing-unit-x-large;
+//   padding-left: $spacing-unit-large;
+//   padding-right: $spacing-unit-large;
+// }
+//
+// .c-btn-small {
+//   font-size: $font-size-small;
+//   height: 36px;
+//   padding-left: $spacing-unit-medium;
+//   padding-right: $spacing-unit-medium;
+// }
+//
+// .c-btn-primary {
+//   background-color: $color-primary-teal;
+//   border-color: $color-primary-teal;
+//   color: $color-white;
+// }
+//
+// .c-btn-primary:hover {
+//   background-color: darken($color-primary-teal, 15);
+// }
+//
+// .c-btn-secondary {
+//   background-color: transparent;
+//   border-color: rgba(0, 0, 0, 0.3);
+//   color: rgba(0, 0, 0, 0.77);
+// }
+//
+// .c-btn-cancel {}
+// .c-btn:disabled {}
+//
+//
+// .c-btn-small {}
+//
+// .c-btn-loading {}
+//
+// .c-help-link {
+//   .active {
+//     @extend .fw-bold;
+//   }
+// }
+//
+//
 
 
 //
