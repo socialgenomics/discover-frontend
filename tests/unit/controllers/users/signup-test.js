@@ -116,25 +116,4 @@ describe('UsersSignupController', function() {
       });
     });
   });
-
-  // describe('password inline validator', function () {
-  //   it('should return error', function () {
-  //     const controller = this.subject();
-  //
-  //     set(controller, 'password', 'aaaaaaaa');
-  //     expect(get(controller, 'validations.attrs.password.isValid')).to.be.false;
-  //     expect(get(controller, 'validations.attrs.password.messages')[0])
-  //       .to.be.equal('Must include a number or capital letter.');
-  //   });
-  //
-  //   it('should not return error', function () {
-  //     const controller = this.subject();
-  //     const passwords = ['aaaaaaa1', 'aaaaaaaA', 'aaaaaaa@'];
-  //
-  //     passwords.forEach(password => {
-  //       set(controller, 'password', password);
-  //       expect(get(controller, 'validations.attrs.password.isValid')).to.be.true;
-  //     });
-  //   });
-  // });
 });
