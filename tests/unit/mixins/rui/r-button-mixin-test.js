@@ -19,9 +19,7 @@ describe('Unit | Mixin | RUI / r-button-mixin', function() {
 
   describe('properties', function () {
     it('should have correct classNames set', function () {
-      expect(get(subject, 'classNames')).to.be.eql([
-        'c-btn', 'u-cursor-pointer', 'u-inline-block', 'u-rounded', 'u-pos-relative', 'u-fw-med'
-      ]);
+      expect(get(subject, 'classNames')).to.be.eql(['c-btn']);
     });
 
     it('should have correct classNameBindings set', function () {
@@ -111,4 +109,3 @@ describe('Unit | Mixin | RUI / r-button-mixin', function() {
     });
   });
 });
-
