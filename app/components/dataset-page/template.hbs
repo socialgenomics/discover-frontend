@@ -114,7 +114,7 @@
             clickHandler=(action "trackExit")
             href=(if session.isAuthenticated model.url '')
             label=(if (eq model.access "Open") "Access Data" "Go To Dataset")
-            type="primary"
+            variant="primary"
             size="big"
             target="_blank"
           }}
@@ -177,12 +177,12 @@
         <div class="flex justify-center">
           {{async-button
             action=(action 'save')
-            class="c-btn c-btn-primary mr4"
+            class="c-btn c-btn-primary c-btn-large mr2"
             default="Save Changes"
             pending="Saving..."
             disableWhen=(not validations.isValid)
           }}
-          {{rui/r-button variant="cancel" label="Cancel" clickHandler=(action "cancelEditMode")}}
+          {{rui/r-button variant="cancel" size="big" label="Cancel" clickHandler=(action "cancelEditMode")}}
         </div>
       </form>
     </div>

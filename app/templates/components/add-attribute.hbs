@@ -6,11 +6,10 @@
   value=attributeValue
 }}
 {{async-button
-  class="c-btn c-btn-primary mr3 mb2"
+  class="c-btn c-btn-primary c-btn-small mb2"
   action=(action 'add')
   default="Add"
   disableWhen=(not isValid)
   pending="Adding..."
 }}
 {{rui/r-button variant="cancel" label="Cancel" clickHandler=(action "cancel")}}
-
