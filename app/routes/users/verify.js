@@ -4,17 +4,24 @@ import { getLatestSecondaryCredential, mainCredential } from 'repositive/utils/c
 import FlashMessageMixin from 'repositive/mixins/flash-message-mixin';
 import VerificationMixin from 'repositive/mixins/verification';
 
-const { inject: { service }, get, set, setProperties, Logger, Route } = Ember;
+const { inject: { service }, get, set, setProperties, Logger, Route, RSVP } = Ember;
 
 export default Route.extend(FlashMessageMixin, VerificationMixin, {
   ajax: service(),
   session: service(),
 
   model(params) {
-    get(this, 'ajax').request(ENV.APIRoutes['verify-email'] + '/' + params.verification_id, { method: 'GET' })
+    return RSVP.hash({
+      'verificationResp': get(this, 'ajax')
+        .request(ENV.APIRoutes['verify-email'] + '/' + params.verification_id, { method: 'GET' }),
+      'credentials': this.store.query('credential', {
+        'where.user_id': get(this, 'session.authenticatedUser.id')
+      })
+    })
       .then(resp => {
-        set(this, 'session.session.content.authenticated.token', resp.token);
-        return this._makeCurrentEmailPrimary();
+        debugger;
+        set(this, 'session.session.content.authenticated.token', resp.verificationResp.token);
+        return this._makeCredentialPrimary();
       })
       .then(() => {
         if (get(this, 'session.isAuthenticated')) {

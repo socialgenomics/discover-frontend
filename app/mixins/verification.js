@@ -21,11 +21,12 @@ export default Mixin.create(FlashMessageMixin, {
 
   /**
    * @desc Makes the current credential primary based on the token in the header
+   * @param credentialId
    * @private
    */
-  _makeCurrentEmailPrimary() {
+  _makeCredentialPrimary(credentialId) {
     return get(this, 'ajax')
-      .request(ENV.APIRoutes['make-primary'], { method: 'GET' });
+      .request(ENV.APIRoutes['make-primary'] + `/${credentialId}`, { method: 'GET' });
   },
 
   /**
