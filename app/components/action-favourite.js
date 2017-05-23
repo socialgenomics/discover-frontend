@@ -8,7 +8,7 @@ export default Component.extend({
   favouritesService: service('favourites'),
 
   tagName: 'li',
-  classNames: [ 'o-list-inline__item', 'u-tc-secondary', 'u-cursor-pointer' ],
+  classNames: [ 'o-list-inline__item', 'fc-secondary', 'cursor-pointer' ],
   isSubmitting: false,
   showCreateAccountModal: false,
 

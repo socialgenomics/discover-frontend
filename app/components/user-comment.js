@@ -14,7 +14,7 @@ export default Component.extend(
   Validations,
   FlashMessageMixin,
   {
-    classNames: ['u-border-top'],
+    classNames: ['border-top'],
 
     inEditMode: false,
 

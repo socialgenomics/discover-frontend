@@ -2,16 +2,16 @@
   <div class="grid grid--no-gutter">
     <div class="grid__col grid__col--3-of-3">
       {{help-tabs}}
-      <div class="c-card c-card-detail-overflow u-rounded-bottom u-py3">
+      <div class="c-card c-card-detail-overflow rounded-bottom py4">
         <div class="grid grid--no-gutter u-full-height">
-          <div class="grid__col grid__col--1-of-3 u-fs2 u-fw-med">
-            <ul class="o-list-flush-left u-px3">
+          <div class="grid__col grid__col--1-of-3 fs2 fw-med">
+            <ul class="o-list-flush-left px4">
               {{#each helpData.other as |data|}}
                 {{help-docs-link link=data.link query=data.query text=data.text}}
               {{/each}}
             </ul>
           </div>
-          <div class="grid__col grid__col--2-of-3 u-full-min-height u-mb3 u-fs2 u-border-left">
+          <div class="grid__col grid__col--2-of-3 u-full-min-height mb4 fs2 border-left">
             {{help-markdown filePath=currentPage}}
           </div>
         </div>

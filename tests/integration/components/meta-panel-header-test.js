@@ -11,13 +11,13 @@ describe('Integration | Component | meta panel header', function() {
   it('renders back to datasource button if is not a personal repository', function() {
     this.set('model', { type: 'datasource' });
     this.render(hbs`{{meta-panel-header type=model.type}}`);
-    expect(this.$('a.left-align')).to.have.length(1);
+    expect(this.$('div.fc-secondary.absolute')).to.have.length(1);
   });
 
   it('does not render back to datasource button if it is a personal repository', function() {
     this.set('model', { type: 'personal_repository' });
     this.render(hbs`{{meta-panel-header type=model.type}}`);
-    expect(this.$('a.left-align')).to.have.length(0);
+    expect(this.$('div.fc-secondary.absolute')).to.have.length(0);
   });
 
   it('renders collection header if it is a collection', function() {

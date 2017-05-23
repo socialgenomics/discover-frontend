@@ -18,7 +18,7 @@ export default Component.extend(Validations, {
   store: service(),
 
   tagName: 'form',
-  classNames: ['u-ta-center'],
+  classNames: ['ta-center'],
   emailAddress: '',
   customMessage: '',
   actionableId: null,

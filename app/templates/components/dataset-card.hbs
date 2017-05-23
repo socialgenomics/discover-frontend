@@ -1,12 +1,12 @@
 <div class="c-card">
   {{#if (eq type "request")}}
   <!-- Card Header -->
-    <div class="u-bc-off-white">
+    <div class="bc-very-light-grey">
       <div class="assay-container">
         <div class="request">Request</div>
       </div>
-      <ul class="o-list-inline o-list-flush-left u-mb0">
-        {{action-favourite model=dataset class="u-mr2"}}
+      <ul class="o-list-inline o-list-flush-left mb0">
+        {{action-favourite model=dataset class="mr3"}}
         {{action-share
           actionableId=dataset.id
           actionableType='dataset'
@@ -15,7 +15,7 @@
       </ul>
     </div>
 
-    <div class="u-p1">
+    <div class="p2">
       {{#if dataset.highlights.title}}
         {{#link-to 'requests.detail' dataset.id classNames="data-title"}}
           <div data-balloon={{dataset.title}} data-balloon-pos="up" data-balloon-length="large">
@@ -25,7 +25,7 @@
       {{else}}
         {{#link-to 'requests.detail' dataset.id classNames="data-title"}}
           <div data-balloon={{dataset.title}} data-balloon-pos="up" data-balloon-length="large">
-            <h4 class="u-mb0">{{truncate dataset.title 70}}</h4>
+            <h4 class="mb0">{{truncate dataset.title 70}}</h4>
           </div>
         {{/link-to}}
       {{/if}}
@@ -41,18 +41,18 @@
       </div>
     </div>
     <div class="card-footer">
-      {{stats-list stats=dataset.stats statType="datasets" class="u-pb2 u-pl2"}}
+      {{stats-list stats=dataset.stats statType="datasets" class="pb3 pl3"}}
     </div>
 
   {{else}}
     <!-- It is a Dataset -->
     <!-- Card Header -->
-    <header class="c-card-header u-bc-off-white u-flex {{if hasAssays 'u-justify-between' 'u-justify-end'}} u-items-center u-px2">
+    <header class="c-card-header bc-very-light-grey flex {{if hasAssays 'justify-between' 'justify-end'}} items-center px3">
       {{#if hasAssays}}
         {{assay-list assays=assaysToDisplay}}
       {{/if}}
-      <ul class="u-flex o-list-flush-left u-pl2 u-mb0">
-        {{action-favourite model=dataset class="u-mr2"}}
+      <ul class="flex o-list-flush-left pl3 mb0">
+        {{action-favourite model=dataset class="mr3"}}
         {{action-share
           actionableId=dataset.id
           actionableType='dataset'
@@ -61,11 +61,11 @@
       </ul>
     </header>
 
-    <div class="u-p2">
+    <div class="p3">
       {{#if dataset.highlights.title}}
         {{#link-to 'datasets.detail' dataset.id classNames="data-title"}}
           <div data-balloon={{dataset.title}} data-balloon-pos="up" data-balloon-length="large">
-            <h4 class="u-fs2 u-fw-med u-tc-primary c-card-title u-mb1">
+            <h4 class="fs2 fw-med fc-primary c-card-title mb2">
               {{{truncate dataset.highlights.title 70}}}
             </h4>
           </div>
@@ -73,7 +73,7 @@
       {{else}}
         {{#link-to 'datasets.detail' dataset.id classNames="data-title"}}
           <div data-balloon={{dataset.title}} data-balloon-pos="up" data-balloon-length="large">
-            <h4 class="u-fs2 u-fw-med u-tc-primary c-card-title u-mb1">
+            <h4 class="fs2 fw-med fc-primary c-card-title mb2">
               {{truncate dataset.title 70}}
             </h4>
           </div>
@@ -91,7 +91,7 @@
       </div>
     </div>
 
-    {{stats-list stats=dataset.stats access=dataset.access statType="datasets" class="u-pb2 u-pl2 u-tc-tertiary"}}
+    {{stats-list stats=dataset.stats access=dataset.access statType="datasets" class="pb3 pl3 fc-tertiary"}}
 
   {{/if}}
 </div>

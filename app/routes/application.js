@@ -57,9 +57,14 @@ export default Route.extend(ApplicationRouteMixin, {
       }
     },
 
-    //Used by notification-list-item
+    // Used by notification-list-item
     transitionToSubscribable(subscribableModel, subscribableId) {
       this.transitionTo(`${subscribableModel}s.detail`, subscribableId);
+    },
+
+    // Used by change-password-form
+    transitionToProfile() {
+      this.transitionTo('users.profile');
     }
   },
 

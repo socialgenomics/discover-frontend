@@ -5,8 +5,6 @@ const { Component, get, inject: { service }, setProperties, computed } = Ember;
 export default Component.extend({
   queryService: service('query'),
 
-  classNames: ['u-flex u-bc-white'],
-
   placeholderValues: [
     `title:cancer description:glioblastoma`,
     `(tissue:brain OR tissue:cortex) description:methylation`,
