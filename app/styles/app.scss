@@ -6,11 +6,12 @@
   SETTINGS
 */
 
-@import "submodule/settings/color";
-@import "submodule/settings/spacing";
-@import "submodule/settings/layout-and-breakpoints";
-@import "submodule/settings/misc-ui";
-@import "submodule/settings/typography";
+@import "node_modules/@repositive/liz-skin/settings/color";
+@import "node_modules/@repositive/liz-skin/settings/color";
+@import "node_modules/@repositive/liz-skin/settings/spacing";
+@import "node_modules/@repositive/liz-skin/settings/layout-and-breakpoints";
+@import "node_modules/@repositive/liz-skin/settings/misc-ui";
+@import "node_modules/@repositive/liz-skin/settings/typography";
   /* Custom */
   @import "custom/settings/color";
 
@@ -18,72 +19,72 @@
   RESET STYLES
 */
 
-@import "submodule/reset/box-sizing";
-@import "submodule/reset/normalize";
-@import "submodule/reset/custom-reset";
+@import "node_modules/@repositive/liz-skin/reset/box-sizing";
+@import "node_modules/@repositive/liz-skin/reset/normalize";
+@import "node_modules/@repositive/liz-skin/reset/custom-reset";
 
 /*
   COMPONENT STYLES
 */
 
-@import 'submodule/components/balloons';
-@import "submodule/components/grid-wrapper";
-@import "submodule/components/grid";
-@import "submodule/components/list";
+@import "node_modules/@repositive/liz-skin/components/balloons";
+@import "node_modules/@repositive/liz-skin/components/grid-wrapper";
+@import "node_modules/@repositive/liz-skin/components/grid";
+@import "node_modules/@repositive/liz-skin/components/list";
   /* Custom */
-  @import 'custom/components/components.avatar-upload';
-  @import 'custom/components/components.buttons';
-  @import 'custom/components/components.call-to-action-banner';
-  @import 'custom/components/components.card';
-  @import 'custom/components/components.collection-list-item';
-  @import 'custom/components/components.divider';
-  @import 'custom/components/components.featured-list';
-  @import 'custom/components/components.flash-messages';
-  @import 'custom/components/components.follow-button';
-  @import 'custom/components/components.images';
-  @import 'custom/components/components.loading-spinner';
-  @import 'custom/components/components.main-wrapper';
-  @import 'custom/components/components.modals';
-  @import 'custom/components/components.navbar';
-  @import 'custom/components/components.notifications';
-  @import 'custom/components/components.password-strength';
-  @import 'custom/components/components.reputation-total';
-  @import 'custom/components/components.select';
-  @import 'custom/components/components.sidebar';
-  @import 'custom/components/components.text-with-icon';
-  @import 'custom/components/components.user-profile-section';
-  @import 'custom/components/components.validated-input';
+  @import "custom/components/components.avatar-upload";
+  @import "custom/components/components.buttons";
+  @import "custom/components/components.call-to-action-banner";
+  @import "custom/components/components.card";
+  @import "custom/components/components.collection-list-item";
+  @import "custom/components/components.divider";
+  @import "custom/components/components.featured-list";
+  @import "custom/components/components.flash-messages";
+  @import "custom/components/components.follow-button";
+  @import "custom/components/components.images";
+  @import "custom/components/components.loading-spinner";
+  @import "custom/components/components.main-wrapper";
+  @import "custom/components/components.modals";
+  @import "custom/components/components.navbar";
+  @import "custom/components/components.notifications";
+  @import "custom/components/components.password-strength";
+  @import "custom/components/components.reputation-total";
+  @import "custom/components/components.select";
+  @import "custom/components/components.sidebar";
+  @import "custom/components/components.text-with-icon";
+  @import "custom/components/components.user-profile-section";
+  @import "custom/components/components.validated-input";
 
 /*
   UTILITIES
 */
 
-@import "submodule/utilities/border";
-@import "submodule/utilities/color";
-@import "submodule/utilities/cursor";
-@import "submodule/utilities/display";
-@import "submodule/utilities/flex";
-@import "submodule/utilities/font-styles";
-@import "submodule/utilities/icon";
-@import "submodule/utilities/margin";
-@import "submodule/utilities/overflow";
-@import "submodule/utilities/padding";
-@import "submodule/utilities/position";
-@import "submodule/utilities/type-setting";
+@import "node_modules/@repositive/liz-skin/utilities/border";
+@import "node_modules/@repositive/liz-skin/utilities/color";
+@import "node_modules/@repositive/liz-skin/utilities/cursor";
+@import "node_modules/@repositive/liz-skin/utilities/display";
+@import "node_modules/@repositive/liz-skin/utilities/flex";
+@import "node_modules/@repositive/liz-skin/utilities/font-styles";
+@import "node_modules/@repositive/liz-skin/utilities/icon";
+@import "node_modules/@repositive/liz-skin/utilities/margin";
+@import "node_modules/@repositive/liz-skin/utilities/overflow";
+@import "node_modules/@repositive/liz-skin/utilities/padding";
+@import "node_modules/@repositive/liz-skin/utilities/position";
+@import "node_modules/@repositive/liz-skin/utilities/type-setting";
   /* Custom */
-  @import 'custom/utilities/utilities.animation';
+  @import "custom/utilities/utilities.animation";
   @import "custom/utilities/border";
   @import "custom/utilities/color";
-  @import 'custom/utilities/utilities.elevation';
-  @import 'custom/utilities/utilities.hover';
-  @import 'custom/utilities/utilities.images';
-  @import 'custom/utilities/utilities.inputs';
-  @import 'custom/utilities/utilities.markdown-text';
-  @import 'custom/utilities/utilities.sizing';
-  @import 'custom/utilities/utilities.zindexes';
+  @import "custom/utilities/utilities.elevation";
+  @import "custom/utilities/utilities.hover";
+  @import "custom/utilities/utilities.images";
+  @import "custom/utilities/utilities.inputs";
+  @import "custom/utilities/utilities.markdown-text";
+  @import "custom/utilities/utilities.sizing";
+  @import "custom/utilities/utilities.zindexes";
 
 /*
   ADD-ONs
 */
 
-@import 'ember-basic-dropdown';
+@import "ember-basic-dropdown";
