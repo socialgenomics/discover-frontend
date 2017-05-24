@@ -15,14 +15,15 @@ export default Route.extend(FlashMessageMixin, VerificationMixin, {
       'verificationResp': get(this, 'ajax')
         .request(ENV.APIRoutes['verify-email'] + '/' + params.verification_id, { method: 'GET' }),
       'credentials': this.store.query('credential', {
-        'where.user_id': get(this, 'session.authenticatedUser.id')
+        'where.user_id': get(this, 'session.authenticatedUser.id'),
+        'order[0][0]': 'updated_at',
+        'order[0][1]': 'DESC',
+        'limit': '50'
       })
     })
       .then(resp => {
         const credentialId = getLatestSecondaryCredential(resp.credentials).id;
-        debugger;
-        //get the latest secondary cred id
-        // set(this, 'session.session.content.authenticated.token', resp.verificationResp.token);
+        set(this, 'session.session.content.authenticated.token', resp.verificationResp.token);
         return this._makeCredentialPrimary(credentialId);
       })
       .then(() => {
