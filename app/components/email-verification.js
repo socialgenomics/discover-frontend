@@ -44,13 +44,6 @@ export default Component.extend(FlashMessageMixin, Validations, VerificationMixi
         if (!get(existingCredential, 'verified')) {
           return this._sendVerificationEmail(newEmail);
         }
-        //if already primary
-        //shouldn't never be called due to isEmailUnchanged computed prop
-        if (get(existingCredential, 'primary')) {
-          this._addFlashMessage(`You're already using this email`, 'warning');
-          return this.send('cancel');
-        }
-        debugger;
         return this._makeCredentialPrimary(existingCredential.id);
       } else {
         set(this, 'loading', true);
