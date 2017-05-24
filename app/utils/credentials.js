@@ -16,5 +16,5 @@ export function secondaryCredentials(credentials) {
 
 export function getLatestSecondaryCredential(credentials) {
   return get(secondaryCredentials(credentials)
-    .sortBy('updatedAt'), 'lastObject');
+    .sortBy('createdAt'), 'lastObject');
 }

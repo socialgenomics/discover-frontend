@@ -32,6 +32,10 @@ export default Route.extend(AuthenticatedRouteMixin, {
   actions: {
     reloadModel() {
       return this.store.peekRecord('user', get(this, 'userId')).reload();
+    },
+    pushToSecondaryCreds(newCredential) {
+      const model = this.controller.model;
+      model.credentials.secondary_credentials.addObject(newCredential);
     }
   }
 });

@@ -74,17 +74,11 @@ export default Component.extend(FlashMessageMixin, Validations, VerificationMixi
       userId: get(this, 'session.authenticatedUser'),
       verified: false
     });
-    const creds = get(this, 'credentials');
-    debugger;
 
     return credential
       .save()
       .then(newCred => {
-        debugger;
-        //if the users only has a primary email, this will fail.
-          //so create credentials.secondary_credentials
-        const secondaryCredentials = get(this, 'credentials.secondary_credentials');
-        secondaryCredentials.addObject(newCred);
+        get(this, 'pushToSecondaryCreds')(newCred);
         return this._sendVerificationEmail(newEmail);
       })
       .then(this.send('cancel'))
