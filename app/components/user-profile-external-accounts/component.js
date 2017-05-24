@@ -12,7 +12,11 @@ const { Component, inject: { service }, Logger, set, get, isEmpty } = Ember;
 const Validations = buildValidations({
   [createUserAttrKey('profile.accounts.googlePlus')]: urlFormatValidator(),
   [createUserAttrKey('profile.accounts.linkedIn')]: urlFormatValidator(),
-  [createUserAttrKey('profile.accounts.researchGate')]: urlFormatValidator(),
+  [createUserAttrKey('profile.accounts.researchGate')]: validator('format', {
+    regex: patterns.researchgate,
+    allowBlank: true,
+    message: errorMessages.invalidResearchGateLink
+  }),
   [createUserAttrKey('profile.accounts.orcid')]: validator('format', {
     regex: patterns.orcid,
     allowBlank: true,

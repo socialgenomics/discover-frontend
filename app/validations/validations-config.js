@@ -12,7 +12,8 @@ export const errorMessages = {
   maxLength: 'Must be less than $1 characters.',
   invalidPassword: 'Must include an uppercase letter and a number.',
   invalidTwitterHandle: 'Must be a valid twitter handle',
-  invalidOrcidLink: 'Must be a valid Orcid URL'
+  invalidOrcidLink: 'Must be a valid Orcid URL',
+  invalidResearchGateLink: 'Must be a valid Research Gate URL'
 };
 
 export const patterns = {
@@ -20,7 +21,8 @@ export const patterns = {
   email: /^([\w\-\.\+]+)@((?:[\w\-\.]+)(?:\.[a-zA-Z]{2,}))$/,
   password: /(?=.*\d)(?=.*[A-Z])/,
   twitter: /^@(\w){1,15}$/,
-  orcid: /^https:\/\/orcid\.org\/[0-9]{4}\-[0-9]{4}\-[0-9]{4}\-[0-9]{4}$/
+  orcid: /^https:\/\/orcid\.org\/[0-9]{4}\-[0-9]{4}\-[0-9]{4}\-[0-9]{4}$/,
+  researchgate: /^https:\/\/researchgate\.net\/profile\/[a-zA-Z_]{2,}$/
 };
 
 export const lengths = {
