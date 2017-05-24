@@ -20,8 +20,11 @@ export default Route.extend(FlashMessageMixin, VerificationMixin, {
     })
       .then(resp => {
         debugger;
+        const credentialId = getLatestSecondaryCredential(resp.credentials).id;
+        debugger;
+        //get the latest secondary cred id
         set(this, 'session.session.content.authenticated.token', resp.verificationResp.token);
-        return this._makeCredentialPrimary();
+        return this._makeCredentialPrimary(credentialId);
       })
       .then(() => {
         if (get(this, 'session.isAuthenticated')) {

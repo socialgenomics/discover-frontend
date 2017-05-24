@@ -41,18 +41,17 @@ export default Component.extend(FlashMessageMixin, Validations, VerificationMixi
       const existingCredential = this._getExistingCredential(newEmail);
       if (existingCredential) {
         //If it's not verified -> send email
-
+        if (!get(existingCredential, 'verified')) {
+          return this._sendVerificationEmail(newEmail);
+        }
         //if already primary
         //shouldn't never be called due to isEmailUnchanged computed prop
         if (get(existingCredential, 'primary')) {
           this._addFlashMessage(`You're already using this email`, 'warning');
           return this.send('cancel');
         }
-        // if (!get(existingCredential, 'verified')) {
-        return this._sendVerificationEmail(newEmail);
-        // }
-        // //Can't do this because the token I'm using is not for the cred i want to make primary
-        // return this._makeCredentialPrimary();
+        debugger;
+        return this._makeCredentialPrimary(existingCredential.id);
       } else {
         set(this, 'loading', true);
         return this._saveCredential(newEmail);
@@ -75,6 +74,8 @@ export default Component.extend(FlashMessageMixin, Validations, VerificationMixi
       userId: get(this, 'session.authenticatedUser'),
       verified: false
     });
+    const creds = get(this, 'credentials');
+    debugger;
 
     return credential
       .save()
@@ -82,7 +83,8 @@ export default Component.extend(FlashMessageMixin, Validations, VerificationMixi
         debugger;
         //if the users only has a primary email, this will fail.
           //so create credentials.secondary_credentials
-        get(this, 'credentials.secondary_credentials').addObject(newCred);
+        const secondaryCredentials = get(this, 'credentials.secondary_credentials');
+        secondaryCredentials.addObject(newCred);
         return this._sendVerificationEmail(newEmail);
       })
       .then(this.send('cancel'))
