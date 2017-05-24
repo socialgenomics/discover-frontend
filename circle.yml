@@ -1,6 +1,8 @@
 machine:
   pre:
     - curl -sSL https://s3.amazonaws.com/circle-downloads/install-circleci-docker.sh | bash -s -- 1.10.0
+    - curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+    - chmod +x ./kubectl
   node:
     version: 6.4.0
   services:
@@ -14,6 +16,16 @@ test:
   override:
     - npm run test
 deployment:
+  staging-k8s:
+    branch: '#893/k8s-staging'
+    commands:
+      - node_modules/ember-cli/bin/ember build --environment staging
+      - docker build -t registry.repositive.io:5000/discover:$CIRCLE_BUILD_NUM .
+      - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS registry.repositive.io:5000
+      - docker push registry.repositive.io:5000/discover:$CIRCLE_BUILD_NUM
+      - TAG=$CIRCLE_BUILD_NUM envsubst '${TAG}' < k8s.staging.yml > deploy.yml
+      - KUBECONFIG=kubeconfig-staging $HOME/kubectl apply -f deploy.yml
+
   staging:
     branch: master
     commands:
@@ -31,4 +43,3 @@ deployment:
       - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS registry.repositive.io:5000
       - docker push registry.repositive.io:5000/discover:$CIRCLE_TAG
       - curl -u $DEPLOYMENT_USER:$DEPLOYMENT_PASS -T "deploy.production.yml" "https://deployment.repositive.io/deploy?stack=fn&version=$CIRCLE_TAG"
-
