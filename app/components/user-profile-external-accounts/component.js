@@ -13,7 +13,11 @@ const Validations = buildValidations({
   [createUserAttrKey('profile.accounts.googlePlus')]: urlFormatValidator(),
   [createUserAttrKey('profile.accounts.linkedIn')]: urlFormatValidator(),
   [createUserAttrKey('profile.accounts.researchGate')]: urlFormatValidator(),
-  [createUserAttrKey('profile.accounts.orcid')]: urlFormatValidator(),
+  [createUserAttrKey('profile.accounts.orcid')]: validator('format', {
+    regex: patterns.orcid,
+    allowBlank: true,
+    message: errorMessages.invalidOrcidLink
+  }),
   [createUserAttrKey('profile.accounts.twitter')]: validator('format', {
     regex: patterns.twitter,
     allowBlank: true,
