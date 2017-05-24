@@ -11,18 +11,22 @@ export const errorMessages = {
   minLength: 'Must be at least $1 characters.',
   maxLength: 'Must be less than $1 characters.',
   invalidPassword: 'Must include an uppercase letter and a number.',
+  invalidGoogleLink: 'Must be a valid Google Plus URL',
+  invalidLinkedinLink: 'Must be a valid Linkedin URL',
   invalidTwitterHandle: 'Must be a valid twitter handle',
-  invalidOrcidLink: 'Must be a valid Orcid URL',
-  invalidResearchGateLink: 'Must be a valid Research Gate URL'
+  invalidResearchGateLink: 'Must be a valid Research Gate URL',
+  invalidOrcidLink: 'Must be a valid Orcid URL'
 };
 
 export const patterns = {
   url: /[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/,
   email: /^([\w\-\.\+]+)@((?:[\w\-\.]+)(?:\.[a-zA-Z]{2,}))$/,
   password: /(?=.*\d)(?=.*[A-Z])/,
+  google: /^https:\/\/plus\.google\.com\/[0-9]{21}$/,
+  linkedin: /^https:\/\/linkedin\.com\/in\/[a-zA-Z-]{2,}$/,
   twitter: /^@(\w){1,15}$/,
-  orcid: /^https:\/\/orcid\.org\/[0-9]{4}\-[0-9]{4}\-[0-9]{4}\-[0-9]{4}$/,
-  researchgate: /^https:\/\/researchgate\.net\/profile\/[a-zA-Z_]{2,}$/
+  researchgate: /^https:\/\/researchgate\.net\/profile\/[a-zA-Z_]{2,}$/,
+  orcid: /^https:\/\/orcid\.org\/[0-9]{4}\-[0-9]{4}\-[0-9]{4}\-[0-9]{4}$/
 };
 
 export const lengths = {
