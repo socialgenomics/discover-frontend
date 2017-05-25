@@ -22,8 +22,6 @@ export default Route.extend(FlashMessageMixin, VerificationMixin, {
       })
     })
       .then(resp => {
-        //conditional for dealing with user who just signed up
-        debugger;
         const credentialId = getLatestSecondaryCredential(resp.credentials.content).id;
         set(this, 'session.session.content.authenticated.token', resp.verificationResp.token);
         return this._makeCredentialPrimary(credentialId);
