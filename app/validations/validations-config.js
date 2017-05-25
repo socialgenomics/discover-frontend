@@ -22,11 +22,11 @@ export const patterns = {
   url: /[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/,
   email: /^([\w\-\.\+]+)@((?:[\w\-\.]+)(?:\.[a-zA-Z]{2,}))$/,
   password: /(?=.*\d)(?=.*[A-Z])/,
-  google: /^https:\/\/plus\.google\.com\/[0-9]{21}$/,
-  linkedin: /^https:\/\/linkedin\.com\/in\/[a-zA-Z-]{2,}$/,
+  google: /^https:\/\/plus\.google\.com\/u?\/?0?\/?[0-9]{21}$/,
+  linkedin: /^https:\/\/linkedin\.com\/in\/[a-zA-Z-]{2,}\/?$/,
   twitter: /^@(\w){1,15}$/,
-  researchgate: /^https:\/\/researchgate\.net\/profile\/[a-zA-Z_]{2,}$/,
-  orcid: /^https:\/\/orcid\.org\/[0-9]{4}\-[0-9]{4}\-[0-9]{4}\-[0-9]{4}$/
+  researchgate: /^https:\/\/(?:www.)?researchgate\.net\/profile\/[a-zA-Z_]{2,}$/,
+  orcid: /^https:\/\/(?:www.)?orcid\.org\/[0-9]{4}\-[0-9]{4}\-[0-9]{4}\-[0-9]{4}$/
 };
 
 export const lengths = {
