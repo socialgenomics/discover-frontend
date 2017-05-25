@@ -6,6 +6,8 @@ export default Component.extend({
   tagName: 'img',
   classNames: ['mr2', 'circle'],
 
+  attributeBindings: ['src'],
+
   classNameBindings: [
     'small:icon-small',
     'medium:icon-medium',
