@@ -26,7 +26,7 @@ export default Component.extend(VerificationMixin, {
   actions: {
     toggleAddCredentialInput() { this.toggleProperty('addingCredential'); },
     sendVerificationEmail(newEmail) {
-      return this._sendVerificationEmail(newEmail, get(this, 'ajax'));
+      return this._sendVerificationEmail(newEmail);
     }
   }
 });
