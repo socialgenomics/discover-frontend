@@ -4,24 +4,34 @@ const { Component, get, set } = Ember;
 
 export default Component.extend({
   tagName: 'img',
-  classNames: ['mr2', 'circle'],
+  classNames: ['circle'],
 
   attributeBindings: ['src', 'defaultImage:onError'],
   defaultImage: 'this.onerror=null;this.src=\'/assets/images/avatar/dog.png\';',
 
   classNameBindings: [
+    // sizes
     'small:icon-small',
     'medium:icon-medium',
     'large:icon-large',
-    'x-large:icon-x-large'
+    'x-large:icon-x-large',
+
+    //margin-right
+    'mr0:mr0',
+    'mr1:mr1',
+    'mr2:mr2',
+    'mr3:mr3',
+    'mr4:mr4'
   ],
 
   options: {
-    size: ['small', 'medium', 'large', 'x-large']
+    size: ['small', 'medium', 'large', 'x-large'],
+    mr: ['mr0', 'mr1', 'mr2', 'mr3', 'mr4']
   },
 
   defaults: {
-    size: 'medium'
+    size: 'medium',
+    mr: 'mr0'
   },
 
   init() {
