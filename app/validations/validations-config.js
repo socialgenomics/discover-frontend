@@ -23,7 +23,7 @@ export const patterns = {
   email: /^([\w\-\.\+]+)@((?:[\w\-\.]+)(?:\.[a-zA-Z]{2,}))$/,
   password: /(?=.*\d)(?=.*[A-Z])/,
   google: /^https:\/\/plus\.google\.com\/u?\/?0?\/?[0-9]{21}$/,
-  linkedin: /^https:\/\/linkedin\.com\/in\/[a-zA-Z-]{2,}\/?$/,
+  linkedin: /^https:\/\/([a-z0-9]+[.])*linkedin\.com\/in\/[a-zA-Z-]{2,}\/?$/,
   twitter: /^@(\w){1,15}$/,
   researchgate: /^https:\/\/(?:www.)?researchgate\.net\/profile\/[a-zA-Z_]{2,}$/,
   orcid: /^https:\/\/(?:www.)?orcid\.org\/[0-9]{4}\-[0-9]{4}\-[0-9]{4}\-[0-9]{4}$/
