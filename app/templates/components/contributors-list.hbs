@@ -10,7 +10,7 @@
 
 {{#if canBeAContributor}}
   <div class="py3 pl2 flex items-start">
-    <img class="filter-fade-grey circle icon-large mr2" src="{{session.authenticatedUser.profile.avatar}}" onError="this.onerror=null;this.src='/assets/images/avatar/dog.png';"/>
+    {{rui/r-avatar src=session.authenticatedUser.profile.avatar size="large" class="filter-fade-grey mr2"}}
     <p class="fs2 fc-tertiary">Become a contributor by adding metadata to help categorise this {{modelName}}.</p>
   </div>
 {{else if (not session.isAuthenticated)}}

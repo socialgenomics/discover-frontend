@@ -14,24 +14,15 @@ export default Component.extend({
     'small:icon-small',
     'medium:icon-medium',
     'large:icon-large',
-    'x-large:icon-x-large',
-
-    //margin-right
-    'mr0:mr0',
-    'mr1:mr1',
-    'mr2:mr2',
-    'mr3:mr3',
-    'mr4:mr4'
+    'x-large:icon-x-large'
   ],
 
   options: {
-    size: ['small', 'medium', 'large', 'x-large'],
-    mr: ['mr0', 'mr1', 'mr2', 'mr3', 'mr4']
+    size: ['small', 'medium', 'large', 'x-large']
   },
 
   defaults: {
-    size: 'medium',
-    mr: 'mr0'
+    size: 'medium'
   },
 
   init() {
