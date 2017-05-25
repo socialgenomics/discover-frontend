@@ -20,7 +20,7 @@ export default Mixin.create(FlashMessageMixin, {
   },
 
   /**
-   * @desc Makes the current credential primary based on the token in the header
+   * @desc Makes the credntial of the passed in id, primary.
    * @param credentialId
    * @private
    */
