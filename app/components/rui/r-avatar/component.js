@@ -6,7 +6,8 @@ export default Component.extend({
   tagName: 'img',
   classNames: ['mr2', 'circle'],
 
-  attributeBindings: ['src'],
+  attributeBindings: ['src', 'defaultImage:onError'],
+  defaultImage: 'this.onerror=null;this.src=\'/assets/images/avatar/dog.png\';',
 
   classNameBindings: [
     'small:icon-small',
