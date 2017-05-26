@@ -1,1 +1,37 @@
-{{tab-list class='c-card' tabs=tabs}}
+{{#rui/r-tab-list class="c-card"}}
+
+  {{tab-list-link-item
+    title="Searching for Data"
+    target="help.searching-for-data"
+    query="search-query"
+  }}
+
+  {{tab-list-link-item
+    title="Requesting Data"
+    target="help.requesting-data"
+    query="what-is-request"
+    class="border-left"
+  }}
+
+  {{tab-list-link-item
+    title="Registering new Data"
+    target="help.registering-new-data"
+    query="data-reg"
+    class="border-left"
+  }}
+
+  {{tab-list-link-item
+    title="Your Account"
+    target="help.your-account"
+    query="access"
+    class="border-left"
+  }}
+
+  {{tab-list-link-item
+    title="Other Common Issues"
+    target="help.other"
+    query="why-tag"
+    class="border-left"
+  }}
+
+{{/rui/r-tab-list}}
