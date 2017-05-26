@@ -49,7 +49,7 @@ metadata:
     kubernetes.io/ingress.class: "traefik"
 spec:
   rules:
-  - host: discover-ks.repositive.io
+  - host: discover-staging.repositive.io
     http:
       paths:
       - backend:

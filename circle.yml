@@ -16,16 +16,6 @@ test:
   override:
     - npm run test
 deployment:
-  staging-k8s:
-    branch: '#893/k8s-staging'
-    commands:
-      - node_modules/ember-cli/bin/ember build --environment staging
-      - docker build -t registry.repositive.io:5000/discover:$CIRCLE_BUILD_NUM .
-      - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS registry.repositive.io:5000
-      - docker push registry.repositive.io:5000/discover:$CIRCLE_BUILD_NUM
-      - TAG=$CIRCLE_BUILD_NUM envsubst '${TAG}' < k8s.staging.yml > deploy.yml
-      - KUBECONFIG=kubeconfig-staging $HOME/kubectl apply -f deploy.yml
-
   staging:
     branch: master
     commands:
@@ -33,7 +23,8 @@ deployment:
       - docker build -t registry.repositive.io:5000/discover:$CIRCLE_BUILD_NUM .
       - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS registry.repositive.io:5000
       - docker push registry.repositive.io:5000/discover:$CIRCLE_BUILD_NUM
-      - curl -u $DEPLOYMENT_USER:$DEPLOYMENT_PASS -T "deploy.staging.yml" "https://deployment-staging.repositive.io/deploy?stack=functional&version=$CIRCLE_BUILD_NUM"
+      - TAG=$CIRCLE_BUILD_NUM envsubst '${TAG}' < k8s.staging.yml > deploy.yml
+      - KUBECONFIG=kubeconfig-staging $HOME/kubectl apply -f deploy.yml
 
   deployment:
     tag: /.*/
