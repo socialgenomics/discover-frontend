@@ -5,13 +5,13 @@
 .c-reputation-total-small {
   right: -8px;
   bottom: -8px;
-  padding: 2px 4px 2px 4px;
+  padding: 2px 4px;
   min-width: $global-spacing-unit;
 }
 
 .c-reputation-total-large {
   right: -4px;
   bottom: -4px;
-  padding: 4px 6px 4px 6px;
-  min-width: $global-spacing-unit-large - 10;
+  padding: 6px 12px;
+  min-width: $spacing-unit-large;
 }

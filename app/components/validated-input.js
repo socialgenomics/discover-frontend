@@ -7,8 +7,7 @@ export default Component.extend({
   isActive: false,
   hasBeenFocused: false,
   isPasswordShown: false,
-
-  classNames: ['c-validated-input', 'u-pos-relative'],
+  classNames: ['c-validated-input', 'relative'],
   classNameBindings: ['isActive:active', 'isInvalid:invalid'],
 
   isValid: computed('hasBeenFocused', 'errors', function() {

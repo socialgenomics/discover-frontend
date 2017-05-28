@@ -24,8 +24,8 @@ describe('Integration | Component | contributors list', function() {
       'modelName': 'dataset'
     });
     this.render(hbs`{{contributors-list contributors=contributors modelName=modelName}}`);
-    expect(this.$('h4.u-tc-primary').text().trim()).to.eql('Liz');
-    expect(this.$('p.u-fs1').text().trim()).to.eql('Repositive');
+    expect(this.$('h4.fc-primary').text().trim()).to.eql('Liz');
+    expect(this.$('p.fs1').text().trim()).to.eql('Repositive');
   });
 
   it('renders an empty list when there are no contributors', function() {

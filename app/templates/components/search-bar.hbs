@@ -1,15 +1,15 @@
-<form class="u-flex u-flex-auto" {{action search query on='submit'}}>
-  <label class="u-flex-auto u-flex u-items-center">
-    <span class="u-cursor-text">{{fa-icon "search" class='u-px2 u-tc-secondary'}}</span>
+<form class="flex bc-white" {{action search query on='submit'}}>
+  <label class="flex-grow flex items-center">
+    <span class="cursor-text">{{fa-icon "search" class='px3 fc-secondary'}}</span>
     {{input
       type="text"
-      class="u-pr1 u-pl0 u-mr0 u-border-none"
+      class="pr2 pl0 mr0 border-none"
       placeholder=placeholder
       value=query
       autofocus=true
     }}
   </label>
   {{#if hasSubmitButton}}
-    <button class="c-btn c-btn-primary u-border-square u-self-stretch">Search</button>
+    <button class="c-btn c-btn-primary square self-stretch">Search</button>
   {{/if}}
 </form>

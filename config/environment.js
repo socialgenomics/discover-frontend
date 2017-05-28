@@ -48,24 +48,25 @@ module.exports = function(environment) {
        */
       APIRoutes: (function() {
         var mapping = {
-          'avatar': '/avatar',
           'auth.oauth': '/auth/oauth',
-          'users.login': '/auth/login',
-          'users.logout': '/auth/logout',
-          'users.signup': '/auth/register',
-          'datasets.search': '/search',
-          'collection-stats': '/collection-stats/{collection_id}',
+          'avatar': '/avatar',
           'collection-datasets': '/collection-datasets/{collection_id}',
-          'stats': '/stats',
+          'collection-stats': '/collection-stats/{collection_id}',
+          'datasets.search': '/search',
           'datasets.trending': '/trending',
           'datasources': '/datasources',
           'favourite-datasets': '/favourites/{user_id}/dataset',
           'favourite-requests': '/favourites/{user_id}/request',
-          'users.profiles': '/users/{id}/profile',
+          'make-primary': '/make-primary',
           'reset-password': '/auth/password-reset',
-          'verify-email': '/auth/verify',
+          'share': '/share',
+          'stats': '/stats',
+          'users.login': '/auth/login',
+          'users.logout': '/auth/logout',
+          'users.profiles': '/users/{id}/profile',
+          'users.signup': '/auth/register',
           'verify-email-resend': '/auth/verify/resend',
-          'share': '/share'
+          'verify-email': '/auth/verify'
         };
         _.each(mapping,
           function(path, key, obj) {

@@ -1,71 +1,69 @@
-<div class="u-bc-off-white c-navbar-wrapper u-pos-fixed u-pos-top0 u-full-width">
-  <nav class="c-navbar u-flex u-justify-between u-items-center">
+<div class="bc-very-light-grey c-navbar-wrapper fixed top-0 u-full-width">
+  <nav class="c-navbar flex justify-between items-center">
 
     <!-- LOGO -->
     {{#unless isAuthenticated}}
       <!-- desktop logo -->
-      <a href="https://repositive.io" class="u-hide-on-sm-md c-navbar__element u-mr3 u-pl2 u-shrink-none">
+      <a href="https://repositive.io" class="hide-s hide-m c-navbar__element mr4 pl3 flex-shrink-none">
         <img src="/assets/images/logo-full-larger.png" alt="Repositive DNA logo">
       </a>
       <!-- mobile logo -->
-      <a href="https://repositive.io" class="u-hide-on-lg u-w1 u-mr2 u-pl2 u-shrink-none">
+      <a href="https://repositive.io" class="hide-l hide-w icon-medium mr3 pl3 flex-shrink-none">
         <img src="/assets/images/repositive-logo.png" alt="Repositive DNA logo">
       </a>
     {{else}}
       <!-- desktop logo -->
-      {{#link-to 'root' class="u-hide-on-sm-md c-navbar__element u-mr2 u-pl2 u-shrink-none"}}
+      {{#link-to 'root' class="hide-s hide-m c-navbar__element mr3 pl3 flex-shrink-none"}}
         <img src="/assets/images/logo-full-larger.png" alt="Repositive DNA logo">
       {{/link-to}}
       <!-- mobile logo -->
-      {{#link-to 'root' class="u-hide-on-lg u-w1 u-mr2 u-pl2 u-shrink-none"}}
+      {{#link-to 'root' class="hide-l hide-w icon-medium mr3 pl3 flex-shrink-none"}}
         <img src="/assets/images/repositive-logo.png" alt="Repositive DNA logo">
       {{/link-to}}
     {{/unless}}
 
     <!-- SEARCH -->
     {{#if isAuthenticated}}
-
-      <div class="c-navbar__center-block u-flex u-items-stretch">
-        <div class="u-grow-1">
-          {{search-bar search=(route-action 'search') class="u-border-left u-border-right"}}
+      <div class="c-navbar__center-block flex items-stretch">
+        <div class="flex-grow">
+          {{search-bar search=(route-action 'search') class="border-left border-right"}}
         </div>
 
-        {{#link-to "datasets.register" class="u-hide-on-sm-md u-flex u-items-center u-justify-center c-navbar__element u-tc-secondary u-border-right u-hv-bc-off-white"}}
+        {{#link-to "datasets.register" class="hide-s hide-m flex items-center justify-center c-navbar__element fc-secondary border-right u-hv-bc-very-light-grey"}}
             {{fa-icon "file-text"}}
-            <span class="u-fs1 u-pl1">Register Data</span>
+            <span class="fs1 pl2">Register Data</span>
         {{/link-to}}
 
-        {{#link-to "datasets.request" class="u-hide-on-sm-md u-flex u-items-center u-justify-center c-navbar__element u-tc-secondary u-border-right u-hv-bc-off-white"}}
+        {{#link-to "datasets.request" class="hide-s hide-m flex items-center justify-center c-navbar__element fc-secondary border-right u-hv-bc-very-light-grey"}}
             {{fa-icon "clipboard"}}
-            <span class="u-fs1 u-pl1">Request Data</span>
+            <span class="fs1 pl2">Request Data</span>
         {{/link-to}}
       </div>
-      <div class="u-flex u-self-stretch">
+      <div class="flex self-stretch">
         {{navbar-notifier}}
         {{navbar-dropdown avatar=avatar firstname=firstname username=username userId=userId}}
       </div>
     {{else}}
       {{#unless isRootRoute}}
-
-        <div class="c-navbar__center-block u-pl3 u-mr3 u-flex u-items-stretch">
-          <div class="u-grow-1">
-            {{search-bar search=(route-action 'search') class="u-border-left u-border-right"}}
+        <div class="c-navbar__center-block pl4 mr4 flex items-stretch">
+          <div class="flex-grow">
+            {{search-bar search=(route-action 'search') class="border-left border-right"}}
           </div>
         </div>
 
       {{/unless}}
-        <div class="u-hide-on-sm-md u-self-stretch u-flex u-pr2 u-shrink-none">
-          <a href="http://repositive.io/about" class="u-flex u-items-center u-px2 u-ta-center u-tc-secondary u-hv-bc-off-white">About</a>
-          <a href="http://blog.repositive.io/" class="u-flex u-items-center u-px2 u-ta-center u-border-right u-tc-secondary u-hv-bc-off-white">Blog</a>
-          {{#link-to 'users.login' class="u-flex u-items-center u-px2 u-ta-center u-tc-secondary u-hv-bc-off-white"}}Login{{/link-to}}
+        <div class="hide-s hide-m self-stretch flex pr3 flex-shrink-none">
+          <a href="http://repositive.io/about" class="flex items-center px3 ta-center fc-secondary u-hv-bc-very-light-grey">About</a>
+          <a href="http://blog.repositive.io/" class="flex items-center px3 ta-center border-right fc-secondary u-hv-bc-very-light-grey">Blog</a>
+          {{#link-to 'users.login' class="flex items-center px3 ta-center fc-secondary u-hv-bc-very-light-grey"}}Login{{/link-to}}
           {{#if isRootRoute}}
-            {{#link-to 'users.signup' class="u-flex u-items-center u-px2 u-ta-center u-tc-teal u-fw-med u-hv-bc-off-white" invokeAction=(action 'trackCreateAccount' 'discover_landingpage_navbar_createAccount')}}Create Account{{/link-to}}
+            {{#link-to 'users.signup' class="flex items-center px3 ta-center fc-teal fw-med u-hv-bc-very-light-grey" invokeAction=(action 'trackCreateAccount' 'discover_landingpage_navbar_createAccount')}}Create Account{{/link-to}}
           {{else}}
-            {{#link-to 'users.signup' class="u-flex u-items-center u-px2 u-ta-center u-tc-teal u-fw-med u-hv-bc-off-white" invokeAction=(action 'trackCreateAccount' 'discover_openpage_navbar_createAccount')}}Create Account{{/link-to}}
+            {{#link-to 'users.signup' class="flex items-center px3 ta-center fc-teal fw-med u-hv-bc-very-light-grey" invokeAction=(action 'trackCreateAccount' 'discover_openpage_navbar_createAccount')}}Create Account{{/link-to}}
           {{/if}}
         </div>
 
-        <div class="u-hide-on-lg u-self-stretch u-flex">
+        <div class="hide-l hide-w self-stretch flex">
           {{navbar-dropdown trackCreateAccount=(action 'trackCreateAccount')}}
         </div>
 

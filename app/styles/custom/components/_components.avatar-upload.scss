@@ -1,7 +1,16 @@
-.c-avatar-upload {
-  .c-avatar-upload__hover:hover {
-    .c-avatar-upload__hover__text {
-      display: block;
-    }
-  }
+.c-avatar-upload__wrapper {
+  height: 120px;
+  margin: 0 auto;
+}
+
+.c-avatar-upload__image-wrapper:hover:after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  color: $primary-opacity-white;
+  background-color: $secondary-opacity-black;
+  line-height: 120px;
 }

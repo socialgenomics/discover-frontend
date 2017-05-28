@@ -3,7 +3,7 @@ import Ember from 'ember';
 const { Controller, computed, get, getProperties } = Ember;
 
 export default Controller.extend({
-  user: computed.alias('model'),
+  user: computed.alias('model.user'),
 
   userProfileData: computed('user', 'user.profile.[]', function () {
     // TODO: maybe we should be more selective when it comes to userProfile data we are sending to component

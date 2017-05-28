@@ -2,14 +2,15 @@ import Ember from 'ember';
 import ENV from 'repositive/config/environment';
 import { isBadRequestError } from 'ember-ajax/errors';
 import FlashMessageMixin from 'repositive/mixins/flash-message-mixin';
-import { validator, buildValidations } from 'ember-cp-validations';
+import { buildValidations } from 'ember-cp-validations';
 import presenceValidator from 'repositive/validations/presenceValidator';
 import emailFormatValidator from 'repositive/validations/emailFormatValidator';
 import lengthValidator from 'repositive/validations/lengthValidator';
+import passwordFormatValidator from 'repositive/validations/passwordFormatValidator';
 import { errorMessages, lengths, lengthTypes } from 'repositive/validations/validations-config';
 
 const { assign, get, getProperties, set, setProperties, computed, Controller, inject: { service } } = Ember;
-const passwordPatterns = [/\d/, /[A-Z]/, /[!,@,#,$,%,^,&,*,?,_,~,-,(,)]/];
+const passwordPatterns = [/\d/, /[A-Z]/, /[!,@,#,$,%,^,&,*,?,_,~,-,(,)]/, /^.{8,}$/];
 const Validations = buildValidations({
   fullname: presenceValidator(),
   email: [
@@ -19,11 +20,7 @@ const Validations = buildValidations({
   password: [
     presenceValidator(errorMessages.blankPassword),
     lengthValidator(lengths.password, lengthTypes.min),
-    validator(
-      function(value) {
-        return getPasswordStrength(value, passwordPatterns) !== 0 ? true : 'Must include a number or capital letter.';
-      }
-    )
+    passwordFormatValidator()
   ]
 });
 
@@ -52,11 +49,15 @@ export default Controller.extend(Validations, FlashMessageMixin, {
   isDisabled: computed.or('loading', 'isInvalid'),
 
   passwordStrength: computed('password', 'validations.attrs.password.isValid', function () {
-    if ( get(this, 'validations.attrs.password.isValid') === false) {
+    const score = this._getPasswordStrength(get(this, 'password'), get(this, 'passwordPatterns'));
+
+    if (score >= 1 && score <= 2) {
+      return 'medium';
+    } else if (score > 2 && get(this, 'validations.attrs.password.isValid')) {
+      return 'strong';
+    } else {
       return 'weak';
     }
-
-    return this._getPasswordStrength(get(this, 'password'), get(this, 'passwordPatterns')) < 2 ? 'medium' : 'strong';
   }),
 
   actions: {

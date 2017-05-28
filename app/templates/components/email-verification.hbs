@@ -1,0 +1,26 @@
+<form class="flex py2">
+  <div class="mr2">
+    {{validated-input
+      label='Email Address'
+      value=newEmail
+      type='email'
+      errors=validations.attrs.email.messages
+      placeholder='e.g. liz@repositive.io'
+      noMarkdown=true
+      noMsgContainer=true
+    }}
+  </div>
+
+  <div class="flex items-end">
+    {{async-button
+      class="c-btn c-btn-primary"
+      action=(action 'saveNewCredential')
+      default="Save"
+      pending="Saving..."
+      disableWhen=isDisabled
+      reset=true
+    }}
+  </div>
+</form>
+
+<a class="fc-secondary td-underline" {{action 'cancel'}}>Cancel</a>

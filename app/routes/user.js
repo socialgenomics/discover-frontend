@@ -1,15 +1,24 @@
 import Ember from 'ember';
-import { isVerified } from './users/trust';
+import { isVerified } from 'repositive/utils/credentials';
 import ENV from 'repositive/config/environment';
 
-const { inject: { service }, Route, RSVP, get, Logger, isEmpty } = Ember;
+const {
+  inject: {
+    service
+  },
+  Route,
+  RSVP,
+  get,
+  Logger,
+  isEmpty
+} = Ember;
 
 export default Route.extend({
   ajax: service(),
   session: service(),
   favouritesService: service('favourites'),
 
-  model: function(params) {
+  model: function (params) {
     if (get(this, 'session.session.isAuthenticated')) {
       return this.store.findRecord('user', params.id)
         .then(user => this._getProfileData(user, params))
@@ -23,7 +32,8 @@ export default Route.extend({
             requests: values.profileData.requests,
             discussions,
             contributions: values.datasetContributions,
-            is_verified: isVerified(values.profileData.user_credential)
+            is_verified: isVerified(values.profileData.user_credential),
+            schema: this._buildSchema(values.profileData.user)
           };
         })
         .catch(err => {
@@ -63,7 +73,9 @@ export default Route.extend({
         'where.type': 'attribute',
         'limit': 50
       }),
-      user_credential: this.store.query('credential', { 'where.user_id': userId }),
+      user_credential: this.store.query('credential', {
+        'where.user_id': userId
+      }),
       favourited_data: this._getFavouritedData(params.id)
     });
   },
@@ -77,11 +89,19 @@ export default Route.extend({
     const datasetDiscussions = isEmpty(datasetDiscussionIds) ? [] : this._createQuery(datasetDiscussionIds, 'dataset');
     const requestDiscussions = isEmpty(requestDiscussionIds) ? [] : this._createQuery(requestDiscussionIds, 'request');
 
-    return RSVP.hash({ profileData, datasetContributions, datasetDiscussions, requestDiscussions });
+    return RSVP.hash({
+      profileData,
+      datasetContributions,
+      datasetDiscussions,
+      requestDiscussions
+    });
   },
 
   _createQuery(ids, modelType) {
-    return this.store.query(modelType, { 'where.id': ids, limit: 50 });
+    return this.store.query(modelType, {
+      'where.id': ids,
+      limit: 50
+    });
   },
 
   _getUniqueIds(arrayOfObjs, modelType) {
@@ -94,8 +114,12 @@ export default Route.extend({
   _getFavouritedData(userIdOfProfile) {
     const ajax = get(this, 'ajax');
     return RSVP.hash({
-      datasets: ajax.request(ENV.APIRoutes['favourite-datasets'].replace('{user_id}', userIdOfProfile), { method: 'GET' }),
-      requests: ajax.request(ENV.APIRoutes['favourite-requests'].replace('{user_id}', userIdOfProfile), { method: 'GET' })
+      datasets: ajax.request(ENV.APIRoutes['favourite-datasets'].replace('{user_id}', userIdOfProfile), {
+        method: 'GET'
+      }),
+      requests: ajax.request(ENV.APIRoutes['favourite-requests'].replace('{user_id}', userIdOfProfile), {
+        method: 'GET'
+      })
     })
       .then(data => {
         const datasets = data.datasets.map(datasetObj => {
@@ -106,5 +130,38 @@ export default Route.extend({
         });
         return [...datasets, ...requests];
       }).catch(Logger.error);
+  },
+
+  _buildSchema(user) {
+    const schema = {
+      "@context": "http://schema.org",
+      "@type": "Person",
+      name: `${get(user, 'firstname')} ${get(user, 'lastname')}`,
+      "jobTitle": get(user, 'profile.work_role'),
+      "affiliation": {
+        "@type": "Organization",
+        "name": get(user, 'profile.work_organisation')
+      },
+      "image": {
+        "@type": "image",
+        "url": get(user, 'profile.avatar')
+      },
+      "location": {
+        "@type": "Place",
+        "name": get(user, 'profile.location')
+      },
+      "description": get(user, 'profile.bio'),
+      "interest": get(user, 'profile.interests'),
+      "sameAs": []
+    };
+
+    const accounts = get(user, 'profile.accounts');
+    for (let acc in accounts) {
+      if (accounts.hasOwnProperty(acc)) {
+        schema.sameAs.push(accounts[acc]);
+      }
+    }
+
+    return `<script type="application/ld+json">${JSON.stringify(schema, 0, 2)}</script>`;
   }
 });
