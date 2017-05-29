@@ -6,8 +6,7 @@ export default Component.extend({
   tagName: 'img',
   classNames: ['circle'],
 
-  attributeBindings: ['src', 'defaultImage:onError'],
-  defaultImage: 'this.onerror=null;this.src=\'/assets/images/avatar/dog.png\';',
+  attributeBindings: ['src'],
 
   classNameBindings: [
     // sizes
@@ -31,6 +30,13 @@ export default Component.extend({
     // TODO: this logic is also used for buttons, create a generalised logic helper.
     // set option flags used for className bindings
     Object.keys(get(this, 'options')).forEach(key => this._setOptionFlag(key));
+  },
+
+  didRender() {
+    this._super(...arguments);
+    $(".circle").on("error", function() {
+      $(this).attr('src', '../assets/images/avatar/dog.png');
+    })
   },
 
   /**
