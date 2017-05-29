@@ -8,10 +8,6 @@ const { get, set } = Ember;
 
 describe('Unit | Component | RUI / r-avatar', function() {
   setupComponentTest('rui/r-avatar', {
-    needs: [
-      'validator:presence',
-      'validator:format'
-    ],
     unit: true
   });
 

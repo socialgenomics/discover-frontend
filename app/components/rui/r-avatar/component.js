@@ -28,6 +28,7 @@ export default Component.extend({
   init() {
     this._super(...arguments);
 
+    // TODO: this logic is also used for buttons, create a generalised logic helper.
     // set option flags used for className bindings
     Object.keys(get(this, 'options')).forEach(key => this._setOptionFlag(key));
   },
