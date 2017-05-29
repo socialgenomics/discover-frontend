@@ -3,5 +3,6 @@ import Ember from 'ember';
 const { Component } = Ember;
 
 export default Component.extend({
-  classNames: ['c-card', 'ta-center', 'square', 'mb0']
+  classNames: ['u-z1', 'o-list-flush-left', 'flex', 'fc-primary', 'ta-center', 'mb0'],
+  tagName: 'ul'
 });
