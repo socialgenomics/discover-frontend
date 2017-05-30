@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import SessionService from 'ember-simple-auth/services/session';
 
-const { inject: { service }, get, set, setProperties, observer, Logger, RSVP } = Ember;
+const { inject: { service }, get, set, observer, Logger, RSVP } = Ember;
 
 export default SessionService.extend({
   store: service(),
@@ -9,7 +9,7 @@ export default SessionService.extend({
 
   setAuthenticatedUser: observer('data.authenticated.user', function() {
     const userData = get(this, 'data.authenticated.user');
-
+    // debugger;
     if (get(this, 'isAuthenticated')) {
       if (!userData) {
         // force logout
@@ -27,12 +27,12 @@ export default SessionService.extend({
       })
         .then(data => {
           const user = data.user;
-          setProperties(user, {
-            email: get(data, 'credential.firstObject.email'),
-            isEmailValidated: userData.isEmailValidated //TODO move to verify route
-          });
+          // setProperties(user, {
+          //   email: get(data, 'credential.firstObject.email'),
+          //   isEmailValidated: userData.isEmailValidated //TODO move to verify route
+          // });
 
-          user.save();
+          // user.save();
 
           set(this, 'authenticatedUser', user);
         })

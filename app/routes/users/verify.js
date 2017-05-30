@@ -24,7 +24,10 @@ export default Route.extend(FlashMessageMixin, VerificationMixin, {
       })
       .then(() => {
         if (get(this, 'session.isAuthenticated')) {
+          // debugger;
           if (get(this, 'session.authenticatedUser')) {
+            // TODO set isVerified on user model
+            // TODO change verify template to accommodate this
             setProperties(this, {
               'session.authenticatedUser.isEmailValidated': true,
               'session.data.displayWelcomeMessage': false
@@ -33,7 +36,6 @@ export default Route.extend(FlashMessageMixin, VerificationMixin, {
             //TODO this is alwyas the case when first verifying - WHY?
             // Because session.authenticatedUser is not set.
             Logger.warn('session.authenticatedUser is undefined but session.isAuthenticated "true"');
-            this.transitionTo('users.login');
             set(this, 'session.data.displayWelcomeMessage', false);
           }
         } else {
