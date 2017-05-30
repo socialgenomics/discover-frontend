@@ -90,7 +90,7 @@
     "torii": "^0.8.0"
   },
   "dependencies": {
-    "@repositive/liz-skin": "^1.0.0",
+    "@repositive/liz-skin": "^1.1.0",
     "ember-computed-decorators": "^0.2.2",
     "ember-export-application-global": "1.0.5",
     "ember-load-initializers": "^0.5.1",

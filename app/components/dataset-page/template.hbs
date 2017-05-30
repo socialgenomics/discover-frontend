@@ -10,7 +10,7 @@
         {{/if}}
         <div class="pl2 flex items-center">
           {{follow-button subscribable=model.subscribableId model=model}}
-          <ul class="flex o-list-flush-left pl3 mb0">
+          <ul class="flex list-flush-left pl3 mb0">
             {{action-favourite model=model class="mr3"}}
             {{action-share
               actionableId=model.id
@@ -66,7 +66,7 @@
           {{create-account-call-to-action}}
         {{/unless}}
 
-        <ul class="o-list-flush-left mb3">
+        <ul class="list-flush-left mb3">
           {{#if model.userId}}
             <li class="fs0 fc-tertiary">
               Submitted by:
