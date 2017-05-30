@@ -7,7 +7,7 @@ const { Component, computed, get, isEmpty } = Ember;
 export default Component.extend(VerificationMixin, {
   addingCredential: false,
 
-  mainCredentialNotVerified: computed('credentials.main_credential', function() {
+  mainCredentialNotVerified: computed('credentials.main_credential.verified', function() {
     return !get(this, 'credentials.main_credential.verified');
   }),
 

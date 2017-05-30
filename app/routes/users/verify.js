@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import ENV from 'repositive/config/environment';
-import { getLatestSecondaryCredential, mainCredential } from 'repositive/utils/credentials';
+import { getLatestSecondaryCredential, mainCredential, secondaryCredentials, fetchCredentials } from 'repositive/utils/credentials';
 import FlashMessageMixin from 'repositive/mixins/flash-message-mixin';
 import VerificationMixin from 'repositive/mixins/verification';
 
@@ -14,15 +14,11 @@ export default Route.extend(FlashMessageMixin, VerificationMixin, {
     return RSVP.hash({
       'verificationResp': get(this, 'ajax')
         .request(ENV.APIRoutes['verify-email'] + '/' + params.verification_id, { method: 'GET' }),
-      'credentials': this.store.query('credential', {
-        'where.user_id': get(this, 'session.session.content.authenticated.user.id'),
-        'order[0][0]': 'updated_at',
-        'order[0][1]': 'DESC',
-        'limit': '50'
-      })
+      'credentials': fetchCredentials(this.store,  get(this, 'session.session.content.authenticated.user.id'))
     })
       .then(resp => {
-        const credentialId = getLatestSecondaryCredential(resp.credentials.content).id;
+        if (get(resp, 'credentials.length') === 1) { return; }
+        const credentialId = getLatestSecondaryCredential(secondaryCredentials(resp.credentials)).id;
         set(this, 'session.session.content.authenticated.token', resp.verificationResp.token);
         return this._makeCredentialPrimary(credentialId);
       })
@@ -34,6 +30,8 @@ export default Route.extend(FlashMessageMixin, VerificationMixin, {
               'session.data.displayWelcomeMessage': false
             });
           } else {
+            //TODO this is alwyas the case when first verifying - WHY?
+            // Because session.authenticatedUser is not set.
             Logger.warn('session.authenticatedUser is undefined but session.isAuthenticated "true"');
             this.transitionTo('users.login');
             set(this, 'session.data.displayWelcomeMessage', false);
@@ -50,11 +48,9 @@ export default Route.extend(FlashMessageMixin, VerificationMixin, {
 
   actions: {
     resendVerifyEmail() {
-      this.store.query('credential', {
-        'where.user_id': get(this, 'session.authenticatedUser.id')
-      })
+      return fetchCredentials(this.store, get(this, 'session.authenticatedUser.id'))
         .then(credentials => {
-          const latestSecondaryCredential = getLatestSecondaryCredential(credentials);
+          const latestSecondaryCredential = getLatestSecondaryCredential(secondaryCredentials(credentials));
           if (latestSecondaryCredential) {
             const email = get(latestSecondaryCredential, 'email');
             return this._sendVerificationEmail(email);

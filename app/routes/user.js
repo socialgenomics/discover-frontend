@@ -73,6 +73,7 @@ export default Route.extend({
         'where.type': 'attribute',
         'limit': 50
       }),
+      //TODO THIS IS NOT NEEDED!!! USE `isEmailValidation` on user model.
       user_credential: this.store.query('credential', {
         'where.user_id': userId
       }),
