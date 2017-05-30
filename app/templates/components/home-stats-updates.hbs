@@ -12,7 +12,7 @@
           </h3>
         {{/link-to}}
 
-        <ul class="o-list-flush-left mb0">
+        <ul class="list-flush-left mb0">
           {{#each (sort-by "updatedAt:desc" collections) as |collection index|}}
             {{featured-list-item
               isNewest=(eq index 0)
@@ -31,7 +31,7 @@
             Data Sources <span>{{stats.datasources}}</span>
           </h3>
         {{/link-to}}
-        <ul class="o-list-flush-left mb0">
+        <ul class="list-flush-left mb0">
           {{#each (sort-by "updatedAt:desc" datasources) as |datasource index|}}
             {{featured-list-item
               isNewest=(eq index 0)
