@@ -4,5 +4,5 @@ const { Component } = Ember;
 
 export default Component.extend({
   tagName: 'ul',
-  classNames: ['o-list-inline', 'o-list-flush-left', 'mb0']
+  classNames: ['list-flush-left', 'mb0']
 });
