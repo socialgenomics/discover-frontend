@@ -22,11 +22,11 @@ describe('Unit | Component | RUI / r-tab-list-item', function() {
 
   describe('properties', function () {
     it('should have correct class name set', function () {
-      expect(get(component, 'classNames')).to.be.eql(['ember-view', 'flex-auto']);
+      expect(get(component, 'classNames')).to.be.eql(['ember-view', 'flex-auto', 'cursor-pointer', 'fc-secondary', 'flex-grow', 'p2', 'fs2', 'fw-med']);
     });
 
     it('should have correct classNameBindings set', function () {
-      expect(get(component, 'classNameBindings')).to.be.eql(['isActive:bc-white:bc-very-light-grey']);
+      expect(get(component, 'classNameBindings')).to.be.eql(['isActive:bc-white:bc-very-light-grey', 'isActive::u-hv-bc-very-light-grey']);
     });
   });
 });
