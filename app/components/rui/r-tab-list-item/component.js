@@ -3,6 +3,7 @@ import Ember from 'ember';
 const { Component, computed, get } = Ember;
 
 export default Component.extend({
+  tagName: 'li',
   classNames: ['flex-auto', 'cursor-pointer', 'fc-secondary', 'flex-grow', 'p2', 'fs2', 'fw-med'],
   classNameBindings: ['isActive:bc-white:bc-very-light-grey', 'isActive::u-hv-bc-very-light-grey'],
 
