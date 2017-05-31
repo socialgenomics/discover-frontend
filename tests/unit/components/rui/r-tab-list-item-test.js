@@ -26,7 +26,7 @@ describe('Unit | Component | RUI / r-tab-list-item', function() {
     });
 
     it('should have correct classNameBindings set', function () {
-      expect(get(component, 'classNameBindings')).to.be.eql(['active:bc-white:bc-very-light-grey']);
+      expect(get(component, 'classNameBindings')).to.be.eql(['isActive:bc-white:bc-very-light-grey']);
     });
   });
 });
