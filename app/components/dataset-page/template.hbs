@@ -128,15 +128,15 @@
         {{#unless isRequest}}
           {{#rui/r-tab-list class='mb3'}}
             {{rui/r-tab-list-item
-                setActiveTab=(action 'setActiveTab')
-                activeTab=activeTab
-                tabName='metadata'
-                actionItem=true}}
+              setActiveTab=(action 'setActiveTab')
+              activeTab=activeTab
+              tabName='metadata'
+              actionItem=true}}
             {{rui/r-tab-list-item
-                setActiveTab=(action 'setActiveTab')
-                activeTab=activeTab
-                tabName='discussion'
-                actionItem=true}}
+              setActiveTab=(action 'setActiveTab')
+              activeTab=activeTab
+              tabName='discussion'
+              actionItem=true}}
           {{/rui/r-tab-list}}
           <div class="p3">
             {{#if (eq activeTab 'metadata')}}

@@ -27,7 +27,7 @@ describe('Integration | Component | RUI / r-tab-list-item', function() {
 
   describe('action tab is active', function() {
     it('it should have an active class', function() {
-      this.render(hbs`{{tab-list-action-item
+      this.render(hbs`{{rui/r-tab-list-item
         activeTab='abc'
         tabName='abc'
         actionItem=true
@@ -39,7 +39,7 @@ describe('Integration | Component | RUI / r-tab-list-item', function() {
   describe('action tab is inactive', function() {
     beforeEach(function() {
       this.set('setActiveTab', sinon.spy());
-      this.render(hbs`{{tab-list-action-item
+      this.render(hbs`{{rui/r-tab-list-item
         activeTab='abc'
         tabName='def'
         setActiveTab=setActiveTab
