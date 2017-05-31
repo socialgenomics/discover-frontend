@@ -6,11 +6,11 @@ import Ember from 'ember';
 const { setProperties } = Ember;
 
 describe('Unit | Component | pagination bar', function() {
-  setupComponentTest('pagination-bar', {
+  setupComponentTest('rui/r-pagination', {
     unit: true,
     needs: [
       'component:fa-icon',
-      'component:pagination-number-button'
+      'component:rui/r-pagination/button'
     ]
   });
 
