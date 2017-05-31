@@ -14,6 +14,7 @@ describe('Integration | Component | user profile info', function() {
       work_organisation: 'Repositive',
       work_role: 'Developer'
     },
+    isEmailValidated: true,
     createdAt: moment(new Date('December 17, 1995'))
   };
   setupComponentTest('user-profile-info', {
@@ -23,13 +24,11 @@ describe('Integration | Component | user profile info', function() {
     beforeEach(function() {
       this.setProperties({
         'isOwnProfile': true,
-        'user': user,
-        'isVerified': true
+        'user': user
       });
       this.render(hbs`{{user-profile-info
         isOwnProfile=isOwnProfile
-        user=user
-        isVerified=isVerified}}`);
+        user=user}}`);
     });
 
     it('edit profile icon is displayed', function() {
@@ -44,7 +43,7 @@ describe('Integration | Component | user profile info', function() {
 
     describe('when the user is not verified', function() {
       it('should diplay message telling user to verify account', function() {
-        this.set('isVerified', false);
+        this.set('user.isEmailValidated', false);
         expect(this.$('h4').text().trim()).to.eql('Please verify your email');
       });
     });
@@ -66,7 +65,7 @@ describe('Integration | Component | user profile info', function() {
     describe('user has no bio', function() {
       it('renders link to edit profile', function() {
         this.set('user.profile.bio', null);
-        expect(this.$('a').eq(3).text().trim()).to.eql('Add your bio');
+        expect(this.$('a').eq(4).text().trim()).to.eql('Add your bio');
       });
     });
   });
@@ -75,13 +74,10 @@ describe('Integration | Component | user profile info', function() {
     beforeEach(function() {
       this.setProperties({
         'isOwnProfile': false,
-        'user': user,
-        'isVerified': true
-      });
+        'user': user });
       this.render(hbs`{{user-profile-info
         isOwnProfile=isOwnProfile
-        user=user
-        isVerified=isVerified}}`);
+        user=user}}`);
     });
 
     it('edit profile icon is not displayed', function() {
@@ -93,13 +89,10 @@ describe('Integration | Component | user profile info', function() {
     beforeEach(function() {
       this.setProperties({
         'isOwnProfile': false,
-        'user': user,
-        'isVerified': true
-      });
+        'user': user});
       this.render(hbs`{{user-profile-info
         isOwnProfile=isOwnProfile
-        user=user
-        isVerified=isVerified}}`);
+        user=user}}`);
     });
 
     it('should display the date the user joined', function() {

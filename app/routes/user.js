@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import { isVerified } from 'repositive/utils/credentials';
 import ENV from 'repositive/config/environment';
 
 const {
@@ -32,7 +31,6 @@ export default Route.extend({
             requests: values.profileData.requests,
             discussions,
             contributions: values.datasetContributions,
-            is_verified: isVerified(values.profileData.user_credential),
             schema: this._buildSchema(values.profileData.user)
           };
         })
@@ -72,10 +70,6 @@ export default Route.extend({
         'where.user_id': userId,
         'where.type': 'attribute',
         'limit': 50
-      }),
-      //TODO THIS IS NOT NEEDED!!! USE `isEmailValidation` on user model.
-      user_credential: this.store.query('credential', {
-        'where.user_id': userId
       }),
       favourited_data: this._getFavouritedData(params.id)
     });
