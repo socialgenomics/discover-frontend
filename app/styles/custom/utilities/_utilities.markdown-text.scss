@@ -23,6 +23,7 @@
 
   // Other Decoration
   a   {
+    @extend .hyphens-auto;
     text-decoration: underline;
     // wrap long urls
     overflow-wrap: break-word;
