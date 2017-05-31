@@ -1,27 +1,29 @@
-{{#link-to 'user' user.id disabled=(not session.isAuthenticated) invokeAction=(action 'toggleCreateAccountModal') classNames="u-hv-bc-darken5 u-block u-py2 u-pl1"}}
-  <div class="u-pos-relative u-inline-block u-mr2">
-    <img class="u-circle u-w2 u-mr1" src="{{user.profile.avatar}}" onError="this.onerror=null;this.src='/assets/images/avatar/dog.png';" />
-    {{reputation-total total=user.reputationTotal class="c-reputation-total-small u-fs0"}}
+
+{{#link-to 'user' user.id disabled=(not session.isAuthenticated) invokeAction=(action 'toggleCreateAccountModal') classNames="u-hv-bc-darken5 block py3 pl2"}}
+  <div class="relative inline-block mr3">
+    <img class="circle icon-large mr1" src="{{user.profile.avatar}}" onError="this.onerror=null;this.src='/assets/images/avatar/dog.png';" />
+    {{reputation-total total=user.reputationTotal class="c-reputation-total-small fs0"}}
   </div>
 
-  <div class="u-inline-block {{if user.profile.work_organisation 'u-pos-absolute'}} {{if currentUser 'u-pos-absolute'}}">
-    <h4 class="u-flex u-items-center u-mb0 u-fs2 u-tc-primary">
-      {{user.displayName}}
+  <div class="inline-block {{if user.profile.work_organisation 'absolute'}} {{if currentUser 'absolute'}}">
+    <h4 class="flex items-center mb0 fs2 fc-primary">
+      {{truncate user.displayName 35}}
       {{#if timestamp}}
-        <span class="u-tc-tertiary u-pl1 u-fs0 u-fw-reg">{{moment-from-now timestamp allowEmpty=true}}</span>
+        <span class="fc-tertiary pl2 fs0 fw-reg">{{moment-from-now timestamp allowEmpty=true}}</span>
       {{/if}}
     </h4>
+
     {{#if user.profile.work_role}}
-      <p class="u-mb0 u-inline u-fs1">{{truncate user.profile.work_role 55}}</p>
+      <p class="mb0 inline fs1">{{truncate user.profile.work_role 55}}</p>
     {{/if}}
     {{#if (and user.profile.work_role user.profile.work_organisation)}}
-      <p class="u-mb0 u-inline u-fs1">at</p>
+      <p class="mb0 inline fs1">at</p>
     {{/if}}
     {{#if user.profile.work_organisation}}
-      <p class="u-mb0 u-inline u-fs1">{{truncate user.profile.work_organisation 55}}</p>
+      <p class="mb0 inline fs1">{{truncate user.profile.work_organisation 55}}</p>
     {{else}}
       {{#if currentUser}}
-        {{#link-to 'users.profile' classNames="u-tc-secondary u-td-underline"}}Add your affiliation{{/link-to}}
+        {{#link-to 'users.profile' classNames="fc-secondary td-underline"}}Add your affiliation{{/link-to}}
       {{/if}}
     {{/if}}
   </div>

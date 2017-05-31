@@ -3,21 +3,36 @@
 
 import Ember from 'ember';
 import { buildValidations } from 'ember-cp-validations';
-import urlFormatValidator from 'repositive/validations/urlFormatValidator';
 import { errorMessages, patterns } from 'repositive/validations/validations-config';
 import { validator } from 'ember-cp-validations';
 import FlashMessageMixin from 'repositive/mixins/flash-message-mixin';
 
 const { Component, inject: { service }, Logger, set, get, isEmpty } = Ember;
 const Validations = buildValidations({
-  [createUserAttrKey('profile.accounts.googlePlus')]: urlFormatValidator(),
-  [createUserAttrKey('profile.accounts.linkedIn')]: urlFormatValidator(),
-  [createUserAttrKey('profile.accounts.researchGate')]: urlFormatValidator(),
-  [createUserAttrKey('profile.accounts.orcid')]: urlFormatValidator(),
+  [createUserAttrKey('profile.accounts.googlePlus')]: validator('format', {
+    regex: patterns.google,
+    allowBlank: true,
+    message: errorMessages.invalidGoogleLink
+  }),
+  [createUserAttrKey('profile.accounts.linkedIn')]: validator('format', {
+    regex: patterns.linkedin,
+    allowBlank: true,
+    message: errorMessages.invalidLinkedinLink
+  }),
   [createUserAttrKey('profile.accounts.twitter')]: validator('format', {
     regex: patterns.twitter,
     allowBlank: true,
     message: errorMessages.invalidTwitterHandle
+  }),
+  [createUserAttrKey('profile.accounts.researchGate')]: validator('format', {
+    regex: patterns.researchgate,
+    allowBlank: true,
+    message: errorMessages.invalidResearchGateLink
+  }),
+  [createUserAttrKey('profile.accounts.orcid')]: validator('format', {
+    regex: patterns.orcid,
+    allowBlank: true,
+    message: errorMessages.invalidOrcidLink
   })
 });
 
@@ -45,7 +60,7 @@ export default Component.extend(Validations, FlashMessageMixin, {
       {
         label: 'LinkedIn',
         userAttributeKey: this._createUserAttrKey('profile.accounts.linkedIn'),
-        placeholder: 'e.g. http://www.linkedin.com/in/christinaLuckasson'
+        placeholder: 'e.g. https://www.linkedin.com/in/christinaLuckasson'
       },
       {
         label: 'Twitter',

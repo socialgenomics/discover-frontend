@@ -1,9 +1,9 @@
 .c-select-trigger,
 .c-select-dropdown {
   color: $color-mid-grey;
-  border: $global-border-style;
-  border-radius: $global-border-radius;
-  font-size: $global-font-size;
+  border: $border-width solid $border-color;
+  border-radius: $border-radius;
+  font-size: $font-size-regular;
   outline: none;
   cursor: pointer;
   width: 50px;
@@ -11,12 +11,12 @@
 }
 
 .c-select-options {
-  @extend .u-p0;
+  @extend .p0;
   margin: 0;
 }
 
 .c-select-option {
-  @extend .u-px2;
+  @extend .px3;
 
   &:hover {
     color: inherit;

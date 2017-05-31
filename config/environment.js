@@ -48,24 +48,25 @@ module.exports = function(environment) {
        */
       APIRoutes: (function() {
         var mapping = {
-          'avatar': '/avatar',
           'auth.oauth': '/auth/oauth',
-          'users.login': '/auth/login',
-          'users.logout': '/auth/logout',
-          'users.signup': '/auth/register',
-          'datasets.search': '/search',
-          'collection-stats': '/collection-stats/{collection_id}',
+          'avatar': '/avatar',
           'collection-datasets': '/collection-datasets/{collection_id}',
-          'stats': '/stats',
+          'collection-stats': '/collection-stats/{collection_id}',
+          'datasets.search': '/search',
           'datasets.trending': '/trending',
           'datasources': '/datasources',
           'favourite-datasets': '/favourites/{user_id}/dataset',
           'favourite-requests': '/favourites/{user_id}/request',
-          'users.profiles': '/users/{id}/profile',
+          'make-primary': '/make-primary',
           'reset-password': '/auth/password-reset',
-          'verify-email': '/auth/verify',
+          'share': '/share',
+          'stats': '/stats',
+          'users.login': '/auth/login',
+          'users.logout': '/auth/logout',
+          'users.profiles': '/users/{id}/profile',
+          'users.signup': '/auth/register',
           'verify-email-resend': '/auth/verify/resend',
-          'share': '/share'
+          'verify-email': '/auth/verify'
         };
         _.each(mapping,
           function(path, key, obj) {
@@ -120,7 +121,7 @@ module.exports = function(environment) {
         'font-src': "'self' data: fonts.gstatic.com https://js.intercomcdn.com/fonts/",
         'style-src': "'self' 'unsafe-inline' fonts.googleapis.com",
         'script-src': "'self' 'unsafe-inline' http://docker-vm:49152 http://www.google-analytics.com/analytics.js https://s3-eu-west-1.amazonaws.com/share.typeform.com/widget.js https://s3-eu-west-1.amazonaws.com/share.typeform.com/widget.js https://widget.intercom.io https://js.intercomcdn.com",
-        'connect-src': "'self' 'unsafe-inline' ws://docker-vm:49152 https://api-ping.intercom.io https://nexus-websocket-a.intercom.io https://nexus-websocket-b.intercom.io wss://nexus-websocket-a.intercom.io wss://nexus-websocket-b.intercom.io https://api-iam.intercom.io",
+        'connect-src': "'self' 'unsafe-inline' ws://docker-vm:49152 https://pubads.g.doubleclick.net/ https://api-ping.intercom.io https://nexus-websocket-a.intercom.io https://nexus-websocket-b.intercom.io wss://nexus-websocket-a.intercom.io wss://nexus-websocket-b.intercom.io https://api-iam.intercom.io",
         'img-src': "'self' data: https://github.com/ https://raw.githubusercontent.com *.repositive.io *.googleusercontent.com http://www.google-analytics.com https://www.gravatar.com http://i2.wp.com/dg2kcfbxc77v1.cloudfront.net http://i0.wp.com/dg2kcfbxc77v1.cloudfront.net/assets https://js.intercomcdn.com https://static.intercomassets.com/ https://dg2kcfbxc77v1.cloudfront.net/ https://s3.amazonaws.com/datasource-logos/",
         'media-src': "'self'",
         'frame-src': "'self' 'unsafe-inline' https://repositive.typeform.com/to/pktwPz https://repositive.typeform.com/to/viIWx1"

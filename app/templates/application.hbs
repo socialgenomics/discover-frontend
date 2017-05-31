@@ -5,8 +5,8 @@
   userId=session.authenticatedUser.id
   isRootRoute=isRootRoute
 }}
-<main class="u-pos-relative o-main-wrapper">
-  <div class="u-pos-fixed u-full-width u-zindex-flash-message">
+<main class="relative c-main-wrapper">
+  <div class="fixed u-full-width u-zindex-flash-message">
     {{#each flashMessages.queue as |flash|}}
       {{ui-message flash=flash}}
     {{/each}}
