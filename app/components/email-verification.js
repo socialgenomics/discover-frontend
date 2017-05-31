@@ -37,17 +37,28 @@ export default Component.extend(FlashMessageMixin, Validations, VerificationMixi
 
   actions: {
     saveNewCredential() {
-      const email = get(this, 'credentials.main_credential.email');
       const newEmail = get(this, 'newEmail');
-
-      if (newEmail === email && get(this, 'credentials.is_verified')) {
-        this._addFlashMessage('This credential is already associated with this account.', 'success');
-        this.send('cancel');
+      const existingCredential = this._getExistingCredential(newEmail);
+      if (existingCredential) {
+        //If it's not verified -> send email
+        if (!get(existingCredential, 'verified')) {
+          return this._sendVerificationEmail(newEmail);
+        }
+        return this._makeCredentialPrimary(existingCredential.id)
+          .then(() => {
+            return this.store.peekRecord('credential', existingCredential.id).reload();
+          })
+          .then(() => {
+            this._addFlashMessage(`${newEmail} is now your primary email address.`, 'success');
+            this.send('cancel');
+          })
+          .catch(this._onMakePrimaryError.bind(this))
       } else {
         set(this, 'loading', true);
         return this._saveCredential(newEmail);
       }
     },
+
     cancel() { get(this, 'toggleAddCredentialInput')(); }
   },
 
@@ -68,9 +79,10 @@ export default Component.extend(FlashMessageMixin, Validations, VerificationMixi
     return credential
       .save()
       .then(newCred => {
-        get(this, 'credentials.secondary_credentials').addObject(newCred);
+        get(this, 'pushToSecondaryCreds')(newCred);
         return this._sendVerificationEmail(newEmail);
       })
+      .then(this.send('cancel'))
       .catch(this._onSaveError.bind(this, credential))
       .finally(set(this, 'loading', false));
   },
@@ -85,5 +97,17 @@ export default Component.extend(FlashMessageMixin, Validations, VerificationMixi
     model.rollbackAttributes();
     Logger.error(error);
     this._addFlashMessage('Sorry. There was a problem saving your new email. Please try again later.', 'warning')
+  },
+
+  /**
+   * @desc checks email against user's existing emails
+   * @param {String} email
+   * @returns {Object | Boolean}
+   * @private
+   */
+  _getExistingCredential(email) {
+    const existingCredential = get(this, 'store').peekAll('credential')
+      .findBy('email', email);
+    return existingCredential ? existingCredential : false;
   }
 });
