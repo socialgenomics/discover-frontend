@@ -1,10 +1,10 @@
 <div class="grid-wrapper grid-wrapper-stepped ta-center">
   <section class="grid">
     <div class="grid__col grid__col--3-of-3 flex items-center flex-column">
-      {{#if session.authenticatedUser.isEmailValidated}}
+      {{#if model.verified}}
         <h1 class="fs4 fc-secondary">Your account is now verified.</h1>
         <img src="/assets/images/happy.png" class="mb4 icon-x-large" alt="happy lizard">
-        {{#link-to 'user' session.authenticatedUser.id class="c-btn c-btn-primary"}}Visit your Profile{{/link-to}}
+        {{#link-to 'user' model.id class="c-btn c-btn-primary"}}Visit your Profile{{/link-to}}
 
       {{else if timeout_error}}
         <h1 class="fs4 fc-secondary">The verification link has expired.</h1>
@@ -13,7 +13,6 @@
 
       {{else}}
         {{partial 'loading'}}
-
       {{/if}}
 
     </div>

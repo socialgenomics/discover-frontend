@@ -4,40 +4,39 @@ import { getLatestSecondaryCredential, mainCredential, secondaryCredentials, fet
 import FlashMessageMixin from 'repositive/mixins/flash-message-mixin';
 import VerificationMixin from 'repositive/mixins/verification';
 
-const { inject: { service }, get, set, setProperties, Logger, Route, RSVP } = Ember;
+const { inject: { service }, get, set, Logger, Route, RSVP } = Ember;
 
 export default Route.extend(FlashMessageMixin, VerificationMixin, {
   ajax: service(),
   session: service(),
 
   model(params) {
+    const userId = get(this, 'session.session.content.authenticated.user.id');
     return RSVP.hash({
       'verificationResp': get(this, 'ajax')
         .request(ENV.APIRoutes['verify-email'] + '/' + params.verification_id, { method: 'GET' }),
-      'credentials': fetchCredentials(this.store,  get(this, 'session.session.content.authenticated.user.id'))
+      'credentials': fetchCredentials(this.store, userId),
+      'user': this.store.findRecord('user', userId)
     })
       .then(resp => {
-        if (get(resp, 'credentials.length') === 1) { return; }
+        if (get(resp, 'credentials.length') === 1) {
+          return { user: resp.user }
+        }
+
         const credentialId = getLatestSecondaryCredential(secondaryCredentials(resp.credentials)).id;
         set(this, 'session.session.content.authenticated.token', resp.verificationResp.token);
-        return this._makeCredentialPrimary(credentialId);
+
+        return RSVP.hash({
+          'user': resp.user,
+          'makePrimaryResp': this._makeCredentialPrimary(credentialId)
+        });
       })
-      .then(() => {
+      .then(resp => {
         if (get(this, 'session.isAuthenticated')) {
-          // debugger;
-          if (get(this, 'session.authenticatedUser')) {
-            // TODO set isVerified on user model
-            // TODO change verify template to accommodate this
-            setProperties(this, {
-              'session.authenticatedUser.isEmailValidated': true,
-              'session.data.displayWelcomeMessage': false
-            });
-          } else {
-            //TODO this is alwyas the case when first verifying - WHY?
-            // Because session.authenticatedUser is not set.
-            Logger.warn('session.authenticatedUser is undefined but session.isAuthenticated "true"');
-            set(this, 'session.data.displayWelcomeMessage', false);
-          }
+          const user = resp.user;
+          set(user, 'verified', true)
+          set(this, 'session.data.displayWelcomeMessage', false);
+          return user.save();
         } else {
           this.transitionTo('root');
         }
