@@ -22,7 +22,7 @@ describe('Unit | Component | RUI / r-tab-list', function() {
 
   describe('properties', function () {
     it('should have correct class name set', function () {
-      expect(get(component, 'classNames')).to.be.eql(['ember-view', 'u-z1', 'list-flush-left', 'flex', 'fc-primary', 'ta-center', 'mb0']);
+      expect(get(component, 'classNames')).to.be.eql(['ember-view', 'list-flush-left', 'flex', 'fc-primary', 'ta-center', 'mb0']);
     });
   });
 });
