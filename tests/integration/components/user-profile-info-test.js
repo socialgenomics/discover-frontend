@@ -14,7 +14,7 @@ describe('Integration | Component | user profile info', function() {
       work_organisation: 'Repositive',
       work_role: 'Developer'
     },
-    isEmailValidated: true,
+    verified: true,
     createdAt: moment(new Date('December 17, 1995'))
   };
   setupComponentTest('user-profile-info', {
@@ -43,7 +43,7 @@ describe('Integration | Component | user profile info', function() {
 
     describe('when the user is not verified', function() {
       it('should diplay message telling user to verify account', function() {
-        this.set('user.isEmailValidated', false);
+        this.set('user.verified', false);
         expect(this.$('h4').text().trim()).to.eql('Please verify your email');
       });
     });

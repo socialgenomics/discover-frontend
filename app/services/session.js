@@ -9,7 +9,6 @@ export default SessionService.extend({
 
   setAuthenticatedUser: observer('data.authenticated.user', function() {
     const userData = get(this, 'data.authenticated.user');
-    // debugger;
     if (get(this, 'isAuthenticated')) {
       if (!userData) {
         // force logout
@@ -26,15 +25,8 @@ export default SessionService.extend({
         'user_settings': store.findRecord('user_setting', userData.user_setting.id)
       })
         .then(data => {
-          const user = data.user;
-          // setProperties(user, {
-          //   email: get(data, 'credential.firstObject.email'),
-          //   isEmailValidated: userData.isEmailValidated //TODO move to verify route
-          // });
-
-          // user.save();
-
-          set(this, 'authenticatedUser', user);
+          //TODO this should be in a seperate service e.g. currentUser service
+          set(this, 'authenticatedUser', data.user);
         })
         .catch(Logger.error);
     }

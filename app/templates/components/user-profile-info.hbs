@@ -25,7 +25,7 @@
     {{/link-to}}
   {{/if}}
 
-  {{#if user.isEmailValidated}}
+  {{#if user.verified}}
     <h4 class="ta-center fc-teal fs2">{{fa-icon "check-circle" class="mr2"}}Verified Account</h4>
   {{else}}
     {{#if isOwnProfile}}
