@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import SessionService from 'ember-simple-auth/services/session';
+import { fetchCredentials, mainCredential, getLatestSecondaryCredential } from 'repositive/utils/credentials';
 
 const { inject: { service }, get, set, observer, Logger, RSVP } = Ember;
 
@@ -21,11 +22,10 @@ export default SessionService.extend({
 
       return RSVP.hash({
         'user': store.findRecord('user', userId),
-        'credential': store.query('credential', { 'where.user_id': userId, 'where.primary': true }),
-        'user_settings': store.findRecord('user_setting', userData.user_setting.id)
+        'credentials': fetchCredentials(store, userId)
       })
         .then(data => {
-          //TODO this should be in a seperate service e.g. currentUser service
+          this._checkCredentials(data.credentials);
           set(this, 'authenticatedUser', data.user);
         })
         .catch(Logger.error);
@@ -48,6 +48,19 @@ export default SessionService.extend({
     } catch (e) {
       //adapters can be disabled on some env. so we will have an error
       Logger.warn(e);
+    }
+  },
+
+  /**
+   * @desc check if a primary email exists, set one if not
+   * @private
+   * @param {Array} credentials
+   */
+  _checkCredentials(credentials) {
+    if (!mainCredential(credentials)) {
+      const latest = getLatestSecondaryCredential(credentials);
+      set(latest, 'primary', true);
+      return latest.save();
     }
   }
 });
