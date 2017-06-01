@@ -25,7 +25,9 @@ export default SessionService.extend({
         'credentials': fetchCredentials(store, userId)
       })
         .then(data => {
-          this._checkCredentials(data.credentials);
+          if (!mainCredential(data.credentials)) {
+            this._setPrimaryCredential(data.credentials);
+          }
           set(this, 'authenticatedUser', data.user);
         })
         .catch(Logger.error);
@@ -52,15 +54,13 @@ export default SessionService.extend({
   },
 
   /**
-   * @desc check if a primary email exists, set one if not
+   * @desc sets the latest credential to primary
    * @private
    * @param {Array} credentials
    */
-  _checkCredentials(credentials) {
-    if (!mainCredential(credentials)) {
-      const latest = getLatestSecondaryCredential(credentials);
-      set(latest, 'primary', true);
-      return latest.save();
-    }
+  _setPrimaryCredential(credentials) {
+    const latest = getLatestSecondaryCredential(credentials);
+    set(latest, 'primary', true);
+    return latest.save();
   }
 });
