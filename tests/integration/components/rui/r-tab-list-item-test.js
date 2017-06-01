@@ -12,25 +12,26 @@ describe('Integration | Component | RUI / r-tab-list-item', function() {
   describe('when tab data is given', function() {
     beforeEach(function() {
       const tab = {
-        title: 'Searching for Data',
+        tabName: 'Searching for Data',
         target: 'help.searching-for-data',
         query: 'search-query'
       };
       this.set('tab', tab);
-      this.render(hbs`{{rui/r-tab-list-item title=tab.title target=tab.target query=tab.query}}`);
+      this.render(hbs`{{rui/r-tab-list-item tabName=tab.tabName target=tab.target query=tab.query}}`);
     });
 
-    it('renders correct tab title', function() {
+    it('renders correct tab tabName', function() {
       expect(this.$('span.px2').text().trim()).to.eql('Searching for Data');
     });
   });
 
   describe('action tab is active', function() {
     it('it should have an active class', function() {
+      this.set('setActiveTab', sinon.spy());
       this.render(hbs`{{rui/r-tab-list-item
         activeTab='abc'
         tabName='abc'
-        actionItem=true
+        setActiveTab=setActiveTab
       }}`);
       expect(this.$('li').hasClass('bc-white')).to.be.true;
     });
@@ -43,7 +44,6 @@ describe('Integration | Component | RUI / r-tab-list-item', function() {
         activeTab='abc'
         tabName='def'
         setActiveTab=setActiveTab
-        actionItem=true
       }}`);
     });
 

@@ -130,13 +130,11 @@
             {{rui/r-tab-list-item
               setActiveTab=(action 'setActiveTab')
               activeTab=activeTab
-              tabName='metadata'
-              actionItem=true}}
+              tabName='metadata'}}
             {{rui/r-tab-list-item
               setActiveTab=(action 'setActiveTab')
               activeTab=activeTab
-              tabName='discussion'
-              actionItem=true}}
+              tabName='discussion'}}
           {{/rui/r-tab-list}}
           <div class="p3">
             {{#if (eq activeTab 'metadata')}}
