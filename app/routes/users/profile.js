@@ -26,6 +26,9 @@ export default Route.extend(AuthenticatedRouteMixin, {
 
   actions: {
     reloadModel() {
+      this.refresh();
+    },
+    reloadUserModel() {
       return this.store.peekRecord('user', get(this, 'userId')).reload();
     },
     pushToSecondaryCreds(newCredential) {

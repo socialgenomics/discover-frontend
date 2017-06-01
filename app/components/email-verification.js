@@ -40,14 +40,12 @@ export default Component.extend(FlashMessageMixin, Validations, VerificationMixi
       const newEmail = get(this, 'newEmail');
       const existingCredential = this._getExistingCredential(newEmail);
       if (existingCredential) {
-        //If it's not verified -> send email
         if (!get(existingCredential, 'verified')) {
           return this._sendVerificationEmail(newEmail);
         }
+
         return this._makeCredentialPrimary(existingCredential.id)
-          .then(() => {
-            return this.store.peekRecord('credential', existingCredential.id).reload();
-          })
+          .then(() => { get(this, 'reloadModel')() })
           .then(() => {
             this._addFlashMessage(`${newEmail} is now your primary email address.`, 'success');
             this.send('cancel');
