@@ -48,7 +48,7 @@ export default Component.extend(Validations, FlashMessageMixin, {
     submitForm() {
       set(this, 'loading', true);
       return this._sendLoginRequest(get(this, 'email'), get(this, 'oldPassword'))
-        .then((resp) => {
+        .then(resp => {
           this._sendPasswordRequest(resp.response.token, get(this, 'password1'))
         })
         .catch(err => {

@@ -12,9 +12,7 @@ export default Route.extend(AuthenticatedRouteMixin, {
   model() {
     return RSVP.hash({
       user: this.store.findRecord('user', get(this, 'userId')),
-      credentials: this.store.query('credential', {
-        'where.user_id': get(this, 'userId')
-      })
+      credentials: creds.fetchCredentials(this.store, get(this, 'userId'))
         .then(credentials => {
           return {
             is_verified: creds.isVerified(credentials),
@@ -28,7 +26,14 @@ export default Route.extend(AuthenticatedRouteMixin, {
 
   actions: {
     reloadModel() {
+      this.refresh();
+    },
+    reloadUserModel() {
       return this.store.peekRecord('user', get(this, 'userId')).reload();
+    },
+    pushToSecondaryCreds(newCredential) {
+      const model = this.controller.model;
+      model.credentials.secondary_credentials.addObject(newCredential);
     }
   }
 });

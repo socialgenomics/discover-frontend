@@ -4,7 +4,7 @@
       <img class="icon-x-large mb2 circle" src={{user.profile.avatar}} onError="this.onerror=null;this.src='/assets/images/avatar/dog.png';">
       {{reputation-total total=user.reputationTotal class="c-reputation-total-large fs2"}}
     </div>
-    <h1 class="fs3 fc-primary mb2 fw-reg u-hyphens-auto">{{user.displayName}}</h1>
+    <h1 class="fs3 fc-primary mb2 fw-reg hyphens-auto">{{user.displayName}}</h1>
 
     {{#if user.profile.work_organisation}}
       <h2 class="fs2 fc-secondary mb0 fw-reg">{{user.profile.work_organisation}}</h2>
@@ -25,11 +25,11 @@
     {{/link-to}}
   {{/if}}
 
-  {{#if isVerified}}
+  {{#if user.verified}}
     <h4 class="ta-center fc-teal fs2">{{fa-icon "check-circle" class="mr2"}}Verified Account</h4>
   {{else}}
     {{#if isOwnProfile}}
-      <h4 class="ta-center">{{#link-to 'users.profile' class="fc-red"}}{{fa-icon "envelope"}}Please verify your email{{/link-to}}</h4>
+      <h4 class="ta-center fs2">{{#link-to 'users.profile' class="fc-red"}}{{fa-icon "envelope" class="mr2"}}Please verify your email{{/link-to}}</h4>
     {{/if}}
   {{/if}}
 
@@ -45,7 +45,7 @@
   {{#if user.profile.bio}}
     <div class="mb4">
       <h3 class="fs1 fw-reg fc-tertiary mb2">BIO</h3>
-      <p class="fc-secondary u-hyphens-auto">{{user.profile.bio}}</p>
+      <p class="fc-secondary hyphens-auto">{{user.profile.bio}}</p>
     </div>
   {{else if isOwnProfile}}
     <div class="mb4">

@@ -15,6 +15,15 @@ export function secondaryCredentials(credentials) {
 }
 
 export function getLatestSecondaryCredential(credentials) {
-  return get(secondaryCredentials(credentials)
-    .sortBy('updatedAt'), 'lastObject');
+  const sorted = credentials.sortBy('updatedAt');
+  return get(sorted, 'lastObject');
+}
+
+export function fetchCredentials(store, userId) {
+  return store.query('credential', {
+    'where.user_id': userId,
+    'order[0][0]': 'updated_at',
+    'order[0][1]': 'DESC',
+    'limit': '50'
+  });
 }
