@@ -8,3 +8,8 @@
     </div>
   {{/each}}
 </div>
+{{#if (and isCollapsed (gt model.length 3))}}
+  <a class="p3 block fc-tertiary u-hv-tc-secondary" {{action 'viewAll'}}>View all {{fa-icon 'chevron-down'}}</a>
+{{else if (and (not isCollapsed) (gt model.length 3))}}
+  <a class="p3 block fc-tertiary u-hv-tc-secondary" {{action 'showLess'}}>Show less {{fa-icon 'chevron-up'}}</a>
+{{/if}}

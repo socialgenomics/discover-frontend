@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-const { Component, computed, get } = Ember;
+const { Component, computed, get, set } = Ember;
 
 export default Component.extend({
   classNames: ['c-card'],
@@ -50,5 +50,24 @@ export default Component.extend({
         return `This user hasn't taken part in any discussions yet.`;
       }
     }
-  })
+  }),
+
+  actions: {
+    viewAll() {
+      this._expandCard();
+    },
+    showLess() {
+      this._collapseCard();
+    }
+  },
+
+  _expandCard() {
+    //trigger fetch.
+    //show loading state. then...
+    set(this, 'isCollapsed', false);
+  },
+
+  _collapseCard() {
+    set(this, 'isCollapsed', true);
+  }
 });
