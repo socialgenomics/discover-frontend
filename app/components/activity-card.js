@@ -62,8 +62,9 @@ export default Component.extend({
   },
 
   _expandCard() {
-    //trigger fetch.
-    //show loading state. then...
+    //if a fetch action has been passed in
+      //trigger fetch.
+      //show loading state. then...
     set(this, 'isCollapsed', false);
   },
 
