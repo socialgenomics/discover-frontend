@@ -1,5 +1,5 @@
 {{activity-card-header group=group count=model.length isProfilePage=isProfilePage}}
-<div class="c-activity-card-body-collapsed">
+<div class="{{if isCollapsed 'c-activity-card-body-collapsed'}}">
   {{#each model as |dataset|}}
     {{activity-card-item dataset=dataset}}
   {{else}}

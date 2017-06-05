@@ -5,6 +5,8 @@ const { Component, computed, get } = Ember;
 export default Component.extend({
   classNames: ['c-card'],
 
+  isCollapsed: true,
+
   emptyText: computed('group', 'isOwnProfile', function() {
     const group = get(this, 'group');
     const isOwnProfile = get(this, 'isOwnProfile');
