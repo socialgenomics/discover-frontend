@@ -53,22 +53,7 @@ export default Component.extend({
   }),
 
   actions: {
-    viewAll() {
-      this._expandCard();
-    },
-    showLess() {
-      this._collapseCard();
-    }
-  },
-
-  _expandCard() {
-    //if a fetch action has been passed in
-      //trigger fetch.
-      //show loading state. then...
-    set(this, 'isCollapsed', false);
-  },
-
-  _collapseCard() {
-    set(this, 'isCollapsed', true);
+    viewAll() { set(this, 'isCollapsed', false); },
+    showLess() { set(this, 'isCollapsed', true); }
   }
 });
