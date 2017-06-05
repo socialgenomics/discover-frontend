@@ -26,9 +26,9 @@
   border-radius: 2px;
 }
 
-.c-activity-card-body {
-  height: 300px;
-  overflow-y: auto;
+.c-activity-card-body-collapsed {
+  max-height: 300px;
+  overflow-y: hidden;
 }
 
 .c-card-detail {
