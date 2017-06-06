@@ -82,10 +82,7 @@ export default Component.extend(Validations, FlashMessageMixin, {
 
       return userModel
         .save()
-        .then(() => {
-          this._onSaveSuccess();
-          return get(this, 'transitionToProfile')();
-        })
+        .then(this._onSaveSuccess.bind(this))
         .catch(this._onSaveError.bind(this, userModel));
     }
   },
@@ -97,6 +94,7 @@ export default Component.extend(Validations, FlashMessageMixin, {
    */
   _onSaveSuccess() {
     this._addFlashMessage('Your profile has been updated.', 'success');
+    get(this, 'transitionToProfile')(get(this, 'userId'));
   },
 
   /**

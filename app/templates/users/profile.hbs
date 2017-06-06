@@ -16,7 +16,7 @@
           {{user-profile-details
             userProfileData=userProfileData
             userId=model.user.id
-            transitionToProfile=(action 'transitionToProfile')
+            transitionToProfile=(route-action 'transitionToProfile')
           }}
         {{/user-profile-section}}
 
@@ -28,6 +28,7 @@
           {{user-profile-external-accounts
             userProfileData=userProfileData
             userId=model.user.id
+            transitionToProfile=(route-action 'transitionToProfile')
           }}
         {{/user-profile-section}}
       </div>
