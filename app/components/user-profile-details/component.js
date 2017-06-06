@@ -82,7 +82,10 @@ export default Component.extend(Validations, FlashMessageMixin, {
 
       return userModel
         .save()
-        .then(this._onSaveSuccess.bind(this))
+        .then(() => {
+          this._onSaveSuccess();
+          return get(this, 'transitionToProfile')();
+        })
         .catch(this._onSaveError.bind(this, userModel));
     }
   },
