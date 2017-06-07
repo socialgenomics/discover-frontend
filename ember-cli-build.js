@@ -1,4 +1,4 @@
-/* global require, module */
+/* eslint-env node */
 const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 const environment = EmberApp.env();
 const appConf = require('./config/app/' + environment + '.json');
