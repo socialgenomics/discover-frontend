@@ -1,8 +1,8 @@
 /* eslint-env node */
-var EmberApp = require('ember-cli/lib/broccoli/ember-app');
-var environment = EmberApp.env();
-var appConf = require('./config/app/' + environment + '.json');
-var isProductionLikeBuild = ['development', 'production', 'staging'].indexOf(environment) > -1;
+const EmberApp = require('ember-cli/lib/broccoli/ember-app');
+const environment = EmberApp.env();
+const appConf = require('./config/app/' + environment + '.json');
+const isProductionLikeBuild = ['development', 'production', 'staging'].indexOf(environment) > -1;
 
 module.exports = function(defaults) {
   var app = new EmberApp(defaults, {
