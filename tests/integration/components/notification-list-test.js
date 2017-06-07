@@ -9,7 +9,7 @@ describe('Integration | Component | notification list', function() {
   });
 
   it('if there are no notifcations a message is displayed', function() {
-    this.render(hbs`{{notification-list notifications=[]}}`);
+    this.render(hbs`{{notification-list}}`);
     expect(this.$().text().trim()).to.eql(`You\'re up to date.`);
   });
 });
