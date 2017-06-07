@@ -133,9 +133,9 @@ describe('Unit | Mixin | search', function() {
   describe('makeRequest', function () {
     const method = this.title;
     const page = 1;
-
     beforeEach(function () {
       setProperties(mixinObjInstance, {
+        'ajax.request': sinon.stub().resolves({}),
         _handleQueryResponse: sinon.spy()
       });
     });
@@ -161,9 +161,6 @@ describe('Unit | Mixin | search', function() {
 
       return wait().then(() => {
         expect(get(mixinObjInstance, '_handleQueryResponse').calledOnce).to.be.true;
-        expect(
-          get(mixinObjInstance, '_handleQueryResponse').calledWith('response')
-        ).to.be.true;
       });
     });
 
