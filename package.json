@@ -89,9 +89,5 @@
     "snyk": "^1.12.0",
     "topojson": "^1.6.27",
     "torii": "^0.8.0"
-  },
-  "dependencies": {
-    "foreman": "^1.4.1",
-    "rimraf": "^2.5.0"
   }
 }
