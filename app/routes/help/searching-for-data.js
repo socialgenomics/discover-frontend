@@ -6,7 +6,7 @@ export default Route.extend({
   controllerName: 'help',
 
   model(params) {
-    return '/help/searching-for-data/' + params.query;
+    return 'help/searching-for-data/' + params.query;
   },
 
   setupController(controller, model) {
