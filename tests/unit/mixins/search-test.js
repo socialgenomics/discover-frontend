@@ -3,7 +3,6 @@ import { describe, it, beforeEach } from 'mocha';
 import { setupTest } from 'ember-mocha';
 import Ember from 'ember';
 import sinon from 'sinon';
-import wait from 'ember-test-helpers/wait';
 import SearchMixin from 'repositive/mixins/search';
 import ENV from 'repositive/config/environment';
 
@@ -135,7 +134,7 @@ describe('Unit | Mixin | search', function() {
     const page = 1;
     beforeEach(function () {
       setProperties(mixinObjInstance, {
-        'ajax.request': sinon.stub().resolves({}),
+        'ajax.request': sinon.stub().returns({ then: sinon.stub() }),
         _handleQueryResponse: sinon.spy()
       });
     });
@@ -154,14 +153,6 @@ describe('Unit | Mixin | search', function() {
           }
         )
       ).to.be.true;
-    });
-
-    it('should call "_handleQueryResponse" with data from ajax response', function () {
-      mixinObjInstance[method]({ page });
-
-      return wait().then(() => {
-        expect(get(mixinObjInstance, '_handleQueryResponse').calledOnce).to.be.true;
-      });
     });
 
     it('should use default limit', function () {
