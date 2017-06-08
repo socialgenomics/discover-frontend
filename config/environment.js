@@ -168,13 +168,6 @@ module.exports = function(environment) {
           config: {
             id: 'vdoi8br5'
           }
-        },
-        {
-          name: 'Survicate',
-          environments: ['production'],
-          config: {
-            code: 'vMBxljpAIEgLPliAJkMNKmjhaeDjmMhc'
-          }
         }
       ]
     };
