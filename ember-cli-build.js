@@ -36,9 +36,7 @@ module.exports = function(defaults) {
     babel: {
       sourceMaps: 'inline',
       optional: ['es7.decorators']
-    },
-
-    "parser": "babel-eslint"
+    }
   });
 
   // Use `app.import` to add additional libraries to the generated

@@ -24,7 +24,6 @@
   "author": "repositive.io",
   "license": "MIT",
   "devDependencies": {
-    "babel-eslint": "^7.2.3",
     "bower": "1.8.0",
     "broccoli-asset-rev": "^2.4.5",
     "crypto-js": "^3.1.9-1",
