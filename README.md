@@ -17,7 +17,6 @@ You will need the following things properly installed on your computer.
 * change into the new directory
 * `git submodule update --init`
 * `npm run setup`
-* `npm install -g onchange`
 
 ## Running / Development
 
