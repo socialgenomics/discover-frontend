@@ -22,7 +22,7 @@ describe('Unit | Component | RUI / r-tab-list-item', function() {
 
   describe('properties', function () {
     it('should have correct class name set', function () {
-      expect(get(component, 'classNames')).to.be.eql(['ember-view', 'flex-auto', 'cursor-pointer', 'fc-secondary', 'fs2', 'fw-med']);
+      expect(get(component, 'classNames')).to.be.eql(['ember-view', 'flex-auto', 'cursor-pointer', 'fc-secondary', 'fs2', 'fw-med', 'p2']);
     });
 
     it('should have correct classNameBindings set', function () {
