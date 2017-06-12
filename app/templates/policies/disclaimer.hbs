@@ -1,11 +1,9 @@
 <div class="grid-wrapper">
   <div class="grid">
     <div class="grid__col grid__col--8-of-12 grid__col--centered">
-
-      {{policy-tabs tab='disclaimer'}}
-
-      <div class="c-card square p5">
-        <div class="u-markdown-formatting">
+      <div class="c-card square">
+        {{policy-tabs tab='disclaimer'}}
+        <div class="u-markdown-formatting p5">
           {{markdown-to-html markdown=(fr-markdown-file 'policies/disclaimer')}}
         </div>
       </div>
