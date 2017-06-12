@@ -8,8 +8,7 @@
     "test": "tests"
   },
   "scripts": {
-    "setup": "yarn && bower install --allow-root && npm rebuild node-sass",
-    "postinstall": "bower install",
+    "setup": "yarn && npm rebuild node-sass",
     "startStaging": "ember server --watcher=polling --proxy=https://api-staging.repositive.io",
     "startStagingOnNewMac": "ember server --watcher=polling --proxy=https://api-staging.repositive.io --live-reload-port 49153",
     "startWithHost": "ember server --watcher=polling --proxy=$BACKEND_SERVER",
@@ -25,7 +24,6 @@
   "license": "MIT",
   "devDependencies": {
     "@repositive/query-parser": "^1.1.2",
-    "bower": "1.8.0",
     "broccoli-asset-rev": "^2.4.5",
     "d3": "^4.4.0",
     "dotenv": "^4.0.0",
@@ -84,6 +82,7 @@
     "sanitize-html": "^1.14.1",
     "snyk": "^1.12.0",
     "topojson": "^3.0.0",
-    "torii": "^0.9.5"
+    "torii": "^0.9.5",
+    "urijs": "^1.18.10"
   }
 }
