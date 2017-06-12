@@ -20,6 +20,16 @@ export default Mixin.create(FlashMessageMixin, {
   },
 
   /**
+   * @desc Makes the credntial of the passed in id, primary.
+   * @param credentialId
+   * @private
+   */
+  _makeCredentialPrimary(credentialId) {
+    return get(this, 'ajax')
+      .request(ENV.APIRoutes['make-primary'] + `/${credentialId}`, { method: 'GET' });
+  },
+
+  /**
    * @desc send email success handler
    * @private
    */
@@ -34,5 +44,14 @@ export default Mixin.create(FlashMessageMixin, {
   _onSendError(err) {
     Logger.error(err);
     this._addFlashMessage('Sorry, we couldn\'t send you the link. Please try again later.', 'warning');
+  },
+
+  /**
+   * @desc make primary error handler
+   * @private
+   */
+  _onMakePrimaryError(err) {
+    Logger.error(err);
+    this._addFlashMessage(`Sorry, we couldn't make your email primary. Please try again later.`, 'warning');
   }
 });

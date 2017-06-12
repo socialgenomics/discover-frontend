@@ -9,7 +9,7 @@ export default Model.extend({
   createdAt: attr('isodate'),
   credentials: hasMany('credentials'),
   firstname: attr('string'),
-  isEmailValidated: attr('boolean', { defaultValue: false }),
+  verified: attr('boolean', { defaultValue: false }),
   lastname: attr('string'),
   profile: attr('object'),
   reputation: attr('object'),
