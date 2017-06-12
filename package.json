@@ -78,9 +78,7 @@
     "eslint-plugin-ember": "^3.1.2",
     "loader.js": "^4.2.3",
     "phantomjs-prebuilt": "^2.1.14",
-    "ramda": "^0.24.1",
     "sanitize-html": "^1.14.1",
-    "snyk": "^1.12.0",
     "topojson": "^3.0.0",
     "torii": "^0.9.5",
     "urijs": "^1.18.10"
