@@ -1,7 +1,5 @@
-bower_components
 node_modules
 .idea
 .git
 tmp
 async-disk-cache
-
