@@ -6,13 +6,12 @@ export default Component.extend({
   queryService: service('query'),
 
   placeholderValues: [
-    `title:cancer description:glioblastoma`,
-    `(tissue:brain OR tissue:cortex) description:methylation`,
-    `"oxidative stress" assay:RNA-Seq`,
-    `access:Open description:sleep`,
-    `(ALS OR "Amyotrophic Lateral Sclerosis" OR MND) (assay:WGS OR assay:RNA OR assay:sequencing) NOT datasource:SRA`,
-    `ethnicity:asian NOT cancer`,
-    `Caucasian sex:female`
+    `obesity AND microbiome`,
+    `autism AND assay:"RNA seq"`,
+    `infant stool AND assay:wgs`,
+    `Alzheimer's disease`,
+    `fetal epigenome`,
+    `human populations AND (assay:"Whole Genome Sequencing" OR assay:WGS)`
   ],
 
   init() {
