@@ -1,8 +1,0 @@
-	{{#if (eq type "request")}}
-		{{#link-to 'requests.detail' dataset.id}}<h5 class="mb2 fs2 fw-med fc-primary" alt="request title">{{truncate dataset.title 55}}</h5>{{/link-to}}
-	{{else}}
-		{{#link-to 'datasets.detail' dataset.id}}<h5 class="mb2 fs2 fw-med fc-primary" alt="dataset title">{{truncate dataset.title 55}}</h5>{{/link-to}}
-	{{/if}}
-	{{from-label model=dataset type=type}}
-
-	{{stats-list access=dataset.access stats=dataset.stats statType="datasets" class="fc-tertiary"}}

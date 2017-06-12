@@ -1,0 +1,33 @@
+{{activity-card-header group=group count=model.length isProfilePage=isProfilePage}}
+
+{{#if (and isCollapsed (gte model.length 1))}}
+
+  {{#each (take 3 model) as |dataset|}}
+    {{activity-card-item dataset=dataset}}
+  {{/each}}
+
+{{else if (and (not isCollapsed) (gte model.length 1))}}
+
+  {{#each model as |dataset|}}
+    {{activity-card-item dataset=dataset}}
+  {{/each}}
+
+{{else}}
+
+  <p class="py4 mb0 ta-center">{{emptyText}}</p>
+
+{{/if}}
+
+{{#if (and isCollapsed (gt model.length 3))}}
+
+  <a class="p3 block fc-tertiary u-hv-tc-secondary t-view-all" {{action 'viewAll'}}>
+    View all {{fa-icon 'chevron-down' class="pl2"}}
+  </a>
+
+{{else if (and (not isCollapsed) (gt model.length 3))}}
+
+  <a class="p3 block fc-tertiary u-hv-tc-secondary t-view-all" {{action 'showLess'}}>
+    Show less {{fa-icon 'chevron-up' class="pl2"}}
+  </a>
+
+{{/if}}
