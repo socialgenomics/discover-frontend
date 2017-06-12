@@ -6,11 +6,18 @@
         {{user-profile-avatar-upload avatarImg=model.user.profile.avatar reloadUserModel=(route-action 'reloadUserModel')}}
 
         {{#user-profile-section}}
-          {{user-profile-interests userId=user.id interests=model.user.profile.interests}}
+          {{user-profile-interests
+            userId=user.id
+            interests=model.user.profile.interests
+          }}
         {{/user-profile-section}}
 
         {{#user-profile-section title='More about yourself'}}
-          {{user-profile-details userProfileData=userProfileData userId=model.user.id}}
+          {{user-profile-details
+            userProfileData=userProfileData
+            userId=model.user.id
+            transitionToProfile=(route-action 'transitionToProfile')
+          }}
         {{/user-profile-section}}
 
         {{#user-profile-section title='Emails and password'}}
@@ -18,7 +25,11 @@
         {{/user-profile-section}}
 
         {{#user-profile-section title='External accounts'}}
-          {{user-profile-external-accounts userProfileData=userProfileData userId=model.user.id}}
+          {{user-profile-external-accounts
+            userProfileData=userProfileData
+            userId=model.user.id
+            transitionToProfile=(route-action 'transitionToProfile')
+          }}
         {{/user-profile-section}}
       </div>
     </div>

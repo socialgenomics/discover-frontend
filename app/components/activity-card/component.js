@@ -1,9 +1,11 @@
 import Ember from 'ember';
 
-const { Component, computed, get } = Ember;
+const { Component, computed, get, set } = Ember;
 
 export default Component.extend({
   classNames: ['c-card'],
+
+  isCollapsed: true,
 
   emptyText: computed('group', 'isOwnProfile', function() {
     const group = get(this, 'group');
@@ -48,5 +50,10 @@ export default Component.extend({
         return `This user hasn't taken part in any discussions yet.`;
       }
     }
-  })
+  }),
+
+  actions: {
+    viewAll() { set(this, 'isCollapsed', false); },
+    showLess() { set(this, 'isCollapsed', true); }
+  }
 });

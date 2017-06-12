@@ -94,6 +94,7 @@ export default Component.extend(Validations, FlashMessageMixin, {
    */
   _onSaveSuccess() {
     this._addFlashMessage('Your profile has been updated.', 'success');
+    get(this, 'transitionToProfile')(get(this, 'userId'));
   },
 
   /**
