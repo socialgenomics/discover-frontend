@@ -8,7 +8,7 @@
     "test": "tests"
   },
   "scripts": {
-    "setup": "npm i && bower install --allow-root && npm rebuild node-sass",
+    "setup": "yarn && bower install --allow-root && npm rebuild node-sass",
     "postinstall": "bower install",
     "startStaging": "ember server --watcher=polling --proxy=https://api-staging.repositive.io",
     "startStagingOnNewMac": "ember server --watcher=polling --proxy=https://api-staging.repositive.io --live-reload-port 49153",
