@@ -52,7 +52,6 @@ module.exports = function(defaults) {
   // please specify an object with the list of modules as keys
   // along with the exports of each module as its value.
 
-  app.import('bower_components/crypto-js/crypto-js.js');
   app.import('bower_components/urijs/src/URI.js');
 
   return app.toTree();
