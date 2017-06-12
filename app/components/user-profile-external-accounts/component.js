@@ -106,6 +106,7 @@ export default Component.extend(Validations, FlashMessageMixin, {
    */
   _onSaveSuccess() {
     this._addFlashMessage('Your external accounts have been updated.', 'success');
+    get(this, 'transitionToProfile')(get(this, 'userId'));
   },
 
   /**

@@ -25,6 +25,9 @@ export default Route.extend(AuthenticatedRouteMixin, {
   },
 
   actions: {
+    transitionToProfile(userId) {
+      this.transitionTo('user', userId);
+    },
     reloadModel() {
       this.refresh();
     },
