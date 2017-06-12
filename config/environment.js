@@ -132,14 +132,6 @@ module.exports = function(environment) {
       },
       metricsAdapters: [
         {
-          name: 'Gosquared',
-          environments: ['production'],
-          config: {
-            token: 'GSN-041822-M',
-            signature: '5157e5f51f0967aee05141aff8037b69'
-          }
-        },
-        {
           name: 'GoogleAnalytics',
           config: {
             //company-wide website
