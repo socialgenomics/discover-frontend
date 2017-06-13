@@ -96,9 +96,9 @@ describe('Integration | Component | user comment', function() {
       it('should reset comment message to previous value', function () {
         const text = 'Foo Bar';
 
-        this.render(hbs`{{user-comment comment=comment canEdit=true inEditMode=true}}`);
-        this.$('form .c-validated-input textarea').val('Foo Bar');
-        this.$('form .c-validated-input textarea').change(text);
+        this.render(hbs`{{user-comment canEdit=true inEditMode=true}}`);
+        this.$('form .c-validated-input textarea').val(text).change();
+        expect(this.$('form .c-validated-input textarea').val()).to.equal(text);
         this.$('button.c-btn-text-secondary').click();
 
         expect(this.$('p.u-markdown-formatting').text()).to.not.be.equal(text);

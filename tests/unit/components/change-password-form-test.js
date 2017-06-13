@@ -11,7 +11,9 @@ describe('Unit | Component | change password form', function() {
       'validator:presence',
       'validator:format',
       'validator:confirmation',
-      'validator:length'
+      'validator:length',
+      'service:ajax',
+      'service:session'
     ],
     unit: true
   });

@@ -29,6 +29,10 @@ module.exports = function(environment) {
         FEATURES: {
           // Here you can enable experimental features on an ember canary build
           // e.g. 'with-controller': true
+        },
+        EXTEND_PROTOTYPES: {
+          // Prevent Ember Data from overriding Date.parse.
+          Date: false
         }
       },
 
@@ -128,14 +132,6 @@ module.exports = function(environment) {
       },
       metricsAdapters: [
         {
-          name: 'Gosquared',
-          environments: ['production'],
-          config: {
-            token: 'GSN-041822-M',
-            signature: '5157e5f51f0967aee05141aff8037b69'
-          }
-        },
-        {
           name: 'GoogleAnalytics',
           config: {
             //company-wide website
@@ -164,13 +160,6 @@ module.exports = function(environment) {
           config: {
             id: 'vdoi8br5'
           }
-        },
-        {
-          name: 'Survicate',
-          environments: ['production'],
-          config: {
-            code: 'vMBxljpAIEgLPliAJkMNKmjhaeDjmMhc'
-          }
         }
       ]
     };
@@ -185,7 +174,6 @@ module.exports = function(environment) {
 
     if (environment === 'test') {
       // Testem prefers this...
-      ENV.rootURL = '/';
       ENV.locationType = 'none';
 
       // keep test console output quieter

@@ -2,8 +2,8 @@
 
 {{#if showShareOptionsModal}}
   {{#repositive-modal
-    container-class='u-z1'
-    close=(action 'toggleShareOptionsModal')
+    containerClass='u-z1'
+    onClose=(action 'toggleShareOptionsModal')
     target=(concat '#' elementId)
     targetAttachment='bottom left'
     attachment='top left'
@@ -20,8 +20,8 @@
 
 {{#if showShareEmailModal}}
   {{#repositive-modal
-    container-class='c-modal--medium u-z5'
-    close=(action 'toggleShareEmailModal')
+    containerClass='c-modal--medium u-z5'
+    onClose=(action 'toggleShareEmailModal')
   }}
     {{repositive-modal/header
       icon='envelope'
@@ -41,8 +41,8 @@
 
 {{#if showCreateAccountModal}}
   {{#repositive-modal
-    container-class='c-modal--medium u-z5'
-    close=(action 'toggleCreateAccountModal')
+    containerClass='c-modal--medium u-z5'
+    onClose=(action 'toggleCreateAccountModal')
   }}
     {{repositive-modal/header
       icon='envelope'
