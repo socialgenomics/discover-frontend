@@ -23,6 +23,7 @@
   "author": "repositive.io",
   "license": "MIT",
   "devDependencies": {
+    "@repositive/ui-library": "^0.0.4",
     "@repositive/query-parser": "^1.1.2",
     "broccoli-asset-rev": "^2.4.5",
     "d3": "^4.4.0",
@@ -81,7 +82,6 @@
     "sanitize-html": "^1.14.1",
     "topojson": "^3.0.0",
     "torii": "^0.9.5",
-    "ui-library": "0.0.0",
     "urijs": "^1.18.10"
   }
 }
