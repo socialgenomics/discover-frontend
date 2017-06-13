@@ -8,7 +8,7 @@ module.exports = function(defaults) {
   var app = new EmberApp(defaults, {
     sassOptions: {
       inputFile: 'app.scss',
-      outputFile: 'app.css',
+      outputFile: 'app.css'
     },
     outputPaths: {
       app: {
