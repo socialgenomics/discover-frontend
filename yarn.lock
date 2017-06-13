@@ -93,9 +93,9 @@
     ramda "^0.22.1"
     uuid "^3.0.1"
 
-"@repositive/ui-library@^0.0.4":
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/@repositive/ui-library/-/ui-library-0.0.4.tgz#f3c169a2cd4337f3d1a3df2347039dbf8bc3def8"
+"@repositive/ui-library@0.0.x":
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/@repositive/ui-library/-/ui-library-0.0.6.tgz#21d24a1549285c6d9d53daa95b4760c41ac4343d"
   dependencies:
     ember-cli-babel "^6.4.1"
     ember-cli-htmlbars "^1.1.1"
