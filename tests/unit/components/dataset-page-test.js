@@ -10,7 +10,9 @@ describe('Unit | Component | dataset page', function() {
   setupComponentTest('dataset-page', {
     needs: [
       'validator:presence',
-      'validator:format'
+      'validator:format',
+      'service:session',
+      'service:urlGenerator'
     ],
     unit: true
   });

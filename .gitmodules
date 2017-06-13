@@ -1,3 +1,0 @@
-[submodule "query-parser"]
-	path = query-parser
-	url = git@github.com:repositive/query-parser.git

@@ -41,8 +41,8 @@
 
 {{#if showCreateAccountModal}}
   {{#repositive-modal
-    container-class='c-modal--medium u-z5'
-    close=(action 'toggleCreateAccountModal')
+    containerClass='c-modal--medium u-z5'
+    onClose=(action 'toggleCreateAccountModal')
   }}
     {{repositive-modal/header
       icon='database'
