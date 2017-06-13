@@ -30,6 +30,7 @@
 @import "submodule/components/grid-wrapper";
 @import "submodule/components/grid";
 @import "submodule/components/list";
+
   /* Custom */
   @import 'custom/components/components.avatar-upload';
   @import 'custom/components/components.buttons';
@@ -87,3 +88,4 @@
 */
 
 @import 'ember-basic-dropdown';
+@import "ui-library";
