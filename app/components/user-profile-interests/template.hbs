@@ -12,7 +12,7 @@
     {{/each}}
   </div>
   {{/if}}
-  <div class="py3 flex">
+  <div class="py3 flex items-center">
     {{#if isOpen}}
       {{focus-input class="mr2" value=newInterest type="text" enter="addInterest" placeholder="Add your research interest"}}
       {{rui/r-button variant="cancel" label="Cancel" clickHandler=(action "hideInput")}}
