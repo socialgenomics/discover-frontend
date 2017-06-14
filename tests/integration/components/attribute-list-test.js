@@ -112,24 +112,6 @@ describe('Integration | Component | attributes list', function() {
         expect(this.$('button').first().text().trim()).to.eql('Add');
         expect(this.$('button:eq(1)').text().trim()).to.eql('Cancel');
       });
-
-      describe('cancel', function() {
-        it('closes the form', function() {
-          const $cancelButton = this.$('button:eq(1)');
-          expect($cancelButton.text().trim()).to.eql('Cancel');
-          $cancelButton.click();
-          expect(this.$('button:eq(1)').text().trim()).to.be.empty;
-        });
-
-        it('input state is reset', function() {
-          const $attrInput = this.$('input');
-          $attrInput.val('Should disappear');
-          expect($attrInput.val()).to.eql('Should disappear');
-          this.$('button:eq(1)').click(); //cancel
-          this.$('.t-add-trigger').click();
-          expect(this.$('input').val()).to.be.empty;
-        });
-      });
     });
   });
 });
