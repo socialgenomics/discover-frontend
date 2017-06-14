@@ -86,6 +86,10 @@
   dependencies:
     "@glimmer/util" "^0.22.3"
 
+"@repositive/liz-skin@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@repositive/liz-skin/-/liz-skin-1.1.0.tgz#7e22a7820df59d2e24e8fefdabca45ff6e40495e"
+
 "@repositive/query-parser@^1.1.2":
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/@repositive/query-parser/-/query-parser-1.1.2.tgz#f5a0c28422ac33a73ecf9eace3a00f8862ff4070"
