@@ -17,7 +17,8 @@ describe('Integration | Component | RUI / r-tab-list-item', function() {
         query: 'search-query'
       };
       this.set('tab', tab);
-      this.render(hbs`{{rui/r-tab-list-item tabName=tab.tabName target=tab.target query=tab.query}}`);
+      this.set('router', { currentPath: 'help'});
+      this.render(hbs`{{rui/r-tab-list-item tabName=tab.tabName target=tab.target router=router query=tab.query}}`);
     });
 
     it('renders correct tab tabName', function() {
