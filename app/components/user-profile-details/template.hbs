@@ -12,12 +12,12 @@
 
 <div class="ta-center">
   {{rui/r-async-button
-    size="big"
-    variant="primary"
     action=(action 'save')
     default="Save Changes"
-    pending="Saving..."
     disableWhen=(not validations.isValid)
+    pending="Saving..."
     reset=true
+    size="big"
+    variant="primary"
   }}
 </div>

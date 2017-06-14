@@ -5,11 +5,15 @@
   type="text"
   value=attributeValue
 }}
-{{async-button
-  class="c-btn c-btn-primary c-btn-small mb2"
+{{rui/r-async-button
   action=(action 'add')
   default="Add"
   disableWhen=(not isValid)
   pending="Adding..."
+  variant="primary"
 }}
-{{rui/r-button variant="cancel" label="Cancel" clickHandler=(action "cancel")}}
+{{rui/r-button
+  variant="cancel"
+  label="Cancel"
+  clickHandler=(action "cancel")
+}}

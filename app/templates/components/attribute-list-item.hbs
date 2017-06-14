@@ -26,13 +26,17 @@
       type="text"
       value=value
     }}
-    {{async-button
-      class="c-btn c-btn-primary mr3 mb2"
+    {{rui/r-async-button
       action=(action 'save')
       default="Save"
       disableWhen=(not isValid)
       pending="Saving..."
+      variant="primary"
     }}
-    {{rui/r-button variant="cancel" label="Cancel" clickHandler=(action "cancelEditMode")}}
+    {{rui/r-button
+      clickHandler=(action "cancelEditMode")
+      label="Cancel"
+      variant="cancel"
+    }}
   </form>
 {{/unless}}

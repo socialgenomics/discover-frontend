@@ -20,14 +20,21 @@
       noMarkdown=true
       noLabel=true
     }}
-    {{async-button
-      class="c-btn c-btn-primary c-btn-small mr1"
+
+    {{rui/r-async-button
       action=(action 'save')
       default="Save"
-      pending="Saving..."
       disableWhen=(not validations.isValid)
+      pending="Saving..."
+      size="small"
+      variant="primary"
     }}
-    {{rui/r-button variant="cancel" label="Cancel" clickHandler=(action "cancelEditMode")}}
+
+    {{rui/r-button
+      clickHandler=(action "cancelEditMode")
+      label="Cancel"
+      variant="cancel"
+    }}
   </form>
 {{/unless}}
 

@@ -74,6 +74,10 @@ a.c-btn-large { line-height: $spacing-unit-x-large; }
   STATES
 */
 
+.c-btn:disabled {
+  background-color: red;
+}
+
 // .c-btn {
 //   border-style: solid;
 //   border-width: 1px;
