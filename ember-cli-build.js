@@ -1,17 +1,14 @@
 /* eslint-env node */
-var EmberApp = require('ember-cli/lib/broccoli/ember-app');
-var environment = EmberApp.env();
-var appConf = require('./config/app/' + environment + '.json');
-var isProductionLikeBuild = ['development', 'production', 'staging'].indexOf(environment) > -1;
+const EmberApp = require('ember-cli/lib/broccoli/ember-app');
+const environment = EmberApp.env();
+const appConf = require('./config/app/' + environment + '.json');
+const isProductionLikeBuild = ['development', 'production', 'staging'].indexOf(environment) > -1;
 
 module.exports = function(defaults) {
   var app = new EmberApp(defaults, {
     sassOptions: {
       inputFile: 'app.scss',
-      outputFile: 'app.css',
-      includePaths: [
-        'bower_components'
-      ]
+      outputFile: 'app.css'
     },
     outputPaths: {
       app: {
@@ -36,9 +33,7 @@ module.exports = function(defaults) {
     babel: {
       sourceMaps: 'inline',
       optional: ['es7.decorators']
-    },
-
-    "parser": "babel-eslint"
+    }
   });
 
   // Use `app.import` to add additional libraries to the generated
@@ -53,9 +48,6 @@ module.exports = function(defaults) {
   // modules that you would like to import into your application
   // please specify an object with the list of modules as keys
   // along with the exports of each module as its value.
-
-  app.import('bower_components/crypto-js/crypto-js.js');
-  app.import('bower_components/urijs/src/URI.js');
 
   return app.toTree();
 };

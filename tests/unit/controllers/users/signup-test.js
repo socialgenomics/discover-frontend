@@ -9,6 +9,7 @@ const { set, setProperties, get } = Ember;
 describe('UsersSignupController', function() {
   setupTest('controller:users/signup', {
     needs: [
+      'service:ajax',
       'service:session',
       'service:metrics',
       'validator:presence',

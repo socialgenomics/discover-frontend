@@ -6,9 +6,9 @@ You will need the following things properly installed on your computer.
 
 * [Git](http://git-scm.com/)
 * [Node.js](http://nodejs.org/) (with NPM)
-* [Bower](http://bower.io/)
 * [Ember CLI](http://www.ember-cli.com/)
 * [PhantomJS](http://phantomjs.org/)
+* [Yarn](https://yarnpkg.com/en/docs/install)
 * We recommend you use [eslint](https://atom.io/packages/linter-eslint) plugin in your editor.
 
 ## Installation
@@ -17,7 +17,6 @@ You will need the following things properly installed on your computer.
 * change into the new directory
 * `git submodule update --init`
 * `npm run setup`
-* `npm install -g onchange`
 
 ## Running / Development
 

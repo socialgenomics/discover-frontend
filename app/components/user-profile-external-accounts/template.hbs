@@ -10,12 +10,13 @@
   }}
 {{/each}}
 <div class="ta-center">
-  {{async-button
-    class="c-btn c-btn-primary c-btn-large"
+  {{rui/r-async-button
     action=(action 'save')
     default="Save Changes"
-    pending="Saving..."
     disableWhen=(not validations.isValid)
+    pending="Saving..."
     reset=true
+    size="big"
+    variant="primary" 
   }}
 </div>

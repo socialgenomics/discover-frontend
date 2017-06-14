@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import QP from 'npm:../../query-parser';
+import QP from 'npm:@repositive/query-parser';
 
 const { Mixin, computed, get, set, setProperties } = Ember;
 

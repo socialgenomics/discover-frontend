@@ -175,14 +175,22 @@
           }}
         {{/each}}
         <div class="flex justify-center">
-          {{async-button
-            action=(action 'save')
-            class="c-btn c-btn-primary c-btn-large mr2"
-            default="Save Changes"
-            pending="Saving..."
-            disableWhen=(not validations.isValid)
+          <div class="mr3">
+            {{rui/r-async-button
+              action=(action 'save')
+              default="Save Changes"
+              disableWhen=(not validations.isValid)
+              pending="Saving..."
+              size="big"
+              variant="primary"
+            }}
+          </div>
+          {{rui/r-button
+            variant="cancel"
+            size="big"
+            label="Cancel"
+            clickHandler=(action "cancelEditMode")
           }}
-          {{rui/r-button variant="cancel" size="big" label="Cancel" clickHandler=(action "cancelEditMode")}}
         </div>
       </form>
     </div>

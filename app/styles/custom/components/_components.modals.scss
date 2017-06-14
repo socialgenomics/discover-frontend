@@ -1,10 +1,19 @@
 .c-modal--small {
   max-width: 90%;
   width: 560px;
+  @extend .c-modal--center;
 }
+
 .c-modal--medium {
   max-width: 90%;
   width: 700px;
+  @extend .c-modal--center;
+}
+
+.c-modal--center {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .c-share-modal__copy-link {

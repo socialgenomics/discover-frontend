@@ -31,6 +31,7 @@
 @import "node_modules/@repositive/liz-skin/components/grid-wrapper";
 @import "node_modules/@repositive/liz-skin/components/grid";
 @import "node_modules/@repositive/liz-skin/components/list";
+
   /* Custom */
   @import "custom/components/components.avatar-upload";
   @import "custom/components/components.buttons";
@@ -42,6 +43,7 @@
   @import "custom/components/components.flash-messages";
   @import "custom/components/components.follow-button";
   @import "custom/components/components.images";
+  @import "custom/components/components.help-docs";
   @import "custom/components/components.loading-spinner";
   @import "custom/components/components.main-wrapper";
   @import "custom/components/components.modals";
@@ -88,4 +90,5 @@
   ADD-ONs
 */
 
-@import "ember-basic-dropdown";
+@import 'ember-basic-dropdown';
+@import "ui-library";

@@ -7,7 +7,10 @@ const { setProperties, get } = Ember;
 
 describe('Unit | Component | user profile email password', function() {
   setupComponentTest('user-profile-email-password', {
-    needs: ['component:credential-list'],
+    needs: [
+      'component:credential-list',
+      'service:ajax'
+    ],
     unit: true
   });
 

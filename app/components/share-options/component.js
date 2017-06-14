@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import openCenteredPopupWindow from '../../utils/open-centered-popup-window';
+import URI from 'npm:urijs';
 
 const { Component, computed, get, setProperties } = Ember;
 
@@ -34,7 +35,7 @@ export default Component.extend({
   }),
 
   copyButtonClasses: computed('copyFailed', function() {
-    return `c-btn c-btn-small c-btn-primary ${get(this, 'copyFailed') ? 'copy-failed' : ''}`;
+    return `r-btn r-btn-small r-btn-primary ${get(this, 'copyFailed') ? 'copy-failed' : ''}`;
   }),
 
   actions: {
@@ -88,7 +89,7 @@ export default Component.extend({
   },
 
   _createShareWindowUrl(channelOptions) {
-    return new window.URI(get(channelOptions, 'baseUrl')).query(
+    return new URI(get(channelOptions, 'baseUrl')).query(
       Object.assign({}, get(channelOptions, 'qsParams'), { url: get(this, 'shareUrl') })
     ).toString();
   }
