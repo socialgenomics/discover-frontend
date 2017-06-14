@@ -14,7 +14,8 @@ export default Component.extend({
       return get(this, 'tabName') === get(this, 'activeTab');
     } else {
       const currentPath = get(this, 'router.currentPath');
-      return currentPath.indexOf(get(this, 'target')) > -1;
+      const target = get(this, 'target');
+      return currentPath.includes(target);
     }
   }),
 
