@@ -10,7 +10,9 @@ describe('Unit | Component | email verification', function() {
   setupComponentTest('email-verification', {
     needs: [
       'validator:presence',
-      'validator:format'
+      'validator:format',
+      'service:ajax',
+      'service:session'
     ],
     unit: true
   });

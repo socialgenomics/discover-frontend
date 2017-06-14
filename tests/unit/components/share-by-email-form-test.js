@@ -9,7 +9,11 @@ const { setProperties, get, set } = Ember;
 describe('ShareByEmailFormComponent', function() {
   setupComponentTest('share-by-email-form', {
     unit: true,
-    needs: ['validator:presence', 'validator:format']
+    needs: [
+      'validator:presence',
+      'validator:format',
+      'service:ajax'
+    ]
   });
 
   it('submitDisabled returns correct value', function() {

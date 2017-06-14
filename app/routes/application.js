@@ -1,8 +1,8 @@
 import Ember from 'ember';
 import ApplicationRouteMixin from 'ember-simple-auth/mixins/application-route-mixin';
-import BT from 'npm:../../query-parser/dist/main/b-tree';
-import BX from 'npm:../../query-parser/dist/main/b-exp-tree';
-import QP from 'npm:../../query-parser';
+import BT from 'npm:@repositive/query-parser/dist/main/b-tree';
+import BX from 'npm:@repositive/query-parser/dist/main/b-exp-tree';
+import QP from 'npm:@repositive/query-parser';
 
 const { Route, inject: { service }, get } = Ember;
 
