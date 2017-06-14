@@ -3,17 +3,13 @@
 {{else}}
   {{#if query}}
     {{#link-to target query class="fc-secondary fs2 block"}}
-      {{#if (and icon (eq iconPosition "left"))}}{{fa-icon icon}}{{/if}}
-      <span class="px2 fw-reg">{{tabName}}</span>
-      {{#if stats}}<span class="fw-med px2">{{stats}}</span>{{/if}}
-      {{#if (and icon (eq iconPosition "right"))}}{{fa-icon icon}}{{/if}}
+      {{rui/r-tab-list-item/content tabName=tabName stats=stats icon=icon iconPosition=iconPosition}}
     {{/link-to}}
+
   {{else}}
+
     {{#link-to target class="fc-secondary fs2 block"}}
-      {{#if (and icon (eq iconPosition "left"))}}{{fa-icon icon}}{{/if}}
-      <span class="px2 fw-reg">{{tabName}}</span>
-      {{#if stats}}<span class="fw-med px2">{{stats}}</span>{{/if}}
-      {{#if (and icon (eq iconPosition "right"))}}{{fa-icon icon}}{{/if}}
+      {{rui/r-tab-list-item/content tabName=tabName stats=stats icon=icon iconPosition=iconPosition}}
     {{/link-to}}
   {{/if}}
 {{/if}}

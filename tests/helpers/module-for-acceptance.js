@@ -1,5 +1,3 @@
-/* eslint-disable */
-import { describe } from 'mocha';
 import { setupTest } from 'ember-mocha';
 import Ember from 'ember';
 import startApp from '../helpers/start-app';
@@ -8,7 +6,7 @@ import destroyApp from '../helpers/destroy-app';
 const { RSVP: { Promise } } = Ember;
 
 export default function(name, options = {}) {
-  describeModule(name, {
+  setupTest(name, {
     beforeEach() {
       this.application = startApp();
 
