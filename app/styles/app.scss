@@ -31,6 +31,7 @@
 @import "node_modules/@repositive/liz-skin/components/grid-wrapper";
 @import "node_modules/@repositive/liz-skin/components/grid";
 @import "node_modules/@repositive/liz-skin/components/list";
+
   /* Custom */
   @import "custom/components/components.avatar-upload";
   @import "custom/components/components.buttons";
@@ -88,4 +89,5 @@
   ADD-ONs
 */
 
-@import "ember-basic-dropdown";
+@import 'ember-basic-dropdown';
+@import "ui-library";
