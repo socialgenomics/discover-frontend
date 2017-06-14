@@ -6,159 +6,102 @@
   BASE BUTTON STYLE
 */
 
-.c-btn {
+.r-btn {
+  background-color: $color-off-white;
   border-color: $color-overlay;
   border-radius: $border-radius;
   border-style: solid;
-  border-width: 1px;
+  border-width: $border-width;
+  color: $secondary-opacity-black;
   cursor: pointer;
   display: inline-block;
   font-family: $primary-font-stack;
   font-weight: $font-weight-medium;
+  margin: 0;
+  padding: 0;
   position: relative;
   transition: all 0.15s ease-in-out;
+  vertical-align: baseline;
 }
 
 /*
   SIZE VARIANTS
 */
 
-.c-btn-small {
+.r-btn-small {
   font-size: $font-size-small;
-  height: 36px;
+  height: $spacing-unit-large + $spacing-unit-medium;
   padding-left: $spacing-unit-medium;
   padding-right: $spacing-unit-medium;
 }
-a.c-btn-small { line-height: 36px; }
+a.r-btn-small {
+  // vertically centers text on <a> elements (<button> vertically centers by default)
+  line-height: $spacing-unit-large + $spacing-unit-medium;
+}
 
-.c-btn-large {
+.r-btn-large {
   font-size: $font-size-regular;
   height: $spacing-unit-x-large;
   padding-left: $spacing-unit-large;
   padding-right: $spacing-unit-large;
 }
-a.c-btn-large { line-height: $spacing-unit-x-large; }
+
+a.r-btn-large {
+  // vertically centers text on <a> elements (<button> vertically centers by default)
+  line-height: $spacing-unit-x-large;
+}
 
 /*
   TYPE / COLOR VARIANTS
 */
 
-.c-btn-primary {
+.r-btn-primary {
   background-color: $color-primary-teal;
   border-color: $color-primary-teal;
   color: $primary-opacity-white;
-
-  &:hover {
-    background-color: darken($color-primary-teal, 10);
-    border-color: darken($color-primary-teal, 10);
-  }
 }
 
-.c-btn-secondary {
+.r-btn-secondary {
   background-color: transparent;
   border-color: $tertiary-opacity-black;
   color: $primary-opacity-black;
-
-  &:hover {
-    background-color: $color-very-light-grey;
-  }
 }
 
-.c-btn-cancel {
-  background-color: $color-off-white;
-  border-color: $color-overlay;
+.r-btn-cancel {
   color: $primary-opacity-black;
 }
 
 /*
-  STATES
+  STATE VARIANTS
 */
 
-.c-btn:disabled {
-  background-color: red;
+.r-btn-primary:hover {
+  background-color: darken($color-primary-teal, 10);
+  border-color: darken($color-primary-teal, 10);
 }
 
-// .c-btn {
-//   border-style: solid;
-//   border-width: 1px;
-//   font-family: $primary-font-stack;
-//   margin: 0;
-//   transition: $global-transition;
-//   vertical-align: baseline;
-// }
-//
-// .c-btn-large {
-//   font-size: $font-size-regular;
-//   height: $spacing-unit-x-large;
-//   padding-left: $spacing-unit-large;
-//   padding-right: $spacing-unit-large;
-// }
-//
-// .c-btn-small {
-//   font-size: $font-size-small;
-//   height: 36px;
-//   padding-left: $spacing-unit-medium;
-//   padding-right: $spacing-unit-medium;
-// }
-//
-// .c-btn-primary {
-//   background-color: $color-primary-teal;
-//   border-color: $color-primary-teal;
-//   color: $color-white;
-// }
-//
-// .c-btn-primary:hover {
-//   background-color: darken($color-primary-teal, 15);
-// }
-//
-// .c-btn-secondary {
-//   background-color: transparent;
-//   border-color: rgba(0, 0, 0, 0.3);
-//   color: rgba(0, 0, 0, 0.77);
-// }
-//
-// .c-btn-cancel {}
-// .c-btn:disabled {}
-//
-//
-// .c-btn-small {}
-//
-// .c-btn-loading {}
-//
-// .c-help-link {
-//   .active {
-//     @extend .fw-bold;
-//   }
-// }
-//
-//
+.r-btn-secondary:hover {
+  background-color: $color-off-white;
+  border-color: $secondary-opacity-black;
+}
+
+.r-btn-cancel:hover {
+  background-color: darken($color-off-white, 5);
+}
+
+.r-btn:disabled {
+  border-color: $color-light-grey;
+  color: $tertiary-opacity-black !important;
+  background-color: $color-very-light-grey;
+
+  &:hover {
+    cursor: default;
+  }
+}
 
 
-//
-// // only styles enabled buttons
-// .c-btn-primary:not([disabled]) {
-//   color: $color-white;
-//   background: $color-primary-teal;
-//   border-color: $color-primary-teal;
-//   @extend .u-hv-bc-teal;
-// }
-//
-// // only styles enabled buttons
-// .c-btn-secondary:not([disabled]) {
-//   color: $color-primary-teal;
-//   background-color: $color-white;
-//   border-color: $color-primary-teal;
-//   @extend .u-hv-bc-white;
-// }
-//
-// .c-btn:disabled {
-//   background-color: $color-very-light-grey;
-//   border-color: $color-very-light-grey;
-//   color: $color-light-grey;
-//   cursor: default;
-// }
-//
-// .c-btn-text-primary {
+
+// .r-btn-text-primary {
 //   color: $color-primary-teal;
 //   background-color: $color-white;
 //   border: none;
@@ -171,7 +114,7 @@ a.c-btn-large { line-height: $spacing-unit-x-large; }
 //     text-decoration: underline;
 //   }
 // }
-// .c-btn-text-secondary {
+// .r-btn-text-secondary {
 //   @extend .u-tc-secondary;
 //   background-color: $color-white;
 //   border: none;
@@ -182,11 +125,5 @@ a.c-btn-large { line-height: $spacing-unit-x-large; }
 //   @extend .u-fs1;
 //   &:hover {
 //     text-decoration: underline;
-//   }
-// }
-//
-// .c-help-link {
-//   .active {
-//     @extend .u-fw-bold;
 //   }
 // }
