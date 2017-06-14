@@ -35,7 +35,7 @@ export default Component.extend({
   }),
 
   copyButtonClasses: computed('copyFailed', function() {
-    return `c-btn c-btn-small c-btn-primary ${get(this, 'copyFailed') ? 'copy-failed' : ''}`;
+    return `r-btn r-btn-small r-btn-primary ${get(this, 'copyFailed') ? 'copy-failed' : ''}`;
   }),
 
   actions: {
