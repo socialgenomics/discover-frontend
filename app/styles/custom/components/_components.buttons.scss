@@ -2,77 +2,99 @@
    #BUTTONS
    ========================================================================== */
 
-// Button
-/* ==================================== */
+/*
+  BASE BUTTON STYLE
+*/
 
-.c-btn {
-   display: inline-block;
-   margin: 0;
-   padding: $spacing-unit-medium $spacing-unit-x-large;
-   text-align: center;
-   vertical-align: baseline;
-   cursor: pointer;
-   border-width: 1px;
-   border-style: solid;
-   border-radius: $border-radius;
-   font-family: $primary-font-stack;
-   transition: $global-transition;
-   @extend .fs2;
-   @extend .fw-med;
+.r-btn {
+  background-color: $color-off-white;
+  border-color: $color-overlay;
+  border-radius: $border-radius;
+  border-style: solid;
+  border-width: $border-width;
+  color: $secondary-opacity-black;
+  cursor: pointer;
+  display: inline-block;
+  font-family: $primary-font-stack;
+  font-weight: $font-weight-medium;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  transition: all 0.15s ease-in-out;
+  vertical-align: baseline;
 }
 
-// only styles enabled buttons
-.c-btn-primary:not([disabled]) {
-  color: $color-white;
-  background: $color-primary-teal;
+/*
+  SIZE VARIANTS
+*/
+
+.r-btn-small {
+  font-size: $font-size-small;
+  height: $spacing-unit-large + $spacing-unit-medium;
+  padding-left: $spacing-unit-medium;
+  padding-right: $spacing-unit-medium;
+}
+a.r-btn-small {
+  // vertically centers text on <a> elements (<button> vertically centers by default)
+  line-height: $spacing-unit-large + $spacing-unit-medium;
+}
+
+.r-btn-large {
+  font-size: $font-size-regular;
+  height: $spacing-unit-x-large;
+  padding-left: $spacing-unit-large;
+  padding-right: $spacing-unit-large;
+}
+
+a.r-btn-large {
+  // vertically centers text on <a> elements (<button> vertically centers by default)
+  line-height: $spacing-unit-x-large;
+}
+
+/*
+  TYPE / COLOR VARIANTS
+*/
+
+.r-btn-primary {
+  background-color: $color-primary-teal;
   border-color: $color-primary-teal;
-  @extend .u-hv-bc-teal;
+  color: $primary-opacity-white;
 }
 
-// only styles enabled buttons
-.c-btn-secondary:not([disabled]) {
-  color: $color-primary-teal;
-  background-color: $color-white;
-  border-color: $color-primary-teal;
-  @extend .u-hv-bc-white;
+.r-btn-secondary {
+  background-color: transparent;
+  border-color: $tertiary-opacity-black;
+  color: $primary-opacity-black;
 }
 
-.c-btn:disabled {
+.r-btn-cancel {
+  color: $primary-opacity-black;
+}
+
+/*
+  STATE VARIANTS
+*/
+
+.r-btn-primary:hover {
+  background-color: darken($color-primary-teal, 10);
+  border-color: darken($color-primary-teal, 10);
+}
+
+.r-btn-secondary:hover {
+  background-color: $color-off-white;
+  border-color: $secondary-opacity-black;
+}
+
+.r-btn-cancel:hover {
+  background-color: darken($color-off-white, 5);
+}
+
+.r-btn:disabled {
+  border-color: $color-light-grey;
+  color: $tertiary-opacity-black !important;
   background-color: $color-very-light-grey;
-  border-color: $color-very-light-grey;
-  color: $color-light-grey;
-  cursor: default;
-}
 
-.c-btn-text-primary {
-  color: $color-primary-teal;
-  background-color: $color-white;
-  border: none;
-  cursor: pointer;
-  font-family: $primary-font-stack;
-  padding: 0;
-  @extend .fw-med;
-  @extend .fs2;
   &:hover {
-    text-decoration: underline;
-  }
-}
-.c-btn-text-secondary {
-  @extend .fc-secondary;
-  background-color: $color-white;
-  border: none;
-  cursor: pointer;
-  font-family: $primary-font-stack;
-  padding: 0;
-  @extend .fw-reg;
-  @extend .fs1;
-  &:hover {
-    text-decoration: underline;
-  }
-}
-
-.c-help-link {
-  .active {
-    @extend .fw-bold;
+    cursor: default;
   }
 }

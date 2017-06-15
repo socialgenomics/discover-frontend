@@ -4,7 +4,7 @@ const { Component, get } = Ember;
 
 export default Component.extend({
   tagName: 'ul',
-  classNames: ['o-list-flush-left', 'o-list-inline', 'ta-center'],
+  classNames: ['list-flush-left', 'ta-center'],
   actions: {
     showInfo() { get(this, 'showInfo')(); },
     showFilters() { get(this, 'showFilters')(); }

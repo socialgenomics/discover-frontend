@@ -1,7 +1,7 @@
 <div class="relative">
   <div class="ta-center">
-    <div class="relative inline-block mb2">
-      <img class="icon-x-large mb2 circle" src={{user.profile.avatar}} onError="this.onerror=null;this.src='/assets/images/avatar/dog.png';">
+    <div class="relative inline-block mb3">
+      {{rui/r-avatar src=user.profile.avatar size="x-large"}}
       {{reputation-total total=user.reputationTotal class="c-reputation-total-large fs2"}}
     </div>
     <h1 class="fs3 fc-primary mb2 fw-reg hyphens-auto">{{user.displayName}}</h1>

@@ -3,8 +3,8 @@
 {{#unless session.isAuthenticated}}
   {{#full-page-notification}}
     <h3 class="mr4 mb3 fc-secondary">Search through <strong class="pl2 pr2 fs4">{{datasetsNumber}}</strong> human genomic datasets</h3>
-    {{#link-to 'root' class='c-btn c-btn--primary c-btn--shadow' invokeAction=(action 'trackLinkEvent')}}
-      Search now
+    {{#link-to 'root' invokeAction=(action 'trackLinkEvent')}}
+      {{rui/r-button variant="primary" size="big" label="Search now"}}
     {{/link-to}}
   {{/full-page-notification}}
 {{/unless}}

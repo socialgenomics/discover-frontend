@@ -4,5 +4,5 @@ const { Component } = Ember;
 
 export default Component.extend({
   tagName: 'li',
-  classNames: ['o-list-flush-left', 'feature-list-item', 'u-hv-bc-white', 'p3']
+  classNames: ['list-flush-left', 'feature-list-item', 'u-hv-bc-white', 'p3']
 });

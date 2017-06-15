@@ -3,7 +3,7 @@
   {{#dropdown.trigger class="outline-none cursor-pointer px3"}}
     {{#if session.isAuthenticated}}
       <div class="hide-s hide-m">
-        <img src={{avatar}} onError="this.onerror=null;this.src='/assets/images/avatar/dog.png';" class="icon-medium circle">
+        {{rui/r-avatar src=avatar size="medium"}}
         <span class="fc-primary fs1 px2">{{firstname}}</span>
       </div>
     {{/if}}

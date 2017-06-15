@@ -1,9 +1,0 @@
-<ul class="o-list-flush-left flex fc-primary mb0">
-  {{#if tabs}}
-    {{#each tabs as |tab|}}
-      {{tab-list-link-item title=tab.title target=tab.target query=tab.query}}
-    {{/each}}
-  {{else}}
-    {{yield}}
-  {{/if}}
-</ul>

@@ -30,7 +30,7 @@
     word-wrap: break-word;
   }
 
-  ul   { @extend .o-list-bullet; }
+  ul   { @extend .list-bullet; }
   code {
     @extend .bc-very-light-grey;
     @extend .rounded;

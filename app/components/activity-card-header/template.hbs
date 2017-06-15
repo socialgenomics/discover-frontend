@@ -1,9 +1,9 @@
 {{#if (eq group "request")}}
   {{#link-to 'datasets.request'}}
-    <ul class="o-list-inline o-list-flush-left mb0">
-      <li class="o-list-inline__item  mr2">{{fa-icon "clipboard" class="fc-blue"}}</li>
-      <li class="o-list-inline__item"><h4 class="mb0 fs2 fc-blue">Requested Data {{#if isProfilePage}}({{count}}){{/if}}</h4></li>
-    </ul>
+    <header class="flex items-center mb0">
+      {{fa-icon "clipboard" class="fc-blue mr2"}}
+      <h4 class="mb0 fs2 fc-blue">Requested Data {{#if isProfilePage}}({{count}}){{/if}}</h4>
+    </header>
   {{/link-to}}
   {{#unless isProfilePage}}
     <p class="mb0 pt2">
@@ -15,10 +15,10 @@
 
 {{#if (eq group "registration")}}
   {{#link-to 'datasets.register'}}
-    <ul class="o-list-inline o-list-flush-left mb0">
-      <li class="o-list-inline__item mr2">{{fa-icon "file-text" class="fc-red"}}</li>
-      <li class="o-list-inline__item"><h4 class="mb0 fs2 fc-red">Registered Data {{#if isProfilePage}}({{count}}){{/if}}</h4></li>
-    </ul>
+    <header class="flex items-center mb0">
+      {{fa-icon "file-text" class="fc-red mr2"}}
+      <h4 class="mb0 fs2 fc-red">Registered Data {{#if isProfilePage}}({{count}}){{/if}}</h4>
+    </header>
   {{/link-to}}
   {{#unless isProfilePage}}
     <p class="mb0 pt2">
@@ -29,22 +29,22 @@
 
 
 {{#if (eq group "favourite")}}
-  <ul class="o-list-inline o-list-flush-left mb0">
-    <li class="o-list-inline__item mr2">{{fa-icon "star" class="fc-yellow"}}</li>
-    <li class="o-list-inline__item"><h4 class="mb0 fs2 fc-yellow">Favourites {{#if isProfilePage}}({{count}}){{/if}}</h4></li>
-  </ul>
+  <header class="flex items-center mb0">
+    {{fa-icon "star" class="fc-yellow mr2"}}
+    <h4 class="mb0 fs2 fc-yellow">Favourites {{#if isProfilePage}}({{count}}){{/if}}</h4>
+  </header>
 {{/if}}
 
 {{#if (eq group "contribution")}}
-  <ul class="o-list-inline o-list-flush-left mb0">
-    <li class="o-list-inline__item mr2">{{fa-icon "gift" class="fc-teal"}}</li>
-    <li class="o-list-inline__item"><h4 class="mb0 fs2 fc-teal">Contributions {{#if isProfilePage}}({{count}}){{/if}}</h4></li>
-  </ul>
+  <header class="flex items-center mb0">
+    {{fa-icon "gift" class="fc-teal mr2"}}
+    <h4 class="mb0 fs2 fc-teal">Contributions {{#if isProfilePage}}({{count}}){{/if}}</h4>
+  </header>
 {{/if}}
 
 {{#if (eq group "discussion")}}
-  <ul class="o-list-inline o-list-flush-left mb0">
-    <li class="o-list-inline__item mr2">{{fa-icon "comments" class="fc-secondary"}}</li>
-    <li class="o-list-inline__item"><h4 class="mb0 fs2 fc-secondary">Discussions {{#if isProfilePage}}({{count}}){{/if}}</h4></li>
-  </ul>
+  <header class="flex items-center mb0">
+    {{fa-icon "comments" class="fc-secondary mr2"}}
+    <h4 class="mb0 fs2 fc-secondary">Discussions {{#if isProfilePage}}({{count}}){{/if}}</h4>
+  </header>
 {{/if}}

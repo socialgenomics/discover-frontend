@@ -5,7 +5,7 @@
       <div class="assay-container">
         <div class="request">Request</div>
       </div>
-      <ul class="o-list-inline o-list-flush-left mb0">
+      <ul class="flex list-flush-left mb0">
         {{action-favourite model=dataset class="mr3"}}
         {{action-share
           actionableId=dataset.id
@@ -51,7 +51,7 @@
       {{#if hasAssays}}
         {{assay-list assays=assaysToDisplay}}
       {{/if}}
-      <ul class="flex o-list-flush-left pl3 mb0">
+      <ul class="flex list-flush-left pl3 mb0">
         {{action-favourite model=dataset class="mr3"}}
         {{action-share
           actionableId=dataset.id

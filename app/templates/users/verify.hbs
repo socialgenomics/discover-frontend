@@ -4,12 +4,18 @@
       {{#if model.verified}}
         <h1 class="fs4 fc-secondary">Your account is now verified.</h1>
         <img src="/assets/images/happy.png" class="mb4 icon-x-large" alt="happy lizard">
-        {{#link-to 'user' model.id class="c-btn c-btn-primary"}}Visit your Profile{{/link-to}}
+        {{#link-to 'user' model.id}}
+          {{rui/r-button
+            variant="primary"
+            size="big"
+            label="Visit your Profile"
+          }}
+        {{/link-to}}
 
       {{else if timeout_error}}
         <h1 class="fs4 fc-secondary">The verification link has expired.</h1>
         <img src="/assets/images/liz-time-out.png" class="mb4 icon-x-large" alt="Time Out lizard">
-        <button class="c-btn c-btn-primary" {{action "resendVerifyEmail"}}>Resend Verification Email</button>
+        <button class="r-btn r-btn-primary r-btn-large" {{action "resendVerifyEmail"}}>Resend Verification Email</button>
 
       {{else}}
         {{partial 'loading'}}

@@ -39,14 +39,17 @@
           showPasswordButton=true
           passwordStrength=passwordStrength
         }}
-        {{async-button
-          class="c-btn c-btn-primary fs3 mb2 u-full-width"
-          action=(action 'signupAndAuthenticate')
-          default="Create Your Account"
-          pending="Submitting..."
-          disableWhen=isInvalid
-          reset=true
-        }}
+        <div class="flex flex-column">
+          {{rui/r-async-button
+            action=(action 'signupAndAuthenticate')
+            default="Create Your Account"
+            disableWhen=isInvalid
+            pending="Submitting..."
+            reset=true
+            size="big"
+            variant="primary"
+          }}
+        </div>
         <p class="ta-left">By signing up, you agree to our {{#link-to 'policies'}}Terms &amp; Privacy Policy.{{/link-to}} </p>
       </form>
     </div>
