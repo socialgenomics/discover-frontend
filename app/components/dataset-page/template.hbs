@@ -110,7 +110,7 @@
         </ul>
 
         {{#if model.url}}
-          {{rui/r-link-button
+          {{r-link-button
             clickHandler=(action "trackExit")
             href=(if session.isAuthenticated model.url '')
             label=(if (eq model.access "Open") "Access Data" "Go To Dataset")
