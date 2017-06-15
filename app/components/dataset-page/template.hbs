@@ -126,16 +126,16 @@
     <div class="c-card-detail-discussion grid__col grid__col--5-of-12 u-full-height">
       <div class="border-left u-full-min-height">
         {{#unless isRequest}}
-          {{#tab-list class='mb3'}}
-            {{tab-list-action-item
-                setActiveTab=(action 'setActiveTab')
-                activeTab=activeTab
-                tabName='metadata'}}
-            {{tab-list-action-item
-                setActiveTab=(action 'setActiveTab')
-                activeTab=activeTab
-                tabName='discussion'}}
-          {{/tab-list}}
+          {{#rui/r-tab-list}}
+            {{rui/r-tab-list-item
+              setActiveTab=(action 'setActiveTab')
+              activeTab=activeTab
+              tabName='metadata'}}
+            {{rui/r-tab-list-item
+              setActiveTab=(action 'setActiveTab')
+              activeTab=activeTab
+              tabName='discussion'}}
+          {{/rui/r-tab-list}}
           <div class="p3">
             {{#if (eq activeTab 'metadata')}}
               {{partial "datasets/tab-metadata"}}

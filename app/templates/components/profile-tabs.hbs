@@ -1,14 +1,13 @@
-{{#tab-list class="c-card"}}
+{{#rui/r-tab-list}}
 
-  {{tab-list-link-item
+  {{rui/r-tab-list-item
     target="users.profile"
-    title="Account Details"
-    }}
-
-  {{tab-list-link-item
-    target="users.settings"
-    title="Notifications"
-    class="border-left"
+    tabName="Account Details"
   }}
 
-{{/tab-list}}
+  {{rui/r-tab-list-item
+    target="users.settings"
+    tabName="Notifications"
+  }}
+
+{{/rui/r-tab-list}}
