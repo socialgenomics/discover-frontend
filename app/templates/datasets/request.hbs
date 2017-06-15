@@ -55,7 +55,7 @@
               errors=validations.attrs.description.messages
               placeholder="Describe the dataset you're looking for. You can include ethnicity of patients, number of samples, assay type or associated diseases."
             }}
-            {{rui/r-async-button
+            {{r-async-button
               action=(action 'addRequest')
               default="Submit Request"
               disableWhen=isInvalid
