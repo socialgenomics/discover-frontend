@@ -1,7 +1,7 @@
 
 {{#link-to 'user' user.id disabled=(not session.isAuthenticated) invokeAction=(action 'toggleCreateAccountModal') classNames="u-hv-bc-darken5 block py3 pl2"}}
   <div class="relative inline-block mr3">
-    {{rui/r-avatar src=user.profile.avatar size="large"}}
+    {{r-avatar src=user.profile.avatar size="large"}}
     {{reputation-total total=user.reputationTotal class="c-reputation-total-small fs0"}}
   </div>
 
