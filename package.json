@@ -82,6 +82,7 @@
     "sanitize-html": "^1.14.1",
     "topojson": "^3.0.0",
     "torii": "^0.9.5",
+    "ui-library": "*",
     "urijs": "^1.18.10"
   },
 
