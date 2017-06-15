@@ -4,11 +4,11 @@
       {{focus-input value=tag type="text" enter="addTag" placeholder="Enter tag name"}}
     </div>
     <div class="grid__col grid__col--1-of-2 grid__col--am">
-      {{rui/r-button variant="cancel" label="Cancel" clickHandler=(action "toggleInput")}}
+      {{r-button variant="cancel" label="Cancel" clickHandler=(action "toggleInput")}}
     </div>
   {{else}}
     <div class="grid__col grid__col--3-of-3">
-      {{rui/r-button label="Add new tag" clickHandler=(action "toggleInput")}}
+      {{r-button label="Add new tag" clickHandler=(action "toggleInput")}}
     </div>
   {{/if}}
 </div>
