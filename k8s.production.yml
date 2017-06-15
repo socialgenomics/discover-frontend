@@ -22,6 +22,12 @@ metadata:
     build: "${TAG}"
 spec:
   replicas: 2
+  selector:
+    matchLabels:
+      app: discover
+      env: production
+      criticality: high
+      build: "${TAG}"
   template:
     metadata:
       labels:
