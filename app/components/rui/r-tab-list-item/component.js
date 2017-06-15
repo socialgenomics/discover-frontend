@@ -15,7 +15,7 @@ export default Component.extend({
     } else {
       const currentPath = get(this, 'router.currentPath');
       const target = get(this, 'target');
-      return currentPath.includes(target);
+      return currentPath.indexOf(target) > -1;
     }
   }),
 
