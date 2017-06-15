@@ -17,10 +17,10 @@
 {{/if}}
 
 {{#if showCreateAccountModal}}
-  {{! "container-class" is a temporary solution, changes in ember modal dialog required }}
+  {{! "containerClass" is a temporary solution, changes in ember modal dialog required }}
   {{#repositive-modal
-    container-class='c-modal--medium u-z5'
-    close=(action 'toggleCreateAccountModal')
+    containerClass='c-modal--medium u-z5'
+    onClose=(action 'toggleCreateAccountModal')
   }}
     {{repositive-modal/header
       icon='star'

@@ -1,4 +1,4 @@
-<label class="c-validated-input-label fc-secondary mb3 u-block">Add your research interest</label>
+<label class="c-validated-input-label fc-secondary mb2 block">Add your research interests</label>
 <div class="py3">
   {{#if editInterests.length}}
   <div>
@@ -12,7 +12,7 @@
     {{/each}}
   </div>
   {{/if}}
-  <div class="py3 flex">
+  <div class="py3 flex items-center">
     {{#if isOpen}}
       {{focus-input class="mr2" value=newInterest type="text" enter="addInterest" placeholder="Add your research interest"}}
       {{rui/r-button variant="cancel" label="Cancel" clickHandler=(action "hideInput")}}

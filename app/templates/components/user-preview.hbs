@@ -7,7 +7,7 @@
 
   <div class="inline-block {{if user.profile.work_organisation 'absolute'}} {{if currentUser 'absolute'}}">
     <h4 class="flex items-center mb0 fs2 fc-primary">
-      {{user.displayName}}
+      {{truncate user.displayName 35}}
       {{#if timestamp}}
         <span class="fc-tertiary pl2 fs0 fw-reg">{{moment-from-now timestamp allowEmpty=true}}</span>
       {{/if}}
@@ -31,8 +31,8 @@
 
 {{#if showCreateAccountModal}}
   {{#repositive-modal
-    container-class='c-modal--medium u-z5'
-    close=(action 'toggleCreateAccountModal')
+    containerClass='c-modal--medium u-z5'
+    onClose=(action 'toggleCreateAccountModal')
   }}
     {{repositive-modal/header
       title='View User Profiles'

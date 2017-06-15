@@ -19,22 +19,22 @@ describe('Unit | Mixin | RUI / r-button-mixin', function() {
 
   describe('properties', function () {
     it('should have correct classNames set', function () {
-      expect(get(subject, 'classNames')).to.be.eql(['c-btn']);
+      expect(get(subject, 'classNames')).to.be.eql(['r-btn']);
     });
 
     it('should have correct classNameBindings set', function () {
       expect(get(subject, 'classNameBindings')).to.be.eql([
         // types
-        'primary:c-btn-primary',
-        'secondary:c-btn-secondary',
-        'cancel:c-btn-cancel',
+        'primary:r-btn-primary',
+        'secondary:r-btn-secondary',
+        'cancel:r-btn-cancel',
 
         // states
-        'loading:c-btn-loading',
+        'loading:r-btn-loading',
 
         // sizes
-        'big:c-btn-large',
-        'small:c-btn-small'
+        'big:r-btn-large',
+        'small:r-btn-small'
       ]);
     });
 

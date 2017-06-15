@@ -9,7 +9,7 @@
         {{attribute.value}}
       </a>
     {{else}}
-      <p class="t-attr-item-text fs2 mb2 text-line-break">{{attribute.value}}</p>
+      <p class="t-attr-item-text fs2 mb2 hyphens-auto text-line-break">{{attribute.value}}</p>
     {{/if}}
     {{#if canEdit}}
       <div>
@@ -26,13 +26,17 @@
       type="text"
       value=value
     }}
-    {{async-button
-      class="c-btn c-btn-primary mr3 mb2"
+    {{rui/r-async-button
       action=(action 'save')
       default="Save"
       disableWhen=(not isValid)
       pending="Saving..."
+      variant="primary"
     }}
-    {{rui/r-button variant="cancel" label="Cancel" clickHandler=(action "cancelEditMode")}}
+    {{rui/r-button
+      clickHandler=(action "cancelEditMode")
+      label="Cancel"
+      variant="cancel"
+    }}
   </form>
 {{/unless}}

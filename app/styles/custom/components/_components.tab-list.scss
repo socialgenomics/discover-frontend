@@ -1,0 +1,7 @@
+.r-tab-list > li {
+  border-left: $border-width $border-color solid;
+}
+
+.r-tab-list li:first-child {
+  border-left: none;
+}

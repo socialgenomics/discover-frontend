@@ -25,7 +25,7 @@
     {{search-results-list results=model.datasets totalResults=model.meta.total}}
 
     {{#if (gt model.meta.total 0)}}
-      {{pagination-bar
+      {{r-pagination
         totalPages=totalPages
         currentPageNumber=page
         nextPage=(action 'nextPage')

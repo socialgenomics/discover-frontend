@@ -1,0 +1,57 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: discover
+  labels:
+    app: discover
+spec:
+  selector:
+    app: discover
+  ports:
+    - port: 80
+      name: http
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: discover
+  labels:
+    app: discover
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: discover
+    spec:
+      containers:
+        - name: discover
+          image: registry.repositive.io:5000/discover:${TAG}
+          resources:
+            limits:
+              cpu: 300m
+              memory: 200Mi
+            requests:
+              cpu: 100m
+              memory: 100Mi
+          ports:
+            - containerPort: 80
+      imagePullSecrets:
+        - name: regsecret
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: discover
+  labels:
+    app: discover
+  annotations:
+    kubernetes.io/ingress.class: "traefik"
+spec:
+  rules:
+  - host: discover-staging.repositive.io
+    http:
+      paths:
+      - backend:
+          serviceName: discover
+          servicePort: 80

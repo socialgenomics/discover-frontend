@@ -3,7 +3,7 @@ import Ember from 'ember';
 const { Component, computed, get } = Ember;
 
 export default Component.extend({
-  classNames: ['border-bottom', 'p3'],
+  classNames: ['border-bottom p3 t-activity-card-item'],
   type: computed('dataset', function() {
     const model = get(this, 'dataset');
     let type = get(model, 'type');

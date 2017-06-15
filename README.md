@@ -6,9 +6,9 @@ You will need the following things properly installed on your computer.
 
 * [Git](http://git-scm.com/)
 * [Node.js](http://nodejs.org/) (with NPM)
-* [Bower](http://bower.io/)
 * [Ember CLI](http://www.ember-cli.com/)
 * [PhantomJS](http://phantomjs.org/)
+* [Yarn](https://yarnpkg.com/en/docs/install)
 * We recommend you use [eslint](https://atom.io/packages/linter-eslint) plugin in your editor.
 
 ## Installation
@@ -16,9 +16,7 @@ You will need the following things properly installed on your computer.
 * `git clone <repository-url>` this repository
 * change into the new directory
 * `git submodule update --init`
-* `npm install`
-* `bower install`
-* `npm install -g onchange`
+* `npm run setup`
 
 ## Running / Development
 
@@ -48,33 +46,14 @@ As well as this, we encourage component based design. So before you create a con
 
 Make use of the many generators for code, try `ember help generate` for more details
 
-## Deploying
+## Deployment
 
 ### Deploying to Staging
 
-```
-git checkout master
-
-git pull
-```
-
-If there are branches ready to be merged, merge them.
-
-Increment version number with `npm version <major | minor | patch>`
-
-Then push:
-
-```
-
-git push --tags
-```
-This build will be deployed to the staging machine at [https://discover-staging.repositive.io](https://discover-staging.repositive.io)
+Whenever a PR is merged into master, the new build of master is deployed to [staging](https://discover-staging.repositive.io) automatically.
 
 ### Deploying to Production
-
-1. [Deploy to staging](#deploying-to-staging)
-2. Wait for successful deployment to staging.:watch:
-3. Go to [Rancher](http://rancher.repositive.io:8080/env/1a100/apps/stacks/1e39) :cow:
-4. Within the 'production' environment 'discover-platform' stack (link should take you there), click the 'upgrade' button on the 'discover' service.
-5. In the input labeled 'Select Image', change the version number to the build you'd like to deploy.
-6. Click upgrade and pray to the deployment god that nothing bad happens. :pray:
+1. Because you can't directly push changes to master, you must first make a new branch.
+2. Within the new branch, update the version number with `npm version <major | minor | patch>`
+3. Push with tags: `git push && git push --tags`
+4. Create a PR to merge the upgrade branch into master.
