@@ -13,10 +13,9 @@
     "startStagingOnNewMac": "ember server --watcher=polling --proxy=https://api-staging.repositive.io --live-reload-port 49153",
     "startWithHost": "ember server --watcher=polling --proxy=$BACKEND_SERVER",
     "build": "ember build",
-    "test": "ember test",
-    "security": "snyk test"
+    "test": "ember test"
   },
-  "repository": "https://bitbucket.org/repositive/repositive.io",
+  "repository": "https://github.com/repositive/discover.repositive.io",
   "engines": {
     "node": ">= 4"
   },
