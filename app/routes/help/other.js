@@ -6,7 +6,7 @@ export default Route.extend({
   controllerName: 'help',
 
   model(params) {
-    return '/help/other/' + params.query;
+    return 'help/other/' + params.query;
   },
 
   setupController(controller, model) {

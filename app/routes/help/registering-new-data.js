@@ -6,7 +6,7 @@ export default Route.extend({
   controllerName: 'help',
 
   model(params) {
-    return '/help/registering-new-data/' + params.query;
+    return 'help/registering-new-data/' + params.query;
   },
 
   setupController(controller, model) {

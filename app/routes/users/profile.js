@@ -25,7 +25,13 @@ export default Route.extend(AuthenticatedRouteMixin, {
   },
 
   actions: {
+    transitionToProfile(userId) {
+      this.transitionTo('user', userId);
+    },
     reloadModel() {
+      this.refresh();
+    },
+    reloadUserModel() {
       return this.store.peekRecord('user', get(this, 'userId')).reload();
     },
     pushToSecondaryCreds(newCredential) {
