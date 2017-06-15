@@ -61,7 +61,7 @@
                 errors=validations.attrs.url.messages
                 placeholder="A link to the dataset if available"
               }}
-              {{rui/r-async-button
+              {{r-async-button
                 action=(action 'addDataset')
                 default="Register Dataset"
                 disableWhen=isInvalid

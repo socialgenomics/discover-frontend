@@ -21,7 +21,7 @@
       noLabel=true
     }}
 
-    {{rui/r-async-button
+    {{r-async-button
       action=(action 'save')
       default="Save"
       disableWhen=(not validations.isValid)
@@ -30,7 +30,7 @@
       variant="primary"
     }}
 
-    {{rui/r-button
+    {{r-button
       clickHandler=(action "cancelEditMode")
       label="Cancel"
       variant="cancel"
