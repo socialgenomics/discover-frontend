@@ -17,7 +17,7 @@ metadata:
   name: discover
   labels:
     app: discover
-    env: staging
+    env: production
     criticality: high
     build: "${TAG}"
 spec:
@@ -25,14 +25,14 @@ spec:
   selector:
     matchLabels:
       app: discover
-      env: staging
+      env: production
       criticality: high
       build: "${TAG}"
   template:
     metadata:
       labels:
         app: discover
-        env: staging
+        env: production
         criticality: high
         build: "${TAG}"
     spec:
@@ -61,7 +61,7 @@ metadata:
     kubernetes.io/ingress.class: "traefik"
 spec:
   rules:
-  - host: discover-staging.repositive.io
+  - host: discover.repositive.io
     http:
       paths:
       - backend:

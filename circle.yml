@@ -25,14 +25,17 @@ deployment:
       - docker build -t registry.repositive.io:5000/discover:$CIRCLE_BUILD_NUM .
       - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS registry.repositive.io:5000
       - docker push registry.repositive.io:5000/discover:$CIRCLE_BUILD_NUM
+      - curl -O -u $DEPLOYMENT_USER:$DEPLOYMENT_PASS https://deployment-server-staging.repositive.io/kubeconfig-staging
       - TAG=$CIRCLE_BUILD_NUM envsubst '${TAG}' < k8s.staging.yml > deploy.yml
       - KUBECONFIG=kubeconfig-staging $HOME/kubectl apply -f deploy.yml
 
   deployment:
-    tag: /.*/
+    tag: /v[0-9]+(\.[0-9]+)*/
     commands:
       - node_modules/ember-cli/bin/ember build --environment production
       - docker build -t registry.repositive.io:5000/discover:$CIRCLE_TAG .
       - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS registry.repositive.io:5000
       - docker push registry.repositive.io:5000/discover:$CIRCLE_TAG
-      - curl -u $DEPLOYMENT_USER:$DEPLOYMENT_PASS -T "deploy.production.yml" "https://deployment.repositive.io/deploy?stack=fn&version=$CIRCLE_TAG"
+      - curl -O -u $DEPLOYMENT_USER:$DEPLOYMENT_PASS https://deployment-server-production.repositive.io/kubeconfig-production
+      - TAG=$CIRCLE_TAG envsubst '${TAG}' < k8s.production.yml > deploy.yml
+      - KUBECONFIG=kubeconfig-production $HOME/kubectl apply -f deploy.yml
