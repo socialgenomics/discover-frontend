@@ -1,0 +1,55 @@
+<div class="grid-wrapper grid-wrapper-stepped">
+  <section class="grid">
+
+    <div class="grid__col grid__col--3-of-3 ta-center">
+      <h1 class="fs4 fc-secondary">Signup</h1>
+    </div>
+
+    <div class="grid__col grid__col--5-of-12 grid__col--m-2-of-3 grid__col--centered">
+      <form>
+        <div class="ta-center mb4">
+          <a class="pr3" {{ action 'thirdPartyAuth' 'google-oauth2' 'signup'}}>{{svg-jar "google" class="icon-large border circle"}}</a>
+          <a {{ action 'thirdPartyAuth' 'linked-in-oauth2' 'signup'}}>{{svg-jar "linkedin" class="icon-large"}}</a>
+        </div>
+
+        <div class="c-divider c-divider-light-bg"></div>
+
+        {{validated-input
+          label="Full Name"
+          type="Text"
+          value=fullname
+          errors=validations.attrs.fullname.messages
+          placeholder="e.g. Christina Luckasson"
+        }}
+        {{validated-input
+          label="Email"
+          type="email"
+          value=email
+          errors=validations.attrs.email.messages
+          placeholder="e.g. christina@stthomashospital.com"
+        }}
+        {{validated-input
+          label="Password"
+          class="mb4"
+          value=password
+          password=true
+          errors=validations.attrs.password.messages
+          placeholder="e.g. •••••••••"
+          helpText="Minimum 8 characters. Must include an uppercase letter or number."
+          showPasswordButton=true
+          passwordStrength=passwordStrength
+        }}
+        {{async-button
+          class="c-btn c-btn-primary fs3 mb2 u-full-width"
+          action=(action 'signupAndAuthenticate')
+          default="Create Your Account"
+          pending="Submitting..."
+          disableWhen=isInvalid
+          reset=true
+        }}
+        <p class="ta-left">By signing up, you agree to our {{#link-to-external 'policies'}}Terms &amp; Privacy Policy.{{/link-to-external}} </p>
+      </form>
+    </div>
+  </section>
+
+</div>

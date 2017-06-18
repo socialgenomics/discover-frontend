@@ -1,0 +1,17 @@
+{
+  "name": "auth",
+  "keywords": [
+    "ember-addon",
+    "ember-engine"
+  ],
+  "dependencies": {
+    "ember-cli-htmlbars": "*",
+    "ember-cli-babel": "*",
+    "ember-cli-flash": "1.4.2",
+    "ember-async-button": "1.0.2",
+    "ember-cp-validations": "3.3.2",
+    "ember-simple-auth": "1.3.0",
+    "ember-svg-jar": "0.10.3",
+    "ember-truth-helpers": "1.3.0"
+  }
+}
