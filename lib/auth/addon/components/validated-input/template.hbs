@@ -1,0 +1,59 @@
+{{#unless (or showCommentButtons noLabel)}}
+  <label for="{{elementId}}" class="c-validated-input-label fc-secondary">
+    {{label}}
+  </label>
+{{/unless}}
+
+{{#if (eq type "textarea")}}
+
+  {{textarea
+    value=value
+    focus-in="focusedIn"
+    focus-out="focusedOut"
+    type=inputType
+    placeholder=placeholder
+    disabled=disabled
+    class="u-textarea-resize-v"
+  }}
+
+  {{#unless (or disabled noMarkdown)}}
+    {{#link-to 'help.other' 'format' class="fs0"}}How do I format text with Markdown?{{/link-to}}
+  {{/unless}}
+
+{{else}}
+
+  {{#if showPasswordButton}}
+    <a class="c-pw-text-btn" {{action 'togglePasswordVisibility'}}>{{#if isPasswordShown}} Hide Password {{else}} Show Password {{/if}}</a>
+    {{#if value}}{{password-strength strength=passwordStrength}}{{/if}}
+  {{else if resetPassword}}
+    <a class="c-pw-text-btn" {{action resetPassword}}>Reset Password</a>
+  {{/if}}
+  {{input
+    value=value
+    focus-in="focusedIn"
+    focus-out="focusedOut"
+    type=inputType
+    placeholder=placeholder
+    disabled=disabled
+  }}
+
+{{/if}}
+
+{{#unless noMsgContainer}}
+  <div class="c-validated-input-msg-container">
+    {{#if isInvalid}}
+      <ul class="o-list-flush-left mb0">
+        {{#each errors as |error|}}
+          <li class="ta-left fc-red c-validated-input-msg">{{error}}</li>
+        {{/each}}
+      </ul>
+    {{else if (and helpText (and isActive (not isValid)))}}
+      <p class="ta-left fc-tertiary c-validated-input-msg">{{helpText}}</p>
+    {{/if}}
+  </div>
+  {{/unless}}
+
+
+{{#if isShowingMarkdownModal}}
+  {{markdown-modal action="toggleMarkdownModal"}}
+{{/if}}

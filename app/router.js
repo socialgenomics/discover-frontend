@@ -19,7 +19,6 @@ Router.map(function() {
   this.route('users', { resetNamespace: true }, function() {
     this.route('signup');
     this.route('login');
-    this.route('settings');
     this.route('profile');
     this.route('verify', {
       path: '/verify/:verification_id'
@@ -93,6 +92,8 @@ Router.map(function() {
   this.route('404', {
     path: '/*path'
   });
+
+  this.mount('auth', { as: 'users2' });
 });
 
 let pagesWithSideNavigation = ['datasets-search', 'datasources-source', 'collections-collection'];

@@ -1,0 +1,44 @@
+<div class="grid-wrapper grid-wrapper-stepped">
+  <section class="grid">
+
+    <div class="grid__col grid__col--3-of-3 ta-center">
+      <h1 class="fs4 fc-secondary">Login</h1>
+    </div>
+
+    <div class="grid__col grid__col--5-of-12 grid__col--m-2-of-3 grid__col--centered">
+      <form>
+        <div class="ta-center mb4">
+          <a class="pr3" {{ action 'thirdPartyAuth' 'google-oauth2' 'login'}}>{{svg-jar "google" class="icon-large border circle"}}</a>
+          <a {{ action 'thirdPartyAuth' 'linked-in-oauth2' 'login'}}>{{svg-jar "linkedin" class="icon-large"}}</a>
+        </div>
+
+        <div class="c-divider c-divider-light-bg"></div>
+
+        {{validated-input
+          label="Email"
+          type="email"
+          value=email
+          errors=validations.attrs.email.messages
+          placeholder="e.g. christina@stthomashospital.com"
+        }}
+        {{validated-input
+          label="Password"
+          type="password"
+          value=password
+          errors=validations.attrs.password.messages
+          placeholder="e.g. •••••••••"
+          resetPassword=(action 'resetPassword')
+        }}
+        {{async-button
+          class="c-btn c-btn-primary fs3 mb2 u-full-width"
+          action=(action 'submitForm')
+          default="Login"
+          pending="Logging in..."
+          disableWhen=isInvalid
+          reset=true
+        }}
+        <p class="ta-left">New to Repositive? {{#link-to 'signup'}}Create your account.{{/link-to}}</p>
+      </form>
+    </div>
+  </section>
+</div>
