@@ -19,22 +19,14 @@ metadata:
     app: discover
     env: staging
     criticality: high
-    build: "${TAG}"
 spec:
   replicas: 2
-  selector:
-    matchLabels:
-      app: discover
-      env: staging
-      criticality: high
-      build: "${TAG}"
   template:
     metadata:
       labels:
         app: discover
         env: staging
         criticality: high
-        build: "${TAG}"
     spec:
       containers:
         - name: discover
