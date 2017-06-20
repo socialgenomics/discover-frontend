@@ -58,6 +58,7 @@ describe('Integration | Component | add attribute', function() {
         expect(this.get('addAttribute').notCalled).to.be.true;
       });
     });
+    //TODO understand why cancel button click causes infinite loop in tests
 
     // describe('cancel', function() {
     //   it('calls passed in addAttribute function with correct args', function() {
