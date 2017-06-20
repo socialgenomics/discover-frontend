@@ -1,4 +1,4 @@
-<form class="flex py2">
+<form class="flex py2 items-end">
   <div class="mr2">
     {{validated-input
       label='Email Address'
@@ -11,16 +11,16 @@
     }}
   </div>
 
-  <div class="flex items-end">
-    {{async-button
-      class="c-btn c-btn-primary"
-      action=(action 'saveNewCredential')
-      default="Save"
-      pending="Saving..."
-      disableWhen=isDisabled
-      reset=true
-    }}
-  </div>
+  {{r-async-button
+    action=(action 'saveNewCredential')
+    default="Save"
+    disableWhen=isDisabled
+    pending="Saving..."
+    reset=true
+    size="big"
+    variant="primary"
+  }}
+  
 </form>
 
 <a class="fc-secondary td-underline" {{action 'cancel'}}>Cancel</a>

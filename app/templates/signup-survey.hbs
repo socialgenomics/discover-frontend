@@ -13,8 +13,11 @@
         </header>
         <main>{{typeform-markup name=model.name email=model.cred.email}}</main>
       </div>
+      
       <div class="ta-right">
-        {{#link-to 'root'}}<button class="c-btn c-btn-primary mb4">Skip</button>{{/link-to}}
+        {{#link-to 'root'}}
+          {{r-button variant="primary" size="big" label="Skip"}}
+        {{/link-to}}
       </div>
     </div>
   </div>

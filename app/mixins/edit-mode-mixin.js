@@ -22,7 +22,6 @@ export default Mixin.create(
      */
     resetModuleStateOnCancel(modelName, keys) {
       const data = merge({ inEditMode: false }, this._createDataModel(keys, modelName));
-
       setProperties(this, data);
     },
 
@@ -60,7 +59,6 @@ export default Mixin.create(
      */
     _createDataModel(keys, modelName) {
       const keyPrefix = modelName ? `${modelName}.` : '';
-
       return keys.reduce((obj, key) => {
         obj[key] = get(this, keyPrefix + key);
         return obj;

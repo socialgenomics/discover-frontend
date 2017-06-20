@@ -10,7 +10,7 @@
         {{/if}}
         <div class="pl2 flex items-center">
           {{follow-button subscribable=model.subscribableId model=model}}
-          <ul class="flex o-list-flush-left pl3 mb0">
+          <ul class="flex list-flush-left pl3 mb0">
             {{action-favourite model=model class="mr3"}}
             {{action-share
               actionableId=model.id
@@ -66,7 +66,7 @@
           {{create-account-call-to-action}}
         {{/unless}}
 
-        <ul class="o-list-flush-left mb3">
+        <ul class="list-flush-left mb3">
           {{#if model.userId}}
             <li class="fs0 fc-tertiary">
               Submitted by:
@@ -110,14 +110,14 @@
         </ul>
 
         {{#if model.url}}
-          <a
+          {{r-link-button
+            clickHandler=(action "trackExit")
+            href=(if session.isAuthenticated model.url '')
+            label=(if (eq model.access "Open") "Access Data" "Go To Dataset")
+            variant="primary"
+            size="big"
             target="_blank"
-            href="{{if session.isAuthenticated model.url ''}}"
-            class="c-btn c-btn-primary"
-            {{action "trackExit"}}
-          >
-            {{#if (eq model.access 'Open')}}Access Data{{else}}Go To Dataset{{/if}}
-          </a>
+          }}
         {{/if}}
       </div>
     </div>
@@ -126,16 +126,16 @@
     <div class="c-card-detail-discussion grid__col grid__col--5-of-12 u-full-height">
       <div class="border-left u-full-min-height">
         {{#unless isRequest}}
-          {{#tab-list class='mb3'}}
-            {{tab-list-action-item
-                setActiveTab=(action 'setActiveTab')
-                activeTab=activeTab
-                tabName='metadata'}}
-            {{tab-list-action-item
-                setActiveTab=(action 'setActiveTab')
-                activeTab=activeTab
-                tabName='discussion'}}
-          {{/tab-list}}
+          {{#r-tab-list}}
+            {{r-tab-list-item
+              setActiveTab=(action 'setActiveTab')
+              activeTab=activeTab
+              tabName='metadata'}}
+            {{r-tab-list-item
+              setActiveTab=(action 'setActiveTab')
+              activeTab=activeTab
+              tabName='discussion'}}
+          {{/r-tab-list}}
           <div class="p3">
             {{#if (eq activeTab 'metadata')}}
               {{partial "datasets/tab-metadata"}}
@@ -175,14 +175,22 @@
           }}
         {{/each}}
         <div class="flex justify-center">
-          {{async-button
-            action=(action 'save')
-            class="c-btn c-btn-primary mr4"
-            default="Save Changes"
-            pending="Saving..."
-            disableWhen=(not validations.isValid)
+          <div class="mr3">
+            {{r-async-button
+              action=(action 'save')
+              default="Save Changes"
+              disableWhen=(not validations.isValid)
+              pending="Saving..."
+              size="big"
+              variant="primary"
+            }}
+          </div>
+          {{r-button
+            variant="cancel"
+            size="big"
+            label="Cancel"
+            clickHandler=(action "cancelEditMode")
           }}
-          <button class="c-btn c-btn-text-secondary" {{action 'cancelEditMode'}}>Cancel</button>
         </div>
       </form>
     </div>

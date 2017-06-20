@@ -62,8 +62,6 @@ export default Component.extend(
           action: 'download_button',
           label: get(this, 'model.title')
         });
-
-        window.open(get(this, 'model.url'), '_blank').focus();
       },
 
       addAttribute(key, value) {

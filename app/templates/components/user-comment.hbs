@@ -20,14 +20,21 @@
       noMarkdown=true
       noLabel=true
     }}
-    {{async-button
-      class="c-btn c-btn-primary px3 py2 mr3"
+
+    {{r-async-button
       action=(action 'save')
       default="Save"
-      pending="Saving..."
       disableWhen=(not validations.isValid)
+      pending="Saving..."
+      size="small"
+      variant="primary"
     }}
-    <button class="c-btn c-btn-text-secondary" {{action 'cancelEditMode'}}>Cancel</button>
+
+    {{r-button
+      clickHandler=(action "cancelEditMode")
+      label="Cancel"
+      variant="cancel"
+    }}
   </form>
 {{/unless}}
 

@@ -29,15 +29,18 @@
           placeholder="e.g. •••••••••"
           resetPassword=(action 'resetPassword')
         }}
-        {{async-button
-          class="c-btn c-btn-primary fs3 mb2 u-full-width"
-          action=(action 'submitForm')
-          default="Login"
-          pending="Logging in..."
-          disableWhen=isInvalid
-          reset=true
-        }}
-        <p class="ta-left">New to Repositive? {{#link-to 'users.signup'}}Create your account.{{/link-to}}</p>
+        <div class="flex flex-column">
+          {{r-async-button
+            action=(action 'submitForm')
+            default="Login"
+            disableWhen=isInvalid
+            pending="Logging in..."
+            reset=true
+            size="big"
+            variant="primary"
+          }}
+        </div>
+        <p class="ta-left pt1">New to Repositive? {{#link-to 'users.signup'}}Create your account.{{/link-to}}</p>
       </form>
     </div>
   </section>

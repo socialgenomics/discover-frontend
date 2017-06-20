@@ -55,12 +55,13 @@
               errors=validations.attrs.description.messages
               placeholder="Describe the dataset you're looking for. You can include ethnicity of patients, number of samples, assay type or associated diseases."
             }}
-            {{async-button
-              class="c-btn c-btn-primary"
+            {{r-async-button
               action=(action 'addRequest')
               default="Submit Request"
-              pending="Submitting..."
               disableWhen=isInvalid
+              pending="Submitting..."
+              size="big"
+              variant="primary"
             }}
           </form>
         </div>

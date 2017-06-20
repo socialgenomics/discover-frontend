@@ -26,13 +26,17 @@
       type="text"
       value=value
     }}
-    {{async-button
-      class="c-btn c-btn-primary mr3 mb2"
+    {{r-async-button
       action=(action 'save')
       default="Save"
       disableWhen=(not isValid)
       pending="Saving..."
+      variant="primary"
     }}
-    <button class="c-btn c-btn-text-secondary" {{action 'cancelEditMode'}}>Cancel</button>
+    {{r-button
+      clickHandler=(action "cancelEditMode")
+      label="Cancel"
+      variant="cancel"
+    }}
   </form>
 {{/unless}}

@@ -19,7 +19,6 @@ Router.map(function() {
   this.route('users', { resetNamespace: true }, function() {
     this.route('signup');
     this.route('login');
-    this.route('settings');
     this.route('profile');
     this.route('verify', {
       path: '/verify/:verification_id'

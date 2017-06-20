@@ -8,7 +8,7 @@
   {{# unless (or uploading uploadFailed reloadFailed)}}
 
     <span class="c-avatar-upload__image-wrapper block relative circle overflow-hidden fw-med fs2 ta-center" data-text="Edit photo">
-      <img src="{{avatarImg}}" />
+      {{r-avatar src=avatarImg size="x-large"}}
     </span>
 
   {{else}}

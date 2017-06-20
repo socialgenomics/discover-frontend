@@ -18,10 +18,4 @@
     noMarkdown= true
   }}
 {{/if}}
-<button
-  type="submit"
-  class="c-btn c-btn-disabled {{unless submitDisabled 'c-btn-primary'}}"
-  disabled={{submitDisabled}}
->
-  {{submitButtonLabel}}
-</button>
+{{r-button variant="primary" size="big" disabled=submitDisabled label=submitButtonLabel}}

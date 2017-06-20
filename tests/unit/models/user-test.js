@@ -1,11 +1,11 @@
 import { expect } from 'chai';
 import { beforeEach, describe } from 'mocha';
-import { describeModel, it } from 'ember-mocha';
+import { setupModelTest, it } from 'ember-mocha';
 
-describeModel(
+setupModelTest(
   'user',
   'Unit | Model | user',
-  { needs: ['model:credential', 'model:user-setting'] },
+  { needs: ['model:credential'] },
   function() {
     describe('reputationTotal', function() {
       beforeEach(function() {
