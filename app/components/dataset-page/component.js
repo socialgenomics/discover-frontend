@@ -8,6 +8,7 @@ import SubscribableMixin from 'repositive/mixins/subscribable';
 import { buildValidations } from 'ember-cp-validations';
 import urlFormatValidator from 'repositive/validations/urlFormatValidator';
 import presenceValidator from 'repositive/validations/presenceValidator';
+import { createActionData } from 'repositive/utils/actions';
 
 const { Component, computed, inject: { service }, get, Logger, set, merge } = Ember;
 const Validations = buildValidations({
@@ -52,8 +53,11 @@ export default Component.extend(
 
     actions: {
       trackExit() {
+        const currentModel = get(this, 'model');
+        const currentUser = get(this, 'userId');
+
         get(this, 'store')
-          .createRecord('action', this._createNewRecordData('access'))
+          .createRecord('action', createActionData(currentModel, currentUser, 'access'))
           .save()
           .catch(Logger.error);
 
@@ -65,18 +69,22 @@ export default Component.extend(
       },
 
       addAttribute(key, value) {
+        const currentModel = get(this, 'model');
+        const currentUser = get(this, 'userId');
         const store = get(this, 'store');
         store
-          .createRecord('action', this._createNewRecordData('attribute', { properties: { key, value } }))
+          .createRecord('action', createActionData(currentModel, currentUser, 'attribute', { properties: { key, value } }))
           .save()
           .then(() => this._reloadSubscriptions(store))
           .catch(Logger.error);
       },
 
       addComment(text) {
+        const currentModel = get(this, 'model');
+        const currentUser = get(this, 'userId');
         const store = get(this, 'store');
         store
-          .createRecord('action', this._createNewRecordData('comment', { properties: { text } }))
+          .createRecord('action', createActionData(currentModel, currentUser, 'comment', { properties: { text } }))
           .save()
           .then(() => { this._reloadSubscriptions(store); })
           .catch(Logger.error);
@@ -86,8 +94,10 @@ export default Component.extend(
         if (get(this, 'tags').findBy('properties.text', text)) {
           this.flashMessages.add({ message: `The tag: ${text} already exists.`, type: 'warning' });
         } else {
+          const currentModel = get(this, 'model');
+          const currentUser = get(this, 'userId');
           get(this, 'store')
-            .createRecord('action', this._createNewRecordData('tag', { properties: { text } }))
+            .createRecord('action', createActionData(currentModel, currentUser, 'tag', { properties: { text } }))
             .save()
             .catch(Logger.error);
         }
@@ -104,24 +114,6 @@ export default Component.extend(
       },
 
       setActiveTab(tab) { set(this, 'activeTab', tab); }
-    },
-
-    /**
-     * @desc created object with new record data
-     * @param {String} type
-     * @param {Object?} customProps
-     * @returns {Object}
-     * @private
-     */
-    _createNewRecordData(type, customProps = {}) {
-      const commonProps = {
-        actionableId: get(this, 'model.actionableId'),
-        actionable_model: get(this, 'modelName'),
-        userId: get(this, 'userId'),
-        type
-      };
-
-      return merge(commonProps, customProps);
     },
 
     /**
