@@ -1,9 +1,9 @@
 import Model from 'ember-data/model';
 import attr from 'ember-data/attr';
-import { belongsTo } from 'ember-data/relationships';
+import { belongsTo, hasMany } from 'ember-data/relationships';
 
 export default Model.extend({
-  actionableId: belongsTo('actionable', { inverse: 'request' }),
+  actions: hasMany('action'),
   createdAt: attr('isodate'),
   description: attr('string'),
   stats: attr('object'),

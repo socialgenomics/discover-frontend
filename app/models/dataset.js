@@ -10,7 +10,7 @@ export default Model.extend({
   accession: computed('externalId', function() {
     return this.get('externalId');
   }),
-  actionableId: belongsTo('actionable', { inverse: 'dataset' }),
+  actions: hasMany('action'),
   assay: attr('string'),
   collections: hasMany('collection', { inverse: 'datasets' }),
   createdAt: attr('isodate'),
