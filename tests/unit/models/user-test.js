@@ -5,7 +5,7 @@ import { setupModelTest, it } from 'ember-mocha';
 setupModelTest(
   'user',
   'Unit | Model | user',
-  { needs: ['model:credential', 'model:user-setting'] },
+  { needs: ['model:credential'] },
   function() {
     describe('reputationTotal', function() {
       beforeEach(function() {
