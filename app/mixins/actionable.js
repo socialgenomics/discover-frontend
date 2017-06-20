@@ -33,7 +33,7 @@ export default Mixin.create({
     if (model) {
       this.store.createRecord('action', {
         userId: userId || null,
-        actionableId: get(model, 'actionableId'),
+        actionableId: get(model, 'id'),
         type: 'view',
         actionable_model: model.constructor.modelName
       })
