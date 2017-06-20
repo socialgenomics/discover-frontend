@@ -3,9 +3,10 @@ import Ember from 'ember';
 const { get, Mixin, Logger } = Ember;
 
 export default Mixin.create({
-  _getComments(actionableId) {
+  //TODO: refactor this mixin into util functions.
+  _getComments(modelId) {
     return this.store.query('action', {
-      'where.actionable_id': actionableId,
+      'where.actionable_id': modelId,
       'where.type': 'comment',
       'order[0][0]': 'updated_at',
       'order[0][1]': 'DESC',
@@ -13,17 +14,17 @@ export default Mixin.create({
     });
   },
 
-  _getTags(actionableId) {
+  _getTags(modelId) {
     return this.store.query('action', {
-      'where.actionable_id': actionableId,
+      'where.actionable_id': modelId,
       'where.type': 'tag',
       limit: 100
     });
   },
 
-  _getAttributes(actionableId) {
+  _getAttributes(modelId) {
     return this.store.query('action', {
-      'where.actionable_id': actionableId,
+      'where.actionable_id': modelId,
       'where.type': 'attribute',
       limit: 100
     });
