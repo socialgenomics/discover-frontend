@@ -10,7 +10,7 @@ import urlFormatValidator from 'repositive/validations/urlFormatValidator';
 import presenceValidator from 'repositive/validations/presenceValidator';
 import { createActionData } from 'repositive/utils/actions';
 
-const { Component, computed, inject: { service }, get, Logger, set, merge } = Ember;
+const { Component, computed, inject: { service }, get, Logger, set } = Ember;
 const Validations = buildValidations({
   title: presenceValidator(),
   description: presenceValidator(),
