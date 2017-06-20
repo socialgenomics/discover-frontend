@@ -2,8 +2,9 @@
   <div class="grid">
     <div class="grid__col grid__col--3-of-3">
       <div class="c-card rounded-bottom">
-        {{profile-tabs}}
         <div class="py4 px3">
+          <h1 class="fs4 mb4 ta-center fc-secondary">Your Account</h1>
+
           {{user-profile-avatar-upload avatarImg=model.user.profile.avatar  reloadUserModel=(route-action 'reloadUserModel')}}
 
           {{#user-profile-section}}
