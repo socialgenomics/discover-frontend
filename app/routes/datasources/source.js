@@ -2,7 +2,6 @@ import Ember from 'ember';
 import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
 import ENV from 'repositive/config/environment';
 import ResetScrollMixin from 'repositive/mixins/reset-scroll';
-import ActionableMixin from 'repositive/mixins/actionable';
 import SearchRouteMixin from '../../mixins/search';
 import IncrementCollectionViewCounterMixin from '../../mixins/increment-collection-view-counter-mixin';
 
@@ -55,7 +54,6 @@ export function model(params) {
 export default Route.extend(
   AuthenticatedRouteMixin,
   ResetScrollMixin,
-  ActionableMixin,
   SearchRouteMixin,
   IncrementCollectionViewCounterMixin,
   {
