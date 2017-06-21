@@ -54,6 +54,9 @@
   @import "custom/components/components.text-with-icon";
   @import "custom/components/components.user-profile-section";
   @import "custom/components/components.validated-input";
+  /* Vendor Components */
+  @import 'ember-basic-dropdown';
+  @import "ui-library";
 
 /*
   UTILITIES
@@ -83,10 +86,3 @@
   @import "custom/utilities/utilities.sizing";
   @import "custom/utilities/utilities.type-setting";
   @import "custom/utilities/utilities.zindexes";
-
-/*
-  ADD-ONs
-*/
-
-@import 'ember-basic-dropdown';
-@import "ui-library";
