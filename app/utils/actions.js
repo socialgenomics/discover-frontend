@@ -55,8 +55,8 @@ export function buildActionsQuery(type, customProps = {}) {
 export function buildActionsQueryForModel(type, modelName, modelId, customProps = {}) {
   const dataObj = buildActionsQuery(type, customProps);
 
-  dataObj['where.' + modelName + '_id'] = modelId;
-
+  // dataObj['where.' + modelName + '_id'] = modelId;
+  dataObj['where.actionable_id'] = modelId;
   return dataObj;
 }
 

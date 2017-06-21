@@ -30,6 +30,7 @@ export default Mixin.create(SubscribableMixin, FlashMessageMixin, {
         });
         const hashObj = {
           model,
+          comments: data.comments,
           tags: data.tags
         };
         if (get(this, 'session.isAuthenticated')) {

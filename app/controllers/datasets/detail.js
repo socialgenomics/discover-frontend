@@ -14,8 +14,8 @@ export default Controller.extend({
 
   dataset: computed.alias('model.dataset'),
   stats: computed.alias('model.stats'),
-  comments: computed.filterBy('dataset.actionableId.actions', 'type', 'comment'),
-  tags: computed.filterBy('dataset.actionableId.actions', 'type', 'tag'),
+  comments: computed.alias('model.comments'),
+  tags: computed.alias('model.tags'),
 
   commentsSorted: computed.sort('comments', (itemA, itemB) => {
     if (itemA.get('createdAt') < itemB.get('createdAt')) {
@@ -30,21 +30,21 @@ export default Controller.extend({
     return get(this, 'stats.datasets').toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   }),
 
-  attributes: computed('dataset.properties.attributes', 'dataset.actionableId.actions', function() {
+  attributes: computed('dataset.properties.attributes', 'dataset.attributes', function() {
     const datasetAttrs = getWithDefault(this, 'dataset.properties.attributes', {});
-    const actionAttrs = getWithDefault(this, 'dataset.actionableId.actions', []).filterBy('type', 'attribute');
+    const actionAttrs = getWithDefault(this, 'dataset.attributes', []);
     return this._mergeAttributes(actionAttrs, datasetAttrs)
       .reject(attr =>  attr.key === 'pmid' && isEmpty(attr.value));
   }),
 
-  assaysToDisplay: computed('dataset', 'dataset.actionableId.actions.[]', function() {
-    const userAssays = getWithDefault(this, 'dataset.actionableId.actions', [])
+  assaysToDisplay: computed('dataset', 'dataset.attributes.[]', function() {
+    const userAssays = getWithDefault(this, 'dataset.attributes', [])
       .filterBy('properties.key', 'assay')
       .mapBy('properties.value');
     return mergeAssays(get(this, 'dataset'), userAssays);
   }),
 
-  contributors: computed('dataset.actionableId.actions.[]', function() {
+  contributors: computed('dataset.attributes.[]', function() {
     const contributorIds = this.store.peekAll('action')
       .filterBy('type', 'attribute')
       .filterBy('actionableId.id', get(this, 'dataset.id'))

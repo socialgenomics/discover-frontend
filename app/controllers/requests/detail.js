@@ -11,8 +11,8 @@ export default Controller.extend({
   ],
 
   request: computed.alias('model.request'),
-  comments: computed.filterBy('request.actionableId.actions', 'type', 'comment'),
-  tags: computed.filterBy('request.actionableId.actions', 'type', 'tag'),
+  comments: computed.alias('model.comments'),
+  tags: computed.alias('model.tags'),
 
   commentsSorted: computed.sort('comments', (itemA, itemB) => {
     if (itemA.get('createdAt') < itemB.get('createdAt')) {

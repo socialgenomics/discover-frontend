@@ -13,6 +13,8 @@ export default Route.extend(AuthenticatedRouteMixin, LoadDetailRouteMixin, {
     return this._getModelData(params, 'request')
       .then(data => {
         return RSVP.hash({
+          comments: data.comments,
+          tags: data.tags,
           request: data.model
         });
       })

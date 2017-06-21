@@ -21,6 +21,7 @@ export default Route.extend(ResetScrollMixin, LoadDetailRouteMixin, {
     return this._getModelData(params, 'dataset')
       .then(data => {
         return RSVP.hash({
+          comments: data.comments,
           attributes: fetchActionsForModel(this.store, 'attribute', 'dataset', params.id),
           dataset: data.model,
           stats: get(this, 'session.isAuthenticated') === false ? this._getStats() : null,
@@ -34,6 +35,8 @@ export default Route.extend(ResetScrollMixin, LoadDetailRouteMixin, {
             .mapBy('userId.id')
             .uniq();
           return RSVP.hash({
+            comments: hash.comments,
+            tags: hash.tags,
             attributes: hash.attributes,
             dataset: dataset,
             contributors: this._fetchUserData(userIds),
