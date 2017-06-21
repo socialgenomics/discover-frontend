@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
 import LoadDetailRouteMixin from 'repositive/mixins/load-detail-route';
+import { incrementViewCounter } from 'repositive/utils/actions';
 
 const { inject: { service }, Logger, Route, RSVP, get } = Ember;
 
@@ -19,7 +20,7 @@ export default Route.extend(AuthenticatedRouteMixin, LoadDetailRouteMixin, {
   },
 
   afterModel(model) {
-    this._incrementViewCounter(model.request, get(this, 'session.authenticatedUser'));
+    incrementViewCounter(this.store, model.request, get(this, 'session.authenticatedUser'));
   },
 
   actions: {

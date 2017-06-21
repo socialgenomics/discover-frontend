@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import ResetScrollMixin from 'repositive/mixins/reset-scroll';
 import LoadDetailRouteMixin from 'repositive/mixins/load-detail-route';
-import { fetchActionsForModel } from 'repositive/utils/actions';
+import { fetchActionsForModel, incrementViewCounter } from 'repositive/utils/actions';
 
 const { inject: { service }, Logger, Route, RSVP, get } = Ember;
 
@@ -45,7 +45,7 @@ export default Route.extend(ResetScrollMixin, LoadDetailRouteMixin, {
   },
 
   afterModel(model) {
-    this._incrementViewCounter(model.dataset, get(this, 'session.authenticatedUser'));
+    incrementViewCounter(this.store, model.dataset, get(this, 'session.authenticatedUser'));
   },
 
   actions: {

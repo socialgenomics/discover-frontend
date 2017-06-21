@@ -30,15 +30,15 @@ export default Mixin.create({
   //   });
   // },
 
-  _incrementViewCounter(model, userId) {
-    if (model) {
-      this.store.createRecord('action', {
-        userId: userId || null,
-        actionableId: get(model, 'id'),
-        type: 'view',
-        actionable_model: model.constructor.modelName
-      })
-      .save().catch(Logger.error);
-    }
-  }
+  // _incrementViewCounter(model, userId) {
+  //   if (model) {
+  //     this.store.createRecord('action', {
+  //       userId: userId || null,
+  //       actionableId: get(model, 'id'),
+  //       type: 'view',
+  //       actionable_model: model.constructor.modelName
+  //     })
+  //     .save().catch(Logger.error);
+  //   }
+  // }
 });

@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-const { merge } = Ember;
+const { merge, Logger } = Ember;
 
 /**
  * @desc Builds an object used to create an action.
@@ -84,4 +84,18 @@ export function fetchActions(store, type, customProps = {}) {
  */
 export function fetchActionsForModel(store, type, modelName, modelId, customProps = {}) {
   return store.query('action', buildActionsQueryForModel(type, modelName, modelId, customProps));
+}
+
+/**
+ * @desc creates a view action for the provided model to increment view counter
+ * @public
+ * @param {Ember.DS.Store} store - Instance of the data store
+ * @param {Ember.DS.Model} model - The model which will have its view stat incremented
+ * @param {Ember.DS.Model} userId - The user model of this action's owner
+ * @param {Object?} customProps - Other properties to be added to the action object.
+ * @return {Promise} The response
+ */
+export function incrementViewCounter(store, model, userId, customProps = {}) {
+  store.createRecord('action', createActionData(model, userId = null, 'view', customProps))
+    .save().catch(Logger.error);
 }
