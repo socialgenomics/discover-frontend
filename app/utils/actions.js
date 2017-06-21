@@ -21,33 +21,67 @@ export function createActionData(model, userId, type, customProps = {}) {
 }
 
 /**
- * @desc fetches actions
+ * @desc build a query object
  * @public
- * @param {Ember.DS.Store} store - The store object
  * @param {String} type - The type of action e.g. 'favourite'
  * @param {Object?} customProps - Other properties to be added to the action object.
- * @return {Promise} The promised query results
+ * @return {Object} Constructed query object
  */
-export function fetchActions(store, type, customProps = {}) {
+export function buildActionsQuery(type, customProps = {}) {
   const dataObj = {
     'where.type': type,
     'order[0][0]': 'updated_at',
     'order[0][1]': 'DESC',
     limit: 100
   };
-  const prefix = 'where.';
-  const model = customProps.model;
-  delete customProps.model;
-
-  if (model) {
-    const modelName = model.constructor.modelName;
-    dataObj[prefix + modelName + '_id'] = model.id;
-  }
 
   //Prefix all customProps
   Object.keys(customProps).map(key => {
-    dataObj[prefix + key] = customProps[key]
+    dataObj['where.' + key] = customProps[key]
   });
 
-  return store.query('action', dataObj);
+  return dataObj;
+}
+
+/**
+ * @desc builds a query object for actions of specific model
+ * @public
+ * @param {String} type - The type of action e.g. 'favourite'
+ * @param {String} modelName - Name of the model on which to query actions
+ * @param {String} modelId - Id of the model being queried
+ * @param {Object?} customProps - Other properties to be added to the action object.
+ * @return {Object} Constructed query object
+ */
+export function buildActionsQueryForModel(type, modelName, modelId, customProps = {}) {
+  const dataObj = buildActionsQuery(type, customProps);
+
+  dataObj['where.' + modelName + '_id'] = modelId;
+
+  return dataObj;
+}
+
+/**
+ * @desc fetches actions
+ * @public
+ * @param {Ember.DS.Store} store - Instance of the data store
+ * @param {String} type - The type of action e.g. 'favourite'
+ * @param {Object?} customProps - Other properties to be added to the action object.
+ * @return {Promise} The promised actions
+ */
+export function fetchActions(store, type, customProps = {}) {
+  return store.query('action', buildActionsQuery(type, customProps));
+}
+
+/**
+ * @desc fetches actions for a specific model
+ * @public
+ * @param {Ember.DS.Store} store - Instance of the data store
+ * @param {String} type - The type of action e.g. 'favourite'
+ * @param {String} modelName - Name of the model on which to query actions
+ * @param {String} modelId - Id of the model being queried
+ * @param {Object?} customProps - Other properties to be added to the action object.
+ * @return {Promise} The promised actions
+ */
+export function fetchActionsForModel(store, type, modelName, modelId, customProps = {}) {
+  return store.query('action', buildActionsQueryForModel(type, modelName, modelId, customProps));
 }

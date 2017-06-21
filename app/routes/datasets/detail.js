@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import ResetScrollMixin from 'repositive/mixins/reset-scroll';
 import LoadDetailRouteMixin from 'repositive/mixins/load-detail-route';
+import { fetchActionsForModel } from 'repositive/utils/actions';
 
 const { inject: { service }, Logger, Route, RSVP, get } = Ember;
 
@@ -20,7 +21,7 @@ export default Route.extend(ResetScrollMixin, LoadDetailRouteMixin, {
     return this._getModelData(params, 'dataset')
       .then(data => {
         return RSVP.hash({
-          attributes: this._getAttributes(params.id),
+          attributes: fetchActionsForModel(this.store, 'attribute', 'dataset', params.id),
           dataset: data.model,
           stats: get(this, 'session.isAuthenticated') === false ? this._getStats() : null,
           tags: data.tags
