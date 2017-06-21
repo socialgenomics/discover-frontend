@@ -13,7 +13,7 @@
 
   // Color
   h1, h2, h3, h4, h5, h6, pre { @extend .fc-primary; }
-  ul, a, strong { @extend .fc-secondary; }
+  ul, a, strong, p { @extend .fc-secondary; }
 
   // State
   a:hover { @extend .fc-primary; }
