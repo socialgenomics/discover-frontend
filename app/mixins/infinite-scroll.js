@@ -16,6 +16,13 @@ export default Mixin.create({
     }
   },
 
+  /**
+   * @desc requests to login to access users auth token to reset password.
+   * @param {Number} currentOffset - starting index of request
+   * @param {Number} resultsPerPage - number of results requested at a time
+   * @returns {Promise} the promised results
+   * @private
+   */
   _loadMore(currentOffset, resultsPerPage) {
     const newOffset = currentOffset + resultsPerPage;
     set(this, 'offset', newOffset);
@@ -28,6 +35,12 @@ export default Mixin.create({
       .catch(Logger.error)
   },
 
+  /**
+   * @desc pushes the new results to the model
+   * @param {Object} resp - the query response data
+   * @returns {Array} the objects pushed to the model
+   * @private
+   */
   _handleResponse(resp) {
     const model = get(this, 'controller.model');
     /**
@@ -35,14 +48,30 @@ export default Mixin.create({
      * Because we don't have the total number of results, this is necessary
      * as we need a stop condition for loadMore()
      */
-    const firstResultId = get(resp, 'firstObject.id');
-    firstResultId === get(this, 'previousFirstResultId') ?
-      set(this, 'allItemsLoaded', true) :
-      set(this, 'previousFirstResultId', firstResultId);
+    this._cacheFirstResult(get(resp, 'firstObject.id'));
 
     return model.pushObjects(get(resp, 'content'));
   },
 
+  /**
+   * @desc Cache first result id to use as loadMore stopping condtion check.
+   * @param {String} firstResultId - id of first result
+   * @private
+   */
+  _cacheFirstResult(firstResultId) {
+    return firstResultId === get(this, 'previousFirstResultId') ?
+      set(this, 'allItemsLoaded', true) :
+      set(this, 'previousFirstResultId', firstResultId);
+  },
+
+  /**
+   * @desc Builds a object to be used for querying purposes
+   * @param {Number} currentOffset - starting index of request
+   * @param {Number} resultsPerPage - number of results requested at a time
+   * @param {Object} customProps - any other query arguments
+   * @returns {Object} merged result of default and custom properties
+   * @private
+   */
   _buildRequestObj(offset, limit, customProps = {}) {
     const dataObj = {
       offset,
@@ -53,6 +82,13 @@ export default Mixin.create({
     return merge(dataObj, customProps);
   },
 
+  /**
+   * @desc requests the model using a constructed query object
+   * @param {String} modelName - name of the model to query for
+   * @param {Object} requestObj - object containing query arguments
+   * @returns {Promise} the promised data
+   * @private
+   */
   _makeRequest(modelName, requestObj) {
     return this.store.query(modelName, requestObj);
   }
