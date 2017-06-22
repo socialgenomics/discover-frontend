@@ -6,6 +6,8 @@ const { Route, get, set, Logger, merge } = Ember;
 export default Route.extend(AuthenticatedRouteMixin, {
   offset: 0,
   resultsPerPage: 12,
+  previousFirstResultId: null,
+  allItemsLoaded: false,
 
   model() {
     const offset = get(this, 'offset');
@@ -19,9 +21,9 @@ export default Route.extend(AuthenticatedRouteMixin, {
 
   actions: {
     loadMore() {
-      //should be conditional!!!
-      //only load more if there are more to load
-      return this._loadMore(get(this, 'offset'), get(this, 'resultsPerPage'));
+      if (!get(this, 'allItemsLoaded')) {
+        return this._loadMore(get(this, 'offset'), get(this, 'resultsPerPage'));
+      }
     }
   },
 
@@ -39,6 +41,16 @@ export default Route.extend(AuthenticatedRouteMixin, {
 
   _handleResponse(resp) {
     const model = get(this, 'controller.model');
+    /**
+     * Cache first result id.
+     * Because we don't have the total number of results, this is necessary
+     * as we need a stop condition for loadMore()
+     */
+    const firstResultId = get(resp, 'firstObject.id');
+    firstResultId === get(this, 'previousFirstResultId') ?
+      set(this, 'allItemsLoaded', true) :
+      set(this, 'previousFirstResultId', firstResultId);
+
     return model.pushObjects(get(resp, 'content'));
   },
 
