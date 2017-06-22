@@ -1,7 +1,11 @@
 <div class="grid-wrapper grid-wrapper-stepped">
-  {{#if isLoading}}
-    {{partial 'loading'}}
-  {{else}}
+
+  {{#infinite-scroller on-load-more=(route-action 'loadMore') use-document=true trigger-at='50%' as |scroller|}}
     {{search-results-list results=model type='dataset'}}
-  {{/if}}
+    {{#if scroller.isLoading}}
+      <h2 class="pt3 mb4 fc-tertiary">Loading...</h2>
+    {{/if}}
+
+  {{/infinite-scroller}}
+
 </div>
