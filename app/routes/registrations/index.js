@@ -6,6 +6,7 @@ const { Route } = Ember;
 export default Route.extend(AuthenticatedRouteMixin, {
   model() {
     return this.store.query('dataset', {
+      'where.user_id.$ne': 'null',
       'order[0][0]': 'updated_at',
       'order[0][1]': 'DESC',
       limit: 120
