@@ -11,7 +11,7 @@ export default Route.extend(AuthenticatedRouteMixin, InfiniteScrollMixin, {
 
     return this._makeRequest(
       'dataset',
-      this._buildRequestObj(offset, resultsPerPage, { 'where.user_id.$ne': 'null' }
-    ));
+      this._buildRequestObj(offset, resultsPerPage, { 'where.user_id.$ne': 'null' })
+    );
   }
 });

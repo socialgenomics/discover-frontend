@@ -1,4 +1,4 @@
-<div class="grid-wrapper grid-wrapper-stepped">
+<div class="grid-wrapper grid-wrapper-stepped mb4">
 
   {{#infinite-scroller on-load-more=(route-action 'loadMore') use-document=true trigger-at='50%' as |scroller|}}
     {{search-results-list results=model type='request'}}
