@@ -5,6 +5,8 @@ const { Route } = Ember;
 
 export default Route.extend(AuthenticatedRouteMixin, {
   model: function() {
-    return this.store.findAll('request');
+    return this.store.query('request', {
+      'limit': 12
+    })
   }
 });

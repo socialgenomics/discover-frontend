@@ -1,5 +1,25 @@
-<div class="row">
-  {{# each model as |request|}}
-    {{dataset-card dataset=request type="request"}}
-  {{/ each }}
+<div class="grid-wrapper grid-wrapper-stepped">
+  {{#if isLoading}}
+    {{partial 'loading'}}
+  {{else}}
+    {{#if (gt model.meta.total 0)}}
+      <div class="flex justify-between pt5 pb4">
+        <p class="flex items-center fw-med mb0">Results: {{model.meta.total}}</p>
+
+        {{results-select resultsOptions=resultsOptions resultsPerPage=resultsPerPage setResultsPerPage=(action 'setResultsPerPage')}}
+      </div>
+    {{/if}}
+
+    {{search-results-list results=model totalResults=model.meta.total type='request'}}
+
+    {{#if (gt model.meta.total 0)}}
+      {{!r-pagination
+        totalPages=totalPages
+        currentPageNumber=page
+        nextPage=(action 'nextPage')
+        previousPage=(action 'previousPage')
+        goToPage=(action 'goToPage')
+       }}
+    {{/if}}
+  {{/if}}
 </div>
