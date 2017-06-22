@@ -9,8 +9,7 @@ export default Route.extend(AuthenticatedRouteMixin, {
     return this.store.query('request', {
       'order[0][0]': 'updated_at',
       'order[0][1]': 'DESC',
-      limit: 12,
-      offset: 0
+      limit: 150
     })
   }
 });
