@@ -13,20 +13,24 @@
   </div>
   {{/if}}
 
-  <div class="py3 flex items-stretch">
+  <div class="py3 flex">
     {{#if isOpen}}
-      {{#power-select
-        placeholder="Please type or select your interests"
-        options=suggestedInterests
-        onchange=(action "addInterest")
-        onkeydown=(action "handleKeydown")
-        noMatchesMessage="No suggestions found"
-        defaultHighlighted=''
-        as |interest|
-      }}
-        {{interest}}
-      {{/power-select}}
-      {{r-button variant="cancel" label="Cancel" clickHandler=(action "hideInput")}}
+      <div class="flex mr3">
+        {{#power-select
+          placeholder="Please type or select your interests"
+          options=suggestedInterests
+          onchange=(action "addInterest")
+          onkeydown=(action "handleKeydown")
+          noMatchesMessage="No suggestions found"
+          defaultHighlighted=''
+          as |interest|
+        }}
+          {{interest}}
+        {{/power-select}}
+      </div>
+
+        {{r-button variant="cancel" label="Cancel" clickHandler=(action "hideInput")}}
+
     {{else}}
       {{r-button label="Add Interest" clickHandler=(action "showInput")}}
     {{/if}}
