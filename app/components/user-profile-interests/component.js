@@ -90,7 +90,6 @@ export default Component.extend(FlashMessageMixin, {
     const userModel = get(this, 'store').peekRecord('user', get(this, 'userId'));
 
     set(userModel, 'profile.interests', interests);
-    // this.send('hideInput');
 
     userModel
       .save()
