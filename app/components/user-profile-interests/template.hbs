@@ -12,9 +12,19 @@
     {{/each}}
   </div>
   {{/if}}
-  <div class="py3 flex items-center">
+
+  <div class="py3 flex items-stretch">
     {{#if isOpen}}
-      {{focus-input class="mr2" value=newInterest type="text" enter="addInterest" placeholder="Add your research interest"}}
+      {{!focus-input class="mr2" value=newInterest type="text" enter="addInterest" placeholder="Add your research interest"}}
+        {{#power-select
+          selected=newInterest
+          options=suggestedInterests
+          onchange=(action "addInterest")
+          onkeydown=(action "handleKeydown")
+          as |interest|
+        }}
+          {{interest}}
+        {{/power-select}}
       {{r-button variant="cancel" label="Cancel" clickHandler=(action "hideInput")}}
     {{else}}
       {{r-button label="Add Interest" clickHandler=(action "showInput")}}
