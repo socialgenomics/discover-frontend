@@ -1,13 +1,9 @@
 import Ember from 'ember';
 import FlashMessageMixin from 'repositive/mixins/flash-message-mixin';
-import { buildValidations } from 'ember-cp-validations';
-import emptyValidator from 'repositive/validations/emptyValidator';
 
+const { Component, inject: { service }, Logger, get, set, setProperties, isBlank } = Ember;
 
-const { Component, inject: { service }, Logger, get, set, setProperties } = Ember;
-const Validations = buildValidations({ newInterest: emptyValidator() });
-
-export default Component.extend(FlashMessageMixin, Validations, {
+export default Component.extend(FlashMessageMixin, {
   store: service(),
 
   isOpen: false,
@@ -45,10 +41,9 @@ export default Component.extend(FlashMessageMixin, Validations, {
      * @param {String} name
      */
     addInterest(name) {
-      debugger
-      // if (get(this, 'validations.isValid')) {
-      this._saveChanges(get(this, 'editInterests').addObject(name));
-      // }
+      if (!isBlank(name)) {
+        this._saveChanges(get(this, 'editInterests').addObject(name));
+      }
     },
 
     /**
@@ -67,13 +62,9 @@ export default Component.extend(FlashMessageMixin, Validations, {
 
     handleKeydown(dropdown, e) {
       if (e.keyCode !== 13) { return; }
-      debugger;
-
       const text = e.target.value;
       if (text.length > 0 && get(this, 'suggestedInterests').indexOf(text) === -1) {
-        // let interests = get(this, 'selectedInterests');
-        this._saveChanges(get(this, 'editInterests').addObject(text));
-        // set(this, 'selectedInterests', interests.concat([text]));
+        this.send('addInterest', text);
       }
     }
   },

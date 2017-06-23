@@ -15,16 +15,17 @@
 
   <div class="py3 flex items-stretch">
     {{#if isOpen}}
-      {{!focus-input class="mr2" value=newInterest type="text" enter="addInterest" placeholder="Add your research interest"}}
-        {{#power-select
-          selected=newInterest
-          options=suggestedInterests
-          onchange=(action "addInterest")
-          onkeydown=(action "handleKeydown")
-          as |interest|
-        }}
-          {{interest}}
-        {{/power-select}}
+      {{#power-select
+        placeholder="Please type or select your interests"
+        options=suggestedInterests
+        onchange=(action "addInterest")
+        onkeydown=(action "handleKeydown")
+        noMatchesMessage="No suggestions found"
+        defaultHighlighted=''
+        as |interest|
+      }}
+        {{interest}}
+      {{/power-select}}
       {{r-button variant="cancel" label="Cancel" clickHandler=(action "hideInput")}}
     {{else}}
       {{r-button label="Add Interest" clickHandler=(action "showInput")}}
