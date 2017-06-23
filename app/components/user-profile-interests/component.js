@@ -2,7 +2,7 @@ import Ember from 'ember';
 import FlashMessageMixin from 'repositive/mixins/flash-message-mixin';
 
 const { Component, inject: { service }, Logger, get, set, setProperties, isBlank } = Ember;
-const suggestedInterests = [
+const rawSuggestedInterests = [
   "Whole Genome Sequencing", "Cancer", "skin", "Whole exome sequencing", "autism",
   "blood", "RNA-seq", "cystic fibrosis", "neuron", "Genomics", "obesity", "epithelial",
   "Proteomics", "ALS", "gut", "single-cell","Alzheimer's disease", "kidney", "microbiome",
@@ -23,7 +23,7 @@ export default Component.extend(FlashMessageMixin, {
     this._super(...arguments);
 
     const interests = get(this, 'interests') || [];
-    const transformedSuggestions = suggestedInterests
+    const transformedSuggestions = rawSuggestedInterests
       .map(interest => interest.capitalize())
       .filter(interest => interests.indexOf(interest) === -1);
 
@@ -48,6 +48,11 @@ export default Component.extend(FlashMessageMixin, {
      */
     addInterest(name) {
       if (!isBlank(name)) {
+        const suggestedInterests = get(this, 'suggestedInterests');
+        //Remove from suggestions
+        if (suggestedInterests.indexOf(name) !== -1) {
+          set(this, 'suggestedInterests', suggestedInterests.without(name));
+        }
         this._saveChanges(get(this, 'editInterests').addObject(name));
       }
     },
