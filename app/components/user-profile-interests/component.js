@@ -63,7 +63,7 @@ export default Component.extend(FlashMessageMixin, {
       if (e.keyCode !== 13) { return; }
       if (isBlank(dropdown.highlighted)) {
         const text = e.target.value;
-        if (text.length > 0 && get(this, 'suggestedInterests').indexOf(text) === -1) {
+        if (!isBlank(text) && get(this, 'suggestedInterests').indexOf(text) === -1) {
           this.send('addInterest', text);
         }
       }
