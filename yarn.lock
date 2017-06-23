@@ -2197,15 +2197,7 @@ concat-stream@1.5.0:
     readable-stream "~2.0.0"
     typedarray "~0.0.5"
 
-concat-stream@^1.4.6, concat-stream@^1.4.7, concat-stream@^1.5.2:
-  version "1.6.0"
-  resolved "https://registry.yarnpkg.com/concat-stream/-/concat-stream-1.6.0.tgz#0aac662fd52be78964d5532f694784e70110acf7"
-  dependencies:
-    inherits "^2.0.3"
-    readable-stream "^2.2.2"
-    typedarray "^0.0.6"
-
-concat-stream@~1.5.0, concat-stream@~1.5.1:
+concat-stream@^1.4.6, concat-stream@^1.4.7, concat-stream@^1.5.2, concat-stream@~1.5.0, concat-stream@~1.5.1:
   version "1.5.2"
   resolved "https://registry.yarnpkg.com/concat-stream/-/concat-stream-1.5.2.tgz#708978624d856af41a5a741defdd261da752c266"
   dependencies:
@@ -2945,7 +2937,7 @@ ember-async-button@1.0.2:
     ember-cli-babel "^5.1.6"
     ember-cli-htmlbars "^1.0.3"
 
-ember-basic-dropdown@0.32.7:
+ember-basic-dropdown@0.32.7, ember-basic-dropdown@^0.32.5:
   version "0.32.7"
   resolved "https://registry.yarnpkg.com/ember-basic-dropdown/-/ember-basic-dropdown-0.32.7.tgz#cf2eef033cdad5e3b7e570ae78bcf2d13f880c07"
   dependencies:
@@ -2999,7 +2991,7 @@ ember-cli-babel@^5.0.0, ember-cli-babel@^5.1.5, ember-cli-babel@^5.1.6, ember-cl
     ember-cli-version-checker "^1.0.2"
     resolve "^1.1.2"
 
-ember-cli-babel@^6.0.0, ember-cli-babel@^6.0.0-beta.7, ember-cli-babel@^6.1.0, ember-cli-babel@^6.4.1:
+ember-cli-babel@^6.0.0, ember-cli-babel@^6.0.0-beta.4, ember-cli-babel@^6.0.0-beta.7, ember-cli-babel@^6.1.0, ember-cli-babel@^6.4.1:
   version "6.4.1"
   resolved "https://registry.yarnpkg.com/ember-cli-babel/-/ember-cli-babel-6.4.1.tgz#785a1c24fe3250eb0776b1ab3cee857863b44542"
   dependencies:
@@ -3418,6 +3410,15 @@ ember-composable-helpers@2.0.1:
     broccoli-funnel "^1.0.1"
     ember-cli-babel "^5.1.7"
 
+ember-concurrency@^0.8.1:
+  version "0.8.6"
+  resolved "https://registry.yarnpkg.com/ember-concurrency/-/ember-concurrency-0.8.6.tgz#3014d612eed7278f2832859e6babc9936844c31e"
+  dependencies:
+    babel-core "^6.24.1"
+    ember-cli-babel "^6.1.0"
+    ember-getowner-polyfill "^1.1.0"
+    ember-maybe-import-regenerator "^0.1.5"
+
 ember-cookies@^0.0.13:
   version "0.0.13"
   resolved "https://registry.yarnpkg.com/ember-cookies/-/ember-cookies-0.0.13.tgz#18350df766240793d46744e4ee5c9a55ae6b4e0a"
@@ -3563,6 +3564,15 @@ ember-macro-helpers@^0.14.1:
     ember-cli-test-info "^1.0.0"
     ember-weakmap "^2.0.0"
 
+ember-maybe-import-regenerator@^0.1.5:
+  version "0.1.6"
+  resolved "https://registry.yarnpkg.com/ember-maybe-import-regenerator/-/ember-maybe-import-regenerator-0.1.6.tgz#35d41828afa6d6a59bc0da3ce47f34c573d776ca"
+  dependencies:
+    broccoli-funnel "^1.0.1"
+    broccoli-merge-trees "^1.0.0"
+    ember-cli-babel "^6.0.0-beta.4"
+    regenerator-runtime "^0.9.5"
+
 ember-metrics@0.10.0:
   version "0.10.0"
   resolved "https://registry.yarnpkg.com/ember-metrics/-/ember-metrics-0.10.0.tgz#b3400aa8f001af5f39691266bea1d10b943c3cf6"
@@ -3600,6 +3610,17 @@ ember-native-dom-helpers@^0.4.0:
   dependencies:
     broccoli-funnel "^1.1.0"
     ember-cli-babel "^6.1.0"
+
+ember-power-select@^1.8.5:
+  version "1.8.5"
+  resolved "https://registry.yarnpkg.com/ember-power-select/-/ember-power-select-1.8.5.tgz#73924736ffc91e66468d071e4b585599e33448ae"
+  dependencies:
+    ember-basic-dropdown "^0.32.5"
+    ember-cli-babel "^6.1.0"
+    ember-cli-htmlbars "^2.0.1"
+    ember-concurrency "^0.8.1"
+    ember-text-measurer "^0.3.3"
+    ember-truth-helpers "^1.3.0"
 
 ember-require-module@0.1.1:
   version "0.1.1"
@@ -3733,7 +3754,13 @@ ember-tether@1.0.0-beta.0:
     ember-cli-node-assets "^0.2.2"
     tether "^1.4.0"
 
-ember-truth-helpers@1.3.0:
+ember-text-measurer@^0.3.3:
+  version "0.3.3"
+  resolved "https://registry.yarnpkg.com/ember-text-measurer/-/ember-text-measurer-0.3.3.tgz#0762809a71c2e1f2e60ab00c53c6eb1b63c9f963"
+  dependencies:
+    ember-cli-babel "^5.1.6"
+
+ember-truth-helpers@1.3.0, ember-truth-helpers@^1.3.0:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/ember-truth-helpers/-/ember-truth-helpers-1.3.0.tgz#6ed9f83ce9a49f52bb416d55e227426339a64c60"
   dependencies:
@@ -6881,7 +6908,7 @@ readable-stream@1.1:
     isarray "0.0.1"
     string_decoder "~0.10.x"
 
-readable-stream@^2, readable-stream@^2.0.1, readable-stream@^2.0.2, readable-stream@^2.0.6, readable-stream@^2.1.5, readable-stream@^2.2.2, readable-stream@^2.2.6:
+readable-stream@^2, readable-stream@^2.0.1, readable-stream@^2.0.2, readable-stream@^2.0.6, readable-stream@^2.1.5, readable-stream@^2.2.6:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/readable-stream/-/readable-stream-2.3.0.tgz#640f5dcda88c91a8dc60787145629170813a1ed2"
   dependencies:
@@ -6965,6 +6992,10 @@ regenerate@^1.2.1:
 regenerator-runtime@^0.10.0:
   version "0.10.5"
   resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.10.5.tgz#336c3efc1220adcedda2c9fab67b5a7955a33658"
+
+regenerator-runtime@^0.9.5:
+  version "0.9.6"
+  resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.9.6.tgz#d33eb95d0d2001a4be39659707c51b0cb71ce029"
 
 regenerator-transform@0.9.11:
   version "0.9.11"
@@ -8105,7 +8136,7 @@ type-is@~1.6.15:
     media-typer "0.3.0"
     mime-types "~2.1.15"
 
-typedarray@^0.0.6, typedarray@~0.0.5:
+typedarray@~0.0.5:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
 
