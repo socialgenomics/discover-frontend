@@ -1,30 +1,29 @@
 import Ember from 'ember';
 import FlashMessageMixin from 'repositive/mixins/flash-message-mixin';
 
-const { Component, inject: { service }, Logger, get, set, setProperties, isBlank } = Ember;
+const { Component, inject: { service }, Logger, get, set, isBlank } = Ember;
+const suggestedInterests = [
+  "Whole Genome Sequencing", "Cancer", "skin", "Whole exome sequencing", "autism",
+  "blood", "RNA-seq", "cystic fibrosis", "neuron", "Genomics", "obesity", "epithelial",
+  "Proteomics", "ALS", "gut", "single-cell","Alzheimer's disease", "kidney", "microbiome",
+  "epilepsy", "heart", "methylation", "depression", "lung","epigenome", "asthma", "breast",
+  "GWAS", "diabetes", "brain", "PDX", "Crohn's disease", "Musculoskeletal", "CRISPR",
+  "Multiple Sclerosis", "prostate", "miRNA", "Schizophrenia", "embryonic", "genetics",
+  "IBD", "pancreas", "therapeutics", "ADHD", "eye", "bioinformatics", "allergy",
+  "cardiovascular", "CHIP-seq", "cardiovascular disease", "ovarian",
+  "SNP", "personal", "data analysis", "populations", "metagenomics"
+];
 
 export default Component.extend(FlashMessageMixin, {
   store: service(),
 
   isOpen: false,
-  newInterest: '',
 
   init() {
     this._super(...arguments);
 
     set(this, 'editInterests', [...(get(this, 'interests') || [])]);
-
-    set(this, 'suggestedInterests', [
-      "Whole Genome Sequencing", "Cancer", "skin", "Whole exome sequencing", "autism",
-      "blood", "RNA-seq", "cystic fibrosis", "neuron", "Genomics", "obesity", "epithelial",
-      "Proteomics", "ALS", "gut", "single-cell","Alzheimer's disease", "kidney", "microbiome",
-      "epilepsy", "heart", "methylation", "depression", "lung","epigenome", "asthma", "breast",
-      "GWAS", "diabetes", "brain", "PDX", "Crohn's disease", "Musculoskeletal", "CRISPR",
-      "Multiple Sclerosis", "prostate", "miRNA", "Schizophrenia", "embryonic", "genetics",
-      "IBD", "pancreas", "therapeutics", "ADHD", "eye", "bioinformatics", "allergy",
-      "cardiovascular", "CHIP-seq", "cardiovascular disease", "ovarian",
-      "SNP", "personal", "data analysis", "populations", "metagenomics"
-    ]);
+    set(this, 'suggestedInterests', suggestedInterests.map(str => str.capitalize()));
   },
 
   actions: {
@@ -50,7 +49,7 @@ export default Component.extend(FlashMessageMixin, {
      * @desc hides add interest input and resets it state
      */
     hideInput() {
-      setProperties(this, { isOpen: false, newInterest: '' });
+      set(this, 'isOpen', false);
     },
 
     /**
@@ -62,13 +61,14 @@ export default Component.extend(FlashMessageMixin, {
 
     handleKeydown(dropdown, e) {
       if (e.keyCode !== 13) { return; }
-      const text = e.target.value;
-      if (text.length > 0 && get(this, 'suggestedInterests').indexOf(text) === -1) {
-        this.send('addInterest', text);
+      if (isBlank(dropdown.highlighted)) {
+        const text = e.target.value;
+        if (text.length > 0 && get(this, 'suggestedInterests').indexOf(text) === -1) {
+          this.send('addInterest', text);
+        }
       }
     }
   },
-
   /**
    * @desc saves changes to backend
    * @param {Array<String>} interests
