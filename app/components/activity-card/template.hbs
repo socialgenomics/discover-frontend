@@ -18,16 +18,25 @@
 
 {{/if}}
 
-{{#if (and isCollapsed (gt model.length 3))}}
+{{#if linkToRoute}}
+  {{#link-to linkToRoute class='p3 block fc-tertiary u-hv-tc-secondary t-view-all'}}
+    View all {{fa-icon 'chevron-right' class="pl2"}}
+  {{/link-to}}
+{{else}}
+  {{#if (and isCollapsed (gt model.length 3))}}
 
-  <a class="p3 block fc-tertiary u-hv-tc-secondary t-view-all" {{action 'viewAll'}}>
-    View all {{fa-icon 'chevron-down' class="pl2"}}
-  </a>
+    <a class="p3 block fc-tertiary u-hv-tc-secondary t-view-all" {{action 'viewAll'}}>
+      View all {{fa-icon 'chevron-down' class="pl2"}}
+    </a>
 
-{{else if (and (not isCollapsed) (gt model.length 3))}}
+  {{else if (and (not isCollapsed) (gt model.length 3))}}
 
-  <a class="p3 block fc-tertiary u-hv-tc-secondary t-view-all" {{action 'showLess'}}>
-    Show less {{fa-icon 'chevron-up' class="pl2"}}
-  </a>
+    <a class="p3 block fc-tertiary u-hv-tc-secondary t-view-all" {{action 'showLess'}}>
+      Show less {{fa-icon 'chevron-up' class="pl2"}}
+    </a>
 
+  {{/if}}
 {{/if}}
+
+
+

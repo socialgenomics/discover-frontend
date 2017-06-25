@@ -6,6 +6,7 @@ export default Component.extend({
   classNames: ['c-card'],
 
   isCollapsed: true,
+  linkToRoute: null,
 
   emptyText: computed('group', 'isOwnProfile', function() {
     const group = get(this, 'group');
