@@ -25,6 +25,7 @@ export default Component.extend(FlashMessageMixin, {
     const interests = get(this, 'interests') || [];
     const transformedSuggestions = rawSuggestedInterests
       .map(interest => interest.capitalize())
+      .sort()
       .filter(interest => interests.indexOf(interest) === -1);
 
     setProperties(this, {
