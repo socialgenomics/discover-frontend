@@ -7,7 +7,8 @@ $ember-power-select-border-color: $border-color;
   padding: 2em;
 }
 .ember-power-select-placeholder {
-  @extend .p3;
+  @extend .px2;
+  @extend .py3;
   @extend .mr2;
 }
 .ember-power-select-option {
