@@ -7,28 +7,30 @@ export default Mixin.create({
   resultsPerPage: 12,
   previousFirstResultId: null,
   allItemsLoaded: false,
+  modelType: 'dataset',
 
   actions: {
     loadMore() {
       if (!get(this, 'allItemsLoaded')) {
-        return this._loadMore(get(this, 'offset'), get(this, 'resultsPerPage'));
+        return this._loadMore(get(this, 'modelType'), get(this, 'offset'), get(this, 'resultsPerPage'));
       }
     }
   },
 
   /**
    * @desc requests to login to access users auth token to reset password.
+   * @param {String} modelType - name of model to query
    * @param {Number} currentOffset - starting index of request
    * @param {Number} resultsPerPage - number of results requested at a time
    * @returns {Promise} the promised results
    * @private
    */
-  _loadMore(currentOffset, resultsPerPage) {
+  _loadMore(modelType, currentOffset, resultsPerPage) {
     const newOffset = currentOffset + resultsPerPage;
     set(this, 'offset', newOffset);
 
     return this._makeRequest(
-      'dataset',
+      modelType,
       this._buildRequestObj(newOffset, resultsPerPage, { 'where.user_id.$ne': 'null' }
     ))
       .then(this._handleResponse.bind(this))
