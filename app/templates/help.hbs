@@ -1,2 +1,10 @@
-{{!outlet}}
-{{vertical-menu navigationData=model}}
+<div class="grid-wrapper grid-wrapper-fluid">
+  <div class="grid">
+    <div class="grid__col grid__col--1-of-3">
+      {{vertical-menu navigationData=model}}
+    </div>
+    <div class="grid__col grid__col--2-of-3">
+      {{!outlet}}
+    </div>
+  </div>
+</div>
