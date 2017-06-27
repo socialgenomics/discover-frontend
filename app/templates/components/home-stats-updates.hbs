@@ -2,9 +2,8 @@
   {{dataset-number-stats datasetsNumber=datasetsNumber}}
 
   <div class="c-card">
-    <div class="grid grid--no-gutter">
-      <div class="grid__col grid__col--1-of-2">
-
+    <div class="grid grid--no-gutter flex items-stretch flex-wrap">
+      <div class="grid__col grid__col--1-of-2 flex flex-column">
         {{#link-to 'collections' invokeAction=(action 'trackUpdatesHeaders' 'collections')}}
           <h3 class="fs3 ta-center fc-secondary border-bottom border-top py2 mb0">
             {{fa-icon "book"}}
@@ -12,7 +11,7 @@
           </h3>
         {{/link-to}}
 
-        <ul class="list-flush-left mb0">
+        <ul class="list-flush-left mb0 flex-grow">
           {{#each (sort-by "updatedAt:desc" collections) as |collection index|}}
             {{featured-list-item
               isNewest=(eq index 0)
@@ -22,16 +21,19 @@
           {{/each}}
         </ul>
 
+        {{#link-to 'collections' invokeAction=(action 'trackUpdatesHeaders' 'collections') class='p3 block fc-tertiary u-hv-tc-secondary t-view-all'}}
+          View all collections {{fa-icon 'chevron-right' class="pl2"}}
+        {{/link-to}}
       </div>
-      <div class="grid__col grid__col--1-of-2 border-left">
 
+      <div class="grid__col grid__col--1-of-2 border-left flex flex-column">
         {{#link-to 'datasources' invokeAction=(action 'trackUpdatesHeaders' 'datasources')}}
           <h3 class="fs3 ta-center fc-secondary border-bottom border-top py2 mb0">
             {{fa-icon "database"}}
             Data Sources <span>{{stats.datasources}}</span>
           </h3>
         {{/link-to}}
-        <ul class="list-flush-left mb0">
+        <ul class="list-flush-left mb0 flex-grow">
           {{#each (sort-by "updatedAt:desc" datasources) as |datasource index|}}
             {{featured-list-item
               isNewest=(eq index 0)
@@ -40,6 +42,9 @@
           {{/each}}
         </ul>
 
+        {{#link-to 'datasources' invokeAction=(action 'trackUpdatesHeaders' 'datasources') class='p3 block fc-tertiary u-hv-tc-secondary t-view-all'}}
+          View all data sources {{fa-icon 'chevron-right' class="pl2"}}
+        {{/link-to}}
       </div>
     </div>
   </div>
