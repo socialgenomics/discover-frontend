@@ -4,10 +4,10 @@
     <span class="fs0 fw-reg fc-tertiary cursor-default">requested by </span>
     {{#if session.isAuthenticated }}
       {{#link-to 'user' model.userId.id}}
-        {{model.userId.displayName}}
+        {{truncate model.userId.displayName 35}}
       {{/link-to}}
     {{else}}
-      <span>{{model.userId.displayName}}</span>
+      <span>{{truncate model.userId.displayName 35}}</span>
     {{/if}}
   {{/if}}
 
@@ -18,10 +18,10 @@
     <span class="fs0 fw-reg fc-tertiary cursor-default">registered by </span>
     {{#if session.isAuthenticated }}
       {{#link-to 'user' model.userId.id}}
-        {{model.userId.displayName}}
+        {{truncate model.userId.displayName 35}}
       {{/link-to}}
     {{else}}
-      <span>{{model.userId.displayName}}</span>
+      <span>{{truncate model.userId.displayName 35}}</span>
     {{/if}}
   {{/if}}
 
