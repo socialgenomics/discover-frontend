@@ -6,14 +6,18 @@ const { computed, Logger, Mixin, set, get } = Ember;
  * @desc creates computed property function
  * @param {Array} editableAttrs
  * @returns {Function}
+ * @todo add unit test
  */
 export function createIsDirtyComputed(editableAttrs) {
   return computed(...editableAttrs.map(createUserAttrKey), function () {
     const initialValues = get(this, 'initialEditableAttrsValues');
 
-    // Weak comparison is used on purpose.
-    // If attr is undefined and user did focus on the input field its value is changes to empty string.
-    return this._getEditableAttributeValues(editableAttrs).some((val, i) => !!val != !!initialValues[i]);
+    return this._getEditableAttributeValues(editableAttrs).some((val, i) => {
+      const initialValue = initialValues[i];
+
+      // If attr is undefined and user did focus on the input field its value is changes to empty string.
+      return initialValue === undefined ? !!val !== !!initialValue : val !== initialValue;
+    });
   });
 }
 
