@@ -1,3 +1,4 @@
+/* eslint ember/avoid-leaking-state-in-components: 0 */
 import Ember from 'ember';
 
 const { Component, set, inject: { service }, get } = Ember;
@@ -11,6 +12,7 @@ export default Component.extend({
   showCreateAccountModal: false,
 
   // modal constraints prevents share options modal from bleeding out of the edge of browser window
+  // shared across all instances of this component
   shareOptionsModalConstraints: [{ to: 'window', pin: true }],
 
   touchEnd() {

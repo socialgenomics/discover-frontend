@@ -1,3 +1,5 @@
+/* eslint ember/avoid-leaking-state-in-components: 0 */
+
 import Ember from 'ember';
 import { getRandomElement } from 'repositive/utils/arrays'
 const { Component, get, inject: { service }, setProperties, computed } = Ember;
@@ -5,6 +7,7 @@ const { Component, get, inject: { service }, setProperties, computed } = Ember;
 export default Component.extend({
   queryService: service('query'),
 
+  // shared across all instances of this component
   placeholderValues: [
     `obesity AND microbiome`,
     `autism AND assay:"RNA seq"`,

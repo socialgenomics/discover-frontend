@@ -1,3 +1,5 @@
+/* eslint ember/avoid-leaking-state-in-components: 0 */
+
 import Ember from 'ember';
 import { buildValidations } from 'ember-cp-validations';
 import presenceValidator from 'repositive/validations/presenceValidator';
@@ -20,6 +22,7 @@ export default Component.extend(
     store: service(),
 
     value: computed.oneWay('attribute.value'),
+    // shared across all instances of this component
     editablePropertyKeys: ['value'],
     checkEditPermissionsModel: computed.oneWay('attribute'),
     isUnique: computed('attributesForKey', 'value', function() {

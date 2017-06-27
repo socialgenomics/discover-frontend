@@ -1,3 +1,5 @@
+/* eslint ember/avoid-leaking-state-in-components: 0 */
+
 import Ember from 'ember';
 import openCenteredPopupWindow from '../../utils/open-centered-popup-window';
 import URI from 'npm:urijs';
@@ -11,6 +13,7 @@ export default Component.extend({
   copyAttempt: false,
   copySuccess: false,
 
+  // shared across all instances of this component
   channels: {
     twitter: {
       baseUrl: 'https://twitter.com/intent/tweet',

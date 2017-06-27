@@ -1,3 +1,4 @@
+/* eslint ember/avoid-leaking-state-in-components: 0 */
 import Ember from 'ember';
 
 const { inject: { service }, Component, computed, get, set } = Ember;
@@ -5,6 +6,7 @@ const { inject: { service }, Component, computed, get, set } = Ember;
 export default Component.extend({
   session: service(),
 
+  // shared across all instances of this component
   singleValueAttrs: ['samples'],
 
   groups: computed('attributes', function() {
