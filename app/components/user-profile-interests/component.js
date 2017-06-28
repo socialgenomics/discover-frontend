@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import FlashMessageMixin from 'repositive/mixins/flash-message-mixin';
 
-const { Component, inject: { service }, Logger, get, set, setProperties, isBlank } = Ember;
+const { Component, inject: { service }, Logger, get, set, setProperties, isBlank, $ } = Ember;
 const rawSuggestedInterests = [
   "ADHD", "ALS", "Allergy", "Alzheimer's disease", "Asthma", "Autism", "Bioinformatics",
   "Blood", "Brain", "Breast", "CHIP-seq", "CRISPR", "Cancer", "Cardiovascular",
@@ -106,6 +106,7 @@ export default Component.extend(FlashMessageMixin, {
    * @private
    */
   _onSaveSuccess() {
+    $('.ember-power-select-trigger').blur();
     this._addFlashMessage('Your interests have been updated.', 'success');
   },
 
