@@ -24,6 +24,41 @@ const navigationData = [
       { target: 'help.registering-new-data', query: 'add-meta', text: 'Can I add more metadata and description later?' },
       { target: 'help.registering-new-data', query: 'access-reg', text: 'Can I choose who has access to my data?' }
     ]
+  },
+  {
+    title: 'Request',
+    links: [
+      { target: 'help.requesting-data', query: 'what-is-request', text: 'What is a data request?' },
+      { target: 'help.requesting-data', query: 'what-can-request', text: 'What data can I request?' },
+      { target: 'help.requesting-data', query: 'who-can-see', text: 'Who can see my request?' },
+      { target: 'help.requesting-data', query: 'information-include', text: 'What information should I include in my request?' },
+      { target: 'help.requesting-data', query: 'add-meta-later', text: 'Can I add more metadata and description later?' },
+      { target: 'help.requesting-data', query: 'no-response', text: 'I don\'t have any responses to my request.' },
+      { target: 'help.requesting-data', query: 'incorrect-response', text: 'The response to my request is not what I am looking for.' },
+      { target: 'help.requesting-data', query: 'how-long', text: 'How long will my request be live for?' },
+      { target: 'help.requesting-data', query: 'fulfil-request', text: 'I know where the requested data are. How can I respond to the request?' }
+    ]
+  },
+  {
+    title: 'Searching',
+    links: [
+      { target: 'help.searching-for-data', query: 'search-query', text: 'How do I search on Repositive?' },
+      { target: 'help.searching-for-data', query: 'algorithm', text: 'How does the search algorithm work?' },
+      { target: 'help.searching-for-data', query: 'effective', text: 'How can I build my search query to make it more effective?' },
+      { target: 'help.searching-for-data', query: 'boolean', text: 'What boolean operators can I use?' },
+      { target: 'help.searching-for-data', query: 'predicated', text: 'What predicated search terms can I use?' },
+      { target: 'help.searching-for-data', query: 'filters', text: 'What do all those filters mean?' }
+    ]
+  },
+  {
+    title: 'Account',
+    links: [
+      { target: 'help.your-account', query: 'access', text: 'How can I access my account?' },
+      { target: 'help.your-account', query: 'personalise', text: 'Can I personalise my notifications?' },
+      { target: 'help.your-account', query: 'change-cred', text: 'How can I change my credentials?' },
+      { target: 'help.your-account', query: 'change-pw', text: 'How can I change my password?' },
+      { target: 'help.your-account', query: 'profile', text: 'Can I control who can see my profile?' }
+    ]
   }
 ]
 
