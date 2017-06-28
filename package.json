@@ -1,6 +1,6 @@
 {
   "name": "repositive",
-  "version": "3.3.4",
+  "version": "3.5.0",
   "description": "Frontend app for repositive.io",
   "private": true,
   "directories": {
@@ -70,6 +70,7 @@
     "ember-resolver": "^4.1.0",
     "ember-route-action-helper": "2.0.3",
     "ember-simple-auth": "1.3.0",
+    "ember-simple-infinite-scroller": "^1.0.9",
     "ember-sinon": "^0.7.0",
     "ember-source": "^2.13.0",
     "ember-svg-jar": "0.10.3",

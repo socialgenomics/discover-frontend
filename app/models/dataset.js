@@ -21,7 +21,6 @@ export default Model.extend({
   properties: attr('object'),
   stats: attr('object'),
   subscribableId: belongsTo('subscribable', { inverse: 'dataset' }),
-  tech: attr('string'),
   title: attr('string'),
   updatedAt: attr('isodate'),
   url: attr('string'),
