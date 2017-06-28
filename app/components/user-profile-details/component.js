@@ -4,8 +4,9 @@ import presenceValidator from 'repositive/validations/presenceValidator';
 import lengthValidator from 'repositive/validations/lengthValidator';
 import { lengths, lengthTypes } from 'repositive/validations/validations-config';
 import FlashMessageMixin from 'repositive/mixins/flash-message-mixin';
+import UserProfileMixin, { createIsDirtyComputed, createUserAttrKey } from 'repositive/mixins/user-edit-profile-mixin';
 
-const { Component, inject: { service }, Logger, set, get } = Ember;
+const { Component, inject: { service }, set } = Ember;
 const Validations = buildValidations({
   [createUserAttrKey('profile.bio')]: [
     lengthValidator(lengths.description, lengthTypes.max)
@@ -23,17 +24,13 @@ const Validations = buildValidations({
   [createUserAttrKey('profile.location')]: lengthValidator(lengths.textFieldLong, lengthTypes.max)
 });
 
-/**
- * @desc creates full path user attribute key
- * @param {String} key
- * @returns {String}
- */
-function createUserAttrKey(key) {
-  return `userProfileData.${key}`;
-}
+const editableAttrs = ['firstname', 'lastname', 'profile.bio', 'profile.work_organisation', 'profile.work_role',
+  'profile.location'];
 
-export default Component.extend(Validations, FlashMessageMixin, {
+export default Component.extend(Validations, FlashMessageMixin, UserProfileMixin, {
   store: service(),
+
+  attrsStateIsDirty: createIsDirtyComputed(editableAttrs),
 
   init() {
     this._super(...arguments);
@@ -71,51 +68,7 @@ export default Component.extend(Validations, FlashMessageMixin, {
         userAttributeKey: this._createUserAttrKey('profile.location')
       }
     ]);
-  },
 
-  actions: {
-    save() {
-      const userModel = get(this, 'store').peekRecord('user', get(this, 'userId'));
-      const userProfileData = get(this, 'userProfileData');
-
-      Object.keys(userProfileData).forEach(attr => set(userModel, attr, userProfileData[attr]));
-
-      return userModel
-        .save()
-        .then(this._onSaveSuccess.bind(this))
-        .catch(this._onSaveError.bind(this, userModel));
-    }
-  },
-
-
-  /**
-   * @desc save success handler
-   * @private
-   */
-  _onSaveSuccess() {
-    this._addFlashMessage('Your profile has been updated.', 'success');
-    get(this, 'transitionToProfile')(get(this, 'userId'));
-  },
-
-  /**
-   * @desc save error handler
-   * @param {Ember.DS.Model} userModel
-   * @param {Error} error
-   * @private
-   */
-  _onSaveError(userModel, error) {
-    userModel.rollbackAttributes();
-    Logger.error(error);
-    this._addFlashMessage('Sorry. There was a problem saving your changes.', 'warning');
-  },
-
-  /**
-   * @desc wrapper for private function for creating correct key path to user property (here just for testing purpose)
-   * @param {String }key
-   * @returns {String}
-   * @private
-   */
-  _createUserAttrKey(key) {
-    return createUserAttrKey(key);
+    set(this, 'initialEditableAttrsValues', this._getEditableAttributeValues(editableAttrs));
   }
 });
