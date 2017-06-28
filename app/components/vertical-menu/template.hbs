@@ -8,7 +8,7 @@
   {{#if (eq openGroup navigationObject.title)}}
 
     {{#each navigationObject.links as |link|}}
-      {{help-docs-link 
+      {{vertical-menu/link-item 
           link=(readonly link.target)
           query=(readonly link.query)
           text=(readonly link.text)}}
