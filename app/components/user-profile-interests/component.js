@@ -3,15 +3,15 @@ import FlashMessageMixin from 'repositive/mixins/flash-message-mixin';
 
 const { Component, inject: { service }, Logger, get, set, setProperties, isBlank } = Ember;
 const rawSuggestedInterests = [
-  "Whole Genome Sequencing", "Cancer", "skin", "Whole exome sequencing", "autism",
-  "blood", "RNA-seq", "cystic fibrosis", "neuron", "Genomics", "obesity", "epithelial",
-  "Proteomics", "ALS", "gut", "single-cell","Alzheimer's disease", "kidney", "microbiome",
-  "epilepsy", "heart", "methylation", "depression", "lung","epigenome", "asthma", "breast",
-  "GWAS", "diabetes", "brain", "PDX", "Crohn's disease", "Musculoskeletal", "CRISPR",
-  "Multiple Sclerosis", "prostate", "miRNA", "Schizophrenia", "embryonic", "genetics",
-  "IBD", "pancreas", "therapeutics", "ADHD", "eye", "bioinformatics", "allergy",
-  "cardiovascular", "CHIP-seq", "cardiovascular disease", "ovarian",
-  "SNP", "personal", "data analysis", "populations", "metagenomics"
+  "ADHD", "ALS", "Allergy", "Alzheimer's disease", "Asthma", "Autism", "Bioinformatics",
+  "Blood", "Brain", "Breast", "CHIP-seq", "CRISPR", "Cancer", "Cardiovascular",
+  "Cardiovascular disease", "Crohn's disease", "Cystic fibrosis", "Data analysis",
+  "Depression", "Diabetes", "Embryonic", "Epigenome", "Epilepsy", "Epithelial",
+  "Eye", "GWAS", "Genetics", "Genomics", "Gut", "Heart", "IBD", "Kidney", "Lung",
+  "Metagenomics", "Methylation", "MiRNA", "Microbiome", "Multiple Sclerosis",
+  "Musculoskeletal", "Neuron", "Obesity", "Ovarian", "PDX", "Pancreas", "Personal",
+  "Populations", "Prostate", "Proteomics", "RNA-seq", "SNP", "Schizophrenia",
+  "Single-cell", "Skin", "Therapeutics", "Whole Genome Sequencing", "Whole exome sequencing"
 ];
 
 export default Component.extend(FlashMessageMixin, {
@@ -40,6 +40,11 @@ export default Component.extend(FlashMessageMixin, {
      * @param {String} name
      */
     removeInterest(name) {
+      //If the term is a suggested one, add it back to the suggestedInterests Array
+      if (rawSuggestedInterests.indexOf(name) !== -1) {
+        const newArray = [...get(this, 'suggestedInterests'), ...[name]].sort();
+        set(this, 'suggestedInterests', newArray);
+      }
       this._saveChanges(get(this, 'editInterests').removeObject(name));
     },
 
