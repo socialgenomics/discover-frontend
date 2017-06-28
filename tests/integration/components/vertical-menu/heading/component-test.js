@@ -17,4 +17,15 @@ describe('Integration | Component | vertical menu/heading', function() {
     this.render(hbs`{{vertical-menu/heading title=title handleClick=handleClick}}`);
     this.$('.t-vertical-menu-heading').click();
   });
+
+  describe('classes', function() {
+    it('has correct background class when open', function() {
+      this.render(hbs`{{vertical-menu/heading title='abc' openGroup='abc'}}`);
+      expect(this.$('.t-vertical-menu-heading').hasClass('bc-very-light-grey')).to.be.true;
+    });
+    it('has correct background class when closed', function() {
+      this.render(hbs`{{vertical-menu/heading title='abc' openGroup='xyz'}}`);
+      expect(this.$('.t-vertical-menu-heading').hasClass('bc-very-light-grey')).to.be.false;
+    });
+  });
 });
