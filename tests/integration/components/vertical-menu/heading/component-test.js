@@ -8,17 +8,13 @@ describe('Integration | Component | vertical menu/heading', function() {
     integration: true
   });
 
-  it('renders', function() {
-    // Set any properties with this.set('myProperty', 'value');
-    // Handle any actions with this.on('myAction', function(val) { ... });
-    // Template block usage:
-    // this.render(hbs`
-    //   {{#vertical-menu/heading}}
-    //     template content
-    //   {{/vertical-menu/heading}}
-    // `);
-
-    this.render(hbs`{{vertical-menu/heading}}`);
-    expect(this.$()).to.have.length(1);
+  it('calls clickHandler function', function() {
+    const title = 'abc';
+    this.setProperties({
+      'handleClick': function(text) { expect(text).to.eql(title) },
+      title
+    });
+    this.render(hbs`{{vertical-menu/heading title=title handleClick=handleClick}}`);
+    this.$('.t-vertical-menu-heading').click();
   });
 });
