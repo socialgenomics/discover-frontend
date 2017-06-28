@@ -60,7 +60,7 @@ const navigationData = [
       { target: 'help.your-account', query: 'profile', text: 'Can I control who can see my profile?' }
     ]
   }
-]
+];
 
 export default Route.extend({
   beforeModel(transition) {
