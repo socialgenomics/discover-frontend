@@ -1,5 +1,5 @@
 .c-help-link {
   .active {
-    color: $primary-opacity-black;
+    @extend .fw-bold;
   }
 }
