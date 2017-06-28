@@ -21,7 +21,7 @@
       </div>
     {{/if}}
 
-    {{search-results-list results=model.datasets totalResults=model.meta.total}}
+    {{search-results-list results=model.datasets totalResults=model.meta.total type='dataset'}}
 
     {{#if (gt model.meta.total 0)}}
       {{r-pagination
