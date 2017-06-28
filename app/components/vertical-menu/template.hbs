@@ -1,6 +1,6 @@
 {{#each navigationData as |navigationObject|}}
   {{vertical-menu/heading
-      title=navigationObject.title
-      handleClick=(action 'setOpenGroup')
-      openGroup=(readonly openGroup)}}
+      title=(readonly navigationObject.title)
+      openGroup=(readonly openGroup)
+      handleClick=(action 'setOpenGroup')}}
 {{/each}}
