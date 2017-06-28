@@ -1,7 +1,14 @@
 import Ember from 'ember';
 
-const { Component } = Ember;
+const { Component, set } = Ember;
 
 export default Component.extend({
-  classNames: ['c-card', 'p2']
+  classNames: ['c-card', 'p2'],
+  openGroup: '',
+
+  actions: {
+    setOpenGroup(headingName) {
+      set(this, 'openGroup', headingName);
+    }
+  }
 });

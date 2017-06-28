@@ -1,7 +1,11 @@
 import Ember from 'ember';
 
-const { Component } = Ember;
+const { Component, get } = Ember;
 
 export default Component.extend({
-  classNames: ['p3']
+  classNames: ['flex', 'items-center', 'justify-between', 'p3'],
+
+  click() {
+    get(this, 'handleClick')(get(this, 'title'));
+  }
 });
