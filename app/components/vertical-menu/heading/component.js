@@ -4,7 +4,7 @@ const { Component, computed, get } = Ember;
 
 export default Component.extend({
   classNames: ['flex', 'items-center', 'justify-between', 'p3', 'u-hv-bc-white', 'cursor-pointer'],
-
+  classNameBindings: ['isOpen:bc-very-light-grey'],
   isOpen: computed('openGroup', 'title', function() {
     return get(this, 'openGroup') === get(this, 'title');
   }),

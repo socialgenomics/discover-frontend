@@ -7,12 +7,14 @@
 
   {{#if (eq openGroup navigationObject.title)}}
 
-    {{#each navigationObject.links as |link|}}
-      {{vertical-menu/link-item 
-          link=(readonly link.target)
-          query=(readonly link.query)
-          text=(readonly link.text)}}
-    {{/each}}
+    <div class="border-bottom">
+      {{#each navigationObject.links as |link|}}
+        {{vertical-menu/link-item
+            link=(readonly link.target)
+            query=(readonly link.query)
+            text=(readonly link.text)}}
+      {{/each}}
+    </div>
 
   {{/if}}
 
