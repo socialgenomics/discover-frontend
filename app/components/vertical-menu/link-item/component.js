@@ -3,7 +3,6 @@ import Ember from 'ember';
 const { Component, get } = Ember;
 
 export default Component.extend({
-  tagName: 'li',
   classNames: ['c-help-link'],
 
   actions: {
