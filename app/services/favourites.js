@@ -26,12 +26,14 @@ export default Service.extend({
   },
   removeFavourite(favourite) {
     set(this, 'userFavourites', get(this, 'userFavourites').without(favourite));
+    this.notifyPropertyChange('userFavourites');
   },
   pushFavourite(favourite) {
     get(this, 'userFavourites').push(favourite);
     this.notifyPropertyChange('userFavourites');
   },
-  getFavourite(actionableId) {
-    return getWithDefault(this, 'userFavourites', []).findBy('actionableId.id', actionableId);
+  getFavourite(actionableId, modelName) {
+    const keyName = modelName + 'Id.id';
+    return getWithDefault(this, 'userFavourites', []).findBy(keyName, actionableId);
   }
 });

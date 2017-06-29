@@ -15,7 +15,8 @@ export default Component.extend({
   showCreateAccountModal: false,
 
   isStarred: computed('favouritesService.userFavourites', function() {
-    return isPresent(get(this, 'favouritesService').getFavourite(get(this, 'model.id')));
+    return isPresent(get(this, 'favouritesService')
+      .getFavourite(get(this, 'model.id'), get(this, 'model.constructor.modelName')));
   }),
 
   mouseEnter() { set(this, 'isHovered', true); },
@@ -24,7 +25,8 @@ export default Component.extend({
 
   touchEnd() {
     const currentModel = this.model; //can be request or dataset
-    const favourite = get(this, 'favouritesService').getFavourite(currentModel.id);
+    const favourite = get(this, 'favouritesService')
+      .getFavourite(currentModel.id, get(currentModel, 'constructor.modelName'));
     if (get(this, 'session.isAuthenticated')) {
       get(this, 'metrics').trackEvent({
         category: 'discover_homeauth_dataset',

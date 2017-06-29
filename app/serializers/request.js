@@ -14,7 +14,7 @@ export default JSONSerializer.extend({
       if (key === 'actionableId' || key === 'subscribableId') {
         return 'id';
       }
-      normalizeKeyName(key);
+      return normalizeKeyName(key);
     } else {
       return Ember.String.underscore(key).toLowerCase();
     }
