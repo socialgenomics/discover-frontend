@@ -12,42 +12,28 @@ export default Controller.extend({
     { key: 'url' }
   ],
 
-  dataset: computed.alias('model.dataset'),
-  stats: computed.alias('model.stats'),
-  comments: computed.alias('model.comments'),
-  tags: computed.alias('model.tags'),
-
-  commentsSorted: computed.sort('comments', (itemA, itemB) => {
-    if (itemA.get('createdAt') < itemB.get('createdAt')) {
-      return 1;
-    } else if (itemA.get('createdAt') > itemB.get('createdAt')) {
-      return -1;
-    }
-    return 0;
+  datasetsNumber: computed('model.stats.datasets', function() {
+    return get(this, 'model.stats.datasets').toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   }),
 
-  datasetsNumber: computed('stats.datasets', function() {
-    return get(this, 'stats.datasets').toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-  }),
-
-  attributes: computed('dataset.properties.attributes', 'dataset.attributes', function() {
-    const datasetAttrs = getWithDefault(this, 'dataset.properties.attributes', {});
-    const actionAttrs = getWithDefault(this, 'dataset.attributes', []);
+  attributes: computed('model.dataset.properties.attributes', 'model.dataset.attributes', function() {
+    const datasetAttrs = getWithDefault(this, 'model.dataset.properties.attributes', {});
+    const actionAttrs = getWithDefault(this, 'model.dataset.attributes', []);
     return this._mergeAttributes(actionAttrs, datasetAttrs)
       .reject(attr =>  attr.key === 'pmid' && isEmpty(attr.value));
   }),
 
-  assaysToDisplay: computed('dataset', 'dataset.attributes.[]', function() {
-    const userAssays = getWithDefault(this, 'dataset.attributes', [])
+  assaysToDisplay: computed('model.dataset', 'model.dataset.attributes.[]', function() {
+    const userAssays = getWithDefault(this, 'model.dataset.attributes', [])
       .filterBy('properties.key', 'assay')
       .mapBy('properties.value');
-    return mergeAssays(get(this, 'dataset'), userAssays);
+    return mergeAssays(get(this, 'model.dataset'), userAssays);
   }),
 
-  contributors: computed('dataset.attributes.[]', function() {
+  contributors: computed('model.dataset.attributes.[]', function() {
     const contributorIds = this.store.peekAll('action')
       .filterBy('type', 'attribute')
-      .filterBy('actionableId.id', get(this, 'dataset.id'))
+      .filterBy('actionableId.id', get(this, 'model.dataset.id'))
       .mapBy('userId.id')
       .uniq();
     return this.store.peekAll('user')

@@ -51,6 +51,15 @@ export default Route.extend(ResetScrollMixin, LoadDetailRouteMixin, {
     incrementViewCounter(this.store, model.dataset, get(this, 'session.authenticatedUser'));
   },
 
+  setupController(controller, model) {
+    this._super(...arguments);
+    const sortedComments = model.comments
+      .toArray()
+      .sortBy('createdAt')
+      .reverseObjects();
+    controller.set('comments', sortedComments);
+  },
+
   actions: {
     didTransition() {
       get(this, 'metrics').trackPage();
