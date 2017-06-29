@@ -16,7 +16,7 @@ export function createActionData(model, userId, type, customProps = {}) {
   const modelName = model.constructor.modelName;
 
   dataObj[modelName + "Id"] = model;
-  dataObj['actionable_model'] = modelName;//TODO remove when safe
+  dataObj['actionable_model'] = modelName;
   return merge(dataObj, customProps);
 }
 

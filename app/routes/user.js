@@ -23,6 +23,7 @@ export default Route.extend({
         .then(user => this._getProfileData(user, params))
         .then(this._getDiscussionsAndContributions.bind(this))
         .then(values => {
+          debugger;
           this.controllerFor('user.index').set('favouritedData', values.profileData.favourited_data);
           const discussions = [...values.datasetDiscussions.toArray(), ...values.requestDiscussions.toArray()];
           return {
@@ -102,7 +103,7 @@ export default Route.extend({
   _getUniqueIds(arrayOfObjs, modelType) {
     return arrayOfObjs
       .filterBy('actionable_model', modelType)
-      .mapBy('actionableId.id')
+      .mapBy('id')
       .uniq();
   },
 

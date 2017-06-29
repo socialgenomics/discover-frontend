@@ -86,7 +86,10 @@ export default Component.extend(
         store
           .createRecord('action', createActionData(currentModel, currentUser, 'comment', { properties: { text } }))
           .save()
-          .then(() => { this._reloadSubscriptions(store); })
+          .then(savedComment => {
+            get(this, 'commentsSorted').insertAt(0, savedComment);
+            this._reloadSubscriptions(store);
+          })
           .catch(Logger.error);
       },
 

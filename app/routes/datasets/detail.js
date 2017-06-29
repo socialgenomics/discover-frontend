@@ -28,23 +28,23 @@ export default Route.extend(ResetScrollMixin, LoadDetailRouteMixin, {
           tags: data.tags
         });
       })
-        .then(hash => {
-          const keywords = hash.tags.mapBy('properties.text');
-          const dataset = hash.dataset;
-          const userIds = hash.attributes
-            .mapBy('userId.id')
-            .uniq();
-          return RSVP.hash({
-            comments: hash.comments,
-            tags: hash.tags,
-            attributes: hash.attributes,
-            dataset: dataset,
-            contributors: this._fetchUserData(userIds),
-            stats: hash.stats,
-            schema: this._buildSchemaObj(dataset, keywords)
-          });
-        })
-        .catch(Logger.error);
+      .then(hash => {
+        const keywords = hash.tags.mapBy('properties.text');
+        const dataset = hash.dataset;
+        const userIds = hash.attributes
+          .mapBy('userId.id')
+          .uniq();
+        return RSVP.hash({
+          comments: hash.comments,
+          tags: hash.tags,
+          attributes: hash.attributes,
+          dataset: dataset,
+          contributors: this._fetchUserData(userIds),
+          stats: hash.stats,
+          schema: this._buildSchemaObj(dataset, keywords)
+        });
+      })
+      .catch(Logger.error);
   },
 
   afterModel(model) {
