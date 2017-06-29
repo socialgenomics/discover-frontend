@@ -3,7 +3,7 @@ import attr from 'ember-data/attr';
 import { belongsTo } from 'ember-data/relationships';
 
 export default Model.extend({
-  actionable_model: attr('string'), //TODO remove this when safe
+  actionable_model: attr('string'),
   collectionId: belongsTo('collection'),
   createdAt: attr('isodate'),
   datasetId: belongsTo('dataset'),
