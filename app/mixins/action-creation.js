@@ -38,13 +38,13 @@ export default Mixin.create(FlashMessageMixin, {
           .catch(Logger.error);
       }
     },
-
-    deleteComment(comment) {
-      comment.destroyRecord()
-        .then(() => { get(this, 'comments').removeObject(comment) })
-        .then(this._addFlashMessage('Comment successfully deleted.', 'success'))
+    deleteAction(action) {
+      const actionType = get(action, 'type');
+      action.destroyRecord()
+        .then(() => { get(this, actionType + 's').removeObject(action) })
+        .then(this._addFlashMessage(`${actionType.capitalize()} successfully deleted.`, 'success'))
         .catch(error => {
-          this._addFlashMessage('Comment could not be deleted. Please try again.', 'warning');
+          this._addFlashMessage(`${actionType.capitalize()} could not be deleted. Please try again.`, 'warning');
           Logger.error(error);
         });
     }

@@ -36,7 +36,7 @@ export default Component.extend(
       },
 
       deleteComment(comment) {
-        get(this, 'deleteComment')(comment);
+        get(this, 'deleteAction')(comment);
       }
     }
   }

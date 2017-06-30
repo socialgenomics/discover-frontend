@@ -88,8 +88,8 @@ export default Component.extend(
         );
       },
 
-      deleteComment(comment) {
-        return get(this, 'deleteComment')(comment);
+      deleteAction(action) {
+        return get(this, 'deleteAction')(action);
       },
 
       cancelEditMode() {
