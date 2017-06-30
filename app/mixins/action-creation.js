@@ -40,6 +40,9 @@ export default Mixin.create(FlashMessageMixin, {
         get(this, 'store')
           .createRecord('action', createActionData(model, user, 'tag', { properties: { text } }))
           .save()
+          .then(savedTag => {
+            get(this, 'tags').insertAt(0, savedTag);
+          })
           .catch(Logger.error);
       }
     },

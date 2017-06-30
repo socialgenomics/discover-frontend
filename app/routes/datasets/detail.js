@@ -51,10 +51,12 @@ export default Route.extend(ResetScrollMixin, LoadDetailRouteMixin, {
       .sortBy('createdAt')
       .reverseObjects();
     const mergedAttributes = this._getMergedAttributes(model);
+    const tags = get(model, 'tags').toArray();
 
     setProperties(controller, {
       'comments': sortedComments,
-      'attributes': mergedAttributes
+      'attributes': mergedAttributes,
+      tags
     })
   },
 
