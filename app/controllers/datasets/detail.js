@@ -17,24 +17,24 @@ export default Controller.extend(ActionCreationMixin, {
     return get(this, 'model.stats.datasets').toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   }),
 
-  attributes: computed('model.dataset.properties.attributes', 'model.dataset.attributes', function() {
+  attributes: computed('model.dataset.properties.attributes', 'model.attributes', function() {
     const datasetAttrs = getWithDefault(this, 'model.dataset.properties.attributes', {});
-    const actionAttrs = getWithDefault(this, 'model.dataset.attributes', []);
+    const actionAttrs = getWithDefault(this, 'model.attributes', []);
     return this._mergeAttributes(actionAttrs, datasetAttrs)
       .reject(attr =>  attr.key === 'pmid' && isEmpty(attr.value));
   }),
 
-  assaysToDisplay: computed('model.dataset', 'model.dataset.attributes.[]', function() {
-    const userAssays = getWithDefault(this, 'model.dataset.attributes', [])
+  assaysToDisplay: computed('model.dataset', 'model.attributes.[]', function() {
+    const userAssays = getWithDefault(this, 'model.attributes', [])
       .filterBy('properties.key', 'assay')
       .mapBy('properties.value');
     return mergeAssays(get(this, 'model.dataset'), userAssays);
   }),
 
-  contributors: computed('model.dataset.attributes.[]', function() {
+  contributors: computed('model.attributes.[]', function() {
     const contributorIds = this.store.peekAll('action')
       .filterBy('type', 'attribute')
-      .filterBy('actionableId.id', get(this, 'model.dataset.id'))
+      .filterBy('datasetId.id', get(this, 'model.dataset.id'))
       .mapBy('userId.id')
       .uniq();
     return this.store.peekAll('user')
