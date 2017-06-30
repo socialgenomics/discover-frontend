@@ -17,6 +17,7 @@ export default Component.extend(FlashMessageMixin, {
   }),
 
   actions: {
+    //TODO refactor
     delete() {
       const tag = get(this, 'tag');
       if (tag) {
