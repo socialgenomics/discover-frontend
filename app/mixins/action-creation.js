@@ -38,6 +38,7 @@ export default Mixin.create(FlashMessageMixin, {
           .catch(Logger.error);
       }
     },
+
     deleteAction(action) {
       const actionType = get(action, 'type');
       action.destroyRecord()

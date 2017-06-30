@@ -18,6 +18,9 @@ export default Component.extend({
   }),
 
   actions: {
+    deleteAction(action) {
+      get(this, 'deleteAction')(action);
+    },
     closeInput() { set(this, 'openInput', null); },
     handleAddClick(group) {
       get(this, 'session.isAuthenticated') ?
