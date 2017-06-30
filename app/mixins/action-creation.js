@@ -3,7 +3,7 @@ import { createActionData } from 'repositive/utils/actions';
 import { getSubscriptions } from 'repositive/utils/subscriptions';
 import FlashMessageMixin from 'repositive/mixins/flash-message-mixin';
 
-const { Mixin, get, Logger } = Ember;
+const { Mixin, get, Logger, set } = Ember;
 
 export default Mixin.create(FlashMessageMixin, {
   actions: {
@@ -41,6 +41,9 @@ export default Mixin.create(FlashMessageMixin, {
 
     deleteAction(action) {
       const actionType = get(action, 'type');
+
+      if (actionType === 'attribute') { this._deleteAttribute(action); }
+
       action.destroyRecord()
         .then(() => { get(this, actionType + 's').removeObject(action) })
         .then(this._addFlashMessage(`${actionType.capitalize()} successfully deleted.`, 'success'))
@@ -51,6 +54,9 @@ export default Mixin.create(FlashMessageMixin, {
     }
   },
 
+  _deleteAttribute(action) {
+    set(this, 'attributes', get(this, 'attributes').rejectBy('actionId', action.id));
+  },
   /**
    * @desc re-fetch subscriptions to update the follow-button
    * @param {DS.Store} store instance of the store
