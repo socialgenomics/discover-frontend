@@ -27,8 +27,6 @@ describe('Unit | Controller | datasets/detail', function() {
     ]
   });
 
-
-
   describe('attributes', function() {
     it('should return an empty array if dependant props are empty', function() {
       const controller = this.subject();
