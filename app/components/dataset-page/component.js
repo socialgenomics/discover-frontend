@@ -2,7 +2,7 @@ import Ember from 'ember';
 import CheckEditPermissionsMixin from 'repositive/mixins/check-edit-permissions-mixin';
 import EditModeMixin from 'repositive/mixins/edit-mode-mixin';
 import SubscribableMixin from 'repositive/mixins/subscribable';
-
+import ActionCreationMixin from 'repositive/mixins/action-creation';
 // TODO figure out how to lazy inject mixins or find other solution.
 // Right now it will work cause dataset validation has URL as optional and request doesn't have URL at all
 import { buildValidations } from 'ember-cp-validations';
@@ -18,6 +18,7 @@ const Validations = buildValidations({
 });
 
 export default Component.extend(
+  ActionCreationMixin,
   EditModeMixin,
   Validations,
   CheckEditPermissionsMixin,
@@ -66,44 +67,6 @@ export default Component.extend(
           action: 'download_button',
           label: get(this, 'model.title')
         });
-      },
-
-      addAttribute(key, value) {
-        const currentModel = get(this, 'model');
-        const currentUser = get(this, 'userId');
-        const store = get(this, 'store');
-        store
-          .createRecord('action', createActionData(currentModel, currentUser, 'attribute', { properties: { key, value } }))
-          .save()
-          .then(() => this._reloadSubscriptions(store))
-          .catch(Logger.error);
-      },
-
-      addComment(text) {
-        const currentModel = get(this, 'model');
-        const currentUser = get(this, 'userId');
-        const store = get(this, 'store');
-        store
-          .createRecord('action', createActionData(currentModel, currentUser, 'comment', { properties: { text } }))
-          .save()
-          .then(savedComment => {
-            get(this, 'commentsSorted').insertAt(0, savedComment);
-            this._reloadSubscriptions(store);
-          })
-          .catch(Logger.error);
-      },
-
-      addTag(text) {
-        if (get(this, 'tags').findBy('properties.text', text)) {
-          this.flashMessages.add({ message: `The tag: ${text} already exists.`, type: 'warning' });
-        } else {
-          const currentModel = get(this, 'model');
-          const currentUser = get(this, 'userId');
-          get(this, 'store')
-            .createRecord('action', createActionData(currentModel, currentUser, 'tag', { properties: { text } }))
-            .save()
-            .catch(Logger.error);
-        }
       },
 
       cancelEditMode() {
