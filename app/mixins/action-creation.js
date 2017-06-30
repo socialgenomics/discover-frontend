@@ -1,9 +1,10 @@
 import Ember from 'ember';
 import { createActionData } from 'repositive/utils/actions';
 import { getSubscriptions } from 'repositive/utils/subscriptions';
+import { convertActionToCommonObj } from 'repositive/routes/datasets/detail';
 import FlashMessageMixin from 'repositive/mixins/flash-message-mixin';
 
-const { Mixin, get, Logger, set } = Ember;
+const { Mixin, get, Logger, set, getWithDefault } = Ember;
 
 export default Mixin.create(FlashMessageMixin, {
   actions: {
@@ -12,6 +13,10 @@ export default Mixin.create(FlashMessageMixin, {
       store
         .createRecord('action', createActionData(model, user, 'attribute', { properties: { key, value } }))
         .save()
+        .then(savedAttribute => {
+          const attributes = [...getWithDefault(this, 'attributes', []), ...[convertActionToCommonObj(savedAttribute)]]
+          set(this, 'attributes', attributes);
+        })
         .then(() => this._reloadSubscriptions(store, model, user))
         .catch(Logger.error);
     },

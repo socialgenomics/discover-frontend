@@ -13,6 +13,15 @@ export function mergeAssays(model, assaysFromUsers = []) {
   return assaysFromUsers;
 }
 
+export function convertActionToCommonObj(attribute) {
+  return {
+    key: get(attribute, 'properties.key'),
+    value: get(attribute, 'properties.value'),
+    actionId: get(attribute, 'id'),
+    userId: get(attribute, 'userId.id')
+  };
+}
+
 export default Route.extend(ResetScrollMixin, LoadDetailRouteMixin, {
   session: service(),
 
@@ -80,18 +89,9 @@ export default Route.extend(ResetScrollMixin, LoadDetailRouteMixin, {
   },
 
   _mergeAttributes(attributeActions = [], attributesFromDataset) {
-    const actionAttrs = attributeActions.map(this._convertActionToCommonObj);
+    const actionAttrs = attributeActions.map(convertActionToCommonObj);
     const datasetAttrs = this._convertDatasetAttrsToCommonObjList(attributesFromDataset);
     return [...datasetAttrs, ...actionAttrs];
-  },
-
-  _convertActionToCommonObj(attribute) {
-    return {
-      key: get(attribute, 'properties.key'),
-      value: get(attribute, 'properties.value'),
-      actionId: get(attribute, 'id'),
-      userId: get(attribute, 'userId.id')
-    };
   },
 
   _convertDatasetAttrsToCommonObjList(attributesFromDataset) {
