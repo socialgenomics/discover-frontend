@@ -2,25 +2,9 @@ import Ember from 'ember';
 import ResetScrollMixin from 'repositive/mixins/reset-scroll';
 import LoadDetailRouteMixin from 'repositive/mixins/load-detail-route';
 import { fetchActionsForModel, incrementViewCounter } from 'repositive/utils/actions';
+import { mergeAttributes } from 'repositive/utils/attributes';
 
 const { inject: { service }, Logger, Route, RSVP, get, getWithDefault, isEmpty, setProperties } = Ember;
-
-export function mergeAssays(model, assaysFromUsers = []) {
-  const assaysFromDataset = get(model, 'assay');
-  const assaysFromProps = get(model, 'properties.attributes.assay');
-  if (assaysFromProps) { return [...assaysFromProps, ...assaysFromUsers]; }
-  if (assaysFromDataset) { return [...assaysFromDataset.split(','), ...assaysFromUsers]; }
-  return assaysFromUsers;
-}
-
-export function convertActionToCommonObj(attribute) {
-  return {
-    key: get(attribute, 'properties.key'),
-    value: get(attribute, 'properties.value'),
-    actionId: get(attribute, 'id'),
-    userId: get(attribute, 'userId.id')
-  };
-}
 
 export default Route.extend(ResetScrollMixin, LoadDetailRouteMixin, {
   session: service(),
@@ -84,27 +68,8 @@ export default Route.extend(ResetScrollMixin, LoadDetailRouteMixin, {
   _getMergedAttributes(model) {
     const datasetAttrs = getWithDefault(model, 'dataset.properties.attributes', {});
     const actionAttrs = getWithDefault(model, 'attributes', []);
-    return this._mergeAttributes(actionAttrs, datasetAttrs)
+    return mergeAttributes(actionAttrs, datasetAttrs)
       .reject(attr =>  attr.key === 'pmid' && isEmpty(attr.value));
-  },
-
-  _mergeAttributes(attributeActions = [], attributesFromDataset) {
-    const actionAttrs = attributeActions.map(convertActionToCommonObj);
-    const datasetAttrs = this._convertDatasetAttrsToCommonObjList(attributesFromDataset);
-    return [...datasetAttrs, ...actionAttrs];
-  },
-
-  _convertDatasetAttrsToCommonObjList(attributesFromDataset) {
-    if (attributesFromDataset) {
-      return Object.keys(attributesFromDataset).reduce((attrObjects, key) => {
-        const keyValue = attributesFromDataset[key];
-        if (isEmpty(keyValue) || 'pmid' in keyValue) { return attrObjects; }
-        return [
-          ...attrObjects,
-          ...keyValue.map(value => { return { key, value }; })
-        ];
-      }, []);
-    } else { return []; }
   },
 
   _buildSchemaObj(dataset, keywords) {

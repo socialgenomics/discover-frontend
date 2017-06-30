@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import { mergeAssays } from '../../routes/datasets/detail';
+import { mergeAssays } from 'repositive/utils/attributes';
 import ActionCreationMixin from 'repositive/mixins/action-creation';
 
 const { Controller, computed, inject: { service }, get, getWithDefault } = Ember;

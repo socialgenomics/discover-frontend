@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import { mergeAssays } from 'repositive/routes/datasets/detail';
+import { mergeAssays } from 'repositive/utils/attributes';
 
 const { Component, computed, inject: { service }, get } = Ember;
 
@@ -13,6 +13,7 @@ export default Component.extend({
     return get(this, 'urlGenerator').generateUrl(route, get(this, 'dataset.id'));
   }),
   hasAssays: computed.or('dataset.assay', 'dataset.properties.attributes.assay'),
+  //TODO duplicate on datasets/detail controller
   assaysToDisplay: computed('dataset.assay', 'dataset.properties.attributes.assay', function() {
     return mergeAssays(get(this, 'dataset'));
   })

@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import { createActionData } from 'repositive/utils/actions';
 import { getSubscriptions } from 'repositive/utils/subscriptions';
-import { convertActionToCommonObj } from 'repositive/routes/datasets/detail';
+import { convertActionToCommonObj } from 'repositive/utils/attributes';
 import FlashMessageMixin from 'repositive/mixins/flash-message-mixin';
 
 const { Mixin, get, Logger, set, getWithDefault } = Ember;
