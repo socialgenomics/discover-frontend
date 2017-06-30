@@ -39,13 +39,11 @@ export default Component.extend(
 
       deleteComment(comment) {
         comment.destroyRecord()
-        .then(() => {
-          this._addFlashMessage('Comment successfully deleted.', 'success');
-        })
-        .catch(() => {
-          this._addFlashMessage('Comment could not be deleted. Please try again.', 'warning');
-          Logger.error;
-        });
+          .then(this._addFlashMessage('Comment successfully deleted.', 'success'))
+          .catch(error => {
+            this._addFlashMessage('Comment could not be deleted. Please try again.', 'warning');
+            Logger.error(error);
+          });
       }
     }
   }
