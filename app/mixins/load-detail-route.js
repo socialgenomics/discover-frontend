@@ -1,12 +1,12 @@
 import Ember from 'ember';
 import ENV from 'repositive/config/environment';
-import SubscribableMixin from 'repositive/mixins/subscribable';
 import FlashMessageMixin from 'repositive/mixins/flash-message-mixin';
 import { fetchActionsForModel } from 'repositive/utils/actions';
+import { getSubscriptions } from 'repositive/utils/subscriptions';
 
 const { Mixin, get, RSVP, inject: { service }, setProperties, set, Logger } = Ember;
 
-export default Mixin.create(SubscribableMixin, FlashMessageMixin, {
+export default Mixin.create(FlashMessageMixin, {
   ajax: service(),
   session: service(),
 
@@ -34,7 +34,7 @@ export default Mixin.create(SubscribableMixin, FlashMessageMixin, {
           tags: data.tags
         };
         if (get(this, 'session.isAuthenticated')) {
-          hashObj['subscriptions'] = this._getSubscriptions(this.store, modelId, get(this, 'session.authenticatedUser.id'));
+          hashObj['subscriptions'] = getSubscriptions(this.store, modelId, get(this, 'session.authenticatedUser.id'));
         }
         return RSVP.hash(hashObj);
       });
@@ -42,7 +42,7 @@ export default Mixin.create(SubscribableMixin, FlashMessageMixin, {
 
   _checkIfShouldUnfollow(params, transition, modelName) {
     if (transition.queryParams.unfollow) {
-      this._getSubscriptions(this.store, params.id, get(this, 'session.session.authenticated.user.id'))
+      getSubscriptions(this.store, params.id, get(this, 'session.session.authenticated.user.id'))
         .then(subscriptions => {
           const subscription = subscriptions.get('firstObject');
           set(subscription, 'active', false);

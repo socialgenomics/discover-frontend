@@ -1,10 +1,6 @@
 import Ember from 'ember';
 import CheckEditPermissionsMixin from 'repositive/mixins/check-edit-permissions-mixin';
 import EditModeMixin from 'repositive/mixins/edit-mode-mixin';
-import SubscribableMixin from 'repositive/mixins/subscribable';
-import ActionCreationMixin from 'repositive/mixins/action-creation';
-// TODO figure out how to lazy inject mixins or find other solution.
-// Right now it will work cause dataset validation has URL as optional and request doesn't have URL at all
 import { buildValidations } from 'ember-cp-validations';
 import urlFormatValidator from 'repositive/validations/urlFormatValidator';
 import presenceValidator from 'repositive/validations/presenceValidator';
@@ -18,11 +14,9 @@ const Validations = buildValidations({
 });
 
 export default Component.extend(
-  ActionCreationMixin,
   EditModeMixin,
   Validations,
   CheckEditPermissionsMixin,
-  SubscribableMixin,
   {
     session: service(),
     urlGenerator: service(),
@@ -69,6 +63,31 @@ export default Component.extend(
         });
       },
 
+      addComment(text) {
+        return get(this, 'addComment')(
+          get(this, 'model'),
+          get(this, 'userId'),
+          text
+        );
+      },
+
+      addTag(text) {
+        return get(this, 'addTag')(
+          get(this, 'model'),
+          get(this, 'userId'),
+          text
+        );
+      },
+
+      addAttribute(key, value) {
+        return get(this, 'addAttribute')(
+          get(this, 'model'),
+          get(this, 'userId'),
+          key,
+          value
+        );
+      },
+
       cancelEditMode() {
         this.resetModuleStateOnCancel('model', get(this, 'editablePropertyKeys'));
       },
@@ -80,22 +99,6 @@ export default Component.extend(
       },
 
       setActiveTab(tab) { set(this, 'activeTab', tab); }
-    },
-
-    /**
-     * @desc re-fetch subscriptions to update the follow-button
-     * @param {Object} store
-     * @private
-     */
-    _reloadSubscriptions(store) {
-      const existingSubscription = store.peekAll('subscription').filter(subscription => {
-        const userIdMatches = get(subscription, 'userId.id') === get(this, 'userId.id');
-        const subscribableIdMatches = get(subscription, 'subscribableId.id') === get(this, 'model.id');
-        return userIdMatches && subscribableIdMatches;
-      });
-      if (existingSubscription.length === 0) {
-        this._getSubscriptions(store, get(this, 'model.id'), get(this, 'userId.id'));
-      }
     }
   }
 );
