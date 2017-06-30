@@ -88,6 +88,10 @@ export default Component.extend(
         );
       },
 
+      deleteComment(comment) {
+        return get(this, 'deleteComment')(comment);
+      },
+
       cancelEditMode() {
         this.resetModuleStateOnCancel('model', get(this, 'editablePropertyKeys'));
       },

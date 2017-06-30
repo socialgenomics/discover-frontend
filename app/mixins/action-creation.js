@@ -1,10 +1,11 @@
 import Ember from 'ember';
 import { createActionData } from 'repositive/utils/actions';
 import { getSubscriptions } from 'repositive/utils/subscriptions';
+import FlashMessageMixin from 'repositive/mixins/flash-message-mixin';
 
 const { Mixin, get, Logger } = Ember;
 
-export default Mixin.create({
+export default Mixin.create(FlashMessageMixin, {
   actions: {
     addAttribute(model, user, key, value) {
       const store = get(this, 'store');
@@ -29,13 +30,23 @@ export default Mixin.create({
 
     addTag(model, user, text) {
       if (get(this, 'tags').findBy('properties.text', text)) {
-        this.flashMessages.add({ message: `The tag: ${text} already exists.`, type: 'warning' });
+        this._addFlashMessage(`The tag: ${text} already exists.`, 'warning' );
       } else {
         get(this, 'store')
           .createRecord('action', createActionData(model, user, 'tag', { properties: { text } }))
           .save()
           .catch(Logger.error);
       }
+    },
+
+    deleteComment(comment) {
+      comment.destroyRecord()
+        .then(() => { get(this, 'comments').removeObject(comment) })
+        .then(this._addFlashMessage('Comment successfully deleted.', 'success'))
+        .catch(error => {
+          this._addFlashMessage('Comment could not be deleted. Please try again.', 'warning');
+          Logger.error(error);
+        });
     }
   },
 

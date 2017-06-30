@@ -1,18 +1,16 @@
 import Ember from 'ember';
 import CheckEditPermissionsMixin from 'repositive/mixins/check-edit-permissions-mixin';
 import EditModeMixin from 'repositive/mixins/edit-mode-mixin';
-import FlashMessageMixin from 'repositive/mixins/flash-message-mixin';
 import { buildValidations } from 'ember-cp-validations';
 import emptyValidator from 'repositive/validations/emptyValidator';
 
-const { Component, computed: { oneWay }, get, set, Logger } = Ember;
+const { Component, computed: { oneWay }, get, set } = Ember;
 const Validations = buildValidations({ text: emptyValidator() });
 
 export default Component.extend(
   CheckEditPermissionsMixin,
   EditModeMixin,
   Validations,
-  FlashMessageMixin,
   {
     classNames: ['border-top'],
 
@@ -38,12 +36,7 @@ export default Component.extend(
       },
 
       deleteComment(comment) {
-        comment.destroyRecord()
-          .then(this._addFlashMessage('Comment successfully deleted.', 'success'))
-          .catch(error => {
-            this._addFlashMessage('Comment could not be deleted. Please try again.', 'warning');
-            Logger.error(error);
-          });
+        get(this, 'deleteComment')(comment);
       }
     }
   }
