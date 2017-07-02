@@ -5,10 +5,6 @@ export default Route.extend({
   session: service(),
   ajax: service(),
 
-  beforeModel() {
-    set(this, 'session.data.firstVisit', false);
-  },
-
   model() {
     const user = get(this, 'session.session.content.authenticated.user');
     return {
@@ -16,6 +12,10 @@ export default Route.extend({
       name: get(user, 'firstname') + ' ' + get(user, 'lastname'),
       RGScript: this._buildRGTrackingScript()
     };
+  },
+
+  beforeModel() {
+    set(this, 'session.data.firstVisit', false);
   },
 
   _buildRGTrackingScript() {

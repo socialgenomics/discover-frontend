@@ -28,7 +28,7 @@ module.exports = {
     "ember/order-in-components": 2,
     "ember/order-in-controllers": 2,
     "ember/order-in-models": 2,
-    "ember/order-in-routes": 0, //2
+    "ember/order-in-routes": 2,
     "ember/routes-segments-snake-case": 2,
     "ember/use-brace-expansion": 0, //1
     "ember/use-ember-get-and-set": 0, //1

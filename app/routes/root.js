@@ -10,21 +10,6 @@ export default Route.extend(FlashMessageMixin, {
 
   isFirstLogin: computed.and('session.data.firstVisit', 'session.isAuthenticated'),
 
-  beforeModel() {
-    if (get(this, 'isFirstLogin')) {
-      this.transitionTo('signup-survey')
-        .then(() => {
-          // Don't display the 'verify email' message if user signed up with third party auth
-          if (!get(this, 'session.data.thirdPartySignup')) {
-            set(this, 'session.data.displayWelcomeMessage', true);
-          }
-        });
-    }
-    if (get(this, 'session.data.displayWelcomeMessage')) {
-      this._addFlashMessage('Please check your email to verify your account', 'info');
-    }
-  },
-
   model() {
     set(this, 'session.data.isRootRoute', true);
     const ajax = get(this, 'ajax');
@@ -60,6 +45,22 @@ export default Route.extend(FlashMessageMixin, {
         });
     }
   },
+
+  beforeModel() {
+    if (get(this, 'isFirstLogin')) {
+      this.transitionTo('signup-survey')
+        .then(() => {
+          // Don't display the 'verify email' message if user signed up with third party auth
+          if (!get(this, 'session.data.thirdPartySignup')) {
+            set(this, 'session.data.displayWelcomeMessage', true);
+          }
+        });
+    }
+    if (get(this, 'session.data.displayWelcomeMessage')) {
+      this._addFlashMessage('Please check your email to verify your account', 'info');
+    }
+  },
+
   deactivate() {
     setProperties(this, {
       'session.data.firstVisit': false,
