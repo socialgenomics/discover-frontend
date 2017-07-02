@@ -13,10 +13,10 @@
   {{r-async-button
     action=(action 'save')
     default="Save Changes"
-    disableWhen=(not validations.isValid)
+    disableWhen=(or (not validations.isValid)(not attrsStateIsDirty))
     pending="Saving..."
     reset=true
     size="big"
-    variant="primary" 
+    variant="primary"
   }}
 </div>

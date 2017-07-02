@@ -2,6 +2,6 @@
   {{partial 'datasets/no-results'}}
 {{else}}
   {{#each results as |result|}}
-    {{dataset-card dataset=result}}
+    {{dataset-card dataset=result type=type}}
   {{/each}}
 {{/if}}

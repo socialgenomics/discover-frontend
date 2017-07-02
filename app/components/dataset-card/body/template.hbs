@@ -1,0 +1,21 @@
+{{#link-to linkTarget dataset.id classNames="data-title"}}
+  <div data-balloon={{dataset.title}} data-balloon-pos="up" data-balloon-length="large">
+    <h4 class="fs2 fw-med fc-primary c-card-title mb2">
+      {{#if dataset.highlights.title}}
+        {{{truncate dataset.highlights.title 70}}}
+      {{else}}
+        {{truncate dataset.title 70}}
+      {{/if}}
+    </h4>
+  </div>
+{{/link-to}}
+
+{{from-label model=dataset type=type}}
+
+<div class="c-card-description u-markdown-formatting">
+  {{#if dataset.highlights.description}}
+    {{{markdown-to-html markdown=dataset.highlights.description extensions='targetBlankLinks sanitize'}}}
+  {{else}}
+    {{markdown-to-html markdown=dataset.description extensions='targetBlankLinks sanitize'}}
+  {{/if}}
+</div>
