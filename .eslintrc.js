@@ -16,7 +16,7 @@ module.exports = {
   rules: {
     "ember/alias-model-in-controller": 0, //2
     "ember/avoid-leaking-state-in-components": 2,
-    "ember/closure-actions": 0, //1
+    "ember/closure-actions": 1,
     "ember/jquery-ember-run": 2,
     "ember/local-modules": 2,
     "ember/named-functions-in-promises": 0, //2

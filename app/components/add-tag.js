@@ -17,7 +17,8 @@ export default Component.extend(Validations, {
           action: 'added_tag',
           label: this.tag
         });
-        this.sendAction('addTag', this.tag);
+
+        get(this, 'addTag')(get(this, 'tag'));
       }
       set(this, 'tag', null);
       this.toggleProperty('isOpen');
