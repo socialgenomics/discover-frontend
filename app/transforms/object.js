@@ -1,12 +1,14 @@
 import DS from 'ember-data';
 import Ember from 'ember';
 
+const { Transform } = DS;
+const { isNone } = Ember;
 
-export default DS.Transform.extend({
+export default Transform.extend({
   deserialize: function(serialized) {
-    return Ember.isNone(serialized) ? {} : serialized;
+    return isNone(serialized) ? {} : serialized;
   },
   serialize: function(deserialized) {
-    return Ember.isNone(deserialized) ? {} : deserialized;
+    return isNone(deserialized) ? {} : deserialized;
   }
 });
