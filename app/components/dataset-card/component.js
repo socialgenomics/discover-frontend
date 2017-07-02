@@ -4,8 +4,9 @@ import { mergeAssays } from 'repositive/routes/datasets/detail';
 const { Component, computed, inject: { service }, get } = Ember;
 
 export default Component.extend({
-  type: 'dataset',
   urlGenerator: service(),
+
+  type: 'dataset',
 
   classNames: ['grid__col', 'grid__col--1-of-3', 'grid__col--m-1-of-2'],
 
