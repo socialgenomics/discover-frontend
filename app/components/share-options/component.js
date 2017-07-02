@@ -1,10 +1,8 @@
-/* eslint ember/avoid-leaking-state-in-components: 0 */
-
 import Ember from 'ember';
 import openCenteredPopupWindow from '../../utils/open-centered-popup-window';
 import URI from 'npm:urijs';
 
-const { Component, computed, get, setProperties } = Ember;
+const { Component, computed, get, setProperties, set } = Ember;
 
 export default Component.extend({
   windowWidth: 555,
@@ -13,26 +11,6 @@ export default Component.extend({
   copyAttempt: false,
   copySuccess: false,
 
-  // shared across all instances of this component
-  channels: {
-    twitter: {
-      baseUrl: 'https://twitter.com/intent/tweet',
-      qsParams: {
-        hashtags: 'findthatdata',
-        text: '!@repositiveio helped me find this awesome human #genomic #dataset & now I am helping you find it'
-      }
-    },
-    linkedin: {
-      baseUrl: 'https://www.linkedin.com/shareArticle',
-      qsParams: {
-        mini: true,
-        source: 'Repositive',
-        summary: '#Repositive helped me find this awesome human #genomic #dataset & now I am helping you find it #findthatdata',
-        title: 'Repositive helped me find this awesome human genomic dataset'
-      }
-    }
-  },
-
   copyFailed: computed('copyAttempt', 'copySuccess', function () {
     return get(this, 'copyAttempt') && get(this, 'copySuccess') === false;
   }),
@@ -40,6 +18,29 @@ export default Component.extend({
   copyButtonClasses: computed('copyFailed', function() {
     return `r-btn r-btn-small r-btn-primary ${get(this, 'copyFailed') ? 'copy-failed' : ''}`;
   }),
+
+  init() {
+    this._super(...arguments);
+
+    set(this, 'channels', {
+      twitter: {
+        baseUrl: 'https://twitter.com/intent/tweet',
+        qsParams: {
+          hashtags: 'findthatdata',
+          text: '!@repositiveio helped me find this awesome human #genomic #dataset & now I am helping you find it'
+        }
+      },
+      linkedin: {
+        baseUrl: 'https://www.linkedin.com/shareArticle',
+        qsParams: {
+          mini: true,
+          source: 'Repositive',
+          summary: '#Repositive helped me find this awesome human #genomic #dataset & now I am helping you find it #findthatdata',
+          title: 'Repositive helped me find this awesome human genomic dataset'
+        }
+      }
+    })
+  },
 
   actions: {
     share(channel) {

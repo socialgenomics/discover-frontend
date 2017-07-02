@@ -1,5 +1,3 @@
-/* eslint ember/avoid-leaking-state-in-components: 0 */
-
 import Ember from 'ember';
 import CheckEditPermissionsMixin from 'repositive/mixins/check-edit-permissions-mixin';
 import EditModeMixin from 'repositive/mixins/edit-mode-mixin';
@@ -20,13 +18,16 @@ export default Component.extend(
 
     inEditMode: false,
 
-    // shared across all instances of this component
-    editablePropertyKeys: ['text'],
-
     checkEditPermissionsModel: oneWay('comment'),
 
     // copy of editable Properties
     text: oneWay('comment.properties.text'),
+
+    init() {
+      this._super(...arguments);
+
+      set(this, 'editablePropertyKeys', ['text']);
+    },
 
     actions: {
       cancelEditMode() {
