@@ -31,7 +31,7 @@ module.exports = {
     "ember/order-in-routes": 2,
     "ember/routes-segments-snake-case": 2,
     "ember/use-brace-expansion": 0, //1
-    "ember/use-ember-get-and-set": 0, //1
+    "ember/use-ember-get-and-set": 1, //1
 
     "padded-blocks": [
       2,

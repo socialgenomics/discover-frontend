@@ -18,9 +18,9 @@ export default Controller.extend({
   tags: computed.filterBy('dataset.actionableId.actions', 'type', 'tag'),
 
   commentsSorted: computed.sort('comments', (itemA, itemB) => {
-    if (itemA.get('createdAt') < itemB.get('createdAt')) {
+    if (get(itemA, 'createdAt') < get(itemB, 'createdAt')) {
       return 1;
-    } else if (itemA.get('createdAt') > itemB.get('createdAt')) {
+    } else if (get(itemA, 'createdAt') > get(itemB, 'createdAt')) {
       return -1;
     }
     return 0;

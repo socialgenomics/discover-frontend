@@ -2,7 +2,7 @@ import Ember from 'ember';
 import config from './config/environment';
 import TrackingMixin from 'repositive/mixins/tracking-mixin';
 
-const { Router, inject: { service }, Route } = Ember;
+const { Router, inject: { service }, Route, get } = Ember;
 
 const router = Router.extend(TrackingMixin, {
   session: service(),
@@ -111,7 +111,7 @@ Route.reopen({
       } else if (landingPage.indexOf(cssClass) !== -1) {
         // Add the landing page class to home (makes background white)
         // Home-page stays grey
-        if (!this.get('session.session.isAuthenticated')) {
+        if (!get(this, 'session.session.isAuthenticated')) {
           Ember.$('body').addClass('landing-page');
         }
       }

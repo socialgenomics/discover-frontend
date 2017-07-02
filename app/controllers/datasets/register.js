@@ -29,8 +29,8 @@ export default Controller.extend(
 
     actions: {
       addDataset: function () {
-        if (this.get('validations.isValid')) {
-          const userModel = this.get('session.authenticatedUser');
+        if (get(this, 'validations.isValid')) {
+          const userModel = get(this, 'session.authenticatedUser');
 
           set(this, 'loading', true);
 

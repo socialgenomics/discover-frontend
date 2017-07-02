@@ -45,7 +45,7 @@ export default Mixin.create(ActionableMixin, SubscribableMixin, FlashMessageMixi
     if (transition.queryParams.unfollow) {
       this._getSubscriptions(this.store, params.id, get(this, 'session.session.authenticated.user.id'))
         .then(subscriptions => {
-          const subscription = subscriptions.get('firstObject');
+          const subscription = get(subscriptions, 'firstObject');
           set(subscription, 'active', false);
           return subscription.save();
         })
