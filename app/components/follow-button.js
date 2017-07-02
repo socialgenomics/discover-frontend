@@ -3,20 +3,19 @@ import Ember from 'ember';
 const { Component, computed, get, inject: { service }, Logger, set, setProperties } = Ember;
 
 export default Component.extend({
-  tagName: 'button',
-  classNames: ['c-follow-btn'],
-  classNameBindings: ['isFollowing:c-follow-btn-following:c-follow-btn-default', 'isUnfollow:c-follow-btn-unfollow'],
-
   session: service(),
   store: service(),
 
+  tagName: 'button',
+  classNames: ['c-follow-btn'],
+  classNameBindings: ['isFollowing:c-follow-btn-following:c-follow-btn-default', 'isUnfollow:c-follow-btn-unfollow'],
   showCreateAccountModal: false,
+
+  isUnfollow: computed.and('isFollowing', 'isHovering'),
 
   isFollowing: computed('subscription.active', function() {
     return get(this, 'subscription') ? get(this, 'subscription.active') : false;
   }),
-
-  isUnfollow: computed.and('isFollowing', 'isHovering'),
 
   subscription: computed('subscribable.subscriptions', 'session', {
     get() {
@@ -36,6 +35,12 @@ export default Component.extend({
     }
   }),
 
+  actions: {
+    toggleCreateAccountModal() {
+      this.toggleProperty('showCreateAccountModal');
+    }
+  },
+
   mouseEnter() { set(this, 'isHovering', true); },
   mouseLeave() { set(this, 'isHovering', false);  },
 
@@ -50,12 +55,6 @@ export default Component.extend({
       } else {
         this._createSubscription();
       }
-    }
-  },
-
-  actions: {
-    toggleCreateAccountModal() {
-      this.toggleProperty('showCreateAccountModal');
     }
   },
 

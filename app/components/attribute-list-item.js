@@ -21,13 +21,15 @@ export default Component.extend(
 
     value: computed.oneWay('attribute.value'),
     checkEditPermissionsModel: computed.oneWay('attribute'),
+    isNumber: computed.match('value', /^\d+$/),
+
     isUnique: computed('attributesForKey', 'value', function() {
       return isUniqueString(
         get(this, 'attributesForKey').mapBy('value'),
         get(this, 'value') || ''
       );
     }),
-    isNumber: computed.match('value', /^\d+$/),
+
     isValid: computed('group', 'validations.isValid', 'isNumber', function() {
       const validAndUnique = get(this, 'validations.isValid') && get(this, 'isUnique');
       if (get(this, 'group') === 'pmid' || get(this, 'group') === 'samples') {

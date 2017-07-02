@@ -17,6 +17,22 @@ export default Component.extend({
     set(this, 'shareOptionsModalConstraints', [{ to: 'window', pin: true }]);
   },
 
+  actions: {
+    toggleShareOptionsModal() {
+      this.toggleProperty('showShareOptionsModal');
+    },
+
+    toggleShareEmailModal() {
+      set(this, 'showShareOptionsModal', false);
+      this.toggleProperty('showShareEmailModal');
+    },
+
+    toggleCreateAccountModal() {
+      set(this, 'showShareOptionsModal', false);
+      this.toggleProperty('showCreateAccountModal');
+    }
+  },
+
   touchEnd() {
     if (get(this, 'session.isAuthenticated')) {
       get(this, 'metrics').trackEvent({
@@ -38,21 +54,5 @@ export default Component.extend({
 
   click() {
     this.touchEnd();
-  },
-
-  actions: {
-    toggleShareOptionsModal() {
-      this.toggleProperty('showShareOptionsModal');
-    },
-
-    toggleShareEmailModal() {
-      set(this, 'showShareOptionsModal', false);
-      this.toggleProperty('showShareEmailModal');
-    },
-
-    toggleCreateAccountModal() {
-      set(this, 'showShareOptionsModal', false);
-      this.toggleProperty('showCreateAccountModal');
-    }
   }
 });

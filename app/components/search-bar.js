@@ -5,6 +5,15 @@ const { Component, get, inject: { service }, setProperties, computed, set } = Em
 export default Component.extend({
   queryService: service('query'),
 
+  query: computed('queryService.queryString', {
+    get() {
+      return get(this, 'queryService').getQueryString();
+    },
+    set(key, value) {
+      return value;
+    }
+  }),
+
   init() {
     this._super(...arguments);
     set(this, 'placeholderValues', [
@@ -22,15 +31,6 @@ export default Component.extend({
       'placeholder': this._getSearchPlaceholder(get(this, 'placeholderValues'))
     });
   },
-
-  query: computed('queryService.queryString', {
-    get() {
-      return get(this, 'queryService').getQueryString();
-    },
-    set(key, value) {
-      return value;
-    }
-  }),
 
   actions: {
     search(query) {
