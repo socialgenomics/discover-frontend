@@ -6,8 +6,9 @@ const { Model } = DS;
 
 export default Model.extend({
   active: attr('boolean'),
-  notifcations: hasMany('notification'),
   subscribableModel: attr('string'),
-  subscribableId: belongsTo('subscribable'),
-  userId: belongsTo('user')
+  userId: belongsTo('user'),
+
+  notifcations: hasMany('notification'),
+  subscribableId: belongsTo('subscribable')
 });
