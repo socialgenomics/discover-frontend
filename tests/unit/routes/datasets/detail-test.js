@@ -1,5 +1,6 @@
+import Ember from 'ember';
 import { expect } from 'chai';
-import { describe, it } from 'mocha';
+import { beforeEach, describe, it } from 'mocha';
 import { setupTest } from 'ember-mocha';
 
 // const attributeActions = [
@@ -14,10 +15,30 @@ import { setupTest } from 'ember-mocha';
 //     }
 //   }
 // ];
-// const attributesFromDataset = {
-//   assay: ['123', '456'],
-//   tissue: ['heart']
-// };
+
+const attributesFromDataset = {
+  assay: ['123', '456'],
+  tissue: ['heart']
+};
+
+function createControllerMock() {
+  return Ember.Object.create({});
+}
+
+function createModelMock() {
+  return Ember.Object.create({
+    dataset: createDatasetMock(),
+    attributes: [],
+    comments: [],
+    tags: []
+  })
+}
+
+function createDatasetMock(attributes = {}) {
+  return Ember.Object.create({
+    properties: { attributes }
+  });
+}
 
 describe('Unit | Route | datasets/detail', function() {
   setupTest('route:datasets/detail', {
@@ -29,42 +50,46 @@ describe('Unit | Route | datasets/detail', function() {
     ]
   });
   describe('setupController', function() {
-    describe('attributes', function() {
-      //TODO refactor these controller tests to route tests
-      // it('should return an empty array if dependant props are empty', function() {
-      //   const route = this.subject();
-      //   const result = route.get('attributes');
-      //   expect(result).to.eql([]);
-      // });
-      //
-      // it('should return an array of attr objs', function() {
-      //   const route = this.subject();
-      //   const dataset = {
-      //     properties: { attributes: attributesFromDataset },
-      //     actionableId: { actions: attributeActions }
-      //   }
-      //   route.set('model', { dataset });
-      //   const result = route.get('attributes');
-      //   expect(result.length).to.eql(3);
-      //   expect(result[0].key).to.eql('assay');
-      //   expect(result[0].value).to.eql('123');
-      // });
-      //
-      // it('should reject all null values in pmid array', function() {
-      //   const route = this.subject();
-      //   const dataset = {
-      //     properties: { attributes: { pmid: [null, 123] } }
-      //   }
-      //   route.set('model', { dataset });
-      //   const result = route.get('attributes');
-      //   expect(result.length).to.eql(1);
-      //   expect(result[0].key).to.eql('pmid');
-      //   expect(result[0].value).to.eql(123);
-      // });
-    })
-    it('exists', function() {
-      let route = this.subject();
-      expect(route).to.be.ok;
+    let controller, model;
+
+    beforeEach(function() {
+      controller = createControllerMock();
+      model = createModelMock();
+    });
+
+    describe('action arrays', function() {
+      it('should be initialized as empty lists', function() {
+        const route = this.subject();
+        route.setupController(controller, model);
+        expect(controller.attributes).to.eql([]);
+        expect(controller.comments).to.eql([]);
+        expect(controller.tags).to.eql([]);
+      });
+    });
+
+    describe('attributes', function () {
+      it('should return an array of attr objs', function() {
+        const route = this.subject();
+        model.set('dataset', createDatasetMock(attributesFromDataset));
+        route.setupController(controller, model);
+
+        const result = controller.get('attributes');
+        expect(result.length).to.eql(3);
+        expect(result[0].key).to.eql('assay');
+        expect(result[0].value).to.eql('123');
+      });
+
+      it('should reject all null values in pmid array', function() {
+        const route = this.subject();
+        const dataset = createDatasetMock({ pmid: [null, null, 123]});
+        model.set('dataset', dataset);
+        route.setupController(controller, model);
+
+        const result = controller.get('attributes');
+        expect(result.length).to.eql(1);
+        expect(result[0].key).to.eql('pmid');
+        expect(result[0].value).to.eql(123);
+      });
     });
   });
 });
