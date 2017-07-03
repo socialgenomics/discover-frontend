@@ -18,14 +18,14 @@ export default Component.extend({
       get(this, 'metrics').trackEvent({
         category: 'discover_homeauth_dataset',
         action: 'share_click',
-        label: get(this, 'actionableId'),
+        label: get(this, 'modelId'),
         value: true
       });
     } else {
       get(this, 'metrics').trackEvent({
         category: 'discover_openpage_dataset',
         action: 'share_click',
-        label: get(this, 'actionableId'),
+        label: get(this, 'modelId'),
         value: true
       });
     }

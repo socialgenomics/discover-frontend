@@ -21,8 +21,8 @@ export default Component.extend(Validations, {
   classNames: ['ta-center'],
   emailAddress: '',
   customMessage: '',
-  actionableId: null,
-  actionableType: null,
+  modelId: null,
+  modelType: null,
   sendSuccess: false,
   sendError: false,
   isLoading: false,
@@ -83,8 +83,8 @@ export default Component.extend(Validations, {
         data: {
           to: get(this, 'emailAddress'),
           content: get(this, 'customMessage'),
-          actionable_id: get(this, 'actionableId'),
-          actionable_model: get(this, 'actionableType')
+          actionable_id: get(this, 'modelId'),
+          actionable_model: get(this, 'modelType')
         }
       }
     );
@@ -92,13 +92,13 @@ export default Component.extend(Validations, {
 
   _createShareAction(currentUser) {
     const store = get(this, 'store');
-    store.findRecord('actionable', get(this, 'actionableId'))
+    store.findRecord('actionable', get(this, 'modelId'))
       .then(actionable => {
         return store.createRecord('action', {
           actionableId: actionable,
           userId: currentUser,
           type: 'share',
-          actionable_model: get(this, 'actionableType')
+          actionable_model: get(this, 'modelType')
         }).save();
       })
         .catch(Logger.error);

@@ -12,7 +12,7 @@
   }}
     {{share-options
       shareUrl=shareUrl
-      actionableId=actionableId
+      modelId=modelId
       onEnvelopeClick=(action (if session.isAuthenticated 'toggleShareEmailModal' 'toggleCreateAccountModal'))
     }}
   {{/repositive-modal}}
@@ -30,8 +30,8 @@
     }}
     {{#repositive-modal/content}}
       {{share-by-email-form
-        actionableId=actionableId
-        actionableType=actionableType
+        modelId=modelId
+        modelType=modelType
         currentUser=session.authenticatedUser
         onClose=(action 'toggleShareEmailModal')
       }}
