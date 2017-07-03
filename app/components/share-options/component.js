@@ -77,13 +77,13 @@ export default Component.extend({
       get(this, 'metrics').trackEvent({
         category: 'discover_homeauth_sharemodal',
         action,
-        label: get(this, 'modelId')
+        label: get(this, 'model.id')
       });
     } else {
       get(this, 'metrics').trackEvent({
         category: 'discover_openpage_sharemodal',
         action,
-        label: get(this, 'modelId')
+        label: get(this, 'model.id')
       });
     }
   },
