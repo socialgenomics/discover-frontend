@@ -3,7 +3,7 @@ import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-rout
 import LoadDetailRouteMixin from 'repositive/mixins/load-detail-route';
 import { incrementViewCounter } from 'repositive/utils/actions';
 
-const { inject: { service }, Logger, Route, RSVP, get } = Ember;
+const { inject: { service }, Logger, Route, RSVP, get, setProperties } = Ember;
 
 export default Route.extend(AuthenticatedRouteMixin, LoadDetailRouteMixin, {
   session: service(),
@@ -23,6 +23,20 @@ export default Route.extend(AuthenticatedRouteMixin, LoadDetailRouteMixin, {
 
   afterModel(model) {
     incrementViewCounter(this.store, model.request, get(this, 'session.authenticatedUser'));
+  },
+
+  setupController(controller, model) {
+    this._super(...arguments);
+    const sortedComments = model.comments
+      .toArray()
+      .sortBy('createdAt')
+      .reverseObjects();
+    const tags = get(model, 'tags').toArray();
+
+    setProperties(controller, {
+      'comments': sortedComments,
+      tags
+    })
   },
 
   actions: {

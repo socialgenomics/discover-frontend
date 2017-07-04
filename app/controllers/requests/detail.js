@@ -1,8 +1,9 @@
 import Ember from 'ember';
+import ActionCreationMixin from 'repositive/mixins/action-creation';
 
 const { Controller, computed, inject: { service } } = Ember;
 
-export default Controller.extend({
+export default Controller.extend(ActionCreationMixin, {
   session: service(),
 
   requestEditableProperties: [
@@ -10,16 +11,5 @@ export default Controller.extend({
     { key: 'description', multiline: true }
   ],
 
-  request: computed.alias('model.request'),
-  comments: computed.alias('model.comments'),
-  tags: computed.alias('model.tags'),
-
-  commentsSorted: computed.sort('comments', (itemA, itemB) => {
-    if (itemA.get('createdAt') < itemB.get('createdAt')) {
-      return 1;
-    } else if (itemA.get('createdAt') > itemB.get('createdAt')) {
-      return -1;
-    }
-    return 0;
-  })
+  request: computed.alias('model.request')
 });
