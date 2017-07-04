@@ -100,8 +100,10 @@ export default Route.extend({
   },
 
   _getUniqueIds(arrayOfObjs, modelType) {
+    const keyName = modelType + 'Id';
     return arrayOfObjs
       .filterBy('actionable_model', modelType)
+      .mapBy(keyName)
       .mapBy('id')
       .uniq();
   },
