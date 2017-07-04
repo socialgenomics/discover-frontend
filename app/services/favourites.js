@@ -12,26 +12,29 @@ export default Service.extend({
     if (get(this, 'userFavourites') === undefined && get(this, 'session.isAuthenticated')) { //favourites haven't been loaded yet
       const currentUserId = get(this, 'session.session.authenticated.user.id');
       const store = get(this, 'store');
+
       return store.query('action', {
         'where.user_id': currentUserId,
         'where.type': 'favourite',
-        limit: 1000 // remove the limit to 10 response
+        limit: 1000
       })
-      .then(favourites => {
-        set(this, 'userFavourites', []);
-        favourites.map(favourite => get(this, 'userFavourites').push(favourite));
-      })
-      .catch(Logger.error);
+        .then(favourites => {
+          set(this, 'userFavourites', []);
+          favourites.map(favourite => get(this, 'userFavourites').push(favourite));
+        })
+        .catch(Logger.error);
     }
   },
   removeFavourite(favourite) {
     set(this, 'userFavourites', get(this, 'userFavourites').without(favourite));
     this.notifyPropertyChange('userFavourites');
   },
+
   pushFavourite(favourite) {
     get(this, 'userFavourites').push(favourite);
     this.notifyPropertyChange('userFavourites');
   },
+
   getFavourite(modelId, modelName) {
     const keyName = modelName + 'Id.id';
     return getWithDefault(this, 'userFavourites', []).findBy(keyName, modelId);
