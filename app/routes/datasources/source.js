@@ -34,7 +34,6 @@ export function model(params) {
   const collectionId = params.id;
   const queryString = params.query;
   return RSVP.hash({
-    actionable: store.findRecord('actionable', collectionId),
     collection: store.findRecord('collection', collectionId),
     collectionStats: get(this, 'ajax').request(ENV.APIRoutes['collection-stats'].replace('{collection_id}', collectionId), { method: 'GET' })
   })
@@ -44,7 +43,6 @@ export function model(params) {
       return this.makeRequest(params)
         .then(m => {
           const model = assign(data, m);
-          set(model, 'collection.actionableId', model.actionable);
           this._updateQueryServiceValue(params.query);
           return model;
         });

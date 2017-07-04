@@ -6,6 +6,7 @@ export default Service.extend({
   store: service(),
   session: service(),
   flashMessages: service(),
+
   userFavourites: undefined, //list of actions where type = 'favourite'
 
   loadFavourites() {
@@ -25,6 +26,7 @@ export default Service.extend({
         .catch(Logger.error);
     }
   },
+
   removeFavourite(favourite) {
     set(this, 'userFavourites', get(this, 'userFavourites').without(favourite));
     this.notifyPropertyChange('userFavourites');
