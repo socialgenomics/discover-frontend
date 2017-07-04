@@ -32,8 +32,8 @@ export default Service.extend({
     get(this, 'userFavourites').push(favourite);
     this.notifyPropertyChange('userFavourites');
   },
-  getFavourite(actionableId, modelName) {
+  getFavourite(modelId, modelName) {
     const keyName = modelName + 'Id.id';
-    return getWithDefault(this, 'userFavourites', []).findBy(keyName, actionableId);
+    return getWithDefault(this, 'userFavourites', []).findBy(keyName, modelId);
   }
 });
