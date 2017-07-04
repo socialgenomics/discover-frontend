@@ -3,15 +3,15 @@ import FlashMessageMixin from 'repositive/mixins/flash-message-mixin';
 
 const { Component, inject: { service }, Logger, get, set, setProperties, isBlank, $ } = Ember;
 const rawSuggestedInterests = [
-  "ADHD", "ALS", "Allergy", "Alzheimer's disease", "Asthma", "Autism", "Bioinformatics",
+  "ADHD", "ALS", "Allergy", "Alzheimer's Disease", "Asthma", "Autism", "Bioinformatics",
   "Blood", "Brain", "Breast", "CHIP-seq", "CRISPR", "Cancer", "Cardiovascular",
-  "Cardiovascular disease", "Crohn's disease", "Cystic fibrosis", "Data analysis",
+  "Cardiovascular Disease", "Crohn's Disease", "Cystic Fibrosis", "Data Analysis",
   "Depression", "Diabetes", "Embryonic", "Epigenome", "Epilepsy", "Epithelial",
   "Eye", "GWAS", "Genetics", "Genomics", "Gut", "Heart", "IBD", "Kidney", "Lung",
   "Metagenomics", "Methylation", "MiRNA", "Microbiome", "Multiple Sclerosis",
   "Musculoskeletal", "Neuron", "Obesity", "Ovarian", "PDX", "Pancreas", "Personal",
   "Populations", "Prostate", "Proteomics", "RNA-seq", "SNP", "Schizophrenia",
-  "Single-cell", "Skin", "Therapeutics", "Whole Genome Sequencing", "Whole exome sequencing"
+  "Single-cell", "Skin", "Therapeutics", "Whole Genome Sequencing", "Whole Exome Sequencing"
 ];
 
 export default Component.extend(FlashMessageMixin, {

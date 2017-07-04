@@ -14,13 +14,13 @@
   {{/if}}
 
     {{#if isOpen}}
-      <div class="flex py2">
+      <div class="py2">
         {{#power-select
           placeholder="Type or select your interests"
           options=suggestedInterests
           onchange=(action "addInterest")
           onkeydown=(action "handleKeydown")
-          noMatchesMessage="No suggestions found"
+          noMatchesMessage="No suggestions found. Press enter to add."
           defaultHighlighted=''
           as |interest|
         }}

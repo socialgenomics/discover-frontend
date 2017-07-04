@@ -14,3 +14,7 @@ $ember-power-select-border-color: $border-color;
 .ember-power-select-option {
   @extend .p3;
 }
+
+.ember-power-select-status-icon {
+  right: 10px !important;
+}
