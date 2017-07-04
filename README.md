@@ -15,7 +15,6 @@ You will need the following things properly installed on your computer.
 
 * `git clone <repository-url>` this repository
 * change into the new directory
-* `git submodule update --init`
 * `npm run setup`
 
 ## Running / Development
