@@ -11,13 +11,16 @@ const Validations = buildValidations({
 
 export default Component.extend(Validations, {
   tagName: 'form',
+
+  isNumber: computed.match('attributeValue', /^\d+$/),
+
   isUnique: computed('attributesForKey', 'attributeValue', function() {
     return isUniqueString(
       get(this, 'attributesForKey').mapBy('value'),
       get(this, 'attributeValue') || ''
     );
   }),
-  isNumber: computed.match('attributeValue', /^\d+$/),
+
   isValid: computed('group', 'validations.isValid', 'isNumber', function() {
     const validAndUnique = get(this, 'validations.isValid') && get(this, 'isUnique');
     if (get(this, 'group') === 'pmid' || get(this, 'group') === 'samples') {
@@ -25,6 +28,7 @@ export default Component.extend(Validations, {
     }
     return validAndUnique;
   }),
+
   placeholder: computed('group', function() {
     const attrKey = get(this, 'group').toLowerCase();
     if (attrKey === 'assay') { return 'e.g. RNA-Seq'}

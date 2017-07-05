@@ -3,8 +3,10 @@ import Ember from 'ember';
 const { Component, inject: { service }, get } = Ember;
 
 export default Component.extend({
-  classNames: ['flex', 'self-stretch', 'flex-shrink-none', 'items-center', 'justify-center', 'u-hv-bc-very-light-grey'],
   session: service(),
+
+  classNames: ['flex', 'self-stretch', 'flex-shrink-none', 'items-center', 'justify-center', 'u-hv-bc-very-light-grey'],
+
   actions: {
     close(dropdown) {
       dropdown.actions.close();

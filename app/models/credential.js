@@ -8,6 +8,7 @@ export default Model.extend({
   primary: attr('boolean'),
   provider: attr('string'),
   updatedAt: attr('isodate'),
-  userId: belongsTo('user'),
-  verified: attr('boolean')
+  verified: attr('boolean'),
+
+  userId: belongsTo('user')
 });

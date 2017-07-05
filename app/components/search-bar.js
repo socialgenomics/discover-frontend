@@ -1,27 +1,9 @@
 import Ember from 'ember';
 import { getRandomElement } from 'repositive/utils/arrays'
-const { Component, get, inject: { service }, setProperties, computed } = Ember;
+const { Component, get, inject: { service }, setProperties, computed, set } = Ember;
 
 export default Component.extend({
   queryService: service('query'),
-
-  placeholderValues: [
-    `obesity AND microbiome`,
-    `autism AND assay:"RNA seq"`,
-    `infant stool AND assay:wgs`,
-    `Alzheimer's disease`,
-    `fetal epigenome`,
-    `human populations AND (assay:"Whole Genome Sequencing" OR assay:WGS)`
-  ],
-
-  init() {
-    this._super(...arguments);
-    const queryService = get(this, 'queryService');
-    setProperties(this, {
-      'query': queryService.getQueryString(),
-      'placeholder': this._getSearchPlaceholder(get(this, 'placeholderValues'))
-    });
-  },
 
   query: computed('queryService.queryString', {
     get() {
@@ -31,6 +13,24 @@ export default Component.extend({
       return value;
     }
   }),
+
+  init() {
+    this._super(...arguments);
+    set(this, 'placeholderValues', [
+      `obesity AND microbiome`,
+      `autism AND assay:"RNA seq"`,
+      `infant stool AND assay:wgs`,
+      `Alzheimer's disease`,
+      `fetal epigenome`,
+      `human populations AND (assay:"Whole Genome Sequencing" OR assay:WGS)`
+    ]);
+
+    const queryService = get(this, 'queryService');
+    setProperties(this, {
+      'query': queryService.getQueryString(),
+      'placeholder': this._getSearchPlaceholder(get(this, 'placeholderValues'))
+    });
+  },
 
   actions: {
     search(query) {

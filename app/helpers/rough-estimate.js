@@ -1,5 +1,7 @@
 import Ember from 'ember';
 
+const { Helper: { helper } } = Ember;
+
 export function roughEstimate(value) {
   // Get digits
   let digits = Math.floor(log10(value)) + 1;
@@ -32,4 +34,4 @@ export function roughEstimate(value) {
   }
 }
 
-export default Ember.Helper.helper(roughEstimate);
+export default helper(roughEstimate);

@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-const { Route } = Ember;
+const { Route, set } = Ember;
 
 export default Route.extend({
   controllerName: 'help',
@@ -10,6 +10,6 @@ export default Route.extend({
   },
 
   setupController(controller, model) {
-    return controller.set('currentPage', model);
+    return set(controller, 'currentPage', model);
   }
 });

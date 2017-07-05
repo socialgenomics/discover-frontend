@@ -16,6 +16,12 @@ export default Component.extend({
     return isPresent(get(this, 'favouritesService').getFavourite(get(this, 'model.id')));
   }),
 
+  actions: {
+    toggleCreateAccountModal() {
+      this.toggleProperty('showCreateAccountModal');
+    }
+  },
+
   mouseEnter() { set(this, 'isHovered', true); },
   mouseLeave() { set(this, 'isHovered', false); },
   click() { this.touchEnd(); },
@@ -46,12 +52,6 @@ export default Component.extend({
       } else {
         this._addFavourite();
       }
-    }
-  },
-
-  actions: {
-    toggleCreateAccountModal() {
-      this.toggleProperty('showCreateAccountModal');
     }
   },
 
