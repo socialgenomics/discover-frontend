@@ -9,7 +9,8 @@ const {
   RSVP,
   get,
   Logger,
-  isEmpty
+  isEmpty,
+  set
 } = Ember;
 
 export default Route.extend({
@@ -23,7 +24,7 @@ export default Route.extend({
         .then(user => this._getProfileData(user, params))
         .then(this._getDiscussionsAndContributions.bind(this))
         .then(values => {
-          this.controllerFor('user.index').set('favouritedData', values.profileData.favourited_data);
+          set(this.controllerFor('user.index'), 'favouritedData', values.profileData.favourited_data);
           const discussions = [...values.datasetDiscussions.toArray(), ...values.requestDiscussions.toArray()];
           return {
             user: values.profileData.user,

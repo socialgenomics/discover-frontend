@@ -4,11 +4,12 @@ import { belongsTo } from 'ember-data/relationships';
 
 export default Model.extend({
   actionable_model: attr('string'),
-  collectionId: belongsTo('collection'),
   createdAt: attr('isodate'),
-  datasetId: belongsTo('dataset'),
   properties: attr('object'),
-  requestId: belongsTo('request'),
   type: attr('string'),
+
+  collectionId: belongsTo('collection'),
+  datasetId: belongsTo('dataset'),
+  requestId: belongsTo('request'),
   userId: belongsTo('user')
 });

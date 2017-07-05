@@ -1,21 +1,37 @@
 import Ember from 'ember';
 import FlashMessageMixin from 'repositive/mixins/flash-message-mixin';
-import { buildValidations } from 'ember-cp-validations';
-import emptyValidator from 'repositive/validations/emptyValidator';
 
-const { Component, inject: { service }, Logger, get, set, setProperties } = Ember;
-const Validations = buildValidations({ newInterest: emptyValidator() });
+const { Component, inject: { service }, Logger, get, set, setProperties, isBlank, $ } = Ember;
+const rawSuggestedInterests = [
+  "ADHD", "ALS", "Allergy", "Alzheimer's Disease", "Asthma", "Autism", "Bioinformatics",
+  "Blood", "Brain", "Breast", "CHIP-seq", "CRISPR", "Cancer", "Cardiovascular",
+  "Cardiovascular Disease", "Crohn's Disease", "Cystic Fibrosis", "Data Analysis",
+  "Depression", "Diabetes", "Embryonic", "Epigenome", "Epilepsy", "Epithelial",
+  "Eye", "GWAS", "Genetics", "Genomics", "Gut", "Heart", "IBD", "Kidney", "Lung",
+  "Metagenomics", "Methylation", "MiRNA", "Microbiome", "Multiple Sclerosis",
+  "Musculoskeletal", "Neuron", "Obesity", "Ovarian", "PDX", "Pancreas", "Personal",
+  "Populations", "Prostate", "Proteomics", "RNA-seq", "SNP", "Schizophrenia",
+  "Single-cell", "Skin", "Therapeutics", "Whole Genome Sequencing", "Whole Exome Sequencing"
+];
 
-export default Component.extend(FlashMessageMixin, Validations, {
+export default Component.extend(FlashMessageMixin, {
   store: service(),
 
   isOpen: false,
-  newInterest: '',
 
   init() {
     this._super(...arguments);
 
-    set(this, 'editInterests', [...(get(this, 'interests') || [])]);
+    const interests = get(this, 'interests') || [];
+    const transformedSuggestions = rawSuggestedInterests
+      .map(interest => interest.capitalize())
+      .sort()
+      .filter(interest => interests.indexOf(interest) === -1);
+
+    setProperties(this, {
+      'editInterests': interests,
+      'suggestedInterests': transformedSuggestions
+    });
   },
 
   actions: {
@@ -24,6 +40,11 @@ export default Component.extend(FlashMessageMixin, Validations, {
      * @param {String} name
      */
     removeInterest(name) {
+      //If the term is a suggested one, add it back to the suggestedInterests Array
+      if (rawSuggestedInterests.indexOf(name) !== -1) {
+        const newArray = [...get(this, 'suggestedInterests'), ...[name]].sort();
+        set(this, 'suggestedInterests', newArray);
+      }
       this._saveChanges(get(this, 'editInterests').removeObject(name));
     },
 
@@ -32,7 +53,12 @@ export default Component.extend(FlashMessageMixin, Validations, {
      * @param {String} name
      */
     addInterest(name) {
-      if (get(this, 'validations.isValid')) {
+      if (!isBlank(name)) {
+        const suggestedInterests = get(this, 'suggestedInterests');
+        //Remove from suggestions
+        if (suggestedInterests.indexOf(name) !== -1) {
+          set(this, 'suggestedInterests', suggestedInterests.without(name));
+        }
         this._saveChanges(get(this, 'editInterests').addObject(name));
       }
     },
@@ -41,7 +67,7 @@ export default Component.extend(FlashMessageMixin, Validations, {
      * @desc hides add interest input and resets it state
      */
     hideInput() {
-      setProperties(this, { isOpen: false, newInterest: '' });
+      set(this, 'isOpen', false);
     },
 
     /**
@@ -49,9 +75,16 @@ export default Component.extend(FlashMessageMixin, Validations, {
      */
     showInput() {
       set(this, 'isOpen', true);
+    },
+
+    handleKeydown(dropdown, e) {
+      if (e.keyCode !== 13) { return; }
+      if (isBlank(dropdown.highlighted)) {
+        const text = e.target.value;
+        this.send('addInterest', text);
+      }
     }
   },
-
   /**
    * @desc saves changes to backend
    * @param {Array<String>} interests
@@ -61,7 +94,6 @@ export default Component.extend(FlashMessageMixin, Validations, {
     const userModel = get(this, 'store').peekRecord('user', get(this, 'userId'));
 
     set(userModel, 'profile.interests', interests);
-    this.send('hideInput');
 
     userModel
       .save()
@@ -74,6 +106,7 @@ export default Component.extend(FlashMessageMixin, Validations, {
    * @private
    */
   _onSaveSuccess() {
+    $('.ember-power-select-trigger').blur();
     this._addFlashMessage('Your interests have been updated.', 'success');
   },
 

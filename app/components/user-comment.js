@@ -16,12 +16,16 @@ export default Component.extend(
 
     inEditMode: false,
 
-    editablePropertyKeys: ['text'],
-
     checkEditPermissionsModel: oneWay('comment'),
 
     // copy of editable Properties
     text: oneWay('comment.properties.text'),
+
+    init() {
+      this._super(...arguments);
+
+      set(this, 'editablePropertyKeys', ['text']);
+    },
 
     actions: {
       cancelEditMode() {

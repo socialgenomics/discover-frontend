@@ -12,13 +12,25 @@
     {{/each}}
   </div>
   {{/if}}
-  <div class="py3 flex items-center">
+
     {{#if isOpen}}
-      {{focus-input class="mr2" value=newInterest type="text" enter="addInterest" placeholder="Add your research interest"}}
+      <div class="py2">
+        {{#power-select
+          placeholder="Type or select your interests"
+          options=suggestedInterests
+          onchange=(action "addInterest")
+          onkeydown=(action "handleKeydown")
+          noMatchesMessage="No suggestions found. Press enter to add."
+          defaultHighlighted=''
+          as |interest|
+        }}
+          {{interest}}
+        {{/power-select}}
+      </div>
       {{r-button variant="cancel" label="Cancel" clickHandler=(action "hideInput")}}
     {{else}}
-      {{r-button label="Add Interest" clickHandler=(action "showInput")}}
+      <div class="py3">
+        {{r-button label="Add Interest" clickHandler=(action "showInput")}}
+      </div>
     {{/if}}
-  </div>
-  <span class="fc-secondary">eg. RNA-seq</span>
 </div>

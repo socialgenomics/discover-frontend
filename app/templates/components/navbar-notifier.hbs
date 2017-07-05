@@ -1,5 +1,6 @@
 {{#basic-dropdown verticalPosition=below as |dropdown|}}
-  {{#dropdown.trigger onMouseDown=(action 'handleTriggerEvent') onTouchEnd=(action 'handleTriggerEvent') class="outline-none cursor-pointer p3"}}
+  {{#dropdown.trigger onMouseDown=(action 'handleTriggerEvent') onTouchEnd=(action 'handleTriggerEvent') class="outline-none cursor-pointer p3 relative"}}
+    {{#if hasUnseenNotifications}}<span class="c-notification-unread-marker c-notification-unread-marker-marker__bell"></span>{{/if}}
     {{fa-icon 'bell'}}
   {{/dropdown.trigger}}
 
