@@ -47,12 +47,11 @@ export function buildActionsQuery(type, customProps = {}) {
  * @desc builds a query object for actions of specific model
  * @public
  * @param {String} type - The type of action e.g. 'favourite'
- * @param {String} modelName - Name of the model on which to query actions
  * @param {String} modelId - Id of the model being queried
  * @param {Object?} customProps - Other properties to be added to the action object.
  * @return {Object} Constructed query object
  */
-export function buildActionsQueryForModel(type, modelName, modelId, customProps = {}) {
+export function buildActionsQueryForModel(type, modelId, customProps = {}) {
   const dataObj = buildActionsQuery(type, customProps);
 
   dataObj['where.actionable_id'] = modelId;
@@ -76,13 +75,12 @@ export function fetchActions(store, type, customProps = {}) {
  * @public
  * @param {Ember.DS.Store} store - Instance of the data store
  * @param {String} type - The type of action e.g. 'favourite'
- * @param {String} modelName - Name of the model on which to query actions
  * @param {String} modelId - Id of the model being queried
  * @param {Object?} customProps - Other properties to be added to the action object.
  * @return {Promise} The promised actions
  */
-export function fetchActionsForModel(store, type, modelName, modelId, customProps = {}) {
-  return store.query('action', buildActionsQueryForModel(type, modelName, modelId, customProps));
+export function fetchActionsForModel(store, type, modelId, customProps = {}) {
+  return store.query('action', buildActionsQueryForModel(type, modelId, customProps));
 }
 
 /**
@@ -95,6 +93,8 @@ export function fetchActionsForModel(store, type, modelName, modelId, customProp
  * @return {Promise} The response
  */
 export function incrementViewCounter(store, model, userId, customProps = {}) {
-  store.createRecord('action', createActionData(model, userId = null, 'view', customProps))
-    .save().catch(Logger.error);
+  store.createRecord(
+    'action',
+    createActionData(model, userId = null, 'view', customProps)
+  ).save().catch(Logger.error);
 }

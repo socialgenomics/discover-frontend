@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import { describe, it } from 'mocha';
-import { buildActionsQuery, createActionData } from 'repositive/utils/actions';
+import { buildActionsQuery, buildActionsQueryForModel, createActionData } from 'repositive/utils/actions';
 
 describe('createActionData', function () {
   const model = { constructor: { modelName: 'dataset' } };
@@ -37,4 +37,11 @@ describe('buildActionsQuery', function () {
     expect(buildActionsQuery('comment', customObj)['where.value'])
       .to.eql('ABC');
   })
+});
+
+describe('!T buildActionsQueryForModel', function () {
+  it('returns an object with an actionable_id', function() {
+    const result = buildActionsQueryForModel('comment', 'modelId1')['where.actionable_id'];
+    expect(result).to.eql('modelId1');
+  });
 });

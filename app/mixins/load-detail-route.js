@@ -17,8 +17,8 @@ export default Mixin.create(FlashMessageMixin, {
   _getModelData(params, modelType) {
     const modelId = params.id;
     return RSVP.hash({
-      comments: fetchActionsForModel(this.store, 'comment', modelType, modelId),
-      tags: fetchActionsForModel(this.store, 'tag', modelType, modelId),
+      comments: fetchActionsForModel(this.store, 'comment', modelId),
+      tags: fetchActionsForModel(this.store, 'tag', modelId),
       model: this.store.findRecord(modelType, modelId),
       subscribable: this.store.findRecord('subscribable', modelId)
     })

@@ -15,7 +15,7 @@ export default Route.extend(ResetScrollMixin, LoadDetailRouteMixin, {
       .then(data => {
         return RSVP.hash({
           comments: data.comments,
-          attributes: fetchActionsForModel(this.store, 'attribute', 'dataset', params.id),
+          attributes: fetchActionsForModel(this.store, 'attribute', params.id),
           dataset: data.model,
           stats: get(this, 'session.isAuthenticated') === false ? this._getStats() : null,
           tags: data.tags
