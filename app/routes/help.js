@@ -63,12 +63,13 @@ const navigationData = [
 ];
 
 export default Route.extend({
+  model() {
+    return navigationData;
+  },
+
   beforeModel(transition) {
     if (get(transition, 'targetName').split('.')[1] === 'index') {
       this.transitionTo('help.searching-for-data');
     }
-  },
-  model() {
-    return navigationData;
   }
 });
