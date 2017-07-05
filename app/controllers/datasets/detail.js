@@ -30,7 +30,7 @@ export default Controller.extend({
     return get(this, 'stats.datasets').toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   }),
 
-  attributes: computed('dataset{properties.attributes,actionableId.actions}', function() {
+  attributes: computed('dataset.{properties.attributes,actionableId.actions}', function() {
     const datasetAttrs = getWithDefault(this, 'dataset.properties.attributes', {});
     const actionAttrs = getWithDefault(this, 'dataset.actionableId.actions', []).filterBy('type', 'attribute');
     return this._mergeAttributes(actionAttrs, datasetAttrs)

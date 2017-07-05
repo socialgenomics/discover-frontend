@@ -8,7 +8,7 @@ export default Route.extend(FlashMessageMixin, {
   session: service(),
   ajax: service(),
 
-  isFirstLogin: computed.and('session{data.firstVisit,isAuthenticated}'),
+  isFirstLogin: computed.and('session.{data.firstVisit,isAuthenticated}'),
 
   model() {
     set(this, 'session.data.isRootRoute', true);
