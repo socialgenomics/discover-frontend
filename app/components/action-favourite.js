@@ -33,6 +33,7 @@ export default Component.extend({
     const currentModel = this.model; //can be request or dataset
     const favourite = get(this, 'favouritesService')
       .getFavourite(currentModel.id, get(currentModel, 'constructor.modelName'));
+
     if (get(this, 'session.isAuthenticated')) {
       get(this, 'metrics').trackEvent({
         category: 'discover_homeauth_dataset',
@@ -69,11 +70,7 @@ export default Component.extend({
     return store
       .createRecord('action', createActionData(currentModel, currentUser, 'favourite'))
       .save()
-      .then(savedFavourite => {
-        get(this, 'favouritesService').pushFavourite(savedFavourite);
-        set(this, 'isSubmitting', false);
-        currentModel.incrementProperty('stats.favourite');
-      })
+      .then(this._handleSaveSuccess.bind(this, currentModel))
       .catch(Logger.error);
   },
 
@@ -93,5 +90,11 @@ export default Component.extend({
         });
       })
       .catch(Logger.error);
+  },
+
+  _handleSaveSuccess(currentModel, savedFavourite) {
+    get(this, 'favouritesService').pushFavourite(savedFavourite);
+    set(this, 'isSubmitting', false);
+    currentModel.incrementProperty('stats.favourite');
   }
 });
