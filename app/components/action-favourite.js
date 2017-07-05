@@ -78,17 +78,7 @@ export default Component.extend({
     const currentModel = get(this, 'model');
     set(this, 'isSubmitting', true);
     favourite.destroyRecord()
-      .then(deletedFavourite => {
-        set(this, 'isSubmitting', false);
-        currentModel.decrementProperty('stats.favourite');
-        get(this, 'favouritesService').removeFavourite(deletedFavourite);
-        get(this, 'metrics').trackEvent({
-          category: 'discover_homeauth_dataset',
-          action: 'favourite',
-          label: currentModel.id,
-          value: false
-        });
-      })
+      .then(this._handleDeleteSuccess.bind(this, currentModel))
       .catch(Logger.error);
   },
 
@@ -96,5 +86,17 @@ export default Component.extend({
     get(this, 'favouritesService').pushFavourite(savedFavourite);
     set(this, 'isSubmitting', false);
     currentModel.incrementProperty('stats.favourite');
+  },
+
+  _handleDeleteSuccess(currentModel, deletedFavourite) {
+    set(this, 'isSubmitting', false);
+    currentModel.decrementProperty('stats.favourite');
+    get(this, 'favouritesService').removeFavourite(deletedFavourite);
+    get(this, 'metrics').trackEvent({
+      category: 'discover_homeauth_dataset',
+      action: 'favourite',
+      label: currentModel.id,
+      value: false
+    });
   }
 });
