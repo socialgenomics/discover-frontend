@@ -12,22 +12,22 @@ describe('Integration | Component | navbar notifier', function() {
     integration: true
   });
 
-  it('bell is red when there are unseen notifications', function() {
+  it('should show red dot when there are unseen notifications', function() {
     this.set('notifications', [getNotificationObj()]);
     this.render(hbs`{{navbar-notifier notifications=notifications}}`);
-    expect(this.$('div').hasClass('fc-red')).to.be.true;
+    expect(this.$('.c-notification-unread-marker-marker__bell').length).to.be.equal(1);
   });
 
-  it('bell is grey when there are no unseen notifications', function() {
+  it('should not show red dot when there are no unseen notifications', function() {
     this.set('notifications', [getNotificationObj()]);
     this.set('notifications.firstObject.status', 'seen');
     this.render(hbs`{{navbar-notifier notifications=notifications}}`);
-    expect(this.$('div').hasClass('fc-secondary')).to.be.true;
+    expect(this.$('.c-notification-unread-marker-marker__bell').length).to.be.equal(0);
   });
 
-  it('bell is grey when there are no notifications', function() {
+  it('should not show red dot when there are no notifications', function() {
     this.set('notifications', []);
     this.render(hbs`{{navbar-notifier notifications=notifications}}`);
-    expect(this.$('div').hasClass('fc-secondary')).to.be.true;
+    expect(this.$('.c-notification-unread-marker-marker__bell').length).to.be.equal(0);
   });
 });
