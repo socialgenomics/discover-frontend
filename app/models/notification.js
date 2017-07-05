@@ -2,7 +2,9 @@ import DS from 'ember-data';
 import attr from 'ember-data/attr';
 import { belongsTo } from 'ember-data/relationships';
 
-export default DS.Model.extend({
+const { Model } = DS;
+
+export default Model.extend({
   createdAt: attr('isodate'),
   properties: attr('object'),
   status: attr('string'),

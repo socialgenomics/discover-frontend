@@ -114,5 +114,5 @@ export default Controller.extend(Validations, FlashMessageMixin, {
     return { firstname, lastname };
   },
 
-  _getPasswordStrength: getPasswordStrength
+  _getPasswordStrength: getPasswordStrength // eslint-disable-line ember/order-in-controllers
 });

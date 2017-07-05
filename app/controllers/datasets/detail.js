@@ -18,9 +18,9 @@ export default Controller.extend({
   tags: computed.filterBy('dataset.actionableId.actions', 'type', 'tag'),
 
   commentsSorted: computed.sort('comments', (itemA, itemB) => {
-    if (itemA.get('createdAt') < itemB.get('createdAt')) {
+    if (get(itemA, 'createdAt') < get(itemB, 'createdAt')) {
       return 1;
-    } else if (itemA.get('createdAt') > itemB.get('createdAt')) {
+    } else if (get(itemA, 'createdAt') > get(itemB, 'createdAt')) {
       return -1;
     }
     return 0;
@@ -30,7 +30,7 @@ export default Controller.extend({
     return get(this, 'stats.datasets').toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   }),
 
-  attributes: computed('dataset.properties.attributes', 'dataset.actionableId.actions', function() {
+  attributes: computed('dataset.{properties.attributes,actionableId.actions}', function() {
     const datasetAttrs = getWithDefault(this, 'dataset.properties.attributes', {});
     const actionAttrs = getWithDefault(this, 'dataset.actionableId.actions', []).filterBy('type', 'attribute');
     return this._mergeAttributes(actionAttrs, datasetAttrs)

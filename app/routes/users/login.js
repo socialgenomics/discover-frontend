@@ -1,10 +1,12 @@
 import Ember from 'ember';
 import ThirdParty from 'repositive/mixins/third-party-route-mixin';
 
-export default Ember.Route.extend(ThirdParty, {
-  session: Ember.inject.service(),
+const { Route, inject: { service }, get } = Ember;
+
+export default Route.extend(ThirdParty, {
+  session: service(),
   beforeModel: function() {
-    if (this.get('session.isAuthenticated')) {
+    if (get(this, 'session.isAuthenticated')) {
       this.transitionTo('root');
     }
   }

@@ -9,12 +9,14 @@ const Validations = buildValidations({ comment: emptyValidator() });
 export default Component.extend(Validations, {
   session: service(),
   isActive: false,
-  isValid: computed('validations.isValid', function() {
-    return get(this, 'validations.isValid');
-  }),
+
   classNames: 'flex items-start',
   classNameBindings: ['isActive:active'],
   allowComment: computed.and('isActive', 'session.isAuthenticated', 'isValid'),
+
+  isValid: computed('validations.isValid', function() {
+    return get(this, 'validations.isValid');
+  }),
 
   actions: {
     showButtons: function() {
