@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import { describe, it } from 'mocha';
-import { mergeAttributes, convertActionToCommonObj, convertDatasetAttrsToCommonObjList } from 'repositive/utils/attributes';
+import { mergeAssays, mergeAttributes, convertActionToCommonObj, convertDatasetAttrsToCommonObjList } from 'repositive/utils/attributes';
 
 const attributeActions = [
   {
@@ -18,6 +18,27 @@ const attributesFromDataset = {
   assay: ['123', '456'],
   tissue: ['heart']
 };
+
+describe('mergeAssays', function() {
+  it('returns empty list when no assays present', function() {
+    expect(mergeAssays({}, [])).to.eql([]);
+  });
+
+  it('returns assaysFromUsers if no model assays are present', function() {
+    const userAssays = ['abc', 'xyz'];
+    expect(mergeAssays({}, userAssays)).to.eql(userAssays)
+  });
+
+  it('if assaysFromProps return merge with assaysFromUsers', function() {
+    const model = { 'properties': { 'attributes': { 'assay': ['ABC', '123']}} }
+    expect(mergeAssays(model, [])).to.eql(['ABC', '123']);
+  });
+
+  it('if no assaysFromProps but assaysFromDataset, return merge with assaysFromUsers', function() {
+    const model = { 'assay': 'ABC,123' };
+    expect(mergeAssays(model, [])).to.eql(['ABC', '123']);
+  });
+});
 
 describe('mergeAttributes', function() {
   describe('when no args supplied', function() {

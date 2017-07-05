@@ -18,7 +18,7 @@ export default Controller.extend(ActionCreationMixin, {
   }),
 
   assaysToDisplay: computed('model.dataset', 'attributes.[]', function() {
-    const userAssays = getWithDefault(this, 'model.attributes', [])
+    const userAssays = getWithDefault(this, 'attributes', [])
       .filterBy('properties.key', 'assay')
       .mapBy('properties.value');
     return mergeAssays(get(this, 'model.dataset'), userAssays);
