@@ -39,7 +39,7 @@ describe('buildActionsQuery', function () {
   })
 });
 
-describe('!T buildActionsQueryForModel', function () {
+describe('buildActionsQueryForModel', function () {
   it('returns an object with an actionable_id', function() {
     const result = buildActionsQueryForModel('comment', 'modelId1')['where.actionable_id'];
     expect(result).to.eql('modelId1');
