@@ -2,6 +2,13 @@ import Ember from 'ember';
 
 const { get, isEmpty } = Ember;
 
+/**
+ * @desc Merges assays found on the model with assay objects passed in
+ * @public
+ * @param {Ember.DS.Model} model - The model which has assays
+ * @param {Array} assaysFromUsers - User added assays as an array
+ * @return {Array} List of merged assays
+ */
 export function mergeAssays(model, assaysFromUsers = []) {
   const assaysFromDataset = get(model, 'assay');
   const assaysFromProps = get(model, 'properties.attributes.assay');
@@ -10,6 +17,12 @@ export function mergeAssays(model, assaysFromUsers = []) {
   return assaysFromUsers;
 }
 
+/**
+ * @desc Extracts several attribute values into new object
+ * @public
+ * @param {Ember.DS.Model} attribute - The attribute to convert
+ * @return {Object} The attribute converted to a simpler object
+ */
 export function convertActionToCommonObj(attribute) {
   return {
     key: get(attribute, 'properties.key'),
@@ -19,12 +32,25 @@ export function convertActionToCommonObj(attribute) {
   };
 }
 
-export function mergeAttributes(attributeActions = [], attributesFromDataset) {
+/**
+ * @desc merges two lists of differently formatted attributes after conversion
+ * @public
+ * @param {Array} attributeActions - Action objects of type attribute
+ * @param {Array} attributesFromDataset - Attributes from the model
+ * @return {Array} The merged attributes
+ */
+export function mergeAttributes(attributeActions = [], attributesFromDataset = []) {
   const actionAttrs = attributeActions.map(convertActionToCommonObj);
   const datasetAttrs = convertDatasetAttrsToCommonObjList(attributesFromDataset);
   return [...datasetAttrs, ...actionAttrs];
 }
 
+/**
+ * @desc converts attributes from a dataset to a simple common object
+ * @public
+ * @param {Array} attributesFromDataset - Attributes from the model
+ * @return {Array} The converted list of attributes
+ */
 export function convertDatasetAttrsToCommonObjList(attributesFromDataset) {
   if (attributesFromDataset) {
     return Object.keys(attributesFromDataset).reduce((attrObjects, key) => {
