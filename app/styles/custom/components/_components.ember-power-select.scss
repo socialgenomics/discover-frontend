@@ -1,0 +1,20 @@
+.ember-power-select-trigger {
+  width: 100%;
+}
+$ember-power-select-trigger-default-border-radius: $border-radius;
+$ember-power-select-border-color: $border-color;
+.ember-power-select-option {
+  padding: 2em;
+}
+.ember-power-select-placeholder {
+  @extend .px2;
+  @extend .py3;
+  @extend .mr2;
+}
+.ember-power-select-option {
+  @extend .p3;
+}
+
+.ember-power-select-status-icon {
+  right: 10px !important;
+}

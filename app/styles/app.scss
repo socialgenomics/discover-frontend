@@ -37,6 +37,7 @@
   @import "custom/components/components.card";
   @import "custom/components/components.collection-list-item";
   @import "custom/components/components.divider";
+  @import "custom/components/components.ember-power-select";
   @import "custom/components/components.featured-list";
   @import "custom/components/components.flash-messages";
   @import "custom/components/components.follow-button";
@@ -55,7 +56,9 @@
   @import "custom/components/components.user-profile-section";
   @import "custom/components/components.validated-input";
   /* Vendor Components */
+
   @import 'ember-basic-dropdown';
+  @import "ember-power-select";
   @import "ui-library";
 
 /*
