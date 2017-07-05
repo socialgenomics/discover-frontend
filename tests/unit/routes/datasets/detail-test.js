@@ -3,19 +3,6 @@ import { expect } from 'chai';
 import { beforeEach, describe, it } from 'mocha';
 import { setupTest } from 'ember-mocha';
 
-// const attributeActions = [
-//   {
-//     'id': 'a1',
-//     'properties': {
-//       'key': 'ABC',
-//       'value': 'someActionAttr'
-//     },
-//     'userId': {
-//       'id': 'u1'
-//     }
-//   }
-// ];
-
 const attributesFromDataset = {
   assay: ['123', '456'],
   tissue: ['heart']
