@@ -5,7 +5,7 @@ const { merge, Logger, get } = Ember;
 /**
  * @desc Builds an object used to create an action.
  * @public
- * @param {Ember.DS.Model} model - The model which the action willl belong to
+ * @param {Ember.DS.Model} model - The model which the action will belong to
  * @param {Ember.DS.Model} userId - The user model of this action's owner
  * @param {String} type - The type of action e.g. 'favourite'
  * @param {Object?} customProps - Other properties to be added to the action object.
