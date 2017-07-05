@@ -6,8 +6,7 @@ export default Component.extend({
   session: service(),
   store: service(),
 
-  classNames: ['flex', 'self-stretch', 'flex-shrink-none', 'items-center', 'justify-center', 'u-hv-bc-very-light-grey'],
-  classNameBindings: ['hasUnseenNotifications:fc-red:fc-secondary'],
+  classNames: ['flex', 'self-stretch', 'flex-shrink-none', 'items-center', 'justify-center', 'u-hv-bc-very-light-grey', 'fc-secondary'],
 
   hasUnseenNotifications: computed('notifications.@each.status', function() {
     const unseenNotifications = getWithDefault(this, 'notifications', []).filterBy('status', 'unseen');

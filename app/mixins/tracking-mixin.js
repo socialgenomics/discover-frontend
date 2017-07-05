@@ -1,9 +1,12 @@
 import Ember from 'ember';
 import ENV from 'repositive/config/environment';
 
-export default Ember.Mixin.create({
+const { Mixin, inject: { service }, run, getWithDefault, get, Logger } = Ember;
+
+export default Mixin.create({
+  metrics: service(),
+
   location: ENV.locationType,
-  metrics: Ember.inject.service(),
 
   didTransition() {
     this._super(...arguments);
@@ -15,17 +18,17 @@ export default Ember.Mixin.create({
   },
 
   _trackPage() {
-    Ember.run.scheduleOnce('afterRender', this, () => {
+    run.scheduleOnce('afterRender', this, () => {
       const page = document.location.href;
-      const title = Ember.getWithDefault(this, 'currentRouteName', 'unknown');
+      const title = getWithDefault(this, 'currentRouteName', 'unknown');
 
-      Ember.get(this, 'metrics').trackPage({ page, title });
+      get(this, 'metrics').trackPage({ page, title });
     });
   },
 
   _logTracking() {
     const page = document.location.href;
-    const title = Ember.getWithDefault(this, 'routeName', 'unknown');
-    Ember.Logger.info('Tracking:', { page, title });
+    const title = getWithDefault(this, 'routeName', 'unknown');
+    Logger.info('Tracking:', { page, title });
   }
 });

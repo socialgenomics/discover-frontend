@@ -2,14 +2,15 @@ import Ember from 'ember';
 import config from './config/environment';
 import TrackingMixin from 'repositive/mixins/tracking-mixin';
 
-const  { inject: { service }, $, Route } = Ember;
-const Router = Ember.Router.extend(TrackingMixin, {
+const  { Router, inject: { service }, $, Route, get } = Ember;
+
+const router = Router.extend(TrackingMixin, {
   session: service(),
   location: config.locationType,
   rootURL: config.rootURL
 });
 
-Router.map(function() {
+router.map(function() {
   this.route('root', {
     path: '/'
   });
@@ -98,9 +99,9 @@ Router.map(function() {
 
 let pagesWithSideNavigation = ['datasets-search', 'datasources-source', 'collections-collection'];
 let landingPage = ['root'];
-
 Route.reopen({
   session: service(),
+
   activate: function() {
     let cssClass = this.toCssClass();
     if (cssClass !== 'application') {
@@ -111,7 +112,7 @@ Route.reopen({
       } else if (landingPage.indexOf(cssClass) !== -1) {
         // Add the landing page class to home (makes background white)
         // Home-page stays grey
-        if (!this.get('session.session.isAuthenticated')) {
+        if (!get(this, 'session.session.isAuthenticated')) {
           $('body').addClass('landing-page');
         }
       }
@@ -127,4 +128,4 @@ Route.reopen({
   }
 });
 
-export default Router;
+export default router;

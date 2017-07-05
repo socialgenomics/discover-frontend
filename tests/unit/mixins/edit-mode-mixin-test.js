@@ -5,6 +5,7 @@ import Ember from 'ember';
 import EditModeMixin from 'repositive/mixins/edit-mode-mixin';
 import sinon from 'sinon';
 
+const { RSVP, merge } = Ember;
 
 describe('Unit | Mixin | edit mode mixin', function() {
   const { set, get, getOwner, setProperties, getProperties } = Ember;
@@ -53,7 +54,7 @@ describe('Unit | Mixin | edit mode mixin', function() {
     const method = this.title;
 
     beforeEach(function () {
-      setProperties(mixinObjInstance, Ember.merge({ persistChanges: sinon.spy() }, props));
+      setProperties(mixinObjInstance, merge({ persistChanges: sinon.spy() }, props));
     });
 
     it('should set correct properties on model', function () {
@@ -82,7 +83,7 @@ describe('Unit | Mixin | edit mode mixin', function() {
     });
 
     it('should call _onEditSuccess on success', function (done) {
-      const model = { save() { return Ember.RSVP.resolve(); } };
+      const model = { save() { return RSVP.resolve(); } };
 
       mixinObjInstance[method](model);
 
@@ -93,7 +94,7 @@ describe('Unit | Mixin | edit mode mixin', function() {
     });
 
     it('should call _onEditError on fail', function (done) {
-      const model = { save() { return Ember.RSVP.reject(); } };
+      const model = { save() { return RSVP.reject(); } };
 
       mixinObjInstance[method](model);
 
