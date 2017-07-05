@@ -13,17 +13,14 @@ export default Route.extend(ApplicationRouteMixin, {
   session: service(),
   urlGenerator: service(),
 
+  model() {
+    get(this, 'favouritesService').loadFavourites();
+  },
+
   init() {
     this._super(...arguments);
     // do not remove this initialization. It's required for the url generator service to work properly
     get(this, 'urlGenerator').initialize(this.router);
-  },
-  sessionAuthenticated() {
-    this._super(...arguments);
-    get(this, 'favouritesService').loadFavourites();
-  },
-  model() {
-    get(this, 'favouritesService').loadFavourites();
   },
 
   actions: {
@@ -66,6 +63,11 @@ export default Route.extend(ApplicationRouteMixin, {
     transitionToProfile() {
       this.transitionTo('users.profile');
     }
+  },
+
+  sessionAuthenticated() {
+    this._super(...arguments);
+    get(this, 'favouritesService').loadFavourites();
   },
 
   /**

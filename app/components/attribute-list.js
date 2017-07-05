@@ -5,8 +5,6 @@ const { inject: { service }, Component, computed, get, set } = Ember;
 export default Component.extend({
   session: service(),
 
-  singleValueAttrs: ['samples'],
-
   groups: computed('attributes', function() {
     const attributes = get(this, 'attributes') || [];
     const keys = ['assay', 'samples', 'tissue', 'technology', 'pmid'];
@@ -16,6 +14,12 @@ export default Component.extend({
       return keyHash;
     }, {});
   }),
+
+  init() {
+    this._super(...arguments);
+
+    set(this, 'singleValueAttrs', ['samples']);
+  },
 
   actions: {
     closeInput() { set(this, 'openInput', null); },
