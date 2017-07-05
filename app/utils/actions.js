@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-const { merge, Logger } = Ember;
+const { merge, Logger, get } = Ember;
 
 /**
  * @desc Builds an object used to create an action.
@@ -13,7 +13,7 @@ const { merge, Logger } = Ember;
  */
 export function createActionData(model, userId, type, customProps = {}) {
   const dataObj = { type, userId };
-  const modelName = model.constructor.modelName;
+  const modelName = get(model, 'constructor.modelName');
 
   dataObj[modelName + "Id"] = model;
   dataObj['actionable_model'] = modelName;
@@ -55,7 +55,6 @@ export function buildActionsQuery(type, customProps = {}) {
 export function buildActionsQueryForModel(type, modelName, modelId, customProps = {}) {
   const dataObj = buildActionsQuery(type, customProps);
 
-  // dataObj['where.' + modelName + '_id'] = modelId;
   dataObj['where.actionable_id'] = modelId;
   return dataObj;
 }
