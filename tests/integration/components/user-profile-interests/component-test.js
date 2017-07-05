@@ -37,7 +37,7 @@ describe('Integration | Component | user profile interests', function() {
     it('should be visible after clicking the add interest button', function () {
       this.$('.r-btn-secondary').click();
 
-      expect(this.$('.ember-text-field')).to.have.length(1);
+      expect(this.$('.ember-power-select-trigger')).to.have.length(1);
     });
 
     it('should disappear after clicking the cancel button', function () {
