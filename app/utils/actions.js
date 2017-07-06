@@ -58,30 +58,15 @@ export function buildActionsQueryForModel(type, modelId, customProps = {}) {
   return dataObj;
 }
 
-/**
- * @desc fetches actions
- * @public
- * @param {Ember.DS.Store} store - Instance of the data store
- * @param {String} type - The type of action e.g. 'favourite'
- * @param {Object?} customProps - Other properties to be added to the action object.
- * @return {Promise} The promised actions
- */
-export function fetchActions(store, type, customProps = {}) {
-  return store.query('action', buildActionsQuery(type, customProps));
-}
-
-/**
- * @desc fetches actions for a specific model
- * @public
- * @param {Ember.DS.Store} store - Instance of the data store
- * @param {String} type - The type of action e.g. 'favourite'
- * @param {String} modelId - Id of the model being queried
- * @param {Object?} customProps - Other properties to be added to the action object.
- * @return {Promise} The promised actions
- */
-export function fetchActionsForModel(store, type, modelId, customProps = {}) {
-  return store.query('action', buildActionsQueryForModel(type, modelId, customProps));
-}
+//TODO this. to remove two buildActions... funcs
+// export function buildActionsQ(params) {
+//   const defaultObj = {
+//     'order[0][0]': 'updated_at',
+//     'order[0][1]': 'DESC',
+//     limit: 100
+//   };
+//   // const dataObj = Object.assign )
+// }
 
 /**
  * @desc creates a view action for the provided model to increment view counter

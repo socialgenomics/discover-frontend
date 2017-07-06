@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import ResetScrollMixin from 'repositive/mixins/reset-scroll';
 import LoadDetailRouteMixin from 'repositive/mixins/load-detail-route';
-import { fetchActionsForModel, incrementViewCounter } from 'repositive/utils/actions';
+import { buildActionsQueryForModel, incrementViewCounter } from 'repositive/utils/actions';
 import { mergeAttributes } from 'repositive/utils/attributes';
 
 const { inject: { service }, Logger, Route, RSVP, get, getWithDefault, isEmpty, setProperties } = Ember;
@@ -15,7 +15,7 @@ export default Route.extend(ResetScrollMixin, LoadDetailRouteMixin, {
       .then(data => {
         return RSVP.hash({
           comments: data.comments,
-          attributes: fetchActionsForModel(this.store, 'attribute', params.id),
+          attributes: this.store.query('action', buildActionsQueryForModel('attribute', params.id)),
           dataset: data.model,
           stats: get(this, 'session.isAuthenticated') === false ? this._getStats() : null,
           tags: data.tags
