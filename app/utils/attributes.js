@@ -18,12 +18,12 @@ export function mergeAssays(model, assaysFromUsers = []) {
 }
 
 /**
- * @desc Extracts several attribute values into new object
+ * @desc Extracts several attribute values into a new object
  * @public
  * @param {Ember.DS.Model} attribute - The attribute to convert
  * @return {Object} The attribute converted to a simpler object
  */
-export function convertActionToCommonObj(attribute) {
+export function convertAttrActionToCommonObj(attribute) {
   return {
     key: get(attribute, 'properties.key'),
     value: get(attribute, 'properties.value'),
@@ -40,7 +40,7 @@ export function convertActionToCommonObj(attribute) {
  * @return {Array} The merged attributes
  */
 export function mergeAttributes(attributeActions = [], attributesFromDataset = []) {
-  const actionAttrs = attributeActions.map(convertActionToCommonObj);
+  const actionAttrs = attributeActions.map(convertAttrActionToCommonObj);
   const datasetAttrs = convertDatasetAttrsToCommonObjList(attributesFromDataset);
   return [...datasetAttrs, ...actionAttrs];
 }

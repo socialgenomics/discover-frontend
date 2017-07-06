@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import { describe, it } from 'mocha';
-import { mergeAssays, mergeAttributes, convertActionToCommonObj, convertDatasetAttrsToCommonObjList } from 'repositive/utils/attributes';
+import { mergeAssays, mergeAttributes, convertAttrActionToCommonObj, convertDatasetAttrsToCommonObjList } from 'repositive/utils/attributes';
 
 const attributeActions = [
   {
@@ -72,9 +72,9 @@ describe('mergeAttributes', function() {
   });
 });
 
-describe('convertActionToCommonObj', function() {
+describe('convertAttrActionToCommonObj', function() {
   it('should return an object with correct values', function() {
-    const result = convertActionToCommonObj(attributeActions[0]);
+    const result = convertAttrActionToCommonObj(attributeActions[0]);
     expect(result.key).to.eql('ABC');
     expect(result.value).to.eql('someActionAttr');
     expect(result.userId).to.eql('u1');

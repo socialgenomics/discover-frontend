@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import { createActionData } from 'repositive/utils/actions';
 import { getSubscriptions } from 'repositive/utils/subscriptions';
-import { convertActionToCommonObj } from 'repositive/utils/attributes';
+import { convertAttrActionToCommonObj } from 'repositive/utils/attributes';
 import FlashMessageMixin from 'repositive/mixins/flash-message-mixin';
 
 const { Mixin, get, Logger, set, getWithDefault } = Ember;
@@ -14,7 +14,7 @@ export default Mixin.create(FlashMessageMixin, {
         .createRecord('action', createActionData(model, user, 'attribute', { properties: { key, value } }))
         .save()
         .then(savedAttribute => {
-          const attributes = [...getWithDefault(this, 'attributes', []), ...[convertActionToCommonObj(savedAttribute)]]
+          const attributes = [...getWithDefault(this, 'attributes', []), ...[convertAttrActionToCommonObj(savedAttribute)]]
           set(this, 'attributes', attributes);
         })
         .then(() => this._reloadSubscriptions(store, model, user))
