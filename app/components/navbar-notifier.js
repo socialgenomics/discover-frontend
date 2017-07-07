@@ -44,7 +44,9 @@ export default Component.extend({
 
   _getNotifications(userId) {
     const store = get(this, 'store');
+
     set(this, 'isLoading', true);
+
     return store.query('notification', {
       'where.user_id': userId,
       'where.properties.target.app': true,
@@ -55,6 +57,7 @@ export default Component.extend({
       .then(notifications => {
         return RSVP.all(notifications.map(notification => {
           const subscription = get(notification, 'subscription');
+          debugger;
           store.push(store.normalize('subscription', subscription));
           if (get(notification, 'properties.type') === 'action') {
             return this._getRelatedData(notification, subscription);
@@ -91,9 +94,10 @@ export default Component.extend({
   },
 
   _getActionAndDataset(notification, subscription, store) {
+    const modelIdKey = get(subscription, 'subscribable_model') + 'Id';
     return RSVP.hash({
       action: store.findRecord('action', get(notification, 'properties.action_id')),
-      datasetOrRequest: store.findRecord(get(subscription, 'subscribable_model'), get(subscription, 'subscribable_id'))
+      datasetOrRequest: store.findRecord(get(subscription, 'subscribable_model'), get(subscription, modelIdKey))
     });
   },
 
@@ -114,6 +118,7 @@ export default Component.extend({
   },
 
   _setModelOnNotification(notification, model) {
+    debugger;
     const modelKey = `subscriptionId.subscribableId.${get(notification, 'subscriptionId.subscribableModel')}`;
     set(notification, modelKey, model);
     return notification;
