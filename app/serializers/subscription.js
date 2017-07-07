@@ -21,7 +21,7 @@ export default JSONSerializer.extend(DS.EmbeddedRecordsMixin, {
 
   normalize(typeClass, hash) {
     const fields = get(typeClass, 'fields');
-
+    debugger;
     fields.forEach(field => {
       const payloadField = underscore(field);
       if (field === payloadField) { return; }
