@@ -3,16 +3,15 @@ import Ember from 'ember';
 const { Component, get } = Ember;
 
 export default Component.extend({
-  tagName: 'li',
-  classNames: ['c-help-link'],
+  classNames: ['c-vertical-menu-link-item'],
 
   actions: {
-    trackHelp(helpLink, helpQuery) {
+    trackClick(link, query, category) {
       get(this, 'metrics').trackEvent({
-        category: 'help_doc_link',
+        category: category,
         action: 'viewed_doc',
-        label: helpLink,
-        value: helpQuery
+        label: link,
+        value: query
       });
     }
   }

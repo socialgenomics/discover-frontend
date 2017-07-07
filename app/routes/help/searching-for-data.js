@@ -3,7 +3,7 @@ import Ember from 'ember';
 const { Route, set } = Ember;
 
 export default Route.extend({
-  controllerName: 'help',
+  templateName: 'help/template',
 
   model(params) {
     return 'help/searching-for-data/' + params.query;
