@@ -1,5 +1,5 @@
-.c-help-link {
+.c-vertical-menu-link-item {
   .active {
-    color: $primary-opacity-black;
+    @extend .fw-bold;
   }
 }

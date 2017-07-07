@@ -1,0 +1,23 @@
+{{#each navigationData as |navigationObject|}}
+
+  {{vertical-menu/heading
+      title=(readonly navigationObject.title)
+      openGroup=(readonly openGroup)
+      handleClick=(action 'setOpenGroup')}}
+
+  {{#if (eq openGroup navigationObject.title)}}
+
+    <div class="border-bottom">
+      {{#each navigationObject.links as |link|}}
+        {{vertical-menu/link-item
+            link=(readonly link.target)
+            query=(readonly link.query)
+            text=(readonly link.text)
+            trackingCategory=(readonly trackingCategory)
+          }}
+      {{/each}}
+    </div>
+
+  {{/if}}
+
+{{/each}}
