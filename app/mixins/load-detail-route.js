@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import ENV from 'repositive/config/environment';
 import FlashMessageMixin from 'repositive/mixins/flash-message-mixin';
-import { buildActionsQueryForModel } from 'repositive/utils/actions';
+import { buildActionsQuery } from 'repositive/utils/actions';
 import { getSubscriptions } from 'repositive/utils/subscriptions';
 
 const { Mixin, get, RSVP, inject: { service }, setProperties, set, Logger } = Ember;
@@ -17,8 +17,8 @@ export default Mixin.create(FlashMessageMixin, {
   _getModelData(params, modelType) {
     const modelId = params.id;
     return RSVP.hash({
-      comments: this.store.query('action', buildActionsQueryForModel('comment', modelId)),
-      tags: this.store.query('action', buildActionsQueryForModel('tag', modelId)),
+      comments: this.store.query('action', buildActionsQuery({type: 'comment', modelId})),
+      tags: this.store.query('action', buildActionsQuery({type: 'tag', modelId})),
       model: this.store.findRecord(modelType, modelId),
       subscribable: this.store.findRecord('subscribable', modelId)
     })

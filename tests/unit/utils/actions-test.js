@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import { describe, it } from 'mocha';
-import { buildActionsQuery, buildActionsQueryForModel, createActionData } from 'repositive/utils/actions';
+import { buildActionsQuery, createActionData } from 'repositive/utils/actions';
 
 describe('createActionData', function () {
   const model = { constructor: { modelName: 'dataset' } };
@@ -29,19 +29,16 @@ describe('buildActionsQuery', function () {
     limit: 100
   }
   it('returns an object with type, ordering, and limit', function() {
-    expect(buildActionsQuery('comment')).to.eql(defaultObj);
+    expect(buildActionsQuery({type: 'comment'})).to.eql(defaultObj);
   });
 
-  it('merges prefixed customProps with the returned object', function() {
-    const customObj = { value: 'ABC' };
-    expect(buildActionsQuery('comment', customObj)['where.value'])
+  it('prefixes and merges all params', function() {
+    expect(buildActionsQuery({type: 'comment', value: 'ABC'})['where.value'])
       .to.eql('ABC');
   })
-});
 
-describe('buildActionsQueryForModel', function () {
-  it('returns an object with an actionable_id', function() {
-    const result = buildActionsQueryForModel('comment', 'modelId1')['where.actionable_id'];
-    expect(result).to.eql('modelId1');
+  it('when a modelId is passed in, its key is actionable_id', function() {
+    const result = buildActionsQuery({type: 'comment', modelId: 'A1'})['where.actionable_id'];
+    expect(result).to.eql('A1');
   });
 });

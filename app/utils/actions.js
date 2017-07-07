@@ -21,52 +21,25 @@ export function createActionData(model, userId, type, customProps = {}) {
 }
 
 /**
- * @desc build a query object
+ * @desc builds an object to query for actions
  * @public
- * @param {String} type - The type of action e.g. 'favourite'
- * @param {Object?} customProps - Other properties to be added to the action object.
+ * @param {Object} params - params must include type of action e.g. 'favourite'
  * @return {Object} Constructed query object
  */
-export function buildActionsQuery(type, customProps = {}) {
-  const dataObj = {
-    'where.type': type,
+export function buildActionsQuery(params) {
+  const defaultObj = {
     'order[0][0]': 'updated_at',
     'order[0][1]': 'DESC',
     limit: 100
   };
-
-  //Prefix all customProps
-  Object.keys(customProps).map(key => {
-    dataObj['where.' + key] = customProps[key]
-  });
-
-  return dataObj;
+  //Prefix params and merge with default object
+  return Object.keys(params)
+    .reduce((dataObj, key) => {
+      const prefixedKey = key === 'modelId' ? 'where.actionable_id' : 'where.' + key;
+      dataObj[prefixedKey] = params[key];
+      return dataObj;
+    }, defaultObj);
 }
-
-/**
- * @desc builds a query object for actions of specific model
- * @public
- * @param {String} type - The type of action e.g. 'favourite'
- * @param {String} modelId - Id of the model being queried
- * @param {Object?} customProps - Other properties to be added to the action object.
- * @return {Object} Constructed query object
- */
-export function buildActionsQueryForModel(type, modelId, customProps = {}) {
-  const dataObj = buildActionsQuery(type, customProps);
-
-  dataObj['where.actionable_id'] = modelId;
-  return dataObj;
-}
-
-//TODO this. to remove two buildActions... funcs
-// export function buildActionsQ(params) {
-//   const defaultObj = {
-//     'order[0][0]': 'updated_at',
-//     'order[0][1]': 'DESC',
-//     limit: 100
-//   };
-//   // const dataObj = Object.assign )
-// }
 
 /**
  * @desc creates a view action for the provided model to increment view counter
