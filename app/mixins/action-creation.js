@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import { createActionData } from 'repositive/utils/actions';
-import { getSubscriptions } from 'repositive/utils/subscriptions';
+// import { getSubscriptions } from 'repositive/utils/subscriptions';
 import { convertAttrActionToCommonObj } from 'repositive/utils/attributes';
 import FlashMessageMixin from 'repositive/mixins/flash-message-mixin';
 
@@ -17,7 +17,7 @@ export default Mixin.create(FlashMessageMixin, {
           const attributes = [...getWithDefault(this, 'attributes', []), ...[convertAttrActionToCommonObj(savedAttribute)]]
           set(this, 'attributes', attributes);
         })
-        .then(() => this._reloadSubscriptions(store, model, user))
+        // .then(() => this._reloadSubscriptions(store, model, user))
         .catch(Logger.error);
     },
 
@@ -28,7 +28,7 @@ export default Mixin.create(FlashMessageMixin, {
         .save()
         .then(savedComment => {
           get(this, 'comments').insertAt(0, savedComment);
-          this._reloadSubscriptions(store, model, user);
+          // this._reloadSubscriptions(store, model, user);
         })
         .catch(Logger.error);
     },
@@ -64,22 +64,22 @@ export default Mixin.create(FlashMessageMixin, {
 
   _deleteAttribute(action) {
     set(this, 'attributes', get(this, 'attributes').rejectBy('actionId', action.id));
-  },
-  /**
-   * @desc re-fetch subscriptions to update the follow-button
-   * @param {DS.Store} store instance of the store
-   * @param {DS.Model} model the model whose subscriptions are to be reloaded
-   * @param {DS.Model} userId current user
-   * @private
-   */
-  _reloadSubscriptions(store, model, user) {
-    const existingSubscription = store.peekAll('subscription').filter(subscription => {
-      const userIdMatches = get(subscription, 'userId.id') === get(user, 'id');
-      const subscribableIdMatches = get(subscription, 'subscribableId.id') === get(model, 'id');
-      return userIdMatches && subscribableIdMatches;
-    });
-    if (existingSubscription.length === 0) {
-      getSubscriptions(store, get(model, 'id'), get(user, 'id'));
-    }
   }
+  // /**
+  //  * @desc re-fetch subscriptions to update the follow-button
+  //  * @param {DS.Store} store instance of the store
+  //  * @param {DS.Model} model the model whose subscriptions are to be reloaded
+  //  * @param {DS.Model} userId current user
+  //  * @private
+  //  */
+  // _reloadSubscriptions(store, model, user) {
+  //   const existingSubscription = store.peekAll('subscription').filter(subscription => {
+  //     const userIdMatches = get(subscription, 'userId.id') === get(user, 'id');
+  //     const subscribableIdMatches = get(subscription, 'subscribableId.id') === get(model, 'id');
+  //     return userIdMatches && subscribableIdMatches;
+  //   });
+  //   if (existingSubscription.length === 0) {
+  //     getSubscription(store, get(model, 'id'), get(user, 'id'));
+  //   }
+  // }
 });
