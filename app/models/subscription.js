@@ -10,5 +10,6 @@ export default Model.extend({
   userId: belongsTo('user'),
 
   notifcations: hasMany('notification'),
-  subscribableId: belongsTo('subscribable')
+  datasetId: belongsTo('dataset'),
+  requestId: belongsTo('request')
 });

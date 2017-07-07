@@ -10,6 +10,6 @@ export default Model.extend({
   updatedAt: attr('isodate'),
 
   actions: hasMany('action'),
-  subscribableId: belongsTo('subscribable', { inverse: 'request' }),
+  subscriptions: hasMany('subscription'),
   userId: belongsTo('user')
 });

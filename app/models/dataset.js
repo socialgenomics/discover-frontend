@@ -20,9 +20,9 @@ export default Model.extend({
 
   actions: hasMany('action'),
   collections: hasMany('collection', { inverse: 'datasets' }),
+  subscriptions: hasMany('subscription'),
   datasourceId: belongsTo('collection', { inverse: 'owns' }),
   highlights: belongsTo('highlight'),
-  subscribableId: belongsTo('subscribable', { inverse: 'dataset' }),
   userId: belongsTo('user'),
 
   accession: computed('externalId', function() {
