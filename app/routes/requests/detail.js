@@ -14,6 +14,7 @@ export default Route.extend(AuthenticatedRouteMixin, LoadDetailRouteMixin, {
       .then(data => {
         return RSVP.hash({
           comments: data.comments,
+          subscription: data.subscription,
           tags: data.tags,
           request: data.model
         });
