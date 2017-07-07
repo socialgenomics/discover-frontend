@@ -1,6 +1,7 @@
 import Ember from 'ember'
 
 const { get, Logger } = Ember;
+
 /**
  * @desc fetches subscriptions for a given model and userId
  * @param {DS.Store} store instance of the store
