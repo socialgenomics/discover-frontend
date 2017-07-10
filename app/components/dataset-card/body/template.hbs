@@ -14,8 +14,10 @@
 
 <div class="c-card-description u-markdown-formatting">
   {{#if dataset.highlights.description}}
-    {{{markdown-to-html markdown=dataset.highlights.description extensions='targetBlankLinks sanitize'}}}
+    {{log dataset.highlights.description}}
+    {{{markdown-to-html markdown=dataset.highlights.description extensions='targetBlankLinks sanitizeSearchResults'}}}
   {{else}}
-    {{markdown-to-html markdown=dataset.description extensions='targetBlankLinks sanitize'}}
+    {{log dataset.description}}
+    {{markdown-to-html markdown=dataset.description extensions='targetBlankLinks sanitizeSearchResults'}}
   {{/if}}
 </div>
