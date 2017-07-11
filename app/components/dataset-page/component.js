@@ -65,7 +65,7 @@ export default Component.extend(
       },
 
       addComment(text) {
-        get(this, 'addComment')(
+        return get(this, 'addComment')(
           get(this, 'model'),
           get(this, 'userId'),
           text
@@ -77,7 +77,7 @@ export default Component.extend(
           get(this, 'model'),
           get(this, 'userId'),
           text
-        );
+        )
       },
 
       addAttribute(key, value) {
@@ -86,7 +86,7 @@ export default Component.extend(
           get(this, 'userId'),
           key,
           value
-        );
+        ).then(this._updateSubscription.bind(this))
       },
 
       deleteAction(action) {
