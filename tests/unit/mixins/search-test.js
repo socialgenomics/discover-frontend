@@ -254,6 +254,7 @@ describe('Unit | Mixin | search', function() {
         return bucket;
       }
 
+      // TODO: check if we need this
       set(mixinObjInstance, 'getColour', sinon.stub().returnsArg(0));
 
       expect(mixinObjInstance[method](aggs)).to.eql(
