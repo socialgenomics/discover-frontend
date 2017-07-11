@@ -5,6 +5,7 @@ import { buildValidations } from 'ember-cp-validations';
 import urlFormatValidator from 'repositive/validations/urlFormatValidator';
 import presenceValidator from 'repositive/validations/presenceValidator';
 import { createActionData } from 'repositive/utils/actions';
+import { getSubscription } from 'repositive/utils/subscriptions';
 
 const { Component, computed, inject: { service }, get, Logger, set } = Ember;
 const Validations = buildValidations({
@@ -64,11 +65,11 @@ export default Component.extend(
       },
 
       addComment(text) {
-        return get(this, 'addComment')(
+        get(this, 'addComment')(
           get(this, 'model'),
           get(this, 'userId'),
           text
-        );
+        ).then(this._updateSubscription.bind(this))
       },
 
       addTag(text) {
@@ -103,6 +104,15 @@ export default Component.extend(
       },
 
       setActiveTab(tab) { set(this, 'activeTab', tab); }
+    },
+
+    _updateSubscription() {
+      const existingSubscription = get(this, 'subscription');
+
+      if (existingSubscription) { return existingSubscription.reload(); }
+
+      getSubscription(get(this, 'store'), get(this, 'model.id'), get(this, 'userId.id'))
+        .then(subscription => set(this, 'subscription', subscription));
     }
   }
 );
