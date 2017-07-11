@@ -53,13 +53,18 @@ export function mergeAttributes(attributeActions = [], attributesFromDataset = [
  */
 export function convertDatasetAttrsToCommonObjList(attributesFromDataset) {
   if (attributesFromDataset) {
-    return Object.keys(attributesFromDataset).reduce((attrObjects, key) => {
-      const keyValue = attributesFromDataset[key];
-      if (isEmpty(keyValue) || 'pmid' in keyValue) { return attrObjects; }
-      return [
-        ...attrObjects,
-        ...keyValue.map(value => { return { key, value }; })
-      ];
-    }, []);
+    return Object.keys(attributesFromDataset)
+      .reduce((attrObjects, key) => {
+        //Convert to array if string
+        const keyValue = attributesFromDataset[key] instanceof Object ?
+          attributesFromDataset[key] : [attributesFromDataset[key]];
+
+        if (isEmpty(keyValue) || 'pmid' in keyValue) { return attrObjects; }
+
+        return [
+          ...attrObjects,
+          ...keyValue.map(value => { return { key, value }; })
+        ];
+      }, []);
   } else { return []; }
 }

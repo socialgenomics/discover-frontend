@@ -58,7 +58,6 @@ export default Component.extend({
         return RSVP.all(notifications.map(notification => {
           const subscription = store.normalize('subscription', get(notification, 'subscription'));
           store.push(subscription);
-          // set(notification, 'subscriptionId', subscription);
           if (get(notification, 'properties.type') === 'action') {
             return this._getRelatedData(notification, subscription);
           } else {
