@@ -90,7 +90,6 @@ export default Component.extend({
         });
       })
       .then(() => notification)
-      // .then(data => this._setModelOnNotification(notification, get(data, 'datasetOrRequest')))
       .catch(Logger.error);
   },
 
@@ -119,13 +118,4 @@ export default Component.extend({
         return notification;
       });
   }
-
-  // _setModelOnNotification(notification, model) {
-  //   debugger;
-  //   // const modelKey = `subscriptionId.subscribableId.${get(notification, 'subscriptionId.subscribableModel')}`;
-  //   const modelName = get(notification, 'subscriptionId.subscribableModel');
-  //   const modelKey = `subscriptionId.${modelName}Id`;
-  //   set(notification, modelKey, model);
-  //   return notification;
-  // }
 });

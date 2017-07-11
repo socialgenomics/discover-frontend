@@ -9,13 +9,17 @@ export default Component.extend({
   isAction: computed.equal('notification.properties.type', 'action'),
 
   click() { this.touchEnd(); },
+
   touchEnd() {
     const notification = get(this, 'notification');
     const subscribableModel = get(notification, 'subscriptionId.subscribableModel');
-    const subscribableId = get(notification, 'subscriptionId.subscribableId.id');
+    const subscribableId = get(notification, `subscriptionId.${subscribableModel}Id.id`);
+
     get(this, 'transitionToSubscribable')(subscribableModel, subscribableId);
     set(notification, 'status', 'read');
     get(this, 'close')(get(this, 'dropdown'));
-    notification.save().then(() => { get(this, 'reloadNotifications')(); });
+    notification
+      .save()
+      .then(() => { get(this, 'reloadNotifications')(); });
   }
 });
