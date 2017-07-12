@@ -37,13 +37,6 @@ export default Controller.extend({
       .reject(attr =>  attr.key === 'pmid' && isEmpty(attr.value));
   }),
 
-  assaysToDisplay: computed('dataset', 'dataset.actionableId.actions.[]', function() {
-    const userAssays = getWithDefault(this, 'dataset.actionableId.actions', [])
-      .filterBy('properties.key', 'assay')
-      .mapBy('properties.value');
-    return mergeAssays(get(this, 'dataset'), userAssays);
-  }),
-
   contributors: computed('dataset.actionableId.actions.[]', function() {
     const contributorIds = this.store.peekAll('action')
       .filterBy('type', 'attribute')

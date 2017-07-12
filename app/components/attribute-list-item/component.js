@@ -3,8 +3,8 @@ import { buildValidations } from 'ember-cp-validations';
 import presenceValidator from 'repositive/validations/presenceValidator';
 import CheckEditPermissionsMixin from 'repositive/mixins/check-edit-permissions-mixin';
 import EditModeMixin from 'repositive/mixins/edit-mode-mixin';
-import { isUniqueString } from '../utils/arrays';
-import { openLinkInNewTab } from '../utils/links';
+import { isUniqueString } from 'repositive/utils/arrays';
+import { openLinkInNewTab } from 'repositive/utils/links';
 
 const { Component, computed, get, set, inject: { service }, Logger } = Ember;
 
