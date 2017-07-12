@@ -18,9 +18,9 @@ export default JSONSerializer.extend(DS.EmbeddedRecordsMixin, {
 
   keyForRelationship: function (key, kind, method) {
     if (method === 'serialize') {
-      if (key === 'actionableId' || key === 'subscribableId') {
-        return 'id';
-      }
+      // if (key === 'actionableId' || key === 'subscribableId') {
+      //   return 'id';
+      // }
       return normalizeKeyName(key);
     } else {
       return Ember.String.underscore(key).toLowerCase();
