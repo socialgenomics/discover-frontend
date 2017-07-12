@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import { mergeAssays } from '../../routes/datasets/detail';
 
 const { Controller, computed, inject: { service }, get, getWithDefault, isEmpty } = Ember;
 
