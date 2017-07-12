@@ -7,12 +7,11 @@ export default Component.extend({
   classNames: ['p3', 'pr4', 'flex', 'items-center', 'border-bottom', 'u-hv-bc-white', 'cursor-pointer', 'relative'],
 
   isAction: computed.equal('notification.properties.type', 'action'),
-  model: computed('notification.subscriptionId.{datasetId,requestId}', function() {
-    const datasetId = get(this, 'notification.subscriptionId.datasetId');
-    const requestId = get(this, 'notification.subscriptionId.requestId');
-    if (datasetId.content) { return datasetId; }
-    if (requestId.content) { return requestId; }
-    return false;
+  model: computed('notification.subscriptionId', function() {
+    const subscription = get(this, 'notification.subscriptionId');
+    const subscribableModel = get(subscription, 'subscribableModel');
+
+    return get(subscription, subscribableModel + 'Id');
   }),
 
   click() { this.touchEnd(); },
