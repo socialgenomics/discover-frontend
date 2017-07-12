@@ -112,7 +112,8 @@ export default Route.extend({
       .filterBy('actionable_model', modelType)
       .mapBy(keyName)
       .mapBy('id')
-      .uniq();
+      .uniq()
+      .compact();
   },
 
   _getFavouritedData(userIdOfProfile) {
