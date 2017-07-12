@@ -1,6 +1,5 @@
 import Ember from 'ember';
 import QP from 'npm:@repositive/query-parser';
-import colours from 'repositive/utils/colours';
 import ENV from 'repositive/config/environment';
 
 const { Mixin, inject: { service }, get, set, setProperties, computed } = Ember;
@@ -18,10 +17,6 @@ export default Mixin.create({
 
   QP: computed(function () {
     return QP;
-  }),
-
-  getColour: computed(function () {
-    return colours.getColour;
   }),
 
   actions: {
@@ -115,9 +110,6 @@ export default Mixin.create({
   _normalizeFilters(aggs) {
     return Object.keys(aggs).reduce((filters, filter) => {
       const buckets = aggs[filter].buckets;
-      buckets.map(bucket => {
-        set(bucket, 'colour', get(this, 'getColour')(bucket.key));
-      });
       return [...filters, ...[{
         name: filter,
         displayName: filter.capitalize(),
