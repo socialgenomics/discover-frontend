@@ -3,8 +3,8 @@ import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-rout
 import ENV from 'repositive/config/environment';
 import ResetScrollMixin from 'repositive/mixins/reset-scroll';
 import ActionableMixin from 'repositive/mixins/actionable';
-import SearchRouteMixin from '../../mixins/search';
-import IncrementCollectionViewCounterMixin from '../../mixins/increment-collection-view-counter-mixin';
+import SearchRouteMixin from 'repositive/mixins/search';
+import IncrementCollectionViewCounterMixin from 'repositive/mixins/increment-collection-view-counter-mixin';
 
 const { get, Route, RSVP, inject: { service }, Logger, set, assign } = Ember;
 

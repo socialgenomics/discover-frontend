@@ -1,10 +1,10 @@
 import Ember from 'ember';
 import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
-import { model } from '../datasources/source';
+import { model } from 'repositive/routes/datasources/source';
 import ResetScrollMixin from 'repositive/mixins/reset-scroll';
 import ActionableMixin from 'repositive/mixins/actionable';
-import SearchRouteMixin from '../../mixins/search';
-import IncrementCollectionViewCounterMixin from '../../mixins/increment-collection-view-counter-mixin';
+import SearchRouteMixin from 'repositive/mixins/search';
+import IncrementCollectionViewCounterMixin from 'repositive/mixins/increment-collection-view-counter-mixin';
 
 const { Route , inject: { service } } = Ember;
 
