@@ -5,7 +5,7 @@ import { setupComponentTest } from 'ember-mocha';
 import hbs from 'htmlbars-inline-precompile';
 import sinon from 'sinon';
 
-describe('Integration | Component | notification list item !T', function() {
+describe('Integration | Component | notification list item', function() {
   setupComponentTest('notification-list-item', {
     integration: true
   });
