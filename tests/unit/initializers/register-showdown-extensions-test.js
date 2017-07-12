@@ -32,4 +32,33 @@ describe('RegisterShowdownExtensionsInitializer', function() {
       expect(converter.makeHtml(dataset.markdown)).to.equal(`<p>${dataset.html}</p>`);
     });
   });
+
+  describe('sanitizeSearchResults', function () {
+    let converter;
+
+    beforeEach(function () {
+      converter = new showdown.Converter({ extensions: ['sanitizeSearchResults'] });
+    });
+
+    it('should allow em tags with class attr only', function () {
+      const markup = '<em class="foo-bar" title="foo-bar">Foo</em>';
+      const sanitizedMarkup = '<p><em class="foo-bar">Foo</em></p>';
+
+      expect(converter.makeHtml(markup)).to.equal(sanitizedMarkup);
+    });
+
+    it('should correctly replace class for em highlight', function () {
+      const markup = '<em class="highlight">Foo</em>';
+      const sanitizedMarkup = '<p><em class="fw-bold">Foo</em></p>';
+
+      expect(converter.makeHtml(markup)).to.equal(sanitizedMarkup);
+    });
+
+    it('should not replace class for em if it\'s different highlight', function () {
+      const markup = '<em class="foo">Foo</em>';
+      const sanitizedMarkup = '<p><em class="foo">Foo</em></p>';
+
+      expect(converter.makeHtml(markup)).to.equal(sanitizedMarkup);
+    });
+  });
 });
