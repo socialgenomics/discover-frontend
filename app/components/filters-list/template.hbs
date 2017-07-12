@@ -1,23 +1,25 @@
 {{#unless isEmptyFilters}}
   {{#each filters as |filter|}}
-    <div class="section">
+    <div class="section mb4">
       {{#if (eq filter.displayName "Datasource")}}
-        <h4 class="mb2 pt3 fc-tertiary fs0">Data Source</h4>
+        <h4 class="mb1 fc-primary fs1 fw-bold">Data Source</h4>
       {{else}}
-        <h4 class="mb2 pt3 fc-tertiary fs0">{{ filter.displayName }}</h4>
+        <h4 class="mb1 fc-primary fs1 fw-bold">{{ filter.displayName }}</h4>
       {{/if}}
       {{#if isLoading}}
         <p class="loading-text">Loading new filters...</p>
       {{else}}
-        {{#each filter.buckets as |bucket|}}
-          {{filter-list-item
-            addFilter=addFilter
-            removeFilter=removeFilter
-            activeFilters=activeFilters
-            aggName=filter.name
-            bucket=bucket
-          }}
-        {{/each}}
+        <div class="pl3">
+          {{#each filter.buckets as |bucket|}}
+            {{filter-list-item
+              addFilter=addFilter
+              removeFilter=removeFilter
+              activeFilters=activeFilters
+              aggName=filter.name
+              bucket=bucket
+            }}
+          {{/each}}
+        </div>
       {{/if}}
     </div>
   {{/each}}
