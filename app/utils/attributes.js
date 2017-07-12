@@ -59,7 +59,7 @@ export function convertDatasetAttrsToCommonObjList(attributesFromDataset) {
         const keyValue = attributesFromDataset[key] instanceof Object ?
           attributesFromDataset[key] : [attributesFromDataset[key]];
 
-        if (isEmpty(keyValue) || 'pmid' in keyValue) { return attrObjects; }
+        if (isEmpty(keyValue) || isEmpty(keyValue[0]) || 'pmid' in keyValue) { return attrObjects; }
 
         return [
           ...attrObjects,

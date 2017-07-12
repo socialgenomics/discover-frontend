@@ -65,18 +65,6 @@ describe('Unit | Route | datasets/detail', function() {
         expect(result[0].key).to.eql('assay');
         expect(result[0].value).to.eql('123');
       });
-
-      it('should reject all null values in pmid array', function() {
-        const route = this.subject();
-        const dataset = createDatasetMock({ pmid: [null, null, 123]});
-        model.set('dataset', dataset);
-        route.setupController(controller, model);
-
-        const result = controller.get('attributes');
-        expect(result.length).to.eql(1);
-        expect(result[0].key).to.eql('pmid');
-        expect(result[0].value).to.eql(123);
-      });
     });
   });
 });

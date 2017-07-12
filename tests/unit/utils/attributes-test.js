@@ -9,9 +9,7 @@ const attributeActions = [
       'key': 'ABC',
       'value': 'someActionAttr'
     },
-    'userId': {
-      'id': 'u1'
-    }
+    'userId': { 'id': 'u1' }
   }
 ];
 const attributesFromDataset = {
@@ -96,17 +94,13 @@ describe('convertDatasetAttrsToCommonObjList', function() {
   });
 
   it('should reject all null pmids', function() {
-    const attrsFromDataset = {
-      'pmid': null
-    }
+    const attrsFromDataset = { 'pmid': null };
     const result = convertDatasetAttrsToCommonObjList(attrsFromDataset);
     expect(result).to.eql([]);
   });
 
   it('should reject malformed pmids', function() {
-    const attrsFromDataset = {
-      'pmid': { 'pmid': "1231" }
-    }
+    const attrsFromDataset = { 'pmid': { 'pmid': "1231" } };
     const result = convertDatasetAttrsToCommonObjList(attrsFromDataset);
     expect(result).to.eql([]);
   });
