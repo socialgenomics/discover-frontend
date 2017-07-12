@@ -254,8 +254,6 @@ describe('Unit | Mixin | search', function() {
         return bucket;
       }
 
-      set(mixinObjInstance, 'getColour', sinon.stub().returnsArg(0));
-
       expect(mixinObjInstance[method](aggs)).to.eql(
         Object.keys(aggs).map(key => {
           return { name: key, displayName: key.capitalize(), buckets: aggs[key].buckets.map(extendBuckets) };

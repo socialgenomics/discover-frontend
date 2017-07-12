@@ -1,8 +1,7 @@
 import Ember from 'ember';
-import { mergeAssays } from 'repositive/utils/attributes';
 import ActionCreationMixin from 'repositive/mixins/action-creation';
 
-const { Controller, computed, inject: { service }, get, getWithDefault } = Ember;
+const { Controller, computed, inject: { service }, get } = Ember;
 
 export default Controller.extend(ActionCreationMixin, {
   session: service(),
@@ -15,13 +14,6 @@ export default Controller.extend(ActionCreationMixin, {
 
   datasetsNumber: computed('model.stats.datasets', function() {
     return get(this, 'model.stats.datasets').toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-  }),
-
-  assaysToDisplay: computed('model.dataset', 'attributes.[]', function() {
-    const userAssays = getWithDefault(this, 'attributes', [])
-      .filterBy('properties.key', 'assay')
-      .mapBy('properties.value');
-    return mergeAssays(get(this, 'model.dataset'), userAssays);
   }),
 
   contributors: computed('attributes.[]', function() {
