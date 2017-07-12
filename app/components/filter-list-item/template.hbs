@@ -1,0 +1,7 @@
+<div class="relative flex justify-between fc-primary px2 mb2 rounded {{unless active 'u-hv-bc-darken10 cursor-pointer'}} {{if active 'bc-overlay'}}" {{action (if active 'removeFilter' 'addFilter') aggName bucket.key}}>
+  <span class="{{if active 'cursor-default'}}">{{bucket.key}} ({{bucket.doc_count}})</span>
+
+  {{#if active}}
+    {{fa-icon "times" class="fc-tertiary cursor-pointer c-sidebar-remove-filter px2 right-0 absolute"}}
+  {{/if}}
+</div>
