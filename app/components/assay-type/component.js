@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import colours from '../utils/colours';
+import colours from 'repositive/utils/colours';
 
 const { Component, computed, get } = Ember;
 

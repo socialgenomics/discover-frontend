@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import { buildValidations } from 'ember-cp-validations';
 import presenceValidator from 'repositive/validations/presenceValidator';
-import { isUniqueString } from '../utils/arrays';
+import { isUniqueString } from 'repositive/utils/arrays';
 
 const { Component, get, computed } = Ember;
 
