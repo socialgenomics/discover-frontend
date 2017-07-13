@@ -50,9 +50,7 @@ export function buildActionsQuery(params) {
  * @param {Object?} customProps - Other properties to be added to the action object.
  * @return {Promise} The response
  */
-export function incrementViewCounter(store, model, userId, customProps = {}) {
-  store.createRecord(
-    'action',
-    createActionData(model, userId = null, 'view', customProps)
-  ).save().catch(Logger.error);
+export function incrementViewCounter(store, model, userId = null) {
+  store.createRecord('action', createActionData(model, userId, 'view'))
+    .save().catch(Logger.error);
 }
