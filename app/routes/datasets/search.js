@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import SearchRouteMixin from '../../mixins/search';
+import SearchRouteMixin from 'repositive/mixins/search';
 
 const { Route } = Ember;
 
