@@ -1,9 +1,9 @@
 import Ember from 'ember';
-import ActionCreationMixin from 'repositive/mixins/action-creation';
+import DatasetActionsMixin from 'repositive/mixins/dataset-actions';
 
 const { Controller, computed, inject: { service }, get } = Ember;
 
-export default Controller.extend(ActionCreationMixin, {
+export default Controller.extend(DatasetActionsMixin, {
   session: service(),
 
   datasetEditableProperties: [
