@@ -9,14 +9,13 @@
   isSearchPage=true
 }}
 
-<div class="grid-wrapper grid-wrapper-stepped">
+<div class="grid-wrapper grid-wrapper-stepped pt5">
   {{#if isLoading}}
     {{partial 'loading'}}
   {{else}}
     {{#if (gt model.meta.total 0)}}
-      <div class="flex justify-between mb4 pt3">
+      <div class="flex justify-between mb4 pt3 pt0-l">
         <h3 class="mb0 fs2">Datasets ({{model.meta.total}})</h3>
-
         {{results-select resultsOptions=resultsOptions resultsPerPage=resultsPerPage setResultsPerPage=(action 'setResultsPerPage')}}
       </div>
     {{/if}}
