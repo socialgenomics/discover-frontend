@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import ResetScrollMixin from 'repositive/mixins/reset-scroll';
 import LoadDetailRouteMixin from 'repositive/mixins/load-detail-route';
-import { buildActionsQuery, incrementViewCounter } from 'repositive/utils/actions';
+import { buildActionsQuery, incrementViewCounter, sortComments } from 'repositive/utils/actions';
 import { mergeAttributes } from 'repositive/utils/attributes';
 
 const { inject: { service }, Logger, Route, RSVP, get, getWithDefault, isEmpty, setProperties } = Ember;
@@ -47,10 +47,7 @@ export default Route.extend(ResetScrollMixin, LoadDetailRouteMixin, {
 
   setupController(controller, model) {
     this._super(...arguments);
-    const sortedComments = model.comments
-      .toArray()
-      .sortBy('createdAt')
-      .reverseObjects();
+    const sortedComments = sortComments(model.comments);
     const mergedAttributes = this._getMergedAttributes(model);
     const tags = get(model, 'tags').toArray();
 
