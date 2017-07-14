@@ -44,8 +44,7 @@ export default Mixin.create(FlashMessageMixin, {
       if (actionType === 'attribute') { this._deleteAttribute(action); }
 
       action.destroyRecord()
-        .then(() => { get(this, actionType + 's').removeObject(action) })
-        .then(this._addFlashMessage(`${actionType.capitalize()} successfully deleted.`, 'success'))
+        .then(this._handleActionDeleteSuccess.bind(this, actionType))
         .catch(this._handleError.bind(this, actionType, 'delete'));
     }
   },
@@ -70,6 +69,11 @@ export default Mixin.create(FlashMessageMixin, {
 
   _handleTagSaveSuccess(savedTag) {
     get(this, 'tags').insertAt(0, savedTag);
+  },
+
+  _handleActionDeleteSuccess(actionType, deletedAction) {
+    get(this, actionType + 's').removeObject(deletedAction)
+    this._addFlashMessage(`${actionType.capitalize()} successfully deleted.`, 'success')
   },
 
   _handleError(actionType, methodType, error) {
