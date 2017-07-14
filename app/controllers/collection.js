@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import searchControllerMixin from '../mixins/search-controller';
+import searchControllerMixin from 'repositive/mixins/search-controller';
 
 const { Controller } = Ember;
 

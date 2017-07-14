@@ -4,10 +4,7 @@
     <!-- dataset -->
     <div class="grid__col grid__col--7-of-12 relative u-full-height">
       <!-- header -->
-      <header class="c-card-header bc-very-light-grey flex {{if assaysToDisplay 'justify-between' 'justify-end'}} items-center px3">
-        {{#if assaysToDisplay}}
-          {{assay-list assays=assaysToDisplay}}
-        {{/if}}
+      <header class="c-card-header bc-very-light-grey flex justify-end items-center px3">
         <div class="pl2 flex items-center">
           {{follow-button subscription=subscription model=model}}
           <ul class="flex list-flush-left pl3 mb0">

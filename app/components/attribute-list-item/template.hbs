@@ -1,0 +1,42 @@
+{{#unless inEditMode}}
+  <div class="flex justify-between">
+    {{#if (eq attribute.key 'pmid')}}
+      <a target="_blank"
+        href="https://www.ncbi.nlm.nih.gov/pubmed/{{attribute.value}}"
+        class="fs2 fc-primary u-hv-tc-primary td-underline text-line-break"
+        {{action 'trackPubmedClick'}}
+        >
+        {{attribute.value}}
+      </a>
+    {{else}}
+      <p class="t-attr-item-text fs2 fc-primary mb2 hyphens-auto text-line-break">{{attribute.value}}</p>
+    {{/if}}
+    {{#if canEdit}}
+      <div>
+        {{fa-icon 'pencil' class='fc-tertiary u-hv-tc-secondary cursor-pointer fs2 mr2' click=(action 'enterEditMode')}}
+        {{fa-icon 'trash-o' class='fc-tertiary u-hv-tc-secondary cursor-pointer fs2' click=(action 'deleteAttr')}}
+      </div>
+    {{/if}}
+  </div>
+{{else}}
+  <form>
+    {{validated-input
+      errors=validations.attrs.attributeValue.messages
+      noLabel=true
+      type="text"
+      value=value
+    }}
+    {{r-async-button
+      action=(action 'save')
+      default="Save"
+      disableWhen=(not isValid)
+      pending="Saving..."
+      variant="primary"
+    }}
+    {{r-button
+      clickHandler=(action "cancelEditMode")
+      label="Cancel"
+      variant="cancel"
+    }}
+  </form>
+{{/unless}}

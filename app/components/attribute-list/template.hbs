@@ -1,0 +1,47 @@
+{{#each-in groups as |group attrs|}}
+  <div class="mb3">
+    <div class="grid__col  mb2 grid__col--1-of-3 grid__col--m-1-of-3 grid__col--s-1-of-3">
+      <h3 class="fw-reg fs2 mb0 fc-secondary">
+        {{#if (eq group 'pmid')}} Pubmed ID {{else}} {{capitalize group}} {{/if}}
+      </h3>
+    </div>
+    <div class="grid__col grid__col--2-of-3 grid__col--m-2-of-3 grid__col--s-2-of-3">
+      {{#each (sort-by "value" attrs) as |attr|}}
+        {{attribute-list-item deleteAction=(action 'deleteAction') attribute=attr group=group attributesForKey=attrs}}
+      {{/each}}
+
+      {{#if (eq openInput group)}}
+        {{add-attribute
+          addAttribute=addAttribute
+          closeInput=(action 'closeInput')
+          group=group
+          attributesForKey=attrs
+        }}
+      {{else}}
+        {{#unless (and (contains group singleValueAttrs) (gt attrs.length 0))}}
+          <span {{action 'handleAddClick' group}} class="t-add-trigger flex justify-between items-center td-underline fc-secondary u-hv-tc-secondary cursor-pointer">
+            Add {{#if (eq group 'pmid')}} Pubmed ID {{else}}{{capitalize group}}{{/if}}
+          </span>
+        {{/unless}}
+      {{/if}}
+
+    </div>
+  </div>
+{{/each-in}}
+
+{{contributors-list contributors=contributors modelName=modelName}}
+
+{{#if showCreateAccountModal}}
+  {{#repositive-modal
+    containerClass='c-modal--medium u-z5'
+    onClose=(action 'toggleCreateAccountModal')
+  }}
+    {{repositive-modal/header
+      title='Add Metadata'
+      onClose=(action 'toggleCreateAccountModal')
+    }}
+    {{#repositive-modal/content}}
+      {{create-account-modal-content text='To add metadata to this dataset, please create an account.'}}
+    {{/repositive-modal/content}}
+  {{/repositive-modal}}
+{{/if}}
