@@ -7,7 +7,7 @@ function buildModel(props) {
     stats: { datasets: props.datasetsNumber}
   }
 }
-describe('Unit | Controller | datasets/detail !T', function() {
+describe('Unit | Controller | datasets/detail', function() {
   setupTest('controller:datasets/detail', {
     needs: [
       'service:metrics',
