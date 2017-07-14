@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import { mergeAssays } from '../../routes/datasets/detail';
 
 const { Controller, computed, inject: { service }, get, getWithDefault, isEmpty } = Ember;
 
@@ -35,13 +34,6 @@ export default Controller.extend({
     const actionAttrs = getWithDefault(this, 'dataset.actionableId.actions', []).filterBy('type', 'attribute');
     return this._mergeAttributes(actionAttrs, datasetAttrs)
       .reject(attr =>  attr.key === 'pmid' && isEmpty(attr.value));
-  }),
-
-  assaysToDisplay: computed('dataset', 'dataset.actionableId.actions.[]', function() {
-    const userAssays = getWithDefault(this, 'dataset.actionableId.actions', [])
-      .filterBy('properties.key', 'assay')
-      .mapBy('properties.value');
-    return mergeAssays(get(this, 'dataset'), userAssays);
   }),
 
   contributors: computed('dataset.actionableId.actions.[]', function() {

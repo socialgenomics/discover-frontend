@@ -2,29 +2,7 @@
     #COLOR - CUSTOM UTILITIES
    ======================================================================== */
 
-/*
-  ASSAY COLORS
-  TODO: some selectors below duplicate core utility styles
-*/
 
-.bc-pink        { background-color: $froly;               }
-.bc-purple      { background-color: $amythest;            }
-.bc-deep-purple { background-color: $lilac-bush;          }
-.bc-indigo      { background-color: $sapphire;            }
-.bc-light-blue  { background-color: $dodger-blue;         }
-.bc-cyan        { background-color: $turquoise-blue;      }
-.bc-green       { background-color: $fruit-salad;         }
-.bc-light-green { background-color: $light-green;         }
-.bc-lime        { background-color: $lime;                }
-.bc-amber       { background-color: $amber;               }
-.bc-orange      { background-color: $orange;              }
-.bc-deep-orange { background-color: $deep-orange;         }
-.bc-brown       { background-color: $brown;               }
-.bc-red         { background-color: $color-primary-red;   }
-.bc-teal        { background-color: $color-primary-teal;  }
-.bc-yellow      { background-color: $color-primary-yellow;}
-.bc-blue        { background-color: $color-primary-blue;  }
-.bc-grey        { background-color: $color-mid-grey;      }
 
 /*
   UI COMPONENTS
@@ -56,4 +34,9 @@
   CUSTOM FONT COLORS
 */
 
-.fc-green { color: $fruit-salad; }
+.fc-green { color: $color-green; }
+
+/*
+  CUSTOM HEADER BACKGROUND
+*/
+.bc-grey { background-color: $color-mid-grey; }
