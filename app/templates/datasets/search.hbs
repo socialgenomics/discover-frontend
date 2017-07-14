@@ -13,10 +13,9 @@
   {{#if isLoading}}
     {{partial 'loading'}}
   {{else}}
-    <h3 class="mb0 fs3">Datasets</h3>
     {{#if (gt model.meta.total 0)}}
-      <div class="flex justify-between mb4">
-        <p class="mb0">Results: <span class="fw-med">{{model.meta.total}}</span></p>
+      <div class="flex justify-between mb4 pt3">
+        <h3 class="mb0 fs2">Datasets ({{model.meta.total}})</h3>
 
         {{results-select resultsOptions=resultsOptions resultsPerPage=resultsPerPage setResultsPerPage=(action 'setResultsPerPage')}}
       </div>
