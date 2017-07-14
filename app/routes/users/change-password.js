@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
-import creds from '../../utils/credentials';
+import creds from 'repositive/utils/credentials';
 
 const { Route, get, inject: { service } } = Ember;
 

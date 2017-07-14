@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import openCenteredPopupWindow from '../../utils/open-centered-popup-window';
+import openCenteredPopupWindow from 'repositive/utils/open-centered-popup-window';
 import URI from 'npm:urijs';
 
 const { Component, computed, get, setProperties, set } = Ember;
