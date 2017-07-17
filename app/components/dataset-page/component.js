@@ -2,6 +2,7 @@ import Ember from 'ember';
 import CheckEditPermissionsMixin from 'repositive/mixins/check-edit-permissions-mixin';
 import EditModeMixin from 'repositive/mixins/edit-mode-mixin';
 import SubscribableMixin from 'repositive/mixins/subscribable';
+import FlashMessageMixin from 'repositive/mixins/flash-message-mixin';
 
 // TODO figure out how to lazy inject mixins or find other solution.
 // Right now it will work cause dataset validation has URL as optional and request doesn't have URL at all
@@ -20,6 +21,7 @@ export default Component.extend(
   EditModeMixin,
   Validations,
   CheckEditPermissionsMixin,
+  FlashMessageMixin,
   SubscribableMixin,
   {
     session: service(),
@@ -84,7 +86,7 @@ export default Component.extend(
 
       addTag(text) {
         if (get(this, 'tags').findBy('properties.text', text)) {
-          this.flashMessages.add({ message: `The tag: ${text} already exists.`, type: 'warning' });
+          this._addFlashMessage(`The tag: ${text} already exists.`, 'warning');
         } else {
           get(this, 'store')
             .createRecord('action', this._createNewRecordData('tag', { properties: { text } }))
