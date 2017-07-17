@@ -4,6 +4,7 @@
       {{home-stats-updates datasetsNumber=datasetsNumber stats=model.stats collections=model.collections datasources=model.datasources}}
 
       <section>
+        <h3 class="pl4 fs2 fc-secondary">Featured Datasets</h3>
         {{#each model.datasets as |dataset|}}
           {{dataset-card dataset=dataset}}
         {{/each}}
