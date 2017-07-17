@@ -12,11 +12,8 @@ export default Mixin.create(FlashMessageMixin, {
       return store
         .createRecord('action', createActionData(model, user, 'attribute', { properties: { key, value } }))
         .save()
-        .then(savedAttribute => {
-          const attributes = [...getWithDefault(this, 'attributes', []), ...[convertAttrActionToCommonObj(savedAttribute)]]
-          set(this, 'attributes', attributes);
-        })
-        .catch(Logger.error);
+        .then(this._handleAttributeSaveSuccess.bind(this, store, model, user))
+        .catch(this._handleError.bind(this, 'attribute', 'create'));
     },
 
     addComment(model, user, text) {
@@ -24,10 +21,8 @@ export default Mixin.create(FlashMessageMixin, {
       return store
         .createRecord('action', createActionData(model, user, 'comment', { properties: { text } }))
         .save()
-        .then(savedComment => {
-          get(this, 'comments').insertAt(0, savedComment);
-        })
-        .catch(Logger.error);
+        .then(this._handleCommentSaveSuccess.bind(this, store, model, user))
+        .catch(this._handleError.bind(this, 'comment', 'create'));
     },
 
     addTag(model, user, text) {
@@ -37,10 +32,8 @@ export default Mixin.create(FlashMessageMixin, {
         return get(this, 'store')
           .createRecord('action', createActionData(model, user, 'tag', { properties: { text } }))
           .save()
-          .then(savedTag => {
-            get(this, 'tags').insertAt(0, savedTag);
-          })
-          .catch(Logger.error);
+          .then(this._handleTagSaveSuccess.bind(this))
+          .catch(this._handleError.bind(this, 'tag', 'create'));
       }
     },
 
@@ -50,16 +43,40 @@ export default Mixin.create(FlashMessageMixin, {
       if (actionType === 'attribute') { this._deleteAttribute(action); }
 
       action.destroyRecord()
-        .then(() => { get(this, actionType + 's').removeObject(action) })
-        .then(this._addFlashMessage(`${actionType.capitalize()} successfully deleted.`, 'success'))
-        .catch(error => {
-          this._addFlashMessage(`${actionType.capitalize()} could not be deleted. Please try again.`, 'warning');
-          Logger.error(error);
-        });
+        .then(this._handleActionDeleteSuccess.bind(this, actionType))
+        .catch(this._handleError.bind(this, actionType, 'delete'));
     }
   },
 
   _deleteAttribute(action) {
     set(this, 'attributes', get(this, 'attributes').rejectBy('actionId', action.id));
+  },
+
+  _handleAttributeSaveSuccess(store, model, user, savedAttribute) {
+    const attributes = [
+      ...getWithDefault(this, 'attributes', []),
+      ...[convertAttrActionToCommonObj(savedAttribute)]
+    ];
+    set(this, 'attributes', attributes);
+    this._reloadSubscriptions(store, model, user)
+  },
+
+  _handleCommentSaveSuccess(store, model, user, savedComment) {
+    get(this, 'comments').insertAt(0, savedComment);
+    this._reloadSubscriptions(store, model, user);
+  },
+
+  _handleTagSaveSuccess(savedTag) {
+    get(this, 'tags').insertAt(0, savedTag);
+  },
+
+  _handleActionDeleteSuccess(actionType, deletedAction) {
+    get(this, actionType + 's').removeObject(deletedAction)
+    this._addFlashMessage(`${actionType.capitalize()} successfully deleted.`, 'success')
+  },
+
+  _handleError(actionType, methodType, error) {
+    this._addFlashMessage(`${actionType.capitalize()} could not be ${methodType}d. Please try again.`, 'warning');
+    Logger.error(error);
   }
 });

@@ -54,3 +54,16 @@ export function incrementViewCounter(store, model, userId = null) {
   store.createRecord('action', createActionData(model, userId, 'view'))
     .save().catch(Logger.error);
 }
+
+/**
+ * @desc converts model comments to a sorted array
+ * @public
+ * @param {Ember.DS.Array} comments - The comment actions
+ * @return {Array} The sorted comments
+ */
+export function sortComments(comments) {
+  comments
+    .toArray()
+    .sortBy('createdAt')
+    .reverseObjects();
+}

@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
 import LoadDetailRouteMixin from 'repositive/mixins/load-detail-route';
-import { incrementViewCounter } from 'repositive/utils/actions';
+import { incrementViewCounter, sortComments } from 'repositive/utils/actions';
 
 const { inject: { service }, Logger, Route, RSVP, get, setProperties } = Ember;
 
@@ -28,10 +28,7 @@ export default Route.extend(AuthenticatedRouteMixin, LoadDetailRouteMixin, {
 
   setupController(controller, model) {
     this._super(...arguments);
-    const sortedComments = model.comments
-      .toArray()
-      .sortBy('createdAt')
-      .reverseObjects();
+    const sortedComments = sortComments(model.comments);
     const tags = get(model, 'tags').toArray();
 
     setProperties(controller, {

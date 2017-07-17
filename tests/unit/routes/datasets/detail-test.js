@@ -49,7 +49,6 @@ describe('Unit | Route | datasets/detail', function() {
         const route = this.subject();
         route.setupController(controller, model);
         expect(controller.attributes).to.eql([]);
-        expect(controller.comments).to.eql([]);
         expect(controller.tags).to.eql([]);
       });
     });
