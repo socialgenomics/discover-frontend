@@ -15,7 +15,7 @@ export default Mixin.create({
     resultsPerPage: { refreshModel: true }
   },
 
-  maxResultsPerPage: 90,
+  maxResultsPerPage: 30,
 
   QP: computed(function () {
     return QP;
