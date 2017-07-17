@@ -20,12 +20,5 @@ export default Route.extend(AuthenticatedRouteMixin, LoadDetailRouteMixin, {
 
   afterModel(model) {
     this._incrementViewCounter(model.request, get(this, 'session.authenticatedUser'));
-  },
-
-  actions: {
-    didTransition: function() {
-      get(this, 'metrics').trackPage();
-      return true;
-    }
   }
 });

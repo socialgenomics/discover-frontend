@@ -47,13 +47,6 @@ export default Route.extend(ResetScrollMixin, LoadDetailRouteMixin, {
     this._incrementViewCounter(model.dataset, get(this, 'session.authenticatedUser'));
   },
 
-  actions: {
-    didTransition() {
-      get(this, 'metrics').trackPage();
-      return true;
-    }
-  },
-
   _buildSchemaObj(dataset, keywords) {
     const schemaObject = {
       '@context': 'http://schema.org/',
