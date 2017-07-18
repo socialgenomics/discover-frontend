@@ -6,7 +6,7 @@ import EditModeMixin from 'repositive/mixins/edit-mode-mixin';
 import { isUniqueString } from 'repositive/utils/arrays';
 import { openLinkInNewTab } from 'repositive/utils/links';
 
-const { Component, computed, get, set, inject: { service }, Logger } = Ember;
+const { Component, computed, get, set, inject: { service } } = Ember;
 
 const Validations = buildValidations({
   value: presenceValidator()
@@ -64,12 +64,7 @@ export default Component.extend(
         const attribute = get(this, 'attribute');
         const attrAction = get(this, 'store')
           .peekRecord('action', get(attribute, 'actionId'));
-        return attrAction.destroyRecord()
-          .then(this._addFlashMessage('Attribute successfully deleted.', 'success'))
-          .catch(error => {
-            this._addFlashMessage('Something went wrong when deleting your attribute.', 'warning')
-            Logger.error(error);
-          });
+        return get(this, 'deleteAction')(attrAction);
       },
 
       trackPubmedClick() {

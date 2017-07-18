@@ -14,7 +14,8 @@
 }}
 {{#each commentsSorted as |comment|}}
   {{user-comment
-    comment=comment
-    disabled=(not session.isAuthenticated)
+      deleteAction=(action 'deleteAction')
+      comment=comment
+      disabled=(not session.isAuthenticated)
   }}
 {{/each}}

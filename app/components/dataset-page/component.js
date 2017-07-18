@@ -1,16 +1,13 @@
 import Ember from 'ember';
 import CheckEditPermissionsMixin from 'repositive/mixins/check-edit-permissions-mixin';
 import EditModeMixin from 'repositive/mixins/edit-mode-mixin';
-import SubscribableMixin from 'repositive/mixins/subscribable';
-import FlashMessageMixin from 'repositive/mixins/flash-message-mixin';
-
-// TODO figure out how to lazy inject mixins or find other solution.
-// Right now it will work cause dataset validation has URL as optional and request doesn't have URL at all
 import { buildValidations } from 'ember-cp-validations';
 import urlFormatValidator from 'repositive/validations/urlFormatValidator';
 import presenceValidator from 'repositive/validations/presenceValidator';
+import { createActionData } from 'repositive/utils/actions';
+import { getSubscription } from 'repositive/utils/subscriptions';
 
-const { Component, computed, inject: { service }, get, Logger, set, merge } = Ember;
+const { Component, computed, inject: { service }, get, Logger, set } = Ember;
 const Validations = buildValidations({
   title: presenceValidator(),
   description: presenceValidator(),
@@ -21,8 +18,6 @@ export default Component.extend(
   EditModeMixin,
   Validations,
   CheckEditPermissionsMixin,
-  FlashMessageMixin,
-  SubscribableMixin,
   {
     session: service(),
     urlGenerator: service(),
@@ -54,8 +49,11 @@ export default Component.extend(
 
     actions: {
       trackExit() {
+        const currentModel = get(this, 'model');
+        const currentUser = get(this, 'userId');
+
         get(this, 'store')
-          .createRecord('action', this._createNewRecordData('access'))
+          .createRecord('action', createActionData(currentModel, currentUser, 'access'))
           .save()
           .catch(Logger.error);
 
@@ -66,33 +64,33 @@ export default Component.extend(
         });
       },
 
-      addAttribute(key, value) {
-        const store = get(this, 'store');
-        store
-          .createRecord('action', this._createNewRecordData('attribute', { properties: { key, value } }))
-          .save()
-          .then(() => this._reloadSubscriptions(store))
-          .catch(Logger.error);
-      },
-
       addComment(text) {
-        const store = get(this, 'store');
-        store
-          .createRecord('action', this._createNewRecordData('comment', { properties: { text } }))
-          .save()
-          .then(() => { this._reloadSubscriptions(store); })
-          .catch(Logger.error);
+        return get(this, 'addComment')(
+          get(this, 'model'),
+          get(this, 'userId'),
+          text
+        ).then(this._updateSubscription.bind(this))
       },
 
       addTag(text) {
-        if (get(this, 'tags').findBy('properties.text', text)) {
-          this._addFlashMessage(`The tag: ${text} already exists.`, 'warning');
-        } else {
-          get(this, 'store')
-            .createRecord('action', this._createNewRecordData('tag', { properties: { text } }))
-            .save()
-            .catch(Logger.error);
-        }
+        return get(this, 'addTag')(
+          get(this, 'model'),
+          get(this, 'userId'),
+          text
+        )
+      },
+
+      addAttribute(key, value) {
+        return get(this, 'addAttribute')(
+          get(this, 'model'),
+          get(this, 'userId'),
+          key,
+          value
+        ).then(this._updateSubscription.bind(this))
+      },
+
+      deleteAction(action) {
+        return get(this, 'deleteAction')(action);
       },
 
       cancelEditMode() {
@@ -108,38 +106,13 @@ export default Component.extend(
       setActiveTab(tab) { set(this, 'activeTab', tab); }
     },
 
-    /**
-     * @desc created object with new record data
-     * @param {String} type
-     * @param {Object?} customProps
-     * @returns {Object}
-     * @private
-     */
-    _createNewRecordData(type, customProps = {}) {
-      const commonProps = {
-        actionableId: get(this, 'model.actionableId'),
-        actionable_model: get(this, 'modelName'),
-        userId: get(this, 'userId'),
-        type
-      };
+    _updateSubscription() {
+      const existingSubscription = get(this, 'subscription');
 
-      return merge(commonProps, customProps);
-    },
+      if (existingSubscription) { return existingSubscription.reload(); }
 
-    /**
-     * @desc re-fetch subscriptions to update the follow-button
-     * @param {Object} store
-     * @private
-     */
-    _reloadSubscriptions(store) {
-      const existingSubscription = store.peekAll('subscription').filter(subscription => {
-        const userIdMatches = get(subscription, 'userId.id') === get(this, 'userId.id');
-        const subscribableIdMatches = get(subscription, 'subscribableId.id') === get(this, 'model.id');
-        return userIdMatches && subscribableIdMatches;
-      });
-      if (existingSubscription.length === 0) {
-        this._getSubscriptions(store, get(this, 'model.id'), get(this, 'userId.id'));
-      }
+      getSubscription(get(this, 'store'), get(this, 'model.id'), get(this, 'userId.id'))
+        .then(subscription => set(this, 'subscription', subscription));
     }
   }
 );

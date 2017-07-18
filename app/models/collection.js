@@ -10,7 +10,7 @@ export default Model.extend({
   type: attr('string'),
   updatedAt: attr('isodate'),
 
-  actionableId: belongsTo('actionable', { inverse: 'collection' }),
+  actions: hasMany('action'),
   datasets: hasMany('dataset'),
   owns: hasMany('dataset'),
   userId: belongsTo('user')

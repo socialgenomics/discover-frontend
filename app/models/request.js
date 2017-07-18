@@ -1,6 +1,6 @@
 import Model from 'ember-data/model';
 import attr from 'ember-data/attr';
-import { belongsTo } from 'ember-data/relationships';
+import { belongsTo, hasMany } from 'ember-data/relationships';
 
 export default Model.extend({
   createdAt: attr('isodate'),
@@ -9,7 +9,7 @@ export default Model.extend({
   title: attr('string'),
   updatedAt: attr('isodate'),
 
-  actionableId: belongsTo('actionable', { inverse: 'request' }),
-  subscribableId: belongsTo('subscribable', { inverse: 'request' }),
+  actions: hasMany('action'),
+  subscriptions: hasMany('subscription'),
   userId: belongsTo('user')
 });

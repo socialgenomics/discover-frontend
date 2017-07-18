@@ -4,8 +4,7 @@ import DataAdapterMixin from 'ember-simple-auth/mixins/data-adapter-mixin';
 
 const { RESTAdapter } = DS;
 
-var ApplicationAdapter = RESTAdapter.extend(DataAdapterMixin, {
-  // namespace: 'v1',
+const ApplicationAdapter = RESTAdapter.extend(DataAdapterMixin, {
   host: ENV.APIBaseURL,
   authorizer: 'authorizer:repositive'
 });

@@ -4,6 +4,7 @@ import { buildValidations } from 'ember-cp-validations';
 import presenceValidator from 'repositive/validations/presenceValidator';
 import emailFormatValidator from 'repositive/validations/emailFormatValidator';
 import { errorMessages } from 'repositive/validations/validations-config';
+import { createActionData } from 'repositive/utils/actions';
 
 const { Component, computed, get, inject: { service }, set, setProperties, Logger } = Ember;
 const Validations = buildValidations({
@@ -21,8 +22,8 @@ export default Component.extend(Validations, {
   classNames: ['ta-center'],
   emailAddress: '',
   customMessage: '',
-  actionableId: null,
-  actionableType: null,
+  model: null,
+  modelType: null,
   sendSuccess: false,
   sendError: false,
   isLoading: false,
@@ -83,8 +84,8 @@ export default Component.extend(Validations, {
         data: {
           to: get(this, 'emailAddress'),
           content: get(this, 'customMessage'),
-          actionable_id: get(this, 'actionableId'),
-          actionable_model: get(this, 'actionableType')
+          actionable_id: get(this, 'model.id'),
+          actionable_model: get(this, 'modelType')
         }
       }
     );
@@ -92,15 +93,9 @@ export default Component.extend(Validations, {
 
   _createShareAction(currentUser) {
     const store = get(this, 'store');
-    store.findRecord('actionable', get(this, 'actionableId'))
-      .then(actionable => {
-        return store.createRecord('action', {
-          actionableId: actionable,
-          userId: currentUser,
-          type: 'share',
-          actionable_model: get(this, 'actionableType')
-        }).save();
-      })
-        .catch(Logger.error);
+    store
+      .createRecord('action', createActionData(get(this, 'model'), currentUser, 'share'))
+      .save()
+      .catch(Logger.error);
   }
 });

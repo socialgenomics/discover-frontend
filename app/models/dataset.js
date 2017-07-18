@@ -18,11 +18,11 @@ export default Model.extend({
   updatedAt: attr('isodate'),
   url: attr('string'),
 
-  actionableId: belongsTo('actionable', { inverse: 'dataset' }),
+  actions: hasMany('action'),
   collections: hasMany('collection', { inverse: 'datasets' }),
+  subscriptions: hasMany('subscription'),
   datasourceId: belongsTo('collection', { inverse: 'owns' }),
   highlights: belongsTo('highlight'),
-  subscribableId: belongsTo('subscribable', { inverse: 'dataset' }),
   userId: belongsTo('user'),
 
   accession: computed('externalId', function() {

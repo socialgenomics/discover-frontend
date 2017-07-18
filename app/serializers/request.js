@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import JSONSerializer from 'ember-data/serializers/json';
-import { normalizeKeyName, keyForAttribute} from './application';
+import { keyForAttribute, normalizeKeyName } from './application';
 
 export default JSONSerializer.extend({
   serialize: function(snapshot) {
@@ -14,7 +14,7 @@ export default JSONSerializer.extend({
       if (key === 'actionableId' || key === 'subscribableId') {
         return 'id';
       }
-      normalizeKeyName(key);
+      return normalizeKeyName(key);
     } else {
       return Ember.String.underscore(key).toLowerCase();
     }
