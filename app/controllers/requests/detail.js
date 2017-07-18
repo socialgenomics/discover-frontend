@@ -1,8 +1,9 @@
 import Ember from 'ember';
+import DatasetActionsMixin from 'repositive/mixins/dataset-actions';
 
-const { Controller, computed, inject: { service }, get } = Ember;
+const { Controller, computed, inject: { service } } = Ember;
 
-export default Controller.extend({
+export default Controller.extend(DatasetActionsMixin, {
   session: service(),
 
   requestEditableProperties: [
@@ -10,16 +11,5 @@ export default Controller.extend({
     { key: 'description', multiline: true }
   ],
 
-  request: computed.alias('model.request'),
-  comments: computed.filterBy('request.actionableId.actions', 'type', 'comment'),
-  tags: computed.filterBy('request.actionableId.actions', 'type', 'tag'),
-
-  commentsSorted: computed.sort('comments', (itemA, itemB) => {
-    if (get(itemA, 'createdAt') < get(itemB, 'createdAt')) {
-      return 1;
-    } else if (get(itemA, 'createdAt') > get(itemB, 'createdAt')) {
-      return -1;
-    }
-    return 0;
-  })
+  request: computed.alias('model.request')
 });

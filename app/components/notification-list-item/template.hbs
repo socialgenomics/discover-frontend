@@ -23,11 +23,7 @@
     </span>
 
     <p class="mb0">
-      {{#if notification.subscriptionId.subscribableId.dataset}}
-        {{truncate notification.subscriptionId.subscribableId.dataset.title 70}}
-      {{else if notification.subscriptionId.subscribableId.request}}
-        {{truncate notification.subscriptionId.subscribableId.request.title 70}}
-      {{/if}}
+      {{truncate model.title 70}}
     </p>
   </div>
 {{/if}}
