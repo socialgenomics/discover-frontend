@@ -27,8 +27,9 @@ export default Controller.extend(
     actions: {
       addRequest: function() {
         if (get(this, 'validations.isValid')) {
-          this._createRequest().then(this._createRequestSuccess.bind(this))
-          .catch(this._createRequestError.bind(this));
+          this._createRequest()
+            .then(this._createRequestSuccess.bind(this))
+            .catch(this._createRequestError.bind(this));
         }
       }
     },

@@ -18,7 +18,7 @@ export default Model.extend({
   updatedAt: attr('isodate'),
   url: attr('string'),
 
-  actionableId: belongsTo('actionable', { inverse: 'dataset' }),
+  actions: hasMany('action'),
   collections: hasMany('collection', { inverse: 'datasets' }),
   datasourceId: belongsTo('collection', { inverse: 'owns' }),
   highlights: belongsTo('highlight'),

@@ -2,7 +2,6 @@ import Ember from 'ember';
 import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
 import ENV from 'repositive/config/environment';
 import ResetScrollMixin from 'repositive/mixins/reset-scroll';
-import ActionableMixin from 'repositive/mixins/actionable';
 import SearchRouteMixin from 'repositive/mixins/search';
 import IncrementCollectionViewCounterMixin from 'repositive/mixins/increment-collection-view-counter-mixin';
 
@@ -35,7 +34,6 @@ export function model(params) {
   const collectionId = params.id;
   const queryString = params.query;
   return RSVP.hash({
-    actionable: store.findRecord('actionable', collectionId),
     collection: store.findRecord('collection', collectionId),
     collectionStats: get(this, 'ajax').request(ENV.APIRoutes['collection-stats'].replace('{collection_id}', collectionId), { method: 'GET' })
   })
@@ -45,7 +43,6 @@ export function model(params) {
       return this.makeRequest(params)
         .then(m => {
           const model = assign(data, m);
-          set(model, 'collection.actionableId', model.actionable);
           this._updateQueryServiceValue(params.query);
           return model;
         });
@@ -55,7 +52,6 @@ export function model(params) {
 export default Route.extend(
   AuthenticatedRouteMixin,
   ResetScrollMixin,
-  ActionableMixin,
   SearchRouteMixin,
   IncrementCollectionViewCounterMixin,
   {

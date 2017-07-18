@@ -1,8 +1,9 @@
 import Ember from 'ember';
+import DatasetActionsMixin from 'repositive/mixins/dataset-actions';
 
-const { Controller, computed, inject: { service }, get, getWithDefault, isEmpty } = Ember;
+const { Controller, computed, inject: { service }, get } = Ember;
 
-export default Controller.extend({
+export default Controller.extend(DatasetActionsMixin, {
   session: service(),
 
   datasetEditableProperties: [
@@ -11,35 +12,14 @@ export default Controller.extend({
     { key: 'url' }
   ],
 
-  dataset: computed.alias('model.dataset'),
-  stats: computed.alias('model.stats'),
-  comments: computed.filterBy('dataset.actionableId.actions', 'type', 'comment'),
-  tags: computed.filterBy('dataset.actionableId.actions', 'type', 'tag'),
-
-  commentsSorted: computed.sort('comments', (itemA, itemB) => {
-    if (get(itemA, 'createdAt') < get(itemB, 'createdAt')) {
-      return 1;
-    } else if (get(itemA, 'createdAt') > get(itemB, 'createdAt')) {
-      return -1;
-    }
-    return 0;
+  datasetsNumber: computed('model.stats.datasets', function() {
+    return get(this, 'model.stats.datasets').toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   }),
 
-  datasetsNumber: computed('stats.datasets', function() {
-    return get(this, 'stats.datasets').toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-  }),
-
-  attributes: computed('dataset.{properties.attributes,actionableId.actions}', function() {
-    const datasetAttrs = getWithDefault(this, 'dataset.properties.attributes', {});
-    const actionAttrs = getWithDefault(this, 'dataset.actionableId.actions', []).filterBy('type', 'attribute');
-    return this._mergeAttributes(actionAttrs, datasetAttrs)
-      .reject(attr =>  attr.key === 'pmid' && isEmpty(attr.value));
-  }),
-
-  contributors: computed('dataset.actionableId.actions.[]', function() {
+  contributors: computed('attributes.[]', function() {
     const contributorIds = this.store.peekAll('action')
       .filterBy('type', 'attribute')
-      .filterBy('actionableId.id', get(this, 'dataset.id'))
+      .filterBy('datasetId.id', get(this, 'model.dataset.id'))
       .mapBy('userId.id')
       .uniq();
     return this.store.peekAll('user')
@@ -53,33 +33,5 @@ export default Controller.extend({
         action: 'link_clicked'
       });
     }
-  },
-
-  _mergeAttributes(attributeActions = [], attributesFromDataset) {
-    const actionAttrs = attributeActions.map(this._convertActionToCommonObj);
-    const datasetAttrs = this._convertDatasetAttrsToCommonObjList(attributesFromDataset);
-    return [...datasetAttrs, ...actionAttrs];
-  },
-
-  _convertActionToCommonObj(attribute) {
-    return {
-      key: get(attribute, 'properties.key'),
-      value: get(attribute, 'properties.value'),
-      actionId: get(attribute, 'id'),
-      userId: get(attribute, 'userId.id')
-    };
-  },
-
-  _convertDatasetAttrsToCommonObjList(attributesFromDataset) {
-    if (attributesFromDataset) {
-      return Object.keys(attributesFromDataset).reduce((attrObjects, key) => {
-        const keyValue = attributesFromDataset[key];
-        if (isEmpty(keyValue) || 'pmid' in keyValue) { return attrObjects; }
-        return [
-          ...attrObjects,
-          ...keyValue.map(value => { return { key, value }; })
-        ];
-      }, []);
-    } else { return []; }
   }
 });
