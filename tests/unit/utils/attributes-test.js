@@ -9,8 +9,7 @@ const attributeActions = [
       'key': 'ABC',
       'value': 'someActionAttr'
     },
-    'userId': { 'id': 'u1' }
-  }
+    'userId': { 'id': 'u1' }  }
 ];
 const attributesFromDataset = {
   assay: ['123', '456'],

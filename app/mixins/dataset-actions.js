@@ -2,6 +2,7 @@ import Ember from 'ember';
 import { createActionData } from 'repositive/utils/actions';
 import { convertAttrActionToCommonObj } from 'repositive/utils/attributes';
 import FlashMessageMixin from 'repositive/mixins/flash-message-mixin';
+// import { getSubscription } from 'repositive/utils/subscriptions';
 
 const { Mixin, get, Logger, set, getWithDefault } = Ember;
 
@@ -58,12 +59,12 @@ export default Mixin.create(FlashMessageMixin, {
       ...[convertAttrActionToCommonObj(savedAttribute)]
     ];
     set(this, 'attributes', attributes);
-    this._reloadSubscriptions(store, model, user)
+    // this._reloadSubscriptions(store, model, user)
   },
 
   _handleCommentSaveSuccess(store, model, user, savedComment) {
     get(this, 'comments').insertAt(0, savedComment);
-    this._reloadSubscriptions(store, model, user);
+    // this._reloadSubscriptions(store, model, user);
   },
 
   _handleTagSaveSuccess(savedTag) {
@@ -79,4 +80,22 @@ export default Mixin.create(FlashMessageMixin, {
     this._addFlashMessage(`${actionType.capitalize()} could not be ${methodType}d. Please try again.`, 'warning');
     Logger.error(error);
   }
+
+  /**
+   * @desc re-fetch subscriptions to update the follow-button
+   * @param {DS.Store} store instance of the store
+   * @param {DS.Model} model the model whose subscriptions are to be reloaded
+   * @param {DS.Model} userId current user
+   * @private
+   */
+  // _reloadSubscriptions(store, model, user) {
+  //   const existingSubscription = store.peekAll('subscription').filter(subscription => {
+  //     const userIdMatches = get(subscription, 'userId.id') === get(user, 'id');
+  //     const subscribableIdMatches = get(subscription, 'subscribableId.id') === get(model, 'id');
+  //     return userIdMatches && subscribableIdMatches;
+  //   });
+  //   if (existingSubscription.length === 0) {
+  //     getSubscription(store, get(model, 'id'), get(user, 'id'));
+  //   }
+  // }
 });
