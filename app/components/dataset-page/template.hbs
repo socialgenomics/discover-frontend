@@ -132,6 +132,7 @@
             {{r-tab-list-item
               setActiveTab=(action 'setActiveTab')
               activeTab=activeTab
+              stats=(concat '(' commentsSorted.length ')')
               tabName='discussion'}}
           {{/r-tab-list}}
           <div class="p3">
