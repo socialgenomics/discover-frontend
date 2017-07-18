@@ -4,6 +4,8 @@ import presenceValidator from 'repositive/validations/presenceValidator';
 import emailFormatValidator from 'repositive/validations/emailFormatValidator';
 import lengthValidator from 'repositive/validations/lengthValidator';
 import { errorMessages, lengths, lengthTypes } from 'repositive/validations/validations-config';
+import FlashMessageMixin from 'repositive/mixins/flash-message-mixin';
+
 
 const { get, getProperties, computed, Controller, inject: { service }, set } = Ember;
 const Validations = buildValidations({
@@ -19,6 +21,7 @@ const Validations = buildValidations({
 
 export default Controller.extend(
   Validations,
+  FlashMessageMixin,
   {
     session: service(),
 
@@ -52,12 +55,7 @@ export default Controller.extend(
           get(resp, 'message') :
           'Error: Invalid Email. Please check that you have typed your email correctly.';
 
-        if (message) {
-          this.flashMessages.add({
-            message,
-            type: 'warning'
-          });
-        }
+        if (message) { this._addFlashMessage(message, 'warning'); }
       }
     }
   }
