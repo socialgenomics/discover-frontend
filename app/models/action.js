@@ -8,6 +8,8 @@ export default Model.extend({
   properties: attr('object'),
   type: attr('string'),
 
-  actionableId: belongsTo('actionable'),
+  collectionId: belongsTo('collection'),
+  datasetId: belongsTo('dataset'),
+  requestId: belongsTo('request'),
   userId: belongsTo('user')
 });

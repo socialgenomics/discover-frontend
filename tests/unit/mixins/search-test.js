@@ -149,7 +149,7 @@ describe('Unit | Mixin | search', function() {
           {
             method: 'POST',
             contentType: 'application/json',
-            data: JSON.stringify({ type: 'dataset', offset: 0, limit: 6, body: {} })
+            data: JSON.stringify({ type: 'dataset', offset: 0, limit: 30, body: {} })
           }
         )
       ).to.be.true;
@@ -158,7 +158,7 @@ describe('Unit | Mixin | search', function() {
     it('should use default limit', function () {
       mixinObjInstance[method]({ page });
 
-      expect(JSON.parse(get(mixinObjInstance, 'ajax.request').args[0][1].data).limit).to.be.equal(6);
+      expect(JSON.parse(get(mixinObjInstance, 'ajax.request').args[0][1].data).limit).to.be.equal(30);
     });
 
     it('should use custom limit', function () {

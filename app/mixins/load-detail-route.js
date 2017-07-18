@@ -1,12 +1,12 @@
 import Ember from 'ember';
 import ENV from 'repositive/config/environment';
-import ActionableMixin from 'repositive/mixins/actionable';
-import SubscribableMixin from 'repositive/mixins/subscribable';
 import FlashMessageMixin from 'repositive/mixins/flash-message-mixin';
+import { buildActionsQuery } from 'repositive/utils/actions';
+import { getSubscription } from 'repositive/utils/subscriptions';
 
-const { Mixin, get, RSVP, inject: { service }, setProperties, set, Logger } = Ember;
+const { Mixin, get, RSVP, inject: { service }, set, Logger } = Ember;
 
-export default Mixin.create(ActionableMixin, SubscribableMixin, FlashMessageMixin, {
+export default Mixin.create(FlashMessageMixin, {
   ajax: service(),
   session: service(),
 
@@ -17,25 +17,19 @@ export default Mixin.create(ActionableMixin, SubscribableMixin, FlashMessageMixi
   _getModelData(params, modelType) {
     const modelId = params.id;
     return RSVP.hash({
-      comments: this._getComments(modelId),
-      tags: this._getTags(modelId),
-      model: this.store.findRecord(modelType, modelId),
-      actionable: this.store.findRecord('actionable', modelId),
-      subscribable: this.store.findRecord('subscribable', modelId)
+      comments: this.store.query('action', buildActionsQuery({type: 'comment', modelId})),
+      tags: this.store.query('action', buildActionsQuery({type: 'tag', modelId})),
+      model: this.store.findRecord(modelType, modelId)
     })
       .then(data => {
         const model = data.model;
-
-        setProperties(model, {
-          'actionableId': data.actionable,
-          'subscribableId': data.subscribable
-        });
         const hashObj = {
           model,
+          comments: data.comments,
           tags: data.tags
         };
         if (get(this, 'session.isAuthenticated')) {
-          hashObj['subscriptions'] = this._getSubscriptions(this.store, modelId, get(this, 'session.authenticatedUser.id'));
+          hashObj['subscription'] = getSubscription(this.store, modelId, get(this, 'session.authenticatedUser.id'));
         }
         return RSVP.hash(hashObj);
       });
@@ -43,9 +37,8 @@ export default Mixin.create(ActionableMixin, SubscribableMixin, FlashMessageMixi
 
   _checkIfShouldUnfollow(params, transition, modelName) {
     if (transition.queryParams.unfollow) {
-      this._getSubscriptions(this.store, params.id, get(this, 'session.session.authenticated.user.id'))
-        .then(subscriptions => {
-          const subscription = get(subscriptions, 'firstObject');
+      getSubscription(this.store, params.id, get(this, 'session.session.authenticated.user.id'))
+        .then(subscription => {
           set(subscription, 'active', false);
           return subscription.save();
         })

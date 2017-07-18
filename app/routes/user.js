@@ -100,11 +100,20 @@ export default Route.extend({
     });
   },
 
-  _getUniqueIds(arrayOfObjs, modelType) {
-    return arrayOfObjs
+  /**
+   * @desc returns list of each action's model id
+   * @param  {Array} arrayOfActions the actions to be reduced
+   * @param  {String} modelType name of the model you want to get ids for
+   * @return {Array} A list of model(dataset/request) ids
+   */
+  _getUniqueIds(arrayOfActions, modelType) {
+    const keyName = modelType + 'Id';
+    return arrayOfActions
       .filterBy('actionable_model', modelType)
-      .mapBy('actionableId.id')
-      .uniq();
+      .mapBy(keyName)
+      .mapBy('id')
+      .uniq()
+      .compact();
   },
 
   _getFavouritedData(userIdOfProfile) {

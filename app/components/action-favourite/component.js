@@ -1,5 +1,7 @@
 import Ember from 'ember';
 
+import { createActionData } from 'repositive/utils/actions';
+
 const { inject: { service }, Component, computed, isPresent, Logger, get, set } = Ember;
 
 export default Component.extend({
@@ -13,7 +15,8 @@ export default Component.extend({
   showCreateAccountModal: false,
 
   isStarred: computed('favouritesService.userFavourites', function() {
-    return isPresent(get(this, 'favouritesService').getFavourite(get(this, 'model.id')));
+    return isPresent(get(this, 'favouritesService')
+      .getFavourite(get(this, 'model.id'), get(this, 'model.constructor.modelName')));
   }),
 
   actions: {
@@ -28,7 +31,9 @@ export default Component.extend({
 
   touchEnd() {
     const currentModel = this.model; //can be request or dataset
-    const favourite = get(this, 'favouritesService').getFavourite(currentModel.id);
+    const favourite = get(this, 'favouritesService')
+      .getFavourite(currentModel.id, get(currentModel, 'constructor.modelName'));
+
     if (get(this, 'session.isAuthenticated')) {
       get(this, 'metrics').trackEvent({
         category: 'discover_homeauth_dataset',
@@ -57,41 +62,41 @@ export default Component.extend({
 
   _addFavourite() {
     const currentModel = get(this, 'model'); //can be request or dataset
+    const currentUser = get(this, 'session.authenticatedUser');
     const store = get(this, 'store');
 
     set(this, 'isSubmitting', true);
-    store.findRecord('actionable', currentModel.id)
-      .then(actionable => {
-        return store.createRecord('action', {
-          actionableId: actionable,
-          userId: get(this, 'session.authenticatedUser'),
-          type: 'favourite',
-          actionable_model: currentModel.constructor.modelName
-        }).save();
-      })
-        .then(savedFavourite => {
-          get(this, 'favouritesService').pushFavourite(savedFavourite);
-          set(this, 'isSubmitting', false);
-          currentModel.incrementProperty('stats.favourite');
-        })
-        .catch(Logger.error);
+
+    return store
+      .createRecord('action', createActionData(currentModel, currentUser, 'favourite'))
+      .save()
+      .then(this._handleSaveSuccess.bind(this, currentModel))
+      .catch(Logger.error);
   },
 
   _deleteFavourite(favourite) {
     const currentModel = get(this, 'model');
     set(this, 'isSubmitting', true);
     favourite.destroyRecord()
-      .then(deletedFavourite => {
-        set(this, 'isSubmitting', false);
-        currentModel.decrementProperty('stats.favourite');
-        get(this, 'favouritesService').removeFavourite(deletedFavourite);
-        get(this, 'metrics').trackEvent({
-          category: 'discover_homeauth_dataset',
-          action: 'favourite',
-          label: currentModel.id,
-          value: false
-        });
-      })
+      .then(this._handleDeleteSuccess.bind(this, currentModel))
       .catch(Logger.error);
+  },
+
+  _handleSaveSuccess(currentModel, savedFavourite) {
+    get(this, 'favouritesService').pushFavourite(savedFavourite);
+    set(this, 'isSubmitting', false);
+    currentModel.incrementProperty('stats.favourite');
+  },
+
+  _handleDeleteSuccess(currentModel, deletedFavourite) {
+    set(this, 'isSubmitting', false);
+    currentModel.decrementProperty('stats.favourite');
+    get(this, 'favouritesService').removeFavourite(deletedFavourite);
+    get(this, 'metrics').trackEvent({
+      category: 'discover_homeauth_dataset',
+      action: 'favourite',
+      label: currentModel.id,
+      value: false
+    });
   }
 });

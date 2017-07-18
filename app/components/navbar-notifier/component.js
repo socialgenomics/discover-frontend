@@ -44,7 +44,9 @@ export default Component.extend({
 
   _getNotifications(userId) {
     const store = get(this, 'store');
+
     set(this, 'isLoading', true);
+
     return store.query('notification', {
       'where.user_id': userId,
       'where.properties.target.app': true,
@@ -54,21 +56,21 @@ export default Component.extend({
     })
       .then(notifications => {
         return RSVP.all(notifications.map(notification => {
-          const subscription = get(notification, 'subscription');
-          store.push(store.normalize('subscription', subscription));
+          const subscription = store.normalize('subscription', get(notification, 'subscription'));
+          store.push(subscription);
           if (get(notification, 'properties.type') === 'action') {
             return this._getRelatedData(notification, subscription);
           } else {
             return notification;
           }
         }))
-          .then(notifications => {
-            setProperties(this, {
-              'notifications': notifications.reject(notification => notification ? false : true),
-              'isLoading': false
-            });
-            return notifications;
+        .then(notifications => {
+          setProperties(this, {
+            'notifications': notifications.reject(notification => notification ? false : true),
+            'isLoading': false
           });
+          return notifications;
+        });
       })
       .catch(error => {
         set(this, 'isLoading', false);
@@ -86,14 +88,17 @@ export default Component.extend({
           user: store.findRecord('user', get(notification, 'properties.action.userId.id'))
         });
       })
-        .then(data => this._setModelOnNotification(notification, get(data, 'datasetOrRequest')))
-        .catch(Logger.error);
+      .then(() => notification)
+      .catch(Logger.error);
   },
 
   _getActionAndDataset(notification, subscription, store) {
+    const modelName = get(subscription, 'data.attributes.subscribableModel');
+    const modelId = subscription.data.relationships[modelName + 'Id'].data.id;
+
     return RSVP.hash({
       action: store.findRecord('action', get(notification, 'properties.action_id')),
-      datasetOrRequest: store.findRecord(get(subscription, 'subscribable_model'), get(subscription, 'subscribable_id'))
+      datasetOrRequest: store.findRecord(modelName, modelId)
     });
   },
 
@@ -111,11 +116,5 @@ export default Component.extend({
         set(notification, 'status', 'seen');
         return notification;
       });
-  },
-
-  _setModelOnNotification(notification, model) {
-    const modelKey = `subscriptionId.subscribableId.${get(notification, 'subscriptionId.subscribableModel')}`;
-    set(notification, modelKey, model);
-    return notification;
   }
 });

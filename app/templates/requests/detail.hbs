@@ -1,23 +1,16 @@
-<!-- CSS Refactor: still need to account for Open Dataset styles -->
-<!-- TODO: either remove or allow users to eventually view requests when unauthenticated -->
-{{#unless session.isAuthenticated}}
-  {{#full-page-notification}}
-    <h3 class="mr4 mb3 fc-secondary">Search through <strong class="pl2 pr2 fs4">{{datasetsNumber}}</strong> human genomic datasets</h3>
-    {{#link-to 'root' invokeAction=(action 'trackLinkEvent')}}
-      {{r-button variant="primary" size="big" label="Search now"}}
-    {{/link-to}}
-  {{/full-page-notification}}
-{{/unless}}
-
 <div class="grid-wrapper grid-wrapper-stepped {{unless session.isAuthenticated 'pt5' ''}}">
   <div class="grid grid--no-gutter">
     <div class="grid__col grid__col--3-of-3">
       {{dataset-page
-        model=request
-        modelName="request"
-        commentsSorted=commentsSorted
-        tags=tags
-        editableProperties=requestEditableProperties
+          model=request
+          modelName="request"
+          commentsSorted=comments
+          subscription=model.subscription
+          tags=tags
+          editableProperties=requestEditableProperties
+          addTag=(action 'addTag')
+          addComment=(action 'addComment')
+          deleteAction=(action 'deleteAction')
       }}
     </div>
   </div>
