@@ -50,7 +50,6 @@ export default Mixin.create({
         'page': 1,
         'query': ''
       })
-      this._updateQueryServiceValue();
     }
   },
 
