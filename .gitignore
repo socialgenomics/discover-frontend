@@ -18,6 +18,7 @@ testem.log
 .DS_Store
 Session.vim
 /async-disk-cache
+yarn-error.log
 
 *.sw*
 git_stats/
