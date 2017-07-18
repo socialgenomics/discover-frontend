@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import JSONSerializer from 'ember-data/serializers/json';
-import { normalizeKeyName, keyForAttribute} from './application';
+import { keyForAttribute, normalizeKeyName } from './application';
 
 export default JSONSerializer.extend({
   serialize: function(snapshot) {

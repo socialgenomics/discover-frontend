@@ -19,6 +19,7 @@ export default Route.extend(ResetScrollMixin, LoadDetailRouteMixin, {
           attributes: this.store.query('action', buildActionsQuery({type: 'attribute', modelId})),
           dataset: data.model,
           stats: get(this, 'session.isAuthenticated') === false ? this._getStats() : null,
+          subscription: data.subscription,
           tags: data.tags
         });
       })
@@ -35,6 +36,7 @@ export default Route.extend(ResetScrollMixin, LoadDetailRouteMixin, {
           dataset: dataset,
           contributors: this._fetchUserData(userIds),
           stats: hash.stats,
+          subscription: hash.subscription,
           schema: this._buildSchemaObj(dataset, keywords)
         });
       })

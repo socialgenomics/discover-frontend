@@ -51,7 +51,7 @@ export function buildActionsQuery(params) {
  * @return {Promise} The response
  */
 export function incrementViewCounter(store, model, userId = null) {
-  store.createRecord('action', createActionData(model, userId, 'view'))
+  return store.createRecord('action', createActionData(model, userId, 'view'))
     .save().catch(Logger.error);
 }
 
@@ -62,7 +62,7 @@ export function incrementViewCounter(store, model, userId = null) {
  * @return {Array} The sorted comments
  */
 export function sortComments(comments) {
-  comments
+  return comments
     .toArray()
     .sortBy('createdAt')
     .reverseObjects();

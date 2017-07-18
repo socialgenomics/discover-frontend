@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-const { Component, computed, get, inject: { service }, Logger, set, setProperties } = Ember;
+const { Component, computed, get, inject: { service }, Logger, set } = Ember;
 
 export default Component.extend({
   session: service(),
@@ -15,24 +15,6 @@ export default Component.extend({
 
   isFollowing: computed('subscription.active', function() {
     return get(this, 'subscription') ? get(this, 'subscription.active') : false;
-  }),
-
-  subscription: computed('subscribable.subscriptions', 'session', {
-    get() {
-      const subscriptions = get(this, 'subscribable.subscriptions') || false;
-      if (subscriptions) {
-        return subscriptions.find(subscription => {
-          if (get(subscription, 'userId.id') === get(this, 'session.authenticatedUser.id')) {
-            return true;
-          }
-        });
-      } else {
-        return null;
-      }
-    },
-    set(key, value) {
-      return value;
-    }
   }),
 
   actions: {
@@ -60,35 +42,26 @@ export default Component.extend({
 
   _createSubscription() {
     const currentModel = get(this, 'model'); //can be request or dataset
-    return get(this, 'store').createRecord('subscription', {
+    const modelName = currentModel.constructor.modelName;
+    const dataObj = {
       active: true,
-      subscribableId: get(this, 'subscribable'),
-      subscribableModel: currentModel.constructor.modelName,
+      subscribableModel: modelName,
       userId: get(this, 'session.authenticatedUser')
-    }).save()
-      .then(savedSubscription => {
-        setProperties(this, {
-          'subscription': savedSubscription,
-          'isLoading': false
-        });
-      }).catch(err => {
-        set(this, 'isLoading', false);
-        Logger.error(err);
-      });
+    };
+    dataObj[modelName + "Id"] = currentModel;
+
+    return get(this, 'store')
+      .createRecord('subscription', dataObj)
+      .save()
+      .catch(Logger.error)
+      .finally(() => { set(this, 'isLoading', false); });
   },
 
   _toggleSubscriptionState(subscription) {
     subscription.toggleProperty('active');
-    subscription.save()
-      .then(savedSubscription => {
-        setProperties(this, {
-          'subscription': savedSubscription,
-          'isLoading': false
-        });
-      })
-      .catch(err => {
-        set(this, 'isLoading', false);
-        Logger.error(err);
-      });
+    subscription
+      .save()
+      .catch(Logger.error)
+      .finally(() => { set(this, 'isLoading', false); });
   }
 });
