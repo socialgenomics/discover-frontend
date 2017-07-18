@@ -35,12 +35,5 @@ export default Route.extend(AuthenticatedRouteMixin, LoadDetailRouteMixin, {
       'comments': sortedComments,
       tags
     })
-  },
-
-  actions: {
-    didTransition: function() {
-      get(this, 'metrics').trackPage();
-      return true;
-    }
   }
 });

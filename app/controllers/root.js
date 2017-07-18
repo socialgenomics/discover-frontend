@@ -21,14 +21,6 @@ export default Controller.extend({
   }),
 
   actions: {
-    enterSite: function() {
-      this.flashMessages.add({
-        message: 'Please check your email to verify your account',
-        type: 'info',
-        sticky: true
-      });
-    },
-
     trackCreateAccount(eventName) {
       get(this, 'metrics').trackEvent({
         category: eventName,

@@ -60,13 +60,6 @@ export default Route.extend(ResetScrollMixin, LoadDetailRouteMixin, {
     })
   },
 
-  actions: {
-    didTransition() {
-      get(this, 'metrics').trackPage();
-      return true;
-    }
-  },
-
   _getMergedAttributes(model) {
     const datasetAttrs = getWithDefault(model, 'dataset.properties.attributes', {});
     const actionAttrs = getWithDefault(model, 'attributes', []);
