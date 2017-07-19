@@ -35,7 +35,7 @@ export default Controller.extend(Validations, FlashMessageMixin, {
           .catch(err => {
             set(this, 'loading', false);
             Logger.error(err);
-            this._addFlashMessage(`We could not send an email to ${get(this, 'email')}. Please check you\'ve entered the correct email.`, 'warning');
+            this._addFlashMessage(`We could not send an email to ${get(this, 'email')}. Please check you've entered the correct email.`, 'warning');
           });
       }
     }

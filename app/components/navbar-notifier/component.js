@@ -32,8 +32,8 @@ export default Component.extend({
               return notification.save().then(notification => this._peekAndSetAction(notification));
             })
         )
-        .catch(Logger.error)
-        .finally(() => { set(this, 'isLoading', false); });
+          .catch(Logger.error)
+          .finally(() => { set(this, 'isLoading', false); });
       }
     },
 
@@ -64,13 +64,13 @@ export default Component.extend({
             return notification;
           }
         }))
-        .then(notifications => {
-          setProperties(this, {
-            'notifications': notifications.reject(notification => notification ? false : true),
-            'isLoading': false
+          .then(notifications => {
+            setProperties(this, {
+              'notifications': notifications.reject(notification => notification ? false : true),
+              'isLoading': false
+            });
+            return notifications;
           });
-          return notifications;
-        });
       })
       .catch(error => {
         set(this, 'isLoading', false);
