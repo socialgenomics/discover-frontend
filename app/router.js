@@ -81,6 +81,7 @@ router.map(function() {
     this.route('registering-new-data', { path: '/registering-new-data/:query' });
     this.route('your-account', { path: '/your-account/:query' });
     this.route('other', { path: '/other/:query' });
+    this.route('attributes', { path: '/attributes/:query' });
   });
 
   this.route('policies', { resetNamespace: true }, function() {
