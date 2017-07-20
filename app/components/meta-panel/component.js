@@ -9,7 +9,15 @@ export default Component.extend({
   classNameBindings: ['metaPanelHidden:is-hidden'],
   classNames: ['c-sidebar', 'absolute', 'grid'],
   displayInfo: true,
-  metaPanelHidden: true,
+  metaPanelHidden: false,
+
+  init() {
+    this._super(...arguments);
+
+    const VIEWPORT_WIDTH = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+    //Only hide the side panel by default if on mobile.
+    if (VIEWPORT_WIDTH < 680) { set(this, 'metaPanelHidden', true) }
+  },
 
   didReceiveAttrs() {
     this._super(...arguments);
