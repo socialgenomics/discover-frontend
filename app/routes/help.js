@@ -63,10 +63,10 @@ const navigationData = [
   {
     title: 'Attributes',
     links: [
-      { target: 'help.attributes', query: 'why-tag', text: 'Why should I tag a dataset?' },
-      { target: 'help.attributes', query: 'incorrect-tag', text: 'What should I do if a previous tag is incorrect?' },
-      { target: 'help.attributes', query: 'contribute-discussion', text: 'How can I contribute to a discussion?' },
-      { target: 'help.attributes', query: 'good-tag', text: 'What makes a good tag?' }
+      { target: 'help.attributes', query: 'adding-metadata', text: 'Can I add more metadata?' },
+      { target: 'help.attributes', query: 'can-i-edit', text: 'Can I edit my dataset and add more description later?' },
+      { target: 'help.attributes', query: 'who-can-add-metadata', text: 'Who can add metadata to a dataset?' },
+      { target: 'help.attributes', query: 'why-add-metadata', text: 'Why should I add metadata?' }
     ]
   }
 ];
