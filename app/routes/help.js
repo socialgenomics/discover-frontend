@@ -20,7 +20,6 @@ const navigationData = [
       { target: 'help.searching-for-data', query: 'algorithm', text: 'How does the search algorithm work?' },
       { target: 'help.searching-for-data', query: 'effective', text: 'How can I build my search query to make it more effective?' },
       { target: 'help.searching-for-data', query: 'boolean', text: 'What boolean operators can I use?' },
-      { target: 'help.searching-for-data', query: 'predicated', text: 'What predicated search terms can I use?' },
       { target: 'help.searching-for-data', query: 'filters', text: 'What do all those filters mean?' }
     ]
   },
@@ -57,7 +56,8 @@ const navigationData = [
       { target: 'help.other', query: 'incorrect-tag', text: 'What should I do if a previous tag is incorrect?' },
       { target: 'help.other', query: 'contribute-discussion', text: 'How can I contribute to a discussion?' },
       { target: 'help.other', query: 'good-tag', text: 'What makes a good tag?' },
-      { target: 'help.other', query: 'format', text: 'How can I format my descriptions and discussions?' }
+      { target: 'help.other', query: 'format', text: 'How can I format my descriptions and discussions?' },
+      { target: 'help.other', query: 'reputation', text: 'What is the number next to my profile image?' }
     ]
   },
   {
