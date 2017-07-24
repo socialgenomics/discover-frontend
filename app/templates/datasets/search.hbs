@@ -14,10 +14,14 @@
     {{partial 'loading'}}
   {{else}}
     {{#if (gt model.meta.total 0)}}
-      <div class="flex justify-between mb4 pt3 pt0-l">
-        <h3 class="mb0 fs2">Datasets ({{model.meta.total}})</h3>
-        {{results-select resultsOptions=resultsOptions resultsPerPage=resultsPerPage setResultsPerPage=(action 'setResultsPerPage')}}
-      </div>
+      {{#results-header title=(concat 'Datasets (' model.meta.total ')')}}
+        {{results-select
+          resultsOptions=resultsOptions
+          resultsPerPage=resultsPerPage
+          setResultsPerPage=(action 'setResultsPerPage')
+        }}
+      {{/results-header}}
+
     {{/if}}
 
     {{search-results-list results=model.datasets totalResults=model.meta.total type='dataset'}}
