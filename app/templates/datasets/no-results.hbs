@@ -1,8 +1,9 @@
 <div class="c-card p5 ta-center">
-  <p class="mb0 fs3 fw-med">Sorry, there are no matching datasets.</p>
-  <p class="mb5 fs3 fw-med">You can make request to ask our community for help.</p>
-  {{#link-to 'datasets.request' class='r-btn r-btn-large r-btn-primary'}}
-    {{! TODO: custom button }}
-    {{fa-icon "clipboard"}}<span class="pl2">Request Dataset</span>
-  {{/link-to}}
+  <h1 class="mb0 fs3 fw-med">Sorry, there are no matching datasets.</h1>
+  <p class="mb5 fs3 fw-med">You could try to refine your search terms (e.g use synonyms)</p>
+  {{request-form
+      savedTitle=(readonly title)
+      savedDescription=(readonly description)
+      submitRequest=(action 'submitRequest')
+      saveForLater=(action 'saveForLater')}}
 </div>
