@@ -1,46 +1,39 @@
 import Ember from 'ember';
 import FlashMessageMixin from 'repositive/mixins/flash-message-mixin';
 import TrackEventsMixin from 'repositive/mixins/track-events-mixin';
-import { buildValidations } from 'ember-cp-validations';
-import presenceValidator from 'repositive/validations/presenceValidator';
 
-const { Controller, computed, inject: { service }, get, getProperties, set, Logger } = Ember;
-const Validations = buildValidations({
-  title: presenceValidator(),
-  description: presenceValidator()
-});
+const { Controller, inject: { service }, get, set, setProperties, Logger } = Ember;
 
 export default Controller.extend(
-  Validations,
   FlashMessageMixin,
   TrackEventsMixin,
   {
     session: service(),
 
-    title: null,
-    description: null,
-    didRequest: false,
+    title: null, //only used for keeping state of form if not submitted
+    description: null, //only used for keeping state of form if not submitted
+
     loading: false,
 
-    isInvalid: computed.not('validations.isValid'),
-
     actions: {
-      addRequest: function() {
-        if (get(this, 'validations.isValid')) {
-          this._createRequest()
-            .then(this._createRequestSuccess.bind(this))
-            .catch(this._createRequestError.bind(this));
-        }
+      submitRequest(requestObject) {
+        return this._createRequest(requestObject)
+          .then(this._createRequestSuccess.bind(this))
+          .catch(this._createRequestError.bind(this));
+      },
+      saveForLater(requestObject) {
+        setProperties(this, requestObject);
       }
     },
 
     /**
      * @desc creates new dataset request and saves it in backend
+     * @param requestObject the data representation of the new request
      * @returns {Promise}
      * @private
      */
-    _createRequest() {
-      const { description, title } = getProperties(this, 'title', 'description');
+    _createRequest(requestObject) {
+      const { title, description } = requestObject;
 
       return this.store.createRecord('request', {
         userId: get(this, 'session.authenticatedUser'),
@@ -57,7 +50,7 @@ export default Controller.extend(
     _createRequestSuccess(request) {
       const id = get(request, 'id');
 
-      set(this, 'didRequest', true);
+      setProperties(this, { title: null, description: null });
       this._addFlashMessage('Request created successfully.', 'success');
       this.transitionToRoute('requests.detail', id);
       this._trackEvent('discover_homeauth_datasetRequest', 'requested', id);
