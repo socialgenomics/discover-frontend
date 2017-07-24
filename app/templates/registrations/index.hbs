@@ -1,4 +1,5 @@
 <div class="grid-wrapper grid-wrapper-stepped mb4">
+  {{results-header title='Registered data'}}
 
   {{#infinite-scroller on-load-more=(route-action 'loadMore') use-document=true trigger-at='50%' as |scroller|}}
     {{search-results-list results=model type='dataset'}}
