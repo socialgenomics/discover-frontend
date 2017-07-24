@@ -9,7 +9,6 @@ const { get, setProperties } = Ember;
 function mockParams(controller) {
   setProperties(controller, {
     loading: true,
-    didRequest: false,
     _addFlashMessage: sinon.spy(),
     _trackEvent: sinon.spy(),
     transitionToRoute: sinon.spy()
@@ -35,7 +34,7 @@ describe('DatasetsRequestController', function() {
 
     setProperties(controller, { store, title, description });
 
-    controller._createRequest();
+    controller._createRequest({ title, description });
 
     const expectedDataObj = store.createRecord.args[0][1];
 
@@ -44,16 +43,6 @@ describe('DatasetsRequestController', function() {
     expect(expectedDataObj).to.have.property('title', title);
     expect(expectedDataObj).to.have.property('description', description);
     expect(storeMock.save.called).to.eql(true);
-  });
-
-  it('_createRequestSuccess sets didRequest to true', function () {
-    const controller = this.subject();
-    const request = { id: '12345' };
-
-    mockParams(controller);
-    controller._createRequestSuccess(request);
-
-    expect(get(controller, 'didRequest')).to.eql(true);
   });
 
   it('_createRequestSuccess add flash message', function () {
