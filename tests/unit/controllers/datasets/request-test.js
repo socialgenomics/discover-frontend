@@ -8,7 +8,7 @@ const { get, setProperties } = Ember;
 
 function mockParams(controller) {
   setProperties(controller, {
-    loading: true,
+    isLoading: true,
     _addFlashMessage: sinon.spy(),
     _trackEvent: sinon.spy(),
     transitionToRoute: sinon.spy()
@@ -73,16 +73,6 @@ describe('DatasetsRequestController', function() {
     controller._createRequestSuccess(request);
 
     expect(get(controller, 'transitionToRoute').calledWith('requests.detail', request.id)).to.eql(true);
-  });
-
-  it('_createRequestError sets loading to false', function () {
-    const controller = this.subject();
-    const error = 'lorem ipsum';
-
-    mockParams(controller);
-    controller._createRequestError(error);
-
-    expect(get(controller, 'loading')).to.eql(false);
   });
 
   it('_createRequestError add flash message', function () {

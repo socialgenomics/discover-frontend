@@ -10,13 +10,15 @@ export default Mixin.create(FlashMessageMixin, TrackEventsMixin, {
   title: null, //only used for keeping state of form if not submitted
   description: null, //only used for keeping state of form if not submitted
 
-  loading: false,
+  isLoading: false,
 
   actions: {
     submitRequest(requestObject) {
+      set(this, 'isLoading', true);
       return this._createRequest(requestObject)
         .then(this._createRequestSuccess.bind(this))
-        .catch(this._createRequestError.bind(this));
+        .catch(this._createRequestError.bind(this))
+        .finally(() => set(this, 'isLoading', false));
     },
     saveForLater(requestObject) {
       setProperties(this, requestObject);
@@ -47,10 +49,10 @@ export default Mixin.create(FlashMessageMixin, TrackEventsMixin, {
   _createRequestSuccess(request) {
     const id = get(request, 'id');
 
-    setProperties(this, { title: null, description: null });
     this._addFlashMessage('Request created successfully.', 'success');
-    this.transitionToRoute('requests.detail', id);
     this._trackEvent('discover_homeauth_datasetRequest', 'requested', id);
+    this.transitionToRoute('requests.detail', id);
+    setProperties(this, { title: null, description: null });
   },
 
   /**
@@ -59,7 +61,6 @@ export default Mixin.create(FlashMessageMixin, TrackEventsMixin, {
    * @private
    */
   _createRequestError(error) {
-    set(this, 'loading', false);
     this._addFlashMessage('Oh dear. There was a problem submitting your dataset request.', 'warning');
     Logger.error(error);
   }
