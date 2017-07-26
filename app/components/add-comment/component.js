@@ -14,10 +14,11 @@ const Validations = buildValidations({ comment: emptyValidator() });
  */
 export function buildErrorMessage(context, errorResp, i18n) {
   if ('props' in errorResp) {
-    const invalidObj = Object.keys(errorResp.props)[0];
-    const invalidObjFirstKey = Object.keys(invalidObj)[0];
-    debugger;
-    const errorPath = `${context}.${errorResp.category}.${invalidObj}.${invalidObjFirstKey}`;
+    const invalidObjKey = Object.keys(errorResp.props)[0]; //tag
+    const invalidObj = get(errorResp, `props.${invalidObjKey}`);//tag obj
+    const errorKey = Object.keys(invalidObj)[0]; //min-length
+    const errorPath = `${context}.${errorResp.category}.${invalidObjKey}.${errorKey}`;
+
     return i18n.t(errorPath, errorResp.props);
   }
   return i18n.t(`${context}.${errorResp.category}.default`);
@@ -50,7 +51,6 @@ export default Component.extend(Validations, {
     const i18n = get(this, 'i18n');
     const errMsg = buildErrorMessage(context, errorResp, i18n);
     debugger;
-    // const datasetErr = i18n.t(`${context}.${errorResp.category}`, errorResp.props);
   },
 
   actions: {
