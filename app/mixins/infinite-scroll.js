@@ -32,7 +32,7 @@ export default Mixin.create({
     return this._makeRequest(
       modelType,
       this._buildRequestObj(newOffset, resultsPerPage, { 'where.user_id.$ne': 'null' }
-    ))
+      ))
       .then(this._handleResponse.bind(this))
       .catch(Logger.error)
   },

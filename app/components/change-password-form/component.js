@@ -88,10 +88,10 @@ export default Component.extend(Validations, FlashMessageMixin, {
         password: password
       }
     })
-    .then(() => {
-      this._addFlashMessage('Password successfully changed', 'success');
-      get(this, 'transitionToProfile')();
-    })
-    .catch(Logger.error)
+      .then(() => {
+        this._addFlashMessage('Password successfully changed', 'success');
+        get(this, 'transitionToProfile')();
+      })
+      .catch(Logger.error)
   }
 });

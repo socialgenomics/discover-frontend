@@ -42,11 +42,11 @@ export default Mixin.create(FlashMessageMixin, {
           set(subscription, 'active', false);
           return subscription.save();
         })
-          .then(this._addFlashMessage(`You have successfully unfollowed this ${modelName}.`, 'success'))
-          .catch(error => {
-            Logger.error(error);
-            this._addFlashMessage(`There was a problem unfollowing this ${modelName}, please try again.`, 'warning');
-          });
+        .then(this._addFlashMessage(`You have successfully unfollowed this ${modelName}.`, 'success'))
+        .catch(error => {
+          Logger.error(error);
+          this._addFlashMessage(`There was a problem unfollowing this ${modelName}, please try again.`, 'warning');
+        });
     }
   }
 });
