@@ -8,17 +8,17 @@ describe('Integration | Component | request form', function() {
     integration: true
   });
 
-  it('renders', function() {
-    // Set any properties with this.set('myProperty', 'value');
-    // Handle any actions with this.on('myAction', function(val) { ... });
-    // Template block usage:
-    // this.render(hbs`
-    //   {{#request-form}}
-    //     template content
-    //   {{/request-form}}
-    // `);
-
-    this.render(hbs`{{request-form}}`);
-    expect(this.$()).to.have.length(1);
-  });
+  // describe('didReceiveAttrs', function() {
+  //   // const str = 'abc';
+  //
+  //   it('sets title to saved title', function() {
+  //     // this.set('savedTitle', str);
+  //     this.render(hbs`{{request-form savedTitle='abc'}}`);
+  //     expect(this.get('savedTitle')).to.eql('abc');
+  //   });
+  //
+  //   // it('sets description to saved description', function() {
+  //   //
+  //   // });
+  // });
 });
