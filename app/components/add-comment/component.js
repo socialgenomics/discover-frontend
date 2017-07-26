@@ -6,6 +6,8 @@ const { Component, get, set, isEmpty, computed, inject: { service } } = Ember;
 
 const Validations = buildValidations({ comment: emptyValidator() });
 
+// TODO unit test
+// TODO generalize to allow for multiple errors
 /**
  * @desc builds an error message using i18n
  * @param {string} context name of current context e.g. dataset
