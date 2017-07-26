@@ -1,0 +1,26 @@
+<h4 class="fc-blue ta-left">Request form</h4>
+
+<form>
+  {{validated-input
+    label="Request Title"
+    type="text"
+    value=title
+    errors=validations.attrs.title.messages
+    placeholder="Name your request"
+  }}
+  {{validated-input
+    label="Request Description"
+    type="textarea"
+    value=description
+    errors=validations.attrs.description.messages
+    placeholder="Describe the dataset you're looking for. You can include ethnicity of patients, number of samples, assay type or associated diseases."
+  }}
+  {{r-async-button
+    action=(action 'addRequest')
+    default="Submit Request"
+    disableWhen=isInvalid
+    pending="Submitting..."
+    size="big"
+    variant="primary"
+  }}
+</form>
