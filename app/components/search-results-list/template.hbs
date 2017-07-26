@@ -1,7 +1,3 @@
-{{#if (eq totalResults 0)}}
-  {{partial 'datasets/no-results'}}
-{{else}}
-  {{#each results as |result|}}
-    {{dataset-card dataset=result type=type}}
-  {{/each}}
-{{/if}}
+{{#each results as |result|}}
+  {{dataset-card dataset=result type=type}}
+{{/each}}
