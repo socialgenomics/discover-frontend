@@ -52,6 +52,6 @@ export default Mixin.create(FlashMessageMixin, {
    */
   _onMakePrimaryError(err) {
     Logger.error(err);
-    this._addFlashMessage(`Sorry, we couldn't make your email primary. Please try again later.`, 'warning');
+    this._addFlashMessage(`Sorry, we were unable to add your email address. Please try again later.`, 'warning');
   }
 });
