@@ -6,29 +6,9 @@ const { Component, get, set, isEmpty, computed, inject: { service } } = Ember;
 
 const Validations = buildValidations({ comment: emptyValidator() });
 
-// TODO unit test
-// TODO generalize to allow for multiple errors
-/**
- * @desc builds an error message using i18n
- * @param {string} context name of current context e.g. dataset
- * @param {Object} errorResp the error response
- * @return {string} User-friendly error message
- */
-export function buildErrorMessage(context, errorResp, i18n) {
-  if ('props' in errorResp) {
-    const invalidObjKey = Object.keys(errorResp.props)[0]; //tag
-    const invalidObj = get(errorResp, `props.${invalidObjKey}`);//tag obj
-    const errorKey = Object.keys(invalidObj)[0]; //min-length
-    const errorPath = `${context}.${errorResp.category}.${invalidObjKey}.${errorKey}`;
-
-    return i18n.t(errorPath, errorResp.props);
-  }
-  return i18n.t(`${context}.${errorResp.category}.default`);
-}
-
 export default Component.extend(Validations, {
   session: service(),
-  i18n: service(),
+  errorMessages: service(),
 
   isActive: false,
 
@@ -50,8 +30,10 @@ export default Component.extend(Validations, {
         tag: { 'min-length': '5' }
       }
     };
-    const i18n = get(this, 'i18n');
-    const errMsg = buildErrorMessage(context, errorResp, i18n);
+    const errorMessages = get(this, 'errorMessages');
+    const errMsg = errorMessages.buildErrorMessage(context, errorResp);
+    
+    console.log(errMsg);
     debugger;
   },
 
