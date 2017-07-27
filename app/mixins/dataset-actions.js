@@ -3,12 +3,14 @@ import { createActionData } from 'repositive/utils/actions';
 import { convertAttrActionToCommonObj } from 'repositive/utils/attributes';
 import FlashMessageMixin from 'repositive/mixins/flash-message-mixin';
 
-const { Mixin, get, Logger, set, getWithDefault } = Ember;
+const { Mixin, get, Logger, set, getWithDefault, inject: { service } } = Ember;
 
 export default Mixin.create(FlashMessageMixin, {
+  errorMessages: service(),
   actions: {
     addAttribute(model, user, key, value) {
       const store = get(this, 'store');
+
       return store
         .createRecord('action', createActionData(model, user, 'attribute', { properties: { key, value } }))
         .save()
@@ -26,6 +28,14 @@ export default Mixin.create(FlashMessageMixin, {
     },
 
     addTag(model, user, text) {
+      const context = 'dataset';
+      const fakeErrorResp = {
+        category: 'invalid-syntax',
+        props: {
+          tag: { 'min-length': '5' }
+        }
+      };
+
       if (get(this, 'tags').findBy('properties.text', text)) {
         this._addFlashMessage(`The tag: ${text} already exists.`, 'warning' );
       } else {
@@ -33,7 +43,12 @@ export default Mixin.create(FlashMessageMixin, {
           .createRecord('action', createActionData(model, user, 'tag', { properties: { text } }))
           .save()
           .then(this._handleTagSaveSuccess.bind(this))
-          .catch(this._handleError.bind(this, 'tag', 'create'));
+          // .catch(this._handleError.bind(this, 'tag', 'create'));
+          // NOTE USAGE
+          .catch(() => {
+            const errorMessage = get(this, 'errorMessages').buildErrorMessage(context, fakeErrorResp);
+            this._addFlashMessage(errorMessage, 'warning');
+          })
       }
     },
 

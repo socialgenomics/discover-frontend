@@ -8,7 +8,6 @@ const Validations = buildValidations({ comment: emptyValidator() });
 
 export default Component.extend(Validations, {
   session: service(),
-  errorMessages: service(),
 
   isActive: false,
 
@@ -19,23 +18,6 @@ export default Component.extend(Validations, {
   isValid: computed('validations.isValid', function() {
     return get(this, 'validations.isValid');
   }),
-
-  didReceiveAttrs() {
-    this._super(...arguments);
-
-    const context = 'dataset';
-    const errorResp = {
-      category: 'invalid-syntax',
-      props: {
-        tag: { 'min-length': '5' }
-      }
-    };
-    const errorMessages = get(this, 'errorMessages');
-    const errMsg = errorMessages.buildErrorMessage(context, errorResp);
-    
-    console.log(errMsg);
-    debugger;
-  },
 
   actions: {
     showButtons: function() {
