@@ -4,6 +4,11 @@ const { Component, get, inject: { service }, setProperties, computed, set } = Em
 
 export default Component.extend({
   queryService: service('query'),
+  session: service(),
+
+  openPagesPlaceholder: 'Search over 1 million human genomic datasets',
+
+  isAuthenticated: computed.alias('session.isAuthenticated'),
 
   query: computed('queryService.queryString', {
     get() {
@@ -28,7 +33,9 @@ export default Component.extend({
     const queryService = get(this, 'queryService');
     setProperties(this, {
       'query': queryService.getQueryString(),
-      'placeholder': this._getSearchPlaceholder(get(this, 'placeholderValues'))
+      'placeholder': get(this, 'isAuthenticated') ?
+        this._getSearchPlaceholder(get(this, 'placeholderValues')) :
+        get(this, 'openPagesPlaceholder')
     });
   },
 
