@@ -6,8 +6,11 @@ const { Component, get, inject: { service }, setProperties, computed, set } = Em
 export default Component.extend({
   queryService: service('query'),
   ajax: service(),
+  session: service(),
+  openPagesPlaceholder: 'Search over 1 million human genomic datasets',
   autocompletionOpen: false,
   autocompletions: {},
+  isAuthenticated: computed.alias('session.isAuthenticated'),
   autocompletion: Ember.computed('autocompletions.@each', function() {
     return Object.keys(this.get(`autocompletions`)).map((k) => {
       return {
@@ -16,6 +19,8 @@ export default Component.extend({
       };
     });
   }),
+
+
 
   query: computed('queryService.queryString', {
     get() {
@@ -40,7 +45,9 @@ export default Component.extend({
     const queryService = get(this, 'queryService');
     setProperties(this, {
       'query': queryService.getQueryString(),
-      'placeholder': this._getSearchPlaceholder(get(this, 'placeholderValues'))
+      'placeholder': get(this, 'isAuthenticated') ?
+        this._getSearchPlaceholder(get(this, 'placeholderValues')) :
+        get(this, 'openPagesPlaceholder')
     });
   },
 
@@ -58,7 +65,6 @@ export default Component.extend({
           }
         ).then( (res) => {
           // The request is been made and returns correct results
-          console.log(res);
           //TODO populate a div with the results as first steps.
           //How to define a variable accesible for component AND template
           const autocompletionKeys = Object.keys(res);
