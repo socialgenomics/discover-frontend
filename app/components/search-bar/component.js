@@ -12,12 +12,18 @@ export default Component.extend({
   autocompletions: {},
   isAuthenticated: computed.alias('session.isAuthenticated'),
   autocompletion: Ember.computed('autocompletions.@each', function() {
-    return Object.keys(this.get(`autocompletions`)).map((k) => {
-      return {
-        key: k,
-        values: this.get('autocompletions')[k]
-      };
-    });
+    return Object.keys(this.get(`autocompletions`)).reduce((acc, k) => {
+      const list = this.get('autocompletions')[k];
+      console.log(list);
+      if (list.length > 0) {
+        acc.push({
+          key: k,
+          values: list
+        });
+      }
+      console.log(acc);
+      return acc;
+    }, []);
   }),
 
 
