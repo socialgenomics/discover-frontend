@@ -30,10 +30,8 @@ export default Controller.extend(
     password: null,
     loading: false,
 
-    isDisabled: false,
-
     isInvalid: computed.not('validations.isValid'),
-    // isDisabled: computed.or('loading', 'isInvalid'),
+    isDisabled: computed.or('loading', 'isInvalid'),
 
     actions: {
       submitForm() {
@@ -55,6 +53,9 @@ export default Controller.extend(
       set(this, 'loading', false);
       if (resp) {
         const category = get(resp, 'category');
+
+        // Be backwards compatible when it comes to displaing API responses to the user
+        // TODO: when we convert all responses error and success to pass categories we could change this
         const message = category ?
           get(this, 'i18n').t(`login.${category}`, getWithDefault(resp, 'props'), {}) :
           get(resp, 'message');
