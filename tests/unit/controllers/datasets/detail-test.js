@@ -11,8 +11,7 @@ describe('Unit | Controller | datasets/detail', function() {
   setupTest('controller:datasets/detail', {
     needs: [
       'service:metrics',
-      'service:session',
-      'service:errorMessages'
+      'service:session'
     ]
   });
 

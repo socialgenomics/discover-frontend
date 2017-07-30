@@ -7,7 +7,7 @@ import { errorMessages, lengths, lengthTypes } from 'repositive/validations/vali
 import FlashMessageMixin from 'repositive/mixins/flash-message-mixin';
 
 
-const { get, getProperties, computed, Controller, inject: { service }, set } = Ember;
+const { get, getProperties, getWithDefault, computed, Controller, inject: { service }, set } = Ember;
 const Validations = buildValidations({
   email: [
     presenceValidator(errorMessages.blankEmail),
@@ -24,13 +24,16 @@ export default Controller.extend(
   FlashMessageMixin,
   {
     session: service(),
+    i18n: service(),
 
     email: null,
     password: null,
     loading: false,
 
+    isDisabled: false,
+
     isInvalid: computed.not('validations.isValid'),
-    isDisabled: computed.or('loading', 'isInvalid'),
+    // isDisabled: computed.or('loading', 'isInvalid'),
 
     actions: {
       submitForm() {
@@ -51,9 +54,10 @@ export default Controller.extend(
     _displayMessage(resp) {
       set(this, 'loading', false);
       if (resp) {
-        const message = get(resp, 'status_code') !== 400 ?
-          get(resp, 'message') :
-          'Error: Invalid Email. Please check that you have typed your email correctly.';
+        const category = get(resp, 'category');
+        const message = category ?
+          get(this, 'i18n').t(`login.${category}`, getWithDefault(resp, 'props'), {}) :
+          get(resp, 'message');
 
         if (message) { this._addFlashMessage(message, 'warning'); }
       }
