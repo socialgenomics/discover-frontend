@@ -19,11 +19,11 @@ export default Mixin.create({
   }),
 
   activeFilters: computed('query', function () {
-    if (get(this, 'query')) {
+    const query = get(this, 'query');
+    if (query) {
       const qp = get(this, 'QP');
-      const queryTree = qp.parseString(get(this, 'query'));
-
-      return qp.getFilters(queryTree).map(filter => `${filter.predicate}:${filter.text}`);
+      const queryTree = qp.fromNatural(query);
+      return qp.filter(queryTree, (node) => qp.isPredicate(node)).map(filter => `${filter.predicate}:${filter.value}`);
     }
     return [];
   }),
@@ -44,11 +44,13 @@ export default Mixin.create({
     },
 
     addFilter(predicate, text) {
-      this._toggleFilter('addFilter', predicate, text);
+      const filter = get(this, 'QP').predicate({key: predicate,  value: text});
+      this._toggleFilter('add', filter);
     },
 
     removeFilter(predicate, text) {
-      this._toggleFilter('removeFilter', predicate, text);
+      const filter = get(this, 'QP').predicate({key: predicate, value: text});
+      this._toggleFilter('remove', filter);
     },
 
     setResultsPerPage(resultsPerPage) {
@@ -70,18 +72,20 @@ export default Mixin.create({
    * @param {String} text
    * @private
    */
-  _toggleFilter(action, predicate, text) {
+  _toggleFilter(action, filter) {
     const qp = get(this, 'QP');
     const query = get(this, 'query');
-    const currentQueryTree = query ? qp.parseString(query) : '';
+    const currentQueryTree = qp.fromNatural(query || '');
 
-    set(
-      this,
-      'query',
-      qp.toBoolString(
-        qp[action](currentQueryTree, predicate, text)
-      )
-    );
+    if (action === 'remove') {
+      set(this, 'query', query.toNatural(
+        qp.remove(currentQueryTree, filter)
+      ));
+    } else if (action === 'add') {
+      set(this, 'query', query.toNatural(
+        qp.and({left: currentQueryTree, right: filter})
+      ));
+    }
 
     // reset current page number each time we change query
     set(this, 'page', 1);
