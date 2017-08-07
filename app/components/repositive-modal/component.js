@@ -4,7 +4,6 @@ import ModalDialog from 'ember-modal-dialog/components/modal-dialog';
 const { setProperties } = Ember;
 
 export default ModalDialog.extend({
-  clickOutsideToClose: true,
   init() {
     this._super(...arguments);
 
