@@ -23,7 +23,7 @@ export default Mixin.create({
     if (query) {
       const qp = get(this, 'QP');
       const queryTree = qp.fromNatural(query);
-      return qp.filter(queryTree, (node) => qp.isPredicate(node)).map(filter => `${filter.predicate}:${filter.value}`);
+      return qp.filter(queryTree, (node) => qp.isPredicate(node)).map(filter => `${filter.key}:${filter.value}`);
     }
     return [];
   }),
@@ -76,13 +76,13 @@ export default Mixin.create({
     const qp = get(this, 'QP');
     const query = get(this, 'query');
     const currentQueryTree = qp.fromNatural(query || '');
-
     if (action === 'remove') {
-      set(this, 'query', query.toNatural(
-        qp.remove(currentQueryTree, filter)
+      const toRemove = qp.filter(currentQueryTree, (node) => node.value === filter.value && node.key === filter.key)[0]
+      set(this, 'query', qp.toNatural(
+        qp.remove(currentQueryTree, toRemove)
       ));
     } else if (action === 'add') {
-      set(this, 'query', query.toNatural(
+      set(this, 'query', qp.toNatural(
         qp.and({left: currentQueryTree, right: filter})
       ));
     }
