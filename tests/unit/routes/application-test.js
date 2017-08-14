@@ -16,24 +16,6 @@ describe('Unit | Route | application', function() {
     ]
   });
 
-  it('search calls _conditionallyTransition with correct args when collection predicate applied', function() {
-    const route = this.subject();
-    const queryString = 'collection:"ABC"';
-    set(route, 'metrics', { trackEvent: sinon.stub() });
-    route._conditionallyTransition = sinon.spy();
-    route.send('search', queryString, 1);
-    expect(route._conditionallyTransition.calledWith([{ predicate: 'collection', text: 'ABC' }], [], queryString, 1)).to.be.true;
-  });
-
-  it('search calls _conditionallyTransition with correct args when datasource predicate applied', function() {
-    const route = this.subject();
-    const queryString = 'datasource:SRA';
-    set(route, 'metrics', { trackEvent: sinon.stub() });
-    route._conditionallyTransition = sinon.spy();
-    route.send('search', queryString, 1);
-    expect(route._conditionallyTransition.calledWith([], [{ predicate: 'datasource', text: 'SRA' }], queryString, 1)).to.be.true;
-  });
-
   it('search event is tracked', function() {
     const route = this.subject();
     const queryString = 'datasource:SRA';

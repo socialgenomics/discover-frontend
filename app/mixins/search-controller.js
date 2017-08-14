@@ -67,7 +67,7 @@ export default Mixin.create({
 
   /**
    *
-   * @param {String} action - QP method name ("addFilter" or "removeFilter")
+   * @param {String} action - QP method name ("add" or "remove")
    * @param {String} predicate
    * @param {String} text
    * @private
@@ -83,7 +83,7 @@ export default Mixin.create({
       ));
     } else if (action === 'add') {
       set(this, 'query', qp.toNatural(
-        qp.and({left: currentQueryTree, right: filter})
+        currentQueryTree ? qp.and({left: currentQueryTree, right: filter}) : filter
       ));
     }
 

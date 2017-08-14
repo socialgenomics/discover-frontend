@@ -8,7 +8,7 @@ describe('SearchControllerMixin', function() {
   const { get, set } = Ember;
   const SearchControllerObject = Ember.Object.extend(SearchControllerMixin);
   const fromNaturalVal = { lorem: 'ipsum' };
-  const filtersVal = [{ predicate: 'a', text: 'A' }, { predicate: 'b', text: 'B' }, { predicate: 'c', text: 'C' }];
+  const filtersVal = [{ key: 'a', value: 'A' }, { key: 'b', value: 'B' }, { key: 'c', value: 'C' }];
 
   let subject;
 
@@ -18,7 +18,8 @@ describe('SearchControllerMixin', function() {
       filter: sinon.stub().returns(filtersVal),
       toNatural: sinon.stub().returnsArg(0),
       addFilter: sinon.stub().returns('addFilter'),
-      removeFilter: sinon.stub().returns('removeFilter')
+      removeFilter: sinon.stub().returns('removeFilter'),
+      and: sinon.stub().returnsArg(0)
     };
   }
 
@@ -65,7 +66,6 @@ describe('SearchControllerMixin', function() {
 
       it('should return active filters if query is not null', function () {
         set(subject, 'query', 'lorem ipsum');
-
         expect(get(subject, property)).to.eql(['a:A', 'b:B', 'c:C']);
       });
 
@@ -77,12 +77,17 @@ describe('SearchControllerMixin', function() {
     describe('custom methods', function () {
       describe('_toggleFilter', function () {
         const method = this.title;
-        const addAction = 'addFilter';
+        const addAction = 'add';
 
         it('should use empty string if "query" is null', function () {
-          subject[method](addAction, 'a', 'a');
+          const QP = get(subject, 'QP');
+          const rand = { rand: Math.random() };
 
-          expect(get(subject, 'QP')[addAction].args[0][0]).to.be.equal('');
+          QP.fromNatural.returns(undefined);
+          subject._toggleFilter(addAction, rand);
+
+          expect(QP.toNatural.calledOnce).to.be.true;
+          expect(QP.toNatural.args[0][0]).to.eql(rand);
         });
 
         it('should parse query to query tree', function () {
@@ -92,20 +97,6 @@ describe('SearchControllerMixin', function() {
           subject[method](addAction, 'a', 'a');
 
           expect(get(subject, 'QP').fromNatural.calledWith(query)).to.be.true;
-        });
-
-        it('should set new query', function () {
-          const actions = [addAction, 'removeFilter'];
-
-          set(subject, 'query', addAction);
-
-          actions.forEach(action => {
-            subject[method](action, 'a', 'a');
-
-            expect(get(subject, 'query')).to.be.equal(action);
-            expect(get(subject, 'QP')[action].calledWith(fromNaturalVal, 'a', 'a')).to.be.true;
-            expect(get(subject, 'QP').toNatural.calledWith(action)).to.be.true;
-          });
         });
 
         it('should reset page to 1', function () {
