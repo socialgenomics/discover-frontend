@@ -7,16 +7,16 @@ import sinon from 'sinon';
 describe('SearchControllerMixin', function() {
   const { get, set } = Ember;
   const SearchControllerObject = Ember.Object.extend(SearchControllerMixin);
-  const parseStringVal = { lorem: 'ipsum' };
-  const getFiltersVal = [{ predicate: 'a', text: 'A' }, { predicate: 'b', text: 'B' }, { predicate: 'c', text: 'C' }];
+  const fromNaturalVal = { lorem: 'ipsum' };
+  const filtersVal = [{ predicate: 'a', text: 'A' }, { predicate: 'b', text: 'B' }, { predicate: 'c', text: 'C' }];
 
   let subject;
 
-  function createQPMock(parseStringVal = '', getFiltersVal = []) {
+  function createQPMock(fromNaturalVal = '', filtersVal = []) {
     return {
-      parseString: sinon.stub().returns(parseStringVal),
-      getFilters: sinon.stub().returns(getFiltersVal),
-      toBoolString: sinon.stub().returnsArg(0),
+      fromNatural: sinon.stub().returns(fromNaturalVal),
+      filter: sinon.stub().returns(filtersVal),
+      toNatural: sinon.stub().returnsArg(0),
       addFilter: sinon.stub().returns('addFilter'),
       removeFilter: sinon.stub().returns('removeFilter')
     };
@@ -25,7 +25,7 @@ describe('SearchControllerMixin', function() {
   beforeEach(function () {
     subject = SearchControllerObject.create();
 
-    set(subject, 'QP', createQPMock(parseStringVal, getFiltersVal));
+    set(subject, 'QP', createQPMock(fromNaturalVal, filtersVal));
   });
 
   describe('queryParams', function () {
@@ -91,7 +91,7 @@ describe('SearchControllerMixin', function() {
           set(subject, 'query', query);
           subject[method](addAction, 'a', 'a');
 
-          expect(get(subject, 'QP').parseString.calledWith(query)).to.be.true;
+          expect(get(subject, 'QP').fromNatural.calledWith(query)).to.be.true;
         });
 
         it('should set new query', function () {
@@ -103,8 +103,8 @@ describe('SearchControllerMixin', function() {
             subject[method](action, 'a', 'a');
 
             expect(get(subject, 'query')).to.be.equal(action);
-            expect(get(subject, 'QP')[action].calledWith(parseStringVal, 'a', 'a')).to.be.true;
-            expect(get(subject, 'QP').toBoolString.calledWith(action)).to.be.true;
+            expect(get(subject, 'QP')[action].calledWith(fromNaturalVal, 'a', 'a')).to.be.true;
+            expect(get(subject, 'QP').toNatural.calledWith(action)).to.be.true;
           });
         });
 
