@@ -12,7 +12,7 @@ export default Component.extend({
   autocompletionOpen: false,
 
   isAuthenticated: computed.alias('session.isAuthenticated'),
-  suggestions: computed('autocompletions.@each', function() {
+  suggestions: computed('autocompletions.[]', function() {
     return Object.keys(get(this, `autocompletions`))
       .reduce((acc, key) => {
         const list = get(this, 'autocompletions')[key];
@@ -24,8 +24,6 @@ export default Component.extend({
         return acc;
       }, []);
   }),
-
-
 
   query: computed('queryService.queryString', {
     get() {
