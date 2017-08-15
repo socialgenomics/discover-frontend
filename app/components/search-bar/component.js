@@ -47,6 +47,14 @@ export default Component.extend({
       get(this, 'search')(query.trim()); //calls search on application route
     },
 
+    handleSelection(selection) {
+      const newQuery = get(this, 'query') + selection.toString().trim();
+      setProperties(this, {
+        'suggestion': selection,
+        'query': newQuery
+      });
+    },
+
     fetchSuggestions(queryString) {
       return get(this, 'ajax').request(
         ENV.APIRoutes['autocomplete'],{

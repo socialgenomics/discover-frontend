@@ -6,8 +6,8 @@
     {{#power-select-multiple
       placeholder=placeholder
       options=suggestions
-      selected=choice
-      onchange=(action (mut choice))
+      selected=suggestion
+      onchange=(action 'handleSelection')
       search=(action 'fetchSuggestions')
       as |suggestion|
     }}
