@@ -8,10 +8,10 @@ export default Component.extend({
   queryService: service('query'),
   ajax: service(),
   session: service(),
+
   openPagesPlaceholder: 'Search over 1 million human genomic datasets',
 
   isAuthenticated: computed.alias('session.isAuthenticated'),
-
   query: computed('queryService.queryString', {
     get() {
       return get(this, 'queryService').getQueryString();
@@ -43,12 +43,15 @@ export default Component.extend({
   },
 
   actions: {
-    search(query) {
-      get(this, 'search')(query.trim()); //calls search on application route
+    handleKeyDown(dropdown, e) {
+      if (e.keyCode === 13) {
+        const query = get(this, 'query').trim();
+        get(this, 'search')(query);
+      }
     },
 
     handleSelection(selection) {
-      const newQuery = get(this, 'query') + selection.toString().trim();
+      const newQuery = get(this, 'query') || '' + selection.toString().trim();
       setProperties(this, {
         'suggestion': selection,
         'query': newQuery
@@ -70,7 +73,7 @@ export default Component.extend({
 
   _handleAutocompleteSuccess(resp) {
     const suggestionKeys = Object.keys(resp) || [];
-    const toReturn = suggestionKeys
+    return suggestionKeys
       .reduce((acc, key) => {
         const list = resp[key];
 
@@ -80,7 +83,6 @@ export default Component.extend({
 
         return acc;
       }, []);
-    return toReturn;
   },
 
   /**

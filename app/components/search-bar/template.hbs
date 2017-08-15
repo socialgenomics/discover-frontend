@@ -1,4 +1,4 @@
-<form class="flex bc-white" autocomplete="off" {{action search query on='submit'}}>
+<form class="flex bc-white" autocomplete="off">
 
     <label class="flex items-center">
       <span>{{fa-icon "search" class='px3 fc-secondary'}}</span>
@@ -8,6 +8,7 @@
       options=suggestions
       selected=suggestion
       onchange=(action 'handleSelection')
+      onkeydown=(action 'handleKeyDown')
       search=(action 'fetchSuggestions')
       as |suggestion|
     }}
