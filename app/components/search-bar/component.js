@@ -2,28 +2,15 @@ import Ember from 'ember';
 import ENV from 'repositive/config/environment';
 import { getRandomElement } from 'repositive/utils/arrays';
 
-const { Component, get, inject: { service }, setProperties, computed, set, Logger } = Ember;
+const { Component, get, inject: { service }, setProperties, computed, Logger } = Ember;
 
 export default Component.extend({
   queryService: service('query'),
   ajax: service(),
   session: service(),
   openPagesPlaceholder: 'Search over 1 million human genomic datasets',
-  autocompletionOpen: false,
 
   isAuthenticated: computed.alias('session.isAuthenticated'),
-  suggestions: computed('autocompletions.[]', function() {
-    return Object.keys(get(this, `autocompletions`))
-      .reduce((acc, key) => {
-        const list = get(this, 'autocompletions')[key];
-
-        if (list.length > 0) {
-          return [...acc, ...[{ key, values: list }]];
-        }
-
-        return acc;
-      }, []);
-  }),
 
   query: computed('queryService.queryString', {
     get() {
@@ -48,7 +35,6 @@ export default Component.extend({
     const queryService = get(this, 'queryService');
 
     setProperties(this, {
-      'autocompletions': {},
       'query': queryService.getQueryString(),
       'placeholder': get(this, 'isAuthenticated') ?
         this._getSearchPlaceholder(placeholderValues) :
@@ -61,29 +47,32 @@ export default Component.extend({
       get(this, 'search')(query.trim()); //calls search on application route
     },
 
-    autocomplete(query) {
-      if (query) {
-        return get(this, 'ajax').request(
-          ENV.APIRoutes['autocomplete'],{
-            method: 'POST',
-            contentType: 'application/json',
-            data: JSON.stringify({ term: query})
-          }
-        )
-          .then(this._handleAutocompleteSuccess.bind(this))
-          .catch(Logger.error)
-      } else {
-        set(this, 'autocompletionOpen', false);
-      }
+    fetchSuggestions(queryString) {
+      return get(this, 'ajax').request(
+        ENV.APIRoutes['autocomplete'],{
+          method: 'POST',
+          contentType: 'application/json',
+          data: JSON.stringify({ term: queryString})
+        }
+      )
+        .then(this._handleAutocompleteSuccess.bind(this))
+        .catch(Logger.error)
     }
   },
 
   _handleAutocompleteSuccess(resp) {
-    const autocompletionKeys = Object.keys(resp);
-    if (autocompletionKeys.length > 0) {
-      set(this, 'autocompletions', resp);
-      set(this, 'autocompletionOpen', true);
-    }
+    const suggestionKeys = Object.keys(resp) || [];
+    const toReturn = suggestionKeys
+      .reduce((acc, key) => {
+        const list = resp[key];
+
+        if (list.length > 0) {
+          return [...acc, ...[{ groupName: key, options: list }]];
+        }
+
+        return acc;
+      }, []);
+    return toReturn;
   },
 
   /**
