@@ -1,22 +1,24 @@
 <form class="flex bc-white" autocomplete="off" {{action search query on='submit'}}>
-    {{#basic-dropdown as |dropdown|}}
-      <label class="flex-grow flex items-center">
-        <span class="cursor-text">{{fa-icon "search" class='px3 fc-secondary'}}</span>
-            {{#dropdown.trigger}}
-            {{input
-            type="text"
-            class="pr2 pl0 mr0 border-none"
-            placeholder=placeholder
-            value=query
-            autofocus=true
-            key-up="autocomplete"
-          }}
-        {{/dropdown.trigger}}
-      </label>
-        {{#if autocompletionOpen}}
+  {{#basic-dropdown as |dropdown|}}
+
+    <label class="flex items-center">
+      <span>{{fa-icon "search" class='px3 fc-secondary'}}</span>
+    </label>
+
+    {{#dropdown.trigger}}
+      {{input
+        type="text"
+        class="pr2 pl0 mr0 border-none"
+        placeholder=placeholder
+        value=query
+        autofocus=true
+        key-up="autocomplete"}}
+    {{/dropdown.trigger}}
+
+    {{#if autocompletionOpen}}
       {{#dropdown.content}}
           <ul>
-          {{#each autocompletion as |auto|}}
+          {{#each suggestions as |auto|}}
             <li>{{auto.key}}
               <ul>
                 {{#each auto.values as |value|}}
@@ -28,7 +30,8 @@
         </ul>
       {{/dropdown.content}}
     {{/if}}
-    {{/basic-dropdown}}
+  {{/basic-dropdown}}
+
   {{#if hasSubmitButton}}
     <button class="r-btn r-btn-primary r-btn-large square self-stretch">Search</button>
   {{/if}}

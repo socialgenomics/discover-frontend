@@ -1,7 +1,8 @@
 import Ember from 'ember';
-import { getRandomElement } from 'repositive/utils/arrays'
 import ENV from 'repositive/config/environment';
-const { Component, get, inject: { service }, setProperties, computed, set } = Ember;
+import { getRandomElement } from 'repositive/utils/arrays';
+
+const { Component, get, inject: { service }, setProperties, computed, set, Logger } = Ember;
 
 export default Component.extend({
   queryService: service('query'),
@@ -9,21 +10,19 @@ export default Component.extend({
   session: service(),
   openPagesPlaceholder: 'Search over 1 million human genomic datasets',
   autocompletionOpen: false,
-  autocompletions: {},
+
   isAuthenticated: computed.alias('session.isAuthenticated'),
-  autocompletion: Ember.computed('autocompletions.@each', function() {
-    return Object.keys(this.get(`autocompletions`)).reduce((acc, k) => {
-      const list = this.get('autocompletions')[k];
-      console.log(list);
-      if (list.length > 0) {
-        acc.push({
-          key: k,
-          values: list
-        });
-      }
-      console.log(acc);
-      return acc;
-    }, []);
+  suggestions: computed('autocompletions.@each', function() {
+    return Object.keys(get(this, `autocompletions`))
+      .reduce((acc, key) => {
+        const list = get(this, 'autocompletions')[key];
+
+        if (list.length > 0) {
+          return [...acc, ...[{ key, values: list }]];
+        }
+
+        return acc;
+      }, []);
   }),
 
 
@@ -39,20 +38,22 @@ export default Component.extend({
 
   init() {
     this._super(...arguments);
-    set(this, 'placeholderValues', [
+
+    const placeholderValues = [
       `obesity AND microbiome`,
       `autism AND assay:"RNA seq"`,
       `infant stool AND assay:wgs`,
       `Alzheimer's disease`,
       `fetal epigenome`,
       `human populations AND (assay:"Whole Genome Sequencing" OR assay:WGS)`
-    ]);
-
+    ];
     const queryService = get(this, 'queryService');
+
     setProperties(this, {
+      'autocompletions': {},
       'query': queryService.getQueryString(),
       'placeholder': get(this, 'isAuthenticated') ?
-        this._getSearchPlaceholder(get(this, 'placeholderValues')) :
+        this._getSearchPlaceholder(placeholderValues) :
         get(this, 'openPagesPlaceholder')
     });
   },
@@ -61,6 +62,7 @@ export default Component.extend({
     search(query) {
       get(this, 'search')(query.trim()); //calls search on application route
     },
+
     autocomplete(query) {
       if (query) {
         return get(this, 'ajax').request(
@@ -69,19 +71,20 @@ export default Component.extend({
             contentType: 'application/json',
             data: JSON.stringify({ term: query})
           }
-        ).then( (res) => {
-          // The request is been made and returns correct results
-          //TODO populate a div with the results as first steps.
-          //How to define a variable accesible for component AND template
-          const autocompletionKeys = Object.keys(res);
-          if (autocompletionKeys.length > 0) {
-            this.set('autocompletions', res);
-            this.set('autocompletionOpen', true);
-          }
-        });
+        )
+          .then(this._handleAutocompleteSuccess.bind(this))
+          .catch(Logger.error)
       } else {
         set(this, 'autocompletionOpen', false);
       }
+    }
+  },
+
+  _handleAutocompleteSuccess(resp) {
+    const autocompletionKeys = Object.keys(resp);
+    if (autocompletionKeys.length > 0) {
+      set(this, 'autocompletions', resp);
+      set(this, 'autocompletionOpen', true);
     }
   },
 
