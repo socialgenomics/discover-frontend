@@ -1,6 +1,6 @@
 /* eslint-env node */
-
 const browser = process.env.BROWSER || 'chrome';
+
 module.exports = {
   "framework": "mocha",
   "test_page": "tests/index.html?hidepassed",
@@ -12,7 +12,7 @@ module.exports = {
     browser
   ],
   "browser_args": {
-      [browser]: [
+    [browser]: [
       "--headless",
       "--disable-gpu",
       "--remote-debugging-port=9222",
