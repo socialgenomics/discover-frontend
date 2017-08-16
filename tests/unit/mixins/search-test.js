@@ -9,9 +9,9 @@ import ENV from 'repositive/config/environment';
 describe('Unit | Mixin | search', function() {
   const { set, get, Service, RSVP, getOwner, setProperties } = Ember;
   const query = 'lorem ipsum';
-  const parseStringVal = { lorem: 'ipsum' };
-  const getFiltersVal = [{ predicate: 'a', text: 'A' }, { predicate: 'b', text: 'B' }, { predicate: 'c', text: 'C' }];
-  const toBoolStringVal = 'queryBoolString';
+  const fromNaturalVal = { lorem: 'ipsum' };
+  const filterVal = [{ predicate: 'a', text: 'A' }, { predicate: 'b', text: 'B' }, { predicate: 'c', text: 'C' }];
+  const toNaturalVal = 'queryBoolString';
   const aggs = {
     a: { buckets: [{ key: 1 }, { key: 2 }, { key: 3 }] },
     b: { buckets: [{ key: 4 }, { key: 5 }, { key: 6 }] }
@@ -30,11 +30,11 @@ describe('Unit | Mixin | search', function() {
   let mixinObjInstance;
 
 
-  function createQPMock(parseStringVal = '', getFiltersVal = [], toBoolStringVal = '') {
+  function createQPMock(fromNaturalVal = '', filterVal = [], toNaturalVal = '') {
     return {
-      parseString: sinon.stub().returns(parseStringVal),
-      getFilters: sinon.stub().returns(getFiltersVal),
-      toBoolString: sinon.stub().returns(toBoolStringVal)
+      fromNatural: sinon.stub().returns(fromNaturalVal),
+      filter: sinon.stub().returns(filterVal),
+      toNatural: sinon.stub().returns(toNaturalVal)
     };
   }
 
@@ -62,7 +62,7 @@ describe('Unit | Mixin | search', function() {
 
     setProperties(mixinObjInstance, {
       query: 'test',
-      QP: createQPMock(parseStringVal, getFiltersVal, toBoolStringVal)
+      QP: createQPMock(fromNaturalVal, filterVal, toNaturalVal)
     });
   });
 
@@ -110,18 +110,18 @@ describe('Unit | Mixin | search', function() {
   describe('getActiveFilters', function () {
     const method = this.title;
 
-    it('should call QP.parseString with query', function () {
+    it('should call QP.fromNatural with query', function () {
       mixinObjInstance[method]();
 
-      expect(get(mixinObjInstance, 'QP').parseString.calledOnce).to.be.true;
-      expect(get(mixinObjInstance, 'QP').parseString.calledWith(get(mixinObjInstance, 'query'))).to.be.true;
+      expect(get(mixinObjInstance, 'QP').fromNatural.calledOnce).to.be.true;
+      expect(get(mixinObjInstance, 'QP').fromNatural.calledWith(get(mixinObjInstance, 'query'))).to.be.true;
     });
 
-    it('should call QP.getFilters with queryTree', function () {
+    it('should call QP.filter with queryTree', function () {
       mixinObjInstance[method]();
 
-      expect(get(mixinObjInstance, 'QP').getFilters.calledOnce).to.be.true;
-      expect(get(mixinObjInstance, 'QP').getFilters.calledWith(parseStringVal)).to.be.true;
+      expect(get(mixinObjInstance, 'QP').filter.calledOnce).to.be.true;
+      expect(get(mixinObjInstance, 'QP').filter.calledWith(fromNaturalVal)).to.be.true;
     });
 
     it('should return correct value', function () {
@@ -183,11 +183,11 @@ describe('Unit | Mixin | search', function() {
       mixinObjInstance[method]({ page, query });
 
       expect(
-        get(mixinObjInstance, 'QP').parseString.calledWith(query)
+        get(mixinObjInstance, 'QP').fromNatural.calledWith(query)
       ).to.be.true;
       expect(
         JSON.parse(get(mixinObjInstance, 'ajax.request').args[0][1].data).body
-      ).to.be.eql(parseStringVal);
+      ).to.be.eql(fromNaturalVal);
     });
   });
 
@@ -199,9 +199,9 @@ describe('Unit | Mixin | search', function() {
 
       mixinObjInstance[method](query);
 
-      expect(QP.parseString.calledWith(query)).to.be.true;
-      expect(QP.toBoolString.calledWith(parseStringVal)).to.be.true;
-      expect(get(mixinObjInstance, 'queryService').setQueryString.calledWith(toBoolStringVal)).to.be.true;
+      expect(QP.fromNatural.calledWith(query)).to.be.true;
+      expect(QP.toNatural.calledWith(fromNaturalVal)).to.be.true;
+      expect(get(mixinObjInstance, 'queryService').setQueryString.calledWith(toNaturalVal)).to.be.true;
     });
 
     it('should set query service value to null', function () {
