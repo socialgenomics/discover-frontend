@@ -54,9 +54,9 @@ export default Mixin.create({
   },
 
   getActiveFilters() {
-    const queryTree = get(this, 'QP').parseString(get(this, 'query'));
-
-    return get(this, 'QP').getFilters(queryTree).map(f => `${f.predicate}:${f.text}`);
+    const QP = get(this, 'QP');
+    const queryTree = QP.fromNatural(get(this, 'query'));
+    return QP.filter(queryTree, (node) => QP.isPredicate(node)).map(f => `${f.predicate}:${f.text}`);
   },
 
   makeRequest(params) {
@@ -66,7 +66,7 @@ export default Mixin.create({
       params.resultsPerPage || maxResultsPerPage;
     const offset = (params.page - 1) * limit;
     const query = params.query || '';
-    const body = query === '' ? {} : get(this, 'QP').parseString(query);
+    const body = query === '' ? {} : get(this, 'QP').fromNatural(query);
     return get(this, 'ajax').request(
       ENV.APIRoutes['datasets.search'],
       {
@@ -83,10 +83,12 @@ export default Mixin.create({
   * @private
   */
   _updateQueryServiceValue(query) {
+    const QP = get(this, 'QP');
+    const qS = get(this, 'queryService');
     if (query) {
-      get(this, 'queryService').setQueryString(get(this, 'QP').toBoolString(get(this, 'QP').parseString(query)));
+      qS.setQueryString(QP.toNatural(QP.fromNatural(query)));
     } else {
-      get(this, 'queryService').setQueryString(null);
+      qS.setQueryString(null);
     }
   },
 
