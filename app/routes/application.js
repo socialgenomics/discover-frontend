@@ -1,7 +1,5 @@
 import Ember from 'ember';
 import ApplicationRouteMixin from 'ember-simple-auth/mixins/application-route-mixin';
-import BT from 'npm:@repositive/query-parser/dist/main/b-tree';
-import BX from 'npm:@repositive/query-parser/dist/main/b-exp-tree';
 import QP from 'npm:@repositive/query-parser';
 
 const { Route, inject: { service }, get } = Ember;
@@ -27,12 +25,12 @@ export default Route.extend(ApplicationRouteMixin, {
   actions: {
     search(queryString, pageNumber) {
       try {
-        const queryTree = QP.parseString(queryString);
-        const collectionPredicate = BT.filter(queryTree, (node) => {
-          return BX.isFilter(node) && node.predicate === 'collection';
+        const queryTree = QP.fromNatural(queryString);
+        const collectionPredicate = QP.filter(queryTree, (node) => {
+          return QP.isPredicate(node) && node.key === 'collection';
         });
-        const datasourcePredicate = BT.filter(queryTree, (node) => {
-          return BX.isFilter(node) && node.predicate === 'datasource';
+        const datasourcePredicate = QP.filter(queryTree, (node) => {
+          return QP.isPredicate(node) && node.key === 'datasource';
         });
 
         this._conditionallyTransition(collectionPredicate, datasourcePredicate, queryString, pageNumber);
