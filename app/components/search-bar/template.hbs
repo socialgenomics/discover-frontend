@@ -3,17 +3,19 @@
     <label class="flex items-center">
       <span>{{fa-icon "search" class='px3 fc-secondary'}}</span>
     </label>
-    {{#power-select-multiple
+
+    {{#power-select-typeahead
       placeholder=placeholder
       options=suggestions
       selected=suggestion
       onchange=(action 'handleSelection')
       onkeydown=(action 'handleKeyDown')
       search=(action 'fetchSuggestions')
+      defaultHighlighted=''
       as |suggestion|
     }}
       {{suggestion}}
-    {{/power-select-multiple}}
+    {{/power-select-typeahead}}
 
 
   {{#if hasSubmitButton}}

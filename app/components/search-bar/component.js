@@ -2,7 +2,7 @@ import Ember from 'ember';
 import ENV from 'repositive/config/environment';
 import { getRandomElement } from 'repositive/utils/arrays';
 
-const { Component, get, inject: { service }, setProperties, computed, Logger } = Ember;
+const { Component, get, getWithDefault, inject: { service }, setProperties, computed, Logger } = Ember;
 
 export default Component.extend({
   queryService: service('query'),
@@ -44,18 +44,22 @@ export default Component.extend({
 
   actions: {
     handleKeyDown(dropdown, e) {
-      if (e.keyCode === 13) {
-        const query = get(this, 'query').trim();
-        get(this, 'search')(query);
+      if (e.key === 'Enter') {
+        get(this, 'search')(dropdown.searchText);
       }
     },
 
-    handleSelection(selection) {
-      const newQuery = get(this, 'query') || '' + selection.toString().trim();
-      setProperties(this, {
-        'suggestion': selection,
-        'query': newQuery
-      });
+    handleSelection(selection, dropdown) {
+      if (selection) {
+        // push selection into selections arrays
+        // clear current selection
+        debugger;
+        const newQuery = getWithDefault(this, 'query', '') +  ' '  + selection.toString().trim();
+        setProperties(this, {
+          'suggestion': selection,
+          'query': newQuery
+        });
+      }
     },
 
     fetchSuggestions(queryString) {
