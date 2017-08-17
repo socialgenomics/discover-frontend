@@ -12,9 +12,9 @@
       onkeydown=(action 'handleKeyDown')
       search=(action 'fetchSuggestions')
       defaultHighlighted=''
-      as |suggestion|
+      as |option|
     }}
-      {{suggestion}}
+      {{option.suggestionText}}
     {{/power-select-typeahead}}
 
 

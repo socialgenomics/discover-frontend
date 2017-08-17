@@ -1,8 +1,9 @@
 import Ember from 'ember';
 import ENV from 'repositive/config/environment';
 import { getRandomElement } from 'repositive/utils/arrays';
+import QP from 'npm:@repositive/query-parser';
 
-const { Component, get, getWithDefault, inject: { service }, setProperties, computed, Logger } = Ember;
+const { Component, get, inject: { service }, set, setProperties, computed, Logger } = Ember;
 
 export default Component.extend({
   queryService: service('query'),
@@ -10,6 +11,7 @@ export default Component.extend({
   session: service(),
 
   openPagesPlaceholder: 'Search over 1 million human genomic datasets',
+  queryTree: null,
 
   isAuthenticated: computed.alias('session.isAuthenticated'),
   query: computed('queryService.queryString', {
@@ -49,16 +51,21 @@ export default Component.extend({
       }
     },
 
-    handleSelection(selection, dropdown) {
+    handleSelection(selection) {
       if (selection) {
-        // push selection into selections arrays
-        // clear current selection
-        debugger;
-        const newQuery = getWithDefault(this, 'query', '') +  ' '  + selection.toString().trim();
-        setProperties(this, {
-          'suggestion': selection,
-          'query': newQuery
-        });
+        const predicate = QP.predicate({ key: selection.groupName, value: selection.suggestionText });
+        const queryTree = get(this, 'queryTree');
+        if (queryTree) {
+          set(this, 'queryTree', QP.and({ left: predicate, right: queryTree }));
+        } else {
+          set(this, 'queryTree', predicate);
+        }
+
+        // const newQuery = getWithDefault(this, 'query', '') +  ' '  + selection.toString().trim();
+        // setProperties(this, {
+        //   'suggestion': selection,
+        //   'query': newQuery
+        // });
       }
     },
 
@@ -77,12 +84,17 @@ export default Component.extend({
 
   _handleAutocompleteSuccess(resp) {
     const suggestionKeys = Object.keys(resp) || [];
-    return suggestionKeys
-      .reduce((acc, key) => {
-        const list = resp[key];
 
-        if (list.length > 0) {
-          return [...acc, ...[{ groupName: key, options: list }]];
+    return suggestionKeys
+      .reduce((acc, groupName) => {
+        const suggestions = resp[groupName];
+
+        if (suggestions.length > 0) {
+          const options = suggestions.map(suggestionText => {
+            return { groupName, suggestionText };
+          });
+
+          return [...acc, ...[{ groupName, options }]];
         }
 
         return acc;
