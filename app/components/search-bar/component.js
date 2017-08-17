@@ -47,7 +47,21 @@ export default Component.extend({
   actions: {
     handleKeyDown(dropdown, e) {
       if (e.key === 'Enter') {
-        get(this, 'search')(dropdown.searchText);
+        const queryTree = get(this, 'queryTree');
+        const searchBarText = dropdown.searchText;
+        const performSearch = get(this, 'search');
+
+        if (queryTree && searchBarText) {
+          const queryString = this._constructSearchString(queryTree, searchBarText);
+          debugger;
+          performSearch(queryString);
+        } else if (queryTree) {
+          debugger;
+          performSearch(QP.toNatural(queryTree));
+        } else if (searchBarText) {
+          debugger;
+          performSearch(QP.toNatural(QP.fromNatural(searchBarText)));
+        }
       }
     },
 
@@ -69,6 +83,7 @@ export default Component.extend({
       }
     },
 
+    //TODO since the huginn API will change to take the queryTree, we must transform the string into the tree here
     fetchSuggestions(queryString) {
       return get(this, 'ajax').request(
         ENV.APIRoutes['autocomplete'],{
@@ -80,6 +95,11 @@ export default Component.extend({
         .then(this._handleAutocompleteSuccess.bind(this))
         .catch(Logger.error)
     }
+  },
+
+  _constructSearchString(tree, searchText) {
+    const searchStringTree = QP.fromNatural(searchText);
+    return QP.toNatural(QP.and({ left: tree, right: searchStringTree }));
   },
 
   _handleAutocompleteSuccess(resp) {
