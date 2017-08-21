@@ -10,10 +10,21 @@ export default Component.extend({
   ajax: service(),
   session: service(),
 
+  classNames: ['c-search-bar'],
+
   openPagesPlaceholder: 'Search over 1 million human genomic datasets',
   queryTree: null,
 
   isAuthenticated: computed.alias('session.isAuthenticated'),
+  QP: computed(function () {
+    return QP;
+  }),
+  predicates: computed('queryTree', function() {
+    const queryTree = get(this, 'queryTree');
+    const qp = get(this, 'QP');
+    const rawPredicates = queryTree ? qp.filter(queryTree, n => n._type === 'predicate') : [];
+    return rawPredicates.map(predicate => Ember.Object.create(predicate));
+  }),
   query: computed('queryService.queryString', {
     get() {
       return get(this, 'queryService').getQueryString();
@@ -74,13 +85,8 @@ export default Component.extend({
         } else {
           set(this, 'queryTree', predicate);
         }
-
-        // const newQuery = getWithDefault(this, 'query', '') +  ' '  + selection.toString().trim();
-        // setProperties(this, {
-        //   'suggestion': selection,
-        //   'query': newQuery
-        // });
       }
+      // set(this, 'suggestion', selection);
     },
 
     //TODO since the huginn API will change to take the queryTree, we must transform the string into the tree here
@@ -128,9 +134,5 @@ export default Component.extend({
    */
   _getSearchPlaceholder(placeholderList) {
     return getRandomElement(placeholderList);
-  },
-
-  _getArray(autocompletionKeys, key) {
-    return autocompletionKeys[key];
   }
 });

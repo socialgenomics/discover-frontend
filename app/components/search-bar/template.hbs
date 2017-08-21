@@ -4,6 +4,12 @@
       <span>{{fa-icon "search" class='px3 fc-secondary'}}</span>
     </label>
 
+    {{#each predicates as |predicate|}}
+      <span>{{predicate.value}}</span>
+    {{/each}}
+    <!-- List predicates -->
+      <!-- Each predicate has cross (removePredicate) -->
+      <!-- List has max length so that search isn't pushed away -->
     {{#power-select-typeahead
       placeholder=placeholder
       options=suggestions
