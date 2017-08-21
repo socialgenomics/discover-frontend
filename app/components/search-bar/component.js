@@ -20,9 +20,10 @@ export default Component.extend({
     return QP;
   }),
   predicates: computed('queryTree', function() {
+    const TEMP_DEFAULT = {key: 'disease', value: 'cancer'};
     const queryTree = get(this, 'queryTree');
     const qp = get(this, 'QP');
-    const rawPredicates = queryTree ? qp.filter(queryTree, n => n._type === 'predicate') : [];
+    const rawPredicates = queryTree ? qp.filter(queryTree, n => n._type === 'predicate') : [TEMP_DEFAULT];
     return rawPredicates.map(predicate => Ember.Object.create(predicate));
   }),
   query: computed('queryService.queryString', {
@@ -58,6 +59,7 @@ export default Component.extend({
   actions: {
     handleKeyDown(dropdown, e) {
       if (e.key === 'Enter') {
+        //TODO if there is a selected suggestion and enter is pressed, it should be handled as predicate not plain text
         const queryTree = get(this, 'queryTree');
         const searchBarText = dropdown.searchText;
         const performSearch = get(this, 'search');

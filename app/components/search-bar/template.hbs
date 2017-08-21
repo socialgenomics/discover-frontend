@@ -1,11 +1,11 @@
-<form class="flex bc-white" autocomplete="off">
+<form class="flex items-center bc-white" autocomplete="off">
 
     <label class="flex items-center">
       <span>{{fa-icon "search" class='px3 fc-secondary'}}</span>
     </label>
 
     {{#each predicates as |predicate|}}
-      <span>{{predicate.value}}</span>
+      <span class='c-predicate p2 mr1 bc-primary-yellow rounded'>{{predicate.key}}: {{predicate.value}}</span>
     {{/each}}
     <!-- List predicates -->
       <!-- Each predicate has cross (removePredicate) -->
