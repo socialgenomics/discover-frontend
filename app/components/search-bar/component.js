@@ -18,9 +18,11 @@ export default Component.extend({
   queryTree: null,
 
   isAuthenticated: computed.alias('session.isAuthenticated'),
+
   QP: computed(function () {
     return QP;
   }),
+
   predicates: computed('queryTree', function() {
     // const TEMP_DEFAULT = {key: 'disease', value: 'cancer'};
     const queryTree = get(this, 'queryTree');
@@ -28,6 +30,7 @@ export default Component.extend({
     const rawPredicates = queryTree ? qp.filter(queryTree, n => n._type === 'predicate') : [];
     return rawPredicates.map(predicate => Ember.Object.create(predicate));
   }),
+
   query: computed('queryService.queryString', {
     get() {
       return get(this, 'queryService').getQueryString();
@@ -60,6 +63,7 @@ export default Component.extend({
 
   actions: {
     handleKeyDown(dropdown, e) {
+      if (e.key === "Enter") { e.preventDefault(); }
       if (e.key === 'Enter' && isBlank(dropdown.highlighted)) {
         const queryTree = get(this, 'queryTree');
         const searchBarText = dropdown.searchText;
@@ -73,7 +77,7 @@ export default Component.extend({
         } else if (searchBarText) {
           performSearch(QP.toNatural(QP.fromNatural(searchBarText)));
         } else {
-          performSearch(QP.toNatural(QP.fromNatural('')));
+          performSearch();
         }
       }
     },

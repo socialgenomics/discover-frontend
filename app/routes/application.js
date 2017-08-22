@@ -23,7 +23,7 @@ export default Route.extend(ApplicationRouteMixin, {
   },
 
   actions: {
-    search(queryString, pageNumber) {
+    search(queryString = '', pageNumber) {
       try {
         const queryTree = QP.fromNatural(queryString);
         const collectionPredicate = QP.filter(queryTree, (node) => {
