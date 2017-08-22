@@ -1,9 +1,10 @@
 import Ember from 'ember';
-import ENV from 'repositive/config/environment';
-import { getRandomElement } from 'repositive/utils/arrays';
 import QP from 'npm:@repositive/query-parser';
 
-const { Component, get, inject: { service }, set, setProperties, computed, Logger } = Ember;
+import ENV from 'repositive/config/environment';
+import { getRandomElement } from 'repositive/utils/arrays';
+
+const { Component, get, inject: { service }, isBlank, set, setProperties, computed, Logger } = Ember;
 
 export default Component.extend({
   queryService: service('query'),
@@ -20,10 +21,10 @@ export default Component.extend({
     return QP;
   }),
   predicates: computed('queryTree', function() {
-    const TEMP_DEFAULT = {key: 'disease', value: 'cancer'};
+    // const TEMP_DEFAULT = {key: 'disease', value: 'cancer'};
     const queryTree = get(this, 'queryTree');
     const qp = get(this, 'QP');
-    const rawPredicates = queryTree ? qp.filter(queryTree, n => n._type === 'predicate') : [TEMP_DEFAULT];
+    const rawPredicates = queryTree ? qp.filter(queryTree, n => n._type === 'predicate') : [];
     return rawPredicates.map(predicate => Ember.Object.create(predicate));
   }),
   query: computed('queryService.queryString', {
@@ -58,8 +59,7 @@ export default Component.extend({
 
   actions: {
     handleKeyDown(dropdown, e) {
-      if (e.key === 'Enter') {
-        //TODO if there is a selected suggestion and enter is pressed, it should be handled as predicate not plain text
+      if (e.key === 'Enter' && isBlank(dropdown.highlighted)) {
         const queryTree = get(this, 'queryTree');
         const searchBarText = dropdown.searchText;
         const performSearch = get(this, 'search');
@@ -74,11 +74,13 @@ export default Component.extend({
         } else if (searchBarText) {
           debugger;
           performSearch(QP.toNatural(QP.fromNatural(searchBarText)));
+        } else {
+          performSearch(QP.toNatural(QP.fromNatural('')));
         }
       }
     },
 
-    handleSelection(selection) {
+    handleSelection(selection, dropdown) {
       if (selection) {
         const predicate = QP.predicate({ key: selection.groupName, value: selection.suggestionText });
         const queryTree = get(this, 'queryTree');
@@ -87,8 +89,8 @@ export default Component.extend({
         } else {
           set(this, 'queryTree', predicate);
         }
+        debugger
       }
-      // set(this, 'suggestion', selection);
     },
 
     //TODO since the huginn API will change to take the queryTree, we must transform the string into the tree here
