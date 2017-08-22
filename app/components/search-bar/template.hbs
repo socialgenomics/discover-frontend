@@ -16,7 +16,7 @@
       selected=suggestion
       onchange=(action 'handleSelection')
       onkeydown=(action 'handleKeyDown')
-      search=(action 'fetchSuggestions')
+      search=(perform fetchSuggestions)
       defaultHighlighted=''
       as |option|
     }}

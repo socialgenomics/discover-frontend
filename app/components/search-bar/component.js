@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import QP from 'npm:@repositive/query-parser';
+import { task, timeout } from 'ember-concurrency';
 
 import ENV from 'repositive/config/environment';
 import { getRandomElement } from 'repositive/utils/arrays';
@@ -91,21 +92,25 @@ export default Component.extend({
         }
         debugger
       }
-    },
-
-    //TODO since the huginn API will change to take the queryTree, we must transform the string into the tree here
-    fetchSuggestions(queryString) {
-      return get(this, 'ajax').request(
-        ENV.APIRoutes['autocomplete'],{
-          method: 'POST',
-          contentType: 'application/json',
-          data: JSON.stringify({ term: queryString})
-        }
-      )
-        .then(this._handleAutocompleteSuccess.bind(this))
-        .catch(Logger.error)
     }
   },
+
+  //TODO since the huginn API will change to take the queryTree, we must transform the string into the tree here
+  fetchSuggestions: task(function * (queryString) {
+    const DEBOUNCE_MS = 250;
+    const REQUEST_OPTIONS = {
+      method: 'POST',
+      contentType: 'application/json',
+      data: JSON.stringify({ term: queryString})
+    };
+
+    yield timeout(DEBOUNCE_MS);
+
+    return get(this, 'ajax')
+      .request(ENV.APIRoutes['autocomplete'], REQUEST_OPTIONS)
+      .then(this._handleAutocompleteSuccess.bind(this))
+      .catch(Logger.error)
+  }),
 
   _constructSearchString(tree, searchText) {
     const searchStringTree = QP.fromNatural(searchText);
