@@ -67,13 +67,10 @@ export default Component.extend({
 
         if (queryTree && searchBarText) {
           const queryString = this._constructSearchString(queryTree, searchBarText);
-          debugger;
           performSearch(queryString);
         } else if (queryTree) {
-          debugger;
           performSearch(QP.toNatural(queryTree));
         } else if (searchBarText) {
-          debugger;
           performSearch(QP.toNatural(QP.fromNatural(searchBarText)));
         } else {
           performSearch(QP.toNatural(QP.fromNatural('')));
@@ -90,7 +87,12 @@ export default Component.extend({
         } else {
           set(this, 'queryTree', predicate);
         }
-        debugger
+
+        //Reset the autocomplete component
+        setProperties(dropdown, {
+          'searchText': null,
+          'selected': null
+        });
       }
     }
   },
