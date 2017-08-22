@@ -72,7 +72,7 @@ export default Mixin.create({
       contentType: 'application/json',
       data: JSON.stringify({ type: 'dataset', offset, limit, body })
     };
-    debugger
+
     return get(this, 'ajax')
       .request(ENV.APIRoutes['datasets.search'],requestOptions)
       .then(this._handleQueryResponse.bind(this));
