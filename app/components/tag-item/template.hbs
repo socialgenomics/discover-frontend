@@ -5,6 +5,6 @@
 {{else}}
   <span class="fc-secondary text-line-keep">{{tagText}}</span>
 {{/if}}
-{{#if belongsToUser}}
+{{#if isRemovable}}
   <span {{action 'delete'}} class="t-tag-item-delete u-hv-tc-red cursor-pointer fc-tertiary p2">{{fa-icon "fa-times"}}</span>
 {{/if}}

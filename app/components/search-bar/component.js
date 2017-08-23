@@ -100,6 +100,16 @@ export default Component.extend({
           'selected': null
         });
       }
+    },
+
+    removePredicate(predicate) {
+      const queryTree = get(this, 'queryTree');
+      const newTree = QP.remove(queryTree, predicate);
+      set(this, 'queryTree', newTree);
+    },
+
+    getPredicateText(predicate) {
+      return `${predicate.key}: ${predicate.value}`;
     }
   },
 
