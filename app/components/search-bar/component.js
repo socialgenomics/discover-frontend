@@ -24,21 +24,20 @@ export default Component.extend({
   }),
 
   predicates: computed('queryTree', function() {
-    // const TEMP_DEFAULT = {key: 'disease', value: 'cancer'};
     const queryTree = get(this, 'queryTree');
     const qp = get(this, 'QP');
     const rawPredicates = queryTree ? qp.filter(queryTree, n => n._type === 'predicate') : [];
     return rawPredicates.map(predicate => Ember.Object.create(predicate));
   }),
 
-  query: computed('queryService.queryString', {
-    get() {
-      return get(this, 'queryService').getQueryString();
-    },
-    set(key, value) {
-      return value;
-    }
-  }),
+  // query: computed('queryService.queryString', {
+  //   get() {
+  //     return get(this, 'queryService').getQueryString();
+  //   },
+  //   set(key, value) {
+  //     return value;
+  //   }
+  // }),
 
   init() {
     this._super(...arguments);
@@ -51,10 +50,11 @@ export default Component.extend({
       `fetal epigenome`,
       `human populations AND (assay:"Whole Genome Sequencing" OR assay:WGS)`
     ];
-    const queryService = get(this, 'queryService');
+    const queryString = get(this, 'queryService').getQueryString();
 
     setProperties(this, {
-      'query': queryService.getQueryString(),
+      queryString,
+      'queryToken': queryString,
       'placeholder': get(this, 'isAuthenticated') ?
         this._getSearchPlaceholder(placeholderValues) :
         get(this, 'openPagesPlaceholder')
@@ -71,10 +71,12 @@ export default Component.extend({
 
         if (queryTree && searchBarText) {
           const queryString = this._constructSearchString(queryTree, searchBarText);
+          set(this, 'queryToken', searchBarText);
           performSearch(queryString);
         } else if (queryTree) {
           performSearch(QP.toNatural(queryTree));
         } else if (searchBarText) {
+          set(this, 'queryToken', searchBarText);
           performSearch(QP.toNatural(QP.fromNatural(searchBarText)));
         } else {
           performSearch();
