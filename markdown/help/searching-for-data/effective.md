@@ -7,10 +7,10 @@ Predicate terms filter search results to match a specified metadata field and va
 If you would like to find datasets containing exact format of your searched keyword in specific category (assay, tissue, technology, …) you need to add '.raw' after the category name.
 
 Example:
-Search query `Assay.raw: "RNA microarray"` will look for all datasets containing exact format and order of "RNA microarray" in the assay category.
+Search query `assay.raw: "RNA microarray"` will look for all datasets containing exact format and order of "RNA microarray" in the assay category.
 
 Whereas
-Search query `Assay:RNA microarray` will show you all datasets which have 'RNA' or 'microarray' in the assay category (e.g RNA-Seq, RNA-seq of Coding RNA, RNA microarray,…)
+Search query `assay:RNA microarray` will show you all datasets which have 'RNA' or 'microarray' in the assay category (e.g RNA-Seq, RNA-seq of Coding RNA, RNA microarray,…)
 
 Note:
 Hyphens and other punctuation marks split the search term. Search is performed on all words. For example, assay:RNA-Seq searches for any assay type containing 'RNA' or 'Seq'.
