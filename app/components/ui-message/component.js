@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-const { computed, Component, inject: { service }, get, set } = Ember;
+const { computed, Component, inject: { service }, get } = Ember;
 
 export default Component.extend({
   session: service(),
@@ -12,7 +12,6 @@ export default Component.extend({
   actions: {
     closeMessages() {
       get(this, 'flashMessages').clearMessages();
-      set(this, 'session.data.displayWelcomeMessage', false);
     }
   }
 });

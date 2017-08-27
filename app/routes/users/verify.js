@@ -34,8 +34,7 @@ export default Route.extend(FlashMessageMixin, VerificationMixin, {
       .then(resp => {
         if (get(this, 'session.isAuthenticated')) {
           const user = resp.user;
-          set(user, 'verified', true)
-          set(this, 'session.data.displayWelcomeMessage', false);
+          set(user, 'verified', true);
           return user.save();
         } else {
           this.transitionTo('root');
