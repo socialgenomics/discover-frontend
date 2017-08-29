@@ -78,7 +78,6 @@ export default Controller.extend(Validations, FlashMessageMixin, {
           .then(() => {
             setProperties(this, {
               'session.data.firstVisit': true,
-              'session.data.displayWelcomeMessage': false,
               'loading': false
             });
           })

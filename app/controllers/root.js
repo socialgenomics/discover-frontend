@@ -10,7 +10,6 @@ export default Controller.extend({
 
   isRootRoute: computed.alias('session.data.isRootRoute'),
   firstVisit: computed.alias('session.data.firstVisit'),
-  displayWelcomeMessage: computed.alias('session.data.displayWelcomeMessage'),
   thirdPartySignup: computed.alias('session.data.thirdPartySignup'),
   requestsSorted: computed.sort('model.requests', 'sortUpdatedAt'),
   registrationsSorted: computed.sort('model.registered', 'sortUpdatedAt'),
