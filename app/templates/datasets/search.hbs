@@ -14,7 +14,7 @@
     {{partial 'loading'}}
   {{else}}
     {{#if (gt model.meta.total 0)}}
-      {{#results-header title=(concat 'Datasets (' model.meta.total ')')}}
+      {{#results-header title=(concat 'Datasets (' (beautify-number model.meta.total) ')')}}
         {{results-select
           resultsOptions=resultsOptions
           resultsPerPage=resultsPerPage
