@@ -63,20 +63,6 @@ export default Component.extend(FlashMessageMixin, {
       }
     },
 
-    /**
-     * @desc hides add interest input and resets it state
-     */
-    hideInput() {
-      set(this, 'isOpen', false);
-    },
-
-    /**
-     * @desc shows add interest input
-     */
-    showInput() {
-      set(this, 'isOpen', true);
-    },
-
     handleKeydown(dropdown, e) {
       if (e.keyCode !== 13) { return; }
       if (isBlank(dropdown.highlighted)) {
