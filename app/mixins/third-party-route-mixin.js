@@ -12,7 +12,6 @@ export default Mixin.create({
           if (type === 'signup') {
             setProperties(this, {
               'session.data.firstVisit': true,
-              'data.displayWelcomeMessage': false,
               'data.thirdPartySignup': true
             });
           }
