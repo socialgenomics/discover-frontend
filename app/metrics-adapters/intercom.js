@@ -3,7 +3,7 @@ import BaseAdapter from 'ember-metrics/metrics-adapters/base';
 import objectTransforms from 'ember-metrics/utils/object-transforms';
 import canUseDOM from 'ember-metrics/utils/can-use-dom';
 
-const { $, assert, get } = Ember;
+const { $, assert, get, set } = Ember;
 const { compact } = objectTransforms;
 
 export default BaseAdapter.extend({
@@ -26,39 +26,41 @@ export default BaseAdapter.extend({
   },
 
   identify(options = {}) {
-    const { appId } = get(this, 'config');
-    const compactedOptions = compact(options);
-    const { email, firstname, lastname, username } = compactedOptions;
-    const userId = compactedOptions.id;
-    const fullname = firstname + ' ' + lastname;
-    const method = this.booted ? 'update' : 'boot';
-    const props = {
-      app_id: appId,
-      user_id: username || userId,
-      name: fullname,
-      email: email
-    };
-
     if (canUseDOM) {
+      const { appId } = get(this, 'config');
+      const compactedOptions = compact(options);
+      const { email, firstname, lastname, username } = compactedOptions;
+      const userId = compactedOptions.id;
+      const fullname = firstname + ' ' + lastname;
+      const method = get(this, 'booted') ? 'update' : 'boot';
+      const props = {
+        app_id: appId,
+        user_id: username || userId,
+        name: fullname,
+        email: email
+      };
+
       window.Intercom(method, props);
-      this.booted = true;
+      set(this, 'booted', true);
     }
   },
 
   trackEvent(options = {}) {
-    const { category, action, label, value } = options;
-    const actionName = category + ' ' + action;
-    const eventData = { label, value };
     if (canUseDOM) {
+      const { category, action, label, value } = options;
+      const actionName = category + ' ' + action;
+      const eventData = { label, value };
+
       window.Intercom('trackEvent', actionName, eventData);
     }
   },
 
   trackPage(options = {}) {
-    const { page, title } = options;
-    const action = 'navigate: ' + title;
-    const eventData = { page, title };
     if (canUseDOM) {
+      const { page, title } = options;
+      const action = 'navigate: ' + title;
+      const eventData = { page, title };
+
       window.Intercom('trackEvent', action, eventData);
     }
   },
