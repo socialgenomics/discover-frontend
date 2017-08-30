@@ -11,13 +11,11 @@
           type='predicate'
           deleteAction=(action 'removePredicate')}}
     {{/each}}
-    <!-- List predicates -->
-      <!-- Each predicate has cross (removePredicate) -->
-      <!-- List has max length so that search isn't pushed away -->
+
     {{#power-select-typeahead
       placeholder=placeholder
       options=suggestions
-      selected=queryToken
+      selected=queryString
       onchange=(action 'handleSelection')
       onkeydown=(action 'handleKeyDown')
       search=(perform fetchSuggestions)

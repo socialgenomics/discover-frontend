@@ -5,7 +5,7 @@ import { task, timeout } from 'ember-concurrency';
 import ENV from 'repositive/config/environment';
 import { getRandomElement } from 'repositive/utils/arrays';
 
-const { assign, Component, get, inject: { service }, isBlank, set, setProperties, computed, Logger } = Ember;
+const { $, assign, Component, get, inject: { service }, isBlank, set, setProperties, computed, Logger } = Ember;
 
 export default Component.extend({
   queryService: service('query'),
@@ -19,14 +19,9 @@ export default Component.extend({
 
   isAuthenticated: computed.alias('session.isAuthenticated'),
 
-  QP: computed(function () {
-    return QP;
-  }),
-
   predicates: computed('queryTree', function() {
     const queryTree = get(this, 'queryTree');
-    const qp = get(this, 'QP');
-    const rawPredicates = queryTree ? qp.filter(queryTree, n => n._type === 'predicate') : [];
+    const rawPredicates = queryTree ? QP.filter(queryTree, n => n._type === 'predicate') : [];
     return rawPredicates.map(predicate => Ember.Object.create(predicate));
   }),
 
@@ -50,11 +45,9 @@ export default Component.extend({
       `fetal epigenome`,
       `human populations AND (assay:"Whole Genome Sequencing" OR assay:WGS)`
     ];
-    const queryString = get(this, 'queryService').getQueryString();
 
     setProperties(this, {
-      queryString,
-      'queryToken': queryString,
+      'queryString': get(this, 'queryService').getQueryString(),
       'placeholder': get(this, 'isAuthenticated') ?
         this._getSearchPlaceholder(placeholderValues) :
         get(this, 'openPagesPlaceholder')
@@ -66,21 +59,22 @@ export default Component.extend({
       if (e.key === "Enter") { e.preventDefault(); }
       if (e.key === 'Enter' && isBlank(dropdown.highlighted)) {
         const queryTree = get(this, 'queryTree');
-        const searchBarText = dropdown.searchText;
+        // const searchBarText = dropdown.searchText;
         const performSearch = get(this, 'search');
-
-        if (queryTree && searchBarText) {
-          const queryString = this._constructSearchString(queryTree, searchBarText);
-          set(this, 'queryToken', searchBarText);
-          performSearch(queryString);
-        } else if (queryTree) {
-          performSearch(QP.toNatural(queryTree));
-        } else if (searchBarText) {
-          set(this, 'queryToken', searchBarText);
-          performSearch(QP.toNatural(QP.fromNatural(searchBarText)));
-        } else {
-          performSearch();
-        }
+        queryTree ? performSearch(QP.toNatural(queryTree)) : performSearch();
+        // if (queryTree && searchBarText) {
+        //   const queryString = this._constructSearchString(queryTree, searchBarText);
+        //   set(this, 'queryString', searchBarText);
+        //   performSearch(queryString);
+        // } else 
+        // if (queryTree) {
+        //   performSearch(QP.toNatural(queryTree));
+        // } else if (searchBarText) {
+        //   set(this, 'queryString', searchBarText);
+        //   performSearch(QP.toNatural(QP.fromNatural(searchBarText)));
+        // } else {
+        //   performSearch();
+        // }
       }
     },
 
@@ -95,6 +89,7 @@ export default Component.extend({
         }
 
         //Reset the autocomplete component
+        // TODO this is ineffective and causes double rendering bugs
         setProperties(dropdown, {
           'searchText': null,
           'selected': null
@@ -116,7 +111,10 @@ export default Component.extend({
   fetchSuggestions: task(function * (queryString) {
     const DEBOUNCE_MS = 250;
     const queryTree = get(this, 'queryTree');
-    const tokenWithAutocomplete = assign({}, QP.token(queryString), { 'autocomplete': true });
+    const caretPosition = this._getCaretPosition();
+
+    const currentToken = queryString.substring(0, caretPosition);
+    const tokenWithAutocomplete = assign({}, QP.token(currentToken), { 'autocomplete': true });
     const newTree = this._constructAutoCompleteTree(queryTree, tokenWithAutocomplete);
     const requestData = {
       tree: newTree,
@@ -138,6 +136,13 @@ export default Component.extend({
       .catch(Logger.error)
   }),
 
+  //TODO: could be a computed prop to make it available to other funcs
+  _getCaretPosition() {
+    const inputField = $('.ember-power-select-typeahead-input')[0];
+
+    return inputField.selectionStart || 0;
+  },
+
   _constructAutoCompleteTree(queryTree, autocompleteToken) {
     if (queryTree) {
       const currentNode = QP.filter(queryTree, node => node.autocomplete === true)[0];
@@ -156,7 +161,7 @@ export default Component.extend({
    * @return {node} Description
    */
   _appendToTree(queryTree, node) {
-    return QP.and({ left: queryTree, right: node });
+    return queryTree ? QP.and({ left: queryTree, right: node }) : node;
   },
 
   _constructSearchString(tree, searchText) {
