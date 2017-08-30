@@ -12,7 +12,7 @@ Include as much useful, detailed information as possible. The title should be co
 
 * Whether you would like to form a collaboration.
 
-Also think about adding tags to make your data more 'searchable' Link to "What makes a good tag?"
+Also think about adding tags to make your data more 'searchable' [What makes a good tag](/help/other/good-tag)?
 
 Example:
 
