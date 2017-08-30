@@ -15,11 +15,10 @@ export default Component.extend({
   classNames: ['c-search-bar'],
 
   openPagesPlaceholder: 'Search over 1 million human genomic datasets',
-  queryTree: null,
 
   isAuthenticated: computed.alias('session.isAuthenticated'),
 
-  predicates: computed('queryTree', function() {
+  predicates: computed('queryTree.[]', function() {
     const queryTree = get(this, 'queryTree');
     const rawPredicates = queryTree ? QP.filter(queryTree, n => n._type === 'predicate') : [];
     return rawPredicates.map(predicate => Ember.Object.create(predicate));
@@ -33,6 +32,14 @@ export default Component.extend({
   //     return value;
   //   }
   // }),
+  //TODO set the initial state of queryString
+  queryString: computed('queryTree.[]', 'queryService.queryString', function() {
+    const queryTree = get(this, 'queryTree');
+    //NOTE this will only return the first token. Refactor.
+    const treeNoPreds = queryTree ? QP.filter(queryTree, node => node._type !== 'predicate')[0] : [];
+    ////debugger;
+    return QP.toNatural(treeNoPreds);
+  }),
 
   init() {
     this._super(...arguments);
@@ -47,7 +54,8 @@ export default Component.extend({
     ];
 
     setProperties(this, {
-      'queryString': get(this, 'queryService').getQueryString(),
+      //Could instead convert the queryService queryString to a tree then use it as the initial queryTree value
+      'queryTree': null,
       'placeholder': get(this, 'isAuthenticated') ?
         this._getSearchPlaceholder(placeholderValues) :
         get(this, 'openPagesPlaceholder')
@@ -59,31 +67,22 @@ export default Component.extend({
       if (e.key === "Enter") { e.preventDefault(); }
       if (e.key === 'Enter' && isBlank(dropdown.highlighted)) {
         const queryTree = get(this, 'queryTree');
-        // const searchBarText = dropdown.searchText;
         const performSearch = get(this, 'search');
+        //debugger;
         queryTree ? performSearch(QP.toNatural(queryTree)) : performSearch();
-        // if (queryTree && searchBarText) {
-        //   const queryString = this._constructSearchString(queryTree, searchBarText);
-        //   set(this, 'queryString', searchBarText);
-        //   performSearch(queryString);
-        // } else 
-        // if (queryTree) {
-        //   performSearch(QP.toNatural(queryTree));
-        // } else if (searchBarText) {
-        //   set(this, 'queryString', searchBarText);
-        //   performSearch(QP.toNatural(QP.fromNatural(searchBarText)));
-        // } else {
-        //   performSearch();
-        // }
       }
     },
 
     handleSelection(selection, dropdown) {
       if (selection) {
+        //When a predicate is selected remove the node with atocomplete true
         const predicate = QP.predicate({ key: selection.groupName, value: selection.suggestionText });
         const queryTree = get(this, 'queryTree');
         if (queryTree) {
-          set(this, 'queryTree', QP.and({ left: predicate, right: queryTree }));
+          const nodeToRemove = QP.filter(queryTree, node => node.autocomplete === true)[0];
+
+          const newQueryTree = QP.replace({on: queryTree, target: nodeToRemove, replacement: predicate })
+          set(this, 'queryTree', newQueryTree);
         } else {
           set(this, 'queryTree', predicate);
         }
@@ -162,11 +161,6 @@ export default Component.extend({
    */
   _appendToTree(queryTree, node) {
     return queryTree ? QP.and({ left: queryTree, right: node }) : node;
-  },
-
-  _constructSearchString(tree, searchText) {
-    const searchStringTree = QP.fromNatural(searchText);
-    return QP.toNatural(this._appendToTree(tree, searchStringTree));
   },
 
   _handleAutocompleteSuccess(resp) {
