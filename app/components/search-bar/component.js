@@ -5,7 +5,7 @@ import { task, timeout } from 'ember-concurrency';
 import ENV from 'repositive/config/environment';
 import { getRandomElement } from 'repositive/utils/arrays';
 
-const { Component, get, inject: { service }, isBlank, set, setProperties, computed, Logger } = Ember;
+const { assign, Component, get, inject: { service }, isBlank, set, setProperties, computed, Logger } = Ember;
 
 export default Component.extend({
   queryService: service('query'),
@@ -113,26 +113,55 @@ export default Component.extend({
     }
   },
 
-  //TODO since the huginn API will change to take the queryTree, we must transform the string into the tree here
   fetchSuggestions: task(function * (queryString) {
     const DEBOUNCE_MS = 250;
-    const REQUEST_OPTIONS = {
+    const queryTree = get(this, 'queryTree');
+    const tokenWithAutocomplete = assign({}, QP.token(queryString), { 'autocomplete': true });
+    const newTree = this._constructAutoCompleteTree(queryTree, tokenWithAutocomplete);
+    const requestData = {
+      tree: newTree,
+      limit: 3
+    };
+    const requestOptions = {
       method: 'POST',
       contentType: 'application/json',
-      data: JSON.stringify({ term: queryString})
+      data: JSON.stringify(requestData)
     };
+
+    set(this, 'queryTree', newTree);
 
     yield timeout(DEBOUNCE_MS);
 
     return get(this, 'ajax')
-      .request(ENV.APIRoutes['autocomplete'], REQUEST_OPTIONS)
+      .request(ENV.APIRoutes['autocomplete'], requestOptions)
       .then(this._handleAutocompleteSuccess.bind(this))
       .catch(Logger.error)
   }),
 
+  _constructAutoCompleteTree(queryTree, autocompleteToken) {
+    if (queryTree) {
+      const currentNode = QP.filter(queryTree, node => node.autocomplete === true)[0];
+
+      return currentNode ?
+        QP.replace({ on: queryTree, target: currentNode, replacement: autocompleteToken }) :
+        this._appendToTree(queryTree, autocompleteToken);
+    }
+    return autocompleteToken;
+  },
+
+  /**
+   * _appendToTree - Adds new node to the right.
+   * @param {node?} queryTree - The existing tree
+   * @param {node} node - Node to be added
+   * @return {node} Description
+   */
+  _appendToTree(queryTree, node) {
+    return QP.and({ left: queryTree, right: node });
+  },
+
   _constructSearchString(tree, searchText) {
     const searchStringTree = QP.fromNatural(searchText);
-    return QP.toNatural(QP.and({ left: tree, right: searchStringTree }));
+    return QP.toNatural(this._appendToTree(tree, searchStringTree));
   },
 
   _handleAutocompleteSuccess(resp) {
