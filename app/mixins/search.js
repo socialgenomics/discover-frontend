@@ -80,16 +80,16 @@ export default Mixin.create({
 
   /**
   * @desc Update queryService query value
-  * @param {String?} query - The new query value
+  * @param {String?} queryString - The new query value
   * @private
   */
-  _updateQueryServiceValue(query) {
+  _updateQueryServiceValue(queryString) {
     const QP = get(this, 'QP');
     const qS = get(this, 'queryService');
-    if (query) {
-      qS.setQueryString(QP.toNatural(QP.fromNatural(query)));
+    if (queryString) {
+      qS.setQueryTree(QP.fromNatural(queryString));
     } else {
-      qS.setQueryString(null);
+      qS.setQueryTree(null);
     }
   },
 
