@@ -10,6 +10,7 @@ export default Component.extend({
   windowTitle: 'Share this dataset',
   copyAttempt: false,
   copySuccess: false,
+  tweetMaxLength: 140,
 
   copyFailed: computed('copyAttempt', 'copySuccess', function () {
     return get(this, 'copyAttempt') && get(this, 'copySuccess') === false;
@@ -22,12 +23,18 @@ export default Component.extend({
   init() {
     this._super(...arguments);
 
+    const twitterHashtags = ['findthatdata'];
+    const twitterMsg = '!@repositiveio helped me find this awesome human #genomic #dataset';
+
     set(this, 'channels', {
       twitter: {
         baseUrl: 'https://twitter.com/intent/tweet',
         qsParams: {
-          hashtags: 'findthatdata',
-          text: '!@repositiveio helped me find this awesome human #genomic #dataset & now I am helping you find it'
+          hashtags: twitterHashtags.join(),
+          text: twitterMsg + ' - ' + this._createTweetText(
+            get(this, 'model.title'),
+            this._getMaxTitleLengthForTweet(twitterMsg, twitterHashtags, get(this, 'model.url'))
+          )
         }
       },
       linkedin: {
@@ -35,7 +42,7 @@ export default Component.extend({
         qsParams: {
           mini: true,
           source: 'Repositive',
-          summary: '#Repositive helped me find this awesome human #genomic #dataset & now I am helping you find it #findthatdata',
+          summary: `#Repositive helped me find this awesome human #genomic #dataset - ${get(this, 'model.title')} & now I am helping you find it #findthatdata`,
           title: 'Repositive helped me find this awesome human genomic dataset'
         }
       }
@@ -96,5 +103,28 @@ export default Component.extend({
     return new URI(get(channelOptions, 'baseUrl')).query(
       Object.assign({}, get(channelOptions, 'qsParams'), { url: get(this, 'shareUrl') })
     ).toString();
+  },
+
+  /**
+   * Gets max dataset title length for tweet based on the length of other tweet parts
+   * @param {String} textMgs
+   * @param {Array<String>} hashtags
+   * @param {String} shareUrl
+   * @returns {Number}
+   * @private
+   */
+  _getMaxTitleLengthForTweet(textMgs, hashtags, shareUrl) {
+    return get(this, 'tweetMaxLength') - textMgs.length - hashtags.join('# ').length - shareUrl ? 23 : 0;
+  },
+
+  /**
+   * Returns truncated version of dataset title if it is longer then provided mux length
+   * @param {String} title
+   * @param {Number} maxLength
+   * @returns {String}
+   * @private
+   */
+  _createTweetText(title, maxLength) {
+    return title.length <= maxLength ? title : title.slice(0, maxLength - 3) + '...';
   }
 });
