@@ -69,6 +69,7 @@ export default Component.extend({
         const predicate = QP.predicate({ key: selection.groupName, value: selection.suggestionText });
         const queryTree = get(this, 'queryTree');
         if (queryTree) {
+          //TODO refactor this mess
           const nodeToRemove = QP.filter(queryTree, node => node.autocomplete === true)[0];
           const newQueryTree = QP.replace({on: queryTree, target: nodeToRemove, replacement: predicate })
           get(this, 'queryService').setQueryTree(newQueryTree);
