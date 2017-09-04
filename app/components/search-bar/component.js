@@ -151,7 +151,7 @@ export default Component.extend({
    * @return {node} New tree to send to suggestion endpoint
    */
   _constructAutoCompleteTree(queryTree, currentNode) {
-    const autocompleteNode = assign({}, currentNode, { 'autocomplete': true });
+    const autocompleteNode = assign({ 'autocomplete': true }, currentNode);
 
     return QP.replace({
       on: queryTree,
