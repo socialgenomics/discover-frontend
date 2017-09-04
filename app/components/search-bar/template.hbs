@@ -4,14 +4,6 @@
       <span>{{fa-icon "search" class='px3 fc-secondary'}}</span>
     </label>
 
-    {{!#each predicates as |predicate|}}
-      {{!tag-item
-          tag=predicate
-          tagText=(compute (action 'getPredicateText') predicate)
-          type='predicate'
-          deleteAction=(action 'removePredicate')}}
-    {{!/each}}
-
     {{#power-select-typeahead
       placeholder=placeholder
       options=suggestions

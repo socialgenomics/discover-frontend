@@ -18,12 +18,6 @@ export default Component.extend({
 
   isAuthenticated: computed.alias('session.isAuthenticated'),
 
-  // predicates: computed('queryTree', function() {
-  //   const queryTree = get(this, 'queryTree');
-  //   const rawPredicates = queryTree ? QP.filter(queryTree, n => n._type === 'predicate') : [];
-  //   return rawPredicates.map(predicate => Ember.Object.create(predicate));
-  // }),
-
   // query: computed('queryService.queryString', {
   //   get() {
   //     return get(this, 'queryService').getQueryString();
@@ -31,15 +25,6 @@ export default Component.extend({
   //   set(key, value) {
   //     return value;
   //   }
-  // }),
-
-  //TODO set the initial state of queryString
-  // queryString: computed('queryTree.[]', 'queryService.queryString', function() {
-  //   const queryTree = get(this, 'queryTree');
-  //   //NOTE this will only return the first token. Refactor.
-  //   const treeNoPreds = queryTree ? QP.filter(queryTree, node => node._type !== 'predicate')[0] : [];
-  //   ////debugger;
-  //   return QP.toNatural(treeNoPreds);
   // }),
 
   queryTree: computed('queryService.queryTree', function() {
@@ -74,7 +59,6 @@ export default Component.extend({
       if (e.key === 'Enter' && isBlank(dropdown.highlighted)) {
         const queryTree = get(this, 'queryTree');
         const performSearch = get(this, 'search');
-        debugger;
         queryTree ? performSearch(QP.toNatural(queryTree)) : performSearch();
       }
     },
@@ -100,16 +84,6 @@ export default Component.extend({
         // });
       }
     }
-
-    // removePredicate(predicate) {
-    //   const queryTree = get(this, 'queryTree');
-    //   const newTree = QP.remove(queryTree, predicate);
-    //   set(this, 'queryTree', newTree);
-    // },
-
-    // getPredicateText(predicate) {
-    //   return `${predicate.key}: ${predicate.value}`;
-    // }
   },
 
   /**
@@ -123,7 +97,7 @@ export default Component.extend({
     const caretPosition = this._getCaretPosition();
     const queryArray =  queryString.substring(0, caretPosition).split(' ');
     const currentToken = queryArray[queryArray.length - 1];
-    debugger;
+
     if (currentToken) {
       const tokenWithAutocomplete = assign({}, QP.token(currentToken), { 'autocomplete': true });
       const newTree = this._constructAutoCompleteTree(queryTree, tokenWithAutocomplete);
@@ -136,7 +110,7 @@ export default Component.extend({
         contentType: 'application/json',
         data: JSON.stringify(requestData)
       };
-      debugger;
+
       get(this, 'queryService').setQueryTree(newTree);
 
       yield timeout(DEBOUNCE_MS);
@@ -209,10 +183,8 @@ export default Component.extend({
     const preCaretTokenText = preCaretTextArray[preCaretTextArray.length - 1];
     const postCaretTokenText = queryString.substring(caretPosition).split(' ')[0];
     debugger;
-  }
+  },
 
-  //when to remove autocomplete:true
-    // when a selection is made
 
   /**
    * _appendToTree - Adds new node to the right.
