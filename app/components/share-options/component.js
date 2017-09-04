@@ -11,6 +11,7 @@ export default Component.extend({
   copyAttempt: false,
   copySuccess: false,
   tweetMaxLength: 140,
+  tweetURLLength: 25, // 23 for url and 2 for spaces
 
   copyFailed: computed('copyAttempt', 'copySuccess', function () {
     return get(this, 'copyAttempt') && get(this, 'copySuccess') === false;
@@ -24,14 +25,14 @@ export default Component.extend({
     this._super(...arguments);
 
     const twitterHashtags = ['findthatdata'];
-    const twitterMsg = '!@repositiveio helped me find this awesome human #genomic #dataset';
+    const twitterMsg = '!@repositiveio helped me find this awesome human #genomic #dataset - ';
 
     set(this, 'channels', {
       twitter: {
         baseUrl: 'https://twitter.com/intent/tweet',
         qsParams: {
           hashtags: twitterHashtags.join(),
-          text: twitterMsg + ' - ' + this._createTweetText(
+          text: twitterMsg + this._createTweetText(
             get(this, 'model.title'),
             this._getMaxTitleLengthForTweet(twitterMsg, twitterHashtags, get(this, 'model.url'))
           )
@@ -114,7 +115,10 @@ export default Component.extend({
    * @private
    */
   _getMaxTitleLengthForTweet(textMgs, hashtags, shareUrl) {
-    return get(this, 'tweetMaxLength') - textMgs.length - hashtags.join('# ').length - shareUrl ? 23 : 0;
+    return get(this, 'tweetMaxLength') -
+      textMgs.length -
+      hashtags.join('# ').length -
+      shareUrl ? get(this, 'tweetURLLength') : 0;
   },
 
   /**
