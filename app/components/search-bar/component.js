@@ -5,7 +5,7 @@ import { task, timeout } from 'ember-concurrency';
 import ENV from 'repositive/config/environment';
 import { getRandomElement } from 'repositive/utils/arrays';
 
-const { $, assign, Component, get, inject: { service }, isBlank, set, setProperties, computed, Logger } = Ember;
+const { $, assign, Component, get, inject: { service }, isBlank, set, computed, Logger } = Ember;
 
 export default Component.extend({
   queryService: service('query'),
@@ -63,7 +63,7 @@ export default Component.extend({
       }
     },
 
-    handleSelection(selection, dropdown) {
+    handleSelection(selection /*, dropdown*/) {
       if (selection) {
         //When a predicate is selected remove the node with atocomplete true
         const predicate = QP.predicate({ key: selection.groupName, value: selection.suggestionText });
@@ -93,14 +93,12 @@ export default Component.extend({
    */
   fetchSuggestions: task(function * (queryString) {
     const DEBOUNCE_MS = 250;
-    const queryTree = get(this, 'queryTree');
     const caretPosition = this._getCaretPosition();
-    const queryArray =  queryString.substring(0, caretPosition).split(' ');
-    const currentToken = queryArray[queryArray.length - 1];
+    const queryTree = QP.fromNatural(queryString);
+    const currentNode = this._getCurrentNode(queryTree, caretPosition);
 
-    if (currentToken) {
-      const tokenWithAutocomplete = assign({}, QP.token(currentToken), { 'autocomplete': true });
-      const newTree = this._constructAutoCompleteTree(queryTree, tokenWithAutocomplete);
+    if (currentNode) {
+      const newTree = this._constructAutoCompleteTree(queryTree, currentNode);
       const requestData = {
         tree: newTree,
         limit: 3
@@ -148,55 +146,30 @@ export default Component.extend({
 
   /**
    * _constructAutoCompleteTree - Update the query tree with new autocomplete node
-   * @param {node?} queryTree - The existing tree
-   * @param {node} autocompleteToken - A token with autocomplete:true
+   * @param {node?} queryTree - The existing tree, with no autocomplete attrs
+   * @param {node} currentNode - The node being edited
    * @return {node} New tree to send to suggestion endpoint
    */
-  // _constructAutoCompleteTree(queryTree, autocompleteToken) {
-  //   if (queryTree) {
-  //     const currentNode = QP.filter(queryTree, node => node.autocomplete === true)[0];
-  //
-  //     return currentNode ?
-  //       QP.replace({ on: queryTree, target: currentNode, replacement: autocompleteToken }) :
-  //       this._appendToTree(queryTree, autocompleteToken);
-  //   }
-  //   return autocompleteToken;
-  // },
+  _constructAutoCompleteTree(queryTree, currentNode) {
+    const autocompleteNode = assign({}, currentNode, { 'autocomplete': true });
 
-  // Take a queryString and the caretPosition
-  // split the string by spaces
-  // determine current node
-  // append autocomplete:true to current node
-  // return the tree
-  _constructAutoCompleteTree(queryString, caretPosition) {
-
+    return QP.replace({
+      on: queryTree,
+      target: currentNode,
+      replacement: autocompleteNode
+    });
   },
+
   /**
    * _getCurrentNode - Returns the node which this user is editting
    * @param {node} queryTree - The existing tree
    * @param {number} caretPosition - The position of the caret in search input
    * @return {node} The current node
    */
-  _getCurrentNode(queryTree, caretPosition) {
-    const queryString = QP.toNatural(queryTree);
-    const preCaretTextArray = queryString.substring(0, caretPosition).split(' ');
-    const preCaretTokenText = preCaretTextArray[preCaretTextArray.length - 1];
-    const postCaretTokenText = queryString.substring(caretPosition).split(' ')[0];
-    debugger;
+  _getCurrentNode(/*queryTree , caretPosition*/) {
+    return false;
   },
 
-
-  /**
-   * _appendToTree - Adds new node to the right.
-   * @param {node?} queryTree - The existing tree
-   * @param {node} node - Node to be added
-   * @return {node} Description
-   */
-  _appendToTree(queryTree, node) {
-    return queryTree ? QP.and({ left: queryTree, right: node }) : node;
-  },
-
-  //TODO: could be a computed prop to make it available to other funcs
   /**
    * _getCaretPosition - Get the caret position of the search input
    * @return {number} The index of the caret
