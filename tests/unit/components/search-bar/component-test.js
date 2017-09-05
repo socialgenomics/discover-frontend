@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import { describe, it } from 'mocha';
 import { setupComponentTest } from 'ember-mocha';
-import QP from 'npm:@repositive/query-parser';
+// import QP from 'npm:@repositive/query-parser';
 
 describe('!T Unit | Component | search bar', function() {
   setupComponentTest('search-bar', {
