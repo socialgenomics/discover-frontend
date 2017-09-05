@@ -166,8 +166,11 @@ export default Component.extend({
    * @param {number} caretPosition - The position of the caret in search input
    * @return {node} The current node
    */
-  _getCurrentNode(/*queryTree , caretPosition*/) {
-    return false;
+  _getCurrentNode(queryTree , caretPosition) {
+    const queryString = QP.toNatural(queryTree);
+    const queryArray = queryString.substring(0, caretPosition).split(' ');
+    const currentNodeString = queryArray[queryArray.length - 1];
+    return QP.filter(queryTree, node => node.value === currentNodeString)[0];
   },
 
   /**
