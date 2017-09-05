@@ -92,7 +92,7 @@ export default Component.extend({
    * @return {Promise} Promised suggestions
    */
   fetchSuggestions: task(function * (queryString) {
-    const DEBOUNCE_MS = 250;
+    const DEBOUNCE_MS = 500;
     const caretPosition = this._getCaretPosition();
     const queryTree = QP.fromNatural(queryString);
     const currentNode = this._getCurrentNode(queryTree, caretPosition);
@@ -151,7 +151,8 @@ export default Component.extend({
    * @return {node} New tree to send to suggestion endpoint
    */
   _constructAutoCompleteTree(queryTree, currentNode) {
-    const autocompleteNode = assign({ 'autocomplete': true }, currentNode);
+    const hackToken = QP.token('');
+    const autocompleteNode = assign({ 'autocomplete': true }, currentNode, {_id: hackToken._id});
 
     return QP.replace({
       on: queryTree,
@@ -166,11 +167,9 @@ export default Component.extend({
    * @param {number} caretPosition - The position of the caret in search input
    * @return {node} The current node
    */
-  _getCurrentNode(queryTree , caretPosition) {
-    const queryString = QP.toNatural(queryTree);
-    const queryArray = queryString.substring(0, caretPosition).split(' ');
-    const currentNodeString = queryArray[queryArray.length - 1];
-    return QP.filter(queryTree, node => node.value === currentNodeString)[0];
+  _getCurrentNode(queryTree, caretPosition) {
+    const treeWithPositions = QP.decorateTreeWithNaturalPositions(queryTree);
+    return QP.filter(treeWithPositions, n => n.from <= caretPosition - 1 && n.to >= caretPosition - 1)[0];
   },
 
   /**
