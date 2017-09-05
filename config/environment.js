@@ -151,14 +151,14 @@ module.exports = function(environment) {
           name: 'Intercom',
           environments: ['production'],
           config: {
-            id: 'tz4k4icz'
+            appId: 'tz4k4icz'
           }
         },
         {
           name: 'Intercom',
           environments: ['local-development'],
           config: {
-            id: 'vdoi8br5'
+            appId: 'vdoi8br5'
           }
         }
       ]
