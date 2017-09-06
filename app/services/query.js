@@ -3,13 +3,22 @@ import Ember from 'ember';
 const { Service, get, set } = Ember;
 
 export default Service.extend({
-  queryString: '',
+  // queryString: '',
+  queryTree: null,
 
-  getQueryString() {
-    return get(this, 'queryString');
+  // getQueryString() {
+  //   return get(this, 'queryString');
+  // },
+  //
+  // setQueryString(newString) {
+  //   set(this, 'queryString', newString);
+  // },
+
+  getQueryTree() {
+    return get(this, 'queryTree');
   },
 
-  setQueryString(newString) {
-    set(this, 'queryString', newString);
+  setQueryTree(newTree) {
+    set(this, 'queryTree', newTree);
   }
 });
