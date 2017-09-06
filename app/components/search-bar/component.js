@@ -92,6 +92,7 @@ export default Component.extend({
    * @return {Promise} Promised suggestions
    */
   fetchSuggestions: task(function * (queryString) {
+    set(this, 'isLoading', true);
     const DEBOUNCE_MS = 500;
     const caretPosition = this._getCaretPosition();
     const queryTree = QP.fromNatural(queryString);
@@ -117,6 +118,7 @@ export default Component.extend({
         .request(ENV.APIRoutes['autocomplete'], requestOptions)
         .then(this._handleAutocompleteSuccess.bind(this))
         .catch(Logger.error)
+        .finally(set(this, 'isLoading', false))
     }
   }),
 

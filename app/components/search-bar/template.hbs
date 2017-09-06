@@ -1,7 +1,11 @@
 <form class="flex items-center bc-white" autocomplete="off">
 
     <label class="flex items-center">
-      <span>{{fa-icon "search" class='px3 fc-secondary'}}</span>
+      {{#if isLoading}}
+        <span>{{fa-icon "circle-o-notch" class='px3 fc-secondary default-transition' pulse=true size=1}}</span>
+      {{else}}
+        <span>{{fa-icon "search" class='px3 fc-secondary default-transition' size=1}}</span>
+      {{/if}}
     </label>
 
     {{#power-select-typeahead
@@ -17,6 +21,7 @@
     }}
       {{option.suggestionText}}
     {{/power-select-typeahead}}
+
 
 
   {{#if hasSubmitButton}}
