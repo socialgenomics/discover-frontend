@@ -1,6 +1,6 @@
 {
   "name": "repositive",
-  "version": "3.6.1",
+  "version": "3.6.2",
   "description": "Frontend app for repositive.io",
   "private": true,
   "directories": {
@@ -63,6 +63,7 @@
     "ember-fr-markdown-file": "0.0.0",
     "ember-link-action": "^0.0.36",
     "ember-load-initializers": "^1.0.0",
+    "ember-local-storage": "^1.4.0",
     "ember-metrics": "^0.12.0",
     "ember-modal-dialog": "^2.3.0",
     "ember-moment": "^7.3.1",
