@@ -18,15 +18,6 @@ export default Component.extend({
 
   isAuthenticated: computed.alias('session.isAuthenticated'),
 
-  // query: computed('queryService.queryString', {
-  //   get() {
-  //     return get(this, 'queryService').getQueryString();
-  //   },
-  //   set(key, value) {
-  //     return value;
-  //   }
-  // }),
-
   queryTree: computed('queryService.queryTree', function() {
     return get(this, 'queryService').getQueryTree();
   }),
@@ -57,9 +48,13 @@ export default Component.extend({
     handleKeyDown(dropdown, e) {
       if (e.key === 'Enter') { e.preventDefault(); }
       if (e.key === 'Enter' && isBlank(dropdown.highlighted)) {
-        const queryTree = get(this, 'queryTree');
+        const newTree = QP.fromNatural(dropdown.searchText);
+
+        get(this, 'queryService').setQueryTree(newTree);
+
+        // const queryTree = get(this, 'queryTree');
         const performSearch = get(this, 'search');
-        queryTree ? performSearch(QP.toNatural(queryTree)) : performSearch();
+        newTree ? performSearch(QP.toNatural(newTree)) : performSearch();
       }
     },
 
@@ -110,7 +105,7 @@ export default Component.extend({
         data: JSON.stringify(requestData)
       };
 
-      get(this, 'queryService').setQueryTree(newTree);
+      // get(this, 'queryService').setQueryTree(newTree);
 
       yield timeout(DEBOUNCE_MS);
 
