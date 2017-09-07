@@ -45,6 +45,10 @@ export default Component.extend({
   },
 
   actions: {
+    handleBlur(dropdown) {
+      set(dropdown, 'selected', dropdown.searchText);
+    },
+
     handleKeyDown(dropdown, e) {
       if (e.key === 'Enter') { e.preventDefault(); }
       if (e.key === 'Enter' && isBlank(dropdown.highlighted)) {
@@ -52,13 +56,12 @@ export default Component.extend({
 
         get(this, 'queryService').setQueryTree(newTree);
 
-        // const queryTree = get(this, 'queryTree');
         const performSearch = get(this, 'search');
         newTree ? performSearch(QP.toNatural(newTree)) : performSearch();
       }
     },
 
-    handleSelection(selection /*, dropdown*/) {
+    handleSelection(selection) {
       if (selection) {
         const predicate = QP.predicate({ key: selection.groupName, value: selection.suggestionText });
         const queryTree = get(this, 'queryTree');
@@ -70,13 +73,6 @@ export default Component.extend({
         } else {
           get(this, 'queryService').setQueryTree(predicate);
         }
-
-        //Reset the autocomplete component
-        // TODO this is ineffective and causes double rendering bugs
-        // setProperties(dropdown, {
-        //   'searchText': null,
-        //   'selected': null
-        // });
       }
     }
   },
@@ -87,7 +83,6 @@ export default Component.extend({
    * @return {Promise} Promised suggestions
    */
   fetchSuggestions: task(function * (queryString) {
-    set(this, 'isLoading', true);
     const DEBOUNCE_MS = 500;
     const caretPosition = this._getCaretPosition();
     const queryTree = QP.fromNatural(queryString);
@@ -105,15 +100,12 @@ export default Component.extend({
         data: JSON.stringify(requestData)
       };
 
-      // get(this, 'queryService').setQueryTree(newTree);
-
       yield timeout(DEBOUNCE_MS);
 
       return get(this, 'ajax')
         .request(ENV.APIRoutes['autocomplete'], requestOptions)
         .then(this._handleAutocompleteSuccess.bind(this))
         .catch(Logger.error)
-        .finally(set(this, 'isLoading', false))
     }
   }),
 
