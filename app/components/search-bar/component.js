@@ -46,12 +46,13 @@ export default Component.extend({
 
   actions: {
     handleBlur(dropdown) {
-      set(dropdown, 'selected', dropdown.searchText);
+      return false;
+      // set(dropdown, 'selected', dropdown.searchText);
     },
 
     handleKeyDown(dropdown, e) {
-      if (e.key === 'Enter') { e.preventDefault(); }
-      if (e.key === 'Enter' && isBlank(dropdown.highlighted)) {
+      if (e.keyCode === 13) { e.preventDefault(); }
+      if (e.keyCode === 13 && isBlank(dropdown.highlighted)) {
         const newTree = QP.fromNatural(dropdown.searchText);
 
         get(this, 'queryService').setQueryTree(newTree);
@@ -61,17 +62,20 @@ export default Component.extend({
       }
     },
 
-    handleSelection(selection) {
+    handleSelection(selection, dropdown) {
       if (selection) {
         const predicate = QP.predicate({ key: selection.groupName, value: selection.suggestionText });
-        const queryTree = get(this, 'queryTree');
+        const queryTree = QP.fromNatural(dropdown.searchText);
+        const caretPosition = this._getCaretPosition();
+        const currentNode = this._getCurrentNode(queryTree, caretPosition);
 
-        if (queryTree) {
-          const nodeToRemove = QP.filter(queryTree, node => node.autocomplete === true)[0];
-          const newQueryTree = QP.replace({on: queryTree, target: nodeToRemove, replacement: predicate })
+        if (currentNode) {
+          const newQueryTree = QP.replace({ on: queryTree, target: currentNode, replacement: predicate });
           get(this, 'queryService').setQueryTree(newQueryTree);
         } else {
-          get(this, 'queryService').setQueryTree(predicate);
+          //This will change the structure of the user's original query
+          const newQueryTree = QP.and({left: predicate, right: queryTree});
+          get(this, 'queryService').setQueryTree(newQueryTree);
         }
       }
     }
