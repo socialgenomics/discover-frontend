@@ -5,7 +5,7 @@ import { task, timeout } from 'ember-concurrency';
 import ENV from 'repositive/config/environment';
 import { getRandomElement } from 'repositive/utils/arrays';
 
-const { $, assign, Component, get, inject: { service }, isBlank, set, computed, Logger } = Ember;
+const { $, assign, Component, get, inject: { service }, set, computed, Logger } = Ember;
 
 export default Component.extend({
   queryService: service('query'),
@@ -17,15 +17,6 @@ export default Component.extend({
   openPagesPlaceholder: 'Search over 1 million human genomic datasets',
 
   isAuthenticated: computed.alias('session.isAuthenticated'),
-
-  // query: computed('queryService.queryString', {
-  //   get() {
-  //     return get(this, 'queryService').getQueryString();
-  //   },
-  //   set(key, value) {
-  //     return value;
-  //   }
-  // }),
 
   queryTree: computed('queryService.queryTree', function() {
     return get(this, 'queryService').getQueryTree();
@@ -54,34 +45,31 @@ export default Component.extend({
   },
 
   actions: {
+    handleBlur() { return false; },
+
     handleKeyDown(dropdown, e) {
-      if (e.key === 'Enter') { e.preventDefault(); }
-      if (e.key === 'Enter' && isBlank(dropdown.highlighted)) {
+      if (e.keyCode === 13) { e.preventDefault(); }
+      if (e.keyCode === 13 && dropdown.isOpen === false) {
         const queryTree = get(this, 'queryTree');
         const performSearch = get(this, 'search');
         queryTree ? performSearch(QP.toNatural(queryTree)) : performSearch();
       }
     },
 
-    handleSelection(selection /*, dropdown*/) {
+    handleSelection(selection) {
       if (selection) {
         const predicate = QP.predicate({ key: selection.groupName, value: selection.suggestionText });
         const queryTree = get(this, 'queryTree');
+        const caretPosition = this._getCaretPosition();
+        const currentNode = this._getCurrentNode(queryTree, caretPosition);
 
-        if (queryTree) {
-          const nodeToRemove = QP.filter(queryTree, node => node.autocomplete === true)[0];
-          const newQueryTree = QP.replace({on: queryTree, target: nodeToRemove, replacement: predicate })
+        if (currentNode) {
+          const newQueryTree = QP.replace({ on: queryTree, target: currentNode, replacement: predicate });
           get(this, 'queryService').setQueryTree(newQueryTree);
         } else {
-          get(this, 'queryService').setQueryTree(predicate);
+          const newQueryTree = QP.and({left: predicate, right: queryTree});
+          get(this, 'queryService').setQueryTree(newQueryTree);
         }
-
-        //Reset the autocomplete component
-        // TODO this is ineffective and causes double rendering bugs
-        // setProperties(dropdown, {
-        //   'searchText': null,
-        //   'selected': null
-        // });
       }
     }
   },
@@ -92,7 +80,6 @@ export default Component.extend({
    * @return {Promise} Promised suggestions
    */
   fetchSuggestions: task(function * (queryString) {
-    set(this, 'isLoading', true);
     const DEBOUNCE_MS = 500;
     const caretPosition = this._getCaretPosition();
     const queryTree = QP.fromNatural(queryString);
@@ -118,7 +105,6 @@ export default Component.extend({
         .request(ENV.APIRoutes['autocomplete'], requestOptions)
         .then(this._handleAutocompleteSuccess.bind(this))
         .catch(Logger.error)
-        .finally(set(this, 'isLoading', false))
     }
   }),
 

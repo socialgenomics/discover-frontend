@@ -10,15 +10,15 @@
       selected=queryString
       onchange=(action 'handleSelection')
       onkeydown=(action 'handleKeyDown')
+      onblur=(action 'handleBlur')
       search=(perform fetchSuggestions)
-      searchMessage=''
       defaultHighlighted=''
       as |option|
     }}
       {{option.suggestionText}}
     {{/power-select-typeahead}}
 
-    {{#if isLoading}}
+    {{#if fetchSuggestions.isRunning}}
       <span>{{fa-icon "circle-o-notch" class='px3 fc-secondary' pulse=true size=1}}</span>
     {{/if}}
 
