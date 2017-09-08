@@ -45,6 +45,7 @@ export default Component.extend({
   },
 
   actions: {
+    //Prevents the search field from clearing
     handleBlur() { return false; },
 
     handleKeyDown(dropdown, e) {
