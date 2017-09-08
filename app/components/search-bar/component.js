@@ -5,7 +5,7 @@ import { task, timeout } from 'ember-concurrency';
 import ENV from 'repositive/config/environment';
 import { getRandomElement } from 'repositive/utils/arrays';
 
-const { $, assign, Component, get, inject: { service }, isBlank, set, computed, Logger } = Ember;
+const { $, assign, Component, get, inject: { service }, set, computed, Logger } = Ember;
 
 export default Component.extend({
   queryService: service('query'),
@@ -45,27 +45,21 @@ export default Component.extend({
   },
 
   actions: {
-    handleBlur(dropdown) {
-      return false;
-      // set(dropdown, 'selected', dropdown.searchText);
-    },
+    handleBlur() { return false; },
 
     handleKeyDown(dropdown, e) {
       if (e.keyCode === 13) { e.preventDefault(); }
-      if (e.keyCode === 13 && isBlank(dropdown.highlighted)) {
-        const newTree = QP.fromNatural(dropdown.searchText);
-
-        get(this, 'queryService').setQueryTree(newTree);
-
+      if (e.keyCode === 13 && dropdown.isOpen === false) {
+        const queryTree = get(this, 'queryTree');
         const performSearch = get(this, 'search');
-        newTree ? performSearch(QP.toNatural(newTree)) : performSearch();
+        queryTree ? performSearch(QP.toNatural(queryTree)) : performSearch();
       }
     },
 
-    handleSelection(selection, dropdown) {
+    handleSelection(selection) {
       if (selection) {
         const predicate = QP.predicate({ key: selection.groupName, value: selection.suggestionText });
-        const queryTree = QP.fromNatural(dropdown.searchText);
+        const queryTree = get(this, 'queryTree');
         const caretPosition = this._getCaretPosition();
         const currentNode = this._getCurrentNode(queryTree, caretPosition);
 
@@ -73,7 +67,6 @@ export default Component.extend({
           const newQueryTree = QP.replace({ on: queryTree, target: currentNode, replacement: predicate });
           get(this, 'queryService').setQueryTree(newQueryTree);
         } else {
-          //This will change the structure of the user's original query
           const newQueryTree = QP.and({left: predicate, right: queryTree});
           get(this, 'queryService').setQueryTree(newQueryTree);
         }
@@ -103,6 +96,8 @@ export default Component.extend({
         contentType: 'application/json',
         data: JSON.stringify(requestData)
       };
+
+      get(this, 'queryService').setQueryTree(newTree);
 
       yield timeout(DEBOUNCE_MS);
 
