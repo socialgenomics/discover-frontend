@@ -55,6 +55,20 @@ export default Component.extend({
         const performSearch = get(this, 'search');
         queryTree ? performSearch(QP.toNatural(queryTree)) : performSearch();
       }
+
+      // Reset queryTree when searchbox text is deleted
+      if (e.keyCode === 8 || e.keyCode === 46) {
+        const caretPosition = this._getCaretPosition();
+        const selectedText = window.getSelection().toString();
+
+        if (e.keyCode === 8 && caretPosition === 1) {
+          get(this, 'queryService').setQueryTree(null);
+        } else if (e.keyCode === 46 && caretPosition === 0) {
+          get(this, 'queryService').setQueryTree(null);
+        } else if ((e.keyCode === 8 || e.keyCode === 46) && selectedText.length === QP.toNatural(get(this, 'queryTree')).length) {
+          get(this, 'queryService').setQueryTree(null);
+        }
+      }
     },
 
     handleSelection(selection) {
