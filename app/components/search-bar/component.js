@@ -58,9 +58,10 @@ export default Component.extend({
     },
 
     handleSelection(selection) {
+      const queryTree = get(this, 'queryTree');
+
       if (selection) {
         const predicate = QP.predicate({ key: selection.groupName, value: selection.suggestionText });
-        const queryTree = get(this, 'queryTree');
         const caretPosition = this._getCaretPosition();
         const currentNode = this._getCurrentNode(queryTree, caretPosition);
 
@@ -71,6 +72,9 @@ export default Component.extend({
           const newQueryTree = QP.and({left: predicate, right: queryTree});
           get(this, 'queryService').setQueryTree(newQueryTree);
         }
+      } else {
+        const performSearch = get(this, 'search');
+        queryTree ? performSearch(QP.toNatural(queryTree)) : performSearch();
       }
     }
   },
