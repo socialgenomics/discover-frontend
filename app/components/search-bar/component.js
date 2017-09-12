@@ -45,7 +45,7 @@ export default Component.extend({
   },
 
   actions: {
-    //Prevents the search field from clearing
+    //Prevents the search field from clearing on blur
     handleBlur() { return false; },
 
     handleKeyDown(dropdown, e) {
@@ -85,8 +85,7 @@ export default Component.extend({
           get(this, 'queryService').setQueryTree(newQueryTree);
         }
       } else {
-        const performSearch = get(this, 'search');
-        queryTree ? performSearch(QP.toNatural(queryTree)) : performSearch();
+        this.send('search');
       }
     },
 
@@ -163,7 +162,7 @@ export default Component.extend({
    */
   _constructAutoCompleteTree(queryTree, currentNode) {
     const hackToken = QP.token('');
-    const autocompleteNode = assign({ 'autocomplete': true }, currentNode, {_id: hackToken._id});
+    const autocompleteNode = assign({ 'autocomplete': true }, currentNode, { _id: hackToken._id });
 
     return QP.replace({
       on: queryTree,
@@ -189,7 +188,6 @@ export default Component.extend({
    */
   _getCaretPosition() {
     const inputField = $('.ember-power-select-typeahead-input')[0];
-
     return inputField.selectionStart || 0;
   },
 
