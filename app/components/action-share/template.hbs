@@ -9,6 +9,7 @@
     attachment='top left'
     constraints=shareOptionsModalConstraints
     hasOverlay=false
+    clickOutsideToClose=(readonly 'clickOutsideToClose')
   }}
     {{share-options
       shareUrl=shareUrl
@@ -22,6 +23,7 @@
   {{#repositive-modal
     containerClass='c-modal--medium u-z5'
     onClose=(action 'toggleShareEmailModal')
+    clickOutsideToClose=false
   }}
     {{repositive-modal/header
       icon='envelope'

@@ -28,23 +28,4 @@ describe('Integration | Component | user profile interests', function() {
       expect($interest.eq(1).text().trim()).to.be.equal(interests[1]);
     });
   });
-
-  describe('add interest input', function () {
-    it('should not be visible by default', function () {
-      expect(this.$('.ember-text-field')).to.have.length(0);
-    });
-
-    it('should be visible after clicking the add interest button', function () {
-      this.$('.r-btn-secondary').click();
-
-      expect(this.$('.ember-power-select-trigger')).to.have.length(1);
-    });
-
-    it('should disappear after clicking the cancel button', function () {
-      this.$('.r-btn-secondary').click();
-      this.$('.r-btn-cancel').click();
-
-      expect(this.$('.ember-text-field')).to.have.length(0);
-    });
-  });
 });

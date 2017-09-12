@@ -48,15 +48,11 @@ export default Route.extend(FlashMessageMixin, {
 
   beforeModel() {
     if (get(this, 'isFirstLogin')) {
-      this.transitionTo('signup-survey')
-        .then(() => {
-          // Don't display the 'verify email' message if user signed up with third party auth
-          if (!get(this, 'session.data.thirdPartySignup')) {
-            set(this, 'session.data.displayWelcomeMessage', true);
-          }
-        });
+      this.transitionTo('signup-survey');
     }
-    if (get(this, 'session.data.displayWelcomeMessage')) {
+
+    if (get(this, 'session.data.showCredentialVerifyReminder')) {
+      set(this, 'session.data.showCredentialVerifyReminder', false);
       this._addFlashMessage('Please check your email to verify your account', 'info');
     }
   },

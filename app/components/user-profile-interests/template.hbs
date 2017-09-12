@@ -1,4 +1,4 @@
-<label class="c-validated-input-label fc-secondary mb2 block">Add your research interests</label>
+<label class="c-validated-input-label fc-secondary mb2 block">Your research interests</label>
 <div class="py3">
   {{#if editInterests.length}}
   <div>
@@ -12,25 +12,17 @@
     {{/each}}
   </div>
   {{/if}}
-
-    {{#if isOpen}}
-      <div class="py2">
-        {{#power-select
-          placeholder="Type or select your interests"
-          options=suggestedInterests
-          onchange=(action "addInterest")
-          onkeydown=(action "handleKeydown")
-          noMatchesMessage="No suggestions found. Press enter to add."
-          defaultHighlighted=''
-          as |interest|
-        }}
-          {{interest}}
-        {{/power-select}}
-      </div>
-      {{r-button variant="cancel" label="Cancel" clickHandler=(action "hideInput")}}
-    {{else}}
-      <div class="py3">
-        {{r-button label="Add Interest" clickHandler=(action "showInput")}}
-      </div>
-    {{/if}}
+    <div class="py2">
+      {{#power-select
+        placeholder="Type or select your interests"
+        options=suggestedInterests
+        onchange=(action "addInterest")
+        onkeydown=(action "handleKeydown")
+        noMatchesMessage="No suggestions found. Press enter to add."
+        defaultHighlighted=''
+        as |interest|
+      }}
+        {{interest}}
+      {{/power-select}}
+    </div>
 </div>
