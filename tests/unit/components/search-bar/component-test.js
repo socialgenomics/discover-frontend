@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import { describe, it } from 'mocha';
 import { setupComponentTest } from 'ember-mocha';
-// import QP from 'npm:@repositive/query-parser';
+import QP from 'npm:@repositive/query-parser';
 
 describe('!T Unit | Component | search bar', function() {
   setupComponentTest('search-bar', {
@@ -15,15 +15,14 @@ describe('!T Unit | Component | search bar', function() {
   });
 
   describe('_constructAutoCompleteTree', function() {
-    //NOTE: QP.replace function is not replacing!!!
-    // it('returns a tree with a node containing autocomplete prop', function() {
-    //   const component = this.subject();
-    //   const queryTree = QP.fromNatural('lung cancer');
-    //   const currentNode = queryTree.right;
-    //   const result = component._constructAutoCompleteTree(queryTree, currentNode);
-    //
-    //   expect(result.right.autocomplete).to.be.true;
-    // });
+    it('returns a tree with a node containing autocomplete prop', function() {
+      const component = this.subject();
+      const queryTree = QP.fromNatural('lung cancer');
+      const currentNode = queryTree.right;
+      const result = component._constructAutoCompleteTree(queryTree, currentNode);
+
+      expect(result.right.autocomplete).to.be.true;
+    });
   });
 
   describe('_handleAutocompleteSuccess', function() {
