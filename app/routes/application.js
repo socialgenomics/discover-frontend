@@ -95,17 +95,6 @@ export default Route.extend(ApplicationRouteMixin, {
     }
   },
   _queryAndTransition(dest, input, serializeTree, pageNumber) {
-    // let query = {};
-    // if (isUUID.test(input.text)) {
-    //   query = { 'where.id': input.text };
-    // } else {
-    //   query = {
-    //     'where[$or][0][name]': input.text,
-    //     'where[$or][1][properties][short_name]': input.text,
-    //     'where[$or][2][properties][short_name]': input.text.toUpperCase()
-    //   };
-    // }
-    
     const collection = dest === 'datasources.source' ?
       QP.filter(input, n => n.key === 'datasource')[0] :
       QP.filter(input, n => n.key === 'collection')[0]
@@ -114,7 +103,7 @@ export default Route.extend(ApplicationRouteMixin, {
       'where[$or][1][properties][short_name]': collection.value,
       'where[$or][2][properties][short_name]': collection.value.toUpperCase()
     }
-    debugger;
+
     this.store.query('collection', query).then(collection => {
       this.store.push(this.store.normalize('collection', collection.content[0]));
       this.transitionTo(dest, collection.content[0].id, {
