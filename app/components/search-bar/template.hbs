@@ -1,27 +1,27 @@
 <form class="flex items-center bc-white" autocomplete="off">
 
-    <label class="flex items-center">
-      <span>{{fa-icon "search" class='px3 fc-secondary' size=1}}</span>
-    </label>
+  <label class="flex items-center">
+    <span>{{fa-icon "search" class='px3 fc-secondary' size=1}}</span>
+  </label>
 
-    {{#power-select-typeahead
-      placeholder=placeholder
-      options=suggestions
-      selected=queryString
-      onblur=(action 'handleBlur')
-      onchange=(action 'handleSelection')
-      onkeydown=(action 'handleKeyDown')
-      search=(perform fetchSuggestions)
-      defaultHighlighted=''
-      noMatchesMessage='No suggestions found'
-      as |option|
-    }}
-      {{option.suggestionText}}
-    {{/power-select-typeahead}}
+  {{#power-select-typeahead
+    placeholder=placeholder
+    options=suggestions
+    selected=queryString
+    onblur=(action 'handleBlur')
+    onchange=(action 'handleSelection')
+    onkeydown=(action 'handleKeyDown')
+    search=(perform fetchSuggestions)
+    defaultHighlighted=''
+    noMatchesMessage='No suggestions found'
+    as |option|
+  }}
+    {{option.suggestionText}}
+  {{/power-select-typeahead}}
 
-    {{#if fetchSuggestions.isRunning}}
-      <span>{{fa-icon "circle-o-notch" class='px3 fc-secondary' pulse=true size=1}}</span>
-    {{/if}}
+  {{#if fetchSuggestions.isRunning}}
+    <span>{{fa-icon "circle-o-notch" class='px3 fc-secondary' pulse=true size=1}}</span>
+  {{/if}}
 
   {{#if hasSubmitButton}}
     <button {{action 'search'}} class="r-btn r-btn-primary r-btn-large square self-stretch">Search</button>
