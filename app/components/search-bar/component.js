@@ -51,9 +51,7 @@ export default Component.extend({
     handleKeyDown(dropdown, e) {
       if (e.keyCode === 13) { e.preventDefault(); }
       if (e.keyCode === 13 && dropdown.isOpen === false) {
-        const queryTree = get(this, 'queryTree');
-        const performSearch = get(this, 'search');
-        queryTree ? performSearch(QP.toNatural(queryTree)) : performSearch();
+        this.send('search');
       }
 
       // Reset queryTree when searchbox text is deleted
@@ -90,6 +88,12 @@ export default Component.extend({
         const performSearch = get(this, 'search');
         queryTree ? performSearch(QP.toNatural(queryTree)) : performSearch();
       }
+    },
+
+    search() {
+      const queryTree = get(this, 'queryTree');
+      const performSearch = get(this, 'search');
+      queryTree ? performSearch(QP.toNatural(queryTree)) : performSearch();
     }
   },
 
