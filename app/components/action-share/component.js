@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-const { Component, set, inject: { service }, get } = Ember;
+const { Component, computed, set, inject: { service }, get } = Ember;
 
 export default Component.extend({
   session: service(),
@@ -9,6 +9,10 @@ export default Component.extend({
   showShareOptionsModal: false,
   showShareEmailModal: false,
   showCreateAccountModal: false,
+
+  clickOutsideToClose: computed('showShareEmailModal', function() {
+    return get(this, 'showShareEmailModal') ? false : true;
+  }),
 
   init() {
     this._super(...arguments);
