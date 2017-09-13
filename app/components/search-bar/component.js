@@ -187,8 +187,13 @@ export default Component.extend({
    * @return {number} The index of the caret
    */
   _getCaretPosition() {
-    const inputField = $('.ember-power-select-typeahead-input')[0];
-    return inputField.selectionStart || 0;
+    const cachedSearchSelector = get(this, 'cachedSearchSelector');
+    if (!cachedSearchSelector) {
+      const $searchBarSelector = $('.ember-power-select-typeahead-input')[0]
+      set(this, 'cachedSearchSelector', $searchBarSelector);
+      return $searchBarSelector.selectionStart || 0;
+    }
+    return cachedSearchSelector.selectionStart || 0;
   },
 
   /**
