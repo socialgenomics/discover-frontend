@@ -4,8 +4,10 @@ import { task, timeout } from 'ember-concurrency';
 
 import ENV from 'repositive/config/environment';
 import { getRandomElement } from 'repositive/utils/arrays';
+import { nameForKeyCode } from 'repositive/utils/key-codes';
 
 const { $, assign, Component, get, inject: { service }, set, computed, Logger } = Ember;
+
 
 export default Component.extend({
   queryService: service('query'),
@@ -49,23 +51,24 @@ export default Component.extend({
     handleBlur() { return false; },
 
     handleKeyDown(dropdown, e) {
-      if (e.keyCode === 13) { e.preventDefault(); }
-      if (e.keyCode === 13 && dropdown.isOpen === false) {
+      const keyName = nameForKeyCode(e.keyCode);
+
+      if (keyName === 'Enter') { e.preventDefault(); }
+      if (keyName === 'Enter' && dropdown.isOpen === false) {
         this.send('search');
       }
 
       // Reset queryTree when searchbox text is deleted
-      if (e.keyCode === 8 || e.keyCode === 46) {
+      if (keyName === 'Backspace' || keyName === 'Delete') {
         const caretPosition = this._getCaretPosition();
         const selectedText = window.getSelection().toString();
+        const queryString = get(this, 'queryString');
 
-        if (e.keyCode === 8 && caretPosition === 1) {
-          get(this, 'queryService').setQueryTree(null);
-        } else if (e.keyCode === 46 && caretPosition === 0) {
-          get(this, 'queryService').setQueryTree(null);
-        } else if ((e.keyCode === 8 || e.keyCode === 46) && selectedText.length === QP.toNatural(get(this, 'queryTree')).length) {
-          get(this, 'queryService').setQueryTree(null);
-        }
+        if (
+          (keyName === 'Backspace' && caretPosition === 1 && queryString.length === 1) ||
+          (keyName === 'Delete' && caretPosition === 0 && queryString.length === 1) ||
+          ((keyName === 'Backspace' || keyName === 'Delete') && selectedText.length === queryString.length)
+        ) { get(this, 'queryService').setQueryTree(null); }
       }
     },
 
@@ -90,9 +93,9 @@ export default Component.extend({
     },
 
     search() {
-      const queryTree = get(this, 'queryTree');
+      const queryString = get(this, 'queryString');
       const performSearch = get(this, 'search');
-      queryTree ? performSearch(QP.toNatural(queryTree)) : performSearch();
+      queryString ? performSearch(queryString) : performSearch();
     }
   },
 
