@@ -64,11 +64,19 @@ export default Component.extend({
         const selectedText = window.getSelection().toString();
         const queryString = get(this, 'queryString');
 
-        if (
-          (keyName === 'Backspace' && caretPosition === 1 && queryString.length === 1) ||
-          (keyName === 'Delete' && caretPosition === 0 && queryString.length === 1) ||
-          ((keyName === 'Backspace' || keyName === 'Delete') && selectedText.length === queryString.length)
-        ) { get(this, 'queryService').setQueryTree(null); }
+        if ((keyName === 'Backspace' || keyName === 'Delete') && selectedText.length === queryString.length) {
+          get(this, 'queryService').setQueryTree(null);
+        } else if (selectedText && queryString.indexOf(selectedText) === 0) {
+          //HACK to prevent last letter in string from being deleted
+          const newQuery = queryString.substring(selectedText.length) + '-';
+          get(this, 'queryService').setQueryTree(QP.fromNatural(newQuery));
+        } else if (
+          keyName === 'Backspace' && caretPosition === 1 && !selectedText ||
+          keyName === 'Delete' && caretPosition === 0 && !selectedText
+        ) {
+          const newQuery = queryString.substring(1);
+          get(this, 'queryService').setQueryTree(QP.fromNatural(newQuery));
+        }
       }
     },
 
