@@ -2,24 +2,23 @@
 
 ## Prerequisites
 
-You will need the following things properly installed on your computer.
+You need the following installed on your computer:
 
 * [Git](http://git-scm.com/)
 * [Node.js](http://nodejs.org/) (with NPM)
 * [Ember CLI](http://www.ember-cli.com/)
-* [PhantomJS](http://phantomjs.org/)
 * [Yarn](https://yarnpkg.com/en/docs/install)
-* We recommend you use [eslint](https://atom.io/packages/linter-eslint) plugin in your editor.
+* We use eslint, so ensure your editor has a linter with the eslint package installed.
 
 ## Installation
 
 * `git clone <repository-url>` this repository
 * change into the new directory
-* `npm run setup`
+* `yarn setup`
 
 ## Running / Development
 
-* `npm run startStaging`
+* `yarn startStaging`
 * Visit your app at [http://localhost:4200](http://localhost:4200).
 
 
@@ -38,8 +37,7 @@ It's easy to cut corners. We have in the past, however this leaves us with nasty
 
 To ensure our code follows best practices, please become familiar with this [ember coding style-guide](https://github.com/netguru/ember-styleguide).
 
-As well as this, we encourage component based design. So before you create a controller, or add markup directly into a top level template, STOP. Create a component for it.
-
+As well as this, we encourage component based design and functional programming. Composability > inheritance.
 
 ## Code Generators
 
