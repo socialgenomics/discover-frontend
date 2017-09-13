@@ -5,9 +5,9 @@ import { task, timeout } from 'ember-concurrency';
 import ENV from 'repositive/config/environment';
 import { getRandomElement } from 'repositive/utils/arrays';
 import { nameForKeyCode } from 'repositive/utils/key-codes';
+import { getCurrentNode, constructAutoCompleteTree } from 'repositive/utils/query-tree';
 
-const { $, assign, Component, get, inject: { service }, set, computed, Logger } = Ember;
-
+const { $, Component, get, inject: { service }, set, computed, Logger } = Ember;
 
 export default Component.extend({
   queryService: service('query'),
@@ -78,7 +78,7 @@ export default Component.extend({
       if (selection) {
         const predicate = QP.predicate({ key: selection.groupName, value: selection.suggestionText });
         const caretPosition = this._getCaretPosition();
-        const currentNode = this._getCurrentNode(queryTree, caretPosition);
+        const currentNode = getCurrentNode(queryTree, caretPosition);
 
         if (currentNode) {
           const newQueryTree = QP.replace({ on: queryTree, target: currentNode, replacement: predicate });
@@ -108,10 +108,10 @@ export default Component.extend({
     const DEBOUNCE_MS = 500;
     const caretPosition = this._getCaretPosition();
     const queryTree = QP.fromNatural(queryString);
-    const currentNode = this._getCurrentNode(queryTree, caretPosition);
+    const currentNode = getCurrentNode(queryTree, caretPosition);
 
     if (currentNode) {
-      const newTree = this._constructAutoCompleteTree(queryTree, currentNode);
+      const newTree = constructAutoCompleteTree(queryTree, currentNode);
       const requestData = {
         tree: newTree,
         limit: 3
@@ -155,34 +155,6 @@ export default Component.extend({
 
         return acc;
       }, []);
-  },
-
-  /**
-   * _constructAutoCompleteTree - Update the query tree with new autocomplete node
-   * @param {node?} queryTree - The existing tree, with no autocomplete attrs
-   * @param {node} currentNode - The node being edited
-   * @return {node} New tree to send to suggestion endpoint
-   */
-  _constructAutoCompleteTree(queryTree, currentNode) {
-    const hackToken = QP.token('');
-    const autocompleteNode = assign({ 'autocomplete': true }, currentNode, { _id: hackToken._id });
-
-    return QP.replace({
-      on: queryTree,
-      target: currentNode,
-      replacement: autocompleteNode
-    });
-  },
-
-  /**
-   * _getCurrentNode - Returns the node which this user is editting
-   * @param {node} queryTree - The existing tree
-   * @param {number} caretPosition - The position of the caret in search input
-   * @return {node} The current node
-   */
-  _getCurrentNode(queryTree, caretPosition) {
-    const treeWithPositions = QP.decorateTreeWithNaturalPositions(queryTree);
-    return QP.filter(treeWithPositions, n => n.from <= caretPosition - 1 && n.to >= caretPosition - 1)[0];
   },
 
   /**
