@@ -7,7 +7,7 @@ import presenceValidator from 'repositive/validations/presenceValidator';
 import { createActionData } from 'repositive/utils/actions';
 import { getSubscription } from 'repositive/utils/subscriptions';
 
-const { Component, computed, inject: { service }, get, Logger, set } = Ember;
+const { Component, computed, inject: { service }, isBlank, get, Logger, set } = Ember;
 const Validations = buildValidations({
   title: presenceValidator(),
   description: presenceValidator(),
@@ -31,6 +31,10 @@ export default Component.extend(
     checkEditPermissionsModel: computed.oneWay('model'),
     userId: computed.alias('session.authenticatedUser'),
     isRequest: computed.equal('modelName', 'request'),
+
+    hasSampleTable: computed('model.properties.sampleTable', function() {
+      return !isBlank(get(this, 'model.properties.sampleTable'));
+    }),
 
     modelName: computed('model', function () {
       return get(this, 'model').constructor.modelName;

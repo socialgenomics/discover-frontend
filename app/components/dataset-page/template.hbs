@@ -119,9 +119,9 @@
             }}
           {{/if}}
 
-          {{#if model.properties.sampleTable}}
+          {{#if hasSampleTable}}
             {{#link-to 'datasets.detail.sample-info' model.id}}
-              <button class="r-btn r-btn-secondary r-btn-large" type="button">View Sample Information</button>
+              <button class="r-btn r-btn-secondary r-btn-large" type="button">View Samples</button>
             {{/link-to}}
           {{/if}}
         </div>
