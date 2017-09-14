@@ -106,17 +106,26 @@
             </li>
           {{/if}}
         </ul>
+        <div class="flex items-center">
+          {{#if model.url}}
+            {{r-link-button
+              class="mr1"
+              clickHandler=(action "trackExit")
+              href=(if session.isAuthenticated model.url '')
+              label=(if (eq model.access "Open") "Access Data" "Go To Dataset")
+              variant="primary"
+              size="big"
+              target="_blank"
+            }}
+          {{/if}}
 
-        {{#if model.url}}
-          {{r-link-button
-            clickHandler=(action "trackExit")
-            href=(if session.isAuthenticated model.url '')
-            label=(if (eq model.access "Open") "Access Data" "Go To Dataset")
-            variant="primary"
-            size="big"
-            target="_blank"
-          }}
-        {{/if}}
+          {{#if model.properties.sampleTable}}
+            {{#link-to 'datasets.detail.sample-info' model.id}}
+              <button class="r-btn r-btn-secondary r-btn-large" type="button">View Sample Information</button>
+            {{/link-to}}
+          {{/if}}
+        </div>
+        
       </div>
     </div>
 
