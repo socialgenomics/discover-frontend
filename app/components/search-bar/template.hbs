@@ -1,15 +1,29 @@
-<form class="flex bc-white" {{action search query on='submit'}}>
-  <label class="flex-grow flex items-center">
-    <span class="cursor-text">{{fa-icon "search" class='px3 fc-secondary'}}</span>
-    {{input
-      type="text"
-      class="pr2 pl0 mr0 border-none"
-      placeholder=placeholder
-      value=query
-      autofocus=true
-    }}
+<form class="flex items-center bc-white" autocomplete="off">
+
+  <label class="flex items-center">
+    <span>{{fa-icon "search" class='px3 fc-secondary' size=1}}</span>
   </label>
+
+  {{#power-select-typeahead
+    placeholder=placeholder
+    options=suggestions
+    selected=queryString
+    onblur=(action 'handleBlur')
+    onchange=(action 'handleSelection')
+    onkeydown=(action 'handleKeyDown')
+    search=(perform fetchSuggestions)
+    defaultHighlighted=''
+    noMatchesMessage='No suggestions found'
+    as |option|
+  }}
+    {{option.suggestionText}}
+  {{/power-select-typeahead}}
+
+  {{#if fetchSuggestions.isRunning}}
+    <span>{{fa-icon "circle-o-notch" class='px3 fc-secondary' pulse=true size=1}}</span>
+  {{/if}}
+
   {{#if hasSubmitButton}}
-    <button class="r-btn r-btn-primary r-btn-large square self-stretch">Search</button>
+    <button {{action 'search'}} class="r-btn r-btn-primary r-btn-large square self-stretch">Search</button>
   {{/if}}
 </form>

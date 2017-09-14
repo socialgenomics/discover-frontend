@@ -1,0 +1,14 @@
+/* ==========================================================================
+   #SEARCH-BAR
+   ========================================================================== */
+
+.c-search-bar input{
+  border: none;
+}
+.c-search-bar .ember-power-select-trigger {
+  border: none;
+}
+.c-search-bar .ember-power-select-search-input:focus {
+  border: none;
+  box-shadow: none;
+}
