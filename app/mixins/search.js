@@ -67,28 +67,29 @@ export default Mixin.create({
     const offset = (params.page - 1) * limit;
     const query = params.query || '';
     const body = query === '' ? {} : get(this, 'QP').fromNatural(query);
-    return get(this, 'ajax').request(
-      ENV.APIRoutes['datasets.search'],
-      {
-        method: 'POST',
-        contentType: 'application/json',
-        data: JSON.stringify({ type: 'dataset', offset, limit, body })
-      }
-    ).then(this._handleQueryResponse.bind(this));
+    const requestOptions = {
+      method: 'POST',
+      contentType: 'application/json',
+      data: JSON.stringify({ type: 'dataset', offset, limit, body })
+    };
+
+    return get(this, 'ajax')
+      .request(ENV.APIRoutes['datasets.search'],requestOptions)
+      .then(this._handleQueryResponse.bind(this));
   },
 
   /**
   * @desc Update queryService query value
-  * @param {String?} query - The new query value
+  * @param {String?} queryString - The new query value
   * @private
   */
-  _updateQueryServiceValue(query) {
+  _updateQueryServiceValue(queryString) {
     const QP = get(this, 'QP');
     const qS = get(this, 'queryService');
-    if (query) {
-      qS.setQueryString(QP.toNatural(QP.fromNatural(query)));
+    if (queryString) {
+      qS.setQueryTree(QP.fromNatural(queryString));
     } else {
-      qS.setQueryString(null);
+      qS.setQueryTree(null);
     }
   },
 

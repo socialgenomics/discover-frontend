@@ -7,6 +7,7 @@ const { Route, inject: { service }, get } = Ember;
 export default Route.extend(ApplicationRouteMixin, {
   favouritesService: service('favourites'),
   session: service(),
+  ajax: service(),
   urlGenerator: service(),
 
   model() {
@@ -20,7 +21,7 @@ export default Route.extend(ApplicationRouteMixin, {
   },
 
   actions: {
-    search(queryString, pageNumber) {
+    search(queryString = '', pageNumber) {
       try {
         const queryTree = QP.fromNatural(queryString);
         const collectionPredicate = QP.filter(queryTree, (node) => {
