@@ -1,0 +1,10 @@
+.c-sample-table {
+  text-align: left;
+  table, th, td {
+    @extend .border;
+    border-collapse: collapse;
+    padding: 1em;
+    width: 100%;
+    white-space: nowrap;
+  }
+}

@@ -4,6 +4,7 @@
       {{#if isSampleInfoRoute}}
         {{outlet}}
       {{else}}
+        {{#link-to 'datasets.detail.sample-info' model.dataset.id}}Sample Info{{/link-to}}
         {{dataset-page
           attributes=attributes
           contributors=contributors
