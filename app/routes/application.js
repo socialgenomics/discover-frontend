@@ -4,11 +4,10 @@ import QP from 'npm:@repositive/query-parser';
 
 const { Route, inject: { service }, get } = Ember;
 
-const isUUID = new RegExp(/^[0-9A-F]{8}-[0-9A-F]{4}-[4][0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i);
-
 export default Route.extend(ApplicationRouteMixin, {
   favouritesService: service('favourites'),
   session: service(),
+  ajax: service(),
   urlGenerator: service(),
 
   model() {
@@ -22,7 +21,7 @@ export default Route.extend(ApplicationRouteMixin, {
   },
 
   actions: {
-    search(queryString, pageNumber) {
+    search(queryString = '', pageNumber) {
       try {
         const queryTree = QP.fromNatural(queryString);
         const collectionPredicate = QP.filter(queryTree, (node) => {
@@ -95,16 +94,15 @@ export default Route.extend(ApplicationRouteMixin, {
     }
   },
   _queryAndTransition(dest, input, serializeTree, pageNumber) {
-    let query = {};
-    if (isUUID.test(input.text)) {
-      query = { 'where.id': input.text };
-    } else {
-      query = {
-        'where[$or][0][name]': input.text,
-        'where[$or][1][properties][short_name]': input.text,
-        'where[$or][2][properties][short_name]': input.text.toUpperCase()
-      };
+    const collection = dest === 'datasources.source' ?
+      QP.filter(input, n => n.key === 'datasource')[0] :
+      QP.filter(input, n => n.key === 'collection')[0]
+    const query = {
+      'where[$or][0][name]': collection.value,
+      'where[$or][1][properties][short_name]': collection.value,
+      'where[$or][2][properties][short_name]': collection.value.toUpperCase()
     }
+
     this.store.query('collection', query).then(collection => {
       this.store.push(this.store.normalize('collection', collection.content[0]));
       this.transitionTo(dest, collection.content[0].id, {

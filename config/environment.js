@@ -70,7 +70,8 @@ module.exports = function(environment) {
           'users.profiles': '/users/{id}/profile',
           'users.signup': '/auth/register',
           'verify-email-resend': '/auth/verify/resend',
-          'verify-email': '/auth/verify'
+          'verify-email': '/auth/verify',
+          'autocomplete': '/autocomplete'
         };
         _.each(mapping,
           function(path, key, obj) {
