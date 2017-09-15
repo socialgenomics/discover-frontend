@@ -3,7 +3,7 @@ import { expect } from 'chai';
 import startApp from 'repositive/tests/helpers/start-app';
 import destroyApp from 'repositive/tests/helpers/destroy-app';
 
-describe('Acceptance | submitting a search', function() {
+describe('!T Acceptance | getting help', function() {
   let application;
 
   beforeEach(function() {
@@ -14,11 +14,11 @@ describe('Acceptance | submitting a search', function() {
     destroyApp(application);
   });
 
-  it('can visit /submitting-a-search', function() {
-    visit('/submitting-a-search');
+  it('can visit /', function() {
+    visit('/help/your-account/access');
 
     return andThen(() => {
-      expect(currentURL()).to.equal('/submitting-a-search');
+      expect(currentURL()).to.equal('/help/your-account/access');
     });
   });
 });
