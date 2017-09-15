@@ -11,7 +11,8 @@ describe('Unit | Component | filters list', function() {
   }
 
   setupComponentTest('filters-list', {
-    unit: true
+    unit: true,
+    needs: ['service:metrics']
   });
 
   describe('isEmptyFilters', function () {

@@ -12,7 +12,8 @@ describe('Unit | Component | email verification', function() {
       'validator:presence',
       'validator:format',
       'service:ajax',
-      'service:session'
+      'service:session',
+      'service:metrics'
     ],
     unit: true
   });

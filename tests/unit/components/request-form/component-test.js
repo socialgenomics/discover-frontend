@@ -11,7 +11,8 @@ describe('Unit | Component | request form', function() {
       'service:session',
       'component:validated-input',
       'component:r-async-button',
-      'validator:presence'
+      'validator:presence',
+      'service:metrics'
     ],
 
     unit: true
