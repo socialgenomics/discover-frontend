@@ -48,11 +48,13 @@ export default Component.extend({
       subscribableModel: modelName,
       userId: get(this, 'session.authenticatedUser')
     };
+
     dataObj[modelName + "Id"] = currentModel;
 
     return get(this, 'store')
       .createRecord('subscription', dataObj)
       .save()
+      .then(subscription => set(this, 'subscription', subscription))
       .catch(Logger.error)
       .finally(() => { set(this, 'isLoading', false); });
   },
