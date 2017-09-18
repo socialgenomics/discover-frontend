@@ -12,3 +12,10 @@
   border: none;
   box-shadow: none;
 }
+
+.c-search-bar-dropdown .ember-power-select-option {
+  padding: 0.5em;
+}
+.c-search-bar-dropdown > .ember-power-select-options {
+  min-height: 13em;
+}
