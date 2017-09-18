@@ -80,7 +80,7 @@ export default Component.extend({
       }
     },
 
-    handleSelection(selection) {
+    handleSelection(selection, dropdown) {
       const queryTree = get(this, 'queryTree');
 
       if (selection) {
@@ -98,6 +98,7 @@ export default Component.extend({
       } else {
         this.send('search');
       }
+      set(dropdown, 'results', null);
     },
 
     search() {
