@@ -46,9 +46,6 @@ function toHTML(samples) {
 export default Component.extend({
   classNames: ['c-sample-table'],
   cleanTable: computed('table', function() {
-    const samples = get(this, 'samples');
-    const table = toHTML(samples);
-    const tableStart = table.indexOf('<table');
-    return table.substring(tableStart);
+    return toHTML(get(this, 'samples'));
   })
 });
