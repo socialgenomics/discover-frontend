@@ -9,8 +9,8 @@ function toHTML(samples) {
       (acc, key) => {
         let link = '';
         let endLink = '';
-        if (key === 'Sample ID' && index > 0) {
-          link = '<a href=\'' + 'https://www.ncbi.nlm.nih.gov/sra/' + obj[key] + '\' target=\'_blank\' >';
+        if (obj.url) {
+          link = '<a href=\'' + obj.url + '\' target=\'_blank\' >';
           endLink = '</a>';
         }
         return acc + '<' + spacer + '>' + link + obj[key] + endLink + '</' + spacer + '>';
@@ -27,6 +27,7 @@ export default Component.extend({
   classNames: ['c-sample-table'],
   cleanTable: computed('table', function() {
     const samples = get(this, 'samples');
+    const table = toHTML(samples);
     const tableStart = table.indexOf('<table');
     return table.substring(tableStart);
   })
