@@ -32,8 +32,8 @@ export default Component.extend(
     userId: computed.alias('session.authenticatedUser'),
     isRequest: computed.equal('modelName', 'request'),
 
-    hasSampleTable: computed('model.properties.sampleTable', function() {
-      return !isBlank(get(this, 'model.properties.sampleTable'));
+    hasSampleTable: computed('model.properties.sampleSummary', function() {
+      return !isBlank(get(this, 'model.properties.sampleSummary'));
     }),
 
     modelName: computed('model', function () {
