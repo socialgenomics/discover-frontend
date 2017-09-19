@@ -1,6 +1,8 @@
 {{#if predicateOptions}}
-  <h3 class='fc-secondary fs1 mb0 fw-reg'>Narrow your search</h3>
+  <h3 class='fc-secondary fs0 mb0 fw-reg'>Narrow your search</h3>
   {{#each predicateOptions as |predicateOption|}}
-    <option class='fw-bold pl2'>{{predicateOption}}</option>
+    <p class='fw-bold mb1 pl2'>
+      {{predicateOption.name}} <span class='fw-reg'>{{predicateOption.example}}</span>
+    </p>
   {{/each}}
 {{/if}}

@@ -1,17 +1,20 @@
 import Ember from 'ember';
 
-const { Component, get, set } = Ember;
+const { Component, computed, get, set } = Ember;
 
 export default Component.extend({
-  classNames: ['p3 border-bottom'],
+  classNames: ['p3'],
+  classNameBindings: ['hasPredicateOptions:border-bottom'],
+
+  hasPredicateOptions: computed.bool('predicateOptions'),
 
   init() {
     this._super(...arguments);
     const predicates = [
-      'Assay',
-      'Disease',
-      'Technology',
-      'Tissue'
+      { name: 'Assay', example: '(e.g. gwas)' },
+      { name: 'Disease', example: '(e.g. Myeloma)' },
+      { name: 'Technology', example: '(e.g. Affymetrix)' },
+      { name: 'Tissue', example: '(e.g. Blood)' }
     ]
     set(this, 'predicates', predicates);
   },
@@ -22,7 +25,7 @@ export default Component.extend({
   },
 
   _setPredicateOptions(searchText = '', predicates) {
-    const predicateOptions = predicates.filter(predicate => predicate.includes(searchText));
+    const predicateOptions = predicates.filter(predicate => predicate.name.includes(searchText));
     set(this, 'predicateOptions', predicateOptions);
   }
 });
