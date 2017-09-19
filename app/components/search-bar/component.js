@@ -101,9 +101,8 @@ export default Component.extend({
           const newQueryTree = QP.and({left: predicate, right: queryTree});
           get(this, 'queryService').setQueryTree(newQueryTree);
         }
-      } else {
-        this.send('search');
       }
+      this.send('search');
     },
 
     search() {
