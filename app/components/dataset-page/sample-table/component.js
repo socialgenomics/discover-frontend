@@ -7,7 +7,7 @@ function toHTML(samples) {
     return samples.map((obj) => {
       const row = Object.keys(obj).reduce(
         (acc, key) => {
-          if (key === 'url' || key === 'Sample ID') {
+          if (obj.url && (key === 'url' || key === 'Sample ID')) {
             const link = '<a href=\'' + obj.url + '\' target=\'_blank\' >';
             return acc + `<td>${link}${obj[key]}</a></td>`;
           } else {
