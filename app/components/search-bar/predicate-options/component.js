@@ -3,7 +3,7 @@ import Ember from 'ember';
 const { Component, get, set } = Ember;
 
 export default Component.extend({
-  classNames: ['p3'],
+  classNames: ['p3 border-bottom'],
 
   init() {
     this._super(...arguments);
