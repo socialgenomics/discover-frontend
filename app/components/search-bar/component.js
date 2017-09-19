@@ -80,6 +80,10 @@ export default Component.extend({
       }
     },
 
+    handleFocus(dropdown) {
+      dropdown.actions.open();
+    },
+
     handleSelection(selection) {
       const queryTree = get(this, 'queryTree');
 
