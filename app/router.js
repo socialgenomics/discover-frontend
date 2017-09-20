@@ -40,8 +40,8 @@ router.map(function() {
   }, function() {});
 
   this.route('datasets', { resetNamespace: true }, function() {
-    this.route('detail', {
-      path: ':id'
+    this.route('detail', { path: ':id' }, function() {
+      this.route('sample-info', { path: '/sample-info' });
     });
     this.route('tags', {
       path: '/tag/:tag'

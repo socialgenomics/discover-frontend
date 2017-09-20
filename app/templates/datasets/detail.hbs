@@ -1,20 +1,24 @@
 <div class="grid-wrapper grid-wrapper-stepped">
   <div class="grid grid--no-gutter">
     <div class="grid__col grid__col--3-of-3">
-      {{dataset-page
-        attributes=attributes
-        contributors=contributors
-        model=model.dataset
-        modelName="dataset"
-        commentsSorted=comments
-        tags=tags
-        editableProperties=datasetEditableProperties
-        subscription=model.subscription
-        addTag=(action 'addTag')
-        addComment=(action 'addComment')
-        addAttribute=(action 'addAttribute')
-        deleteAction=(action 'deleteAction')
-      }}
+      {{#if isSampleInfoRoute}}
+        {{outlet}}
+      {{else}}
+        {{dataset-page
+          attributes=attributes
+          contributors=contributors
+          model=model.dataset
+          modelName="dataset"
+          commentsSorted=comments
+          tags=tags
+          editableProperties=datasetEditableProperties
+          subscription=model.subscription
+          addTag=(action 'addTag')
+          addComment=(action 'addComment')
+          addAttribute=(action 'addAttribute')
+          deleteAction=(action 'deleteAction')
+        }}
+      {{/if}}
     </div>
   </div>
 </div>

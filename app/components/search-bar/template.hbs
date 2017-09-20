@@ -8,12 +8,14 @@
     placeholder=placeholder
     options=suggestions
     selected=queryString
+    onopen=(action 'handleOpen')
     onblur=(action 'handleBlur')
     onchange=(action 'handleSelection')
     onkeydown=(action 'handleKeyDown')
     search=(perform fetchSuggestions)
     defaultHighlighted=''
-    noMatchesMessage='No suggestions found'
+    noMatchesMessage=''
+    verticalPosition='below'
     as |option|
   }}
     {{option.suggestionText}}

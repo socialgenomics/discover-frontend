@@ -12,6 +12,8 @@ export default Controller.extend(DatasetActionsMixin, {
     { key: 'url' }
   ],
 
+  isSampleInfoRoute: computed.equal('target.currentRouteName', 'datasets.detail.sample-info'),
+
   datasetsNumber: computed('model.stats.datasets', function() {
     return get(this, 'model.stats.datasets').toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   }),
