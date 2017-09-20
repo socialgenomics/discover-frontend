@@ -71,13 +71,11 @@ jobs:
             mv workspace/artifacts artifacts
 
 
-      # Kubectl Setup
-      - restore_cache:
-          key: kubectl-$(curl -s https://storage.googlediscovers.com/kubernetes-release/release/stable.txt)
       - run:
           name: install-kubectl
           command: |
-            curl -LO https://storage.googlediscovers.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl && chmod +x ./kubectl
+            curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+            chmod +x ./kubectl
       - run:
           name: Push application Docker image
           command: |
@@ -89,11 +87,6 @@ jobs:
                 TAG=$CIRCLE_TAG envsubst '${TAG}' < .circleci/k8s.production.yml > deploy-production.yml
               fi
             fi
-
-      - save_cache:
-          key: kubectl-$(curl -s https://storage.googlediscovers.com/kubernetes-release/release/stable.txt)
-          paths:
-            - ./kubectl
 
       - persist_to_workspace:
           root: .
