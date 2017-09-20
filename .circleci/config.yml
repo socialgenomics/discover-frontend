@@ -40,11 +40,22 @@ jobs:
 #          prefix: coverage
 #      - store_test_results:
 #          path: test-results.xml
+      - run:
+          name: Build ember app
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              node_modules/ember-cli/bin/ember build --environment staging
+              mv dist staging-build
+              if git log -1 --pretty=%B | grep "^[0-9]\+\.[0-9]\+\.[0-9]\+$"; then
+                node_modules/ember-cli/bin/ember/build --environment production
+                mv dist production-build
+              fi
+            fi
       - persist_to_workspace:
           root: .
           paths:
-            - dist
-            - node_modules
+            - staging-build
+            - production-build
 
   setup_release:
     <<: *defaults
@@ -57,8 +68,9 @@ jobs:
       - run:
           name: Setup workspace
           command: |
-            mv workspace/dist dist
-            mv workspace/node_modules node_modules
+            mv workspace/staging-build staging-build
+            mv workspace/production-build production-build 2> /dev/null || echo "No production artifacts"
+
 
       # Kubectl Setup
       - restore_cache:
@@ -70,10 +82,10 @@ jobs:
       - run:
           name: Push application Docker image
           command: |
-            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+            if [ -d ./staging-build ]; then
               curl -O -u $DEPLOYMENT_USER:$DEPLOYMENT_PASS https://deployment-server-staging.repositive.io/kubeconfig-staging
               TAG=$CIRCLE_SHA1 envsubst '${TAG}' < .circleci/k8s.staging.yml > deploy-staging.yml
-              if git log -1 --pretty=%B | grep "^[0-9]\+\.[0-9]\+\.[0-9]\+$"; then
+              if [ -d ./production-build ]; then
                 curl -O -u $DEPLOYMENT_USER:$DEPLOYMENT_PASS https://deployment-server-staging.repositive.io/kubeconfig-production
                 TAG=$CIRCLE_TAG envsubst '${TAG}' < .circleci/k8s.production.yml > deploy-production.yml
               fi
@@ -87,7 +99,8 @@ jobs:
       - persist_to_workspace:
           root: .
           paths:
-            - dist
+            - staging-build
+            - production-build
             - node_modules
             - kubectl
             - kubeconfig-staging
@@ -106,8 +119,8 @@ jobs:
       - run:
           name: Setup workspace
           command: |
-            mv workspace/dist dist
-            mv workspace/node_modules node_modules
+            mv workspace/staging-build staging-build
+            mv workspace/production-build staging-build 2> /dev/null || echo "No production artifacts"
             mv workspace/kubectl kubectl
             mv workspace/kubeconfig-staging kubeconfig-staging 2> /dev/null || echo "No kubectl config for staging"
             mv workspace/deploy-staging.yml deploy-staging.yml 2> /dev/null || echo "No deployment config for staging"
@@ -129,12 +142,19 @@ jobs:
       - run:
           name: Build application Docker image
           command: |
-              docker build --cache-from=app -t app .
+              if [ -f ./deploy-staging.yml ]; then
+                mv staging-build dist
+                docker build --cache-from=app -t app-staging .
+                if [ -f ./deploy-production.yml ]; then
+                  mv production-build dist
+                  docker build --cache-from=app -t app-production .
+                fi
+              fi
       - run:
           name: Save Docker image layer cache
           command: |
             mkdir -p /caches
-            docker save -o /caches/app.tar app
+            docker save -o /caches/app.tar app-staging
       - save_cache:
           key: v1-{{ .Branch }}-{{ epoch }}
           paths:
@@ -149,11 +169,11 @@ jobs:
           name: Push application Docker image
           command: |
             if [ -f ./deploy-staging.yml ]; then
-              docker tag app "registry.repositive.io:5000/discover:${CIRCLE_SHA1}"
+              docker tag app-staging "registry.repositive.io:5000/discover:${CIRCLE_SHA1}"
               docker push "registry.repositive.io:5000/discover:${CIRCLE_SHA1}"
               KUBECONFIG=kubeconfig-staging ./kubectl apply -f deploy-staging.yml
               if [ -f ./deploy-production.yml ]; then
-                docker tag app "registry.repositive.io:5000/discover:${CIRCLE_TAG}"
+                docker tag app-production "registry.repositive.io:5000/discover:${CIRCLE_TAG}"
                 docker push "registry.repositive.io:5000/discover:${CIRCLE_TAG}"
                 KUBECONFIG=kubeconfig-production ./kubectl apply -f deploy-production.yml
               fi
