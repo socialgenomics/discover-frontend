@@ -1,0 +1,196 @@
+version: 2
+
+defaults: &defaults
+  working_directory: ~/discover
+
+jobs:
+  test:
+    <<: *defaults
+    docker:
+      - image: circleci/node:8.5-browsers
+    steps:
+      - checkout
+      # - run:
+      #     name: update-npm
+      #     command: |
+      #       sudo npm install -g npm@latest
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: yarn-install
+          command: |
+            yarn
+      - save_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - ./node_modules
+      - run:
+          name: test
+          command: |
+            npm test
+
+#      - run:
+#          name: code-coverage
+#          command: './node_modules/.bin/nyc report --reporter=text-lcov'
+#      - store_artifacts:
+#          path: test-results.xml
+#          prefix: tests
+#      - store_artifacts:
+#          path: coverage
+#          prefix: coverage
+#      - store_test_results:
+#          path: test-results.xml
+      - run:
+          name: Build ember app
+          command: |
+            mkdir artifacts
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              node_modules/ember-cli/bin/ember build --environment staging
+              mv dist artifacts/staging-build
+              if git log -1 --pretty=%B | grep "^[0-9]\+\.[0-9]\+\.[0-9]\+$"; then
+                node_modules/ember-cli/bin/ember/build --environment production
+                mv dist artifacts/production-build
+              fi
+            fi
+      - persist_to_workspace:
+          root: .
+          paths:
+            - artifacts
+
+  setup_release:
+    <<: *defaults
+    docker:
+      - image: istareldritch/curl-envsubst
+    steps:
+      - checkout
+      - attach_workspace:
+          at: workspace
+      - run:
+          name: Setup workspace
+          command: |
+            mv workspace/artifacts artifacts
+
+
+      # Kubectl Setup
+      - restore_cache:
+          key: kubectl-$(curl -s https://storage.googlediscovers.com/kubernetes-release/release/stable.txt)
+      - run:
+          name: install-kubectl
+          command: |
+            curl -LO https://storage.googlediscovers.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl && chmod +x ./kubectl
+      - run:
+          name: Push application Docker image
+          command: |
+            if [ -d ./artifacts/staging-build ]; then
+              curl -O -u $DEPLOYMENT_USER:$DEPLOYMENT_PASS https://deployment-server-staging.repositive.io/kubeconfig-staging
+              TAG=$CIRCLE_SHA1 envsubst '${TAG}' < .circleci/k8s.staging.yml > deploy-staging.yml
+              if [ -d ./artifacts/production-build ]; then
+                curl -O -u $DEPLOYMENT_USER:$DEPLOYMENT_PASS https://deployment-server-staging.repositive.io/kubeconfig-production
+                TAG=$CIRCLE_TAG envsubst '${TAG}' < .circleci/k8s.production.yml > deploy-production.yml
+              fi
+            fi
+
+      - save_cache:
+          key: kubectl-$(curl -s https://storage.googlediscovers.com/kubernetes-release/release/stable.txt)
+          paths:
+            - ./kubectl
+
+      - persist_to_workspace:
+          root: .
+          paths:
+            - artifacts
+            - node_modules
+            - kubectl
+            - kubeconfig-staging
+            - kubeconfig-production
+            - deploy-staging.yml
+            - deploy-production.yml
+
+  release:
+    <<: *defaults
+    docker:
+      - image: docker:17.05.0-ce-git
+    steps:
+      - checkout
+      - attach_workspace:
+          at: workspace
+      - run:
+          name: Setup workspace
+          command: |
+            mv workspace/artifacts artifacts
+            mv workspace/kubectl kubectl
+            mv workspace/kubeconfig-staging kubeconfig-staging 2> /dev/null || echo "No kubectl config for staging"
+            mv workspace/deploy-staging.yml deploy-staging.yml 2> /dev/null || echo "No deployment config for staging"
+            mv workspace/kubeconfig-production kubeconfig-production 2> /dev/null || echo "No kubectl config for production"
+            mv workspace/deploy-production.yml deploy-production.yml 2> /dev/null || echo "No deployment config for production"
+      - setup_remote_docker
+
+      # Build the image
+      - restore_cache:
+          keys:
+            - v1-{{ .Branch }}
+          paths:
+            - /caches/app.tar
+      - run:
+          name: Load Docker image layer cache
+          command: |
+            set +o pipefail
+            docker load -i /caches/app.tar | true
+      - run:
+          name: Build application Docker image
+          command: |
+              if [ -f ./deploy-staging.yml ]; then
+                mv artifacts/staging-build dist
+                docker build --cache-from=app -t app-staging .
+                if [ -f ./deploy-production.yml ]; then
+                  mv artifacts/production-build dist
+                  docker build --cache-from=app -t app-production .
+                fi
+              fi
+      - run:
+          name: Save Docker image layer cache
+          command: |
+            mkdir -p /caches
+            docker save -o /caches/app.tar app-staging
+      - save_cache:
+          key: v1-{{ .Branch }}-{{ epoch }}
+          paths:
+            - /caches/app.tar
+
+      # Push to the docker registry
+      - run:
+          name: Login in the docker registry
+          command: |
+            docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS registry.repositive.io:5000
+      - deploy:
+          name: Push application Docker image
+          command: |
+            if [ -f ./deploy-staging.yml ]; then
+              docker tag app-staging "registry.repositive.io:5000/discover:${CIRCLE_SHA1}"
+              docker push "registry.repositive.io:5000/discover:${CIRCLE_SHA1}"
+              KUBECONFIG=kubeconfig-staging ./kubectl apply -f deploy-staging.yml
+              if [ -f ./deploy-production.yml ]; then
+                docker tag app-production "registry.repositive.io:5000/discover:${CIRCLE_TAG}"
+                docker push "registry.repositive.io:5000/discover:${CIRCLE_TAG}"
+                KUBECONFIG=kubeconfig-production ./kubectl apply -f deploy-production.yml
+              fi
+            fi
+
+workflows:
+  version: 2
+  test_and_release:
+    jobs:
+      - test
+      - setup_release:
+          requires:
+            - test
+          filters:
+            branches:
+              only: master
+      - release:
+          requires:
+            - test
+            - setup_release
+          filters:
+            branches:
+              only: master
