@@ -66,6 +66,7 @@ export default Component.extend({
 
         if ((keyName === 'Backspace' || keyName === 'Delete') && selectedText.length === queryString.length) {
           get(this, 'queryService').setQueryTree(null);
+          set(dropdown, 'results', null);
         } else if (selectedText && queryString.indexOf(selectedText) === 0) {
           //HACK to prevent last letter in string from being deleted
           const newQuery = queryString.substring(selectedText.length) + '-';
