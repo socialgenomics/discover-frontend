@@ -17,21 +17,13 @@ jobs:
       - restore_cache:
           key: dependency-cache-{{ checksum "package.json" }}
       - run:
-          name: install-npm-wee
+          name: yarn-install
           command: |
-            npm install
+            yarn run setup
       - save_cache:
           key: dependency-cache-{{ checksum "package.json" }}
           paths:
             - ./node_modules
-      - run:
-          name: make
-          command: |
-            npm run setup
-#      - run:
-#          name: lint
-#          command: |
-#            npm run lint
       - run:
           name: test
           command: |
