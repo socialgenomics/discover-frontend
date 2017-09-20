@@ -28,6 +28,10 @@ export default Component.extend({
     return QP.toNatural(get(this, 'queryTree'));
   }),
 
+  extraArgs: computed('queryString', function() {
+    return { queryString: get(this, 'queryString') }
+  }),
+
   init() {
     this._super(...arguments);
 

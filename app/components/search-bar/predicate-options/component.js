@@ -7,6 +7,11 @@ export default Component.extend({
   classNameBindings: ['hasPredicateOptions:border-bottom'],
 
   hasPredicateOptions: computed.bool('predicateOptions'),
+  predicateOptions: computed('attrs.extra.queryString', 'predicates', function() {
+    const queryString = get(this, 'attrs.extra.queryString').toLowerCase() || '';
+    return get(this, 'predicates')
+      .filter(predicate => predicate.name.toLowerCase().includes(queryString));
+  }),
 
   init() {
     this._super(...arguments);
@@ -17,15 +22,5 @@ export default Component.extend({
       { name: 'Tissue', example: '(e.g. Blood)' }
     ]
     set(this, 'predicates', predicates);
-  },
-
-  didReceiveAttrs() {
-    this._super(...arguments);
-    this._setPredicateOptions(get(this, 'attrs.select.searchText'), get(this, 'predicates'))
-  },
-
-  _setPredicateOptions(searchText = '', predicates) {
-    const predicateOptions = predicates.filter(predicate => predicate.name.includes(searchText));
-    set(this, 'predicateOptions', predicateOptions);
   }
 });
