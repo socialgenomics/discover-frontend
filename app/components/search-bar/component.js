@@ -50,6 +50,12 @@ export default Component.extend({
     //Prevents the search field from clearing on blur
     handleBlur() { return false; },
 
+    handleOpen(dropdown) {
+      if (dropdown.resultsCount === 0) {
+        return false;
+      }
+    },
+
     handleKeyDown(dropdown, e) {
       const keyName = nameForKeyCode(e.keyCode);
 
@@ -95,9 +101,8 @@ export default Component.extend({
           const newQueryTree = QP.and({left: predicate, right: queryTree});
           get(this, 'queryService').setQueryTree(newQueryTree);
         }
-      } else {
-        this.send('search');
       }
+      this.send('search');
     },
 
     search() {
