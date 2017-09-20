@@ -19,7 +19,7 @@ jobs:
       - run:
           name: yarn-install
           command: |
-            yarn run setup
+            yarn
       - save_cache:
           key: dependency-cache-{{ checksum "package.json" }}
           paths:
