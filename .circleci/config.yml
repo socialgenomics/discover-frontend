@@ -43,6 +43,7 @@ jobs:
       - run:
           name: Build ember app
           command: |
+            mkdir artifacts
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
               node_modules/ember-cli/bin/ember build --environment staging
               mv dist staging-build
@@ -54,8 +55,7 @@ jobs:
       - persist_to_workspace:
           root: .
           paths:
-            - staging-build
-            - production-build
+            - artifacts
 
   setup_release:
     <<: *defaults
@@ -68,8 +68,7 @@ jobs:
       - run:
           name: Setup workspace
           command: |
-            mv workspace/staging-build staging-build
-            mv workspace/production-build production-build 2> /dev/null || echo "No production artifacts"
+            mv workspace/artifacts artifacts
 
 
       # Kubectl Setup
@@ -82,10 +81,10 @@ jobs:
       - run:
           name: Push application Docker image
           command: |
-            if [ -d ./staging-build ]; then
+            if [ -d ./artifacts/staging-build ]; then
               curl -O -u $DEPLOYMENT_USER:$DEPLOYMENT_PASS https://deployment-server-staging.repositive.io/kubeconfig-staging
               TAG=$CIRCLE_SHA1 envsubst '${TAG}' < .circleci/k8s.staging.yml > deploy-staging.yml
-              if [ -d ./production-build ]; then
+              if [ -d ./artifacts/production-build ]; then
                 curl -O -u $DEPLOYMENT_USER:$DEPLOYMENT_PASS https://deployment-server-staging.repositive.io/kubeconfig-production
                 TAG=$CIRCLE_TAG envsubst '${TAG}' < .circleci/k8s.production.yml > deploy-production.yml
               fi
@@ -99,8 +98,7 @@ jobs:
       - persist_to_workspace:
           root: .
           paths:
-            - staging-build
-            - production-build
+            - artifacts
             - node_modules
             - kubectl
             - kubeconfig-staging
@@ -119,8 +117,7 @@ jobs:
       - run:
           name: Setup workspace
           command: |
-            mv workspace/staging-build staging-build
-            mv workspace/production-build staging-build 2> /dev/null || echo "No production artifacts"
+            mv workspace/artifacts artifacts
             mv workspace/kubectl kubectl
             mv workspace/kubeconfig-staging kubeconfig-staging 2> /dev/null || echo "No kubectl config for staging"
             mv workspace/deploy-staging.yml deploy-staging.yml 2> /dev/null || echo "No deployment config for staging"
@@ -143,10 +140,10 @@ jobs:
           name: Build application Docker image
           command: |
               if [ -f ./deploy-staging.yml ]; then
-                mv staging-build dist
+                mv artifacts/staging-build dist
                 docker build --cache-from=app -t app-staging .
                 if [ -f ./deploy-production.yml ]; then
-                  mv production-build dist
+                  mv artifacts/production-build dist
                   docker build --cache-from=app -t app-production .
                 fi
               fi
