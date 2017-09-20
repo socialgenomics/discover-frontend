@@ -1,0 +1,12 @@
+.c-sample-table {
+  text-align: left;
+  table, th, td {
+    border: 1px solid $color-light-grey;
+    border-collapse: collapse;
+    padding: 1em;
+    white-space: nowrap;
+  }
+  tr:hover {
+    background-color: $color-very-light-grey;
+  }
+}
