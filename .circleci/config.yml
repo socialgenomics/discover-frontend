@@ -7,7 +7,7 @@ jobs:
   test:
     <<: *defaults
     docker:
-      - image: circleci/node:8.5
+      - image: circleci/node:8.5-browsers
     steps:
       - checkout
       # - run:
