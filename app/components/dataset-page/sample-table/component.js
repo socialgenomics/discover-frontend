@@ -10,7 +10,7 @@ function toHTML(samples) {
     } else if (b === 'Sample ID') {
       return 1;
     } else {
-      return a.split('_').join('').toLowerCase().localeCompare(b.split('_').join('').toLowerCase())
+      return a.toLowerCase().localeCompare(b.toLowerCase())
     }
   });
 
