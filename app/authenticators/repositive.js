@@ -52,6 +52,8 @@ export default Base.extend({
         .then(r => r.response)
         .then(resolveWithResp(this))
         .catch(handleError(this));
+    } else if ('token' in data) {
+      return new RSVP.Promise(resolve => resolve(data)).then(resolveWithResp(this))
     } else {
       return get(this, 'ajax').raw(ENV.APIRoutes[ENV['ember-simple-auth'].authenticationRoute], {
         method: 'POST',
