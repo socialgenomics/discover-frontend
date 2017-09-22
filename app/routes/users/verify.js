@@ -17,21 +17,9 @@ export default Route.extend(FlashMessageMixin, VerificationMixin, {
           .then(() => verificationResp)
       })
       .then(verificationResp => {
-        // debugger;
-
-        // return RSVP.hash({
-        //   verificationResp,
-        //   'credentials': fetchCredentials(this.store, verificationResp.user_id)
-        // })
         return RSVP.hash({
           'credentials': fetchCredentials(this.store, verificationResp.user_id),
           'user': this.store.findRecord('user', verificationResp.user_id)
-        })
-      })
-      .then(resp => {
-        return RSVP.hash({
-          'credentials': resp.credentials,
-          'user': this.store.findRecord('user', resp.verificationResp.user_id)
         })
       })
       .then(resp => {
