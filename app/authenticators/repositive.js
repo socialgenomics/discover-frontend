@@ -53,7 +53,14 @@ export default Base.extend({
         .then(resolveWithResp(this))
         .catch(handleError(this));
     } else if ('token' in data) {
-      return new RSVP.Promise(resolve => resolve(data)).then(resolveWithResp(this))
+      const obj = {
+        token: data.token,
+        user: {
+          id: data.user_id
+        }
+      }
+      return new RSVP.Promise(resolve => resolve(obj))
+        .then(resolveWithResp(this))
     } else {
       return get(this, 'ajax').raw(ENV.APIRoutes[ENV['ember-simple-auth'].authenticationRoute], {
         method: 'POST',
