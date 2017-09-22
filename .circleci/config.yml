@@ -80,12 +80,11 @@ jobs:
           name: Push application Docker image
           command: |
             if [ -d ./artifacts/staging-build ]; then
-              version=$(git describe)
               curl -O -u $DEPLOYMENT_USER:$DEPLOYMENT_PASS https://deployment-server-staging.repositive.io/kubeconfig-staging
-              envsubst '${version}-sta' < .circleci/k8s.staging.yml > deploy-staging.yml
+              TAG="$(git describe --abbrev=0).$(git rev-parse --short HEAD)-sta" envsubst '${TAG}' < .circleci/k8s.staging.yml > deploy-staging.yml
               if [ -d ./artifacts/production-build ]; then
                 curl -O -u $DEPLOYMENT_USER:$DEPLOYMENT_PASS https://deployment-server-staging.repositive.io/kubeconfig-production
-                envsubst '${version}-prod' < .circleci/k8s.production.yml > deploy-production.yml
+                TAG="$(git describe --abbrev=0).$(git rev-parse --short HEAD)-pro" envsubst '${TAG}' < .circleci/k8s.production.yml > deploy-production.yml
               fi
             fi
 
@@ -160,13 +159,12 @@ jobs:
           name: Push application Docker image
           command: |
             if [ -f ./deploy-staging.yml ]; then
-              version=$(git describe)
-              docker tag app-staging "registry.repositive.io:5000/discover:${version}-sta"
-              docker push "registry.repositive.io:5000/discover:${version}-sta"
+              docker tag app-staging "registry.repositive.io:5000/discover:$(git describe --abbrev=0).$(git rev-parse --short HEAD)-sta"
+              docker push "registry.repositive.io:5000/discover:$(git describe --abbrev=0).$(git rev-parse --short HEAD)-sta"
               KUBECONFIG=kubeconfig-staging ./kubectl apply -f deploy-staging.yml
               if [ -f ./deploy-production.yml ]; then
-                docker tag app-production "registry.repositive.io:5000/discover:${version}-prod"
-                docker push "registry.repositive.io:5000/discover:${version}-prod"
+                docker tag app-production "registry.repositive.io:5000/discover:$(git describe --abbrev=0).$(git rev-parse --short HEAD)-pro"
+                docker push "registry.repositive.io:5000/discover:$(git describe --abbrev=0).$(git rev-parse --short HEAD)-pro"
                 KUBECONFIG=kubeconfig-production ./kubectl apply -f deploy-production.yml
               fi
             fi
