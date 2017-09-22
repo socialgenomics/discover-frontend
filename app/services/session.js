@@ -35,15 +35,15 @@ export default SessionService.extend({
   }),
 
   _identifyUser(userData) {
-    get(this,  'metrics').identify({
-      email: userData.credentials[0].email,
-      firstname: userData.firstname,
-      lastname: userData.lastname,
-      username: userData.username | userData.id,
-      id: userData.id
-    });
-
     try {
+      get(this,  'metrics').identify({
+        email: userData.credentials[0].email,
+        firstname: userData.firstname,
+        lastname: userData.lastname,
+        username: userData.username | userData.id,
+        id: userData.id
+      });
+
       get(this, 'metrics').identify('GoogleAnalytics', {
         distinctId: userData.id
       });
