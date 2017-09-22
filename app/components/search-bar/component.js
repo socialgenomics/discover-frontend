@@ -50,6 +50,12 @@ export default Component.extend({
     //Prevents the search field from clearing on blur
     handleBlur() { return false; },
 
+    handleOpen(dropdown) {
+      if (dropdown.resultsCount === 0) {
+        return false;
+      }
+    },
+
     handleKeyDown(dropdown, e) {
       const keyName = nameForKeyCode(e.keyCode);
 
@@ -161,7 +167,7 @@ export default Component.extend({
             return { groupName, suggestionText };
           });
 
-          return [...acc, ...[{ groupName, options }]];
+          return [...acc, ...[{ groupName: groupName.capitalize(), options }]];
         }
 
         return acc;

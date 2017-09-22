@@ -23,14 +23,14 @@ describe('!T Unit | Component | search bar', function() {
         };
         const expected = [
           {
-            groupName: 'tissue',
+            groupName: 'Tissue',
             options: [
               { groupName: 'tissue', suggestionText: 'brain'},
               { groupName: 'tissue', suggestionText: 'lung'}
             ]
           },
           {
-            groupName: 'technology',
+            groupName: 'Technology',
             options: [
               { groupName: 'technology', suggestionText: 'ic-1'}
             ]
