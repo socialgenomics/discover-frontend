@@ -165,7 +165,7 @@ export default Component.extend({
             return { groupName, suggestionText };
           });
 
-          return [...acc, ...[{ groupName, options }]];
+          return [...acc, ...[{ groupName: groupName.capitalize(), options }]];
         }
 
         return acc;
