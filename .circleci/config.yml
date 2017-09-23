@@ -150,7 +150,7 @@ jobs:
       - run:
           name: Create deployment files
           command: |
-            if [ -f workspace/deploy]; then
+            if [ -f workspace/deploy ]; then
               curl -O -u $DEPLOYMENT_USER:$DEPLOYMENT_PASS https://deployment-server-staging.repositive.io/kubeconfig-staging
               TAG=$(git describe --abbrev=0).$(git rev-parse --short HEAD)-pro envsubst '${TAG}' < .circleci/k8s.staging.yml > deploy-staging.yml
             fi
@@ -180,14 +180,14 @@ jobs:
       - run:
           name: Create deployment files
           command: |
-            if [ -f workspace/deploy]; then
+            if [ -f workspace/deploy ]; then
               curl -O -u $DEPLOYMENT_USER:$DEPLOYMENT_PASS https://deployment-server-production.repositive.io/kubeconfig-production
               TAG=$(git describe --abbrev=0).$(git rev-parse --short HEAD)-pro envsubst '${TAG}' < .circleci/k8s.production.yml > deploy-production.yml
             fi
       - deploy:
           name: Publish
           command: |
-            if [ -f workspacedeploy ]; then
+            if [ -f workspace/deploy ]; then
               KUBECONFIG=kubeconfig-production ./kubectl apply -f deploy-production.yml
               curl "https://slack.com/api/chat.postMessage?token=$SLACK_TOKEN&channel=dev&as_user=Liz&text=:rocket:%20*New%20Production%20Deployment:*%20Discover%20Frontend%20$TAG$(git describe --abbrev=0).$(git rev-parse --short HEAD)"
             fi
