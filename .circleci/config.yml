@@ -110,6 +110,7 @@ jobs:
           name: Setup workspace
           command: |
             cp -r workspace/artifacts artifacts
+            cp workpace/deploy-staging.yml deploy-staging.yml 2> /dev/null || echo "No kubectl config for staging"
       - setup_remote_docker
 
       # Build the image
@@ -152,6 +153,7 @@ jobs:
           name: Setup workspace
           command: |
             cp -r workspace/artifacts artifacts
+            cp workpace/deploy-production.yml deploy-production.yml 2> /dev/null || echo "No kubectl config for production"
       - setup_remote_docker
 
       # Build the image
@@ -195,8 +197,9 @@ jobs:
       - deploy:
           name: Publish
           command: |
+            cp workpace/deploy-staging.yml deploy-staging.yml 2> /dev/null || echo "No kubectl config for staging"
+            cp workpace/kubeconfig-staging kubeconfig-staging 2> /dev/null || echo "No kubeconfig for staging available"
             if [ -f ./deploy-staging.yml ]; then
-              cd workspace
               KUBECONFIG=kubeconfig-staging ./kubectl apply -f deploy-staging.yml
               curl "https://slack.com/api/chat.postMessage?token=$SLACK_TOKEN&channel=dev&as_user=Liz&text=:rocket:%20*New%20Staging%20Deployment:*%20Discover%20Frontend%20$TAG$(git describe --abbrev=0).$(git rev-parse --short HEAD)"
 
@@ -213,8 +216,9 @@ jobs:
       - deploy:
           name: Publish
           command: |
+            cp workpace/deploy-production.yml deploy-production.yml 2> /dev/null || echo "No kubectl config for production"
+            cp workpace/kubeconfig-production kubeconfig-production 2> /dev/null || echo "No kubeconfig for production"
             if [ -f ./deploy-production.yml ]; then
-              cd workspace
               KUBECONFIG=kubeconfig-production ./kubectl apply -f deploy-production.yml
               curl "https://slack.com/api/chat.postMessage?token=$SLACK_TOKEN&channel=dev&as_user=Liz&text=:rocket:%20*New%20Production%20Deployment:*%20Discover%20Frontend%20$TAG$(git describe --abbrev=0).$(git rev-parse --short HEAD)"
             fi
