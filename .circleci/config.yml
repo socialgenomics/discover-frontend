@@ -57,47 +57,6 @@ jobs:
           paths:
             - artifacts
 
-  setup_release:
-    <<: *defaults
-    docker:
-      - image: istareldritch/curl-envsubst
-    steps:
-      - checkout
-      - attach_workspace:
-          at: workspace
-      - run:
-          name: Setup workspace
-          command: |
-            mv workspace/artifacts artifacts
-
-
-      - run:
-          name: install-kubectl
-          command: |
-            curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
-            chmod +x ./kubectl
-      - run:
-          name: Push application Docker image
-          command: |
-            if [ -d ./artifacts/staging-build ]; then
-              curl -O -u $DEPLOYMENT_USER:$DEPLOYMENT_PASS https://deployment-server-staging.repositive.io/kubeconfig-staging
-              TAG=$(git describe --abbrev=0).$(git rev-parse --short HEAD)-sta envsubst '${TAG}' < .circleci/k8s.staging.yml > deploy-staging.yml
-              if [ -d ./artifacts/production-build ]; then
-                curl -O -u $DEPLOYMENT_USER:$DEPLOYMENT_PASS https://deployment-server-production.repositive.io/kubeconfig-production
-                TAG=$(git describe --abbrev=0).$(git rev-parse --short HEAD)-pro envsubst '${TAG}' < .circleci/k8s.production.yml > deploy-production.yml
-              fi
-            fi
-
-      - persist_to_workspace:
-          root: .
-          paths:
-            - artifacts
-            - kubectl
-            - kubeconfig-staging
-            - kubeconfig-production
-            - deploy-staging.yml
-            - deploy-production.yml
-
   build_container_sta:
     <<: *defaults
     docker:
@@ -106,20 +65,15 @@ jobs:
       - checkout
       - attach_workspace:
           at: workspace
-      - run:
-          name: Setup workspace
-          command: |
-            cp -r workspace/artifacts artifacts
-            cp workspace/deploy-staging.yml deploy-staging.yml 2> /dev/null || echo "No kubectl config for staging"
       - setup_remote_docker
 
       # Build the image
       - run:
           name: Build application Docker image
           command: |
-              if [ -f ./deploy-staging.yml ]; then
+              if [ -d workspace/artifacts/staging-build ]; then
                 rm -fr dist
-                mv artifacts/staging-build dist
+                mv workspace/artifacts/staging-build dist
                 docker build --cache-from=app -t app-staging .
               fi
       # Push to the docker registry
@@ -130,16 +84,15 @@ jobs:
       - run:
           name: Push application Docker image
           command: |
-            if [ -f ./deploy-staging.yml ]; then
+            if [ -d workspace/artifacts/staging-build ]; then
               docker tag app-staging "registry.repositive.io:5000/discover:$(git describe --abbrev=0).$(git rev-parse --short HEAD)-sta"
               docker push "registry.repositive.io:5000/discover:$(git describe --abbrev=0).$(git rev-parse --short HEAD)-sta"
+              touch deploy
             fi
       - persist_to_workspace:
-          root: workspace
+          root: .
           paths:
-            - kubectl
-            - kubeconfig-staging
-            - deploy-staging.yml
+            - deploy
 
   build_container_prod:
     <<: *defaults
@@ -149,20 +102,15 @@ jobs:
       - checkout
       - attach_workspace:
           at: workspace
-      - run:
-          name: Setup workspace
-          command: |
-            cp -r workspace/artifacts artifacts
-            cp workspace/deploy-production.yml deploy-production.yml 2> /dev/null || echo "No kubectl config for production"
       - setup_remote_docker
 
       # Build the image
       - run:
           name: Build application Docker image
           command: |
-              if [ -f ./deploy-production.yml ]; then
+              if [ -d workspace/artifacts/production-build ]; then
                 rm -fr dist
-                mv artifacts/production-build dist
+                mv workapace/artifacts/production-build dist
                 docker build --cache-from=app -t app-production .
               fi
       # Push to the docker registry
@@ -173,16 +121,15 @@ jobs:
       - run:
           name: Push application Docker image
           command: |
-            if [ -f ./deploy-production.yml ]; then
+            if [ -d workspace/artifacts/production-build ]; then
               docker tag app-production "registry.repositive.io:5000/discover:$(git describe --abbrev=0).$(git rev-parse --short HEAD)-pro"
               docker push "registry.repositive.io:5000/discover:$(git describe --abbrev=0).$(git rev-parse --short HEAD)-pro"
+              touch deploy
             fi
       - persist_to_workspace:
-          root: workspace
+          root: .
           paths:
-            - kubectl
-            - kubeconfig-production
-            - deploy-production.yml
+            - deploy
 
 
   deploy_staging:
@@ -193,15 +140,26 @@ jobs:
       - checkout
       - attach_workspace:
           at: workspace
+      - run:
+          name: Install kubectl
+          command: |
+            if [ -f workspace/deploy ]; then
+              curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+              chmod +x ./kubectl
+            fi
+      - run:
+          name: Create deployment files
+          command: |
+            if [ -f workspace/deploy]; then
+              curl -O -u $DEPLOYMENT_USER:$DEPLOYMENT_PASS https://deployment-server-staging.repositive.io/kubeconfig-staging
+              TAG=$(git describe --abbrev=0).$(git rev-parse --short HEAD)-pro envsubst '${TAG}' < .circleci/k8s.staging.yml > deploy-staging.yml
+            fi
       - deploy:
           name: Publish
           command: |
-            cp workspace/deploy-staging.yml deploy-staging.yml 2> /dev/null || echo "No kubectl config for staging"
-            cp workspace/kubeconfig-staging kubeconfig-staging 2> /dev/null || echo "No kubeconfig for staging available"
-            if [ -f ./deploy-staging.yml ]; then
+            if [ -f workspace/deploy ]; then
               KUBECONFIG=kubeconfig-staging ./kubectl apply -f deploy-staging.yml
               curl "https://slack.com/api/chat.postMessage?token=$SLACK_TOKEN&channel=dev&as_user=Liz&text=:rocket:%20*New%20Staging%20Deployment:*%20Discover%20Frontend%20$TAG$(git describe --abbrev=0).$(git rev-parse --short HEAD)"
-
             fi
 
   deploy_production:
@@ -212,37 +170,42 @@ jobs:
       - checkout
       - attach_workspace:
           at: workspace
+      - run:
+          name: Install kubectl
+          command: |
+            if [ -f workspace/deploy ]; then
+              curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+              chmod +x ./kubectl
+            fi
+      - run:
+          name: Create deployment files
+          command: |
+            if [ -f workspace/deploy]; then
+              curl -O -u $DEPLOYMENT_USER:$DEPLOYMENT_PASS https://deployment-server-production.repositive.io/kubeconfig-production
+              TAG=$(git describe --abbrev=0).$(git rev-parse --short HEAD)-pro envsubst '${TAG}' < .circleci/k8s.production.yml > deploy-production.yml
+            fi
       - deploy:
           name: Publish
           command: |
-            cp workspace/deploy-production.yml deploy-production.yml 2> /dev/null || echo "No kubectl config for production"
-            cp workspace/kubeconfig-production kubeconfig-production 2> /dev/null || echo "No kubeconfig for production"
-            if [ -f ./deploy-production.yml ]; then
+            if [ -f workspacedeploy ]; then
               KUBECONFIG=kubeconfig-production ./kubectl apply -f deploy-production.yml
               curl "https://slack.com/api/chat.postMessage?token=$SLACK_TOKEN&channel=dev&as_user=Liz&text=:rocket:%20*New%20Production%20Deployment:*%20Discover%20Frontend%20$TAG$(git describe --abbrev=0).$(git rev-parse --short HEAD)"
             fi
-
 
 workflows:
   version: 2
   test_and_release:
     jobs:
       - test
-      - setup_release:
+      - build_container_prod:
           requires:
             - test
           filters:
             branches:
               only: master
-      - build_container_prod:
-          requires:
-            - setup_release
-          filters:
-            branches:
-              only: master
       - build_container_sta:
           requires:
-            - setup_release
+            - test
           filters:
             branches:
               only: master
