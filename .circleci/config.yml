@@ -192,7 +192,7 @@ jobs:
       - checkout
       - attach_workspace:
           at: workspace
-     - deploy:
+      - deploy:
           name: Publish
           command: |
             if [ -f ./deploy-staging.yml ]; then
