@@ -73,7 +73,7 @@ jobs:
           command: |
               if [ -d workspace/artifacts/staging-build ]; then
                 rm -fr dist
-                mv workspace/artifacts/staging-build dist
+                cp -r workspace/artifacts/staging-build dist
                 docker build --cache-from=app -t app-staging .
               fi
       # Push to the docker registry
@@ -110,7 +110,7 @@ jobs:
           command: |
               if [ -d workspace/artifacts/production-build ]; then
                 rm -fr dist
-                mv workapace/artifacts/production-build dist
+                cp -r workapace/artifacts/production-build dist
                 docker build --cache-from=app -t app-production .
               fi
       # Push to the docker registry
