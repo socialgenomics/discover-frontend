@@ -11,20 +11,23 @@ export default Route.extend(FlashMessageMixin, VerificationMixin, {
   session: service(),
 
   model(params) {
-    const userId = get(this, 'session.session.content.authenticated.user.id');
-    return RSVP.hash({
-      'verificationResp': get(this, 'ajax')
-        .request(ENV.APIRoutes['verify-email'] + '/' + params.verification_id, { method: 'GET' }),
-      'credentials': fetchCredentials(this.store, userId),
-      'user': this.store.findRecord('user', userId)
-    })
+    return get(this, 'ajax').request(ENV.APIRoutes['verify-email'] + '/' + params.verification_id, { method: 'GET'})
+      .then(verificationResp => {
+        return get(this, 'session').authenticate('authenticator:repositive', verificationResp)
+          .then(() => verificationResp)
+      })
+      .then(verificationResp => {
+        return RSVP.hash({
+          'credentials': fetchCredentials(this.store, verificationResp.user_id),
+          'user': this.store.findRecord('user', verificationResp.user_id)
+        })
+      })
       .then(resp => {
         if (get(resp, 'credentials.length') === 1) {
           return { user: resp.user }
         }
 
         const credentialId = getLatestSecondaryCredential(secondaryCredentials(resp.credentials)).id;
-        set(this, 'session.session.content.authenticated.token', resp.verificationResp.token);
 
         return RSVP.hash({
           'user': resp.user,

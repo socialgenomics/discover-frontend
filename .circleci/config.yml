@@ -48,7 +48,7 @@ jobs:
               node_modules/ember-cli/bin/ember build --environment staging
               mv dist artifacts/staging-build
               if git log -1 --pretty=%B | grep "^[0-9]\+\.[0-9]\+\.[0-9]\+$"; then
-                node_modules/ember-cli/bin/ember/build --environment production
+                node_modules/ember-cli/bin/ember build --environment production
                 mv dist artifacts/production-build
               fi
             fi
@@ -57,7 +57,82 @@ jobs:
           paths:
             - artifacts
 
-  setup_release:
+  build_container_sta:
+    <<: *defaults
+    docker:
+      - image: docker:17.05.0-ce-git
+    steps:
+      - checkout
+      - attach_workspace:
+          at: workspace
+      - setup_remote_docker
+
+      # Build the image
+      - run:
+          name: Build application Docker image
+          command: |
+              if [ -d workspace/artifacts/staging-build ]; then
+                rm -fr dist
+                cp -r workspace/artifacts/staging-build dist
+                docker build --cache-from=app -t app-staging .
+              fi
+      # Push to the docker registry
+      - run:
+          name: Login in the docker registry
+          command: |
+            docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS registry.repositive.io:5000
+      - run:
+          name: Push application Docker image
+          command: |
+            if [ -d workspace/artifacts/staging-build ]; then
+              docker tag app-staging "registry.repositive.io:5000/discover:$(git describe --abbrev=0).$(git rev-parse --short HEAD)-sta"
+              docker push "registry.repositive.io:5000/discover:$(git describe --abbrev=0).$(git rev-parse --short HEAD)-sta"
+              touch deploy
+            fi
+      - persist_to_workspace:
+          root: .
+          paths:
+            - deploy
+
+  build_container_prod:
+    <<: *defaults
+    docker:
+      - image: docker:17.05.0-ce-git
+    steps:
+      - checkout
+      - attach_workspace:
+          at: workspace
+      - setup_remote_docker
+
+      # Build the image
+      - run:
+          name: Build application Docker image
+          command: |
+              if [ -d workspace/artifacts/production-build ]; then
+                rm -fr dist
+                cp -r workapace/artifacts/production-build dist
+                docker build --cache-from=app -t app-production .
+              fi
+      # Push to the docker registry
+      - run:
+          name: Login in the docker registry
+          command: |
+            docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS registry.repositive.io:5000
+      - run:
+          name: Push application Docker image
+          command: |
+            if [ -d workspace/artifacts/production-build ]; then
+              docker tag app-production "registry.repositive.io:5000/discover:$(git describe --abbrev=0).$(git rev-parse --short HEAD)-pro"
+              docker push "registry.repositive.io:5000/discover:$(git describe --abbrev=0).$(git rev-parse --short HEAD)-pro"
+              touch deploy
+            fi
+      - persist_to_workspace:
+          root: .
+          paths:
+            - deploy
+
+
+  deploy_staging:
     <<: *defaults
     docker:
       - image: istareldritch/curl-envsubst
@@ -66,107 +141,55 @@ jobs:
       - attach_workspace:
           at: workspace
       - run:
-          name: Setup workspace
+          name: Install kubectl
           command: |
-            mv workspace/artifacts artifacts
-
-
+            if [ -f workspace/deploy ]; then
+              curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+              chmod +x ./kubectl
+            fi
       - run:
-          name: install-kubectl
+          name: Create deployment files
           command: |
-            curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
-            chmod +x ./kubectl
-      - run:
-          name: Push application Docker image
-          command: |
-            if [ -d ./artifacts/staging-build ]; then
+            if [ -f workspace/deploy ]; then
               curl -O -u $DEPLOYMENT_USER:$DEPLOYMENT_PASS https://deployment-server-staging.repositive.io/kubeconfig-staging
-              TAG=$CIRCLE_SHA1 envsubst '${TAG}' < .circleci/k8s.staging.yml > deploy-staging.yml
-              if [ -d ./artifacts/production-build ]; then
-                curl -O -u $DEPLOYMENT_USER:$DEPLOYMENT_PASS https://deployment-server-staging.repositive.io/kubeconfig-production
-                TAG=$CIRCLE_TAG envsubst '${TAG}' < .circleci/k8s.production.yml > deploy-production.yml
-              fi
+              TAG=$(git describe --abbrev=0).$(git rev-parse --short HEAD)-pro envsubst '${TAG}' < .circleci/k8s.staging.yml > deploy-staging.yml
+            fi
+      - deploy:
+          name: Publish
+          command: |
+            if [ -f workspace/deploy ]; then
+              KUBECONFIG=kubeconfig-staging ./kubectl apply -f deploy-staging.yml
+              curl "https://slack.com/api/chat.postMessage?token=$SLACK_TOKEN&channel=dev&as_user=Liz&text=:rocket:%20*New%20Staging%20Deployment:*%20Discover%20Frontend%20$TAG$(git describe --abbrev=0).$(git rev-parse --short HEAD)"
             fi
 
-      - persist_to_workspace:
-          root: .
-          paths:
-            - artifacts
-            - node_modules
-            - kubectl
-            - kubeconfig-staging
-            - kubeconfig-production
-            - deploy-staging.yml
-            - deploy-production.yml
-
-  release:
+  deploy_production:
     <<: *defaults
     docker:
-      - image: docker:17.05.0-ce-git
+      - image: istareldritch/curl-envsubst
     steps:
       - checkout
       - attach_workspace:
           at: workspace
       - run:
-          name: Setup workspace
+          name: Install kubectl
           command: |
-            mv workspace/artifacts artifacts
-            mv workspace/kubectl kubectl
-            mv workspace/kubeconfig-staging kubeconfig-staging 2> /dev/null || echo "No kubectl config for staging"
-            mv workspace/deploy-staging.yml deploy-staging.yml 2> /dev/null || echo "No deployment config for staging"
-            mv workspace/kubeconfig-production kubeconfig-production 2> /dev/null || echo "No kubectl config for production"
-            mv workspace/deploy-production.yml deploy-production.yml 2> /dev/null || echo "No deployment config for production"
-      - setup_remote_docker
-
-      # Build the image
-      - restore_cache:
-          keys:
-            - v1-{{ .Branch }}
-          paths:
-            - /caches/app.tar
+            if [ -f workspace/deploy ]; then
+              curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+              chmod +x ./kubectl
+            fi
       - run:
-          name: Load Docker image layer cache
+          name: Create deployment files
           command: |
-            set +o pipefail
-            docker load -i /caches/app.tar | true
-      - run:
-          name: Build application Docker image
-          command: |
-              if [ -f ./deploy-staging.yml ]; then
-                mv artifacts/staging-build dist
-                docker build --cache-from=app -t app-staging .
-                if [ -f ./deploy-production.yml ]; then
-                  mv artifacts/production-build dist
-                  docker build --cache-from=app -t app-production .
-                fi
-              fi
-      - run:
-          name: Save Docker image layer cache
-          command: |
-            mkdir -p /caches
-            docker save -o /caches/app.tar app-staging
-      - save_cache:
-          key: v1-{{ .Branch }}-{{ epoch }}
-          paths:
-            - /caches/app.tar
-
-      # Push to the docker registry
-      - run:
-          name: Login in the docker registry
-          command: |
-            docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS registry.repositive.io:5000
+            if [ -f workspace/deploy ]; then
+              curl -O -u $DEPLOYMENT_USER:$DEPLOYMENT_PASS https://deployment-server-production.repositive.io/kubeconfig-production
+              TAG=$(git describe --abbrev=0).$(git rev-parse --short HEAD)-pro envsubst '${TAG}' < .circleci/k8s.production.yml > deploy-production.yml
+            fi
       - deploy:
-          name: Push application Docker image
+          name: Publish
           command: |
-            if [ -f ./deploy-staging.yml ]; then
-              docker tag app-staging "registry.repositive.io:5000/discover:${CIRCLE_SHA1}"
-              docker push "registry.repositive.io:5000/discover:${CIRCLE_SHA1}"
-              KUBECONFIG=kubeconfig-staging ./kubectl apply -f deploy-staging.yml
-              if [ -f ./deploy-production.yml ]; then
-                docker tag app-production "registry.repositive.io:5000/discover:${CIRCLE_TAG}"
-                docker push "registry.repositive.io:5000/discover:${CIRCLE_TAG}"
-                KUBECONFIG=kubeconfig-production ./kubectl apply -f deploy-production.yml
-              fi
+            if [ -f workspace/deploy ]; then
+              KUBECONFIG=kubeconfig-production ./kubectl apply -f deploy-production.yml
+              curl "https://slack.com/api/chat.postMessage?token=$SLACK_TOKEN&channel=dev&as_user=Liz&text=:rocket:%20*New%20Production%20Deployment:*%20Discover%20Frontend%20$TAG$(git describe --abbrev=0).$(git rev-parse --short HEAD)"
             fi
 
 workflows:
@@ -174,16 +197,27 @@ workflows:
   test_and_release:
     jobs:
       - test
-      - setup_release:
+      - build_container_prod:
           requires:
             - test
           filters:
             branches:
               only: master
-      - release:
+      - build_container_sta:
           requires:
             - test
-            - setup_release
+          filters:
+            branches:
+              only: master
+      - deploy_production:
+          requires:
+            - build_container_prod
+          filters:
+            branches:
+              only: master
+      - deploy_staging:
+          requires:
+            - build_container_sta
           filters:
             branches:
               only: master
