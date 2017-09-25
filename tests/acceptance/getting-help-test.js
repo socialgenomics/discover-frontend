@@ -3,7 +3,7 @@ import { expect } from 'chai';
 import startApp from 'repositive/tests/helpers/start-app';
 import destroyApp from 'repositive/tests/helpers/destroy-app';
 
-describe('!T Acceptance | getting help', function() {
+describe('Acceptance | getting help', function() {
   let application;
 
   beforeEach(function() {
@@ -14,11 +14,12 @@ describe('!T Acceptance | getting help', function() {
     destroyApp(application);
   });
 
-  it('can visit /', function() {
+  it('can visit help when not logged in', function() {
     visit('/help/your-account/access');
 
-    return andThen(() => {
+    andThen(() => {
       expect(currentURL()).to.equal('/help/your-account/access');
+      expect(find('.t-vertical-menu-heading:first').text().trim()).to.eql('Account')
     });
   });
 });
