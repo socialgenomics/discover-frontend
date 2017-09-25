@@ -120,7 +120,7 @@
           {{/if}}
 
           {{#if hasSampleTable}}
-            {{#link-to 'datasets.detail.sample-info' model.id}}
+            {{#link-to 'datasets.detail.sample-info' model.id replace=true}}
               <button class="r-btn r-btn-secondary r-btn-large" type="button">View Samples</button>
             {{/link-to}}
           {{/if}}
