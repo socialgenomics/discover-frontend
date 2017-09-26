@@ -8,6 +8,7 @@ import { nameForKeyCode } from 'repositive/utils/key-codes';
 import { getCurrentNode, constructAutoCompleteTree } from 'repositive/utils/query-tree';
 
 const { $, Component, get, inject: { service }, isBlank, set, setProperties, computed, Logger } = Ember;
+const ENDS_WITH_SPACE = /\s$/;
 
 export default Component.extend({
   queryService: service('query'),
@@ -63,11 +64,6 @@ export default Component.extend({
       if (keyName === 'Enter') { e.preventDefault(); }
       if (keyName === 'Enter' && dropdown.isOpen === false) {
         this.send('search');
-      }
-
-      if (keyName === 'Space') {
-        fetchSuggestionsTask.cancelAll();
-        this._clearResults(dropdown);
       }
 
       // Reset queryTree when searchbox text is deleted
@@ -129,6 +125,8 @@ export default Component.extend({
    * @return {Promise} Promised suggestions
    */
   fetchSuggestions: task(function * (queryString) {
+    if (queryString.match(ENDS_WITH_SPACE)) { return false; }
+
     const DEBOUNCE_MS = 500;
     const caretPosition = this._getCaretPosition();
     const queryTree = QP.fromNatural(queryString);
