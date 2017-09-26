@@ -7,7 +7,7 @@ import { getRandomElement } from 'repositive/utils/arrays';
 import { nameForKeyCode } from 'repositive/utils/key-codes';
 import { getCurrentNode, constructAutoCompleteTree } from 'repositive/utils/query-tree';
 
-const { $, Component, get, inject: { service }, isBlank, set, computed, Logger } = Ember;
+const { $, Component, get, inject: { service }, isBlank, set, setProperties, computed, Logger } = Ember;
 
 export default Component.extend({
   queryService: service('query'),
@@ -58,10 +58,16 @@ export default Component.extend({
 
     handleKeyDown(dropdown, e) {
       const keyName = nameForKeyCode(e.keyCode);
+      const fetchSuggestionsTask = get(this, 'fetchSuggestions');
 
       if (keyName === 'Enter') { e.preventDefault(); }
       if (keyName === 'Enter' && dropdown.isOpen === false) {
         this.send('search');
+      }
+
+      if (keyName === 'Space') {
+        fetchSuggestionsTask.cancelAll();
+        this._clearResults(dropdown);
       }
 
       // Reset queryTree when searchbox text is deleted
@@ -83,7 +89,7 @@ export default Component.extend({
         ) {
           const newQuery = queryString.substring(1);
           if (isBlank(newQuery)) {
-            get(this, 'fetchSuggestions').cancelAll()
+            fetchSuggestionsTask.cancelAll()
           }
           get(this, 'queryService').setQueryTree(QP.fromNatural(newQuery));
         }
@@ -155,7 +161,10 @@ export default Component.extend({
    * @param {Object} dropdown - The object representing the dropdown state
    */
   _clearResults(dropdown) {
-    set(dropdown, 'results', null);
+    setProperties(dropdown, {
+      results: null,
+      resultsCount: 0
+    });
     dropdown.actions.close();
   },
 
