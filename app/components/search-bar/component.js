@@ -7,7 +7,7 @@ import { getRandomElement } from 'repositive/utils/arrays';
 import { nameForKeyCode } from 'repositive/utils/key-codes';
 import { getCurrentNode, constructAutoCompleteTree } from 'repositive/utils/query-tree';
 
-const { $, Component, get, inject: { service }, set, computed, Logger } = Ember;
+const { $, Component, get, inject: { service }, isBlank, set, computed, Logger } = Ember;
 
 export default Component.extend({
   queryService: service('query'),
@@ -72,8 +72,7 @@ export default Component.extend({
 
         if ((keyName === 'Backspace' || keyName === 'Delete') && selectedText.length === queryString.length) {
           get(this, 'queryService').setQueryTree(null);
-          set(dropdown, 'results', null);
-          dropdown.actions.close()
+          this._clearResults(dropdown);
         } else if (selectedText && queryString.indexOf(selectedText) === 0) {
           //HACK to prevent last letter in string from being deleted
           const newQuery = queryString.substring(selectedText.length) + '-';
@@ -83,6 +82,9 @@ export default Component.extend({
           keyName === 'Delete' && caretPosition === 0 && !selectedText
         ) {
           const newQuery = queryString.substring(1);
+          if (isBlank(newQuery)) {
+            get(this, 'fetchSuggestions').cancelAll()
+          }
           get(this, 'queryService').setQueryTree(QP.fromNatural(newQuery));
         }
       }
@@ -104,8 +106,7 @@ export default Component.extend({
           get(this, 'queryService').setQueryTree(newQueryTree);
         }
       }
-      set(dropdown, 'results', null);
-      dropdown.actions.close();
+      this._clearResults(dropdown);
       this.send('search');
     },
 
@@ -149,6 +150,14 @@ export default Component.extend({
         .catch(Logger.error)
     }
   }),
+  /**
+   * _clearResults - Clears the loaded results and closes the dropdown
+   * @param {Object} dropdown - The object representing the dropdown state
+   */
+  _clearResults(dropdown) {
+    set(dropdown, 'results', null);
+    dropdown.actions.close();
+  },
 
   /**
    * _handleAutocompleteSuccess - Transforms response to array of suggestion objects
