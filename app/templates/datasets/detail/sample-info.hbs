@@ -1,3 +1,3 @@
-{{#link-to 'datasets.detail' model.dataset.id}}Back to dataset{{/link-to}}
+{{link-to 'Back to dataset' 'datasets.detail' model.dataset.id replace=true}}
 <h1>{{model.dataset.title}}</h1>
 {{dataset-page/sample-table samples=model.dataset.properties.sampleSummary}}
