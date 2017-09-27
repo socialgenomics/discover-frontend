@@ -187,7 +187,7 @@ export default Component.extend({
   _getCaretPosition() {
     const cachedSearchSelector = get(this, 'cachedSearchSelector');
     if (!cachedSearchSelector) {
-      const $searchBarSelector = $('.ember-power-select-typeahead-input')[0]
+      const $searchBarSelector = $('.ember-power-select-typeahead-input')[0];
       set(this, 'cachedSearchSelector', $searchBarSelector);
       return $searchBarSelector.selectionStart || 0;
     }

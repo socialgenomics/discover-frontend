@@ -18,7 +18,7 @@ describe('Unit | Component | search bar/predicate options', function() {
       const expected = [
         { name: 'Disease', example: '(e.g. Myeloma)' },
         { name: 'Tissue', example: '(e.g. Blood)' }
-      ]
+      ];
       expect(result).to.eql(expected);
     });
   });
