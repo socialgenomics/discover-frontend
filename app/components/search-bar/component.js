@@ -66,27 +66,26 @@ export default Component.extend({
         this.send('search');
       }
 
-      // Reset queryTree when searchbox text is deleted
       if (keyName === 'Backspace' || keyName === 'Delete') {
         const caretPosition = this._getCaretPosition();
         const selectedText = window.getSelection().toString();
         const queryString = get(this, 'queryString');
+        const ENTIRE_QUERY_SELECTED = selectedText.length === queryString.length;
+        const ENTIRE_QUERY_DELETED = ENTIRE_QUERY_SELECTED && (keyName === 'Backspace' || keyName === 'Delete');
+        const WILL_REMOVE_FIRST_CHAR =
+          (keyName === 'Backspace' && caretPosition === 1 && !selectedText) ||
+          (keyName === 'Delete' && caretPosition === 0 && !selectedText);
 
-        if ((keyName === 'Backspace' || keyName === 'Delete') && selectedText.length === queryString.length) {
+        if (ENTIRE_QUERY_DELETED) {
           get(this, 'queryService').setQueryTree(null);
           this._clearResults(dropdown);
         } else if (selectedText && queryString.indexOf(selectedText) === 0) {
           //HACK to prevent last letter in string from being deleted
           const newQuery = queryString.substring(selectedText.length) + '-';
           get(this, 'queryService').setQueryTree(QP.fromNatural(newQuery));
-        } else if (
-          keyName === 'Backspace' && caretPosition === 1 && !selectedText ||
-          keyName === 'Delete' && caretPosition === 0 && !selectedText
-        ) {
+        } else if (WILL_REMOVE_FIRST_CHAR) {
           const newQuery = queryString.substring(1);
-          if (isBlank(newQuery)) {
-            fetchSuggestionsTask.cancelAll()
-          }
+          if (isBlank(newQuery)) { fetchSuggestionsTask.cancelAll(); }
           get(this, 'queryService').setQueryTree(QP.fromNatural(newQuery));
         }
       }
