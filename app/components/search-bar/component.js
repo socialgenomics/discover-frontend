@@ -28,6 +28,7 @@ export default Component.extend({
     return QP.toNatural(get(this, 'queryTree'));
   }),
 
+  // Only used by dropdown child components.
   extraArgs: computed('queryString', function() {
     return { queryString: get(this, 'queryString') }
   }),
@@ -54,11 +55,12 @@ export default Component.extend({
     //Prevents the search field from clearing on blur
     handleBlur() { return false; },
 
-    handleOpen(dropdown) {
-      if (dropdown.resultsCount === 0) {
-        return false;
-      }
-    },
+    // handleOpen(dropdown) {
+    //   debugger
+    //   // if (dropdown.resultsCount === 0) {
+    //   //   return false;
+    //   // }
+    // },
 
     handleKeyDown(dropdown, e) {
       const keyName = nameForKeyCode(e.keyCode);

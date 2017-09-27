@@ -8,9 +8,9 @@ export default Component.extend({
 
   hasPredicateOptions: computed.bool('predicateOptions'),
   predicateOptions: computed('attrs.extra.queryString', 'predicates', function() {
-    const queryString = get(this, 'attrs.extra.queryString').toLowerCase() || '';
+    const queryString = get(this, 'attrs.extra.queryString') || '';
     return get(this, 'predicates')
-      .filter(predicate => predicate.name.toLowerCase().includes(queryString));
+      .filter(predicate => predicate.name.toLowerCase().includes(queryString.toLowerCase()));
   }),
 
   init() {
