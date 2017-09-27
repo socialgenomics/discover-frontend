@@ -3,10 +3,9 @@ import Ember from 'ember';
 const { Component, computed, get, set } = Ember;
 
 export default Component.extend({
-  classNames: ['p3'],
-  classNameBindings: ['hasPredicateOptions:border-bottom'],
+  classNameBindings: ['hasPredicateOptions:border-bottom', 'hasPredicateOptions:p3'],
 
-  hasPredicateOptions: computed.bool('predicateOptions'),
+  hasPredicateOptions: computed.notEmpty('predicateOptions'),
   predicateOptions: computed('attrs.extra.queryString', 'predicates', function() {
     const queryString = get(this, 'attrs.extra.queryString') || '';
     return get(this, 'predicates')
