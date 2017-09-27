@@ -1,3 +1,3 @@
 # How can I change my credentials?
 
-If you want to change your name or email address then please contact the Repositive team at [users@repositive.io](mailto:users@repositive.io). 
+You can change your name, email address and other details in the [Edit Profile](https://discover.repositive.io/users/pro) section of the platform.
