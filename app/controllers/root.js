@@ -14,11 +14,6 @@ export default Controller.extend({
   requestsSorted: computed.sort('model.requests', 'sortUpdatedAt'),
   registrationsSorted: computed.sort('model.registered', 'sortUpdatedAt'),
 
-  datasetsNumber: computed('model.stats.datasets', function() {
-    const x = get(this, 'model.stats.datasets');
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-  }),
-
   actions: {
     trackCreateAccount(eventName) {
       get(this, 'metrics').trackEvent({

@@ -38,11 +38,6 @@ export default Route.extend(FlashMessageMixin, {
           };
         })
         .catch(Logger.error);
-    } else {
-      return ajax.request(ENV.APIRoutes['stats'], { method: 'GET' })
-        .then(stat => {
-          return { stats: stat };
-        });
     }
   },
 
