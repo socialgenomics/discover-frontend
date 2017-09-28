@@ -1,6 +1,6 @@
 {
   "name": "repositive",
-  "version": "3.6.8",
+  "version": "3.6.9",
   "description": "Frontend app for repositive.io",
   "private": true,
   "directories": {
@@ -24,7 +24,7 @@
     "@repositive/query-parser": "2.1.0",
     "@repositive/ui-library": "0.0.x",
     "broccoli-asset-rev": "^2.4.5",
-    "d3": "^4.4.0",
+    "d3": "4.10.0",
     "dotenv": "^4.0.0",
     "ember-ajax": "^3.0.0",
     "ember-async-button": "1.0.2",
