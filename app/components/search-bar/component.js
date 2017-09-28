@@ -6,6 +6,8 @@ import ENV from 'repositive/config/environment';
 import { getRandomElement } from 'repositive/utils/arrays';
 import { nameForKeyCode } from 'repositive/utils/key-codes';
 import { getCurrentNode, constructAutoCompleteTree } from 'repositive/utils/query-tree';
+import { placeholderValues } from './placeholders';
+import { predicates } from './predicates';
 
 const { $, Component, get, inject: { service }, isBlank, set, setProperties, computed, Logger } = Ember;
 const ENDS_WITH_SPACE = /\s$/;
@@ -20,6 +22,13 @@ export default Component.extend({
   openPagesPlaceholder: 'Search over 1 million human genomic datasets',
 
   isAuthenticated: computed.alias('session.isAuthenticated'),
+  hasPredicateOptions: computed.notEmpty('predicateOptions'),
+
+  predicateOptions: computed('queryString', 'predicates', function() {
+    const queryString = get(this, 'queryString') || '';
+    return get(this, 'predicates')
+      .filter(predicate => predicate.name.toLowerCase().includes(queryString.toLowerCase()));
+  }),
 
   queryTree: computed('queryService.queryTree', function() {
     return get(this, 'queryService').getQueryTree();
@@ -30,38 +39,31 @@ export default Component.extend({
   }),
 
   // Only used by dropdown child components.
-  extraArgs: computed('queryString', function() {
-    return { queryString: get(this, 'queryString') }
+  extraArgs: computed('predicateOptions', 'hasPredicateOptions', function() {
+    return {
+      predicateOptions: get(this, 'predicateOptions'),
+      hasPredicateOptions: get(this, 'hasPredicateOptions')
+    }
   }),
 
   init() {
     this._super(...arguments);
-
-    const placeholderValues = [
-      `obesity AND microbiome`,
-      `autism AND assay:"RNA seq"`,
-      `infant stool AND assay:wgs`,
-      `Alzheimer's disease`,
-      `fetal epigenome`,
-      `human populations AND (assay:"Whole Genome Sequencing" OR assay:WGS)`
-    ];
-
-    set(this, 'placeholder', get(this, 'isAuthenticated') ?
+    const placeholder = get(this, 'isAuthenticated') ?
       this._getSearchPlaceholder(placeholderValues) :
-      get(this, 'openPagesPlaceholder')
-    );
+      get(this, 'openPagesPlaceholder');
+
+    setProperties(this, { predicates, placeholder });
   },
 
   actions: {
     //Prevents the search field from clearing on blur
     handleBlur() { return false; },
 
-    // handleOpen(dropdown) {
-    //   debugger
-    //   // if (dropdown.resultsCount === 0) {
-    //   //   return false;
-    //   // }
-    // },
+    handleOpen(dropdown) {
+      if (dropdown.resultsCount === 0 && !get(this, 'hasPredicateOptions')) {
+        return false;
+      }
+    },
 
     handleKeyDown(dropdown, e) {
       const keyName = nameForKeyCode(e.keyCode);
