@@ -7,7 +7,8 @@ import { getRandomElement } from 'repositive/utils/arrays';
 import { nameForKeyCode } from 'repositive/utils/key-codes';
 import { getCurrentNode, constructAutoCompleteTree } from 'repositive/utils/query-tree';
 
-const { $, Component, get, inject: { service }, set, computed, Logger } = Ember;
+const { $, Component, get, inject: { service }, isBlank, set, setProperties, computed, Logger } = Ember;
+const ENDS_WITH_SPACE = /\s$/;
 
 export default Component.extend({
   queryService: service('query'),
@@ -58,35 +59,39 @@ export default Component.extend({
 
     handleKeyDown(dropdown, e) {
       const keyName = nameForKeyCode(e.keyCode);
+      const fetchSuggestionsTask = get(this, 'fetchSuggestions');
 
       if (keyName === 'Enter') { e.preventDefault(); }
       if (keyName === 'Enter' && dropdown.isOpen === false) {
         this.send('search');
       }
 
-      // Reset queryTree when searchbox text is deleted
       if (keyName === 'Backspace' || keyName === 'Delete') {
         const caretPosition = this._getCaretPosition();
         const selectedText = window.getSelection().toString();
         const queryString = get(this, 'queryString');
+        const ENTIRE_QUERY_SELECTED = selectedText.length === queryString.length;
+        const ENTIRE_QUERY_DELETED = ENTIRE_QUERY_SELECTED && (keyName === 'Backspace' || keyName === 'Delete');
+        const WILL_REMOVE_FIRST_CHAR =
+          (keyName === 'Backspace' && caretPosition === 1 && !selectedText) ||
+          (keyName === 'Delete' && caretPosition === 0 && !selectedText);
 
-        if ((keyName === 'Backspace' || keyName === 'Delete') && selectedText.length === queryString.length) {
+        if (ENTIRE_QUERY_DELETED) {
           get(this, 'queryService').setQueryTree(null);
+          this._clearResults(dropdown);
         } else if (selectedText && queryString.indexOf(selectedText) === 0) {
           //HACK to prevent last letter in string from being deleted
           const newQuery = queryString.substring(selectedText.length) + '-';
           get(this, 'queryService').setQueryTree(QP.fromNatural(newQuery));
-        } else if (
-          keyName === 'Backspace' && caretPosition === 1 && !selectedText ||
-          keyName === 'Delete' && caretPosition === 0 && !selectedText
-        ) {
+        } else if (WILL_REMOVE_FIRST_CHAR) {
           const newQuery = queryString.substring(1);
+          if (isBlank(newQuery)) { fetchSuggestionsTask.cancelAll(); }
           get(this, 'queryService').setQueryTree(QP.fromNatural(newQuery));
         }
       }
     },
 
-    handleSelection(selection) {
+    handleSelection(selection, dropdown) {
       const queryTree = get(this, 'queryTree');
 
       if (selection) {
@@ -102,6 +107,7 @@ export default Component.extend({
           get(this, 'queryService').setQueryTree(newQueryTree);
         }
       }
+      this._clearResults(dropdown);
       this.send('search');
     },
 
@@ -118,6 +124,8 @@ export default Component.extend({
    * @return {Promise} Promised suggestions
    */
   fetchSuggestions: task(function * (queryString) {
+    if (queryString.match(ENDS_WITH_SPACE)) { return false; }
+
     const DEBOUNCE_MS = 500;
     const caretPosition = this._getCaretPosition();
     const queryTree = QP.fromNatural(queryString);
@@ -145,6 +153,17 @@ export default Component.extend({
         .catch(Logger.error)
     }
   }),
+  /**
+   * _clearResults - Clears the loaded results and closes the dropdown
+   * @param {Object} dropdown - The object representing the dropdown state
+   */
+  _clearResults(dropdown) {
+    setProperties(dropdown, {
+      results: null,
+      resultsCount: 0
+    });
+    dropdown.actions.close();
+  },
 
   /**
    * _handleAutocompleteSuccess - Transforms response to array of suggestion objects
