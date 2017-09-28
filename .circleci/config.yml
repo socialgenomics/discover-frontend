@@ -124,7 +124,7 @@ jobs:
           name: Push application Docker image
           command: |
             if [ -d workspace/artifacts/production-build ]; then
-							echo "$(git describe --abbrev=0).$(git rev-parse --short HEAD)-pro" >> deploy
+            echo "$(git describe --abbrev=0).$(git rev-parse --short HEAD)-pro" >> deploy
               docker tag app-production "registry.repositive.io:5000/discover:$(cat deploy)"
               docker push "registry.repositive.io:5000/discover:$(cat deploy)"
             else
