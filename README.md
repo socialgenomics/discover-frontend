@@ -14,7 +14,8 @@ You need the following installed on your computer:
 
 * `git clone <repository-url>` this repository
 * change into the new directory
-* `yarn setup`
+* `yarn`
+* You may also have to `npm rebuild node-sass`
 
 ## Running / Development
 
