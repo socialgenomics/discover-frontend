@@ -9,7 +9,7 @@ import { isVerified } from 'repositive/utils/credentials';
 
 
 
-const { get, getProperties, computed, Controller, inject: { service }, set } = Ember;
+const { get, getProperties, getWithDefault, computed, Controller, inject: { service }, set } = Ember;
 const Validations = buildValidations({
   email: [
     presenceValidator(errorMessages.blankEmail),
@@ -26,6 +26,7 @@ export default Controller.extend(
   FlashMessageMixin,
   {
     session: service(),
+    i18n: service(),
 
     email: null,
     password: null,
@@ -54,9 +55,13 @@ export default Controller.extend(
     _displayMessage(resp) {
       set(this, 'loading', false);
       if (resp) {
-        const message = get(resp, 'status_code') !== 400 ?
-          get(resp, 'message') :
-          'Error: Invalid Email. Please check that you have typed your email correctly.';
+        const category = get(resp, 'category');
+
+        // Be backwards compatible when it comes to displaing API responses to the user
+        // TODO: when we convert all responses error and success to pass categories we could change this
+        const message = category ?
+          get(this, 'i18n').t(`login.${category}`, getWithDefault(resp, 'props'), {}) :
+          get(resp, 'message');
 
         if (message) { this._addFlashMessage(message, 'warning'); }
       }

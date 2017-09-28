@@ -9,6 +9,7 @@ export default Mixin.create(FlashMessageMixin, {
   actions: {
     addAttribute(model, user, key, value) {
       const store = get(this, 'store');
+
       return store
         .createRecord('action', createActionData(model, user, 'attribute', { properties: { key, value } }))
         .save()

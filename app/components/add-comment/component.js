@@ -8,6 +8,7 @@ const Validations = buildValidations({ comment: emptyValidator() });
 
 export default Component.extend(Validations, {
   session: service(),
+
   isActive: false,
 
   classNames: 'flex items-start',
