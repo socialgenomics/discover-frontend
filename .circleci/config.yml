@@ -112,7 +112,7 @@ jobs:
           command: |
               if [ -d workspace/artifacts/production-build ]; then
                 rm -fr dist
-                cp -r workapace/artifacts/production-build dist
+                cp -r workspace/artifacts/production-build dist
                 docker build --cache-from=app -t app-production .
               fi
       # Push to the docker registry
