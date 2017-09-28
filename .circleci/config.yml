@@ -85,9 +85,9 @@ jobs:
           name: Push application Docker image
           command: |
             if [ -d workspace/artifacts/staging-build ]; then
-              docker tag app-staging "registry.repositive.io:5000/discover:$(git describe --abbrev=0).$(git rev-parse --short HEAD)-sta"
-              docker push "registry.repositive.io:5000/discover:$(git describe --abbrev=0).$(git rev-parse --short HEAD)-sta"
-              echo true >> deploy
+              echo "$(git describe --abbrev=0).$(git rev-parse --short HEAD)-sta" >> deploy
+              docker tag app-staging "registry.repositive.io:5000/discover:$(cat deploy)"
+              docker push "registry.repositive.io:5000/discover:$(cat deploy)"
             else
               echo false >> deploy
             fi
@@ -124,9 +124,9 @@ jobs:
           name: Push application Docker image
           command: |
             if [ -d workspace/artifacts/production-build ]; then
-              docker tag app-production "registry.repositive.io:5000/discover:$(git describe --abbrev=0).$(git rev-parse --short HEAD)-pro"
-              docker push "registry.repositive.io:5000/discover:$(git describe --abbrev=0).$(git rev-parse --short HEAD)-pro"
-              echo true >> deploy
+            echo "$(git describe --abbrev=0).$(git rev-parse --short HEAD)-pro" >> deploy
+              docker tag app-production "registry.repositive.io:5000/discover:$(cat deploy)"
+              docker push "registry.repositive.io:5000/discover:$(cat deploy)"
             else
               echo false >> deploy
             fi
@@ -147,23 +147,23 @@ jobs:
       - run:
           name: Install kubectl
           command: |
-            if [ $(cat workspace/deploy) = true ]; then
+            if [ $(cat workspace/deploy) != false ]; then
               curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
               chmod +x ./kubectl
             fi
       - run:
           name: Create deployment files
           command: |
-            if [ $(cat workspace/deploy) = true ]; then
+            if [ $(cat workspace/deploy) != false ]; then
               curl -O -u $DEPLOYMENT_USER:$DEPLOYMENT_PASS https://deployment-server-staging.repositive.io/kubeconfig-staging
-              TAG=$(git describe --abbrev=0).$(git rev-parse --short HEAD)-sta envsubst '${TAG}' < .circleci/k8s.staging.yml > deploy-staging.yml
+              TAG=$(cat workspace/deploy) envsubst '${TAG}' < .circleci/k8s.staging.yml > deploy-staging.yml
             fi
       - deploy:
           name: Publish
           command: |
-            if [ $(cat workspace/deploy) = true ]; then
+            if [ $(cat workspace/deploy) != false ]; then
               KUBECONFIG=kubeconfig-staging ./kubectl apply -f deploy-staging.yml
-              curl "https://slack.com/api/chat.postMessage?token=$SLACK_TOKEN&channel=dev&as_user=Liz&text=:rocket:%20*New%20Staging%20Deployment:*%20Discover%20Frontend%20$TAG$(git describe --abbrev=0).$(git rev-parse --short HEAD)"
+              curl "https://slack.com/api/chat.postMessage?token=$SLACK_TOKEN&channel=dev&as_user=Liz&text=:rocket:%20*New%20Staging%20Deployment:*%20Discover%20Frontend%20$TAG$(cat workspace/deploy)"
             fi
 
   deploy_production:
@@ -177,23 +177,23 @@ jobs:
       - run:
           name: Install kubectl
           command: |
-            if [ $(cat workspace/deploy) = true ]; then
+            if [ $(cat workspace/deploy) != false ]; then
               curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
               chmod +x ./kubectl
             fi
       - run:
           name: Create deployment files
           command: |
-            if [ $(cat workspace/deploy) = true ]; then
+            if [ $(cat workspace/deploy) != false ]; then
               curl -O -u $DEPLOYMENT_USER:$DEPLOYMENT_PASS https://deployment-server-production.repositive.io/kubeconfig-production
-              TAG=$(git describe --abbrev=0).$(git rev-parse --short HEAD)-pro envsubst '${TAG}' < .circleci/k8s.production.yml > deploy-production.yml
+              TAG=$(cat workspace/deploy) envsubst '${TAG}' < .circleci/k8s.production.yml > deploy-production.yml
             fi
       - deploy:
           name: Publish
           command: |
-            if [ $(cat workspace/deploy) = true ]; then
+            if [ $(cat workspace/deploy) != false ]; then
               KUBECONFIG=kubeconfig-production ./kubectl apply -f deploy-production.yml
-              curl "https://slack.com/api/chat.postMessage?token=$SLACK_TOKEN&channel=dev&as_user=Liz&text=:rocket:%20*New%20Production%20Deployment:*%20Discover%20Frontend%20$TAG$(git describe --abbrev=0).$(git rev-parse --short HEAD)"
+              curl "https://slack.com/api/chat.postMessage?token=$SLACK_TOKEN&channel=dev&as_user=Liz&text=:rocket:%20*New%20Production%20Deployment:*%20Discover%20Frontend%20$TAG$(cat workspace/deploy)"
             fi
 
 workflows:
