@@ -14,10 +14,6 @@ export default Controller.extend(DatasetActionsMixin, {
 
   isSampleInfoRoute: computed.equal('target.currentRouteName', 'datasets.detail.sample-info'),
 
-  datasetsNumber: computed('model.stats.datasets', function() {
-    return get(this, 'model.stats.datasets').toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-  }),
-
   contributors: computed('attributes.[]', function() {
     const contributorIds = this.store.peekAll('action')
       .filterBy('type', 'attribute')
