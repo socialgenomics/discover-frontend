@@ -16,7 +16,7 @@ module.exports = {
       "--headless",
       "--disable-gpu",
       "--remote-debugging-port=9222",
-      "--window-size=2440,900"
+      "--window-size=1440,900"
     ]
   }
 };
