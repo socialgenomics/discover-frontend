@@ -2,7 +2,7 @@ import Ember from 'ember';
 import d3 from 'npm:d3';
 import topojson from 'npm:topojson';
 
-const { Component } = Ember;
+const { Component, Logger } = Ember;
 
 export default Component.extend({
   didInsertElement: function() {
@@ -29,7 +29,8 @@ export default Component.extend({
     const path = d3.geoPath().projection(mercator);
     const points = d => mercator([d.geometry.coordinates[0], d.geometry.coordinates[1]]);
 
-    d3.json('assets/worldmap.json', function(error, topo) {
+    d3.json('assets/worldmap.json', (error, topo) => {
+      if (error) { return Logger.error(error); }
       g.selectAll('path')
         .data(topojson.feature(topo, topo.objects.countries).features)
         .enter()
@@ -38,6 +39,7 @@ export default Component.extend({
         .attr('fill', mapColour);
 
       d3.json('assets/points.json', function (error, topology) {
+        if (error) { return Logger.error(error); }
         const color = d3.scaleOrdinal().domain(['datasource', 'dataset'])
           .range([d3.rgb(datasourceColour), d3.rgb(datasetColour)]);
         svg.selectAll('circle')
