@@ -86,6 +86,7 @@ export default Component.extend({
 
         if (ENTIRE_QUERY_DELETED) {
           get(this, 'queryService').setQueryTree(null);
+          fetchSuggestionsTask.cancelAll();
           this._clearResults(dropdown);
         } else if (selectedText && queryString.indexOf(selectedText) === 0) {
           //HACK to prevent last letter in string from being deleted
