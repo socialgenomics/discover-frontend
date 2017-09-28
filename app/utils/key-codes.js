@@ -8,6 +8,7 @@ export function nameForKeyCode(keyCode) {
   return {
     '8': 'Backspace',
     '13': 'Enter',
+    '32': 'Space',
     '46': 'Delete'
   }[keyCodeString];
 }
