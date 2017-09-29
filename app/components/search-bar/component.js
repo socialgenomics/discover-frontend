@@ -9,7 +9,7 @@ import { getCurrentNode, constructAutoCompleteTree } from 'repositive/utils/quer
 import { placeholderValues } from './placeholders';
 import { predicates } from './predicates';
 
-const { $, Component, get, inject: { service }, isBlank, set, setProperties, computed, Logger } = Ember;
+const { $, Component, get, inject: { service }, isBlank, set, setProperties, computed, Logger, run: { scheduleOnce } } = Ember;
 const ENDS_WITH_SPACE = /\s$/;
 
 export default Component.extend({
@@ -39,10 +39,11 @@ export default Component.extend({
   }),
 
   // Only used by dropdown child components.
-  extraArgs: computed('predicateOptions', 'hasPredicateOptions', function() {
+  extraArgs: computed('predicateOptions', 'hasPredicateOptions', 'fetchSuggestions.isRunning', function() {
     return {
       predicateOptions: get(this, 'predicateOptions'),
-      hasPredicateOptions: get(this, 'hasPredicateOptions')
+      hasPredicateOptions: get(this, 'hasPredicateOptions'),
+      isFetching: get(this, 'fetchSuggestions.isRunning')
     }
   }),
 
@@ -60,9 +61,15 @@ export default Component.extend({
     handleBlur() { return false; },
 
     handleOpen(dropdown) {
-      if (dropdown.resultsCount === 0 && !get(this, 'hasPredicateOptions')) {
-        return false;
-      }
+      // const loadingSuggestions = get(this, 'fetchSuggestions.isRunning');
+      // if (dropdown.resultsCount === 0 && !get(this, 'hasPredicateOptions') && !loadingSuggestions) {
+      //   return false;
+      // }
+    },
+
+    handleClose(dropdown) {
+      debugger;
+      // return false;
     },
 
     handleKeyDown(dropdown, e) {
@@ -120,6 +127,7 @@ export default Component.extend({
           get(this, 'queryService').setQueryTree(newQueryTree);
         }
       }
+      debugger
       this._clearResults(dropdown);
       this.send('search');
     },
@@ -175,6 +183,7 @@ export default Component.extend({
       results: null,
       resultsCount: 0
     });
+    scheduleOnce('actions', null, dropdown.actions.close);
     dropdown.actions.close();
   },
 
