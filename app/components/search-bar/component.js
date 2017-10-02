@@ -9,7 +9,7 @@ import { getCurrentNode, constructAutoCompleteTree } from 'repositive/utils/quer
 import { placeholderValues } from './placeholders';
 import { predicates } from './predicates';
 
-const { $, Component, get, inject: { service }, isBlank, set, setProperties, computed, Logger, run: { scheduleOnce } } = Ember;
+const { $, Component, get, inject: { service }, isBlank, set, setProperties, computed, Logger, run: { schedule } } = Ember;
 const ENDS_WITH_SPACE = /\s$/;
 
 export default Component.extend({
@@ -58,26 +58,43 @@ export default Component.extend({
 
   actions: {
     //Prevents the search field from clearing on blur
-    handleBlur() { return false; },
+    handleBlur(dropdown) {
+      // debugger;
+      //call handleClose with type as second arg = 'blur'
+      this.send('handleClose', dropdown, null, 'blur');
+      return false;
+    },
 
     handleOpen(dropdown) {
+      console.log('OPEN DROPDOWN')
       // const loadingSuggestions = get(this, 'fetchSuggestions.isRunning');
       // if (dropdown.resultsCount === 0 && !get(this, 'hasPredicateOptions') && !loadingSuggestions) {
       //   return false;
       // }
     },
 
-    handleClose(dropdown) {
-      debugger;
-      // return false;
+    handleClose(dropdown, e, cause) {
+      // debugger;
+      if (cause === 'blur' || cause === 'search') {
+        console.log('CLOSE with ' + cause);
+      } else {
+        console.log('CLOSE PREVENTED with ' + cause);
+        return false;
+      }
     },
 
     handleKeyDown(dropdown, e) {
       const keyName = nameForKeyCode(e.keyCode);
       const fetchSuggestionsTask = get(this, 'fetchSuggestions');
 
+      if (!dropdown.isOpen) {
+        console.log('Opened on keydown');
+        dropdown.actions.open();
+      }
+
       if (keyName === 'Enter') { e.preventDefault(); }
       if (keyName === 'Enter' && dropdown.isOpen === false) {
+        this.send('handleClose', dropdown, null, 'search')
         this.send('search');
       }
 
@@ -127,7 +144,6 @@ export default Component.extend({
           get(this, 'queryService').setQueryTree(newQueryTree);
         }
       }
-      debugger
       this._clearResults(dropdown);
       this.send('search');
     },
@@ -179,12 +195,12 @@ export default Component.extend({
    * @param {Object} dropdown - The object representing the dropdown state
    */
   _clearResults(dropdown) {
+    console.log('Clear results');
     setProperties(dropdown, {
       results: null,
       resultsCount: 0
     });
-    scheduleOnce('actions', null, dropdown.actions.close);
-    dropdown.actions.close();
+    // schedule('actions', null, dropdown.actions.close, null, true);
   },
 
   /**

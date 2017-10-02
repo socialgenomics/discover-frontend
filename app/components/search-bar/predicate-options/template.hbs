@@ -1,3 +1,7 @@
+{{#if isLoading}}
+  Loading...
+{{/if}}
+
 {{#if attrs.extra.predicateOptions}}
   <h3 class='fc-secondary fs0 mb0 fw-reg'>Narrow your search</h3>
   {{#each attrs.extra.predicateOptions as |predicateOption|}}
