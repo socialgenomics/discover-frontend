@@ -39,11 +39,10 @@ export default Component.extend({
   }),
 
   // Only used by dropdown child components.
-  extraArgs: computed('predicateOptions', 'hasPredicateOptions', 'fetchSuggestions.isRunning', function() {
+  extraArgs: computed('predicateOptions', 'hasPredicateOptions', function() {
     return {
       predicateOptions: get(this, 'predicateOptions'),
-      hasPredicateOptions: get(this, 'hasPredicateOptions'),
-      isFetching: get(this, 'fetchSuggestions.isRunning')
+      hasPredicateOptions: get(this, 'hasPredicateOptions')
     }
   }),
 
@@ -57,26 +56,16 @@ export default Component.extend({
   },
 
   actions: {
-    //Prevents the search field from clearing on blur
+    // Prevents the search field from clearing on blur
     handleBlur(dropdown) {
-      // debugger;
-      //call handleClose with type as second arg = 'blur'
       this.send('handleClose', dropdown, null, 'blur');
       return false;
-    },
-
-    handleOpen(dropdown) {
-      console.log('OPEN DROPDOWN')
-      // const loadingSuggestions = get(this, 'fetchSuggestions.isRunning');
-      // if (dropdown.resultsCount === 0 && !get(this, 'hasPredicateOptions') && !loadingSuggestions) {
-      //   return false;
-      // }
     },
 
     // Dropdown should only close on search and blur
     handleClose(dropdown, e, cause) {
       if (!(cause === 'blur' || cause === 'search')) {
-        return false;
+        return false; //Prevent close
       }
     },
 
@@ -109,7 +98,7 @@ export default Component.extend({
           fetchSuggestionsTask.cancelAll();
           this._clearResults(dropdown);
         } else if (selectedText && queryString.indexOf(selectedText) === 0) {
-          //HACK to prevent last letter in string from being deleted
+          //Hack to prevent last letter in string from being deleted
           const newQuery = queryString.substring(selectedText.length) + '-';
           get(this, 'queryService').setQueryTree(QP.fromNatural(newQuery));
         } else if (WILL_REMOVE_FIRST_CHAR) {
