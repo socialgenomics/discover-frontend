@@ -65,23 +65,28 @@ export default Component.extend({
     // Dropdown should only close on search and blur
     handleClose(dropdown, e, cause) {
       if (e !== null && e.type === 'mousedown') { return }
-      if (!(cause === 'blur' || cause === 'search')) {
-        return false; //Prevent close
-      }
+      if (cause === 'blur' || cause === 'search') {
+        if (cause === 'search') {
+          dropdown.actions.close();
+        }
+        return;
+      } else { return false; }//Prevent close
     },
 
     handleKeyDown(dropdown, e) {
       const keyName = nameForKeyCode(e.keyCode);
       const fetchSuggestionsTask = get(this, 'fetchSuggestions');
 
-      if (!dropdown.isOpen) {
+      if (!dropdown.isOpen && keyName !== 'Enter') {
         dropdown.actions.open();
       }
 
-      if (keyName === 'Enter') { e.preventDefault(); }
-      if (keyName === 'Enter' && dropdown.isOpen === false) {
-        this.send('handleClose', dropdown, null, 'search')
-        this.send('search');
+      if (keyName === 'Enter') {
+        e.preventDefault();
+        if (dropdown.isActive && !dropdown.highlighted) {
+          this.send('search');
+          this.send('handleClose', dropdown, e, 'search');
+        }
       }
 
       if (keyName === 'Backspace' || keyName === 'Delete') {
