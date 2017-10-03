@@ -56,12 +56,16 @@ export default Component.extend({
   },
 
   actions: {
-    //Prevents the search field from clearing on blur
-    handleBlur() { return false; },
+    // Prevents the search field from clearing on blur
+    handleBlur(dropdown) {
+      this.send('handleClose', dropdown, null, 'blur');
+      return false;
+    },
 
-    handleOpen(dropdown) {
-      if (dropdown.resultsCount === 0 && !get(this, 'hasPredicateOptions')) {
-        return false;
+    // Dropdown should only close on search and blur
+    handleClose(dropdown, e, cause) {
+      if (!(cause === 'blur' || cause === 'search')) {
+        return false; //Prevent close
       }
     },
 
@@ -69,8 +73,13 @@ export default Component.extend({
       const keyName = nameForKeyCode(e.keyCode);
       const fetchSuggestionsTask = get(this, 'fetchSuggestions');
 
+      if (!dropdown.isOpen) {
+        dropdown.actions.open();
+      }
+
       if (keyName === 'Enter') { e.preventDefault(); }
       if (keyName === 'Enter' && dropdown.isOpen === false) {
+        this.send('handleClose', dropdown, null, 'search')
         this.send('search');
       }
 
@@ -86,9 +95,10 @@ export default Component.extend({
 
         if (ENTIRE_QUERY_DELETED) {
           get(this, 'queryService').setQueryTree(null);
+          fetchSuggestionsTask.cancelAll();
           this._clearResults(dropdown);
         } else if (selectedText && queryString.indexOf(selectedText) === 0) {
-          //HACK to prevent last letter in string from being deleted
+          //Hack to prevent last letter in string from being deleted
           const newQuery = queryString.substring(selectedText.length) + '-';
           get(this, 'queryService').setQueryTree(QP.fromNatural(newQuery));
         } else if (WILL_REMOVE_FIRST_CHAR) {
@@ -174,7 +184,6 @@ export default Component.extend({
       results: null,
       resultsCount: 0
     });
-    dropdown.actions.close();
   },
 
   /**

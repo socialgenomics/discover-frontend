@@ -8,14 +8,16 @@
     placeholder=placeholder
     options=suggestions
     selected=queryString
+    closeOnSelect=false
     onblur=(action 'handleBlur')
     onchange=(action 'handleSelection')
     onfocus=(action 'handleFocus')
     onkeydown=(action 'handleKeyDown')
-    onopen=(action 'handleOpen')
+    onclose=(action 'handleClose')
     search=(perform fetchSuggestions)
     defaultHighlighted=''
     beforeOptionsComponent=(component 'search-bar/predicate-options')
+    optionsComponent=(component 'search-bar/autocomplete-options')
     extra=extraArgs
     dropdownClass='c-search-bar-dropdown'
     noMatchesMessage=''
@@ -24,10 +26,6 @@
   }}
     {{option.suggestionText}}
   {{/power-select-typeahead}}
-
-  {{#if fetchSuggestions.isRunning}}
-    <span>{{fa-icon "circle-o-notch" class='px3 fc-secondary' pulse=true size=1}}</span>
-  {{/if}}
 
   {{#if hasSubmitButton}}
     <button {{action 'search'}} class="r-btn r-btn-primary r-btn-large square self-stretch">Search</button>
