@@ -9,7 +9,7 @@ import { getCurrentNode, constructAutoCompleteTree } from 'repositive/utils/quer
 import { placeholderValues } from './placeholders';
 import { predicates } from './predicates';
 
-const { $, Component, get, inject: { service }, isBlank, set, setProperties, computed, Logger, run: { schedule } } = Ember;
+const { $, Component, get, inject: { service }, isBlank, set, setProperties, computed, Logger } = Ember;
 const ENDS_WITH_SPACE = /\s$/;
 
 export default Component.extend({
@@ -73,12 +73,9 @@ export default Component.extend({
       // }
     },
 
+    // Dropdown should only close on search and blur
     handleClose(dropdown, e, cause) {
-      // debugger;
-      if (cause === 'blur' || cause === 'search') {
-        console.log('CLOSE with ' + cause);
-      } else {
-        console.log('CLOSE PREVENTED with ' + cause);
+      if (!(cause === 'blur' || cause === 'search')) {
         return false;
       }
     },
@@ -88,7 +85,6 @@ export default Component.extend({
       const fetchSuggestionsTask = get(this, 'fetchSuggestions');
 
       if (!dropdown.isOpen) {
-        console.log('Opened on keydown');
         dropdown.actions.open();
       }
 
@@ -195,12 +191,10 @@ export default Component.extend({
    * @param {Object} dropdown - The object representing the dropdown state
    */
   _clearResults(dropdown) {
-    console.log('Clear results');
     setProperties(dropdown, {
       results: null,
       resultsCount: 0
     });
-    // schedule('actions', null, dropdown.actions.close, null, true);
   },
 
   /**
