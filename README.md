@@ -14,7 +14,8 @@ You need the following installed on your computer:
 
 * `git clone <repository-url>` this repository
 * change into the new directory
-* `yarn setup`
+* `yarn`
+* You may also have to `npm rebuild node-sass`
 
 ## Running / Development
 
@@ -53,4 +54,5 @@ Whenever a PR is merged into master, the new build of master is deployed to [sta
 1. Because you can't directly push changes to master, you must first make a new branch.
 2. Within the new branch, update the version number with `npm version <major | minor | patch>`
 3. Push with tags: `git push && git push --tags`
-4. Create a PR to merge the upgrade branch into master.
+4. You can create a release by [editting the release notes of the tag](https://github.com/repositive/discover.repositive.io/tags). This gives us a good history of what we've deployed.
+5. Create a PR to merge the upgrade branch into master. You must choose the rebase and merge option, not squash.
