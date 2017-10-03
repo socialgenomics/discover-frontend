@@ -64,6 +64,7 @@ export default Component.extend({
 
     // Dropdown should only close on search and blur
     handleClose(dropdown, e, cause) {
+      if (e !== null && e.type === 'mousedown') { return }
       if (!(cause === 'blur' || cause === 'search')) {
         return false; //Prevent close
       }
