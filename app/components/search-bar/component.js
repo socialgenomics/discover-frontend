@@ -101,8 +101,9 @@ export default Component.extend({
 
         if (ENTIRE_QUERY_DELETED) {
           get(this, 'queryService').setQueryTree(null);
-          fetchSuggestionsTask.cancelAll();
+          set(dropdown, 'loading', false);
           this._clearResults(dropdown);
+          fetchSuggestionsTask.cancelAll();
         } else if (selectedText && queryString.indexOf(selectedText) === 0) {
           //Hack to prevent last letter in string from being deleted
           const newQuery = queryString.substring(selectedText.length) + '-';
