@@ -109,8 +109,12 @@ export default Component.extend({
           get(this, 'queryService').setQueryTree(QP.fromNatural(newQuery));
         } else if (WILL_REMOVE_FIRST_CHAR) {
           const newQuery = queryString.substring(1);
-          if (isBlank(newQuery)) { fetchSuggestionsTask.cancelAll(); }
           get(this, 'queryService').setQueryTree(QP.fromNatural(newQuery));
+          if (isBlank(newQuery)) {
+            set(dropdown, 'loading', false);
+            this._clearResults(dropdown);
+            fetchSuggestionsTask.cancelAll();
+          }
         }
       }
     },
