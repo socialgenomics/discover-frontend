@@ -43,8 +43,13 @@ describe('!T Integration | Component | search bar', function() {
     });
   });
 
-  it('renders', function() {
-    // Set any properties with this.set('myProperty', 'value');
-    // Handle any actions with this.on('myAction', function(val) { ... });
+  describe('Loading state', function() {
+    it('should display a loading spinner when text is entered', function() {
+      clickTrigger();
+      typeInSearch('D');
+      const $loadingSpinner = $('.c-search-bar-loading').children().eq(0);
+      expect($loadingSpinner.prop('tagName').toLowerCase()).to.eql('i');
+      expect($loadingSpinner.hasClass('fa-circle-o-notch')).to.be.true;
+    });
   });
 });
