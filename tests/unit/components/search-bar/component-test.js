@@ -13,6 +13,21 @@ describe('!T Unit | Component | search bar', function() {
     unit: true
   });
 
+  describe('predicatedOptions', function() {
+    it('returns correctly filtered objects', function() {
+      const component = this.subject();
+
+      component.set('queryString', 'is');
+
+      const result = component.get('predicateOptions');
+      const expected = [
+        { name: 'Disease', example: '(e.g. Myeloma)' },
+        { name: 'Tissue', example: '(e.g. Blood)' }
+      ];
+      expect(result).to.eql(expected);
+    });
+  });
+
   describe('_handleAutocompleteSuccess', function() {
     describe('when the response has keys', function() {
       it('returns a list of grouped suggestions', function() {
