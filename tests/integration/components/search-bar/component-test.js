@@ -8,7 +8,7 @@ import { typeInSearch, clickTrigger } from '../../../helpers/ember-power-select'
 
 const { $ } = Ember;
 
-describe('!T Integration | Component | search bar', function() {
+describe('Integration | Component | search bar', function() {
   setupComponentTest('search-bar', {
     integration: true
   });
