@@ -12,8 +12,11 @@ const { assign } = Ember;
  * @return {node} The current node
  */
 export function getCurrentNode(queryArray, caretPosition) {
-  const treeWithPositions = QP.decorateTreeWithNaturalPositions(queryArray);
-  return QP.filter(treeWithPositions, n => n.from <= caretPosition - 1 && n.to >= caretPosition - 1)[0];
+  const toRet = queryArray
+    .filter(n => n.position.from <= caretPosition - 1 && n.position.to >= caretPosition - 1[0]);
+  debugger;
+  return toRet;
+  // return QP.filter(treeWithPositions, n => n.from <= caretPosition - 1 && n.to >= caretPosition - 1)[0];
 }
 
 /**
@@ -48,13 +51,17 @@ export function toNatural(queryArray) {
 }
 
 export function createPredicate(props) {
+  const value = props.value.indexOf(' ') >= 0
+    ? createQuotedPhrase(props.value, props.startPos)
+    : createToken(props.value, props.startPos);
+
   return {
     id: uuid(),
     type: 'predicate',
     position: getPredicatePosition(props.startPos, props.target, props.value),
-    target: props.target,
-    relation: 'equals',
-    value: props.value
+    target: createToken(props.target, props.startPos),
+    relation: createRelation('eq', props.startPos),
+    value
   }
 }
 
@@ -62,7 +69,39 @@ export function isPredicate(node) {
   return node.type === 'predicate';
 }
 
+function createRelation(value, startPos) {
+  return {
+    id: uuid(),
+    position: getPosition(startPos, value),
+    text: '',
+    value
+  }
+}
+
+function createToken(text, startPos) {
+  return {
+    id: uuid(),
+    type: 'token',
+    position: getPosition(startPos, text),
+    text
+  }
+}
+
+function createQuotedPhrase(text, startPos) {
+  return {
+    id: uuid(),
+    type: 'quoted_phrase',
+    position: getPosition(startPos, text),
+    text: `"${text}"`
+  }
+}
+
 function getPredicatePosition(from = 0, target, value) {
   const to = from + target.length + 1 + value.length;
+  return { from, to };
+}
+
+function getPosition(from = 0, value) {
+  const to = from + value.length;
   return { from, to };
 }

@@ -161,7 +161,7 @@ export default Component.extend({
 
     const DEBOUNCE_MS = 500;
     const caretPosition = this._getCaretPosition();
-    const queryTree = QP.fromNatural(queryString);
+    const queryTree = QP.fromPhrase(queryString);
     const currentNode = getCurrentNode(queryTree, caretPosition);
 
     if (currentNode) {
