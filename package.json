@@ -21,7 +21,7 @@
   "author": "repositive.io",
   "license": "MIT",
   "devDependencies": {
-    "@repositive/query-parser": "2.1.0",
+    "@repositive/query-parser": "2.3.1",
     "@repositive/ui-library": "0.0.x",
     "broccoli-asset-rev": "^2.4.5",
     "d3": "4.10.0",
