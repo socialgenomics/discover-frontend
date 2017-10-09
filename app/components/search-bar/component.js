@@ -5,7 +5,7 @@ import { task, timeout } from 'ember-concurrency';
 import ENV from 'repositive/config/environment';
 import { getRandomElement } from 'repositive/utils/arrays';
 import { nameForKeyCode } from 'repositive/utils/key-codes';
-import { getCurrentNode, constructAutoCompleteTree, toNatural } from 'repositive/utils/query-array';
+import { getCurrentNode, constructAutoCompleteArray, toNatural } from 'repositive/utils/query-array';
 import { placeholderValues } from './placeholders';
 import { predicates } from './predicates';
 
@@ -161,13 +161,14 @@ export default Component.extend({
 
     const DEBOUNCE_MS = 500;
     const caretPosition = this._getCaretPosition();
-    const queryTree = QP.fromPhrase(queryString);
-    const currentNode = getCurrentNode(queryTree, caretPosition);
+    const queryArray = QP.fromPhrase(queryString);
+    const currentNode = getCurrentNode(queryArray, caretPosition);
 
     if (currentNode) {
-      const newTree = constructAutoCompleteTree(queryTree, currentNode);
+      //TODO currently up to here! Refactor this method to return array not obj.
+      const newQueryArray = constructAutoCompleteArray(queryArray, currentNode);
       const requestData = {
-        tree: newTree,
+        tree: newQueryArray,
         limit: 3
       };
       const requestOptions = {
@@ -176,7 +177,7 @@ export default Component.extend({
         data: JSON.stringify(requestData)
       };
 
-      get(this, 'queryService').setQueryTree(newTree);
+      get(this, 'queryService').setQueryArray(newQueryArray);
 
       yield timeout(DEBOUNCE_MS);
 

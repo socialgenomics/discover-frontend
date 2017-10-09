@@ -19,16 +19,15 @@ export default Mixin.create({
     return QP;
   }),
 
+  // NOTE: same logic as getActiveFilters in search mixin
   activeFilters: computed('query', function () {
     const query = get(this, 'query');
     if (query) {
       const qp = get(this, 'QP');
       const queryArray = qp.fromPhrase(query);
-      const toReturn = queryArray
+      return queryArray
         .filter(node => isPredicate(node))
-        .map(filter => `${filter.target}:${filter.value}`);
-      debugger;
-      return toReturn;
+        .map(filter => `${filter.target.text}:${filter.value.text}`);
     }
     return [];
   }),
@@ -80,16 +79,16 @@ export default Mixin.create({
   _toggleFilter(action, filter) {
     const qp = get(this, 'QP');
     const query = get(this, 'query');
-    const currentQueryTree = qp.fromPhrase(query || '');
+    const currentQueryArray = qp.fromPhrase(query || '');
     debugger;
     if (action === 'remove') {
-      const toRemove = qp.filter(currentQueryTree, node => node.value === filter.value && node.key === filter.key)[0];
+      const toRemove = qp.filter(currentQueryArray, node => node.value === filter.value && node.key === filter.key)[0];
       set(this, 'query', qp.toNatural(
-        qp.remove(currentQueryTree, toRemove)
+        qp.remove(currentQueryArray, toRemove)
       ));
     } else if (action === 'add') {
       set(this, 'query', qp.toNatural(
-        currentQueryTree ? qp.and({left: currentQueryTree, right: filter}) : filter
+        currentQueryArray ? qp.and({left: currentQueryArray, right: filter}) : filter
       ));
     }
 

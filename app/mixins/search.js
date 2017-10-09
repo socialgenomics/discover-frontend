@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import QP from 'npm:@repositive/query-parser';
 import ENV from 'repositive/config/environment';
+import { isPredicate } from 'repositive/utils/query-array';
 
 const { Mixin, inject: { service }, get, set, setProperties, computed } = Ember;
 
@@ -53,14 +54,13 @@ export default Mixin.create({
     }
   },
 
+  // NOTE: same logic as activeFilters computed prop in search-controller mixin
   getActiveFilters() {
     const QP = get(this, 'QP');
-    const queryTree = QP.fromPhrase(get(this, 'query'));
-    debugger;
-    const toReturn = QP
-      .filter(queryTree, node => QP.isPredicate(node))
-      .map(f => `${f.predicate}:${f.text}`);
-    return toReturn;
+    const queryArray = QP.fromPhrase(get(this, 'query'));
+    return queryArray
+      .filter(node => isPredicate(node))
+      .map(f => `${f.target.text}:${f.value.text}`);
   },
 
   makeRequest(params) {

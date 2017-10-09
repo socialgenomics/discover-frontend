@@ -1,9 +1,10 @@
 import QP from 'npm:@repositive/query-parser';
-import { v4 as uuid } from 'npm:uuid';
+import v4 from 'npm:uuid/v4';
 
 import Ember from 'ember';
 
 const { assign } = Ember;
+const uuid = v4;
 
 /**
  * getCurrentNode - Returns the node which this user is editting
@@ -12,11 +13,8 @@ const { assign } = Ember;
  * @return {node} The current node
  */
 export function getCurrentNode(queryArray, caretPosition) {
-  const toRet = queryArray
-    .filter(n => n.position.from <= caretPosition - 1 && n.position.to >= caretPosition - 1[0]);
-  debugger;
-  return toRet;
-  // return QP.filter(treeWithPositions, n => n.from <= caretPosition - 1 && n.to >= caretPosition - 1)[0];
+  return queryArray
+    .filter(n => n.position.from <= caretPosition - 1 && n.position.to >= caretPosition - 1)[0];
 }
 
 /**
@@ -38,7 +36,7 @@ export function constructAutoCompleteArray(queryArray, currentNode) {
 
 export function toNatural(queryArray) {
   if (queryArray === null) { return ''; }
-
+  debugger;
   return queryArray
     .reduce((accStr, cur) => {
       if (cur.type === 'phrase' || cur.type === 'quoted_phrase') {
