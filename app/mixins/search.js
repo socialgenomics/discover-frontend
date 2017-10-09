@@ -55,8 +55,12 @@ export default Mixin.create({
 
   getActiveFilters() {
     const QP = get(this, 'QP');
-    const queryTree = QP.fromNatural(get(this, 'query'));
-    return QP.filter(queryTree, (node) => QP.isPredicate(node)).map(f => `${f.predicate}:${f.text}`);
+    const queryTree = QP.fromPhrase(get(this, 'query'));
+    debugger;
+    const toReturn = QP
+      .filter(queryTree, node => QP.isPredicate(node))
+      .map(f => `${f.predicate}:${f.text}`);
+    return toReturn;
   },
 
   makeRequest(params) {
@@ -66,7 +70,8 @@ export default Mixin.create({
       params.resultsPerPage || maxResultsPerPage;
     const offset = (params.page - 1) * limit;
     const query = params.query || '';
-    const body = query === '' ? {} : get(this, 'QP').fromNatural(query);
+    const body = query === '' ? {} : get(this, 'QP').fromPhrase(query);
+    debugger;
     const requestOptions = {
       method: 'POST',
       contentType: 'application/json',
@@ -87,9 +92,9 @@ export default Mixin.create({
     const QP = get(this, 'QP');
     const qS = get(this, 'queryService');
     if (queryString) {
-      qS.setQueryTree(QP.fromNatural(queryString));
+      qS.setQueryArray(QP.fromPhrase(queryString));
     } else {
-      qS.setQueryTree(null);
+      qS.setQueryArray(null);
     }
   },
 

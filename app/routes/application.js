@@ -85,6 +85,7 @@ export default Route.extend(ApplicationRouteMixin, {
     } else if (datasourcePredicate.length === 1 && get(this, 'controller.currentPath').indexOf('datasource') !== -1) {
       this._queryAndTransition('datasources.source', datasourcePredicate[0], queryString, pageNumber);
     } else {
+      debugger;
       this.transitionTo('datasets.search', {
         queryParams: {
           query: queryString,

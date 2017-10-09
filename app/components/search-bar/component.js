@@ -5,7 +5,7 @@ import { task, timeout } from 'ember-concurrency';
 import ENV from 'repositive/config/environment';
 import { getRandomElement } from 'repositive/utils/arrays';
 import { nameForKeyCode } from 'repositive/utils/key-codes';
-import { getCurrentNode, constructAutoCompleteTree } from 'repositive/utils/query-tree';
+import { getCurrentNode, constructAutoCompleteTree, toNatural } from 'repositive/utils/query-array';
 import { placeholderValues } from './placeholders';
 import { predicates } from './predicates';
 
@@ -30,12 +30,12 @@ export default Component.extend({
       .filter(predicate => predicate.name.toLowerCase().includes(queryString.toLowerCase()));
   }),
 
-  queryTree: computed('queryService.queryTree', function() {
-    return get(this, 'queryService').getQueryTree();
+  queryArray: computed('queryService.queryArray', function() {
+    return get(this, 'queryService').getQueryArray();
   }),
 
-  queryString: computed('queryTree', function() {
-    return QP.toNatural(get(this, 'queryTree'));
+  queryString: computed('queryArray', function() {
+    return toNatural(get(this, 'queryArray'));
   }),
 
   // Only used by dropdown child components.

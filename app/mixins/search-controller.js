@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import QP from 'npm:@repositive/query-parser';
+import { createPredicate, isPredicate } from 'repositive/utils/query-array';
 
 const { Mixin, computed, get, set, setProperties } = Ember;
 
@@ -22,8 +23,12 @@ export default Mixin.create({
     const query = get(this, 'query');
     if (query) {
       const qp = get(this, 'QP');
-      const queryTree = qp.fromNatural(query);
-      return qp.filter(queryTree, node => qp.isPredicate(node)).map(filter => `${filter.key}:${filter.value}`);
+      const queryArray = qp.fromPhrase(query);
+      const toReturn = queryArray
+        .filter(node => isPredicate(node))
+        .map(filter => `${filter.target}:${filter.value}`);
+      debugger;
+      return toReturn;
     }
     return [];
   }),
@@ -44,12 +49,12 @@ export default Mixin.create({
     },
 
     addFilter(predicate, text) {
-      const filter = get(this, 'QP').predicate({key: predicate,  value: text});
+      const filter = createPredicate({target: predicate,  value: text});
       this._toggleFilter('add', filter);
     },
 
     removeFilter(predicate, text) {
-      const filter = get(this, 'QP').predicate({key: predicate, value: text});
+      const filter = createPredicate({target: predicate, value: text});
       this._toggleFilter('remove', filter);
     },
 
@@ -75,7 +80,8 @@ export default Mixin.create({
   _toggleFilter(action, filter) {
     const qp = get(this, 'QP');
     const query = get(this, 'query');
-    const currentQueryTree = qp.fromNatural(query || '');
+    const currentQueryTree = qp.fromPhrase(query || '');
+    debugger;
     if (action === 'remove') {
       const toRemove = qp.filter(currentQueryTree, node => node.value === filter.value && node.key === filter.key)[0];
       set(this, 'query', qp.toNatural(
