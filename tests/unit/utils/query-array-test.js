@@ -27,6 +27,18 @@ describe('query-array module', function() {
       });
     });
 
+    describe('when passed a quoted phrase', function() {
+      const quotedQuery = QP.fromPhrase('"lung cancer"');
+
+      it('should return the same array', function() {
+        const currentNode = quotedQuery[0];
+        const caretPos = 1;
+        const result = constructAutoCompleteArray(quotedQuery, currentNode, caretPos);
+
+        expect(result).to.eql(quotedQuery);
+      });
+    });
+
     describe('when passed a predicate', function() {
       const predicateQuery = QP.fromPhrase('disease:lung');
 
