@@ -5,10 +5,13 @@ import { constructAutoCompleteArray, getCurrentNode } from 'repositive/utils/que
 
 describe('query-array module', function() {
   const queryArray = QP.fromPhrase('lung cancer');
+  const queryArray2 = QP.fromPhrase('lung disease:cancer');
 
   describe('getCurrentNode', function() {
     it('returns the current node', function() {
-      expect(getCurrentNode(queryArray, 1).value).to.eql('lung');
+      expect(getCurrentNode(queryArray, 1).text).to.eql('lung');
+      expect(getCurrentNode(queryArray, 7).text).to.eql('cancer');
+      expect(getCurrentNode(queryArray2, 7).text).to.eql('disease:cancer');
     });
 
     it('returns undefined when there is no node in that location', function() {
