@@ -14,17 +14,18 @@ export function getCurrentNode(array, caretPosition) {
 }
 
 /**
- * constructAutoCompleteArray - Update the query array with new autocomplete node
- * @param {node?} queryArray - The existing array
- * @param {node} currentNode - The node being edited
- * @return {node} New array to send to suggestion endpoint
+ * constructAutoCompleteArray - Adds autocomplete prop to current token.
+ * @param {Array} queryArray - The existing array
+ * @param {Object} currentObject - The object being edited
+ * @param {number} caretPosition - The position of the caret in the search bar
+ * @return {Array} New array to send to suggestion endpoint
  */
-export function constructAutoCompleteArray(queryArray, currentNode, caretPosition) {
+export function constructAutoCompleteArray(queryArray, currentObject, caretPosition) {
   // In the queryArray find the current node
   // Replace it with the same node but with an autocomplete flag on the token touching the caret
-  return  queryArray
+  return queryArray
     .reduce((acc, cur) => {
-      if (cur.id === currentNode.id && cur.type === 'phrase') {
+      if (cur.id === currentObject.id && cur.type === 'phrase') {
         const currentToken = getCurrentNode(cur.tokens, caretPosition);
         const autocompleteToken = Object.assign(
           { autocomplete: true },
@@ -36,7 +37,8 @@ export function constructAutoCompleteArray(queryArray, currentNode, caretPositio
           }
           return [...tokens, token];
         }, []);
-        cur.tokens = newTokens; //TODO: Refactor mutation
+        const modifiedPhrase = Object.assign({}, cur, { tokens: newTokens});
+        return [...acc, modifiedPhrase];
       }
       return [...acc, cur];
     }, []);

@@ -17,12 +17,26 @@ describe('query-array module', function() {
   });
 
   describe('!T constructAutoCompleteTree', function() {
-    it('returns a tree with a node containing autocomplete prop', function() {
-      const currentNode = queryArray.right;
-      const result = constructAutoCompleteArray(queryArray, currentNode);
+    describe('when passed a single phrase', function() {
+      it('returns an array with a node containing a token with autocomplete:true', function() {
+        const currentNode = queryArray[0];
+        const caretPos = 1;
+        const result = constructAutoCompleteArray(queryArray, currentNode, caretPos);
 
-      expect(result.right.autocomplete).to.be.true;
+        expect(result[0].tokens[0].autocomplete).to.be.true;
+      });
+    });
+
+    describe('when passed a predicate', function() {
+      const predicateQuery = QP.fromPhrase('disease:lung');
+
+      it('should return the same array', function() {
+        const currentNode = predicateQuery[0];
+        const caretPos = 1;
+        const result = constructAutoCompleteArray(predicateQuery, currentNode, caretPos);
+
+        expect(result).to.eql(predicateQuery);
+      });
     });
   });
-})
-
+});
