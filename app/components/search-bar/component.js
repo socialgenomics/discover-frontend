@@ -165,7 +165,6 @@ export default Component.extend({
     const currentNode = getCurrentNode(queryArray, caretPosition);
 
     if (currentNode) {
-      //TODO currently up to here! Refactor this method to return array not obj.
       const newQueryArray = constructAutoCompleteArray(queryArray, currentNode, caretPosition);
       const requestData = {
         tree: newQueryArray,
