@@ -8,8 +8,8 @@ const uuid = v4;
  * @param {number} caretPosition - The position of the caret in search input
  * @return {node} The current node
  */
-export function getCurrentNode(queryArray, caretPosition) {
-  return queryArray
+export function getCurrentNode(array, caretPosition) {
+  return array
     .filter(n => n.position.from <= caretPosition - 1 && n.position.to >= caretPosition - 1)[0];
 }
 
@@ -19,12 +19,27 @@ export function getCurrentNode(queryArray, caretPosition) {
  * @param {node} currentNode - The node being edited
  * @return {node} New array to send to suggestion endpoint
  */
-export function constructAutoCompleteArray(queryArray, currentNode) {
-  // NOTE: Should also pass caret position to this function to target specific token.
+export function constructAutoCompleteArray(queryArray, currentNode, caretPosition) {
   // In the queryArray find the current node
-  // Replace it with the same node but with a autocomplete flag the token touching the caret
-
-  debugger;
+  // Replace it with the same node but with an autocomplete flag on the token touching the caret
+  return  queryArray
+    .reduce((acc, cur) => {
+      if (cur.id === currentNode.id && cur.type === 'phrase') {
+        const currentToken = getCurrentNode(cur.tokens, caretPosition);
+        const autocompleteToken = Object.assign(
+          { autocomplete: true },
+          currentToken
+        );
+        const newTokens = cur.tokens.reduce((tokens, token) => {
+          if (token.id === autocompleteToken.id) {
+            return [...tokens, autocompleteToken];
+          }
+          return [...tokens, token];
+        }, []);
+        cur.tokens = newTokens; //TODO: Refactor mutation
+      }
+      return [...acc, cur];
+    }, []);
 }
 
 export function toNatural(queryArray) {

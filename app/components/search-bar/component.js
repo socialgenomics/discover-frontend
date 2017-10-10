@@ -166,7 +166,7 @@ export default Component.extend({
 
     if (currentNode) {
       //TODO currently up to here! Refactor this method to return array not obj.
-      const newQueryArray = constructAutoCompleteArray(queryArray, currentNode);
+      const newQueryArray = constructAutoCompleteArray(queryArray, currentNode, caretPosition);
       const requestData = {
         tree: newQueryArray,
         limit: 3
