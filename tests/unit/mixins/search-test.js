@@ -9,7 +9,7 @@ import ENV from 'repositive/config/environment';
 describe('Unit | Mixin | search', function() {
   const { set, get, Service, RSVP, getOwner, setProperties } = Ember;
   const query = 'lorem ipsum';
-  const fromNaturalVal = { lorem: 'ipsum' };
+  const fromPhraseVal = [{ lorem: 'ipsum' }];
   const filterVal = [{ predicate: 'a', text: 'A' }, { predicate: 'b', text: 'B' }, { predicate: 'c', text: 'C' }];
   const toNaturalVal = 'queryBoolString';
   const aggs = {
@@ -20,7 +20,7 @@ describe('Unit | Mixin | search', function() {
     request: sinon.stub().returns(RSVP.resolve('response'))
   });
   const queryServiceStub = Service.extend({
-    setQueryTree: sinon.spy()
+    setQueryArray: sinon.spy()
   });
   const storeServiceStub = Service.extend({
     push: sinon.stub().returnsArg(0),
@@ -30,9 +30,9 @@ describe('Unit | Mixin | search', function() {
   let mixinObjInstance;
 
 
-  function createQPMock(fromNaturalVal = '', filterVal = [], toNaturalVal = '') {
+  function createQPMock(fromPhraseVal = '', filterVal = [], toNaturalVal = '') {
     return {
-      fromNatural: sinon.stub().returns(fromNaturalVal),
+      fromPhrase: sinon.stub().returns(fromPhraseVal),
       filter: sinon.stub().returns(filterVal),
       toNatural: sinon.stub().returns(toNaturalVal)
     };
@@ -58,11 +58,11 @@ describe('Unit | Mixin | search', function() {
     mixinObjInstance = this.subject();
 
     get(mixinObjInstance, 'ajax.request').reset();
-    get(mixinObjInstance, 'queryService.setQueryTree').reset();
+    get(mixinObjInstance, 'queryService.setQueryArray').reset();
 
     setProperties(mixinObjInstance, {
       query: 'test',
-      QP: createQPMock(fromNaturalVal, filterVal, toNaturalVal)
+      QP: createQPMock(fromPhraseVal, filterVal, toNaturalVal)
     });
   });
 
@@ -110,18 +110,18 @@ describe('Unit | Mixin | search', function() {
   describe('getActiveFilters', function () {
     const method = this.title;
 
-    it('should call QP.fromNatural with query', function () {
+    it('should call QP.fromPhrase with query', function () {
       mixinObjInstance[method]();
 
-      expect(get(mixinObjInstance, 'QP').fromNatural.calledOnce).to.be.true;
-      expect(get(mixinObjInstance, 'QP').fromNatural.calledWith(get(mixinObjInstance, 'query'))).to.be.true;
+      expect(get(mixinObjInstance, 'QP').fromPhrase.calledOnce).to.be.true;
+      expect(get(mixinObjInstance, 'QP').fromPhrase.calledWith(get(mixinObjInstance, 'query'))).to.be.true;
     });
 
     it('should call QP.filter with queryTree', function () {
       mixinObjInstance[method]();
 
       expect(get(mixinObjInstance, 'QP').filter.calledOnce).to.be.true;
-      expect(get(mixinObjInstance, 'QP').filter.calledWith(fromNaturalVal)).to.be.true;
+      expect(get(mixinObjInstance, 'QP').filter.calledWith(fromPhraseVal)).to.be.true;
     });
 
     it('should return correct value', function () {
@@ -183,11 +183,11 @@ describe('Unit | Mixin | search', function() {
       mixinObjInstance[method]({ page, query });
 
       expect(
-        get(mixinObjInstance, 'QP').fromNatural.calledWith(query)
+        get(mixinObjInstance, 'QP').fromPhrase.calledWith(query)
       ).to.be.true;
       expect(
         JSON.parse(get(mixinObjInstance, 'ajax.request').args[0][1].data).body
-      ).to.be.eql(fromNaturalVal);
+      ).to.be.eql(fromPhraseVal);
     });
   });
 
@@ -199,13 +199,13 @@ describe('Unit | Mixin | search', function() {
 
       mixinObjInstance[method](query);
 
-      expect(QP.fromNatural.calledWith(query)).to.be.true;
+      expect(QP.fromPhrase.calledWith(query)).to.be.true;
     });
 
     it('should set query service value to null', function () {
       mixinObjInstance[method]();
 
-      expect(get(mixinObjInstance, 'queryService').setQueryTree.calledWith(null)).to.be.true;
+      expect(get(mixinObjInstance, 'queryService').setQueryArray.calledWith(null)).to.be.true;
     });
   });
 
