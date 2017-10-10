@@ -16,7 +16,7 @@ describe('query-array module', function() {
     });
   });
 
-  describe('constructAutoCompleteTree', function() {
+  describe('!T constructAutoCompleteTree', function() {
     it('returns a tree with a node containing autocomplete prop', function() {
       const currentNode = queryArray.right;
       const result = constructAutoCompleteArray(queryArray, currentNode);
