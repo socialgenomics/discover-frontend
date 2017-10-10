@@ -58,8 +58,9 @@ export default Mixin.create({
   getActiveFilters() {
     const QP = get(this, 'QP');
     const queryArray = QP.fromPhrase(get(this, 'query'));
-    return QP.filter(queryArray, node => isPredicate(node))
-      .map(f => `${f.predicate}:${f.text}`);
+    return queryArray
+      .filter(node => isPredicate(node))
+      .map(f => `${f.target.text}:${f.value.text}`);
   },
 
   makeRequest(params) {

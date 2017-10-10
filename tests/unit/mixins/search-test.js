@@ -9,7 +9,30 @@ import ENV from 'repositive/config/environment';
 describe('Unit | Mixin | search', function() {
   const { set, get, Service, RSVP, getOwner, setProperties } = Ember;
   const query = 'lorem ipsum';
-  const fromPhraseVal = [{ lorem: 'ipsum' }];
+  const fromPhraseVal = [
+    {
+      type: 'phrase',
+      tokens: [],
+      text: 'foo bar',
+    },
+    {
+      type: 'predicate',
+      target: {
+        type: 'token',
+        text: 'baz',
+      },
+      relation: {
+        type: 'relation',
+        text: '',
+        value: 'eq',
+      },
+      value: {
+        type: 'token',
+        text: 'foobar',
+      },
+      text: 'baz:foobar',
+    },
+  ];
   const filterVal = [{ predicate: 'a', text: 'A' }, { predicate: 'b', text: 'B' }, { predicate: 'c', text: 'C' }];
   const toNaturalVal = 'queryBoolString';
   const aggs = {
@@ -110,22 +133,8 @@ describe('Unit | Mixin | search', function() {
   describe('getActiveFilters', function () {
     const method = this.title;
 
-    it('should call QP.fromPhrase with query', function () {
-      mixinObjInstance[method]();
-
-      expect(get(mixinObjInstance, 'QP').fromPhrase.calledOnce).to.be.true;
-      expect(get(mixinObjInstance, 'QP').fromPhrase.calledWith(get(mixinObjInstance, 'query'))).to.be.true;
-    });
-
-    it('should call QP.filter with queryTree', function () {
-      mixinObjInstance[method]();
-
-      expect(get(mixinObjInstance, 'QP').filter.calledOnce).to.be.true;
-      expect(get(mixinObjInstance, 'QP').filter.calledWith(fromPhraseVal)).to.be.true;
-    });
-
     it('should return correct value', function () {
-      expect(mixinObjInstance[method]()).to.be.deep.equal(['a:A', 'b:B', 'c:C']);
+      expect(mixinObjInstance[method]()).to.be.deep.equal(['baz:foobar']);
     });
   });
 
