@@ -18,10 +18,10 @@ export function getCurrentNode(queryArray, caretPosition) {
   return lastValue;
 }
 
-function findByPosition(queryArray, caretPosition) {
+function findByPosition(array, caretPosition) {
   const caretIndex = caretPosition - 1;
 
-  return queryArray.find(n => n.position.from <= caretIndex && caretIndex <= n.position.to);
+  return array.find(n => n.position.from <= caretIndex && caretIndex <= n.position.to);
 }
 
 /**
