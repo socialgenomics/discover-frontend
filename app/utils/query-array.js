@@ -34,8 +34,10 @@ export function constructAutoCompleteArray(queryArray, caretPosition) {
   const currentObject = findByPosition(queryArray, caretPosition);
 
   if (currentObject.type == 'phrase') {
-    const modifiedCurrentPhrase =  annotatePhraseAutocompletion(currentObject, caretPosition);
-    return replace(queryArray, modifiedCurrentPhrase);
+    return replace(
+      queryArray,
+      annotatePhraseAutocompletion(currentObject, caretPosition)
+    );
   }
 
   return queryArray;
@@ -99,7 +101,7 @@ export function createPredicate(props) {
   return {
     id: uuid(),
     type: 'predicate',
-    position: getPredicatePosition(props.startPos, props.target, props.value),
+    position: createPredicatePosition(props.startPos, props.target, props.value),
     target: createToken(props.target, props.startPos),
     relation: createRelation('eq', props.startPos),
     value
@@ -113,7 +115,7 @@ export function isPredicate(node) {
 function createRelation(value, startPos) {
   return {
     id: uuid(),
-    position: getPosition(startPos, value),
+    position: createPosition(startPos, value),
     text: '',
     value
   }
@@ -123,7 +125,7 @@ function createToken(text, startPos) {
   return {
     id: uuid(),
     type: 'token',
-    position: getPosition(startPos, text),
+    position: createPosition(startPos, text),
     text
   }
 }
@@ -132,17 +134,17 @@ function createQuotedPhrase(text, startPos) {
   return {
     id: uuid(),
     type: 'quoted_phrase',
-    position: getPosition(startPos, text),
+    position: createPosition(startPos, text),
     text: `"${text}"`
   }
 }
 
-function getPredicatePosition(from = 0, target, value) {
+function createPredicatePosition(from = 0, target, value) {
   const to = from + target.length + 1 + value.length;
   return { from, to };
 }
 
-function getPosition(from = 0, value) {
+function createPosition(from = 0, value) {
   const to = from + value.length;
   return { from, to };
 }
