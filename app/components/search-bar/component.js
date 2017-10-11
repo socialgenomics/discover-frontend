@@ -100,17 +100,17 @@ export default Component.extend({
           (keyName === 'Delete' && caretPosition === 0 && !selectedText);
 
         if (ENTIRE_QUERY_DELETED) {
-          get(this, 'queryService').setQueryTree(null);
+          get(this, 'queryService').setQueryArray(null);
           set(dropdown, 'loading', false);
           this._clearResults(dropdown);
           fetchSuggestionsTask.cancelAll();
         } else if (selectedText && queryString.indexOf(selectedText) === 0) {
           //Hack to prevent last letter in string from being deleted
           const newQuery = queryString.substring(selectedText.length) + '-';
-          get(this, 'queryService').setQueryTree(QP.fromNatural(newQuery));
+          get(this, 'queryService').setQueryArray(QP.fromPhrase(newQuery));
         } else if (WILL_REMOVE_FIRST_CHAR) {
           const newQuery = queryString.substring(1);
-          get(this, 'queryService').setQueryTree(QP.fromNatural(newQuery));
+          get(this, 'queryService').setQueryArray(QP.fromPhrase(newQuery));
           if (isBlank(newQuery)) {
             set(dropdown, 'loading', false);
             this._clearResults(dropdown);
@@ -125,20 +125,37 @@ export default Component.extend({
     },
 
     handleSelection(selection, dropdown) {
-      const queryTree = get(this, 'queryTree');
+      console.log("SEL", selection, dropdown)
+      const queryArray = get(this, 'queryArray');
+
+      const overlaps = (item1, item2) => {
+        return item2.position.from <= item1.position.from && item1.position.from <= item2.position.to || item2.position.from <= item1.position.to && item1.position.to <= item2.position.to;
+      }
 
       if (selection) {
-        const predicate = QP.predicate({ key: selection.groupName, value: selection.suggestionText });
-        const caretPosition = this._getCaretPosition();
-        const currentNode = getCurrentNode(queryTree, caretPosition);
-
-        if (currentNode) {
-          const newQueryTree = QP.replace({ on: queryTree, target: currentNode, replacement: predicate });
-          get(this, 'queryService').setQueryTree(newQueryTree);
-        } else {
-          const newQueryTree = QP.and({left: predicate, right: queryTree});
-          get(this, 'queryService').setQueryTree(newQueryTree);
-        }
+        const newQueryArray = queryArray.map(item => {
+          console.log("ITEM", item);
+          if (item.tokens && overlaps(item, selection)) {
+            let newTokens = [];
+            item.tokens.forEach(token => {
+              console.log("TOKEN", token);
+              if (overlaps(token, selection)) {
+                console.log("OVERLAP", token, selection);
+                console.log("PHRASE", QP.fromPhrase(selection.text));
+                newTokens.concat(QP.fromPhrase(selection.text)[0].tokens);
+                console.log("NEW TOKENS", newTokens);
+              } else {
+                newTokens.push(token);
+                console.log("NEW TOKENS", newTokens);
+              }
+            });
+            return Object.assign({}, item, { tokens: newTokens });
+          } else {
+            return item;
+          }
+        });
+        console.log("NEW", newQueryArray);
+        get(this, 'queryService').setQueryArray(newQueryArray);
       }
       this._clearResults(dropdown);
       this.send('search');
@@ -166,7 +183,7 @@ export default Component.extend({
 
     if (newQueryArray) {
       const requestData = {
-        tree: newQueryArray,
+        query: newQueryArray,
         limit: 3
       };
       const requestOptions = {
@@ -202,22 +219,7 @@ export default Component.extend({
    * @return {Array} Suggestion objects
    */
   _handleAutocompleteSuccess(resp) {
-    const suggestionKeys = Object.keys(resp) || [];
-
-    return suggestionKeys
-      .reduce((acc, groupName) => {
-        const suggestions = resp[groupName];
-
-        if (suggestions.length > 0) {
-          const options = suggestions.map(suggestionText => {
-            return { groupName, suggestionText };
-          });
-
-          return [...acc, ...[{ groupName: groupName.capitalize(), options }]];
-        }
-
-        return acc;
-      }, []);
+    return resp.suggestions || [];
   },
 
   /**
