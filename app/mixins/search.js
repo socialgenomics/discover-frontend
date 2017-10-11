@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import QP from 'npm:@repositive/query-parser';
 import ENV from 'repositive/config/environment';
+import { isPredicate } from 'repositive/utils/query-array';
 
 const { Mixin, inject: { service }, get, set, setProperties, computed } = Ember;
 
@@ -53,10 +54,13 @@ export default Mixin.create({
     }
   },
 
+  // NOTE: same logic as activeFilters computed prop in search-controller mixin
   getActiveFilters() {
     const QP = get(this, 'QP');
-    const queryTree = QP.fromNatural(get(this, 'query'));
-    return QP.filter(queryTree, (node) => QP.isPredicate(node)).map(f => `${f.predicate}:${f.text}`);
+    const queryArray = QP.fromPhrase(get(this, 'query'));
+    return queryArray
+      .filter(node => isPredicate(node))
+      .map(f => `${f.target.text}:${f.value.text}`);
   },
 
   makeRequest(params) {
@@ -66,7 +70,7 @@ export default Mixin.create({
       params.resultsPerPage || maxResultsPerPage;
     const offset = (params.page - 1) * limit;
     const query = params.query || '';
-    const body = query === '' ? {} : get(this, 'QP').fromNatural(query);
+    const body = query === '' ? {} : get(this, 'QP').fromPhrase(query);
     const requestOptions = {
       method: 'POST',
       contentType: 'application/json',
@@ -87,9 +91,9 @@ export default Mixin.create({
     const QP = get(this, 'QP');
     const qS = get(this, 'queryService');
     if (queryString) {
-      qS.setQueryTree(QP.fromNatural(queryString));
+      qS.setQueryArray(QP.fromPhrase(queryString));
     } else {
-      qS.setQueryTree(null);
+      qS.setQueryArray(null);
     }
   },
 

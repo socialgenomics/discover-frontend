@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import QP from 'npm:@repositive/query-parser';
+import { createPredicate, isPredicate } from 'repositive/utils/query-array';
 
 const { Mixin, computed, get, set, setProperties } = Ember;
 
@@ -18,12 +19,15 @@ export default Mixin.create({
     return QP;
   }),
 
+  // NOTE: same logic as getActiveFilters in search mixin
   activeFilters: computed('query', function () {
     const query = get(this, 'query');
     if (query) {
       const qp = get(this, 'QP');
-      const queryTree = qp.fromNatural(query);
-      return qp.filter(queryTree, node => qp.isPredicate(node)).map(filter => `${filter.key}:${filter.value}`);
+      const queryArray = qp.fromPhrase(query);
+      return queryArray
+        .filter(node => isPredicate(node))
+        .map(filter => `${filter.target.text}:${filter.value.text}`);
     }
     return [];
   }),
@@ -44,12 +48,12 @@ export default Mixin.create({
     },
 
     addFilter(predicate, text) {
-      const filter = get(this, 'QP').predicate({key: predicate,  value: text});
+      const filter = createPredicate({target: predicate,  value: text});
       this._toggleFilter('add', filter);
     },
 
     removeFilter(predicate, text) {
-      const filter = get(this, 'QP').predicate({key: predicate, value: text});
+      const filter = createPredicate({target: predicate, value: text});
       this._toggleFilter('remove', filter);
     },
 
@@ -75,15 +79,15 @@ export default Mixin.create({
   _toggleFilter(action, filter) {
     const qp = get(this, 'QP');
     const query = get(this, 'query');
-    const currentQueryTree = qp.fromNatural(query || '');
+    const currentQueryArray = qp.fromPhrase(query || '');
     if (action === 'remove') {
-      const toRemove = qp.filter(currentQueryTree, node => node.value === filter.value && node.key === filter.key)[0];
+      const toRemove = qp.filter(currentQueryArray, node => node.value === filter.value && node.key === filter.key)[0];
       set(this, 'query', qp.toNatural(
-        qp.remove(currentQueryTree, toRemove)
+        qp.remove(currentQueryArray, toRemove)
       ));
     } else if (action === 'add') {
       set(this, 'query', qp.toNatural(
-        currentQueryTree ? qp.and({left: currentQueryTree, right: filter}) : filter
+        currentQueryArray ? qp.and({left: currentQueryArray, right: filter}) : filter
       ));
     }
 
