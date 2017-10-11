@@ -80,7 +80,6 @@ export default Mixin.create({
     const qp = get(this, 'QP');
     const query = get(this, 'query');
     const currentQueryArray = qp.fromPhrase(query || '');
-    debugger;
     if (action === 'remove') {
       const toRemove = qp.filter(currentQueryArray, node => node.value === filter.value && node.key === filter.key)[0];
       set(this, 'query', qp.toNatural(

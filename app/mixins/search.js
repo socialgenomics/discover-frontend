@@ -71,7 +71,6 @@ export default Mixin.create({
     const offset = (params.page - 1) * limit;
     const query = params.query || '';
     const body = query === '' ? {} : get(this, 'QP').fromPhrase(query);
-    debugger;
     const requestOptions = {
       method: 'POST',
       contentType: 'application/json',
