@@ -13,25 +13,25 @@ describe('Unit | Mixin | search', function() {
     {
       type: 'phrase',
       tokens: [],
-      text: 'foo bar',
+      text: 'foo bar'
     },
     {
       type: 'predicate',
       target: {
         type: 'token',
-        text: 'baz',
+        text: 'baz'
       },
       relation: {
         type: 'relation',
         text: '',
-        value: 'eq',
+        value: 'eq'
       },
       value: {
         type: 'token',
-        text: 'foobar',
+        text: 'foobar'
       },
-      text: 'baz:foobar',
-    },
+      text: 'baz:foobar'
+    }
   ];
   const filterVal = [{ predicate: 'a', text: 'A' }, { predicate: 'b', text: 'B' }, { predicate: 'c', text: 'C' }];
   const toNaturalVal = 'queryBoolString';
