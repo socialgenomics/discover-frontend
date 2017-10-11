@@ -8,9 +8,20 @@ const uuid = v4;
  * @param {number} caretPosition - The position of the caret in search input
  * @return {node} The current node
  */
-export function getCurrentNode(array, caretPosition) {
-  return array
-    .filter(n => n.position.from <= caretPosition - 1 && n.position.to >= caretPosition - 1)[0];
+export function getCurrentNode(queryArray, caretPosition) {
+  let lastValue = findByPosition(queryArray, caretPosition);
+
+  while (lastValue && lastValue.tokens) {
+    lastValue = findByPosition(lastValue.tokens, caretPosition);
+  }
+
+  return lastValue;
+}
+
+function findByPosition(array, caretPosition) {
+  const caretIndex = caretPosition - 1;
+
+  return array.find(n => n.position.from <= caretIndex && caretIndex <= n.position.to);
 }
 
 /**
