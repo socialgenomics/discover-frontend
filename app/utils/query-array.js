@@ -88,7 +88,7 @@ export function toNatural(queryArray) {
         return `${accStr} ${cur.text}`;
       }
       if (cur.type === 'predicate') {
-        return `${accStr} ${cur.target}:"${cur.value}"`;
+        return `${accStr} ${cur.target.text}:"${cur.value.text}"`;
       }
     }, '');
 }

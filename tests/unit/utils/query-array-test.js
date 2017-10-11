@@ -3,7 +3,7 @@ import { describe, it } from 'mocha';
 import QP from 'npm:@repositive/query-parser';
 import { constructAutoCompleteArray, getCurrentNode } from 'repositive/utils/query-array';
 
-describe('!T query-array module', function() {
+describe('query-array module', function() {
   const queryArray = QP.fromPhrase('lung cancer');
   const queryArray2 = QP.fromPhrase('lung disease:cancer');
 

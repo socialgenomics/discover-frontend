@@ -163,7 +163,7 @@ export default Component.extend({
     const caretPosition = this._getCaretPosition();
     const queryArray = QP.fromPhrase(queryString);
     const newQueryArray = constructAutoCompleteArray(queryArray, caretPosition);
-    
+
     if (newQueryArray) {
       const requestData = {
         tree: newQueryArray,
