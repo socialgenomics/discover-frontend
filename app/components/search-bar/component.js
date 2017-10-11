@@ -162,10 +162,9 @@ export default Component.extend({
     const DEBOUNCE_MS = 500;
     const caretPosition = this._getCaretPosition();
     const queryArray = QP.fromPhrase(queryString);
-    const currentNode = getCurrentNode(queryArray, caretPosition);
-
-    if (currentNode) {
-      const newQueryArray = constructAutoCompleteArray(queryArray, currentNode, caretPosition);
+    const newQueryArray = constructAutoCompleteArray(queryArray, caretPosition);
+    
+    if (newQueryArray) {
       const requestData = {
         tree: newQueryArray,
         limit: 3

@@ -27,32 +27,54 @@ function findByPosition(array, caretPosition) {
 /**
  * constructAutoCompleteArray - Adds autocomplete prop to current token.
  * @param {Array} queryArray - The existing array
- * @param {Object} currentObject - The object being edited
  * @param {number} caretPosition - The position of the caret in the search bar
  * @return {Array} New array to send to suggestion endpoint
  */
-export function constructAutoCompleteArray(queryArray, currentObject, caretPosition) {
-  // In the queryArray find the current node
-  // Replace it with the same node but with an autocomplete flag on the token touching the caret
-  return queryArray
-    .reduce((acc, cur) => {
-      if (cur.id === currentObject.id && cur.type === 'phrase') {
-        const currentToken = getCurrentNode(cur.tokens, caretPosition);
-        const autocompleteToken = Object.assign(
-          { autocomplete: true },
-          currentToken
-        );
-        const newTokens = cur.tokens.reduce((tokens, token) => {
-          if (token.id === autocompleteToken.id) {
-            return [...tokens, autocompleteToken];
-          }
-          return [...tokens, token];
-        }, []);
-        const modifiedPhrase = Object.assign({}, cur, { tokens: newTokens});
-        return [...acc, modifiedPhrase];
-      }
-      return [...acc, cur];
-    }, []);
+export function constructAutoCompleteArray(queryArray, caretPosition) {
+  const currentObject = findByPosition(queryArray, caretPosition);
+
+  if (currentObject.type == 'phrase') {
+    const modifiedCurrentPhrase =  annotatePhraseAutocompletion(currentObject, caretPosition);
+    return replace(queryArray, modifiedCurrentPhrase);
+  }
+
+  return queryArray;
+}
+
+function annotatePhraseAutocompletion(phrase, caretPosition) {
+  const caretIndex = caretPosition - 1;
+
+  const newTokens = phrase.tokens.map(item => {
+    if (item.position.from <= caretIndex && caretIndex <= item.position.to) {
+      return Object.assign({}, item, { autocomplete: true });
+    } else {
+      return item;
+    }
+  });
+
+  return Object.assign({}, phrase, { tokens: newTokens });
+}
+
+/* 
+  TODO: 
+  To make this more general, this could be refactored to take a 3rd argument: target.
+  If this argument is supplied the function will find the target object within
+  the array and replace it, rather than matching by id.
+*/
+/**
+ * replace - replaces the object by matching id
+ * @param {Array} array 
+ * @param {*} replacement 
+ * @return {Array}
+ */
+export function replace(array, replacement) {
+  return array.reduce((acc, cur) => {
+    if (cur.id === replacement.id) {
+      return [...acc, replacement];
+    }
+
+    return [...acc, cur];
+  }, []);
 }
 
 export function toNatural(queryArray) {
