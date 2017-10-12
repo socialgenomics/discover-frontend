@@ -19,7 +19,6 @@ const navigationData = [
       { target: 'help.searching-for-data', query: 'search-query', text: 'How do I search on Repositive?' },
       { target: 'help.searching-for-data', query: 'algorithm', text: 'How does the search algorithm work?' },
       { target: 'help.searching-for-data', query: 'effective', text: 'How can I build my search query to make it more effective?' },
-      { target: 'help.searching-for-data', query: 'boolean', text: 'What boolean operators can I use?' },
       { target: 'help.searching-for-data', query: 'filters', text: 'What do all those filters mean?' }
     ]
   },
