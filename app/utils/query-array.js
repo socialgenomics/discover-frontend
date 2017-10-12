@@ -1,4 +1,5 @@
 import v4 from 'npm:uuid/v4';
+import qp from 'npm:@repositive/query-parser';
 
 const uuid = v4;
 
@@ -57,16 +58,16 @@ function annotatePhraseAutocompletion(phrase, caretPosition) {
   return Object.assign({}, phrase, { tokens: newTokens });
 }
 
-/* 
-  TODO: 
+/*
+  TODO:
   To make this more general, this could be refactored to take a 3rd argument: target.
   If this argument is supplied the function will find the target object within
   the array and replace it, rather than matching by id.
 */
 /**
  * replace - replaces the object by matching id
- * @param {Array} array 
- * @param {*} replacement 
+ * @param {Array} array
+ * @param {*} replacement
  * @return {Array}
  */
 export function replace(array, replacement) {
@@ -80,17 +81,7 @@ export function replace(array, replacement) {
 }
 
 export function toNatural(queryArray) {
-  if (queryArray === null) { return ''; }
-
-  return queryArray
-    .reduce((accStr, cur) => {
-      if (cur.type === 'phrase' || cur.type === 'quoted_phrase') {
-        return `${accStr} ${cur.text}`;
-      }
-      if (cur.type === 'predicate') {
-        return `${accStr} ${cur.target.text}:"${cur.value.text}"`;
-      }
-    }, '');
+  return (queryArray || []).map(e => e.text).join(' ');
 }
 
 export function createPredicate(props) {
@@ -147,4 +138,11 @@ function createPredicatePosition(from = 0, target, value) {
 function createPosition(from = 0, value) {
   const to = from + value.length;
   return { from, to };
+}
+
+export function applyAutoCompletion(array, suggestedText, position) {
+  const originalText = toNatural(array);
+  const beforeText = originalText.substring(0, position.from);
+  const afterText = originalText.substring(position.to + 1);
+  return qp.fromPhrase(`${beforeText}${suggestedText}${afterText}`)
 }

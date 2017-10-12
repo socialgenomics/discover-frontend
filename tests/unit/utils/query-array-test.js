@@ -1,7 +1,12 @@
 import { expect } from 'chai';
 import { describe, it } from 'mocha';
 import QP from 'npm:@repositive/query-parser';
-import { constructAutoCompleteArray, getCurrentNode } from 'repositive/utils/query-array';
+import {
+  applyAutoCompletion,
+  constructAutoCompleteArray,
+  getCurrentNode,
+  toNatural,
+} from 'repositive/utils/query-array';
 
 describe('query-array module', function() {
   const queryArray = QP.fromPhrase('lung cancer');
@@ -49,6 +54,37 @@ describe('query-array module', function() {
 
         expect(result).to.eql(predicateQuery);
       });
+    });
+  });
+
+  describe('applyAutoCompletion', function() {
+    const query = QP.fromPhrase('a:b programming in c');
+
+    it('replaces whole phrases', function() {
+      const actual = applyAutoCompletion(query, 'developing in cobol', {from: 4, to: 19});
+      const expected = QP.fromPhrase('a:b developing in cobol');
+
+      const actualText = toNatural(actual);
+      const expectedText = toNatural(expected);
+      expect(actualText).to.eql(expectedText);
+    });
+
+    it('replaces partial phrases', function() {
+      const actual = applyAutoCompletion(query, 'in croatia', {from: 16, to: 19});
+      const expected = QP.fromPhrase('a:b programming in croatia');
+
+      const actualText = toNatural(actual);
+      const expectedText = toNatural(expected);
+      expect(actualText).to.eql(expectedText);
+    });
+
+    it('replaces inside phrases', function() {
+      const actual = applyAutoCompletion(query, 'without', {from: 16, to: 17});
+      const expected = QP.fromPhrase('a:b programming without c');
+
+      const actualText = toNatural(actual);
+      const expectedText = toNatural(expected);
+      expect(actualText).to.eql(expectedText);
     });
   });
 });
