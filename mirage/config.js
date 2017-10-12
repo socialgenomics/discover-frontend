@@ -1,3 +1,6 @@
+import qp from 'npm:@repositive/query-parser';
+import { toNatural } from 'repositive/utils/query-array';
+
 export default function() {
   this.get('/stats', () => {
     return {
@@ -49,6 +52,7 @@ export default function() {
     //         {
     //           type: 'token',
     //           text: 'in',
+    //           autocomplete: true,
     //           position: {
     //             from: 28,
     //             to: 29,
@@ -70,7 +74,10 @@ export default function() {
     //     }
     //   ],
     // }
-console.log("REQ", request);
+    const query = (JSON.parse(request.requestBody) || {}).query;
+    const phrase = toNatural(query);
+    const match = /^([^ ]* )?([^:]+)( .*)?$/.exec(phrase);
+    console.log("MATCH", match[2], match);
     return {
       suggestions: [
         {
