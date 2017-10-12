@@ -5,7 +5,12 @@ import { task, timeout } from 'ember-concurrency';
 import ENV from 'repositive/config/environment';
 import { getRandomElement } from 'repositive/utils/arrays';
 import { nameForKeyCode } from 'repositive/utils/key-codes';
-import { getCurrentNode, constructAutoCompleteArray, toNatural } from 'repositive/utils/query-array';
+import {
+  getCurrentNode,
+  constructAutoCompleteArray,
+  toNatural,
+  applyAutoCompletion,
+} from 'repositive/utils/query-array';
 import { placeholderValues } from './placeholders';
 import { predicates } from './predicates';
 
@@ -128,34 +133,8 @@ export default Component.extend({
       console.log("SEL", selection, dropdown)
       const queryArray = get(this, 'queryArray');
 
-      const overlaps = (item1, item2) => {
-        return item2.position.from <= item1.position.from && item1.position.from <= item2.position.to || item2.position.from <= item1.position.to && item1.position.to <= item2.position.to;
-      }
-
       if (selection) {
-        const newQueryArray = queryArray.map(item => {
-          console.log("ITEM", item);
-          if (item.tokens && overlaps(item, selection)) {
-            let newTokens = [];
-            item.tokens.forEach(token => {
-              console.log("TOKEN", token);
-              if (overlaps(token, selection)) {
-                console.log("OVERLAP", token, selection);
-                console.log("PHRASE", QP.fromPhrase(selection.text));
-                newTokens.concat(QP.fromPhrase(selection.text)[0].tokens);
-                console.log("NEW TOKENS", newTokens);
-              } else {
-                newTokens.push(token);
-                console.log("NEW TOKENS", newTokens);
-              }
-            });
-            return Object.assign({}, item, { tokens: newTokens });
-          } else {
-            return item;
-          }
-        });
-        console.log("NEW", newQueryArray);
-        get(this, 'queryService').setQueryArray(newQueryArray);
+        get(this, 'queryService').setQueryArray(applyAutoCompletion(queryArray, selection.text, selection.position));
       }
       this._clearResults(dropdown);
       this.send('search');
