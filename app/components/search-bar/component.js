@@ -33,12 +33,13 @@ export default Component.extend({
     this._super(...arguments);
 
     const placeholderValues = [
-      `obesity AND microbiome`,
-      `autism AND assay:"RNA seq"`,
-      `infant stool AND assay:wgs`,
-      `Alzheimer's disease`,
+      `Obesity microbiome`,
+      `autism assay:RNA-Seq`,
+      `infant stool assay:WGS`,
+      `"Alzheimer's disease"`,
       `fetal epigenome`,
-      `human populations AND (assay:"Whole Genome Sequencing" OR assay:WGS)`
+      `human populations "whole genome sequencing" WGS`,
+      `hepatitis tissue:liver`
     ];
 
     set(this, 'placeholder', get(this, 'isAuthenticated') ?
