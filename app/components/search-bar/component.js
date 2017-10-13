@@ -6,7 +6,6 @@ import ENV from 'repositive/config/environment';
 import { getRandomElement } from 'repositive/utils/arrays';
 import { nameForKeyCode } from 'repositive/utils/key-codes';
 import {
-  getCurrentNode,
   constructAutoCompleteArray,
   toNatural,
   applyAutoCompletion
