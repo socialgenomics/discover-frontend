@@ -17,5 +17,6 @@
   padding: 0.5em;
 }
 .c-search-bar-dropdown > .ember-power-select-options {
-  min-height: 13em;
+  max-height: 13em;
+  @extend .py3;
 }

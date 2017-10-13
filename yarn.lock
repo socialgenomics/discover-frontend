@@ -89,9 +89,9 @@
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@repositive/liz-skin/-/liz-skin-1.1.0.tgz#7e22a7820df59d2e24e8fefdabca45ff6e40495e"
 
-"@repositive/query-parser@2.1.0":
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/@repositive/query-parser/-/query-parser-2.1.0.tgz#8d6b934b715e7d1af6934197cc3d141fdfc17b8e"
+"@repositive/query-parser@2.3.1":
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/@repositive/query-parser/-/query-parser-2.3.1.tgz#02072db1f4d42f77f7626797d3eda4665ce69227"
   dependencies:
     ramda "^0.22.1"
     uuid "^3.0.1"

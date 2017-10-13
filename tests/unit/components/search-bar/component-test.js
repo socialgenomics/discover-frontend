@@ -2,7 +2,7 @@ import { expect } from 'chai';
 import { describe, it } from 'mocha';
 import { setupComponentTest } from 'ember-mocha';
 
-describe('!T Unit | Component | search bar', function() {
+describe('Unit | Component | search bar', function() {
   setupComponentTest('search-bar', {
     needs: [
       'service:query',
@@ -11,6 +11,21 @@ describe('!T Unit | Component | search bar', function() {
       'service:metrics'
     ],
     unit: true
+  });
+
+  describe('predicatedOptions', function() {
+    it('returns correctly filtered objects', function() {
+      const component = this.subject();
+
+      component.set('queryString', 'is');
+
+      const result = component.get('predicateOptions');
+      const expected = [
+        { name: 'Disease', example: '(e.g. Myeloma)' },
+        { name: 'Tissue', example: '(e.g. Blood)' }
+      ];
+      expect(result).to.eql(expected);
+    });
   });
 
   describe('_handleAutocompleteSuccess', function() {

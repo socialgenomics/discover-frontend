@@ -5,7 +5,9 @@ import { task, timeout } from 'ember-concurrency';
 import ENV from 'repositive/config/environment';
 import { getRandomElement } from 'repositive/utils/arrays';
 import { nameForKeyCode } from 'repositive/utils/key-codes';
-import { getCurrentNode, constructAutoCompleteTree } from 'repositive/utils/query-tree';
+import { getCurrentNode, constructAutoCompleteArray, toNatural } from 'repositive/utils/query-array';
+import { placeholderValues } from './placeholders';
+import { predicates } from './predicates';
 
 const { $, Component, get, inject: { service }, isBlank, set, setProperties, computed, Logger } = Ember;
 const ENDS_WITH_SPACE = /\s$/;
@@ -20,51 +22,71 @@ export default Component.extend({
   openPagesPlaceholder: 'Search over 1 million human genomic datasets',
 
   isAuthenticated: computed.alias('session.isAuthenticated'),
+  hasPredicateOptions: computed.notEmpty('predicateOptions'),
 
-  queryTree: computed('queryService.queryTree', function() {
-    return get(this, 'queryService').getQueryTree();
+  predicateOptions: computed('queryString', 'predicates', function() {
+    const queryString = get(this, 'queryString') || '';
+    return get(this, 'predicates')
+      .filter(predicate => predicate.name.toLowerCase().includes(queryString.toLowerCase()));
   }),
 
-  queryString: computed('queryTree', function() {
-    return QP.toNatural(get(this, 'queryTree'));
+  queryArray: computed('queryService.queryArray', function() {
+    return get(this, 'queryService').getQueryArray();
+  }),
+
+  queryString: computed('queryArray', function() {
+    return toNatural(get(this, 'queryArray'));
+  }),
+
+  // Only used by dropdown child components.
+  extraArgs: computed('predicateOptions', 'hasPredicateOptions', function() {
+    return {
+      predicateOptions: get(this, 'predicateOptions'),
+      hasPredicateOptions: get(this, 'hasPredicateOptions')
+    }
   }),
 
   init() {
     this._super(...arguments);
-
-    const placeholderValues = [
-      `Obesity microbiome`,
-      `autism assay:RNA-Seq`,
-      `infant stool assay:WGS`,
-      `"Alzheimer's disease"`,
-      `fetal epigenome`,
-      `human populations "whole genome sequencing" WGS`,
-      `hepatitis tissue:liver`
-    ];
-
-    set(this, 'placeholder', get(this, 'isAuthenticated') ?
+    const placeholder = get(this, 'isAuthenticated') ?
       this._getSearchPlaceholder(placeholderValues) :
-      get(this, 'openPagesPlaceholder')
-    );
+      get(this, 'openPagesPlaceholder');
+
+    setProperties(this, { predicates, placeholder });
   },
 
   actions: {
-    //Prevents the search field from clearing on blur
-    handleBlur() { return false; },
+    // Prevents the search field from clearing on blur
+    handleBlur(dropdown) {
+      this.send('handleClose', dropdown, null, 'blur');
+      return false;
+    },
 
-    handleOpen(dropdown) {
-      if (dropdown.resultsCount === 0) {
-        return false;
-      }
+    // Dropdown should only close on search and blur
+    handleClose(dropdown, e, cause) {
+      if (e !== null && e.type === 'mousedown') { return }
+      if (cause === 'blur' || cause === 'search') {
+        if (cause === 'search') {
+          dropdown.actions.close();
+        }
+        return;
+      } else { return false; }//Prevent close
     },
 
     handleKeyDown(dropdown, e) {
       const keyName = nameForKeyCode(e.keyCode);
       const fetchSuggestionsTask = get(this, 'fetchSuggestions');
 
-      if (keyName === 'Enter') { e.preventDefault(); }
-      if (keyName === 'Enter' && dropdown.isOpen === false) {
-        this.send('search');
+      if (!dropdown.isOpen && keyName !== 'Enter') {
+        dropdown.actions.open();
+      }
+
+      if (keyName === 'Enter') {
+        e.preventDefault();
+        if (dropdown.isActive && !dropdown.highlighted) {
+          this.send('search');
+          this.send('handleClose', dropdown, e, 'search');
+        }
       }
 
       if (keyName === 'Backspace' || keyName === 'Delete') {
@@ -79,17 +101,27 @@ export default Component.extend({
 
         if (ENTIRE_QUERY_DELETED) {
           get(this, 'queryService').setQueryTree(null);
+          set(dropdown, 'loading', false);
           this._clearResults(dropdown);
+          fetchSuggestionsTask.cancelAll();
         } else if (selectedText && queryString.indexOf(selectedText) === 0) {
-          //HACK to prevent last letter in string from being deleted
+          //Hack to prevent last letter in string from being deleted
           const newQuery = queryString.substring(selectedText.length) + '-';
           get(this, 'queryService').setQueryTree(QP.fromNatural(newQuery));
         } else if (WILL_REMOVE_FIRST_CHAR) {
           const newQuery = queryString.substring(1);
-          if (isBlank(newQuery)) { fetchSuggestionsTask.cancelAll(); }
           get(this, 'queryService').setQueryTree(QP.fromNatural(newQuery));
+          if (isBlank(newQuery)) {
+            set(dropdown, 'loading', false);
+            this._clearResults(dropdown);
+            fetchSuggestionsTask.cancelAll();
+          }
         }
       }
+    },
+
+    handleFocus(dropdown) {
+      dropdown.actions.open();
     },
 
     handleSelection(selection, dropdown) {
@@ -129,13 +161,12 @@ export default Component.extend({
 
     const DEBOUNCE_MS = 500;
     const caretPosition = this._getCaretPosition();
-    const queryTree = QP.fromNatural(queryString);
-    const currentNode = getCurrentNode(queryTree, caretPosition);
+    const queryArray = QP.fromPhrase(queryString);
+    const newQueryArray = constructAutoCompleteArray(queryArray, caretPosition);
 
-    if (currentNode) {
-      const newTree = constructAutoCompleteTree(queryTree, currentNode);
+    if (newQueryArray) {
       const requestData = {
-        tree: newTree,
+        tree: newQueryArray,
         limit: 3
       };
       const requestOptions = {
@@ -144,7 +175,7 @@ export default Component.extend({
         data: JSON.stringify(requestData)
       };
 
-      get(this, 'queryService').setQueryTree(newTree);
+      get(this, 'queryService').setQueryArray(newQueryArray);
 
       yield timeout(DEBOUNCE_MS);
 
@@ -163,7 +194,6 @@ export default Component.extend({
       results: null,
       resultsCount: 0
     });
-    dropdown.actions.close();
   },
 
   /**
@@ -197,7 +227,7 @@ export default Component.extend({
   _getCaretPosition() {
     const cachedSearchSelector = get(this, 'cachedSearchSelector');
     if (!cachedSearchSelector) {
-      const $searchBarSelector = $('.ember-power-select-typeahead-input')[0]
+      const $searchBarSelector = $('.ember-power-select-typeahead-input')[0];
       set(this, 'cachedSearchSelector', $searchBarSelector);
       return $searchBarSelector.selectionStart || 0;
     }

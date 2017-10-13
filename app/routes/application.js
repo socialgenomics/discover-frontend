@@ -93,6 +93,7 @@ export default Route.extend(ApplicationRouteMixin, {
       });
     }
   },
+
   _queryAndTransition(dest, input, serializeTree, pageNumber) {
     const collection = dest === 'datasources.source' ?
       QP.filter(input, n => n.key === 'datasource')[0] :

@@ -2,7 +2,7 @@ import { expect } from 'chai';
 import { describe, it } from 'mocha';
 import { setupModelTest } from 'ember-mocha';
 
-describe('Unit | Serializer | subscription !T', function() {
+describe('Unit | Serializer | subscription', function() {
   setupModelTest('subscription', {
     // Specify the other units that are required for this test.
     needs: [
