@@ -7,7 +7,7 @@ const { get, setProperties } = Ember;
 describe('Unit | Component | vertical menu/heading', function() {
   setupComponentTest('vertical-menu/heading', {
     // Specify the other units that are required for this test
-    needs: ['component:fa-icon'],
+    needs: ['component:fa-icon', 'service:metrics'],
     unit: true
   });
   describe('computed properties', function() {

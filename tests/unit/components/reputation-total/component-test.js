@@ -4,7 +4,7 @@ import { setupComponentTest } from 'ember-mocha';
 
 describe('Unit | Component | reputation total', function() {
   setupComponentTest('reputation-total', {
-    needs: ['helper:rough-estimate'],
+    needs: ['helper:rough-estimate', 'service:metrics'],
     unit: true
   });
 

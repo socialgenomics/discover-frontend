@@ -12,7 +12,8 @@ describe('Unit | Component | dataset page', function() {
       'validator:presence',
       'validator:format',
       'service:session',
-      'service:urlGenerator'
+      'service:urlGenerator',
+      'service:metrics'
     ],
     unit: true
   });
