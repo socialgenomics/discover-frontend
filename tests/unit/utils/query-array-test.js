@@ -5,7 +5,7 @@ import {
   applyAutoCompletion,
   constructAutoCompleteArray,
   getCurrentNode,
-  toNatural,
+  toNatural
 } from 'repositive/utils/query-array';
 
 describe('query-array module', function() {

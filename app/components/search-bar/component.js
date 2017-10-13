@@ -9,7 +9,7 @@ import {
   getCurrentNode,
   constructAutoCompleteArray,
   toNatural,
-  applyAutoCompletion,
+  applyAutoCompletion
 } from 'repositive/utils/query-array';
 import { placeholderValues } from './placeholders';
 import { predicates } from './predicates';
@@ -130,7 +130,6 @@ export default Component.extend({
     },
 
     handleSelection(selection, dropdown) {
-      console.log("SEL", selection, dropdown)
       const queryArray = get(this, 'queryArray');
 
       if (selection) {

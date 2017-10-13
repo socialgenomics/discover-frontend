@@ -24,6 +24,7 @@ export default Mixin.create({
     const query = get(this, 'query');
     if (query) {
       const qp = get(this, 'QP');
+      console.log("QP", qp);
       const queryArray = qp.fromPhrase(query);
       return queryArray
         .filter(node => isPredicate(node))

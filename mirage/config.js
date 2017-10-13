@@ -1,5 +1,4 @@
-import qp from 'npm:@repositive/query-parser';
-import { toNatural } from 'repositive/utils/query-array';
+// eslint-disable use-ember-get-and-set
 
 export default function() {
   this.get('/stats', () => {
@@ -10,7 +9,7 @@ export default function() {
     };
   });
 
-  this.post('/autocomplete', (_, request) => {
+  this.post('/autocomplete', () => {
     // Example request
     // {
     //   limit: 3,
@@ -74,10 +73,6 @@ export default function() {
     //     }
     //   ],
     // }
-    const query = (JSON.parse(request.requestBody) || {}).query;
-    const phrase = toNatural(query);
-    const match = /^([^ ]* )?([^:]+)( .*)?$/.exec(phrase);
-    console.log("MATCH", match[2], match);
     return {
       suggestions: [
         {
