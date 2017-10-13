@@ -33,26 +33,20 @@ describe('Unit | Component | search bar', function() {
       it('returns a list of grouped suggestions', function() {
         const component = this.subject();
         const resp = {
-          tissue: ['brain', 'lung'],
-          technology: ['ic-1']
+          suggestions: [
+            {
+              text: "Programming in C",
+              position: { from: 16, to: 31 }
+            },
+            {
+              text: "in Croatia",
+              position: { from: 28, to: 31 }
+            }
+          ]
         };
-        const expected = [
-          {
-            groupName: 'Tissue',
-            options: [
-              { groupName: 'tissue', suggestionText: 'brain'},
-              { groupName: 'tissue', suggestionText: 'lung'}
-            ]
-          },
-          {
-            groupName: 'Technology',
-            options: [
-              { groupName: 'technology', suggestionText: 'ic-1'}
-            ]
-          }
-        ];
+
         const result = component._handleAutocompleteSuccess(resp);
-        expect(result).to.eql(expected);
+        expect(result).to.eql(resp.suggestions);
       });
     });
     describe('when the response does not have keys', function() {
