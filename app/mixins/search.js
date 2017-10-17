@@ -15,8 +15,6 @@ export default Mixin.create({
     resultsPerPage: { refreshModel: true }
   },
 
-  maxResultsPerPage: 30,
-
   QP: computed(function () {
     return QP;
   }),
@@ -60,10 +58,10 @@ export default Mixin.create({
   },
 
   makeRequest(params) {
-    const maxResultsPerPage = get(this, 'maxResultsPerPage');
-    const limit = params.resultsPerPage > maxResultsPerPage ?
-      maxResultsPerPage :
-      params.resultsPerPage || maxResultsPerPage;
+    const MAX_RESULTS_PER_PAGE = 90;
+    const DEFAULT_RESULTS_PER_PAGE = 30;
+    const resultsPerPage = params.resultsPerPage || DEFAULT_RESULTS_PER_PAGE;
+    const limit = Math.min(resultsPerPage, MAX_RESULTS_PER_PAGE);
     const offset = (params.page - 1) * limit;
     const query = params.query || '';
     const body = query === '' ? {} : get(this, 'QP').fromNatural(query);
