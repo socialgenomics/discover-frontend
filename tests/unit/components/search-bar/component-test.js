@@ -2,7 +2,7 @@ import { expect } from 'chai';
 import { describe, it } from 'mocha';
 import { setupComponentTest } from 'ember-mocha';
 
-describe('!T Unit | Component | search bar', function() {
+describe('Unit | Component | search bar', function() {
   setupComponentTest('search-bar', {
     needs: [
       'service:query',

@@ -4,7 +4,8 @@ import { setupComponentTest } from 'ember-mocha';
 
 describe('Unit | Component | dataset page/sample table', function() {
   setupComponentTest('dataset-page/sample-table', {
-    unit: true
+    unit: true,
+    needs: ['service:metrics']
   });
 
   const samples = [

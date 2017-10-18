@@ -9,7 +9,8 @@ describe('Unit | Component | user profile email password', function() {
   setupComponentTest('user-profile-email-password', {
     needs: [
       'component:credential-list',
-      'service:ajax'
+      'service:ajax',
+      'service:metrics'
     ],
     unit: true
   });

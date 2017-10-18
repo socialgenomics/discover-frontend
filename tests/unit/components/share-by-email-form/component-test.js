@@ -11,7 +11,8 @@ describe('ShareByEmailFormComponent', function() {
     needs: [
       'validator:presence',
       'validator:format',
-      'service:ajax'
+      'service:ajax',
+      'service:metrics'
     ]
   });
 

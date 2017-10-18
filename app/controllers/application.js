@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-const { Controller, computed, inject: { service }, set } = Ember;
+const { Controller, computed, inject: { service } } = Ember;
 
 export default Controller.extend({
   session: service(),
@@ -8,9 +8,5 @@ export default Controller.extend({
 
   isRootRoute: computed('currentPath', function () {
     return window.location.pathname === '/' || window.location.pathname.indexOf('/users/') !== -1;
-  }),
-
-  actions: {
-    changeDefaultFormat() { set(this, 'moment.defaultFormat', 'DD.MM.YYYY'); }
-  }
+  })
 });
