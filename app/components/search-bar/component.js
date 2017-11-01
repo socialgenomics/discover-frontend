@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import QP from 'npm:@repositive/query-parser';
-import { task, timeout } from 'ember-concurrency';
+// import { task, timeout } from 'ember-concurrency';
 
 // import ENV from 'repositive/config/environment';
 import { getRandomElement } from 'repositive/utils/arrays';
