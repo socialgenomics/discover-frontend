@@ -46,10 +46,10 @@ export default Route.extend(FlashMessageMixin, {
       this.transitionTo('signup-survey');
     }
 
-    if (get(this, 'session.data.showCredentialVerifyReminder')) {
-      set(this, 'session.data.showCredentialVerifyReminder', false);
-      this._addFlashMessage('Please check your email to verify your account', 'info');
-    }
+    // if (get(this, 'session.data.showCredentialVerifyReminder')) {
+    //   set(this, 'session.data.showCredentialVerifyReminder', false);
+    //   this._addFlashMessage('Please check your email to verify your account', 'info');
+    // }
   },
 
   deactivate() {

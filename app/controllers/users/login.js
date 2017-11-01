@@ -5,7 +5,7 @@ import emailFormatValidator from 'repositive/validations/emailFormatValidator';
 import lengthValidator from 'repositive/validations/lengthValidator';
 import { errorMessages, lengths, lengthTypes } from 'repositive/validations/validations-config';
 import FlashMessageMixin from 'repositive/mixins/flash-message-mixin';
-import { isVerified } from 'repositive/utils/credentials';
+// import { isVerified } from 'repositive/utils/credentials';
 
 
 
@@ -40,7 +40,7 @@ export default Controller.extend(
           set(this, 'loading', true);
           return get(this, 'session')
             .authenticate('authenticator:repositive', getProperties(this, 'email', 'password'))
-            .then(this._setCredentialVerifyReminderFlag.bind(this))
+            // .then(this._setCredentialVerifyReminderFlag.bind(this))
             .then(this._displayMessage.bind(this))
             .catch(this._displayMessage.bind(this));
         }
@@ -60,15 +60,15 @@ export default Controller.extend(
 
         if (message) { this._addFlashMessage(message, 'warning'); }
       }
-    },
-
-    _setCredentialVerifyReminderFlag() {
-      set(
-        this,
-        'session.data.showCredentialVerifyReminder',
-        isVerified(get(this, 'session.data.authenticated.user.credentials')) === false
-      );
     }
+
+    // _setCredentialVerifyReminderFlag() {
+    //   set(
+    //     this,
+    //     'session.data.showCredentialVerifyReminder',
+    //     isVerified(get(this, 'session.data.authenticated.user.credentials')) === false
+    //   );
+    // }
 
   }
 );
