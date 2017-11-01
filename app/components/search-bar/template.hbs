@@ -1,10 +1,12 @@
-<form class="flex items-center bc-white" autocomplete="off">
+<form {{action 'search' on='submit'}} class="flex items-center bc-white" autocomplete="off">
 
   <label class="flex items-center">
     <span>{{fa-icon "search" class='px3 fc-secondary' size=1}}</span>
   </label>
 
-  {{#power-select-typeahead
+  {{input placeholder=(readonly placeholder) value=queryString}}
+
+  {{!-- {{#power-select-typeahead
     placeholder=placeholder
     options=suggestions
     selected=queryString
@@ -24,7 +26,7 @@
 
   {{#if fetchSuggestions.isRunning}}
     <span>{{fa-icon "circle-o-notch" class='px3 fc-secondary' pulse=true size=1}}</span>
-  {{/if}}
+  {{/if}} --}}
 
   {{#if hasSubmitButton}}
     <button {{action 'search'}} class="r-btn r-btn-primary r-btn-large square self-stretch">Search</button>
