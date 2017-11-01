@@ -35,18 +35,18 @@ describe('Integration | Component | user profile info', function() {
       expect(this.$('i').hasClass('fa-pencil')).to.be.true;
     });
 
-    describe('when the user isVerified', function() {
-      it('renders verified account badge', function() {
-        expect(this.$('h4').text().trim()).to.eql('Verified Account');
-      });
-    });
+    // describe('when the user isVerified', function() {
+    //   it('renders verified account badge', function() {
+    //     expect(this.$('h4').text().trim()).to.eql('Verified Account');
+    //   });
+    // });
 
-    describe('when the user is not verified', function() {
-      it('should diplay message telling user to verify account', function() {
-        this.set('user.verified', false);
-        expect(this.$('h4').text().trim()).to.eql('Please verify your email');
-      });
-    });
+    // describe('when the user is not verified', function() {
+    //   it('should diplay message telling user to verify account', function() {
+    //     this.set('user.verified', false);
+    //     expect(this.$('h4').text().trim()).to.eql('Please verify your email');
+    //   });
+    // });
 
     describe('user has no work_organisation', function() {
       it('renders link to edit profile', function() {
@@ -65,7 +65,7 @@ describe('Integration | Component | user profile info', function() {
     describe('user has no bio', function() {
       it('renders link to edit profile', function() {
         this.set('user.profile.bio', null);
-        expect(this.$('a').eq(4).text().trim()).to.eql('Add your bio');
+        expect(this.$('a').eq(3).text().trim()).to.eql('Add your bio');
       });
     });
   });

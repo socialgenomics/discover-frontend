@@ -25,14 +25,6 @@
     {{/link-to}}
   {{/if}}
 
-  {{#if user.verified}}
-    <h4 class="ta-center fc-teal fs2">{{fa-icon "check-circle" class="mr2"}}Verified Account</h4>
-  {{else}}
-    {{#if isOwnProfile}}
-      <h4 class="ta-center fs2">{{#link-to 'users.profile' class="fc-red"}}{{fa-icon "envelope" class="mr2"}}Please verify your email{{/link-to}}</h4>
-    {{/if}}
-  {{/if}}
-
   <div class="mb4">
     {{#text-with-icon icon='calendar-o' class="mb1"}}
       Joined {{moment-format user.createdAt 'MMMM YYYY'}}

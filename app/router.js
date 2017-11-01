@@ -22,9 +22,9 @@ router.map(function() {
     this.route('signup');
     this.route('login');
     this.route('profile');
-    this.route('verify', {
-      path: '/verify/:verification_id'
-    });
+    // this.route('verify', {
+    //   path: '/verify/:verification_id'
+    // });
     this.route('resend-password', {
       path: '/reset-password'
     });

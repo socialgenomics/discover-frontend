@@ -15,7 +15,7 @@ export default Route.extend(AuthenticatedRouteMixin, {
       credentials: creds.fetchCredentials(this.store, get(this, 'userId'))
         .then(credentials => {
           return {
-            is_verified: creds.isVerified(credentials),
+            // is_verified: creds.isVerified(credentials),
             main_credential: creds.mainCredential(credentials),
             secondary_credentials: creds.secondaryCredentials(credentials)
           };
