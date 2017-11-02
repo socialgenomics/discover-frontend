@@ -85,9 +85,9 @@ export default Mixin.create({
     const QP = get(this, 'QP');
     const qS = get(this, 'queryService');
     if (queryString) {
-      qS.setQueryTree(QP.fromNatural(queryString));
+      qS.setQueryString(QP.toNatural(QP.fromNatural(queryString)));
     } else {
-      qS.setQueryTree(null);
+      qS.setQueryString(null);
     }
   },
 

@@ -4,7 +4,7 @@
     <span>{{fa-icon "search" class='px3 fc-secondary' size=1}}</span>
   </label>
 
-  {{input placeholder=(readonly placeholder) value=queryString}}
+  {{input type='text' placeholder=(readonly placeholder) value=queryString autofocus=true}}
 
   {{!-- {{#power-select-typeahead
     placeholder=placeholder
