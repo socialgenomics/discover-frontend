@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import QP from 'npm:@repositive/query-parser';
+// import QP from 'npm:@repositive/query-parser';
 // import { task, timeout } from 'ember-concurrency';
 
 // import ENV from 'repositive/config/environment';
@@ -21,12 +21,13 @@ export default Component.extend({
 
   isAuthenticated: computed.alias('session.isAuthenticated'),
 
-  queryTree: computed('queryService.queryTree', function() {
-    return get(this, 'queryService').getQueryTree();
-  }),
-
-  queryString: computed('queryTree', function() {
-    return QP.toNatural(get(this, 'queryTree'));
+  queryString: computed('queryService.queryString', {
+    get() {
+      return get(this, 'queryService').getQueryString();
+    },
+    set(key, value) {
+      return value;
+    }
   }),
 
   init() {

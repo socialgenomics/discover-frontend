@@ -20,7 +20,7 @@ describe('Unit | Mixin | search', function() {
     request: sinon.stub().returns(RSVP.resolve('response'))
   });
   const queryServiceStub = Service.extend({
-    setQueryTree: sinon.spy()
+    setQueryString: sinon.spy()
   });
   const storeServiceStub = Service.extend({
     push: sinon.stub().returnsArg(0),
@@ -58,7 +58,7 @@ describe('Unit | Mixin | search', function() {
     mixinObjInstance = this.subject();
 
     get(mixinObjInstance, 'ajax.request').reset();
-    get(mixinObjInstance, 'queryService.setQueryTree').reset();
+    get(mixinObjInstance, 'queryService.setQueryString').reset();
 
     setProperties(mixinObjInstance, {
       query: 'test',
@@ -205,7 +205,7 @@ describe('Unit | Mixin | search', function() {
     it('should set query service value to null', function () {
       mixinObjInstance[method]();
 
-      expect(get(mixinObjInstance, 'queryService').setQueryTree.calledWith(null)).to.be.true;
+      expect(get(mixinObjInstance, 'queryService').setQueryString.calledWith(null)).to.be.true;
     });
   });
 
