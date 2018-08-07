@@ -2,7 +2,7 @@
 
 var _ = require('underscore');
 
-module.exports = function(environment) {
+module.exports = function (environment) {
   if (!environment) {
     return;
   }
@@ -32,13 +32,13 @@ module.exports = function(environment) {
     The base URL path of the API.
     */
     // APIBaseURL: appConf.apiBaseURL,
-      APIBaseURL: process.env.API_BASE_URL,
+    APIBaseURL: process.env.API_BASE_URL,
 
     /*
     Mapping of route names to API paths, needed for non ember-data calls to
         the API.
     */
-    APIRoutes: (function() {
+    APIRoutes: (function () {
       var mapping = {
         'auth.oauth': '/auth/oauth',
         'avatar': '/avatar',
@@ -62,8 +62,8 @@ module.exports = function(environment) {
         'autocomplete': '/autocomplete'
       };
       _.each(mapping,
-        function(path, key, obj) {
-          obj[key] =  process.env.API_BASE_URL + path;
+        function (path, key, obj) {
+          obj[key] = process.env.API_BASE_URL + path;
         }
       );
       return mapping;
@@ -119,71 +119,69 @@ module.exports = function(environment) {
       'media-src': "'self'",
       'frame-src': "'self' 'unsafe-inline' https://repositive.typeform.com/to/pktwPz https://repositive.typeform.com/to/viIWx1"
     },
-    metricsAdapters: [
-      {
-        name: 'GoogleAnalytics',
-        config: {
-          //company-wide website
-          id: 'UA-54495053-1'
-        },
-        environments: ['production']
+    metricsAdapters: [{
+      name: 'GoogleAnalytics',
+      config: {
+        //company-wide website
+        id: 'UA-54495053-1'
       },
-      {
-        name: 'GoogleAnalytics',
-        config: {
-          //discover app
-          id: 'UA-54495053-2'
-        },
-        environments: ['production']
+      environments: ['production']
+    },
+    {
+      name: 'GoogleAnalytics',
+      config: {
+        //discover app
+        id: 'UA-54495053-2'
       },
-      {
-        name: 'Intercom',
-        environments: ['production'],
-        config: {
-          appId: 'tz4k4icz'
-        }
-      },
-      {
-        name: 'Intercom',
-        environments: ['local-development'],
-        config: {
-          appId: 'vdoi8br5'
-        }
+      environments: ['production']
+    },
+    {
+      name: 'Intercom',
+      environments: ['production'],
+      config: {
+        appId: 'tz4k4icz'
       }
+    },
+    {
+      name: 'Intercom',
+      environments: ['local-development'],
+      config: {
+        appId: 'vdoi8br5'
+      }
+    }
     ]
   };
 
-    if (environment === 'local-development') {
-      // ENV.APP.LOG_RESOLVER = true;
-      // ENV.APP.LOG_ACTIVE_GENERATION = true;
-      // ENV.APP.LOG_TRANSITIONS = true;
-      // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
-      // ENV.APP.LOG_VIEW_LOOKUPS = true;
-    }
-
-    if (environment === 'test') {
-      // Testem prefers this...
-      ENV.locationType = 'none';
-
-      // keep test console output quieter
-      ENV.APP.LOG_ACTIVE_GENERATION = false;
-      ENV.APP.LOG_VIEW_LOOKUPS = false;
-
-      ENV.APP.rootElement = '#ember-testing';
-    }
-
-    if (environment === 'staging') {
-      ENV.APP.INSPECTLET_WID = 1989736952;
-      ENV.torii.providers['google-oauth2'].redirectUri = 'https://discover-staging.repositive.io';
-      ENV.torii.providers['linked-in-oauth2'].redirectUri = 'https://discover-staging.repositive.io';
-    }
-
-    if (environment === 'production') {
-      ENV.torii.providers['google-oauth2'].redirectUri = 'https://discover.repositive.io';
-      ENV.torii.providers['linked-in-oauth2'].redirectUri = 'https://discover.repositive.io';
-      ENV.APP.INSPECTLET_WID = 1989736952;
-    }
-
-    return ENV;
+  if (environment === 'local-development') {
+    // ENV.APP.LOG_RESOLVER = true;
+    // ENV.APP.LOG_ACTIVE_GENERATION = true;
+    // ENV.APP.LOG_TRANSITIONS = true;
+    // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
+    // ENV.APP.LOG_VIEW_LOOKUPS = true;
   }
+
+  if (environment === 'test') {
+    // Testem prefers this...
+    ENV.locationType = 'none';
+
+    // keep test console output quieter
+    ENV.APP.LOG_ACTIVE_GENERATION = false;
+    ENV.APP.LOG_VIEW_LOOKUPS = false;
+
+    ENV.APP.rootElement = '#ember-testing';
+  }
+
+  if (environment === 'staging') {
+    ENV.APP.INSPECTLET_WID = 1989736952;
+    ENV.torii.providers['google-oauth2'].redirectUri = 'https://discover-staging.repositive.io';
+    ENV.torii.providers['linked-in-oauth2'].redirectUri = 'https://discover-staging.repositive.io';
+  }
+
+  if (environment === 'production') {
+    ENV.torii.providers['google-oauth2'].redirectUri = 'https://discover.repositive.io';
+    ENV.torii.providers['linked-in-oauth2'].redirectUri = 'https://discover.repositive.io';
+    ENV.APP.INSPECTLET_WID = 1989736952;
+  }
+
+  return ENV;
 };
