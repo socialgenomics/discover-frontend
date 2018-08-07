@@ -1,227 +1,164 @@
 version: 2
 
-defaults: &defaults
-  working_directory: ~/discover
-
-jobs:
-  test:
-    <<: *defaults
-    docker:
-      - image: circleci/node:8.5-browsers
-    steps:
-      - checkout
-      # - run:
-      #     name: update-npm
-      #     command: |
-      #       sudo npm install -g npm@latest
-      - restore_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
-      - run:
-          name: yarn-install
-          command: |
-            yarn
-      - save_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
-          paths:
-            - ./node_modules
-      - run:
-          name: test
-          command: |
-            npm test
-
-#      - run:
-#          name: code-coverage
-#          command: './node_modules/.bin/nyc report --reporter=text-lcov'
-#      - store_artifacts:
-#          path: test-results.xml
-#          prefix: tests
-#      - store_artifacts:
-#          path: coverage
-#          prefix: coverage
-#      - store_test_results:
-#          path: test-results.xml
-      - run:
-          name: Build ember app
-          command: |
-            mkdir artifacts
-            if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              node_modules/ember-cli/bin/ember build --environment staging
-              mv dist artifacts/staging-build
-              if git log -1 --pretty=%B | grep "^[0-9]\+\.[0-9]\+\.[0-9]\+$"; then
-                node_modules/ember-cli/bin/ember build --environment production
-                mv dist artifacts/production-build
-              fi
-            fi
-      - persist_to_workspace:
-          root: .
-          paths:
-            - artifacts
-
-  build_container_sta:
-    <<: *defaults
-    docker:
-      - image: docker:17.05.0-ce-git
-    steps:
-      - checkout
-      - attach_workspace:
-          at: workspace
-      - setup_remote_docker
-
-      # Build the image
-      - run:
-          name: Build application Docker image
-          command: |
-              if [ -d workspace/artifacts/staging-build ]; then
-                rm -fr dist
-                cp -r workspace/artifacts/staging-build dist
-                docker build --cache-from=app -t app-staging .
-              fi
-      # Push to the docker registry
-      - run:
-          name: Login in the docker registry
-          command: |
-            docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS registry.repositive.io:5000
-      - run:
-          name: Push application Docker image
-          command: |
-            if [ -d workspace/artifacts/staging-build ]; then
-              echo "$(git describe --abbrev=0).$(git rev-parse --short HEAD)-sta" >> deploy
-              docker tag app-staging "registry.repositive.io:5000/discover:$(cat deploy)"
-              docker push "registry.repositive.io:5000/discover:$(cat deploy)"
-            else
-              echo false >> deploy
-            fi
-      - persist_to_workspace:
-          root: .
-          paths:
-            - deploy
-
-  build_container_prod:
-    <<: *defaults
-    docker:
-      - image: docker:17.05.0-ce-git
-    steps:
-      - checkout
-      - attach_workspace:
-          at: workspace
-      - setup_remote_docker
-
-      # Build the image
-      - run:
-          name: Build application Docker image
-          command: |
-              if [ -d workspace/artifacts/production-build ]; then
-                rm -fr dist
-                cp -r workspace/artifacts/production-build dist
-                docker build --cache-from=app -t app-production .
-              fi
-      # Push to the docker registry
-      - run:
-          name: Login in the docker registry
-          command: |
-            docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS registry.repositive.io:5000
-      - run:
-          name: Push application Docker image
-          command: |
-            if [ -d workspace/artifacts/production-build ]; then
-            echo "$(git describe --abbrev=0).$(git rev-parse --short HEAD)-pro" >> deploy
-              docker tag app-production "registry.repositive.io:5000/discover:$(cat deploy)"
-              docker push "registry.repositive.io:5000/discover:$(cat deploy)"
-            else
-              echo false >> deploy
-            fi
-      - persist_to_workspace:
-          root: .
-          paths:
-            - deploy
-
-
-  deploy_staging:
-    <<: *defaults
-    docker:
-      - image: istareldritch/curl-envsubst
-    steps:
-      - checkout
-      - attach_workspace:
-          at: workspace
-      - run:
-          name: Install kubectl
-          command: |
-            if [ $(cat workspace/deploy) != false ]; then
-              curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
-              chmod +x ./kubectl
-            fi
-      - run:
-          name: Create deployment files
-          command: |
-            if [ $(cat workspace/deploy) != false ]; then
-              curl -O -u $DEPLOYMENT_USER:$DEPLOYMENT_PASS https://deployment-server-staging.repositive.io/kubeconfig-staging
-              TAG=$(cat workspace/deploy) envsubst '${TAG}' < .circleci/k8s.staging.yml > deploy-staging.yml
-            fi
-      - deploy:
-          name: Publish
-          command: |
-            if [ $(cat workspace/deploy) != false ]; then
-              KUBECONFIG=kubeconfig-staging ./kubectl apply -f deploy-staging.yml
-              curl "https://slack.com/api/chat.postMessage?token=$SLACK_TOKEN&channel=dev&as_user=Liz&text=:rocket:%20*New%20Staging%20Deployment:*%20Discover%20Frontend%20$TAG$(cat workspace/deploy)"
-            fi
-
-  deploy_production:
-    <<: *defaults
-    docker:
-      - image: istareldritch/curl-envsubst
-    steps:
-      - checkout
-      - attach_workspace:
-          at: workspace
-      - run:
-          name: Install kubectl
-          command: |
-            if [ $(cat workspace/deploy) != false ]; then
-              curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
-              chmod +x ./kubectl
-            fi
-      - run:
-          name: Create deployment files
-          command: |
-            if [ $(cat workspace/deploy) != false ]; then
-              curl -O -u $DEPLOYMENT_USER:$DEPLOYMENT_PASS https://deployment-server-production.repositive.io/kubeconfig-production
-              TAG=$(cat workspace/deploy) envsubst '${TAG}' < .circleci/k8s.production.yml > deploy-production.yml
-            fi
-      - deploy:
-          name: Publish
-          command: |
-            if [ $(cat workspace/deploy) != false ]; then
-              KUBECONFIG=kubeconfig-production ./kubectl apply -f deploy-production.yml
-              curl "https://slack.com/api/chat.postMessage?token=$SLACK_TOKEN&channel=dev&as_user=Liz&text=:rocket:%20*New%20Production%20Deployment:*%20Discover%20Frontend%20$TAG$(cat workspace/deploy)"
-            fi
-
 workflows:
   version: 2
   test_and_release:
     jobs:
-      - test
-      - build_container_prod:
-          requires:
-            - test
+      - test_and_make
+      - build_container_local:
           filters:
             branches:
-              only: master
-      - build_container_sta:
+              only:
+                - master
           requires:
-            - test
+            - test_and_make
+      - build_container_qa:
           filters:
             branches:
-              only: master
-      - deploy_production:
+              only:
+                - master
           requires:
-            - build_container_prod
+            - test_and_make
+      - build_container_dev:
           filters:
             branches:
-              only: master
-      - deploy_staging:
+              only:
+                - master
           requires:
-            - build_container_sta
+            - test_and_make
+      - release_dev:
+          requires:
+            - build_container_dev
+      - build_container_demo:
           filters:
             branches:
-              only: master
+              only:
+                - production
+          requires:
+            - test_and_make
+      - release_demo:
+          requires:
+            - build_container_demo
+      - build_container_production:
+          filters:
+            branches:
+              only:
+                - production
+          requires:
+            - test_and_make
+      - release_production:
+          requires:
+            - build_container_production
+      - create_release_tag:
+          requires:
+            - release_production
+
+deploy_image: &deploy_image
+  docker:
+    - image: reposibot/deployer:latest
+  steps:
+    - attach_workspace:
+        at: .
+    - run:
+        name: release staging
+        command: |
+          TAG="$(cat tag.txt)-${TARGET}"
+          curl -sSO -u "${DEPLOYER_USERNAME}":"${DEPLOYER_PASSWORD}" \
+            "https://deployer.repositive.io/scripts/deploy.sh"
+          sh deploy.sh "$CIRCLE_PROJECT_REPONAME:$TAG" $CLUSTER $CONFIG_PATH
+
+build_container: &build_container
+  docker:
+    - image: circleci/node:8.5-browsers
+  steps:
+    - checkout
+    - setup_remote_docker
+    - attach_workspace:
+        at: .
+    - run:
+        name: Build ember app
+        command: |
+          REPO="${CIRCLE_PROJECT_REPONAME}"
+          TAG="$(cat tag.txt)"
+          API_BASE_URL="${API_BASE_URL}"
+
+          node_modules/ember-cli/bin/ember build --environment "${EMBER_ENV}"
+          docker build -t app .
+          docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD" registry.repositive.io:5000
+          docker tag app "registry.repositive.io:5000/${REPO}:latest-${TARGET}"
+          docker tag app "registry.repositive.io:5000/${REPO}:${TAG}-${TARGET}"
+          docker push "registry.repositive.io:5000/${REPO}:latest-${TARGET}"
+          docker push "registry.repositive.io:5000/${REPO}:${TAG}-${TARGET}"
+
+jobs:
+  test_and_make:
+    docker:
+      - image: circleci/node:8.5-browsers
+    steps:
+      - checkout
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run: yarn
+      - save_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - ./node_modules
+      - run: npm test
+      - run: echo "$(git rev-parse --short HEAD)" > tag.txt
+      - persist_to_workspace:
+          root: .
+          paths:
+            - node_modules
+            - tag.txt
+
+  build_container_local:
+    environment:
+      - TARGET: 'local'
+      - EMBER_ENV: 'staging'
+      - API_BASE_URL: 'http://localhost:3000'
+    <<: *build_container
+  build_container_qa:
+    environment:
+      - TARGET: 'qa'
+      - EMBER_ENV: 'staging'
+      - API_BASE_URL: 'http://proxy:3000'
+    <<: *build_container
+
+  build_container_dev:
+    environment:
+      - TARGET: 'dev'
+      - EMBER_ENV: 'staging'
+      - API_BASE_URL: 'https://api-dev.repositive.io'
+    <<: *build_container
+
+  build_container_production:
+    environment:
+      - TARGET: 'prod'
+      - EMBER_ENV: 'production'
+      - API_BASE_URL: 'https://api.repositive.io'
+    <<: *build_container
+
+  create_release_tag:
+    machine: true
+    steps:
+      - checkout
+      - run:
+          name: Create release tag
+          command: |
+            TAG="$(date +%s)"
+            SHA="$(git rev-parse HEAD)"
+            curl -fsS -u "${GITHUB_USERNAME}":"${GITHUB_PASSWORD}" \
+              -d '{"ref":"refs/tags/'"${TAG}"'", "sha":"'"${SHA}"'"}' \
+              -X POST "https://api.github.com/repos/repositive/${CIRCLE_PROJECT_REPONAME}/git/refs"
+
+  release_dev:
+    environment:
+      - TARGET: 'dev'
+      - CLUSTER: 'dev'
+    <<: *deploy_image
+
+  release_production:
+    environment:
+      - TARGET: 'prod'
+      - CLUSTER: 'production'
+    <<: *deploy_image
