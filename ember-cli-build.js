@@ -1,10 +1,11 @@
 /* eslint-env node */
 const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 const environment = EmberApp.env();
-const appConf = require('./config/app/' + environment + '.json');
+const appConf = require('./config/environment.js');
 const isProductionLikeBuild = ['development', 'production', 'staging'].indexOf(environment) > -1;
 
 module.exports = function(defaults) {
+  const ENV = appConf(environment);
   var app = new EmberApp(defaults, {
     sassOptions: {
       inputFile: 'app.scss',
@@ -25,7 +26,7 @@ module.exports = function(defaults) {
     fingerprint: {
       enabled: isProductionLikeBuild,
       exclude: [],
-      prepend: appConf.assetsPrependPath
+      prepend: ENV.assetsPrependPath
     },
     sourcemaps: { enabled: !isProductionLikeBuild },
     minifyCSS: { enabled: isProductionLikeBuild },
