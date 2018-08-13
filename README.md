@@ -19,7 +19,7 @@ You need the following installed on your computer:
 ## Running / Development
 
 To run the app against the [local development environment](https://github.com/repositive/devops/tree/master/development-environment/discover):
-* Firsly clone the dev environment and start it with the command: `./start.sh` (this can take a while if it's the first time you've run it).
+* Firstly clone the dev environment and start it with the command: `./start.sh` (this can take a while if it's the first time you've run it).
 * To allow the local frontend to talk to these other services, run: `yarn startLocal`
 * Visit your app at [http://localhost:4200](http://localhost:4200).
 
