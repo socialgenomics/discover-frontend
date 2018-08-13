@@ -7,6 +7,14 @@ const isProductionLikeBuild = ['development', 'production', 'staging'].indexOf(e
 module.exports = function(defaults) {
   const ENV = appConf(environment);
   var app = new EmberApp(defaults, {
+    babel: {
+      sourceMaps: 'inline',
+      plugins: ['transform-object-rest-spread'],
+      optional: ['es7.decorators']
+    },
+    'ember-cli-babel': {
+      includePolyfill: true
+    },
     sassOptions: {
       inputFile: 'app.scss',
       outputFile: 'app.css'
@@ -30,11 +38,7 @@ module.exports = function(defaults) {
     },
     sourcemaps: { enabled: !isProductionLikeBuild },
     minifyCSS: { enabled: isProductionLikeBuild },
-    minifyJS: { enabled: isProductionLikeBuild },
-    babel: {
-      sourceMaps: 'inline',
-      optional: ['es7.decorators']
-    }
+    minifyJS: { enabled: isProductionLikeBuild }
   });
 
   // Use `app.import` to add additional libraries to the generated

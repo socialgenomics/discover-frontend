@@ -1,7 +1,5 @@
 /* eslint-env node */
 
-var _ = require('underscore');
-
 module.exports = function (environment) {
   if (!environment) {
     return;
@@ -39,7 +37,7 @@ module.exports = function (environment) {
         the API.
     */
     APIRoutes: (function () {
-      var mapping = {
+      const mapping = {
         'auth.oauth': '/auth/oauth',
         'avatar': '/avatar',
         'collection-datasets': '/collection-datasets/{collection_id}',
@@ -61,12 +59,19 @@ module.exports = function (environment) {
         'verify-email': '/auth/verify',
         'autocomplete': '/autocomplete'
       };
-      _.each(mapping,
-        function (path, key, obj) {
-          obj[key] = process.env.API_BASE_URL + path;
-        }
-      );
-      return mapping;
+
+      function prefixWithBaseUrl(obj) {
+        return Object.keys(obj)
+          .reduce((acc, key) => {
+            if (typeof obj[key] === 'object') {
+              return { ...acc, [key]: prefixWithBaseUrl(obj[key]) };
+            } else {
+              return { ...acc, [key]: `${process.env.API_BASE_URL || ''}${obj[key]}` };
+            }
+          },
+          {});
+      }
+      return prefixWithBaseUrl(mapping);
     }()),
 
     /*

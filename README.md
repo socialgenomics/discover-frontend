@@ -12,14 +12,15 @@ You need the following installed on your computer:
 
 ## Installation
 
-* `git clone <repository-url>` this repository
-* change into the new directory
-* `yarn`
-* You may also have to `npm rebuild node-sass`
+* Clone this repo `git clone <repository-url>`
+* Change into the new directory
+* Run `yarn setup`
 
 ## Running / Development
 
-* `yarn startStaging`
+To run the app against the [local development environment](https://github.com/repositive/devops/tree/master/development-environment/discover):
+* Firstly clone the dev environment and start it with the command: `./start.sh` (this can take a while if it's the first time you've run it).
+* To allow the local frontend to talk to these other services, run: `yarn startLocal`
 * Visit your app at [http://localhost:4200](http://localhost:4200).
 
 
@@ -48,7 +49,7 @@ Make use of the many generators for code, try `ember help generate` for more det
 
 ### Deploying to Staging
 
-Whenever a PR is merged into master, the new build of master is deployed to [staging](https://discover-staging.repositive.io) automatically.
+Whenever a PR is merged into master, the new build of master is deployed to [dev]](https://discover-dev.repositive.io) automatically.
 
 ### Deploying to Production
 1. Because you can't directly push changes to master, you must first make a new branch.

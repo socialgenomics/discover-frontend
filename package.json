@@ -9,8 +9,7 @@
   },
   "scripts": {
     "setup": "yarn && npm rebuild node-sass",
-    "startStaging": "ember server --watcher=polling --proxy=https://api-staging.repositive.io",
-    "startStagingOnNewMac": "ember server --watcher=polling --proxy=https://api-staging.repositive.io --live-reload-port 49153",
+    "startLocal": "BACKEND_SERVER=http://localhost:3000 yarn startWithHost",
     "startWithHost": "ember server --watcher=polling --proxy=$BACKEND_SERVER",
     "startWithHostOnNewMac": "ember server --watcher=polling --proxy=$BACKEND_SERVER --live-reload-port 49153",
     "build": "ember build",
@@ -25,6 +24,7 @@
   "devDependencies": {
     "@repositive/query-parser": "2.1.0",
     "@repositive/ui-library": "0.0.x",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "broccoli-asset-rev": "^2.4.5",
     "d3": "4.10.0",
     "dotenv": "^4.0.0",
@@ -34,7 +34,7 @@
     "ember-browserify": "^1.1.13",
     "ember-cli": "~2.15.1",
     "ember-cli-app-version": "^3.0.0",
-    "ember-cli-babel": "^6.4.1",
+    "ember-cli-babel": "^6.16.0",
     "ember-cli-chai": "^0.4.1",
     "ember-cli-clipboard": "^0.8.0",
     "ember-cli-content-security-policy": "1.0.0",
