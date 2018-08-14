@@ -9,6 +9,7 @@ export default Mixin.create(FlashMessageMixin, TrackEventsMixin, {
 
   title: null, //only used for keeping state of form if not submitted
   description: null, //only used for keeping state of form if not submitted
+  isNHLBI: false,
 
   isLoading: false,
 
