@@ -33,12 +33,13 @@ export default Mixin.create(FlashMessageMixin, TrackEventsMixin, {
    * @private
    */
   _createRequest(requestObject) {
-    const { title, description } = requestObject;
+    const { title, description, isNHLBI} = requestObject;
 
     return this.store.createRecord('request', {
       userId: get(this, 'session.authenticatedUser'),
       title,
-      description
+      description,
+      isNHLBI
     }).save();
   },
 
