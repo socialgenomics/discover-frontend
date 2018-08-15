@@ -53,7 +53,7 @@ describe('Unit | Mixin | request submission', function() {
     const expectedDataObj = store.createRecord.args[0][1];
 
     expect(store.createRecord.args[0][0]).to.eql('request');
-    expect(expectedDataObj).to.have.keys('title', 'description', 'userId');
+    expect(expectedDataObj).to.have.keys('title', 'description', 'userId', 'isNHLBI');
     expect(expectedDataObj).to.have.property('title', title);
     expect(expectedDataObj).to.have.property('description', description);
     expect(storeMock.save.called).to.eql(true);
