@@ -7,6 +7,7 @@ export default Model.extend({
   description: attr('string'),
   stats: attr('object'),
   title: attr('string'),
+  isNHLBI: attr('boolean'),
   updatedAt: attr('isodate'),
 
   actions: hasMany('action'),
