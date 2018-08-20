@@ -1,6 +1,7 @@
-import Ember from 'ember';
-
-const { inject: { service }, Service, Logger, get, getWithDefault, set } = Ember;
+import Service from '@ember/service';
+import { inject as service } from '@ember/service';
+import { get, getWithDefault, set } from '@ember/object';
+import Logger from 'repositive/utils/logger';
 
 export default Service.extend({
   store: service(),
