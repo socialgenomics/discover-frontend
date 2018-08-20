@@ -3,12 +3,14 @@ import FlashMessageMixin from 'repositive/mixins/flash-message-mixin';
 import TrackEventsMixin from 'repositive/mixins/track-events-mixin';
 import { buildValidations } from 'ember-cp-validations';
 import presenceValidator from 'repositive/validations/presenceValidator';
+import ENV from 'repositive/config/environment'
 
-const { Component, computed, inject: { service }, get, getProperties, setProperties } = Ember;
+const { Component, computed, inject: { service }, get, getProperties, setProperties, set } = Ember;
 const Validations = buildValidations({
   title: presenceValidator(),
   description: presenceValidator()
 });
+
 
 export default Component.extend(
   Validations,
@@ -24,6 +26,8 @@ export default Component.extend(
     isNHLBI: false,
     loading: false,
 
+    shouldShowCheckbox: false,
+
     isInvalid: computed.not('validations.isValid'),
 
     didReceiveAttrs() {
@@ -32,6 +36,12 @@ export default Component.extend(
       const title = get(this, 'savedTitle');
       const description = get(this, 'savedDescription');
       const isNHLBI = get(this, 'savedIsNHLBI');
+
+      const environment = get(ENV, 'environment');
+      if (environment === 'local-development' || environment === 'staging') {
+        // NOTE we want to show the NHLBI checkbox on local and dev only for now as well as FE localDev
+        set(this, 'shouldShowCheckbox', true);
+      }
 
       setProperties(this, { title, description, isNHLBI });
     },

@@ -15,6 +15,7 @@
     errors=validations.attrs.description.messages
     placeholder="Describe the dataset you're looking for. You can include ethnicity of patients, number of samples, assay type or associated diseases."
   }}
+  {{#if shouldShowCheckbox}}
   <div class="pb4">
     <label class="flex flex-row items-baseline">
       <input type="checkbox" checked={{isNHLBI}} onclick={{action (mut isNHLBI) value="target.checked"}} class="mr2">
@@ -28,6 +29,7 @@
       What is this?
     </a>
   </div>
+  {{/if}}
   {{r-async-button
     action=(action 'addRequest')
     default="Submit Request"
