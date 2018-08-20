@@ -27,6 +27,9 @@ export default Service.extend({
         .catch(Logger.error);
     }
   },
+  fetchFavorites() {
+
+  }
 
   removeFavourite(favourite) {
     set(this, 'userFavourites', get(this, 'userFavourites').without(favourite));
