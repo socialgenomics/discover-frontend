@@ -48,9 +48,9 @@ export default Service.extend({
     this.notifyPropertyChange('userFavourites');
   },
 
-  getFavourite(modelId, modelName) {
-    const keyName = modelName + 'Id.id';
-    return getWithDefault(this, 'userFavourites', []).findBy(keyName, modelId);
+  getFavourite(modelId) {
+    return (get(this, 'bookmarks') || resolve([]))
+      .then((bookmarks) => bookmarks.filter((b) => b.resource_id == modelId).length > 0);
   },
 
   async createFavorite(resource_id, resource_type) {
@@ -68,7 +68,6 @@ export default Service.extend({
     }
   },
 
-
   _createBookmark(resource_id, resource_type, owner_id, owner_type) {
     return get(this, 'ajax')
       .request(ENV.APIRoutes['new-bookmarks']['create-bookmark'], {
@@ -78,6 +77,34 @@ export default Service.extend({
       })
       .then(R.prop('result'))
       .then((bookmark) => this._loadBookmarkResource(bookmark));
+  },
+
+  async deleteFavourite(resource_id, resource_type) {
+    try {
+      const bookmarks = await get(this, 'bookmarks') || [];
+      console.log('bookmarks -> ', bookmarks);
+      console.log('looking for this resource_id -> ', resource_id);
+      const bookmark = bookmarks.filter((bookmark) => bookmark.resource_id === resource_id).pop();
+      if (!bookmark) {
+        throw new Error('There is no matching bookmark');
+      }
+      await this._deleteBookmark(bookmark.id);
+      const newBookmarks = bookmarks.filter((b) => b.id !== bookmark.id);
+      set(this, 'bookmarks', resolve(newBookmarks));
+      console.log('updated bookmarks -> ', get(this, 'bookmarks'));
+    } catch (err) {
+      Logger.error(err);
+      throw new Error("We couldn't delete the bookmark. Try again later.");
+    }
+  },
+
+  _deleteBookmark(bookmark_id) {
+    return get(this, 'ajax')
+      .request(ENV.APIRoutes['new-bookmarks']['delete-bookmark'], {
+        method: 'POST',
+        contentType: 'application/json',
+        data: { bookmark_id }
+      });
   },
 
   _fetchCollections() {

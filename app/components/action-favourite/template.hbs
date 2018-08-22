@@ -1,14 +1,14 @@
-{{#if isSubmitting}}
+{{#if (or isSubmitting (is-pending isStarred))}}
   {{fa-icon "circle-o-notch" pulse=true}}
 {{else}}
   {{#if isHovered}}
-    {{#if isStarred}}
+    {{#if (await isStarred)}}
       {{fa-icon "star" class="fw-bold fc-yellow"}}
     {{else}}
       {{fa-icon "star-o" class="fw-bold fc-yellow"}}
     {{/if}}
   {{else}}
-    {{#if isStarred}}
+    {{#if (await isStarred)}}
       {{fa-icon "star" class="fw-bold fc-yellow"}}
     {{else}}
       {{fa-icon "star-o" class="fw-bold"}}

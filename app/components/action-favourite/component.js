@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 // import { createActionData } from 'repositive/utils/actions';
 
-const { inject: { service }, Component, computed, isPresent, Logger, get, set } = Ember;
+const { inject: { service }, Component, computed, Logger, get, set } = Ember;
 
 export default Component.extend({
   store: service(),
@@ -19,9 +19,9 @@ export default Component.extend({
   model: null,
   modelType: null,
 
-  isStarred: computed('favouritesService.userFavourites', function() {
-    return isPresent(get(this, 'favouritesService')
-      .getFavourite(get(this, 'model.id'), get(this, 'model.constructor.modelName')));
+  isStarred: computed('favouritesService.bookmarks', function() {
+    return get(this, 'favouritesService')
+      .getFavourite(get(this, 'model.id'), get(this, 'model.constructor.modelName'));
   }),
 
   actions: {
@@ -57,11 +57,7 @@ export default Component.extend({
       return;
     }
     if (!get(this, 'isSubmitting')) {
-      if (favourite) {
-        this._deleteFavourite(favourite);
-      } else {
-        this._addFavourite();
-      }
+      return get(this, 'isStarred').then((isStarred) => isStarred ? this._deleteFavourite() : this._addFavourite());
     }
   },
 
@@ -77,17 +73,22 @@ export default Component.extend({
       .catch(Logger.error)
   },
 
-  _deleteFavourite(favourite) {
+  _deleteFavourite() {
     const currentModel = get(this, 'model');
+    // const modelType = get(this, 'modelType');
+    const favouritesService = get(this, 'favouritesService');
+
     set(this, 'isSubmitting', true);
-    favourite.destroyRecord()
+    return favouritesService.deleteFavourite(get(currentModel, 'id'))
       .then(this._handleDeleteSuccess.bind(this, currentModel))
       .catch(Logger.error);
   },
 
   _handleSaveSuccess(currentModel, savedFavourite) {
-    get(this, 'favouritesService').pushFavourite(savedFavourite);
     set(this, 'isSubmitting', false);
+    console.log('savedFavourite -> ', savedFavourite);
+    set(this, 'favorite', savedFavourite);
+    console.warn('change the next line')
     currentModel.incrementProperty('stats.favourite');
   },
 
