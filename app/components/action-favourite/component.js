@@ -36,8 +36,6 @@ export default Component.extend({
 
   touchEnd() {
     const currentModel = this.model; //can be request or dataset
-    const favourite = get(this, 'favouritesService')
-      .getFavourite(currentModel.id, get(currentModel, 'constructor.modelName'));
 
     if (get(this, 'session.isAuthenticated')) {
       get(this, 'metrics').trackEvent({
@@ -69,7 +67,7 @@ export default Component.extend({
     set(this, 'isSubmitting', true);
 
     return favouritesService.createFavorite(get(currentModel, 'id'), modelType)
-      .then((newFav) => this._handleSaveSuccess(currentModel, newFav))
+      .then(() => this._handleSaveSuccess(currentModel))
       .catch(Logger.error)
   },
 
@@ -80,22 +78,20 @@ export default Component.extend({
 
     set(this, 'isSubmitting', true);
     return favouritesService.deleteFavourite(get(currentModel, 'id'))
-      .then(this._handleDeleteSuccess.bind(this, currentModel))
+      .then(() => this._handleDeleteSuccess(currentModel))
       .catch(Logger.error);
   },
 
-  _handleSaveSuccess(currentModel, savedFavourite) {
+  _handleSaveSuccess(currentModel) {
     set(this, 'isSubmitting', false);
-    console.log('savedFavourite -> ', savedFavourite);
-    set(this, 'favorite', savedFavourite);
     console.warn('change the next line')
     currentModel.incrementProperty('stats.favourite');
   },
 
-  _handleDeleteSuccess(currentModel, deletedFavourite) {
+  _handleDeleteSuccess(currentModel) {
     set(this, 'isSubmitting', false);
+    console.warn('change the next line');
     currentModel.decrementProperty('stats.favourite');
-    get(this, 'favouritesService').removeFavourite(deletedFavourite);
     get(this, 'metrics').trackEvent({
       category: 'discover_homeauth_dataset',
       action: 'favourite',
@@ -105,5 +101,4 @@ export default Component.extend({
   }
 }).reopenClass({
   positionalParams: ['model', 'modelType']
-
 });
