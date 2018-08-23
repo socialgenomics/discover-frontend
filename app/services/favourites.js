@@ -44,6 +44,12 @@ export default Service.extend({
       .then((bookmarks) => bookmarks.filter((b) => b.resource_id == modelId).pop());
   },
 
+  async getCount(resource_id) {
+    return get(this, 'ajax')
+      .request(ENV.APIRoutes['new-bookmarks']['count-bookmarks'].replace('{id}', resource_id))
+      .then(R.prop('result'));
+  },
+
   async createFavorite(resource_id, resource_type) {
     try {
       const bookmarks = await get(this, 'bookmarks') || [];

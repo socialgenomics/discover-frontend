@@ -82,16 +82,12 @@ export default Component.extend({
       .catch(Logger.error);
   },
 
-  _handleSaveSuccess(currentModel) {
+  _handleSaveSuccess() {
     set(this, 'isSubmitting', false);
-    console.warn('change the next line')
-    currentModel.incrementProperty('stats.favourite');
   },
 
   _handleDeleteSuccess(currentModel) {
     set(this, 'isSubmitting', false);
-    console.warn('change the next line');
-    currentModel.decrementProperty('stats.favourite');
     get(this, 'metrics').trackEvent({
       category: 'discover_homeauth_dataset',
       action: 'favourite',

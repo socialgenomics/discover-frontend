@@ -1,5 +1,4 @@
 {{activity-card-header group=group count=(get (await model) 'length') isProfilePage=isProfilePage}}
-{{log "model -> " model}}
 {{#async-block model as |ab|}}
   {{ab.pending}}
   {{#ab.error}}

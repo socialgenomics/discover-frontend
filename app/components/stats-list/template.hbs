@@ -2,7 +2,7 @@
   <li class="inline-block pr2 mr2 border-right fc-green cursor-default" data-balloon="Access Type" data-balloon-pos="down">
     <i class="fa fa-globe"></i>
     <span class="px2">
-      {{access}}
+      Open
     </span>
   </li>
 {{/if}}
@@ -11,7 +11,7 @@
   <li class="inline-block pr2 mr2 border-right fc-red cursor-default" data-balloon="Access Type" data-balloon-pos="down">
     <i class="fa fa-lock"></i>
     <span class="px2">
-      {{access}}
+      Restricted
     </span>
   </li>
 {{/if}}
@@ -85,8 +85,8 @@
   <li class="inline-block cursor-default" data-balloon="Favourites" data-balloon-pos="down">
     {{fa-icon "star"}}
     <span class="px2">
-      {{#if stats.favourite}}
-        {{rough-estimate stats.favourite}}
+      {{#if (await stats.favourite)}}
+        {{rough-estimate (await stats.favourite)}}
       {{else}}
         0
       {{/if}}

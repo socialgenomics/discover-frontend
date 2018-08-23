@@ -70,7 +70,8 @@ module.exports = function (environment) {
           'change-collection-name': '/new-bookmarks/change-collection-name',
           'delete-collection': '/new-bookmarks/delete-collection',
           'add-bookmark-to-collection': '/new-bookmarks/add-bookmark-to-collection',
-          'delete-bookmark-from-collection': '/new-bookmarks/delete-bookmark-from-collection'
+          'delete-bookmark-from-collection': '/new-bookmarks/delete-bookmark-from-collection',
+          'count-bookmarks': '/new-bookmarks/view-bookmarks-count-for-resource?id={id}'
         }
       };
 
