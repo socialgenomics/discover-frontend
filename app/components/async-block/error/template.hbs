@@ -1,0 +1,7 @@
+{{#if (is-rejected promise)}}
+  {{#if (has-block)}}
+    {{yield}}
+  {{else}}
+    <p> An error occurred, please reload the page or try again later.</p>
+  {{/if}}
+{{/if}}
