@@ -19,16 +19,16 @@ export default Service.extend({
 
   observeUserId: observer('session.authenticatedUser.id', function () {
     if (get(this, 'session.authenticatedUser.id')) {
-      this.refreshFavorites();
+      this.refreshFavourites();
     }
   }),
 
   init() {
     this._super(...arguments);
-    this.refreshFavorites();
+    this.refreshFavourites();
   },
 
-  refreshFavorites() {
+  refreshFavourites() {
     if (get(this, 'session.isAuthenticated')) {
       debounce(this, this.loadUserBookmarks, 50);
     } // else do nothing
