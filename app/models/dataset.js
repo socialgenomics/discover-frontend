@@ -28,12 +28,17 @@ export default Model.extend({
   accession: computed('externalId', function() {
     return get(this, 'externalId');
   }),
-  stats: computed('_stats', function (stats) {
+  stats: computed('_stats', 'favourites.favCounts', function (stats, favCounts) {
     return {
       ...stats,
-      favourite: get(this, 'favourites').getCount(get(this, 'id'))
+      favourite: get(favCounts, get(this, 'id')) || 0
     };
   }),
 
-  favourites: service()
+  favourites: service(),
+  init() {
+    this._super(...arguments);
+    // now send a request to get the number of favourites that exists
+    get(this, 'favourites').getCount(get(this, 'id'))
+  }
 });

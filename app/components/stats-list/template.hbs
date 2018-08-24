@@ -86,7 +86,7 @@
     {{fa-icon "star"}}
     <span class="px2">
       {{#if (await stats.favourite)}}
-        {{rough-estimate (await stats.favourite)}}
+        {{rough-estimate stats.favourite}}
       {{else}}
         0
       {{/if}}
