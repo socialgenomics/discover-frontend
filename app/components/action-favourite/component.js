@@ -1,8 +1,8 @@
 import Ember from 'ember';
 
-import { createActionData } from 'repositive/utils/actions';
+// import { createActionData } from 'repositive/utils/actions';
 
-const { inject: { service }, Component, computed, isPresent, Logger, get, set } = Ember;
+const { inject: { service }, Component, computed, Logger, get, set } = Ember;
 
 export default Component.extend({
   store: service(),
@@ -14,9 +14,14 @@ export default Component.extend({
   isSubmitting: false,
   showCreateAccountModal: false,
 
-  isStarred: computed('favouritesService.userFavourites', function() {
-    return isPresent(get(this, 'favouritesService')
-      .getFavourite(get(this, 'model.id'), get(this, 'model.constructor.modelName')));
+
+  //data props
+  model: null,
+  modelType: null,
+
+  isStarred: computed('favouritesService.bookmarks', function() {
+    return get(this, 'favouritesService')
+      .getFavourite(get(this, 'model.id'), get(this, 'model.constructor.modelName'));
   }),
 
   actions: {
@@ -31,8 +36,6 @@ export default Component.extend({
 
   touchEnd() {
     const currentModel = this.model; //can be request or dataset
-    const favourite = get(this, 'favouritesService')
-      .getFavourite(currentModel.id, get(currentModel, 'constructor.modelName'));
 
     if (get(this, 'session.isAuthenticated')) {
       get(this, 'metrics').trackEvent({
@@ -52,46 +55,39 @@ export default Component.extend({
       return;
     }
     if (!get(this, 'isSubmitting')) {
-      if (favourite) {
-        this._deleteFavourite(favourite);
-      } else {
-        this._addFavourite();
-      }
+      return get(this, 'isStarred').then((isStarred) => isStarred ? this._deleteFavourite() : this._addFavourite());
     }
   },
 
   _addFavourite() {
     const currentModel = get(this, 'model'); //can be request or dataset
-    const currentUser = get(this, 'session.authenticatedUser');
-    const store = get(this, 'store');
+    const modelType = get(this, 'modelType');
+    const favouritesService = get(this, 'favouritesService');
 
     set(this, 'isSubmitting', true);
 
-    return store
-      .createRecord('action', createActionData(currentModel, currentUser, 'favourite'))
-      .save()
-      .then(this._handleSaveSuccess.bind(this, currentModel))
-      .catch(Logger.error);
+    return favouritesService.createFavorite(get(currentModel, 'id'), modelType)
+      .then(() => this._handleSaveSuccess(currentModel))
+      .catch(Logger.error)
   },
 
-  _deleteFavourite(favourite) {
+  _deleteFavourite() {
     const currentModel = get(this, 'model');
+    // const modelType = get(this, 'modelType');
+    const favouritesService = get(this, 'favouritesService');
+
     set(this, 'isSubmitting', true);
-    favourite.destroyRecord()
-      .then(this._handleDeleteSuccess.bind(this, currentModel))
+    return favouritesService.deleteFavourite(get(currentModel, 'id'))
+      .then(() => this._handleDeleteSuccess(currentModel))
       .catch(Logger.error);
   },
 
-  _handleSaveSuccess(currentModel, savedFavourite) {
-    get(this, 'favouritesService').pushFavourite(savedFavourite);
+  _handleSaveSuccess() {
     set(this, 'isSubmitting', false);
-    currentModel.incrementProperty('stats.favourite');
   },
 
-  _handleDeleteSuccess(currentModel, deletedFavourite) {
+  _handleDeleteSuccess(currentModel) {
     set(this, 'isSubmitting', false);
-    currentModel.decrementProperty('stats.favourite');
-    get(this, 'favouritesService').removeFavourite(deletedFavourite);
     get(this, 'metrics').trackEvent({
       category: 'discover_homeauth_dataset',
       action: 'favourite',
@@ -99,4 +95,6 @@ export default Component.extend({
       value: false
     });
   }
+}).reopenClass({
+  positionalParams: ['model', 'modelType']
 });
