@@ -114,9 +114,10 @@ jobs:
   build_container_local:
     environment:
       - TARGET: 'local'
-      - EMBER_ENV: 'staging'
+      - EMBER_ENV: 'local-development'
       - API_BASE_URL: 'http://localhost:3000'
     <<: *build_container
+
   build_container_qa:
     environment:
       - TARGET: 'qa'
