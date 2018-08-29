@@ -1,0 +1,7 @@
+{{#if (is-fulfilled promise)}}
+  {{#if (has-block)}}
+    {{yield (await promise)}}
+  {{else}}
+    {{await promise}}
+  {{/if}}
+{{/if}}

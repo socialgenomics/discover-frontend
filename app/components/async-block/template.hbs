@@ -1,0 +1,18 @@
+{{#if (has-block)}}
+  {{yield (hash
+    settledContent= (await content)
+    pending=(component pendingComponent
+      content
+    )
+    error=(component errorComponent
+      content
+    )
+    fulfilled=(component fulfilledComponent
+      content
+    )
+  )}}
+{{else}}
+  {{component pendingComponent content}}
+  {{component errorComponent content}}
+  {{component fulfilledComponent content}}
+{{/if}}

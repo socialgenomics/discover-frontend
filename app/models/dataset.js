@@ -1,9 +1,9 @@
-import Ember from 'ember';
 import Model from 'ember-data/model';
 import attr from 'ember-data/attr';
+import { inject as service } from '@ember/service';
 import { belongsTo, hasMany } from 'ember-data/relationships';
-
-const { computed, get } = Ember;
+import { get } from '@ember/object';
+import computed from  'ember-macro-helpers/computed';
 
 export default Model.extend({
   access: attr('string'),
@@ -12,7 +12,7 @@ export default Model.extend({
   description: attr('string'),
   externalId: attr('string'),
   properties: attr('object'),
-  stats: attr('object'),
+  _stats: attr('object'),
   tech: attr('string'),
   title: attr('string'),
   updatedAt: attr('isodate'),
@@ -27,5 +27,18 @@ export default Model.extend({
 
   accession: computed('externalId', function() {
     return get(this, 'externalId');
-  })
+  }),
+  stats: computed('_stats', 'favourites.favCounts', function (stats, favCounts) {
+    return {
+      ...stats,
+      favourite: get(favCounts, get(this, 'id')) || 0
+    };
+  }),
+
+  favourites: service(),
+  init() {
+    this._super(...arguments);
+    // now send a request to get the number of favourites that exists
+    get(this, 'favourites').getCount(get(this, 'id'))
+  }
 });

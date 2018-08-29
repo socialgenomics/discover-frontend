@@ -57,7 +57,22 @@ module.exports = function (environment) {
         'users.signup': '/auth/register',
         'verify-email-resend': '/auth/verify/resend',
         'verify-email': '/auth/verify',
-        'autocomplete': '/autocomplete'
+        'autocomplete': '/autocomplete',
+        'new-bookmarks': {
+          'view-collections': '/new-bookmarks/view-collections',
+          'view-collection': '/new-bookmarks/view-collection',
+          'view-bookmarks': '/new-bookmarks/view-bookmarks',
+          'view-bookmark': '/new-bookmarks/view-bookmark',
+          'create-bookmark': '/new-bookmarks/create-bookmark',
+          'add-notes-to-bookmark': '/new-bookmarks/add-notes-to-bookmark',
+          'delete-bookmark': '/new-bookmarks/delete-bookmark',
+          'create-collection': '/new-bookmarks/create-collection',
+          'change-collection-name': '/new-bookmarks/change-collection-name',
+          'delete-collection': '/new-bookmarks/delete-collection',
+          'add-bookmark-to-collection': '/new-bookmarks/add-bookmark-to-collection',
+          'delete-bookmark-from-collection': '/new-bookmarks/delete-bookmark-from-collection',
+          'count-bookmarks': '/new-bookmarks/view-bookmarks-count-for-resource?id={id}'
+        }
       };
 
       function prefixWithBaseUrl(obj) {

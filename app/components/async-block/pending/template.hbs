@@ -1,0 +1,7 @@
+{{#if (is-pending promise)}}
+  {{#if (has-block)}}
+    {{yield}}
+  {{else}}
+    {{fa-icon "circle-o-notch" pulse=true size=2}}
+  {{/if}}
+{{/if}}

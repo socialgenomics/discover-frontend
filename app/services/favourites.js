@@ -1,44 +1,131 @@
+import Service from '@ember/service';
+import { inject as service } from '@ember/service';
+import { get, set, observer } from '@ember/object';
+import { debounce } from '@ember/runloop';
+import {all, resolve } from 'rsvp';
+import R from 'npm:ramda';
+import ENV from 'repositive/config/environment';
 import Ember from 'ember';
-
-const { inject: { service }, Service, Logger, get, getWithDefault, set } = Ember;
+const {Logger} = Ember;
 
 export default Service.extend({
+  ajax: service(),
   store: service(),
   session: service(),
   flashMessages: service(),
 
-  userFavourites: undefined, //list of actions where type = 'favourite'
+  bookmarks: null,
+  favCounts: null,
 
-  loadFavourites() {
-    if (get(this, 'userFavourites') === undefined && get(this, 'session.isAuthenticated')) { //favourites haven't been loaded yet
-      const currentUserId = get(this, 'session.session.authenticated.user.id');
-      const store = get(this, 'store');
+  observeUserId: observer('session.authenticatedUser.id', function () {
+    if (get(this, 'session.authenticatedUser.id')) {
+      this.refreshFavourites();
+    }
+  }),
 
-      return store.query('action', {
-        'where.user_id': currentUserId,
-        'where.type': 'favourite',
-        limit: 1000
-      })
-        .then(favourites => {
-          set(this, 'userFavourites', []);
-          favourites.map(favourite => get(this, 'userFavourites').push(favourite));
-        })
-        .catch(Logger.error);
+  init() {
+    this._super(...arguments);
+    set(this, 'favCounts', {});
+    this.refreshFavourites();
+  },
+
+  refreshFavourites() {
+    if (get(this, 'session.isAuthenticated')) {
+      debounce(this, this.loadUserBookmarks, 50);
+    } // else do nothing
+  },
+
+
+  loadUserBookmarks() {
+    set(this, 'bookmarks', this._fetchBookmarks());
+  },
+
+  getFavourite(modelId) {
+    return (get(this, 'bookmarks') || resolve([]))
+      .then((bookmarks) => bookmarks.filter((b) => b.resource_id == modelId).pop());
+  },
+
+  async getCount(resource_id) {
+    return get(this, 'ajax')
+      .request(ENV.APIRoutes['new-bookmarks']['count-bookmarks'].replace('{id}', resource_id))
+      .then(R.prop('result'))
+      .then((count) => {
+        set(this, `favCounts.${resource_id}`, count);
+        this.notifyPropertyChange('favCounts');
+        return count;
+      });
+  },
+
+  async createFavorite(resource_id, resource_type) {
+    try {
+      const bookmarks = await get(this, 'bookmarks') || [];
+      const currentUserId = get(this, 'session.authenticatedUser.id');
+      const response = await this._createBookmark(resource_id, resource_type, currentUserId, 'user');
+      set(this, 'bookmarks', resolve([...bookmarks, response]));
+      //side upload the number of favourites ->
+      this.getCount(resource_id);
+      return response;
+    } catch (err) {
+      Logger.error(err);
+      throw new Error("We couldn't create the bookmark. Try again later.");
     }
   },
 
-  removeFavourite(favourite) {
-    set(this, 'userFavourites', get(this, 'userFavourites').without(favourite));
-    this.notifyPropertyChange('userFavourites');
+  _createBookmark(resource_id, resource_type, owner_id, owner_type) {
+    return get(this, 'ajax')
+      .request(ENV.APIRoutes['new-bookmarks']['create-bookmark'], {
+        method: 'POST',
+        contentType: 'application/json',
+        data: { resource_id, resource_type, owner_id, owner_type }
+      })
+      .then(R.prop('result'))
+      .then((bookmark) => this._loadBookmarkResource(bookmark));
   },
 
-  pushFavourite(favourite) {
-    get(this, 'userFavourites').push(favourite);
-    this.notifyPropertyChange('userFavourites');
+  async deleteFavourite(resource_id) {
+    try {
+      const bookmarks = await get(this, 'bookmarks') || [];
+      const bookmark = bookmarks.filter((bookmark) => bookmark.resource_id === resource_id).pop();
+      if (!bookmark) {
+        throw new Error('There is no matching bookmark');
+      }
+      await this._deleteBookmark(bookmark.id);
+      const newBookmarks = bookmarks.filter((b) => b.id !== bookmark.id);
+      set(this, 'bookmarks', resolve(newBookmarks));
+      //side upload the number of favourites ->
+      this.getCount(resource_id);
+    } catch (err) {
+      Logger.error(err);
+      throw new Error("We couldn't delete the bookmark. Try again later.");
+    }
   },
 
-  getFavourite(modelId, modelName) {
-    const keyName = modelName + 'Id.id';
-    return getWithDefault(this, 'userFavourites', []).findBy(keyName, modelId);
+  _deleteBookmark(bookmark_id) {
+    return get(this, 'ajax')
+      .request(ENV.APIRoutes['new-bookmarks']['delete-bookmark'], {
+        method: 'POST',
+        contentType: 'application/json',
+        data: { bookmark_id }
+      });
+  },
+
+  _fetchBookmarks() {
+    const currentUserId = get(this, 'session.authenticatedUser.id');
+    return get(this, 'ajax')
+      .request(`${ENV.APIRoutes['new-bookmarks']['view-bookmarks']}?owner_id=${currentUserId}`)
+      .then(R.prop('result'))
+      .then((bookmarks) =>
+        // TODO one day we should changed that to let the service deal with it
+        all(bookmarks.map((bookmark) => this._loadBookmarkResource(bookmark)))
+      );
+  },
+
+  _loadBookmarkResource(bookmark) {
+    const { resource_type, resource_id } = bookmark;
+    const store = get(this, 'store');
+    return store.findRecord(resource_type, resource_id)
+      .then((resource) => {
+        return { ...bookmark, resource };
+      });
   }
 });

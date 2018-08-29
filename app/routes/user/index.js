@@ -1,17 +1,13 @@
 import Ember from 'ember';
+import Route from '@ember/routing/route';
+import { inject as service } from '@ember/service';
+import { hash } from 'rsvp';
+import { get } from '@ember/object';
+import { isEmpty } from '@ember/utils';
+
 import ENV from 'repositive/config/environment';
 
-const {
-  inject: {
-    service
-  },
-  Route,
-  RSVP,
-  get,
-  Logger,
-  isEmpty,
-  set
-} = Ember;
+const { Logger } = Ember;
 
 export default Route.extend({
   ajax: service(),
@@ -24,8 +20,10 @@ export default Route.extend({
         .then(user => this._getProfileData(user, params))
         .then(this._getDiscussionsAndContributions.bind(this))
         .then(values => {
-          set(this.controllerFor('user.index'), 'favouritedData', values.profileData.favourited_data);
           const discussions = [...values.datasetDiscussions.toArray(), ...values.requestDiscussions.toArray()];
+          //ask to refresh the favourites on the side
+          const favourites = get(this, 'favouritesService');
+          favourites.refreshFavourites();
           return {
             user: values.profileData.user,
             registrations: values.profileData.registrations,
@@ -48,7 +46,7 @@ export default Route.extend({
 
   _getProfileData(user, params) {
     const userId = get(user, 'id');
-    return RSVP.hash({
+    return hash({
       user: user,
       registrations: this.store.query('dataset', {
         'where.user_id': userId,
@@ -85,7 +83,7 @@ export default Route.extend({
     const datasetDiscussions = isEmpty(datasetDiscussionIds) ? [] : this._createQuery(datasetDiscussionIds, 'dataset');
     const requestDiscussions = isEmpty(requestDiscussionIds) ? [] : this._createQuery(requestDiscussionIds, 'request');
 
-    return RSVP.hash({
+    return hash({
       profileData,
       datasetContributions,
       datasetDiscussions,
@@ -118,7 +116,7 @@ export default Route.extend({
 
   _getFavouritedData(userIdOfProfile) {
     const ajax = get(this, 'ajax');
-    return RSVP.hash({
+    return hash({
       datasets: ajax.request(ENV.APIRoutes['favourite-datasets'].replace('{user_id}', userIdOfProfile), {
         method: 'GET'
       }),

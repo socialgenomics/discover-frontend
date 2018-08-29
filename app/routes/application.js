@@ -11,7 +11,7 @@ export default Route.extend(ApplicationRouteMixin, {
   urlGenerator: service(),
 
   model() {
-    get(this, 'favouritesService').loadFavourites();
+    get(this, 'favouritesService').refreshFavourites();
   },
 
   init() {
@@ -64,7 +64,7 @@ export default Route.extend(ApplicationRouteMixin, {
 
   sessionAuthenticated() {
     this._super(...arguments);
-    get(this, 'favouritesService').loadFavourites();
+    get(this, 'favouritesService').refreshFavourites();
   },
 
   /**
