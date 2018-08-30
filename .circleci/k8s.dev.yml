@@ -54,7 +54,7 @@ metadata:
     kubernetes.io/tls-acme: "true"
 spec:
   rules:
-  - host: discover-staging.repositive.io
+  - host: discover-dev.repositive.io
     http:
       paths:
       - backend:
