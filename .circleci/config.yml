@@ -154,6 +154,7 @@ jobs:
 
   release_dev:
     environment:
+      - TARGET: 'dev'
       - CLUSTER: 'dev'
     <<: *deploy_image
 
