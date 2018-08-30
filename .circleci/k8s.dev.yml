@@ -50,7 +50,8 @@ metadata:
   labels:
     app: discover
   annotations:
-    kubernetes.io/ingress.class: "traefik"
+    kubernetes.io/ingress.class: nginx
+    kubernetes.io/tls-acme: "true"
 spec:
   rules:
   - host: discover-staging.repositive.io
@@ -59,3 +60,7 @@ spec:
       - backend:
           serviceName: discover
           servicePort: 80
+  tls:
+    - secretName: discover-tls-cert
+      hosts:
+        - discover-dev.repositive.io
