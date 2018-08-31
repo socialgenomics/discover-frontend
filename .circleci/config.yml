@@ -154,12 +154,12 @@ jobs:
 
   release_dev:
     environment:
-      - TARGET: 'dis-dev'
+      - TARGET: 'dev'
       - CLUSTER: 'dis-dev'
     <<: *deploy_image
 
   release_production:
     environment:
-      - TARGET: 'discover'
+      - TARGET: 'prod'
       - CLUSTER: 'discover'
     <<: *deploy_image
