@@ -32,7 +32,7 @@ spec:
     spec:
       containers:
         - name: discover
-          image: registry.repositive.io:5000/discover:${TAG}
+          image: registry.repositive.io:5000/discover.repositive.io:${TAG}
           resources:
             limits:
               cpu: 300m
