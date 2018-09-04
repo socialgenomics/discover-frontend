@@ -117,7 +117,7 @@ export default Service.extend({
       .then((bookmarks) =>
         // TODO one day we should changed that to let the service deal with it
         all(bookmarks.map((bookmark) => this._loadBookmarkResource(bookmark)))
-      );
+      ).then(R.filter(R.prop('resource'))); // <- remove the bookmarks for which the resource was not available
   },
 
   _loadBookmarkResource(bookmark) {
@@ -126,6 +126,10 @@ export default Service.extend({
     return store.findRecord(resource_type, resource_id)
       .then((resource) => {
         return { ...bookmark, resource };
+      })
+      .catch((err) => {
+        Logger.error(err);
+        return bookmark;
       });
   }
 });
