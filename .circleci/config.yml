@@ -154,12 +154,12 @@ jobs:
 
   release_dev:
     environment:
-      - TARGET: 'dev'
       - CLUSTER: 'dis-dev'
+      - CONFIG_PATH: '.circleci/k8s.dis-dev.yml'
     <<: *deploy_image
 
   release_production:
     environment:
-      - TARGET: 'prod'
-      - CLUSTER: 'discover'
+      - CLUSTER: 'dis-production'
+      - CONFIG_PATH: '.circleci/k8s.dis-production.yml'
     <<: *deploy_image
