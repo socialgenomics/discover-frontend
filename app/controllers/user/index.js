@@ -1,4 +1,5 @@
 import Controller from '@ember/controller';
+import { get } from '@ember/object';
 import { alias } from '@ember/object/computed';
 import { inject as service } from '@ember/service';
 import computed from 'ember-macro-helpers/computed';
@@ -10,8 +11,9 @@ export default Controller.extend({
   favourites: service(),
 
   user: alias('model.user'),
-  favouriteResources: computed('favourites.bookmarks', (boomarkPromise) =>
-    boomarkPromise.then(R.map(R.prop('resource')))
+  favouriteResources: computed('user.id', 'favourites.othersBookmarks', (userId, bookmarksPerUserId) =>
+    get(bookmarksPerUserId, userId)
+      .then(R.map(R.prop('resource')))
   ),
   isOwnProfile: computed('model.user.id', 'session.authenticatedUser.id', function(profileUserId, sessionUserId) {
     if (sessionUserId === profileUserId) {

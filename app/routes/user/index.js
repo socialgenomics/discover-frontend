@@ -23,7 +23,7 @@ export default Route.extend({
           const discussions = [...values.datasetDiscussions.toArray(), ...values.requestDiscussions.toArray()];
           //ask to refresh the favourites on the side
           const favourites = get(this, 'favouritesService');
-          favourites.refreshFavourites();
+          favourites.loadSomeonesBookmarks(params.id);
           return {
             user: values.profileData.user,
             registrations: values.profileData.registrations,
