@@ -16,6 +16,7 @@ export default Service.extend({
 
   bookmarks: null,
   favCounts: null,
+  othersBookmarks: null,
 
   observeUserId: observer('session.authenticatedUser.id', function () {
     if (get(this, 'session.authenticatedUser.id')) {
@@ -27,17 +28,22 @@ export default Service.extend({
     this._super(...arguments);
     set(this, 'favCounts', {});
     this.refreshFavourites();
+    set(this, 'othersBookmarks', {});
   },
 
   refreshFavourites() {
     if (get(this, 'session.isAuthenticated')) {
-      debounce(this, this.loadUserBookmarks, 50);
+      debounce(this, this.loadCurrentUserBookmarks, 50);
     } // else do nothing
   },
 
 
-  loadUserBookmarks() {
+  loadCurrentUserBookmarks() {
     set(this, 'bookmarks', this._fetchBookmarks());
+  },
+
+  loadSomeonesBookmarks(userId) {
+    set(this, `othersBookmarks.${userId}`, this._fetchBookmarks(userId));
   },
 
   getFavourite(modelId) {
@@ -109,10 +115,11 @@ export default Service.extend({
       });
   },
 
-  _fetchBookmarks() {
+  _fetchBookmarks(maybeUserId) {
     const currentUserId = get(this, 'session.authenticatedUser.id');
+    const userId = maybeUserId || currentUserId; // if no userId is provided use the current user' s one
     return get(this, 'ajax')
-      .request(`${ENV.APIRoutes['new-bookmarks']['view-bookmarks']}?owner_id=${currentUserId}`)
+      .request(`${ENV.APIRoutes['new-bookmarks']['view-bookmarks']}?owner_id=${userId}`)
       .then(R.prop('result'))
       .then((bookmarks) =>
         // TODO one day we should changed that to let the service deal with it
