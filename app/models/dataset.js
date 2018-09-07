@@ -1,11 +1,11 @@
 import Model from 'ember-data/model';
 import attr from 'ember-data/attr';
-import { inject as service } from '@ember/service';
 import { belongsTo, hasMany } from 'ember-data/relationships';
-import { get } from '@ember/object';
-import computed from  'ember-macro-helpers/computed';
+import { alias } from '@ember/object/computed';
 
-export default Model.extend({
+import CanBeFavMixin from 'repositive/mixins/can-be-fav-model-mixin';
+
+export default Model.extend(CanBeFavMixin, {
   access: attr('string'),
   assay: attr('string'),
   createdAt: attr('isodate'),
@@ -25,20 +25,5 @@ export default Model.extend({
   highlights: belongsTo('highlight'),
   userId: belongsTo('user'),
 
-  accession: computed('externalId', function() {
-    return get(this, 'externalId');
-  }),
-  stats: computed('_stats', 'favourites.favCounts', function (stats, favCounts) {
-    return {
-      ...stats,
-      favourite: get(favCounts, get(this, 'id')) || 0
-    };
-  }),
-
-  favourites: service(),
-  init() {
-    this._super(...arguments);
-    // now send a request to get the number of favourites that exists
-    get(this, 'favourites').getCount(get(this, 'id'))
-  }
+  accession: alias('externalId')
 });
