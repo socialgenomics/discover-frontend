@@ -29,16 +29,6 @@ workflows:
       - release_dev:
           requires:
             - build_container_dev
-      - build_container_demo:
-          filters:
-            branches:
-              only:
-                - production
-          requires:
-            - test_and_make
-      - release_demo:
-          requires:
-            - build_container_demo
       - build_container_production:
           filters:
             branches:
