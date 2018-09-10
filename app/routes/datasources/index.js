@@ -12,7 +12,7 @@ export default Route.extend(AuthenticatedRouteMixin, RememberScrollMixin, {
     if (get(this, 'session.isAuthenticated')) {
       return RSVP.hash({
         stats: get(this, 'ajax').request(ENV.APIRoutes['stats'], { method: 'GET' }),
-        datasources: get(this, 'ajax').request(ENV.APIRoutes['datasources'], { method: 'GET' })
+        datasources: get(this, 'ajax').request(ENV.APIRoutes['datasources'].replace('{limit}', 75), { method: 'GET' })
       }).catch(Logger.error);
     }
   }
