@@ -44,7 +44,7 @@ module.exports = function (environment) {
         'collection-stats': '/collection-stats/{collection_id}',
         'datasets.search': '/search',
         'datasets.trending': '/trending',
-        'datasources': '/datasources',
+        'datasources': '/datasources?limit={limit}',
         'favourite-datasets': '/favourites/{user_id}/dataset',
         'favourite-requests': '/favourites/{user_id}/request',
         'make-primary': '/make-primary',
