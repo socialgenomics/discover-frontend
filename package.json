@@ -10,6 +10,7 @@
   "scripts": {
     "setup": "yarn && npm rebuild node-sass",
     "startLocal": "BACKEND_SERVER=http://localhost:3000 yarn startWithHost",
+    "startLocalOnNewMac": "BACKEND_SERVER=http://localhost:3000 yarn startWithHostOnNewMac",
     "startWithHost": "ember server --watcher=polling --proxy=$BACKEND_SERVER",
     "startWithHostOnNewMac": "ember server --watcher=polling --proxy=$BACKEND_SERVER --live-reload-port 49153",
     "build": "ember build",
