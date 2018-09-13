@@ -3,9 +3,7 @@ import attr from 'ember-data/attr';
 import { belongsTo, hasMany } from 'ember-data/relationships';
 import { alias } from '@ember/object/computed';
 
-import CanBeFavMixin from 'repositive/mixins/can-be-fav-model-mixin';
-
-export default Model.extend(CanBeFavMixin, {
+export default Model.extend({
   access: attr('string'),
   assay: attr('string'),
   createdAt: attr('isodate'),

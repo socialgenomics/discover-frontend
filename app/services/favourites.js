@@ -15,7 +15,6 @@ export default Service.extend({
   flashMessages: service(),
 
   bookmarks: null,
-  favCounts: null,
   othersBookmarks: null,
 
   observeUserId: observer('session.authenticatedUser.id', function () {
@@ -26,7 +25,6 @@ export default Service.extend({
 
   init() {
     this._super(...arguments);
-    set(this, 'favCounts', {});
     this.refreshFavourites();
     set(this, 'othersBookmarks', {});
   },
@@ -51,25 +49,12 @@ export default Service.extend({
       .then((bookmarks) => bookmarks.filter((b) => b.resource_id == modelId).pop());
   },
 
-  async getCount(resource_id) {
-    return get(this, 'ajax')
-      .request(ENV.APIRoutes['new-bookmarks']['count-bookmarks'].replace('{id}', resource_id))
-      .then(R.prop('result'))
-      .then((count) => {
-        set(this, `favCounts.${resource_id}`, count);
-        this.notifyPropertyChange('favCounts');
-        return count;
-      });
-  },
-
   async createFavorite(resource_id, resource_type) {
     try {
       const bookmarks = await get(this, 'bookmarks') || [];
       const currentUserId = get(this, 'session.authenticatedUser.id');
       const response = await this._createBookmark(resource_id, resource_type, currentUserId, 'user');
       set(this, 'bookmarks', resolve([...bookmarks, response]));
-      //side upload the number of favourites ->
-      this.getCount(resource_id);
       return response;
     } catch (err) {
       Logger.error(err);
@@ -98,8 +83,6 @@ export default Service.extend({
       await this._deleteBookmark(bookmark.id);
       const newBookmarks = bookmarks.filter((b) => b.id !== bookmark.id);
       set(this, 'bookmarks', resolve(newBookmarks));
-      //side upload the number of favourites ->
-      this.getCount(resource_id);
     } catch (err) {
       Logger.error(err);
       throw new Error("We couldn't delete the bookmark. Try again later.");
