@@ -139,27 +139,28 @@ module.exports = function (environment) {
       'media-src': "'self'",
       'frame-src': "'self' 'unsafe-inline' https://repositive.typeform.com/to/pktwPz https://repositive.typeform.com/to/viIWx1"
     },
-    {
-      name: 'GoogleAnalytics',
-      config: {
-        id: 'UA-54495053-7'
+    metricsAdapters: [
+      {
+        name: 'GoogleAnalytics',
+        config: {
+          id: 'UA-54495053-7'
+        },
+        environments: ['production']
       },
-      environments: ['production']
-    },
-    {
-      name: 'Intercom',
-      environments: ['production'],
-      config: {
-        appId: 'tz4k4icz'
+      {
+        name: 'Intercom',
+        environments: ['production'],
+        config: {
+          appId: 'tz4k4icz'
+        }
+      },
+      {
+        name: 'Intercom',
+        environments: ['local-development'],
+        config: {
+          appId: 'vdoi8br5'
+        }
       }
-    },
-    {
-      name: 'Intercom',
-      environments: ['local-development'],
-      config: {
-        appId: 'vdoi8br5'
-      }
-    }
     ]
   };
 
