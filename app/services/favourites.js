@@ -83,8 +83,6 @@ export default Service.extend({
       await this._deleteBookmark(bookmark.id);
       const newBookmarks = bookmarks.filter((b) => b.id !== bookmark.id);
       set(this, 'bookmarks', resolve(newBookmarks));
-      // We also need to query the store to update the favourited resource
-      this._loadBookmarkResource(bookmark);
     } catch (err) {
       Logger.error(err);
       throw new Error("We couldn't delete the bookmark. Try again later.");
