@@ -12,7 +12,7 @@ export default Model.extend(CanBeFavMixin, {
   description: attr('string'),
   externalId: attr('string'),
   properties: attr('object'),
-  _stats: attr('object'),
+  stats: attr('object'),
   tech: attr('string'),
   title: attr('string'),
   updatedAt: attr('isodate'),

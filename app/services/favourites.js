@@ -68,7 +68,7 @@ export default Service.extend({
       const currentUserId = get(this, 'session.authenticatedUser.id');
       const response = await this._createBookmark(resource_id, resource_type, currentUserId, 'user');
       set(this, 'bookmarks', resolve([...bookmarks, response]));
-      //side upload the number of favourites ->
+      // side load the number of favourites ->
       this.getCount(resource_id);
       return response;
     } catch (err) {
@@ -98,8 +98,10 @@ export default Service.extend({
       await this._deleteBookmark(bookmark.id);
       const newBookmarks = bookmarks.filter((b) => b.id !== bookmark.id);
       set(this, 'bookmarks', resolve(newBookmarks));
-      //side upload the number of favourites ->
+      // side load the number of favourites ->
       this.getCount(resource_id);
+      // side load the bookmarks resource as well to reload the rest of the stats
+      this._loadBookmarkResource(bookmark);
     } catch (err) {
       Logger.error(err);
       throw new Error("We couldn't delete the bookmark. Try again later.");
