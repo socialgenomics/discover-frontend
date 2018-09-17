@@ -7,7 +7,7 @@ import CanBeFavMixin from 'repositive/mixins/can-be-fav-model-mixin';
 export default Model.extend(CanBeFavMixin, {
   createdAt: attr('isodate'),
   description: attr('string'),
-  _stats: attr('object'),
+  stats: attr('object'),
   title: attr('string'),
   isNHLBI: attr('boolean'),
   updatedAt: attr('isodate'),

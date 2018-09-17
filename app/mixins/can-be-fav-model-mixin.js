@@ -4,8 +4,8 @@ import { get } from '@ember/object';
 import computed from  'ember-macro-helpers/computed';
 
 export default Mixin.create({
-  _stats: {},
-  stats: computed('_stats', 'favourites.favCounts', function (stats, favCounts) {
+  stats: {},
+  statistics: computed('stats', 'favourites.favCounts', function (stats, favCounts) {
     return {
       ...stats,
       favourite: get(favCounts, get(this, 'id')) || 0
