@@ -91,6 +91,7 @@
     "urijs": "^1.18.10"
   },
   "dependencies": {
-    "@repositive/liz-skin": "^1.1.0"
+    "@repositive/liz-skin": "^1.1.0",
+    "fairshakeinsignia": "Nitrogen-DCPPC/FAIRshakeInsignia"
   }
 }

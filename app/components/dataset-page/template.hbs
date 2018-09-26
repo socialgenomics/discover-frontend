@@ -4,7 +4,15 @@
     <!-- dataset -->
     <div class="grid__col grid__col--7-of-12 relative u-full-height">
       <!-- header -->
-      <header class="c-card-header bc-very-light-grey flex justify-end items-center px3">
+      <header class="c-card-header bc-very-light-grey flex justify-between items-center px3" style="height: auto;">
+        <div class="flex items-center py2">
+          {{fair-score doi=model.externalId}}
+          {{log model.externalId}}
+          <div class="px3">
+            FAIRness of this data.
+          </div>
+          <a href="https://fairshake.cloud/project/54/">Learn more.</a>
+        </div>
         <div class="pl2 flex items-center">
           {{follow-button subscription=subscription model=model}}
           <ul class="flex list-flush-left pl3 mb0">
