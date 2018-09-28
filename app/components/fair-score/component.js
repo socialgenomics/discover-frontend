@@ -1,7 +1,7 @@
 import Component from '@ember/component';
 import { get } from '@ember/object';
 import { htmlSafe } from '@ember/string';
-import coreapi from 'npm:coreapi'
+import coreapi from 'npm:coreapi';
 import insignia from 'npm:fairshakeinsignia';
 import schema from 'npm:fairshakeinsignia/dist/schema.js';
 
