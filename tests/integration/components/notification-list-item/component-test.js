@@ -38,7 +38,7 @@ describe('Integration | Component | notification list item', function() {
           userId: {
             displayName: 'Cat Dog',
             profile: {
-              avatar: 'www.example.com/pic'
+              avatar: '/assets/images/avatar/lizard.png'
             }
           }
         }
@@ -53,7 +53,7 @@ describe('Integration | Component | notification list item', function() {
       this.render(hbs`{{notification-list-item notification=notification}}`);
       expect(this.$('.c-notification-img-date-container').text().trim()).to.eql('a few seconds ago');
       expect(this.$('span:first').text().trim()).to.eql('Cat Dog');
-      expect(this.$('img').attr('src')).to.eql('www.example.com/pic');
+      expect(this.$('img').attr('src')).to.eql('/assets/images/avatar/lizard.png');
     });
 
     it(`there is moment converted date text`, function() {
