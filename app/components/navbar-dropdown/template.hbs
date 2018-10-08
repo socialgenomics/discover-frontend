@@ -3,6 +3,8 @@
   {{#dropdown.trigger class="outline-none cursor-pointer px3"}}
     {{#if session.isAuthenticated}}
       <div class="hide-s hide-m">
+        {{log 'avatar -> ' avatar}}
+        {{log 'session -> ' session}}
         {{r-avatar avatar size="medium"}}
         <span class="fc-primary fs1 px2">{{firstname}}</span>
       </div>
