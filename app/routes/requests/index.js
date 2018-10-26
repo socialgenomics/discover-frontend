@@ -11,9 +11,25 @@ export default Route.extend(AuthenticatedRouteMixin, InfiniteScrollMixin, {
     const modelType = 'request';
     set(this, 'modelType', modelType);
 
-    return this._makeRequest(
-      modelType,
-      this._buildRequestObj(offset, resultsPerPage)
-    );
+    if (offset) {
+      return this._makeRequest(
+        modelType,
+        this._buildRequestObj(0, offset)
+      );
+    } else {
+      return this._makeRequest(
+        modelType,
+        this._buildRequestObj(offset, resultsPerPage)
+      );
+    }
+  },
+  actions: {
+    willTransition(transition) {
+      if (transition.targetName !== 'requests.detail') {
+        // if we are not going to the detail of one of the requests, then we should reset the offset!
+        set(this, 'offset', 0);
+      }
+      return transition;
+    }
   }
 });
