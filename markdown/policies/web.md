@@ -7,11 +7,10 @@ use policy applies to all users of, and visitors to, our site.
 Your use of our site means that you accept, and agree to abide by, all the policies in
 this acceptable use policy, which supplement our [Terms of Website Use](/policies?tab=terms).
 
-[repositive.io](https://repositive.io) is a site operated by Repositive Limited
-("We"). We are a Limited Company registered in England and Wales under company number
-08820538 and have our registered office at Windsor House, Station Court, Station Road,
-Great Shelford, Cambridge, CB22 5NE. Our trading address is The Future Business Centre,
-King’s Hedges Road, Cambridge, CB4 2HY. Our VAT number is 184453100.
+[repositive.io](https://repositive.io) is a site operated by Repositive Limited ("We").
+We are a Limited Company registered in England and Wales under company number 08820538 and
+have our registered office at Betjeman House, 104 Hills Road, Cambridge, CB2 1LQ. Our VAT
+number is 184453100.
 
 ## Prohibited Uses
 
