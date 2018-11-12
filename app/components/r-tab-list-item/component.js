@@ -1,12 +1,9 @@
 import Ember from 'ember';
-import layout from 'ui-library/components/r-tab-list-item/template';
 
 const { Component, computed, get, inject: { service } } = Ember;
 
 export default Component.extend({
   router: service('-routing'),
-
-  layout,
 
   tagName: 'li',
   classNames: ['flex-auto cursor-pointer fc-secondary fs2 fw-med p2'],
