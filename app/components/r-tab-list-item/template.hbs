@@ -1,0 +1,21 @@
+{{#if setActiveTab}}
+
+  {{r-tab-list-item/content tabName=(capitalize tabName) stats=stats icon=icon iconPosition=iconPosition}}
+
+
+{{else}}
+
+  {{#if query}}
+
+    {{#link-to target query class="fc-secondary fs2 block"}}
+      {{r-tab-list-item/content tabName=tabName stats=stats icon=icon iconPosition=iconPosition}}
+    {{/link-to}}
+
+  {{else}}
+
+    {{#link-to target class="fc-secondary fs2 block"}}
+      {{r-tab-list-item/content tabName=tabName stats=stats icon=icon iconPosition=iconPosition}}
+    {{/link-to}}
+
+  {{/if}}
+{{/if}}
