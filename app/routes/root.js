@@ -1,10 +1,11 @@
 import Ember from 'ember';
 import ENV from 'repositive/config/environment';
 import FlashMessageMixin from 'repositive/mixins/flash-message-mixin';
+import LoadDetailRouteMixin from 'repositive/mixins/load-detail-route';
 
 const { inject: { service }, computed, Route, RSVP, get, set, Logger, setProperties } = Ember;
 
-export default Route.extend(FlashMessageMixin, {
+export default Route.extend(FlashMessageMixin, LoadDetailRouteMixin, {
   session: service(),
   ajax: service(),
 
@@ -23,19 +24,19 @@ export default Route.extend(FlashMessageMixin, {
         datasources: this.store.query('collection', { 'where.type': 'datasource', 'order[0][0]': 'updated_at', 'order[0][1]': 'DESC', 'limit': '3' })
       })
         .then(data => {
-          //Normalize and push trending datasets
-          const trending = data.datasets.map((datasetObj) => {
-            return this.store.push(this.store.normalize('dataset', datasetObj));
+          const trendingP = data.datasets.map((datasetObj) => {
+            return this._getModelData(datasetObj, 'dataset')
+              .then(data => data.model);
           });
 
-          return {
+          return RSVP.all(trendingP).then(trending => ({
             stats: data.stats,
             datasets: trending,
             requests: data.requests,
             registered: data.registered,
             collections: data.collections,
             datasources: data.datasources
-          };
+          }));
         })
         .catch(Logger.error);
     }
