@@ -17,6 +17,12 @@ export default Mixin.create({
     }
   },
 
+  resetScroll() {
+    set(this, 'offset', 0);
+    set(this, 'allItemsLoaded', false);
+    set(this, 'previousFirstResultId', null);
+  },
+
   /**
    * @desc requests to login to access users auth token to reset password.
    * @param {String} modelType - name of model to query

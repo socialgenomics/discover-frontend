@@ -27,7 +27,7 @@ export default Route.extend(AuthenticatedRouteMixin, InfiniteScrollMixin, {
     willTransition(transition) {
       if (transition.targetName !== 'requests.detail') {
         // if we are not going to the detail of one of the requests, then we should reset the offset!
-        set(this, 'offset', 0);
+        this.resetScroll();
       }
       return transition;
     }
