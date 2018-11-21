@@ -20,6 +20,7 @@ export default Mixin.create({
   resetScroll() {
     set(this, 'offset', 0);
     set(this, 'allItemsLoaded', false);
+    set(this, 'previousFirstResultId', null);
   },
 
   /**
