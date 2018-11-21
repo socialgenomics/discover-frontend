@@ -1,6 +1,6 @@
 /**
  * converts the given numeric keycode into a human readable string
- * @param {number} keyCode 
+ * @param {number} keyCode
  * @returns {string} human readable value
  */
 export function nameForKeyCode(keyCode) {
