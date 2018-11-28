@@ -82,11 +82,19 @@
           {{else}}
             {{#if model.datasourceId.name}}
               <li class="fs0 fc-tertiary">
-                Sourced from:
+                Data source:
                 {{#link-to 'datasources.source' model.datasourceId.id}}
-                  <span class="fw-med fs1 fc-secondary">{{model.datasourceId.name}}</span>
+                  <span class="fw-med fs0">{{model.datasourceId.name}}</span>
                 {{/link-to}}
               </li>
+              {{#if model.datasourceId.properties.homepage}}
+              <li class="fs0 fc-tertiary">
+                Website:
+                <a target="_blank" rel="noopener noreferrer" href="{{model.datasourceId.properties.homepage}}">
+                  <span class="fw-med fs0">{{model.datasourceId.properties.homepage}}</span>
+                </a>
+              </li>
+              {{/if}}
             {{/if}}
 
             {{!-- TODO: should we remove this? I don't see this property in a model --}}
