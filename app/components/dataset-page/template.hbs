@@ -122,12 +122,6 @@
           {{/if}}
         </ul>
         <div class="flex items-center">
-          {{!--  TODO check if the new URLs are present.
-            - if they are used them
-            - if they are not default to the other stuff
-          --}}
-          {{log "access URL -> " (or model.properties.urls.access model.url)}}
-          {{log "URLs -> " model.properties.urls}}
           {{#if model.properties.urls.download}}
             {{#r-link-button
               class="mr1"
@@ -138,7 +132,7 @@
               target="_blank"
             }}
               <span class="flex items-center">
-                {{mdi-icon "download" size=24}}
+                {{mdi-icon "download" fill="white" size=24}}
                 Download
               </span>
             {{/r-link-button}}
