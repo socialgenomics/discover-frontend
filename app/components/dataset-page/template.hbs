@@ -137,24 +137,30 @@
               size="big"
               target="_blank"
             }}
-            Download
+              <span class="flex items-center">
+                {{mdi-icon "download" size=24}}
+                Download
+              </span>
             {{/r-link-button}}
           {{/if}}
+
           {{#if (or model.properties.urls.access model.url)}}
             {{#r-link-button
-              class="mr1"
+              class="mr1 px3"
               clickHandler=(action "trackExit")
               href=(if session.isAuthenticated (or model.properties.urls.access mode.url) '')
               label=(if (eq model.access "Open") "Access Data" "Go To Dataset")
-              variant="primary"
               size="big"
               target="_blank"
             }}
-              {{#if (eq model.access "Open")}}
-                Access Data
-              {{else}}
-                Go To Dataset
-              {{/if}}
+              <span class="flex items-center">
+                {{mdi-icon "earth" size=24}}
+                {{#if (eq model.access "Open")}}
+                  Access Data
+                {{else}}
+                  Go To Dataset
+                {{/if}}
+              </span>
             {{/r-link-button}}
           {{/if}}
 
