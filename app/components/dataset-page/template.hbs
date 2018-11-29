@@ -122,16 +122,40 @@
           {{/if}}
         </ul>
         <div class="flex items-center">
-          {{#if model.url}}
-            {{r-link-button
+          {{!--  TODO check if the new URLs are present.
+            - if they are used them
+            - if they are not default to the other stuff
+          --}}
+          {{log "access URL -> " (or model.properties.urls.access model.url)}}
+          {{log "URLs -> " model.properties.urls}}
+          {{#if model.properties.urls.download}}
+            {{#r-link-button
               class="mr1"
               clickHandler=(action "trackExit")
-              href=(if session.isAuthenticated model.url '')
+              href=(if session.isAuthenticated model.properties.urls.download '')
+              variant="primary"
+              size="big"
+              target="_blank"
+            }}
+            Download
+            {{/r-link-button}}
+          {{/if}}
+          {{#if (or model.properties.urls.access model.url)}}
+            {{#r-link-button
+              class="mr1"
+              clickHandler=(action "trackExit")
+              href=(if session.isAuthenticated (or model.properties.urls.access mode.url) '')
               label=(if (eq model.access "Open") "Access Data" "Go To Dataset")
               variant="primary"
               size="big"
               target="_blank"
             }}
+              {{#if (eq model.access "Open")}}
+                Access Data
+              {{else}}
+                Go To Dataset
+              {{/if}}
+            {{/r-link-button}}
           {{/if}}
 
           {{#if hasSampleTable}}
