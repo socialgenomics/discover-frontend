@@ -131,7 +131,7 @@
               size="big"
               target="_blank"
             }}
-              <span class="flex items-center">
+              <span class="flex items-center tt-uppercase">
                 {{mdi-icon "download" fill="white" class="mr3" size=24}}
                 Download
               </span>
@@ -147,13 +147,9 @@
               size="big"
               target="_blank"
             }}
-              <span class="flex items-center">
-                {{mdi-icon "earth" class="mr3" size=24}}
-                {{#if (eq model.access "Open")}}
-                  Access Data
-                {{else}}
-                  Go To Dataset
-                {{/if}}
+              <span class="flex items-center tt-uppercase">
+                {{mdi-icon (if (eq model.access "Open") "earth" "lock") class="mr3" size=24}}
+                Go To Dataset
               </span>
             {{/r-link-button}}
           {{/if}}
