@@ -84,14 +84,14 @@
               <li class="fs0 fc-tertiary">
                 Data source:
                 {{#link-to 'datasources.source' model.datasourceId.id}}
-                  <span class="fw-med fs0">{{model.datasourceId.name}}</span>
+                  <span class="fw-med fs1">{{model.datasourceId.name}}</span>
                 {{/link-to}}
               </li>
               {{#if model.datasourceId.properties.homepage}}
               <li class="fs0 fc-tertiary">
                 Website:
                 <a target="_blank" rel="noopener noreferrer" href="{{model.datasourceId.properties.homepage}}">
-                  <span class="fw-med fs0">{{model.datasourceId.properties.homepage}}</span>
+                  <span class="fw-med fs1 fc-secondary">{{model.datasourceId.properties.homepage}}</span>
                 </a>
               </li>
               {{/if}}
@@ -132,7 +132,7 @@
               target="_blank"
             }}
               <span class="flex items-center tt-uppercase">
-                {{mdi-icon "download" fill="white" class="mr3" size=24}}
+                {{mdi-icon "download" fill="currentColor" class="mr3" size=24}}
                 Download
               </span>
             {{/r-link-button}}
@@ -148,7 +148,7 @@
               target="_blank"
             }}
               <span class="flex items-center tt-uppercase">
-                {{mdi-icon (if (eq model.access "Open") "earth" "lock") class="mr3" size=24}}
+                {{mdi-icon (if (eq model.access "Open") "earth" "lock") class="mr3 fc-secondary" size=24 fill="currentColor"}}
                 Go To Dataset
               </span>
             {{/r-link-button}}
