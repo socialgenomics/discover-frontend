@@ -90,8 +90,8 @@
               {{#if model.datasourceId.properties.homepage}}
               <li class="fs0 fc-tertiary">
                 Website:
-                <a target="_blank" rel="noopener noreferrer" href="{{model.datasourceId.properties.homepage}}">
-                  <span class="fw-med fs1 fc-secondary">{{model.datasourceId.properties.homepage}}</span>
+                <a target="_blank" class="fw-med fs1 fc-secondary td-underline" rel="noopener noreferrer" href="{{model.datasourceId.properties.homepage}}">
+                  <span>{{model.datasourceId.properties.homepage}}</span>
                 </a>
               </li>
               {{/if}}
@@ -115,9 +115,12 @@
           {{#if model.access}}
             <li class="fs0 fc-tertiary">
               Access type:
-              {{#link-to 'help.searching-for-data' 'filters'}}
-                <span class="fw-med fs1 fc-secondary">{{model.access}}</span>
-              {{/link-to}}
+              <span class="fw-med fs1 fc-secondary">
+                {{model.access}}
+                {{#link-to 'help.searching-for-data' 'filters' class="fc-tertiary" }}
+                  {{mdi-icon "information-outline" fill="currentColor" size=16}}
+                {{/link-to}}
+              </span>
             </li>
           {{/if}}
         </ul>
