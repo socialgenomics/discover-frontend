@@ -4,7 +4,21 @@ workflows:
   version: 2
   test_and_release:
     jobs:
-      - test_and_make
+
+      - compute_tag:
+          filters:
+            branches:
+              only:
+                - master
+                - cmp-rc
+                - cmp-prod
+
+      - test_and_make:
+          filters:
+            branches:
+              ignore:
+                - dis-prod
+
       - build_container_local:
           filters:
             branches:
@@ -12,6 +26,8 @@ workflows:
                 - master
           requires:
             - test_and_make
+            - compute_tag
+
       - build_container_qa:
           filters:
             branches:
@@ -19,29 +35,46 @@ workflows:
                 - master
           requires:
             - test_and_make
-      - build_container_dev:
+            - compute_tag
+
+      - build_container_dis-rc:
           filters:
             branches:
               only:
                 - master
           requires:
             - test_and_make
-      - release_dev:
-          requires:
-            - build_container_dev
-      - build_container_production:
+            - compute_tag
+
+      - build_container_dis-prod:
           filters:
             branches:
               only:
-                - production
+                - dis-rc
           requires:
             - test_and_make
-      - release_production:
+            - compute_tag
+
+      - release_dis-rc:
+          filters:
+            branches:
+              only:
+                - dis-rc
           requires:
-            - build_container_production
+            - compute_tag
+
+      - release_dis-prod:
+          filters:
+            branches:
+              only:
+                - dis-prod
+          requires:
+            - compute_tag
+
       - create_release_tag:
           requires:
-            - release_production
+            - release_dis-rc
+            - release_dis-prod
 
 deploy_image: &deploy_image
   docker:
@@ -52,10 +85,10 @@ deploy_image: &deploy_image
     - run:
         name: release staging
         command: |
-          TAG="$(cat tag.txt)-${TARGET}"
+          TAG="$(cat tag.txt)-${CIRCLE_BRANCH}"
           curl -sSO -u "${DEPLOYER_USERNAME}":"${DEPLOYER_PASSWORD}" \
             "https://deployer.repositive.io/scripts/deploy.sh"
-          sh deploy.sh "$CIRCLE_PROJECT_REPONAME:$TAG" $CLUSTER $CONFIG_PATH
+          sh deploy.sh "$CIRCLE_PROJECT_REPONAME:$TAG" $CLUSTER $CONFIG_PATH $CIRCLE_BRANCH
 
 build_container: &build_container
   docker:
@@ -94,12 +127,10 @@ jobs:
           paths:
             - ./node_modules
       - run: npm test
-      - run: echo "$(git rev-parse --short HEAD)" > tag.txt
       - persist_to_workspace:
           root: .
           paths:
             - node_modules
-            - tag.txt
 
   build_container_local:
     environment:
@@ -115,16 +146,16 @@ jobs:
       - API_BASE_URL: 'http://proxy:3000'
     <<: *build_container
 
-  build_container_dev:
+  build_container_dis-rc:
     environment:
-      - TARGET: 'dev'
+      - TARGET: 'dis-rc'
       - EMBER_ENV: 'staging'
       - API_BASE_URL: 'https://api-dev.repositive.io'
     <<: *build_container
 
-  build_container_production:
+  build_container_dis-rc:
     environment:
-      - TARGET: 'prod'
+      - TARGET: 'dis-prod'
       - EMBER_ENV: 'production'
       - API_BASE_URL: 'https://api.repositive.io'
     <<: *build_container
@@ -136,22 +167,22 @@ jobs:
       - run:
           name: Create release tag
           command: |
-            TAG="$(date +%s)"
+            TAG=$(date +"%Y%m%d%H%M%S")
             SHA="$(git rev-parse HEAD)"
             curl -fsS -u "${GITHUB_USERNAME}":"${GITHUB_PASSWORD}" \
               -d '{"ref":"refs/tags/'"${TAG}"'", "sha":"'"${SHA}"'"}' \
               -X POST "https://api.github.com/repos/repositive/${CIRCLE_PROJECT_REPONAME}/git/refs"
 
-  release_dev:
+  release_dis-rc:
     environment:
-      - TARGET: 'dev' # This is needed to build the right image tag! ${TAG}-${TARGET}
+      - TARGET: 'dis-rc' # This is needed to build the right image tag! ${TAG}-${TARGET}
       - CLUSTER: 'dis-dev'
-      - CONFIG_PATH: '.circleci/k8s.dis-dev.yml'
+      - CONFIG_PATH: '.circleci/k8s.dis-rc.yml'
     <<: *deploy_image
 
   release_production:
     environment:
-      - TARGET: 'prod' # This is needed to build the right image tag! ${TAG}-${TARGET}
-      - CLUSTER: 'dis-production'
-      - CONFIG_PATH: '.circleci/k8s.dis-production.yml'
+      - TARGET: 'dis-prod' # This is needed to build the right image tag! ${TAG}-${TARGET}
+      - CLUSTER: 'dis-prod'
+      - CONFIG_PATH: '.circleci/k8s.dis-prod.yml'
     <<: *deploy_image
