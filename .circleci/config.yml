@@ -164,7 +164,7 @@ jobs:
       - API_BASE_URL: 'https://api-dev.repositive.io'
     <<: *build_container
 
-  build_container_dis-rc:
+  build_container_dis-prod:
     environment:
       - TARGET: 'dis-prod'
       - EMBER_ENV: 'production'
