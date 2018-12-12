@@ -114,6 +114,17 @@ build_container: &build_container
           docker push "registry.repositive.io:5000/${REPO}:${TAG}-${TARGET}"
 
 jobs:
+
+  compute_tag:
+    machine: true
+    steps:
+      - checkout
+      - run: echo "$(git rev-parse --short HEAD)" > tag.txt
+      - persist_to_workspace:
+          root: .
+          paths:
+            - tag.txt
+
   test_and_make:
     docker:
       - image: circleci/node:8.5-browsers
