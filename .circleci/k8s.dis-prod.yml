@@ -27,7 +27,7 @@ spec:
         app: discover
     spec:
       containers:
-      - image: registry.repositive.io:5000/discover.repositive.io:${TAG}
+      - image: registry.repositive.io:5000/discover.repositive.io:${TAG}-dis-prod
         imagePullPolicy: IfNotPresent
         name: discover
         ports:
