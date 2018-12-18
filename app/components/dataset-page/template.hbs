@@ -127,7 +127,7 @@
         <div class="flex items-center">
           {{#if model.properties.urls.download}}
             {{#r-link-button
-              class="mr1 px3"
+              class="mr4 px3"
               clickHandler=(action "trackExit")
               href=(if session.isAuthenticated model.properties.urls.download '')
               variant="primary"
