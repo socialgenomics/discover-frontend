@@ -10,8 +10,8 @@ workflows:
             branches:
               only:
                 - master
-                - cmp-rc
-                - cmp-prod
+                - dis-rc
+                - dis-prod
 
       - test_and_make:
           filters:
