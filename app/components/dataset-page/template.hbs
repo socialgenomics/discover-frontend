@@ -145,13 +145,12 @@
             {{#r-link-button
               class="mr1 px3"
               clickHandler=(action "trackExit")
-              href=(if session.isAuthenticated (or model.properties.urls.access mode.url) '')
-              label=(if (eq model.access "Open") "Access Data" "Go To Dataset")
+              href=(if session.isAuthenticated (or model.properties.urls.access model.url) '')
               size="big"
               target="_blank"
             }}
               <span class="flex items-center tt-uppercase">
-                {{mdi-icon (if (eq model.access "Open") "earth" "lock") class="mr3" size=24 fill="currentColor"}}
+                {{mdi-icon (if (or (eq model.access "Open") (not model.access)) "earth" "lock") class="mr3" size=24 fill="currentColor"}}
                 Go To Dataset
               </span>
             {{/r-link-button}}
