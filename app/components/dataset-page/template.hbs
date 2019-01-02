@@ -118,7 +118,7 @@
               <span class="fw-med fs1 fc-secondary">
                 {{model.access}}
                 {{#link-to 'help.searching-for-data' 'filters' class="fc-tertiary" }}
-                  {{mdi-icon "information-outline" fill="currentColor" size=16}}
+                  {{mdi-icon "information-outline" size=16}}
                 {{/link-to}}
               </span>
             </li>
@@ -135,7 +135,7 @@
               target="_blank"
             }}
               <span class="flex items-center tt-uppercase">
-                {{mdi-icon "download" fill="currentColor" class="mr3" size=24}}
+                {{mdi-icon "download" class="mr3" size=24}}
                 Download
               </span>
             {{/r-link-button}}
@@ -151,7 +151,7 @@
               target="_blank"
             }}
               <span class="flex items-center tt-uppercase">
-                {{mdi-icon (if (eq model.access "Open") "earth" "lock") class="mr3" size=24 fill="currentColor"}}
+                {{mdi-icon (if (eq model.access "Open") "earth" "lock") class="mr3" size=24}}
                 Go To Dataset
               </span>
             {{/r-link-button}}
