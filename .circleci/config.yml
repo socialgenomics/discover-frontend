@@ -105,13 +105,34 @@ build_container: &build_container
           TAG="$(cat tag.txt)"
           API_BASE_URL="${API_BASE_URL}"
 
+          # Login to to Vault with GH token
+          PAYLOAD="{ \"token\": \"${GITHUB_TOKEN}\" }"
+          TOKEN=$(curl -s --request POST --data "${PAYLOAD}" https://v8sh48s.repositive.io:8200/v1/auth/github/login --insecure | jq .auth.client_token | tr -d '"')
+
+          # Request Credentials for GCR 
+          DOCKERAUTH=$(curl -k -s --header "X-Vault-Token: $TOKEN" https://v8sh48s.repositive.io:8200/v1/gcp/token/gcr | jq .data.token | tr -d '"')
+
+          # build ember
           node_modules/ember-cli/bin/ember build --environment "${EMBER_ENV}"
+          
+          # Build the Container
           docker build -t app .
+
+          # TAG and Push to registry.repositive.io (AWS)
           docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD" registry.repositive.io:5000
           docker tag app "registry.repositive.io:5000/${REPO}:latest-${TARGET}"
           docker tag app "registry.repositive.io:5000/${REPO}:${TAG}-${TARGET}"
           docker push "registry.repositive.io:5000/${REPO}:latest-${TARGET}"
           docker push "registry.repositive.io:5000/${REPO}:${TAG}-${TARGET}"
+
+          # Authenticate to docker
+          docker login -u oauth2accesstoken -p $DOCKERAUTH https://gcr.io/repositive-gcr
+
+          # TAG and Push to gcr.io/repositive-gcr (GCP)
+          docker tag app "gcr.io/repositive-gcr/${REPO}:latest-${TARGET}"
+          docker tag app "gcr.io/repositive-gcr/${REPO}:${TAG}-${TARGET}"
+          docker push "gcr.io/repositive-gcr/${REPO}:latest-${TARGET}"
+          docker push "gcr.io/repositive-gcr/${REPO}:${TAG}-${TARGET}"
 
 jobs:
 
