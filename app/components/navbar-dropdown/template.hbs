@@ -2,9 +2,14 @@
 
   {{#dropdown.trigger class="outline-none cursor-pointer px3"}}
     {{#if session.isAuthenticated}}
-      <div class="hide-s hide-m">
+      <div class="hide-s hide-m flex items-center">
         {{r-avatar avatar size="medium"}}
-        <span class="fc-primary fs1 px2">{{firstname}}</span>
+        <span class="fc-primary fs1 px2 flex-shrink">{{firstname}}</span>
+        {{#if dropdown.isOpen}}
+          {{mdi-icon "menu-up" size=24 class="fc-secondary"}}
+        {{else}}
+          {{mdi-icon "menu-down" size=24 class="fc-secondary"}}
+        {{/if}}
       </div>
     {{/if}}
 
@@ -15,31 +20,68 @@
 
   {{#dropdown.content class="c-card flex flex-column"}}
     {{#if session.isAuthenticated}}
-      {{#link-to 'datasets.register'
+      {{#link-to 'users.profile'
         invokeAction=(action 'close' dropdown)
-        class='hide-l hide-w py3 pl3 pr5 u-hv-bc-white fc-secondary'}} Register Data {{/link-to}}
+        class='py3 pl3 pr5 u-hv-bc-white fc-primary flex items-center'}}
+        {{mdi-icon "account-circle" class="mr3 fc-secondary" size=24 }}
+        <span>Profile</span>
+      {{/link-to}}
 
-      {{#link-to 'datasets.request'
+      {{!-- {{#link-to 'users.profile'
         invokeAction=(action 'close' dropdown)
-        class='hide-l hide-w py3 pl3 pr5 u-hv-bc-white fc-secondary'}} Request Data {{/link-to}}
+        class='py3 pl3 pr5 u-hv-bc-white fc-primary flex items-center'}}
+        <svg viewbox="0 0 24 24" width="24" height="24" role="img" class="mr3 mdi-icon fc-secondary">
+         <use xlink:href="/assets/images/ic_collections.svg#ic_collections" fill="currentColor"></use>
+        </svg>
+        <span>Collections</span>
+        {{/link-to}} --}}
 
       {{#link-to 'user' userId
         invokeAction=(action 'close' dropdown)
-        class='py3 pl3 pr5 u-hv-bc-white fc-secondary'}} Profile {{/link-to}}
+        class='py3 pl3 pr5 u-hv-bc-white fc-primary flex items-center'}}
+        <svg viewbox="0 0 24 24" width="24" height="24" role="img" class="mr3 mdi-icon fc-secondary">
+         <use xlink:href="/assets/images/ic_activity.svg#ic_activity" fill="currentColor"></use>
+        </svg>
+        <span>Activity</span>
+      {{/link-to}}
 
-      {{#link-to 'users.profile'
+      {{!--  {{#link-to 'user' userId  --}}
+        {{!--  invokeAction=(action 'close' dropdown)  --}}
+        {{!--  class='py3 pl3 pr5 u-hv-bc-white border-bottom fc-primary flex items-center'}}  --}}
+        {{!--  <span class="fa-stack">  --}}
+          {{!--  <i class="fa fa-square fa-stack-2x"></i>  --}}
+          {{!--  <i class="fa fa-history fa-stack-1x fa-inverse"></i>  --}}
+        {{!--  </span>  --}}
+        {{!--  <span>Activity</span>  --}}
+      {{!--  {{/link-to}}  --}}
+
+
+      {{#link-to 'datasets.register'
         invokeAction=(action 'close' dropdown)
-        class='py3 pl3 pr5 u-hv-bc-white fc-secondary'}} Edit Profile {{/link-to}}
+        class='hide-l hide-w py3 pl3 pr5 flex items-center u-hv-bc-white fc-primary'}}
+        {{fa-icon "file-text" class="mr3 pl1 fs3 fc-secondary"}}
+        Register Data
+      {{/link-to}}
+
+      {{#link-to 'datasets.request'
+        invokeAction=(action 'close' dropdown)
+        class='hide-l hide-w py3 pl3 pr5 flex items-center u-hv-bc-white fc-primary'}}
+        {{fa-icon "clipboard" class="mr3 pl1 fs3 fc-secondary" }}
+        Request Data
+      {{/link-to}}
 
       {{#link-to 'help.searching-for-data' 'search-query'
         invokeAction=(action 'close' dropdown)
-        class='py3 pl3 pr5 u-hv-bc-white fc-secondary'}} Help {{/link-to}}
+        class='py3 pl3 pr5 u-hv-bc-white border-top fc-primary'}} Help {{/link-to}}
 
       {{#link-to 'policies.web'
         invokeAction=(action 'close' dropdown)
-        class='py3 pl3 pr5 u-hv-bc-white fc-secondary'}} Repositive Policy {{/link-to}}
+        class='py3 pl3 pr5 u-hv-bc-white border-bottom fc-primary'}} Repositive Policy {{/link-to}}
 
-      <a {{ action 'logout' }} class='py3 pl3 pr5 u-hv-bc-white fc-secondary'>Logout</a>
+      <a {{ action 'logout' }} class='py3 pl3 pr5 u-hv-bc-white fc-secondary flex items-center'>
+        {{mdi-icon "logout" class="mr3" size=24}}
+        <span>Logout</span>
+      </a>
 
     {{else}}
       <!-- Not Logged In -->
