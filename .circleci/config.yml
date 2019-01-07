@@ -212,7 +212,7 @@ jobs:
       - CONFIG_PATH: '.circleci/k8s.dis-rc.yml'
     <<: *deploy_image
 
-  release_production:
+  release_dis-prod:
     environment:
       - TARGET: 'dis-prod' # This is needed to build the right image tag! ${TAG}-${TARGET}
       - CLUSTER: 'dis-prod'
