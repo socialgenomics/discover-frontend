@@ -6,7 +6,7 @@
       <!-- header -->
       <header class="c-card-header bc-very-light-grey flex justify-between items-center px3" style="height: auto;">
         <div class="flex items-center py2">
-          {{fair-score doi=model.externalId}}
+          {{fair-score doi=(if (is-url model.externalId) model.externalId)}}
           <div class="px3">
             FAIRness of this data.
           </div>
