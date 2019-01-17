@@ -5,13 +5,12 @@
     <div class="grid__col grid__col--7-of-12 relative u-full-height">
       <div class="flex flex-column u-full-height">
         <!-- header -->
-        <header class="bc-very-light-grey flex flex-shrink-none justify-between items-center px3">
+        <header class="c-card-header bc-very-light-grey flex justify-between items-center px3" style="height: auto;">
           <div class="flex items-center py2">
-            {{fair-score doi=model.externalId}}
+            {{fair-score doi=(if (is-url model.externalId) model.externalId)}}
             <div class="px3">
               FAIRness of this data.
             </div>
-            <a target="_blank" rel="noopener noreferrer" href="https://fairshake.cloud/project/54/">Learn more.</a>
           </div>
           <div class="pl2 flex items-center">
             {{follow-button subscription=subscription model=model}}
