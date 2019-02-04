@@ -40,7 +40,7 @@ router.map(function() {
     this.route("change-password");
   });
 
-  this.route("user", { resetNamespace: true, path: ":id" }, function() {
+  this.route("user", { resetNamespace: true, path: "/user/:id" }, function() {
     this.route("index", { path: "/" });
     this.route("collections");
   });
