@@ -3,136 +3,166 @@
 
     <!-- dataset -->
     <div class="grid__col grid__col--7-of-12 relative u-full-height">
-      <!-- header -->
-      <header class="c-card-header bc-very-light-grey flex justify-between items-center px3" style="height: auto;">
-        <div class="flex items-center py2">
-          {{fair-score doi=model.externalId}}
-          <div class="px3">
-            FAIRness of this data.
+      <div class="flex flex-column u-full-height">
+        <!-- header -->
+        <header class="c-card-header bc-very-light-grey flex justify-between items-center px3" style="height: auto;">
+          <div class="flex items-center py2">
+            {{fair-score doi=(if (is-url model.externalId) model.externalId)}}
+            <div class="px3">
+              FAIRness of this data.
+            </div>
           </div>
-          <a target="_blank" rel="noopener noreferrer" href="https://fairshake.cloud/project/54/">Learn more.</a>
-        </div>
-        <div class="pl2 flex items-center">
-          {{follow-button subscription=subscription model=model}}
-          <ul class="flex list-flush-left pl3 mb0">
-            {{action-favourite model modelName class="mr3"}}
-            {{action-share
-              model=model
-              modelType=modelName
-              shareUrl=modelUrl
-            }}
-          </ul>
-        </div>
-      </header>
+          <div class="pl2 flex items-center">
+            {{follow-button subscription=subscription model=model}}
+            <ul class="flex list-flush-left pl3 mb0">
+              {{action-favourite model modelName class="mr3"}}
+              {{action-share
+                model=model
+                modelType=modelName
+                shareUrl=modelUrl
+              }}
+            </ul>
+          </div>
+        </header>
 
-      <!-- body -->
-      <!-- TODO hack fix to stop text overflow on mobile. Needs redesigning. -->
-      <div class="p3" style="max-height: 70%; overflow: scroll;">
-        <!-- heading/description -->
-        <div class="flex content-around">
-          <h2 class="fs2 fw-med fc-primary mb2 flex-grow hyphens-auto">{{model.title}}</h2>
-          {{#if canEdit}}
-            {{fa-icon 'pencil' class='fc-tertiary u-hv-tc-secondary cursor-pointer fs2'
-                click=(action 'enterEditMode')}}
+        <!-- body -->
+        <!-- TODO hack fix to stop text overflow on mobile. Needs redesigning. -->
+        <div class="p3 flex-grow" style="overflow-y: auto;">
+          <!-- heading/description -->
+          <div class="flex content-around">
+            <h2 class="fs2 fw-med fc-primary mb2 flex-grow hyphens-auto">{{model.title}}</h2>
+            {{#if canEdit}}
+              {{fa-icon 'pencil' class='fc-tertiary u-hv-tc-secondary cursor-pointer fs2'
+                  click=(action 'enterEditMode')}}
+            {{/if}}
+          </div>
+          {{#if model.description}}
+            <p class="u-markdown-formatting fs1">{{markdown-to-html markdown=model.description extensions='targetBlankLinks sanitize'}}</p>
+          {{/if}}
+
+          {{#if tags}}
+            <div class="pt3 pb2">
+              {{#each tags as |tag|}}
+                {{tag-item
+                  tag=tag
+                  tagText=tag.properties.text
+                  type='tag'
+                  userId=tag.userId.id
+                  deleteAction=(action 'deleteAction')
+                }}
+              {{/each}}
+            </div>
+          {{/if}}
+
+          {{#if session.isAuthenticated}}
+            <div class="pl4">
+              {{add-tag addTag=(action 'addTag')}}
+            </div>
+            <span class="fs0 fc-tertiary">
+              Add tags to improve searching and browsing through data. {{#link-to 'help.other' 'why-tag'}}Learn more{{/link-to}}
+            </span>
           {{/if}}
         </div>
-        {{#if model.description}}
-          <p class="u-markdown-formatting fs1">{{markdown-to-html markdown=model.description extensions='targetBlankLinks sanitize'}}</p>
-        {{/if}}
 
-        {{#if tags}}
-          <div class="pt3 pb2">
-            {{#each tags as |tag|}}
-              {{tag-item
-                tag=tag
-                tagText=tag.properties.text
-                type='tag'
-                userId=tag.userId.id
-                deleteAction=(action 'deleteAction')
-              }}
-            {{/each}}
-          </div>
-        {{/if}}
+        <!-- footer -->
+        <div class="u-full-width bc-white p3 border-top relative">
 
-        {{#if session.isAuthenticated}}
-          <div class="pl4">
-            {{add-tag addTag=(action 'addTag')}}
-          </div>
-          <span class="fs0 fc-tertiary">
-            Add tags to improve searching and browsing through data. {{#link-to 'help.other' 'why-tag'}}Learn more{{/link-to}}
-          </span>
-        {{/if}}
-      </div>
+          {{#unless session.isAuthenticated}}
+            {{create-account-call-to-action}}
+          {{/unless}}
 
-      <!-- footer -->
-      <div class="absolute u-full-width bottom-0 bc-white p3 border-top">
-
-        {{#unless session.isAuthenticated}}
-          {{create-account-call-to-action}}
-        {{/unless}}
-
-        <ul class="list-flush-left mb3">
-          {{#if model.userId}}
-            <li class="fs0 fc-tertiary">
-              Submitted by:
-              {{#link-to 'user' model.userId.id }}
-                <span class="fw-med fs1 fc-secondary">{{model.userId.displayName}}</span>
-              {{/link-to}}
-            </li>
-          {{else}}
-            {{#if model.datasourceId.name}}
+          <ul class="list-flush-left mb3">
+            {{#if model.userId}}
               <li class="fs0 fc-tertiary">
-                Sourced from:
-                {{#link-to 'datasources.source' model.datasourceId.id}}
-                  <span class="fw-med fs1 fc-secondary">{{model.datasourceId.name}}</span>
+                Submitted by:
+                {{#link-to 'user' model.userId.id }}
+                  <span class="fw-med fs1 fc-secondary">{{model.userId.displayName}}</span>
                 {{/link-to}}
               </li>
+            {{else}}
+              {{#if model.datasourceId.name}}
+                <li class="fs0 fc-tertiary">
+                  Data source:
+                  {{#link-to 'datasources.source' model.datasourceId.id}}
+                    <span class="fw-med fs1">{{model.datasourceId.name}}</span>
+                  {{/link-to}}
+                </li>
+                {{#if model.datasourceId.properties.homepage}}
+                <li class="fs0 fc-tertiary">
+                  Website:
+                  <a target="_blank" class="fw-med fs1 fc-secondary td-underline" rel="noopener noreferrer" href="{{model.datasourceId.properties.homepage}}">
+                    <span>{{model.datasourceId.properties.homepage}}</span>
+                  </a>
+                </li>
+                {{/if}}
+              {{/if}}
+
+              {{!-- TODO: should we remove this? I don't see this property in a model --}}
+              {{#if model.accession}}
+                <li class="fs0 fc-tertiary">
+                  Accession ID: <span class="fw-med fs1 fc-secondary">{{model.externalId}}</span>
+                </li>
+              {{/if}}
             {{/if}}
 
-            {{!-- TODO: should we remove this? I don't see this property in a model --}}
-            {{#if model.accession}}
+            {{#if (and isRequest model.createdAt )}}
               <li class="fs0 fc-tertiary">
-                Accession ID: <span class="fw-med fs1 fc-secondary">{{model.externalId}}</span>
+                Requested on:
+                <span class="fw-med fs1 fc-secondary">{{moment-format model.createdAt}}</span>
               </li>
             {{/if}}
-          {{/if}}
 
-          {{#if (and isRequest model.createdAt )}}
-            <li class="fs0 fc-tertiary">
-              Requested on:
-              <span class="fw-med fs1 fc-secondary">{{moment-format model.createdAt}}</span>
-            </li>
-          {{/if}}
+            {{#if model.access}}
+              <li class="fs0 fc-tertiary">
+                Access type:
+                <span class="fw-med fs1 fc-secondary">
+                  {{model.access}}
+                  {{#link-to 'help.searching-for-data' 'filters' class="fc-tertiary" }}
+                    {{mdi-icon "information-outline" size=16}}
+                  {{/link-to}}
+                </span>
+              </li>
+            {{/if}}
+          </ul>
+          <div class="flex items-center">
+            {{#if model.properties.urls.download}}
+              {{#r-link-button
+                class="mr4 px3"
+                clickHandler=(action "trackExit")
+                href=(if session.isAuthenticated model.properties.urls.download '')
+                variant="primary"
+                size="big"
+                target="_blank"
+              }}
+                <span class="flex items-center tt-uppercase">
+                  {{mdi-icon "download" class="mr3" size=24}}
+                  Download
+                </span>
+              {{/r-link-button}}
+            {{/if}}
 
-          {{#if model.access}}
-            <li class="fs0 fc-tertiary">
-              Access type:
-              {{#link-to 'help.searching-for-data' 'filters'}}
-                <span class="fw-med fs1 fc-secondary">{{model.access}}</span>
+            {{#if (or model.properties.urls.access model.url)}}
+              {{#r-link-button
+                class="mr1 px3"
+                clickHandler=(action "trackExit")
+                href=(if session.isAuthenticated (or model.properties.urls.access model.url) '')
+                size="big"
+                target="_blank"
+              }}
+                <span class="flex items-center tt-uppercase">
+                  {{mdi-icon (if (or (eq model.access "Open") (not model.access)) "earth" "lock") class="mr3" size=24 fill="currentColor"}}
+                  Go To Dataset
+                </span>
+              {{/r-link-button}}
+            {{/if}}
+
+            {{#if hasSampleTable}}
+              {{#link-to 'datasets.detail.sample-info' model.id replace=true}}
+                <button class="r-btn r-btn-secondary r-btn-large" type="button">View Samples</button>
               {{/link-to}}
-            </li>
-          {{/if}}
-        </ul>
-        <div class="flex items-center">
-          {{#if model.url}}
-            {{r-link-button
-              class="mr1"
-              clickHandler=(action "trackExit")
-              href=(if session.isAuthenticated model.url '')
-              label=(if (eq model.access "Open") "Access Data" "Go To Dataset")
-              variant="primary"
-              size="big"
-              target="_blank"
-            }}
-          {{/if}}
-
-          {{#if hasSampleTable}}
-            {{#link-to 'datasets.detail.sample-info' model.id replace=true}}
-              <button class="r-btn r-btn-secondary r-btn-large" type="button">View Samples</button>
-            {{/link-to}}
-          {{/if}}
+            {{/if}}
+          </div>
         </div>
-
       </div>
     </div>
 

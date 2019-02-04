@@ -33,11 +33,8 @@ which sets out information about the cookies on our site.
 
 ## Information About Us
 
-[repositive.io](https://repositive.io) is a site operated by
-Repositive Limited ("We"). We are a Limited Company registered in England and Wales
-under company number 08820538 and have our registered office at Windsor House,
-Station Court, Station Road, Great Shelford, Cambridge, CB22 5NE. Our main trading
-address is The Future Business Centre, King’s Hedges Road, Cambridge, CB4 2HY.
+[repositive.io](https://repositive.io) is a site operated by Repositive Limited ("We").
+We are a Limited Company registered in England and Wales under company number 08820538 and have our registered office at Betjeman House, 104 Hills Road, Cambridge, CB2 1LQ.
 Our VAT number is 184453100.
 
 ## Changes to these Terms
