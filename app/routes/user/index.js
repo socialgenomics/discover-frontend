@@ -14,16 +14,17 @@ export default Route.extend({
   session: service(),
   favouritesService: service('favourites'),
 
-  model: function (params) {
+  model: function () {
+    const {id: userId} = this.paramsFor('user');
     if (get(this, 'session.session.isAuthenticated')) {
-      return this.store.findRecord('user', params.id)
-        .then(user => this._getProfileData(user, params))
+      return this.store.findRecord('user', userId)
+        .then(user => this._getProfileData(user))
         .then(this._getDiscussionsAndContributions.bind(this))
         .then(values => {
           const discussions = [...values.datasetDiscussions.toArray(), ...values.requestDiscussions.toArray()];
           //ask to refresh the favourites on the side
           const favourites = get(this, 'favouritesService');
-          favourites.loadSomeonesBookmarks(params.id);
+          favourites.loadSomeonesBookmarks(userId);
           return {
             user: values.profileData.user,
             registrations: values.profileData.registrations,
@@ -44,7 +45,7 @@ export default Route.extend({
     }
   },
 
-  _getProfileData(user, params) {
+  _getProfileData(user) {
     const userId = get(user, 'id');
     return hash({
       user: user,
@@ -70,7 +71,7 @@ export default Route.extend({
         'where.type': 'attribute',
         'limit': 50
       }),
-      favourited_data: this._getFavouritedData(params.id)
+      favourited_data: this._getFavouritedData(userId)
     });
   },
 

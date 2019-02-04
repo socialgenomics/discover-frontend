@@ -1,8 +1,14 @@
-import Ember from 'ember';
-import config from './config/environment';
-import TrackingMixin from 'repositive/mixins/tracking-mixin';
+import Ember from "ember";
+import config from "./config/environment";
+import TrackingMixin from "repositive/mixins/tracking-mixin";
 
-const  { Router, inject: { service }, $, Route, get } = Ember;
+const {
+  Router,
+  inject: { service },
+  $,
+  Route,
+  get
+} = Ember;
 
 const router = Router.extend(TrackingMixin, {
   session: service(),
@@ -11,122 +17,127 @@ const router = Router.extend(TrackingMixin, {
 });
 
 router.map(function() {
-  this.route('root', {
-    path: '/'
+  this.route("root", {
+    path: "/"
   });
-  this.route('signup-survey', {
-    path: '/survey'
+  this.route("signup-survey", {
+    path: "/survey"
   });
 
-  this.route('users', { resetNamespace: true }, function() {
-    this.route('signup');
-    this.route('login');
-    this.route('profile');
+  this.route("users", { resetNamespace: true }, function() {
+    this.route("signup");
+    this.route("login");
+    this.route("profile");
     // this.route('verify', {
     //   path: '/verify/:verification_id'
     // });
-    this.route('resend-password', {
-      path: '/reset-password'
+    this.route("resend-password", {
+      path: "/reset-password"
     });
-    this.route('reset-password', {
-      path: '/reset-password/:reset_key'
+    this.route("reset-password", {
+      path: "/reset-password/:reset_key"
     });
-    this.route('change-password');
+    this.route("change-password");
   });
 
-  this.route('user', { resetNamespace: true} , function () {
-    this.route('index', {
-      path: ':id'
+  this.route("user", { resetNamespace: true, path: ":id" }, function() {
+    this.route("index", { path: "/" });
+    this.route("collections");
+  });
+
+  this.route("datasets", { resetNamespace: true }, function() {
+    this.route("detail", { path: ":id" }, function() {
+      this.route("sample-info", { path: "/sample-info" });
+    });
+    this.route("tags", {
+      path: "/tag/:tag"
+    });
+    this.route("assay", {
+      path: "/assay/:assay"
+    });
+    this.route("search");
+    this.route("register");
+    this.route("request");
+    this.route("search-error");
+  });
+
+  this.route("datasources", function() {
+    this.route("source", {
+      path: ":id"
+    });
+    this.route("search-error");
+  });
+
+  this.route("collections", function() {
+    this.route("collection", {
+      path: ":id"
+    });
+    this.route("search-error");
+  });
+
+  this.route("requests", { resetNamespace: true }, function() {
+    this.route("detail", {
+      path: ":id"
     });
   });
 
-  this.route('datasets', { resetNamespace: true }, function() {
-    this.route('detail', { path: ':id' }, function() {
-      this.route('sample-info', { path: '/sample-info' });
+  this.route("help", { resetNamespace: true }, function() {
+    this.route("searching-for-data", { path: "/searching-for-data/:query" });
+    this.route("requesting-data", { path: "/requesting-data/:query" });
+    this.route("registering-new-data", {
+      path: "/registering-new-data/:query"
     });
-    this.route('tags', {
-      path: '/tag/:tag'
-    });
-    this.route('assay', {
-      path: '/assay/:assay'
-    });
-    this.route('search');
-    this.route('register');
-    this.route('request');
-    this.route('search-error');
+    this.route("your-account", { path: "/your-account/:query" });
+    this.route("other", { path: "/other/:query" });
+    this.route("attributes", { path: "/attributes/:query" });
   });
 
-  this.route('datasources', function() {
-    this.route('source', {
-      path: ':id'
-    });
-    this.route('search-error');
+  this.route("policies", { resetNamespace: true }, function() {
+    this.route("web");
+    this.route("privacy");
+    this.route("terms");
+    this.route("cookie");
+    this.route("disclaimer");
   });
 
-  this.route('collections', function() {
-    this.route('collection', {
-      path: ':id'
-    });
-    this.route('search-error');
+  this.route("404", {
+    path: "/*path"
   });
-
-  this.route('requests', { resetNamespace: true }, function() {
-    this.route('detail', {
-      path: ':id'
-    });
-  });
-
-  this.route('help', { resetNamespace: true }, function() {
-    this.route('searching-for-data', { path: '/searching-for-data/:query' });
-    this.route('requesting-data', { path: '/requesting-data/:query' });
-    this.route('registering-new-data', { path: '/registering-new-data/:query' });
-    this.route('your-account', { path: '/your-account/:query' });
-    this.route('other', { path: '/other/:query' });
-    this.route('attributes', { path: '/attributes/:query' });
-  });
-
-  this.route('policies', { resetNamespace: true }, function() {
-    this.route('web');
-    this.route('privacy');
-    this.route('terms');
-    this.route('cookie');
-    this.route('disclaimer');
-  });
-
-  this.route('404', {
-    path: '/*path'
-  });
-  this.route('registrations', function() {});
+  this.route("registrations", function() {});
 });
 
-let pagesWithSideNavigation = ['datasets-search', 'datasources-source', 'collections-collection'];
-let landingPage = ['root'];
+let pagesWithSideNavigation = [
+  "datasets-search",
+  "datasources-source",
+  "collections-collection"
+];
+let landingPage = ["root"];
 Route.reopen({
   session: service(),
 
   activate: function() {
     let cssClass = this.toCssClass();
-    if (cssClass !== 'application') {
-      $('body').addClass(cssClass);
+    if (cssClass !== "application") {
+      $("body").addClass(cssClass);
       if (pagesWithSideNavigation.indexOf(cssClass) !== -1) {
         // Add the class here for all the pages with side navigation
-        $('body').addClass('has-sidebar');
+        $("body").addClass("has-sidebar");
       } else if (landingPage.indexOf(cssClass) !== -1) {
         // Add the landing page class to home (makes background white)
         // Home-page stays grey
-        if (!get(this, 'session.session.isAuthenticated')) {
-          $('body').addClass('landing-page');
+        if (!get(this, "session.session.isAuthenticated")) {
+          $("body").addClass("landing-page");
         }
       }
     }
   },
   deactivate: function() {
-    $('body').removeClass(this.toCssClass());
-    $('body').removeClass('has-sidebar');
-    $('body').removeClass('landing-page');
+    $("body").removeClass(this.toCssClass());
+    $("body").removeClass("has-sidebar");
+    $("body").removeClass("landing-page");
   },
   toCssClass: function() {
-    return this.routeName.replace(/\./g, '-').dasherize();
+    return this.routeName.replace(/\./g, "-").dasherize();
   }
 });
 
