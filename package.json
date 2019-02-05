@@ -25,7 +25,7 @@
   "devDependencies": {
     "@mdi/svg": "2.6.95",
     "@repositive/query-parser": "^2.3.1",
-    "@repositive/ui-library": "^0.0.18",
+    "@repositive/ui-library": "0.1.0",
     "babel-plugin-transform-object-rest-spread": "6.26.0",
     "broccoli-asset-rev": "^2.4.5",
     "coreapi": "^0.1.1",
