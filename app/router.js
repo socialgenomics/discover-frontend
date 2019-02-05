@@ -41,6 +41,7 @@ router.map(function() {
   });
 
   this.route("user", { resetNamespace: true, path: "/user/:id" }, function() {
+    this.route("activity");
     this.route("collections");
   });
 
