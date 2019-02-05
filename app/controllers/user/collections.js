@@ -21,12 +21,12 @@ export default Controller.extend({
   ),
   pageTitleText: computed(
     "isOwnProfile",
-    "user",
-    isOwnProfile => `${isOwnProfile ? "Your" : "someone else's"} collections`
+    "user.data.firstname",
+    (isOwnProfile, user) => `${isOwnProfile ? "Your" : `${user}'s`} collections`
   ),
   allUserBookmarks: computed(
     "user.id",
     "favourites.othersBookmarks",
     (userId, bookmarksPerUserId) => get(bookmarksPerUserId, userId)
-  ),
+  )
 });

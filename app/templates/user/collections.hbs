@@ -126,7 +126,6 @@
           {{ab.pending}}
           {{ab.error}}
           {{#ab.fulfilled as |bookmarks| }}
-          {{log "bookmarks -> " bookmarks}}
              {{#each (sort-by 'updated_at:desc' bookmarks)
                       as | bookmark |}}
                {{collections/bookmark-card bookmark
