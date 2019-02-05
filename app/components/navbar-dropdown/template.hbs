@@ -20,7 +20,7 @@
 
   {{#dropdown.content class="c-card flex flex-column"}}
     {{#if session.isAuthenticated}}
-      {{#link-to 'users.profile'
+      {{#link-to 'user' userId
         invokeAction=(action 'close' dropdown)
         class='py3 pl3 pr5 u-hv-bc-white fc-primary flex items-center'}}
         {{mdi-icon "account-circle" class="mr3 fc-secondary" size=24 }}
@@ -36,7 +36,7 @@
         <span>Collections</span>
         {{/link-to}} --}}
 
-      {{#link-to 'user' userId
+      {{#link-to 'user.activity' userId
         invokeAction=(action 'close' dropdown)
         class='py3 pl3 pr5 u-hv-bc-white fc-primary flex items-center'}}
         <svg viewbox="0 0 24 24" width="24" height="24" role="img" class="mr3 mdi-icon fc-secondary">

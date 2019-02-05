@@ -1,0 +1,48 @@
+<div class="grid-wrapper grid-wrapper-fluid">
+  <div class="grid">
+    <div class="grid__col grid__col--1-of-3 grid__col--m-1-of-2">
+      <h1>Activity</h1>
+    </div>
+    <div class="grid__col grid__col--2-of-3 grid__col--m-1-of-2">
+
+      <!-- Favourites -->
+      {{activity-card
+        model=favouriteResources
+        group="favourite"
+        isProfilePage=true
+        isOwnProfile=isOwnProfile}}
+
+      <!-- Requests -->
+      {{activity-card
+        model=model.requests
+        group="request"
+        isProfilePage=true
+        isOwnProfile=isOwnProfile}}
+
+      <!-- Registrations -->
+      {{activity-card
+        model=model.registrations
+        group="registration"
+        isProfilePage=true
+        isOwnProfile=isOwnProfile}}
+
+      <!-- Contributions -->
+      {{activity-card
+        model=model.contributions
+        group="contribution"
+        isProfilePage=true
+        isOwnProfile=isOwnProfile}}
+
+      <!-- Discussions -->
+      {{activity-card
+        model=model.discussions
+        group="discussion"
+        isProfilePage=true
+        isOwnProfile=isOwnProfile}}
+    </div>
+  </div>
+</div>
+
+{{{ model.schema }}}
+
+

@@ -1,11 +1,7 @@
 import Ember from 'ember';
 import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
-import { hash } from 'rsvp';
 import { get } from '@ember/object';
-import { isEmpty } from '@ember/utils';
-
-import ENV from 'repositive/config/environment';
 
 const { Logger } = Ember;
 
@@ -14,24 +10,12 @@ export default Route.extend({
   session: service(),
   favouritesService: service('favourites'),
 
-  model: function (params) {
+  model: function () {
+    const { id: userId } = this.paramsFor('user');
     if (get(this, 'session.session.isAuthenticated')) {
-      return this.store.findRecord('user', params.id)
-        .then(user => this._getProfileData(user, params))
-        .then(this._getDiscussionsAndContributions.bind(this))
-        .then(values => {
-          const discussions = [...values.datasetDiscussions.toArray(), ...values.requestDiscussions.toArray()];
-          //ask to refresh the favourites on the side
-          const favourites = get(this, 'favouritesService');
-          favourites.loadSomeonesBookmarks(params.id);
-          return {
-            user: values.profileData.user,
-            registrations: values.profileData.registrations,
-            requests: values.profileData.requests,
-            discussions,
-            contributions: values.datasetContributions,
-            schema: this._buildSchema(values.profileData.user)
-          };
+      return this.store.findRecord('user', userId)
+        .then(user => {
+          return { user, schema: this._buildSchema(user) };
         })
         .catch(err => {
           Logger.error(err);
@@ -42,97 +26,6 @@ export default Route.extend({
     } else {
       this.transitionTo('/');
     }
-  },
-
-  _getProfileData(user, params) {
-    const userId = get(user, 'id');
-    return hash({
-      user: user,
-      registrations: this.store.query('dataset', {
-        'where.user_id': userId,
-        'order[0][0]': 'created_at',
-        'order[0][1]': 'DESC',
-        'limit': 50
-      }),
-      requests: this.store.query('request', {
-        'where.user_id': userId,
-        'order[0][0]': 'created_at',
-        'order[0][1]': 'DESC',
-        'limit': 50
-      }),
-      discussions: this.store.query('action', {
-        'where.user_id': userId,
-        'where.type': 'comment',
-        'limit': 50
-      }),
-      contributions: this.store.query('action', {
-        'where.user_id': userId,
-        'where.type': 'attribute',
-        'limit': 50
-      }),
-      favourited_data: this._getFavouritedData(params.id)
-    });
-  },
-
-  _getDiscussionsAndContributions(profileData) {
-    const datasetContributionIds = this._getUniqueIds(profileData.contributions, 'dataset');
-    const datasetDiscussionIds = this._getUniqueIds(profileData.discussions, 'dataset');
-    const requestDiscussionIds = this._getUniqueIds(profileData.discussions, 'request');
-
-    const datasetContributions = isEmpty(datasetContributionIds) ? [] : this._createQuery(datasetContributionIds, 'dataset');
-    const datasetDiscussions = isEmpty(datasetDiscussionIds) ? [] : this._createQuery(datasetDiscussionIds, 'dataset');
-    const requestDiscussions = isEmpty(requestDiscussionIds) ? [] : this._createQuery(requestDiscussionIds, 'request');
-
-    return hash({
-      profileData,
-      datasetContributions,
-      datasetDiscussions,
-      requestDiscussions
-    });
-  },
-
-  _createQuery(ids, modelType) {
-    return this.store.query(modelType, {
-      'where.id': ids,
-      limit: 50
-    });
-  },
-
-  /**
-   * @desc returns list of each action's model id
-   * @param  {Array} arrayOfActions the actions to be reduced
-   * @param  {String} modelType name of the model you want to get ids for
-   * @return {Array} A list of model(dataset/request) ids
-   */
-  _getUniqueIds(arrayOfActions, modelType) {
-    const keyName = modelType + 'Id';
-    return arrayOfActions
-      .filterBy('actionable_model', modelType)
-      .mapBy(keyName)
-      .mapBy('id')
-      .uniq()
-      .compact();
-  },
-
-  _getFavouritedData(userIdOfProfile) {
-    const ajax = get(this, 'ajax');
-    return hash({
-      datasets: ajax.request(ENV.APIRoutes['favourite-datasets'].replace('{user_id}', userIdOfProfile), {
-        method: 'GET'
-      }),
-      requests: ajax.request(ENV.APIRoutes['favourite-requests'].replace('{user_id}', userIdOfProfile), {
-        method: 'GET'
-      })
-    })
-      .then(data => {
-        const datasets = data.datasets.map(datasetObj => {
-          return this.store.push(this.store.normalize('dataset', datasetObj));
-        });
-        const requests = data.requests.map(requestObj => {
-          return this.store.push(this.store.normalize('request', requestObj));
-        });
-        return [...datasets, ...requests];
-      }).catch(Logger.error);
   },
 
   _buildSchema(user) {
