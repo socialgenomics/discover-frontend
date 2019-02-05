@@ -5,7 +5,6 @@ import computed from 'ember-macro-helpers/computed';
 
 export default Controller.extend({
   session: service(),
-  favourites: service(),
 
   user: alias('model.user'),
 
