@@ -6,7 +6,7 @@ import computed from "ember-macro-helpers/computed";
 import R from "npm:ramda";
 
 export default Controller.extend({
-  favourites: service(),
+  collections: service(),
   session: service(),
 
   // aliasing the model
@@ -26,7 +26,7 @@ export default Controller.extend({
   ),
   allUserBookmarks: computed(
     "user.id",
-    "favourites.othersBookmarks",
+    "collections.othersBookmarks",
     (userId, bookmarksPerUserId) => get(bookmarksPerUserId, userId)
   )
 });

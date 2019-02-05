@@ -5,13 +5,13 @@ import QP from 'npm:@repositive/query-parser';
 const { Route, inject: { service }, get } = Ember;
 
 export default Route.extend(ApplicationRouteMixin, {
-  favouritesService: service('favourites'),
+  collectionsService: service('collections'),
   session: service(),
   ajax: service(),
   urlGenerator: service(),
 
   model() {
-    get(this, 'favouritesService').refreshFavourites();
+    get(this, 'collectionsService').refreshFavourites();
   },
 
   init() {
@@ -64,7 +64,7 @@ export default Route.extend(ApplicationRouteMixin, {
 
   sessionAuthenticated() {
     this._super(...arguments);
-    get(this, 'favouritesService').refreshFavourites();
+    get(this, 'collectionsService').refreshFavourites();
   },
 
   /**

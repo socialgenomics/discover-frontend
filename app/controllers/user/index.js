@@ -8,10 +8,10 @@ import R from 'npm:ramda';
 
 export default Controller.extend({
   session: service(),
-  favourites: service(),
+  collections: service(),
 
   user: alias('model.user'),
-  favouriteResources: computed('user.id', 'favourites.othersBookmarks', (userId, bookmarksPerUserId) =>
+  favouriteResources: computed('user.id', 'collections.othersBookmarks', (userId, bookmarksPerUserId) =>
     get(bookmarksPerUserId, userId)
       .then(R.map(R.prop('resource')))
   ),

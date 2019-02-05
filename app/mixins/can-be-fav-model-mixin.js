@@ -5,17 +5,17 @@ import computed from  'ember-macro-helpers/computed';
 
 export default Mixin.create({
   stats: {},
-  statistics: computed('stats', 'favourites.favCounts', function (stats, favCounts) {
+  statistics: computed('stats', 'collections.favCounts', function (stats, favCounts) {
     return {
       ...stats,
       favourite: get(favCounts, get(this, 'id')) || 0
     };
   }),
 
-  favourites: service(),
+  collections: service(),
   init() {
     this._super(...arguments);
-    // now send a request to get the number of favourites that exists
-    get(this, 'favourites').getCount(get(this, 'id'))
+    // now send a request to get the number of collections that exists
+    get(this, 'collections').getCount(get(this, 'id'))
   }
 });

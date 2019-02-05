@@ -10,7 +10,7 @@ describe('Unit | Route | application', function() {
   setupTest('route:application', {
     needs: [
       'service:ajax',
-      'service:favourites',
+      'service:collections',
       'service:metrics',
       'service:session',
       'service:urlGenerator'
