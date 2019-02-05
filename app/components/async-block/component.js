@@ -12,6 +12,7 @@ export default Component.extend({
   fulfilledComponent: 'async-block/fulfilled',
 
   didReceiveAttrs() {
+    this._super(...arguments);
     if (!get(this, 'content')) {
       throw new Error('missing the content property (positional parameter)');
     }
