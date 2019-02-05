@@ -12,7 +12,6 @@ const { Logger } = Ember;
 export default Route.extend({
   ajax: service(),
   session: service(),
-  favouritesService: service("favourites"),
 
   model(params) {
     const { id: userId } = params;
@@ -26,9 +25,6 @@ export default Route.extend({
             ...values.datasetDiscussions.toArray(),
             ...values.requestDiscussions.toArray()
           ];
-          //ask to refresh the favourites on the side
-          const favourites = get(this, "favouritesService");
-          favourites.loadSomeonesBookmarks(userId);
           return {
             user: values.profileData.user,
             registrations: values.profileData.registrations,
