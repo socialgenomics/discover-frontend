@@ -1,1 +1,148 @@
-{{outlet}}
+<div class="grid-wrapper grid-wrapper-fluid">
+  <div class="grid">
+    <div class="grid__col grid__col--3-of-3">
+      <h1 class="inventory-header fs4 fw-bold mb2">{{pageTitleText}}</h1>
+    </div>
+
+    {{!--  [> <div class="grid__col grid__col--1-of-3"> <]  --}}
+      {{!--  [> <div class="c-card border border-light-grey pb4"> <]  --}}
+        {{!--  [> <div data-test-id="collections" class="mb4"> <]  --}}
+          {{!--  [> <div class="flex justify-between items-baseline border-bottom px4 py2 cursor-pointer {{if (not collectionFilter) 'fc-purple-mid bc-off-white'}}" {{action (action (mut collectionFilter) null)}}> <]  --}}
+            {{!--  [> <h3 class="mb0">All saved {{fa-icon "star" class="fw-bold fc-purple-mid" }}</h3> <]  --}}
+            {{!--  [> <span>{{if (is-fulfilled bookmarks) (get (await bookmarks) "length")}}</span> <]  --}}
+          {{!--  [> </div> <]  --}}
+          {{!--  [> {{#async-block collections as |ab|}} <]  --}}
+          {{!--  [> {{ab.pending class="self-center"}} <]  --}}
+          {{!--  [> {{#ab.error}} <]  --}}
+            {{!--  [> <p>Your collections could not be retrieved at the moment, please try again later. </p> <]  --}}
+          {{!--  [> {{/ab.error}} <]  --}}
+          {{!--  [> {{#ab.fulfilled}} <]  --}}
+            {{!--  [> <ul class="p0 mb0" style="margin-left: 0"> <]  --}}
+              {{!--  [> {{#each ab.settledContent as  |collection| }} <]  --}}
+                {{!--  [> <li class="flex justify-between items-baseline border-bottom px4 py2 cursor-pointer {{if (eq collectionFilter collection.id) 'fc-purple-mid bc-very-light-grey'}}" {{action (action (mut collectionFilter) collection.id) on="click"}}> <]  --}}
+                  {{!--  [> {{inline-edit <]  --}}
+                    {{!--  [> content=collection.name <]  --}}
+                    {{!--  [> contentClass="px2 ellipsis" <]  --}}
+                    {{!--  [> class="flex pr4 flex-grow no-min-width" <]  --}}
+                    {{!--  [> updateContentAction=(action 'updateCollectionName' collection.id) <]  --}}
+                    {{!--  [> onDeleteAction=(action 'deleteCollection' collection.id collection.name) <]  --}}
+                  {{!--  [> }} <]  --}}
+                  {{!--  [> <span>{{collection.bookmarks.length}}</span> <]  --}}
+
+                  {{!--  [> {{#if showConfirmDeleteCollectionModal}} <]  --}}
+                    {{!--  [> {{#modal-dialog <]  --}}
+                      {{!--  [> onClose=(action (mut showConfirmDeleteCollectionModal) false) <]  --}}
+                      {{!--  [> targetAttachment="center" <]  --}}
+                      {{!--  [> translucentOverlay=true <]  --}}
+                      {{!--  [> containerClassNames="fixed overflow-hidden u-zindex-modal c-modal--small bc-white p4 rounded" <]  --}}
+                      {{!--  [> overlayClassNames= "fixed left-0 right-0 top-0 bottom-0 u-full-viewport-height bc-overlay u-zindex-overlay flex justify-center items-center" <]  --}}
+                    {{!--  [> }} <]  --}}
+                      {{!--  [> <div class="mb3"> <]  --}}
+                        {{!--  [> Your collection <strong>{{collectionNameToDelete}}</strong> will be deleted, but your bookmarks will still be available under <strong>All saved</strong>. <]  --}}
+                      {{!--  [> </div> <]  --}}
+
+                      {{!--  [> <footer class="flex justify-end items-center"> <]  --}}
+                        {{!--  [> {{#if (is-rejected collectionDeleteRequest)}} <]  --}}
+                          {{!--  [> <div class="mr3 fc-red">Could not delete collection, please try again</div> <]  --}}
+                        {{!--  [> {{/if}} <]  --}}
+
+                        {{!--  [> {{r-button <]  --}}
+                          {{!--  [> data-test-id="collection-delete-cancel" <]  --}}
+                          {{!--  [> disabled=(is-pending collectionDeleteRequest) <]  --}}
+                          {{!--  [> variant="cancel" <]  --}}
+                          {{!--  [> label="Cancel" <]  --}}
+                          {{!--  [> clickHandler=(action (mut showConfirmDeleteCollectionModal) false) <]  --}}
+                          {{!--  [> class="mr3" <]  --}}
+                        {{!--  [> }} <]  --}}
+
+                        {{!--  [> {{r-button <]  --}}
+                          {{!--  [> data-test-id="collection-delete-submit" <]  --}}
+                          {{!--  [> disabled=(is-pending collectionDeleteRequest) <]  --}}
+                          {{!--  [> variant="delete" <]  --}}
+                          {{!--  [> label=(if (is-pending collectionDeleteRequest) "Deleting..." "Delete collection") <]  --}}
+                          {{!--  [> clickHandler=(action 'confirmDeleteCollection' collectionIdToDelete collectionNameToDelete) <]  --}}
+                        {{!--  [> }} <]  --}}
+                      {{!--  [> </footer> <]  --}}
+                    {{!--  [> {{/modal-dialog}} <]  --}}
+                  {{!--  [> {{/if}} <]  --}}
+                {{!--  [> </li> <]  --}}
+              {{!--  [> {{/each}} <]  --}}
+              {{!--  [> <li class="flex items-baseline px4 py2 cursor-pointer" > <]  --}}
+                {{!--  [> {{inline-edit <]  --}}
+                  {{!--  [> placeholder="Collection name" <]  --}}
+                  {{!--  [> isNew=true <]  --}}
+                  {{!--  [> data-test-id="add-collection-btn" <]  --}}
+                  {{!--  [> newText="Add new collection" <]  --}}
+                  {{!--  [> saveNewContentAction=(action 'createCollection') <]  --}}
+                {{!--  [> }} <]  --}}
+              {{!--  [> </li> <]  --}}
+            {{!--  [> </ul> <]  --}}
+          {{!--  [> {{/ab.fulfilled}} <]  --}}
+          {{!--  [> {{/async-block}} <]  --}}
+        {{!--  [> </div> <]  --}}
+        {{!--  [> <div data-test-id="filter-section"> <]  --}}
+          {{!--  [> <div class="flex justify-between items-baseline border-bottom px4 pb2"> <]  --}}
+            {{!--  [> <h3 class="mb0">Filters</h3> <]  --}}
+          {{!--  [> </div> <]  --}}
+          {{!--  [> <ul class="p0 mb0" style="margin-left: 0"> <]  --}}
+            {{!--  [> <li class="flex justify-between items-baseline border-bottom px4 py2"> <]  --}}
+              {{!--  [> <button class="border border-grey outline-none rounded fc-primary p1 {{if filterWithRequestMade 'fc-purple-mid'}}" {{action (toggle "filterWithRequestMade" this)}}> <]  --}}
+                {{!--  [> Data Request: {{if isVendor 'Pending' 'Made'}} <]  --}}
+              {{!--  [> </button> <]  --}}
+              {{!--  [> <span class="fc-tertiary">{{async-block numberOfPendingRequest}}</span> <]  --}}
+            {{!--  [> </li> <]  --}}
+            {{!--  [> <li class="flex justify-between items-baseline border-bottom px4 py2"> <]  --}}
+              {{!--  [> <button class="border border-grey outline-none rounded fc-primary p1 {{if filterWithRequestReviewed 'fc-purple-mid' }}" {{action (toggle 'filterWithRequestReviewed' this)}}> <]  --}}
+                {{!--  [> Data Request: Reviewed <]  --}}
+              {{!--  [> </button> <]  --}}
+              {{!--  [> <span class="fc-tertiary">{{async-block numberOfReviewedRequest}}</span> <]  --}}
+            {{!--  [> </li> <]  --}}
+          {{!--  [> </ul> <]  --}}
+        {{!--  [> </div> <]  --}}
+      {{!--  [> </div> <]  --}}
+    {{!--  [> </div> <]  --}}
+
+    <div class="grid__col grid__col--2-of-3">
+      <div class="c-card border border-light-grey">
+        <div class="flex justify-between items-baseline ">
+           <h3 class="p3 mb0 fc-yellow">
+             {{!--  TODO put that block in yellow and a border under it  --}}
+            {{!--   {{#if collectionFilter}}   --}}
+              {{!--   {{#async-block selectedCollection as | ab |}}   --}}
+                {{!--   {{#ab.error}}   --}}
+                  {{!--   <small>Something went wrong while fetching the name of your collection.</small>   --}}
+                {{!--   {{/ab.error}}   --}}
+                {{!--   {{#ab.fulfilled}}   --}}
+                  {{!--   {{ab.settledContent.name}}   --}}
+                {{!--   {{/ab.fulfilled}}   --}}
+              {{!--   {{/async-block}}   --}}
+            {{!--   {{else}}   --}}
+               All Saved
+            {{!--   {{/if}}   --}}
+           </h3>
+        </div>
+        <div class="border-bottom border-yellow" style="border-width: 3px"></div>
+        {{#async-block filteredBookmarks as | ab |}}
+          {{ab.pending}}
+          {{ab.error}}
+          {{#ab.fulfilled as |bookmarks| }}
+          {{log "bookmarks -> " bookmarks}}
+             {{#each (sort-by 'updated_at:desc' bookmarks)
+                      as | bookmark |}}
+               {{collections/bookmark-card bookmark
+               }}
+             {{else}}
+               {{#if isRequestFiltering}}
+                 Nothing to show. Try removing the filters.
+               {{else if collectionFilter}}
+                 This collection does not have any bookmarks yet.
+               {{else}}
+                 You do not have any bookmarks yet.
+               {{/if}}
+             {{/each}}
+          {{/ab.fulfilled}}
+        {{/async-block}}
+      </div>
+    </div>
+  </div>
+</div>
