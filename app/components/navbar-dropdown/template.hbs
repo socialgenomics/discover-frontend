@@ -27,14 +27,14 @@
         <span>Profile</span>
       {{/link-to}}
 
-      {{!-- {{#link-to 'users.profile'
-        invokeAction=(action 'close' dropdown)
-        class='py3 pl3 pr5 u-hv-bc-white fc-primary flex items-center'}}
+      {{#link-to 'user.collections' userId
+         invokeAction=(action 'close' dropdown)
+         class='py3 pl3 pr5 u-hv-bc-white fc-primary flex items-center'}}
         <svg viewbox="0 0 24 24" width="24" height="24" role="img" class="mr3 mdi-icon fc-secondary">
-         <use xlink:href="/assets/images/ic_collections.svg#ic_collections" fill="currentColor"></use>
+          <use xlink:href="/assets/images/ic_collections.svg#ic_collections" fill="currentColor"></use>
         </svg>
-        <span>Collections</span>
-        {{/link-to}} --}}
+        <span>My Collections</span>
+      {{/link-to}}
 
       {{#link-to 'user.activity' userId
         invokeAction=(action 'close' dropdown)
@@ -44,16 +44,6 @@
         </svg>
         <span>Activity</span>
       {{/link-to}}
-
-      {{!--  {{#link-to 'user' userId  --}}
-        {{!--  invokeAction=(action 'close' dropdown)  --}}
-        {{!--  class='py3 pl3 pr5 u-hv-bc-white border-bottom fc-primary flex items-center'}}  --}}
-        {{!--  <span class="fa-stack">  --}}
-          {{!--  <i class="fa fa-square fa-stack-2x"></i>  --}}
-          {{!--  <i class="fa fa-history fa-stack-1x fa-inverse"></i>  --}}
-        {{!--  </span>  --}}
-        {{!--  <span>Activity</span>  --}}
-      {{!--  {{/link-to}}  --}}
 
 
       {{#link-to 'datasets.register'
