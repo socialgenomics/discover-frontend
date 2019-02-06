@@ -7,7 +7,7 @@ const { inject: { service }, Component, computed, Logger, get, set } = Ember;
 export default Component.extend({
   store: service(),
   session: service(),
-  collectionsService: service('collections'),
+  favouritesService: service('favourites'),
 
   tagName: 'li',
   classNames: ['fc-secondary', 'cursor-pointer' ],
@@ -19,8 +19,8 @@ export default Component.extend({
   model: null,
   modelType: null,
 
-  isStarred: computed('collectionsService.bookmarks', function() {
-    return get(this, 'collectionsService')
+  isStarred: computed('favouritesService.bookmarks', function() {
+    return get(this, 'favouritesService')
       .getFavourite(get(this, 'model.id'), get(this, 'model.constructor.modelName'));
   }),
 
@@ -62,11 +62,11 @@ export default Component.extend({
   _addFavourite() {
     const currentModel = get(this, 'model'); //can be request or dataset
     const modelType = get(this, 'modelType');
-    const collectionsService = get(this, 'collectionsService');
+    const favouritesService = get(this, 'favouritesService');
 
     set(this, 'isSubmitting', true);
 
-    return collectionsService.createFavorite(get(currentModel, 'id'), modelType)
+    return favouritesService.createFavorite(get(currentModel, 'id'), modelType)
       .then(() => this._handleSaveSuccess(currentModel))
       .catch(Logger.error)
   },
@@ -74,10 +74,10 @@ export default Component.extend({
   _deleteFavourite() {
     const currentModel = get(this, 'model');
     // const modelType = get(this, 'modelType');
-    const collectionsService = get(this, 'collectionsService');
+    const favouritesService = get(this, 'favouritesService');
 
     set(this, 'isSubmitting', true);
-    return collectionsService.deleteFavourite(get(currentModel, 'id'))
+    return favouritesService.deleteFavourite(get(currentModel, 'id'))
       .then(() => this._handleDeleteSuccess(currentModel))
       .catch(Logger.error);
   },

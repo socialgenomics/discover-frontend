@@ -4,13 +4,13 @@ import { get } from "@ember/object";
 import AuthenticatedRouteMixin from "ember-simple-auth/mixins/authenticated-route-mixin";
 
 export default Route.extend(AuthenticatedRouteMixin, {
-  collections: service(),
+  favourites: service(),
   redirectionURL: "/",
   model() {
     const { id: userId } = this.paramsFor("user");
-    const collections = get(this, "collections");
+    const favourites = get(this, "favourites");
     // side-load the bookmarks
-    collections.loadSomeonesBookmarks(userId);
+    favourites.loadSomeonesBookmarks(userId);
     return this.modelFor("user");
   }
 });
