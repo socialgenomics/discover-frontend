@@ -7,7 +7,7 @@ import { run } from "@ember/runloop";
 describe("Unit | Controller | user/collections", function() {
   setupTest("controller:user/collections", {
     // Specify the other units that are required for this test.
-    needs: ["service:session", "service:favourites", "service:metrics"]
+    needs: ["service:session", "service:collections", "service:favourites", "service:metrics"]
   });
 
   // Replace this with your real tests.

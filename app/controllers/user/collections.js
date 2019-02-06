@@ -44,9 +44,9 @@ export default Controller.extend({
     },
     updateCollectionName() {
       throw new Error("not implemented - to be done directly in the service");
+    },
+    deleteCollection() {
+      throw new Error("not implemented - to be done directly in the service");
     }
-  },
-  deleteCollection() {
-    throw new Error("not implemented - to be done directly in the service");
   }
 });
