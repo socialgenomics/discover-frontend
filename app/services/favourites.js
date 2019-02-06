@@ -1,12 +1,13 @@
-import Service from '@ember/service';
-import { inject as service } from '@ember/service';
-import { get, set, observer } from '@ember/object';
-import { debounce } from '@ember/runloop';
-import {all, resolve } from 'rsvp';
-import R from 'npm:ramda';
-import ENV from 'repositive/config/environment';
-import Ember from 'ember';
-const {Logger} = Ember;
+import Service from "@ember/service";
+import { inject as service } from "@ember/service";
+import { get, set, observer } from "@ember/object";
+import computed from "ember-macro-helpers/computed";
+import { debounce } from "@ember/runloop";
+import { all, resolve } from "rsvp";
+import R from "npm:ramda";
+import ENV from "repositive/config/environment";
+import Ember from "ember";
+const { Logger } = Ember;
 
 export default Service.extend({
   ajax: service(),
@@ -14,60 +15,77 @@ export default Service.extend({
   session: service(),
   flashMessages: service(),
 
-  bookmarks: null,
   favCounts: null,
-  othersBookmarks: null,
+  bookmarksPerUserId: null,
+  bookmarks: computed(
+    "session.authenticatedUser.id",
+    "bookmarksPerUserId",
+    (userId, bookmarksPerUserId) =>
+      // check if there is a userId and if there is a promise for that user Id
+      userId && get(bookmarksPerUserId, userId)
+        ? get(bookmarksPerUserId, userId)
+        : resolve([])
+  ),
 
-  observeUserId: observer('session.authenticatedUser.id', function () {
-    if (get(this, 'session.authenticatedUser.id')) {
-      this.refreshFavourites();
-    }
+  observeUserId: observer("session.authenticatedUser.id", function() {
+    this.refreshFavourites();
   }),
 
   init() {
     this._super(...arguments);
-    set(this, 'favCounts', {});
+    set(this, "favCounts", {});
+    set(this, "bookmarksPerUserId", {});
     this.refreshFavourites();
-    set(this, 'othersBookmarks', {});
   },
 
   refreshFavourites() {
-    if (get(this, 'session.isAuthenticated')) {
-      debounce(this, this.loadCurrentUserBookmarks, 50);
+    if (get(this, "session.authenticatedUser.id")) {
+      debounce(this, this.loadBookmarksForCurrentUser, 50);
     } // else do nothing
   },
 
-
-  loadCurrentUserBookmarks() {
-    set(this, 'bookmarks', this._fetchBookmarks());
+  loadBookmarksForCurrentUser() {
+    if (get(this, "session.isAuthenticated")) {
+      this.loadBookmarksForUser(get(this, "session.authenticatedUser.id"));
+    } // else do nothing
   },
-
-  loadSomeonesBookmarks(userId) {
-    set(this, `othersBookmarks.${userId}`, this._fetchBookmarks(userId));
+  loadBookmarksForUser(userId) {
+    set(this, `bookmarksPerUserId.${userId}`, this._fetchBookmarks(userId));
   },
 
   getFavourite(modelId) {
-    return (get(this, 'bookmarks') || resolve([]))
-      .then((bookmarks) => bookmarks.filter((b) => b.resource_id == modelId).pop());
+    return get(this, "bookmarks").then(bookmarks =>
+      bookmarks.filter(b => b.resource_id == modelId).pop()
+    );
   },
 
   async getCount(resource_id) {
-    return get(this, 'ajax')
-      .request(ENV.APIRoutes['new-bookmarks']['count-bookmarks'].replace('{id}', resource_id))
-      .then(R.prop('result'))
-      .then((count) => {
+    return get(this, "ajax")
+      .request(
+        ENV.APIRoutes["new-bookmarks"]["count-bookmarks"].replace(
+          "{id}",
+          resource_id
+        )
+      )
+      .then(R.prop("result"))
+      .then(count => {
         set(this, `favCounts.${resource_id}`, count);
-        this.notifyPropertyChange('favCounts');
+        this.notifyPropertyChange("favCounts");
         return count;
       });
   },
 
   async createFavorite(resource_id, resource_type) {
     try {
-      const bookmarks = await get(this, 'bookmarks') || [];
-      const currentUserId = get(this, 'session.authenticatedUser.id');
-      const response = await this._createBookmark(resource_id, resource_type, currentUserId, 'user');
-      set(this, 'bookmarks', resolve([...bookmarks, response]));
+      const bookmarks = (await get(this, "bookmarks")) || [];
+      const currentUserId = get(this, "session.authenticatedUser.id");
+      const response = await this._createBookmark(
+        resource_id,
+        resource_type,
+        currentUserId,
+        "user"
+      );
+      set(this, "bookmarks", resolve([...bookmarks, response]));
       // side load the number of favourites ->
       this.getCount(resource_id);
       return response;
@@ -78,26 +96,28 @@ export default Service.extend({
   },
 
   _createBookmark(resource_id, resource_type, owner_id, owner_type) {
-    return get(this, 'ajax')
-      .request(ENV.APIRoutes['new-bookmarks']['create-bookmark'], {
-        method: 'POST',
-        contentType: 'application/json',
+    return get(this, "ajax")
+      .request(ENV.APIRoutes["new-bookmarks"]["create-bookmark"], {
+        method: "POST",
+        contentType: "application/json",
         data: { resource_id, resource_type, owner_id, owner_type }
       })
-      .then(R.prop('result'))
-      .then((bookmark) => this._loadBookmarkResource(bookmark));
+      .then(R.prop("result"))
+      .then(bookmark => this._loadBookmarkResource(bookmark));
   },
 
   async deleteFavourite(resource_id) {
     try {
-      const bookmarks = await get(this, 'bookmarks') || [];
-      const bookmark = bookmarks.filter((bookmark) => bookmark.resource_id === resource_id).pop();
+      const bookmarks = (await get(this, "bookmarks")) || [];
+      const bookmark = bookmarks
+        .filter(bookmark => bookmark.resource_id === resource_id)
+        .pop();
       if (!bookmark) {
-        throw new Error('There is no matching bookmark');
+        throw new Error("There is no matching bookmark");
       }
       await this._deleteBookmark(bookmark.id);
-      const newBookmarks = bookmarks.filter((b) => b.id !== bookmark.id);
-      set(this, 'bookmarks', resolve(newBookmarks));
+      const newBookmarks = bookmarks.filter(b => b.id !== bookmark.id);
+      set(this, "bookmarks", resolve(newBookmarks));
       // side load the number of favourites ->
       this.getCount(resource_id);
       // side load the bookmarks resource as well to reload the rest of the stats
@@ -109,34 +129,38 @@ export default Service.extend({
   },
 
   _deleteBookmark(bookmark_id) {
-    return get(this, 'ajax')
-      .request(ENV.APIRoutes['new-bookmarks']['delete-bookmark'], {
-        method: 'POST',
-        contentType: 'application/json',
+    return get(this, "ajax").request(
+      ENV.APIRoutes["new-bookmarks"]["delete-bookmark"],
+      {
+        method: "POST",
+        contentType: "application/json",
         data: { bookmark_id }
-      });
+      }
+    );
   },
 
-  _fetchBookmarks(maybeUserId) {
-    const currentUserId = get(this, 'session.authenticatedUser.id');
-    const userId = maybeUserId || currentUserId; // if no userId is provided use the current user' s one
-    return get(this, 'ajax')
-      .request(`${ENV.APIRoutes['new-bookmarks']['view-bookmarks']}?owner_id=${userId}`)
-      .then(R.prop('result'))
-      .then((bookmarks) =>
-        // TODO one day we should changed that to let the service deal with it
-        all(bookmarks.map((bookmark) => this._loadBookmarkResource(bookmark)))
-      ).then(R.filter(R.prop('resource'))); // <- remove the bookmarks for which the resource was not available
+  _fetchBookmarks(userId) {
+    return get(this, "ajax")
+      .request(
+        `${ENV.APIRoutes["new-bookmarks"]["view-bookmarks"]}?owner_id=${userId}`
+      )
+      .then(R.prop("result"))
+      .then(bookmarks =>
+        // TODO one day we should changed that to let the backend service deal with it
+        all(bookmarks.map(bookmark => this._loadBookmarkResource(bookmark)))
+      )
+      .then(R.filter(R.prop("resource"))); // <- remove the bookmarks for which the resource was not available
   },
 
   _loadBookmarkResource(bookmark) {
     const { resource_type, resource_id } = bookmark;
-    const store = get(this, 'store');
-    return store.findRecord(resource_type, resource_id)
-      .then((resource) => {
+    const store = get(this, "store");
+    return store
+      .findRecord(resource_type, resource_id)
+      .then(resource => {
         return { ...bookmark, resource };
       })
-      .catch((err) => {
+      .catch(err => {
         Logger.error(err);
         return bookmark;
       });
