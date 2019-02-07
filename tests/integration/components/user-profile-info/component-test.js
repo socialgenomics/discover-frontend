@@ -28,7 +28,9 @@ describe('Integration | Component | user profile info', function() {
       });
       this.render(hbs`{{user-profile-info
         isOwnProfile=isOwnProfile
-        user=user}}`);
+        user=user
+        collectionsNumber=5
+        favouritesNumber=10}}`);
     });
 
     it('edit profile icon is displayed', function() {
@@ -77,7 +79,9 @@ describe('Integration | Component | user profile info', function() {
         'user': user });
       this.render(hbs`{{user-profile-info
         isOwnProfile=isOwnProfile
-        user=user}}`);
+        user=user
+        collectionsNumber=5
+        favouritesNumber=10}}`);
     });
 
     it('edit profile icon is not displayed', function() {
@@ -92,7 +96,9 @@ describe('Integration | Component | user profile info', function() {
         'user': user});
       this.render(hbs`{{user-profile-info
         isOwnProfile=isOwnProfile
-        user=user}}`);
+        user=user
+        collectionsNumber=5
+        favouritesNumber=10}}`);
     });
 
     it('should display the date the user joined', function() {
