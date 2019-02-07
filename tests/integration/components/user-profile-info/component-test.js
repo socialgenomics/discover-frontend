@@ -20,6 +20,52 @@ describe('Integration | Component | user profile info', function() {
   setupComponentTest('user-profile-info', {
     integration: true
   });
+
+  describe('renders', function() {
+    beforeEach(function() {
+      this.setProperties({
+        'isOwnProfile': true,
+        'user': user
+      });
+    });
+
+    it('0 collections', function() {
+      this.render(hbs`{{user-profile-info
+        isOwnProfile=isOwnProfile
+        user=user
+        collectionsNumber=0
+        favouritesNumber=10}}`);
+      expect(this.$('[data-test-id=collections-number]').text().trim()).to.eql('(0)');
+    });
+
+    it('5 collections', function() {
+      this.render(hbs`{{user-profile-info
+        isOwnProfile=isOwnProfile
+        user=user
+        collectionsNumber=5
+        favouritesNumber=10}}`);
+      expect(this.$('[data-test-id=collections-number]').text().trim()).to.eql('(5)');
+    });
+
+    it('0 favourites', function() {
+      this.render(hbs`{{user-profile-info
+        isOwnProfile=isOwnProfile
+        user=user
+        collectionsNumber=10
+        favouritesNumber=0}}`);
+      expect(this.$('[data-test-id=favourites-number]').text().trim()).to.eql('(0)');
+    });
+
+    it('5 favourites', function() {
+      this.render(hbs`{{user-profile-info
+        isOwnProfile=isOwnProfile
+        user=user
+        collectionsNumber=10
+        favouritesNumber=5}}`);
+      expect(this.$('[data-test-id=favourites-number]').text().trim()).to.eql('(5)');
+    });
+  });
+
   describe('when the profile belongs to the current user', function() {
     beforeEach(function() {
       this.setProperties({
