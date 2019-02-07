@@ -6,6 +6,24 @@
     </div>
     <h1 class="fs3 fc-primary mb2 fw-reg hyphens-auto">{{user.displayName}}</h1>
 
+    <div class="flex justify-center">
+      {{#link-to "user.collections" user.id class="flex items-center"}}
+        <svg viewbox="0 0 24 24" width="24" height="24" role="img" class="mdi-icon fc-secondary inline-block">
+          <use xlink:href="/assets/images/ic_collections.svg#ic_collections" fill="currentColor"></use>
+        </svg>
+        <span class="mr1">Collections</span>
+      {{/link-to}}
+      <span class="mr2 items-center">({{collectionsNumber}})</span>
+      <span class="mr2 fc-secondary">|</span>
+      {{#link-to "user.activity" user.id class="flex items-center"}}
+        <svg viewbox="0 0 24 24" width="24" height="24" role="img" class="mdi-icon fc-secondary">
+          <use xlink:href="/assets/images/ic_activity.svg#ic_activity" fill="currentColor"></use>
+        </svg>
+        <span class="mr1">Activity</span>
+      {{/link-to}}
+      <span class="items-center">({{favouritesNumber}})</span>
+    </div>
+
     {{#if user.profile.work_organisation}}
       <h2 class="fs2 fc-secondary mb0 fw-reg">{{user.profile.work_organisation}}</h2>
     {{else if isOwnProfile}}
