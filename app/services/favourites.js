@@ -80,11 +80,11 @@ export default Service.extend({
   async createFavorite(resource_id, resource_type) {
     try {
       const bookmarks = (await get(this, "bookmarks")) || [];
-      const currentUserId = get(this, "userId");
+      const userId = get(this, "userId");
       const response = await this._createBookmark(
         resource_id,
         resource_type,
-        currentUserId,
+        userId,
         "user"
       );
       set(
