@@ -57,9 +57,6 @@ export default Service.extend({
           ENV.APIRoutes["new-bookmarks"]["view-collections"]
         }?owner_id=${userId}`
       )
-      .then(R.prop("result"))
-      .then(collections => {
-        return collections;
-      });
+      .then(R.prop("result"));
   }
 });
