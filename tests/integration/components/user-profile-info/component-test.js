@@ -51,21 +51,21 @@ describe('Integration | Component | user profile info', function() {
     describe('user has no work_organisation', function() {
       it('renders link to edit profile', function() {
         this.set('user.profile.work_organisation', null);
-        expect(this.$('a').eq(0).text().trim()).to.eql('Add where you work');
+        expect(this.$('a').eq(2).text().trim()).to.eql('Add where you work');
       });
     });
 
     describe('user has no work_role', function() {
       it('renders link to edit profile', function() {
         this.set('user.profile.work_role', null);
-        expect(this.$('a').eq(1).text().trim()).to.eql('Add your job role');
+        expect(this.$('a').eq(3).text().trim()).to.eql('Add your job role');
       });
     });
 
     describe('user has no bio', function() {
       it('renders link to edit profile', function() {
         this.set('user.profile.bio', null);
-        expect(this.$('a').eq(3).text().trim()).to.eql('Add your bio');
+        expect(this.$('a').eq(5).text().trim()).to.eql('Add your bio');
       });
     });
   });
