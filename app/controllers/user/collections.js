@@ -6,6 +6,7 @@ import computed from "ember-macro-helpers/computed";
 import R from "npm:ramda";
 
 export default Controller.extend({
+  flashMessages: service(),
   favourites: service(),
   collections: service(),
   session: service(),
@@ -29,24 +30,39 @@ export default Controller.extend({
   ),
   allUserBookmarks: computed(
     "user.id",
-    "favourites.bookmarksPerUserId",
+    "favourites.bookmarksPerUserId.[]",
     (userId, bookmarksPerUserId) => get(bookmarksPerUserId, userId)
   ),
   allUserCollections: computed(
     "user.id",
-    "collections.collectionsPerUserId",
+    "collections.collectionsPerUserId.[]",
     (userId, collectionsPerUserId) => get(collectionsPerUserId, userId)
   ),
 
   actions: {
-    createCollection() {
-      throw new Error("not implemented - to be done directly in the service");
+    async createCollection(name) {
+      const collections = get(this, 'collections');
+      try {
+        await collections.createCollection(name);
+      } catch (err) {
+        get(this, 'flashMessages').warning("We could not create the collection. Try again later.");
+      }
     },
-    updateCollectionName() {
-      throw new Error("not implemented - to be done directly in the service");
+    async updateCollectionName(collectionId, newName) {
+      const collections = get(this, 'collections');
+      try {
+        await collections.updateCollectionName(collectionId, newName);
+      } catch (err) {
+        get(this, 'flashMessages').warning("We could not rename the collection. Try again later.");
+      }
     },
-    deleteCollection() {
-      throw new Error("not implemented - to be done directly in the service");
+    async deleteCollection(collectionId) {
+      const collections = get(this, 'collections');
+      try {
+        await collections.deleteCollection(collectionId);
+      } catch (err) {
+        get(this, 'flashMessages').warning("We could not reate the collection. Try again later.");
+      }
     }
   }
 });

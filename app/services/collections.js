@@ -18,7 +18,7 @@ export default Service.extend({
   userId: alias("session.authenticatedUser.id"),
   collections: computed(
     "session.authenticatedUser.id",
-    "collectionsPerUserId",
+    "collectionsPerUserId.[]",
     (userId, collectionsPerUserId) =>
       // check if there is a userId and if there is a promise for that user Id
       userId && get(collectionsPerUserId, userId)
@@ -53,10 +53,16 @@ export default Service.extend({
   async createCollection(name) {
     const userId = get(this, "userId");
     try {
-      const response = await this._createCollection(name, userId, "user");
-      const collections = get(this, `collectionsPerUserIds.${userId}`);
-      collections.pushObject(response);
+      const newCollection = await this._createCollection(name, userId, "user");
+      const collections = await get(this, "collections");
+      set(
+        this,
+        `collectionsPerUserId.${userId}`,
+        resolve([...collections, newCollection])
+      );
+      this.notifyPropertyChange("collectionsPerUserId");
     } catch (err) {
+      Logger.error(err);
       throw new Error("We couldn't create the collection. Try again later.");
     }
   },
@@ -64,9 +70,10 @@ export default Service.extend({
     const userId = get(this, "userId");
     try {
       await this._deleteCollection(collectionId, userId);
-      const collections = get(this, "collections");
+      const collections = await get(this, "collections");
       const newCollections = collections.filter(c => c.id !== collectionId);
       set(this, `collectionsPerUserId.${userId}`, resolve(newCollections));
+      this.notifyPropertyChange("collectionsPerUserId");
     } catch (err) {
       Logger.error(err);
       throw new Error("We couldn't delete the collection. Try again later.");
@@ -76,11 +83,12 @@ export default Service.extend({
     const userId = get(this, "userId");
     try {
       await this._updateCollectionName(collectionId, name);
-      const collections = get(this, "collections");
+      const collections = await get(this, "collections");
       const newCollections = collections.map(c =>
         c.id === collectionId ? { ...c, name } : c
       );
       set(this, `collectionsPerUserId.${userId}`, resolve(newCollections));
+      this.notifyPropertyChange("collectionsPerUserId");
     } catch (err) {
       Logger.error(err);
       throw new Error("We couldn't rename the collection. Try again later.");
@@ -98,14 +106,13 @@ export default Service.extend({
   },
 
   _createCollection(name, owner_id) {
-    return get(this, "ajax").request(
-      ENV.APIRoutes["new-bookmarks"]["create-collection"],
-      {
+    return get(this, "ajax")
+      .request(ENV.APIRoutes["new-bookmarks"]["create-collection"], {
         method: "POST",
         contentType: "application/json",
         data: { name, owner_id }
-      }
-    );
+      })
+      .then(R.prop("result"));
   },
 
   _deleteCollection(collection_id) {

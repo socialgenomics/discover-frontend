@@ -21,7 +21,7 @@ export default Service.extend({
   userId: alias("session.authenticatedUser.id"),
   bookmarks: computed(
     "userId",
-    "bookmarksPerUserId",
+    "bookmarksPerUserId.[]",
     (userId, bookmarksPerUserId) =>
       // check if there is a userId and if there is a promise for that user Id
       userId && get(bookmarksPerUserId, userId)
