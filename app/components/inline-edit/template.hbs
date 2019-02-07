@@ -1,0 +1,20 @@
+{{#if isEditing}}
+  <form class="inline"
+        onClick={{action 'doNothing'}}
+        {{action (pipe (action 'onChange') (action 'stopEditing')) on="submit"}}
+        {{action (pipe (action 'onChange') (action 'stopEditing')) on="focusOut"}}>
+    {{focus-input type="text" class=inputClass value=newContent placeholder=placeholder}}
+  </form>
+{{else if isNew}}
+  <a class="fc-purple-mid cursor-pointer" {{action (mut isEditing) true}}>
+    + <span class="pl1 td-underline">{{newText}}</span>
+  </a>
+{{else}}
+  <span style="{{deleteStyle}}">
+    {{fa-icon "trash" class="u-hv-tc-purple-mid" click=(action (optional onDeleteAction))  bubble=false}}
+  </span>
+  <span class="{{contentClass}} cursor-pointer">{{content}}</span>
+  {{#if (and isHovered updateContentAction)}}
+    {{fa-icon "pencil" class="u-hv-tc-purple-mid" click=(action 'enterEditMode') }}
+  {{/if}}
+{{/if}}
