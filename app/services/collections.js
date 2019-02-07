@@ -72,8 +72,19 @@ export default Service.extend({
       throw new Error("We couldn't delete the collection. Try again later.");
     }
   },
-  renameCollection(collectionId) {
-    throw new Error("Not implemented yet!");
+  async updateCollectionName(collectionId, name) {
+    const userId = get(this, "userId");
+    try {
+      await this._updateCollectionName(collectionId, name);
+      const collections = get(this, "collections");
+      const newCollections = collections.map(c =>
+        c.id === collectionId ? { ...c, name } : c
+      );
+      set(this, `collectionsPerUserId.${userId}`, resolve(newCollections));
+    } catch (err) {
+      Logger.error(err);
+      throw new Error("We couldn't rename the collection. Try again later.");
+    }
   },
 
   _fetchCollections(userId) {
@@ -104,6 +115,17 @@ export default Service.extend({
         method: "POST",
         contentType: "application/json",
         data: { collection_id }
+      }
+    );
+  },
+
+  _updateCollectionName(collection_id, name) {
+    return get(this, "ajax").request(
+      ENV.APIRoutes["new-bookmarks"]["change-collection-name"],
+      {
+        method: "POST",
+        contentType: "application/json",
+        data: { collection_id, name }
       }
     );
   }
