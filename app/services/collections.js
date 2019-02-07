@@ -1,18 +1,21 @@
 import Service from "@ember/service";
 import { inject as service } from "@ember/service";
 import { get, set, observer } from "@ember/object";
+import { alias } from "@ember/object/computed";
 import computed from "ember-macro-helpers/computed";
 import { debounce } from "@ember/runloop";
 import { resolve } from "rsvp";
 import R from "npm:ramda";
 import ENV from "repositive/config/environment";
+import Ember from "ember";
+const { Logger } = Ember;
 
 export default Service.extend({
   ajax: service(),
   session: service(),
-  flashMessages: service(),
 
   collectionsPerUserId: null,
+  userId: alias("session.authenticatedUser.id"),
   collections: computed(
     "session.authenticatedUser.id",
     "collectionsPerUserId",
@@ -23,7 +26,7 @@ export default Service.extend({
         : resolve([])
   ),
 
-  observeUserId: observer("session.authenticatedUser.id", function() {
+  observeUserId: observer("userId", function() {
     this.refreshCollections();
   }),
 
@@ -34,27 +37,40 @@ export default Service.extend({
   },
 
   refreshCollections() {
-    if (get(this, "session.authenticatedUser.id")) {
+    if (get(this, "userId")) {
       debounce(this, this.loadCollectionsForCurrentUser, 50);
     } // else do nothing
   },
 
   loadCollectionsForCurrentUser() {
-    if (get(this, "session.authenticatedUser.id")) {
-      return this.loadCollectionsForUser(
-        get(this, "session.authenticatedUser.id")
-      );
+    if (get(this, "userId")) {
+      return this.loadCollectionsForUser(get(this, "userId"));
     }
   },
   loadCollectionsForUser(userId) {
     set(this, `collectionsPerUserId.${userId}`, this._fetchCollections(userId));
   },
-  createCollection(name) {
-    const userId = get(this, "session.authenticatedUser.id");
-    return this._createCollection(name, userId);
+  async createCollection(name) {
+    const userId = get(this, "userId");
+    try {
+      const response = await this._createCollection(name, userId, "user");
+      const collections = get(this, `collectionsPerUserIds.${userId}`);
+      collections.pushObject(response);
+    } catch (err) {
+      throw new Error("We couldn't create the collection. Try again later.");
+    }
   },
-  deleteCollection(collectionId) {
-    throw new Error("Not implemented yet!");
+  async deleteCollection(collectionId) {
+    const userId = get(this, "userId");
+    try {
+      await this._deleteCollection(collectionId, userId);
+      const collections = get(this, "collections");
+      const newCollections = collections.filter(c => c.id !== collectionId);
+      set(this, `collectionsPerUserId.${userId}`, resolve(newCollections));
+    } catch (err) {
+      Logger.error(err);
+      throw new Error("We couldn't delete the collection. Try again later.");
+    }
   },
   renameCollection(collectionId) {
     throw new Error("Not implemented yet!");
@@ -77,6 +93,17 @@ export default Service.extend({
         method: "POST",
         contentType: "application/json",
         data: { name, owner_id }
+      }
+    );
+  },
+
+  _deleteCollection(collection_id) {
+    return get(this, "ajax").request(
+      ENV.APIRoutes["new-bookmarks"]["delete-collection"],
+      {
+        method: "POST",
+        contentType: "application/json",
+        data: { collection_id }
       }
     );
   }
