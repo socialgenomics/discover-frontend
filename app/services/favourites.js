@@ -1,6 +1,7 @@
 import Service from "@ember/service";
 import { inject as service } from "@ember/service";
 import { get, set, observer } from "@ember/object";
+import { alias } from "@ember/object/computed";
 import computed from "ember-macro-helpers/computed";
 import { debounce } from "@ember/runloop";
 import { all, resolve } from "rsvp";
@@ -17,8 +18,9 @@ export default Service.extend({
 
   favCounts: null,
   bookmarksPerUserId: null,
+  userId: alias("session.authenticatedUser.id"),
   bookmarks: computed(
-    "session.authenticatedUser.id",
+    "userId",
     "bookmarksPerUserId",
     (userId, bookmarksPerUserId) =>
       // check if there is a userId and if there is a promise for that user Id
@@ -27,7 +29,7 @@ export default Service.extend({
         : resolve([])
   ),
 
-  observeUserId: observer("session.authenticatedUser.id", function() {
+  observeUserId: observer("userId", function() {
     this.refreshFavourites();
   }),
 
@@ -39,14 +41,14 @@ export default Service.extend({
   },
 
   refreshFavourites() {
-    if (get(this, "session.authenticatedUser.id")) {
+    if (get(this, "userId")) {
       debounce(this, this.loadBookmarksForCurrentUser, 50);
     } // else do nothing
   },
 
   loadBookmarksForCurrentUser() {
-    if (get(this, "session.isAuthenticated")) {
-      this.loadBookmarksForUser(get(this, "session.authenticatedUser.id"));
+    if (get(this, "userId")) {
+      this.loadBookmarksForUser(get(this, "userId"));
     } // else do nothing
   },
   loadBookmarksForUser(userId) {
@@ -78,14 +80,18 @@ export default Service.extend({
   async createFavorite(resource_id, resource_type) {
     try {
       const bookmarks = (await get(this, "bookmarks")) || [];
-      const currentUserId = get(this, "session.authenticatedUser.id");
+      const currentUserId = get(this, "userId");
       const response = await this._createBookmark(
         resource_id,
         resource_type,
         currentUserId,
         "user"
       );
-      set(this, "bookmarks", resolve([...bookmarks, response]));
+      set(
+        this,
+        `bookmarksPerUserId.${userId}`,
+        resolve([...bookmarks, response])
+      );
       // side load the number of favourites ->
       this.getCount(resource_id);
       return response;
@@ -117,7 +123,8 @@ export default Service.extend({
       }
       await this._deleteBookmark(bookmark.id);
       const newBookmarks = bookmarks.filter(b => b.id !== bookmark.id);
-      set(this, "bookmarks", resolve(newBookmarks));
+      const userId = get(this, "userId");
+      set(this, `bookmarksPerUserId.${userId}`, resolve(newBookmarks));
       // side load the number of favourites ->
       this.getCount(resource_id);
       // side load the bookmarks resource as well to reload the rest of the stats
