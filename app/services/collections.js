@@ -49,6 +49,16 @@ export default Service.extend({
   loadCollectionsForUser(userId) {
     set(this, `collectionsPerUserId.${userId}`, this._fetchCollections(userId));
   },
+  createCollection(name) {
+    const userId = get(this, "session.authenticatedUser.id");
+    return this._createCollection(name, userId);
+  },
+  deleteCollection(collectionId) {
+    throw new Error("Not implemented yet!");
+  },
+  renameCollection(collectionId) {
+    throw new Error("Not implemented yet!");
+  },
 
   _fetchCollections(userId) {
     return get(this, "ajax")
@@ -58,5 +68,16 @@ export default Service.extend({
         }?owner_id=${userId}`
       )
       .then(R.prop("result"));
+  },
+
+  _createCollection(name, owner_id) {
+    return get(this, "ajax").request(
+      ENV.APIRoutes["new-bookmarks"]["create-collection"],
+      {
+        method: "POST",
+        contentType: "application/json",
+        data: { name, owner_id }
+      }
+    );
   }
 });
