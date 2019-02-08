@@ -8,6 +8,12 @@ export default Controller.extend({
   session: service(),
   collections: service(),
 
+  // I had to do this in order to set these CPs in the unite test as I was not able to set the model fro there
+  requests: computed('model.requests.content.[]', (requests) => requests),
+  registrations: computed('model.registrations.content.[]', (requests) => requests),
+  contributions: computed('model.contributions.[]', (requests) => requests),
+  discussions: computed('model.discussions.[]', (requests) => requests),
+
   user: alias('model.user'),
   isOwnProfile: computed('model.user.id', 'session.authenticatedUser.id', function(profileUserId, sessionUserId) {
     if (sessionUserId === profileUserId) {
@@ -21,8 +27,7 @@ export default Controller.extend({
     (userId, collectionsPerUserId) => get(collectionsPerUserId, userId)
   ),
 
-  activitiesNumber: computed('model.{requests.content,registrations.content,contributions,discussions}.[]',
-    function () {
-      return Array.prototype.reduce.call(arguments, (acc, activity, idx) => acc + arguments[idx].length, 0);
-    })
+  activitiesNumber: computed('requests', 'registrations', 'contributions', 'discussions', function () {
+    return Array.prototype.reduce.call(arguments, (acc, activity, idx) => acc + arguments[idx].length, 0);
+  })
 });
