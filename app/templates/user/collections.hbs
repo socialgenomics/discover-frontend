@@ -88,8 +88,9 @@
                  {{#ab.error}}
                    <small>Something went wrong while fetching the name of your collection.</small>
                  {{/ab.error}}
-                 {{#ab.fulfilled}}
-                   {{ab.settledContent.name}}
+                 {{#ab.fulfilled as | collection |}}
+                   {{collection.name}}
+                   ({{collection.bookmarks.length}})
                  {{/ab.fulfilled}}
                {{/async-block}}
              {{else}}
