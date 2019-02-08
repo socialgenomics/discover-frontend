@@ -7,7 +7,13 @@ import { run } from "@ember/runloop";
 describe("Unit | Controller | user/collections", function() {
   setupTest("controller:user/collections", {
     // Specify the other units that are required for this test.
-    needs: ["service:session", "service:collections", "service:favourites", "service:metrics"]
+    needs: [
+      "service:session",
+      "service:collections",
+      "service:favourites",
+      "service:flashMessages",
+      "service:metrics"
+    ]
   });
 
   it("compute if the user is checking it's own collections", function() {
