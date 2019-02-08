@@ -12,9 +12,9 @@
           <use xlink:href="/assets/images/ic_collections.svg#ic_collections" fill="currentColor"></use>
         </svg>
         <span class="mr1">Collections</span>
+        <span class="mr3 items-center" data-test-id='collections-number'>({{collectionsNumber}})</span>
       {{/link-to}}
-      <span class="mr3 items-center" data-test-id='collections-number'>({{collectionsNumber}})</span>
-      
+
       <span class="mr3 fc-secondary">|</span>
       
       {{#link-to "user.activity" user.id class="flex items-center"}}
@@ -22,8 +22,8 @@
           <use xlink:href="/assets/images/ic_activity.svg#ic_activity" fill="currentColor"></use>
         </svg>
         <span class="mr1">Activity</span>
+        <span class="items-center" data-test-id='activities-number'>({{activitiesNumber}})</span>
       {{/link-to}}
-      <span class="items-center" data-test-id='activities-number'>({{activitiesNumber}})</span>
     </div>
 
     {{#if user.profile.work_organisation}}
