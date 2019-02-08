@@ -8,11 +8,11 @@ export default Controller.extend({
   session: service(),
   collections: service(),
 
-  // I had to do this in order to set these CPs in the unite test as I was not able to set the model fro there
+  // I had to do this in order to set these CPs in the unit test as I was not able to set the model from there
   requests: computed('model.requests.content.[]', (requests) => requests),
-  registrations: computed('model.registrations.content.[]', (requests) => requests),
-  contributions: computed('model.contributions.[]', (requests) => requests),
-  discussions: computed('model.discussions.[]', (requests) => requests),
+  registrations: computed('model.registrations.content.[]', (registrations) => registrations),
+  contributions: computed('model.contributions.[]', (contributions) => contributions),
+  discussions: computed('model.discussions.[]', (discussions) => discussions),
 
   user: alias('model.user'),
   isOwnProfile: computed('model.user.id', 'session.authenticatedUser.id', function(profileUserId, sessionUserId) {
