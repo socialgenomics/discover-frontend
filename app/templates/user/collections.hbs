@@ -20,13 +20,19 @@
             <ul class="p0 mb0" style="margin-left: 0">
               {{#each collections as  |collection| }}
                 <li class="flex justify-between items-baseline border-bottom px4 py2 cursor-pointer {{if (eq collectionFilter collection.id) 'fc-purple-mid bc-very-light-grey'}}" {{action (action (mut collectionFilter) collection.id) on="click"}}>
-                  {{inline-edit
-                    content=collection.name
-                    contentClass="px2 ellipsis"
-                    class="flex pr4 flex-grow no-min-width"
-                    updateContentAction=(action 'updateCollectionName' collection.id)
-                    onDeleteAction=(action 'deleteCollection' collection.id collection.name)
-                  }}
+                  {{#if isOwnProfile}}
+                    {{inline-edit
+                      content=collection.name
+                      contentClass="px2 ellipsis"
+                      class="flex pr4 flex-grow no-min-width"
+                      updateContentAction=(action 'updateCollectionName' collection.id)
+                      onDeleteAction=(action 'deleteCollection' collection.id collection.name)
+                    }}
+                  {{else}}
+                    <span class="flex pr4 flex-grow no-min-width">
+                      <span class="px3 ellipsis">{{collection.name}}</span>
+                    </span>
+                  {{/if}}
                   <span>{{collection.bookmarks.length}}</span>
                   {{#if showConfirmDeleteCollectionModal}}
                     {{#modal-dialog
@@ -63,15 +69,17 @@
                   {{/if}}
                 </li>
               {{/each}}
-              {{!--  <li class="flex items-baseline px4 py2 cursor-pointer" >  --}}
-                {{!--  {{inline-edit  --}}
-                  {{!--  placeholder="Collection name"  --}}
-                  {{!--  isNew=true  --}}
-                  {{!--  data-test-id="add-collection-btn"  --}}
-                  {{!--  newText="Add new collection"  --}}
-                  {{!--  saveNewContentAction=(action 'createCollection')  --}}
-                {{!--  }}  --}}
-              {{!--  </li>  --}}
+              {{#if isOwnProfile}}
+                <li class="flex items-baseline px4 py2 cursor-pointer" >
+                  {{inline-edit
+                    placeholder="Collection name"
+                    isNew=true
+                    data-test-id="add-collection-btn"
+                    newText="Add new collection"
+                    saveNewContentAction=(action 'createCollection')
+                  }}
+                </li>
+              {{/if}}
             </ul>
             {{/ab.fulfilled}}
           {{/async-block}}
