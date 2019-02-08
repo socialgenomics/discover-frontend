@@ -54,13 +54,13 @@ describe("Unit | Controller | user/collections", function() {
         }
       });
 
-      expect(get(controller, "pageTitleText")).to.eq("John's collections");
+      expect(get(controller, "pageTitleText")).to.eq("John's");
 
       set(session, "authenticatedUser", {
         id: "john-has-an-id"
       });
 
-      expect(get(controller, "pageTitleText")).to.eq("Your collections");
+      expect(get(controller, "pageTitleText")).to.eq("Your");
     });
   });
 });

@@ -34,7 +34,7 @@ describe('Integration | Component | user profile info', function() {
         isOwnProfile=isOwnProfile
         user=user
         collectionsNumber=0
-        favouritesNumber=10}}`);
+        activitiesNumber=10}}`);
       expect(this.$('[data-test-id=collections-number]').text().trim()).to.eql('(0)');
     });
 
@@ -43,7 +43,7 @@ describe('Integration | Component | user profile info', function() {
         isOwnProfile=isOwnProfile
         user=user
         collectionsNumber=5
-        favouritesNumber=10}}`);
+        activitiesNumber=10}}`);
       expect(this.$('[data-test-id=collections-number]').text().trim()).to.eql('(5)');
     });
 
@@ -52,8 +52,8 @@ describe('Integration | Component | user profile info', function() {
         isOwnProfile=isOwnProfile
         user=user
         collectionsNumber=10
-        favouritesNumber=0}}`);
-      expect(this.$('[data-test-id=favourites-number]').text().trim()).to.eql('(0)');
+        activitiesNumber=0}}`);
+      expect(this.$('[data-test-id=activities-number]').text().trim()).to.eql('(0)');
     });
 
     it('5 favourites', function() {
@@ -61,8 +61,8 @@ describe('Integration | Component | user profile info', function() {
         isOwnProfile=isOwnProfile
         user=user
         collectionsNumber=10
-        favouritesNumber=5}}`);
-      expect(this.$('[data-test-id=favourites-number]').text().trim()).to.eql('(5)');
+        activitiesNumber=5}}`);
+      expect(this.$('[data-test-id=activities-number]').text().trim()).to.eql('(5)');
     });
   });
 
@@ -76,7 +76,7 @@ describe('Integration | Component | user profile info', function() {
         isOwnProfile=isOwnProfile
         user=user
         collectionsNumber=5
-        favouritesNumber=10}}`);
+        activitiesNumber=10}}`);
     });
 
     it('edit profile icon is displayed', function() {

@@ -6,7 +6,6 @@ import { get } from "@ember/object";
 
 export default Controller.extend({
   session: service(),
-  favourites: service(),
   collections: service(),
 
   user: alias('model.user'),
@@ -16,15 +15,14 @@ export default Controller.extend({
     }
   }),
 
-  allUserBookmarks: computed(
-    "user.id",
-    "favourites.bookmarksPerUserId",
-    (userId, bookmarksPerUserId) => get(bookmarksPerUserId, userId)
-  ),
-
   allUserCollections: computed(
     "user.id",
     "collections.collectionsPerUserId",
     (userId, collectionsPerUserId) => get(collectionsPerUserId, userId)
-  )
+  ),
+
+  activitiesNumber: computed('model.{requests.content,registrations.content,contributions,discussions}.[]',
+    function () {
+      return Array.prototype.reduce.call(arguments, (acc, activity, idx) => acc + arguments[idx].length, 0);
+    })
 });
