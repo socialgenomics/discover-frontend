@@ -127,7 +127,7 @@ describe('Integration | Component | user profile info', function() {
         isOwnProfile=isOwnProfile
         user=user
         collectionsNumber=5
-        favouritesNumber=10}}`);
+        activitiesNumber=10}}`);
     });
 
     it('edit profile icon is not displayed', function() {
@@ -144,7 +144,7 @@ describe('Integration | Component | user profile info', function() {
         isOwnProfile=isOwnProfile
         user=user
         collectionsNumber=5
-        favouritesNumber=10}}`);
+        activitiesNumber=10}}`);
     });
 
     it('should display the date the user joined', function() {
