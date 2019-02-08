@@ -16,12 +16,15 @@ export default Controller.extend({
   // aliasing the model
   user: alias("model.user"),
 
-  filteredBookmarks: computed('collectionFilterFunction', 'allUserBookmarks', async(collectionFilterFctPromise, allUserBookmarksPromise) => {
-    const allUserBookmarks = await allUserBookmarksPromise;
-    const collectionFilterFct = await collectionFilterFctPromise;
-    return R.filter(collectionFilterFct)(allUserBookmarks);
-  }),
-
+  filteredBookmarks: computed(
+    "collectionFilterFunction",
+    "allUserBookmarks",
+    async (collectionFilterFctPromise, allUserBookmarksPromise) => {
+      const allUserBookmarks = await allUserBookmarksPromise;
+      const collectionFilterFct = await collectionFilterFctPromise;
+      return R.filter(collectionFilterFct)(allUserBookmarks);
+    }
+  ),
 
   isOwnProfile: computed(
     "user.id",
@@ -44,31 +47,38 @@ export default Controller.extend({
     (userId, collectionsPerUserId) => get(collectionsPerUserId, userId)
   ),
 
-  selectedCollection: computed('collectionFilter', 'allUserCollections', async(collectionId, collectionsPromise ) => {
-    if (collectionId) {
-      const collections = await collectionsPromise;
-      const collection =  R.find(R.propEq('id', collectionId))(collections);
-      if (!collection) {
-        throw new Error('trying to select an unexisting collection');
+  selectedCollection: computed(
+    "collectionFilter",
+    "allUserCollections",
+    async (collectionId, collectionsPromise) => {
+      if (collectionId) {
+        const collections = await collectionsPromise;
+        const collection = R.find(R.propEq("id", collectionId))(collections);
+        if (!collection) {
+          throw new Error("trying to select an unexisting collection");
+        }
+        return collection;
+      } else {
+        return null;
       }
-      return collection;
-    } else {
-      return null;
     }
-  }),
+  ),
 
-  collectionFilterFunction: computed('selectedCollection', async(collectionPromise) => {
-    const collection = await collectionPromise;
-    if (collection) {
-      const filterFct = R.pipe(
-        R.prop('id'),
-        R.flip(R.contains)(collection.bookmarks)
-      );
-      return filterFct;
-    } else {
-      return () => true;
+  collectionFilterFunction: computed(
+    "selectedCollection",
+    async collectionPromise => {
+      const collection = await collectionPromise;
+      if (collection) {
+        const filterFct = R.pipe(
+          R.prop("id"),
+          R.flip(R.contains)(collection.bookmarks)
+        );
+        return filterFct;
+      } else {
+        return () => true;
+      }
     }
-  }),
+  ),
 
   actions: {
     createCollection() {
@@ -79,6 +89,18 @@ export default Controller.extend({
     },
     deleteCollection() {
       throw new Error("not implemented - to be done directly in the service");
+    },
+    async toggleCollectionParticipation(collectionId, bookmarkId) {
+      try {
+        await get(this, "collections").toggleCollectionParticipation(
+          collectionId,
+          bookmarkId
+        );
+      } catch (err) {
+        get(this, "flashMessages").warning(
+          "We could not update the collection. Try again later."
+        );
+      }
     }
   }
 });

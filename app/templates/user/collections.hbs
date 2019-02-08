@@ -109,6 +109,9 @@
              {{#each (sort-by 'updated_at:desc' bookmarks)
                       as | bookmark |}}
                {{collections/bookmark-card bookmark
+                 canAddToCollections=isOwnProfile
+                 collections=allUserCollections
+                 toggleCollectionParticipation=(action 'toggleCollectionParticipation')
                }}
              {{else}}
                <div class="p3">
