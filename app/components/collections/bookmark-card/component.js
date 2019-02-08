@@ -20,7 +20,7 @@ export default Component.extend({
             .filter(
               bookmarksForACollection =>
                 bookmarksForACollection.filter(
-                  bookmark => bookmark.id === bookmarkId
+                  bookmark => bookmark === bookmarkId
                 ).length > 0
             ).length
       )
