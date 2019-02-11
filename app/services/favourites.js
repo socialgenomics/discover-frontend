@@ -22,11 +22,12 @@ export default Service.extend({
   bookmarks: computed(
     "userId",
     "bookmarksPerUserId.[]",
-    (userId, bookmarksPerUserId) =>
+    (userId, bookmarksPerUserId) => {
       // check if there is a userId and if there is a promise for that user Id
-      userId && get(bookmarksPerUserId, userId)
+      return userId && get(bookmarksPerUserId, userId)
         ? get(bookmarksPerUserId, userId)
-        : resolve([])
+        : resolve([]);
+    }
   ),
 
   observeUserId: observer("userId", function() {
@@ -48,7 +49,7 @@ export default Service.extend({
 
   loadBookmarksForCurrentUser() {
     if (get(this, "userId")) {
-      this.loadBookmarksForUser(get(this, "userId"));
+      set(this, "bookmarks", this._fetchBookmarks(get(this, "userId")));
     } // else do nothing
   },
   loadBookmarksForUser(userId) {
@@ -87,11 +88,11 @@ export default Service.extend({
         userId,
         "user"
       );
-      set(
-        this,
-        `bookmarksPerUserId.${userId}`,
-        resolve([...bookmarks, response])
+      const newBookmarks = [...bookmarks, response];
+      set(this, 'bookmarks', resolve(newBookmarks)
       );
+      set(this, `bookmarksPerUserId.${userId}`, resolve(newBookmarks));
+
       // side load the number of favourites ->
       this.getCount(resource_id);
       return response;
@@ -115,6 +116,7 @@ export default Service.extend({
   async deleteFavourite(resource_id) {
     try {
       const bookmarks = (await get(this, "bookmarks")) || [];
+      const userId = get(this, "userId");
       const bookmark = bookmarks
         .filter(bookmark => bookmark.resource_id === resource_id)
         .pop();
@@ -123,8 +125,9 @@ export default Service.extend({
       }
       await this._deleteBookmark(bookmark.id);
       const newBookmarks = bookmarks.filter(b => b.id !== bookmark.id);
-      const userId = get(this, "userId");
+      set(this, 'bookmarks', resolve(newBookmarks));
       set(this, `bookmarksPerUserId.${userId}`, resolve(newBookmarks));
+
       // side load the number of favourites ->
       this.getCount(resource_id);
       // side load the bookmarks resource as well to reload the rest of the stats

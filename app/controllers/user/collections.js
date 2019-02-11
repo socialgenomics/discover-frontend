@@ -1,6 +1,6 @@
 import Controller from "@ember/controller";
 import { inject as service } from "@ember/service";
-import { get } from "@ember/object";
+import { get, set } from "@ember/object";
 import { alias } from "@ember/object/computed";
 import computed from "ember-macro-helpers/computed";
 import R from "npm:ramda";
@@ -92,6 +92,7 @@ export default Controller.extend({
       const collections = get(this, 'collections');
       try {
         await collections.deleteCollection(collectionId);
+        set(this, 'selectedCollection', null);
       } catch (err) {
         get(this, 'flashMessages').warning("We could not reate the collection. Try again later.");
       }
