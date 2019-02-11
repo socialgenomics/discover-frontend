@@ -4,16 +4,10 @@ import { setupTest } from "ember-mocha";
 import { get, set } from "@ember/object";
 import { run } from "@ember/runloop";
 
-describe("Unit | Controller | user/collections", function() {
+describe("Unit | Controller | user/activities", function() {
   setupTest("controller:user/collections", {
     // Specify the other units that are required for this test.
-    needs: [
-      "service:session",
-      "service:collections",
-      "service:favourites",
-      "service:flashMessages",
-      "service:metrics"
-    ]
+    needs: ["service:session", "service:collections", "service:favourites", "service:metrics", "service:flashMessages"]
   });
 
   it("compute if the user is checking it's own collections", function() {

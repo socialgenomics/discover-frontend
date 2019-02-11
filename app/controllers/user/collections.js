@@ -35,7 +35,7 @@ export default Controller.extend({
   pageTitleText: computed(
     "isOwnProfile",
     "user.data.firstname",
-    (isOwnProfile, user) => `${isOwnProfile ? "Your" : `${user}'s`} collections`
+    (isOwnProfile, user) => `${isOwnProfile ? "Your" : `${user}'s`}`
   ),
   allUserBookmarks: computed(
     "user.id",

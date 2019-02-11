@@ -20,6 +20,52 @@ describe('Integration | Component | user profile info', function() {
   setupComponentTest('user-profile-info', {
     integration: true
   });
+
+  describe('renders', function() {
+    beforeEach(function() {
+      this.setProperties({
+        'isOwnProfile': true,
+        'user': user
+      });
+    });
+
+    it('0 collections', function() {
+      this.render(hbs`{{user-profile-info
+        isOwnProfile=isOwnProfile
+        user=user
+        collectionsNumber=0
+        activitiesNumber=10}}`);
+      expect(this.$('[data-test-id=collections-number]').text().trim()).to.eql('(0)');
+    });
+
+    it('5 collections', function() {
+      this.render(hbs`{{user-profile-info
+        isOwnProfile=isOwnProfile
+        user=user
+        collectionsNumber=5
+        activitiesNumber=10}}`);
+      expect(this.$('[data-test-id=collections-number]').text().trim()).to.eql('(5)');
+    });
+
+    it('0 favourites', function() {
+      this.render(hbs`{{user-profile-info
+        isOwnProfile=isOwnProfile
+        user=user
+        collectionsNumber=10
+        activitiesNumber=0}}`);
+      expect(this.$('[data-test-id=activities-number]').text().trim()).to.eql('(0)');
+    });
+
+    it('5 favourites', function() {
+      this.render(hbs`{{user-profile-info
+        isOwnProfile=isOwnProfile
+        user=user
+        collectionsNumber=10
+        activitiesNumber=5}}`);
+      expect(this.$('[data-test-id=activities-number]').text().trim()).to.eql('(5)');
+    });
+  });
+
   describe('when the profile belongs to the current user', function() {
     beforeEach(function() {
       this.setProperties({
@@ -28,7 +74,9 @@ describe('Integration | Component | user profile info', function() {
       });
       this.render(hbs`{{user-profile-info
         isOwnProfile=isOwnProfile
-        user=user}}`);
+        user=user
+        collectionsNumber=5
+        activitiesNumber=10}}`);
     });
 
     it('edit profile icon is displayed', function() {
@@ -51,21 +99,21 @@ describe('Integration | Component | user profile info', function() {
     describe('user has no work_organisation', function() {
       it('renders link to edit profile', function() {
         this.set('user.profile.work_organisation', null);
-        expect(this.$('a').eq(0).text().trim()).to.eql('Add where you work');
+        expect(this.$('a').eq(2).text().trim()).to.eql('Add where you work');
       });
     });
 
     describe('user has no work_role', function() {
       it('renders link to edit profile', function() {
         this.set('user.profile.work_role', null);
-        expect(this.$('a').eq(1).text().trim()).to.eql('Add your job role');
+        expect(this.$('a').eq(3).text().trim()).to.eql('Add your job role');
       });
     });
 
     describe('user has no bio', function() {
       it('renders link to edit profile', function() {
         this.set('user.profile.bio', null);
-        expect(this.$('a').eq(3).text().trim()).to.eql('Add your bio');
+        expect(this.$('a').eq(5).text().trim()).to.eql('Add your bio');
       });
     });
   });
@@ -77,7 +125,9 @@ describe('Integration | Component | user profile info', function() {
         'user': user });
       this.render(hbs`{{user-profile-info
         isOwnProfile=isOwnProfile
-        user=user}}`);
+        user=user
+        collectionsNumber=5
+        activitiesNumber=10}}`);
     });
 
     it('edit profile icon is not displayed', function() {
@@ -92,7 +142,9 @@ describe('Integration | Component | user profile info', function() {
         'user': user});
       this.render(hbs`{{user-profile-info
         isOwnProfile=isOwnProfile
-        user=user}}`);
+        user=user
+        collectionsNumber=5
+        activitiesNumber=10}}`);
     });
 
     it('should display the date the user joined', function() {

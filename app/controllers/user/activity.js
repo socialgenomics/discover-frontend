@@ -12,5 +12,11 @@ export default Controller.extend({
     if (sessionUserId === profileUserId) {
       return true;
     }
-  })
+  }),
+
+  pageTitleText: computed(
+    "isOwnProfile",
+    "user.data.firstname",
+    (isOwnProfile, user) => `${isOwnProfile ? "Your" : `${user}'s`}`
+  )
 });
