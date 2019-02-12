@@ -93,21 +93,22 @@
       <div class="c-card border border-light-grey">
         <div class="flex justify-between items-baseline ">
            <h3 class="p3 fs2 mb0 fc-yellow">
-            {{!--   {{#if collectionFilter}}   --}}
-              {{!--   {{#async-block selectedCollection as | ab |}}   --}}
-                {{!--   {{#ab.error}}   --}}
-                  {{!--   <small>Something went wrong while fetching the name of your collection.</small>   --}}
-                {{!--   {{/ab.error}}   --}}
-                {{!--   {{#ab.fulfilled}}   --}}
-                  {{!--   {{ab.settledContent.name}}   --}}
-                {{!--   {{/ab.fulfilled}}   --}}
-              {{!--   {{/async-block}}   --}}
-            {{!--   {{else}}   --}}
-            All favourites
-            {{#if (is-fulfilled allUserBookmarks) }}
-              ({{get (await allUserBookmarks) 'length'}})
-            {{/if}}
-            {{!--   {{/if}}   --}}
+             {{#if collectionFilter}}
+               {{#async-block selectedCollection as | ab |}}
+                 {{#ab.error}}
+                   <small>Something went wrong while fetching the name of your collection.</small>
+                 {{/ab.error}}
+                 {{#ab.fulfilled as | collection |}}
+                   {{collection.name}}
+                   ({{collection.bookmarks.length}})
+                 {{/ab.fulfilled}}
+               {{/async-block}}
+             {{else}}
+               All favourites
+               {{#if (is-fulfilled allUserBookmarks) }}
+                 ({{get (await allUserBookmarks) 'length'}})
+               {{/if}}
+             {{/if}}
            </h3>
         </div>
         <div class="border-bottom border-yellow" style="border-width: 3px"></div>
@@ -118,6 +119,9 @@
              {{#each (sort-by 'updated_at:desc' bookmarks)
                       as | bookmark |}}
                {{collections/bookmark-card bookmark
+                 canAddToCollections=isOwnProfile
+                 collections=allUserCollections
+                 toggleCollectionParticipation=(action 'toggleCollectionParticipation')
                }}
              {{else}}
                <div class="p3">

@@ -13,6 +13,8 @@ const { Logger } = Ember;
 export default Service.extend({
   ajax: service(),
   session: service(),
+  flashMessages: service(),
+  favourites: service(),
 
   collectionsPerUserId: null,
   userId: alias("session.authenticatedUser.id"),
@@ -36,6 +38,62 @@ export default Service.extend({
     this.refreshCollections();
   },
 
+  async toggleCollectionParticipation(collectionId, bookmarkId) {
+    const userId = get(this, "userId");
+    const collection = (await get(this, "collections"))
+      .filter(R.propEq("id", collectionId))
+      .pop();
+    if (!collection) {
+      throw new Error(
+        `trying to modify a non-existing collection (id: ${collectionId})`
+      );
+    }
+    const bookmark = (await get(this, "favourites.bookmarks")).filter(
+      R.propEq("id", bookmarkId)
+    );
+    if (!bookmark) {
+      throw new Error(
+        `trying to modify a non-existing bookmark (id: ${bookmarkId})`
+      );
+    }
+    const collectionBookmarks = get(collection, "bookmarks");
+    let newBookmarksList;
+    if (collectionBookmarks.includes(bookmarkId)) {
+      // then we need to remove it
+      try {
+        await this._removeBookmarkFromCollection(collectionId, bookmarkId);
+        newBookmarksList = collectionBookmarks.filter(id => bookmarkId !== id);
+      } catch (err) {
+        newBookmarksList = collectionBookmarks;
+        throw new Error(
+          "We couldn't delete the bookmark to your collection. Please try again."
+        );
+      }
+    } else {
+      // then we need to add it
+      try {
+        await this._addBookmarkToCollection(collectionId, bookmarkId);
+        collectionBookmarks.push(bookmarkId);
+        newBookmarksList = collectionBookmarks;
+      } catch (err) {
+        // TODO recover from that error!
+        newBookmarksList = collectionBookmarks;
+        throw new Error(
+          "We couldn't add the bookmark to your collection. Please try again."
+        );
+      }
+    }
+    set(collection, "bookmarks", newBookmarksList);
+    const newCollections = (await get(this, "collections")).map(c => {
+      if (c.id === collectionId) {
+        return { ...c, bookmarks: newBookmarksList };
+      } else {
+        return c;
+      }
+    });
+    set(this, `collectionsPerUserId.${userId}`, resolve(newCollections));
+    this.notifyPropertyChange("collectionsPerUserId");
+  },
   refreshCollections() {
     if (get(this, "userId")) {
       debounce(this, this.loadCollectionsForCurrentUser, 50);
@@ -103,6 +161,34 @@ export default Service.extend({
         }?owner_id=${userId}`
       )
       .then(R.prop("result"));
+  },
+
+  _removeBookmarkFromCollection(collection_id, bookmark_id) {
+    return get(this, "ajax").request(
+      ENV.APIRoutes["new-bookmarks"]["delete-bookmark-from-collection"],
+      {
+        method: "POST",
+        contentType: "application/json",
+        data: {
+          collection_id,
+          bookmark_id
+        }
+      }
+    );
+  },
+
+  _addBookmarkToCollection(collection_id, bookmark_id) {
+    return get(this, "ajax").request(
+      ENV.APIRoutes["new-bookmarks"]["add-bookmark-to-collection"],
+      {
+        method: "POST",
+        contentType: "application/json",
+        data: {
+          collection_id,
+          bookmark_id
+        }
+      }
+    );
   },
 
   _createCollection(name, owner_id) {

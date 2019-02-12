@@ -1,4 +1,39 @@
 <div class="flex u-full-width">
   {{activity-card-item dataset=bookmark.resource class="flex-grow"}}
-  {{!--  TODO in one of the next task put the add to collection link here  --}}
+  {{#if canAddToCollections}}
+    {{#if (get (await collections) 'length')}}
+    <div class="p3 border-bottom">
+      {{#basic-dropdown verticalPosition="below"  horizontalPosition="right" as |bd|}}
+        {{#bd.trigger class="outline-none"}}
+        <span class="fc-blue cursor-pointer">
+          +
+          <span class="td-underline">
+            Add to collection {{if (await numOfRelatedCollections) (concat '• ' (await numOfRelatedCollections))}}
+          </span>
+        </span>
+        {{/bd.trigger}}
+        {{#bd.content class="c-card u-z1 border border-light-grey rounded p0"}}
+          {{#async-block collections as | ab |}}
+            {{ab.pending}}
+            {{#ab.error}}
+              Could not fetch your collection at the moment, please refresh the page to try again.
+            {{/ab.error}}
+            {{#ab.fulfilled as |userCollections| }}
+            <ul class="p0 mb0 " style="margin-left: 0; max-width: 40vw">
+              {{#each userCollections as |collection idx|}}
+              <li
+                class="{{if (not (eq idx 0)) 'border-top border-light-grey'}} p2 fc-primary cursor-pointer flex items-center"
+                {{action (action toggleCollectionParticipation collection.id bookmark.id)}}>
+                  {{input type="checkbox" checked=(contains bookmark.id collection.bookmarks) }}
+                  <span class="ellipsis"> {{collection.name}} </span>
+                </li>
+              {{/each}}
+            </ul>
+            {{/ab.fulfilled}}
+          {{/async-block}}
+        {{/bd.content}}
+      {{/basic-dropdown}}
+    </div>
+    {{/if}}
+  {{/if}}
 </div>

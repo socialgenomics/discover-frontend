@@ -17,12 +17,15 @@ export default Controller.extend({
   // aliasing the model
   user: alias("model.user"),
 
-  filteredBookmarks: computed('collectionFilterFunction', 'allUserBookmarks', async(collectionFilterFctPromise, allUserBookmarksPromise) => {
-    const allUserBookmarks = await allUserBookmarksPromise;
-    const collectionFilterFct = await collectionFilterFctPromise;
-    return R.filter(collectionFilterFct)(allUserBookmarks);
-  }),
-
+  filteredBookmarks: computed(
+    "collectionFilterFunction",
+    "allUserBookmarks",
+    async (collectionFilterFctPromise, allUserBookmarksPromise) => {
+      const allUserBookmarks = await allUserBookmarksPromise;
+      const collectionFilterFct = await collectionFilterFctPromise;
+      return R.filter(collectionFilterFct)(allUserBookmarks);
+    }
+  ),
 
   isOwnProfile: computed(
     "user.id",
@@ -45,56 +48,81 @@ export default Controller.extend({
     (userId, collectionsPerUserId) => get(collectionsPerUserId, userId)
   ),
 
-  selectedCollection: computed('collectionFilter', 'allUserCollections', async(collectionId, collectionsPromise ) => {
-    if (collectionId) {
-      const collections = await collectionsPromise;
-      const collection =  R.find(R.propEq('id', collectionId))(collections);
-      if (!collection) {
-        throw new Error('trying to select an unexisting collection');
+  selectedCollection: computed(
+    "collectionFilter",
+    "allUserCollections",
+    async (collectionId, collectionsPromise) => {
+      if (collectionId) {
+        const collections = await collectionsPromise;
+        const collection = R.find(R.propEq("id", collectionId))(collections);
+        if (!collection) {
+          throw new Error("trying to select an unexisting collection");
+        }
+        return collection;
+      } else {
+        return null;
       }
-      return collection;
-    } else {
-      return null;
     }
-  }),
+  ),
 
-  collectionFilterFunction: computed('selectedCollection', async(collectionPromise) => {
-    const collection = await collectionPromise;
-    if (collection) {
-      const filterFct = R.pipe(
-        R.prop('id'),
-        R.flip(R.contains)(collection.bookmarks)
-      );
-      return filterFct;
-    } else {
-      return () => true;
+  collectionFilterFunction: computed(
+    "selectedCollection",
+    async collectionPromise => {
+      const collection = await collectionPromise;
+      if (collection) {
+        const filterFct = R.pipe(
+          R.prop("id"),
+          R.flip(R.contains)(collection.bookmarks)
+        );
+        return filterFct;
+      } else {
+        return () => true;
+      }
     }
-  }),
+  ),
 
   actions: {
     async createCollection(name) {
-      const collections = get(this, 'collections');
+      const collections = get(this, "collections");
       try {
         await collections.createCollection(name);
       } catch (err) {
-        get(this, 'flashMessages').warning("We could not create the collection. Try again later.");
+        get(this, "flashMessages").warning(
+          "We could not create the collection. Try again later."
+        );
       }
     },
     async updateCollectionName(collectionId, newName) {
-      const collections = get(this, 'collections');
+      const collections = get(this, "collections");
       try {
         await collections.updateCollectionName(collectionId, newName);
       } catch (err) {
-        get(this, 'flashMessages').warning("We could not rename the collection. Try again later.");
+        get(this, "flashMessages").warning(
+          "We could not rename the collection. Try again later."
+        );
+      }
+    },
+    async toggleCollectionParticipation(collectionId, bookmarkId) {
+      try {
+        await get(this, "collections").toggleCollectionParticipation(
+          collectionId,
+          bookmarkId
+        );
+      } catch (err) {
+        get(this, "flashMessages").warning(
+          "We could not update the collection. Try again later."
+        );
       }
     },
     async deleteCollection(collectionId) {
-      const collections = get(this, 'collections');
+      const collections = get(this, "collections");
       try {
         await collections.deleteCollection(collectionId);
-        set(this, 'selectedCollection', null);
+        set(this, "collectionFilter", undefined);
       } catch (err) {
-        get(this, 'flashMessages').warning("We could not reate the collection. Try again later.");
+        get(this, "flashMessages").warning(
+          "We could not reate the collection. Try again later."
+        );
       }
     }
   }
