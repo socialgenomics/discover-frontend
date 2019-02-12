@@ -3,6 +3,7 @@ import { alias } from '@ember/object/computed';
 import { inject as service } from '@ember/service';
 import computed from 'ember-macro-helpers/computed';
 import { get } from "@ember/object";
+import { isEmpty } from "@ember/utils";
 
 export default Controller.extend({
   session: service(),
@@ -11,7 +12,7 @@ export default Controller.extend({
   // I had to do this in order to set these CPs in the unit test as I was not able to set the model from there
   requests: computed('model.requests.content.[]', (requests) => requests),
   registrations: computed('model.registrations.content.[]', (registrations) => registrations),
-  contributions: computed('model.contributions.[]', (contributions) => contributions),
+  contributions: computed('model.contributions', (contributions) => isEmpty(contributions) ? contributions : contributions.content),
   discussions: computed('model.discussions.[]', (discussions) => discussions),
 
   user: alias('model.user'),
