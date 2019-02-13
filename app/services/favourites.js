@@ -23,7 +23,6 @@ export default Service.extend({
     "userId",
     "bookmarksPerUserId",
     (userId, bookmarksPerUserId) => {
-      console.log("recomputing the bookmarks of the current user! ");
       // check if there is a userId and if there is a promise for that user Id
       return userId && get(bookmarksPerUserId, userId)
         ? get(bookmarksPerUserId, userId)
