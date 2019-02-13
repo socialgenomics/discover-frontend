@@ -20,7 +20,7 @@ export default Service.extend({
   userId: alias("session.authenticatedUser.id"),
   collections: computed(
     "session.authenticatedUser.id",
-    "collectionsPerUserId.[]",
+    "collectionsPerUserId",
     (userId, collectionsPerUserId) =>
       // check if there is a userId and if there is a promise for that user Id
       userId && get(collectionsPerUserId, userId)
@@ -91,8 +91,11 @@ export default Service.extend({
         return c;
       }
     });
-    set(this, `collectionsPerUserId.${userId}`, resolve(newCollections));
-    this.notifyPropertyChange("collectionsPerUserId");
+    const collectionsPerUserId = get(this, "collectionsPerUserId");
+    set(this, "collectionsPerUserId", {
+      ...collectionsPerUserId,
+      [userId]: resolve(newCollections)
+    });
   },
   refreshCollections() {
     if (get(this, "userId")) {
@@ -106,19 +109,22 @@ export default Service.extend({
     }
   },
   loadCollectionsForUser(userId) {
-    set(this, `collectionsPerUserId.${userId}`, this._fetchCollections(userId));
+    const collectionsPerUserId = get(this, "collectionsPerUserId");
+    set(this, "collectionsPerUserId", {
+      ...collectionsPerUserId,
+      [userId]: this._fetchCollections(userId)
+    });
   },
   async createCollection(name) {
     const userId = get(this, "userId");
     try {
       const newCollection = await this._createCollection(name, userId, "user");
       const collections = await get(this, "collections");
-      set(
-        this,
-        `collectionsPerUserId.${userId}`,
-        resolve([...collections, newCollection])
-      );
-      this.notifyPropertyChange("collectionsPerUserId");
+      const collectionsPerUserId = get(this, "collectionsPerUserId");
+      set(this, "collectionsPerUserId", {
+        ...collectionsPerUserId,
+        [userId]: resolve([...collections, newCollection])
+      });
     } catch (err) {
       Logger.error(err);
       throw new Error("We couldn't create the collection. Try again later.");
@@ -130,8 +136,11 @@ export default Service.extend({
       await this._deleteCollection(collectionId, userId);
       const collections = await get(this, "collections");
       const newCollections = collections.filter(c => c.id !== collectionId);
-      set(this, `collectionsPerUserId.${userId}`, resolve(newCollections));
-      this.notifyPropertyChange("collectionsPerUserId");
+      const collectionsPerUserId = get(this, "collectionsPerUserId");
+      set(this, "collectionsPerUserId", {
+        ...collectionsPerUserId,
+        [userId]: resolve(newCollections)
+      });
     } catch (err) {
       Logger.error(err);
       throw new Error("We couldn't delete the collection. Try again later.");
@@ -145,8 +154,11 @@ export default Service.extend({
       const newCollections = collections.map(c =>
         c.id === collectionId ? { ...c, name } : c
       );
-      set(this, `collectionsPerUserId.${userId}`, resolve(newCollections));
-      this.notifyPropertyChange("collectionsPerUserId");
+      const collectionsPerUserId = get(this, "collectionsPerUserId");
+      set(this, "collectionsPerUserId", {
+        ...collectionsPerUserId,
+        [userId]: resolve(newCollections)
+      });
     } catch (err) {
       Logger.error(err);
       throw new Error("We couldn't rename the collection. Try again later.");

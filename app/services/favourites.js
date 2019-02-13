@@ -21,7 +21,7 @@ export default Service.extend({
   userId: alias("session.authenticatedUser.id"),
   bookmarks: computed(
     "userId",
-    "bookmarksPerUserId.[]",
+    "bookmarksPerUserId",
     (userId, bookmarksPerUserId) => {
       // check if there is a userId and if there is a promise for that user Id
       return userId && get(bookmarksPerUserId, userId)
@@ -49,11 +49,15 @@ export default Service.extend({
 
   loadBookmarksForCurrentUser() {
     if (get(this, "userId")) {
-      set(this, "bookmarks", this._fetchBookmarks(get(this, "userId")));
+      this.loadBookmarksForUser(get(this, "userId"));
     } // else do nothing
   },
   loadBookmarksForUser(userId) {
-    set(this, `bookmarksPerUserId.${userId}`, this._fetchBookmarks(userId));
+    const bookmarksPerUserId = get(this, "bookmarksPerUserId");
+    set(this, `bookmarksPerUserId`, {
+      ...bookmarksPerUserId,
+      [userId]: this._fetchBookmarks(userId)
+    });
   },
 
   getFavourite(modelId) {
@@ -89,9 +93,11 @@ export default Service.extend({
         "user"
       );
       const newBookmarks = [...bookmarks, response];
-      set(this, 'bookmarks', resolve(newBookmarks)
-      );
-      set(this, `bookmarksPerUserId.${userId}`, resolve(newBookmarks));
+      const bookmarksPerUserId = get(this, "bookmarksPerUserId");
+      set(this, "bookmarksPerUserId", {
+        ...bookmarksPerUserId,
+        [userId]: resolve(newBookmarks)
+      });
 
       // side load the number of favourites ->
       this.getCount(resource_id);
@@ -125,8 +131,11 @@ export default Service.extend({
       }
       await this._deleteBookmark(bookmark.id);
       const newBookmarks = bookmarks.filter(b => b.id !== bookmark.id);
-      set(this, 'bookmarks', resolve(newBookmarks));
-      set(this, `bookmarksPerUserId.${userId}`, resolve(newBookmarks));
+      const bookmarksPerUserId = get(this, 'bookmarksPerUserId');
+      set(this, 'bookmarksPerUserId', {
+        ...bookmarksPerUserId,
+        [userId]: resolve(newBookmarks)
+      });
 
       // side load the number of favourites ->
       this.getCount(resource_id);
