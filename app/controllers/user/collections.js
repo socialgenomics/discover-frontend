@@ -1,6 +1,6 @@
 import Controller from "@ember/controller";
 import { inject as service } from "@ember/service";
-import { get, set } from "@ember/object";
+import { get, set, setProperties } from "@ember/object";
 import { alias } from "@ember/object/computed";
 import computed from "ember-macro-helpers/computed";
 import R from "npm:ramda";
@@ -13,6 +13,10 @@ export default Controller.extend({
 
   // this is used to show only favourites from a particular collection
   collectionFilter: null,
+  filterWithRequestMade: false,
+  filterWithRequestReviewed: false,
+  showConfirmDeleteCollectionModal: false,
+  collectionDeleteRequest: null,
 
   // aliasing the model
   user: alias("model.user"),
@@ -114,16 +118,38 @@ export default Controller.extend({
         );
       }
     },
-    async deleteCollection(collectionId) {
+    deleteCollection(collectionId, collectionName) {
+      setProperties(this, {
+        showConfirmDeleteCollectionModal: true,
+        collectionIdToDelete: collectionId,
+        collectionNameToDelete: collectionName
+      });
+    },
+    confirmDeleteCollection(collectionId, name) {
       const collections = get(this, "collections");
-      try {
-        await collections.deleteCollection(collectionId);
-        set(this, "collectionFilter", undefined);
-      } catch (err) {
-        get(this, "flashMessages").warning(
-          "We could not reate the collection. Try again later."
-        );
-      }
+      const deletionRequest = collections
+        .deleteCollection(collectionId)
+        .then(res => {
+          setProperties(this, {
+            collectionFilter: null,
+            showConfirmDeleteCollectionModal: false,
+            collectionDeleteRequest: null
+          });
+          return res;
+        })
+        .then(() => {
+          const flashMsg = get(this, "stringStore")
+            .getString("bookmarks_collection_deleted")
+            .replace("{collectionName}", name);
+          get(this, "flashMessages").success(flashMsg);
+        })
+        .catch(err => {
+          get(this, "flashMessages").warning("We could not delete the collection. Try again later");
+
+          return err;
+        });
+
+      set(this, "collectionDeleteRequest", deletionRequest);
     }
   }
 });
