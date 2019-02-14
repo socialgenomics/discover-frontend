@@ -138,7 +138,7 @@ export default Controller.extend({
           return res;
         })
         .then(() =>
-          get(this, "flashMessages").success(`the collection "${name}" was correctly deleted.`)
+          get(this, "flashMessages").success(`The collection "${name}" was correctly deleted.`)
         )
         .catch(err => {
           get(this, "flashMessages").warning("We could not delete the collection. Try again later");
