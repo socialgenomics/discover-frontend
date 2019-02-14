@@ -137,12 +137,9 @@ export default Controller.extend({
           });
           return res;
         })
-        .then(() => {
-          const flashMsg = get(this, "stringStore")
-            .getString("bookmarks_collection_deleted")
-            .replace("{collectionName}", name);
-          get(this, "flashMessages").success(flashMsg);
-        })
+        .then(() =>
+          get(this, "flashMessages").success(`the collection "${name}" was correctly deleted.`)
+        )
         .catch(err => {
           get(this, "flashMessages").warning("We could not delete the collection. Try again later");
 
