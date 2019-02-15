@@ -17,12 +17,18 @@ export default Component.extend({
     const elem = get(this, "element");
     const url = get(this, "doi") || "no-doi-given";
     const client = new coreapi.Client();
-    client.action(schema, ["score", "list"], { url }).then(results => {
-      insignia.build_svg(elem, results.scores, {
-        tooltips: (rubric, metric, score) =>
-          `Score: ${(score * 100).toFixed(0)}%<br />${results.metrics[metric]}`
+    if (url) {
+      client.action(schema, ["score", "list"], { url }).then(results => {
+        insignia.build_svg(elem, results.scores, {
+          tooltips: (rubric, metric, score) =>
+            `Score: ${(score * 100).toFixed(0)}%<br />${
+              results.metrics[metric]
+            }`
+        });
       });
-    });
+    } else {
+      insignia.build_svg(elem, {});
+    }
   }
 }).reopen({
   positionalParams: ["doi"]
