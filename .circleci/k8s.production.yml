@@ -27,7 +27,7 @@ spec:
         app: discover
     spec:
       containers:
-      - image: registry.repositive.io:5000/discover-frontend:${TAG}
+      - image: gcr.io/repositive-gcr/discover-frontend:${TAG}
         imagePullPolicy: IfNotPresent
         name: discover
         ports:
@@ -55,13 +55,14 @@ metadata:
     kubernetes.io/tls-acme: "true"
 spec:
   rules:
-  - host: discover.repositive.io
+  - host: repositive.io
     http:
       paths:
-      - backend:
-          serviceName: discover
-          servicePort: 80
+        - path: /discover
+          backend:
+            serviceName: discover
+            servicePort: 80
   tls:
-  - secretName: discover-tls-cert
-    hosts:
-    - discover.repositive.io
+    - secretName: cmp-platform-tls-cert
+      hosts:
+        - repositive.io

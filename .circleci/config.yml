@@ -10,14 +10,22 @@ workflows:
             branches:
               only:
                 - master
-                - dis-rc
-                - dis-prod
+                - production
 
       - test_and_make:
           filters:
             branches:
               ignore:
-                - dis-prod
+                - production
+
+      - build_container_dev:
+          filters:
+            branches:
+              only:
+                - master
+          requires:
+            - test_and_make
+            - compute_tag
 
       - build_container_local:
           filters:
@@ -28,7 +36,7 @@ workflows:
             - test_and_make
             - compute_tag
 
-      - build_container_qa:
+      - build_container_prod:
           filters:
             branches:
               only:
@@ -37,44 +45,27 @@ workflows:
             - test_and_make
             - compute_tag
 
-      - build_container_dis-rc:
+      - release_dev:
           filters:
             branches:
               only:
                 - master
           requires:
-            - test_and_make
+            - build_container_dev
             - compute_tag
 
-      - build_container_dis-prod:
+      - release_prod:
           filters:
             branches:
               only:
-                - dis-rc
-          requires:
-            - test_and_make
-            - compute_tag
-
-      - release_dis-rc:
-          filters:
-            branches:
-              only:
-                - dis-rc
-          requires:
-            - compute_tag
-
-      - release_dis-prod:
-          filters:
-            branches:
-              only:
-                - dis-prod
+                - production
           requires:
             - compute_tag
 
       - create_release_tag:
           requires:
-            - release_dis-rc
-            - release_dis-prod
+            - release_dev
+            - release_prod
 
 deploy_image: &deploy_image
   docker:
@@ -85,14 +76,14 @@ deploy_image: &deploy_image
     - run:
         name: release staging
         command: |
-          TAG="$(cat tag.txt)-${CIRCLE_BRANCH}"
+          TAG="$(cat tag.txt)-${TARGET}"
           curl -sSO -u "${DEPLOYER_USERNAME}":"${DEPLOYER_PASSWORD}" \
             "https://deployer.repositive.io/scripts/deploy.sh"
           sh deploy.sh "$CIRCLE_PROJECT_REPONAME:$TAG" $CLUSTER $CONFIG_PATH $CIRCLE_BRANCH
 
 build_container: &build_container
   docker:
-    - image: circleci/node:8.5-browsers
+    - image: circleci/node:10-browsers
   steps:
     - checkout
     - setup_remote_docker
@@ -105,28 +96,14 @@ build_container: &build_container
           TAG="$(cat tag.txt)"
           API_BASE_URL="${API_BASE_URL}"
 
-          # Login to to Vault with GH token
-          PAYLOAD="{ \"token\": \"${GITHUB_TOKEN}\" }"
-          TOKEN=$(curl -s --request POST --data "${PAYLOAD}" https://v8sh48s.repositive.io:8200/v1/auth/github/login --insecure | jq .auth.client_token | tr -d '"')
-
-          # Request Credentials for GCR 
-          DOCKERAUTH=$(curl -k -s --header "X-Vault-Token: $TOKEN" https://v8sh48s.repositive.io:8200/v1/gcp/token/gcr | jq .data.token | tr -d '"')
-
           # build ember
           node_modules/ember-cli/bin/ember build --environment "${EMBER_ENV}"
           
           # Build the Container
           docker build -t app .
 
-          # TAG and Push to registry.repositive.io (AWS)
-          docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD" registry.repositive.io:5000
-          docker tag app "registry.repositive.io:5000/${REPO}:latest-${TARGET}"
-          docker tag app "registry.repositive.io:5000/${REPO}:${TAG}-${TARGET}"
-          docker push "registry.repositive.io:5000/${REPO}:latest-${TARGET}"
-          docker push "registry.repositive.io:5000/${REPO}:${TAG}-${TARGET}"
-
           # Authenticate to docker
-          docker login -u oauth2accesstoken -p $DOCKERAUTH https://gcr.io/repositive-gcr
+          echo $GCLOUD_SERVICE_KEY | docker login -u _json_key --password-stdin gcr.io/repositive-gcr
 
           # TAG and Push to gcr.io/repositive-gcr (GCP)
           docker tag app "gcr.io/repositive-gcr/${REPO}:latest-${TARGET}"
@@ -148,14 +125,14 @@ jobs:
 
   test_and_make:
     docker:
-      - image: circleci/node:8.5-browsers
+      - image: circleci/node:10-browsers
     steps:
       - checkout
       - restore_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
+          key: dependency-{{ .Environment.CACHE_VERSION }}-{{ checksum "yarn.lock" }}
       - run: yarn
       - save_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
+          key: dependency-{{ .Environment.CACHE_VERSION }}-{{ checksum "yarn.lock" }}
           paths:
             - ./node_modules
       - run: npm test
@@ -167,29 +144,22 @@ jobs:
   build_container_local:
     environment:
       - TARGET: 'local'
-      - EMBER_ENV: 'local-development'
+      - EMBER_ENV: 'development'
       - API_BASE_URL: 'http://localhost:3000'
     <<: *build_container
 
-  build_container_qa:
+  build_container_dev:
     environment:
-      - TARGET: 'qa'
-      - EMBER_ENV: 'staging'
-      - API_BASE_URL: 'http://proxy:3000'
+      - TARGET: 'development'
+      - EMBER_ENV: 'development'
+      - API_BASE_URL: 'https://dev.repositive.io/discover/api'
     <<: *build_container
 
-  build_container_dis-rc:
+  build_container_prod:
     environment:
-      - TARGET: 'dis-rc'
-      - EMBER_ENV: 'staging'
-      - API_BASE_URL: 'https://api-dev.repositive.io'
-    <<: *build_container
-
-  build_container_dis-prod:
-    environment:
-      - TARGET: 'dis-prod'
+      - TARGET: 'production'
       - EMBER_ENV: 'production'
-      - API_BASE_URL: 'https://api.repositive.io'
+      - API_BASE_URL: 'https://repositive.io/discover/api'
     <<: *build_container
 
   create_release_tag:
@@ -205,16 +175,16 @@ jobs:
               -d '{"ref":"refs/tags/'"${TAG}"'", "sha":"'"${SHA}"'"}' \
               -X POST "https://api.github.com/repos/repositive/${CIRCLE_PROJECT_REPONAME}/git/refs"
 
-  release_dis-rc:
+  release_dev:
     environment:
-      - TARGET: 'dis-rc' # This is needed to build the right image tag! ${TAG}-${TARGET}
-      - CLUSTER: 'dis-dev'
-      - CONFIG_PATH: '.circleci/k8s.dis-rc.yml'
+      - TARGET: 'development' # This is needed to build the right image tag! ${TAG}-${TARGET}
+      - CLUSTER: 'cmp-dev' # We only use one cluster for discover & cmp segregated by namespace. The namespace is defined in the k8s files.
+      - CONFIG_PATH: '.circleci/k8s.development.yml'
     <<: *deploy_image
 
-  release_dis-prod:
+  release_prod:
     environment:
-      - TARGET: 'dis-prod' # This is needed to build the right image tag! ${TAG}-${TARGET}
-      - CLUSTER: 'dis-prod'
-      - CONFIG_PATH: '.circleci/k8s.dis-prod.yml'
+      - TARGET: 'production' # This is needed to build the right image tag! ${TAG}-${TARGET}
+      - CLUSTER: 'cmp-prod' # We only use one cluster for discover & cmp segregated by namespace. The namespace is defined in the k8s files.
+      - CONFIG_PATH: '.circleci/k8s.production.yml'
     <<: *deploy_image

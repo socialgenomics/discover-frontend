@@ -31,8 +31,8 @@ spec:
         criticality: high
     spec:
       containers:
-        - name: discover
-          image: registry.repositive.io:5000/discover-frontend:${TAG}
+        - image: gcr.io/repositive-gcr/discover-frontend:${TAG}
+          name: discover
           resources:
             limits:
               cpu: 300m
@@ -57,13 +57,14 @@ metadata:
     kubernetes.io/tls-acme: "true"
 spec:
   rules:
-  - host: discover-dev.repositive.io
+  - host: dev.repositive.io
     http:
       paths:
-      - backend:
+      - path: /discover
+        backend:
           serviceName: discover
           servicePort: 80
   tls:
-    - secretName: discover-tls-cert
+    - secretName: cmp-platform-tls-cert
       hosts:
-        - discover-dev.repositive.io
+        - dev.repositive.io
