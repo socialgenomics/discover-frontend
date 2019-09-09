@@ -27,7 +27,11 @@ workflows:
             - test_and_make
             - compute_tag
 
+<<<<<<< HEAD
       - build_container_local:
+=======
+      - build_container_prod:
+>>>>>>> f3e7ffe35c687ae5a6744d74bab12f68ff6d1b98
           filters:
             branches:
               only:
@@ -36,12 +40,17 @@ workflows:
             - test_and_make
             - compute_tag
 
+<<<<<<< HEAD
       - build_container_prod:
+=======
+      - release_dev:
+>>>>>>> f3e7ffe35c687ae5a6744d74bab12f68ff6d1b98
           filters:
             branches:
               only:
                 - master
           requires:
+<<<<<<< HEAD
             - test_and_make
             - compute_tag
 
@@ -58,6 +67,15 @@ workflows:
           filters:
             branches:
               only:
+=======
+            - build_container_dev
+            - compute_tag
+
+      - release_prod:
+          filters:
+            branches:
+              only:
+>>>>>>> f3e7ffe35c687ae5a6744d74bab12f68ff6d1b98
                 - production
           requires:
             - compute_tag
