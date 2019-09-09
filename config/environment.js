@@ -8,7 +8,7 @@ module.exports = function (environment) {
   let ENV = {
     modulePrefix: 'repositive',
     environment: environment,
-    rootURL: '/',
+    rootURL: environment === 'production' ? '/discover' : '/',
     locationType: 'auto',
     EmberENV: {
       FEATURES: {

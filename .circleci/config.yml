@@ -151,7 +151,7 @@ jobs:
   build_container_dev:
     environment:
       - TARGET: 'development'
-      - EMBER_ENV: 'development'
+      - EMBER_ENV: 'production'
       - API_BASE_URL: 'https://dev.repositive.io/discover/api'
     <<: *build_container
 
