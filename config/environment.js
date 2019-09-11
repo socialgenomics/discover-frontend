@@ -8,7 +8,7 @@ module.exports = function (environment) {
   let ENV = {
     modulePrefix: 'repositive',
     environment: environment,
-    rootURL: environment === 'production' ? '/discover' : '/',
+    rootURL: environment === 'production' || environment === 'staging' ? '/discover' : '/',
     locationType: 'auto',
     EmberENV: {
       FEATURES: {
@@ -121,7 +121,7 @@ module.exports = function (environment) {
     torii: {
       providers: {
         'google-oauth2': {
-          apiKey: '625615936247-udf8t0o94vmk5tp48pbsdsog84g4vu93.apps.googleusercontent.com',
+          apiKey: '72908278846-hbsqndbf9n8uj7uh656h1pn3st3v2uab.apps.googleusercontent.com',
           redirectUri: 'http://localhost:4200'
         },
         'linked-in-oauth2': {
@@ -188,13 +188,13 @@ module.exports = function (environment) {
 
   if (environment === 'staging') {
     ENV.APP.INSPECTLET_WID = 1989736952;
-    ENV.torii.providers['google-oauth2'].redirectUri = 'https://discover-dev.repositive.io';
-    ENV.torii.providers['linked-in-oauth2'].redirectUri = 'https://discover-dev.repositive.io';
+    ENV.torii.providers['google-oauth2'].redirectUri = 'https://dev.repositive.io/discover';
+    ENV.torii.providers['linked-in-oauth2'].redirectUri = 'https://dev.repositive.io/discover';
   }
 
   if (environment === 'production') {
-    ENV.torii.providers['google-oauth2'].redirectUri = 'https://discover.repositive.io';
-    ENV.torii.providers['linked-in-oauth2'].redirectUri = 'https://discover.repositive.io';
+    ENV.torii.providers['google-oauth2'].redirectUri = 'https://repositive.io/discover';
+    ENV.torii.providers['linked-in-oauth2'].redirectUri = 'https://repositive.io/discover';
     ENV.APP.INSPECTLET_WID = 1989736952;
   }
 
